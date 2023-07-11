@@ -1,0 +1,209 @@
+File Information
+- File name: base
+- Original Directory: /home/anabrendel/lfind/benchmarks/tree-automata/lemma_le_0_l_154
+- LFind Directory: /home/anabrendel/lfind/benchmarks/tree-automata/_lfind_lemma_le_0_l_154
+- Namespace: TreeAutomata
+- Proof name: le_mult_l
+- Theorem: Theorem le_mult_l: forall (n0 m0 p0 : nat) (_ : le n0 m0),
+le (Init.Nat.mul n0 p0) (Init.Nat.mul m0 p0).
+- Declarations: 
+From lfind Require Import LFind.
+Require Import Arith.
+Require Import BinNat.
+From IntMap Require Import Allmaps.
+
+Proof Context
+* Goal State: le O (Init.Nat.add p (Init.Nat.mul n p))
+
+* Hypothesis:
+H0 : le O (S n)
+H : forall (p0 : nat) (_ : le O n), le (Init.Nat.mul O p0) (Init.Nat.mul n p0)
+m : nat
+p : nat
+n : nat
+
+* Types:
+Set
+Prop
+nat
+
+* Polymorphic Types:
+
+
+* Variables:
+p : nat
+n : nat
+
+* Terms:
+forall _ : le O n,
+le (Init.Nat.mul O _UNBOUND_REL_2) (Init.Nat.mul n _UNBOUND_REL_2) : Prop
+le (Init.Nat.mul O _UNBOUND_REL_2) (Init.Nat.mul n _UNBOUND_REL_2) : Prop
+le O n : Prop
+forall (p0 : nat) (_ : le O n), le (Init.Nat.mul O p0) (Init.Nat.mul n p0) : Prop
+nat : Set
+le O (S n) : Prop
+Init.Nat.mul n _UNBOUND_REL_2 : nat
+Init.Nat.add p (Init.Nat.mul n p) : nat
+Init.Nat.mul n p : nat
+le O (Init.Nat.add p (Init.Nat.mul n p)) : Prop
+S n : nat
+p : nat
+n : nat
+Init.Nat.mul O _UNBOUND_REL_2 : nat
+O : nat
+
+* Functions:
+Init.Nat.add  : forall (_ : nat) (_ : nat), nat
+le  : forall (_ : nat) (_ : nat), Prop
+S  : forall _ : nat, nat
+Init.Nat.mul  : forall (_ : nat) (_ : nat), nat
+
+<---GENERALIZATION--->
+Time elapsed: 3 seconds
+Generalized Variables:
+lf3 : nat = O
+lf1 : nat = Init.Nat.add p (Init.Nat.mul n p)
+lf2 : nat = Init.Nat.mul n p
+
+Generalizations:
+Lemma conj1: forall (lf1 : nat) (lf3 : nat), le lf3 lf1.
+Lemma conj3: forall (lf2 : nat) (p : nat) (lf3 : nat), le lf3 (Init.Nat.add p lf2).
+Lemma conj4: forall (p : nat) (n : nat) (lf3 : nat), le lf3 (Init.Nat.add p (Init.Nat.mul n p)).
+Lemma conj5: forall (lf1 : nat), le O lf1.
+Lemma conj7: forall (lf2 : nat) (p : nat), le O (Init.Nat.add p lf2).
+Lemma conj8: forall (p : nat) (n : nat), le O (Init.Nat.add p (Init.Nat.mul n p)).
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 48 seconds
+Valid:
+Lemma conj8: forall (p : nat) (n : nat), le O (Init.Nat.add p (Init.Nat.mul n p)).
+Lemma conj7: forall (lf2 : nat) (p : nat), le O (Init.Nat.add p lf2).
+Lemma conj5: forall (lf1 : nat), le O lf1.
+
+Invalid:
+Lemma conj4: forall (p : nat) (n : nat) (lf3 : nat), le lf3 (Init.Nat.add p (Init.Nat.mul n p)).
+Lemma conj3: forall (lf2 : nat) (p : nat) (lf3 : nat), le lf3 (Init.Nat.add p lf2).
+Lemma conj1: forall (lf1 : nat) (lf3 : nat), le lf3 lf1.
+
+<---ADD IMPLICATIONS--->
+Time elapsed: 57 seconds
+Generalizations:
+Lemma conj4: forall (p : nat) (n : nat) (lf3 : nat), le lf3 (Init.Nat.add p (Init.Nat.mul n p)).
+Lemma conj3: forall (lf2 : nat) (p : nat) (lf3 : nat), le lf3 (Init.Nat.add p lf2).
+Lemma conj1: forall (lf1 : nat) (lf3 : nat), le lf3 lf1.
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 64 seconds
+Valid:
+
+Invalid:
+Lemma conj1: forall (lf1 : nat) (lf3 : nat), le lf3 lf1.
+Lemma conj3: forall (lf2 : nat) (p : nat) (lf3 : nat), le lf3 (Init.Nat.add p lf2).
+Lemma conj4: forall (p : nat) (n : nat) (lf3 : nat), le lf3 (Init.Nat.add p (Init.Nat.mul n p)).
+
+
+<---CREATE SKETCHES--->
+Time elapsed: 65 seconds
+Sketches:
+Sketch conj3_sketch0 : le lf3 (##hole##)
+Sketch conj3_term_sketch0 : @eq nat (Init.Nat.add p lf2) (##hole##)
+Sketch conj4_sketch0 : le lf3 (##hole##)
+Sketch conj4_sketch1 : le lf3 (Init.Nat.add p (##hole##))
+Sketch conj4_term_sketch0 : @eq nat (Init.Nat.add p (Init.Nat.mul n p)) (##hole##)
+Sketch conj4_term_sketch1 : @eq nat (Init.Nat.mul n p) (##hole##)
+
+
+<---CREATE SYNTHESIS PROBLEMS--->
+Time elapsed: 127 seconds
+Problems per Sketch:
+Sketch conj4_term_sketch1 --> Problem  synth_5
+Sketch conj3_sketch0 --> Problem  synth_1
+Sketch conj3_term_sketch0 --> Problem  synth_2
+Sketch conj4_term_sketch0 --> Problem  synth_4
+Sketch conj4_sketch0 --> Problem  synth_1
+Sketch conj4_sketch1 --> Problem  synth_3
+
+
+<--- SYNTHESIS PROBLEM RESULTS--->
+Time elapsed: 159 seconds
+
+Problem: synth_3
+
+Problem: synth_5
+ Nat.mul p (Nat.mul n (S O))
+ Nat.mul n (Nat.mul p (S O))
+ Nat.mul p (Nat.add n O)
+ Nat.mul n (Nat.add p O)
+ Nat.mul p n
+ Nat.mul n p
+
+Problem: synth_4
+ Nat.add (Nat.mul p (S O)) (Nat.mul n (Nat.mul p (S O)))
+ Nat.add (Nat.add p O) (Nat.mul n (Nat.add p O))
+ Nat.mul p (Nat.add n (S O))
+ Nat.add p (Nat.mul p n)
+ Nat.add p (Nat.mul n p)
+ Nat.mul p (S n)
+
+Problem: synth_1
+
+Problem: synth_2
+ Nat.add lf2 (Nat.mul p (S O))
+ Nat.add p (Nat.mul lf2 (S O))
+ Nat.add lf2 (Nat.add p O)
+ Nat.add p (Nat.add lf2 O)
+ Nat.add lf2 p
+ Nat.add p lf2
+
+<---INITIAL CANDIDATE LEMMAS--->
+Time elapsed: 160 seconds
+Lemmas:
+Lemma candidate_1: forall (n : nat) (p : nat), le O (Init.Nat.add p (Init.Nat.mul n p)).
+Lemma candidate_2: forall (p : nat) (lf2 : nat), le O (Init.Nat.add p lf2).
+Lemma candidate_3: forall (lf1 : nat), le O lf1.
+Lemma candidate_4: forall (p : nat) (lf2 : nat), @eq nat (Init.Nat.add p lf2) (Nat.add lf2 (Nat.mul p (S O))).
+Lemma candidate_5: forall (p : nat) (lf2 : nat), @eq nat (Init.Nat.add p lf2) (Nat.add p (Nat.mul lf2 (S O))).
+Lemma candidate_6: forall (p : nat) (lf2 : nat), @eq nat (Init.Nat.add p lf2) (Nat.add lf2 (Nat.add p O)).
+Lemma candidate_7: forall (p : nat) (lf2 : nat), @eq nat (Init.Nat.add p lf2) (Nat.add p (Nat.add lf2 O)).
+Lemma candidate_8: forall (p : nat) (lf2 : nat), @eq nat (Init.Nat.add p lf2) (Nat.add lf2 p).
+Lemma candidate_9: forall (p : nat) (lf2 : nat), @eq nat (Init.Nat.add p lf2) (Nat.add p lf2).
+Lemma candidate_10: forall (n : nat) (p : nat), @eq nat (Init.Nat.add p (Init.Nat.mul n p))   (Nat.add (Nat.mul p (S O)) (Nat.mul n (Nat.mul p (S O)))).
+Lemma candidate_11: forall (n : nat) (p : nat), @eq nat (Init.Nat.add p (Init.Nat.mul n p))   (Nat.add (Nat.add p O) (Nat.mul n (Nat.add p O))).
+Lemma candidate_12: forall (n : nat) (p : nat), @eq nat (Init.Nat.add p (Init.Nat.mul n p)) (Nat.mul p (Nat.add n (S O))).
+Lemma candidate_13: forall (n : nat) (p : nat), @eq nat (Init.Nat.add p (Init.Nat.mul n p)) (Nat.add p (Nat.mul p n)).
+Lemma candidate_14: forall (n : nat) (p : nat), @eq nat (Init.Nat.add p (Init.Nat.mul n p)) (Nat.add p (Nat.mul n p)).
+Lemma candidate_15: forall (n : nat) (p : nat), @eq nat (Init.Nat.add p (Init.Nat.mul n p)) (Nat.mul p (S n)).
+Lemma candidate_16: forall (n : nat) (p : nat), @eq nat (Init.Nat.mul n p) (Nat.mul p (Nat.mul n (S O))).
+Lemma candidate_17: forall (n : nat) (p : nat), @eq nat (Init.Nat.mul n p) (Nat.mul n (Nat.mul p (S O))).
+Lemma candidate_18: forall (n : nat) (p : nat), @eq nat (Init.Nat.mul n p) (Nat.mul p (Nat.add n O)).
+Lemma candidate_19: forall (n : nat) (p : nat), @eq nat (Init.Nat.mul n p) (Nat.mul n (Nat.add p O)).
+Lemma candidate_20: forall (n : nat) (p : nat), @eq nat (Init.Nat.mul n p) (Nat.mul p n).
+Lemma candidate_21: forall (n : nat) (p : nat), @eq nat (Init.Nat.mul n p) (Nat.mul n p).
+
+<---FILTERED CANDIDATE LEMMAS--->
+Time elapsed: 240 seconds
+Duplicates removed: 1
+Filtered by Quickchick: 0
+Filtered by script: 3
+Remaining: 17
+
+Lemmas: 
+Lemma candidate_3: forall (lf1 : nat), le O lf1.
+Lemma candidate_2: forall (p : nat) (lf2 : nat), le O (Init.Nat.add p lf2).
+Lemma candidate_20: forall (n : nat) (p : nat), @eq nat (Init.Nat.mul n p) (Nat.mul p n).
+Lemma candidate_8: forall (p : nat) (lf2 : nat), @eq nat (Init.Nat.add p lf2) (Nat.add lf2 p).
+Lemma candidate_19: forall (n : nat) (p : nat), @eq nat (Init.Nat.mul n p) (Nat.mul n (Nat.add p O)).
+Lemma candidate_18: forall (n : nat) (p : nat), @eq nat (Init.Nat.mul n p) (Nat.mul p (Nat.add n O)).
+Lemma candidate_17: forall (n : nat) (p : nat), @eq nat (Init.Nat.mul n p) (Nat.mul n (Nat.mul p (S O))).
+Lemma candidate_16: forall (n : nat) (p : nat), @eq nat (Init.Nat.mul n p) (Nat.mul p (Nat.mul n (S O))).
+Lemma candidate_7: forall (p : nat) (lf2 : nat), @eq nat (Init.Nat.add p lf2) (Nat.add p (Nat.add lf2 O)).
+Lemma candidate_6: forall (p : nat) (lf2 : nat), @eq nat (Init.Nat.add p lf2) (Nat.add lf2 (Nat.add p O)).
+Lemma candidate_5: forall (p : nat) (lf2 : nat), @eq nat (Init.Nat.add p lf2) (Nat.add p (Nat.mul lf2 (S O))).
+Lemma candidate_4: forall (p : nat) (lf2 : nat), @eq nat (Init.Nat.add p lf2) (Nat.add lf2 (Nat.mul p (S O))).
+Lemma candidate_15: forall (n : nat) (p : nat), @eq nat (Init.Nat.add p (Init.Nat.mul n p)) (Nat.mul p (S n)).
+Lemma candidate_13: forall (n : nat) (p : nat), @eq nat (Init.Nat.add p (Init.Nat.mul n p)) (Nat.add p (Nat.mul p n)).
+Lemma candidate_12: forall (n : nat) (p : nat), @eq nat (Init.Nat.add p (Init.Nat.mul n p)) (Nat.mul p (Nat.add n (S O))).
+Lemma candidate_11: forall (n : nat) (p : nat), @eq nat (Init.Nat.add p (Init.Nat.mul n p))   (Nat.add (Nat.add p O) (Nat.mul n (Nat.add p O))).
+Lemma candidate_10: forall (n : nat) (p : nat), @eq nat (Init.Nat.add p (Init.Nat.mul n p))   (Nat.add (Nat.mul p (S O)) (Nat.mul n (Nat.mul p (S O)))).

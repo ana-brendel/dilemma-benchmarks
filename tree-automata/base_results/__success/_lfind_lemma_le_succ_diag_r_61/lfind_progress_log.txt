@@ -1,0 +1,153 @@
+File Information
+- File name: base
+- Original Directory: /home/anabrendel/lfind/benchmarks/tree-automata/lemma_le_succ_diag_r_61
+- LFind Directory: /home/anabrendel/lfind/benchmarks/tree-automata/_lfind_lemma_le_succ_diag_r_61
+- Namespace: TreeAutomata
+- Proof name: max_le_Sr_0
+- Theorem: Theorem max_le_Sr_0: forall n1 m0 : nat,
+and (le (Init.Nat.max n1 m0) (Init.Nat.max n1 (S m0)))
+  (le (Init.Nat.max (S n1) m0) (Init.Nat.max (S n1) (S m0))).
+- Declarations: 
+From lfind Require Import LFind.
+Require Import Arith.
+Require Import BinNat.
+From IntMap Require Import Allmaps.
+
+Proof Context
+* Goal State: le (S n0) (S (S n0))
+
+* Hypothesis:
+H0 : le (Init.Nat.max O n0) (Init.Nat.max O (S n0))
+H1 : le (Init.Nat.max (S O) n0) (Init.Nat.max (S O) (S n0))
+H : and (le (Init.Nat.max O n0) (Init.Nat.max O (S n0)))
+  (le (Init.Nat.max (S O) n0) (Init.Nat.max (S O) (S n0)))
+m : nat
+n : nat
+n0 : nat
+
+* Types:
+Set
+Prop
+nat
+
+* Polymorphic Types:
+
+
+* Variables:
+n0 : nat
+
+* Terms:
+Init.Nat.max O (S n0) : nat
+S O : nat
+nat : Set
+Init.Nat.max (S O) n0 : nat
+S (S n0) : nat
+Init.Nat.max (S O) (S n0) : nat
+le (Init.Nat.max O n0) (Init.Nat.max O (S n0)) : Prop
+S n0 : nat
+Init.Nat.max O n0 : nat
+le (S n0) (S (S n0)) : Prop
+le (Init.Nat.max (S O) n0) (Init.Nat.max (S O) (S n0)) : Prop
+n0 : nat
+O : nat
+and (le (Init.Nat.max O n0) (Init.Nat.max O (S n0)))
+  (le (Init.Nat.max (S O) n0) (Init.Nat.max (S O) (S n0))) : Prop
+
+* Functions:
+and  : forall (_ : Prop) (_ : Prop), Prop
+le  : forall (_ : nat) (_ : nat), Prop
+Init.Nat.max  : forall (_ : nat) (_ : nat), nat
+S  : forall _ : nat, nat
+
+<---GENERALIZATION--->
+Time elapsed: 3 seconds
+Generalized Variables:
+lf1 : nat = S (S n0)
+lf2 : nat = S n0
+
+Generalizations:
+Lemma conj1: forall (lf2 : nat) (lf1 : nat), le lf2 lf1.
+Lemma conj2: forall (lf1 : nat) (n0 : nat), le (S n0) lf1.
+Lemma conj3: forall (lf2 : nat), le lf2 (S lf2).
+Lemma conj4: forall (n0 : nat), le (S n0) (S (S n0)).
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 20 seconds
+Valid:
+Lemma conj4: forall (n0 : nat), le (S n0) (S (S n0)).
+Lemma conj3: forall (lf2 : nat), le lf2 (S lf2).
+
+Invalid:
+Lemma conj2: forall (lf1 : nat) (n0 : nat), le (S n0) lf1.
+Lemma conj1: forall (lf2 : nat) (lf1 : nat), le lf2 lf1.
+
+<---ADD IMPLICATIONS--->
+Time elapsed: 30 seconds
+Generalizations:
+Lemma conj2: forall (lf1 : nat) (n0 : nat), le (S n0) lf1.
+Lemma conj1: forall (lf2 : nat) (lf1 : nat), le lf2 lf1.
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 35 seconds
+Valid:
+
+Invalid:
+Lemma conj1: forall (lf2 : nat) (lf1 : nat), le lf2 lf1.
+Lemma conj2: forall (lf1 : nat) (n0 : nat), le (S n0) lf1.
+
+
+<---CREATE SKETCHES--->
+Time elapsed: 35 seconds
+Sketches:
+Sketch conj2_sketch0 : le (##hole##) lf1
+Sketch conj2_term_sketch0 : @eq nat (S n0) (##hole##)
+
+
+<---CREATE SYNTHESIS PROBLEMS--->
+Time elapsed: 42 seconds
+Problems per Sketch:
+Sketch conj2_term_sketch0 --> Problem  synth_2
+Sketch conj2_sketch0 --> Problem  synth_1
+
+
+<--- SYNTHESIS PROBLEM RESULTS--->
+Time elapsed: 58 seconds
+
+Problem: synth_1
+
+Problem: synth_2
+ Nat.max n0 (Nat.max n0 (S n0))
+ S (Nat.max n0 n0)
+ S (Nat.max n0 O)
+ match n0 with | O => S n0 | S m' => S (Nat.max n0 m') end
+ Nat.max n0 (S n0)
+ S n0
+
+<---INITIAL CANDIDATE LEMMAS--->
+Time elapsed: 58 seconds
+Lemmas:
+Lemma candidate_1: forall (n0 : nat), le (S n0) (S (S n0)).
+Lemma candidate_2: forall (lf2 : nat), le lf2 (S lf2).
+Lemma candidate_3: forall (n0 : nat), @eq nat (S n0) (Nat.max n0 (Nat.max n0 (S n0))).
+Lemma candidate_4: forall (n0 : nat), @eq nat (S n0) (S (Nat.max n0 n0)).
+Lemma candidate_5: forall (n0 : nat), @eq nat (S n0) (S (Nat.max n0 O)).
+Lemma candidate_6: forall (n0 : nat), @eq nat (S n0) (match n0 with | O => S n0 | S m' => S (Nat.max n0 m') end).
+Lemma candidate_7: forall (n0 : nat), @eq nat (S n0) (Nat.max n0 (S n0)).
+Lemma candidate_8: forall (n0 : nat), @eq nat (S n0) (S n0).
+
+<---FILTERED CANDIDATE LEMMAS--->
+Time elapsed: 84 seconds
+Duplicates removed: 1
+Filtered by Quickchick: 0
+Filtered by script: 1
+Remaining: 6
+
+Lemmas: 
+Lemma candidate_2: forall (lf2 : nat), le lf2 (S lf2).
+Lemma candidate_5: forall (n0 : nat), @eq nat (S n0) (S (Nat.max n0 O)).
+Lemma candidate_7: forall (n0 : nat), @eq nat (S n0) (Nat.max n0 (S n0)).
+Lemma candidate_4: forall (n0 : nat), @eq nat (S n0) (S (Nat.max n0 n0)).
+Lemma candidate_3: forall (n0 : nat), @eq nat (S n0) (Nat.max n0 (Nat.max n0 (S n0))).
+Lemma candidate_6: forall (n0 : nat), @eq nat (S n0) (match n0 with | O => S n0 | S m' => S (Nat.max n0 m') end).

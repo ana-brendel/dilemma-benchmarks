@@ -1,0 +1,122 @@
+File Information
+- File name: base
+- Original Directory: /home/anabrendel/lfind/benchmarks/tree-automata/lemma_le_0_r_152
+- LFind Directory: /home/anabrendel/lfind/benchmarks/tree-automata/_lfind_lemma_le_0_r_152
+- Namespace: TreeAutomata
+- Proof name: le_mult_l
+- Theorem: Theorem le_mult_l: forall (n0 m0 p0 : nat) (_ : le n0 m0),
+le (Init.Nat.mul n0 p0) (Init.Nat.mul m0 p0).
+- Declarations: 
+From lfind Require Import LFind.
+Require Import Arith.
+Require Import BinNat.
+From IntMap Require Import Allmaps.
+
+Proof Context
+* Goal State: @eq nat n O
+
+* Hypothesis:
+H : le n O
+m : nat
+p : nat
+n : nat
+
+* Types:
+Set
+Prop
+nat
+
+* Polymorphic Types:
+
+
+* Variables:
+n : nat
+
+* Terms:
+nat : Set
+le n O : Prop
+n : nat
+O : nat
+@eq nat n O : Prop
+
+* Functions:
+le  : forall (_ : nat) (_ : nat), Prop
+@eq  : forall (A : Type) (_ : A) (_ : A), Prop
+
+<---GENERALIZATION--->
+Time elapsed: 3 seconds
+Generalized Variables:
+lf1 : nat = O
+
+Generalizations:
+Lemma conj1: forall (lf1 : nat) (n : nat), @eq nat n lf1.
+Lemma conj2: forall (n : nat), @eq nat n O.
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 10 seconds
+Valid:
+
+Invalid:
+Lemma conj2: forall (n : nat), @eq nat n O.
+Lemma conj1: forall (lf1 : nat) (n : nat), @eq nat n lf1.
+
+<---ADD IMPLICATIONS--->
+Time elapsed: 15 seconds
+Generalizations:
+Lemma conj2_imp: forall (n : nat), forall _ : le n O, @eq nat n O.
+Lemma conj2: forall (n : nat), @eq nat n O.
+Lemma conj1_imp: forall (lf1 : nat) (n : nat), forall _ : le n lf1, @eq nat n lf1.
+Lemma conj1: forall (lf1 : nat) (n : nat), @eq nat n lf1.
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 25 seconds
+Valid:
+Lemma conj2_imp: forall (n : nat), forall _ : le n O, @eq nat n O.
+
+Invalid:
+Lemma conj1: forall (lf1 : nat) (n : nat), @eq nat n lf1.
+Lemma conj1_imp: forall (lf1 : nat) (n : nat), forall _ : le n lf1, @eq nat n lf1.
+Lemma conj2: forall (n : nat), @eq nat n O.
+
+
+<---CREATE SKETCHES--->
+Time elapsed: 26 seconds
+Sketches:
+Sketch conj2_sketch0 : @eq nat n (##hole##)
+Sketch conj2_term_sketch0 : @eq nat O (##hole##)
+
+
+<---CREATE SYNTHESIS PROBLEMS--->
+Time elapsed: 28 seconds
+Problems per Sketch:
+Sketch conj2_term_sketch0 --> Problem  synth_2
+Sketch conj2_sketch0 --> Problem  synth_1
+
+
+<--- SYNTHESIS PROBLEM RESULTS--->
+Time elapsed: 58 seconds
+
+Problem: synth_1
+ O
+
+Problem: synth_2
+ O
+
+<---INITIAL CANDIDATE LEMMAS--->
+Time elapsed: 59 seconds
+Lemmas:
+Lemma candidate_1: forall (n : nat), forall _ : le n O, @eq nat n O.
+Lemma candidate_2: forall (n : nat), @eq nat n (O).
+Lemma candidate_3: @eq nat O (O).
+
+<---FILTERED CANDIDATE LEMMAS--->
+Time elapsed: 71 seconds
+Duplicates removed: 0
+Filtered by Quickchick: 1
+Filtered by script: 1
+Remaining: 1
+
+Lemmas: 
+Lemma candidate_1: forall (n : nat), forall _ : le n O, @eq nat n O.
