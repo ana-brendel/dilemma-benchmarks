@@ -76,29 +76,37 @@ Proof.
 	intros. unfold term_high in |- *. unfold term_high_0 in |- *. trivial.
 Qed.
 
+(* Helper Lemma = high_aux_0, defined above *)
+(* Helper Lemma = le_n_S, ∀ n m: n ≤ m → S n ≤ S m *)
+(* Helper Lemma = Nat.le_trans, ∀ n m p : nat, n ≤ m → m ≤ p → n ≤ p *)
 Lemma high_aux_2 : forall (l : term_list) (c : ad), 1 <= term_high (app c l).
 Proof.
 	intros. cut (S (term_high_0 l) <= term_high (app c l)).
 	intro. cut (1 <= S (term_high_0 l)). intro.
-	exact (le_trans 1 (S (term_high_0 l)) (term_high (app c l)) H0 H).
-	exact (le_n_S 0 (term_high_0 l) (le_O_n (term_high_0 l))).
-	exact (high_aux_0 c l).
+  apply le_trans with (m := (S (term_high_0 l))).
+	apply H0. apply H.
+  apply le_n_S. apply le_0_n.
+  apply high_aux_0.
 Qed.
 
+(* Helper Lemma = le_max_l *)
 Lemma high_aux_3 :
  forall (t : term) (tl : term_list), term_high t <= term_high_0 (tcons t tl).
 Proof.
-	intros. simpl in |- *. unfold term_high in |- *. exact (le_max_l _ (term_high_0 tl)).
+	intros. simpl in |- *. 
+  apply le_max_l.
 Qed.
 
+(* Helper Lemma = le_max_r *)
 Lemma high_aux_4 :
  forall (t : term) (tl : term_list),
  term_high_0 tl <= term_high_0 (tcons t tl).
 Proof.
 	intros.
 	cut (term_high_0 (tcons t tl) = max (term_high t) (term_high_0 tl)).
-	intro. rewrite H. exact (le_max_r (term_high t) (term_high_0 tl)).
-	unfold term_high_0 in |- *. trivial.
+	intro. rewrite H. 
+  apply le_max_r. 
+  trivial.
 Qed.
 
 (* taille des termes : *)

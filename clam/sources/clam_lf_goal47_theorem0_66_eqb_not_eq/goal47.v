@@ -1,0 +1,75 @@
+Load LFindLoad.
+From lfind Require Import LFind.
+Unset Printing Notations.
+Set Printing Implicit.
+
+Require Import Arith.
+From QuickChick Require Import QuickChick.
+Inductive natural : Type := Succ : natural -> natural |  Zero : natural.
+Derive Show for natural. Derive Arbitrary for natural.  Instance Dec_Eq_natural : Dec_Eq natural. Proof. dec_eq. Qed.
+Inductive lst : Type := Cons : natural -> lst -> lst |  Nil : lst.
+
+Inductive tree : Type := Node : natural -> tree -> tree -> tree |  Leaf : tree.
+
+Inductive Pair : Type := mkpair : natural -> natural -> Pair
+with Zlst : Type := zcons : Pair -> Zlst -> Zlst |  znil : Zlst.
+
+Fixpoint lfeqb (n m: natural) : bool :=
+  match n, m with
+    | Zero, Zero => true
+    | Zero, Succ _ => false
+    | Succ _, Zero => false
+    | Succ n', Succ m' => lfeqb n' m'
+  end.
+
+  Fixpoint mem  (mem_arg1 : lst) (mem_arg0 : natural)
+  := match mem_arg0, mem_arg1 with
+    | x, Nil => false
+    | x, Cons y z => orb (lfeqb x y) (mem z x)
+    end.
+
+Fixpoint less (less_arg0 : natural) (less_arg1 : natural) : bool
+           := match less_arg0, less_arg1 with
+              | x, Zero => false
+              | Zero, Succ x => true
+              | Succ x, Succ y => less x y
+              end.
+
+
+
+Fixpoint insort  (insort_arg1 : lst) (insort_arg0 : natural) : lst
+           := match insort_arg1, insort_arg0 with
+              |  Nil, i => Cons i Nil
+              | Cons x y, i => if less i x then Cons i (Cons x y) else Cons x (insort y i)
+              end.
+
+Fixpoint sort (sort_arg0 : lst) : lst
+           := match sort_arg0 with
+              | Nil => Nil
+              | Cons x y => insort (sort y) x
+              end.
+
+Theorem lfeqb_refl: forall n, lfeqb n n = true.
+Proof.
+  induction n; simpl.
+  { assumption. }
+  { reflexivity. }
+Qed.
+
+Theorem lfeqb_not_eq: forall n m, n <> m -> lfeqb n m = false.
+Proof.
+  induction n; induction m; intro; simpl; try reflexivity.
+  apply IHn. intro. rewrite H0 in H. apply H. reflexivity.
+  exfalso. apply H. reflexivity.
+Qed.
+
+Theorem theorem0 : forall (x : natural) (y : natural) (z : lst), not (eq x y) -> eq (mem (insort z y) x) (mem z x).
+Proof.
+  intros.
+  induction z.
+  {
+    simpl. destruct (less y n).
+    { simpl.  
+    lfind_coqsynth.  }
+Admitted.
+
