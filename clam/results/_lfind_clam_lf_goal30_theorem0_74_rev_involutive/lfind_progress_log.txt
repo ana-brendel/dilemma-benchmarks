@@ -1,0 +1,141 @@
+File Information
+- File name: goal30
+- Original Directory: /home/anabrendel/lfind/benchmarks/clam/sources/clam_lf_goal30_theorem0_74_rev_involutive
+- LFind Directory: /home/anabrendel/lfind/benchmarks/clam/sources/_lfind_clam_lf_goal30_theorem0_74_rev_involutive
+- Namespace: adtind
+- Proof name: theorem0
+- Theorem: Theorem theorem0: forall x0 : lst, @eq lst (rev (lfappend (rev x0) Nil)) x0.
+- Declarations: 
+From lfind Require Import LFind.
+
+Proof Context
+* Goal State: @eq lst (rev (rev x)) x
+
+* Hypothesis:
+x : lst
+
+* Types:
+Set
+Prop
+lst
+
+* Polymorphic Types:
+
+
+* Variables:
+x : lst
+
+* Terms:
+x : lst
+rev (rev x) : lst
+lst : Set
+rev x : lst
+@eq lst (rev (rev x)) x : Prop
+
+* Functions:
+rev  : forall _ : lst, lst
+@eq  : forall (A : Type) (_ : A) (_ : A), Prop
+
+<---GENERALIZATION--->
+Time elapsed: 4 seconds
+Generalized Variables:
+lf1 : lst = rev (rev x)
+lf2 : lst = rev x
+
+Generalizations:
+Lemma conj1: forall (x : lst) (lf1 : lst), @eq lst lf1 x.
+Lemma conj3: forall (lf2 : lst) (x : lst), @eq lst (rev lf2) x.
+Lemma conj4: forall (x : lst), @eq lst (rev (rev x)) x.
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 20 seconds
+Valid:
+Lemma conj4: forall (x : lst), @eq lst (rev (rev x)) x.
+
+Invalid:
+Lemma conj3: forall (lf2 : lst) (x : lst), @eq lst (rev lf2) x.
+Lemma conj1: forall (x : lst) (lf1 : lst), @eq lst lf1 x.
+
+<---ADD IMPLICATIONS--->
+Time elapsed: 21 seconds
+Generalizations:
+Lemma conj3: forall (lf2 : lst) (x : lst), @eq lst (rev lf2) x.
+Lemma conj1: forall (x : lst) (lf1 : lst), @eq lst lf1 x.
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 25 seconds
+Valid:
+
+Invalid:
+Lemma conj1: forall (x : lst) (lf1 : lst), @eq lst lf1 x.
+Lemma conj3: forall (lf2 : lst) (x : lst), @eq lst (rev lf2) x.
+
+
+<---CREATE SKETCHES--->
+Time elapsed: 26 seconds
+Sketches:
+Sketch conj3_sketch0 : @eq lst (##hole##) x
+Sketch conj3_term_sketch0 : @eq lst (rev lf2) (##hole##)
+
+
+<---CREATE SYNTHESIS PROBLEMS--->
+Time elapsed: 38 seconds
+Problems per Sketch:
+Sketch conj3_sketch0 --> Problem  synth_1
+Sketch conj3_term_sketch0 --> Problem  synth_2
+
+
+<--- SYNTHESIS PROBLEM RESULTS--->
+Time elapsed: 42 seconds
+
+Problem: synth_1
+ rev (lfappend (rev x) Nil)
+ lfappend (rev (rev x)) Nil
+ lfappend (lfappend x Nil) Nil
+ rev (rev x)
+ lfappend x Nil
+ x
+
+Problem: synth_2
+ lfappend (rev (lfappend lf2 Nil)) Nil
+ lfappend (lfappend (rev lf2) Nil) Nil
+ rev (rev (rev lf2))
+ rev (lfappend lf2 Nil)
+ lfappend (rev lf2) Nil
+ rev lf2
+
+<---INITIAL CANDIDATE LEMMAS--->
+Time elapsed: 42 seconds
+Lemmas:
+Lemma candidate_1: forall (x : lst), @eq lst (rev (rev x)) x.
+Lemma candidate_2: forall (x : lst), @eq lst (rev (lfappend (rev x) Nil)) x.
+Lemma candidate_3: forall (x : lst), @eq lst (lfappend (rev (rev x)) Nil) x.
+Lemma candidate_4: forall (x : lst), @eq lst (lfappend (lfappend x Nil) Nil) x.
+Lemma candidate_5: forall (x : lst), @eq lst (rev (rev x)) x.
+Lemma candidate_6: forall (x : lst), @eq lst (lfappend x Nil) x.
+Lemma candidate_7: forall (x : lst), @eq lst (x) x.
+Lemma candidate_8: forall (lf2 : lst), @eq lst (rev lf2) (lfappend (rev (lfappend lf2 Nil)) Nil).
+Lemma candidate_9: forall (lf2 : lst), @eq lst (rev lf2) (lfappend (lfappend (rev lf2) Nil) Nil).
+Lemma candidate_10: forall (lf2 : lst), @eq lst (rev lf2) (rev (rev (rev lf2))).
+Lemma candidate_11: forall (lf2 : lst), @eq lst (rev lf2) (rev (lfappend lf2 Nil)).
+Lemma candidate_12: forall (lf2 : lst), @eq lst (rev lf2) (lfappend (rev lf2) Nil).
+Lemma candidate_13: forall (lf2 : lst), @eq lst (rev lf2) (rev lf2).
+
+<---FILTERED CANDIDATE LEMMAS--->
+Time elapsed: 96 seconds
+Duplicates removed: 2
+Filtered by Quickchick: 0
+Filtered by script: 3
+Remaining: 8
+
+Lemmas: 
+Lemma candidate_6: forall (x : lst), @eq lst (lfappend x Nil) x.
+Lemma candidate_3: forall (x : lst), @eq lst (lfappend (rev (rev x)) Nil) x.
+Lemma candidate_10: forall (lf2 : lst), @eq lst (rev lf2) (rev (rev (rev lf2))).
+Lemma candidate_4: forall (x : lst), @eq lst (lfappend (lfappend x Nil) Nil) x.
+Lemma candidate_12: forall (lf2 : lst), @eq lst (rev lf2) (lfappend (rev lf2) Nil).
+Lemma candidate_11: forall (lf2 : lst), @eq lst (rev lf2) (rev (lfappend lf2 Nil)).
+Lemma candidate_9: forall (lf2 : lst), @eq lst (rev lf2) (lfappend (lfappend (rev lf2) Nil) Nil).
+Lemma candidate_8: forall (lf2 : lst), @eq lst (rev lf2) (lfappend (rev (lfappend lf2 Nil)) Nil).

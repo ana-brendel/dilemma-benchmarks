@@ -1,0 +1,994 @@
+File Information
+- File name: goal50
+- Original Directory: /home/anabrendel/lfind/benchmarks/clam/sources/clam_lf_goal50_count_insort_123_count_cons
+- LFind Directory: /home/anabrendel/lfind/benchmarks/clam/sources/_lfind_clam_lf_goal50_count_insort_123_count_cons
+- Namespace: adtind
+- Proof name: count_insort
+- Theorem: Theorem count_insort: forall (x0 : natural) (l0 : lst),
+@eq natural (count (insort l0 x0) x0) (Succ (count l0 x0)).
+- Declarations: 
+From lfind Require Import LFind.
+Require Import Arith.
+
+Proof Context
+* Goal State: @eq natural (count (Cons n (insort l n)) n) (Succ (Succ (count l n)))
+
+* Hypothesis:
+x : natural
+IHl : @eq natural (count (insort l n) n) (Succ (count l n))
+l : lst
+n : natural
+E : @eq natural x n
+
+* Types:
+Set
+natural
+Prop
+lst
+
+* Polymorphic Types:
+
+
+* Variables:
+x : natural
+n : natural
+l : lst
+
+* Terms:
+Succ (Succ (count l n)) : natural
+count (insort l n) n : natural
+x : natural
+count l n : natural
+@eq natural (count (insort l n) n) (Succ (count l n)) : Prop
+Cons n (insort l n) : lst
+@eq natural x n : Prop
+lst : Set
+@eq natural (count (Cons n (insort l n)) n) (Succ (Succ (count l n))) : Prop
+insort l n : lst
+count (Cons n (insort l n)) n : natural
+n : natural
+natural : Set
+l : lst
+Succ (count l n) : natural
+
+* Functions:
+Succ  : forall _ : natural, natural
+count  : forall (_ : lst) (_ : natural), natural
+insort  : forall (_ : lst) (_ : natural), lst
+Cons  : forall (_ : natural) (_ : lst), lst
+@eq  : forall (A : Type) (_ : A) (_ : A), Prop
+
+<---GENERALIZATION--->
+Time elapsed: 1 seconds
+Generalized Variables:
+lf3 : lst = Cons n (insort l n)
+lf1 : natural = count (Cons n (insort l n)) n
+lf4 : natural = Succ (count l n)
+lf5 : lst = insort l n
+lf2 : natural = Succ (Succ (count l n))
+lf6 : natural = count l n
+
+Generalizations:
+Lemma conj1: forall (lf2 : natural) (lf1 : natural), @eq natural lf1 lf2.
+Lemma conj3: forall (lf4 : natural) (lf1 : natural), @eq natural lf1 (Succ lf4).
+Lemma conj11: forall (lf6 : natural) (lf1 : natural), @eq natural lf1 (Succ (Succ lf6)).
+Lemma conj12: forall (lf1 : natural) (n : natural) (l : lst), @eq natural lf1 (Succ (Succ (count l n))).
+Lemma conj17: forall (lf2 : natural) (n : natural) (lf3 : lst), @eq natural (count lf3 n) lf2.
+Lemma conj19: forall (lf4 : natural) (n : natural) (lf3 : lst), @eq natural (count lf3 n) (Succ lf4).
+Lemma conj27: forall (lf6 : natural) (n : natural) (lf3 : lst), @eq natural (count lf3 n) (Succ (Succ lf6)).
+Lemma conj28: forall (n : natural) (l : lst) (lf3 : lst), @eq natural (count lf3 n) (Succ (Succ (count l n))).
+Lemma conj49: forall (lf2 : natural) (lf5 : lst) (n : natural), @eq natural (count (Cons n lf5) n) lf2.
+Lemma conj51: forall (lf5 : lst) (lf4 : natural) (n : natural), @eq natural (count (Cons n lf5) n) (Succ lf4).
+Lemma conj53: forall (lf2 : natural) (n : natural) (l : lst), @eq natural (count (Cons n (insort l n)) n) lf2.
+Lemma conj55: forall (lf4 : natural) (n : natural) (l : lst), @eq natural (count (Cons n (insort l n)) n) (Succ lf4).
+Lemma conj59: forall (lf6 : natural) (lf5 : lst) (n : natural), @eq natural (count (Cons n lf5) n) (Succ (Succ lf6)).
+Lemma conj60: forall (lf5 : lst) (n : natural) (l : lst), @eq natural (count (Cons n lf5) n) (Succ (Succ (count l n))).
+Lemma conj63: forall (lf6 : natural) (n : natural) (l : lst), @eq natural (count (Cons n (insort l n)) n) (Succ (Succ lf6)).
+Lemma conj64: forall (n : natural) (l : lst), @eq natural (count (Cons n (insort l n)) n) (Succ (Succ (count l n))).
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 25 seconds
+Valid:
+Lemma conj64: forall (n : natural) (l : lst), @eq natural (count (Cons n (insort l n)) n) (Succ (Succ (count l n))).
+
+Invalid:
+Lemma conj63: forall (lf6 : natural) (n : natural) (l : lst), @eq natural (count (Cons n (insort l n)) n) (Succ (Succ lf6)).
+Lemma conj60: forall (lf5 : lst) (n : natural) (l : lst), @eq natural (count (Cons n lf5) n) (Succ (Succ (count l n))).
+Lemma conj59: forall (lf6 : natural) (lf5 : lst) (n : natural), @eq natural (count (Cons n lf5) n) (Succ (Succ lf6)).
+Lemma conj55: forall (lf4 : natural) (n : natural) (l : lst), @eq natural (count (Cons n (insort l n)) n) (Succ lf4).
+Lemma conj53: forall (lf2 : natural) (n : natural) (l : lst), @eq natural (count (Cons n (insort l n)) n) lf2.
+Lemma conj51: forall (lf5 : lst) (lf4 : natural) (n : natural), @eq natural (count (Cons n lf5) n) (Succ lf4).
+Lemma conj49: forall (lf2 : natural) (lf5 : lst) (n : natural), @eq natural (count (Cons n lf5) n) lf2.
+Lemma conj28: forall (n : natural) (l : lst) (lf3 : lst), @eq natural (count lf3 n) (Succ (Succ (count l n))).
+Lemma conj27: forall (lf6 : natural) (n : natural) (lf3 : lst), @eq natural (count lf3 n) (Succ (Succ lf6)).
+Lemma conj19: forall (lf4 : natural) (n : natural) (lf3 : lst), @eq natural (count lf3 n) (Succ lf4).
+Lemma conj17: forall (lf2 : natural) (n : natural) (lf3 : lst), @eq natural (count lf3 n) lf2.
+Lemma conj12: forall (lf1 : natural) (n : natural) (l : lst), @eq natural lf1 (Succ (Succ (count l n))).
+Lemma conj11: forall (lf6 : natural) (lf1 : natural), @eq natural lf1 (Succ (Succ lf6)).
+Lemma conj3: forall (lf4 : natural) (lf1 : natural), @eq natural lf1 (Succ lf4).
+Lemma conj1: forall (lf2 : natural) (lf1 : natural), @eq natural lf1 lf2.
+
+<---ADD IMPLICATIONS--->
+Time elapsed: 47 seconds
+Generalizations:
+Lemma conj63_imp: forall (lf6 : natural) (n : natural) (l : lst), forall _ : @eq natural (count (insort l n) n) (Succ lf6),
+@eq natural (count (Cons n (insort l n)) n) (Succ (Succ lf6)).
+Lemma conj63: forall (lf6 : natural) (n : natural) (l : lst), @eq natural (count (Cons n (insort l n)) n) (Succ (Succ lf6)).
+Lemma conj60_imp: forall (lf5 : lst) (n : natural) (l : lst), forall _ : @eq natural (count lf5 n) (Succ (count l n)),
+@eq natural (count (Cons n lf5) n) (Succ (Succ (count l n))).
+Lemma conj60: forall (lf5 : lst) (n : natural) (l : lst), @eq natural (count (Cons n lf5) n) (Succ (Succ (count l n))).
+Lemma conj59_imp: forall (lf6 : natural) (lf5 : lst) (n : natural), forall _ : @eq natural (count lf5 n) (Succ lf6),
+@eq natural (count (Cons n lf5) n) (Succ (Succ lf6)).
+Lemma conj59: forall (lf6 : natural) (lf5 : lst) (n : natural), @eq natural (count (Cons n lf5) n) (Succ (Succ lf6)).
+Lemma conj55_imp: forall (lf4 : natural) (n : natural) (l : lst), forall _ : @eq natural (count (insort l n) n) lf4,
+@eq natural (count (Cons n (insort l n)) n) (Succ lf4).
+Lemma conj55: forall (lf4 : natural) (n : natural) (l : lst), @eq natural (count (Cons n (insort l n)) n) (Succ lf4).
+Lemma conj53: forall (lf2 : natural) (n : natural) (l : lst), @eq natural (count (Cons n (insort l n)) n) lf2.
+Lemma conj51_imp: forall (lf5 : lst) (lf4 : natural) (n : natural), forall _ : @eq natural (count lf5 n) lf4,
+@eq natural (count (Cons n lf5) n) (Succ lf4).
+Lemma conj51: forall (lf5 : lst) (lf4 : natural) (n : natural), @eq natural (count (Cons n lf5) n) (Succ lf4).
+Lemma conj49: forall (lf2 : natural) (lf5 : lst) (n : natural), @eq natural (count (Cons n lf5) n) lf2.
+Lemma conj28: forall (n : natural) (l : lst) (lf3 : lst), @eq natural (count lf3 n) (Succ (Succ (count l n))).
+Lemma conj27: forall (lf6 : natural) (n : natural) (lf3 : lst), @eq natural (count lf3 n) (Succ (Succ lf6)).
+Lemma conj19: forall (lf4 : natural) (n : natural) (lf3 : lst), @eq natural (count lf3 n) (Succ lf4).
+Lemma conj17: forall (lf2 : natural) (n : natural) (lf3 : lst), @eq natural (count lf3 n) lf2.
+Lemma conj12: forall (lf1 : natural) (n : natural) (l : lst), @eq natural lf1 (Succ (Succ (count l n))).
+Lemma conj11: forall (lf6 : natural) (lf1 : natural), @eq natural lf1 (Succ (Succ lf6)).
+Lemma conj3: forall (lf4 : natural) (lf1 : natural), @eq natural lf1 (Succ lf4).
+Lemma conj1: forall (lf2 : natural) (lf1 : natural), @eq natural lf1 lf2.
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 76 seconds
+Valid:
+Lemma conj51_imp: forall (lf5 : lst) (lf4 : natural) (n : natural), forall _ : @eq natural (count lf5 n) lf4,
+@eq natural (count (Cons n lf5) n) (Succ lf4).
+Lemma conj55_imp: forall (lf4 : natural) (n : natural) (l : lst), forall _ : @eq natural (count (insort l n) n) lf4,
+@eq natural (count (Cons n (insort l n)) n) (Succ lf4).
+Lemma conj59_imp: forall (lf6 : natural) (lf5 : lst) (n : natural), forall _ : @eq natural (count lf5 n) (Succ lf6),
+@eq natural (count (Cons n lf5) n) (Succ (Succ lf6)).
+Lemma conj60_imp: forall (lf5 : lst) (n : natural) (l : lst), forall _ : @eq natural (count lf5 n) (Succ (count l n)),
+@eq natural (count (Cons n lf5) n) (Succ (Succ (count l n))).
+Lemma conj63_imp: forall (lf6 : natural) (n : natural) (l : lst), forall _ : @eq natural (count (insort l n) n) (Succ lf6),
+@eq natural (count (Cons n (insort l n)) n) (Succ (Succ lf6)).
+
+Invalid:
+Lemma conj1: forall (lf2 : natural) (lf1 : natural), @eq natural lf1 lf2.
+Lemma conj3: forall (lf4 : natural) (lf1 : natural), @eq natural lf1 (Succ lf4).
+Lemma conj11: forall (lf6 : natural) (lf1 : natural), @eq natural lf1 (Succ (Succ lf6)).
+Lemma conj12: forall (lf1 : natural) (n : natural) (l : lst), @eq natural lf1 (Succ (Succ (count l n))).
+Lemma conj17: forall (lf2 : natural) (n : natural) (lf3 : lst), @eq natural (count lf3 n) lf2.
+Lemma conj19: forall (lf4 : natural) (n : natural) (lf3 : lst), @eq natural (count lf3 n) (Succ lf4).
+Lemma conj27: forall (lf6 : natural) (n : natural) (lf3 : lst), @eq natural (count lf3 n) (Succ (Succ lf6)).
+Lemma conj28: forall (n : natural) (l : lst) (lf3 : lst), @eq natural (count lf3 n) (Succ (Succ (count l n))).
+Lemma conj49: forall (lf2 : natural) (lf5 : lst) (n : natural), @eq natural (count (Cons n lf5) n) lf2.
+Lemma conj51: forall (lf5 : lst) (lf4 : natural) (n : natural), @eq natural (count (Cons n lf5) n) (Succ lf4).
+Lemma conj53: forall (lf2 : natural) (n : natural) (l : lst), @eq natural (count (Cons n (insort l n)) n) lf2.
+Lemma conj55: forall (lf4 : natural) (n : natural) (l : lst), @eq natural (count (Cons n (insort l n)) n) (Succ lf4).
+Lemma conj59: forall (lf6 : natural) (lf5 : lst) (n : natural), @eq natural (count (Cons n lf5) n) (Succ (Succ lf6)).
+Lemma conj60: forall (lf5 : lst) (n : natural) (l : lst), @eq natural (count (Cons n lf5) n) (Succ (Succ (count l n))).
+Lemma conj63: forall (lf6 : natural) (n : natural) (l : lst), @eq natural (count (Cons n (insort l n)) n) (Succ (Succ lf6)).
+
+
+<---CREATE SKETCHES--->
+Time elapsed: 76 seconds
+Sketches:
+Sketch conj3_sketch0 : @eq natural lf1 (##hole##)
+Sketch conj3_term_sketch0 : @eq natural (Succ lf4) (##hole##)
+Sketch conj11_sketch0 : @eq natural lf1 (Succ (##hole##))
+Sketch conj11_sketch1 : @eq natural lf1 (##hole##)
+Sketch conj11_term_sketch0 : @eq natural (Succ lf6) (##hole##)
+Sketch conj11_term_sketch1 : @eq natural (Succ (Succ lf6)) (##hole##)
+Sketch conj12_sketch0 : @eq natural lf1 (##hole##)
+Sketch conj12_sketch1 : @eq natural lf1 (Succ (Succ (##hole##)))
+Sketch conj12_sketch2 : @eq natural lf1 (Succ (##hole##))
+Sketch conj12_term_sketch0 : @eq natural (Succ (Succ (count l n))) (##hole##)
+Sketch conj12_term_sketch1 : @eq natural (count l n) (##hole##)
+Sketch conj12_term_sketch2 : @eq natural (Succ (count l n)) (##hole##)
+Sketch conj17_sketch0 : @eq natural (##hole##) lf2
+Sketch conj17_term_sketch0 : @eq natural (count lf3 n) (##hole##)
+Sketch conj19_sketch0 : @eq natural (##hole##) (Succ lf4)
+Sketch conj19_sketch1 : @eq natural (count lf3 n) (##hole##)
+Sketch conj19_term_sketch0 : @eq natural (count lf3 n) (##hole##)
+Sketch conj19_term_sketch1 : @eq natural (Succ lf4) (##hole##)
+Sketch conj27_sketch0 : @eq natural (##hole##) (Succ (Succ lf6))
+Sketch conj27_sketch1 : @eq natural (count lf3 n) (Succ (##hole##))
+Sketch conj27_sketch2 : @eq natural (count lf3 n) (##hole##)
+Sketch conj27_term_sketch0 : @eq natural (count lf3 n) (##hole##)
+Sketch conj27_term_sketch1 : @eq natural (Succ lf6) (##hole##)
+Sketch conj27_term_sketch2 : @eq natural (Succ (Succ lf6)) (##hole##)
+Sketch conj28_sketch0 : @eq natural (count lf3 n) (##hole##)
+Sketch conj28_sketch1 : @eq natural (count lf3 n) (Succ (Succ (##hole##)))
+Sketch conj28_sketch2 : @eq natural (##hole##) (Succ (Succ (count l n)))
+Sketch conj28_sketch3 : @eq natural (count lf3 n) (Succ (##hole##))
+Sketch conj28_term_sketch0 : @eq natural (Succ (Succ (count l n))) (##hole##)
+Sketch conj28_term_sketch1 : @eq natural (count l n) (##hole##)
+Sketch conj28_term_sketch2 : @eq natural (count lf3 n) (##hole##)
+Sketch conj28_term_sketch3 : @eq natural (Succ (count l n)) (##hole##)
+Sketch conj49_sketch0 : @eq natural (count (##hole##) n) lf2
+Sketch conj49_sketch1 : @eq natural (##hole##) lf2
+Sketch conj49_term_sketch0 : @eq lst (Cons n lf5) (##hole##)
+Sketch conj49_term_sketch1 : @eq natural (count (Cons n lf5) n) (##hole##)
+Sketch conj51_sketch0 : @eq natural (count (##hole##) n) (Succ lf4)
+Sketch conj51_sketch1 : @eq natural (##hole##) (Succ lf4)
+Sketch conj51_sketch2 : @eq natural (count (Cons n lf5) n) (##hole##)
+Sketch conj51_term_sketch0 : @eq lst (Cons n lf5) (##hole##)
+Sketch conj51_term_sketch1 : @eq natural (count (Cons n lf5) n) (##hole##)
+Sketch conj51_term_sketch2 : @eq natural (Succ lf4) (##hole##)
+Sketch conj53_sketch0 : @eq natural (count (##hole##) n) lf2
+Sketch conj53_sketch1 : @eq natural (count (Cons n (##hole##)) n) lf2
+Sketch conj53_sketch2 : @eq natural (##hole##) lf2
+Sketch conj53_term_sketch0 : @eq lst (Cons n (insort l n)) (##hole##)
+Sketch conj53_term_sketch1 : @eq lst (insort l n) (##hole##)
+Sketch conj53_term_sketch2 : @eq natural (count (Cons n (insort l n)) n) (##hole##)
+Sketch conj55_sketch0 : @eq natural (count (##hole##) n) (Succ lf4)
+Sketch conj55_sketch1 : @eq natural (count (Cons n (insort l n)) n) (##hole##)
+Sketch conj55_sketch2 : @eq natural (count (Cons n (##hole##)) n) (Succ lf4)
+Sketch conj55_sketch3 : @eq natural (##hole##) (Succ lf4)
+Sketch conj55_term_sketch0 : @eq lst (Cons n (insort l n)) (##hole##)
+Sketch conj55_term_sketch1 : @eq natural (Succ lf4) (##hole##)
+Sketch conj55_term_sketch2 : @eq lst (insort l n) (##hole##)
+Sketch conj55_term_sketch3 : @eq natural (count (Cons n (insort l n)) n) (##hole##)
+Sketch conj59_sketch0 : @eq natural (count (##hole##) n) (Succ (Succ lf6))
+Sketch conj59_sketch1 : @eq natural (##hole##) (Succ (Succ lf6))
+Sketch conj59_sketch2 : @eq natural (count (Cons n lf5) n) (Succ (##hole##))
+Sketch conj59_sketch3 : @eq natural (count (Cons n lf5) n) (##hole##)
+Sketch conj59_term_sketch0 : @eq lst (Cons n lf5) (##hole##)
+Sketch conj59_term_sketch1 : @eq natural (count (Cons n lf5) n) (##hole##)
+Sketch conj59_term_sketch2 : @eq natural (Succ lf6) (##hole##)
+Sketch conj59_term_sketch3 : @eq natural (Succ (Succ lf6)) (##hole##)
+Sketch conj60_sketch0 : @eq natural (count (Cons n lf5) n) (##hole##)
+Sketch conj60_sketch1 : @eq natural (count (##hole##) n) (Succ (Succ (count l n)))
+Sketch conj60_sketch2 : @eq natural (count (Cons n lf5) n) (Succ (Succ (##hole##)))
+Sketch conj60_sketch3 : @eq natural (##hole##) (Succ (Succ (count l n)))
+Sketch conj60_sketch4 : @eq natural (count (Cons n lf5) n) (Succ (##hole##))
+Sketch conj60_term_sketch0 : @eq natural (Succ (Succ (count l n))) (##hole##)
+Sketch conj60_term_sketch1 : @eq lst (Cons n lf5) (##hole##)
+Sketch conj60_term_sketch2 : @eq natural (count l n) (##hole##)
+Sketch conj60_term_sketch3 : @eq natural (count (Cons n lf5) n) (##hole##)
+Sketch conj60_term_sketch4 : @eq natural (Succ (count l n)) (##hole##)
+Sketch conj63_sketch0 : @eq natural (count (##hole##) n) (Succ (Succ lf6))
+Sketch conj63_sketch1 : @eq natural (count (Cons n (insort l n)) n) (Succ (##hole##))
+Sketch conj63_sketch2 : @eq natural (count (Cons n (##hole##)) n) (Succ (Succ lf6))
+Sketch conj63_sketch3 : @eq natural (count (Cons n (insort l n)) n) (##hole##)
+Sketch conj63_sketch4 : @eq natural (##hole##) (Succ (Succ lf6))
+Sketch conj63_term_sketch0 : @eq lst (Cons n (insort l n)) (##hole##)
+Sketch conj63_term_sketch1 : @eq natural (Succ lf6) (##hole##)
+Sketch conj63_term_sketch2 : @eq lst (insort l n) (##hole##)
+Sketch conj63_term_sketch3 : @eq natural (Succ (Succ lf6)) (##hole##)
+Sketch conj63_term_sketch4 : @eq natural (count (Cons n (insort l n)) n) (##hole##)
+
+
+<---CREATE SYNTHESIS PROBLEMS--->
+Time elapsed: 76 seconds
+Problems per Sketch:
+Sketch conj12_sketch0 --> Problem  synth_1
+Sketch conj28_sketch0 --> Problem  synth_6
+Sketch conj53_sketch1 --> Problem  synth_7
+Sketch conj60_term_sketch1 --> Problem  synth_8
+Sketch conj59_term_sketch2 --> Problem  synth_3
+Sketch conj11_term_sketch1 --> Problem  synth_3
+Sketch conj63_sketch4 --> Problem  synth_3
+Sketch conj60_term_sketch4 --> Problem  synth_4
+Sketch conj59_term_sketch1 --> Problem  synth_9
+Sketch conj59_sketch1 --> Problem  synth_3
+Sketch conj53_term_sketch2 --> Problem  synth_13
+Sketch conj60_sketch0 --> Problem  synth_9
+Sketch conj53_term_sketch0 --> Problem  synth_11
+Sketch conj11_sketch1 --> Problem  synth_1
+Sketch conj17_term_sketch0 --> Problem  synth_6
+Sketch conj28_term_sketch1 --> Problem  synth_4
+Sketch conj63_term_sketch0 --> Problem  synth_11
+Sketch conj55_sketch3 --> Problem  synth_2
+Sketch conj12_term_sketch0 --> Problem  synth_4
+Sketch conj60_term_sketch3 --> Problem  synth_9
+Sketch conj60_term_sketch2 --> Problem  synth_4
+Sketch conj60_sketch1 --> Problem  synth_11
+Sketch conj55_sketch1 --> Problem  synth_13
+Sketch conj28_term_sketch3 --> Problem  synth_4
+Sketch conj60_sketch2 --> Problem  synth_9
+Sketch conj59_sketch3 --> Problem  synth_9
+Sketch conj12_sketch1 --> Problem  synth_1
+Sketch conj27_term_sketch2 --> Problem  synth_3
+Sketch conj12_sketch2 --> Problem  synth_1
+Sketch conj63_term_sketch4 --> Problem  synth_13
+Sketch conj3_term_sketch0 --> Problem  synth_2
+Sketch conj59_sketch2 --> Problem  synth_9
+Sketch conj28_sketch2 --> Problem  synth_4
+Sketch conj11_term_sketch0 --> Problem  synth_3
+Sketch conj19_term_sketch1 --> Problem  synth_2
+Sketch conj51_term_sketch2 --> Problem  synth_2
+Sketch conj27_sketch2 --> Problem  synth_6
+Sketch conj28_term_sketch2 --> Problem  synth_6
+Sketch conj60_term_sketch0 --> Problem  synth_4
+Sketch conj27_sketch1 --> Problem  synth_6
+Sketch conj53_sketch0 --> Problem  synth_7
+Sketch conj60_sketch3 --> Problem  synth_4
+Sketch conj51_sketch0 --> Problem  synth_10
+Sketch conj12_term_sketch2 --> Problem  synth_4
+Sketch conj19_term_sketch0 --> Problem  synth_6
+Sketch conj63_term_sketch1 --> Problem  synth_3
+Sketch conj51_term_sketch1 --> Problem  synth_9
+Sketch conj51_term_sketch0 --> Problem  synth_8
+Sketch conj55_term_sketch0 --> Problem  synth_11
+Sketch conj27_term_sketch1 --> Problem  synth_3
+Sketch conj19_sketch0 --> Problem  synth_2
+Sketch conj17_sketch0 --> Problem  synth_5
+Sketch conj49_sketch0 --> Problem  synth_7
+Sketch conj63_sketch2 --> Problem  synth_14
+Sketch conj55_term_sketch1 --> Problem  synth_2
+Sketch conj3_sketch0 --> Problem  synth_1
+Sketch conj59_sketch0 --> Problem  synth_14
+Sketch conj49_term_sketch1 --> Problem  synth_9
+Sketch conj12_term_sketch1 --> Problem  synth_4
+Sketch conj63_term_sketch3 --> Problem  synth_3
+Sketch conj63_sketch0 --> Problem  synth_14
+Sketch conj55_term_sketch3 --> Problem  synth_13
+Sketch conj63_sketch3 --> Problem  synth_13
+Sketch conj59_term_sketch0 --> Problem  synth_8
+Sketch conj53_term_sketch1 --> Problem  synth_12
+Sketch conj28_term_sketch0 --> Problem  synth_4
+Sketch conj59_term_sketch3 --> Problem  synth_3
+Sketch conj51_sketch1 --> Problem  synth_2
+Sketch conj55_sketch0 --> Problem  synth_10
+Sketch conj63_sketch1 --> Problem  synth_13
+Sketch conj53_sketch2 --> Problem  synth_5
+Sketch conj27_sketch0 --> Problem  synth_3
+Sketch conj19_sketch1 --> Problem  synth_6
+Sketch conj28_sketch3 --> Problem  synth_6
+Sketch conj28_sketch1 --> Problem  synth_6
+Sketch conj60_sketch4 --> Problem  synth_9
+Sketch conj11_sketch0 --> Problem  synth_1
+Sketch conj55_term_sketch2 --> Problem  synth_12
+Sketch conj27_term_sketch0 --> Problem  synth_6
+Sketch conj51_sketch2 --> Problem  synth_9
+Sketch conj63_term_sketch2 --> Problem  synth_12
+Sketch conj55_sketch2 --> Problem  synth_10
+Sketch conj49_sketch1 --> Problem  synth_5
+Sketch conj49_term_sketch0 --> Problem  synth_8
+
+
+<--- SYNTHESIS PROBLEM RESULTS--->
+Time elapsed: 88 seconds
+
+Problem: synth_14
+ Cons (Succ lf6) Nil
+ Cons (Succ Zero) Nil
+ Cons n Nil
+ Cons lf6 Nil
+ Cons Zero Nil
+ Nil
+
+Problem: synth_10
+ Cons (Succ lf4) Nil
+ Cons (Succ Zero) Nil
+ Cons n Nil
+ Cons lf4 Nil
+ Cons Zero Nil
+ Nil
+
+Problem: synth_8
+ Cons n Nil
+ insort lf5 Zero
+ Cons Zero Nil
+ sort lf5
+ lf5
+ Nil
+
+Problem: synth_3
+ Succ (Succ lf6)
+ Succ (Succ Zero)
+ Succ lf6
+ Succ Zero
+ lf6
+ Zero
+
+Problem: synth_9
+ count lf5 n
+ count lf5 Zero
+ Succ n
+ Succ Zero
+ n
+ Zero
+
+Problem: synth_13
+ count l n
+ count l Zero
+ Succ n
+ Succ Zero
+ n
+ Zero
+
+Problem: synth_12
+ Cons n Nil
+ insort l Zero
+ Cons Zero Nil
+ sort l
+ l
+ Nil
+
+Problem: synth_6
+ count lf3 n
+ count lf3 Zero
+ Succ n
+ Succ Zero
+ n
+ Zero
+
+Problem: synth_11
+ Cons n Nil
+ insort l Zero
+ Cons Zero Nil
+ sort l
+ l
+ Nil
+
+Problem: synth_7
+ Cons (Succ lf2) Nil
+ Cons (Succ Zero) Nil
+ Cons n Nil
+ Cons lf2 Nil
+ Cons Zero Nil
+ Nil
+
+Problem: synth_5
+ Succ (Succ lf2)
+ Succ (Succ Zero)
+ Succ lf2
+ Succ Zero
+ lf2
+ Zero
+
+Problem: synth_4
+ count l n
+ count l Zero
+ Succ n
+ Succ Zero
+ n
+ Zero
+
+Problem: synth_1
+ Succ (Succ lf1)
+ Succ (Succ Zero)
+ Succ lf1
+ Succ Zero
+ lf1
+ Zero
+
+Problem: synth_2
+ Succ (Succ lf4)
+ Succ (Succ Zero)
+ Succ lf4
+ Succ Zero
+ lf4
+ Zero
+
+<---INITIAL CANDIDATE LEMMAS--->
+Time elapsed: 88 seconds
+Lemmas:
+Lemma candidate_1: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (Succ (Succ (count l n))).
+Lemma candidate_2: forall (n : natural) (lf4 : natural) (lf5 : lst), forall _ : @eq natural (count lf5 n) lf4, @eq natural (count (Cons n lf5) n) (Succ lf4).
+Lemma candidate_3: forall (l : lst) (n : natural) (lf4 : natural), forall _ : @eq natural (count (insort l n) n) lf4, @eq natural (count (Cons n (insort l n)) n) (Succ lf4).
+Lemma candidate_4: forall (n : natural) (lf5 : lst) (lf6 : natural), forall _ : @eq natural (count lf5 n) (Succ lf6), @eq natural (count (Cons n lf5) n) (Succ (Succ lf6)).
+Lemma candidate_5: forall (l : lst) (n : natural) (lf5 : lst), forall _ : @eq natural (count lf5 n) (Succ (count l n)), @eq natural (count (Cons n lf5) n) (Succ (Succ (count l n))).
+Lemma candidate_6: forall (l : lst) (n : natural) (lf6 : natural), forall _ : @eq natural (count (insort l n) n) (Succ lf6), @eq natural (count (Cons n (insort l n)) n) (Succ (Succ lf6)).
+Lemma candidate_7: forall (lf1 : natural), @eq natural lf1 (Succ (Succ lf1)).
+Lemma candidate_8: forall (lf1 : natural), @eq natural lf1 (Succ (Succ Zero)).
+Lemma candidate_9: forall (lf1 : natural), @eq natural lf1 (Succ lf1).
+Lemma candidate_10: forall (lf1 : natural), @eq natural lf1 (Succ Zero).
+Lemma candidate_11: forall (lf1 : natural), @eq natural lf1 (lf1).
+Lemma candidate_12: forall (lf1 : natural), @eq natural lf1 (Zero).
+Lemma candidate_13: forall (lf4 : natural), @eq natural (Succ lf4) (Succ (Succ lf4)).
+Lemma candidate_14: forall (lf4 : natural), @eq natural (Succ lf4) (Succ (Succ Zero)).
+Lemma candidate_15: forall (lf4 : natural), @eq natural (Succ lf4) (Succ lf4).
+Lemma candidate_16: forall (lf4 : natural), @eq natural (Succ lf4) (Succ Zero).
+Lemma candidate_17: forall (lf4 : natural), @eq natural (Succ lf4) (lf4).
+Lemma candidate_18: forall (lf4 : natural), @eq natural (Succ lf4) (Zero).
+Lemma candidate_19: forall (lf1 : natural), @eq natural lf1 (Succ (Succ (Succ lf1))).
+Lemma candidate_20: forall (lf1 : natural), @eq natural lf1 (Succ (Succ (Succ Zero))).
+Lemma candidate_21: forall (lf1 : natural), @eq natural lf1 (Succ (Succ lf1)).
+Lemma candidate_22: forall (lf1 : natural), @eq natural lf1 (Succ (Succ Zero)).
+Lemma candidate_23: forall (lf1 : natural), @eq natural lf1 (Succ (lf1)).
+Lemma candidate_24: forall (lf1 : natural), @eq natural lf1 (Succ (Zero)).
+Lemma candidate_25: forall (lf1 : natural), @eq natural lf1 (Succ (Succ lf1)).
+Lemma candidate_26: forall (lf1 : natural), @eq natural lf1 (Succ (Succ Zero)).
+Lemma candidate_27: forall (lf1 : natural), @eq natural lf1 (Succ lf1).
+Lemma candidate_28: forall (lf1 : natural), @eq natural lf1 (Succ Zero).
+Lemma candidate_29: forall (lf1 : natural), @eq natural lf1 (lf1).
+Lemma candidate_30: forall (lf1 : natural), @eq natural lf1 (Zero).
+Lemma candidate_31: forall (lf6 : natural), @eq natural (Succ lf6) (Succ (Succ lf6)).
+Lemma candidate_32: forall (lf6 : natural), @eq natural (Succ lf6) (Succ (Succ Zero)).
+Lemma candidate_33: forall (lf6 : natural), @eq natural (Succ lf6) (Succ lf6).
+Lemma candidate_34: forall (lf6 : natural), @eq natural (Succ lf6) (Succ Zero).
+Lemma candidate_35: forall (lf6 : natural), @eq natural (Succ lf6) (lf6).
+Lemma candidate_36: forall (lf6 : natural), @eq natural (Succ lf6) (Zero).
+Lemma candidate_37: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (Succ (Succ lf6)).
+Lemma candidate_38: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (Succ (Succ Zero)).
+Lemma candidate_39: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (Succ lf6).
+Lemma candidate_40: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (Succ Zero).
+Lemma candidate_41: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (lf6).
+Lemma candidate_42: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (Zero).
+Lemma candidate_43: forall (lf1 : natural), @eq natural lf1 (Succ (Succ lf1)).
+Lemma candidate_44: forall (lf1 : natural), @eq natural lf1 (Succ (Succ Zero)).
+Lemma candidate_45: forall (lf1 : natural), @eq natural lf1 (Succ lf1).
+Lemma candidate_46: forall (lf1 : natural), @eq natural lf1 (Succ Zero).
+Lemma candidate_47: forall (lf1 : natural), @eq natural lf1 (lf1).
+Lemma candidate_48: forall (lf1 : natural), @eq natural lf1 (Zero).
+Lemma candidate_49: forall (lf1 : natural), @eq natural lf1 (Succ (Succ (Succ (Succ lf1)))).
+Lemma candidate_50: forall (lf1 : natural), @eq natural lf1 (Succ (Succ (Succ (Succ Zero)))).
+Lemma candidate_51: forall (lf1 : natural), @eq natural lf1 (Succ (Succ (Succ lf1))).
+Lemma candidate_52: forall (lf1 : natural), @eq natural lf1 (Succ (Succ (Succ Zero))).
+Lemma candidate_53: forall (lf1 : natural), @eq natural lf1 (Succ (Succ (lf1))).
+Lemma candidate_54: forall (lf1 : natural), @eq natural lf1 (Succ (Succ (Zero))).
+Lemma candidate_55: forall (lf1 : natural), @eq natural lf1 (Succ (Succ (Succ lf1))).
+Lemma candidate_56: forall (lf1 : natural), @eq natural lf1 (Succ (Succ (Succ Zero))).
+Lemma candidate_57: forall (lf1 : natural), @eq natural lf1 (Succ (Succ lf1)).
+Lemma candidate_58: forall (lf1 : natural), @eq natural lf1 (Succ (Succ Zero)).
+Lemma candidate_59: forall (lf1 : natural), @eq natural lf1 (Succ (lf1)).
+Lemma candidate_60: forall (lf1 : natural), @eq natural lf1 (Succ (Zero)).
+Lemma candidate_61: forall (n : natural) (l : lst), @eq natural (Succ (Succ (count l n))) (count l n).
+Lemma candidate_62: forall (n : natural) (l : lst), @eq natural (Succ (Succ (count l n))) (count l Zero).
+Lemma candidate_63: forall (n : natural) (l : lst), @eq natural (Succ (Succ (count l n))) (Succ n).
+Lemma candidate_64: forall (n : natural) (l : lst), @eq natural (Succ (Succ (count l n))) (Succ Zero).
+Lemma candidate_65: forall (n : natural) (l : lst), @eq natural (Succ (Succ (count l n))) (n).
+Lemma candidate_66: forall (n : natural) (l : lst), @eq natural (Succ (Succ (count l n))) (Zero).
+Lemma candidate_67: forall (n : natural) (l : lst), @eq natural (count l n) (count l n).
+Lemma candidate_68: forall (n : natural) (l : lst), @eq natural (count l n) (count l Zero).
+Lemma candidate_69: forall (n : natural) (l : lst), @eq natural (count l n) (Succ n).
+Lemma candidate_70: forall (n : natural) (l : lst), @eq natural (count l n) (Succ Zero).
+Lemma candidate_71: forall (n : natural) (l : lst), @eq natural (count l n) (n).
+Lemma candidate_72: forall (n : natural) (l : lst), @eq natural (count l n) (Zero).
+Lemma candidate_73: forall (n : natural) (l : lst), @eq natural (Succ (count l n)) (count l n).
+Lemma candidate_74: forall (n : natural) (l : lst), @eq natural (Succ (count l n)) (count l Zero).
+Lemma candidate_75: forall (n : natural) (l : lst), @eq natural (Succ (count l n)) (Succ n).
+Lemma candidate_76: forall (n : natural) (l : lst), @eq natural (Succ (count l n)) (Succ Zero).
+Lemma candidate_77: forall (n : natural) (l : lst), @eq natural (Succ (count l n)) (n).
+Lemma candidate_78: forall (n : natural) (l : lst), @eq natural (Succ (count l n)) (Zero).
+Lemma candidate_79: forall (lf2 : natural), @eq natural (Succ (Succ lf2)) lf2.
+Lemma candidate_80: forall (lf2 : natural), @eq natural (Succ (Succ Zero)) lf2.
+Lemma candidate_81: forall (lf2 : natural), @eq natural (Succ lf2) lf2.
+Lemma candidate_82: forall (lf2 : natural), @eq natural (Succ Zero) lf2.
+Lemma candidate_83: forall (lf2 : natural), @eq natural (lf2) lf2.
+Lemma candidate_84: forall (lf2 : natural), @eq natural (Zero) lf2.
+Lemma candidate_85: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (count lf3 n).
+Lemma candidate_86: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (count lf3 Zero).
+Lemma candidate_87: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ n).
+Lemma candidate_88: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ Zero).
+Lemma candidate_89: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (n).
+Lemma candidate_90: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Zero).
+Lemma candidate_91: forall (lf4 : natural), @eq natural (Succ (Succ lf4)) (Succ lf4).
+Lemma candidate_92: forall (lf4 : natural), @eq natural (Succ (Succ Zero)) (Succ lf4).
+Lemma candidate_93: forall (lf4 : natural), @eq natural (Succ lf4) (Succ lf4).
+Lemma candidate_94: forall (lf4 : natural), @eq natural (Succ Zero) (Succ lf4).
+Lemma candidate_95: forall (lf4 : natural), @eq natural (lf4) (Succ lf4).
+Lemma candidate_96: forall (lf4 : natural), @eq natural (Zero) (Succ lf4).
+Lemma candidate_97: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (count lf3 n).
+Lemma candidate_98: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (count lf3 Zero).
+Lemma candidate_99: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ n).
+Lemma candidate_100: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ Zero).
+Lemma candidate_101: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (n).
+Lemma candidate_102: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Zero).
+Lemma candidate_103: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (count lf3 n).
+Lemma candidate_104: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (count lf3 Zero).
+Lemma candidate_105: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ n).
+Lemma candidate_106: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ Zero).
+Lemma candidate_107: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (n).
+Lemma candidate_108: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Zero).
+Lemma candidate_109: forall (lf4 : natural), @eq natural (Succ lf4) (Succ (Succ lf4)).
+Lemma candidate_110: forall (lf4 : natural), @eq natural (Succ lf4) (Succ (Succ Zero)).
+Lemma candidate_111: forall (lf4 : natural), @eq natural (Succ lf4) (Succ lf4).
+Lemma candidate_112: forall (lf4 : natural), @eq natural (Succ lf4) (Succ Zero).
+Lemma candidate_113: forall (lf4 : natural), @eq natural (Succ lf4) (lf4).
+Lemma candidate_114: forall (lf4 : natural), @eq natural (Succ lf4) (Zero).
+Lemma candidate_115: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (Succ (Succ lf6)).
+Lemma candidate_116: forall (lf6 : natural), @eq natural (Succ (Succ Zero)) (Succ (Succ lf6)).
+Lemma candidate_117: forall (lf6 : natural), @eq natural (Succ lf6) (Succ (Succ lf6)).
+Lemma candidate_118: forall (lf6 : natural), @eq natural (Succ Zero) (Succ (Succ lf6)).
+Lemma candidate_119: forall (lf6 : natural), @eq natural (lf6) (Succ (Succ lf6)).
+Lemma candidate_120: forall (lf6 : natural), @eq natural (Zero) (Succ (Succ lf6)).
+Lemma candidate_121: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ (count lf3 n)).
+Lemma candidate_122: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ (count lf3 Zero)).
+Lemma candidate_123: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ (Succ n)).
+Lemma candidate_124: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ (Succ Zero)).
+Lemma candidate_125: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ (n)).
+Lemma candidate_126: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ (Zero)).
+Lemma candidate_127: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (count lf3 n).
+Lemma candidate_128: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (count lf3 Zero).
+Lemma candidate_129: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ n).
+Lemma candidate_130: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ Zero).
+Lemma candidate_131: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (n).
+Lemma candidate_132: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Zero).
+Lemma candidate_133: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (count lf3 n).
+Lemma candidate_134: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (count lf3 Zero).
+Lemma candidate_135: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ n).
+Lemma candidate_136: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ Zero).
+Lemma candidate_137: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (n).
+Lemma candidate_138: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Zero).
+Lemma candidate_139: forall (lf6 : natural), @eq natural (Succ lf6) (Succ (Succ lf6)).
+Lemma candidate_140: forall (lf6 : natural), @eq natural (Succ lf6) (Succ (Succ Zero)).
+Lemma candidate_141: forall (lf6 : natural), @eq natural (Succ lf6) (Succ lf6).
+Lemma candidate_142: forall (lf6 : natural), @eq natural (Succ lf6) (Succ Zero).
+Lemma candidate_143: forall (lf6 : natural), @eq natural (Succ lf6) (lf6).
+Lemma candidate_144: forall (lf6 : natural), @eq natural (Succ lf6) (Zero).
+Lemma candidate_145: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (Succ (Succ lf6)).
+Lemma candidate_146: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (Succ (Succ Zero)).
+Lemma candidate_147: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (Succ lf6).
+Lemma candidate_148: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (Succ Zero).
+Lemma candidate_149: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (lf6).
+Lemma candidate_150: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (Zero).
+Lemma candidate_151: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (count lf3 n).
+Lemma candidate_152: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (count lf3 Zero).
+Lemma candidate_153: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ n).
+Lemma candidate_154: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ Zero).
+Lemma candidate_155: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (n).
+Lemma candidate_156: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Zero).
+Lemma candidate_157: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ (Succ (count lf3 n))).
+Lemma candidate_158: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ (Succ (count lf3 Zero))).
+Lemma candidate_159: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ (Succ (Succ n))).
+Lemma candidate_160: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ (Succ (Succ Zero))).
+Lemma candidate_161: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ (Succ (n))).
+Lemma candidate_162: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ (Succ (Zero))).
+Lemma candidate_163: forall (n : natural) (l : lst), @eq natural (count l n) (Succ (Succ (count l n))).
+Lemma candidate_164: forall (n : natural) (l : lst), @eq natural (count l Zero) (Succ (Succ (count l n))).
+Lemma candidate_165: forall (n : natural) (l : lst), @eq natural (Succ n) (Succ (Succ (count l n))).
+Lemma candidate_166: forall (n : natural) (l : lst), @eq natural (Succ Zero) (Succ (Succ (count l n))).
+Lemma candidate_167: forall (n : natural) (l : lst), @eq natural (n) (Succ (Succ (count l n))).
+Lemma candidate_168: forall (n : natural) (l : lst), @eq natural (Zero) (Succ (Succ (count l n))).
+Lemma candidate_169: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ (count lf3 n)).
+Lemma candidate_170: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ (count lf3 Zero)).
+Lemma candidate_171: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ (Succ n)).
+Lemma candidate_172: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ (Succ Zero)).
+Lemma candidate_173: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ (n)).
+Lemma candidate_174: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ (Zero)).
+Lemma candidate_175: forall (n : natural) (l : lst), @eq natural (Succ (Succ (count l n))) (count l n).
+Lemma candidate_176: forall (n : natural) (l : lst), @eq natural (Succ (Succ (count l n))) (count l Zero).
+Lemma candidate_177: forall (n : natural) (l : lst), @eq natural (Succ (Succ (count l n))) (Succ n).
+Lemma candidate_178: forall (n : natural) (l : lst), @eq natural (Succ (Succ (count l n))) (Succ Zero).
+Lemma candidate_179: forall (n : natural) (l : lst), @eq natural (Succ (Succ (count l n))) (n).
+Lemma candidate_180: forall (n : natural) (l : lst), @eq natural (Succ (Succ (count l n))) (Zero).
+Lemma candidate_181: forall (n : natural) (l : lst), @eq natural (count l n) (count l n).
+Lemma candidate_182: forall (n : natural) (l : lst), @eq natural (count l n) (count l Zero).
+Lemma candidate_183: forall (n : natural) (l : lst), @eq natural (count l n) (Succ n).
+Lemma candidate_184: forall (n : natural) (l : lst), @eq natural (count l n) (Succ Zero).
+Lemma candidate_185: forall (n : natural) (l : lst), @eq natural (count l n) (n).
+Lemma candidate_186: forall (n : natural) (l : lst), @eq natural (count l n) (Zero).
+Lemma candidate_187: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (count lf3 n).
+Lemma candidate_188: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (count lf3 Zero).
+Lemma candidate_189: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ n).
+Lemma candidate_190: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Succ Zero).
+Lemma candidate_191: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (n).
+Lemma candidate_192: forall (lf3 : lst) (n : natural), @eq natural (count lf3 n) (Zero).
+Lemma candidate_193: forall (n : natural) (l : lst), @eq natural (Succ (count l n)) (count l n).
+Lemma candidate_194: forall (n : natural) (l : lst), @eq natural (Succ (count l n)) (count l Zero).
+Lemma candidate_195: forall (n : natural) (l : lst), @eq natural (Succ (count l n)) (Succ n).
+Lemma candidate_196: forall (n : natural) (l : lst), @eq natural (Succ (count l n)) (Succ Zero).
+Lemma candidate_197: forall (n : natural) (l : lst), @eq natural (Succ (count l n)) (n).
+Lemma candidate_198: forall (n : natural) (l : lst), @eq natural (Succ (count l n)) (Zero).
+Lemma candidate_199: forall (n : natural) (lf2 : natural), @eq natural (count (Cons (Succ lf2) Nil) n) lf2.
+Lemma candidate_200: forall (n : natural) (lf2 : natural), @eq natural (count (Cons (Succ Zero) Nil) n) lf2.
+Lemma candidate_201: forall (n : natural) (lf2 : natural), @eq natural (count (Cons n Nil) n) lf2.
+Lemma candidate_202: forall (n : natural) (lf2 : natural), @eq natural (count (Cons lf2 Nil) n) lf2.
+Lemma candidate_203: forall (n : natural) (lf2 : natural), @eq natural (count (Cons Zero Nil) n) lf2.
+Lemma candidate_204: forall (n : natural) (lf2 : natural), @eq natural (count (Nil) n) lf2.
+Lemma candidate_205: forall (lf2 : natural), @eq natural (Succ (Succ lf2)) lf2.
+Lemma candidate_206: forall (lf2 : natural), @eq natural (Succ (Succ Zero)) lf2.
+Lemma candidate_207: forall (lf2 : natural), @eq natural (Succ lf2) lf2.
+Lemma candidate_208: forall (lf2 : natural), @eq natural (Succ Zero) lf2.
+Lemma candidate_209: forall (lf2 : natural), @eq natural (lf2) lf2.
+Lemma candidate_210: forall (lf2 : natural), @eq natural (Zero) lf2.
+Lemma candidate_211: forall (n : natural) (lf5 : lst), @eq lst (Cons n lf5) (Cons n Nil).
+Lemma candidate_212: forall (n : natural) (lf5 : lst), @eq lst (Cons n lf5) (insort lf5 Zero).
+Lemma candidate_213: forall (n : natural) (lf5 : lst), @eq lst (Cons n lf5) (Cons Zero Nil).
+Lemma candidate_214: forall (n : natural) (lf5 : lst), @eq lst (Cons n lf5) (sort lf5).
+Lemma candidate_215: forall (n : natural) (lf5 : lst), @eq lst (Cons n lf5) (lf5).
+Lemma candidate_216: forall (n : natural) (lf5 : lst), @eq lst (Cons n lf5) (Nil).
+Lemma candidate_217: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (count lf5 n).
+Lemma candidate_218: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (count lf5 Zero).
+Lemma candidate_219: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ n).
+Lemma candidate_220: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ Zero).
+Lemma candidate_221: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (n).
+Lemma candidate_222: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Zero).
+Lemma candidate_223: forall (n : natural) (lf4 : natural), @eq natural (count (Cons (Succ lf4) Nil) n) (Succ lf4).
+Lemma candidate_224: forall (n : natural) (lf4 : natural), @eq natural (count (Cons (Succ Zero) Nil) n) (Succ lf4).
+Lemma candidate_225: forall (n : natural) (lf4 : natural), @eq natural (count (Cons n Nil) n) (Succ lf4).
+Lemma candidate_226: forall (n : natural) (lf4 : natural), @eq natural (count (Cons lf4 Nil) n) (Succ lf4).
+Lemma candidate_227: forall (n : natural) (lf4 : natural), @eq natural (count (Cons Zero Nil) n) (Succ lf4).
+Lemma candidate_228: forall (n : natural) (lf4 : natural), @eq natural (count (Nil) n) (Succ lf4).
+Lemma candidate_229: forall (lf4 : natural), @eq natural (Succ (Succ lf4)) (Succ lf4).
+Lemma candidate_230: forall (lf4 : natural), @eq natural (Succ (Succ Zero)) (Succ lf4).
+Lemma candidate_231: forall (lf4 : natural), @eq natural (Succ lf4) (Succ lf4).
+Lemma candidate_232: forall (lf4 : natural), @eq natural (Succ Zero) (Succ lf4).
+Lemma candidate_233: forall (lf4 : natural), @eq natural (lf4) (Succ lf4).
+Lemma candidate_234: forall (lf4 : natural), @eq natural (Zero) (Succ lf4).
+Lemma candidate_235: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (count lf5 n).
+Lemma candidate_236: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (count lf5 Zero).
+Lemma candidate_237: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ n).
+Lemma candidate_238: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ Zero).
+Lemma candidate_239: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (n).
+Lemma candidate_240: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Zero).
+Lemma candidate_241: forall (n : natural) (lf5 : lst), @eq lst (Cons n lf5) (Cons n Nil).
+Lemma candidate_242: forall (n : natural) (lf5 : lst), @eq lst (Cons n lf5) (insort lf5 Zero).
+Lemma candidate_243: forall (n : natural) (lf5 : lst), @eq lst (Cons n lf5) (Cons Zero Nil).
+Lemma candidate_244: forall (n : natural) (lf5 : lst), @eq lst (Cons n lf5) (sort lf5).
+Lemma candidate_245: forall (n : natural) (lf5 : lst), @eq lst (Cons n lf5) (lf5).
+Lemma candidate_246: forall (n : natural) (lf5 : lst), @eq lst (Cons n lf5) (Nil).
+Lemma candidate_247: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (count lf5 n).
+Lemma candidate_248: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (count lf5 Zero).
+Lemma candidate_249: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ n).
+Lemma candidate_250: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ Zero).
+Lemma candidate_251: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (n).
+Lemma candidate_252: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Zero).
+Lemma candidate_253: forall (lf4 : natural), @eq natural (Succ lf4) (Succ (Succ lf4)).
+Lemma candidate_254: forall (lf4 : natural), @eq natural (Succ lf4) (Succ (Succ Zero)).
+Lemma candidate_255: forall (lf4 : natural), @eq natural (Succ lf4) (Succ lf4).
+Lemma candidate_256: forall (lf4 : natural), @eq natural (Succ lf4) (Succ Zero).
+Lemma candidate_257: forall (lf4 : natural), @eq natural (Succ lf4) (lf4).
+Lemma candidate_258: forall (lf4 : natural), @eq natural (Succ lf4) (Zero).
+Lemma candidate_259: forall (n : natural) (lf2 : natural), @eq natural (count (Cons (Succ lf2) Nil) n) lf2.
+Lemma candidate_260: forall (n : natural) (lf2 : natural), @eq natural (count (Cons (Succ Zero) Nil) n) lf2.
+Lemma candidate_261: forall (n : natural) (lf2 : natural), @eq natural (count (Cons n Nil) n) lf2.
+Lemma candidate_262: forall (n : natural) (lf2 : natural), @eq natural (count (Cons lf2 Nil) n) lf2.
+Lemma candidate_263: forall (n : natural) (lf2 : natural), @eq natural (count (Cons Zero Nil) n) lf2.
+Lemma candidate_264: forall (n : natural) (lf2 : natural), @eq natural (count (Nil) n) lf2.
+Lemma candidate_265: forall (n : natural) (lf2 : natural), @eq natural (count (Cons n (Cons (Succ lf2) Nil)) n) lf2.
+Lemma candidate_266: forall (n : natural) (lf2 : natural), @eq natural (count (Cons n (Cons (Succ Zero) Nil)) n) lf2.
+Lemma candidate_267: forall (n : natural) (lf2 : natural), @eq natural (count (Cons n (Cons n Nil)) n) lf2.
+Lemma candidate_268: forall (n : natural) (lf2 : natural), @eq natural (count (Cons n (Cons lf2 Nil)) n) lf2.
+Lemma candidate_269: forall (n : natural) (lf2 : natural), @eq natural (count (Cons n (Cons Zero Nil)) n) lf2.
+Lemma candidate_270: forall (n : natural) (lf2 : natural), @eq natural (count (Cons n (Nil)) n) lf2.
+Lemma candidate_271: forall (lf2 : natural), @eq natural (Succ (Succ lf2)) lf2.
+Lemma candidate_272: forall (lf2 : natural), @eq natural (Succ (Succ Zero)) lf2.
+Lemma candidate_273: forall (lf2 : natural), @eq natural (Succ lf2) lf2.
+Lemma candidate_274: forall (lf2 : natural), @eq natural (Succ Zero) lf2.
+Lemma candidate_275: forall (lf2 : natural), @eq natural (lf2) lf2.
+Lemma candidate_276: forall (lf2 : natural), @eq natural (Zero) lf2.
+Lemma candidate_277: forall (l : lst) (n : natural), @eq lst (Cons n (insort l n)) (Cons n Nil).
+Lemma candidate_278: forall (l : lst) (n : natural), @eq lst (Cons n (insort l n)) (insort l Zero).
+Lemma candidate_279: forall (l : lst) (n : natural), @eq lst (Cons n (insort l n)) (Cons Zero Nil).
+Lemma candidate_280: forall (l : lst) (n : natural), @eq lst (Cons n (insort l n)) (sort l).
+Lemma candidate_281: forall (l : lst) (n : natural), @eq lst (Cons n (insort l n)) (l).
+Lemma candidate_282: forall (l : lst) (n : natural), @eq lst (Cons n (insort l n)) (Nil).
+Lemma candidate_283: forall (n : natural) (l : lst), @eq lst (insort l n) (Cons n Nil).
+Lemma candidate_284: forall (n : natural) (l : lst), @eq lst (insort l n) (insort l Zero).
+Lemma candidate_285: forall (n : natural) (l : lst), @eq lst (insort l n) (Cons Zero Nil).
+Lemma candidate_286: forall (n : natural) (l : lst), @eq lst (insort l n) (sort l).
+Lemma candidate_287: forall (n : natural) (l : lst), @eq lst (insort l n) (l).
+Lemma candidate_288: forall (n : natural) (l : lst), @eq lst (insort l n) (Nil).
+Lemma candidate_289: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (count l n).
+Lemma candidate_290: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (count l Zero).
+Lemma candidate_291: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (Succ n).
+Lemma candidate_292: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (Succ Zero).
+Lemma candidate_293: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (n).
+Lemma candidate_294: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (Zero).
+Lemma candidate_295: forall (n : natural) (lf4 : natural), @eq natural (count (Cons (Succ lf4) Nil) n) (Succ lf4).
+Lemma candidate_296: forall (n : natural) (lf4 : natural), @eq natural (count (Cons (Succ Zero) Nil) n) (Succ lf4).
+Lemma candidate_297: forall (n : natural) (lf4 : natural), @eq natural (count (Cons n Nil) n) (Succ lf4).
+Lemma candidate_298: forall (n : natural) (lf4 : natural), @eq natural (count (Cons lf4 Nil) n) (Succ lf4).
+Lemma candidate_299: forall (n : natural) (lf4 : natural), @eq natural (count (Cons Zero Nil) n) (Succ lf4).
+Lemma candidate_300: forall (n : natural) (lf4 : natural), @eq natural (count (Nil) n) (Succ lf4).
+Lemma candidate_301: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (count l n).
+Lemma candidate_302: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (count l Zero).
+Lemma candidate_303: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (Succ n).
+Lemma candidate_304: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (Succ Zero).
+Lemma candidate_305: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (n).
+Lemma candidate_306: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (Zero).
+Lemma candidate_307: forall (n : natural) (lf4 : natural), @eq natural (count (Cons n (Cons (Succ lf4) Nil)) n) (Succ lf4).
+Lemma candidate_308: forall (n : natural) (lf4 : natural), @eq natural (count (Cons n (Cons (Succ Zero) Nil)) n) (Succ lf4).
+Lemma candidate_309: forall (n : natural) (lf4 : natural), @eq natural (count (Cons n (Cons n Nil)) n) (Succ lf4).
+Lemma candidate_310: forall (n : natural) (lf4 : natural), @eq natural (count (Cons n (Cons lf4 Nil)) n) (Succ lf4).
+Lemma candidate_311: forall (n : natural) (lf4 : natural), @eq natural (count (Cons n (Cons Zero Nil)) n) (Succ lf4).
+Lemma candidate_312: forall (n : natural) (lf4 : natural), @eq natural (count (Cons n (Nil)) n) (Succ lf4).
+Lemma candidate_313: forall (lf4 : natural), @eq natural (Succ (Succ lf4)) (Succ lf4).
+Lemma candidate_314: forall (lf4 : natural), @eq natural (Succ (Succ Zero)) (Succ lf4).
+Lemma candidate_315: forall (lf4 : natural), @eq natural (Succ lf4) (Succ lf4).
+Lemma candidate_316: forall (lf4 : natural), @eq natural (Succ Zero) (Succ lf4).
+Lemma candidate_317: forall (lf4 : natural), @eq natural (lf4) (Succ lf4).
+Lemma candidate_318: forall (lf4 : natural), @eq natural (Zero) (Succ lf4).
+Lemma candidate_319: forall (l : lst) (n : natural), @eq lst (Cons n (insort l n)) (Cons n Nil).
+Lemma candidate_320: forall (l : lst) (n : natural), @eq lst (Cons n (insort l n)) (insort l Zero).
+Lemma candidate_321: forall (l : lst) (n : natural), @eq lst (Cons n (insort l n)) (Cons Zero Nil).
+Lemma candidate_322: forall (l : lst) (n : natural), @eq lst (Cons n (insort l n)) (sort l).
+Lemma candidate_323: forall (l : lst) (n : natural), @eq lst (Cons n (insort l n)) (l).
+Lemma candidate_324: forall (l : lst) (n : natural), @eq lst (Cons n (insort l n)) (Nil).
+Lemma candidate_325: forall (lf4 : natural), @eq natural (Succ lf4) (Succ (Succ lf4)).
+Lemma candidate_326: forall (lf4 : natural), @eq natural (Succ lf4) (Succ (Succ Zero)).
+Lemma candidate_327: forall (lf4 : natural), @eq natural (Succ lf4) (Succ lf4).
+Lemma candidate_328: forall (lf4 : natural), @eq natural (Succ lf4) (Succ Zero).
+Lemma candidate_329: forall (lf4 : natural), @eq natural (Succ lf4) (lf4).
+Lemma candidate_330: forall (lf4 : natural), @eq natural (Succ lf4) (Zero).
+Lemma candidate_331: forall (n : natural) (l : lst), @eq lst (insort l n) (Cons n Nil).
+Lemma candidate_332: forall (n : natural) (l : lst), @eq lst (insort l n) (insort l Zero).
+Lemma candidate_333: forall (n : natural) (l : lst), @eq lst (insort l n) (Cons Zero Nil).
+Lemma candidate_334: forall (n : natural) (l : lst), @eq lst (insort l n) (sort l).
+Lemma candidate_335: forall (n : natural) (l : lst), @eq lst (insort l n) (l).
+Lemma candidate_336: forall (n : natural) (l : lst), @eq lst (insort l n) (Nil).
+Lemma candidate_337: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (count l n).
+Lemma candidate_338: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (count l Zero).
+Lemma candidate_339: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (Succ n).
+Lemma candidate_340: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (Succ Zero).
+Lemma candidate_341: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (n).
+Lemma candidate_342: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (Zero).
+Lemma candidate_343: forall (n : natural) (lf6 : natural), @eq natural (count (Cons (Succ lf6) Nil) n) (Succ (Succ lf6)).
+Lemma candidate_344: forall (n : natural) (lf6 : natural), @eq natural (count (Cons (Succ Zero) Nil) n) (Succ (Succ lf6)).
+Lemma candidate_345: forall (n : natural) (lf6 : natural), @eq natural (count (Cons n Nil) n) (Succ (Succ lf6)).
+Lemma candidate_346: forall (n : natural) (lf6 : natural), @eq natural (count (Cons lf6 Nil) n) (Succ (Succ lf6)).
+Lemma candidate_347: forall (n : natural) (lf6 : natural), @eq natural (count (Cons Zero Nil) n) (Succ (Succ lf6)).
+Lemma candidate_348: forall (n : natural) (lf6 : natural), @eq natural (count (Nil) n) (Succ (Succ lf6)).
+Lemma candidate_349: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (Succ (Succ lf6)).
+Lemma candidate_350: forall (lf6 : natural), @eq natural (Succ (Succ Zero)) (Succ (Succ lf6)).
+Lemma candidate_351: forall (lf6 : natural), @eq natural (Succ lf6) (Succ (Succ lf6)).
+Lemma candidate_352: forall (lf6 : natural), @eq natural (Succ Zero) (Succ (Succ lf6)).
+Lemma candidate_353: forall (lf6 : natural), @eq natural (lf6) (Succ (Succ lf6)).
+Lemma candidate_354: forall (lf6 : natural), @eq natural (Zero) (Succ (Succ lf6)).
+Lemma candidate_355: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ (count lf5 n)).
+Lemma candidate_356: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ (count lf5 Zero)).
+Lemma candidate_357: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ (Succ n)).
+Lemma candidate_358: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ (Succ Zero)).
+Lemma candidate_359: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ (n)).
+Lemma candidate_360: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ (Zero)).
+Lemma candidate_361: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (count lf5 n).
+Lemma candidate_362: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (count lf5 Zero).
+Lemma candidate_363: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ n).
+Lemma candidate_364: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ Zero).
+Lemma candidate_365: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (n).
+Lemma candidate_366: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Zero).
+Lemma candidate_367: forall (n : natural) (lf5 : lst), @eq lst (Cons n lf5) (Cons n Nil).
+Lemma candidate_368: forall (n : natural) (lf5 : lst), @eq lst (Cons n lf5) (insort lf5 Zero).
+Lemma candidate_369: forall (n : natural) (lf5 : lst), @eq lst (Cons n lf5) (Cons Zero Nil).
+Lemma candidate_370: forall (n : natural) (lf5 : lst), @eq lst (Cons n lf5) (sort lf5).
+Lemma candidate_371: forall (n : natural) (lf5 : lst), @eq lst (Cons n lf5) (lf5).
+Lemma candidate_372: forall (n : natural) (lf5 : lst), @eq lst (Cons n lf5) (Nil).
+Lemma candidate_373: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (count lf5 n).
+Lemma candidate_374: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (count lf5 Zero).
+Lemma candidate_375: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ n).
+Lemma candidate_376: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ Zero).
+Lemma candidate_377: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (n).
+Lemma candidate_378: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Zero).
+Lemma candidate_379: forall (lf6 : natural), @eq natural (Succ lf6) (Succ (Succ lf6)).
+Lemma candidate_380: forall (lf6 : natural), @eq natural (Succ lf6) (Succ (Succ Zero)).
+Lemma candidate_381: forall (lf6 : natural), @eq natural (Succ lf6) (Succ lf6).
+Lemma candidate_382: forall (lf6 : natural), @eq natural (Succ lf6) (Succ Zero).
+Lemma candidate_383: forall (lf6 : natural), @eq natural (Succ lf6) (lf6).
+Lemma candidate_384: forall (lf6 : natural), @eq natural (Succ lf6) (Zero).
+Lemma candidate_385: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (Succ (Succ lf6)).
+Lemma candidate_386: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (Succ (Succ Zero)).
+Lemma candidate_387: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (Succ lf6).
+Lemma candidate_388: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (Succ Zero).
+Lemma candidate_389: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (lf6).
+Lemma candidate_390: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (Zero).
+Lemma candidate_391: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (count lf5 n).
+Lemma candidate_392: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (count lf5 Zero).
+Lemma candidate_393: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ n).
+Lemma candidate_394: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ Zero).
+Lemma candidate_395: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (n).
+Lemma candidate_396: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Zero).
+Lemma candidate_397: forall (l : lst) (n : natural), @eq natural (count (Cons n Nil) n) (Succ (Succ (count l n))).
+Lemma candidate_398: forall (l : lst) (n : natural), @eq natural (count (insort l Zero) n) (Succ (Succ (count l n))).
+Lemma candidate_399: forall (l : lst) (n : natural), @eq natural (count (Cons Zero Nil) n) (Succ (Succ (count l n))).
+Lemma candidate_400: forall (l : lst) (n : natural), @eq natural (count (sort l) n) (Succ (Succ (count l n))).
+Lemma candidate_401: forall (l : lst) (n : natural), @eq natural (count (l) n) (Succ (Succ (count l n))).
+Lemma candidate_402: forall (l : lst) (n : natural), @eq natural (count (Nil) n) (Succ (Succ (count l n))).
+Lemma candidate_403: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ (Succ (count lf5 n))).
+Lemma candidate_404: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ (Succ (count lf5 Zero))).
+Lemma candidate_405: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ (Succ (Succ n))).
+Lemma candidate_406: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ (Succ (Succ Zero))).
+Lemma candidate_407: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ (Succ (n))).
+Lemma candidate_408: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ (Succ (Zero))).
+Lemma candidate_409: forall (n : natural) (l : lst), @eq natural (count l n) (Succ (Succ (count l n))).
+Lemma candidate_410: forall (n : natural) (l : lst), @eq natural (count l Zero) (Succ (Succ (count l n))).
+Lemma candidate_411: forall (n : natural) (l : lst), @eq natural (Succ n) (Succ (Succ (count l n))).
+Lemma candidate_412: forall (n : natural) (l : lst), @eq natural (Succ Zero) (Succ (Succ (count l n))).
+Lemma candidate_413: forall (n : natural) (l : lst), @eq natural (n) (Succ (Succ (count l n))).
+Lemma candidate_414: forall (n : natural) (l : lst), @eq natural (Zero) (Succ (Succ (count l n))).
+Lemma candidate_415: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ (count lf5 n)).
+Lemma candidate_416: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ (count lf5 Zero)).
+Lemma candidate_417: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ (Succ n)).
+Lemma candidate_418: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ (Succ Zero)).
+Lemma candidate_419: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ (n)).
+Lemma candidate_420: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ (Zero)).
+Lemma candidate_421: forall (n : natural) (l : lst), @eq natural (Succ (Succ (count l n))) (count l n).
+Lemma candidate_422: forall (n : natural) (l : lst), @eq natural (Succ (Succ (count l n))) (count l Zero).
+Lemma candidate_423: forall (n : natural) (l : lst), @eq natural (Succ (Succ (count l n))) (Succ n).
+Lemma candidate_424: forall (n : natural) (l : lst), @eq natural (Succ (Succ (count l n))) (Succ Zero).
+Lemma candidate_425: forall (n : natural) (l : lst), @eq natural (Succ (Succ (count l n))) (n).
+Lemma candidate_426: forall (n : natural) (l : lst), @eq natural (Succ (Succ (count l n))) (Zero).
+Lemma candidate_427: forall (n : natural) (lf5 : lst), @eq lst (Cons n lf5) (Cons n Nil).
+Lemma candidate_428: forall (n : natural) (lf5 : lst), @eq lst (Cons n lf5) (insort lf5 Zero).
+Lemma candidate_429: forall (n : natural) (lf5 : lst), @eq lst (Cons n lf5) (Cons Zero Nil).
+Lemma candidate_430: forall (n : natural) (lf5 : lst), @eq lst (Cons n lf5) (sort lf5).
+Lemma candidate_431: forall (n : natural) (lf5 : lst), @eq lst (Cons n lf5) (lf5).
+Lemma candidate_432: forall (n : natural) (lf5 : lst), @eq lst (Cons n lf5) (Nil).
+Lemma candidate_433: forall (n : natural) (l : lst), @eq natural (count l n) (count l n).
+Lemma candidate_434: forall (n : natural) (l : lst), @eq natural (count l n) (count l Zero).
+Lemma candidate_435: forall (n : natural) (l : lst), @eq natural (count l n) (Succ n).
+Lemma candidate_436: forall (n : natural) (l : lst), @eq natural (count l n) (Succ Zero).
+Lemma candidate_437: forall (n : natural) (l : lst), @eq natural (count l n) (n).
+Lemma candidate_438: forall (n : natural) (l : lst), @eq natural (count l n) (Zero).
+Lemma candidate_439: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (count lf5 n).
+Lemma candidate_440: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (count lf5 Zero).
+Lemma candidate_441: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ n).
+Lemma candidate_442: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ Zero).
+Lemma candidate_443: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (n).
+Lemma candidate_444: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Zero).
+Lemma candidate_445: forall (n : natural) (l : lst), @eq natural (Succ (count l n)) (count l n).
+Lemma candidate_446: forall (n : natural) (l : lst), @eq natural (Succ (count l n)) (count l Zero).
+Lemma candidate_447: forall (n : natural) (l : lst), @eq natural (Succ (count l n)) (Succ n).
+Lemma candidate_448: forall (n : natural) (l : lst), @eq natural (Succ (count l n)) (Succ Zero).
+Lemma candidate_449: forall (n : natural) (l : lst), @eq natural (Succ (count l n)) (n).
+Lemma candidate_450: forall (n : natural) (l : lst), @eq natural (Succ (count l n)) (Zero).
+Lemma candidate_451: forall (n : natural) (lf6 : natural), @eq natural (count (Cons (Succ lf6) Nil) n) (Succ (Succ lf6)).
+Lemma candidate_452: forall (n : natural) (lf6 : natural), @eq natural (count (Cons (Succ Zero) Nil) n) (Succ (Succ lf6)).
+Lemma candidate_453: forall (n : natural) (lf6 : natural), @eq natural (count (Cons n Nil) n) (Succ (Succ lf6)).
+Lemma candidate_454: forall (n : natural) (lf6 : natural), @eq natural (count (Cons lf6 Nil) n) (Succ (Succ lf6)).
+Lemma candidate_455: forall (n : natural) (lf6 : natural), @eq natural (count (Cons Zero Nil) n) (Succ (Succ lf6)).
+Lemma candidate_456: forall (n : natural) (lf6 : natural), @eq natural (count (Nil) n) (Succ (Succ lf6)).
+Lemma candidate_457: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (Succ (count l n)).
+Lemma candidate_458: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (Succ (count l Zero)).
+Lemma candidate_459: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (Succ (Succ n)).
+Lemma candidate_460: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (Succ (Succ Zero)).
+Lemma candidate_461: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (Succ (n)).
+Lemma candidate_462: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (Succ (Zero)).
+Lemma candidate_463: forall (n : natural) (lf6 : natural), @eq natural (count (Cons n (Cons (Succ lf6) Nil)) n) (Succ (Succ lf6)).
+Lemma candidate_464: forall (n : natural) (lf6 : natural), @eq natural (count (Cons n (Cons (Succ Zero) Nil)) n) (Succ (Succ lf6)).
+Lemma candidate_465: forall (n : natural) (lf6 : natural), @eq natural (count (Cons n (Cons n Nil)) n) (Succ (Succ lf6)).
+Lemma candidate_466: forall (n : natural) (lf6 : natural), @eq natural (count (Cons n (Cons lf6 Nil)) n) (Succ (Succ lf6)).
+Lemma candidate_467: forall (n : natural) (lf6 : natural), @eq natural (count (Cons n (Cons Zero Nil)) n) (Succ (Succ lf6)).
+Lemma candidate_468: forall (n : natural) (lf6 : natural), @eq natural (count (Cons n (Nil)) n) (Succ (Succ lf6)).
+Lemma candidate_469: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (count l n).
+Lemma candidate_470: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (count l Zero).
+Lemma candidate_471: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (Succ n).
+Lemma candidate_472: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (Succ Zero).
+Lemma candidate_473: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (n).
+Lemma candidate_474: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (Zero).
+Lemma candidate_475: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (Succ (Succ lf6)).
+Lemma candidate_476: forall (lf6 : natural), @eq natural (Succ (Succ Zero)) (Succ (Succ lf6)).
+Lemma candidate_477: forall (lf6 : natural), @eq natural (Succ lf6) (Succ (Succ lf6)).
+Lemma candidate_478: forall (lf6 : natural), @eq natural (Succ Zero) (Succ (Succ lf6)).
+Lemma candidate_479: forall (lf6 : natural), @eq natural (lf6) (Succ (Succ lf6)).
+Lemma candidate_480: forall (lf6 : natural), @eq natural (Zero) (Succ (Succ lf6)).
+Lemma candidate_481: forall (l : lst) (n : natural), @eq lst (Cons n (insort l n)) (Cons n Nil).
+Lemma candidate_482: forall (l : lst) (n : natural), @eq lst (Cons n (insort l n)) (insort l Zero).
+Lemma candidate_483: forall (l : lst) (n : natural), @eq lst (Cons n (insort l n)) (Cons Zero Nil).
+Lemma candidate_484: forall (l : lst) (n : natural), @eq lst (Cons n (insort l n)) (sort l).
+Lemma candidate_485: forall (l : lst) (n : natural), @eq lst (Cons n (insort l n)) (l).
+Lemma candidate_486: forall (l : lst) (n : natural), @eq lst (Cons n (insort l n)) (Nil).
+Lemma candidate_487: forall (lf6 : natural), @eq natural (Succ lf6) (Succ (Succ lf6)).
+Lemma candidate_488: forall (lf6 : natural), @eq natural (Succ lf6) (Succ (Succ Zero)).
+Lemma candidate_489: forall (lf6 : natural), @eq natural (Succ lf6) (Succ lf6).
+Lemma candidate_490: forall (lf6 : natural), @eq natural (Succ lf6) (Succ Zero).
+Lemma candidate_491: forall (lf6 : natural), @eq natural (Succ lf6) (lf6).
+Lemma candidate_492: forall (lf6 : natural), @eq natural (Succ lf6) (Zero).
+Lemma candidate_493: forall (n : natural) (l : lst), @eq lst (insort l n) (Cons n Nil).
+Lemma candidate_494: forall (n : natural) (l : lst), @eq lst (insort l n) (insort l Zero).
+Lemma candidate_495: forall (n : natural) (l : lst), @eq lst (insort l n) (Cons Zero Nil).
+Lemma candidate_496: forall (n : natural) (l : lst), @eq lst (insort l n) (sort l).
+Lemma candidate_497: forall (n : natural) (l : lst), @eq lst (insort l n) (l).
+Lemma candidate_498: forall (n : natural) (l : lst), @eq lst (insort l n) (Nil).
+Lemma candidate_499: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (Succ (Succ lf6)).
+Lemma candidate_500: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (Succ (Succ Zero)).
+Lemma candidate_501: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (Succ lf6).
+Lemma candidate_502: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (Succ Zero).
+Lemma candidate_503: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (lf6).
+Lemma candidate_504: forall (lf6 : natural), @eq natural (Succ (Succ lf6)) (Zero).
+Lemma candidate_505: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (count l n).
+Lemma candidate_506: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (count l Zero).
+Lemma candidate_507: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (Succ n).
+Lemma candidate_508: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (Succ Zero).
+Lemma candidate_509: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (n).
+Lemma candidate_510: forall (l : lst) (n : natural), @eq natural (count (Cons n (insort l n)) n) (Zero).
+
+<---FILTERED CANDIDATE LEMMAS--->
+Time elapsed: 380 seconds
+Duplicates removed: 326
+Filtered by Quickchick: 171
+Filtered by script: 7
+Remaining: 6
+
+Lemmas: 
+Lemma candidate_355: forall (n : natural) (lf5 : lst), @eq natural (count (Cons n lf5) n) (Succ (count lf5 n)).
+Lemma candidate_2: forall (n : natural) (lf4 : natural) (lf5 : lst), forall _ : @eq natural (count lf5 n) lf4, @eq natural (count (Cons n lf5) n) (Succ lf4).
+Lemma candidate_4: forall (n : natural) (lf5 : lst) (lf6 : natural), forall _ : @eq natural (count lf5 n) (Succ lf6), @eq natural (count (Cons n lf5) n) (Succ (Succ lf6)).
+Lemma candidate_3: forall (l : lst) (n : natural) (lf4 : natural), forall _ : @eq natural (count (insort l n) n) lf4, @eq natural (count (Cons n (insort l n)) n) (Succ lf4).
+Lemma candidate_5: forall (l : lst) (n : natural) (lf5 : lst), forall _ : @eq natural (count lf5 n) (Succ (count l n)), @eq natural (count (Cons n lf5) n) (Succ (Succ (count l n))).
+Lemma candidate_6: forall (l : lst) (n : natural) (lf6 : natural), forall _ : @eq natural (count (insort l n) n) (Succ lf6), @eq natural (count (Cons n (insort l n)) n) (Succ (Succ lf6)).

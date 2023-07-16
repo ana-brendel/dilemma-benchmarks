@@ -1,0 +1,45 @@
+Load LFindLoad.
+Load LFindLoad.
+From adtind Require Import goal28.
+
+From lfind Require Import LFind.
+
+From QuickChick Require Import QuickChick.
+QCInclude "/home/anabrendel/lfind/benchmarks/clam/sources/_lfind_clam_lf_goal28_qrevflat_append_62_append_assoc/".
+QCInclude ".".
+Extract Constant defNumTests => "50".
+Derive Show for lst.
+
+        Derive Arbitrary for lst.
+
+        Instance Dec_Eq_lst : Dec_Eq lst.
+
+        Proof. dec_eq. Qed.
+
+
+Derive Show for tree.
+
+        Derive Arbitrary for tree.
+
+        Instance Dec_Eq_tree : Dec_Eq tree.
+
+        Proof. dec_eq. Qed.
+
+
+
+
+Derive Show for natural.
+
+        Derive Arbitrary for natural.
+
+        Instance Dec_Eq_natural : Dec_Eq natural.
+
+        Proof. dec_eq. Qed.
+
+
+
+Lemma conj384_imp: forall (x1 : tree) (y : lst) (x2 : tree) (n : natural) (lf7 : lst) (n0 : natural), forall _ : forall y0 : lst, @eq lst (lfappend lf7 y0) (qrevaflat x2 y0),
+@eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) (Cons n0 y))
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 (Cons n0 y)))).
+Admitted.
+QuickChick conj384_imp.

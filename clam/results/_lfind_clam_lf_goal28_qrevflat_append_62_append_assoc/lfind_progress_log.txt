@@ -1,0 +1,428 @@
+File Information
+- File name: goal28
+- Original Directory: /home/anabrendel/lfind/benchmarks/clam/sources/clam_lf_goal28_qrevflat_append_62_append_assoc
+- LFind Directory: /home/anabrendel/lfind/benchmarks/clam/sources/_lfind_clam_lf_goal28_qrevflat_append_62_append_assoc
+- Namespace: adtind
+- Proof name: qrevflat_lfappend
+- Theorem: Theorem qrevflat_lfappend: forall (x : tree) (y0 : lst),
+@eq lst (lfappend (revflat x) y0) (qrevaflat x y0).
+- Declarations: 
+From lfind Require Import LFind.
+
+Proof Context
+* Goal State: @eq lst (lfappend (lfappend (revflat x1) (Cons n (revflat x2))) (Cons n0 y))
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 (Cons n0 y))))
+
+* Hypothesis:
+IHx2 : forall y0 : lst, @eq lst (lfappend (revflat x2) y0) (qrevaflat x2 y0)
+x1 : tree
+y : lst
+x2 : tree
+n : natural
+n0 : natural
+IHy : @eq lst (lfappend (revflat (Node n x1 x2)) y) (qrevaflat (Node n x1 x2) y)
+IHx1 : forall y0 : lst, @eq lst (lfappend (revflat x1) y0) (qrevaflat x1 y0)
+
+* Types:
+Set
+natural
+Prop
+tree
+lst
+
+* Polymorphic Types:
+
+
+* Variables:
+x1 : tree
+y : lst
+x2 : tree
+n : natural
+n0 : natural
+
+* Terms:
+qrevaflat x2 (Cons n0 y) : lst
+lfappend (lfappend (revflat x1) (Cons n (revflat x2))) (Cons n0 y) : lst
+forall y0 : lst, @eq lst (lfappend (revflat x1) y0) (qrevaflat x1 y0) : Prop
+lfappend (revflat (Node n x1 x2)) y : lst
+Cons n (revflat x2) : lst
+lfappend (revflat x1) (Cons n (revflat x2)) : lst
+y : lst
+lfappend (revflat x1) _UNBOUND_REL_1 : lst
+Node n x1 x2 : tree
+@eq lst (lfappend (lfappend (revflat x1) (Cons n (revflat x2))) (Cons n0 y))
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 (Cons n0 y)))) : Prop
+revflat x2 : lst
+qrevaflat x2 _UNBOUND_REL_1 : lst
+Cons n (qrevaflat x2 (Cons n0 y)) : lst
+lfappend (revflat x1) (Cons n (qrevaflat x2 (Cons n0 y))) : lst
+qrevaflat x1 _UNBOUND_REL_1 : lst
+revflat x1 : lst
+@eq lst (lfappend (revflat x2) _UNBOUND_REL_1) (qrevaflat x2 _UNBOUND_REL_1) : Prop
+@eq lst (lfappend (revflat x1) _UNBOUND_REL_1) (qrevaflat x1 _UNBOUND_REL_1) : Prop
+x1 : tree
+lst : Set
+qrevaflat (Node n x1 x2) y : lst
+tree : Set
+forall y0 : lst, @eq lst (lfappend (revflat x2) y0) (qrevaflat x2 y0) : Prop
+Cons n0 y : lst
+revflat (Node n x1 x2) : lst
+@eq lst (lfappend (revflat (Node n x1 x2)) y) (qrevaflat (Node n x1 x2) y) : Prop
+x2 : tree
+n : natural
+natural : Set
+lfappend (revflat x2) _UNBOUND_REL_1 : lst
+n0 : natural
+
+* Functions:
+lfappend  : forall (_ : lst) (_ : lst), lst
+Node  : forall (_ : natural) (_ : tree) (_ : tree), tree
+Cons  : forall (_ : natural) (_ : lst), lst
+@eq  : forall (A : Type) (_ : A) (_ : A), Prop
+revflat  : forall _ : tree, lst
+qrevaflat  : forall (_ : tree) (_ : lst), lst
+
+<---GENERALIZATION--->
+Time elapsed: 2 seconds
+Generalized Variables:
+lf3 : lst = lfappend (revflat x1) (Cons n (revflat x2))
+lf7 : lst = revflat x2
+lf1 : lst = lfappend (lfappend (revflat x1) (Cons n (revflat x2))) (Cons n0 y)
+lf4 : lst = Cons n (qrevaflat x2 (Cons n0 y))
+lf5 : lst = qrevaflat x2 (Cons n0 y)
+lf9 : lst = Cons n0 y
+lf2 : lst = lfappend (revflat x1) (Cons n (qrevaflat x2 (Cons n0 y)))
+lf8 : lst = revflat x1
+lf6 : lst = Cons n (revflat x2)
+
+Generalizations:
+Lemma conj1: forall (lf2 : lst) (lf1 : lst), @eq lst lf1 lf2.
+Lemma conj5: forall (lf8 : lst) (lf4 : lst) (lf1 : lst), @eq lst lf1 (lfappend lf8 lf4).
+Lemma conj7: forall (lf4 : lst) (x1 : tree) (lf1 : lst), @eq lst lf1 (lfappend (revflat x1) lf4).
+Lemma conj37: forall (lf8 : lst) (lf5 : lst) (lf1 : lst) (n : natural), @eq lst lf1 (lfappend lf8 (Cons n lf5)).
+Lemma conj39: forall (lf5 : lst) (x1 : tree) (lf1 : lst) (n : natural), @eq lst lf1 (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj53: forall (lf8 : lst) (lf9 : lst) (lf1 : lst) (x2 : tree) (n : natural), @eq lst lf1 (lfappend lf8 (Cons n (qrevaflat x2 lf9))).
+Lemma conj55: forall (lf9 : lst) (x1 : tree) (lf1 : lst) (x2 : tree) (n : natural), @eq lst lf1 (lfappend (revflat x1) (Cons n (qrevaflat x2 lf9))).
+Lemma conj61: forall (lf8 : lst) (lf1 : lst) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst lf1 (lfappend lf8 (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj63: forall (x1 : tree) (lf1 : lst) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst lf1 (lfappend (revflat x1) (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj65: forall (lf2 : lst) (lf9 : lst) (lf3 : lst), @eq lst (lfappend lf3 lf9) lf2.
+Lemma conj69: forall (lf8 : lst) (lf9 : lst) (lf4 : lst) (lf3 : lst), @eq lst (lfappend lf3 lf9) (lfappend lf8 lf4).
+Lemma conj71: forall (lf9 : lst) (lf4 : lst) (x1 : tree) (lf3 : lst), @eq lst (lfappend lf3 lf9) (lfappend (revflat x1) lf4).
+Lemma conj73: forall (lf2 : lst) (y : lst) (n0 : natural) (lf3 : lst), @eq lst (lfappend lf3 (Cons n0 y)) lf2.
+Lemma conj77: forall (lf8 : lst) (lf4 : lst) (y : lst) (n0 : natural) (lf3 : lst), @eq lst (lfappend lf3 (Cons n0 y)) (lfappend lf8 lf4).
+Lemma conj79: forall (lf4 : lst) (x1 : tree) (y : lst) (n0 : natural) (lf3 : lst), @eq lst (lfappend lf3 (Cons n0 y)) (lfappend (revflat x1) lf4).
+Lemma conj101: forall (lf8 : lst) (lf9 : lst) (lf5 : lst) (n : natural) (lf3 : lst), @eq lst (lfappend lf3 lf9) (lfappend lf8 (Cons n lf5)).
+Lemma conj103: forall (lf9 : lst) (lf5 : lst) (x1 : tree) (n : natural) (lf3 : lst), @eq lst (lfappend lf3 lf9) (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj109: forall (lf8 : lst) (lf5 : lst) (y : lst) (n : natural) (n0 : natural) (lf3 : lst), @eq lst (lfappend lf3 (Cons n0 y)) (lfappend lf8 (Cons n lf5)).
+Lemma conj111: forall (lf5 : lst) (x1 : tree) (y : lst) (n : natural) (n0 : natural) (lf3 : lst), @eq lst (lfappend lf3 (Cons n0 y)) (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj117: forall (lf8 : lst) (lf9 : lst) (x2 : tree) (n : natural) (lf3 : lst), @eq lst (lfappend lf3 lf9) (lfappend lf8 (Cons n (qrevaflat x2 lf9))).
+Lemma conj119: forall (lf9 : lst) (x1 : tree) (x2 : tree) (n : natural) (lf3 : lst), @eq lst (lfappend lf3 lf9)
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 lf9))).
+Lemma conj125: forall (lf8 : lst) (y : lst) (x2 : tree) (n : natural) (n0 : natural) (lf3 : lst), @eq lst (lfappend lf3 (Cons n0 y))
+  (lfappend lf8 (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj127: forall (x1 : tree) (y : lst) (x2 : tree) (n : natural) (n0 : natural) (lf3 : lst), @eq lst (lfappend lf3 (Cons n0 y))
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj321: forall (lf6 : lst) (lf8 : lst) (lf2 : lst) (lf9 : lst), @eq lst (lfappend (lfappend lf8 lf6) lf9) lf2.
+Lemma conj322: forall (lf8 : lst) (lf2 : lst) (lf9 : lst) (lf7 : lst) (n : natural), @eq lst (lfappend (lfappend lf8 (Cons n lf7)) lf9) lf2.
+Lemma conj323: forall (lf6 : lst) (lf2 : lst) (lf9 : lst) (x1 : tree), @eq lst (lfappend (lfappend (revflat x1) lf6) lf9) lf2.
+Lemma conj324: forall (lf2 : lst) (lf9 : lst) (x1 : tree) (lf7 : lst) (n : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) lf9) lf2.
+Lemma conj325: forall (lf8 : lst) (lf6 : lst) (lf9 : lst) (lf4 : lst), @eq lst (lfappend (lfappend lf8 lf6) lf9) (lfappend lf8 lf4).
+Lemma conj326: forall (lf8 : lst) (lf9 : lst) (lf4 : lst) (lf7 : lst) (n : natural), @eq lst (lfappend (lfappend lf8 (Cons n lf7)) lf9) (lfappend lf8 lf4).
+Lemma conj327: forall (lf6 : lst) (lf9 : lst) (lf4 : lst) (x1 : tree), @eq lst (lfappend (lfappend (revflat x1) lf6) lf9)
+  (lfappend (revflat x1) lf4).
+Lemma conj328: forall (lf9 : lst) (lf4 : lst) (x1 : tree) (lf7 : lst) (n : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) lf9)
+  (lfappend (revflat x1) lf4).
+Lemma conj329: forall (lf6 : lst) (lf8 : lst) (lf2 : lst) (y : lst) (n0 : natural), @eq lst (lfappend (lfappend lf8 lf6) (Cons n0 y)) lf2.
+Lemma conj330: forall (lf8 : lst) (lf2 : lst) (y : lst) (lf7 : lst) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend lf8 (Cons n lf7)) (Cons n0 y)) lf2.
+Lemma conj331: forall (lf6 : lst) (lf2 : lst) (x1 : tree) (y : lst) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) lf6) (Cons n0 y)) lf2.
+Lemma conj332: forall (lf2 : lst) (x1 : tree) (y : lst) (lf7 : lst) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) (Cons n0 y)) lf2.
+Lemma conj333: forall (lf8 : lst) (lf6 : lst) (lf4 : lst) (y : lst) (n0 : natural), @eq lst (lfappend (lfappend lf8 lf6) (Cons n0 y)) (lfappend lf8 lf4).
+Lemma conj334: forall (lf8 : lst) (lf4 : lst) (y : lst) (lf7 : lst) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend lf8 (Cons n lf7)) (Cons n0 y)) (lfappend lf8 lf4).
+Lemma conj335: forall (lf6 : lst) (lf4 : lst) (x1 : tree) (y : lst) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) lf6) (Cons n0 y))
+  (lfappend (revflat x1) lf4).
+Lemma conj336: forall (lf4 : lst) (x1 : tree) (y : lst) (lf7 : lst) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) (Cons n0 y))
+  (lfappend (revflat x1) lf4).
+Lemma conj357: forall (lf8 : lst) (lf6 : lst) (lf9 : lst) (lf5 : lst) (n : natural), @eq lst (lfappend (lfappend lf8 lf6) lf9) (lfappend lf8 (Cons n lf5)).
+Lemma conj358: forall (lf8 : lst) (lf9 : lst) (lf5 : lst) (n : natural) (lf7 : lst), @eq lst (lfappend (lfappend lf8 (Cons n lf7)) lf9)
+  (lfappend lf8 (Cons n lf5)).
+Lemma conj359: forall (lf6 : lst) (lf9 : lst) (lf5 : lst) (x1 : tree) (n : natural), @eq lst (lfappend (lfappend (revflat x1) lf6) lf9)
+  (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj360: forall (lf9 : lst) (lf5 : lst) (x1 : tree) (n : natural) (lf7 : lst), @eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) lf9)
+  (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj365: forall (lf8 : lst) (lf6 : lst) (lf5 : lst) (y : lst) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend lf8 lf6) (Cons n0 y)) (lfappend lf8 (Cons n lf5)).
+Lemma conj366: forall (lf8 : lst) (lf5 : lst) (y : lst) (n : natural) (lf7 : lst) (n0 : natural), @eq lst (lfappend (lfappend lf8 (Cons n lf7)) (Cons n0 y))
+  (lfappend lf8 (Cons n lf5)).
+Lemma conj367: forall (lf6 : lst) (lf5 : lst) (x1 : tree) (y : lst) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) lf6) (Cons n0 y))
+  (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj368: forall (lf5 : lst) (x1 : tree) (y : lst) (n : natural) (lf7 : lst) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) (Cons n0 y))
+  (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj373: forall (lf8 : lst) (lf6 : lst) (lf9 : lst) (x2 : tree) (n : natural), @eq lst (lfappend (lfappend lf8 lf6) lf9)
+  (lfappend lf8 (Cons n (qrevaflat x2 lf9))).
+Lemma conj374: forall (lf8 : lst) (lf9 : lst) (x2 : tree) (n : natural) (lf7 : lst), @eq lst (lfappend (lfappend lf8 (Cons n lf7)) lf9)
+  (lfappend lf8 (Cons n (qrevaflat x2 lf9))).
+Lemma conj375: forall (lf6 : lst) (lf9 : lst) (x1 : tree) (x2 : tree) (n : natural), @eq lst (lfappend (lfappend (revflat x1) lf6) lf9)
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 lf9))).
+Lemma conj376: forall (lf9 : lst) (x1 : tree) (x2 : tree) (n : natural) (lf7 : lst), @eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) lf9)
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 lf9))).
+Lemma conj381: forall (lf8 : lst) (lf6 : lst) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend lf8 lf6) (Cons n0 y))
+  (lfappend lf8 (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj382: forall (lf8 : lst) (y : lst) (x2 : tree) (n : natural) (lf7 : lst) (n0 : natural), @eq lst (lfappend (lfappend lf8 (Cons n lf7)) (Cons n0 y))
+  (lfappend lf8 (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj383: forall (lf6 : lst) (x1 : tree) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) lf6) (Cons n0 y))
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj384: forall (x1 : tree) (y : lst) (x2 : tree) (n : natural) (lf7 : lst) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) (Cons n0 y))
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj450: forall (lf8 : lst) (lf2 : lst) (lf9 : lst) (x2 : tree) (n : natural), @eq lst (lfappend (lfappend lf8 (Cons n (revflat x2))) lf9) lf2.
+Lemma conj452: forall (lf2 : lst) (lf9 : lst) (x1 : tree) (x2 : tree) (n : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n (revflat x2))) lf9) lf2.
+Lemma conj454: forall (lf8 : lst) (lf9 : lst) (lf4 : lst) (x2 : tree) (n : natural), @eq lst (lfappend (lfappend lf8 (Cons n (revflat x2))) lf9)
+  (lfappend lf8 lf4).
+Lemma conj456: forall (lf9 : lst) (lf4 : lst) (x1 : tree) (x2 : tree) (n : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n (revflat x2))) lf9)
+  (lfappend (revflat x1) lf4).
+Lemma conj458: forall (lf8 : lst) (lf2 : lst) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend lf8 (Cons n (revflat x2))) (Cons n0 y)) lf2.
+Lemma conj460: forall (lf2 : lst) (x1 : tree) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n (revflat x2))) (Cons n0 y))
+  lf2.
+Lemma conj462: forall (lf8 : lst) (lf4 : lst) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend lf8 (Cons n (revflat x2))) (Cons n0 y))
+  (lfappend lf8 lf4).
+Lemma conj464: forall (lf4 : lst) (x1 : tree) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n (revflat x2))) (Cons n0 y))
+  (lfappend (revflat x1) lf4).
+Lemma conj486: forall (lf8 : lst) (lf9 : lst) (lf5 : lst) (n : natural) (x2 : tree), @eq lst (lfappend (lfappend lf8 (Cons n (revflat x2))) lf9)
+  (lfappend lf8 (Cons n lf5)).
+Lemma conj488: forall (lf9 : lst) (lf5 : lst) (x1 : tree) (n : natural) (x2 : tree), @eq lst (lfappend (lfappend (revflat x1) (Cons n (revflat x2))) lf9)
+  (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj494: forall (lf8 : lst) (lf5 : lst) (y : lst) (n : natural) (x2 : tree) (n0 : natural), @eq lst (lfappend (lfappend lf8 (Cons n (revflat x2))) (Cons n0 y))
+  (lfappend lf8 (Cons n lf5)).
+Lemma conj496: forall (lf5 : lst) (x1 : tree) (y : lst) (n : natural) (x2 : tree) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n (revflat x2))) (Cons n0 y))
+  (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj502: forall (lf8 : lst) (lf9 : lst) (x2 : tree) (n : natural), @eq lst (lfappend (lfappend lf8 (Cons n (revflat x2))) lf9)
+  (lfappend lf8 (Cons n (qrevaflat x2 lf9))).
+Lemma conj504: forall (lf9 : lst) (x1 : tree) (x2 : tree) (n : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n (revflat x2))) lf9)
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 lf9))).
+Lemma conj510: forall (lf8 : lst) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend lf8 (Cons n (revflat x2))) (Cons n0 y))
+  (lfappend lf8 (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj512: forall (x1 : tree) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n (revflat x2))) (Cons n0 y))
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 (Cons n0 y)))).
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 285 seconds
+Valid:
+Lemma conj512: forall (x1 : tree) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n (revflat x2))) (Cons n0 y))
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj510: forall (lf8 : lst) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend lf8 (Cons n (revflat x2))) (Cons n0 y))
+  (lfappend lf8 (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj504: forall (lf9 : lst) (x1 : tree) (x2 : tree) (n : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n (revflat x2))) lf9)
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 lf9))).
+Lemma conj502: forall (lf8 : lst) (lf9 : lst) (x2 : tree) (n : natural), @eq lst (lfappend (lfappend lf8 (Cons n (revflat x2))) lf9)
+  (lfappend lf8 (Cons n (qrevaflat x2 lf9))).
+
+Invalid:
+Lemma conj496: forall (lf5 : lst) (x1 : tree) (y : lst) (n : natural) (x2 : tree) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n (revflat x2))) (Cons n0 y))
+  (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj494: forall (lf8 : lst) (lf5 : lst) (y : lst) (n : natural) (x2 : tree) (n0 : natural), @eq lst (lfappend (lfappend lf8 (Cons n (revflat x2))) (Cons n0 y))
+  (lfappend lf8 (Cons n lf5)).
+Lemma conj488: forall (lf9 : lst) (lf5 : lst) (x1 : tree) (n : natural) (x2 : tree), @eq lst (lfappend (lfappend (revflat x1) (Cons n (revflat x2))) lf9)
+  (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj486: forall (lf8 : lst) (lf9 : lst) (lf5 : lst) (n : natural) (x2 : tree), @eq lst (lfappend (lfappend lf8 (Cons n (revflat x2))) lf9)
+  (lfappend lf8 (Cons n lf5)).
+Lemma conj464: forall (lf4 : lst) (x1 : tree) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n (revflat x2))) (Cons n0 y))
+  (lfappend (revflat x1) lf4).
+Lemma conj462: forall (lf8 : lst) (lf4 : lst) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend lf8 (Cons n (revflat x2))) (Cons n0 y))
+  (lfappend lf8 lf4).
+Lemma conj460: forall (lf2 : lst) (x1 : tree) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n (revflat x2))) (Cons n0 y))
+  lf2.
+Lemma conj458: forall (lf8 : lst) (lf2 : lst) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend lf8 (Cons n (revflat x2))) (Cons n0 y)) lf2.
+Lemma conj456: forall (lf9 : lst) (lf4 : lst) (x1 : tree) (x2 : tree) (n : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n (revflat x2))) lf9)
+  (lfappend (revflat x1) lf4).
+Lemma conj454: forall (lf8 : lst) (lf9 : lst) (lf4 : lst) (x2 : tree) (n : natural), @eq lst (lfappend (lfappend lf8 (Cons n (revflat x2))) lf9)
+  (lfappend lf8 lf4).
+Lemma conj452: forall (lf2 : lst) (lf9 : lst) (x1 : tree) (x2 : tree) (n : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n (revflat x2))) lf9) lf2.
+Lemma conj450: forall (lf8 : lst) (lf2 : lst) (lf9 : lst) (x2 : tree) (n : natural), @eq lst (lfappend (lfappend lf8 (Cons n (revflat x2))) lf9) lf2.
+Lemma conj384: forall (x1 : tree) (y : lst) (x2 : tree) (n : natural) (lf7 : lst) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) (Cons n0 y))
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj383: forall (lf6 : lst) (x1 : tree) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) lf6) (Cons n0 y))
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj382: forall (lf8 : lst) (y : lst) (x2 : tree) (n : natural) (lf7 : lst) (n0 : natural), @eq lst (lfappend (lfappend lf8 (Cons n lf7)) (Cons n0 y))
+  (lfappend lf8 (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj381: forall (lf8 : lst) (lf6 : lst) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend lf8 lf6) (Cons n0 y))
+  (lfappend lf8 (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj376: forall (lf9 : lst) (x1 : tree) (x2 : tree) (n : natural) (lf7 : lst), @eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) lf9)
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 lf9))).
+Lemma conj375: forall (lf6 : lst) (lf9 : lst) (x1 : tree) (x2 : tree) (n : natural), @eq lst (lfappend (lfappend (revflat x1) lf6) lf9)
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 lf9))).
+Lemma conj374: forall (lf8 : lst) (lf9 : lst) (x2 : tree) (n : natural) (lf7 : lst), @eq lst (lfappend (lfappend lf8 (Cons n lf7)) lf9)
+  (lfappend lf8 (Cons n (qrevaflat x2 lf9))).
+Lemma conj373: forall (lf8 : lst) (lf6 : lst) (lf9 : lst) (x2 : tree) (n : natural), @eq lst (lfappend (lfappend lf8 lf6) lf9)
+  (lfappend lf8 (Cons n (qrevaflat x2 lf9))).
+Lemma conj368: forall (lf5 : lst) (x1 : tree) (y : lst) (n : natural) (lf7 : lst) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) (Cons n0 y))
+  (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj367: forall (lf6 : lst) (lf5 : lst) (x1 : tree) (y : lst) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) lf6) (Cons n0 y))
+  (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj366: forall (lf8 : lst) (lf5 : lst) (y : lst) (n : natural) (lf7 : lst) (n0 : natural), @eq lst (lfappend (lfappend lf8 (Cons n lf7)) (Cons n0 y))
+  (lfappend lf8 (Cons n lf5)).
+Lemma conj365: forall (lf8 : lst) (lf6 : lst) (lf5 : lst) (y : lst) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend lf8 lf6) (Cons n0 y)) (lfappend lf8 (Cons n lf5)).
+Lemma conj360: forall (lf9 : lst) (lf5 : lst) (x1 : tree) (n : natural) (lf7 : lst), @eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) lf9)
+  (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj359: forall (lf6 : lst) (lf9 : lst) (lf5 : lst) (x1 : tree) (n : natural), @eq lst (lfappend (lfappend (revflat x1) lf6) lf9)
+  (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj358: forall (lf8 : lst) (lf9 : lst) (lf5 : lst) (n : natural) (lf7 : lst), @eq lst (lfappend (lfappend lf8 (Cons n lf7)) lf9)
+  (lfappend lf8 (Cons n lf5)).
+Lemma conj357: forall (lf8 : lst) (lf6 : lst) (lf9 : lst) (lf5 : lst) (n : natural), @eq lst (lfappend (lfappend lf8 lf6) lf9) (lfappend lf8 (Cons n lf5)).
+Lemma conj336: forall (lf4 : lst) (x1 : tree) (y : lst) (lf7 : lst) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) (Cons n0 y))
+  (lfappend (revflat x1) lf4).
+Lemma conj335: forall (lf6 : lst) (lf4 : lst) (x1 : tree) (y : lst) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) lf6) (Cons n0 y))
+  (lfappend (revflat x1) lf4).
+Lemma conj334: forall (lf8 : lst) (lf4 : lst) (y : lst) (lf7 : lst) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend lf8 (Cons n lf7)) (Cons n0 y)) (lfappend lf8 lf4).
+Lemma conj333: forall (lf8 : lst) (lf6 : lst) (lf4 : lst) (y : lst) (n0 : natural), @eq lst (lfappend (lfappend lf8 lf6) (Cons n0 y)) (lfappend lf8 lf4).
+Lemma conj332: forall (lf2 : lst) (x1 : tree) (y : lst) (lf7 : lst) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) (Cons n0 y)) lf2.
+Lemma conj331: forall (lf6 : lst) (lf2 : lst) (x1 : tree) (y : lst) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) lf6) (Cons n0 y)) lf2.
+Lemma conj330: forall (lf8 : lst) (lf2 : lst) (y : lst) (lf7 : lst) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend lf8 (Cons n lf7)) (Cons n0 y)) lf2.
+Lemma conj329: forall (lf6 : lst) (lf8 : lst) (lf2 : lst) (y : lst) (n0 : natural), @eq lst (lfappend (lfappend lf8 lf6) (Cons n0 y)) lf2.
+Lemma conj328: forall (lf9 : lst) (lf4 : lst) (x1 : tree) (lf7 : lst) (n : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) lf9)
+  (lfappend (revflat x1) lf4).
+Lemma conj327: forall (lf6 : lst) (lf9 : lst) (lf4 : lst) (x1 : tree), @eq lst (lfappend (lfappend (revflat x1) lf6) lf9)
+  (lfappend (revflat x1) lf4).
+Lemma conj326: forall (lf8 : lst) (lf9 : lst) (lf4 : lst) (lf7 : lst) (n : natural), @eq lst (lfappend (lfappend lf8 (Cons n lf7)) lf9) (lfappend lf8 lf4).
+Lemma conj325: forall (lf8 : lst) (lf6 : lst) (lf9 : lst) (lf4 : lst), @eq lst (lfappend (lfappend lf8 lf6) lf9) (lfappend lf8 lf4).
+Lemma conj324: forall (lf2 : lst) (lf9 : lst) (x1 : tree) (lf7 : lst) (n : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) lf9) lf2.
+Lemma conj323: forall (lf6 : lst) (lf2 : lst) (lf9 : lst) (x1 : tree), @eq lst (lfappend (lfappend (revflat x1) lf6) lf9) lf2.
+Lemma conj322: forall (lf8 : lst) (lf2 : lst) (lf9 : lst) (lf7 : lst) (n : natural), @eq lst (lfappend (lfappend lf8 (Cons n lf7)) lf9) lf2.
+Lemma conj321: forall (lf6 : lst) (lf8 : lst) (lf2 : lst) (lf9 : lst), @eq lst (lfappend (lfappend lf8 lf6) lf9) lf2.
+Lemma conj127: forall (x1 : tree) (y : lst) (x2 : tree) (n : natural) (n0 : natural) (lf3 : lst), @eq lst (lfappend lf3 (Cons n0 y))
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj125: forall (lf8 : lst) (y : lst) (x2 : tree) (n : natural) (n0 : natural) (lf3 : lst), @eq lst (lfappend lf3 (Cons n0 y))
+  (lfappend lf8 (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj119: forall (lf9 : lst) (x1 : tree) (x2 : tree) (n : natural) (lf3 : lst), @eq lst (lfappend lf3 lf9)
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 lf9))).
+Lemma conj117: forall (lf8 : lst) (lf9 : lst) (x2 : tree) (n : natural) (lf3 : lst), @eq lst (lfappend lf3 lf9) (lfappend lf8 (Cons n (qrevaflat x2 lf9))).
+Lemma conj111: forall (lf5 : lst) (x1 : tree) (y : lst) (n : natural) (n0 : natural) (lf3 : lst), @eq lst (lfappend lf3 (Cons n0 y)) (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj109: forall (lf8 : lst) (lf5 : lst) (y : lst) (n : natural) (n0 : natural) (lf3 : lst), @eq lst (lfappend lf3 (Cons n0 y)) (lfappend lf8 (Cons n lf5)).
+Lemma conj103: forall (lf9 : lst) (lf5 : lst) (x1 : tree) (n : natural) (lf3 : lst), @eq lst (lfappend lf3 lf9) (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj101: forall (lf8 : lst) (lf9 : lst) (lf5 : lst) (n : natural) (lf3 : lst), @eq lst (lfappend lf3 lf9) (lfappend lf8 (Cons n lf5)).
+Lemma conj79: forall (lf4 : lst) (x1 : tree) (y : lst) (n0 : natural) (lf3 : lst), @eq lst (lfappend lf3 (Cons n0 y)) (lfappend (revflat x1) lf4).
+Lemma conj77: forall (lf8 : lst) (lf4 : lst) (y : lst) (n0 : natural) (lf3 : lst), @eq lst (lfappend lf3 (Cons n0 y)) (lfappend lf8 lf4).
+Lemma conj73: forall (lf2 : lst) (y : lst) (n0 : natural) (lf3 : lst), @eq lst (lfappend lf3 (Cons n0 y)) lf2.
+Lemma conj71: forall (lf9 : lst) (lf4 : lst) (x1 : tree) (lf3 : lst), @eq lst (lfappend lf3 lf9) (lfappend (revflat x1) lf4).
+Lemma conj69: forall (lf8 : lst) (lf9 : lst) (lf4 : lst) (lf3 : lst), @eq lst (lfappend lf3 lf9) (lfappend lf8 lf4).
+Lemma conj65: forall (lf2 : lst) (lf9 : lst) (lf3 : lst), @eq lst (lfappend lf3 lf9) lf2.
+Lemma conj63: forall (x1 : tree) (lf1 : lst) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst lf1 (lfappend (revflat x1) (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj61: forall (lf8 : lst) (lf1 : lst) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst lf1 (lfappend lf8 (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj55: forall (lf9 : lst) (x1 : tree) (lf1 : lst) (x2 : tree) (n : natural), @eq lst lf1 (lfappend (revflat x1) (Cons n (qrevaflat x2 lf9))).
+Lemma conj53: forall (lf8 : lst) (lf9 : lst) (lf1 : lst) (x2 : tree) (n : natural), @eq lst lf1 (lfappend lf8 (Cons n (qrevaflat x2 lf9))).
+Lemma conj39: forall (lf5 : lst) (x1 : tree) (lf1 : lst) (n : natural), @eq lst lf1 (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj37: forall (lf8 : lst) (lf5 : lst) (lf1 : lst) (n : natural), @eq lst lf1 (lfappend lf8 (Cons n lf5)).
+Lemma conj7: forall (lf4 : lst) (x1 : tree) (lf1 : lst), @eq lst lf1 (lfappend (revflat x1) lf4).
+Lemma conj5: forall (lf8 : lst) (lf4 : lst) (lf1 : lst), @eq lst lf1 (lfappend lf8 lf4).
+Lemma conj1: forall (lf2 : lst) (lf1 : lst), @eq lst lf1 lf2.
+
+<---ADD IMPLICATIONS--->
+Time elapsed: 454 seconds
+Generalizations:
+Lemma conj496: forall (lf5 : lst) (x1 : tree) (y : lst) (n : natural) (x2 : tree) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n (revflat x2))) (Cons n0 y))
+  (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj494: forall (lf8 : lst) (lf5 : lst) (y : lst) (n : natural) (x2 : tree) (n0 : natural), @eq lst (lfappend (lfappend lf8 (Cons n (revflat x2))) (Cons n0 y))
+  (lfappend lf8 (Cons n lf5)).
+Lemma conj488: forall (lf9 : lst) (lf5 : lst) (x1 : tree) (n : natural) (x2 : tree), @eq lst (lfappend (lfappend (revflat x1) (Cons n (revflat x2))) lf9)
+  (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj486: forall (lf8 : lst) (lf9 : lst) (lf5 : lst) (n : natural) (x2 : tree), @eq lst (lfappend (lfappend lf8 (Cons n (revflat x2))) lf9)
+  (lfappend lf8 (Cons n lf5)).
+Lemma conj464: forall (lf4 : lst) (x1 : tree) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n (revflat x2))) (Cons n0 y))
+  (lfappend (revflat x1) lf4).
+Lemma conj462: forall (lf8 : lst) (lf4 : lst) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend lf8 (Cons n (revflat x2))) (Cons n0 y))
+  (lfappend lf8 lf4).
+Lemma conj460: forall (lf2 : lst) (x1 : tree) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n (revflat x2))) (Cons n0 y))
+  lf2.
+Lemma conj458: forall (lf8 : lst) (lf2 : lst) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend lf8 (Cons n (revflat x2))) (Cons n0 y)) lf2.
+Lemma conj456: forall (lf9 : lst) (lf4 : lst) (x1 : tree) (x2 : tree) (n : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n (revflat x2))) lf9)
+  (lfappend (revflat x1) lf4).
+Lemma conj454: forall (lf8 : lst) (lf9 : lst) (lf4 : lst) (x2 : tree) (n : natural), @eq lst (lfappend (lfappend lf8 (Cons n (revflat x2))) lf9)
+  (lfappend lf8 lf4).
+Lemma conj452: forall (lf2 : lst) (lf9 : lst) (x1 : tree) (x2 : tree) (n : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n (revflat x2))) lf9) lf2.
+Lemma conj450: forall (lf8 : lst) (lf2 : lst) (lf9 : lst) (x2 : tree) (n : natural), @eq lst (lfappend (lfappend lf8 (Cons n (revflat x2))) lf9) lf2.
+Lemma conj384_imp: forall (x1 : tree) (y : lst) (x2 : tree) (n : natural) (lf7 : lst) (n0 : natural), forall _ : forall y0 : lst, @eq lst (lfappend lf7 y0) (qrevaflat x2 y0),
+@eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) (Cons n0 y))
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj384: forall (x1 : tree) (y : lst) (x2 : tree) (n : natural) (lf7 : lst) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) (Cons n0 y))
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj383: forall (lf6 : lst) (x1 : tree) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) lf6) (Cons n0 y))
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj382_imp: forall (lf8 : lst) (y : lst) (x2 : tree) (n : natural) (lf7 : lst) (n0 : natural), forall _ : forall y0 : lst, @eq lst (lfappend lf7 y0) (qrevaflat x2 y0),
+@eq lst (lfappend (lfappend lf8 (Cons n lf7)) (Cons n0 y))
+  (lfappend lf8 (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj382: forall (lf8 : lst) (y : lst) (x2 : tree) (n : natural) (lf7 : lst) (n0 : natural), @eq lst (lfappend (lfappend lf8 (Cons n lf7)) (Cons n0 y))
+  (lfappend lf8 (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj381: forall (lf8 : lst) (lf6 : lst) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend lf8 lf6) (Cons n0 y))
+  (lfappend lf8 (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj376_imp: forall (lf9 : lst) (x1 : tree) (x2 : tree) (n : natural) (lf7 : lst), forall _ : forall y0 : lst, @eq lst (lfappend lf7 y0) (qrevaflat x2 y0),
+@eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) lf9)
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 lf9))).
+Lemma conj376: forall (lf9 : lst) (x1 : tree) (x2 : tree) (n : natural) (lf7 : lst), @eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) lf9)
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 lf9))).
+Lemma conj375: forall (lf6 : lst) (lf9 : lst) (x1 : tree) (x2 : tree) (n : natural), @eq lst (lfappend (lfappend (revflat x1) lf6) lf9)
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 lf9))).
+Lemma conj374_imp: forall (lf8 : lst) (lf9 : lst) (x2 : tree) (n : natural) (lf7 : lst), forall _ : forall y0 : lst, @eq lst (lfappend lf7 y0) (qrevaflat x2 y0),
+@eq lst (lfappend (lfappend lf8 (Cons n lf7)) lf9)
+  (lfappend lf8 (Cons n (qrevaflat x2 lf9))).
+Lemma conj374: forall (lf8 : lst) (lf9 : lst) (x2 : tree) (n : natural) (lf7 : lst), @eq lst (lfappend (lfappend lf8 (Cons n lf7)) lf9)
+  (lfappend lf8 (Cons n (qrevaflat x2 lf9))).
+Lemma conj373: forall (lf8 : lst) (lf6 : lst) (lf9 : lst) (x2 : tree) (n : natural), @eq lst (lfappend (lfappend lf8 lf6) lf9)
+  (lfappend lf8 (Cons n (qrevaflat x2 lf9))).
+Lemma conj368: forall (lf5 : lst) (x1 : tree) (y : lst) (n : natural) (lf7 : lst) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) (Cons n0 y))
+  (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj367: forall (lf6 : lst) (lf5 : lst) (x1 : tree) (y : lst) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) lf6) (Cons n0 y))
+  (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj366: forall (lf8 : lst) (lf5 : lst) (y : lst) (n : natural) (lf7 : lst) (n0 : natural), @eq lst (lfappend (lfappend lf8 (Cons n lf7)) (Cons n0 y))
+  (lfappend lf8 (Cons n lf5)).
+Lemma conj365: forall (lf8 : lst) (lf6 : lst) (lf5 : lst) (y : lst) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend lf8 lf6) (Cons n0 y)) (lfappend lf8 (Cons n lf5)).
+Lemma conj360: forall (lf9 : lst) (lf5 : lst) (x1 : tree) (n : natural) (lf7 : lst), @eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) lf9)
+  (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj359: forall (lf6 : lst) (lf9 : lst) (lf5 : lst) (x1 : tree) (n : natural), @eq lst (lfappend (lfappend (revflat x1) lf6) lf9)
+  (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj358: forall (lf8 : lst) (lf9 : lst) (lf5 : lst) (n : natural) (lf7 : lst), @eq lst (lfappend (lfappend lf8 (Cons n lf7)) lf9)
+  (lfappend lf8 (Cons n lf5)).
+Lemma conj357: forall (lf8 : lst) (lf6 : lst) (lf9 : lst) (lf5 : lst) (n : natural), @eq lst (lfappend (lfappend lf8 lf6) lf9) (lfappend lf8 (Cons n lf5)).
+Lemma conj336: forall (lf4 : lst) (x1 : tree) (y : lst) (lf7 : lst) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) (Cons n0 y))
+  (lfappend (revflat x1) lf4).
+Lemma conj335: forall (lf6 : lst) (lf4 : lst) (x1 : tree) (y : lst) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) lf6) (Cons n0 y))
+  (lfappend (revflat x1) lf4).
+Lemma conj334: forall (lf8 : lst) (lf4 : lst) (y : lst) (lf7 : lst) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend lf8 (Cons n lf7)) (Cons n0 y)) (lfappend lf8 lf4).
+Lemma conj333: forall (lf8 : lst) (lf6 : lst) (lf4 : lst) (y : lst) (n0 : natural), @eq lst (lfappend (lfappend lf8 lf6) (Cons n0 y)) (lfappend lf8 lf4).
+Lemma conj332: forall (lf2 : lst) (x1 : tree) (y : lst) (lf7 : lst) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) (Cons n0 y)) lf2.
+Lemma conj331: forall (lf6 : lst) (lf2 : lst) (x1 : tree) (y : lst) (n0 : natural), @eq lst (lfappend (lfappend (revflat x1) lf6) (Cons n0 y)) lf2.
+Lemma conj330: forall (lf8 : lst) (lf2 : lst) (y : lst) (lf7 : lst) (n : natural) (n0 : natural), @eq lst (lfappend (lfappend lf8 (Cons n lf7)) (Cons n0 y)) lf2.
+Lemma conj329: forall (lf6 : lst) (lf8 : lst) (lf2 : lst) (y : lst) (n0 : natural), @eq lst (lfappend (lfappend lf8 lf6) (Cons n0 y)) lf2.
+Lemma conj328: forall (lf9 : lst) (lf4 : lst) (x1 : tree) (lf7 : lst) (n : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) lf9)
+  (lfappend (revflat x1) lf4).
+Lemma conj327: forall (lf6 : lst) (lf9 : lst) (lf4 : lst) (x1 : tree), @eq lst (lfappend (lfappend (revflat x1) lf6) lf9)
+  (lfappend (revflat x1) lf4).
+Lemma conj326: forall (lf8 : lst) (lf9 : lst) (lf4 : lst) (lf7 : lst) (n : natural), @eq lst (lfappend (lfappend lf8 (Cons n lf7)) lf9) (lfappend lf8 lf4).
+Lemma conj325: forall (lf8 : lst) (lf6 : lst) (lf9 : lst) (lf4 : lst), @eq lst (lfappend (lfappend lf8 lf6) lf9) (lfappend lf8 lf4).
+Lemma conj324: forall (lf2 : lst) (lf9 : lst) (x1 : tree) (lf7 : lst) (n : natural), @eq lst (lfappend (lfappend (revflat x1) (Cons n lf7)) lf9) lf2.
+Lemma conj323: forall (lf6 : lst) (lf2 : lst) (lf9 : lst) (x1 : tree), @eq lst (lfappend (lfappend (revflat x1) lf6) lf9) lf2.
+Lemma conj322: forall (lf8 : lst) (lf2 : lst) (lf9 : lst) (lf7 : lst) (n : natural), @eq lst (lfappend (lfappend lf8 (Cons n lf7)) lf9) lf2.
+Lemma conj321: forall (lf6 : lst) (lf8 : lst) (lf2 : lst) (lf9 : lst), @eq lst (lfappend (lfappend lf8 lf6) lf9) lf2.
+Lemma conj127: forall (x1 : tree) (y : lst) (x2 : tree) (n : natural) (n0 : natural) (lf3 : lst), @eq lst (lfappend lf3 (Cons n0 y))
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj125: forall (lf8 : lst) (y : lst) (x2 : tree) (n : natural) (n0 : natural) (lf3 : lst), @eq lst (lfappend lf3 (Cons n0 y))
+  (lfappend lf8 (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj119: forall (lf9 : lst) (x1 : tree) (x2 : tree) (n : natural) (lf3 : lst), @eq lst (lfappend lf3 lf9)
+  (lfappend (revflat x1) (Cons n (qrevaflat x2 lf9))).
+Lemma conj117: forall (lf8 : lst) (lf9 : lst) (x2 : tree) (n : natural) (lf3 : lst), @eq lst (lfappend lf3 lf9) (lfappend lf8 (Cons n (qrevaflat x2 lf9))).
+Lemma conj111: forall (lf5 : lst) (x1 : tree) (y : lst) (n : natural) (n0 : natural) (lf3 : lst), @eq lst (lfappend lf3 (Cons n0 y)) (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj109: forall (lf8 : lst) (lf5 : lst) (y : lst) (n : natural) (n0 : natural) (lf3 : lst), @eq lst (lfappend lf3 (Cons n0 y)) (lfappend lf8 (Cons n lf5)).
+Lemma conj103: forall (lf9 : lst) (lf5 : lst) (x1 : tree) (n : natural) (lf3 : lst), @eq lst (lfappend lf3 lf9) (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj101: forall (lf8 : lst) (lf9 : lst) (lf5 : lst) (n : natural) (lf3 : lst), @eq lst (lfappend lf3 lf9) (lfappend lf8 (Cons n lf5)).
+Lemma conj79: forall (lf4 : lst) (x1 : tree) (y : lst) (n0 : natural) (lf3 : lst), @eq lst (lfappend lf3 (Cons n0 y)) (lfappend (revflat x1) lf4).
+Lemma conj77: forall (lf8 : lst) (lf4 : lst) (y : lst) (n0 : natural) (lf3 : lst), @eq lst (lfappend lf3 (Cons n0 y)) (lfappend lf8 lf4).
+Lemma conj73: forall (lf2 : lst) (y : lst) (n0 : natural) (lf3 : lst), @eq lst (lfappend lf3 (Cons n0 y)) lf2.
+Lemma conj71: forall (lf9 : lst) (lf4 : lst) (x1 : tree) (lf3 : lst), @eq lst (lfappend lf3 lf9) (lfappend (revflat x1) lf4).
+Lemma conj69: forall (lf8 : lst) (lf9 : lst) (lf4 : lst) (lf3 : lst), @eq lst (lfappend lf3 lf9) (lfappend lf8 lf4).
+Lemma conj65: forall (lf2 : lst) (lf9 : lst) (lf3 : lst), @eq lst (lfappend lf3 lf9) lf2.
+Lemma conj63: forall (x1 : tree) (lf1 : lst) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst lf1 (lfappend (revflat x1) (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj61: forall (lf8 : lst) (lf1 : lst) (y : lst) (x2 : tree) (n : natural) (n0 : natural), @eq lst lf1 (lfappend lf8 (Cons n (qrevaflat x2 (Cons n0 y)))).
+Lemma conj55: forall (lf9 : lst) (x1 : tree) (lf1 : lst) (x2 : tree) (n : natural), @eq lst lf1 (lfappend (revflat x1) (Cons n (qrevaflat x2 lf9))).
+Lemma conj53: forall (lf8 : lst) (lf9 : lst) (lf1 : lst) (x2 : tree) (n : natural), @eq lst lf1 (lfappend lf8 (Cons n (qrevaflat x2 lf9))).
+Lemma conj39: forall (lf5 : lst) (x1 : tree) (lf1 : lst) (n : natural), @eq lst lf1 (lfappend (revflat x1) (Cons n lf5)).
+Lemma conj37: forall (lf8 : lst) (lf5 : lst) (lf1 : lst) (n : natural), @eq lst lf1 (lfappend lf8 (Cons n lf5)).
+Lemma conj7: forall (lf4 : lst) (x1 : tree) (lf1 : lst), @eq lst lf1 (lfappend (revflat x1) lf4).
+Lemma conj5: forall (lf8 : lst) (lf4 : lst) (lf1 : lst), @eq lst lf1 (lfappend lf8 lf4).
+Lemma conj1: forall (lf2 : lst) (lf1 : lst), @eq lst lf1 lf2.
