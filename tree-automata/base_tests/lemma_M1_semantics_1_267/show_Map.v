@@ -52,6 +52,8 @@ Definition genMap {A} (g : G A) : nat -> G (Map A) :=
 (* (Map A) in typeclass Gen *)
 Definition genMapBounded {A} (g : G A) : G (Map A) := sized (genMap g).
 
+Instance gen_map {A} `{_ : Gen A} : Gen (Map A) :=
+{| arbitrary := genMapBounded arbitrary|}.
 
 Set Nested Proofs Allowed.
 Instance Dec_Eq_map {A} `{_ : Dec_Eq A} : Dec_Eq (Map A).

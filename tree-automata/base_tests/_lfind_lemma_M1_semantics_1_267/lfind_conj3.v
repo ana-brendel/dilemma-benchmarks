@@ -65,6 +65,11 @@ Definition genMap {A} (g : G A) : nat -> G (Map A) :=
 (* (Map A) in typeclass Gen *)
 Definition genMapBounded {A} (g : G A) : G (Map A) := sized (genMap g).
 
+Instance gen_map {A} `{_ : Gen A} : Gen (Map A) := { arbitrary := genMapBounded arbitrary }.
+(* Instance GenOfGenSized {A} `{Gen A} : Gen (Map A) :=
+  {
+    arbitrary := sized (genMap arbitrary)
+  }. *)
 
 Set Nested Proofs Allowed.
 Instance Dec_Eq_map {A} `{_ : Dec_Eq A} : Dec_Eq (Map A).
@@ -87,6 +92,13 @@ Derive Arbitrary for option.
 Instance Dec_Eq_option {A} `{_ : Dec_Eq A} : Dec_Eq (option A).
 Proof. dec_eq. Qed.
 Notation A := nat.
+
+Derive Show for nat.
+
+Derive Arbitrary for nat.
+
+Instance Dec_Eq_natural : Dec_Eq nat.
+
 
 
 Lemma conj3: forall {A} (x0 : ad) (lf2 : Map A) (lf3 : option A), @eq (option A) (MapGet A lf2 x0) lf3.
