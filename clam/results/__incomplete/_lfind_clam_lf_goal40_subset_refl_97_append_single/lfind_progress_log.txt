@@ -1,0 +1,223 @@
+File Information
+- File name: goal40
+- Original Directory: /home/anabrendel/lfind/benchmarks/clam/sources/clam_lf_goal40_subset_refl_97_append_single
+- LFind Directory: /home/anabrendel/lfind/benchmarks/clam/sources/_lfind_clam_lf_goal40_subset_refl_97_append_single
+- Namespace: adtind
+- Proof name: subset_refl
+- Theorem: Theorem subset_refl: forall x0 : lst, @eq bool (lst_subset x0 x0) true.
+- Declarations: 
+From lfind Require Import LFind.
+Require Import Arith.
+
+Proof Context
+* Goal State: @eq bool (lst_subset x (Cons n x)) true
+
+* Hypothesis:
+IHx : @eq bool (lst_subset x x) true
+x : lst
+n : natural
+
+* Types:
+Set
+natural
+Prop
+lst
+bool
+
+* Polymorphic Types:
+
+
+* Variables:
+x : lst
+n : natural
+
+* Terms:
+lst_subset x x : bool
+bool : Set
+x : lst
+@eq bool (lst_subset x x) true : Prop
+Cons n x : lst
+@eq bool (lst_subset x (Cons n x)) true : Prop
+lst : Set
+lst_subset x (Cons n x) : bool
+natural : Set
+true : bool
+n : natural
+
+* Functions:
+lst_subset  : forall (_ : lst) (_ : lst), bool
+Cons  : forall (_ : natural) (_ : lst), lst
+@eq  : forall (A : Type) (_ : A) (_ : A), Prop
+
+<---GENERALIZATION--->
+Time elapsed: 2 seconds
+Generalized Variables:
+lf3 : bool = true
+lf1 : bool = lst_subset x (Cons n x)
+lf2 : lst = Cons n x
+
+Generalizations:
+Lemma conj1: forall (lf1 : bool) (lf3 : bool), @eq bool lf1 lf3.
+Lemma conj3: forall (lf2 : lst) (x : lst) (lf3 : bool), @eq bool (lst_subset x lf2) lf3.
+Lemma conj4: forall (x : lst) (n : natural) (lf3 : bool), @eq bool (lst_subset x (Cons n x)) lf3.
+Lemma conj5: forall (lf1 : bool), @eq bool lf1 true.
+Lemma conj7: forall (lf2 : lst) (x : lst), @eq bool (lst_subset x lf2) true.
+Lemma conj8: forall (x : lst) (n : natural), @eq bool (lst_subset x (Cons n x)) true.
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 42 seconds
+Valid:
+Lemma conj8: forall (x : lst) (n : natural), @eq bool (lst_subset x (Cons n x)) true.
+
+Invalid:
+Lemma conj7: forall (lf2 : lst) (x : lst), @eq bool (lst_subset x lf2) true.
+Lemma conj5: forall (lf1 : bool), @eq bool lf1 true.
+Lemma conj4: forall (x : lst) (n : natural) (lf3 : bool), @eq bool (lst_subset x (Cons n x)) lf3.
+Lemma conj3: forall (lf2 : lst) (x : lst) (lf3 : bool), @eq bool (lst_subset x lf2) lf3.
+Lemma conj1: forall (lf1 : bool) (lf3 : bool), @eq bool lf1 lf3.
+
+<---ADD IMPLICATIONS--->
+Time elapsed: 47 seconds
+Generalizations:
+Lemma conj7: forall (lf2 : lst) (x : lst), @eq bool (lst_subset x lf2) true.
+Lemma conj5: forall (lf1 : bool), @eq bool lf1 true.
+Lemma conj4_imp: forall (x : lst) (n : natural) (lf3 : bool), forall _ : @eq bool (lst_subset x x) lf3,
+@eq bool (lst_subset x (Cons n x)) lf3.
+Lemma conj4: forall (x : lst) (n : natural) (lf3 : bool), @eq bool (lst_subset x (Cons n x)) lf3.
+Lemma conj3: forall (lf2 : lst) (x : lst) (lf3 : bool), @eq bool (lst_subset x lf2) lf3.
+Lemma conj1: forall (lf1 : bool) (lf3 : bool), @eq bool lf1 lf3.
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 57 seconds
+Valid:
+Lemma conj4_imp: forall (x : lst) (n : natural) (lf3 : bool), forall _ : @eq bool (lst_subset x x) lf3,
+@eq bool (lst_subset x (Cons n x)) lf3.
+
+Invalid:
+Lemma conj1: forall (lf1 : bool) (lf3 : bool), @eq bool lf1 lf3.
+Lemma conj3: forall (lf2 : lst) (x : lst) (lf3 : bool), @eq bool (lst_subset x lf2) lf3.
+Lemma conj4: forall (x : lst) (n : natural) (lf3 : bool), @eq bool (lst_subset x (Cons n x)) lf3.
+Lemma conj5: forall (lf1 : bool), @eq bool lf1 true.
+Lemma conj7: forall (lf2 : lst) (x : lst), @eq bool (lst_subset x lf2) true.
+
+
+<---CREATE SKETCHES--->
+Time elapsed: 57 seconds
+Sketches:
+Sketch conj3_sketch0 : @eq bool (##hole##) lf3
+Sketch conj3_term_sketch0 : @eq bool (lst_subset x lf2) (##hole##)
+Sketch conj4_sketch0 : @eq bool (lst_subset x (##hole##)) lf3
+Sketch conj4_sketch1 : @eq bool (##hole##) lf3
+Sketch conj4_term_sketch0 : @eq lst (Cons n x) (##hole##)
+Sketch conj4_term_sketch1 : @eq bool (lst_subset x (Cons n x)) (##hole##)
+Sketch conj5_sketch0 : @eq bool lf1 (##hole##)
+Sketch conj5_term_sketch0 : @eq bool true (##hole##)
+Sketch conj7_sketch0 : @eq bool (lst_subset x lf2) (##hole##)
+Sketch conj7_sketch1 : @eq bool (##hole##) true
+Sketch conj7_term_sketch0 : @eq bool true (##hole##)
+Sketch conj7_term_sketch1 : @eq bool (lst_subset x lf2) (##hole##)
+
+
+<---CREATE SYNTHESIS PROBLEMS--->
+Time elapsed: 177 seconds
+Problems per Sketch:
+Sketch conj4_term_sketch1 --> Problem  synth_5
+Sketch conj3_sketch0 --> Problem  synth_1
+Sketch conj7_sketch1 --> Problem  synth_7
+Sketch conj5_sketch0 --> Problem  synth_6
+Sketch conj3_term_sketch0 --> Problem  synth_2
+Sketch conj7_term_sketch1 --> Problem  synth_2
+Sketch conj7_term_sketch0 --> Problem  synth_7
+Sketch conj4_term_sketch0 --> Problem  synth_4
+Sketch conj5_term_sketch0 --> Problem  synth_7
+Sketch conj7_sketch0 --> Problem  synth_2
+Sketch conj4_sketch0 --> Problem  synth_3
+Sketch conj4_sketch1 --> Problem  synth_1
+
+
+<--- SYNTHESIS PROBLEM RESULTS--->
+Time elapsed: 241 seconds
+
+Problem: synth_3
+
+Problem: synth_6
+ lf1
+ true
+
+Problem: synth_7
+ true
+
+Problem: synth_5
+ lst_subset x (Cons Zero x)
+ lst_subset x (lfappend x Nil)
+ lst_subset x (lst_union x Nil)
+ lst_subset x x
+ eqb n n
+ true
+
+Problem: synth_4
+ lst_union x (Cons n (lst_union x Nil))
+ Cons n (lst_union x x)
+ lst_union x (Cons n x)
+ Cons n (lfappend x Nil)
+ Cons n (lst_union x Nil)
+ Cons n x
+
+Problem: synth_1
+ lf3
+ true
+
+Problem: synth_2
+ lst_subset x (lst_union lf2 Nil)
+ lst_subset lf2 (lst_union lf2 Nil)
+ lst_subset x x
+ lst_subset x lf2
+ lst_subset lf2 lf2
+ true
+
+<---INITIAL CANDIDATE LEMMAS--->
+Time elapsed: 241 seconds
+Lemmas:
+Lemma candidate_1: forall (n : natural) (x : lst), @eq bool (lst_subset x (Cons n x)) true.
+Lemma candidate_2: forall (lf3 : bool) (n : natural) (x : lst), forall _ : @eq bool (lst_subset x x) lf3, @eq bool (lst_subset x (Cons n x)) lf3.
+Lemma candidate_3: forall (lf3 : bool), @eq bool (lf3) lf3.
+Lemma candidate_4: forall (lf3 : bool), @eq bool (true) lf3.
+Lemma candidate_5: forall (x : lst) (lf2 : lst), @eq bool (lst_subset x lf2) (lst_subset x (lst_union lf2 Nil)).
+Lemma candidate_6: forall (x : lst) (lf2 : lst), @eq bool (lst_subset x lf2) (lst_subset lf2 (lst_union lf2 Nil)).
+Lemma candidate_7: forall (x : lst) (lf2 : lst), @eq bool (lst_subset x lf2) (lst_subset x x).
+Lemma candidate_8: forall (x : lst) (lf2 : lst), @eq bool (lst_subset x lf2) (lst_subset x lf2).
+Lemma candidate_9: forall (x : lst) (lf2 : lst), @eq bool (lst_subset x lf2) (lst_subset lf2 lf2).
+Lemma candidate_10: forall (x : lst) (lf2 : lst), @eq bool (lst_subset x lf2) (true).
+Lemma candidate_11: forall (lf3 : bool), @eq bool (lf3) lf3.
+Lemma candidate_12: forall (lf3 : bool), @eq bool (true) lf3.
+Lemma candidate_13: forall (n : natural) (x : lst), @eq lst (Cons n x) (lst_union x (Cons n (lst_union x Nil))).
+Lemma candidate_14: forall (n : natural) (x : lst), @eq lst (Cons n x) (Cons n (lst_union x x)).
+Lemma candidate_15: forall (n : natural) (x : lst), @eq lst (Cons n x) (lst_union x (Cons n x)).
+Lemma candidate_16: forall (n : natural) (x : lst), @eq lst (Cons n x) (Cons n (lfappend x Nil)).
+Lemma candidate_17: forall (n : natural) (x : lst), @eq lst (Cons n x) (Cons n (lst_union x Nil)).
+Lemma candidate_18: forall (n : natural) (x : lst), @eq lst (Cons n x) (Cons n x).
+Lemma candidate_19: forall (n : natural) (x : lst), @eq bool (lst_subset x (Cons n x)) (lst_subset x (Cons Zero x)).
+Lemma candidate_20: forall (n : natural) (x : lst), @eq bool (lst_subset x (Cons n x)) (lst_subset x (lfappend x Nil)).
+Lemma candidate_21: forall (n : natural) (x : lst), @eq bool (lst_subset x (Cons n x)) (lst_subset x (lst_union x Nil)).
+Lemma candidate_22: forall (n : natural) (x : lst), @eq bool (lst_subset x (Cons n x)) (lst_subset x x).
+Lemma candidate_23: forall (n : natural) (x : lst), @eq bool (lst_subset x (Cons n x)) (eqb n n).
+Lemma candidate_24: forall (n : natural) (x : lst), @eq bool (lst_subset x (Cons n x)) (true).
+Lemma candidate_25: forall (lf1 : bool), @eq bool lf1 (lf1).
+Lemma candidate_26: forall (lf1 : bool), @eq bool lf1 (true).
+Lemma candidate_27: @eq bool true (true).
+Lemma candidate_28: forall (x : lst) (lf2 : lst), @eq bool (lst_subset x lf2) (lst_subset x (lst_union lf2 Nil)).
+Lemma candidate_29: forall (x : lst) (lf2 : lst), @eq bool (lst_subset x lf2) (lst_subset lf2 (lst_union lf2 Nil)).
+Lemma candidate_30: forall (x : lst) (lf2 : lst), @eq bool (lst_subset x lf2) (lst_subset x x).
+Lemma candidate_31: forall (x : lst) (lf2 : lst), @eq bool (lst_subset x lf2) (lst_subset x lf2).
+Lemma candidate_32: forall (x : lst) (lf2 : lst), @eq bool (lst_subset x lf2) (lst_subset lf2 lf2).
+Lemma candidate_33: forall (x : lst) (lf2 : lst), @eq bool (lst_subset x lf2) (true).
+Lemma candidate_34: @eq bool (true) true.
+Lemma candidate_35: @eq bool true (true).
+Lemma candidate_36: forall (x : lst) (lf2 : lst), @eq bool (lst_subset x lf2) (lst_subset x (lst_union lf2 Nil)).
+Lemma candidate_37: forall (x : lst) (lf2 : lst), @eq bool (lst_subset x lf2) (lst_subset lf2 (lst_union lf2 Nil)).
+Lemma candidate_38: forall (x : lst) (lf2 : lst), @eq bool (lst_subset x lf2) (lst_subset x x).
+Lemma candidate_39: forall (x : lst) (lf2 : lst), @eq bool (lst_subset x lf2) (lst_subset x lf2).
+Lemma candidate_40: forall (x : lst) (lf2 : lst), @eq bool (lst_subset x lf2) (lst_subset lf2 lf2).
+Lemma candidate_41: forall (x : lst) (lf2 : lst), @eq bool (lst_subset x lf2) (true).

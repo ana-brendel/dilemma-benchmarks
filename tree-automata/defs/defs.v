@@ -21,14 +21,12 @@ From IntMap Require Import Allmaps.
 Require Import EqNat.
 From TreeAutomataCoqGym Require Import bases.
 
-(* définition inductive du type des termes : *)
 Inductive term : Set :=
     app : ad -> term_list -> term
 with term_list : Set :=
   | tnil : term_list
   | tcons : term -> term_list -> term_list.
 
-(* les principes d'induction *)
 Scheme term_term_list_rec := Induction for term
   Sort Set
   with term_list_term_rec := Induction for term_list 
@@ -109,8 +107,6 @@ Proof.
   trivial.
 Qed.
 
-(* taille des termes : *)
-
 Fixpoint taille_term (t : term) : nat :=
   match t with
   | app c l => S (mtaille_term_list l)
@@ -121,8 +117,6 @@ Fixpoint taille_term (t : term) : nat :=
   | tnil => 0
   | tcons hd tl => max (taille_term hd) (mtaille_term_list tl)
   end.
-
-(* définition des structures prec_list : adjacence des états de l'automate *)
 
 Inductive prec_list : Set :=
   | prec_cons : ad -> prec_list -> prec_list -> prec_list
@@ -138,18 +132,12 @@ Proof.
 	split with pl0. reflexivity. left. reflexivity.
 Qed.
 
-(* définition des états *)
-
 Definition state := Map prec_list.
-
-(* définition des automates *)
 
 Definition preDTA := Map state.
 
 Inductive DTA : Type :=
     dta : preDTA -> ad -> DTA.
-
-(* calcul de la taille de l'automate : *)
 
 Fixpoint taille_0 (l : prec_list) : nat :=
   match l with
@@ -171,32 +159,37 @@ Fixpoint DTA_taille (d : preDTA) : nat :=
   | M2 x y => max (DTA_taille x) (DTA_taille y)
   end.
 
+(* Helper Lemma = le_n_S, ∀ n m: n ≤ m → S n ≤ S m *) 
+(* Helper Lemma = le_plus_l, ∀ n m: n ≤ n + m *)
 Lemma taille_aux_0 :
  forall (a : ad) (la ls : prec_list),
  S (taille_0 la) <= taille_0 (prec_cons a la ls).
 Proof.
 	intros. simpl in |- *.
-	apply (le_n_S (taille_0 la) (taille_0 la + taille_0 ls)).
-	exact (le_plus_l (taille_0 la) (taille_0 ls)).
+  apply le_n_S.
+  apply le_plus_l.
 Qed.
 
+(* Helper Lemma = le_n_S, ∀ n m: n ≤ m → S n ≤ S m *) 
+(* Helper Lemma = le_0_n, ∀ n : 0 ≤ n *)
 Lemma taille_aux_1 :
  forall (a : ad) (la ls : prec_list), 1 <= taille_0 (prec_cons a la ls).
 Proof.
-	intros. unfold taille_0 in |- *. 
-	exact (le_n_S 0 _ (le_O_n _)).
+	intros. simpl.
+  apply le_n_S.
+  apply le_0_n. 
 Qed.
 
+(* Helper Lemma = le_n_S, ∀ n m: n ≤ m → S n ≤ S m *) 
+(* Helper Lemma = le_plus_r, ∀ n m: n ≤ m + n*)
 Lemma taille_aux_2 :
  forall (a : ad) (la ls : prec_list),
  S (taille_0 ls) <= taille_0 (prec_cons a la ls).
 Proof.
 	intros. simpl in |- *.
-	apply (le_n_S (taille_0 ls) (taille_0 la + taille_0 ls)).
-	exact (le_plus_r (taille_0 la) (taille_0 ls)).
+  apply le_n_S.
+  apply le_plus_r.
 Qed.
-
-(* relation d'une adresse d'occurence dans les prec_list *)
 
 Inductive prec_occur : prec_list -> ad -> Prop :=
   | prec_hd :
@@ -209,7 +202,6 @@ Inductive prec_occur : prec_list -> ad -> Prop :=
       forall (a b : ad) (pl0 pl1 : prec_list),
       prec_occur pl1 b -> prec_occur (prec_cons a pl0 pl1) b.
 
-(* relation de "contenu" pour les prec_list *)
 
 Inductive prec_contained : prec_list -> prec_list -> Prop :=
   | prec_id : forall p : prec_list, prec_contained p p
@@ -220,15 +212,12 @@ Inductive prec_contained : prec_list -> prec_list -> Prop :=
       forall (p p0 p1 : prec_list) (a : ad),
       prec_contained p p1 -> prec_contained p (prec_cons a p0 p1).
 
-(* définition de l'appartenance d'un état à un pre dta *)
-
 Definition state_in_dta (d : preDTA) (s : state) : Prop :=
   exists a : ad, MapGet state d a = Some s.
 
 Definition state_in_dta_diff (d : preDTA) (s : state) 
   (a : ad) : Prop := exists b : ad, MapGet state d b = Some s /\ a <> b.
 
-(* définition de l'appartenance d'une adjacence à un pre dta *)
 
 Definition prec_in_dta (d : preDTA) (p : prec_list) : Prop :=
   exists s : state,
@@ -263,57 +252,74 @@ Definition prec_in_dta_diff_cont (d : preDTA) (p : prec_list)
              MapGet prec_list s c = Some p0 /\
              prec_contained p p0 /\ a <> b))).
 
-(* définition de l'appartenance d'une adjacence à un etat *)
 
 Definition prec_in_state (s : state) (p : prec_list) : Prop :=
   exists c : ad, MapGet prec_list s c = Some p.
-
+ 
+(* Helper Lemma = in_M0_false, ∀ (A : Type) (a : A), ¬ (∃ e : ad, MapGet A (M0 A) e = Some a)*)
 Lemma prec_in_state_M0_false :
  forall p : prec_list, ~ prec_in_state (M0 prec_list) p.
 Proof.
-	intros. exact (in_M0_false prec_list p).
+	intros. 
+  apply in_M0_false. 
 Qed.
 
+(* Helper Lemma = in_M0_false, ∀ (A : Type) (a : A), ¬ (∃ e : ad, MapGet A (M0 A) e = Some a)*)
 Lemma state_in_dta_M0_false : forall s : state, ~ state_in_dta (M0 state) s.
 Proof.
-	intros. exact (in_M0_false state s).
+	intros. 
+  apply in_M0_false. 
 Qed.
 
-(* lemmes sur prec_occur, contained : *)
-
+(* Helper Lemma = prec_hd, ∀ (a : ad) (pl0 pl1 : prec_list), prec_occur (prec_cons a pl0 pl1) a *)
+(* Helper Lemma = prec_int0, ∀ (a b : ad) (pl0 pl1 : prec_list), prec_occur pl0 b → prec_occur (prec_cons a pl0 pl1) b *)
+(* Helper Lemma = prec_int1, ∀ (a b : ad) (pl0 pl1 : prec_list), prec_occur pl1 b → prec_occur (prec_cons a pl0 pl1) b *)
 Lemma prec_occur_1 :
  forall (a : ad) (p0 p1 p2 : prec_list),
  prec_contained (prec_cons a p0 p1) p2 -> prec_occur p2 a.
 Proof.
-	intros. induction  p2 as [a0 p2_1 Hrecp2_1 p2_0 Hrecp2_0| ]. inversion H. exact (prec_hd a0 p2_1 p2_0).
-	exact (prec_int0 a0 a p2_1 p2_0 (Hrecp2_1 H2)).
-	exact (prec_int1 a0 a p2_1 p2_0 (Hrecp2_0 H2)).
-	inversion H.
+	intros. induction  p2 as [a0 p2_1 Hrecp2_1 p2_0 Hrecp2_0| ]. inversion H. 
+  apply prec_hd.
+  apply prec_int0.
+  apply Hrecp2_1. apply H2.
+  apply prec_int1.
+  apply Hrecp2_0. apply H2.
+  inversion H.
 Qed.
 
+(* Helper Lemma = prec_c_int0, ∀ (p p0 p1 : prec_list) (a : ad), prec_contained p p0 → prec_contained p (prec_cons a p0 p1) *)
+(* Helper Lemma = prec_id, ∀ p : prec_list, prec_contained p p *)
+(* Helper Lemma = prec_c_int1, ∀ (p p0 p1 : prec_list) (a : ad), prec_contained p p1 → prec_contained p (prec_cons a p0 p1) *)
 Lemma prec_contained_0 :
  forall (a : ad) (p0 p1 p2 : prec_list),
  prec_contained (prec_cons a p0 p1) p2 -> prec_contained p0 p2.
 Proof.
 	intros. induction  p2 as [a0 p2_1 Hrecp2_1 p2_0 Hrecp2_0| ]. inversion H. 
-	exact (prec_c_int0 p2_1 p2_1 p2_0 a0 (prec_id p2_1)).
-	exact (prec_c_int0 _ _ _ _ (Hrecp2_1 H2)).
-	exact (prec_c_int1 _ _ _ _ (Hrecp2_0 H2)). 
+  apply prec_c_int0.
+  apply prec_id.
+  apply prec_c_int0.
+  apply Hrecp2_1. apply H2.
+  apply prec_c_int1. 
+  apply Hrecp2_0. apply H2. 
 	inversion H.
 Qed.
 
+(* Helper Lemma = prec_c_int0, ∀ (p p0 p1 : prec_list) (a : ad), prec_contained p p0 → prec_contained p (prec_cons a p0 p1) *)
+(* Helper Lemma = prec_id, ∀ p : prec_list, prec_contained p p *)
+(* Helper Lemma = prec_c_int1, ∀ (p p0 p1 : prec_list) (a : ad), prec_contained p p1 → prec_contained p (prec_cons a p0 p1) *)
 Lemma prec_contained_1 :
  forall (a : ad) (p0 p1 p2 : prec_list),
  prec_contained (prec_cons a p0 p1) p2 -> prec_contained p1 p2.
 Proof.
 	intros. induction  p2 as [a0 p2_1 Hrecp2_1 p2_0 Hrecp2_0| ]. inversion H. 
-	exact (prec_c_int1 _ _ _ _ (prec_id p2_0)).
-	exact (prec_c_int0 _ _ _ _ (Hrecp2_1 H2)).
-	exact (prec_c_int1 _ _ _ _ (Hrecp2_0 H2)).
+  apply prec_c_int1.
+  apply prec_id.
+  apply prec_c_int0.
+  apply Hrecp2_1. apply H2.
+  apply prec_c_int1.
+  apply Hrecp2_0. apply H2.
 	inversion H.
 Qed.
-
-(* occurence de termes dans les listes *)
 
 Inductive term_occur : term -> term -> Prop :=
   | to_eq : forall t : term, term_occur t t
@@ -334,39 +340,51 @@ Definition term_occur_def_0 (t : term) :=
 Definition term_occur_def_1 (t : term_list) :=
   forall u : term, term_list_occur u t -> term_high u <= term_high_0 t.
 
+(* Helper Lemma = le_n_n, ∀ n : nat, n ≤ n *)
+(* Helper Lemma = le_trans, __ *)
+(* Helper Lemma = le_n_Sn, (?) ∀ n : nat, n ≤ S n (?) *)
 Lemma term_occur_0_0 :
  forall (a : ad) (t : term_list),
  term_occur_def_1 t -> term_occur_def_0 (app a t).
 Proof.
 	unfold term_occur_def_1 in |- *. unfold term_occur_def_0 in |- *. intros. inversion H0.
-	exact (le_n_n _). apply
-  (le_trans (term_high u) (term_high_0 t) (term_high (app a t)) (H u H3)). unfold term_high in |- *. exact (le_n_Sn _).
+  apply le_n_n.
+	apply (le_trans (term_high u) (term_high_0 t) (term_high (app a t)) (H u H3)). 
+  unfold term_high in |- *. 
+  apply le_n_Sn.
 Qed.
 
+(* No helper lemma *)
 Lemma term_occur_0_1 : term_occur_def_1 tnil.
 Proof.
 	unfold term_occur_def_1 in |- *. intros. induction  u as (a, t). inversion H.
 Qed.
 
+(* Helper Lemma = le_trans, __ *)
+(* Helper Lemma = le_max_l, ∀ n m : nat, n ≤ Nat.max n m *)
+(* Helper Lemma = le_max_r, ∀ n m : nat, m ≤ Nat.max n m *)
 Lemma term_occur_0_2 :
- forall t : term,
- term_occur_def_0 t ->
+ forall t : term, term_occur_def_0 t ->
  forall t0 : term_list, term_occur_def_1 t0 -> term_occur_def_1 (tcons t t0).
 Proof.
 	unfold term_occur_def_0 in |- *. unfold term_occur_def_1 in |- *. intros. inversion H1.
 	apply (le_trans (term_high u) (term_high t) (term_high_0 (tcons t t0))).
-	exact (H u H4). exact (le_max_l _ _). apply (le_trans (term_high u) (term_high_0 t0) (term_high_0 (tcons t t0))). exact (H0 u H4).
-	exact (le_max_r _ _).
+	exact (H u H4). 
+  apply le_max_l.
+  apply (le_trans (term_high u) (term_high_0 t0) (term_high_0 (tcons t t0))). 
+  exact (H0 u H4).
+	apply le_max_r.
 Qed.
 
-Lemma term_occur_0 :
- forall t u : term, term_occur u t -> term_high u <= term_high t.
+(* Single lemma used *)
+Lemma term_occur_0 : forall t u : term, term_occur u t -> term_high u <= term_high t.
 Proof.
 	exact
   (term_term_list_ind term_occur_def_0 term_occur_def_1 term_occur_0_0
      term_occur_0_1 term_occur_0_2).
 Qed.
 
+(* Single lemma used *)
 Lemma term_occur_1 :
  forall (t : term_list) (u : term),
  term_list_occur u t -> term_high u <= term_high_0 t.
@@ -382,44 +400,55 @@ Definition indprinciple_3_aux (n : nat) :=
    (forall u : term, term_list_occur u tl -> P u) -> P (app a tl)) ->
   forall t : term, term_high t <= n -> P t.
 
+(* No helper lemma *)
 Lemma indprinciple_3_0 : indprinciple_3_aux 0.
 Proof.
 	unfold indprinciple_3_aux in |- *. intros. induction  t as (a, t). simpl in H0. inversion H0.
 Qed.
 
+(* Helper Lemma = le_trans, ___ *)
+(* Helper Lemma = term_occur_1, ∀ (t : term_list) (u : term), term_list_occur u t → term_high u ≤ term_high_0 t *)
+(* Helper Lemma = le_S_n, ∀ n m : nat, S n ≤ S m → n ≤ m *)
 Lemma indprinciple_3_1 :
  forall n : nat, indprinciple_3_aux n -> indprinciple_3_aux (S n).
 Proof.
 	unfold indprinciple_3_aux in |- *. intros. induction  t as (a, t). apply (H0 a t).
-	intros. apply (H P H0 u). apply (le_trans (term_high u) (term_high_0 t) n).
-	exact (term_occur_1 t u H2). exact (le_S_n _ _ H1).
+	intros. apply (H P H0 u). 
+  apply (le_trans (term_high u) (term_high_0 t) n).
+  apply term_occur_1. 
+  apply H2.
+  apply le_S_n. 
+  apply H1.
 Qed.
 
+(* Single lemma used *)
 Lemma indprinciple_3_2 :
  forall (n : nat) (P : term -> Prop),
  (forall (a : ad) (tl : term_list),
   (forall u : term, term_list_occur u tl -> P u) -> P (app a tl)) ->
  forall t : term, term_high t <= n -> P t.
 Proof.
-	exact (nat_ind indprinciple_3_aux indprinciple_3_0 indprinciple_3_1).
+  exact (nat_ind indprinciple_3_aux indprinciple_3_0 indprinciple_3_1).
 Qed.
 
+(* Single lemma used *)
 Lemma indprinciple_term :
  forall P : term -> Prop,
  (forall (a : ad) (tl : term_list),
   (forall u : term, term_list_occur u tl -> P u) -> P (app a tl)) ->
  forall t : term, P t.
 Proof.
-	intros. exact (indprinciple_3_2 (term_high t) P H t (le_n_n _)).
+	intros. 
+  exact (indprinciple_3_2 (term_high t) P H t (le_n_n _)).
 Qed.
 
-(* lemmes sur Ndouble, Ndouble_plus_one *)
-
+(* No helper used *)
 Lemma Ndouble_inv_N0 : forall x : ad, Ndouble x = N0 -> x = N0.
 Proof.
 	simple induction x. intros. reflexivity. simpl in |- *. intros. inversion H.
 Qed.
 
+(* No helper used *)
 Lemma Ndouble_inv_xO :
  forall (x : ad) (p : positive), Ndouble x = Npos (xO p) -> x = Npos p.
 Proof.
@@ -427,12 +456,14 @@ Proof.
 	inversion H. reflexivity.
 Qed.
 
+(* No helper used *)
 Lemma Ndouble_plus_one_inv_xH :
  forall x : ad, Ndouble_plus_one x = Npos 1 -> x = N0.
 Proof.
 	simple induction x. intros. reflexivity. simpl in |- *. intros. inversion H.
 Qed.
 
+(* No helper used *)
 Lemma Ndouble_plus_one_inv_xI :
  forall (x : ad) (p : positive),
  Ndouble_plus_one x = Npos (xI p) -> x = Npos p.

@@ -1,0 +1,239 @@
+File Information
+- File name: goal66
+- Original Directory: /home/anabrendel/lfind/benchmarks/clam/sources/clam_lf_goal66_theorem0_35_negb_invol
+- LFind Directory: /home/anabrendel/lfind/benchmarks/clam/sources/_lfind_clam_lf_goal66_theorem0_35_negb_invol
+- Namespace: adtind
+- Proof name: theorem0
+- Theorem: Theorem theorem0: forall x y0 : natural,
+@eq bool (even (plus x y0)) (even (plus x (Succ (Succ y0)))).
+- Declarations: 
+From lfind Require Import LFind.
+Require Import Arith Bool.
+
+Proof Context
+* Goal State: @eq bool (even y) (negb (negb (even y)))
+
+* Hypothesis:
+y : natural
+
+* Types:
+Set
+natural
+Prop
+bool
+
+* Polymorphic Types:
+
+
+* Variables:
+y : natural
+
+* Terms:
+negb (negb (even y)) : bool
+bool : Set
+negb (even y) : bool
+@eq bool (even y) (negb (negb (even y))) : Prop
+even y : bool
+y : natural
+natural : Set
+
+* Functions:
+even  : forall _ : natural, bool
+negb  : forall _ : bool, bool
+@eq  : forall (A : Type) (_ : A) (_ : A), Prop
+
+<---GENERALIZATION--->
+Time elapsed: 2 seconds
+Generalized Variables:
+lf3 : bool = even y
+lf1 : bool = negb (negb (even y))
+lf2 : bool = negb (even y)
+
+Generalizations:
+Lemma conj1: forall (lf1 : bool) (lf3 : bool), @eq bool lf3 lf1.
+Lemma conj3: forall (lf2 : bool) (lf3 : bool), @eq bool lf3 (negb lf2).
+Lemma conj4: forall (lf3 : bool), @eq bool lf3 (negb (negb lf3)).
+Lemma conj5: forall (lf1 : bool) (y : natural), @eq bool (even y) lf1.
+Lemma conj7: forall (lf2 : bool) (y : natural), @eq bool (even y) (negb lf2).
+Lemma conj8: forall (y : natural), @eq bool (even y) (negb (negb (even y))).
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 19 seconds
+Valid:
+Lemma conj8: forall (y : natural), @eq bool (even y) (negb (negb (even y))).
+Lemma conj4: forall (lf3 : bool), @eq bool lf3 (negb (negb lf3)).
+
+Invalid:
+Lemma conj7: forall (lf2 : bool) (y : natural), @eq bool (even y) (negb lf2).
+Lemma conj5: forall (lf1 : bool) (y : natural), @eq bool (even y) lf1.
+Lemma conj3: forall (lf2 : bool) (lf3 : bool), @eq bool lf3 (negb lf2).
+Lemma conj1: forall (lf1 : bool) (lf3 : bool), @eq bool lf3 lf1.
+
+<---ADD IMPLICATIONS--->
+Time elapsed: 20 seconds
+Generalizations:
+Lemma conj7: forall (lf2 : bool) (y : natural), @eq bool (even y) (negb lf2).
+Lemma conj5: forall (lf1 : bool) (y : natural), @eq bool (even y) lf1.
+Lemma conj3: forall (lf2 : bool) (lf3 : bool), @eq bool lf3 (negb lf2).
+Lemma conj1: forall (lf1 : bool) (lf3 : bool), @eq bool lf3 lf1.
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 26 seconds
+Valid:
+
+Invalid:
+Lemma conj1: forall (lf1 : bool) (lf3 : bool), @eq bool lf3 lf1.
+Lemma conj3: forall (lf2 : bool) (lf3 : bool), @eq bool lf3 (negb lf2).
+Lemma conj5: forall (lf1 : bool) (y : natural), @eq bool (even y) lf1.
+Lemma conj7: forall (lf2 : bool) (y : natural), @eq bool (even y) (negb lf2).
+
+
+<---CREATE SKETCHES--->
+Time elapsed: 26 seconds
+Sketches:
+Sketch conj3_sketch0 : @eq bool lf3 (##hole##)
+Sketch conj3_term_sketch0 : @eq bool (negb lf2) (##hole##)
+Sketch conj5_sketch0 : @eq bool (##hole##) lf1
+Sketch conj5_term_sketch0 : @eq bool (even y) (##hole##)
+Sketch conj7_sketch0 : @eq bool (##hole##) (negb lf2)
+Sketch conj7_sketch1 : @eq bool (even y) (##hole##)
+Sketch conj7_term_sketch0 : @eq bool (even y) (##hole##)
+Sketch conj7_term_sketch1 : @eq bool (negb lf2) (##hole##)
+
+
+<---CREATE SYNTHESIS PROBLEMS--->
+Time elapsed: 48 seconds
+Problems per Sketch:
+Sketch conj3_sketch0 --> Problem  synth_1
+Sketch conj7_sketch1 --> Problem  synth_4
+Sketch conj5_sketch0 --> Problem  synth_3
+Sketch conj3_term_sketch0 --> Problem  synth_2
+Sketch conj7_term_sketch1 --> Problem  synth_2
+Sketch conj7_term_sketch0 --> Problem  synth_4
+Sketch conj5_term_sketch0 --> Problem  synth_4
+Sketch conj7_sketch0 --> Problem  synth_2
+
+
+<--- SYNTHESIS PROBLEM RESULTS--->
+Time elapsed: 53 seconds
+
+Problem: synth_3
+ negb (negb (negb (negb (negb (negb (negb (negb (negb (negb lf1)))))))))
+ negb (negb (negb (negb (negb (negb (negb (negb lf1)))))))
+ negb (negb (negb (negb (negb (negb lf1)))))
+ negb (negb (negb (negb lf1)))
+ negb (negb lf1)
+ lf1
+
+Problem: synth_4
+ even (plus y (Succ (Succ Zero)))
+ even (plus y (plus y y))
+ negb (even (plus y (Succ Zero)))
+ even (plus y Zero)
+ negb (negb (even y))
+ even y
+
+Problem: synth_1
+ negb (negb (negb (negb (negb (negb (negb (negb (negb (negb lf3)))))))))
+ negb (negb (negb (negb (negb (negb (negb (negb lf3)))))))
+ negb (negb (negb (negb (negb (negb lf3)))))
+ negb (negb (negb (negb lf3)))
+ negb (negb lf3)
+ lf3
+
+Problem: synth_2
+ negb (negb (negb (negb (negb (negb (negb (negb (negb (negb (negb lf2))))))))))
+ negb (negb (negb (negb (negb (negb (negb (negb (negb lf2))))))))
+ negb (negb (negb (negb (negb (negb (negb lf2))))))
+ negb (negb (negb (negb (negb lf2))))
+ negb (negb (negb lf2))
+ negb lf2
+
+<---INITIAL CANDIDATE LEMMAS--->
+Time elapsed: 53 seconds
+Lemmas:
+Lemma candidate_1: forall (y : natural), @eq bool (even y) (negb (negb (even y))).
+Lemma candidate_2: forall (lf3 : bool), @eq bool lf3 (negb (negb lf3)).
+Lemma candidate_3: forall (lf3 : bool), @eq bool lf3   (negb (negb (negb (negb (negb (negb (negb (negb (negb (negb lf3)))))))))).
+Lemma candidate_4: forall (lf3 : bool), @eq bool lf3 (negb (negb (negb (negb (negb (negb (negb (negb lf3)))))))).
+Lemma candidate_5: forall (lf3 : bool), @eq bool lf3 (negb (negb (negb (negb (negb (negb lf3)))))).
+Lemma candidate_6: forall (lf3 : bool), @eq bool lf3 (negb (negb (negb (negb lf3)))).
+Lemma candidate_7: forall (lf3 : bool), @eq bool lf3 (negb (negb lf3)).
+Lemma candidate_8: forall (lf3 : bool), @eq bool lf3 (lf3).
+Lemma candidate_9: forall (lf2 : bool), @eq bool (negb lf2)   (negb (negb (negb (negb (negb (negb (negb (negb (negb (negb (negb lf2))))))))))).
+Lemma candidate_10: forall (lf2 : bool), @eq bool (negb lf2)   (negb (negb (negb (negb (negb (negb (negb (negb (negb lf2))))))))).
+Lemma candidate_11: forall (lf2 : bool), @eq bool (negb lf2) (negb (negb (negb (negb (negb (negb (negb lf2))))))).
+Lemma candidate_12: forall (lf2 : bool), @eq bool (negb lf2) (negb (negb (negb (negb (negb lf2))))).
+Lemma candidate_13: forall (lf2 : bool), @eq bool (negb lf2) (negb (negb (negb lf2))).
+Lemma candidate_14: forall (lf2 : bool), @eq bool (negb lf2) (negb lf2).
+Lemma candidate_15: forall (lf1 : bool), @eq bool   (negb (negb (negb (negb (negb (negb (negb (negb (negb (negb lf1))))))))))   lf1.
+Lemma candidate_16: forall (lf1 : bool), @eq bool (negb (negb (negb (negb (negb (negb (negb (negb lf1)))))))) lf1.
+Lemma candidate_17: forall (lf1 : bool), @eq bool (negb (negb (negb (negb (negb (negb lf1)))))) lf1.
+Lemma candidate_18: forall (lf1 : bool), @eq bool (negb (negb (negb (negb lf1)))) lf1.
+Lemma candidate_19: forall (lf1 : bool), @eq bool (negb (negb lf1)) lf1.
+Lemma candidate_20: forall (lf1 : bool), @eq bool (lf1) lf1.
+Lemma candidate_21: forall (y : natural), @eq bool (even y) (even (plus y (Succ (Succ Zero)))).
+Lemma candidate_22: forall (y : natural), @eq bool (even y) (even (plus y (plus y y))).
+Lemma candidate_23: forall (y : natural), @eq bool (even y) (negb (even (plus y (Succ Zero)))).
+Lemma candidate_24: forall (y : natural), @eq bool (even y) (even (plus y Zero)).
+Lemma candidate_25: forall (y : natural), @eq bool (even y) (negb (negb (even y))).
+Lemma candidate_26: forall (y : natural), @eq bool (even y) (even y).
+Lemma candidate_27: forall (lf2 : bool), @eq bool   (negb (negb (negb (negb (negb (negb (negb (negb (negb (negb (negb lf2)))))))))))   (negb lf2).
+Lemma candidate_28: forall (lf2 : bool), @eq bool (negb (negb (negb (negb (negb (negb (negb (negb (negb lf2)))))))))   (negb lf2).
+Lemma candidate_29: forall (lf2 : bool), @eq bool (negb (negb (negb (negb (negb (negb (negb lf2))))))) (negb lf2).
+Lemma candidate_30: forall (lf2 : bool), @eq bool (negb (negb (negb (negb (negb lf2))))) (negb lf2).
+Lemma candidate_31: forall (lf2 : bool), @eq bool (negb (negb (negb lf2))) (negb lf2).
+Lemma candidate_32: forall (lf2 : bool), @eq bool (negb lf2) (negb lf2).
+Lemma candidate_33: forall (y : natural), @eq bool (even y) (even (plus y (Succ (Succ Zero)))).
+Lemma candidate_34: forall (y : natural), @eq bool (even y) (even (plus y (plus y y))).
+Lemma candidate_35: forall (y : natural), @eq bool (even y) (negb (even (plus y (Succ Zero)))).
+Lemma candidate_36: forall (y : natural), @eq bool (even y) (even (plus y Zero)).
+Lemma candidate_37: forall (y : natural), @eq bool (even y) (negb (negb (even y))).
+Lemma candidate_38: forall (y : natural), @eq bool (even y) (even y).
+Lemma candidate_39: forall (y : natural), @eq bool (even y) (even (plus y (Succ (Succ Zero)))).
+Lemma candidate_40: forall (y : natural), @eq bool (even y) (even (plus y (plus y y))).
+Lemma candidate_41: forall (y : natural), @eq bool (even y) (negb (even (plus y (Succ Zero)))).
+Lemma candidate_42: forall (y : natural), @eq bool (even y) (even (plus y Zero)).
+Lemma candidate_43: forall (y : natural), @eq bool (even y) (negb (negb (even y))).
+Lemma candidate_44: forall (y : natural), @eq bool (even y) (even y).
+Lemma candidate_45: forall (lf2 : bool), @eq bool (negb lf2)   (negb (negb (negb (negb (negb (negb (negb (negb (negb (negb (negb lf2))))))))))).
+Lemma candidate_46: forall (lf2 : bool), @eq bool (negb lf2)   (negb (negb (negb (negb (negb (negb (negb (negb (negb lf2))))))))).
+Lemma candidate_47: forall (lf2 : bool), @eq bool (negb lf2) (negb (negb (negb (negb (negb (negb (negb lf2))))))).
+Lemma candidate_48: forall (lf2 : bool), @eq bool (negb lf2) (negb (negb (negb (negb (negb lf2))))).
+Lemma candidate_49: forall (lf2 : bool), @eq bool (negb lf2) (negb (negb (negb lf2))).
+Lemma candidate_50: forall (lf2 : bool), @eq bool (negb lf2) (negb lf2).
+
+<---FILTERED CANDIDATE LEMMAS--->
+Time elapsed: 169 seconds
+Duplicates removed: 22
+Filtered by Quickchick: 0
+Filtered by script: 4
+Remaining: 24
+
+Lemmas: 
+Lemma candidate_19: forall (lf1 : bool), @eq bool (negb (negb lf1)) lf1.
+Lemma candidate_2: forall (lf3 : bool), @eq bool lf3 (negb (negb lf3)).
+Lemma candidate_24: forall (y : natural), @eq bool (even y) (even (plus y Zero)).
+Lemma candidate_31: forall (lf2 : bool), @eq bool (negb (negb (negb lf2))) (negb lf2).
+Lemma candidate_22: forall (y : natural), @eq bool (even y) (even (plus y (plus y y))).
+Lemma candidate_18: forall (lf1 : bool), @eq bool (negb (negb (negb (negb lf1)))) lf1.
+Lemma candidate_13: forall (lf2 : bool), @eq bool (negb lf2) (negb (negb (negb lf2))).
+Lemma candidate_6: forall (lf3 : bool), @eq bool lf3 (negb (negb (negb (negb lf3)))).
+Lemma candidate_23: forall (y : natural), @eq bool (even y) (negb (even (plus y (Succ Zero)))).
+Lemma candidate_21: forall (y : natural), @eq bool (even y) (even (plus y (Succ (Succ Zero)))).
+Lemma candidate_30: forall (lf2 : bool), @eq bool (negb (negb (negb (negb (negb lf2))))) (negb lf2).
+Lemma candidate_17: forall (lf1 : bool), @eq bool (negb (negb (negb (negb (negb (negb lf1)))))) lf1.
+Lemma candidate_12: forall (lf2 : bool), @eq bool (negb lf2) (negb (negb (negb (negb (negb lf2))))).
+Lemma candidate_5: forall (lf3 : bool), @eq bool lf3 (negb (negb (negb (negb (negb (negb lf3)))))).
+Lemma candidate_29: forall (lf2 : bool), @eq bool (negb (negb (negb (negb (negb (negb (negb lf2))))))) (negb lf2).
+Lemma candidate_16: forall (lf1 : bool), @eq bool (negb (negb (negb (negb (negb (negb (negb (negb lf1)))))))) lf1.
+Lemma candidate_11: forall (lf2 : bool), @eq bool (negb lf2) (negb (negb (negb (negb (negb (negb (negb lf2))))))).
+Lemma candidate_4: forall (lf3 : bool), @eq bool lf3 (negb (negb (negb (negb (negb (negb (negb (negb lf3)))))))).
+Lemma candidate_28: forall (lf2 : bool), @eq bool (negb (negb (negb (negb (negb (negb (negb (negb (negb lf2)))))))))   (negb lf2).
+Lemma candidate_10: forall (lf2 : bool), @eq bool (negb lf2)   (negb (negb (negb (negb (negb (negb (negb (negb (negb lf2))))))))).
+Lemma candidate_3: forall (lf3 : bool), @eq bool lf3   (negb (negb (negb (negb (negb (negb (negb (negb (negb (negb lf3)))))))))).
+Lemma candidate_15: forall (lf1 : bool), @eq bool   (negb (negb (negb (negb (negb (negb (negb (negb (negb (negb lf1))))))))))   lf1.
+Lemma candidate_9: forall (lf2 : bool), @eq bool (negb lf2)   (negb (negb (negb (negb (negb (negb (negb (negb (negb (negb (negb lf2))))))))))).
+Lemma candidate_27: forall (lf2 : bool), @eq bool   (negb (negb (negb (negb (negb (negb (negb (negb (negb (negb (negb lf2)))))))))))   (negb lf2).
