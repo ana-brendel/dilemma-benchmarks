@@ -1,0 +1,384 @@
+File Information
+- File name: goal33
+- Original Directory: /home/anabrendel/lfind/benchmarks/clam/sources/clam_lf_goal33_fac_eq_qfac_123_qfac_mult
+- LFind Directory: /home/anabrendel/lfind/benchmarks/clam/sources/_lfind_clam_lf_goal33_fac_eq_qfac_123_qfac_mult
+- Namespace: adtind
+- Proof name: fac_eq_qfac
+- Theorem: Theorem fac_eq_qfac: forall x0 : natural, @eq natural (fac x0) (qfac x0 (Succ Zero)).
+- Declarations: 
+From lfind Require Import LFind.
+
+Proof Context
+* Goal State: @eq natural (mult (fac x) x) (qfac x x)
+
+* Hypothesis:
+IHx : @eq natural (fac x) (qfac x (Succ Zero))
+x : natural
+
+* Types:
+Set
+natural
+Prop
+
+* Polymorphic Types:
+
+
+* Variables:
+x : natural
+
+* Terms:
+qfac x (Succ Zero) : natural
+mult (fac x) x : natural
+x : natural
+fac x : natural
+Zero : natural
+Succ Zero : natural
+qfac x x : natural
+@eq natural (mult (fac x) x) (qfac x x) : Prop
+natural : Set
+@eq natural (fac x) (qfac x (Succ Zero)) : Prop
+
+* Functions:
+Succ  : forall _ : natural, natural
+mult  : forall (_ : natural) (_ : natural), natural
+qfac  : forall (_ : natural) (_ : natural), natural
+@eq  : forall (A : Type) (_ : A) (_ : A), Prop
+fac  : forall _ : natural, natural
+
+<---GENERALIZATION--->
+Time elapsed: 2 seconds
+Generalized Variables:
+lf3 : natural = fac x
+lf1 : natural = mult (fac x) x
+lf2 : natural = qfac x x
+
+Generalizations:
+Lemma conj1: forall (lf2 : natural) (lf1 : natural), @eq natural lf1 lf2.
+Lemma conj2: forall (x : natural) (lf1 : natural), @eq natural lf1 (qfac x x).
+Lemma conj3: forall (lf2 : natural) (x : natural) (lf3 : natural), @eq natural (mult lf3 x) lf2.
+Lemma conj4: forall (x : natural) (lf3 : natural), @eq natural (mult lf3 x) (qfac x x).
+Lemma conj7: forall (lf2 : natural) (x : natural), @eq natural (mult (fac x) x) lf2.
+Lemma conj8: forall (x : natural), @eq natural (mult (fac x) x) (qfac x x).
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 16 seconds
+Valid:
+Lemma conj8: forall (x : natural), @eq natural (mult (fac x) x) (qfac x x).
+
+Invalid:
+Lemma conj7: forall (lf2 : natural) (x : natural), @eq natural (mult (fac x) x) lf2.
+Lemma conj4: forall (x : natural) (lf3 : natural), @eq natural (mult lf3 x) (qfac x x).
+Lemma conj3: forall (lf2 : natural) (x : natural) (lf3 : natural), @eq natural (mult lf3 x) lf2.
+Lemma conj2: forall (x : natural) (lf1 : natural), @eq natural lf1 (qfac x x).
+Lemma conj1: forall (lf2 : natural) (lf1 : natural), @eq natural lf1 lf2.
+
+<---ADD IMPLICATIONS--->
+Time elapsed: 30 seconds
+Generalizations:
+Lemma conj7: forall (lf2 : natural) (x : natural), @eq natural (mult (fac x) x) lf2.
+Lemma conj4: forall (x : natural) (lf3 : natural), @eq natural (mult lf3 x) (qfac x x).
+Lemma conj4_imp: forall (x : natural) (lf3 : natural), forall _ : @eq natural lf3 (qfac x (Succ Zero)),
+@eq natural (mult lf3 x) (qfac x x).
+Lemma conj3: forall (lf2 : natural) (x : natural) (lf3 : natural), @eq natural (mult lf3 x) lf2.
+Lemma conj3_imp: forall (lf2 : natural) (x : natural) (lf3 : natural), forall _ : @eq natural lf3 (qfac x (Succ Zero)), @eq natural (mult lf3 x) lf2.
+Lemma conj2: forall (x : natural) (lf1 : natural), @eq natural lf1 (qfac x x).
+Lemma conj1: forall (lf2 : natural) (lf1 : natural), @eq natural lf1 lf2.
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 46 seconds
+Valid:
+Lemma conj4_imp: forall (x : natural) (lf3 : natural), forall _ : @eq natural lf3 (qfac x (Succ Zero)),
+@eq natural (mult lf3 x) (qfac x x).
+
+Invalid:
+Lemma conj1: forall (lf2 : natural) (lf1 : natural), @eq natural lf1 lf2.
+Lemma conj2: forall (x : natural) (lf1 : natural), @eq natural lf1 (qfac x x).
+Lemma conj3_imp: forall (lf2 : natural) (x : natural) (lf3 : natural), forall _ : @eq natural lf3 (qfac x (Succ Zero)), @eq natural (mult lf3 x) lf2.
+Lemma conj3: forall (lf2 : natural) (x : natural) (lf3 : natural), @eq natural (mult lf3 x) lf2.
+Lemma conj4: forall (x : natural) (lf3 : natural), @eq natural (mult lf3 x) (qfac x x).
+Lemma conj7: forall (lf2 : natural) (x : natural), @eq natural (mult (fac x) x) lf2.
+
+
+<---CREATE SKETCHES--->
+Time elapsed: 46 seconds
+Sketches:
+Sketch conj2_sketch0 : @eq natural lf1 (##hole##)
+Sketch conj2_term_sketch0 : @eq natural (qfac x x) (##hole##)
+Sketch conj3_imp_sketch0 : forall _ : @eq natural lf3 (##hole##), @eq natural (mult lf3 x) lf2
+Sketch conj3_imp_sketch1 : forall _ : @eq natural lf3 (qfac x (Succ Zero)), @eq natural (##hole##) lf2
+Sketch conj3_imp_sketch2 : forall _ : @eq natural lf3 (qfac x (Succ (##hole##))),
+@eq natural (mult lf3 x) lf2
+Sketch conj3_imp_sketch3 : forall _ : @eq natural lf3 (qfac x (##hole##)), @eq natural (mult lf3 x) lf2
+Sketch conj3_imp_term_sketch0 : @eq natural (qfac x (Succ Zero)) (##hole##)
+Sketch conj3_imp_term_sketch1 : @eq natural (mult lf3 x) (##hole##)
+Sketch conj3_imp_term_sketch2 : @eq natural Zero (##hole##)
+Sketch conj3_imp_term_sketch3 : @eq natural (Succ Zero) (##hole##)
+Sketch conj3_sketch0 : @eq natural (##hole##) lf2
+Sketch conj3_term_sketch0 : @eq natural (mult lf3 x) (##hole##)
+Sketch conj4_sketch0 : @eq natural (##hole##) (qfac x x)
+Sketch conj4_sketch1 : @eq natural (mult lf3 x) (##hole##)
+Sketch conj4_term_sketch0 : @eq natural (mult lf3 x) (##hole##)
+Sketch conj4_term_sketch1 : @eq natural (qfac x x) (##hole##)
+Sketch conj7_sketch0 : @eq natural (##hole##) lf2
+Sketch conj7_sketch1 : @eq natural (mult (##hole##) x) lf2
+Sketch conj7_term_sketch0 : @eq natural (mult (fac x) x) (##hole##)
+Sketch conj7_term_sketch1 : @eq natural (fac x) (##hole##)
+
+
+<---CREATE SYNTHESIS PROBLEMS--->
+Time elapsed: 54 seconds
+Problems per Sketch:
+Sketch conj3_imp_term_sketch0 --> Problem  synth_6
+Sketch conj7_sketch1 --> Problem  synth_11
+Sketch conj3_imp_sketch3 --> Problem  synth_5
+Sketch conj3_term_sketch0 --> Problem  synth_7
+Sketch conj3_imp_term_sketch2 --> Problem  synth_8
+Sketch conj3_imp_term_sketch1 --> Problem  synth_7
+Sketch conj3_imp_term_sketch3 --> Problem  synth_9
+Sketch conj3_imp_sketch1 --> Problem  synth_4
+Sketch conj3_imp_sketch0 --> Problem  synth_3
+Sketch conj7_term_sketch0 --> Problem  synth_2
+Sketch conj7_sketch0 --> Problem  synth_10
+Sketch conj4_sketch0 --> Problem  synth_2
+Sketch conj4_sketch1 --> Problem  synth_7
+Sketch conj4_term_sketch1 --> Problem  synth_2
+Sketch conj2_term_sketch0 --> Problem  synth_2
+Sketch conj3_sketch0 --> Problem  synth_10
+Sketch conj7_term_sketch1 --> Problem  synth_6
+Sketch conj4_term_sketch0 --> Problem  synth_7
+Sketch conj3_imp_sketch2 --> Problem  synth_4
+Sketch conj2_sketch0 --> Problem  synth_1
+
+
+<--- SYNTHESIS PROBLEM RESULTS--->
+Time elapsed: 85 seconds
+
+Problem: synth_10
+ plus lf2 lf2
+ mult lf2 Zero
+ qfac lf2 Zero
+ plus lf2 Zero
+ lf2
+ Zero
+
+Problem: synth_8
+ Zero
+
+Problem: synth_3
+ qfac lf2 lf3
+ plus lf2 lf3
+ plus lf3 lf2
+ plus lf3 Zero
+ fac x
+ lf3
+
+Problem: synth_9
+ Succ Zero
+
+Problem: synth_6
+ fac (plus x Zero)
+ plus (fac x) Zero
+ qfac x (fac x)
+ qfac x (Succ x)
+ qfac x (Succ Zero)
+ fac x
+
+Problem: synth_11
+ plus lf2 (fac x)
+ qfac x (Succ x)
+ qfac x (fac lf2)
+ qfac x (Succ lf2)
+ qfac x (Succ Zero)
+ fac x
+
+Problem: synth_7
+ qfac x x
+ mult lf3 Zero
+ qfac lf3 Zero
+ mult x Zero
+ qfac x Zero
+ Zero
+
+Problem: synth_5
+ plus lf2 (Succ lf2)
+ qfac lf2 (Succ Zero)
+ plus lf2 (Succ Zero)
+ fac lf2
+ Succ lf2
+ Succ Zero
+
+Problem: synth_4
+ qfac x Zero
+ mult lf2 Zero
+ qfac lf2 Zero
+ plus lf2 Zero
+ lf2
+ Zero
+
+Problem: synth_1
+ plus lf1 lf1
+ mult lf1 Zero
+ qfac lf1 Zero
+ plus lf1 Zero
+ lf1
+ Zero
+
+Problem: synth_2
+ mult x (fac x)
+ mult (fac x) x
+ qfac x x
+ mult x Zero
+ qfac x Zero
+ Zero
+
+<---INITIAL CANDIDATE LEMMAS--->
+Time elapsed: 85 seconds
+Lemmas:
+Lemma candidate_1: forall (x : natural), @eq natural (mult (fac x) x) (qfac x x).
+Lemma candidate_2: forall (lf3 : natural) (x : natural), forall _ : @eq natural lf3 (qfac x (Succ Zero)), @eq natural (mult lf3 x) (qfac x x).
+Lemma candidate_3: forall (lf1 : natural), @eq natural lf1 (plus lf1 lf1).
+Lemma candidate_4: forall (lf1 : natural), @eq natural lf1 (mult lf1 Zero).
+Lemma candidate_5: forall (lf1 : natural), @eq natural lf1 (qfac lf1 Zero).
+Lemma candidate_6: forall (lf1 : natural), @eq natural lf1 (plus lf1 Zero).
+Lemma candidate_7: forall (lf1 : natural), @eq natural lf1 (lf1).
+Lemma candidate_8: forall (lf1 : natural), @eq natural lf1 (Zero).
+Lemma candidate_9: forall (x : natural), @eq natural (qfac x x) (mult x (fac x)).
+Lemma candidate_10: forall (x : natural), @eq natural (qfac x x) (mult (fac x) x).
+Lemma candidate_11: forall (x : natural), @eq natural (qfac x x) (qfac x x).
+Lemma candidate_12: forall (x : natural), @eq natural (qfac x x) (mult x Zero).
+Lemma candidate_13: forall (x : natural), @eq natural (qfac x x) (qfac x Zero).
+Lemma candidate_14: forall (x : natural), @eq natural (qfac x x) (Zero).
+Lemma candidate_15: forall (lf3 : natural) (x : natural) (lf2 : natural), forall _ : @eq natural lf3 (qfac lf2 lf3), @eq natural (mult lf3 x) lf2.
+Lemma candidate_16: forall (lf3 : natural) (x : natural) (lf2 : natural), forall _ : @eq natural lf3 (plus lf2 lf3), @eq natural (mult lf3 x) lf2.
+Lemma candidate_17: forall (lf3 : natural) (x : natural) (lf2 : natural), forall _ : @eq natural lf3 (plus lf3 lf2), @eq natural (mult lf3 x) lf2.
+Lemma candidate_18: forall (lf3 : natural) (x : natural) (lf2 : natural), forall _ : @eq natural lf3 (plus lf3 Zero), @eq natural (mult lf3 x) lf2.
+Lemma candidate_19: forall (lf3 : natural) (x : natural) (lf2 : natural), forall _ : @eq natural lf3 (fac x), @eq natural (mult lf3 x) lf2.
+Lemma candidate_20: forall (lf3 : natural) (x : natural) (lf2 : natural), forall _ : @eq natural lf3 (lf3), @eq natural (mult lf3 x) lf2.
+Lemma candidate_21: forall (lf3 : natural) (x : natural) (lf2 : natural), forall _ : @eq natural lf3 (qfac x (Succ Zero)), @eq natural (qfac x Zero) lf2.
+Lemma candidate_22: forall (lf3 : natural) (x : natural) (lf2 : natural), forall _ : @eq natural lf3 (qfac x (Succ Zero)), @eq natural (mult lf2 Zero) lf2.
+Lemma candidate_23: forall (lf3 : natural) (x : natural) (lf2 : natural), forall _ : @eq natural lf3 (qfac x (Succ Zero)), @eq natural (qfac lf2 Zero) lf2.
+Lemma candidate_24: forall (lf3 : natural) (x : natural) (lf2 : natural), forall _ : @eq natural lf3 (qfac x (Succ Zero)), @eq natural (plus lf2 Zero) lf2.
+Lemma candidate_25: forall (lf3 : natural) (x : natural) (lf2 : natural), forall _ : @eq natural lf3 (qfac x (Succ Zero)), @eq natural (lf2) lf2.
+Lemma candidate_26: forall (lf3 : natural) (x : natural) (lf2 : natural), forall _ : @eq natural lf3 (qfac x (Succ Zero)), @eq natural (Zero) lf2.
+Lemma candidate_27: forall (lf3 : natural) (x : natural) (lf2 : natural), forall _ : @eq natural lf3 (qfac x (Succ (qfac x Zero))), @eq natural (mult lf3 x) lf2.
+Lemma candidate_28: forall (lf3 : natural) (x : natural) (lf2 : natural), forall _ : @eq natural lf3 (qfac x (Succ (mult lf2 Zero))), @eq natural (mult lf3 x) lf2.
+Lemma candidate_29: forall (lf3 : natural) (x : natural) (lf2 : natural), forall _ : @eq natural lf3 (qfac x (Succ (qfac lf2 Zero))), @eq natural (mult lf3 x) lf2.
+Lemma candidate_30: forall (lf3 : natural) (x : natural) (lf2 : natural), forall _ : @eq natural lf3 (qfac x (Succ (plus lf2 Zero))), @eq natural (mult lf3 x) lf2.
+Lemma candidate_31: forall (lf3 : natural) (x : natural) (lf2 : natural), forall _ : @eq natural lf3 (qfac x (Succ (lf2))), @eq natural (mult lf3 x) lf2.
+Lemma candidate_32: forall (lf3 : natural) (x : natural) (lf2 : natural), forall _ : @eq natural lf3 (qfac x (Succ (Zero))), @eq natural (mult lf3 x) lf2.
+Lemma candidate_33: forall (lf3 : natural) (x : natural) (lf2 : natural), forall _ : @eq natural lf3 (qfac x (plus lf2 (Succ lf2))), @eq natural (mult lf3 x) lf2.
+Lemma candidate_34: forall (lf3 : natural) (x : natural) (lf2 : natural), forall _ : @eq natural lf3 (qfac x (qfac lf2 (Succ Zero))), @eq natural (mult lf3 x) lf2.
+Lemma candidate_35: forall (lf3 : natural) (x : natural) (lf2 : natural), forall _ : @eq natural lf3 (qfac x (plus lf2 (Succ Zero))), @eq natural (mult lf3 x) lf2.
+Lemma candidate_36: forall (lf3 : natural) (x : natural) (lf2 : natural), forall _ : @eq natural lf3 (qfac x (fac lf2)), @eq natural (mult lf3 x) lf2.
+Lemma candidate_37: forall (lf3 : natural) (x : natural) (lf2 : natural), forall _ : @eq natural lf3 (qfac x (Succ lf2)), @eq natural (mult lf3 x) lf2.
+Lemma candidate_38: forall (lf3 : natural) (x : natural) (lf2 : natural), forall _ : @eq natural lf3 (qfac x (Succ Zero)), @eq natural (mult lf3 x) lf2.
+Lemma candidate_39: forall (x : natural), @eq natural (qfac x (Succ Zero)) (fac (plus x Zero)).
+Lemma candidate_40: forall (x : natural), @eq natural (qfac x (Succ Zero)) (plus (fac x) Zero).
+Lemma candidate_41: forall (x : natural), @eq natural (qfac x (Succ Zero)) (qfac x (fac x)).
+Lemma candidate_42: forall (x : natural), @eq natural (qfac x (Succ Zero)) (qfac x (Succ x)).
+Lemma candidate_43: forall (x : natural), @eq natural (qfac x (Succ Zero)) (qfac x (Succ Zero)).
+Lemma candidate_44: forall (x : natural), @eq natural (qfac x (Succ Zero)) (fac x).
+Lemma candidate_45: forall (lf3 : natural) (x : natural), @eq natural (mult lf3 x) (qfac x x).
+Lemma candidate_46: forall (lf3 : natural) (x : natural), @eq natural (mult lf3 x) (mult lf3 Zero).
+Lemma candidate_47: forall (lf3 : natural) (x : natural), @eq natural (mult lf3 x) (qfac lf3 Zero).
+Lemma candidate_48: forall (lf3 : natural) (x : natural), @eq natural (mult lf3 x) (mult x Zero).
+Lemma candidate_49: forall (lf3 : natural) (x : natural), @eq natural (mult lf3 x) (qfac x Zero).
+Lemma candidate_50: forall (lf3 : natural) (x : natural), @eq natural (mult lf3 x) (Zero).
+Lemma candidate_51: @eq natural Zero (Zero).
+Lemma candidate_52: @eq natural (Succ Zero) (Succ Zero).
+Lemma candidate_53: forall (lf2 : natural), @eq natural (plus lf2 lf2) lf2.
+Lemma candidate_54: forall (lf2 : natural), @eq natural (mult lf2 Zero) lf2.
+Lemma candidate_55: forall (lf2 : natural), @eq natural (qfac lf2 Zero) lf2.
+Lemma candidate_56: forall (lf2 : natural), @eq natural (plus lf2 Zero) lf2.
+Lemma candidate_57: forall (lf2 : natural), @eq natural (lf2) lf2.
+Lemma candidate_58: forall (lf2 : natural), @eq natural (Zero) lf2.
+Lemma candidate_59: forall (lf3 : natural) (x : natural), @eq natural (mult lf3 x) (qfac x x).
+Lemma candidate_60: forall (lf3 : natural) (x : natural), @eq natural (mult lf3 x) (mult lf3 Zero).
+Lemma candidate_61: forall (lf3 : natural) (x : natural), @eq natural (mult lf3 x) (qfac lf3 Zero).
+Lemma candidate_62: forall (lf3 : natural) (x : natural), @eq natural (mult lf3 x) (mult x Zero).
+Lemma candidate_63: forall (lf3 : natural) (x : natural), @eq natural (mult lf3 x) (qfac x Zero).
+Lemma candidate_64: forall (lf3 : natural) (x : natural), @eq natural (mult lf3 x) (Zero).
+Lemma candidate_65: forall (x : natural), @eq natural (mult x (fac x)) (qfac x x).
+Lemma candidate_66: forall (x : natural), @eq natural (mult (fac x) x) (qfac x x).
+Lemma candidate_67: forall (x : natural), @eq natural (qfac x x) (qfac x x).
+Lemma candidate_68: forall (x : natural), @eq natural (mult x Zero) (qfac x x).
+Lemma candidate_69: forall (x : natural), @eq natural (qfac x Zero) (qfac x x).
+Lemma candidate_70: forall (x : natural), @eq natural (Zero) (qfac x x).
+Lemma candidate_71: forall (lf3 : natural) (x : natural), @eq natural (mult lf3 x) (qfac x x).
+Lemma candidate_72: forall (lf3 : natural) (x : natural), @eq natural (mult lf3 x) (mult lf3 Zero).
+Lemma candidate_73: forall (lf3 : natural) (x : natural), @eq natural (mult lf3 x) (qfac lf3 Zero).
+Lemma candidate_74: forall (lf3 : natural) (x : natural), @eq natural (mult lf3 x) (mult x Zero).
+Lemma candidate_75: forall (lf3 : natural) (x : natural), @eq natural (mult lf3 x) (qfac x Zero).
+Lemma candidate_76: forall (lf3 : natural) (x : natural), @eq natural (mult lf3 x) (Zero).
+Lemma candidate_77: forall (lf3 : natural) (x : natural), @eq natural (mult lf3 x) (qfac x x).
+Lemma candidate_78: forall (lf3 : natural) (x : natural), @eq natural (mult lf3 x) (mult lf3 Zero).
+Lemma candidate_79: forall (lf3 : natural) (x : natural), @eq natural (mult lf3 x) (qfac lf3 Zero).
+Lemma candidate_80: forall (lf3 : natural) (x : natural), @eq natural (mult lf3 x) (mult x Zero).
+Lemma candidate_81: forall (lf3 : natural) (x : natural), @eq natural (mult lf3 x) (qfac x Zero).
+Lemma candidate_82: forall (lf3 : natural) (x : natural), @eq natural (mult lf3 x) (Zero).
+Lemma candidate_83: forall (x : natural), @eq natural (qfac x x) (mult x (fac x)).
+Lemma candidate_84: forall (x : natural), @eq natural (qfac x x) (mult (fac x) x).
+Lemma candidate_85: forall (x : natural), @eq natural (qfac x x) (qfac x x).
+Lemma candidate_86: forall (x : natural), @eq natural (qfac x x) (mult x Zero).
+Lemma candidate_87: forall (x : natural), @eq natural (qfac x x) (qfac x Zero).
+Lemma candidate_88: forall (x : natural), @eq natural (qfac x x) (Zero).
+Lemma candidate_89: forall (lf2 : natural), @eq natural (plus lf2 lf2) lf2.
+Lemma candidate_90: forall (lf2 : natural), @eq natural (mult lf2 Zero) lf2.
+Lemma candidate_91: forall (lf2 : natural), @eq natural (qfac lf2 Zero) lf2.
+Lemma candidate_92: forall (lf2 : natural), @eq natural (plus lf2 Zero) lf2.
+Lemma candidate_93: forall (lf2 : natural), @eq natural (lf2) lf2.
+Lemma candidate_94: forall (lf2 : natural), @eq natural (Zero) lf2.
+Lemma candidate_95: forall (x : natural) (lf2 : natural), @eq natural (mult (plus lf2 (fac x)) x) lf2.
+Lemma candidate_96: forall (x : natural) (lf2 : natural), @eq natural (mult (qfac x (Succ x)) x) lf2.
+Lemma candidate_97: forall (x : natural) (lf2 : natural), @eq natural (mult (qfac x (fac lf2)) x) lf2.
+Lemma candidate_98: forall (x : natural) (lf2 : natural), @eq natural (mult (qfac x (Succ lf2)) x) lf2.
+Lemma candidate_99: forall (x : natural) (lf2 : natural), @eq natural (mult (qfac x (Succ Zero)) x) lf2.
+Lemma candidate_100: forall (x : natural) (lf2 : natural), @eq natural (mult (fac x) x) lf2.
+Lemma candidate_101: forall (x : natural), @eq natural (mult (fac x) x) (mult x (fac x)).
+Lemma candidate_102: forall (x : natural), @eq natural (mult (fac x) x) (mult (fac x) x).
+Lemma candidate_103: forall (x : natural), @eq natural (mult (fac x) x) (qfac x x).
+Lemma candidate_104: forall (x : natural), @eq natural (mult (fac x) x) (mult x Zero).
+Lemma candidate_105: forall (x : natural), @eq natural (mult (fac x) x) (qfac x Zero).
+Lemma candidate_106: forall (x : natural), @eq natural (mult (fac x) x) (Zero).
+Lemma candidate_107: forall (x : natural), @eq natural (fac x) (fac (plus x Zero)).
+Lemma candidate_108: forall (x : natural), @eq natural (fac x) (plus (fac x) Zero).
+Lemma candidate_109: forall (x : natural), @eq natural (fac x) (qfac x (fac x)).
+Lemma candidate_110: forall (x : natural), @eq natural (fac x) (qfac x (Succ x)).
+Lemma candidate_111: forall (x : natural), @eq natural (fac x) (qfac x (Succ Zero)).
+Lemma candidate_112: forall (x : natural), @eq natural (fac x) (fac x).
+
+<---FILTERED CANDIDATE LEMMAS--->
+Time elapsed: 283 seconds
+Duplicates removed: 34
+Filtered by Quickchick: 42
+Filtered by script: 11
+Remaining: 25
+
+Lemmas: 
+Lemma candidate_70: forall (x : natural), @eq natural (Zero) (qfac x x).
+Lemma candidate_14: forall (x : natural), @eq natural (qfac x x) (Zero).
+Lemma candidate_56: forall (lf2 : natural), @eq natural (plus lf2 Zero) lf2.
+Lemma candidate_6: forall (lf1 : natural), @eq natural lf1 (plus lf1 Zero).
+Lemma candidate_106: forall (x : natural), @eq natural (mult (fac x) x) (Zero).
+Lemma candidate_109: forall (x : natural), @eq natural (fac x) (qfac x (fac x)).
+Lemma candidate_69: forall (x : natural), @eq natural (qfac x Zero) (qfac x x).
+Lemma candidate_68: forall (x : natural), @eq natural (mult x Zero) (qfac x x).
+Lemma candidate_13: forall (x : natural), @eq natural (qfac x x) (qfac x Zero).
+Lemma candidate_12: forall (x : natural), @eq natural (qfac x x) (mult x Zero).
+Lemma candidate_110: forall (x : natural), @eq natural (fac x) (qfac x (Succ x)).
+Lemma candidate_108: forall (x : natural), @eq natural (fac x) (plus (fac x) Zero).
+Lemma candidate_107: forall (x : natural), @eq natural (fac x) (fac (plus x Zero)).
+Lemma candidate_65: forall (x : natural), @eq natural (mult x (fac x)) (qfac x x).
+Lemma candidate_10: forall (x : natural), @eq natural (qfac x x) (mult (fac x) x).
+Lemma candidate_9: forall (x : natural), @eq natural (qfac x x) (mult x (fac x)).
+Lemma candidate_105: forall (x : natural), @eq natural (mult (fac x) x) (qfac x Zero).
+Lemma candidate_104: forall (x : natural), @eq natural (mult (fac x) x) (mult x Zero).
+Lemma candidate_101: forall (x : natural), @eq natural (mult (fac x) x) (mult x (fac x)).
+Lemma candidate_41: forall (x : natural), @eq natural (qfac x (Succ Zero)) (qfac x (fac x)).
+Lemma candidate_42: forall (x : natural), @eq natural (qfac x (Succ Zero)) (qfac x (Succ x)).
+Lemma candidate_40: forall (x : natural), @eq natural (qfac x (Succ Zero)) (plus (fac x) Zero).
+Lemma candidate_39: forall (x : natural), @eq natural (qfac x (Succ Zero)) (fac (plus x Zero)).
+Lemma candidate_24: forall (lf3 : natural) (x : natural) (lf2 : natural), forall _ : @eq natural lf3 (qfac x (Succ Zero)), @eq natural (plus lf2 Zero) lf2.
+Lemma candidate_2: forall (lf3 : natural) (x : natural), forall _ : @eq natural lf3 (qfac x (Succ Zero)), @eq natural (mult lf3 x) (qfac x x).
