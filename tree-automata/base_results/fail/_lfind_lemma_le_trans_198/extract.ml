@@ -3,7 +3,7 @@
   let values = ref SS.empty
     
   let write_to_file value=
-    let oc = open_out_gen [Open_append; Open_creat] 0o777 "/home/anabrendel/lfind/benchmarks/tree-automata/_lfind_lemma_le_trans_198/examples_base.txt" in
+    let oc = open_out_gen [Open_append; Open_creat] 0o777 "/home/anabrendel/lfind/benchmarks/tree-automata/base_tests/_lfind_lemma_le_trans_198/examples_base.txt" in
     if not(SS.mem value !values) then 
       (
         values := SS.add value !values;
