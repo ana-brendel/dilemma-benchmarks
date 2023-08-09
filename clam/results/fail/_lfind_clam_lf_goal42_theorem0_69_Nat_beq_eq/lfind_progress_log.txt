@@ -69,7 +69,7 @@ lst_union  : forall (_ : lst) (_ : lst), lst
 lst_mem  : forall (_ : natural) (_ : lst), bool
 
 <---GENERALIZATION--->
-Time elapsed: 1 seconds
+Time elapsed: 155 seconds
 Generalized Variables:
 lf1 : bool = lst_mem x z
 lf2 : bool = true
@@ -82,7 +82,7 @@ Lemma conj4: forall (x : natural) (z : lst), @eq bool (lst_mem x z) true.
 
 
 <---VALIDITY CHECKS--->
-Time elapsed: 9 seconds
+Time elapsed: 183 seconds
 Valid:
 
 Invalid:
@@ -92,7 +92,7 @@ Lemma conj2: forall (lf1 : bool), @eq bool lf1 true.
 Lemma conj1: forall (lf2 : bool) (lf1 : bool), @eq bool lf1 lf2.
 
 <---ADD IMPLICATIONS--->
-Time elapsed: 16 seconds
+Time elapsed: 190 seconds
 Generalizations:
 Lemma conj4: forall (x : natural) (z : lst), @eq bool (lst_mem x z) true.
 Lemma conj3: forall (lf2 : bool) (x : natural) (z : lst), @eq bool (lst_mem x z) lf2.
@@ -101,7 +101,7 @@ Lemma conj1: forall (lf2 : bool) (lf1 : bool), @eq bool lf1 lf2.
 
 
 <---VALIDITY CHECKS--->
-Time elapsed: 22 seconds
+Time elapsed: 196 seconds
 Valid:
 
 Invalid:
@@ -112,7 +112,7 @@ Lemma conj4: forall (x : natural) (z : lst), @eq bool (lst_mem x z) true.
 
 
 <---CREATE SKETCHES--->
-Time elapsed: 22 seconds
+Time elapsed: 197 seconds
 Sketches:
 Sketch conj2_sketch0 : @eq bool lf1 (##hole##)
 Sketch conj2_term_sketch0 : @eq bool true (##hole##)
@@ -125,81 +125,75 @@ Sketch conj4_term_sketch1 : @eq bool true (##hole##)
 
 
 <---CREATE SYNTHESIS PROBLEMS--->
-Time elapsed: 27 seconds
+Time elapsed: 285 seconds
 Problems per Sketch:
 Sketch conj4_term_sketch1 --> Problem  synth_2
 Sketch conj2_term_sketch0 --> Problem  synth_2
 Sketch conj3_sketch0 --> Problem  synth_3
 Sketch conj3_term_sketch0 --> Problem  synth_4
 Sketch conj4_term_sketch0 --> Problem  synth_4
-Sketch conj4_sketch0 --> Problem  synth_5
+Sketch conj4_sketch0 --> Problem  synth_2
 Sketch conj2_sketch0 --> Problem  synth_1
-Sketch conj4_sketch1 --> Problem  synth_6
+Sketch conj4_sketch1 --> Problem  synth_4
 
 
 <--- SYNTHESIS PROBLEM RESULTS--->
-Time elapsed: 89 seconds
+Time elapsed: 332 seconds
 
 Problem: synth_3
- false
-
-Problem: synth_6
- orb match x with | Succ _ => false | Zero => true end false
- orb (lfeqb x Zero) false
- lfeqb x x
- match x with | Succ _ => false | Zero => true end
- lfeqb x Zero
+ lf2
  true
 
-Problem: synth_5
- false
-
 Problem: synth_4
- lfeqb x (Succ Zero)
+ lst_mem x (lst_union z Nil)
+ orb (lfeqb x x) false
  lst_mem x z
- lst_mem Zero z
  mem z x
- mem z Zero
- false
+ lfeqb x x
+ true
 
 Problem: synth_1
+ lf1
  true
 
 Problem: synth_2
  true
 
 <---INITIAL CANDIDATE LEMMAS--->
-Time elapsed: 90 seconds
+Time elapsed: 332 seconds
 Lemmas:
-Lemma candidate_1: forall (lf1 : bool), @eq bool lf1 (true).
-Lemma candidate_2: @eq bool true (true).
-Lemma candidate_3: forall (lf2 : bool), @eq bool (false) lf2.
-Lemma candidate_4: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (lfeqb x (Succ Zero)).
-Lemma candidate_5: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (lst_mem x z).
-Lemma candidate_6: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (lst_mem Zero z).
-Lemma candidate_7: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (mem z x).
-Lemma candidate_8: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (mem z Zero).
-Lemma candidate_9: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (false).
-Lemma candidate_10: @eq bool (false) true.
-Lemma candidate_11: forall (z : lst) (x : natural), @eq bool (lst_mem x z)   (orb match x with | Succ _ => false | Zero => true end false).
-Lemma candidate_12: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (orb (lfeqb x Zero) false).
-Lemma candidate_13: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (lfeqb x x).
-Lemma candidate_14: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (match x with | Succ _ => false | Zero => true end).
-Lemma candidate_15: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (lfeqb x Zero).
-Lemma candidate_16: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (true).
-Lemma candidate_17: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (lfeqb x (Succ Zero)).
-Lemma candidate_18: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (lst_mem x z).
-Lemma candidate_19: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (lst_mem Zero z).
-Lemma candidate_20: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (mem z x).
-Lemma candidate_21: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (mem z Zero).
-Lemma candidate_22: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (false).
-Lemma candidate_23: @eq bool true (true).
+Lemma candidate_1: forall (lf1 : bool), @eq bool lf1 (lf1).
+Lemma candidate_2: forall (lf1 : bool), @eq bool lf1 (true).
+Lemma candidate_3: @eq bool true (true).
+Lemma candidate_4: forall (lf2 : bool), @eq bool (lf2) lf2.
+Lemma candidate_5: forall (lf2 : bool), @eq bool (true) lf2.
+Lemma candidate_6: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (lst_mem x (lst_union z Nil)).
+Lemma candidate_7: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (orb (lfeqb x x) false).
+Lemma candidate_8: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (lst_mem x z).
+Lemma candidate_9: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (mem z x).
+Lemma candidate_10: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (lfeqb x x).
+Lemma candidate_11: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (true).
+Lemma candidate_12: @eq bool (true) true.
+Lemma candidate_13: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (lst_mem x (lst_union z Nil)).
+Lemma candidate_14: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (orb (lfeqb x x) false).
+Lemma candidate_15: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (lst_mem x z).
+Lemma candidate_16: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (mem z x).
+Lemma candidate_17: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (lfeqb x x).
+Lemma candidate_18: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (true).
+Lemma candidate_19: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (lst_mem x (lst_union z Nil)).
+Lemma candidate_20: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (orb (lfeqb x x) false).
+Lemma candidate_21: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (lst_mem x z).
+Lemma candidate_22: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (mem z x).
+Lemma candidate_23: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (lfeqb x x).
+Lemma candidate_24: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (true).
+Lemma candidate_25: @eq bool true (true).
 
 <---FILTERED CANDIDATE LEMMAS--->
-Time elapsed: 115 seconds
-Duplicates removed: 7
-Filtered by Quickchick: 13
-Filtered by script: 3
-Remaining: 0
+Time elapsed: 360 seconds
+Duplicates removed: 13
+Filtered by Quickchick: 5
+Filtered by script: 6
+Remaining: 1
 
 Lemmas: 
+Lemma candidate_6: forall (z : lst) (x : natural), @eq bool (lst_mem x z) (lst_mem x (lst_union z Nil)).

@@ -1,13 +1,13 @@
 LFind Results
 LFind Directory: /home/anabrendel/lfind/benchmarks/clam/sources/_lfind_clam_lf_goal50_count_insort_diff_163_count_cons_diff
 
-Number of Lemmas: 278
-Number of Lemmas (after duplicates removed): 157
-Number of Lemmas (after QuickChick used to filter): 12
-* Number of Candidate Lemmas: 7
+Number of Lemmas: 304
+Number of Lemmas (after duplicates removed): 145
+Number of Lemmas (after QuickChick used to filter): 41
+* Number of Candidate Lemmas: 23
 
-Time until ranking: 420
-Time to complete: 885
+Time until ranking: 3066
+Time to complete: 4677
 
 Stuck state true independent of hypotheses: false
 
@@ -16,20 +16,36 @@ Count = 0
 
 
 Category 2:
-Count = 2
+Count = 1
 
-Lemma candidate_196: forall (l : lst) (y : natural) (lf4 : lst) (x : natural), forall   _ : and (@eq natural (count lf4 x) (count l x)) (not (@eq natural x y)), @eq natural (count (Cons y lf4) x) (count l x).
-Lemma candidate_194: forall (l : lst) (y : natural) (lf4 : lst) (x : natural), forall   _ : and (@eq natural (count (lf4) x) (count l x)) (not (@eq natural x y)), @eq natural (count (Cons y lf4) x) (count l x).
+Lemma candidate_89: forall (l : lst) (y : natural) (x : natural), @eq natural (count (insort l y) x)   (if lfeqb x y then Succ (count l x) else count l x).
 
 Category 3 (provable):
-Count = 0
+Count = 1
 
+Lemma candidate_82: forall (n : natural) (x : natural), @eq bool (lfeqb x n) (lfeqb n x).
 
 Category 3 (not provable):
-Count = 5
+Count = 21
 
-Lemma candidate_9: forall (x : natural) (lf2 : lst), @eq natural (count lf2 x) (count (sort lf2) x).
-Lemma candidate_193: forall (l : lst) (y : natural) (lf4 : lst) (x : natural), forall   _ : and (@eq natural (count (sort lf4) x) (count l x))         (not (@eq natural x y)), @eq natural (count (Cons y lf4) x) (count l x).
-Lemma candidate_189: forall (l : lst) (y : natural) (lf4 : lst) (x : natural), forall   _ : and (@eq natural (count (insort l x) x) (count l x))         (not (@eq natural x y)), @eq natural (count (Cons y lf4) x) (count l x).
-Lemma candidate_1: forall (lf3 : natural) (n : natural) (l : lst) (y : natural) (x : natural), forall   _ : and (@eq bool (lfeqb x n) false)         (and (@eq bool (less y n) true)            (and (@eq natural (count (insort l y) x) lf3)               (not (@eq natural x y)))), @eq natural (count (Cons y (Cons n l)) x) lf3.
-Lemma candidate_2: forall (n : natural) (l : lst) (y : natural) (x : natural), forall   _ : and (@eq bool (lfeqb x n) false)         (and (@eq bool (less y n) true)            (and (@eq natural (count (insort l y) x) (count l x))               (not (@eq natural x y)))), @eq natural (count (Cons y (Cons n l)) x) (count l x).
+Lemma candidate_131: forall (l : lst) (x : natural), @eq natural (count (sort l) x) (count l x).
+Lemma candidate_119: forall (l : lst) (x : natural), @eq natural (count l x) (count (sort l) x).
+Lemma candidate_11: forall (x : natural) (lf2 : lst), @eq natural (count lf2 x) (count (sort lf2) x).
+Lemma candidate_130: forall (l : lst) (x : natural), @eq natural (count (sort (sort l)) x) (count l x).
+Lemma candidate_118: forall (l : lst) (x : natural), @eq natural (count l x) (count (sort (sort l)) x).
+Lemma candidate_129: forall (l : lst) (x : natural), @eq natural (count (insort l (Succ x)) x) (count l x).
+Lemma candidate_117: forall (l : lst) (x : natural), @eq natural (count l x) (count (insort l (Succ x)) x).
+Lemma candidate_10: forall (x : natural) (lf2 : lst), @eq natural (count lf2 x) (count (sort (sort lf2)) x).
+Lemma candidate_127: forall (l : lst) (x : natural), @eq natural (count (sort (sort (sort l))) x) (count l x).
+Lemma candidate_115: forall (l : lst) (x : natural), @eq natural (count l x) (count (sort (sort (sort l))) x).
+Lemma candidate_9: forall (x : natural) (lf2 : lst), @eq natural (count lf2 x) (count (insort lf2 (Succ x)) x).
+Lemma candidate_20: forall (y : natural) (lf4 : lst) (x : natural), @eq natural (count (Cons y lf4) x) (count (insort lf4 y) x).
+Lemma candidate_7: forall (x : natural) (lf2 : lst), @eq natural (count lf2 x) (count (sort (sort (sort lf2))) x).
+Lemma candidate_128: forall (l : lst) (x : natural), @eq natural (if lfeqb x (Succ x) then Succ (count l x) else count l x)   (count l x).
+Lemma candidate_116: forall (l : lst) (x : natural), @eq natural (count l x)   (if lfeqb x (Succ x) then Succ (count l x) else count l x).
+Lemma candidate_8: forall (x : natural) (lf2 : lst), @eq natural (count lf2 x)   (if lfeqb x (Succ x) then Succ (count lf2 x) else count lf2 x).
+Lemma candidate_149: forall (l : lst) (y : natural) (x : natural), forall   _ : forall _ : not (@eq natural x y),       @eq natural (count (insort l y) x) (count l x), @eq natural (count (sort l) x) (count l x).
+Lemma candidate_146: forall (l : lst) (y : natural) (x : natural), forall   _ : forall _ : not (@eq natural x y),       @eq natural (count (insort l y) x) (count l x), @eq natural (count (sort (sort l)) x) (count l x).
+Lemma candidate_145: forall (l : lst) (y : natural) (x : natural), forall   _ : forall _ : not (@eq natural x y),       @eq natural (count (insort l y) x) (count l x), @eq natural (count (insort l (Succ x)) x) (count l x).
+Lemma candidate_152: forall (l : lst) (y : natural) (lf4 : lst) (x : natural), forall   _ : forall _ : not (@eq natural x y),       @eq natural (count (insort l y) x) (count (insort lf4 y) x), @eq natural (count (Cons y lf4) x) (count (insort lf4 y) x).
+Lemma candidate_219: forall (n : natural) (l : lst) (y : natural) (x : natural), forall   _ : forall (_ : not (@eq natural x y))         (_ : @eq natural (count (insort l y) x) (count l x))         (_ : @eq bool (less y n) true), @eq bool (lfeqb x n) false, @eq natural (count (sort l) x) (count l x).
