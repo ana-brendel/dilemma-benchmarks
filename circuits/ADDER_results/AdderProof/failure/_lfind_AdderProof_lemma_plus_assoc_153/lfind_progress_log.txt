@@ -1,0 +1,1521 @@
+File Information
+- File name: AdderProof
+- Original Directory: /home/anabrendel/lfind/benchmarks/circuits/ADDER_tests/AdderProof/AdderProof_lemma_plus_assoc_153
+- LFind Directory: /home/anabrendel/lfind/benchmarks/circuits/ADDER_tests/AdderProof/_lfind_AdderProof_lemma_plus_assoc_153
+- Namespace: Circuits
+- Proof name: BV_full_adder_ok
+- Theorem: Theorem BV_full_adder_ok: forall (v0 w0 : BV) (cin0 : bool),
+@eq nat (BV_to_nat (BV_full_adder v0 w0 cin0))
+  (Nat.add (Nat.add (BV_to_nat v0) (BV_to_nat w0)) (bool_to_nat cin0)).
+- Declarations: 
+From lfind Require Import LFind.
+From CircuitsCoqGym Require Import Adder. 
+
+Proof Context
+* Goal State: @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0))))
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l))
+        (Nat.add (BV_to_nat l0) (BV_to_nat l0))))
+
+* Hypothesis:
+H0 : forall cin0 : bool,
+@eq nat
+  (BV_to_nat
+     (appbv (BV_full_adder_sum (@cons bool a l) l0 cin0)
+        (consbv (BV_full_adder_carry (@cons bool a l) l0 cin0) nilbv)))
+  (Nat.add (Nat.add (BV_to_nat (@cons bool a l)) (BV_to_nat l0))
+     (bool_to_nat cin0))
+cin : bool
+l0 : list bool
+a0 : bool
+v : BV
+w : BV
+l : list bool
+a : bool
+
+* Types:
+Set
+list bool
+BV
+Prop
+bool
+nat
+
+* Polymorphic Types:
+list bool
+
+* Variables:
+l0 : list bool
+l : list bool
+a : bool
+
+* Terms:
+BV_full_adder_sum (@cons bool a l) l0 _UNBOUND_REL_1 : BV
+BV_full_adder_carry (@cons bool a l) l0 _UNBOUND_REL_1 : bool
+consbv (BV_full_adder_carry (@cons bool a l) l0 _UNBOUND_REL_1) nilbv : BV
+BV_to_nat l0 : nat
+S
+  (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l))
+     (Nat.add (BV_to_nat l0) (BV_to_nat l0))) : nat
+bool_to_nat _UNBOUND_REL_1 : nat
+@cons bool a l : list bool
+nilbv : BV
+forall cin0 : bool,
+@eq nat
+  (BV_to_nat
+     (appbv (BV_full_adder_sum (@cons bool a l) l0 cin0)
+        (consbv (BV_full_adder_carry (@cons bool a l) l0 cin0) nilbv)))
+  (Nat.add (Nat.add (BV_to_nat (@cons bool a l)) (BV_to_nat l0))
+     (bool_to_nat cin0)) : Prop
+Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l))
+  (Nat.add (BV_to_nat l0) (BV_to_nat l0)) : nat
+l : list bool
+@eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0))))
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l))
+        (Nat.add (BV_to_nat l0) (BV_to_nat l0)))) : Prop
+appbv (BV_full_adder_sum (@cons bool a l) l0 _UNBOUND_REL_1)
+  (consbv (BV_full_adder_carry (@cons bool a l) l0 _UNBOUND_REL_1) nilbv) : BV
+BV_to_nat
+  (appbv (BV_full_adder_sum (@cons bool a l) l0 _UNBOUND_REL_1)
+     (consbv (BV_full_adder_carry (@cons bool a l) l0 _UNBOUND_REL_1) nilbv)) : nat
+Nat.add (BV_to_nat (@cons bool a l)) (BV_to_nat l0) : nat
+Nat.add (BV_to_nat l) (BV_to_nat l0) : nat
+@eq nat
+  (BV_to_nat
+     (appbv (BV_full_adder_sum (@cons bool a l) l0 _UNBOUND_REL_1)
+        (consbv (BV_full_adder_carry (@cons bool a l) l0 _UNBOUND_REL_1)
+           nilbv)))
+  (Nat.add (Nat.add (BV_to_nat (@cons bool a l)) (BV_to_nat l0))
+     (bool_to_nat _UNBOUND_REL_1)) : Prop
+Nat.add (Nat.add (BV_to_nat (@cons bool a l)) (BV_to_nat l0))
+  (bool_to_nat _UNBOUND_REL_1) : nat
+nat : Set
+bool : Set
+l0 : list bool
+Nat.add (BV_to_nat l0) (BV_to_nat l0) : nat
+Nat.add (BV_to_nat l) (BV_to_nat l) : nat
+S
+  (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+     (Nat.add (BV_to_nat l) (BV_to_nat l0))) : nat
+BV_to_nat (@cons bool a l) : nat
+BV : Set
+list bool : Set
+a : bool
+BV_to_nat l : nat
+Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+  (Nat.add (BV_to_nat l) (BV_to_nat l0)) : nat
+
+* Functions:
+appbv  : forall (_ : BV) (_ : BV), BV
+BV_full_adder_carry  : forall (_ : list bool) (_ : list bool) (_ : bool), bool
+bool_to_nat  : forall _ : bool, nat
+Nat.add  : forall (_ : nat) (_ : nat), nat
+list  : forall _ : Type, Type
+consbv  : forall (_ : bool) (_ : BV), BV
+S  : forall _ : nat, nat
+@cons  : forall (A : Type) (_ : A) (_ : list A), list A
+@eq  : forall (A : Type) (_ : A) (_ : A), Prop
+BV_full_adder_sum  : forall (_ : list bool) (_ : list bool) (_ : bool), BV
+BV_to_nat  : forall _ : BV, nat
+
+<---GENERALIZATION--->
+Time elapsed: 3 seconds
+Generalized Variables:
+lf3 : nat = Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l))
+  (Nat.add (BV_to_nat l0) (BV_to_nat l0))
+lf7 : nat = Nat.add (BV_to_nat l) (BV_to_nat l)
+lf1 : nat = S
+  (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l))
+     (Nat.add (BV_to_nat l0) (BV_to_nat l0)))
+lf4 : nat = Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+  (Nat.add (BV_to_nat l) (BV_to_nat l0))
+lf5 : nat = Nat.add (BV_to_nat l0) (BV_to_nat l0)
+lf9 : nat = BV_to_nat l
+lf2 : nat = S
+  (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+     (Nat.add (BV_to_nat l) (BV_to_nat l0)))
+lf8 : nat = BV_to_nat l0
+lf6 : nat = Nat.add (BV_to_nat l) (BV_to_nat l0)
+
+Generalizations:
+Lemma conj1: forall (lf6 : nat) (lf5 : nat) (lf7 : nat), @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add lf7 lf5)).
+Lemma conj2: forall (lf8 : nat) (lf9 : nat) (lf5 : nat) (lf7 : nat), @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8)))
+  (S (Nat.add lf7 lf5)).
+Lemma conj4: forall (lf9 : nat) (lf5 : nat) (l0 : list bool) (lf7 : nat), @eq nat
+  (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))
+  (S (Nat.add lf7 lf5)).
+Lemma conj10: forall (lf8 : nat) (lf5 : nat) (lf7 : nat) (l : list bool), @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))
+  (S (Nat.add lf7 lf5)).
+Lemma conj12: forall (lf5 : nat) (l0 : list bool) (lf7 : nat) (l : list bool), @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0)))) (S (Nat.add lf7 lf5)).
+Lemma conj17: forall (lf8 : nat) (lf6 : nat) (lf7 : nat), @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add lf7 (Nat.add lf8 lf8))).
+Lemma conj18: forall (lf8 : nat) (lf9 : nat) (lf7 : nat), @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8)))
+  (S (Nat.add lf7 (Nat.add lf8 lf8))).
+Lemma conj19: forall (lf6 : nat) (l0 : list bool) (lf7 : nat), @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+Lemma conj20: forall (lf9 : nat) (l0 : list bool) (lf7 : nat), @eq nat
+  (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))
+  (S (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+Lemma conj26: forall (lf8 : nat) (lf7 : nat) (l : list bool), @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))
+  (S (Nat.add lf7 (Nat.add lf8 lf8))).
+Lemma conj28: forall (l0 : list bool) (lf7 : nat) (l : list bool), @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0))))
+  (S (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+Lemma conj129: forall (lf6 : nat) (lf9 : nat) (lf5 : nat), @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add (Nat.add lf9 lf9) lf5)).
+Lemma conj130: forall (lf8 : nat) (lf9 : nat) (lf5 : nat), @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8)))
+  (S (Nat.add (Nat.add lf9 lf9) lf5)).
+Lemma conj132: forall (lf9 : nat) (lf5 : nat) (l0 : list bool), @eq nat
+  (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))
+  (S (Nat.add (Nat.add lf9 lf9) lf5)).
+Lemma conj137: forall (lf6 : nat) (lf5 : nat) (l : list bool), @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5)).
+Lemma conj138: forall (lf8 : nat) (lf5 : nat) (l : list bool), @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5)).
+Lemma conj140: forall (lf5 : nat) (l0 : list bool) (l : list bool), @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0))))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5)).
+Lemma conj145: forall (lf8 : nat) (lf6 : nat) (lf9 : nat), @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add (Nat.add lf9 lf9) (Nat.add lf8 lf8))).
+Lemma conj146: forall (lf8 : nat) (lf9 : nat), @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8)))
+  (S (Nat.add (Nat.add lf9 lf9) (Nat.add lf8 lf8))).
+Lemma conj147: forall (lf6 : nat) (lf9 : nat) (l0 : list bool), @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add (Nat.add lf9 lf9) (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+Lemma conj148: forall (lf9 : nat) (l0 : list bool), @eq nat
+  (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))
+  (S (Nat.add (Nat.add lf9 lf9) (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+Lemma conj153: forall (lf8 : nat) (lf6 : nat) (l : list bool), @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) (Nat.add lf8 lf8))).
+Lemma conj154: forall (lf8 : nat) (l : list bool), @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) (Nat.add lf8 lf8))).
+Lemma conj155: forall (lf6 : nat) (l0 : list bool) (l : list bool), @eq nat (S (Nat.add lf6 lf6))
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l))
+        (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+Lemma conj156: forall (l0 : list bool) (l : list bool), @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0))))
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l))
+        (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 91 seconds
+Valid:
+Lemma conj156: forall (l0 : list bool) (l : list bool), @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0))))
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l))
+        (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+Lemma conj154: forall (lf8 : nat) (l : list bool), @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) (Nat.add lf8 lf8))).
+Lemma conj148: forall (lf9 : nat) (l0 : list bool), @eq nat
+  (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))
+  (S (Nat.add (Nat.add lf9 lf9) (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+Lemma conj146: forall (lf8 : nat) (lf9 : nat), @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8)))
+  (S (Nat.add (Nat.add lf9 lf9) (Nat.add lf8 lf8))).
+
+Invalid:
+Lemma conj155: forall (lf6 : nat) (l0 : list bool) (l : list bool), @eq nat (S (Nat.add lf6 lf6))
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l))
+        (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+Lemma conj153: forall (lf8 : nat) (lf6 : nat) (l : list bool), @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) (Nat.add lf8 lf8))).
+Lemma conj147: forall (lf6 : nat) (lf9 : nat) (l0 : list bool), @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add (Nat.add lf9 lf9) (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+Lemma conj145: forall (lf8 : nat) (lf6 : nat) (lf9 : nat), @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add (Nat.add lf9 lf9) (Nat.add lf8 lf8))).
+Lemma conj140: forall (lf5 : nat) (l0 : list bool) (l : list bool), @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0))))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5)).
+Lemma conj138: forall (lf8 : nat) (lf5 : nat) (l : list bool), @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5)).
+Lemma conj137: forall (lf6 : nat) (lf5 : nat) (l : list bool), @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5)).
+Lemma conj132: forall (lf9 : nat) (lf5 : nat) (l0 : list bool), @eq nat
+  (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))
+  (S (Nat.add (Nat.add lf9 lf9) lf5)).
+Lemma conj130: forall (lf8 : nat) (lf9 : nat) (lf5 : nat), @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8)))
+  (S (Nat.add (Nat.add lf9 lf9) lf5)).
+Lemma conj129: forall (lf6 : nat) (lf9 : nat) (lf5 : nat), @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add (Nat.add lf9 lf9) lf5)).
+Lemma conj28: forall (l0 : list bool) (lf7 : nat) (l : list bool), @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0))))
+  (S (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+Lemma conj26: forall (lf8 : nat) (lf7 : nat) (l : list bool), @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))
+  (S (Nat.add lf7 (Nat.add lf8 lf8))).
+Lemma conj20: forall (lf9 : nat) (l0 : list bool) (lf7 : nat), @eq nat
+  (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))
+  (S (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+Lemma conj19: forall (lf6 : nat) (l0 : list bool) (lf7 : nat), @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+Lemma conj18: forall (lf8 : nat) (lf9 : nat) (lf7 : nat), @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8)))
+  (S (Nat.add lf7 (Nat.add lf8 lf8))).
+Lemma conj17: forall (lf8 : nat) (lf6 : nat) (lf7 : nat), @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add lf7 (Nat.add lf8 lf8))).
+Lemma conj12: forall (lf5 : nat) (l0 : list bool) (lf7 : nat) (l : list bool), @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0)))) (S (Nat.add lf7 lf5)).
+Lemma conj10: forall (lf8 : nat) (lf5 : nat) (lf7 : nat) (l : list bool), @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))
+  (S (Nat.add lf7 lf5)).
+Lemma conj4: forall (lf9 : nat) (lf5 : nat) (l0 : list bool) (lf7 : nat), @eq nat
+  (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))
+  (S (Nat.add lf7 lf5)).
+Lemma conj2: forall (lf8 : nat) (lf9 : nat) (lf5 : nat) (lf7 : nat), @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8)))
+  (S (Nat.add lf7 lf5)).
+Lemma conj1: forall (lf6 : nat) (lf5 : nat) (lf7 : nat), @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add lf7 lf5)).
+
+<---ADD IMPLICATIONS--->
+Time elapsed: 103 seconds
+Generalizations:
+Lemma conj155: forall (lf6 : nat) (l0 : list bool) (l : list bool), @eq nat (S (Nat.add lf6 lf6))
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l))
+        (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+Lemma conj153: forall (lf8 : nat) (lf6 : nat) (l : list bool), @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) (Nat.add lf8 lf8))).
+Lemma conj147: forall (lf6 : nat) (lf9 : nat) (l0 : list bool), @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add (Nat.add lf9 lf9) (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+Lemma conj145: forall (lf8 : nat) (lf6 : nat) (lf9 : nat), @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add (Nat.add lf9 lf9) (Nat.add lf8 lf8))).
+Lemma conj140: forall (lf5 : nat) (l0 : list bool) (l : list bool), @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0))))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5)).
+Lemma conj138: forall (lf8 : nat) (lf5 : nat) (l : list bool), @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5)).
+Lemma conj137: forall (lf6 : nat) (lf5 : nat) (l : list bool), @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5)).
+Lemma conj132: forall (lf9 : nat) (lf5 : nat) (l0 : list bool), @eq nat
+  (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))
+  (S (Nat.add (Nat.add lf9 lf9) lf5)).
+Lemma conj130: forall (lf8 : nat) (lf9 : nat) (lf5 : nat), @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8)))
+  (S (Nat.add (Nat.add lf9 lf9) lf5)).
+Lemma conj129: forall (lf6 : nat) (lf9 : nat) (lf5 : nat), @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add (Nat.add lf9 lf9) lf5)).
+Lemma conj28: forall (l0 : list bool) (lf7 : nat) (l : list bool), @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0))))
+  (S (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+Lemma conj26: forall (lf8 : nat) (lf7 : nat) (l : list bool), @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))
+  (S (Nat.add lf7 (Nat.add lf8 lf8))).
+Lemma conj20: forall (lf9 : nat) (l0 : list bool) (lf7 : nat), @eq nat
+  (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))
+  (S (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+Lemma conj19: forall (lf6 : nat) (l0 : list bool) (lf7 : nat), @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+Lemma conj18: forall (lf8 : nat) (lf9 : nat) (lf7 : nat), @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8)))
+  (S (Nat.add lf7 (Nat.add lf8 lf8))).
+Lemma conj17: forall (lf8 : nat) (lf6 : nat) (lf7 : nat), @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add lf7 (Nat.add lf8 lf8))).
+Lemma conj12: forall (lf5 : nat) (l0 : list bool) (lf7 : nat) (l : list bool), @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0)))) (S (Nat.add lf7 lf5)).
+Lemma conj10: forall (lf8 : nat) (lf5 : nat) (lf7 : nat) (l : list bool), @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))
+  (S (Nat.add lf7 lf5)).
+Lemma conj4: forall (lf9 : nat) (lf5 : nat) (l0 : list bool) (lf7 : nat), @eq nat
+  (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))
+  (S (Nat.add lf7 lf5)).
+Lemma conj2: forall (lf8 : nat) (lf9 : nat) (lf5 : nat) (lf7 : nat), @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8)))
+  (S (Nat.add lf7 lf5)).
+Lemma conj1: forall (lf6 : nat) (lf5 : nat) (lf7 : nat), @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add lf7 lf5)).
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 134 seconds
+Valid:
+
+Invalid:
+Lemma conj1: forall (lf6 : nat) (lf5 : nat) (lf7 : nat), @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add lf7 lf5)).
+Lemma conj2: forall (lf8 : nat) (lf9 : nat) (lf5 : nat) (lf7 : nat), @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8)))
+  (S (Nat.add lf7 lf5)).
+Lemma conj4: forall (lf9 : nat) (lf5 : nat) (l0 : list bool) (lf7 : nat), @eq nat
+  (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))
+  (S (Nat.add lf7 lf5)).
+Lemma conj10: forall (lf8 : nat) (lf5 : nat) (lf7 : nat) (l : list bool), @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))
+  (S (Nat.add lf7 lf5)).
+Lemma conj12: forall (lf5 : nat) (l0 : list bool) (lf7 : nat) (l : list bool), @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0)))) (S (Nat.add lf7 lf5)).
+Lemma conj17: forall (lf8 : nat) (lf6 : nat) (lf7 : nat), @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add lf7 (Nat.add lf8 lf8))).
+Lemma conj18: forall (lf8 : nat) (lf9 : nat) (lf7 : nat), @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8)))
+  (S (Nat.add lf7 (Nat.add lf8 lf8))).
+Lemma conj19: forall (lf6 : nat) (l0 : list bool) (lf7 : nat), @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+Lemma conj20: forall (lf9 : nat) (l0 : list bool) (lf7 : nat), @eq nat
+  (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))
+  (S (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+Lemma conj26: forall (lf8 : nat) (lf7 : nat) (l : list bool), @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))
+  (S (Nat.add lf7 (Nat.add lf8 lf8))).
+Lemma conj28: forall (l0 : list bool) (lf7 : nat) (l : list bool), @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0))))
+  (S (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+Lemma conj129: forall (lf6 : nat) (lf9 : nat) (lf5 : nat), @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add (Nat.add lf9 lf9) lf5)).
+Lemma conj130: forall (lf8 : nat) (lf9 : nat) (lf5 : nat), @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8)))
+  (S (Nat.add (Nat.add lf9 lf9) lf5)).
+Lemma conj132: forall (lf9 : nat) (lf5 : nat) (l0 : list bool), @eq nat
+  (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))
+  (S (Nat.add (Nat.add lf9 lf9) lf5)).
+Lemma conj137: forall (lf6 : nat) (lf5 : nat) (l : list bool), @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5)).
+Lemma conj138: forall (lf8 : nat) (lf5 : nat) (l : list bool), @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5)).
+Lemma conj140: forall (lf5 : nat) (l0 : list bool) (l : list bool), @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0))))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5)).
+Lemma conj145: forall (lf8 : nat) (lf6 : nat) (lf9 : nat), @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add (Nat.add lf9 lf9) (Nat.add lf8 lf8))).
+Lemma conj147: forall (lf6 : nat) (lf9 : nat) (l0 : list bool), @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add (Nat.add lf9 lf9) (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+Lemma conj153: forall (lf8 : nat) (lf6 : nat) (l : list bool), @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) (Nat.add lf8 lf8))).
+Lemma conj155: forall (lf6 : nat) (l0 : list bool) (l : list bool), @eq nat (S (Nat.add lf6 lf6))
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l))
+        (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+
+
+<---CREATE SKETCHES--->
+Time elapsed: 134 seconds
+Sketches:
+Sketch conj1_sketch0 : @eq nat (S (Nat.add lf6 lf6)) (S (##hole##))
+Sketch conj1_sketch1 : @eq nat (S (##hole##)) (S (Nat.add lf7 lf5))
+Sketch conj1_sketch2 : @eq nat (##hole##) (S (Nat.add lf7 lf5))
+Sketch conj1_sketch3 : @eq nat (S (Nat.add lf6 lf6)) (##hole##)
+Sketch conj1_term_sketch0 : @eq nat (Nat.add lf7 lf5) (##hole##)
+Sketch conj1_term_sketch1 : @eq nat (Nat.add lf6 lf6) (##hole##)
+Sketch conj1_term_sketch2 : @eq nat (S (Nat.add lf6 lf6)) (##hole##)
+Sketch conj1_term_sketch3 : @eq nat (S (Nat.add lf7 lf5)) (##hole##)
+Sketch conj2_sketch0 : @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8))) (S (##hole##))
+Sketch conj2_sketch1 : @eq nat (##hole##) (S (Nat.add lf7 lf5))
+Sketch conj2_sketch2 : @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8))) (##hole##)
+Sketch conj2_sketch3 : @eq nat (S (##hole##)) (S (Nat.add lf7 lf5))
+Sketch conj2_sketch4 : @eq nat (S (Nat.add (##hole##) (##hole##))) (S (Nat.add lf7 lf5))
+Sketch conj2_term_sketch0 : @eq nat (Nat.add lf7 lf5) (##hole##)
+Sketch conj2_term_sketch1 : @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8))) (##hole##)
+Sketch conj2_term_sketch2 : @eq nat (S (Nat.add lf7 lf5)) (##hole##)
+Sketch conj2_term_sketch3 : @eq nat (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8)) (##hole##)
+Sketch conj2_term_sketch4 : @eq nat (Nat.add lf9 lf8) (##hole##)
+Sketch conj4_sketch0 : @eq nat
+  (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))
+  (S (##hole##))
+Sketch conj4_sketch1 : @eq nat (##hole##) (S (Nat.add lf7 lf5))
+Sketch conj4_sketch2 : @eq nat (S (Nat.add (Nat.add lf9 (##hole##)) (Nat.add lf9 (##hole##))))
+  (S (Nat.add lf7 lf5))
+Sketch conj4_sketch3 : @eq nat (S (Nat.add (##hole##) (##hole##))) (S (Nat.add lf7 lf5))
+Sketch conj4_sketch4 : @eq nat
+  (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))
+  (##hole##)
+Sketch conj4_sketch5 : @eq nat (S (##hole##)) (S (Nat.add lf7 lf5))
+Sketch conj4_term_sketch0 : @eq nat (Nat.add lf7 lf5) (##hole##)
+Sketch conj4_term_sketch1 : @eq nat
+  (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))
+  (##hole##)
+Sketch conj4_term_sketch2 : @eq nat (BV_to_nat l0) (##hole##)
+Sketch conj4_term_sketch3 : @eq nat (Nat.add lf9 (BV_to_nat l0)) (##hole##)
+Sketch conj4_term_sketch4 : @eq nat (S (Nat.add lf7 lf5)) (##hole##)
+Sketch conj4_term_sketch5 : @eq nat (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0)))
+  (##hole##)
+Sketch conj10_sketch0 : @eq nat (S (Nat.add (##hole##) (##hole##))) (S (Nat.add lf7 lf5))
+Sketch conj10_sketch1 : @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))
+  (S (##hole##))
+Sketch conj10_sketch2 : @eq nat (S (##hole##)) (S (Nat.add lf7 lf5))
+Sketch conj10_sketch3 : @eq nat (##hole##) (S (Nat.add lf7 lf5))
+Sketch conj10_sketch4 : @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))
+  (##hole##)
+Sketch conj10_sketch5 : @eq nat (S (Nat.add (Nat.add (##hole##) lf8) (Nat.add (##hole##) lf8)))
+  (S (Nat.add lf7 lf5))
+Sketch conj10_term_sketch0 : @eq nat (Nat.add (BV_to_nat l) lf8) (##hole##)
+Sketch conj10_term_sketch1 : @eq nat (Nat.add lf7 lf5) (##hole##)
+Sketch conj10_term_sketch2 : @eq nat (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8))
+  (##hole##)
+Sketch conj10_term_sketch3 : @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))
+  (##hole##)
+Sketch conj10_term_sketch4 : @eq nat (S (Nat.add lf7 lf5)) (##hole##)
+Sketch conj10_term_sketch5 : @eq nat (BV_to_nat l) (##hole##)
+Sketch conj12_sketch0 : @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0)))) (S (##hole##))
+Sketch conj12_sketch1 : @eq nat (S (Nat.add (##hole##) (##hole##))) (S (Nat.add lf7 lf5))
+Sketch conj12_sketch2 : @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (##hole##))
+        (Nat.add (BV_to_nat l) (##hole##)))) (S (Nat.add lf7 lf5))
+Sketch conj12_sketch3 : @eq nat (##hole##) (S (Nat.add lf7 lf5))
+Sketch conj12_sketch4 : @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0)))) (##hole##)
+Sketch conj12_sketch5 : @eq nat
+  (S
+     (Nat.add (Nat.add (##hole##) (BV_to_nat l0))
+        (Nat.add (##hole##) (BV_to_nat l0)))) (S (Nat.add lf7 lf5))
+Sketch conj12_sketch6 : @eq nat (S (##hole##)) (S (Nat.add lf7 lf5))
+Sketch conj12_term_sketch0 : @eq nat (Nat.add lf7 lf5) (##hole##)
+Sketch conj12_term_sketch1 : @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l0)) (##hole##)
+Sketch conj12_term_sketch2 : @eq nat (BV_to_nat l0) (##hole##)
+Sketch conj12_term_sketch3 : @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0)))) (##hole##)
+Sketch conj12_term_sketch4 : @eq nat (S (Nat.add lf7 lf5)) (##hole##)
+Sketch conj12_term_sketch5 : @eq nat (BV_to_nat l) (##hole##)
+Sketch conj12_term_sketch6 : @eq nat
+  (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+     (Nat.add (BV_to_nat l) (BV_to_nat l0))) (##hole##)
+Sketch conj17_sketch0 : @eq nat (S (Nat.add lf6 lf6)) (S (##hole##))
+Sketch conj17_sketch1 : @eq nat (S (Nat.add lf6 lf6)) (##hole##)
+Sketch conj17_sketch2 : @eq nat (S (##hole##)) (S (Nat.add lf7 (Nat.add lf8 lf8)))
+Sketch conj17_sketch3 : @eq nat (##hole##) (S (Nat.add lf7 (Nat.add lf8 lf8)))
+Sketch conj17_sketch4 : @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add lf7 (##hole##)))
+Sketch conj17_term_sketch0 : @eq nat (Nat.add lf7 (Nat.add lf8 lf8)) (##hole##)
+Sketch conj17_term_sketch1 : @eq nat (S (Nat.add lf7 (Nat.add lf8 lf8))) (##hole##)
+Sketch conj17_term_sketch2 : @eq nat (Nat.add lf6 lf6) (##hole##)
+Sketch conj17_term_sketch3 : @eq nat (S (Nat.add lf6 lf6)) (##hole##)
+Sketch conj17_term_sketch4 : @eq nat (Nat.add lf8 lf8) (##hole##)
+Sketch conj18_sketch0 : @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8))) (S (##hole##))
+Sketch conj18_sketch1 : @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8))) (##hole##)
+Sketch conj18_sketch2 : @eq nat (##hole##) (S (Nat.add lf7 (Nat.add lf8 lf8)))
+Sketch conj18_sketch3 : @eq nat (S (##hole##)) (S (Nat.add lf7 (Nat.add lf8 lf8)))
+Sketch conj18_sketch4 : @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8)))
+  (S (Nat.add lf7 (##hole##)))
+Sketch conj18_sketch5 : @eq nat (S (Nat.add (##hole##) (##hole##)))
+  (S (Nat.add lf7 (Nat.add lf8 lf8)))
+Sketch conj18_term_sketch0 : @eq nat (Nat.add lf7 (Nat.add lf8 lf8)) (##hole##)
+Sketch conj18_term_sketch1 : @eq nat (S (Nat.add lf7 (Nat.add lf8 lf8))) (##hole##)
+Sketch conj18_term_sketch2 : @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8))) (##hole##)
+Sketch conj18_term_sketch3 : @eq nat (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8)) (##hole##)
+Sketch conj18_term_sketch4 : @eq nat (Nat.add lf8 lf8) (##hole##)
+Sketch conj18_term_sketch5 : @eq nat (Nat.add lf9 lf8) (##hole##)
+Sketch conj19_sketch0 : @eq nat (S (Nat.add lf6 lf6)) (##hole##)
+Sketch conj19_sketch1 : @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add lf7 (##hole##)))
+Sketch conj19_sketch2 : @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add lf7 (Nat.add (##hole##) (##hole##))))
+Sketch conj19_sketch3 : @eq nat (S (Nat.add lf6 lf6)) (S (##hole##))
+Sketch conj19_sketch4 : @eq nat (S (##hole##))
+  (S (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0))))
+Sketch conj19_sketch5 : @eq nat (##hole##) (S (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0))))
+Sketch conj19_term_sketch0 : @eq nat (S (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0)))) (##hole##)
+Sketch conj19_term_sketch1 : @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0)) (##hole##)
+Sketch conj19_term_sketch2 : @eq nat (BV_to_nat l0) (##hole##)
+Sketch conj19_term_sketch3 : @eq nat (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0))) (##hole##)
+Sketch conj19_term_sketch4 : @eq nat (Nat.add lf6 lf6) (##hole##)
+Sketch conj19_term_sketch5 : @eq nat (S (Nat.add lf6 lf6)) (##hole##)
+Sketch conj20_sketch0 : @eq nat (##hole##) (S (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0))))
+Sketch conj20_sketch1 : @eq nat
+  (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))
+  (##hole##)
+Sketch conj20_sketch2 : @eq nat
+  (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))
+  (S (Nat.add lf7 (##hole##)))
+Sketch conj20_sketch3 : @eq nat (S (Nat.add (Nat.add lf9 (##hole##)) (Nat.add lf9 (##hole##))))
+  (S (Nat.add lf7 (Nat.add (##hole##) (##hole##))))
+Sketch conj20_sketch4 : @eq nat (S (Nat.add (##hole##) (##hole##)))
+  (S (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0))))
+Sketch conj20_sketch5 : @eq nat
+  (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))
+  (S (##hole##))
+Sketch conj20_sketch6 : @eq nat (S (##hole##))
+  (S (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0))))
+Sketch conj20_term_sketch0 : @eq nat
+  (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))
+  (##hole##)
+Sketch conj20_term_sketch1 : @eq nat (S (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0)))) (##hole##)
+Sketch conj20_term_sketch2 : @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0)) (##hole##)
+Sketch conj20_term_sketch3 : @eq nat (BV_to_nat l0) (##hole##)
+Sketch conj20_term_sketch4 : @eq nat (Nat.add lf9 (BV_to_nat l0)) (##hole##)
+Sketch conj20_term_sketch5 : @eq nat (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0))) (##hole##)
+Sketch conj20_term_sketch6 : @eq nat (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0)))
+  (##hole##)
+Sketch conj26_sketch0 : @eq nat (S (Nat.add (##hole##) (##hole##)))
+  (S (Nat.add lf7 (Nat.add lf8 lf8)))
+Sketch conj26_sketch1 : @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))
+  (S (##hole##))
+Sketch conj26_sketch2 : @eq nat (S (##hole##)) (S (Nat.add lf7 (Nat.add lf8 lf8)))
+Sketch conj26_sketch3 : @eq nat (##hole##) (S (Nat.add lf7 (Nat.add lf8 lf8)))
+Sketch conj26_sketch4 : @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))
+  (##hole##)
+Sketch conj26_sketch5 : @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))
+  (S (Nat.add lf7 (##hole##)))
+Sketch conj26_sketch6 : @eq nat (S (Nat.add (Nat.add (##hole##) lf8) (Nat.add (##hole##) lf8)))
+  (S (Nat.add lf7 (Nat.add lf8 lf8)))
+Sketch conj26_term_sketch0 : @eq nat (Nat.add (BV_to_nat l) lf8) (##hole##)
+Sketch conj26_term_sketch1 : @eq nat (Nat.add lf7 (Nat.add lf8 lf8)) (##hole##)
+Sketch conj26_term_sketch2 : @eq nat (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8))
+  (##hole##)
+Sketch conj26_term_sketch3 : @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))
+  (##hole##)
+Sketch conj26_term_sketch4 : @eq nat (S (Nat.add lf7 (Nat.add lf8 lf8))) (##hole##)
+Sketch conj26_term_sketch5 : @eq nat (Nat.add lf8 lf8) (##hole##)
+Sketch conj26_term_sketch6 : @eq nat (BV_to_nat l) (##hole##)
+Sketch conj28_sketch0 : @eq nat (S (Nat.add (##hole##) (##hole##)))
+  (S (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0))))
+Sketch conj28_sketch1 : @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0)))) (##hole##)
+Sketch conj28_sketch2 : @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0)))) (S (Nat.add lf7 (##hole##)))
+Sketch conj28_sketch3 : @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (##hole##))
+        (Nat.add (BV_to_nat l) (##hole##))))
+  (S (Nat.add lf7 (Nat.add (##hole##) (##hole##))))
+Sketch conj28_sketch4 : @eq nat (##hole##) (S (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0))))
+Sketch conj28_sketch5 : @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0)))) (S (##hole##))
+Sketch conj28_sketch6 : @eq nat
+  (S
+     (Nat.add (Nat.add (##hole##) (BV_to_nat l0))
+        (Nat.add (##hole##) (BV_to_nat l0))))
+  (S (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0))))
+Sketch conj28_sketch7 : @eq nat (S (##hole##))
+  (S (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0))))
+Sketch conj28_term_sketch0 : @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l0)) (##hole##)
+Sketch conj28_term_sketch1 : @eq nat (S (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0)))) (##hole##)
+Sketch conj28_term_sketch2 : @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0)) (##hole##)
+Sketch conj28_term_sketch3 : @eq nat (BV_to_nat l0) (##hole##)
+Sketch conj28_term_sketch4 : @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0)))) (##hole##)
+Sketch conj28_term_sketch5 : @eq nat (Nat.add lf7 (Nat.add (BV_to_nat l0) (BV_to_nat l0))) (##hole##)
+Sketch conj28_term_sketch6 : @eq nat (BV_to_nat l) (##hole##)
+Sketch conj28_term_sketch7 : @eq nat
+  (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+     (Nat.add (BV_to_nat l) (BV_to_nat l0))) (##hole##)
+Sketch conj129_sketch0 : @eq nat (S (Nat.add lf6 lf6)) (S (##hole##))
+Sketch conj129_sketch1 : @eq nat (S (Nat.add lf6 lf6)) (##hole##)
+Sketch conj129_sketch2 : @eq nat (S (##hole##)) (S (Nat.add (Nat.add lf9 lf9) lf5))
+Sketch conj129_sketch3 : @eq nat (##hole##) (S (Nat.add (Nat.add lf9 lf9) lf5))
+Sketch conj129_sketch4 : @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add (##hole##) lf5))
+Sketch conj129_term_sketch0 : @eq nat (Nat.add (Nat.add lf9 lf9) lf5) (##hole##)
+Sketch conj129_term_sketch1 : @eq nat (S (Nat.add (Nat.add lf9 lf9) lf5)) (##hole##)
+Sketch conj129_term_sketch2 : @eq nat (Nat.add lf6 lf6) (##hole##)
+Sketch conj129_term_sketch3 : @eq nat (S (Nat.add lf6 lf6)) (##hole##)
+Sketch conj129_term_sketch4 : @eq nat (Nat.add lf9 lf9) (##hole##)
+Sketch conj130_sketch0 : @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8))) (S (##hole##))
+Sketch conj130_sketch1 : @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8))) (##hole##)
+Sketch conj130_sketch2 : @eq nat (##hole##) (S (Nat.add (Nat.add lf9 lf9) lf5))
+Sketch conj130_sketch3 : @eq nat (S (##hole##)) (S (Nat.add (Nat.add lf9 lf9) lf5))
+Sketch conj130_sketch4 : @eq nat (S (Nat.add (##hole##) (##hole##)))
+  (S (Nat.add (Nat.add lf9 lf9) lf5))
+Sketch conj130_sketch5 : @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8)))
+  (S (Nat.add (##hole##) lf5))
+Sketch conj130_term_sketch0 : @eq nat (Nat.add (Nat.add lf9 lf9) lf5) (##hole##)
+Sketch conj130_term_sketch1 : @eq nat (S (Nat.add (Nat.add lf9 lf9) lf5)) (##hole##)
+Sketch conj130_term_sketch2 : @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8))) (##hole##)
+Sketch conj130_term_sketch3 : @eq nat (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8)) (##hole##)
+Sketch conj130_term_sketch4 : @eq nat (Nat.add lf9 lf8) (##hole##)
+Sketch conj130_term_sketch5 : @eq nat (Nat.add lf9 lf9) (##hole##)
+Sketch conj132_sketch0 : @eq nat
+  (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))
+  (S (##hole##))
+Sketch conj132_sketch1 : @eq nat (##hole##) (S (Nat.add (Nat.add lf9 lf9) lf5))
+Sketch conj132_sketch2 : @eq nat (S (Nat.add (Nat.add lf9 (##hole##)) (Nat.add lf9 (##hole##))))
+  (S (Nat.add (Nat.add lf9 lf9) lf5))
+Sketch conj132_sketch3 : @eq nat (S (Nat.add (##hole##) (##hole##)))
+  (S (Nat.add (Nat.add lf9 lf9) lf5))
+Sketch conj132_sketch4 : @eq nat
+  (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))
+  (##hole##)
+Sketch conj132_sketch5 : @eq nat (S (##hole##)) (S (Nat.add (Nat.add lf9 lf9) lf5))
+Sketch conj132_sketch6 : @eq nat
+  (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))
+  (S (Nat.add (##hole##) lf5))
+Sketch conj132_term_sketch0 : @eq nat (Nat.add (Nat.add lf9 lf9) lf5) (##hole##)
+Sketch conj132_term_sketch1 : @eq nat
+  (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))
+  (##hole##)
+Sketch conj132_term_sketch2 : @eq nat (BV_to_nat l0) (##hole##)
+Sketch conj132_term_sketch3 : @eq nat (Nat.add lf9 (BV_to_nat l0)) (##hole##)
+Sketch conj132_term_sketch4 : @eq nat (S (Nat.add (Nat.add lf9 lf9) lf5)) (##hole##)
+Sketch conj132_term_sketch5 : @eq nat (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0)))
+  (##hole##)
+Sketch conj132_term_sketch6 : @eq nat (Nat.add lf9 lf9) (##hole##)
+Sketch conj137_sketch0 : @eq nat (S (Nat.add lf6 lf6)) (##hole##)
+Sketch conj137_sketch1 : @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add (##hole##) lf5))
+Sketch conj137_sketch2 : @eq nat (S (##hole##))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5))
+Sketch conj137_sketch3 : @eq nat (##hole##) (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5))
+Sketch conj137_sketch4 : @eq nat (S (Nat.add lf6 lf6)) (S (##hole##))
+Sketch conj137_sketch5 : @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add (Nat.add (##hole##) (##hole##)) lf5))
+Sketch conj137_term_sketch0 : @eq nat (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5)) (##hole##)
+Sketch conj137_term_sketch1 : @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l)) (##hole##)
+Sketch conj137_term_sketch2 : @eq nat (Nat.add lf6 lf6) (##hole##)
+Sketch conj137_term_sketch3 : @eq nat (S (Nat.add lf6 lf6)) (##hole##)
+Sketch conj137_term_sketch4 : @eq nat (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5) (##hole##)
+Sketch conj137_term_sketch5 : @eq nat (BV_to_nat l) (##hole##)
+Sketch conj138_sketch0 : @eq nat (S (Nat.add (##hole##) (##hole##)))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5))
+Sketch conj138_sketch1 : @eq nat (S (##hole##))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5))
+Sketch conj138_sketch2 : @eq nat (##hole##) (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5))
+Sketch conj138_sketch3 : @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))
+  (##hole##)
+Sketch conj138_sketch4 : @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))
+  (S (Nat.add (##hole##) lf5))
+Sketch conj138_sketch5 : @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))
+  (S (##hole##))
+Sketch conj138_sketch6 : @eq nat (S (Nat.add (Nat.add (##hole##) lf8) (Nat.add (##hole##) lf8)))
+  (S (Nat.add (Nat.add (##hole##) (##hole##)) lf5))
+Sketch conj138_term_sketch0 : @eq nat (Nat.add (BV_to_nat l) lf8) (##hole##)
+Sketch conj138_term_sketch1 : @eq nat (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8))
+  (##hole##)
+Sketch conj138_term_sketch2 : @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))
+  (##hole##)
+Sketch conj138_term_sketch3 : @eq nat (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5)) (##hole##)
+Sketch conj138_term_sketch4 : @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l)) (##hole##)
+Sketch conj138_term_sketch5 : @eq nat (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5) (##hole##)
+Sketch conj138_term_sketch6 : @eq nat (BV_to_nat l) (##hole##)
+Sketch conj140_sketch0 : @eq nat (S (Nat.add (##hole##) (##hole##)))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5))
+Sketch conj140_sketch1 : @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0)))) (##hole##)
+Sketch conj140_sketch2 : @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0)))) (S (Nat.add (##hole##) lf5))
+Sketch conj140_sketch3 : @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (##hole##))
+        (Nat.add (BV_to_nat l) (##hole##))))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5))
+Sketch conj140_sketch4 : @eq nat (##hole##) (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5))
+Sketch conj140_sketch5 : @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0)))) (S (##hole##))
+Sketch conj140_sketch6 : @eq nat
+  (S
+     (Nat.add (Nat.add (##hole##) (BV_to_nat l0))
+        (Nat.add (##hole##) (BV_to_nat l0))))
+  (S (Nat.add (Nat.add (##hole##) (##hole##)) lf5))
+Sketch conj140_sketch7 : @eq nat (S (##hole##))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5))
+Sketch conj140_term_sketch0 : @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l0)) (##hole##)
+Sketch conj140_term_sketch1 : @eq nat (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5)) (##hole##)
+Sketch conj140_term_sketch2 : @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l)) (##hole##)
+Sketch conj140_term_sketch3 : @eq nat (BV_to_nat l0) (##hole##)
+Sketch conj140_term_sketch4 : @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+        (Nat.add (BV_to_nat l) (BV_to_nat l0)))) (##hole##)
+Sketch conj140_term_sketch5 : @eq nat (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) lf5) (##hole##)
+Sketch conj140_term_sketch6 : @eq nat (BV_to_nat l) (##hole##)
+Sketch conj140_term_sketch7 : @eq nat
+  (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))
+     (Nat.add (BV_to_nat l) (BV_to_nat l0))) (##hole##)
+Sketch conj145_sketch0 : @eq nat (S (Nat.add lf6 lf6)) (S (##hole##))
+Sketch conj145_sketch1 : @eq nat (S (Nat.add lf6 lf6)) (##hole##)
+Sketch conj145_sketch2 : @eq nat (S (##hole##)) (S (Nat.add (Nat.add lf9 lf9) (Nat.add lf8 lf8)))
+Sketch conj145_sketch3 : @eq nat (##hole##) (S (Nat.add (Nat.add lf9 lf9) (Nat.add lf8 lf8)))
+Sketch conj145_sketch4 : @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add (Nat.add lf9 lf9) (##hole##)))
+Sketch conj145_sketch5 : @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add (##hole##) (Nat.add lf8 lf8)))
+Sketch conj145_term_sketch0 : @eq nat (Nat.add (Nat.add lf9 lf9) (Nat.add lf8 lf8)) (##hole##)
+Sketch conj145_term_sketch1 : @eq nat (S (Nat.add (Nat.add lf9 lf9) (Nat.add lf8 lf8))) (##hole##)
+Sketch conj145_term_sketch2 : @eq nat (Nat.add lf6 lf6) (##hole##)
+Sketch conj145_term_sketch3 : @eq nat (S (Nat.add lf6 lf6)) (##hole##)
+Sketch conj145_term_sketch4 : @eq nat (Nat.add lf8 lf8) (##hole##)
+Sketch conj145_term_sketch5 : @eq nat (Nat.add lf9 lf9) (##hole##)
+Sketch conj147_sketch0 : @eq nat (S (Nat.add lf6 lf6)) (##hole##)
+Sketch conj147_sketch1 : @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add (Nat.add lf9 lf9) (##hole##)))
+Sketch conj147_sketch2 : @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add (Nat.add lf9 lf9) (Nat.add (##hole##) (##hole##))))
+Sketch conj147_sketch3 : @eq nat (S (Nat.add lf6 lf6)) (S (##hole##))
+Sketch conj147_sketch4 : @eq nat (S (##hole##))
+  (S (Nat.add (Nat.add lf9 lf9) (Nat.add (BV_to_nat l0) (BV_to_nat l0))))
+Sketch conj147_sketch5 : @eq nat (##hole##)
+  (S (Nat.add (Nat.add lf9 lf9) (Nat.add (BV_to_nat l0) (BV_to_nat l0))))
+Sketch conj147_sketch6 : @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add (##hole##) (Nat.add (BV_to_nat l0) (BV_to_nat l0))))
+Sketch conj147_term_sketch0 : @eq nat
+  (S (Nat.add (Nat.add lf9 lf9) (Nat.add (BV_to_nat l0) (BV_to_nat l0))))
+  (##hole##)
+Sketch conj147_term_sketch1 : @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0)) (##hole##)
+Sketch conj147_term_sketch2 : @eq nat (BV_to_nat l0) (##hole##)
+Sketch conj147_term_sketch3 : @eq nat (Nat.add (Nat.add lf9 lf9) (Nat.add (BV_to_nat l0) (BV_to_nat l0)))
+  (##hole##)
+Sketch conj147_term_sketch4 : @eq nat (Nat.add lf6 lf6) (##hole##)
+Sketch conj147_term_sketch5 : @eq nat (S (Nat.add lf6 lf6)) (##hole##)
+Sketch conj147_term_sketch6 : @eq nat (Nat.add lf9 lf9) (##hole##)
+Sketch conj153_sketch0 : @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add (##hole##) (Nat.add lf8 lf8)))
+Sketch conj153_sketch1 : @eq nat (S (##hole##))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) (Nat.add lf8 lf8)))
+Sketch conj153_sketch2 : @eq nat (S (Nat.add lf6 lf6)) (S (##hole##))
+Sketch conj153_sketch3 : @eq nat (##hole##)
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) (Nat.add lf8 lf8)))
+Sketch conj153_sketch4 : @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) (##hole##)))
+Sketch conj153_sketch5 : @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add (Nat.add (##hole##) (##hole##)) (Nat.add lf8 lf8)))
+Sketch conj153_sketch6 : @eq nat (S (Nat.add lf6 lf6)) (##hole##)
+Sketch conj153_term_sketch0 : @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l)) (##hole##)
+Sketch conj153_term_sketch1 : @eq nat (Nat.add lf6 lf6) (##hole##)
+Sketch conj153_term_sketch2 : @eq nat (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) (Nat.add lf8 lf8))
+  (##hole##)
+Sketch conj153_term_sketch3 : @eq nat (S (Nat.add lf6 lf6)) (##hole##)
+Sketch conj153_term_sketch4 : @eq nat (Nat.add lf8 lf8) (##hole##)
+Sketch conj153_term_sketch5 : @eq nat (BV_to_nat l) (##hole##)
+Sketch conj153_term_sketch6 : @eq nat (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) (Nat.add lf8 lf8)))
+  (##hole##)
+Sketch conj155_sketch0 : @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) (##hole##)))
+Sketch conj155_sketch1 : @eq nat (S (Nat.add lf6 lf6))
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l))
+        (Nat.add (##hole##) (##hole##))))
+Sketch conj155_sketch2 : @eq nat (S (Nat.add lf6 lf6))
+  (S (Nat.add (##hole##) (Nat.add (BV_to_nat l0) (BV_to_nat l0))))
+Sketch conj155_sketch3 : @eq nat (S (Nat.add lf6 lf6)) (##hole##)
+Sketch conj155_sketch4 : @eq nat (S (##hole##))
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l))
+        (Nat.add (BV_to_nat l0) (BV_to_nat l0))))
+Sketch conj155_sketch5 : @eq nat (##hole##)
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l))
+        (Nat.add (BV_to_nat l0) (BV_to_nat l0))))
+Sketch conj155_sketch6 : @eq nat (S (Nat.add lf6 lf6)) (S (##hole##))
+Sketch conj155_sketch7 : @eq nat (S (Nat.add lf6 lf6))
+  (S
+     (Nat.add (Nat.add (##hole##) (##hole##))
+        (Nat.add (BV_to_nat l0) (BV_to_nat l0))))
+Sketch conj155_term_sketch0 : @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0)) (##hole##)
+Sketch conj155_term_sketch1 : @eq nat (BV_to_nat l0) (##hole##)
+Sketch conj155_term_sketch2 : @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l)) (##hole##)
+Sketch conj155_term_sketch3 : @eq nat
+  (S
+     (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l))
+        (Nat.add (BV_to_nat l0) (BV_to_nat l0)))) (##hole##)
+Sketch conj155_term_sketch4 : @eq nat (Nat.add lf6 lf6) (##hole##)
+Sketch conj155_term_sketch5 : @eq nat (S (Nat.add lf6 lf6)) (##hole##)
+Sketch conj155_term_sketch6 : @eq nat
+  (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l))
+     (Nat.add (BV_to_nat l0) (BV_to_nat l0))) (##hole##)
+Sketch conj155_term_sketch7 : @eq nat (BV_to_nat l) (##hole##)
+
+
+<---CREATE SYNTHESIS PROBLEMS--->
+Time elapsed: 2044 seconds
+Problems per Sketch:
+Sketch conj129_term_sketch4 --> Problem  synth_45
+Sketch conj129_sketch3 --> Problem  synth_43
+Sketch conj140_term_sketch2 --> Problem  synth_53
+Sketch conj129_sketch1 --> Problem  synth_4
+Sketch conj137_sketch4 --> Problem  synth_1
+Sketch conj147_sketch1 --> Problem  synth_60
+Sketch conj130_sketch0 --> Problem  synth_5
+Sketch conj20_term_sketch2 --> Problem  synth_33
+Sketch conj17_term_sketch0 --> Problem  synth_24
+Sketch conj137_term_sketch5 --> Problem  synth_18
+Sketch conj153_term_sketch1 --> Problem  synth_1
+Sketch conj12_term_sketch0 --> Problem  synth_2
+Sketch conj155_sketch2 --> Problem  synth_63
+Sketch conj147_term_sketch4 --> Problem  synth_1
+Sketch conj12_term_sketch6 --> Problem  synth_19
+Sketch conj130_sketch1 --> Problem  synth_6
+Sketch conj130_term_sketch1 --> Problem  synth_43
+Sketch conj140_term_sketch0 --> Problem  synth_23
+Sketch conj1_sketch1 --> Problem  synth_2
+Sketch conj10_term_sketch2 --> Problem  synth_14
+Sketch conj153_sketch5 --> Problem  synth_65
+Sketch conj26_term_sketch0 --> Problem  synth_17
+Sketch conj147_sketch0 --> Problem  synth_4
+Sketch conj140_term_sketch4 --> Problem  synth_21
+Sketch conj19_term_sketch1 --> Problem  synth_33
+Sketch conj28_term_sketch2 --> Problem  synth_33
+Sketch conj145_sketch1 --> Problem  synth_4
+Sketch conj2_sketch3 --> Problem  synth_2
+Sketch conj18_term_sketch3 --> Problem  synth_5
+Sketch conj132_term_sketch1 --> Problem  synth_11
+Sketch conj137_term_sketch4 --> Problem  synth_50
+Sketch conj132_term_sketch6 --> Problem  synth_45
+Sketch conj130_sketch4 --> Problem  synth_46
+Sketch conj153_sketch3 --> Problem  synth_15
+Sketch conj20_sketch3 --> Problem  synth_35
+Sketch conj28_term_sketch7 --> Problem  synth_19
+Sketch conj12_sketch3 --> Problem  synth_3
+Sketch conj26_sketch0 --> Problem  synth_29
+Sketch conj153_term_sketch4 --> Problem  synth_27
+Sketch conj140_term_sketch6 --> Problem  synth_18
+Sketch conj138_term_sketch2 --> Problem  synth_15
+Sketch conj4_term_sketch3 --> Problem  synth_13
+Sketch conj137_sketch0 --> Problem  synth_4
+Sketch conj26_sketch1 --> Problem  synth_14
+Sketch conj4_term_sketch0 --> Problem  synth_2
+Sketch conj130_term_sketch5 --> Problem  synth_45
+Sketch conj138_term_sketch3 --> Problem  synth_51
+Sketch conj19_term_sketch2 --> Problem  synth_12
+Sketch conj19_sketch3 --> Problem  synth_1
+Sketch conj18_sketch0 --> Problem  synth_5
+Sketch conj4_term_sketch4 --> Problem  synth_3
+Sketch conj10_term_sketch0 --> Problem  synth_17
+Sketch conj155_term_sketch5 --> Problem  synth_4
+Sketch conj155_sketch6 --> Problem  synth_1
+Sketch conj20_term_sketch5 --> Problem  synth_31
+Sketch conj145_term_sketch1 --> Problem  synth_6
+Sketch conj138_sketch3 --> Problem  synth_15
+Sketch conj138_sketch1 --> Problem  synth_50
+Sketch conj155_sketch0 --> Problem  synth_64
+Sketch conj145_term_sketch2 --> Problem  synth_1
+Sketch conj138_term_sketch1 --> Problem  synth_14
+Sketch conj26_sketch3 --> Problem  synth_25
+Sketch conj138_term_sketch5 --> Problem  synth_50
+Sketch conj17_term_sketch2 --> Problem  synth_1
+Sketch conj132_sketch5 --> Problem  synth_42
+Sketch conj129_sketch0 --> Problem  synth_1
+Sketch conj153_sketch4 --> Problem  synth_64
+Sketch conj26_sketch5 --> Problem  synth_37
+Sketch conj12_sketch0 --> Problem  synth_19
+Sketch conj2_sketch2 --> Problem  synth_6
+Sketch conj1_sketch3 --> Problem  synth_4
+Sketch conj1_sketch0 --> Problem  synth_1
+Sketch conj20_sketch5 --> Problem  synth_9
+Sketch conj26_sketch2 --> Problem  synth_24
+Sketch conj28_sketch6 --> Problem  synth_41
+Sketch conj130_sketch3 --> Problem  synth_42
+Sketch conj28_term_sketch4 --> Problem  synth_21
+Sketch conj17_sketch1 --> Problem  synth_4
+Sketch conj19_sketch4 --> Problem  synth_31
+Sketch conj155_sketch4 --> Problem  synth_19
+Sketch conj10_sketch4 --> Problem  synth_15
+Sketch conj10_term_sketch5 --> Problem  synth_18
+Sketch conj147_term_sketch2 --> Problem  synth_12
+Sketch conj132_term_sketch0 --> Problem  synth_42
+Sketch conj17_term_sketch4 --> Problem  synth_27
+Sketch conj132_sketch0 --> Problem  synth_9
+Sketch conj2_sketch0 --> Problem  synth_5
+Sketch conj28_term_sketch3 --> Problem  synth_12
+Sketch conj12_sketch1 --> Problem  synth_7
+Sketch conj155_sketch3 --> Problem  synth_4
+Sketch conj18_sketch3 --> Problem  synth_24
+Sketch conj4_term_sketch2 --> Problem  synth_12
+Sketch conj12_sketch2 --> Problem  synth_20
+Sketch conj145_sketch4 --> Problem  synth_60
+Sketch conj20_sketch0 --> Problem  synth_32
+Sketch conj12_sketch4 --> Problem  synth_21
+Sketch conj1_term_sketch2 --> Problem  synth_4
+Sketch conj147_term_sketch5 --> Problem  synth_4
+Sketch conj26_sketch4 --> Problem  synth_15
+Sketch conj12_sketch5 --> Problem  synth_22
+Sketch conj18_term_sketch1 --> Problem  synth_25
+Sketch conj147_sketch5 --> Problem  synth_11
+Sketch conj138_sketch5 --> Problem  synth_14
+Sketch conj4_term_sketch1 --> Problem  synth_11
+Sketch conj20_sketch4 --> Problem  synth_36
+Sketch conj2_term_sketch4 --> Problem  synth_8
+Sketch conj18_term_sketch5 --> Problem  synth_8
+Sketch conj153_term_sketch3 --> Problem  synth_4
+Sketch conj130_term_sketch2 --> Problem  synth_6
+Sketch conj4_sketch5 --> Problem  synth_2
+Sketch conj19_term_sketch0 --> Problem  synth_32
+Sketch conj4_sketch2 --> Problem  synth_10
+Sketch conj153_sketch0 --> Problem  synth_61
+Sketch conj1_sketch2 --> Problem  synth_3
+Sketch conj12_term_sketch4 --> Problem  synth_3
+Sketch conj17_sketch0 --> Problem  synth_1
+Sketch conj28_term_sketch5 --> Problem  synth_31
+Sketch conj132_sketch3 --> Problem  synth_46
+Sketch conj18_sketch5 --> Problem  synth_29
+Sketch conj147_sketch3 --> Problem  synth_1
+Sketch conj137_term_sketch2 --> Problem  synth_1
+Sketch conj153_term_sketch5 --> Problem  synth_18
+Sketch conj138_sketch4 --> Problem  synth_55
+Sketch conj18_term_sketch4 --> Problem  synth_27
+Sketch conj145_term_sketch0 --> Problem  synth_5
+Sketch conj2_term_sketch2 --> Problem  synth_3
+Sketch conj20_term_sketch1 --> Problem  synth_32
+Sketch conj153_term_sketch2 --> Problem  synth_14
+Sketch conj26_term_sketch6 --> Problem  synth_18
+Sketch conj28_sketch3 --> Problem  synth_40
+Sketch conj155_term_sketch1 --> Problem  synth_12
+Sketch conj28_sketch1 --> Problem  synth_21
+Sketch conj140_term_sketch3 --> Problem  synth_12
+Sketch conj12_term_sketch3 --> Problem  synth_21
+Sketch conj147_term_sketch3 --> Problem  synth_9
+Sketch conj20_term_sketch4 --> Problem  synth_13
+Sketch conj138_sketch2 --> Problem  synth_51
+Sketch conj132_sketch2 --> Problem  synth_48
+Sketch conj19_sketch5 --> Problem  synth_32
+Sketch conj20_term_sketch3 --> Problem  synth_12
+Sketch conj4_sketch0 --> Problem  synth_9
+Sketch conj130_term_sketch3 --> Problem  synth_5
+Sketch conj19_term_sketch5 --> Problem  synth_4
+Sketch conj129_term_sketch2 --> Problem  synth_1
+Sketch conj26_term_sketch2 --> Problem  synth_14
+Sketch conj2_term_sketch1 --> Problem  synth_6
+Sketch conj4_sketch3 --> Problem  synth_7
+Sketch conj26_term_sketch3 --> Problem  synth_15
+Sketch conj10_sketch1 --> Problem  synth_14
+Sketch conj155_term_sketch3 --> Problem  synth_21
+Sketch conj130_term_sketch0 --> Problem  synth_42
+Sketch conj18_sketch4 --> Problem  synth_28
+Sketch conj153_term_sketch0 --> Problem  synth_53
+Sketch conj147_sketch4 --> Problem  synth_9
+Sketch conj28_sketch7 --> Problem  synth_31
+Sketch conj28_sketch2 --> Problem  synth_39
+Sketch conj12_sketch6 --> Problem  synth_2
+Sketch conj137_sketch3 --> Problem  synth_51
+Sketch conj1_term_sketch0 --> Problem  synth_2
+Sketch conj145_sketch0 --> Problem  synth_1
+Sketch conj153_term_sketch6 --> Problem  synth_15
+Sketch conj153_sketch1 --> Problem  synth_14
+Sketch conj19_sketch2 --> Problem  synth_30
+Sketch conj132_term_sketch4 --> Problem  synth_43
+Sketch conj145_sketch3 --> Problem  synth_6
+Sketch conj10_sketch0 --> Problem  synth_7
+Sketch conj155_term_sketch7 --> Problem  synth_18
+Sketch conj18_sketch1 --> Problem  synth_6
+Sketch conj138_term_sketch4 --> Problem  synth_53
+Sketch conj129_term_sketch3 --> Problem  synth_4
+Sketch conj155_sketch5 --> Problem  synth_21
+Sketch conj10_term_sketch1 --> Problem  synth_2
+Sketch conj20_sketch2 --> Problem  synth_34
+Sketch conj155_term_sketch0 --> Problem  synth_33
+Sketch conj130_sketch2 --> Problem  synth_43
+Sketch conj17_sketch2 --> Problem  synth_24
+Sketch conj147_sketch2 --> Problem  synth_62
+Sketch conj18_term_sketch2 --> Problem  synth_6
+Sketch conj18_sketch2 --> Problem  synth_25
+Sketch conj10_sketch5 --> Problem  synth_16
+Sketch conj153_sketch6 --> Problem  synth_4
+Sketch conj2_term_sketch0 --> Problem  synth_2
+Sketch conj147_term_sketch1 --> Problem  synth_33
+Sketch conj12_term_sketch1 --> Problem  synth_23
+Sketch conj130_sketch5 --> Problem  synth_47
+Sketch conj140_sketch5 --> Problem  synth_19
+Sketch conj132_term_sketch3 --> Problem  synth_13
+Sketch conj19_term_sketch3 --> Problem  synth_31
+Sketch conj145_term_sketch4 --> Problem  synth_27
+Sketch conj155_term_sketch2 --> Problem  synth_53
+Sketch conj17_sketch4 --> Problem  synth_26
+Sketch conj140_sketch4 --> Problem  synth_51
+Sketch conj153_sketch2 --> Problem  synth_1
+Sketch conj137_term_sketch0 --> Problem  synth_51
+Sketch conj28_sketch5 --> Problem  synth_19
+Sketch conj140_term_sketch1 --> Problem  synth_51
+Sketch conj4_sketch1 --> Problem  synth_3
+Sketch conj145_term_sketch3 --> Problem  synth_4
+Sketch conj137_term_sketch3 --> Problem  synth_4
+Sketch conj2_term_sketch3 --> Problem  synth_5
+Sketch conj129_term_sketch1 --> Problem  synth_43
+Sketch conj1_term_sketch3 --> Problem  synth_3
+Sketch conj140_sketch2 --> Problem  synth_57
+Sketch conj140_sketch1 --> Problem  synth_21
+Sketch conj28_sketch0 --> Problem  synth_36
+Sketch conj10_term_sketch3 --> Problem  synth_15
+Sketch conj28_sketch4 --> Problem  synth_32
+Sketch conj140_term_sketch5 --> Problem  synth_50
+Sketch conj129_sketch4 --> Problem  synth_44
+Sketch conj2_sketch1 --> Problem  synth_3
+Sketch conj28_term_sketch1 --> Problem  synth_32
+Sketch conj140_term_sketch7 --> Problem  synth_19
+Sketch conj137_sketch5 --> Problem  synth_52
+Sketch conj4_term_sketch5 --> Problem  synth_9
+Sketch conj10_sketch2 --> Problem  synth_2
+Sketch conj138_sketch0 --> Problem  synth_54
+Sketch conj1_term_sketch1 --> Problem  synth_1
+Sketch conj147_term_sketch0 --> Problem  synth_11
+Sketch conj4_sketch4 --> Problem  synth_11
+Sketch conj28_term_sketch6 --> Problem  synth_18
+Sketch conj20_term_sketch0 --> Problem  synth_11
+Sketch conj132_sketch4 --> Problem  synth_11
+Sketch conj155_term_sketch4 --> Problem  synth_1
+Sketch conj17_term_sketch3 --> Problem  synth_4
+Sketch conj140_sketch0 --> Problem  synth_54
+Sketch conj10_term_sketch4 --> Problem  synth_3
+Sketch conj129_term_sketch0 --> Problem  synth_42
+Sketch conj12_term_sketch2 --> Problem  synth_12
+Sketch conj140_sketch6 --> Problem  synth_59
+Sketch conj26_term_sketch5 --> Problem  synth_27
+Sketch conj155_sketch1 --> Problem  synth_66
+Sketch conj26_term_sketch4 --> Problem  synth_25
+Sketch conj138_term_sketch6 --> Problem  synth_18
+Sketch conj26_term_sketch1 --> Problem  synth_24
+Sketch conj19_sketch0 --> Problem  synth_4
+Sketch conj26_sketch6 --> Problem  synth_38
+Sketch conj132_sketch6 --> Problem  synth_49
+Sketch conj20_sketch1 --> Problem  synth_11
+Sketch conj140_sketch7 --> Problem  synth_50
+Sketch conj140_sketch3 --> Problem  synth_58
+Sketch conj28_term_sketch0 --> Problem  synth_23
+Sketch conj132_sketch1 --> Problem  synth_43
+Sketch conj145_term_sketch5 --> Problem  synth_45
+Sketch conj12_term_sketch5 --> Problem  synth_18
+Sketch conj155_term_sketch6 --> Problem  synth_19
+Sketch conj132_term_sketch2 --> Problem  synth_12
+Sketch conj138_term_sketch0 --> Problem  synth_17
+Sketch conj2_sketch4 --> Problem  synth_7
+Sketch conj137_sketch1 --> Problem  synth_44
+Sketch conj130_term_sketch4 --> Problem  synth_8
+Sketch conj19_sketch1 --> Problem  synth_26
+Sketch conj147_sketch6 --> Problem  synth_63
+Sketch conj20_sketch6 --> Problem  synth_31
+Sketch conj18_term_sketch0 --> Problem  synth_24
+Sketch conj145_sketch2 --> Problem  synth_5
+Sketch conj17_term_sketch1 --> Problem  synth_25
+Sketch conj137_term_sketch1 --> Problem  synth_53
+Sketch conj10_sketch3 --> Problem  synth_3
+Sketch conj129_sketch2 --> Problem  synth_42
+Sketch conj132_term_sketch5 --> Problem  synth_9
+Sketch conj19_term_sketch4 --> Problem  synth_1
+Sketch conj17_sketch3 --> Problem  synth_25
+Sketch conj145_sketch5 --> Problem  synth_61
+Sketch conj138_sketch6 --> Problem  synth_56
+Sketch conj137_sketch2 --> Problem  synth_50
+Sketch conj20_term_sketch6 --> Problem  synth_9
+Sketch conj155_sketch7 --> Problem  synth_67
+Sketch conj147_term_sketch6 --> Problem  synth_45
+
+
+<--- SYNTHESIS PROBLEM RESULTS--->
+Time elapsed: 3000 seconds
+
+Problem: synth_63
+
+Problem: synth_67
+
+Problem: synth_64
+
+Problem: synth_11
+
+Problem: synth_54
+
+Problem: synth_39
+
+Problem: synth_46
+
+Problem: synth_66
+
+Problem: synth_57
+
+Problem: synth_59
+
+Problem: synth_31
+
+Problem: synth_8
+ Nat.add lf8 lf9
+ Nat.add lf9 lf8
+
+Problem: synth_34
+
+Problem: synth_5
+
+Problem: synth_37
+ Nat.add lf8 lf8
+
+Problem: synth_58
+
+Problem: synth_53
+ Nat.add (Bool_compl.bool_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)))
+ Nat.add (Bool_compl.bool_to_nat (Adder.BV_full_adder_carry l (@nil bool) false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)))
+ Nat.add (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)) (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false))
+ Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false))
+
+Problem: synth_2
+ Nat.add lf5 lf7
+ Nat.add lf7 lf5
+
+Problem: synth_22
+
+Problem: synth_18
+ BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))
+ BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (Adder.BV_full_adder_carry l (@nil bool) false))
+ BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) (Adder.BV_full_adder_carry l (@nil bool) false))
+ BV.BV_to_nat (Adder.BV_full_adder_sum l (@cons bool false (@nil bool)) false)
+ BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)
+ BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)
+
+Problem: synth_21
+
+Problem: synth_56
+
+Problem: synth_41
+
+Problem: synth_49
+ Nat.add lf9 lf9
+
+Problem: synth_25
+
+Problem: synth_13
+
+Problem: synth_6
+
+Problem: synth_4
+
+Problem: synth_38
+
+Problem: synth_65
+
+Problem: synth_23
+
+Problem: synth_19
+
+Problem: synth_10
+
+Problem: synth_24
+
+Problem: synth_32
+
+Problem: synth_48
+
+Problem: synth_51
+
+Problem: synth_35
+
+Problem: synth_28
+ Nat.add lf8 lf8
+
+Problem: synth_17
+
+Problem: synth_29
+
+Problem: synth_45
+ Nat.add lf9 lf9
+
+Problem: synth_26
+
+Problem: synth_9
+
+Problem: synth_30
+
+Problem: synth_1
+ Nat.add lf6 lf6
+
+Problem: synth_55
+
+Problem: synth_15
+
+Problem: synth_14
+
+Problem: synth_12
+ BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l0 false))
+ BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 (Adder.BV_full_adder_carry l0 (@nil bool) false))
+ BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) (Adder.BV_full_adder_carry l0 (@nil bool) false))
+ BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@cons bool false (@nil bool)) false)
+ BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)
+ BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) false)
+
+Problem: synth_62
+
+Problem: synth_50
+
+Problem: synth_20
+
+Problem: synth_7
+
+Problem: synth_61
+
+Problem: synth_27
+ Nat.add lf8 lf8
+
+Problem: synth_42
+
+Problem: synth_16
+
+Problem: synth_40
+
+Problem: synth_33
+ Nat.add (Bool_compl.bool_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l0 false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)))
+ Nat.add (Bool_compl.bool_to_nat (Adder.BV_full_adder_carry l0 (@nil bool) false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)))
+ Nat.add (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) false)) (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) false))
+ Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false))
+
+Problem: synth_47
+ Nat.add lf9 lf9
+
+Problem: synth_3
+
+Problem: synth_52
+
+Problem: synth_44
+
+Problem: synth_60
+
+Problem: synth_36
+
+Problem: synth_43
+
+<---INITIAL CANDIDATE LEMMAS--->
+Time elapsed: 3001 seconds
+Lemmas:
+Lemma candidate_1: forall (l : list bool) (l0 : list bool), @eq nat   (S      (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l0))         (Nat.add (BV_to_nat l) (BV_to_nat l0))))   (S      (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l))         (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+Lemma candidate_2: forall (l : list bool) (lf8 : nat), @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))   (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) (Nat.add lf8 lf8))).
+Lemma candidate_3: forall (l0 : list bool) (lf9 : nat), @eq nat   (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))   (S (Nat.add (Nat.add lf9 lf9) (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+Lemma candidate_4: forall (lf9 : nat) (lf8 : nat), @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8)))   (S (Nat.add (Nat.add lf9 lf9) (Nat.add lf8 lf8))).
+Lemma candidate_5: forall (lf6 : nat), @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add lf6 lf6)).
+Lemma candidate_6: forall (lf7 : nat) (lf5 : nat), @eq nat (S (Nat.add lf5 lf7)) (S (Nat.add lf7 lf5)).
+Lemma candidate_7: forall (lf7 : nat) (lf5 : nat), @eq nat (S (Nat.add lf7 lf5)) (S (Nat.add lf7 lf5)).
+Lemma candidate_8: forall (lf7 : nat) (lf5 : nat), @eq nat (Nat.add lf7 lf5) (Nat.add lf5 lf7).
+Lemma candidate_9: forall (lf7 : nat) (lf5 : nat), @eq nat (Nat.add lf7 lf5) (Nat.add lf7 lf5).
+Lemma candidate_10: forall (lf6 : nat), @eq nat (Nat.add lf6 lf6) (Nat.add lf6 lf6).
+Lemma candidate_11: forall (lf7 : nat) (lf5 : nat), @eq nat (S (Nat.add lf5 lf7)) (S (Nat.add lf7 lf5)).
+Lemma candidate_12: forall (lf7 : nat) (lf5 : nat), @eq nat (S (Nat.add lf7 lf5)) (S (Nat.add lf7 lf5)).
+Lemma candidate_13: forall (lf7 : nat) (lf5 : nat), @eq nat (Nat.add lf7 lf5) (Nat.add lf5 lf7).
+Lemma candidate_14: forall (lf7 : nat) (lf5 : nat), @eq nat (Nat.add lf7 lf5) (Nat.add lf7 lf5).
+Lemma candidate_15: forall (lf9 : nat) (lf8 : nat), @eq nat (Nat.add lf9 lf8) (Nat.add lf8 lf9).
+Lemma candidate_16: forall (lf9 : nat) (lf8 : nat), @eq nat (Nat.add lf9 lf8) (Nat.add lf9 lf8).
+Lemma candidate_17: forall (lf7 : nat) (lf5 : nat), @eq nat (S (Nat.add lf5 lf7)) (S (Nat.add lf7 lf5)).
+Lemma candidate_18: forall (lf7 : nat) (lf5 : nat), @eq nat (S (Nat.add lf7 lf5)) (S (Nat.add lf7 lf5)).
+Lemma candidate_19: forall (lf7 : nat) (lf5 : nat), @eq nat (Nat.add lf7 lf5) (Nat.add lf5 lf7).
+Lemma candidate_20: forall (lf7 : nat) (lf5 : nat), @eq nat (Nat.add lf7 lf5) (Nat.add lf7 lf5).
+Lemma candidate_21: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l0 false))).
+Lemma candidate_22: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 (Adder.BV_full_adder_carry l0 (@nil bool) false))).
+Lemma candidate_23: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) (Adder.BV_full_adder_carry l0 (@nil bool) false))).
+Lemma candidate_24: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@cons bool false (@nil bool)) false)).
+Lemma candidate_25: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)).
+Lemma candidate_26: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) false)).
+Lemma candidate_27: forall (lf7 : nat) (lf5 : nat), @eq nat (S (Nat.add lf5 lf7)) (S (Nat.add lf7 lf5)).
+Lemma candidate_28: forall (lf7 : nat) (lf5 : nat), @eq nat (S (Nat.add lf7 lf5)) (S (Nat.add lf7 lf5)).
+Lemma candidate_29: forall (lf7 : nat) (lf5 : nat), @eq nat (Nat.add lf7 lf5) (Nat.add lf5 lf7).
+Lemma candidate_30: forall (lf7 : nat) (lf5 : nat), @eq nat (Nat.add lf7 lf5) (Nat.add lf7 lf5).
+Lemma candidate_31: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))).
+Lemma candidate_32: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_33: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_34: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@cons bool false (@nil bool)) false)).
+Lemma candidate_35: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)).
+Lemma candidate_36: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)).
+Lemma candidate_37: forall (lf7 : nat) (lf5 : nat), @eq nat (S (Nat.add lf5 lf7)) (S (Nat.add lf7 lf5)).
+Lemma candidate_38: forall (lf7 : nat) (lf5 : nat), @eq nat (S (Nat.add lf7 lf5)) (S (Nat.add lf7 lf5)).
+Lemma candidate_39: forall (lf7 : nat) (lf5 : nat), @eq nat (Nat.add lf7 lf5) (Nat.add lf5 lf7).
+Lemma candidate_40: forall (lf7 : nat) (lf5 : nat), @eq nat (Nat.add lf7 lf5) (Nat.add lf7 lf5).
+Lemma candidate_41: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l0 false))).
+Lemma candidate_42: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 (Adder.BV_full_adder_carry l0 (@nil bool) false))).
+Lemma candidate_43: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) (Adder.BV_full_adder_carry l0 (@nil bool) false))).
+Lemma candidate_44: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@cons bool false (@nil bool)) false)).
+Lemma candidate_45: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)).
+Lemma candidate_46: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) false)).
+Lemma candidate_47: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))).
+Lemma candidate_48: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_49: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_50: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@cons bool false (@nil bool)) false)).
+Lemma candidate_51: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)).
+Lemma candidate_52: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)).
+Lemma candidate_53: forall (lf6 : nat), @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add lf6 lf6)).
+Lemma candidate_54: forall (lf6 : nat), @eq nat (Nat.add lf6 lf6) (Nat.add lf6 lf6).
+Lemma candidate_55: forall (lf8 : nat), @eq nat (Nat.add lf8 lf8) (Nat.add lf8 lf8).
+Lemma candidate_56: forall (lf7 : nat) (lf9 : nat) (lf8 : nat), @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8)))   (S (Nat.add lf7 (Nat.add lf8 lf8))).
+Lemma candidate_57: forall (lf8 : nat), @eq nat (Nat.add lf8 lf8) (Nat.add lf8 lf8).
+Lemma candidate_58: forall (lf9 : nat) (lf8 : nat), @eq nat (Nat.add lf9 lf8) (Nat.add lf8 lf9).
+Lemma candidate_59: forall (lf9 : nat) (lf8 : nat), @eq nat (Nat.add lf9 lf8) (Nat.add lf9 lf8).
+Lemma candidate_60: forall (lf6 : nat), @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add lf6 lf6)).
+Lemma candidate_61: forall (l0 : list bool), @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0))   (Nat.add (Bool_compl.bool_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l0 false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)))).
+Lemma candidate_62: forall (l0 : list bool), @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0))   (Nat.add (Bool_compl.bool_to_nat (Adder.BV_full_adder_carry l0 (@nil bool) false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)))).
+Lemma candidate_63: forall (l0 : list bool), @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0))   (Nat.add (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) false)) (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) false))).
+Lemma candidate_64: forall (l0 : list bool), @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0))   (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false))).
+Lemma candidate_65: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l0 false))).
+Lemma candidate_66: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 (Adder.BV_full_adder_carry l0 (@nil bool) false))).
+Lemma candidate_67: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) (Adder.BV_full_adder_carry l0 (@nil bool) false))).
+Lemma candidate_68: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@cons bool false (@nil bool)) false)).
+Lemma candidate_69: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)).
+Lemma candidate_70: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) false)).
+Lemma candidate_71: forall (lf6 : nat), @eq nat (Nat.add lf6 lf6) (Nat.add lf6 lf6).
+Lemma candidate_72: forall (l0 : list bool), @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0))   (Nat.add (Bool_compl.bool_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l0 false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)))).
+Lemma candidate_73: forall (l0 : list bool), @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0))   (Nat.add (Bool_compl.bool_to_nat (Adder.BV_full_adder_carry l0 (@nil bool) false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)))).
+Lemma candidate_74: forall (l0 : list bool), @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0))   (Nat.add (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) false)) (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) false))).
+Lemma candidate_75: forall (l0 : list bool), @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0))   (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false))).
+Lemma candidate_76: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l0 false))).
+Lemma candidate_77: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 (Adder.BV_full_adder_carry l0 (@nil bool) false))).
+Lemma candidate_78: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) (Adder.BV_full_adder_carry l0 (@nil bool) false))).
+Lemma candidate_79: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@cons bool false (@nil bool)) false)).
+Lemma candidate_80: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)).
+Lemma candidate_81: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) false)).
+Lemma candidate_82: forall (lf7 : nat) (l : list bool) (lf8 : nat), @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))   (S (Nat.add lf7 (Nat.add lf8 lf8))).
+Lemma candidate_83: forall (lf8 : nat), @eq nat (Nat.add lf8 lf8) (Nat.add lf8 lf8).
+Lemma candidate_84: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))).
+Lemma candidate_85: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_86: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_87: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@cons bool false (@nil bool)) false)).
+Lemma candidate_88: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)).
+Lemma candidate_89: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)).
+Lemma candidate_90: forall (l0 : list bool), @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0))   (Nat.add (Bool_compl.bool_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l0 false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)))).
+Lemma candidate_91: forall (l0 : list bool), @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0))   (Nat.add (Bool_compl.bool_to_nat (Adder.BV_full_adder_carry l0 (@nil bool) false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)))).
+Lemma candidate_92: forall (l0 : list bool), @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0))   (Nat.add (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) false)) (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) false))).
+Lemma candidate_93: forall (l0 : list bool), @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0))   (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false))).
+Lemma candidate_94: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l0 false))).
+Lemma candidate_95: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 (Adder.BV_full_adder_carry l0 (@nil bool) false))).
+Lemma candidate_96: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) (Adder.BV_full_adder_carry l0 (@nil bool) false))).
+Lemma candidate_97: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@cons bool false (@nil bool)) false)).
+Lemma candidate_98: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)).
+Lemma candidate_99: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) false)).
+Lemma candidate_100: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))).
+Lemma candidate_101: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_102: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_103: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@cons bool false (@nil bool)) false)).
+Lemma candidate_104: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)).
+Lemma candidate_105: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)).
+Lemma candidate_106: forall (lf6 : nat), @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add lf6 lf6)).
+Lemma candidate_107: forall (lf6 : nat), @eq nat (Nat.add lf6 lf6) (Nat.add lf6 lf6).
+Lemma candidate_108: forall (lf9 : nat), @eq nat (Nat.add lf9 lf9) (Nat.add lf9 lf9).
+Lemma candidate_109: forall (lf5 : nat) (lf9 : nat) (lf8 : nat), @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8)))   (S (Nat.add (Nat.add lf9 lf9) lf5)).
+Lemma candidate_110: forall (lf9 : nat) (lf8 : nat), @eq nat (Nat.add lf9 lf8) (Nat.add lf8 lf9).
+Lemma candidate_111: forall (lf9 : nat) (lf8 : nat), @eq nat (Nat.add lf9 lf8) (Nat.add lf9 lf8).
+Lemma candidate_112: forall (lf9 : nat), @eq nat (Nat.add lf9 lf9) (Nat.add lf9 lf9).
+Lemma candidate_113: forall (l0 : list bool) (lf5 : nat) (lf9 : nat), @eq nat   (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))   (S (Nat.add (Nat.add lf9 lf9) lf5)).
+Lemma candidate_114: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l0 false))).
+Lemma candidate_115: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 (Adder.BV_full_adder_carry l0 (@nil bool) false))).
+Lemma candidate_116: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) (Adder.BV_full_adder_carry l0 (@nil bool) false))).
+Lemma candidate_117: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@cons bool false (@nil bool)) false)).
+Lemma candidate_118: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)).
+Lemma candidate_119: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) false)).
+Lemma candidate_120: forall (lf9 : nat), @eq nat (Nat.add lf9 lf9) (Nat.add lf9 lf9).
+Lemma candidate_121: forall (lf6 : nat), @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add lf6 lf6)).
+Lemma candidate_122: forall (l : list bool), @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)))).
+Lemma candidate_123: forall (l : list bool), @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat (Adder.BV_full_adder_carry l (@nil bool) false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)))).
+Lemma candidate_124: forall (l : list bool), @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l))   (Nat.add (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)) (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false))).
+Lemma candidate_125: forall (l : list bool), @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l))   (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false))).
+Lemma candidate_126: forall (lf6 : nat), @eq nat (Nat.add lf6 lf6) (Nat.add lf6 lf6).
+Lemma candidate_127: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))).
+Lemma candidate_128: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_129: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_130: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@cons bool false (@nil bool)) false)).
+Lemma candidate_131: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)).
+Lemma candidate_132: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)).
+Lemma candidate_133: forall (l : list bool), @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)))).
+Lemma candidate_134: forall (l : list bool), @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat (Adder.BV_full_adder_carry l (@nil bool) false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)))).
+Lemma candidate_135: forall (l : list bool), @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l))   (Nat.add (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)) (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false))).
+Lemma candidate_136: forall (l : list bool), @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l))   (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false))).
+Lemma candidate_137: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))).
+Lemma candidate_138: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_139: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_140: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@cons bool false (@nil bool)) false)).
+Lemma candidate_141: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)).
+Lemma candidate_142: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)).
+Lemma candidate_143: forall (l : list bool), @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)))).
+Lemma candidate_144: forall (l : list bool), @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat (Adder.BV_full_adder_carry l (@nil bool) false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)))).
+Lemma candidate_145: forall (l : list bool), @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l))   (Nat.add (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)) (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false))).
+Lemma candidate_146: forall (l : list bool), @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l))   (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false))).
+Lemma candidate_147: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l0 false))).
+Lemma candidate_148: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 (Adder.BV_full_adder_carry l0 (@nil bool) false))).
+Lemma candidate_149: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) (Adder.BV_full_adder_carry l0 (@nil bool) false))).
+Lemma candidate_150: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@cons bool false (@nil bool)) false)).
+Lemma candidate_151: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)).
+Lemma candidate_152: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) false)).
+Lemma candidate_153: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))).
+Lemma candidate_154: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_155: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_156: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@cons bool false (@nil bool)) false)).
+Lemma candidate_157: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)).
+Lemma candidate_158: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)).
+Lemma candidate_159: forall (lf6 : nat), @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add lf6 lf6)).
+Lemma candidate_160: forall (lf6 : nat), @eq nat (Nat.add lf6 lf6) (Nat.add lf6 lf6).
+Lemma candidate_161: forall (lf8 : nat), @eq nat (Nat.add lf8 lf8) (Nat.add lf8 lf8).
+Lemma candidate_162: forall (lf9 : nat), @eq nat (Nat.add lf9 lf9) (Nat.add lf9 lf9).
+Lemma candidate_163: forall (lf6 : nat), @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add lf6 lf6)).
+Lemma candidate_164: forall (l0 : list bool), @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0))   (Nat.add (Bool_compl.bool_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l0 false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)))).
+Lemma candidate_165: forall (l0 : list bool), @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0))   (Nat.add (Bool_compl.bool_to_nat (Adder.BV_full_adder_carry l0 (@nil bool) false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)))).
+Lemma candidate_166: forall (l0 : list bool), @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0))   (Nat.add (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) false)) (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) false))).
+Lemma candidate_167: forall (l0 : list bool), @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0))   (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false))).
+Lemma candidate_168: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l0 false))).
+Lemma candidate_169: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 (Adder.BV_full_adder_carry l0 (@nil bool) false))).
+Lemma candidate_170: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) (Adder.BV_full_adder_carry l0 (@nil bool) false))).
+Lemma candidate_171: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@cons bool false (@nil bool)) false)).
+Lemma candidate_172: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)).
+Lemma candidate_173: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) false)).
+Lemma candidate_174: forall (lf6 : nat), @eq nat (Nat.add lf6 lf6) (Nat.add lf6 lf6).
+Lemma candidate_175: forall (lf9 : nat), @eq nat (Nat.add lf9 lf9) (Nat.add lf9 lf9).
+Lemma candidate_176: forall (lf6 : nat), @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add lf6 lf6)).
+Lemma candidate_177: forall (l : list bool), @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)))).
+Lemma candidate_178: forall (l : list bool), @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat (Adder.BV_full_adder_carry l (@nil bool) false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)))).
+Lemma candidate_179: forall (l : list bool), @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l))   (Nat.add (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)) (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false))).
+Lemma candidate_180: forall (l : list bool), @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l))   (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false))).
+Lemma candidate_181: forall (lf6 : nat), @eq nat (Nat.add lf6 lf6) (Nat.add lf6 lf6).
+Lemma candidate_182: forall (lf8 : nat), @eq nat (Nat.add lf8 lf8) (Nat.add lf8 lf8).
+Lemma candidate_183: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))).
+Lemma candidate_184: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_185: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_186: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@cons bool false (@nil bool)) false)).
+Lemma candidate_187: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)).
+Lemma candidate_188: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)).
+Lemma candidate_189: forall (lf6 : nat), @eq nat (S (Nat.add lf6 lf6)) (S (Nat.add lf6 lf6)).
+Lemma candidate_190: forall (l0 : list bool), @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0))   (Nat.add (Bool_compl.bool_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l0 false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)))).
+Lemma candidate_191: forall (l0 : list bool), @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0))   (Nat.add (Bool_compl.bool_to_nat (Adder.BV_full_adder_carry l0 (@nil bool) false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)))).
+Lemma candidate_192: forall (l0 : list bool), @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0))   (Nat.add (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) false)) (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) false))).
+Lemma candidate_193: forall (l0 : list bool), @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0))   (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false))).
+Lemma candidate_194: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l0 false))).
+Lemma candidate_195: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 (Adder.BV_full_adder_carry l0 (@nil bool) false))).
+Lemma candidate_196: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) (Adder.BV_full_adder_carry l0 (@nil bool) false))).
+Lemma candidate_197: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@cons bool false (@nil bool)) false)).
+Lemma candidate_198: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)).
+Lemma candidate_199: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) false)).
+Lemma candidate_200: forall (l : list bool), @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)))).
+Lemma candidate_201: forall (l : list bool), @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat (Adder.BV_full_adder_carry l (@nil bool) false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)))).
+Lemma candidate_202: forall (l : list bool), @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l))   (Nat.add (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)) (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false))).
+Lemma candidate_203: forall (l : list bool), @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l))   (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false))).
+Lemma candidate_204: forall (lf6 : nat), @eq nat (Nat.add lf6 lf6) (Nat.add lf6 lf6).
+Lemma candidate_205: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))).
+Lemma candidate_206: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_207: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_208: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@cons bool false (@nil bool)) false)).
+Lemma candidate_209: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)).
+Lemma candidate_210: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)).
+
+<---FILTERED CANDIDATE LEMMAS--->
+Time elapsed: 3080 seconds
+Duplicates removed: 173
+Filtered by Quickchick: 4
+Filtered by script: 7
+Remaining: 26
+
+Lemmas: 
+Lemma candidate_15: forall (lf9 : nat) (lf8 : nat), @eq nat (Nat.add lf9 lf8) (Nat.add lf8 lf9).
+Lemma candidate_8: forall (lf7 : nat) (lf5 : nat), @eq nat (Nat.add lf7 lf5) (Nat.add lf5 lf7).
+Lemma candidate_6: forall (lf7 : nat) (lf5 : nat), @eq nat (S (Nat.add lf5 lf7)) (S (Nat.add lf7 lf5)).
+Lemma candidate_36: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)).
+Lemma candidate_26: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) false)).
+Lemma candidate_34: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@cons bool false (@nil bool)) false)).
+Lemma candidate_24: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@cons bool false (@nil bool)) false)).
+Lemma candidate_4: forall (lf9 : nat) (lf8 : nat), @eq nat (S (Nat.add (Nat.add lf9 lf8) (Nat.add lf9 lf8)))   (S (Nat.add (Nat.add lf9 lf9) (Nat.add lf8 lf8))).
+Lemma candidate_33: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_23: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) (Adder.BV_full_adder_carry l0 (@nil bool) false))).
+Lemma candidate_2: forall (l : list bool) (lf8 : nat), @eq nat (S (Nat.add (Nat.add (BV_to_nat l) lf8) (Nat.add (BV_to_nat l) lf8)))   (S (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat l)) (Nat.add lf8 lf8))).
+Lemma candidate_3: forall (l0 : list bool) (lf9 : nat), @eq nat   (S (Nat.add (Nat.add lf9 (BV_to_nat l0)) (Nat.add lf9 (BV_to_nat l0))))   (S (Nat.add (Nat.add lf9 lf9) (Nat.add (BV_to_nat l0) (BV_to_nat l0)))).
+Lemma candidate_124: forall (l : list bool), @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l))   (Nat.add (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)) (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false))).
+Lemma candidate_63: forall (l0 : list bool), @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0))   (Nat.add (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) false)) (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) false))).
+Lemma candidate_31: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))).
+Lemma candidate_21: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat (Adder.BV_full_adder_sum l0 (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l0 false))).
+Lemma candidate_35: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)).
+Lemma candidate_25: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)).
+Lemma candidate_32: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_22: forall (l0 : list bool), @eq nat (BV_to_nat l0)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 (Adder.BV_full_adder_carry l0 (@nil bool) false))).
+Lemma candidate_125: forall (l : list bool), @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l))   (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false))).
+Lemma candidate_64: forall (l0 : list bool), @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0))   (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false))).
+Lemma candidate_123: forall (l : list bool), @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat (Adder.BV_full_adder_carry l (@nil bool) false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)))).
+Lemma candidate_62: forall (l0 : list bool), @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0))   (Nat.add (Bool_compl.bool_to_nat (Adder.BV_full_adder_carry l0 (@nil bool) false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)))).
+Lemma candidate_122: forall (l : list bool), @eq nat (Nat.add (BV_to_nat l) (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)))).
+Lemma candidate_61: forall (l0 : list bool), @eq nat (Nat.add (BV_to_nat l0) (BV_to_nat l0))   (Nat.add (Bool_compl.bool_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l0 false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l0 false)))).

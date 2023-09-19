@@ -1,0 +1,145 @@
+File Information
+- File name: defs
+- Original Directory: /home/anabrendel/lfind/benchmarks/tree-automata/defs_tests/lemma_le_max_r_106
+- LFind Directory: /home/anabrendel/lfind/benchmarks/tree-automata/defs_tests/_lfind_lemma_le_max_r_106
+- Namespace: TreeAutomata
+- Proof name: high_aux_4
+- Theorem: Theorem high_aux_4: forall (t0 : term) (tl0 : term_list),
+le (term_high_0 tl0) (term_high_0 (tcons t0 tl0)).
+- Declarations: 
+From lfind Require Import LFind.
+Require Import Bool.
+Require Import Arith.
+Require Import ZArith.
+From IntMap Require Import Allmaps.
+Require Import EqNat.
+From TreeAutomataCoqGym Require Import bases.
+
+Proof Context
+* Goal State: le (term_high_0 tl) (Nat.max (term_high t) (term_high_0 tl))
+
+* Hypothesis:
+tl : term_list
+H : @eq nat (term_high_0 (tcons t tl)) (Nat.max (term_high t) (term_high_0 tl))
+t : term
+
+* Types:
+Set
+Prop
+term_list
+nat
+term
+
+* Polymorphic Types:
+
+
+* Variables:
+tl : term_list
+t : term
+
+* Terms:
+term : Set
+term_high_0 tl : nat
+term_high t : nat
+le (term_high_0 tl) (Nat.max (term_high t) (term_high_0 tl)) : Prop
+nat : Set
+term_high_0 (tcons t tl) : nat
+tl : term_list
+@eq nat (term_high_0 (tcons t tl)) (Nat.max (term_high t) (term_high_0 tl)) : Prop
+tcons t tl : term_list
+t : term
+term_list : Set
+Nat.max (term_high t) (term_high_0 tl) : nat
+
+* Functions:
+term_high_0  : forall _ : term_list, nat
+term_high  : forall _ : term, nat
+le  : forall (_ : nat) (_ : nat), Prop
+tcons  : forall (_ : term) (_ : term_list), term_list
+@eq  : forall (A : Type) (_ : A) (_ : A), Prop
+Nat.max  : forall (_ : nat) (_ : nat), nat
+
+<---GENERALIZATION--->
+Time elapsed: 2 seconds
+Generalized Variables:
+lf3 : nat = term_high t
+lf1 : nat = Nat.max (term_high t) (term_high_0 tl)
+lf2 : nat = term_high_0 tl
+
+Generalizations:
+Lemma conj1: forall (lf2 : nat) (lf1 : nat), le lf2 lf1.
+Lemma conj2: forall (tl : term_list) (lf1 : nat), le (term_high_0 tl) lf1.
+Lemma conj3: forall (lf2 : nat) (lf3 : nat), le lf2 (Nat.max lf3 lf2).
+Lemma conj4: forall (tl : term_list) (lf3 : nat), le (term_high_0 tl) (Nat.max lf3 (term_high_0 tl)).
+Lemma conj7: forall (lf2 : nat) (t : term), le lf2 (Nat.max (term_high t) lf2).
+Lemma conj8: forall (tl : term_list) (t : term), le (term_high_0 tl) (Nat.max (term_high t) (term_high_0 tl)).
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 46 seconds
+Valid:
+Lemma conj8: forall (tl : term_list) (t : term), le (term_high_0 tl) (Nat.max (term_high t) (term_high_0 tl)).
+Lemma conj7: forall (lf2 : nat) (t : term), le lf2 (Nat.max (term_high t) lf2).
+Lemma conj4: forall (tl : term_list) (lf3 : nat), le (term_high_0 tl) (Nat.max lf3 (term_high_0 tl)).
+Lemma conj3: forall (lf2 : nat) (lf3 : nat), le lf2 (Nat.max lf3 lf2).
+
+Invalid:
+Lemma conj2: forall (tl : term_list) (lf1 : nat), le (term_high_0 tl) lf1.
+Lemma conj1: forall (lf2 : nat) (lf1 : nat), le lf2 lf1.
+
+<---ADD IMPLICATIONS--->
+Time elapsed: 48 seconds
+Generalizations:
+Lemma conj2: forall (tl : term_list) (lf1 : nat), le (term_high_0 tl) lf1.
+Lemma conj1: forall (lf2 : nat) (lf1 : nat), le lf2 lf1.
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 51 seconds
+Valid:
+
+Invalid:
+Lemma conj1: forall (lf2 : nat) (lf1 : nat), le lf2 lf1.
+Lemma conj2: forall (tl : term_list) (lf1 : nat), le (term_high_0 tl) lf1.
+
+
+<---CREATE SKETCHES--->
+Time elapsed: 51 seconds
+Sketches:
+Sketch conj2_sketch0 : le (##hole##) lf1
+Sketch conj2_term_sketch0 : @eq nat (term_high_0 tl) (##hole##)
+
+
+<---CREATE SYNTHESIS PROBLEMS--->
+Time elapsed: 75 seconds
+Problems per Sketch:
+Sketch conj2_term_sketch0 --> Problem  synth_2
+Sketch conj2_sketch0 --> Problem  synth_1
+
+
+<--- SYNTHESIS PROBLEM RESULTS--->
+Time elapsed: 91 seconds
+
+Problem: synth_1
+
+Problem: synth_2
+
+<---INITIAL CANDIDATE LEMMAS--->
+Time elapsed: 91 seconds
+Lemmas:
+Lemma candidate_1: forall (t : term) (tl : term_list), le (term_high_0 tl) (Nat.max (term_high t) (term_high_0 tl)).
+Lemma candidate_2: forall (t : term) (lf2 : nat), le lf2 (Nat.max (term_high t) lf2).
+Lemma candidate_3: forall (lf3 : nat) (tl : term_list), le (term_high_0 tl) (Nat.max lf3 (term_high_0 tl)).
+Lemma candidate_4: forall (lf3 : nat) (lf2 : nat), le lf2 (Nat.max lf3 lf2).
+
+<---FILTERED CANDIDATE LEMMAS--->
+Time elapsed: 103 seconds
+Duplicates removed: 1
+Filtered by Quickchick: 0
+Filtered by script: 0
+Remaining: 3
+
+Lemmas: 
+Lemma candidate_4: forall (lf3 : nat) (lf2 : nat), le lf2 (Nat.max lf3 lf2).
+Lemma candidate_2: forall (t : term) (lf2 : nat), le lf2 (Nat.max (term_high t) lf2).
+Lemma candidate_3: forall (lf3 : nat) (tl : term_list), le (term_high_0 tl) (Nat.max lf3 (term_high_0 tl)).

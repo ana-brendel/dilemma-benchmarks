@@ -1,0 +1,848 @@
+File Information
+- File name: FullAdder
+- Original Directory: /home/anabrendel/lfind/benchmarks/circuits/ADDER_tests/FullAdder/FullAdder_lemma_half_adder_sum_false_60
+- LFind Directory: /home/anabrendel/lfind/benchmarks/circuits/ADDER_tests/FullAdder/_lfind_FullAdder_lemma_half_adder_sum_false_60
+- Namespace: Circuits
+- Proof name: full_adder_sum_sym2
+- Theorem: Theorem full_adder_sum_sym2: forall a0 b0 c0 : bool,
+@eq bool (full_adder_sum a0 b0 c0) (full_adder_sum a0 c0 b0).
+- Declarations: 
+From lfind Require Import LFind.
+From CircuitsCoqGym Require Import HalfAdder.
+
+Proof Context
+* Goal State: @eq bool (half_adder_sum a true)
+  (half_adder_sum (half_adder_sum a false) true)
+
+* Hypothesis:
+c : bool
+b : bool
+a : bool
+
+* Types:
+Set
+Prop
+bool
+
+* Polymorphic Types:
+
+
+* Variables:
+a : bool
+
+* Terms:
+false : bool
+bool : Set
+half_adder_sum a false : bool
+half_adder_sum a true : bool
+half_adder_sum (half_adder_sum a false) true : bool
+true : bool
+@eq bool (half_adder_sum a true)
+  (half_adder_sum (half_adder_sum a false) true) : Prop
+a : bool
+
+* Functions:
+half_adder_sum  : forall (_ : bool) (_ : bool), bool
+@eq  : forall (A : Type) (_ : A) (_ : A), Prop
+
+<---GENERALIZATION--->
+Time elapsed: 3 seconds
+Generalized Variables:
+lf3 : bool = half_adder_sum a true
+lf1 : bool = half_adder_sum (half_adder_sum a false) true
+lf4 : bool = false
+lf5 : bool = true
+lf2 : bool = half_adder_sum a false
+
+Generalizations:
+Lemma conj1: forall (lf1 : bool) (lf3 : bool), @eq bool lf3 lf1.
+Lemma conj9: forall (lf2 : bool) (lf5 : bool) (lf3 : bool), @eq bool lf3 (half_adder_sum lf2 lf5).
+Lemma conj10: forall (lf5 : bool) (lf4 : bool) (a : bool) (lf3 : bool), @eq bool lf3 (half_adder_sum (half_adder_sum a lf4) lf5).
+Lemma conj11: forall (lf2 : bool) (lf3 : bool), @eq bool lf3 (half_adder_sum lf2 true).
+Lemma conj12: forall (lf4 : bool) (a : bool) (lf3 : bool), @eq bool lf3 (half_adder_sum (half_adder_sum a lf4) true).
+Lemma conj14: forall (lf5 : bool) (a : bool) (lf3 : bool), @eq bool lf3 (half_adder_sum (half_adder_sum a false) lf5).
+Lemma conj16: forall (a : bool) (lf3 : bool), @eq bool lf3 (half_adder_sum (half_adder_sum a false) true).
+Lemma conj17: forall (lf5 : bool) (lf1 : bool) (a : bool), @eq bool (half_adder_sum a lf5) lf1.
+Lemma conj19: forall (lf1 : bool) (a : bool), @eq bool (half_adder_sum a true) lf1.
+Lemma conj25: forall (lf2 : bool) (lf5 : bool) (a : bool), @eq bool (half_adder_sum a lf5) (half_adder_sum lf2 lf5).
+Lemma conj26: forall (lf5 : bool) (lf4 : bool) (a : bool), @eq bool (half_adder_sum a lf5) (half_adder_sum (half_adder_sum a lf4) lf5).
+Lemma conj27: forall (lf2 : bool) (a : bool), @eq bool (half_adder_sum a true) (half_adder_sum lf2 true).
+Lemma conj28: forall (lf4 : bool) (a : bool), @eq bool (half_adder_sum a true) (half_adder_sum (half_adder_sum a lf4) true).
+Lemma conj30: forall (lf5 : bool) (a : bool), @eq bool (half_adder_sum a lf5) (half_adder_sum (half_adder_sum a false) lf5).
+Lemma conj32: forall (a : bool), @eq bool (half_adder_sum a true)
+  (half_adder_sum (half_adder_sum a false) true).
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 43 seconds
+Valid:
+Lemma conj32: forall (a : bool), @eq bool (half_adder_sum a true)
+  (half_adder_sum (half_adder_sum a false) true).
+Lemma conj30: forall (lf5 : bool) (a : bool), @eq bool (half_adder_sum a lf5) (half_adder_sum (half_adder_sum a false) lf5).
+
+Invalid:
+Lemma conj28: forall (lf4 : bool) (a : bool), @eq bool (half_adder_sum a true) (half_adder_sum (half_adder_sum a lf4) true).
+Lemma conj27: forall (lf2 : bool) (a : bool), @eq bool (half_adder_sum a true) (half_adder_sum lf2 true).
+Lemma conj26: forall (lf5 : bool) (lf4 : bool) (a : bool), @eq bool (half_adder_sum a lf5) (half_adder_sum (half_adder_sum a lf4) lf5).
+Lemma conj25: forall (lf2 : bool) (lf5 : bool) (a : bool), @eq bool (half_adder_sum a lf5) (half_adder_sum lf2 lf5).
+Lemma conj19: forall (lf1 : bool) (a : bool), @eq bool (half_adder_sum a true) lf1.
+Lemma conj17: forall (lf5 : bool) (lf1 : bool) (a : bool), @eq bool (half_adder_sum a lf5) lf1.
+Lemma conj16: forall (a : bool) (lf3 : bool), @eq bool lf3 (half_adder_sum (half_adder_sum a false) true).
+Lemma conj14: forall (lf5 : bool) (a : bool) (lf3 : bool), @eq bool lf3 (half_adder_sum (half_adder_sum a false) lf5).
+Lemma conj12: forall (lf4 : bool) (a : bool) (lf3 : bool), @eq bool lf3 (half_adder_sum (half_adder_sum a lf4) true).
+Lemma conj11: forall (lf2 : bool) (lf3 : bool), @eq bool lf3 (half_adder_sum lf2 true).
+Lemma conj10: forall (lf5 : bool) (lf4 : bool) (a : bool) (lf3 : bool), @eq bool lf3 (half_adder_sum (half_adder_sum a lf4) lf5).
+Lemma conj9: forall (lf2 : bool) (lf5 : bool) (lf3 : bool), @eq bool lf3 (half_adder_sum lf2 lf5).
+Lemma conj1: forall (lf1 : bool) (lf3 : bool), @eq bool lf3 lf1.
+
+<---ADD IMPLICATIONS--->
+Time elapsed: 43 seconds
+Generalizations:
+Lemma conj28: forall (lf4 : bool) (a : bool), @eq bool (half_adder_sum a true) (half_adder_sum (half_adder_sum a lf4) true).
+Lemma conj27: forall (lf2 : bool) (a : bool), @eq bool (half_adder_sum a true) (half_adder_sum lf2 true).
+Lemma conj26: forall (lf5 : bool) (lf4 : bool) (a : bool), @eq bool (half_adder_sum a lf5) (half_adder_sum (half_adder_sum a lf4) lf5).
+Lemma conj25: forall (lf2 : bool) (lf5 : bool) (a : bool), @eq bool (half_adder_sum a lf5) (half_adder_sum lf2 lf5).
+Lemma conj19: forall (lf1 : bool) (a : bool), @eq bool (half_adder_sum a true) lf1.
+Lemma conj17: forall (lf5 : bool) (lf1 : bool) (a : bool), @eq bool (half_adder_sum a lf5) lf1.
+Lemma conj16: forall (a : bool) (lf3 : bool), @eq bool lf3 (half_adder_sum (half_adder_sum a false) true).
+Lemma conj14: forall (lf5 : bool) (a : bool) (lf3 : bool), @eq bool lf3 (half_adder_sum (half_adder_sum a false) lf5).
+Lemma conj12: forall (lf4 : bool) (a : bool) (lf3 : bool), @eq bool lf3 (half_adder_sum (half_adder_sum a lf4) true).
+Lemma conj11: forall (lf2 : bool) (lf3 : bool), @eq bool lf3 (half_adder_sum lf2 true).
+Lemma conj10: forall (lf5 : bool) (lf4 : bool) (a : bool) (lf3 : bool), @eq bool lf3 (half_adder_sum (half_adder_sum a lf4) lf5).
+Lemma conj9: forall (lf2 : bool) (lf5 : bool) (lf3 : bool), @eq bool lf3 (half_adder_sum lf2 lf5).
+Lemma conj1: forall (lf1 : bool) (lf3 : bool), @eq bool lf3 lf1.
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 76 seconds
+Valid:
+
+Invalid:
+Lemma conj1: forall (lf1 : bool) (lf3 : bool), @eq bool lf3 lf1.
+Lemma conj9: forall (lf2 : bool) (lf5 : bool) (lf3 : bool), @eq bool lf3 (half_adder_sum lf2 lf5).
+Lemma conj10: forall (lf5 : bool) (lf4 : bool) (a : bool) (lf3 : bool), @eq bool lf3 (half_adder_sum (half_adder_sum a lf4) lf5).
+Lemma conj11: forall (lf2 : bool) (lf3 : bool), @eq bool lf3 (half_adder_sum lf2 true).
+Lemma conj12: forall (lf4 : bool) (a : bool) (lf3 : bool), @eq bool lf3 (half_adder_sum (half_adder_sum a lf4) true).
+Lemma conj14: forall (lf5 : bool) (a : bool) (lf3 : bool), @eq bool lf3 (half_adder_sum (half_adder_sum a false) lf5).
+Lemma conj16: forall (a : bool) (lf3 : bool), @eq bool lf3 (half_adder_sum (half_adder_sum a false) true).
+Lemma conj17: forall (lf5 : bool) (lf1 : bool) (a : bool), @eq bool (half_adder_sum a lf5) lf1.
+Lemma conj19: forall (lf1 : bool) (a : bool), @eq bool (half_adder_sum a true) lf1.
+Lemma conj25: forall (lf2 : bool) (lf5 : bool) (a : bool), @eq bool (half_adder_sum a lf5) (half_adder_sum lf2 lf5).
+Lemma conj26: forall (lf5 : bool) (lf4 : bool) (a : bool), @eq bool (half_adder_sum a lf5) (half_adder_sum (half_adder_sum a lf4) lf5).
+Lemma conj27: forall (lf2 : bool) (a : bool), @eq bool (half_adder_sum a true) (half_adder_sum lf2 true).
+Lemma conj28: forall (lf4 : bool) (a : bool), @eq bool (half_adder_sum a true) (half_adder_sum (half_adder_sum a lf4) true).
+
+
+<---CREATE SKETCHES--->
+Time elapsed: 76 seconds
+Sketches:
+Sketch conj9_sketch0 : @eq bool lf3 (##hole##)
+Sketch conj9_term_sketch0 : @eq bool (half_adder_sum lf2 lf5) (##hole##)
+Sketch conj10_sketch0 : @eq bool lf3 (##hole##)
+Sketch conj10_sketch1 : @eq bool lf3 (half_adder_sum (##hole##) lf5)
+Sketch conj10_term_sketch0 : @eq bool (half_adder_sum (half_adder_sum a lf4) lf5) (##hole##)
+Sketch conj10_term_sketch1 : @eq bool (half_adder_sum a lf4) (##hole##)
+Sketch conj11_sketch0 : @eq bool lf3 (##hole##)
+Sketch conj11_sketch1 : @eq bool lf3 (half_adder_sum lf2 (##hole##))
+Sketch conj11_term_sketch0 : @eq bool (half_adder_sum lf2 true) (##hole##)
+Sketch conj11_term_sketch1 : @eq bool true (##hole##)
+Sketch conj12_sketch0 : @eq bool lf3 (##hole##)
+Sketch conj12_sketch1 : @eq bool lf3 (half_adder_sum (half_adder_sum a lf4) (##hole##))
+Sketch conj12_sketch2 : @eq bool lf3 (half_adder_sum (##hole##) true)
+Sketch conj12_term_sketch0 : @eq bool (half_adder_sum (half_adder_sum a lf4) true) (##hole##)
+Sketch conj12_term_sketch1 : @eq bool true (##hole##)
+Sketch conj12_term_sketch2 : @eq bool (half_adder_sum a lf4) (##hole##)
+Sketch conj14_sketch0 : @eq bool lf3 (##hole##)
+Sketch conj14_sketch1 : @eq bool lf3 (half_adder_sum (half_adder_sum a (##hole##)) lf5)
+Sketch conj14_sketch2 : @eq bool lf3 (half_adder_sum (##hole##) lf5)
+Sketch conj14_term_sketch0 : @eq bool (half_adder_sum (half_adder_sum a false) lf5) (##hole##)
+Sketch conj14_term_sketch1 : @eq bool false (##hole##)
+Sketch conj14_term_sketch2 : @eq bool (half_adder_sum a false) (##hole##)
+Sketch conj16_sketch0 : @eq bool lf3 (half_adder_sum (half_adder_sum a (##hole##)) true)
+Sketch conj16_sketch1 : @eq bool lf3 (half_adder_sum (##hole##) true)
+Sketch conj16_sketch2 : @eq bool lf3 (##hole##)
+Sketch conj16_sketch3 : @eq bool lf3 (half_adder_sum (half_adder_sum a false) (##hole##))
+Sketch conj16_term_sketch0 : @eq bool false (##hole##)
+Sketch conj16_term_sketch1 : @eq bool (half_adder_sum a false) (##hole##)
+Sketch conj16_term_sketch2 : @eq bool (half_adder_sum (half_adder_sum a false) true) (##hole##)
+Sketch conj16_term_sketch3 : @eq bool true (##hole##)
+Sketch conj17_sketch0 : @eq bool (##hole##) lf1
+Sketch conj17_term_sketch0 : @eq bool (half_adder_sum a lf5) (##hole##)
+Sketch conj19_sketch0 : @eq bool (##hole##) lf1
+Sketch conj19_sketch1 : @eq bool (half_adder_sum a (##hole##)) lf1
+Sketch conj19_term_sketch0 : @eq bool (half_adder_sum a true) (##hole##)
+Sketch conj19_term_sketch1 : @eq bool true (##hole##)
+Sketch conj25_sketch0 : @eq bool (##hole##) (half_adder_sum lf2 lf5)
+Sketch conj25_sketch1 : @eq bool (half_adder_sum a lf5) (##hole##)
+Sketch conj25_term_sketch0 : @eq bool (half_adder_sum a lf5) (##hole##)
+Sketch conj25_term_sketch1 : @eq bool (half_adder_sum lf2 lf5) (##hole##)
+Sketch conj26_sketch0 : @eq bool (##hole##) (half_adder_sum (half_adder_sum a lf4) lf5)
+Sketch conj26_sketch1 : @eq bool (half_adder_sum a lf5) (##hole##)
+Sketch conj26_sketch2 : @eq bool (half_adder_sum a lf5) (half_adder_sum (##hole##) lf5)
+Sketch conj26_term_sketch0 : @eq bool (half_adder_sum a lf5) (##hole##)
+Sketch conj26_term_sketch1 : @eq bool (half_adder_sum (half_adder_sum a lf4) lf5) (##hole##)
+Sketch conj26_term_sketch2 : @eq bool (half_adder_sum a lf4) (##hole##)
+Sketch conj27_sketch0 : @eq bool (##hole##) (half_adder_sum lf2 true)
+Sketch conj27_sketch1 : @eq bool (half_adder_sum a true) (##hole##)
+Sketch conj27_sketch2 : @eq bool (half_adder_sum a (##hole##)) (half_adder_sum lf2 (##hole##))
+Sketch conj27_term_sketch0 : @eq bool (half_adder_sum a true) (##hole##)
+Sketch conj27_term_sketch1 : @eq bool (half_adder_sum lf2 true) (##hole##)
+Sketch conj27_term_sketch2 : @eq bool true (##hole##)
+Sketch conj28_sketch0 : @eq bool (half_adder_sum a true) (##hole##)
+Sketch conj28_sketch1 : @eq bool (##hole##) (half_adder_sum (half_adder_sum a lf4) true)
+Sketch conj28_sketch2 : @eq bool (half_adder_sum a (##hole##))
+  (half_adder_sum (half_adder_sum a lf4) (##hole##))
+Sketch conj28_sketch3 : @eq bool (half_adder_sum a true) (half_adder_sum (##hole##) true)
+Sketch conj28_term_sketch0 : @eq bool (half_adder_sum (half_adder_sum a lf4) true) (##hole##)
+Sketch conj28_term_sketch1 : @eq bool (half_adder_sum a true) (##hole##)
+Sketch conj28_term_sketch2 : @eq bool true (##hole##)
+Sketch conj28_term_sketch3 : @eq bool (half_adder_sum a lf4) (##hole##)
+
+
+<---CREATE SYNTHESIS PROBLEMS--->
+Time elapsed: 102 seconds
+Problems per Sketch:
+Sketch conj12_sketch0 --> Problem  synth_1
+Sketch conj28_sketch0 --> Problem  synth_18
+Sketch conj26_term_sketch1 --> Problem  synth_4
+Sketch conj16_sketch3 --> Problem  synth_17
+Sketch conj14_sketch2 --> Problem  synth_3
+Sketch conj27_term_sketch1 --> Problem  synth_7
+Sketch conj26_sketch2 --> Problem  synth_21
+Sketch conj25_sketch1 --> Problem  synth_13
+Sketch conj19_sketch0 --> Problem  synth_19
+Sketch conj17_sketch0 --> Problem  synth_19
+Sketch conj16_sketch2 --> Problem  synth_1
+Sketch conj11_term_sketch1 --> Problem  synth_8
+Sketch conj10_term_sketch1 --> Problem  synth_5
+Sketch conj16_term_sketch1 --> Problem  synth_15
+Sketch conj14_term_sketch2 --> Problem  synth_15
+Sketch conj25_term_sketch1 --> Problem  synth_2
+Sketch conj26_sketch0 --> Problem  synth_4
+Sketch conj11_sketch1 --> Problem  synth_6
+Sketch conj17_term_sketch0 --> Problem  synth_13
+Sketch conj28_term_sketch1 --> Problem  synth_18
+Sketch conj12_term_sketch1 --> Problem  synth_8
+Sketch conj9_sketch0 --> Problem  synth_1
+Sketch conj26_term_sketch2 --> Problem  synth_5
+Sketch conj14_term_sketch1 --> Problem  synth_14
+Sketch conj12_term_sketch0 --> Problem  synth_11
+Sketch conj26_sketch1 --> Problem  synth_13
+Sketch conj28_term_sketch0 --> Problem  synth_11
+Sketch conj10_sketch1 --> Problem  synth_3
+Sketch conj9_term_sketch0 --> Problem  synth_2
+Sketch conj28_term_sketch3 --> Problem  synth_5
+Sketch conj27_sketch0 --> Problem  synth_7
+Sketch conj16_sketch1 --> Problem  synth_10
+Sketch conj12_sketch1 --> Problem  synth_9
+Sketch conj27_term_sketch2 --> Problem  synth_8
+Sketch conj19_sketch1 --> Problem  synth_20
+Sketch conj12_sketch2 --> Problem  synth_10
+Sketch conj10_term_sketch0 --> Problem  synth_4
+Sketch conj28_sketch2 --> Problem  synth_23
+Sketch conj11_term_sketch0 --> Problem  synth_7
+Sketch conj28_sketch3 --> Problem  synth_15
+Sketch conj25_sketch0 --> Problem  synth_2
+Sketch conj26_term_sketch0 --> Problem  synth_13
+Sketch conj16_term_sketch2 --> Problem  synth_18
+Sketch conj28_sketch1 --> Problem  synth_11
+Sketch conj19_term_sketch1 --> Problem  synth_8
+Sketch conj27_sketch2 --> Problem  synth_22
+Sketch conj28_term_sketch2 --> Problem  synth_8
+Sketch conj16_sketch0 --> Problem  synth_16
+Sketch conj14_sketch0 --> Problem  synth_1
+Sketch conj27_sketch1 --> Problem  synth_18
+Sketch conj14_term_sketch0 --> Problem  synth_13
+Sketch conj16_term_sketch0 --> Problem  synth_14
+Sketch conj16_term_sketch3 --> Problem  synth_8
+Sketch conj11_sketch0 --> Problem  synth_1
+Sketch conj27_term_sketch0 --> Problem  synth_18
+Sketch conj12_term_sketch2 --> Problem  synth_5
+Sketch conj25_term_sketch0 --> Problem  synth_13
+Sketch conj19_term_sketch0 --> Problem  synth_18
+Sketch conj10_sketch0 --> Problem  synth_1
+Sketch conj14_sketch1 --> Problem  synth_12
+
+
+<--- SYNTHESIS PROBLEM RESULTS--->
+Time elapsed: 138 seconds
+
+Problem: synth_22
+ HalfAdder.half_adder_sum lf2 (HalfAdder.half_adder_sum true lf2)
+ HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum a true)
+ HalfAdder.half_adder_sum lf2 (HalfAdder.half_adder_sum a true)
+ HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf2 true)
+ HalfAdder.half_adder_sum lf2 (HalfAdder.half_adder_sum lf2 true)
+ true
+
+Problem: synth_20
+ HalfAdder.half_adder_sum lf1 (HalfAdder.half_adder_sum lf1 true)
+ HalfAdder.half_adder_sum lf1 (HalfAdder.half_adder_sum a false)
+ HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf1 false)
+ HalfAdder.half_adder_sum lf1 a
+ HalfAdder.half_adder_sum a lf1
+ true
+
+Problem: synth_18
+ HalfAdder.half_adder_sum (HalfAdder.half_adder_sum a false) true
+ HalfAdder.half_adder_sum (HalfAdder.half_adder_sum true a) false
+ HalfAdder.half_adder_sum (HalfAdder.half_adder_sum a true) false
+ HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a false)
+ HalfAdder.half_adder_sum true a
+ HalfAdder.half_adder_sum a true
+
+Problem: synth_17
+ HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum a true)
+ HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf3 false)
+ HalfAdder.half_adder_sum lf3 (HalfAdder.half_adder_sum a false)
+ HalfAdder.half_adder_sum a lf3
+ HalfAdder.half_adder_sum lf3 a
+ true
+
+Problem: synth_21
+ HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum true lf5)
+ HalfAdder.half_adder_sum lf5 (HalfAdder.half_adder_sum a true)
+ HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a true)
+ HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf5 true)
+ HalfAdder.half_adder_sum a false
+ a
+
+Problem: synth_9
+ HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf4 false)
+ HalfAdder.half_adder_sum a lf3
+ HalfAdder.half_adder_sum lf3 a
+ HalfAdder.half_adder_sum true lf4
+ HalfAdder.half_adder_sum lf4 true
+ true
+
+Problem: synth_13
+ HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a false)
+ HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf5 false)
+ HalfAdder.half_adder_sum lf5 a
+ HalfAdder.half_adder_sum true a
+ HalfAdder.half_adder_sum a lf5
+ HalfAdder.half_adder_sum a true
+
+Problem: synth_6
+ HalfAdder.half_adder_sum lf2 (HalfAdder.half_adder_sum lf2 true)
+ HalfAdder.half_adder_sum lf2 (HalfAdder.half_adder_sum lf3 false)
+ HalfAdder.half_adder_sum lf3 (HalfAdder.half_adder_sum lf2 false)
+ HalfAdder.half_adder_sum lf2 lf3
+ HalfAdder.half_adder_sum lf3 lf2
+ true
+
+Problem: synth_11
+ HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum true lf4)
+ HalfAdder.half_adder_sum lf4 (HalfAdder.half_adder_sum a true)
+ HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf4 true)
+ HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a false)
+ HalfAdder.half_adder_sum true a
+ HalfAdder.half_adder_sum a true
+
+Problem: synth_7
+ HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf2 false) true
+ HalfAdder.half_adder_sum (HalfAdder.half_adder_sum true lf2) false
+ HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf2 true) false
+ HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf2 false)
+ HalfAdder.half_adder_sum true lf2
+ HalfAdder.half_adder_sum lf2 true
+
+Problem: synth_4
+ HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a false)
+ HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf5 false)
+ HalfAdder.half_adder_sum lf5 a
+ HalfAdder.half_adder_sum true a
+ HalfAdder.half_adder_sum a lf5
+ HalfAdder.half_adder_sum a true
+
+Problem: synth_1
+ HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf3 false) false
+ HalfAdder.half_adder_sum lf3 (HalfAdder.half_adder_sum lf3 lf3)
+ HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum true lf3)
+ HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf3 true)
+ HalfAdder.half_adder_sum lf3 false
+ lf3
+
+Problem: synth_23
+ HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum a true)
+ HalfAdder.half_adder_sum lf4 (HalfAdder.half_adder_sum lf4 true)
+ HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf4 false)
+ HalfAdder.half_adder_sum true lf4
+ HalfAdder.half_adder_sum lf4 true
+ true
+
+Problem: synth_16
+ HalfAdder.half_adder_sum lf3 (HalfAdder.half_adder_sum a true)
+ HalfAdder.half_adder_sum lf3 (HalfAdder.half_adder_sum lf3 false)
+ HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum a false)
+ HalfAdder.half_adder_sum lf3 lf3
+ HalfAdder.half_adder_sum a a
+ false
+
+Problem: synth_19
+ HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf1 false) false
+ HalfAdder.half_adder_sum lf1 (HalfAdder.half_adder_sum lf1 lf1)
+ HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum true lf1)
+ HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf1 true)
+ HalfAdder.half_adder_sum lf1 false
+ lf1
+
+Problem: synth_15
+ HalfAdder.half_adder_sum (HalfAdder.half_adder_sum a false) false
+ HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum a a)
+ HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum true a)
+ HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a true)
+ HalfAdder.half_adder_sum a false
+ a
+
+Problem: synth_14
+ false
+
+Problem: synth_10
+ HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf3 false) true
+ HalfAdder.half_adder_sum (HalfAdder.half_adder_sum true lf3) false
+ HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf3 true) false
+ HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf3 false)
+ HalfAdder.half_adder_sum true lf3
+ HalfAdder.half_adder_sum lf3 true
+
+Problem: synth_8
+ true
+
+Problem: synth_3
+ HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf3 false)
+ HalfAdder.half_adder_sum lf3 (HalfAdder.half_adder_sum lf5 false)
+ HalfAdder.half_adder_sum lf5 lf3
+ HalfAdder.half_adder_sum true lf3
+ HalfAdder.half_adder_sum lf3 lf5
+ HalfAdder.half_adder_sum lf3 true
+
+Problem: synth_12
+ HalfAdder.half_adder_sum lf3 lf3
+ HalfAdder.half_adder_sum a a
+ HalfAdder.half_adder_sum lf5 lf5
+ HalfAdder.half_adder_sum true lf5
+ HalfAdder.half_adder_sum lf5 true
+ false
+
+Problem: synth_5
+ HalfAdder.half_adder_sum lf4 (HalfAdder.half_adder_sum a false)
+ HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf4 false)
+ HalfAdder.half_adder_sum lf4 a
+ HalfAdder.half_adder_sum a lf4
+ HalfAdder.half_adder_sum a false
+ a
+
+Problem: synth_2
+ HalfAdder.half_adder_sum lf5 (HalfAdder.half_adder_sum lf2 false)
+ HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf2 false)
+ HalfAdder.half_adder_sum lf2 lf5
+ HalfAdder.half_adder_sum lf5 lf2
+ HalfAdder.half_adder_sum true lf2
+ HalfAdder.half_adder_sum lf2 true
+
+<---INITIAL CANDIDATE LEMMAS--->
+Time elapsed: 138 seconds
+Lemmas:
+Lemma candidate_1: forall (a : bool), @eq bool (half_adder_sum a true)   (half_adder_sum (half_adder_sum a false) true).
+Lemma candidate_2: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5) (half_adder_sum (half_adder_sum a false) lf5).
+Lemma candidate_3: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf3 false) false).
+Lemma candidate_4: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum lf3 (HalfAdder.half_adder_sum lf3 lf3)).
+Lemma candidate_5: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum true lf3)).
+Lemma candidate_6: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf3 true)).
+Lemma candidate_7: forall (lf3 : bool), @eq bool lf3 (HalfAdder.half_adder_sum lf3 false).
+Lemma candidate_8: forall (lf3 : bool), @eq bool lf3 (lf3).
+Lemma candidate_9: forall (lf5 : bool) (lf2 : bool), @eq bool (half_adder_sum lf2 lf5)   (HalfAdder.half_adder_sum lf5 (HalfAdder.half_adder_sum lf2 false)).
+Lemma candidate_10: forall (lf5 : bool) (lf2 : bool), @eq bool (half_adder_sum lf2 lf5)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf2 false)).
+Lemma candidate_11: forall (lf5 : bool) (lf2 : bool), @eq bool (half_adder_sum lf2 lf5) (HalfAdder.half_adder_sum lf2 lf5).
+Lemma candidate_12: forall (lf5 : bool) (lf2 : bool), @eq bool (half_adder_sum lf2 lf5) (HalfAdder.half_adder_sum lf5 lf2).
+Lemma candidate_13: forall (lf5 : bool) (lf2 : bool), @eq bool (half_adder_sum lf2 lf5) (HalfAdder.half_adder_sum true lf2).
+Lemma candidate_14: forall (lf5 : bool) (lf2 : bool), @eq bool (half_adder_sum lf2 lf5) (HalfAdder.half_adder_sum lf2 true).
+Lemma candidate_15: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf3 false) false).
+Lemma candidate_16: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum lf3 (HalfAdder.half_adder_sum lf3 lf3)).
+Lemma candidate_17: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum true lf3)).
+Lemma candidate_18: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf3 true)).
+Lemma candidate_19: forall (lf3 : bool), @eq bool lf3 (HalfAdder.half_adder_sum lf3 false).
+Lemma candidate_20: forall (lf3 : bool), @eq bool lf3 (lf3).
+Lemma candidate_21: forall (lf3 : bool) (lf5 : bool), @eq bool lf3   (half_adder_sum      (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf3 false)) lf5).
+Lemma candidate_22: forall (lf3 : bool) (lf5 : bool), @eq bool lf3   (half_adder_sum      (HalfAdder.half_adder_sum lf3 (HalfAdder.half_adder_sum lf5 false)) lf5).
+Lemma candidate_23: forall (lf3 : bool) (lf5 : bool), @eq bool lf3 (half_adder_sum (HalfAdder.half_adder_sum lf5 lf3) lf5).
+Lemma candidate_24: forall (lf3 : bool) (lf5 : bool), @eq bool lf3 (half_adder_sum (HalfAdder.half_adder_sum true lf3) lf5).
+Lemma candidate_25: forall (lf3 : bool) (lf5 : bool), @eq bool lf3 (half_adder_sum (HalfAdder.half_adder_sum lf3 lf5) lf5).
+Lemma candidate_26: forall (lf3 : bool) (lf5 : bool), @eq bool lf3 (half_adder_sum (HalfAdder.half_adder_sum lf3 true) lf5).
+Lemma candidate_27: forall (a : bool) (lf4 : bool) (lf5 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) lf5)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a false)).
+Lemma candidate_28: forall (a : bool) (lf4 : bool) (lf5 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) lf5)   (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf5 false)).
+Lemma candidate_29: forall (a : bool) (lf4 : bool) (lf5 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) lf5)   (HalfAdder.half_adder_sum lf5 a).
+Lemma candidate_30: forall (a : bool) (lf4 : bool) (lf5 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) lf5)   (HalfAdder.half_adder_sum true a).
+Lemma candidate_31: forall (a : bool) (lf4 : bool) (lf5 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) lf5)   (HalfAdder.half_adder_sum a lf5).
+Lemma candidate_32: forall (a : bool) (lf4 : bool) (lf5 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) lf5)   (HalfAdder.half_adder_sum a true).
+Lemma candidate_33: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a lf4)   (HalfAdder.half_adder_sum lf4 (HalfAdder.half_adder_sum a false)).
+Lemma candidate_34: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a lf4)   (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf4 false)).
+Lemma candidate_35: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a lf4) (HalfAdder.half_adder_sum lf4 a).
+Lemma candidate_36: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a lf4) (HalfAdder.half_adder_sum a lf4).
+Lemma candidate_37: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a lf4) (HalfAdder.half_adder_sum a false).
+Lemma candidate_38: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a lf4) (a).
+Lemma candidate_39: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf3 false) false).
+Lemma candidate_40: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum lf3 (HalfAdder.half_adder_sum lf3 lf3)).
+Lemma candidate_41: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum true lf3)).
+Lemma candidate_42: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf3 true)).
+Lemma candidate_43: forall (lf3 : bool), @eq bool lf3 (HalfAdder.half_adder_sum lf3 false).
+Lemma candidate_44: forall (lf3 : bool), @eq bool lf3 (lf3).
+Lemma candidate_45: forall (lf3 : bool) (lf2 : bool), @eq bool lf3   (half_adder_sum lf2      (HalfAdder.half_adder_sum lf2 (HalfAdder.half_adder_sum lf2 true))).
+Lemma candidate_46: forall (lf3 : bool) (lf2 : bool), @eq bool lf3   (half_adder_sum lf2      (HalfAdder.half_adder_sum lf2 (HalfAdder.half_adder_sum lf3 false))).
+Lemma candidate_47: forall (lf3 : bool) (lf2 : bool), @eq bool lf3   (half_adder_sum lf2      (HalfAdder.half_adder_sum lf3 (HalfAdder.half_adder_sum lf2 false))).
+Lemma candidate_48: forall (lf3 : bool) (lf2 : bool), @eq bool lf3 (half_adder_sum lf2 (HalfAdder.half_adder_sum lf2 lf3)).
+Lemma candidate_49: forall (lf3 : bool) (lf2 : bool), @eq bool lf3 (half_adder_sum lf2 (HalfAdder.half_adder_sum lf3 lf2)).
+Lemma candidate_50: forall (lf3 : bool) (lf2 : bool), @eq bool lf3 (half_adder_sum lf2 (true)).
+Lemma candidate_51: forall (lf2 : bool), @eq bool (half_adder_sum lf2 true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf2 false) true).
+Lemma candidate_52: forall (lf2 : bool), @eq bool (half_adder_sum lf2 true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum true lf2) false).
+Lemma candidate_53: forall (lf2 : bool), @eq bool (half_adder_sum lf2 true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf2 true) false).
+Lemma candidate_54: forall (lf2 : bool), @eq bool (half_adder_sum lf2 true)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf2 false)).
+Lemma candidate_55: forall (lf2 : bool), @eq bool (half_adder_sum lf2 true) (HalfAdder.half_adder_sum true lf2).
+Lemma candidate_56: forall (lf2 : bool), @eq bool (half_adder_sum lf2 true) (HalfAdder.half_adder_sum lf2 true).
+Lemma candidate_57: @eq bool true (true).
+Lemma candidate_58: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf3 false) false).
+Lemma candidate_59: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum lf3 (HalfAdder.half_adder_sum lf3 lf3)).
+Lemma candidate_60: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum true lf3)).
+Lemma candidate_61: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf3 true)).
+Lemma candidate_62: forall (lf3 : bool), @eq bool lf3 (HalfAdder.half_adder_sum lf3 false).
+Lemma candidate_63: forall (lf3 : bool), @eq bool lf3 (lf3).
+Lemma candidate_64: forall (lf3 : bool) (a : bool) (lf4 : bool), @eq bool lf3   (half_adder_sum (half_adder_sum a lf4)      (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf4 false))).
+Lemma candidate_65: forall (lf3 : bool) (a : bool) (lf4 : bool), @eq bool lf3   (half_adder_sum (half_adder_sum a lf4) (HalfAdder.half_adder_sum a lf3)).
+Lemma candidate_66: forall (lf3 : bool) (a : bool) (lf4 : bool), @eq bool lf3   (half_adder_sum (half_adder_sum a lf4) (HalfAdder.half_adder_sum lf3 a)).
+Lemma candidate_67: forall (lf3 : bool) (a : bool) (lf4 : bool), @eq bool lf3   (half_adder_sum (half_adder_sum a lf4) (HalfAdder.half_adder_sum true lf4)).
+Lemma candidate_68: forall (lf3 : bool) (a : bool) (lf4 : bool), @eq bool lf3   (half_adder_sum (half_adder_sum a lf4) (HalfAdder.half_adder_sum lf4 true)).
+Lemma candidate_69: forall (lf3 : bool) (a : bool) (lf4 : bool), @eq bool lf3 (half_adder_sum (half_adder_sum a lf4) (true)).
+Lemma candidate_70: forall (lf3 : bool), @eq bool lf3   (half_adder_sum      (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf3 false) true)      true).
+Lemma candidate_71: forall (lf3 : bool), @eq bool lf3   (half_adder_sum      (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum true lf3) false)      true).
+Lemma candidate_72: forall (lf3 : bool), @eq bool lf3   (half_adder_sum      (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf3 true) false)      true).
+Lemma candidate_73: forall (lf3 : bool), @eq bool lf3   (half_adder_sum      (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf3 false))      true).
+Lemma candidate_74: forall (lf3 : bool), @eq bool lf3 (half_adder_sum (HalfAdder.half_adder_sum true lf3) true).
+Lemma candidate_75: forall (lf3 : bool), @eq bool lf3 (half_adder_sum (HalfAdder.half_adder_sum lf3 true) true).
+Lemma candidate_76: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) true)   (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum true lf4)).
+Lemma candidate_77: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) true)   (HalfAdder.half_adder_sum lf4 (HalfAdder.half_adder_sum a true)).
+Lemma candidate_78: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) true)   (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf4 true)).
+Lemma candidate_79: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) true)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a false)).
+Lemma candidate_80: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) true)   (HalfAdder.half_adder_sum true a).
+Lemma candidate_81: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) true)   (HalfAdder.half_adder_sum a true).
+Lemma candidate_82: @eq bool true (true).
+Lemma candidate_83: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a lf4)   (HalfAdder.half_adder_sum lf4 (HalfAdder.half_adder_sum a false)).
+Lemma candidate_84: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a lf4)   (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf4 false)).
+Lemma candidate_85: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a lf4) (HalfAdder.half_adder_sum lf4 a).
+Lemma candidate_86: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a lf4) (HalfAdder.half_adder_sum a lf4).
+Lemma candidate_87: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a lf4) (HalfAdder.half_adder_sum a false).
+Lemma candidate_88: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a lf4) (a).
+Lemma candidate_89: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf3 false) false).
+Lemma candidate_90: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum lf3 (HalfAdder.half_adder_sum lf3 lf3)).
+Lemma candidate_91: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum true lf3)).
+Lemma candidate_92: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf3 true)).
+Lemma candidate_93: forall (lf3 : bool), @eq bool lf3 (HalfAdder.half_adder_sum lf3 false).
+Lemma candidate_94: forall (lf3 : bool), @eq bool lf3 (lf3).
+Lemma candidate_95: forall (lf3 : bool) (a : bool) (lf5 : bool), @eq bool lf3   (half_adder_sum (half_adder_sum a (HalfAdder.half_adder_sum lf3 lf3)) lf5).
+Lemma candidate_96: forall (lf3 : bool) (a : bool) (lf5 : bool), @eq bool lf3   (half_adder_sum (half_adder_sum a (HalfAdder.half_adder_sum a a)) lf5).
+Lemma candidate_97: forall (lf3 : bool) (a : bool) (lf5 : bool), @eq bool lf3   (half_adder_sum (half_adder_sum a (HalfAdder.half_adder_sum lf5 lf5)) lf5).
+Lemma candidate_98: forall (lf3 : bool) (a : bool) (lf5 : bool), @eq bool lf3   (half_adder_sum (half_adder_sum a (HalfAdder.half_adder_sum true lf5)) lf5).
+Lemma candidate_99: forall (lf3 : bool) (a : bool) (lf5 : bool), @eq bool lf3   (half_adder_sum (half_adder_sum a (HalfAdder.half_adder_sum lf5 true)) lf5).
+Lemma candidate_100: forall (lf3 : bool) (a : bool) (lf5 : bool), @eq bool lf3 (half_adder_sum (half_adder_sum a (false)) lf5).
+Lemma candidate_101: forall (lf3 : bool) (lf5 : bool), @eq bool lf3   (half_adder_sum      (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf3 false)) lf5).
+Lemma candidate_102: forall (lf3 : bool) (lf5 : bool), @eq bool lf3   (half_adder_sum      (HalfAdder.half_adder_sum lf3 (HalfAdder.half_adder_sum lf5 false)) lf5).
+Lemma candidate_103: forall (lf3 : bool) (lf5 : bool), @eq bool lf3 (half_adder_sum (HalfAdder.half_adder_sum lf5 lf3) lf5).
+Lemma candidate_104: forall (lf3 : bool) (lf5 : bool), @eq bool lf3 (half_adder_sum (HalfAdder.half_adder_sum true lf3) lf5).
+Lemma candidate_105: forall (lf3 : bool) (lf5 : bool), @eq bool lf3 (half_adder_sum (HalfAdder.half_adder_sum lf3 lf5) lf5).
+Lemma candidate_106: forall (lf3 : bool) (lf5 : bool), @eq bool lf3 (half_adder_sum (HalfAdder.half_adder_sum lf3 true) lf5).
+Lemma candidate_107: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum (half_adder_sum a false) lf5)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a false)).
+Lemma candidate_108: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum (half_adder_sum a false) lf5)   (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf5 false)).
+Lemma candidate_109: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum (half_adder_sum a false) lf5)   (HalfAdder.half_adder_sum lf5 a).
+Lemma candidate_110: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum (half_adder_sum a false) lf5)   (HalfAdder.half_adder_sum true a).
+Lemma candidate_111: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum (half_adder_sum a false) lf5)   (HalfAdder.half_adder_sum a lf5).
+Lemma candidate_112: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum (half_adder_sum a false) lf5)   (HalfAdder.half_adder_sum a true).
+Lemma candidate_113: @eq bool false (false).
+Lemma candidate_114: forall (a : bool), @eq bool (half_adder_sum a false)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum a false) false).
+Lemma candidate_115: forall (a : bool), @eq bool (half_adder_sum a false)   (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum a a)).
+Lemma candidate_116: forall (a : bool), @eq bool (half_adder_sum a false)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum true a)).
+Lemma candidate_117: forall (a : bool), @eq bool (half_adder_sum a false)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a true)).
+Lemma candidate_118: forall (a : bool), @eq bool (half_adder_sum a false) (HalfAdder.half_adder_sum a false).
+Lemma candidate_119: forall (a : bool), @eq bool (half_adder_sum a false) (a).
+Lemma candidate_120: forall (lf3 : bool) (a : bool), @eq bool lf3   (half_adder_sum      (half_adder_sum a         (HalfAdder.half_adder_sum lf3 (HalfAdder.half_adder_sum a true)))      true).
+Lemma candidate_121: forall (lf3 : bool) (a : bool), @eq bool lf3   (half_adder_sum      (half_adder_sum a         (HalfAdder.half_adder_sum lf3 (HalfAdder.half_adder_sum lf3 false)))      true).
+Lemma candidate_122: forall (lf3 : bool) (a : bool), @eq bool lf3   (half_adder_sum      (half_adder_sum a         (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum a false))) true).
+Lemma candidate_123: forall (lf3 : bool) (a : bool), @eq bool lf3   (half_adder_sum (half_adder_sum a (HalfAdder.half_adder_sum lf3 lf3)) true).
+Lemma candidate_124: forall (lf3 : bool) (a : bool), @eq bool lf3   (half_adder_sum (half_adder_sum a (HalfAdder.half_adder_sum a a)) true).
+Lemma candidate_125: forall (lf3 : bool) (a : bool), @eq bool lf3 (half_adder_sum (half_adder_sum a (false)) true).
+Lemma candidate_126: forall (lf3 : bool), @eq bool lf3   (half_adder_sum      (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf3 false) true)      true).
+Lemma candidate_127: forall (lf3 : bool), @eq bool lf3   (half_adder_sum      (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum true lf3) false)      true).
+Lemma candidate_128: forall (lf3 : bool), @eq bool lf3   (half_adder_sum      (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf3 true) false)      true).
+Lemma candidate_129: forall (lf3 : bool), @eq bool lf3   (half_adder_sum      (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf3 false))      true).
+Lemma candidate_130: forall (lf3 : bool), @eq bool lf3 (half_adder_sum (HalfAdder.half_adder_sum true lf3) true).
+Lemma candidate_131: forall (lf3 : bool), @eq bool lf3 (half_adder_sum (HalfAdder.half_adder_sum lf3 true) true).
+Lemma candidate_132: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf3 false) false).
+Lemma candidate_133: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum lf3 (HalfAdder.half_adder_sum lf3 lf3)).
+Lemma candidate_134: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum true lf3)).
+Lemma candidate_135: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf3 true)).
+Lemma candidate_136: forall (lf3 : bool), @eq bool lf3 (HalfAdder.half_adder_sum lf3 false).
+Lemma candidate_137: forall (lf3 : bool), @eq bool lf3 (lf3).
+Lemma candidate_138: forall (lf3 : bool) (a : bool), @eq bool lf3   (half_adder_sum (half_adder_sum a false)      (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum a true))).
+Lemma candidate_139: forall (lf3 : bool) (a : bool), @eq bool lf3   (half_adder_sum (half_adder_sum a false)      (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf3 false))).
+Lemma candidate_140: forall (lf3 : bool) (a : bool), @eq bool lf3   (half_adder_sum (half_adder_sum a false)      (HalfAdder.half_adder_sum lf3 (HalfAdder.half_adder_sum a false))).
+Lemma candidate_141: forall (lf3 : bool) (a : bool), @eq bool lf3   (half_adder_sum (half_adder_sum a false) (HalfAdder.half_adder_sum a lf3)).
+Lemma candidate_142: forall (lf3 : bool) (a : bool), @eq bool lf3   (half_adder_sum (half_adder_sum a false) (HalfAdder.half_adder_sum lf3 a)).
+Lemma candidate_143: forall (lf3 : bool) (a : bool), @eq bool lf3 (half_adder_sum (half_adder_sum a false) (true)).
+Lemma candidate_144: @eq bool false (false).
+Lemma candidate_145: forall (a : bool), @eq bool (half_adder_sum a false)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum a false) false).
+Lemma candidate_146: forall (a : bool), @eq bool (half_adder_sum a false)   (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum a a)).
+Lemma candidate_147: forall (a : bool), @eq bool (half_adder_sum a false)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum true a)).
+Lemma candidate_148: forall (a : bool), @eq bool (half_adder_sum a false)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a true)).
+Lemma candidate_149: forall (a : bool), @eq bool (half_adder_sum a false) (HalfAdder.half_adder_sum a false).
+Lemma candidate_150: forall (a : bool), @eq bool (half_adder_sum a false) (a).
+Lemma candidate_151: forall (a : bool), @eq bool (half_adder_sum (half_adder_sum a false) true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum a false) true).
+Lemma candidate_152: forall (a : bool), @eq bool (half_adder_sum (half_adder_sum a false) true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum true a) false).
+Lemma candidate_153: forall (a : bool), @eq bool (half_adder_sum (half_adder_sum a false) true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum a true) false).
+Lemma candidate_154: forall (a : bool), @eq bool (half_adder_sum (half_adder_sum a false) true)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a false)).
+Lemma candidate_155: forall (a : bool), @eq bool (half_adder_sum (half_adder_sum a false) true)   (HalfAdder.half_adder_sum true a).
+Lemma candidate_156: forall (a : bool), @eq bool (half_adder_sum (half_adder_sum a false) true)   (HalfAdder.half_adder_sum a true).
+Lemma candidate_157: @eq bool true (true).
+Lemma candidate_158: forall (lf1 : bool), @eq bool   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf1 false) false) lf1.
+Lemma candidate_159: forall (lf1 : bool), @eq bool (HalfAdder.half_adder_sum lf1 (HalfAdder.half_adder_sum lf1 lf1))   lf1.
+Lemma candidate_160: forall (lf1 : bool), @eq bool (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum true lf1))   lf1.
+Lemma candidate_161: forall (lf1 : bool), @eq bool (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf1 true))   lf1.
+Lemma candidate_162: forall (lf1 : bool), @eq bool (HalfAdder.half_adder_sum lf1 false) lf1.
+Lemma candidate_163: forall (lf1 : bool), @eq bool (lf1) lf1.
+Lemma candidate_164: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a false)).
+Lemma candidate_165: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5)   (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf5 false)).
+Lemma candidate_166: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5) (HalfAdder.half_adder_sum lf5 a).
+Lemma candidate_167: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5) (HalfAdder.half_adder_sum true a).
+Lemma candidate_168: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5) (HalfAdder.half_adder_sum a lf5).
+Lemma candidate_169: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5) (HalfAdder.half_adder_sum a true).
+Lemma candidate_170: forall (lf1 : bool), @eq bool   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf1 false) false) lf1.
+Lemma candidate_171: forall (lf1 : bool), @eq bool (HalfAdder.half_adder_sum lf1 (HalfAdder.half_adder_sum lf1 lf1))   lf1.
+Lemma candidate_172: forall (lf1 : bool), @eq bool (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum true lf1))   lf1.
+Lemma candidate_173: forall (lf1 : bool), @eq bool (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf1 true))   lf1.
+Lemma candidate_174: forall (lf1 : bool), @eq bool (HalfAdder.half_adder_sum lf1 false) lf1.
+Lemma candidate_175: forall (lf1 : bool), @eq bool (lf1) lf1.
+Lemma candidate_176: forall (a : bool) (lf1 : bool), @eq bool   (half_adder_sum a      (HalfAdder.half_adder_sum lf1 (HalfAdder.half_adder_sum lf1 true))) lf1.
+Lemma candidate_177: forall (a : bool) (lf1 : bool), @eq bool   (half_adder_sum a      (HalfAdder.half_adder_sum lf1 (HalfAdder.half_adder_sum a false))) lf1.
+Lemma candidate_178: forall (a : bool) (lf1 : bool), @eq bool   (half_adder_sum a      (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf1 false))) lf1.
+Lemma candidate_179: forall (a : bool) (lf1 : bool), @eq bool (half_adder_sum a (HalfAdder.half_adder_sum lf1 a)) lf1.
+Lemma candidate_180: forall (a : bool) (lf1 : bool), @eq bool (half_adder_sum a (HalfAdder.half_adder_sum a lf1)) lf1.
+Lemma candidate_181: forall (a : bool) (lf1 : bool), @eq bool (half_adder_sum a (true)) lf1.
+Lemma candidate_182: forall (a : bool), @eq bool (half_adder_sum a true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum a false) true).
+Lemma candidate_183: forall (a : bool), @eq bool (half_adder_sum a true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum true a) false).
+Lemma candidate_184: forall (a : bool), @eq bool (half_adder_sum a true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum a true) false).
+Lemma candidate_185: forall (a : bool), @eq bool (half_adder_sum a true)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a false)).
+Lemma candidate_186: forall (a : bool), @eq bool (half_adder_sum a true) (HalfAdder.half_adder_sum true a).
+Lemma candidate_187: forall (a : bool), @eq bool (half_adder_sum a true) (HalfAdder.half_adder_sum a true).
+Lemma candidate_188: @eq bool true (true).
+Lemma candidate_189: forall (lf5 : bool) (lf2 : bool), @eq bool (HalfAdder.half_adder_sum lf5 (HalfAdder.half_adder_sum lf2 false))   (half_adder_sum lf2 lf5).
+Lemma candidate_190: forall (lf5 : bool) (lf2 : bool), @eq bool (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf2 false))   (half_adder_sum lf2 lf5).
+Lemma candidate_191: forall (lf5 : bool) (lf2 : bool), @eq bool (HalfAdder.half_adder_sum lf2 lf5) (half_adder_sum lf2 lf5).
+Lemma candidate_192: forall (lf5 : bool) (lf2 : bool), @eq bool (HalfAdder.half_adder_sum lf5 lf2) (half_adder_sum lf2 lf5).
+Lemma candidate_193: forall (lf5 : bool) (lf2 : bool), @eq bool (HalfAdder.half_adder_sum true lf2) (half_adder_sum lf2 lf5).
+Lemma candidate_194: forall (lf5 : bool) (lf2 : bool), @eq bool (HalfAdder.half_adder_sum lf2 true) (half_adder_sum lf2 lf5).
+Lemma candidate_195: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a false)).
+Lemma candidate_196: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5)   (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf5 false)).
+Lemma candidate_197: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5) (HalfAdder.half_adder_sum lf5 a).
+Lemma candidate_198: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5) (HalfAdder.half_adder_sum true a).
+Lemma candidate_199: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5) (HalfAdder.half_adder_sum a lf5).
+Lemma candidate_200: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5) (HalfAdder.half_adder_sum a true).
+Lemma candidate_201: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a false)).
+Lemma candidate_202: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5)   (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf5 false)).
+Lemma candidate_203: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5) (HalfAdder.half_adder_sum lf5 a).
+Lemma candidate_204: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5) (HalfAdder.half_adder_sum true a).
+Lemma candidate_205: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5) (HalfAdder.half_adder_sum a lf5).
+Lemma candidate_206: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5) (HalfAdder.half_adder_sum a true).
+Lemma candidate_207: forall (lf5 : bool) (lf2 : bool), @eq bool (half_adder_sum lf2 lf5)   (HalfAdder.half_adder_sum lf5 (HalfAdder.half_adder_sum lf2 false)).
+Lemma candidate_208: forall (lf5 : bool) (lf2 : bool), @eq bool (half_adder_sum lf2 lf5)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf2 false)).
+Lemma candidate_209: forall (lf5 : bool) (lf2 : bool), @eq bool (half_adder_sum lf2 lf5) (HalfAdder.half_adder_sum lf2 lf5).
+Lemma candidate_210: forall (lf5 : bool) (lf2 : bool), @eq bool (half_adder_sum lf2 lf5) (HalfAdder.half_adder_sum lf5 lf2).
+Lemma candidate_211: forall (lf5 : bool) (lf2 : bool), @eq bool (half_adder_sum lf2 lf5) (HalfAdder.half_adder_sum true lf2).
+Lemma candidate_212: forall (lf5 : bool) (lf2 : bool), @eq bool (half_adder_sum lf2 lf5) (HalfAdder.half_adder_sum lf2 true).
+Lemma candidate_213: forall (a : bool) (lf4 : bool) (lf5 : bool), @eq bool (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a false))   (half_adder_sum (half_adder_sum a lf4) lf5).
+Lemma candidate_214: forall (a : bool) (lf4 : bool) (lf5 : bool), @eq bool (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf5 false))   (half_adder_sum (half_adder_sum a lf4) lf5).
+Lemma candidate_215: forall (a : bool) (lf4 : bool) (lf5 : bool), @eq bool (HalfAdder.half_adder_sum lf5 a)   (half_adder_sum (half_adder_sum a lf4) lf5).
+Lemma candidate_216: forall (a : bool) (lf4 : bool) (lf5 : bool), @eq bool (HalfAdder.half_adder_sum true a)   (half_adder_sum (half_adder_sum a lf4) lf5).
+Lemma candidate_217: forall (a : bool) (lf4 : bool) (lf5 : bool), @eq bool (HalfAdder.half_adder_sum a lf5)   (half_adder_sum (half_adder_sum a lf4) lf5).
+Lemma candidate_218: forall (a : bool) (lf4 : bool) (lf5 : bool), @eq bool (HalfAdder.half_adder_sum a true)   (half_adder_sum (half_adder_sum a lf4) lf5).
+Lemma candidate_219: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a false)).
+Lemma candidate_220: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5)   (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf5 false)).
+Lemma candidate_221: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5) (HalfAdder.half_adder_sum lf5 a).
+Lemma candidate_222: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5) (HalfAdder.half_adder_sum true a).
+Lemma candidate_223: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5) (HalfAdder.half_adder_sum a lf5).
+Lemma candidate_224: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5) (HalfAdder.half_adder_sum a true).
+Lemma candidate_225: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5)   (half_adder_sum      (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum true lf5)) lf5).
+Lemma candidate_226: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5)   (half_adder_sum      (HalfAdder.half_adder_sum lf5 (HalfAdder.half_adder_sum a true)) lf5).
+Lemma candidate_227: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5)   (half_adder_sum      (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a true)) lf5).
+Lemma candidate_228: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5)   (half_adder_sum      (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf5 true)) lf5).
+Lemma candidate_229: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5)   (half_adder_sum (HalfAdder.half_adder_sum a false) lf5).
+Lemma candidate_230: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5) (half_adder_sum (a) lf5).
+Lemma candidate_231: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a false)).
+Lemma candidate_232: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5)   (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf5 false)).
+Lemma candidate_233: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5) (HalfAdder.half_adder_sum lf5 a).
+Lemma candidate_234: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5) (HalfAdder.half_adder_sum true a).
+Lemma candidate_235: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5) (HalfAdder.half_adder_sum a lf5).
+Lemma candidate_236: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5) (HalfAdder.half_adder_sum a true).
+Lemma candidate_237: forall (a : bool) (lf4 : bool) (lf5 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) lf5)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a false)).
+Lemma candidate_238: forall (a : bool) (lf4 : bool) (lf5 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) lf5)   (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf5 false)).
+Lemma candidate_239: forall (a : bool) (lf4 : bool) (lf5 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) lf5)   (HalfAdder.half_adder_sum lf5 a).
+Lemma candidate_240: forall (a : bool) (lf4 : bool) (lf5 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) lf5)   (HalfAdder.half_adder_sum true a).
+Lemma candidate_241: forall (a : bool) (lf4 : bool) (lf5 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) lf5)   (HalfAdder.half_adder_sum a lf5).
+Lemma candidate_242: forall (a : bool) (lf4 : bool) (lf5 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) lf5)   (HalfAdder.half_adder_sum a true).
+Lemma candidate_243: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a lf4)   (HalfAdder.half_adder_sum lf4 (HalfAdder.half_adder_sum a false)).
+Lemma candidate_244: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a lf4)   (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf4 false)).
+Lemma candidate_245: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a lf4) (HalfAdder.half_adder_sum lf4 a).
+Lemma candidate_246: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a lf4) (HalfAdder.half_adder_sum a lf4).
+Lemma candidate_247: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a lf4) (HalfAdder.half_adder_sum a false).
+Lemma candidate_248: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a lf4) (a).
+Lemma candidate_249: forall (lf2 : bool), @eq bool (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf2 false) true)   (half_adder_sum lf2 true).
+Lemma candidate_250: forall (lf2 : bool), @eq bool (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum true lf2) false)   (half_adder_sum lf2 true).
+Lemma candidate_251: forall (lf2 : bool), @eq bool (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf2 true) false)   (half_adder_sum lf2 true).
+Lemma candidate_252: forall (lf2 : bool), @eq bool (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf2 false))   (half_adder_sum lf2 true).
+Lemma candidate_253: forall (lf2 : bool), @eq bool (HalfAdder.half_adder_sum true lf2) (half_adder_sum lf2 true).
+Lemma candidate_254: forall (lf2 : bool), @eq bool (HalfAdder.half_adder_sum lf2 true) (half_adder_sum lf2 true).
+Lemma candidate_255: forall (a : bool), @eq bool (half_adder_sum a true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum a false) true).
+Lemma candidate_256: forall (a : bool), @eq bool (half_adder_sum a true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum true a) false).
+Lemma candidate_257: forall (a : bool), @eq bool (half_adder_sum a true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum a true) false).
+Lemma candidate_258: forall (a : bool), @eq bool (half_adder_sum a true)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a false)).
+Lemma candidate_259: forall (a : bool), @eq bool (half_adder_sum a true) (HalfAdder.half_adder_sum true a).
+Lemma candidate_260: forall (a : bool), @eq bool (half_adder_sum a true) (HalfAdder.half_adder_sum a true).
+Lemma candidate_261: forall (a : bool) (lf2 : bool), @eq bool   (half_adder_sum a      (HalfAdder.half_adder_sum lf2 (HalfAdder.half_adder_sum true lf2)))   (half_adder_sum lf2      (HalfAdder.half_adder_sum lf2 (HalfAdder.half_adder_sum true lf2))).
+Lemma candidate_262: forall (a : bool) (lf2 : bool), @eq bool   (half_adder_sum a      (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum a true)))   (half_adder_sum lf2      (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum a true))).
+Lemma candidate_263: forall (a : bool) (lf2 : bool), @eq bool   (half_adder_sum a      (HalfAdder.half_adder_sum lf2 (HalfAdder.half_adder_sum a true)))   (half_adder_sum lf2      (HalfAdder.half_adder_sum lf2 (HalfAdder.half_adder_sum a true))).
+Lemma candidate_264: forall (a : bool) (lf2 : bool), @eq bool   (half_adder_sum a      (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf2 true)))   (half_adder_sum lf2      (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf2 true))).
+Lemma candidate_265: forall (a : bool) (lf2 : bool), @eq bool   (half_adder_sum a      (HalfAdder.half_adder_sum lf2 (HalfAdder.half_adder_sum lf2 true)))   (half_adder_sum lf2      (HalfAdder.half_adder_sum lf2 (HalfAdder.half_adder_sum lf2 true))).
+Lemma candidate_266: forall (a : bool) (lf2 : bool), @eq bool (half_adder_sum a (true)) (half_adder_sum lf2 (true)).
+Lemma candidate_267: forall (a : bool), @eq bool (half_adder_sum a true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum a false) true).
+Lemma candidate_268: forall (a : bool), @eq bool (half_adder_sum a true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum true a) false).
+Lemma candidate_269: forall (a : bool), @eq bool (half_adder_sum a true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum a true) false).
+Lemma candidate_270: forall (a : bool), @eq bool (half_adder_sum a true)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a false)).
+Lemma candidate_271: forall (a : bool), @eq bool (half_adder_sum a true) (HalfAdder.half_adder_sum true a).
+Lemma candidate_272: forall (a : bool), @eq bool (half_adder_sum a true) (HalfAdder.half_adder_sum a true).
+Lemma candidate_273: forall (lf2 : bool), @eq bool (half_adder_sum lf2 true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf2 false) true).
+Lemma candidate_274: forall (lf2 : bool), @eq bool (half_adder_sum lf2 true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum true lf2) false).
+Lemma candidate_275: forall (lf2 : bool), @eq bool (half_adder_sum lf2 true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf2 true) false).
+Lemma candidate_276: forall (lf2 : bool), @eq bool (half_adder_sum lf2 true)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf2 false)).
+Lemma candidate_277: forall (lf2 : bool), @eq bool (half_adder_sum lf2 true) (HalfAdder.half_adder_sum true lf2).
+Lemma candidate_278: forall (lf2 : bool), @eq bool (half_adder_sum lf2 true) (HalfAdder.half_adder_sum lf2 true).
+Lemma candidate_279: @eq bool true (true).
+Lemma candidate_280: forall (a : bool), @eq bool (half_adder_sum a true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum a false) true).
+Lemma candidate_281: forall (a : bool), @eq bool (half_adder_sum a true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum true a) false).
+Lemma candidate_282: forall (a : bool), @eq bool (half_adder_sum a true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum a true) false).
+Lemma candidate_283: forall (a : bool), @eq bool (half_adder_sum a true)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a false)).
+Lemma candidate_284: forall (a : bool), @eq bool (half_adder_sum a true) (HalfAdder.half_adder_sum true a).
+Lemma candidate_285: forall (a : bool), @eq bool (half_adder_sum a true) (HalfAdder.half_adder_sum a true).
+Lemma candidate_286: forall (a : bool) (lf4 : bool), @eq bool (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum true lf4))   (half_adder_sum (half_adder_sum a lf4) true).
+Lemma candidate_287: forall (a : bool) (lf4 : bool), @eq bool (HalfAdder.half_adder_sum lf4 (HalfAdder.half_adder_sum a true))   (half_adder_sum (half_adder_sum a lf4) true).
+Lemma candidate_288: forall (a : bool) (lf4 : bool), @eq bool (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf4 true))   (half_adder_sum (half_adder_sum a lf4) true).
+Lemma candidate_289: forall (a : bool) (lf4 : bool), @eq bool (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a false))   (half_adder_sum (half_adder_sum a lf4) true).
+Lemma candidate_290: forall (a : bool) (lf4 : bool), @eq bool (HalfAdder.half_adder_sum true a)   (half_adder_sum (half_adder_sum a lf4) true).
+Lemma candidate_291: forall (a : bool) (lf4 : bool), @eq bool (HalfAdder.half_adder_sum a true)   (half_adder_sum (half_adder_sum a lf4) true).
+Lemma candidate_292: forall (a : bool) (lf4 : bool), @eq bool   (half_adder_sum a      (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum a true)))   (half_adder_sum (half_adder_sum a lf4)      (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum a true))).
+Lemma candidate_293: forall (a : bool) (lf4 : bool), @eq bool   (half_adder_sum a      (HalfAdder.half_adder_sum lf4 (HalfAdder.half_adder_sum lf4 true)))   (half_adder_sum (half_adder_sum a lf4)      (HalfAdder.half_adder_sum lf4 (HalfAdder.half_adder_sum lf4 true))).
+Lemma candidate_294: forall (a : bool) (lf4 : bool), @eq bool   (half_adder_sum a      (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf4 false)))   (half_adder_sum (half_adder_sum a lf4)      (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf4 false))).
+Lemma candidate_295: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a (HalfAdder.half_adder_sum true lf4))   (half_adder_sum (half_adder_sum a lf4) (HalfAdder.half_adder_sum true lf4)).
+Lemma candidate_296: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a (HalfAdder.half_adder_sum lf4 true))   (half_adder_sum (half_adder_sum a lf4) (HalfAdder.half_adder_sum lf4 true)).
+Lemma candidate_297: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a (true))   (half_adder_sum (half_adder_sum a lf4) (true)).
+Lemma candidate_298: forall (a : bool), @eq bool (half_adder_sum a true)   (half_adder_sum      (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum a false) false) true).
+Lemma candidate_299: forall (a : bool), @eq bool (half_adder_sum a true)   (half_adder_sum (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum a a))      true).
+Lemma candidate_300: forall (a : bool), @eq bool (half_adder_sum a true)   (half_adder_sum      (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum true a)) true).
+Lemma candidate_301: forall (a : bool), @eq bool (half_adder_sum a true)   (half_adder_sum      (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a true)) true).
+Lemma candidate_302: forall (a : bool), @eq bool (half_adder_sum a true)   (half_adder_sum (HalfAdder.half_adder_sum a false) true).
+Lemma candidate_303: forall (a : bool), @eq bool (half_adder_sum a true) (half_adder_sum (a) true).
+Lemma candidate_304: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) true)   (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum true lf4)).
+Lemma candidate_305: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) true)   (HalfAdder.half_adder_sum lf4 (HalfAdder.half_adder_sum a true)).
+Lemma candidate_306: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) true)   (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf4 true)).
+Lemma candidate_307: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) true)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a false)).
+Lemma candidate_308: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) true)   (HalfAdder.half_adder_sum true a).
+Lemma candidate_309: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) true)   (HalfAdder.half_adder_sum a true).
+Lemma candidate_310: forall (a : bool), @eq bool (half_adder_sum a true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum a false) true).
+Lemma candidate_311: forall (a : bool), @eq bool (half_adder_sum a true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum true a) false).
+Lemma candidate_312: forall (a : bool), @eq bool (half_adder_sum a true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum a true) false).
+Lemma candidate_313: forall (a : bool), @eq bool (half_adder_sum a true)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a false)).
+Lemma candidate_314: forall (a : bool), @eq bool (half_adder_sum a true) (HalfAdder.half_adder_sum true a).
+Lemma candidate_315: forall (a : bool), @eq bool (half_adder_sum a true) (HalfAdder.half_adder_sum a true).
+Lemma candidate_316: @eq bool true (true).
+Lemma candidate_317: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a lf4)   (HalfAdder.half_adder_sum lf4 (HalfAdder.half_adder_sum a false)).
+Lemma candidate_318: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a lf4)   (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf4 false)).
+Lemma candidate_319: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a lf4) (HalfAdder.half_adder_sum lf4 a).
+Lemma candidate_320: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a lf4) (HalfAdder.half_adder_sum a lf4).
+Lemma candidate_321: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a lf4) (HalfAdder.half_adder_sum a false).
+Lemma candidate_322: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a lf4) (a).
+
+<---FILTERED CANDIDATE LEMMAS--->
+Time elapsed: 589 seconds
+Duplicates removed: 151
+Filtered by Quickchick: 73
+Filtered by script: 27
+Remaining: 71
+
+Lemmas: 
+Lemma candidate_7: forall (lf3 : bool), @eq bool lf3 (HalfAdder.half_adder_sum lf3 false).
+Lemma candidate_180: forall (a : bool) (lf1 : bool), @eq bool (half_adder_sum a (HalfAdder.half_adder_sum a lf1)) lf1.
+Lemma candidate_179: forall (a : bool) (lf1 : bool), @eq bool (half_adder_sum a (HalfAdder.half_adder_sum lf1 a)) lf1.
+Lemma candidate_49: forall (lf3 : bool) (lf2 : bool), @eq bool lf3 (half_adder_sum lf2 (HalfAdder.half_adder_sum lf3 lf2)).
+Lemma candidate_48: forall (lf3 : bool) (lf2 : bool), @eq bool lf3 (half_adder_sum lf2 (HalfAdder.half_adder_sum lf2 lf3)).
+Lemma candidate_25: forall (lf3 : bool) (lf5 : bool), @eq bool lf3 (half_adder_sum (HalfAdder.half_adder_sum lf3 lf5) lf5).
+Lemma candidate_23: forall (lf3 : bool) (lf5 : bool), @eq bool lf3 (half_adder_sum (HalfAdder.half_adder_sum lf5 lf3) lf5).
+Lemma candidate_75: forall (lf3 : bool), @eq bool lf3 (half_adder_sum (HalfAdder.half_adder_sum lf3 true) true).
+Lemma candidate_74: forall (lf3 : bool), @eq bool lf3 (half_adder_sum (HalfAdder.half_adder_sum true lf3) true).
+Lemma candidate_2: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5) (half_adder_sum (half_adder_sum a false) lf5).
+Lemma candidate_159: forall (lf1 : bool), @eq bool (HalfAdder.half_adder_sum lf1 (HalfAdder.half_adder_sum lf1 lf1))   lf1.
+Lemma candidate_4: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum lf3 (HalfAdder.half_adder_sum lf3 lf3)).
+Lemma candidate_161: forall (lf1 : bool), @eq bool (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf1 true))   lf1.
+Lemma candidate_160: forall (lf1 : bool), @eq bool (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum true lf1))   lf1.
+Lemma candidate_6: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf3 true)).
+Lemma candidate_5: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum true lf3)).
+Lemma candidate_158: forall (lf1 : bool), @eq bool   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf1 false) false) lf1.
+Lemma candidate_3: forall (lf3 : bool), @eq bool lf3   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf3 false) false).
+Lemma candidate_229: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5)   (half_adder_sum (HalfAdder.half_adder_sum a false) lf5).
+Lemma candidate_142: forall (lf3 : bool) (a : bool), @eq bool lf3   (half_adder_sum (half_adder_sum a false) (HalfAdder.half_adder_sum lf3 a)).
+Lemma candidate_141: forall (lf3 : bool) (a : bool), @eq bool lf3   (half_adder_sum (half_adder_sum a false) (HalfAdder.half_adder_sum a lf3)).
+Lemma candidate_111: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum (half_adder_sum a false) lf5)   (HalfAdder.half_adder_sum a lf5).
+Lemma candidate_109: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum (half_adder_sum a false) lf5)   (HalfAdder.half_adder_sum lf5 a).
+Lemma candidate_302: forall (a : bool), @eq bool (half_adder_sum a true)   (half_adder_sum (HalfAdder.half_adder_sum a false) true).
+Lemma candidate_156: forall (a : bool), @eq bool (half_adder_sum (half_adder_sum a false) true)   (HalfAdder.half_adder_sum a true).
+Lemma candidate_155: forall (a : bool), @eq bool (half_adder_sum (half_adder_sum a false) true)   (HalfAdder.half_adder_sum true a).
+Lemma candidate_115: forall (a : bool), @eq bool (half_adder_sum a false)   (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum a a)).
+Lemma candidate_165: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5)   (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf5 false)).
+Lemma candidate_34: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a lf4)   (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf4 false)).
+Lemma candidate_33: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum a lf4)   (HalfAdder.half_adder_sum lf4 (HalfAdder.half_adder_sum a false)).
+Lemma candidate_185: forall (a : bool), @eq bool (half_adder_sum a true)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a false)).
+Lemma candidate_184: forall (a : bool), @eq bool (half_adder_sum a true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum a true) false).
+Lemma candidate_183: forall (a : bool), @eq bool (half_adder_sum a true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum true a) false).
+Lemma candidate_182: forall (a : bool), @eq bool (half_adder_sum a true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum a false) true).
+Lemma candidate_117: forall (a : bool), @eq bool (half_adder_sum a false)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a true)).
+Lemma candidate_116: forall (a : bool), @eq bool (half_adder_sum a false)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum true a)).
+Lemma candidate_189: forall (lf5 : bool) (lf2 : bool), @eq bool (HalfAdder.half_adder_sum lf5 (HalfAdder.half_adder_sum lf2 false))   (half_adder_sum lf2 lf5).
+Lemma candidate_114: forall (a : bool), @eq bool (half_adder_sum a false)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum a false) false).
+Lemma candidate_9: forall (lf5 : bool) (lf2 : bool), @eq bool (half_adder_sum lf2 lf5)   (HalfAdder.half_adder_sum lf5 (HalfAdder.half_adder_sum lf2 false)).
+Lemma candidate_178: forall (a : bool) (lf1 : bool), @eq bool   (half_adder_sum a      (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf1 false))) lf1.
+Lemma candidate_177: forall (a : bool) (lf1 : bool), @eq bool   (half_adder_sum a      (HalfAdder.half_adder_sum lf1 (HalfAdder.half_adder_sum a false))) lf1.
+Lemma candidate_252: forall (lf2 : bool), @eq bool (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf2 false))   (half_adder_sum lf2 true).
+Lemma candidate_250: forall (lf2 : bool), @eq bool (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum true lf2) false)   (half_adder_sum lf2 true).
+Lemma candidate_249: forall (lf2 : bool), @eq bool (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf2 false) true)   (half_adder_sum lf2 true).
+Lemma candidate_54: forall (lf2 : bool), @eq bool (half_adder_sum lf2 true)   (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf2 false)).
+Lemma candidate_53: forall (lf2 : bool), @eq bool (half_adder_sum lf2 true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf2 true) false).
+Lemma candidate_52: forall (lf2 : bool), @eq bool (half_adder_sum lf2 true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum true lf2) false).
+Lemma candidate_51: forall (lf2 : bool), @eq bool (half_adder_sum lf2 true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf2 false) true).
+Lemma candidate_47: forall (lf3 : bool) (lf2 : bool), @eq bool lf3   (half_adder_sum lf2      (HalfAdder.half_adder_sum lf3 (HalfAdder.half_adder_sum lf2 false))).
+Lemma candidate_46: forall (lf3 : bool) (lf2 : bool), @eq bool lf3   (half_adder_sum lf2      (HalfAdder.half_adder_sum lf2 (HalfAdder.half_adder_sum lf3 false))).
+Lemma candidate_22: forall (lf3 : bool) (lf5 : bool), @eq bool lf3   (half_adder_sum      (HalfAdder.half_adder_sum lf3 (HalfAdder.half_adder_sum lf5 false)) lf5).
+Lemma candidate_73: forall (lf3 : bool), @eq bool lf3   (half_adder_sum      (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum lf3 false))      true).
+Lemma candidate_72: forall (lf3 : bool), @eq bool lf3   (half_adder_sum      (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf3 true) false)      true).
+Lemma candidate_71: forall (lf3 : bool), @eq bool lf3   (half_adder_sum      (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum true lf3) false)      true).
+Lemma candidate_70: forall (lf3 : bool), @eq bool lf3   (half_adder_sum      (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum lf3 false) true)      true).
+Lemma candidate_288: forall (a : bool) (lf4 : bool), @eq bool (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf4 true))   (half_adder_sum (half_adder_sum a lf4) true).
+Lemma candidate_287: forall (a : bool) (lf4 : bool), @eq bool (HalfAdder.half_adder_sum lf4 (HalfAdder.half_adder_sum a true))   (half_adder_sum (half_adder_sum a lf4) true).
+Lemma candidate_286: forall (a : bool) (lf4 : bool), @eq bool (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum true lf4))   (half_adder_sum (half_adder_sum a lf4) true).
+Lemma candidate_78: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) true)   (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf4 true)).
+Lemma candidate_77: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) true)   (HalfAdder.half_adder_sum lf4 (HalfAdder.half_adder_sum a true)).
+Lemma candidate_76: forall (a : bool) (lf4 : bool), @eq bool (half_adder_sum (half_adder_sum a lf4) true)   (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum true lf4)).
+Lemma candidate_299: forall (a : bool), @eq bool (half_adder_sum a true)   (half_adder_sum (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum a a))      true).
+Lemma candidate_108: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum (half_adder_sum a false) lf5)   (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf5 false)).
+Lemma candidate_152: forall (a : bool), @eq bool (half_adder_sum (half_adder_sum a false) true)   (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum true a) false).
+Lemma candidate_227: forall (a : bool) (lf5 : bool), @eq bool (half_adder_sum a lf5)   (half_adder_sum      (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a true)) lf5).
+Lemma candidate_301: forall (a : bool), @eq bool (half_adder_sum a true)   (half_adder_sum      (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum a true)) true).
+Lemma candidate_300: forall (a : bool), @eq bool (half_adder_sum a true)   (half_adder_sum      (HalfAdder.half_adder_sum true (HalfAdder.half_adder_sum true a)) true).
+Lemma candidate_140: forall (lf3 : bool) (a : bool), @eq bool lf3   (half_adder_sum (half_adder_sum a false)      (HalfAdder.half_adder_sum lf3 (HalfAdder.half_adder_sum a false))).
+Lemma candidate_139: forall (lf3 : bool) (a : bool), @eq bool lf3   (half_adder_sum (half_adder_sum a false)      (HalfAdder.half_adder_sum a (HalfAdder.half_adder_sum lf3 false))).
+Lemma candidate_298: forall (a : bool), @eq bool (half_adder_sum a true)   (half_adder_sum      (HalfAdder.half_adder_sum (HalfAdder.half_adder_sum a false) false) true).
+Lemma candidate_120: forall (lf3 : bool) (a : bool), @eq bool lf3   (half_adder_sum      (half_adder_sum a         (HalfAdder.half_adder_sum lf3 (HalfAdder.half_adder_sum a true)))      true).

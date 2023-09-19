@@ -1,0 +1,127 @@
+File Information
+- File name: AdderProof
+- Original Directory: /home/anabrendel/lfind/benchmarks/circuits/ADDER_tests/AdderProof/AdderProof_lemma_BV_full_adder_sum_v_nil_false_43
+- LFind Directory: /home/anabrendel/lfind/benchmarks/circuits/ADDER_tests/AdderProof/_lfind_AdderProof_lemma_BV_full_adder_sum_v_nil_false_43
+- Namespace: Circuits
+- Proof name: BV_full_adder_nil_true_ok
+- Theorem: Theorem BV_full_adder_nil_true_ok: forall v0 : BV,
+@eq nat (BV_to_nat (BV_full_adder v0 nilbv true)) (S (BV_to_nat v0)).
+- Declarations: 
+From lfind Require Import LFind.
+From CircuitsCoqGym Require Import Adder. 
+
+Proof Context
+* Goal State: @eq nat
+  (Nat.add (bool_to_nat (half_adder_sum false true))
+     (Nat.add
+        (BV_to_nat
+           (@app bool (BV_full_adder_sum l (@nil bool) false)
+              (consbv (BV_full_adder_carry l (@nil bool) false) nilbv)))
+        (BV_to_nat
+           (@app bool (BV_full_adder_sum l (@nil bool) false)
+              (consbv (BV_full_adder_carry l (@nil bool) false) nilbv)))))
+  (S (Nat.add (bool_to_nat false) (Nat.add (BV_to_nat l) (BV_to_nat l))))
+
+* Hypothesis:
+H : @eq nat
+  (BV_to_nat
+     (appbv (BV_full_adder_sum l (@nil bool) true)
+        (consbv (BV_full_adder_carry l (@nil bool) true) nilbv)))
+  (S (BV_to_nat l))
+v : BV
+l : list bool
+a : bool
+
+* Types:
+Set
+list bool
+Prop
+BV
+bool
+nat
+
+* Polymorphic Types:
+list bool
+
+* Variables:
+l : list bool
+
+* Terms:
+S (Nat.add (bool_to_nat false) (Nat.add (BV_to_nat l) (BV_to_nat l))) : nat
+S (BV_to_nat l) : nat
+Nat.add
+  (BV_to_nat
+     (@app bool (BV_full_adder_sum l (@nil bool) false)
+        (consbv (BV_full_adder_carry l (@nil bool) false) nilbv)))
+  (BV_to_nat
+     (@app bool (BV_full_adder_sum l (@nil bool) false)
+        (consbv (BV_full_adder_carry l (@nil bool) false) nilbv))) : nat
+BV_full_adder_sum l (@nil bool) true : BV
+BV_to_nat
+  (appbv (BV_full_adder_sum l (@nil bool) true)
+     (consbv (BV_full_adder_carry l (@nil bool) true) nilbv)) : nat
+consbv (BV_full_adder_carry l (@nil bool) false) nilbv : BV
+BV_full_adder_sum l (@nil bool) false : BV
+appbv (BV_full_adder_sum l (@nil bool) true)
+  (consbv (BV_full_adder_carry l (@nil bool) true) nilbv) : BV
+half_adder_sum false true : bool
+@eq nat
+  (Nat.add (bool_to_nat (half_adder_sum false true))
+     (Nat.add
+        (BV_to_nat
+           (@app bool (BV_full_adder_sum l (@nil bool) false)
+              (consbv (BV_full_adder_carry l (@nil bool) false) nilbv)))
+        (BV_to_nat
+           (@app bool (BV_full_adder_sum l (@nil bool) false)
+              (consbv (BV_full_adder_carry l (@nil bool) false) nilbv)))))
+  (S (Nat.add (bool_to_nat false) (Nat.add (BV_to_nat l) (BV_to_nat l)))) : Prop
+BV_full_adder_carry l (@nil bool) true : bool
+@nil bool : list bool
+nilbv : BV
+l : list bool
+true : bool
+consbv (BV_full_adder_carry l (@nil bool) true) nilbv : BV
+@app bool (BV_full_adder_sum l (@nil bool) false)
+  (consbv (BV_full_adder_carry l (@nil bool) false) nilbv) : list bool
+Nat.add (bool_to_nat (half_adder_sum false true))
+  (Nat.add
+     (BV_to_nat
+        (@app bool (BV_full_adder_sum l (@nil bool) false)
+           (consbv (BV_full_adder_carry l (@nil bool) false) nilbv)))
+     (BV_to_nat
+        (@app bool (BV_full_adder_sum l (@nil bool) false)
+           (consbv (BV_full_adder_carry l (@nil bool) false) nilbv)))) : nat
+BV_full_adder_carry l (@nil bool) false : bool
+@eq nat
+  (BV_to_nat
+     (appbv (BV_full_adder_sum l (@nil bool) true)
+        (consbv (BV_full_adder_carry l (@nil bool) true) nilbv)))
+  (S (BV_to_nat l)) : Prop
+false : bool
+BV_to_nat
+  (@app bool (BV_full_adder_sum l (@nil bool) false)
+     (consbv (BV_full_adder_carry l (@nil bool) false) nilbv)) : nat
+nat : Set
+bool : Set
+Nat.add (BV_to_nat l) (BV_to_nat l) : nat
+bool_to_nat (half_adder_sum false true) : nat
+BV : Set
+list bool : Set
+bool_to_nat false : nat
+Nat.add (bool_to_nat false) (Nat.add (BV_to_nat l) (BV_to_nat l)) : nat
+BV_to_nat l : nat
+
+* Functions:
+appbv  : forall (_ : BV) (_ : BV), BV
+app  : forall (A : Type) (_ : list A) (_ : list A), list A
+BV_full_adder_carry  : forall (_ : list bool) (_ : list bool) (_ : bool), bool
+bool_to_nat  : forall _ : bool, nat
+Nat.add  : forall (_ : nat) (_ : nat), nat
+half_adder_sum  : forall (_ : bool) (_ : bool), bool
+list  : forall _ : Type, Type
+consbv  : forall (_ : bool) (_ : BV), BV
+S  : forall _ : nat, nat
+@nil  : forall A : Type, list A
+BV_full_adder_sum  : forall (_ : list bool) (_ : list bool) (_ : bool), BV
+@eq  : forall (A : Type) (_ : A) (_ : A), Prop
+BV_to_nat  : forall _ : BV, nat

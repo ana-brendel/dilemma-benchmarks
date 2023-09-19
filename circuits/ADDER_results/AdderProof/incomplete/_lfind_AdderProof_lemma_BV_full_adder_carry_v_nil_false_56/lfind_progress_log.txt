@@ -1,0 +1,573 @@
+File Information
+- File name: AdderProof
+- Original Directory: /home/anabrendel/lfind/benchmarks/circuits/ADDER_tests/AdderProof/AdderProof_lemma_BV_full_adder_carry_v_nil_false_56
+- LFind Directory: /home/anabrendel/lfind/benchmarks/circuits/ADDER_tests/AdderProof/_lfind_AdderProof_lemma_BV_full_adder_carry_v_nil_false_56
+- Namespace: Circuits
+- Proof name: BV_full_adder_nil_ok
+- Theorem: Theorem BV_full_adder_nil_ok: forall (v0 : BV) (cin0 : bool),
+@eq nat (BV_to_nat (BV_full_adder v0 nilbv cin0))
+  (Nat.add (BV_to_nat v0) (bool_to_nat cin0)).
+- Declarations: 
+From lfind Require Import LFind.
+From CircuitsCoqGym Require Import Adder. 
+
+Proof Context
+* Goal State: @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) nilbv false) nilbv)))
+  (Nat.add (BV_to_nat (@cons bool a l)) (bool_to_nat false))
+
+* Hypothesis:
+cin : bool
+H : forall cin0 : bool,
+@eq nat (BV_to_nat (BV_full_adder l nilbv cin0))
+  (Nat.add (BV_to_nat l) (bool_to_nat cin0))
+v : BV
+l : list bool
+a : bool
+
+* Types:
+Set
+list bool
+Prop
+BV
+bool
+nat
+
+* Polymorphic Types:
+list bool
+
+* Variables:
+l : list bool
+a : bool
+
+* Terms:
+Nat.add (BV_to_nat l) (bool_to_nat _UNBOUND_REL_1) : nat
+BV_full_adder l nilbv _UNBOUND_REL_1 : BV
+appbv (@cons bool a l)
+  (consbv (BV_full_adder_carry (@cons bool a l) nilbv false) nilbv) : BV
+bool_to_nat _UNBOUND_REL_1 : nat
+@eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) nilbv false) nilbv)))
+  (Nat.add (BV_to_nat (@cons bool a l)) (bool_to_nat false)) : Prop
+@eq nat (BV_to_nat (BV_full_adder l nilbv _UNBOUND_REL_1))
+  (Nat.add (BV_to_nat l) (bool_to_nat _UNBOUND_REL_1)) : Prop
+@cons bool a l : list bool
+consbv (BV_full_adder_carry (@cons bool a l) nilbv false) nilbv : BV
+nilbv : BV
+BV_to_nat (BV_full_adder l nilbv _UNBOUND_REL_1) : nat
+l : list bool
+forall cin0 : bool,
+@eq nat (BV_to_nat (BV_full_adder l nilbv cin0))
+  (Nat.add (BV_to_nat l) (bool_to_nat cin0)) : Prop
+BV_to_nat
+  (appbv (@cons bool a l)
+     (consbv (BV_full_adder_carry (@cons bool a l) nilbv false) nilbv)) : nat
+false : bool
+nat : Set
+Nat.add (BV_to_nat (@cons bool a l)) (bool_to_nat false) : nat
+bool : Set
+BV_full_adder_carry (@cons bool a l) nilbv false : bool
+BV_to_nat (@cons bool a l) : nat
+BV : Set
+list bool : Set
+bool_to_nat false : nat
+a : bool
+BV_to_nat l : nat
+
+* Functions:
+appbv  : forall (_ : BV) (_ : BV), BV
+BV_full_adder_carry  : forall (_ : list bool) (_ : list bool) (_ : bool), bool
+bool_to_nat  : forall _ : bool, nat
+BV_full_adder  : forall (_ : BV) (_ : BV) (_ : bool), BV
+Nat.add  : forall (_ : nat) (_ : nat), nat
+list  : forall _ : Type, Type
+consbv  : forall (_ : bool) (_ : BV), BV
+@cons  : forall (A : Type) (_ : A) (_ : list A), list A
+@eq  : forall (A : Type) (_ : A) (_ : A), Prop
+BV_to_nat  : forall _ : BV, nat
+
+<---GENERALIZATION--->
+Time elapsed: 4 seconds
+Generalized Variables:
+lf3 : BV = consbv (BV_full_adder_carry (@cons bool a l) nilbv false) nilbv
+lf7 : nat = bool_to_nat false
+lf1 : nat = BV_to_nat
+  (appbv (@cons bool a l)
+     (consbv (BV_full_adder_carry (@cons bool a l) nilbv false) nilbv))
+lf4 : nat = Nat.add (BV_to_nat (@cons bool a l)) (bool_to_nat false)
+lf5 : bool = BV_full_adder_carry (@cons bool a l) nilbv false
+lf9 : bool = false
+lf2 : BV = appbv (@cons bool a l)
+  (consbv (BV_full_adder_carry (@cons bool a l) nilbv false) nilbv)
+lf10 : BV = nilbv
+lf8 : list bool = @cons bool a l
+lf6 : nat = BV_to_nat (@cons bool a l)
+
+Generalizations:
+Lemma conj1: forall (lf8 : list bool) (lf4 : nat) (lf3 : BV), @eq nat (BV_to_nat (appbv lf8 lf3)) lf4.
+Lemma conj3: forall (lf4 : nat) (l : list bool) (a : bool) (lf3 : BV), @eq nat (BV_to_nat (appbv (@cons bool a l) lf3)) lf4.
+Lemma conj65: forall (lf6 : nat) (lf8 : list bool) (lf7 : nat) (lf3 : BV), @eq nat (BV_to_nat (appbv lf8 lf3)) (Nat.add lf6 lf7).
+Lemma conj66: forall (lf8 : list bool) (lf7 : nat) (lf3 : BV), @eq nat (BV_to_nat (appbv lf8 lf3)) (Nat.add (BV_to_nat lf8) lf7).
+Lemma conj67: forall (lf6 : nat) (lf7 : nat) (l : list bool) (a : bool) (lf3 : BV), @eq nat (BV_to_nat (appbv (@cons bool a l) lf3)) (Nat.add lf6 lf7).
+Lemma conj68: forall (lf7 : nat) (l : list bool) (a : bool) (lf3 : BV), @eq nat (BV_to_nat (appbv (@cons bool a l) lf3))
+  (Nat.add (BV_to_nat (@cons bool a l)) lf7).
+Lemma conj321: forall (lf6 : nat) (lf8 : list bool) (lf9 : bool) (lf3 : BV), @eq nat (BV_to_nat (appbv lf8 lf3)) (Nat.add lf6 (bool_to_nat lf9)).
+Lemma conj322: forall (lf8 : list bool) (lf9 : bool) (lf3 : BV), @eq nat (BV_to_nat (appbv lf8 lf3))
+  (Nat.add (BV_to_nat lf8) (bool_to_nat lf9)).
+Lemma conj323: forall (lf6 : nat) (lf9 : bool) (l : list bool) (a : bool) (lf3 : BV), @eq nat (BV_to_nat (appbv (@cons bool a l) lf3))
+  (Nat.add lf6 (bool_to_nat lf9)).
+Lemma conj324: forall (lf9 : bool) (l : list bool) (a : bool) (lf3 : BV), @eq nat (BV_to_nat (appbv (@cons bool a l) lf3))
+  (Nat.add (BV_to_nat (@cons bool a l)) (bool_to_nat lf9)).
+Lemma conj337: forall (lf6 : nat) (lf8 : list bool) (lf3 : BV), @eq nat (BV_to_nat (appbv lf8 lf3)) (Nat.add lf6 (bool_to_nat false)).
+Lemma conj338: forall (lf8 : list bool) (lf3 : BV), @eq nat (BV_to_nat (appbv lf8 lf3))
+  (Nat.add (BV_to_nat lf8) (bool_to_nat false)).
+Lemma conj339: forall (lf6 : nat) (l : list bool) (a : bool) (lf3 : BV), @eq nat (BV_to_nat (appbv (@cons bool a l) lf3))
+  (Nat.add lf6 (bool_to_nat false)).
+Lemma conj340: forall (l : list bool) (a : bool) (lf3 : BV), @eq nat (BV_to_nat (appbv (@cons bool a l) lf3))
+  (Nat.add (BV_to_nat (@cons bool a l)) (bool_to_nat false)).
+Lemma conj513: forall (lf10 : BV) (lf8 : list bool) (lf5 : bool) (lf4 : nat), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 lf10))) lf4.
+Lemma conj515: forall (lf10 : BV) (lf5 : bool) (lf4 : nat) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 lf10))) lf4.
+Lemma conj517: forall (lf8 : list bool) (lf5 : bool) (lf4 : nat), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 nilbv))) lf4.
+Lemma conj519: forall (lf5 : bool) (lf4 : nat) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 nilbv))) lf4.
+Lemma conj545: forall (lf10 : BV) (lf8 : list bool) (lf9 : bool) (lf4 : nat), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 lf10 lf9) lf10)))
+  lf4.
+Lemma conj547: forall (lf10 : BV) (lf9 : bool) (lf4 : nat) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) lf10 lf9) lf10))) lf4.
+Lemma conj549: forall (lf8 : list bool) (lf9 : bool) (lf4 : nat), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 nilbv lf9) nilbv)))
+  lf4.
+Lemma conj551: forall (lf9 : bool) (lf4 : nat) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) nilbv lf9) nilbv))) lf4.
+Lemma conj561: forall (lf10 : BV) (lf8 : list bool) (lf4 : nat), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 lf10 false) lf10)))
+  lf4.
+Lemma conj563: forall (lf10 : BV) (lf4 : nat) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) lf10 false) lf10))) lf4.
+Lemma conj565: forall (lf8 : list bool) (lf4 : nat), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 nilbv false) nilbv)))
+  lf4.
+Lemma conj567: forall (lf4 : nat) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) nilbv false) nilbv)))
+  lf4.
+Lemma conj577: forall (lf6 : nat) (lf10 : BV) (lf8 : list bool) (lf5 : bool) (lf7 : nat), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 lf10))) (Nat.add lf6 lf7).
+Lemma conj578: forall (lf8 : list bool) (lf10 : BV) (lf5 : bool) (lf7 : nat), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 lf10)))
+  (Nat.add (BV_to_nat lf8) lf7).
+Lemma conj579: forall (lf6 : nat) (lf10 : BV) (lf5 : bool) (lf7 : nat) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 lf10)))
+  (Nat.add lf6 lf7).
+Lemma conj580: forall (lf10 : BV) (lf5 : bool) (lf7 : nat) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 lf10)))
+  (Nat.add (BV_to_nat (@cons bool a l)) lf7).
+Lemma conj581: forall (lf6 : nat) (lf8 : list bool) (lf5 : bool) (lf7 : nat), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 nilbv))) (Nat.add lf6 lf7).
+Lemma conj582: forall (lf8 : list bool) (lf5 : bool) (lf7 : nat), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 nilbv)))
+  (Nat.add (BV_to_nat lf8) lf7).
+Lemma conj583: forall (lf6 : nat) (lf5 : bool) (lf7 : nat) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 nilbv)))
+  (Nat.add lf6 lf7).
+Lemma conj584: forall (lf5 : bool) (lf7 : nat) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 nilbv)))
+  (Nat.add (BV_to_nat (@cons bool a l)) lf7).
+Lemma conj609: forall (lf6 : nat) (lf10 : BV) (lf8 : list bool) (lf9 : bool) (lf7 : nat), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 lf10 lf9) lf10)))
+  (Nat.add lf6 lf7).
+Lemma conj610: forall (lf8 : list bool) (lf10 : BV) (lf9 : bool) (lf7 : nat), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 lf10 lf9) lf10)))
+  (Nat.add (BV_to_nat lf8) lf7).
+Lemma conj611: forall (lf6 : nat) (lf10 : BV) (lf9 : bool) (lf7 : nat) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) lf10 lf9) lf10)))
+  (Nat.add lf6 lf7).
+Lemma conj612: forall (lf10 : BV) (lf9 : bool) (lf7 : nat) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) lf10 lf9) lf10)))
+  (Nat.add (BV_to_nat (@cons bool a l)) lf7).
+Lemma conj613: forall (lf6 : nat) (lf8 : list bool) (lf9 : bool) (lf7 : nat), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 nilbv lf9) nilbv)))
+  (Nat.add lf6 lf7).
+Lemma conj614: forall (lf8 : list bool) (lf9 : bool) (lf7 : nat), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 nilbv lf9) nilbv)))
+  (Nat.add (BV_to_nat lf8) lf7).
+Lemma conj615: forall (lf6 : nat) (lf9 : bool) (lf7 : nat) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) nilbv lf9) nilbv)))
+  (Nat.add lf6 lf7).
+Lemma conj616: forall (lf9 : bool) (lf7 : nat) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) nilbv lf9) nilbv)))
+  (Nat.add (BV_to_nat (@cons bool a l)) lf7).
+Lemma conj625: forall (lf6 : nat) (lf10 : BV) (lf8 : list bool) (lf7 : nat), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 lf10 false) lf10)))
+  (Nat.add lf6 lf7).
+Lemma conj626: forall (lf8 : list bool) (lf10 : BV) (lf7 : nat), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 lf10 false) lf10)))
+  (Nat.add (BV_to_nat lf8) lf7).
+Lemma conj627: forall (lf6 : nat) (lf10 : BV) (lf7 : nat) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) lf10 false) lf10)))
+  (Nat.add lf6 lf7).
+Lemma conj628: forall (lf10 : BV) (lf7 : nat) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) lf10 false) lf10)))
+  (Nat.add (BV_to_nat (@cons bool a l)) lf7).
+Lemma conj629: forall (lf6 : nat) (lf8 : list bool) (lf7 : nat), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 nilbv false) nilbv)))
+  (Nat.add lf6 lf7).
+Lemma conj630: forall (lf8 : list bool) (lf7 : nat), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 nilbv false) nilbv)))
+  (Nat.add (BV_to_nat lf8) lf7).
+Lemma conj631: forall (lf6 : nat) (lf7 : nat) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) nilbv false) nilbv)))
+  (Nat.add lf6 lf7).
+Lemma conj632: forall (lf7 : nat) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) nilbv false) nilbv)))
+  (Nat.add (BV_to_nat (@cons bool a l)) lf7).
+Lemma conj833: forall (lf6 : nat) (lf10 : BV) (lf8 : list bool) (lf9 : bool) (lf5 : bool), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 lf10)))
+  (Nat.add lf6 (bool_to_nat lf9)).
+Lemma conj834: forall (lf8 : list bool) (lf10 : BV) (lf9 : bool) (lf5 : bool), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 lf10)))
+  (Nat.add (BV_to_nat lf8) (bool_to_nat lf9)).
+Lemma conj835: forall (lf6 : nat) (lf10 : BV) (lf9 : bool) (lf5 : bool) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 lf10)))
+  (Nat.add lf6 (bool_to_nat lf9)).
+Lemma conj836: forall (lf10 : BV) (lf9 : bool) (lf5 : bool) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 lf10)))
+  (Nat.add (BV_to_nat (@cons bool a l)) (bool_to_nat lf9)).
+Lemma conj837: forall (lf6 : nat) (lf8 : list bool) (lf9 : bool) (lf5 : bool), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 nilbv)))
+  (Nat.add lf6 (bool_to_nat lf9)).
+Lemma conj838: forall (lf8 : list bool) (lf9 : bool) (lf5 : bool), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 nilbv)))
+  (Nat.add (BV_to_nat lf8) (bool_to_nat lf9)).
+Lemma conj839: forall (lf6 : nat) (lf9 : bool) (lf5 : bool) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 nilbv)))
+  (Nat.add lf6 (bool_to_nat lf9)).
+Lemma conj840: forall (lf9 : bool) (lf5 : bool) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 nilbv)))
+  (Nat.add (BV_to_nat (@cons bool a l)) (bool_to_nat lf9)).
+Lemma conj849: forall (lf6 : nat) (lf10 : BV) (lf8 : list bool) (lf5 : bool), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 lf10)))
+  (Nat.add lf6 (bool_to_nat false)).
+Lemma conj850: forall (lf8 : list bool) (lf10 : BV) (lf5 : bool), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 lf10)))
+  (Nat.add (BV_to_nat lf8) (bool_to_nat false)).
+Lemma conj851: forall (lf6 : nat) (lf10 : BV) (lf5 : bool) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 lf10)))
+  (Nat.add lf6 (bool_to_nat false)).
+Lemma conj852: forall (lf10 : BV) (lf5 : bool) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 lf10)))
+  (Nat.add (BV_to_nat (@cons bool a l)) (bool_to_nat false)).
+Lemma conj853: forall (lf6 : nat) (lf8 : list bool) (lf5 : bool), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 nilbv)))
+  (Nat.add lf6 (bool_to_nat false)).
+Lemma conj854: forall (lf8 : list bool) (lf5 : bool), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 nilbv)))
+  (Nat.add (BV_to_nat lf8) (bool_to_nat false)).
+Lemma conj855: forall (lf6 : nat) (lf5 : bool) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 nilbv)))
+  (Nat.add lf6 (bool_to_nat false)).
+Lemma conj856: forall (lf5 : bool) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 nilbv)))
+  (Nat.add (BV_to_nat (@cons bool a l)) (bool_to_nat false)).
+Lemma conj865: forall (lf6 : nat) (lf10 : BV) (lf8 : list bool) (lf9 : bool), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 lf10 lf9) lf10)))
+  (Nat.add lf6 (bool_to_nat lf9)).
+Lemma conj866: forall (lf8 : list bool) (lf10 : BV) (lf9 : bool), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 lf10 lf9) lf10)))
+  (Nat.add (BV_to_nat lf8) (bool_to_nat lf9)).
+Lemma conj867: forall (lf6 : nat) (lf10 : BV) (lf9 : bool) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) lf10 lf9) lf10)))
+  (Nat.add lf6 (bool_to_nat lf9)).
+Lemma conj868: forall (lf10 : BV) (lf9 : bool) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) lf10 lf9) lf10)))
+  (Nat.add (BV_to_nat (@cons bool a l)) (bool_to_nat lf9)).
+Lemma conj869: forall (lf6 : nat) (lf8 : list bool) (lf9 : bool), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 nilbv lf9) nilbv)))
+  (Nat.add lf6 (bool_to_nat lf9)).
+Lemma conj870: forall (lf8 : list bool) (lf9 : bool), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 nilbv lf9) nilbv)))
+  (Nat.add (BV_to_nat lf8) (bool_to_nat lf9)).
+Lemma conj871: forall (lf6 : nat) (lf9 : bool) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) nilbv lf9) nilbv)))
+  (Nat.add lf6 (bool_to_nat lf9)).
+Lemma conj872: forall (lf9 : bool) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) nilbv lf9) nilbv)))
+  (Nat.add (BV_to_nat (@cons bool a l)) (bool_to_nat lf9)).
+Lemma conj881: forall (lf6 : nat) (lf10 : BV) (lf8 : list bool), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 lf10 false) lf10)))
+  (Nat.add lf6 (bool_to_nat false)).
+Lemma conj882: forall (lf8 : list bool) (lf10 : BV), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 lf10 false) lf10)))
+  (Nat.add (BV_to_nat lf8) (bool_to_nat false)).
+Lemma conj883: forall (lf6 : nat) (lf10 : BV) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) lf10 false) lf10)))
+  (Nat.add lf6 (bool_to_nat false)).
+Lemma conj884: forall (lf10 : BV) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) lf10 false) lf10)))
+  (Nat.add (BV_to_nat (@cons bool a l)) (bool_to_nat false)).
+Lemma conj885: forall (lf6 : nat) (lf8 : list bool), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 nilbv false) nilbv)))
+  (Nat.add lf6 (bool_to_nat false)).
+Lemma conj886: forall (lf8 : list bool), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 nilbv false) nilbv)))
+  (Nat.add (BV_to_nat lf8) (bool_to_nat false)).
+Lemma conj887: forall (lf6 : nat) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) nilbv false) nilbv)))
+  (Nat.add lf6 (bool_to_nat false)).
+Lemma conj888: forall (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) nilbv false) nilbv)))
+  (Nat.add (BV_to_nat (@cons bool a l)) (bool_to_nat false)).
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 180 seconds
+Valid:
+Lemma conj888: forall (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) nilbv false) nilbv)))
+  (Nat.add (BV_to_nat (@cons bool a l)) (bool_to_nat false)).
+Lemma conj886: forall (lf8 : list bool), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 nilbv false) nilbv)))
+  (Nat.add (BV_to_nat lf8) (bool_to_nat false)).
+
+Invalid:
+Lemma conj887: forall (lf6 : nat) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) nilbv false) nilbv)))
+  (Nat.add lf6 (bool_to_nat false)).
+Lemma conj885: forall (lf6 : nat) (lf8 : list bool), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 nilbv false) nilbv)))
+  (Nat.add lf6 (bool_to_nat false)).
+Lemma conj884: forall (lf10 : BV) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) lf10 false) lf10)))
+  (Nat.add (BV_to_nat (@cons bool a l)) (bool_to_nat false)).
+Lemma conj883: forall (lf6 : nat) (lf10 : BV) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) lf10 false) lf10)))
+  (Nat.add lf6 (bool_to_nat false)).
+Lemma conj882: forall (lf8 : list bool) (lf10 : BV), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 lf10 false) lf10)))
+  (Nat.add (BV_to_nat lf8) (bool_to_nat false)).
+Lemma conj881: forall (lf6 : nat) (lf10 : BV) (lf8 : list bool), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 lf10 false) lf10)))
+  (Nat.add lf6 (bool_to_nat false)).
+Lemma conj872: forall (lf9 : bool) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) nilbv lf9) nilbv)))
+  (Nat.add (BV_to_nat (@cons bool a l)) (bool_to_nat lf9)).
+Lemma conj871: forall (lf6 : nat) (lf9 : bool) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) nilbv lf9) nilbv)))
+  (Nat.add lf6 (bool_to_nat lf9)).
+Lemma conj870: forall (lf8 : list bool) (lf9 : bool), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 nilbv lf9) nilbv)))
+  (Nat.add (BV_to_nat lf8) (bool_to_nat lf9)).
+Lemma conj869: forall (lf6 : nat) (lf8 : list bool) (lf9 : bool), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 nilbv lf9) nilbv)))
+  (Nat.add lf6 (bool_to_nat lf9)).
+Lemma conj868: forall (lf10 : BV) (lf9 : bool) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) lf10 lf9) lf10)))
+  (Nat.add (BV_to_nat (@cons bool a l)) (bool_to_nat lf9)).
+Lemma conj867: forall (lf6 : nat) (lf10 : BV) (lf9 : bool) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) lf10 lf9) lf10)))
+  (Nat.add lf6 (bool_to_nat lf9)).
+Lemma conj866: forall (lf8 : list bool) (lf10 : BV) (lf9 : bool), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 lf10 lf9) lf10)))
+  (Nat.add (BV_to_nat lf8) (bool_to_nat lf9)).
+Lemma conj865: forall (lf6 : nat) (lf10 : BV) (lf8 : list bool) (lf9 : bool), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 lf10 lf9) lf10)))
+  (Nat.add lf6 (bool_to_nat lf9)).
+Lemma conj856: forall (lf5 : bool) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 nilbv)))
+  (Nat.add (BV_to_nat (@cons bool a l)) (bool_to_nat false)).
+Lemma conj855: forall (lf6 : nat) (lf5 : bool) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 nilbv)))
+  (Nat.add lf6 (bool_to_nat false)).
+Lemma conj854: forall (lf8 : list bool) (lf5 : bool), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 nilbv)))
+  (Nat.add (BV_to_nat lf8) (bool_to_nat false)).
+Lemma conj853: forall (lf6 : nat) (lf8 : list bool) (lf5 : bool), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 nilbv)))
+  (Nat.add lf6 (bool_to_nat false)).
+Lemma conj852: forall (lf10 : BV) (lf5 : bool) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 lf10)))
+  (Nat.add (BV_to_nat (@cons bool a l)) (bool_to_nat false)).
+Lemma conj851: forall (lf6 : nat) (lf10 : BV) (lf5 : bool) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 lf10)))
+  (Nat.add lf6 (bool_to_nat false)).
+Lemma conj850: forall (lf8 : list bool) (lf10 : BV) (lf5 : bool), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 lf10)))
+  (Nat.add (BV_to_nat lf8) (bool_to_nat false)).
+Lemma conj849: forall (lf6 : nat) (lf10 : BV) (lf8 : list bool) (lf5 : bool), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 lf10)))
+  (Nat.add lf6 (bool_to_nat false)).
+Lemma conj840: forall (lf9 : bool) (lf5 : bool) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 nilbv)))
+  (Nat.add (BV_to_nat (@cons bool a l)) (bool_to_nat lf9)).
+Lemma conj839: forall (lf6 : nat) (lf9 : bool) (lf5 : bool) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 nilbv)))
+  (Nat.add lf6 (bool_to_nat lf9)).
+Lemma conj838: forall (lf8 : list bool) (lf9 : bool) (lf5 : bool), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 nilbv)))
+  (Nat.add (BV_to_nat lf8) (bool_to_nat lf9)).
+Lemma conj837: forall (lf6 : nat) (lf8 : list bool) (lf9 : bool) (lf5 : bool), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 nilbv)))
+  (Nat.add lf6 (bool_to_nat lf9)).
+Lemma conj836: forall (lf10 : BV) (lf9 : bool) (lf5 : bool) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 lf10)))
+  (Nat.add (BV_to_nat (@cons bool a l)) (bool_to_nat lf9)).
+Lemma conj835: forall (lf6 : nat) (lf10 : BV) (lf9 : bool) (lf5 : bool) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 lf10)))
+  (Nat.add lf6 (bool_to_nat lf9)).
+Lemma conj834: forall (lf8 : list bool) (lf10 : BV) (lf9 : bool) (lf5 : bool), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 lf10)))
+  (Nat.add (BV_to_nat lf8) (bool_to_nat lf9)).
+Lemma conj833: forall (lf6 : nat) (lf10 : BV) (lf8 : list bool) (lf9 : bool) (lf5 : bool), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 lf10)))
+  (Nat.add lf6 (bool_to_nat lf9)).
+Lemma conj632: forall (lf7 : nat) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) nilbv false) nilbv)))
+  (Nat.add (BV_to_nat (@cons bool a l)) lf7).
+Lemma conj631: forall (lf6 : nat) (lf7 : nat) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) nilbv false) nilbv)))
+  (Nat.add lf6 lf7).
+Lemma conj630: forall (lf8 : list bool) (lf7 : nat), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 nilbv false) nilbv)))
+  (Nat.add (BV_to_nat lf8) lf7).
+Lemma conj629: forall (lf6 : nat) (lf8 : list bool) (lf7 : nat), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 nilbv false) nilbv)))
+  (Nat.add lf6 lf7).
+Lemma conj628: forall (lf10 : BV) (lf7 : nat) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) lf10 false) lf10)))
+  (Nat.add (BV_to_nat (@cons bool a l)) lf7).
+Lemma conj627: forall (lf6 : nat) (lf10 : BV) (lf7 : nat) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) lf10 false) lf10)))
+  (Nat.add lf6 lf7).
+Lemma conj626: forall (lf8 : list bool) (lf10 : BV) (lf7 : nat), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 lf10 false) lf10)))
+  (Nat.add (BV_to_nat lf8) lf7).
+Lemma conj625: forall (lf6 : nat) (lf10 : BV) (lf8 : list bool) (lf7 : nat), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 lf10 false) lf10)))
+  (Nat.add lf6 lf7).
+Lemma conj616: forall (lf9 : bool) (lf7 : nat) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) nilbv lf9) nilbv)))
+  (Nat.add (BV_to_nat (@cons bool a l)) lf7).
+Lemma conj615: forall (lf6 : nat) (lf9 : bool) (lf7 : nat) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) nilbv lf9) nilbv)))
+  (Nat.add lf6 lf7).
+Lemma conj614: forall (lf8 : list bool) (lf9 : bool) (lf7 : nat), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 nilbv lf9) nilbv)))
+  (Nat.add (BV_to_nat lf8) lf7).
+Lemma conj613: forall (lf6 : nat) (lf8 : list bool) (lf9 : bool) (lf7 : nat), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 nilbv lf9) nilbv)))
+  (Nat.add lf6 lf7).
+Lemma conj612: forall (lf10 : BV) (lf9 : bool) (lf7 : nat) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) lf10 lf9) lf10)))
+  (Nat.add (BV_to_nat (@cons bool a l)) lf7).
+Lemma conj611: forall (lf6 : nat) (lf10 : BV) (lf9 : bool) (lf7 : nat) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) lf10 lf9) lf10)))
+  (Nat.add lf6 lf7).
+Lemma conj610: forall (lf8 : list bool) (lf10 : BV) (lf9 : bool) (lf7 : nat), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 lf10 lf9) lf10)))
+  (Nat.add (BV_to_nat lf8) lf7).
+Lemma conj609: forall (lf6 : nat) (lf10 : BV) (lf8 : list bool) (lf9 : bool) (lf7 : nat), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 lf10 lf9) lf10)))
+  (Nat.add lf6 lf7).
+Lemma conj584: forall (lf5 : bool) (lf7 : nat) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 nilbv)))
+  (Nat.add (BV_to_nat (@cons bool a l)) lf7).
+Lemma conj583: forall (lf6 : nat) (lf5 : bool) (lf7 : nat) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 nilbv)))
+  (Nat.add lf6 lf7).
+Lemma conj582: forall (lf8 : list bool) (lf5 : bool) (lf7 : nat), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 nilbv)))
+  (Nat.add (BV_to_nat lf8) lf7).
+Lemma conj581: forall (lf6 : nat) (lf8 : list bool) (lf5 : bool) (lf7 : nat), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 nilbv))) (Nat.add lf6 lf7).
+Lemma conj580: forall (lf10 : BV) (lf5 : bool) (lf7 : nat) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 lf10)))
+  (Nat.add (BV_to_nat (@cons bool a l)) lf7).
+Lemma conj579: forall (lf6 : nat) (lf10 : BV) (lf5 : bool) (lf7 : nat) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 lf10)))
+  (Nat.add lf6 lf7).
+Lemma conj578: forall (lf8 : list bool) (lf10 : BV) (lf5 : bool) (lf7 : nat), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 lf10)))
+  (Nat.add (BV_to_nat lf8) lf7).
+Lemma conj577: forall (lf6 : nat) (lf10 : BV) (lf8 : list bool) (lf5 : bool) (lf7 : nat), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 lf10))) (Nat.add lf6 lf7).
+Lemma conj567: forall (lf4 : nat) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) nilbv false) nilbv)))
+  lf4.
+Lemma conj565: forall (lf8 : list bool) (lf4 : nat), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 nilbv false) nilbv)))
+  lf4.
+Lemma conj563: forall (lf10 : BV) (lf4 : nat) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) lf10 false) lf10))) lf4.
+Lemma conj561: forall (lf10 : BV) (lf8 : list bool) (lf4 : nat), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 lf10 false) lf10)))
+  lf4.
+Lemma conj551: forall (lf9 : bool) (lf4 : nat) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) nilbv lf9) nilbv))) lf4.
+Lemma conj549: forall (lf8 : list bool) (lf9 : bool) (lf4 : nat), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 nilbv lf9) nilbv)))
+  lf4.
+Lemma conj547: forall (lf10 : BV) (lf9 : bool) (lf4 : nat) (l : list bool) (a : bool), @eq nat
+  (BV_to_nat
+     (appbv (@cons bool a l)
+        (consbv (BV_full_adder_carry (@cons bool a l) lf10 lf9) lf10))) lf4.
+Lemma conj545: forall (lf10 : BV) (lf8 : list bool) (lf9 : bool) (lf4 : nat), @eq nat
+  (BV_to_nat (appbv lf8 (consbv (BV_full_adder_carry lf8 lf10 lf9) lf10)))
+  lf4.
+Lemma conj519: forall (lf5 : bool) (lf4 : nat) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 nilbv))) lf4.
+Lemma conj517: forall (lf8 : list bool) (lf5 : bool) (lf4 : nat), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 nilbv))) lf4.
+Lemma conj515: forall (lf10 : BV) (lf5 : bool) (lf4 : nat) (l : list bool) (a : bool), @eq nat (BV_to_nat (appbv (@cons bool a l) (consbv lf5 lf10))) lf4.
+Lemma conj513: forall (lf10 : BV) (lf8 : list bool) (lf5 : bool) (lf4 : nat), @eq nat (BV_to_nat (appbv lf8 (consbv lf5 lf10))) lf4.
+Lemma conj340: forall (l : list bool) (a : bool) (lf3 : BV), @eq nat (BV_to_nat (appbv (@cons bool a l) lf3))
+  (Nat.add (BV_to_nat (@cons bool a l)) (bool_to_nat false)).
+Lemma conj339: forall (lf6 : nat) (l : list bool) (a : bool) (lf3 : BV), @eq nat (BV_to_nat (appbv (@cons bool a l) lf3))
+  (Nat.add lf6 (bool_to_nat false)).
+Lemma conj338: forall (lf8 : list bool) (lf3 : BV), @eq nat (BV_to_nat (appbv lf8 lf3))
+  (Nat.add (BV_to_nat lf8) (bool_to_nat false)).
+Lemma conj337: forall (lf6 : nat) (lf8 : list bool) (lf3 : BV), @eq nat (BV_to_nat (appbv lf8 lf3)) (Nat.add lf6 (bool_to_nat false)).
+Lemma conj324: forall (lf9 : bool) (l : list bool) (a : bool) (lf3 : BV), @eq nat (BV_to_nat (appbv (@cons bool a l) lf3))
+  (Nat.add (BV_to_nat (@cons bool a l)) (bool_to_nat lf9)).
+Lemma conj323: forall (lf6 : nat) (lf9 : bool) (l : list bool) (a : bool) (lf3 : BV), @eq nat (BV_to_nat (appbv (@cons bool a l) lf3))
+  (Nat.add lf6 (bool_to_nat lf9)).
+Lemma conj322: forall (lf8 : list bool) (lf9 : bool) (lf3 : BV), @eq nat (BV_to_nat (appbv lf8 lf3))
+  (Nat.add (BV_to_nat lf8) (bool_to_nat lf9)).
+Lemma conj321: forall (lf6 : nat) (lf8 : list bool) (lf9 : bool) (lf3 : BV), @eq nat (BV_to_nat (appbv lf8 lf3)) (Nat.add lf6 (bool_to_nat lf9)).
+Lemma conj68: forall (lf7 : nat) (l : list bool) (a : bool) (lf3 : BV), @eq nat (BV_to_nat (appbv (@cons bool a l) lf3))
+  (Nat.add (BV_to_nat (@cons bool a l)) lf7).
+Lemma conj67: forall (lf6 : nat) (lf7 : nat) (l : list bool) (a : bool) (lf3 : BV), @eq nat (BV_to_nat (appbv (@cons bool a l) lf3)) (Nat.add lf6 lf7).
+Lemma conj66: forall (lf8 : list bool) (lf7 : nat) (lf3 : BV), @eq nat (BV_to_nat (appbv lf8 lf3)) (Nat.add (BV_to_nat lf8) lf7).
+Lemma conj65: forall (lf6 : nat) (lf8 : list bool) (lf7 : nat) (lf3 : BV), @eq nat (BV_to_nat (appbv lf8 lf3)) (Nat.add lf6 lf7).
+Lemma conj3: forall (lf4 : nat) (l : list bool) (a : bool) (lf3 : BV), @eq nat (BV_to_nat (appbv (@cons bool a l) lf3)) lf4.
+Lemma conj1: forall (lf8 : list bool) (lf4 : nat) (lf3 : BV), @eq nat (BV_to_nat (appbv lf8 lf3)) lf4.

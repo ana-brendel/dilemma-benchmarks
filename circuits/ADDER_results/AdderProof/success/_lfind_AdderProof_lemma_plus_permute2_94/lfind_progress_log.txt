@@ -1,0 +1,1877 @@
+File Information
+- File name: AdderProof
+- Original Directory: /home/anabrendel/lfind/benchmarks/circuits/ADDER_tests/AdderProof/AdderProof_lemma_plus_permute2_94
+- LFind Directory: /home/anabrendel/lfind/benchmarks/circuits/ADDER_tests/AdderProof/_lfind_AdderProof_lemma_plus_permute2_94
+- Namespace: Circuits
+- Proof name: BV_full_adder_ok
+- Theorem: Theorem BV_full_adder_ok: forall (v0 w0 : BV) (cin0 : bool),
+@eq nat (BV_to_nat (BV_full_adder v0 w0 cin0))
+  (Nat.add (Nat.add (BV_to_nat v0) (BV_to_nat w0)) (bool_to_nat cin0)).
+- Declarations: 
+From lfind Require Import LFind.
+From CircuitsCoqGym Require Import Adder. 
+
+Proof Context
+* Goal State: @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin))
+        (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+        (BV_to_nat l)) (bool_to_nat cin))
+
+* Hypothesis:
+cin : bool
+H : forall (w0 : BV) (cin0 : bool),
+@eq nat
+  (BV_to_nat
+     (appbv (BV_full_adder_sum l w0 cin0)
+        (consbv (BV_full_adder_carry l w0 cin0) nilbv)))
+  (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat w0)) (bool_to_nat cin0))
+v : BV
+w : BV
+l : list bool
+a : bool
+
+* Types:
+Set
+list bool
+BV
+Prop
+bool
+nat
+
+* Polymorphic Types:
+list bool
+
+* Variables:
+cin : bool
+l : list bool
+a : bool
+
+* Terms:
+PeanoNat.Nat.add
+  (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin)) (BV_to_nat l))
+  (BV_to_nat l) : nat
+BV_to_nat
+  (appbv (BV_full_adder_sum l _UNBOUND_REL_2 _UNBOUND_REL_1)
+     (consbv (BV_full_adder_carry l _UNBOUND_REL_2 _UNBOUND_REL_1) nilbv)) : nat
+cin : bool
+bool_to_nat _UNBOUND_REL_1 : nat
+PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+  (BV_to_nat l) : nat
+Nat.add (Nat.add (BV_to_nat l) (BV_to_nat _UNBOUND_REL_2))
+  (bool_to_nat _UNBOUND_REL_1) : nat
+bool_to_nat a : nat
+forall (w0 : BV) (cin0 : bool),
+@eq nat
+  (BV_to_nat
+     (appbv (BV_full_adder_sum l w0 cin0)
+        (consbv (BV_full_adder_carry l w0 cin0) nilbv)))
+  (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat w0)) (bool_to_nat cin0)) : Prop
+PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin)) (BV_to_nat l) : nat
+nilbv : BV
+l : list bool
+forall cin0 : bool,
+@eq nat
+  (BV_to_nat
+     (appbv (BV_full_adder_sum l _UNBOUND_REL_2 cin0)
+        (consbv (BV_full_adder_carry l _UNBOUND_REL_2 cin0) nilbv)))
+  (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat _UNBOUND_REL_2))
+     (bool_to_nat cin0)) : Prop
+bool_to_nat cin : nat
+appbv (BV_full_adder_sum l _UNBOUND_REL_2 _UNBOUND_REL_1)
+  (consbv (BV_full_adder_carry l _UNBOUND_REL_2 _UNBOUND_REL_1) nilbv) : BV
+nat : Set
+Nat.add (bool_to_nat a) (bool_to_nat cin) : nat
+bool : Set
+@eq nat
+  (BV_to_nat
+     (appbv (BV_full_adder_sum l _UNBOUND_REL_2 _UNBOUND_REL_1)
+        (consbv (BV_full_adder_carry l _UNBOUND_REL_2 _UNBOUND_REL_1) nilbv)))
+  (Nat.add (Nat.add (BV_to_nat l) (BV_to_nat _UNBOUND_REL_2))
+     (bool_to_nat _UNBOUND_REL_1)) : Prop
+BV_to_nat _UNBOUND_REL_2 : nat
+Nat.add (BV_to_nat l) (BV_to_nat _UNBOUND_REL_2) : nat
+BV_full_adder_sum l _UNBOUND_REL_2 _UNBOUND_REL_1 : BV
+Nat.add
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+     (BV_to_nat l)) (bool_to_nat cin) : nat
+PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l) : nat
+BV_full_adder_carry l _UNBOUND_REL_2 _UNBOUND_REL_1 : bool
+BV : Set
+list bool : Set
+consbv (BV_full_adder_carry l _UNBOUND_REL_2 _UNBOUND_REL_1) nilbv : BV
+a : bool
+BV_to_nat l : nat
+@eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin))
+        (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+        (BV_to_nat l)) (bool_to_nat cin)) : Prop
+
+* Functions:
+appbv  : forall (_ : BV) (_ : BV), BV
+BV_full_adder_carry  : forall (_ : list bool) (_ : list bool) (_ : bool), bool
+bool_to_nat  : forall _ : bool, nat
+Nat.add  : forall (_ : nat) (_ : nat), nat
+list  : forall _ : Type, Type
+consbv  : forall (_ : bool) (_ : BV), BV
+@eq  : forall (A : Type) (_ : A) (_ : A), Prop
+BV_full_adder_sum  : forall (_ : list bool) (_ : list bool) (_ : bool), BV
+PeanoNat.Nat.add  : forall (_ : nat) (_ : nat), nat
+BV_to_nat  : forall _ : BV, nat
+
+<---GENERALIZATION--->
+Time elapsed: 3 seconds
+Generalized Variables:
+lf3 : nat = PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+  (BV_to_nat l)
+lf7 : nat = bool_to_nat cin
+lf1 : nat = Nat.add
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+     (BV_to_nat l)) (bool_to_nat cin)
+lf4 : nat = PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin)) (BV_to_nat l)
+lf5 : nat = PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l)
+lf9 : nat = BV_to_nat l
+lf2 : nat = PeanoNat.Nat.add
+  (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin)) (BV_to_nat l))
+  (BV_to_nat l)
+lf8 : nat = bool_to_nat a
+lf6 : nat = Nat.add (bool_to_nat a) (bool_to_nat cin)
+
+Generalizations:
+Lemma conj1: forall (lf6 : nat) (lf9 : nat) (lf5 : nat) (lf7 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7).
+Lemma conj2: forall (lf8 : nat) (lf9 : nat) (lf5 : nat) (lf7 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 lf7) lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7).
+Lemma conj4: forall (lf9 : nat) (lf5 : nat) (lf7 : nat) (a : bool), @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7).
+Lemma conj9: forall (lf6 : nat) (lf5 : nat) (lf7 : nat) (l : list bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7).
+Lemma conj10: forall (lf8 : nat) (lf5 : nat) (lf7 : nat) (l : list bool), @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 lf7) (BV_to_nat l))
+     (BV_to_nat l)) (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7).
+Lemma conj12: forall (lf5 : nat) (lf7 : nat) (l : list bool) (a : bool), @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) (BV_to_nat l))
+     (BV_to_nat l)) (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7).
+Lemma conj17: forall (lf8 : nat) (lf6 : nat) (lf9 : nat) (lf7 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf9) lf9) lf7).
+Lemma conj18: forall (lf8 : nat) (lf9 : nat) (lf7 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 lf7) lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf9) lf9) lf7).
+Lemma conj19: forall (lf6 : nat) (lf9 : nat) (lf7 : nat) (a : bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) lf9) lf9) lf7).
+Lemma conj20: forall (lf9 : nat) (lf7 : nat) (a : bool), @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) lf9) lf9) lf7).
+Lemma conj25: forall (lf8 : nat) (lf6 : nat) (lf7 : nat) (l : list bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (BV_to_nat l)) (BV_to_nat l))
+     lf7).
+Lemma conj26: forall (lf8 : nat) (lf7 : nat) (l : list bool), @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 lf7) (BV_to_nat l))
+     (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (BV_to_nat l)) (BV_to_nat l))
+     lf7).
+Lemma conj27: forall (lf6 : nat) (lf7 : nat) (l : list bool) (a : bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+        (BV_to_nat l)) lf7).
+Lemma conj28: forall (lf7 : nat) (l : list bool) (a : bool), @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) (BV_to_nat l))
+     (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+        (BV_to_nat l)) lf7).
+Lemma conj129: forall (lf6 : nat) (lf9 : nat) (lf5 : nat) (cin : bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) (bool_to_nat cin)).
+Lemma conj130: forall (lf8 : nat) (lf9 : nat) (lf5 : nat) (cin : bool), @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 (bool_to_nat cin)) lf9)
+     lf9) (Nat.add (PeanoNat.Nat.add lf5 lf9) (bool_to_nat cin)).
+Lemma conj132: forall (lf9 : nat) (lf5 : nat) (cin : bool) (a : bool), @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin)) lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) (bool_to_nat cin)).
+Lemma conj137: forall (lf6 : nat) (lf5 : nat) (cin : bool) (l : list bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (bool_to_nat cin)).
+Lemma conj138: forall (lf8 : nat) (lf5 : nat) (cin : bool) (l : list bool), @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add lf8 (bool_to_nat cin)) (BV_to_nat l))
+     (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (bool_to_nat cin)).
+Lemma conj140: forall (lf5 : nat) (cin : bool) (l : list bool) (a : bool), @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin))
+        (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (bool_to_nat cin)).
+Lemma conj145: forall (lf8 : nat) (lf6 : nat) (lf9 : nat) (cin : bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf9) lf9)
+     (bool_to_nat cin)).
+Lemma conj146: forall (lf8 : nat) (lf9 : nat) (cin : bool), @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 (bool_to_nat cin)) lf9)
+     lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf9) lf9)
+     (bool_to_nat cin)).
+Lemma conj147: forall (lf6 : nat) (lf9 : nat) (cin : bool) (a : bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) lf9) lf9)
+     (bool_to_nat cin)).
+Lemma conj148: forall (lf9 : nat) (cin : bool) (a : bool), @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin)) lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) lf9) lf9)
+     (bool_to_nat cin)).
+Lemma conj153: forall (lf8 : nat) (lf6 : nat) (cin : bool) (l : list bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (BV_to_nat l)) (BV_to_nat l))
+     (bool_to_nat cin)).
+Lemma conj154: forall (lf8 : nat) (cin : bool) (l : list bool), @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add lf8 (bool_to_nat cin)) (BV_to_nat l))
+     (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (BV_to_nat l)) (BV_to_nat l))
+     (bool_to_nat cin)).
+Lemma conj155: forall (lf6 : nat) (cin : bool) (l : list bool) (a : bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+        (BV_to_nat l)) (bool_to_nat cin)).
+Lemma conj156: forall (cin : bool) (l : list bool) (a : bool), @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin))
+        (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+        (BV_to_nat l)) (bool_to_nat cin)).
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 98 seconds
+Valid:
+Lemma conj156: forall (cin : bool) (l : list bool) (a : bool), @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin))
+        (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+        (BV_to_nat l)) (bool_to_nat cin)).
+Lemma conj154: forall (lf8 : nat) (cin : bool) (l : list bool), @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add lf8 (bool_to_nat cin)) (BV_to_nat l))
+     (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (BV_to_nat l)) (BV_to_nat l))
+     (bool_to_nat cin)).
+Lemma conj148: forall (lf9 : nat) (cin : bool) (a : bool), @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin)) lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) lf9) lf9)
+     (bool_to_nat cin)).
+Lemma conj146: forall (lf8 : nat) (lf9 : nat) (cin : bool), @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 (bool_to_nat cin)) lf9)
+     lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf9) lf9)
+     (bool_to_nat cin)).
+Lemma conj28: forall (lf7 : nat) (l : list bool) (a : bool), @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) (BV_to_nat l))
+     (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+        (BV_to_nat l)) lf7).
+Lemma conj26: forall (lf8 : nat) (lf7 : nat) (l : list bool), @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 lf7) (BV_to_nat l))
+     (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (BV_to_nat l)) (BV_to_nat l))
+     lf7).
+Lemma conj20: forall (lf9 : nat) (lf7 : nat) (a : bool), @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) lf9) lf9) lf7).
+Lemma conj18: forall (lf8 : nat) (lf9 : nat) (lf7 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 lf7) lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf9) lf9) lf7).
+
+Invalid:
+Lemma conj155: forall (lf6 : nat) (cin : bool) (l : list bool) (a : bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+        (BV_to_nat l)) (bool_to_nat cin)).
+Lemma conj153: forall (lf8 : nat) (lf6 : nat) (cin : bool) (l : list bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (BV_to_nat l)) (BV_to_nat l))
+     (bool_to_nat cin)).
+Lemma conj147: forall (lf6 : nat) (lf9 : nat) (cin : bool) (a : bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) lf9) lf9)
+     (bool_to_nat cin)).
+Lemma conj145: forall (lf8 : nat) (lf6 : nat) (lf9 : nat) (cin : bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf9) lf9)
+     (bool_to_nat cin)).
+Lemma conj140: forall (lf5 : nat) (cin : bool) (l : list bool) (a : bool), @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin))
+        (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (bool_to_nat cin)).
+Lemma conj138: forall (lf8 : nat) (lf5 : nat) (cin : bool) (l : list bool), @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add lf8 (bool_to_nat cin)) (BV_to_nat l))
+     (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (bool_to_nat cin)).
+Lemma conj137: forall (lf6 : nat) (lf5 : nat) (cin : bool) (l : list bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (bool_to_nat cin)).
+Lemma conj132: forall (lf9 : nat) (lf5 : nat) (cin : bool) (a : bool), @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin)) lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) (bool_to_nat cin)).
+Lemma conj130: forall (lf8 : nat) (lf9 : nat) (lf5 : nat) (cin : bool), @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 (bool_to_nat cin)) lf9)
+     lf9) (Nat.add (PeanoNat.Nat.add lf5 lf9) (bool_to_nat cin)).
+Lemma conj129: forall (lf6 : nat) (lf9 : nat) (lf5 : nat) (cin : bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) (bool_to_nat cin)).
+Lemma conj27: forall (lf6 : nat) (lf7 : nat) (l : list bool) (a : bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+        (BV_to_nat l)) lf7).
+Lemma conj25: forall (lf8 : nat) (lf6 : nat) (lf7 : nat) (l : list bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (BV_to_nat l)) (BV_to_nat l))
+     lf7).
+Lemma conj19: forall (lf6 : nat) (lf9 : nat) (lf7 : nat) (a : bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) lf9) lf9) lf7).
+Lemma conj17: forall (lf8 : nat) (lf6 : nat) (lf9 : nat) (lf7 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf9) lf9) lf7).
+Lemma conj12: forall (lf5 : nat) (lf7 : nat) (l : list bool) (a : bool), @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) (BV_to_nat l))
+     (BV_to_nat l)) (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7).
+Lemma conj10: forall (lf8 : nat) (lf5 : nat) (lf7 : nat) (l : list bool), @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 lf7) (BV_to_nat l))
+     (BV_to_nat l)) (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7).
+Lemma conj9: forall (lf6 : nat) (lf5 : nat) (lf7 : nat) (l : list bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7).
+Lemma conj4: forall (lf9 : nat) (lf5 : nat) (lf7 : nat) (a : bool), @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7).
+Lemma conj2: forall (lf8 : nat) (lf9 : nat) (lf5 : nat) (lf7 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 lf7) lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7).
+Lemma conj1: forall (lf6 : nat) (lf9 : nat) (lf5 : nat) (lf7 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7).
+
+<---ADD IMPLICATIONS--->
+Time elapsed: 119 seconds
+Generalizations:
+Lemma conj155: forall (lf6 : nat) (cin : bool) (l : list bool) (a : bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+        (BV_to_nat l)) (bool_to_nat cin)).
+Lemma conj153: forall (lf8 : nat) (lf6 : nat) (cin : bool) (l : list bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (BV_to_nat l)) (BV_to_nat l))
+     (bool_to_nat cin)).
+Lemma conj147: forall (lf6 : nat) (lf9 : nat) (cin : bool) (a : bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) lf9) lf9)
+     (bool_to_nat cin)).
+Lemma conj145: forall (lf8 : nat) (lf6 : nat) (lf9 : nat) (cin : bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf9) lf9)
+     (bool_to_nat cin)).
+Lemma conj140: forall (lf5 : nat) (cin : bool) (l : list bool) (a : bool), @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin))
+        (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (bool_to_nat cin)).
+Lemma conj138: forall (lf8 : nat) (lf5 : nat) (cin : bool) (l : list bool), @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add lf8 (bool_to_nat cin)) (BV_to_nat l))
+     (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (bool_to_nat cin)).
+Lemma conj137: forall (lf6 : nat) (lf5 : nat) (cin : bool) (l : list bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (bool_to_nat cin)).
+Lemma conj132: forall (lf9 : nat) (lf5 : nat) (cin : bool) (a : bool), @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin)) lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) (bool_to_nat cin)).
+Lemma conj130: forall (lf8 : nat) (lf9 : nat) (lf5 : nat) (cin : bool), @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 (bool_to_nat cin)) lf9)
+     lf9) (Nat.add (PeanoNat.Nat.add lf5 lf9) (bool_to_nat cin)).
+Lemma conj129: forall (lf6 : nat) (lf9 : nat) (lf5 : nat) (cin : bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) (bool_to_nat cin)).
+Lemma conj27: forall (lf6 : nat) (lf7 : nat) (l : list bool) (a : bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+        (BV_to_nat l)) lf7).
+Lemma conj25: forall (lf8 : nat) (lf6 : nat) (lf7 : nat) (l : list bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (BV_to_nat l)) (BV_to_nat l))
+     lf7).
+Lemma conj19: forall (lf6 : nat) (lf9 : nat) (lf7 : nat) (a : bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) lf9) lf9) lf7).
+Lemma conj17: forall (lf8 : nat) (lf6 : nat) (lf9 : nat) (lf7 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf9) lf9) lf7).
+Lemma conj12: forall (lf5 : nat) (lf7 : nat) (l : list bool) (a : bool), @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) (BV_to_nat l))
+     (BV_to_nat l)) (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7).
+Lemma conj10: forall (lf8 : nat) (lf5 : nat) (lf7 : nat) (l : list bool), @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 lf7) (BV_to_nat l))
+     (BV_to_nat l)) (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7).
+Lemma conj9: forall (lf6 : nat) (lf5 : nat) (lf7 : nat) (l : list bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7).
+Lemma conj4: forall (lf9 : nat) (lf5 : nat) (lf7 : nat) (a : bool), @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7).
+Lemma conj2: forall (lf8 : nat) (lf9 : nat) (lf5 : nat) (lf7 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 lf7) lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7).
+Lemma conj1: forall (lf6 : nat) (lf9 : nat) (lf5 : nat) (lf7 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7).
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 149 seconds
+Valid:
+
+Invalid:
+Lemma conj1: forall (lf6 : nat) (lf9 : nat) (lf5 : nat) (lf7 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7).
+Lemma conj2: forall (lf8 : nat) (lf9 : nat) (lf5 : nat) (lf7 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 lf7) lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7).
+Lemma conj4: forall (lf9 : nat) (lf5 : nat) (lf7 : nat) (a : bool), @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7).
+Lemma conj9: forall (lf6 : nat) (lf5 : nat) (lf7 : nat) (l : list bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7).
+Lemma conj10: forall (lf8 : nat) (lf5 : nat) (lf7 : nat) (l : list bool), @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 lf7) (BV_to_nat l))
+     (BV_to_nat l)) (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7).
+Lemma conj12: forall (lf5 : nat) (lf7 : nat) (l : list bool) (a : bool), @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) (BV_to_nat l))
+     (BV_to_nat l)) (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7).
+Lemma conj17: forall (lf8 : nat) (lf6 : nat) (lf9 : nat) (lf7 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf9) lf9) lf7).
+Lemma conj19: forall (lf6 : nat) (lf9 : nat) (lf7 : nat) (a : bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) lf9) lf9) lf7).
+Lemma conj25: forall (lf8 : nat) (lf6 : nat) (lf7 : nat) (l : list bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (BV_to_nat l)) (BV_to_nat l))
+     lf7).
+Lemma conj27: forall (lf6 : nat) (lf7 : nat) (l : list bool) (a : bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+        (BV_to_nat l)) lf7).
+Lemma conj129: forall (lf6 : nat) (lf9 : nat) (lf5 : nat) (cin : bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) (bool_to_nat cin)).
+Lemma conj130: forall (lf8 : nat) (lf9 : nat) (lf5 : nat) (cin : bool), @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 (bool_to_nat cin)) lf9)
+     lf9) (Nat.add (PeanoNat.Nat.add lf5 lf9) (bool_to_nat cin)).
+Lemma conj132: forall (lf9 : nat) (lf5 : nat) (cin : bool) (a : bool), @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin)) lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) (bool_to_nat cin)).
+Lemma conj137: forall (lf6 : nat) (lf5 : nat) (cin : bool) (l : list bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (bool_to_nat cin)).
+Lemma conj138: forall (lf8 : nat) (lf5 : nat) (cin : bool) (l : list bool), @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add lf8 (bool_to_nat cin)) (BV_to_nat l))
+     (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (bool_to_nat cin)).
+Lemma conj140: forall (lf5 : nat) (cin : bool) (l : list bool) (a : bool), @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin))
+        (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (bool_to_nat cin)).
+Lemma conj145: forall (lf8 : nat) (lf6 : nat) (lf9 : nat) (cin : bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf9) lf9)
+     (bool_to_nat cin)).
+Lemma conj147: forall (lf6 : nat) (lf9 : nat) (cin : bool) (a : bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) lf9) lf9)
+     (bool_to_nat cin)).
+Lemma conj153: forall (lf8 : nat) (lf6 : nat) (cin : bool) (l : list bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (BV_to_nat l)) (BV_to_nat l))
+     (bool_to_nat cin)).
+Lemma conj155: forall (lf6 : nat) (cin : bool) (l : list bool) (a : bool), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+        (BV_to_nat l)) (bool_to_nat cin)).
+
+
+<---CREATE SKETCHES--->
+Time elapsed: 150 seconds
+Sketches:
+Sketch conj1_sketch0 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9) (##hole##)
+Sketch conj1_sketch1 : @eq nat (##hole##) (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7)
+Sketch conj1_sketch2 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (##hole##) lf7)
+Sketch conj1_sketch3 : @eq nat (PeanoNat.Nat.add (##hole##) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7)
+Sketch conj1_term_sketch0 : @eq nat (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7) (##hole##)
+Sketch conj1_term_sketch1 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9) (##hole##)
+Sketch conj1_term_sketch2 : @eq nat (PeanoNat.Nat.add lf5 lf9) (##hole##)
+Sketch conj1_term_sketch3 : @eq nat (PeanoNat.Nat.add lf6 lf9) (##hole##)
+Sketch conj2_sketch0 : @eq nat (PeanoNat.Nat.add (##hole##) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7)
+Sketch conj2_sketch1 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 lf7) lf9) lf9)
+  (##hole##)
+Sketch conj2_sketch2 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add (##hole##) lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7)
+Sketch conj2_sketch3 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 lf7) lf9) lf9)
+  (Nat.add (##hole##) lf7)
+Sketch conj2_sketch4 : @eq nat (##hole##) (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7)
+Sketch conj2_term_sketch0 : @eq nat (PeanoNat.Nat.add (Nat.add lf8 lf7) lf9) (##hole##)
+Sketch conj2_term_sketch1 : @eq nat (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7) (##hole##)
+Sketch conj2_term_sketch2 : @eq nat (Nat.add lf8 lf7) (##hole##)
+Sketch conj2_term_sketch3 : @eq nat (PeanoNat.Nat.add lf5 lf9) (##hole##)
+Sketch conj2_term_sketch4 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 lf7) lf9) lf9)
+  (##hole##)
+Sketch conj4_sketch0 : @eq nat (##hole##) (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7)
+Sketch conj4_sketch1 : @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) lf9) lf9)
+  (##hole##)
+Sketch conj4_sketch2 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add (##hole##) lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7)
+Sketch conj4_sketch3 : @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add (##hole##) lf7) lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7)
+Sketch conj4_sketch4 : @eq nat (PeanoNat.Nat.add (##hole##) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7)
+Sketch conj4_sketch5 : @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) lf9) lf9)
+  (Nat.add (##hole##) lf7)
+Sketch conj4_term_sketch0 : @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) lf9) lf9)
+  (##hole##)
+Sketch conj4_term_sketch1 : @eq nat (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7) (##hole##)
+Sketch conj4_term_sketch2 : @eq nat (Nat.add (bool_to_nat a) lf7) (##hole##)
+Sketch conj4_term_sketch3 : @eq nat (bool_to_nat a) (##hole##)
+Sketch conj4_term_sketch4 : @eq nat (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) lf9) (##hole##)
+Sketch conj4_term_sketch5 : @eq nat (PeanoNat.Nat.add lf5 lf9) (##hole##)
+Sketch conj9_sketch0 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (##hole##) lf7)
+Sketch conj9_sketch1 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (##hole##)
+Sketch conj9_sketch2 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (##hole##)) (##hole##))
+  (Nat.add (PeanoNat.Nat.add lf5 (##hole##)) lf7)
+Sketch conj9_sketch3 : @eq nat (PeanoNat.Nat.add (##hole##) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7)
+Sketch conj9_sketch4 : @eq nat (##hole##) (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7)
+Sketch conj9_term_sketch0 : @eq nat (PeanoNat.Nat.add lf5 (BV_to_nat l)) (##hole##)
+Sketch conj9_term_sketch1 : @eq nat (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7) (##hole##)
+Sketch conj9_term_sketch2 : @eq nat (BV_to_nat l) (##hole##)
+Sketch conj9_term_sketch3 : @eq nat (PeanoNat.Nat.add lf6 (BV_to_nat l)) (##hole##)
+Sketch conj9_term_sketch4 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (##hole##)
+Sketch conj10_sketch0 : @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 lf7) (BV_to_nat l))
+     (BV_to_nat l)) (Nat.add (##hole##) lf7)
+Sketch conj10_sketch1 : @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 lf7) (BV_to_nat l))
+     (BV_to_nat l)) (##hole##)
+Sketch conj10_sketch2 : @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (##hole##) (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7)
+Sketch conj10_sketch3 : @eq nat (PeanoNat.Nat.add (##hole##) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7)
+Sketch conj10_sketch4 : @eq nat (##hole##) (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7)
+Sketch conj10_sketch5 : @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 lf7) (##hole##))
+     (##hole##)) (Nat.add (PeanoNat.Nat.add lf5 (##hole##)) lf7)
+Sketch conj10_term_sketch0 : @eq nat (PeanoNat.Nat.add lf5 (BV_to_nat l)) (##hole##)
+Sketch conj10_term_sketch1 : @eq nat (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7) (##hole##)
+Sketch conj10_term_sketch2 : @eq nat (Nat.add lf8 lf7) (##hole##)
+Sketch conj10_term_sketch3 : @eq nat (PeanoNat.Nat.add (Nat.add lf8 lf7) (BV_to_nat l)) (##hole##)
+Sketch conj10_term_sketch4 : @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 lf7) (BV_to_nat l))
+     (BV_to_nat l)) (##hole##)
+Sketch conj10_term_sketch5 : @eq nat (BV_to_nat l) (##hole##)
+Sketch conj12_sketch0 : @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) (BV_to_nat l))
+     (BV_to_nat l)) (Nat.add (##hole##) lf7)
+Sketch conj12_sketch1 : @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) (BV_to_nat l))
+     (BV_to_nat l)) (##hole##)
+Sketch conj12_sketch2 : @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (##hole##) (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7)
+Sketch conj12_sketch3 : @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add (##hole##) lf7) (BV_to_nat l))
+     (BV_to_nat l)) (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7)
+Sketch conj12_sketch4 : @eq nat (##hole##) (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7)
+Sketch conj12_sketch5 : @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) (##hole##)) (##hole##))
+  (Nat.add (PeanoNat.Nat.add lf5 (##hole##)) lf7)
+Sketch conj12_sketch6 : @eq nat (PeanoNat.Nat.add (##hole##) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7)
+Sketch conj12_term_sketch0 : @eq nat (PeanoNat.Nat.add lf5 (BV_to_nat l)) (##hole##)
+Sketch conj12_term_sketch1 : @eq nat (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7) (##hole##)
+Sketch conj12_term_sketch2 : @eq nat (Nat.add (bool_to_nat a) lf7) (##hole##)
+Sketch conj12_term_sketch3 : @eq nat (bool_to_nat a) (##hole##)
+Sketch conj12_term_sketch4 : @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) (BV_to_nat l))
+     (BV_to_nat l)) (##hole##)
+Sketch conj12_term_sketch5 : @eq nat (BV_to_nat l) (##hole##)
+Sketch conj12_term_sketch6 : @eq nat (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) (BV_to_nat l))
+  (##hole##)
+Sketch conj17_sketch0 : @eq nat (##hole##)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf9) lf9) lf7)
+Sketch conj17_sketch1 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (##hole##) lf9) lf7)
+Sketch conj17_sketch2 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (##hole##) lf7)
+Sketch conj17_sketch3 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9) (##hole##)
+Sketch conj17_sketch4 : @eq nat (PeanoNat.Nat.add (##hole##) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf9) lf9) lf7)
+Sketch conj17_term_sketch0 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9) (##hole##)
+Sketch conj17_term_sketch1 : @eq nat (PeanoNat.Nat.add lf8 lf9) (##hole##)
+Sketch conj17_term_sketch2 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf9) lf9) (##hole##)
+Sketch conj17_term_sketch3 : @eq nat (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf9) lf9) lf7)
+  (##hole##)
+Sketch conj17_term_sketch4 : @eq nat (PeanoNat.Nat.add lf6 lf9) (##hole##)
+Sketch conj19_sketch0 : @eq nat (##hole##)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) lf9) lf9) lf7)
+Sketch conj19_sketch1 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (##hole##) lf7)
+Sketch conj19_sketch2 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add (##hole##) lf9) lf9) lf7)
+Sketch conj19_sketch3 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (##hole##) lf9) lf7)
+Sketch conj19_sketch4 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9) (##hole##)
+Sketch conj19_sketch5 : @eq nat (PeanoNat.Nat.add (##hole##) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) lf9) lf9) lf7)
+Sketch conj19_term_sketch0 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9) (##hole##)
+Sketch conj19_term_sketch1 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) lf9) lf9)
+  (##hole##)
+Sketch conj19_term_sketch2 : @eq nat (bool_to_nat a) (##hole##)
+Sketch conj19_term_sketch3 : @eq nat (PeanoNat.Nat.add (bool_to_nat a) lf9) (##hole##)
+Sketch conj19_term_sketch4 : @eq nat
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) lf9) lf9) lf7)
+  (##hole##)
+Sketch conj19_term_sketch5 : @eq nat (PeanoNat.Nat.add lf6 lf9) (##hole##)
+Sketch conj25_sketch0 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (##hole##)
+Sketch conj25_sketch1 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add (##hole##) (BV_to_nat l)) lf7)
+Sketch conj25_sketch2 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (##hole##) lf7)
+Sketch conj25_sketch3 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (##hole##)) (##hole##))
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (##hole##)) (##hole##))
+     lf7)
+Sketch conj25_sketch4 : @eq nat (PeanoNat.Nat.add (##hole##) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (BV_to_nat l)) (BV_to_nat l))
+     lf7)
+Sketch conj25_sketch5 : @eq nat (##hole##)
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (BV_to_nat l)) (BV_to_nat l))
+     lf7)
+Sketch conj25_term_sketch0 : @eq nat
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (BV_to_nat l)) (BV_to_nat l))
+     lf7) (##hole##)
+Sketch conj25_term_sketch1 : @eq nat (PeanoNat.Nat.add lf8 (BV_to_nat l)) (##hole##)
+Sketch conj25_term_sketch2 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (BV_to_nat l)) (BV_to_nat l))
+  (##hole##)
+Sketch conj25_term_sketch3 : @eq nat (BV_to_nat l) (##hole##)
+Sketch conj25_term_sketch4 : @eq nat (PeanoNat.Nat.add lf6 (BV_to_nat l)) (##hole##)
+Sketch conj25_term_sketch5 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (##hole##)
+Sketch conj27_sketch0 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (##hole##)
+Sketch conj27_sketch1 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (##hole##) lf7)
+Sketch conj27_sketch2 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add (##hole##) (BV_to_nat l))
+        (BV_to_nat l)) lf7)
+Sketch conj27_sketch3 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add (##hole##) (BV_to_nat l)) lf7)
+Sketch conj27_sketch4 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (##hole##)) (##hole##))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (##hole##))
+        (##hole##)) lf7)
+Sketch conj27_sketch5 : @eq nat (PeanoNat.Nat.add (##hole##) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+        (BV_to_nat l)) lf7)
+Sketch conj27_sketch6 : @eq nat (##hole##)
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+        (BV_to_nat l)) lf7)
+Sketch conj27_term_sketch0 : @eq nat
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+        (BV_to_nat l)) lf7) (##hole##)
+Sketch conj27_term_sketch1 : @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+     (BV_to_nat l)) (##hole##)
+Sketch conj27_term_sketch2 : @eq nat (bool_to_nat a) (##hole##)
+Sketch conj27_term_sketch3 : @eq nat (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l)) (##hole##)
+Sketch conj27_term_sketch4 : @eq nat (BV_to_nat l) (##hole##)
+Sketch conj27_term_sketch5 : @eq nat (PeanoNat.Nat.add lf6 (BV_to_nat l)) (##hole##)
+Sketch conj27_term_sketch6 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (##hole##)
+Sketch conj129_sketch0 : @eq nat (##hole##) (Nat.add (PeanoNat.Nat.add lf5 lf9) (bool_to_nat cin))
+Sketch conj129_sketch1 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9) (##hole##)
+Sketch conj129_sketch2 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (##hole##) (bool_to_nat cin))
+Sketch conj129_sketch3 : @eq nat (PeanoNat.Nat.add (##hole##) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) (bool_to_nat cin))
+Sketch conj129_sketch4 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) (##hole##))
+Sketch conj129_term_sketch0 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9) (##hole##)
+Sketch conj129_term_sketch1 : @eq nat (Nat.add (PeanoNat.Nat.add lf5 lf9) (bool_to_nat cin)) (##hole##)
+Sketch conj129_term_sketch2 : @eq nat (PeanoNat.Nat.add lf5 lf9) (##hole##)
+Sketch conj129_term_sketch3 : @eq nat (PeanoNat.Nat.add lf6 lf9) (##hole##)
+Sketch conj129_term_sketch4 : @eq nat (bool_to_nat cin) (##hole##)
+Sketch conj130_sketch0 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add (##hole##) lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) (bool_to_nat cin))
+Sketch conj130_sketch1 : @eq nat (PeanoNat.Nat.add (##hole##) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) (bool_to_nat cin))
+Sketch conj130_sketch2 : @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 (bool_to_nat cin)) lf9)
+     lf9) (##hole##)
+Sketch conj130_sketch3 : @eq nat (##hole##) (Nat.add (PeanoNat.Nat.add lf5 lf9) (bool_to_nat cin))
+Sketch conj130_sketch4 : @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 (bool_to_nat cin)) lf9)
+     lf9) (Nat.add (##hole##) (bool_to_nat cin))
+Sketch conj130_sketch5 : @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 (##hole##)) lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) (##hole##))
+Sketch conj130_term_sketch0 : @eq nat (Nat.add lf8 (bool_to_nat cin)) (##hole##)
+Sketch conj130_term_sketch1 : @eq nat (PeanoNat.Nat.add (Nat.add lf8 (bool_to_nat cin)) lf9) (##hole##)
+Sketch conj130_term_sketch2 : @eq nat (Nat.add (PeanoNat.Nat.add lf5 lf9) (bool_to_nat cin)) (##hole##)
+Sketch conj130_term_sketch3 : @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 (bool_to_nat cin)) lf9)
+     lf9) (##hole##)
+Sketch conj130_term_sketch4 : @eq nat (PeanoNat.Nat.add lf5 lf9) (##hole##)
+Sketch conj130_term_sketch5 : @eq nat (bool_to_nat cin) (##hole##)
+Sketch conj132_sketch0 : @eq nat (##hole##) (Nat.add (PeanoNat.Nat.add lf5 lf9) (bool_to_nat cin))
+Sketch conj132_sketch1 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add (##hole##) lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) (bool_to_nat cin))
+Sketch conj132_sketch2 : @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin)) lf9) lf9)
+  (##hole##)
+Sketch conj132_sketch3 : @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (##hole##) (bool_to_nat cin)) lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) (bool_to_nat cin))
+Sketch conj132_sketch4 : @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin)) lf9) lf9)
+  (Nat.add (##hole##) (bool_to_nat cin))
+Sketch conj132_sketch5 : @eq nat (PeanoNat.Nat.add (##hole##) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) (bool_to_nat cin))
+Sketch conj132_sketch6 : @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (##hole##)) lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add lf5 lf9) (##hole##))
+Sketch conj132_term_sketch0 : @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin)) lf9) lf9)
+  (##hole##)
+Sketch conj132_term_sketch1 : @eq nat (Nat.add (bool_to_nat a) (bool_to_nat cin)) (##hole##)
+Sketch conj132_term_sketch2 : @eq nat (Nat.add (PeanoNat.Nat.add lf5 lf9) (bool_to_nat cin)) (##hole##)
+Sketch conj132_term_sketch3 : @eq nat (bool_to_nat a) (##hole##)
+Sketch conj132_term_sketch4 : @eq nat (PeanoNat.Nat.add lf5 lf9) (##hole##)
+Sketch conj132_term_sketch5 : @eq nat (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin)) lf9)
+  (##hole##)
+Sketch conj132_term_sketch6 : @eq nat (bool_to_nat cin) (##hole##)
+Sketch conj137_sketch0 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (##hole##)
+Sketch conj137_sketch1 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (##hole##) (bool_to_nat cin))
+Sketch conj137_sketch2 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (##hole##))
+Sketch conj137_sketch3 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (##hole##)) (##hole##))
+  (Nat.add (PeanoNat.Nat.add lf5 (##hole##)) (bool_to_nat cin))
+Sketch conj137_sketch4 : @eq nat (PeanoNat.Nat.add (##hole##) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (bool_to_nat cin))
+Sketch conj137_sketch5 : @eq nat (##hole##)
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (bool_to_nat cin))
+Sketch conj137_term_sketch0 : @eq nat (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (bool_to_nat cin))
+  (##hole##)
+Sketch conj137_term_sketch1 : @eq nat (PeanoNat.Nat.add lf5 (BV_to_nat l)) (##hole##)
+Sketch conj137_term_sketch2 : @eq nat (bool_to_nat cin) (##hole##)
+Sketch conj137_term_sketch3 : @eq nat (BV_to_nat l) (##hole##)
+Sketch conj137_term_sketch4 : @eq nat (PeanoNat.Nat.add lf6 (BV_to_nat l)) (##hole##)
+Sketch conj137_term_sketch5 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (##hole##)
+Sketch conj138_sketch0 : @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add lf8 (bool_to_nat cin)) (BV_to_nat l))
+     (BV_to_nat l)) (##hole##)
+Sketch conj138_sketch1 : @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (##hole##) (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (bool_to_nat cin))
+Sketch conj138_sketch2 : @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add lf8 (bool_to_nat cin)) (BV_to_nat l))
+     (BV_to_nat l)) (Nat.add (##hole##) (bool_to_nat cin))
+Sketch conj138_sketch3 : @eq nat (##hole##)
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (bool_to_nat cin))
+Sketch conj138_sketch4 : @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 (##hole##)) (BV_to_nat l))
+     (BV_to_nat l)) (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (##hole##))
+Sketch conj138_sketch5 : @eq nat (PeanoNat.Nat.add (##hole##) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (bool_to_nat cin))
+Sketch conj138_sketch6 : @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add lf8 (bool_to_nat cin)) (##hole##)) (##hole##))
+  (Nat.add (PeanoNat.Nat.add lf5 (##hole##)) (bool_to_nat cin))
+Sketch conj138_term_sketch0 : @eq nat (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (bool_to_nat cin))
+  (##hole##)
+Sketch conj138_term_sketch1 : @eq nat (Nat.add lf8 (bool_to_nat cin)) (##hole##)
+Sketch conj138_term_sketch2 : @eq nat (PeanoNat.Nat.add lf5 (BV_to_nat l)) (##hole##)
+Sketch conj138_term_sketch3 : @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add lf8 (bool_to_nat cin)) (BV_to_nat l))
+     (BV_to_nat l)) (##hole##)
+Sketch conj138_term_sketch4 : @eq nat (bool_to_nat cin) (##hole##)
+Sketch conj138_term_sketch5 : @eq nat (PeanoNat.Nat.add (Nat.add lf8 (bool_to_nat cin)) (BV_to_nat l))
+  (##hole##)
+Sketch conj138_term_sketch6 : @eq nat (BV_to_nat l) (##hole##)
+Sketch conj140_sketch0 : @eq nat (##hole##)
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (bool_to_nat cin))
+Sketch conj140_sketch1 : @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin))
+        (BV_to_nat l)) (BV_to_nat l)) (##hole##)
+Sketch conj140_sketch2 : @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (##hole##) (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (bool_to_nat cin))
+Sketch conj140_sketch3 : @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin))
+        (BV_to_nat l)) (BV_to_nat l)) (Nat.add (##hole##) (bool_to_nat cin))
+Sketch conj140_sketch4 : @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (##hole##) (bool_to_nat cin)) (BV_to_nat l))
+     (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (bool_to_nat cin))
+Sketch conj140_sketch5 : @eq nat (PeanoNat.Nat.add (##hole##) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (bool_to_nat cin))
+Sketch conj140_sketch6 : @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (##hole##)) (BV_to_nat l))
+     (BV_to_nat l)) (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (##hole##))
+Sketch conj140_sketch7 : @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin)) (##hole##))
+     (##hole##))
+  (Nat.add (PeanoNat.Nat.add lf5 (##hole##)) (bool_to_nat cin))
+Sketch conj140_term_sketch0 : @eq nat
+  (PeanoNat.Nat.add
+     (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin))
+        (BV_to_nat l)) (BV_to_nat l)) (##hole##)
+Sketch conj140_term_sketch1 : @eq nat (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) (bool_to_nat cin))
+  (##hole##)
+Sketch conj140_term_sketch2 : @eq nat (Nat.add (bool_to_nat a) (bool_to_nat cin)) (##hole##)
+Sketch conj140_term_sketch3 : @eq nat (PeanoNat.Nat.add lf5 (BV_to_nat l)) (##hole##)
+Sketch conj140_term_sketch4 : @eq nat (bool_to_nat a) (##hole##)
+Sketch conj140_term_sketch5 : @eq nat
+  (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin)) (BV_to_nat l))
+  (##hole##)
+Sketch conj140_term_sketch6 : @eq nat (bool_to_nat cin) (##hole##)
+Sketch conj140_term_sketch7 : @eq nat (BV_to_nat l) (##hole##)
+Sketch conj145_sketch0 : @eq nat (##hole##)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf9) lf9)
+     (bool_to_nat cin))
+Sketch conj145_sketch1 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (##hole##) lf9) (bool_to_nat cin))
+Sketch conj145_sketch2 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (##hole##) (bool_to_nat cin))
+Sketch conj145_sketch3 : @eq nat (PeanoNat.Nat.add (##hole##) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf9) lf9)
+     (bool_to_nat cin))
+Sketch conj145_sketch4 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf9) lf9) (##hole##))
+Sketch conj145_sketch5 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9) (##hole##)
+Sketch conj145_term_sketch0 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9) (##hole##)
+Sketch conj145_term_sketch1 : @eq nat (PeanoNat.Nat.add lf8 lf9) (##hole##)
+Sketch conj145_term_sketch2 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf9) lf9) (##hole##)
+Sketch conj145_term_sketch3 : @eq nat (PeanoNat.Nat.add lf6 lf9) (##hole##)
+Sketch conj145_term_sketch4 : @eq nat (bool_to_nat cin) (##hole##)
+Sketch conj145_term_sketch5 : @eq nat
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf9) lf9)
+     (bool_to_nat cin)) (##hole##)
+Sketch conj147_sketch0 : @eq nat (##hole##)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) lf9) lf9)
+     (bool_to_nat cin))
+Sketch conj147_sketch1 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9) (##hole##)
+Sketch conj147_sketch2 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (##hole##) (bool_to_nat cin))
+Sketch conj147_sketch3 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add (##hole##) lf9) lf9)
+     (bool_to_nat cin))
+Sketch conj147_sketch4 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (##hole##) lf9) (bool_to_nat cin))
+Sketch conj147_sketch5 : @eq nat (PeanoNat.Nat.add (##hole##) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) lf9) lf9)
+     (bool_to_nat cin))
+Sketch conj147_sketch6 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9)
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) lf9) lf9)
+     (##hole##))
+Sketch conj147_term_sketch0 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 lf9) lf9) (##hole##)
+Sketch conj147_term_sketch1 : @eq nat
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) lf9) lf9)
+     (bool_to_nat cin)) (##hole##)
+Sketch conj147_term_sketch2 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) lf9) lf9)
+  (##hole##)
+Sketch conj147_term_sketch3 : @eq nat (bool_to_nat a) (##hole##)
+Sketch conj147_term_sketch4 : @eq nat (PeanoNat.Nat.add (bool_to_nat a) lf9) (##hole##)
+Sketch conj147_term_sketch5 : @eq nat (PeanoNat.Nat.add lf6 lf9) (##hole##)
+Sketch conj147_term_sketch6 : @eq nat (bool_to_nat cin) (##hole##)
+Sketch conj153_sketch0 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (##hole##)
+Sketch conj153_sketch1 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add (##hole##) (BV_to_nat l)) (bool_to_nat cin))
+Sketch conj153_sketch2 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (##hole##) (bool_to_nat cin))
+Sketch conj153_sketch3 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (BV_to_nat l)) (BV_to_nat l))
+     (##hole##))
+Sketch conj153_sketch4 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (##hole##)) (##hole##))
+  (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (##hole##)) (##hole##))
+     (bool_to_nat cin))
+Sketch conj153_sketch5 : @eq nat (PeanoNat.Nat.add (##hole##) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (BV_to_nat l)) (BV_to_nat l))
+     (bool_to_nat cin))
+Sketch conj153_sketch6 : @eq nat (##hole##)
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (BV_to_nat l)) (BV_to_nat l))
+     (bool_to_nat cin))
+Sketch conj153_term_sketch0 : @eq nat
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (BV_to_nat l)) (BV_to_nat l))
+     (bool_to_nat cin)) (##hole##)
+Sketch conj153_term_sketch1 : @eq nat (PeanoNat.Nat.add lf8 (BV_to_nat l)) (##hole##)
+Sketch conj153_term_sketch2 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (BV_to_nat l)) (BV_to_nat l))
+  (##hole##)
+Sketch conj153_term_sketch3 : @eq nat (bool_to_nat cin) (##hole##)
+Sketch conj153_term_sketch4 : @eq nat (BV_to_nat l) (##hole##)
+Sketch conj153_term_sketch5 : @eq nat (PeanoNat.Nat.add lf6 (BV_to_nat l)) (##hole##)
+Sketch conj153_term_sketch6 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (##hole##)
+Sketch conj155_sketch0 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (##hole##) (bool_to_nat cin))
+Sketch conj155_sketch1 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (##hole##)
+Sketch conj155_sketch2 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add (##hole##) (BV_to_nat l))
+        (BV_to_nat l)) (bool_to_nat cin))
+Sketch conj155_sketch3 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add (PeanoNat.Nat.add (##hole##) (BV_to_nat l)) (bool_to_nat cin))
+Sketch conj155_sketch4 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+        (BV_to_nat l)) (##hole##))
+Sketch conj155_sketch5 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (##hole##)) (##hole##))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (##hole##))
+        (##hole##)) (bool_to_nat cin))
+Sketch conj155_sketch6 : @eq nat (PeanoNat.Nat.add (##hole##) (BV_to_nat l))
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+        (BV_to_nat l)) (bool_to_nat cin))
+Sketch conj155_sketch7 : @eq nat (##hole##)
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+        (BV_to_nat l)) (bool_to_nat cin))
+Sketch conj155_term_sketch0 : @eq nat
+  (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+     (BV_to_nat l)) (##hole##)
+Sketch conj155_term_sketch1 : @eq nat
+  (Nat.add
+     (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))
+        (BV_to_nat l)) (bool_to_nat cin)) (##hole##)
+Sketch conj155_term_sketch2 : @eq nat (bool_to_nat a) (##hole##)
+Sketch conj155_term_sketch3 : @eq nat (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l)) (##hole##)
+Sketch conj155_term_sketch4 : @eq nat (bool_to_nat cin) (##hole##)
+Sketch conj155_term_sketch5 : @eq nat (BV_to_nat l) (##hole##)
+Sketch conj155_term_sketch6 : @eq nat (PeanoNat.Nat.add lf6 (BV_to_nat l)) (##hole##)
+Sketch conj155_term_sketch7 : @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf6 (BV_to_nat l)) (BV_to_nat l))
+  (##hole##)
+
+
+<---CREATE SYNTHESIS PROBLEMS--->
+Time elapsed: 2139 seconds
+Problems per Sketch:
+Sketch conj129_term_sketch4 --> Problem  synth_58
+Sketch conj19_sketch5 --> Problem  synth_17
+Sketch conj9_sketch2 --> Problem  synth_20
+Sketch conj129_sketch3 --> Problem  synth_56
+Sketch conj27_sketch6 --> Problem  synth_51
+Sketch conj140_term_sketch2 --> Problem  synth_69
+Sketch conj129_sketch1 --> Problem  synth_1
+Sketch conj25_sketch1 --> Problem  synth_42
+Sketch conj137_sketch4 --> Problem  synth_74
+Sketch conj147_sketch1 --> Problem  synth_1
+Sketch conj25_sketch3 --> Problem  synth_43
+Sketch conj130_sketch0 --> Problem  synth_59
+Sketch conj25_term_sketch3 --> Problem  synth_24
+Sketch conj27_term_sketch4 --> Problem  synth_24
+Sketch conj4_sketch0 --> Problem  synth_2
+Sketch conj17_term_sketch0 --> Problem  synth_1
+Sketch conj137_term_sketch5 --> Problem  synth_19
+Sketch conj130_term_sketch3 --> Problem  synth_60
+Sketch conj19_term_sketch5 --> Problem  synth_6
+Sketch conj129_term_sketch2 --> Problem  synth_5
+Sketch conj25_term_sketch4 --> Problem  synth_25
+Sketch conj2_term_sketch1 --> Problem  synth_2
+Sketch conj153_term_sketch1 --> Problem  synth_46
+Sketch conj12_term_sketch0 --> Problem  synth_23
+Sketch conj4_sketch3 --> Problem  synth_13
+Sketch conj155_sketch2 --> Problem  synth_95
+Sketch conj147_term_sketch4 --> Problem  synth_41
+Sketch conj12_term_sketch6 --> Problem  synth_35
+Sketch conj130_sketch1 --> Problem  synth_56
+Sketch conj130_term_sketch1 --> Problem  synth_64
+Sketch conj27_sketch4 --> Problem  synth_49
+Sketch conj10_sketch1 --> Problem  synth_27
+Sketch conj155_term_sketch3 --> Problem  synth_53
+Sketch conj130_term_sketch0 --> Problem  synth_63
+Sketch conj9_term_sketch0 --> Problem  synth_23
+Sketch conj140_term_sketch0 --> Problem  synth_82
+Sketch conj153_term_sketch0 --> Problem  synth_76
+Sketch conj147_sketch4 --> Problem  synth_88
+Sketch conj1_sketch1 --> Problem  synth_2
+Sketch conj12_sketch6 --> Problem  synth_21
+Sketch conj10_term_sketch2 --> Problem  synth_11
+Sketch conj153_sketch5 --> Problem  synth_81
+Sketch conj137_sketch3 --> Problem  synth_73
+Sketch conj147_sketch0 --> Problem  synth_65
+Sketch conj1_term_sketch0 --> Problem  synth_2
+Sketch conj140_term_sketch4 --> Problem  synth_16
+Sketch conj19_term_sketch1 --> Problem  synth_40
+Sketch conj145_sketch0 --> Problem  synth_60
+Sketch conj27_sketch3 --> Problem  synth_42
+Sketch conj153_term_sketch6 --> Problem  synth_19
+Sketch conj153_sketch1 --> Problem  synth_92
+Sketch conj27_sketch1 --> Problem  synth_18
+Sketch conj145_sketch1 --> Problem  synth_88
+Sketch conj2_sketch3 --> Problem  synth_9
+Sketch conj19_sketch2 --> Problem  synth_39
+Sketch conj132_term_sketch4 --> Problem  synth_5
+Sketch conj145_sketch3 --> Problem  synth_64
+Sketch conj132_term_sketch1 --> Problem  synth_69
+Sketch conj10_sketch0 --> Problem  synth_26
+Sketch conj137_term_sketch4 --> Problem  synth_25
+Sketch conj155_term_sketch7 --> Problem  synth_19
+Sketch conj132_term_sketch6 --> Problem  synth_58
+Sketch conj130_sketch4 --> Problem  synth_61
+Sketch conj153_sketch3 --> Problem  synth_93
+Sketch conj138_term_sketch4 --> Problem  synth_58
+Sketch conj129_term_sketch3 --> Problem  synth_6
+Sketch conj155_sketch5 --> Problem  synth_97
+Sketch conj27_term_sketch1 --> Problem  synth_52
+Sketch conj10_term_sketch1 --> Problem  synth_22
+Sketch conj155_term_sketch0 --> Problem  synth_52
+Sketch conj130_sketch2 --> Problem  synth_60
+Sketch conj17_sketch2 --> Problem  synth_3
+Sketch conj147_sketch2 --> Problem  synth_55
+Sketch conj12_sketch3 --> Problem  synth_33
+Sketch conj10_sketch5 --> Problem  synth_29
+Sketch conj153_sketch6 --> Problem  synth_76
+Sketch conj153_term_sketch4 --> Problem  synth_24
+Sketch conj2_term_sketch0 --> Problem  synth_10
+Sketch conj140_term_sketch6 --> Problem  synth_58
+Sketch conj147_term_sketch1 --> Problem  synth_65
+Sketch conj138_term_sketch2 --> Problem  synth_23
+Sketch conj12_term_sketch1 --> Problem  synth_22
+Sketch conj9_sketch0 --> Problem  synth_18
+Sketch conj130_sketch5 --> Problem  synth_62
+Sketch conj27_sketch5 --> Problem  synth_50
+Sketch conj9_sketch1 --> Problem  synth_19
+Sketch conj4_term_sketch3 --> Problem  synth_16
+Sketch conj137_sketch0 --> Problem  synth_19
+Sketch conj9_term_sketch4 --> Problem  synth_19
+Sketch conj140_sketch5 --> Problem  synth_74
+Sketch conj4_term_sketch0 --> Problem  synth_12
+Sketch conj132_term_sketch3 --> Problem  synth_16
+Sketch conj19_term_sketch3 --> Problem  synth_41
+Sketch conj130_term_sketch5 --> Problem  synth_58
+Sketch conj138_term_sketch3 --> Problem  synth_76
+Sketch conj19_term_sketch2 --> Problem  synth_16
+Sketch conj19_sketch3 --> Problem  synth_36
+Sketch conj27_sketch0 --> Problem  synth_19
+Sketch conj145_term_sketch4 --> Problem  synth_58
+Sketch conj4_term_sketch4 --> Problem  synth_17
+Sketch conj155_term_sketch2 --> Problem  synth_16
+Sketch conj17_sketch4 --> Problem  synth_10
+Sketch conj10_term_sketch0 --> Problem  synth_23
+Sketch conj155_term_sketch5 --> Problem  synth_24
+Sketch conj25_sketch0 --> Problem  synth_19
+Sketch conj155_sketch6 --> Problem  synth_87
+Sketch conj140_sketch4 --> Problem  synth_84
+Sketch conj153_sketch2 --> Problem  synth_71
+Sketch conj137_term_sketch0 --> Problem  synth_75
+Sketch conj145_term_sketch1 --> Problem  synth_37
+Sketch conj140_term_sketch1 --> Problem  synth_75
+Sketch conj138_sketch3 --> Problem  synth_75
+Sketch conj4_sketch1 --> Problem  synth_12
+Sketch conj25_sketch5 --> Problem  synth_45
+Sketch conj9_term_sketch1 --> Problem  synth_22
+Sketch conj145_term_sketch3 --> Problem  synth_6
+Sketch conj137_term_sketch3 --> Problem  synth_24
+Sketch conj138_sketch1 --> Problem  synth_77
+Sketch conj155_sketch0 --> Problem  synth_71
+Sketch conj2_term_sketch3 --> Problem  synth_5
+Sketch conj145_term_sketch2 --> Problem  synth_38
+Sketch conj138_term_sketch1 --> Problem  synth_63
+Sketch conj27_term_sketch0 --> Problem  synth_51
+Sketch conj138_term_sketch5 --> Problem  synth_81
+Sketch conj27_term_sketch6 --> Problem  synth_19
+Sketch conj25_term_sketch0 --> Problem  synth_45
+Sketch conj129_term_sketch1 --> Problem  synth_54
+Sketch conj17_term_sketch2 --> Problem  synth_38
+Sketch conj132_sketch5 --> Problem  synth_56
+Sketch conj129_sketch0 --> Problem  synth_54
+Sketch conj1_term_sketch3 --> Problem  synth_6
+Sketch conj140_sketch2 --> Problem  synth_77
+Sketch conj140_sketch1 --> Problem  synth_82
+Sketch conj153_sketch4 --> Problem  synth_94
+Sketch conj12_sketch0 --> Problem  synth_31
+Sketch conj2_sketch2 --> Problem  synth_8
+Sketch conj1_sketch3 --> Problem  synth_4
+Sketch conj1_sketch0 --> Problem  synth_1
+Sketch conj10_term_sketch3 --> Problem  synth_30
+Sketch conj140_term_sketch5 --> Problem  synth_87
+Sketch conj130_sketch3 --> Problem  synth_54
+Sketch conj129_sketch4 --> Problem  synth_57
+Sketch conj2_sketch1 --> Problem  synth_7
+Sketch conj17_sketch1 --> Problem  synth_36
+Sketch conj27_term_sketch3 --> Problem  synth_53
+Sketch conj19_sketch4 --> Problem  synth_1
+Sketch conj155_sketch4 --> Problem  synth_96
+Sketch conj140_term_sketch7 --> Problem  synth_24
+Sketch conj10_sketch4 --> Problem  synth_22
+Sketch conj10_term_sketch5 --> Problem  synth_24
+Sketch conj147_term_sketch2 --> Problem  synth_40
+Sketch conj132_term_sketch0 --> Problem  synth_65
+Sketch conj17_term_sketch4 --> Problem  synth_6
+Sketch conj137_sketch5 --> Problem  synth_75
+Sketch conj4_term_sketch5 --> Problem  synth_5
+Sketch conj10_sketch2 --> Problem  synth_28
+Sketch conj138_sketch0 --> Problem  synth_76
+Sketch conj132_sketch0 --> Problem  synth_54
+Sketch conj2_sketch0 --> Problem  synth_4
+Sketch conj1_term_sketch1 --> Problem  synth_1
+Sketch conj12_sketch1 --> Problem  synth_32
+Sketch conj155_sketch3 --> Problem  synth_92
+Sketch conj147_term_sketch0 --> Problem  synth_1
+Sketch conj27_term_sketch2 --> Problem  synth_16
+Sketch conj4_term_sketch2 --> Problem  synth_15
+Sketch conj12_sketch2 --> Problem  synth_28
+Sketch conj145_sketch4 --> Problem  synth_89
+Sketch conj4_sketch4 --> Problem  synth_4
+Sketch conj9_term_sketch3 --> Problem  synth_25
+Sketch conj12_sketch4 --> Problem  synth_22
+Sketch conj1_term_sketch2 --> Problem  synth_5
+Sketch conj147_term_sketch5 --> Problem  synth_6
+Sketch conj27_term_sketch5 --> Problem  synth_25
+Sketch conj12_sketch5 --> Problem  synth_34
+Sketch conj132_sketch4 --> Problem  synth_67
+Sketch conj155_term_sketch4 --> Problem  synth_58
+Sketch conj147_sketch5 --> Problem  synth_70
+Sketch conj27_sketch2 --> Problem  synth_48
+Sketch conj25_sketch2 --> Problem  synth_18
+Sketch conj138_sketch5 --> Problem  synth_74
+Sketch conj17_term_sketch3 --> Problem  synth_7
+Sketch conj4_term_sketch1 --> Problem  synth_2
+Sketch conj140_sketch0 --> Problem  synth_75
+Sketch conj2_term_sketch4 --> Problem  synth_7
+Sketch conj9_term_sketch2 --> Problem  synth_24
+Sketch conj153_term_sketch3 --> Problem  synth_58
+Sketch conj130_term_sketch2 --> Problem  synth_54
+Sketch conj10_term_sketch4 --> Problem  synth_27
+Sketch conj4_sketch5 --> Problem  synth_14
+Sketch conj129_term_sketch0 --> Problem  synth_1
+Sketch conj12_term_sketch2 --> Problem  synth_15
+Sketch conj9_sketch3 --> Problem  synth_21
+Sketch conj140_sketch6 --> Problem  synth_85
+Sketch conj19_term_sketch0 --> Problem  synth_1
+Sketch conj155_sketch1 --> Problem  synth_19
+Sketch conj4_sketch2 --> Problem  synth_8
+Sketch conj153_sketch0 --> Problem  synth_19
+Sketch conj1_sketch2 --> Problem  synth_3
+Sketch conj9_sketch4 --> Problem  synth_22
+Sketch conj138_term_sketch6 --> Problem  synth_24
+Sketch conj12_term_sketch4 --> Problem  synth_32
+Sketch conj19_sketch0 --> Problem  synth_12
+Sketch conj17_sketch0 --> Problem  synth_7
+Sketch conj25_term_sketch5 --> Problem  synth_19
+Sketch conj132_sketch3 --> Problem  synth_66
+Sketch conj25_term_sketch1 --> Problem  synth_46
+Sketch conj132_sketch6 --> Problem  synth_68
+Sketch conj147_sketch3 --> Problem  synth_90
+Sketch conj137_term_sketch2 --> Problem  synth_58
+Sketch conj153_term_sketch5 --> Problem  synth_25
+Sketch conj140_sketch7 --> Problem  synth_86
+Sketch conj140_sketch3 --> Problem  synth_83
+Sketch conj138_sketch4 --> Problem  synth_79
+Sketch conj132_sketch1 --> Problem  synth_59
+Sketch conj145_term_sketch5 --> Problem  synth_60
+Sketch conj145_term_sketch0 --> Problem  synth_1
+Sketch conj12_term_sketch5 --> Problem  synth_24
+Sketch conj2_term_sketch2 --> Problem  synth_11
+Sketch conj155_term_sketch6 --> Problem  synth_25
+Sketch conj132_term_sketch2 --> Problem  synth_54
+Sketch conj138_term_sketch0 --> Problem  synth_75
+Sketch conj2_sketch4 --> Problem  synth_2
+Sketch conj137_sketch1 --> Problem  synth_71
+Sketch conj153_term_sketch2 --> Problem  synth_47
+Sketch conj130_term_sketch4 --> Problem  synth_5
+Sketch conj19_sketch1 --> Problem  synth_3
+Sketch conj147_sketch6 --> Problem  synth_91
+Sketch conj145_sketch2 --> Problem  synth_55
+Sketch conj17_term_sketch1 --> Problem  synth_37
+Sketch conj155_term_sketch1 --> Problem  synth_82
+Sketch conj137_term_sketch1 --> Problem  synth_23
+Sketch conj10_sketch3 --> Problem  synth_21
+Sketch conj140_term_sketch3 --> Problem  synth_23
+Sketch conj129_sketch2 --> Problem  synth_55
+Sketch conj12_term_sketch3 --> Problem  synth_16
+Sketch conj132_term_sketch5 --> Problem  synth_70
+Sketch conj19_term_sketch4 --> Problem  synth_12
+Sketch conj17_sketch3 --> Problem  synth_1
+Sketch conj147_term_sketch3 --> Problem  synth_16
+Sketch conj145_sketch5 --> Problem  synth_1
+Sketch conj138_sketch6 --> Problem  synth_80
+Sketch conj137_sketch2 --> Problem  synth_72
+Sketch conj25_sketch4 --> Problem  synth_44
+Sketch conj155_sketch7 --> Problem  synth_82
+Sketch conj138_sketch2 --> Problem  synth_78
+Sketch conj147_term_sketch6 --> Problem  synth_58
+Sketch conj132_sketch2 --> Problem  synth_65
+Sketch conj25_term_sketch2 --> Problem  synth_47
+
+
+<--- SYNTHESIS PROBLEM RESULTS--->
+Time elapsed: 3284 seconds
+
+Problem: synth_63
+ PeanoNat.Nat.add lf8 (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O)
+ PeanoNat.Nat.add (PeanoNat.Nat.add lf8 O) (Bool_compl.bool_to_nat cin)
+ PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (Bool_compl.bool_to_nat cin)) O
+ PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) (PeanoNat.Nat.add lf8 O)
+ PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) lf8
+ PeanoNat.Nat.add lf8 (Bool_compl.bool_to_nat cin)
+
+Problem: synth_91
+
+Problem: synth_68
+
+Problem: synth_67
+
+Problem: synth_77
+
+Problem: synth_64
+
+Problem: synth_96
+
+Problem: synth_11
+ PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf7) O
+ PeanoNat.Nat.add (PeanoNat.Nat.add lf7 lf8) O
+ PeanoNat.Nat.add lf8 (PeanoNat.Nat.add lf7 O)
+ PeanoNat.Nat.add lf7 (PeanoNat.Nat.add lf8 O)
+ PeanoNat.Nat.add lf8 lf7
+ PeanoNat.Nat.add lf7 lf8
+
+Problem: synth_54
+
+Problem: synth_39
+
+Problem: synth_46
+
+Problem: synth_66
+
+Problem: synth_57
+
+Problem: synth_59
+
+Problem: synth_31
+ Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false)))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false)))))
+ Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a (Adder.BV_full_adder_carry l (@nil bool) false))) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a (Adder.BV_full_adder_carry l (@nil bool) false)))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a (Adder.BV_full_adder_carry l (@nil bool) false)))))
+ Nat.add (Bool_compl.bool_to_nat a) (Nat.add (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)) (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)))
+ Nat.add (Bool_compl.bool_to_nat a) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)))
+ Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a false))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a false))))
+
+Problem: synth_8
+
+Problem: synth_34
+
+Problem: synth_5
+ PeanoNat.Nat.add lf9 lf5
+ PeanoNat.Nat.add lf5 lf9
+
+Problem: synth_37
+ PeanoNat.Nat.add lf8 lf9
+ PeanoNat.Nat.add lf9 lf8
+
+Problem: synth_58
+ Bool_compl.bool_to_nat (HalfAdder.half_adder_carry cin cin)
+ Bool_compl.bool_to_nat (HalfAdder.half_adder_carry cin true)
+ Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum cin false)) O
+ PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O) O
+ PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O
+ Bool_compl.bool_to_nat cin
+
+Problem: synth_53
+
+Problem: synth_2
+
+Problem: synth_95
+
+Problem: synth_22
+
+Problem: synth_18
+
+Problem: synth_21
+ PeanoNat.Nat.add lf5 lf7
+ PeanoNat.Nat.add lf7 lf5
+
+Problem: synth_72
+
+Problem: synth_56
+
+Problem: synth_41
+
+Problem: synth_49
+
+Problem: synth_75
+
+Problem: synth_25
+
+Problem: synth_13
+
+Problem: synth_6
+ PeanoNat.Nat.add lf6 lf9
+ PeanoNat.Nat.add lf9 lf6
+
+Problem: synth_4
+ PeanoNat.Nat.add lf5 lf7
+ PeanoNat.Nat.add lf7 lf5
+
+Problem: synth_38
+
+Problem: synth_65
+
+Problem: synth_23
+
+Problem: synth_88
+
+Problem: synth_19
+
+Problem: synth_10
+
+Problem: synth_24
+ BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))
+ BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (Adder.BV_full_adder_carry l (@nil bool) false))
+ BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) (Adder.BV_full_adder_carry l (@nil bool) false))
+ BV.BV_to_nat (Adder.BV_full_adder_sum l (@cons bool false (@nil bool)) false)
+ BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)
+ BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)
+
+Problem: synth_97
+
+Problem: synth_92
+
+Problem: synth_32
+
+Problem: synth_48
+
+Problem: synth_51
+
+Problem: synth_35
+
+Problem: synth_28
+
+Problem: synth_90
+
+Problem: synth_73
+
+Problem: synth_17
+
+Problem: synth_29
+
+Problem: synth_45
+
+Problem: synth_76
+
+Problem: synth_26
+
+Problem: synth_70
+
+Problem: synth_9
+
+Problem: synth_30
+
+Problem: synth_81
+
+Problem: synth_1
+
+Problem: synth_69
+ PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) (Bool_compl.bool_to_nat a)) O
+ PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) (Bool_compl.bool_to_nat cin)) O
+ PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O)
+ PeanoNat.Nat.add (Bool_compl.bool_to_nat a) (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O)
+ PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) (Bool_compl.bool_to_nat a)
+ PeanoNat.Nat.add (Bool_compl.bool_to_nat a) (Bool_compl.bool_to_nat cin)
+
+Problem: synth_86
+
+Problem: synth_55
+
+Problem: synth_71
+
+Problem: synth_15
+ PeanoNat.Nat.add lf7 (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O)
+ PeanoNat.Nat.add (PeanoNat.Nat.add lf7 O) (Bool_compl.bool_to_nat a)
+ PeanoNat.Nat.add (PeanoNat.Nat.add lf7 (Bool_compl.bool_to_nat a)) O
+ PeanoNat.Nat.add (Bool_compl.bool_to_nat a) (PeanoNat.Nat.add lf7 O)
+ PeanoNat.Nat.add (Bool_compl.bool_to_nat a) lf7
+ PeanoNat.Nat.add lf7 (Bool_compl.bool_to_nat a)
+
+Problem: synth_14
+
+Problem: synth_87
+
+Problem: synth_79
+
+Problem: synth_83
+ Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false)))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false)))))
+ Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a (Adder.BV_full_adder_carry l (@nil bool) false))) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a (Adder.BV_full_adder_carry l (@nil bool) false)))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a (Adder.BV_full_adder_carry l (@nil bool) false)))))
+ Nat.add (Bool_compl.bool_to_nat a) (Nat.add (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)) (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)))
+ Nat.add (Bool_compl.bool_to_nat a) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)))
+ Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a false))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a false))))
+
+Problem: synth_12
+
+Problem: synth_85
+
+Problem: synth_62
+
+Problem: synth_74
+
+Problem: synth_50
+
+Problem: synth_84
+
+Problem: synth_20
+
+Problem: synth_94
+
+Problem: synth_7
+
+Problem: synth_61
+
+Problem: synth_27
+
+Problem: synth_42
+
+Problem: synth_16
+ Bool_compl.bool_to_nat (HalfAdder.half_adder_carry a a)
+ Bool_compl.bool_to_nat (HalfAdder.half_adder_carry a true)
+ Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a false)) O
+ PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O) O
+ PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O
+ Bool_compl.bool_to_nat a
+
+Problem: synth_93
+
+Problem: synth_40
+
+Problem: synth_80
+
+Problem: synth_33
+
+Problem: synth_89
+
+Problem: synth_47
+
+Problem: synth_3
+
+Problem: synth_52
+ Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false)))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false)))))
+ Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a (Adder.BV_full_adder_carry l (@nil bool) false))) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a (Adder.BV_full_adder_carry l (@nil bool) false)))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a (Adder.BV_full_adder_carry l (@nil bool) false)))))
+ Nat.add (Bool_compl.bool_to_nat a) (Nat.add (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)) (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)))
+ Nat.add (Bool_compl.bool_to_nat a) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)))
+ Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a false))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a false))))
+
+Problem: synth_44
+
+Problem: synth_60
+
+Problem: synth_36
+
+Problem: synth_82
+
+Problem: synth_78
+
+Problem: synth_43
+
+<---INITIAL CANDIDATE LEMMAS--->
+Time elapsed: 3286 seconds
+Lemmas:
+Lemma candidate_1: forall (a : bool) (l : list bool) (cin : bool), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin))         (BV_to_nat l)) (BV_to_nat l))   (Nat.add      (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))         (BV_to_nat l)) (bool_to_nat cin)).
+Lemma candidate_2: forall (l : list bool) (cin : bool) (lf8 : nat), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add lf8 (bool_to_nat cin)) (BV_to_nat l))      (BV_to_nat l))   (Nat.add      (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (BV_to_nat l)) (BV_to_nat l))      (bool_to_nat cin)).
+Lemma candidate_3: forall (a : bool) (cin : bool) (lf9 : nat), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin)) lf9) lf9)   (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) lf9) lf9)      (bool_to_nat cin)).
+Lemma candidate_4: forall (cin : bool) (lf9 : nat) (lf8 : nat), @eq nat   (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 (bool_to_nat cin)) lf9)      lf9)   (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf9) lf9)      (bool_to_nat cin)).
+Lemma candidate_5: forall (a : bool) (l : list bool) (lf7 : nat), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) (BV_to_nat l))      (BV_to_nat l))   (Nat.add      (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))         (BV_to_nat l)) lf7).
+Lemma candidate_6: forall (l : list bool) (lf7 : nat) (lf8 : nat), @eq nat   (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 lf7) (BV_to_nat l))      (BV_to_nat l))   (Nat.add      (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (BV_to_nat l)) (BV_to_nat l))      lf7).
+Lemma candidate_7: forall (a : bool) (lf7 : nat) (lf9 : nat), @eq nat   (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) lf9) lf9)   (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) lf9) lf9) lf7).
+Lemma candidate_8: forall (lf7 : nat) (lf9 : nat) (lf8 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 lf7) lf9) lf9)   (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf9) lf9) lf7).
+Lemma candidate_9: forall (lf7 : nat) (lf5 : nat) (lf9 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf5 lf7) lf9)   (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7).
+Lemma candidate_10: forall (lf7 : nat) (lf5 : nat) (lf9 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf7 lf5) lf9)   (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7).
+Lemma candidate_11: forall (lf5 : nat) (lf9 : nat), @eq nat (PeanoNat.Nat.add lf5 lf9) (PeanoNat.Nat.add lf9 lf5).
+Lemma candidate_12: forall (lf5 : nat) (lf9 : nat), @eq nat (PeanoNat.Nat.add lf5 lf9) (PeanoNat.Nat.add lf5 lf9).
+Lemma candidate_13: forall (lf9 : nat) (lf6 : nat), @eq nat (PeanoNat.Nat.add lf6 lf9) (PeanoNat.Nat.add lf6 lf9).
+Lemma candidate_14: forall (lf9 : nat) (lf6 : nat), @eq nat (PeanoNat.Nat.add lf6 lf9) (PeanoNat.Nat.add lf9 lf6).
+Lemma candidate_15: forall (lf7 : nat) (lf5 : nat) (lf9 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf5 lf7) lf9)   (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7).
+Lemma candidate_16: forall (lf7 : nat) (lf5 : nat) (lf9 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf7 lf5) lf9)   (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7).
+Lemma candidate_17: forall (lf7 : nat) (lf8 : nat), @eq nat (Nat.add lf8 lf7) (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf7) O).
+Lemma candidate_18: forall (lf7 : nat) (lf8 : nat), @eq nat (Nat.add lf8 lf7) (PeanoNat.Nat.add (PeanoNat.Nat.add lf7 lf8) O).
+Lemma candidate_19: forall (lf7 : nat) (lf8 : nat), @eq nat (Nat.add lf8 lf7) (PeanoNat.Nat.add lf8 (PeanoNat.Nat.add lf7 O)).
+Lemma candidate_20: forall (lf7 : nat) (lf8 : nat), @eq nat (Nat.add lf8 lf7) (PeanoNat.Nat.add lf7 (PeanoNat.Nat.add lf8 O)).
+Lemma candidate_21: forall (lf7 : nat) (lf8 : nat), @eq nat (Nat.add lf8 lf7) (PeanoNat.Nat.add lf8 lf7).
+Lemma candidate_22: forall (lf7 : nat) (lf8 : nat), @eq nat (Nat.add lf8 lf7) (PeanoNat.Nat.add lf7 lf8).
+Lemma candidate_23: forall (lf5 : nat) (lf9 : nat), @eq nat (PeanoNat.Nat.add lf5 lf9) (PeanoNat.Nat.add lf9 lf5).
+Lemma candidate_24: forall (lf5 : nat) (lf9 : nat), @eq nat (PeanoNat.Nat.add lf5 lf9) (PeanoNat.Nat.add lf5 lf9).
+Lemma candidate_25: forall (lf7 : nat) (lf5 : nat) (lf9 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf5 lf7) lf9)   (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7).
+Lemma candidate_26: forall (lf7 : nat) (lf5 : nat) (lf9 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf7 lf5) lf9)   (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7).
+Lemma candidate_27: forall (a : bool) (lf7 : nat), @eq nat (Nat.add (bool_to_nat a) lf7)   (PeanoNat.Nat.add lf7 (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O)).
+Lemma candidate_28: forall (a : bool) (lf7 : nat), @eq nat (Nat.add (bool_to_nat a) lf7)   (PeanoNat.Nat.add (PeanoNat.Nat.add lf7 O) (Bool_compl.bool_to_nat a)).
+Lemma candidate_29: forall (a : bool) (lf7 : nat), @eq nat (Nat.add (bool_to_nat a) lf7)   (PeanoNat.Nat.add (PeanoNat.Nat.add lf7 (Bool_compl.bool_to_nat a)) O).
+Lemma candidate_30: forall (a : bool) (lf7 : nat), @eq nat (Nat.add (bool_to_nat a) lf7)   (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) (PeanoNat.Nat.add lf7 O)).
+Lemma candidate_31: forall (a : bool) (lf7 : nat), @eq nat (Nat.add (bool_to_nat a) lf7)   (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) lf7).
+Lemma candidate_32: forall (a : bool) (lf7 : nat), @eq nat (Nat.add (bool_to_nat a) lf7)   (PeanoNat.Nat.add lf7 (Bool_compl.bool_to_nat a)).
+Lemma candidate_33: forall (a : bool), @eq nat (bool_to_nat a)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry a a)).
+Lemma candidate_34: forall (a : bool), @eq nat (bool_to_nat a)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry a true)).
+Lemma candidate_35: forall (a : bool), @eq nat (bool_to_nat a)   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a false)) O).
+Lemma candidate_36: forall (a : bool), @eq nat (bool_to_nat a)   (PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O) O).
+Lemma candidate_37: forall (a : bool), @eq nat (bool_to_nat a) (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O).
+Lemma candidate_38: forall (a : bool), @eq nat (bool_to_nat a) (Bool_compl.bool_to_nat a).
+Lemma candidate_39: forall (lf5 : nat) (lf9 : nat), @eq nat (PeanoNat.Nat.add lf5 lf9) (PeanoNat.Nat.add lf9 lf5).
+Lemma candidate_40: forall (lf5 : nat) (lf9 : nat), @eq nat (PeanoNat.Nat.add lf5 lf9) (PeanoNat.Nat.add lf5 lf9).
+Lemma candidate_41: forall (lf7 : nat) (l : list bool) (lf5 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf5 lf7) (BV_to_nat l))   (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7).
+Lemma candidate_42: forall (lf7 : nat) (l : list bool) (lf5 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf7 lf5) (BV_to_nat l))   (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7).
+Lemma candidate_43: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))).
+Lemma candidate_44: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_45: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_46: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@cons bool false (@nil bool)) false)).
+Lemma candidate_47: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)).
+Lemma candidate_48: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)).
+Lemma candidate_49: forall (lf7 : nat) (l : list bool) (lf5 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf5 lf7) (BV_to_nat l))   (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7).
+Lemma candidate_50: forall (lf7 : nat) (l : list bool) (lf5 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf7 lf5) (BV_to_nat l))   (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7).
+Lemma candidate_51: forall (lf7 : nat) (lf8 : nat), @eq nat (Nat.add lf8 lf7) (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf7) O).
+Lemma candidate_52: forall (lf7 : nat) (lf8 : nat), @eq nat (Nat.add lf8 lf7) (PeanoNat.Nat.add (PeanoNat.Nat.add lf7 lf8) O).
+Lemma candidate_53: forall (lf7 : nat) (lf8 : nat), @eq nat (Nat.add lf8 lf7) (PeanoNat.Nat.add lf8 (PeanoNat.Nat.add lf7 O)).
+Lemma candidate_54: forall (lf7 : nat) (lf8 : nat), @eq nat (Nat.add lf8 lf7) (PeanoNat.Nat.add lf7 (PeanoNat.Nat.add lf8 O)).
+Lemma candidate_55: forall (lf7 : nat) (lf8 : nat), @eq nat (Nat.add lf8 lf7) (PeanoNat.Nat.add lf8 lf7).
+Lemma candidate_56: forall (lf7 : nat) (lf8 : nat), @eq nat (Nat.add lf8 lf7) (PeanoNat.Nat.add lf7 lf8).
+Lemma candidate_57: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))).
+Lemma candidate_58: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_59: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_60: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@cons bool false (@nil bool)) false)).
+Lemma candidate_61: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)).
+Lemma candidate_62: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)).
+Lemma candidate_63: forall (a : bool) (l : list bool) (lf7 : nat), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) (BV_to_nat l))      (BV_to_nat l))   (Nat.add      (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false)))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))))))      lf7).
+Lemma candidate_64: forall (a : bool) (l : list bool) (lf7 : nat), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) (BV_to_nat l))      (BV_to_nat l))   (Nat.add      (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a (Adder.BV_full_adder_carry l (@nil bool) false))) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a (Adder.BV_full_adder_carry l (@nil bool) false)))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a (Adder.BV_full_adder_carry l (@nil bool) false))))))      lf7).
+Lemma candidate_65: forall (a : bool) (l : list bool) (lf7 : nat), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) (BV_to_nat l))      (BV_to_nat l))   (Nat.add      (Nat.add (Bool_compl.bool_to_nat a) (Nat.add (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)) (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false))))      lf7).
+Lemma candidate_66: forall (a : bool) (l : list bool) (lf7 : nat), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) (BV_to_nat l))      (BV_to_nat l))   (Nat.add      (Nat.add (Bool_compl.bool_to_nat a) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false))))      lf7).
+Lemma candidate_67: forall (a : bool) (l : list bool) (lf7 : nat), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) (BV_to_nat l))      (BV_to_nat l))   (Nat.add      (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a false))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a false)))))      lf7).
+Lemma candidate_68: forall (lf7 : nat) (l : list bool) (lf5 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf5 lf7) (BV_to_nat l))   (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7).
+Lemma candidate_69: forall (lf7 : nat) (l : list bool) (lf5 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf7 lf5) (BV_to_nat l))   (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7).
+Lemma candidate_70: forall (a : bool) (lf7 : nat), @eq nat (Nat.add (bool_to_nat a) lf7)   (PeanoNat.Nat.add lf7 (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O)).
+Lemma candidate_71: forall (a : bool) (lf7 : nat), @eq nat (Nat.add (bool_to_nat a) lf7)   (PeanoNat.Nat.add (PeanoNat.Nat.add lf7 O) (Bool_compl.bool_to_nat a)).
+Lemma candidate_72: forall (a : bool) (lf7 : nat), @eq nat (Nat.add (bool_to_nat a) lf7)   (PeanoNat.Nat.add (PeanoNat.Nat.add lf7 (Bool_compl.bool_to_nat a)) O).
+Lemma candidate_73: forall (a : bool) (lf7 : nat), @eq nat (Nat.add (bool_to_nat a) lf7)   (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) (PeanoNat.Nat.add lf7 O)).
+Lemma candidate_74: forall (a : bool) (lf7 : nat), @eq nat (Nat.add (bool_to_nat a) lf7)   (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) lf7).
+Lemma candidate_75: forall (a : bool) (lf7 : nat), @eq nat (Nat.add (bool_to_nat a) lf7)   (PeanoNat.Nat.add lf7 (Bool_compl.bool_to_nat a)).
+Lemma candidate_76: forall (a : bool), @eq nat (bool_to_nat a)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry a a)).
+Lemma candidate_77: forall (a : bool), @eq nat (bool_to_nat a)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry a true)).
+Lemma candidate_78: forall (a : bool), @eq nat (bool_to_nat a)   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a false)) O).
+Lemma candidate_79: forall (a : bool), @eq nat (bool_to_nat a)   (PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O) O).
+Lemma candidate_80: forall (a : bool), @eq nat (bool_to_nat a) (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O).
+Lemma candidate_81: forall (a : bool), @eq nat (bool_to_nat a) (Bool_compl.bool_to_nat a).
+Lemma candidate_82: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))).
+Lemma candidate_83: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_84: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_85: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@cons bool false (@nil bool)) false)).
+Lemma candidate_86: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)).
+Lemma candidate_87: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)).
+Lemma candidate_88: forall (lf9 : nat) (lf8 : nat), @eq nat (PeanoNat.Nat.add lf8 lf9) (PeanoNat.Nat.add lf8 lf9).
+Lemma candidate_89: forall (lf9 : nat) (lf8 : nat), @eq nat (PeanoNat.Nat.add lf8 lf9) (PeanoNat.Nat.add lf9 lf8).
+Lemma candidate_90: forall (lf9 : nat) (lf6 : nat), @eq nat (PeanoNat.Nat.add lf6 lf9) (PeanoNat.Nat.add lf6 lf9).
+Lemma candidate_91: forall (lf9 : nat) (lf6 : nat), @eq nat (PeanoNat.Nat.add lf6 lf9) (PeanoNat.Nat.add lf9 lf6).
+Lemma candidate_92: forall (a : bool), @eq nat (bool_to_nat a)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry a a)).
+Lemma candidate_93: forall (a : bool), @eq nat (bool_to_nat a)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry a true)).
+Lemma candidate_94: forall (a : bool), @eq nat (bool_to_nat a)   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a false)) O).
+Lemma candidate_95: forall (a : bool), @eq nat (bool_to_nat a)   (PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O) O).
+Lemma candidate_96: forall (a : bool), @eq nat (bool_to_nat a) (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O).
+Lemma candidate_97: forall (a : bool), @eq nat (bool_to_nat a) (Bool_compl.bool_to_nat a).
+Lemma candidate_98: forall (lf9 : nat) (lf6 : nat), @eq nat (PeanoNat.Nat.add lf6 lf9) (PeanoNat.Nat.add lf6 lf9).
+Lemma candidate_99: forall (lf9 : nat) (lf6 : nat), @eq nat (PeanoNat.Nat.add lf6 lf9) (PeanoNat.Nat.add lf9 lf6).
+Lemma candidate_100: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))).
+Lemma candidate_101: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_102: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_103: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@cons bool false (@nil bool)) false)).
+Lemma candidate_104: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)).
+Lemma candidate_105: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)).
+Lemma candidate_106: forall (a : bool) (l : list bool), @eq nat   (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))      (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false)))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false)))))).
+Lemma candidate_107: forall (a : bool) (l : list bool), @eq nat   (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))      (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a (Adder.BV_full_adder_carry l (@nil bool) false))) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a (Adder.BV_full_adder_carry l (@nil bool) false)))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a (Adder.BV_full_adder_carry l (@nil bool) false)))))).
+Lemma candidate_108: forall (a : bool) (l : list bool), @eq nat   (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))      (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat a) (Nat.add (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)) (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)))).
+Lemma candidate_109: forall (a : bool) (l : list bool), @eq nat   (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))      (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat a) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)))).
+Lemma candidate_110: forall (a : bool) (l : list bool), @eq nat   (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))      (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a false))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a false))))).
+Lemma candidate_111: forall (a : bool), @eq nat (bool_to_nat a)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry a a)).
+Lemma candidate_112: forall (a : bool), @eq nat (bool_to_nat a)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry a true)).
+Lemma candidate_113: forall (a : bool), @eq nat (bool_to_nat a)   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a false)) O).
+Lemma candidate_114: forall (a : bool), @eq nat (bool_to_nat a)   (PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O) O).
+Lemma candidate_115: forall (a : bool), @eq nat (bool_to_nat a) (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O).
+Lemma candidate_116: forall (a : bool), @eq nat (bool_to_nat a) (Bool_compl.bool_to_nat a).
+Lemma candidate_117: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))).
+Lemma candidate_118: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_119: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_120: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@cons bool false (@nil bool)) false)).
+Lemma candidate_121: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)).
+Lemma candidate_122: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)).
+Lemma candidate_123: forall (lf5 : nat) (lf9 : nat), @eq nat (PeanoNat.Nat.add lf5 lf9) (PeanoNat.Nat.add lf9 lf5).
+Lemma candidate_124: forall (lf5 : nat) (lf9 : nat), @eq nat (PeanoNat.Nat.add lf5 lf9) (PeanoNat.Nat.add lf5 lf9).
+Lemma candidate_125: forall (lf9 : nat) (lf6 : nat), @eq nat (PeanoNat.Nat.add lf6 lf9) (PeanoNat.Nat.add lf6 lf9).
+Lemma candidate_126: forall (lf9 : nat) (lf6 : nat), @eq nat (PeanoNat.Nat.add lf6 lf9) (PeanoNat.Nat.add lf9 lf6).
+Lemma candidate_127: forall (cin : bool), @eq nat (bool_to_nat cin)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry cin cin)).
+Lemma candidate_128: forall (cin : bool), @eq nat (bool_to_nat cin)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry cin true)).
+Lemma candidate_129: forall (cin : bool), @eq nat (bool_to_nat cin)   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum cin false)) O).
+Lemma candidate_130: forall (cin : bool), @eq nat (bool_to_nat cin)   (PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O) O).
+Lemma candidate_131: forall (cin : bool), @eq nat (bool_to_nat cin) (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O).
+Lemma candidate_132: forall (cin : bool), @eq nat (bool_to_nat cin) (Bool_compl.bool_to_nat cin).
+Lemma candidate_133: forall (cin : bool) (lf8 : nat), @eq nat (Nat.add lf8 (bool_to_nat cin))   (PeanoNat.Nat.add lf8 (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O)).
+Lemma candidate_134: forall (cin : bool) (lf8 : nat), @eq nat (Nat.add lf8 (bool_to_nat cin))   (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 O) (Bool_compl.bool_to_nat cin)).
+Lemma candidate_135: forall (cin : bool) (lf8 : nat), @eq nat (Nat.add lf8 (bool_to_nat cin))   (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (Bool_compl.bool_to_nat cin)) O).
+Lemma candidate_136: forall (cin : bool) (lf8 : nat), @eq nat (Nat.add lf8 (bool_to_nat cin))   (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) (PeanoNat.Nat.add lf8 O)).
+Lemma candidate_137: forall (cin : bool) (lf8 : nat), @eq nat (Nat.add lf8 (bool_to_nat cin))   (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) lf8).
+Lemma candidate_138: forall (cin : bool) (lf8 : nat), @eq nat (Nat.add lf8 (bool_to_nat cin))   (PeanoNat.Nat.add lf8 (Bool_compl.bool_to_nat cin)).
+Lemma candidate_139: forall (lf5 : nat) (lf9 : nat), @eq nat (PeanoNat.Nat.add lf5 lf9) (PeanoNat.Nat.add lf9 lf5).
+Lemma candidate_140: forall (lf5 : nat) (lf9 : nat), @eq nat (PeanoNat.Nat.add lf5 lf9) (PeanoNat.Nat.add lf5 lf9).
+Lemma candidate_141: forall (cin : bool), @eq nat (bool_to_nat cin)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry cin cin)).
+Lemma candidate_142: forall (cin : bool), @eq nat (bool_to_nat cin)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry cin true)).
+Lemma candidate_143: forall (cin : bool), @eq nat (bool_to_nat cin)   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum cin false)) O).
+Lemma candidate_144: forall (cin : bool), @eq nat (bool_to_nat cin)   (PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O) O).
+Lemma candidate_145: forall (cin : bool), @eq nat (bool_to_nat cin) (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O).
+Lemma candidate_146: forall (cin : bool), @eq nat (bool_to_nat cin) (Bool_compl.bool_to_nat cin).
+Lemma candidate_147: forall (a : bool) (cin : bool), @eq nat (Nat.add (bool_to_nat a) (bool_to_nat cin))   (PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) (Bool_compl.bool_to_nat a)) O).
+Lemma candidate_148: forall (a : bool) (cin : bool), @eq nat (Nat.add (bool_to_nat a) (bool_to_nat cin))   (PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) (Bool_compl.bool_to_nat cin)) O).
+Lemma candidate_149: forall (a : bool) (cin : bool), @eq nat (Nat.add (bool_to_nat a) (bool_to_nat cin))   (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O)).
+Lemma candidate_150: forall (a : bool) (cin : bool), @eq nat (Nat.add (bool_to_nat a) (bool_to_nat cin))   (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O)).
+Lemma candidate_151: forall (a : bool) (cin : bool), @eq nat (Nat.add (bool_to_nat a) (bool_to_nat cin))   (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) (Bool_compl.bool_to_nat a)).
+Lemma candidate_152: forall (a : bool) (cin : bool), @eq nat (Nat.add (bool_to_nat a) (bool_to_nat cin))   (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) (Bool_compl.bool_to_nat cin)).
+Lemma candidate_153: forall (a : bool), @eq nat (bool_to_nat a)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry a a)).
+Lemma candidate_154: forall (a : bool), @eq nat (bool_to_nat a)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry a true)).
+Lemma candidate_155: forall (a : bool), @eq nat (bool_to_nat a)   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a false)) O).
+Lemma candidate_156: forall (a : bool), @eq nat (bool_to_nat a)   (PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O) O).
+Lemma candidate_157: forall (a : bool), @eq nat (bool_to_nat a) (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O).
+Lemma candidate_158: forall (a : bool), @eq nat (bool_to_nat a) (Bool_compl.bool_to_nat a).
+Lemma candidate_159: forall (lf5 : nat) (lf9 : nat), @eq nat (PeanoNat.Nat.add lf5 lf9) (PeanoNat.Nat.add lf9 lf5).
+Lemma candidate_160: forall (lf5 : nat) (lf9 : nat), @eq nat (PeanoNat.Nat.add lf5 lf9) (PeanoNat.Nat.add lf5 lf9).
+Lemma candidate_161: forall (cin : bool), @eq nat (bool_to_nat cin)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry cin cin)).
+Lemma candidate_162: forall (cin : bool), @eq nat (bool_to_nat cin)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry cin true)).
+Lemma candidate_163: forall (cin : bool), @eq nat (bool_to_nat cin)   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum cin false)) O).
+Lemma candidate_164: forall (cin : bool), @eq nat (bool_to_nat cin)   (PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O) O).
+Lemma candidate_165: forall (cin : bool), @eq nat (bool_to_nat cin) (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O).
+Lemma candidate_166: forall (cin : bool), @eq nat (bool_to_nat cin) (Bool_compl.bool_to_nat cin).
+Lemma candidate_167: forall (cin : bool), @eq nat (bool_to_nat cin)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry cin cin)).
+Lemma candidate_168: forall (cin : bool), @eq nat (bool_to_nat cin)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry cin true)).
+Lemma candidate_169: forall (cin : bool), @eq nat (bool_to_nat cin)   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum cin false)) O).
+Lemma candidate_170: forall (cin : bool), @eq nat (bool_to_nat cin)   (PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O) O).
+Lemma candidate_171: forall (cin : bool), @eq nat (bool_to_nat cin) (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O).
+Lemma candidate_172: forall (cin : bool), @eq nat (bool_to_nat cin) (Bool_compl.bool_to_nat cin).
+Lemma candidate_173: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))).
+Lemma candidate_174: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_175: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_176: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@cons bool false (@nil bool)) false)).
+Lemma candidate_177: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)).
+Lemma candidate_178: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)).
+Lemma candidate_179: forall (cin : bool) (lf8 : nat), @eq nat (Nat.add lf8 (bool_to_nat cin))   (PeanoNat.Nat.add lf8 (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O)).
+Lemma candidate_180: forall (cin : bool) (lf8 : nat), @eq nat (Nat.add lf8 (bool_to_nat cin))   (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 O) (Bool_compl.bool_to_nat cin)).
+Lemma candidate_181: forall (cin : bool) (lf8 : nat), @eq nat (Nat.add lf8 (bool_to_nat cin))   (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (Bool_compl.bool_to_nat cin)) O).
+Lemma candidate_182: forall (cin : bool) (lf8 : nat), @eq nat (Nat.add lf8 (bool_to_nat cin))   (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) (PeanoNat.Nat.add lf8 O)).
+Lemma candidate_183: forall (cin : bool) (lf8 : nat), @eq nat (Nat.add lf8 (bool_to_nat cin))   (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) lf8).
+Lemma candidate_184: forall (cin : bool) (lf8 : nat), @eq nat (Nat.add lf8 (bool_to_nat cin))   (PeanoNat.Nat.add lf8 (Bool_compl.bool_to_nat cin)).
+Lemma candidate_185: forall (cin : bool), @eq nat (bool_to_nat cin)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry cin cin)).
+Lemma candidate_186: forall (cin : bool), @eq nat (bool_to_nat cin)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry cin true)).
+Lemma candidate_187: forall (cin : bool), @eq nat (bool_to_nat cin)   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum cin false)) O).
+Lemma candidate_188: forall (cin : bool), @eq nat (bool_to_nat cin)   (PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O) O).
+Lemma candidate_189: forall (cin : bool), @eq nat (bool_to_nat cin) (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O).
+Lemma candidate_190: forall (cin : bool), @eq nat (bool_to_nat cin) (Bool_compl.bool_to_nat cin).
+Lemma candidate_191: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))).
+Lemma candidate_192: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_193: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_194: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@cons bool false (@nil bool)) false)).
+Lemma candidate_195: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)).
+Lemma candidate_196: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)).
+Lemma candidate_197: forall (a : bool) (l : list bool) (cin : bool), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin))         (BV_to_nat l)) (BV_to_nat l))   (Nat.add      (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false)))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))))))      (bool_to_nat cin)).
+Lemma candidate_198: forall (a : bool) (l : list bool) (cin : bool), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin))         (BV_to_nat l)) (BV_to_nat l))   (Nat.add      (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a (Adder.BV_full_adder_carry l (@nil bool) false))) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a (Adder.BV_full_adder_carry l (@nil bool) false)))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a (Adder.BV_full_adder_carry l (@nil bool) false))))))      (bool_to_nat cin)).
+Lemma candidate_199: forall (a : bool) (l : list bool) (cin : bool), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin))         (BV_to_nat l)) (BV_to_nat l))   (Nat.add      (Nat.add (Bool_compl.bool_to_nat a) (Nat.add (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)) (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false))))      (bool_to_nat cin)).
+Lemma candidate_200: forall (a : bool) (l : list bool) (cin : bool), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin))         (BV_to_nat l)) (BV_to_nat l))   (Nat.add      (Nat.add (Bool_compl.bool_to_nat a) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false))))      (bool_to_nat cin)).
+Lemma candidate_201: forall (a : bool) (l : list bool) (cin : bool), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin))         (BV_to_nat l)) (BV_to_nat l))   (Nat.add      (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a false))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a false)))))      (bool_to_nat cin)).
+Lemma candidate_202: forall (a : bool) (cin : bool), @eq nat (Nat.add (bool_to_nat a) (bool_to_nat cin))   (PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) (Bool_compl.bool_to_nat a)) O).
+Lemma candidate_203: forall (a : bool) (cin : bool), @eq nat (Nat.add (bool_to_nat a) (bool_to_nat cin))   (PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) (Bool_compl.bool_to_nat cin)) O).
+Lemma candidate_204: forall (a : bool) (cin : bool), @eq nat (Nat.add (bool_to_nat a) (bool_to_nat cin))   (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O)).
+Lemma candidate_205: forall (a : bool) (cin : bool), @eq nat (Nat.add (bool_to_nat a) (bool_to_nat cin))   (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O)).
+Lemma candidate_206: forall (a : bool) (cin : bool), @eq nat (Nat.add (bool_to_nat a) (bool_to_nat cin))   (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) (Bool_compl.bool_to_nat a)).
+Lemma candidate_207: forall (a : bool) (cin : bool), @eq nat (Nat.add (bool_to_nat a) (bool_to_nat cin))   (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) (Bool_compl.bool_to_nat cin)).
+Lemma candidate_208: forall (a : bool), @eq nat (bool_to_nat a)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry a a)).
+Lemma candidate_209: forall (a : bool), @eq nat (bool_to_nat a)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry a true)).
+Lemma candidate_210: forall (a : bool), @eq nat (bool_to_nat a)   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a false)) O).
+Lemma candidate_211: forall (a : bool), @eq nat (bool_to_nat a)   (PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O) O).
+Lemma candidate_212: forall (a : bool), @eq nat (bool_to_nat a) (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O).
+Lemma candidate_213: forall (a : bool), @eq nat (bool_to_nat a) (Bool_compl.bool_to_nat a).
+Lemma candidate_214: forall (cin : bool), @eq nat (bool_to_nat cin)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry cin cin)).
+Lemma candidate_215: forall (cin : bool), @eq nat (bool_to_nat cin)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry cin true)).
+Lemma candidate_216: forall (cin : bool), @eq nat (bool_to_nat cin)   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum cin false)) O).
+Lemma candidate_217: forall (cin : bool), @eq nat (bool_to_nat cin)   (PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O) O).
+Lemma candidate_218: forall (cin : bool), @eq nat (bool_to_nat cin) (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O).
+Lemma candidate_219: forall (cin : bool), @eq nat (bool_to_nat cin) (Bool_compl.bool_to_nat cin).
+Lemma candidate_220: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))).
+Lemma candidate_221: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_222: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_223: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@cons bool false (@nil bool)) false)).
+Lemma candidate_224: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)).
+Lemma candidate_225: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)).
+Lemma candidate_226: forall (lf9 : nat) (lf8 : nat), @eq nat (PeanoNat.Nat.add lf8 lf9) (PeanoNat.Nat.add lf8 lf9).
+Lemma candidate_227: forall (lf9 : nat) (lf8 : nat), @eq nat (PeanoNat.Nat.add lf8 lf9) (PeanoNat.Nat.add lf9 lf8).
+Lemma candidate_228: forall (lf9 : nat) (lf6 : nat), @eq nat (PeanoNat.Nat.add lf6 lf9) (PeanoNat.Nat.add lf6 lf9).
+Lemma candidate_229: forall (lf9 : nat) (lf6 : nat), @eq nat (PeanoNat.Nat.add lf6 lf9) (PeanoNat.Nat.add lf9 lf6).
+Lemma candidate_230: forall (cin : bool), @eq nat (bool_to_nat cin)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry cin cin)).
+Lemma candidate_231: forall (cin : bool), @eq nat (bool_to_nat cin)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry cin true)).
+Lemma candidate_232: forall (cin : bool), @eq nat (bool_to_nat cin)   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum cin false)) O).
+Lemma candidate_233: forall (cin : bool), @eq nat (bool_to_nat cin)   (PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O) O).
+Lemma candidate_234: forall (cin : bool), @eq nat (bool_to_nat cin) (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O).
+Lemma candidate_235: forall (cin : bool), @eq nat (bool_to_nat cin) (Bool_compl.bool_to_nat cin).
+Lemma candidate_236: forall (a : bool), @eq nat (bool_to_nat a)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry a a)).
+Lemma candidate_237: forall (a : bool), @eq nat (bool_to_nat a)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry a true)).
+Lemma candidate_238: forall (a : bool), @eq nat (bool_to_nat a)   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a false)) O).
+Lemma candidate_239: forall (a : bool), @eq nat (bool_to_nat a)   (PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O) O).
+Lemma candidate_240: forall (a : bool), @eq nat (bool_to_nat a) (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O).
+Lemma candidate_241: forall (a : bool), @eq nat (bool_to_nat a) (Bool_compl.bool_to_nat a).
+Lemma candidate_242: forall (lf9 : nat) (lf6 : nat), @eq nat (PeanoNat.Nat.add lf6 lf9) (PeanoNat.Nat.add lf6 lf9).
+Lemma candidate_243: forall (lf9 : nat) (lf6 : nat), @eq nat (PeanoNat.Nat.add lf6 lf9) (PeanoNat.Nat.add lf9 lf6).
+Lemma candidate_244: forall (cin : bool), @eq nat (bool_to_nat cin)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry cin cin)).
+Lemma candidate_245: forall (cin : bool), @eq nat (bool_to_nat cin)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry cin true)).
+Lemma candidate_246: forall (cin : bool), @eq nat (bool_to_nat cin)   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum cin false)) O).
+Lemma candidate_247: forall (cin : bool), @eq nat (bool_to_nat cin)   (PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O) O).
+Lemma candidate_248: forall (cin : bool), @eq nat (bool_to_nat cin) (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O).
+Lemma candidate_249: forall (cin : bool), @eq nat (bool_to_nat cin) (Bool_compl.bool_to_nat cin).
+Lemma candidate_250: forall (cin : bool), @eq nat (bool_to_nat cin)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry cin cin)).
+Lemma candidate_251: forall (cin : bool), @eq nat (bool_to_nat cin)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry cin true)).
+Lemma candidate_252: forall (cin : bool), @eq nat (bool_to_nat cin)   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum cin false)) O).
+Lemma candidate_253: forall (cin : bool), @eq nat (bool_to_nat cin)   (PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O) O).
+Lemma candidate_254: forall (cin : bool), @eq nat (bool_to_nat cin) (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O).
+Lemma candidate_255: forall (cin : bool), @eq nat (bool_to_nat cin) (Bool_compl.bool_to_nat cin).
+Lemma candidate_256: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))).
+Lemma candidate_257: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_258: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_259: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@cons bool false (@nil bool)) false)).
+Lemma candidate_260: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)).
+Lemma candidate_261: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)).
+Lemma candidate_262: forall (a : bool) (l : list bool), @eq nat   (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))      (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false)))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false)))))).
+Lemma candidate_263: forall (a : bool) (l : list bool), @eq nat   (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))      (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a (Adder.BV_full_adder_carry l (@nil bool) false))) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a (Adder.BV_full_adder_carry l (@nil bool) false)))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a (Adder.BV_full_adder_carry l (@nil bool) false)))))).
+Lemma candidate_264: forall (a : bool) (l : list bool), @eq nat   (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))      (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat a) (Nat.add (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)) (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)))).
+Lemma candidate_265: forall (a : bool) (l : list bool), @eq nat   (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))      (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat a) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)))).
+Lemma candidate_266: forall (a : bool) (l : list bool), @eq nat   (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))      (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a false))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a false))))).
+Lemma candidate_267: forall (a : bool), @eq nat (bool_to_nat a)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry a a)).
+Lemma candidate_268: forall (a : bool), @eq nat (bool_to_nat a)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry a true)).
+Lemma candidate_269: forall (a : bool), @eq nat (bool_to_nat a)   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a false)) O).
+Lemma candidate_270: forall (a : bool), @eq nat (bool_to_nat a)   (PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O) O).
+Lemma candidate_271: forall (a : bool), @eq nat (bool_to_nat a) (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O).
+Lemma candidate_272: forall (a : bool), @eq nat (bool_to_nat a) (Bool_compl.bool_to_nat a).
+Lemma candidate_273: forall (cin : bool), @eq nat (bool_to_nat cin)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry cin cin)).
+Lemma candidate_274: forall (cin : bool), @eq nat (bool_to_nat cin)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry cin true)).
+Lemma candidate_275: forall (cin : bool), @eq nat (bool_to_nat cin)   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum cin false)) O).
+Lemma candidate_276: forall (cin : bool), @eq nat (bool_to_nat cin)   (PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O) O).
+Lemma candidate_277: forall (cin : bool), @eq nat (bool_to_nat cin) (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O).
+Lemma candidate_278: forall (cin : bool), @eq nat (bool_to_nat cin) (Bool_compl.bool_to_nat cin).
+Lemma candidate_279: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))).
+Lemma candidate_280: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_281: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_282: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@cons bool false (@nil bool)) false)).
+Lemma candidate_283: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)).
+Lemma candidate_284: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)).
+
+<---FILTERED CANDIDATE LEMMAS--->
+Time elapsed: 3445 seconds
+Duplicates removed: 210
+Filtered by Quickchick: 0
+Filtered by script: 16
+Remaining: 58
+
+Lemmas: 
+Lemma candidate_22: forall (lf7 : nat) (lf8 : nat), @eq nat (Nat.add lf8 lf7) (PeanoNat.Nat.add lf7 lf8).
+Lemma candidate_89: forall (lf9 : nat) (lf8 : nat), @eq nat (PeanoNat.Nat.add lf8 lf9) (PeanoNat.Nat.add lf9 lf8).
+Lemma candidate_14: forall (lf9 : nat) (lf6 : nat), @eq nat (PeanoNat.Nat.add lf6 lf9) (PeanoNat.Nat.add lf9 lf6).
+Lemma candidate_11: forall (lf5 : nat) (lf9 : nat), @eq nat (PeanoNat.Nat.add lf5 lf9) (PeanoNat.Nat.add lf9 lf5).
+Lemma candidate_20: forall (lf7 : nat) (lf8 : nat), @eq nat (Nat.add lf8 lf7) (PeanoNat.Nat.add lf7 (PeanoNat.Nat.add lf8 O)).
+Lemma candidate_19: forall (lf7 : nat) (lf8 : nat), @eq nat (Nat.add lf8 lf7) (PeanoNat.Nat.add lf8 (PeanoNat.Nat.add lf7 O)).
+Lemma candidate_18: forall (lf7 : nat) (lf8 : nat), @eq nat (Nat.add lf8 lf7) (PeanoNat.Nat.add (PeanoNat.Nat.add lf7 lf8) O).
+Lemma candidate_33: forall (a : bool), @eq nat (bool_to_nat a)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry a a)).
+Lemma candidate_48: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)).
+Lemma candidate_34: forall (a : bool), @eq nat (bool_to_nat a)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry a true)).
+Lemma candidate_127: forall (cin : bool), @eq nat (bool_to_nat cin)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry cin cin)).
+Lemma candidate_32: forall (a : bool) (lf7 : nat), @eq nat (Nat.add (bool_to_nat a) lf7)   (PeanoNat.Nat.add lf7 (Bool_compl.bool_to_nat a)).
+Lemma candidate_128: forall (cin : bool), @eq nat (bool_to_nat cin)   (Bool_compl.bool_to_nat (HalfAdder.half_adder_carry cin true)).
+Lemma candidate_137: forall (cin : bool) (lf8 : nat), @eq nat (Nat.add lf8 (bool_to_nat cin))   (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) lf8).
+Lemma candidate_36: forall (a : bool), @eq nat (bool_to_nat a)   (PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O) O).
+Lemma candidate_35: forall (a : bool), @eq nat (bool_to_nat a)   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a false)) O).
+Lemma candidate_130: forall (cin : bool), @eq nat (bool_to_nat cin)   (PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O) O).
+Lemma candidate_10: forall (lf7 : nat) (lf5 : nat) (lf9 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf7 lf5) lf9)   (Nat.add (PeanoNat.Nat.add lf5 lf9) lf7).
+Lemma candidate_129: forall (cin : bool), @eq nat (bool_to_nat cin)   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum cin false)) O).
+Lemma candidate_46: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@cons bool false (@nil bool)) false)).
+Lemma candidate_30: forall (a : bool) (lf7 : nat), @eq nat (Nat.add (bool_to_nat a) lf7)   (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) (PeanoNat.Nat.add lf7 O)).
+Lemma candidate_29: forall (a : bool) (lf7 : nat), @eq nat (Nat.add (bool_to_nat a) lf7)   (PeanoNat.Nat.add (PeanoNat.Nat.add lf7 (Bool_compl.bool_to_nat a)) O).
+Lemma candidate_28: forall (a : bool) (lf7 : nat), @eq nat (Nat.add (bool_to_nat a) lf7)   (PeanoNat.Nat.add (PeanoNat.Nat.add lf7 O) (Bool_compl.bool_to_nat a)).
+Lemma candidate_27: forall (a : bool) (lf7 : nat), @eq nat (Nat.add (bool_to_nat a) lf7)   (PeanoNat.Nat.add lf7 (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O)).
+Lemma candidate_136: forall (cin : bool) (lf8 : nat), @eq nat (Nat.add lf8 (bool_to_nat cin))   (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) (PeanoNat.Nat.add lf8 O)).
+Lemma candidate_134: forall (cin : bool) (lf8 : nat), @eq nat (Nat.add lf8 (bool_to_nat cin))   (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 O) (Bool_compl.bool_to_nat cin)).
+Lemma candidate_133: forall (cin : bool) (lf8 : nat), @eq nat (Nat.add lf8 (bool_to_nat cin))   (PeanoNat.Nat.add lf8 (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O)).
+Lemma candidate_42: forall (lf7 : nat) (l : list bool) (lf5 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add lf7 lf5) (BV_to_nat l))   (Nat.add (PeanoNat.Nat.add lf5 (BV_to_nat l)) lf7).
+Lemma candidate_45: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_151: forall (a : bool) (cin : bool), @eq nat (Nat.add (bool_to_nat a) (bool_to_nat cin))   (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) (Bool_compl.bool_to_nat a)).
+Lemma candidate_8: forall (lf7 : nat) (lf9 : nat) (lf8 : nat), @eq nat (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 lf7) lf9) lf9)   (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf9) lf9) lf7).
+Lemma candidate_150: forall (a : bool) (cin : bool), @eq nat (Nat.add (bool_to_nat a) (bool_to_nat cin))   (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) O)).
+Lemma candidate_149: forall (a : bool) (cin : bool), @eq nat (Nat.add (bool_to_nat a) (bool_to_nat cin))   (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) (PeanoNat.Nat.add (Bool_compl.bool_to_nat a) O)).
+Lemma candidate_147: forall (a : bool) (cin : bool), @eq nat (Nat.add (bool_to_nat a) (bool_to_nat cin))   (PeanoNat.Nat.add (PeanoNat.Nat.add (Bool_compl.bool_to_nat cin) (Bool_compl.bool_to_nat a)) O).
+Lemma candidate_7: forall (a : bool) (lf7 : nat) (lf9 : nat), @eq nat   (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) lf9) lf9)   (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) lf9) lf9) lf7).
+Lemma candidate_4: forall (cin : bool) (lf9 : nat) (lf8 : nat), @eq nat   (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 (bool_to_nat cin)) lf9)      lf9)   (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 lf9) lf9)      (bool_to_nat cin)).
+Lemma candidate_6: forall (l : list bool) (lf7 : nat) (lf8 : nat), @eq nat   (PeanoNat.Nat.add (PeanoNat.Nat.add (Nat.add lf8 lf7) (BV_to_nat l))      (BV_to_nat l))   (Nat.add      (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (BV_to_nat l)) (BV_to_nat l))      lf7).
+Lemma candidate_3: forall (a : bool) (cin : bool) (lf9 : nat), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin)) lf9) lf9)   (Nat.add (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) lf9) lf9)      (bool_to_nat cin)).
+Lemma candidate_5: forall (a : bool) (l : list bool) (lf7 : nat), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) (BV_to_nat l))      (BV_to_nat l))   (Nat.add      (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))         (BV_to_nat l)) lf7).
+Lemma candidate_2: forall (l : list bool) (cin : bool) (lf8 : nat), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add lf8 (bool_to_nat cin)) (BV_to_nat l))      (BV_to_nat l))   (Nat.add      (PeanoNat.Nat.add (PeanoNat.Nat.add lf8 (BV_to_nat l)) (BV_to_nat l))      (bool_to_nat cin)).
+Lemma candidate_43: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))).
+Lemma candidate_108: forall (a : bool) (l : list bool), @eq nat   (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))      (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat a) (Nat.add (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)) (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)))).
+Lemma candidate_47: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)).
+Lemma candidate_44: forall (l : list bool), @eq nat (BV_to_nat l)   (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (Adder.BV_full_adder_carry l (@nil bool) false))).
+Lemma candidate_65: forall (a : bool) (l : list bool) (lf7 : nat), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) (BV_to_nat l))      (BV_to_nat l))   (Nat.add      (Nat.add (Bool_compl.bool_to_nat a) (Nat.add (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)) (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false))))      lf7).
+Lemma candidate_199: forall (a : bool) (l : list bool) (cin : bool), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin))         (BV_to_nat l)) (BV_to_nat l))   (Nat.add      (Nat.add (Bool_compl.bool_to_nat a) (Nat.add (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false)) (BV.BV_to_nat (Adder.BV_full_adder_sum l (@nil bool) false))))      (bool_to_nat cin)).
+Lemma candidate_109: forall (a : bool) (l : list bool), @eq nat   (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))      (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat a) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)))).
+Lemma candidate_66: forall (a : bool) (l : list bool) (lf7 : nat), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) (BV_to_nat l))      (BV_to_nat l))   (Nat.add      (Nat.add (Bool_compl.bool_to_nat a) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false))))      lf7).
+Lemma candidate_200: forall (a : bool) (l : list bool) (cin : bool), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin))         (BV_to_nat l)) (BV_to_nat l))   (Nat.add      (Nat.add (Bool_compl.bool_to_nat a) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false)) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l false))))      (bool_to_nat cin)).
+Lemma candidate_110: forall (a : bool) (l : list bool), @eq nat   (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))      (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a false))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a false))))).
+Lemma candidate_67: forall (a : bool) (l : list bool) (lf7 : nat), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) (BV_to_nat l))      (BV_to_nat l))   (Nat.add      (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a false))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a false)))))      lf7).
+Lemma candidate_201: forall (a : bool) (l : list bool) (cin : bool), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin))         (BV_to_nat l)) (BV_to_nat l))   (Nat.add      (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a false)) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a false))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a false)))))      (bool_to_nat cin)).
+Lemma candidate_107: forall (a : bool) (l : list bool), @eq nat   (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))      (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a (Adder.BV_full_adder_carry l (@nil bool) false))) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a (Adder.BV_full_adder_carry l (@nil bool) false)))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a (Adder.BV_full_adder_carry l (@nil bool) false)))))).
+Lemma candidate_64: forall (a : bool) (l : list bool) (lf7 : nat), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) (BV_to_nat l))      (BV_to_nat l))   (Nat.add      (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a (Adder.BV_full_adder_carry l (@nil bool) false))) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a (Adder.BV_full_adder_carry l (@nil bool) false)))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a (Adder.BV_full_adder_carry l (@nil bool) false))))))      lf7).
+Lemma candidate_198: forall (a : bool) (l : list bool) (cin : bool), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin))         (BV_to_nat l)) (BV_to_nat l))   (Nat.add      (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a (Adder.BV_full_adder_carry l (@nil bool) false))) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a (Adder.BV_full_adder_carry l (@nil bool) false)))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a (Adder.BV_full_adder_carry l (@nil bool) false))))))      (bool_to_nat cin)).
+Lemma candidate_106: forall (a : bool) (l : list bool), @eq nat   (PeanoNat.Nat.add (PeanoNat.Nat.add (bool_to_nat a) (BV_to_nat l))      (BV_to_nat l))   (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false)))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false)))))).
+Lemma candidate_63: forall (a : bool) (l : list bool) (lf7 : nat), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add (bool_to_nat a) lf7) (BV_to_nat l))      (BV_to_nat l))   (Nat.add      (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false)))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))))))      lf7).
+Lemma candidate_197: forall (a : bool) (l : list bool) (cin : bool), @eq nat   (PeanoNat.Nat.add      (PeanoNat.Nat.add (Nat.add (bool_to_nat a) (bool_to_nat cin))         (BV_to_nat l)) (BV_to_nat l))   (Nat.add      (Nat.add (Bool_compl.bool_to_nat (HalfAdder.half_adder_sum a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))) (Nat.add (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false)))) (BV.BV_to_nat ((fix F0 (l0 : list bool) : forall _ : bool, BV.BV := match l0 with | nil => fun _ : bool => BV.nilbv | cons b l1 => fun z : bool => BV.consbv (HalfAdder.half_adder_sum b z) (F0 l1 (HalfAdder.half_adder_carry b z)) end) l (HalfAdder.half_adder_carry a ((fix F0 (l0 : list bool) : forall _ : bool, bool := match l0 with | nil => fun z : bool => z | cons b l1 => fun z : bool => F0 l1 (HalfAdder.half_adder_carry b z) end) l false))))))      (bool_to_nat cin)).

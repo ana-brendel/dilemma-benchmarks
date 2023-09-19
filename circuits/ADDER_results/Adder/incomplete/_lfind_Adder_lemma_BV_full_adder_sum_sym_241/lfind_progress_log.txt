@@ -1,0 +1,236 @@
+File Information
+- File name: Adder
+- Original Directory: /home/anabrendel/lfind/benchmarks/circuits/ADDER_tests/Adder/Adder_lemma_BV_full_adder_sum_sym_241
+- LFind Directory: /home/anabrendel/lfind/benchmarks/circuits/ADDER_tests/Adder/_lfind_Adder_lemma_BV_full_adder_sum_sym_241
+- Namespace: Circuits
+- Proof name: BV_full_adder_sym
+- Theorem: Theorem BV_full_adder_sym: forall (v0 w0 : BV) (cin0 : bool),
+@eq BV (BV_full_adder v0 w0 cin0) (BV_full_adder w0 v0 cin0).
+- Declarations: 
+From lfind Require Import LFind.
+From CircuitsCoqGym Require Import BV.
+From CircuitsCoqGym Require Import FullAdder.
+
+Proof Context
+* Goal State: @eq BV
+  (appbv (BV_full_adder_sum v w cin)
+     (consbv (BV_full_adder_carry v w cin) nilbv))
+  (appbv (BV_full_adder_sum w v cin)
+     (consbv (BV_full_adder_carry w v cin) nilbv))
+
+* Hypothesis:
+cin : bool
+v : BV
+w : BV
+
+* Types:
+Set
+Prop
+BV
+bool
+
+* Polymorphic Types:
+
+
+* Variables:
+cin : bool
+v : BV
+w : BV
+
+* Terms:
+consbv (BV_full_adder_carry w v cin) nilbv : BV
+appbv (BV_full_adder_sum w v cin)
+  (consbv (BV_full_adder_carry w v cin) nilbv) : BV
+consbv (BV_full_adder_carry v w cin) nilbv : BV
+BV_full_adder_carry v w cin : bool
+bool : Set
+cin : bool
+appbv (BV_full_adder_sum v w cin)
+  (consbv (BV_full_adder_carry v w cin) nilbv) : BV
+v : BV
+BV_full_adder_sum v w cin : BV
+w : BV
+BV : Set
+nilbv : BV
+BV_full_adder_carry w v cin : bool
+BV_full_adder_sum w v cin : BV
+@eq BV
+  (appbv (BV_full_adder_sum v w cin)
+     (consbv (BV_full_adder_carry v w cin) nilbv))
+  (appbv (BV_full_adder_sum w v cin)
+     (consbv (BV_full_adder_carry w v cin) nilbv)) : Prop
+
+* Functions:
+appbv  : forall (_ : BV) (_ : BV), BV
+BV_full_adder_carry  : forall (_ : list bool) (_ : list bool) (_ : bool), bool
+consbv  : forall (_ : bool) (_ : BV), BV
+BV_full_adder_sum  : forall (_ : list bool) (_ : list bool) (_ : bool), BV
+@eq  : forall (A : Type) (_ : A) (_ : A), Prop
+
+<---GENERALIZATION--->
+Time elapsed: 3 seconds
+Generalized Variables:
+lf3 : BV = consbv (BV_full_adder_carry w v cin) nilbv
+lf7 : BV = BV_full_adder_sum v w cin
+lf1 : BV = appbv (BV_full_adder_sum w v cin)
+  (consbv (BV_full_adder_carry w v cin) nilbv)
+lf4 : BV = consbv (BV_full_adder_carry v w cin) nilbv
+lf5 : bool = BV_full_adder_carry v w cin
+lf9 : BV = nilbv
+lf2 : BV = appbv (BV_full_adder_sum v w cin)
+  (consbv (BV_full_adder_carry v w cin) nilbv)
+lf8 : BV = BV_full_adder_sum w v cin
+lf6 : bool = BV_full_adder_carry w v cin
+
+Generalizations:
+Lemma conj1: forall (lf8 : BV) (lf4 : BV) (lf7 : BV) (lf3 : BV), @eq BV (appbv lf7 lf4) (appbv lf8 lf3).
+Lemma conj3: forall (cin : bool) (v : BV) (w : BV) (lf4 : BV) (lf7 : BV) (lf3 : BV), @eq BV (appbv lf7 lf4) (appbv (BV_full_adder_sum w v cin) lf3).
+Lemma conj33: forall (lf8 : BV) (lf9 : BV) (lf5 : bool) (lf7 : BV) (lf3 : BV), @eq BV (appbv lf7 (consbv lf5 lf9)) (appbv lf8 lf3).
+Lemma conj35: forall (lf9 : BV) (lf5 : bool) (cin : bool) (v : BV) (w : BV) (lf7 : BV) (lf3 : BV), @eq BV (appbv lf7 (consbv lf5 lf9)) (appbv (BV_full_adder_sum w v cin) lf3).
+Lemma conj41: forall (lf8 : BV) (lf5 : bool) (lf7 : BV) (lf3 : BV), @eq BV (appbv lf7 (consbv lf5 nilbv)) (appbv lf8 lf3).
+Lemma conj43: forall (lf5 : bool) (cin : bool) (v : BV) (w : BV) (lf7 : BV) (lf3 : BV), @eq BV (appbv lf7 (consbv lf5 nilbv)) (appbv (BV_full_adder_sum w v cin) lf3).
+Lemma conj49: forall (lf8 : BV) (lf9 : BV) (cin : bool) (v : BV) (w : BV) (lf7 : BV) (lf3 : BV), @eq BV (appbv lf7 (consbv (BV_full_adder_carry v w cin) lf9)) (appbv lf8 lf3).
+Lemma conj51: forall (lf9 : BV) (cin : bool) (v : BV) (w : BV) (lf7 : BV) (lf3 : BV), @eq BV (appbv lf7 (consbv (BV_full_adder_carry v w cin) lf9))
+  (appbv (BV_full_adder_sum w v cin) lf3).
+Lemma conj57: forall (lf8 : BV) (cin : bool) (v : BV) (w : BV) (lf7 : BV) (lf3 : BV), @eq BV (appbv lf7 (consbv (BV_full_adder_carry v w cin) nilbv))
+  (appbv lf8 lf3).
+Lemma conj59: forall (cin : bool) (v : BV) (w : BV) (lf7 : BV) (lf3 : BV), @eq BV (appbv lf7 (consbv (BV_full_adder_carry v w cin) nilbv))
+  (appbv (BV_full_adder_sum w v cin) lf3).
+Lemma conj129: forall (lf8 : BV) (cin : bool) (v : BV) (lf4 : BV) (w : BV) (lf3 : BV), @eq BV (appbv (BV_full_adder_sum v w cin) lf4) (appbv lf8 lf3).
+Lemma conj131: forall (cin : bool) (v : BV) (w : BV) (lf4 : BV) (lf3 : BV), @eq BV (appbv (BV_full_adder_sum v w cin) lf4)
+  (appbv (BV_full_adder_sum w v cin) lf3).
+Lemma conj161: forall (lf8 : BV) (lf9 : BV) (lf5 : bool) (cin : bool) (v : BV) (w : BV) (lf3 : BV), @eq BV (appbv (BV_full_adder_sum v w cin) (consbv lf5 lf9)) (appbv lf8 lf3).
+Lemma conj163: forall (lf9 : BV) (lf5 : bool) (cin : bool) (v : BV) (w : BV) (lf3 : BV), @eq BV (appbv (BV_full_adder_sum v w cin) (consbv lf5 lf9))
+  (appbv (BV_full_adder_sum w v cin) lf3).
+Lemma conj169: forall (lf8 : BV) (lf5 : bool) (cin : bool) (v : BV) (w : BV) (lf3 : BV), @eq BV (appbv (BV_full_adder_sum v w cin) (consbv lf5 nilbv)) (appbv lf8 lf3).
+Lemma conj171: forall (lf5 : bool) (cin : bool) (v : BV) (w : BV) (lf3 : BV), @eq BV (appbv (BV_full_adder_sum v w cin) (consbv lf5 nilbv))
+  (appbv (BV_full_adder_sum w v cin) lf3).
+Lemma conj177: forall (lf8 : BV) (lf9 : BV) (cin : bool) (v : BV) (w : BV) (lf3 : BV), @eq BV
+  (appbv (BV_full_adder_sum v w cin)
+     (consbv (BV_full_adder_carry v w cin) lf9)) (appbv lf8 lf3).
+Lemma conj179: forall (lf9 : BV) (cin : bool) (v : BV) (w : BV) (lf3 : BV), @eq BV
+  (appbv (BV_full_adder_sum v w cin)
+     (consbv (BV_full_adder_carry v w cin) lf9))
+  (appbv (BV_full_adder_sum w v cin) lf3).
+Lemma conj185: forall (lf8 : BV) (cin : bool) (v : BV) (w : BV) (lf3 : BV), @eq BV
+  (appbv (BV_full_adder_sum v w cin)
+     (consbv (BV_full_adder_carry v w cin) nilbv)) 
+  (appbv lf8 lf3).
+Lemma conj187: forall (cin : bool) (v : BV) (w : BV) (lf3 : BV), @eq BV
+  (appbv (BV_full_adder_sum v w cin)
+     (consbv (BV_full_adder_carry v w cin) nilbv))
+  (appbv (BV_full_adder_sum w v cin) lf3).
+Lemma conj257: forall (lf6 : bool) (lf8 : BV) (lf9 : BV) (lf4 : BV) (lf7 : BV), @eq BV (appbv lf7 lf4) (appbv lf8 (consbv lf6 lf9)).
+Lemma conj258: forall (lf8 : BV) (lf9 : BV) (cin : bool) (v : BV) (w : BV) (lf4 : BV) (lf7 : BV), @eq BV (appbv lf7 lf4) (appbv lf8 (consbv (BV_full_adder_carry w v cin) lf9)).
+Lemma conj259: forall (lf6 : bool) (lf9 : BV) (cin : bool) (v : BV) (w : BV) (lf4 : BV) (lf7 : BV), @eq BV (appbv lf7 lf4) (appbv (BV_full_adder_sum w v cin) (consbv lf6 lf9)).
+Lemma conj260: forall (lf9 : BV) (cin : bool) (v : BV) (w : BV) (lf4 : BV) (lf7 : BV), @eq BV (appbv lf7 lf4)
+  (appbv (BV_full_adder_sum w v cin)
+     (consbv (BV_full_adder_carry w v cin) lf9)).
+Lemma conj265: forall (lf6 : bool) (lf8 : BV) (lf4 : BV) (lf7 : BV), @eq BV (appbv lf7 lf4) (appbv lf8 (consbv lf6 nilbv)).
+Lemma conj266: forall (lf8 : BV) (cin : bool) (v : BV) (w : BV) (lf4 : BV) (lf7 : BV), @eq BV (appbv lf7 lf4)
+  (appbv lf8 (consbv (BV_full_adder_carry w v cin) nilbv)).
+Lemma conj267: forall (lf6 : bool) (cin : bool) (v : BV) (w : BV) (lf4 : BV) (lf7 : BV), @eq BV (appbv lf7 lf4) (appbv (BV_full_adder_sum w v cin) (consbv lf6 nilbv)).
+Lemma conj268: forall (cin : bool) (v : BV) (w : BV) (lf4 : BV) (lf7 : BV), @eq BV (appbv lf7 lf4)
+  (appbv (BV_full_adder_sum w v cin)
+     (consbv (BV_full_adder_carry w v cin) nilbv)).
+Lemma conj289: forall (lf6 : bool) (lf8 : BV) (lf9 : BV) (lf5 : bool) (lf7 : BV), @eq BV (appbv lf7 (consbv lf5 lf9)) (appbv lf8 (consbv lf6 lf9)).
+Lemma conj290: forall (lf8 : BV) (lf9 : BV) (lf5 : bool) (cin : bool) (v : BV) (w : BV) (lf7 : BV), @eq BV (appbv lf7 (consbv lf5 lf9))
+  (appbv lf8 (consbv (BV_full_adder_carry w v cin) lf9)).
+Lemma conj291: forall (lf6 : bool) (lf9 : BV) (lf5 : bool) (cin : bool) (v : BV) (w : BV) (lf7 : BV), @eq BV (appbv lf7 (consbv lf5 lf9))
+  (appbv (BV_full_adder_sum w v cin) (consbv lf6 lf9)).
+Lemma conj292: forall (lf9 : BV) (lf5 : bool) (cin : bool) (v : BV) (w : BV) (lf7 : BV), @eq BV (appbv lf7 (consbv lf5 lf9))
+  (appbv (BV_full_adder_sum w v cin)
+     (consbv (BV_full_adder_carry w v cin) lf9)).
+Lemma conj297: forall (lf6 : bool) (lf8 : BV) (lf5 : bool) (lf7 : BV), @eq BV (appbv lf7 (consbv lf5 nilbv)) (appbv lf8 (consbv lf6 nilbv)).
+Lemma conj298: forall (lf8 : BV) (lf5 : bool) (cin : bool) (v : BV) (w : BV) (lf7 : BV), @eq BV (appbv lf7 (consbv lf5 nilbv))
+  (appbv lf8 (consbv (BV_full_adder_carry w v cin) nilbv)).
+Lemma conj299: forall (lf6 : bool) (lf5 : bool) (cin : bool) (v : BV) (w : BV) (lf7 : BV), @eq BV (appbv lf7 (consbv lf5 nilbv))
+  (appbv (BV_full_adder_sum w v cin) (consbv lf6 nilbv)).
+Lemma conj300: forall (lf5 : bool) (cin : bool) (v : BV) (w : BV) (lf7 : BV), @eq BV (appbv lf7 (consbv lf5 nilbv))
+  (appbv (BV_full_adder_sum w v cin)
+     (consbv (BV_full_adder_carry w v cin) nilbv)).
+Lemma conj305: forall (lf6 : bool) (lf8 : BV) (lf9 : BV) (cin : bool) (v : BV) (w : BV) (lf7 : BV), @eq BV (appbv lf7 (consbv (BV_full_adder_carry v w cin) lf9))
+  (appbv lf8 (consbv lf6 lf9)).
+Lemma conj306: forall (lf8 : BV) (lf9 : BV) (cin : bool) (v : BV) (w : BV) (lf7 : BV), @eq BV (appbv lf7 (consbv (BV_full_adder_carry v w cin) lf9))
+  (appbv lf8 (consbv (BV_full_adder_carry w v cin) lf9)).
+Lemma conj307: forall (lf6 : bool) (lf9 : BV) (cin : bool) (v : BV) (w : BV) (lf7 : BV), @eq BV (appbv lf7 (consbv (BV_full_adder_carry v w cin) lf9))
+  (appbv (BV_full_adder_sum w v cin) (consbv lf6 lf9)).
+Lemma conj308: forall (lf9 : BV) (cin : bool) (v : BV) (w : BV) (lf7 : BV), @eq BV (appbv lf7 (consbv (BV_full_adder_carry v w cin) lf9))
+  (appbv (BV_full_adder_sum w v cin)
+     (consbv (BV_full_adder_carry w v cin) lf9)).
+Lemma conj313: forall (lf6 : bool) (lf8 : BV) (cin : bool) (v : BV) (w : BV) (lf7 : BV), @eq BV (appbv lf7 (consbv (BV_full_adder_carry v w cin) nilbv))
+  (appbv lf8 (consbv lf6 nilbv)).
+Lemma conj314: forall (lf8 : BV) (cin : bool) (v : BV) (w : BV) (lf7 : BV), @eq BV (appbv lf7 (consbv (BV_full_adder_carry v w cin) nilbv))
+  (appbv lf8 (consbv (BV_full_adder_carry w v cin) nilbv)).
+Lemma conj315: forall (lf6 : bool) (cin : bool) (v : BV) (w : BV) (lf7 : BV), @eq BV (appbv lf7 (consbv (BV_full_adder_carry v w cin) nilbv))
+  (appbv (BV_full_adder_sum w v cin) (consbv lf6 nilbv)).
+Lemma conj316: forall (cin : bool) (v : BV) (w : BV) (lf7 : BV), @eq BV (appbv lf7 (consbv (BV_full_adder_carry v w cin) nilbv))
+  (appbv (BV_full_adder_sum w v cin)
+     (consbv (BV_full_adder_carry w v cin) nilbv)).
+Lemma conj385: forall (lf6 : bool) (lf8 : BV) (lf9 : BV) (cin : bool) (v : BV) (lf4 : BV) (w : BV), @eq BV (appbv (BV_full_adder_sum v w cin) lf4) (appbv lf8 (consbv lf6 lf9)).
+Lemma conj386: forall (lf8 : BV) (lf9 : BV) (cin : bool) (v : BV) (w : BV) (lf4 : BV), @eq BV (appbv (BV_full_adder_sum v w cin) lf4)
+  (appbv lf8 (consbv (BV_full_adder_carry w v cin) lf9)).
+Lemma conj387: forall (lf6 : bool) (lf9 : BV) (cin : bool) (v : BV) (w : BV) (lf4 : BV), @eq BV (appbv (BV_full_adder_sum v w cin) lf4)
+  (appbv (BV_full_adder_sum w v cin) (consbv lf6 lf9)).
+Lemma conj388: forall (lf9 : BV) (cin : bool) (v : BV) (w : BV) (lf4 : BV), @eq BV (appbv (BV_full_adder_sum v w cin) lf4)
+  (appbv (BV_full_adder_sum w v cin)
+     (consbv (BV_full_adder_carry w v cin) lf9)).
+Lemma conj393: forall (lf6 : bool) (lf8 : BV) (cin : bool) (v : BV) (lf4 : BV) (w : BV), @eq BV (appbv (BV_full_adder_sum v w cin) lf4) (appbv lf8 (consbv lf6 nilbv)).
+Lemma conj394: forall (lf8 : BV) (cin : bool) (v : BV) (w : BV) (lf4 : BV), @eq BV (appbv (BV_full_adder_sum v w cin) lf4)
+  (appbv lf8 (consbv (BV_full_adder_carry w v cin) nilbv)).
+Lemma conj395: forall (lf6 : bool) (cin : bool) (v : BV) (w : BV) (lf4 : BV), @eq BV (appbv (BV_full_adder_sum v w cin) lf4)
+  (appbv (BV_full_adder_sum w v cin) (consbv lf6 nilbv)).
+Lemma conj396: forall (cin : bool) (v : BV) (w : BV) (lf4 : BV), @eq BV (appbv (BV_full_adder_sum v w cin) lf4)
+  (appbv (BV_full_adder_sum w v cin)
+     (consbv (BV_full_adder_carry w v cin) nilbv)).
+Lemma conj417: forall (lf6 : bool) (lf8 : BV) (lf9 : BV) (lf5 : bool) (cin : bool) (v : BV) (w : BV), @eq BV (appbv (BV_full_adder_sum v w cin) (consbv lf5 lf9))
+  (appbv lf8 (consbv lf6 lf9)).
+Lemma conj418: forall (lf8 : BV) (lf9 : BV) (lf5 : bool) (cin : bool) (v : BV) (w : BV), @eq BV (appbv (BV_full_adder_sum v w cin) (consbv lf5 lf9))
+  (appbv lf8 (consbv (BV_full_adder_carry w v cin) lf9)).
+Lemma conj419: forall (lf6 : bool) (lf9 : BV) (lf5 : bool) (cin : bool) (v : BV) (w : BV), @eq BV (appbv (BV_full_adder_sum v w cin) (consbv lf5 lf9))
+  (appbv (BV_full_adder_sum w v cin) (consbv lf6 lf9)).
+Lemma conj420: forall (lf9 : BV) (lf5 : bool) (cin : bool) (v : BV) (w : BV), @eq BV (appbv (BV_full_adder_sum v w cin) (consbv lf5 lf9))
+  (appbv (BV_full_adder_sum w v cin)
+     (consbv (BV_full_adder_carry w v cin) lf9)).
+Lemma conj425: forall (lf6 : bool) (lf8 : BV) (lf5 : bool) (cin : bool) (v : BV) (w : BV), @eq BV (appbv (BV_full_adder_sum v w cin) (consbv lf5 nilbv))
+  (appbv lf8 (consbv lf6 nilbv)).
+Lemma conj426: forall (lf8 : BV) (lf5 : bool) (cin : bool) (v : BV) (w : BV), @eq BV (appbv (BV_full_adder_sum v w cin) (consbv lf5 nilbv))
+  (appbv lf8 (consbv (BV_full_adder_carry w v cin) nilbv)).
+Lemma conj427: forall (lf6 : bool) (lf5 : bool) (cin : bool) (v : BV) (w : BV), @eq BV (appbv (BV_full_adder_sum v w cin) (consbv lf5 nilbv))
+  (appbv (BV_full_adder_sum w v cin) (consbv lf6 nilbv)).
+Lemma conj428: forall (lf5 : bool) (cin : bool) (v : BV) (w : BV), @eq BV (appbv (BV_full_adder_sum v w cin) (consbv lf5 nilbv))
+  (appbv (BV_full_adder_sum w v cin)
+     (consbv (BV_full_adder_carry w v cin) nilbv)).
+Lemma conj433: forall (lf6 : bool) (lf8 : BV) (lf9 : BV) (cin : bool) (v : BV) (w : BV), @eq BV
+  (appbv (BV_full_adder_sum v w cin)
+     (consbv (BV_full_adder_carry v w cin) lf9)) (appbv lf8 (consbv lf6 lf9)).
+Lemma conj434: forall (lf8 : BV) (lf9 : BV) (cin : bool) (v : BV) (w : BV), @eq BV
+  (appbv (BV_full_adder_sum v w cin)
+     (consbv (BV_full_adder_carry v w cin) lf9))
+  (appbv lf8 (consbv (BV_full_adder_carry w v cin) lf9)).
+Lemma conj435: forall (lf6 : bool) (lf9 : BV) (cin : bool) (v : BV) (w : BV), @eq BV
+  (appbv (BV_full_adder_sum v w cin)
+     (consbv (BV_full_adder_carry v w cin) lf9))
+  (appbv (BV_full_adder_sum w v cin) (consbv lf6 lf9)).
+Lemma conj436: forall (lf9 : BV) (cin : bool) (v : BV) (w : BV), @eq BV
+  (appbv (BV_full_adder_sum v w cin)
+     (consbv (BV_full_adder_carry v w cin) lf9))
+  (appbv (BV_full_adder_sum w v cin)
+     (consbv (BV_full_adder_carry w v cin) lf9)).
+Lemma conj441: forall (lf6 : bool) (lf8 : BV) (cin : bool) (v : BV) (w : BV), @eq BV
+  (appbv (BV_full_adder_sum v w cin)
+     (consbv (BV_full_adder_carry v w cin) nilbv))
+  (appbv lf8 (consbv lf6 nilbv)).
+Lemma conj442: forall (lf8 : BV) (cin : bool) (v : BV) (w : BV), @eq BV
+  (appbv (BV_full_adder_sum v w cin)
+     (consbv (BV_full_adder_carry v w cin) nilbv))
+  (appbv lf8 (consbv (BV_full_adder_carry w v cin) nilbv)).
+Lemma conj443: forall (lf6 : bool) (cin : bool) (v : BV) (w : BV), @eq BV
+  (appbv (BV_full_adder_sum v w cin)
+     (consbv (BV_full_adder_carry v w cin) nilbv))
+  (appbv (BV_full_adder_sum w v cin) (consbv lf6 nilbv)).
+Lemma conj444: forall (cin : bool) (v : BV) (w : BV), @eq BV
+  (appbv (BV_full_adder_sum v w cin)
+     (consbv (BV_full_adder_carry v w cin) nilbv))
+  (appbv (BV_full_adder_sum w v cin)
+     (consbv (BV_full_adder_carry w v cin) nilbv)).
