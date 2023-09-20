@@ -127,3 +127,21 @@ def count_duplicates(p):
     dups_dict = get_duplicates_by_goal(tests)
     write_to_csv_duplicates(dups_dict,file)
 
+def run_benchmarks_from_list(projects):
+    for path in (projects):
+        make_cmd = f"cd {path} && make"
+        os.system(make_cmd)
+
+rerun_incompletes = [
+    "/home/anabrendel/lfind/benchmarks/circuits/ADDER_tests/Adder/Adder_lemma_BV_full_adder_sum_sym_241",
+    "/home/anabrendel/lfind/benchmarks/circuits/ADDER_results/AdderProof/incomplete/_lfind_AdderProof_lemma_BV_full_adder_sum_v_nil_false_43",
+    "/home/anabrendel/lfind/benchmarks/circuits/ADDER_results/AdderProof/incomplete/_lfind_AdderProof_lemma_full_adder_carry_sym1_119",
+    "/home/anabrendel/lfind/benchmarks/circuits/ADDER_results/AdderProof/incomplete/_lfind_AdderProof_lemma_full_adder_carry_true_120",
+    "/home/anabrendel/lfind/benchmarks/tree-automata/defs_tests/lemma_in_M0_false_271",
+    "/home/anabrendel/lfind/benchmarks/tree-automata/base_tests/lemma_M1_semantics_2_273",
+    "/home/anabrendel/lfind/benchmarks/tree-automata/base_tests/lemma_Neqb_complete_274",
+    "/home/anabrendel/lfind/benchmarks/tree-automata/base_tests/lemma_Neqb_complete_327",
+    "/home/anabrendel/lfind/benchmarks/tree-automata/base_tests/lemma_not_true_is_false_277"
+]
+
+
