@@ -132,5 +132,7 @@ prec_list = "/home/anabrendel/lfind/benchmarks/_QUICKCHICK_PROOFS_/tree-automata
 for test in os.listdir("/home/anabrendel/lfind/benchmarks/tree-automata/def_results/incomplete"):
     t = test.removeprefix("_lfind_")
     ft = os.path.join("/home/anabrendel/lfind/benchmarks/tree-automata/defs_tests",t)
-    show = os.path.join(ft,"show_prec_list.v")
-    shutil.copy(src=prec_list,dst=show)
+    # show = os.path.join(ft,"show_prec_list.v")
+    # shutil.copy(src=prec_list,dst=show)
+    make_cmd = f"cd {ft} && make"
+    os.system(make_cmd)

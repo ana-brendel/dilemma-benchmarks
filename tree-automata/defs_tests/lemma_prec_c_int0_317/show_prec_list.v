@@ -40,6 +40,12 @@ Definition show_N n :=
 
 Instance show_ad : Show ad := {| show := show_N |}.
 
+Derive Arbitrary for positive.
+Derive Arbitrary for N.
+
+Instance Dec_Eq_ad : Dec_Eq ad.
+Proof. dec_eq. Qed.
+
 
 (* Map Instances *)
 Instance show_map {A} `{_ : Show A} : Show (Map A) :=
@@ -52,9 +58,6 @@ Instance show_map {A} `{_ : Show A} : Show (Map A) :=
         end
     in aux 
 |}.
-
-Derive Arbitrary for positive.
-Derive Arbitrary for N.
 
 Definition genM0 {A} := M0 A.
 Definition genM1 {A} := M1 A.
