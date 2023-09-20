@@ -1,3 +1,8 @@
+From QuickChick Require Import QuickChick Tactics.
+Import QcNotation.
+Require Import Ndec.
+Require Import Ndec.
+Require Import Ndigits.
 Open Scope string_scope.
 
 Definition show_type_name_BV (T : Type) := 
@@ -41,9 +46,9 @@ Instance show_map {A} `{_ : Show A} : Show (Map A) :=
 {| show := 
     let fix aux l := 
         match l with
-        | M0 => "M0"
-        | M1 a b => "M1 (" ++ show a ++ ")(" ++ show b ++ ")"
-        | M2 x y => "M2 (" ++ aux x ++ ") (" ++ aux y ++ ")"
+        | M0 _ => "M0"
+        | M1 _ a b => "M1 (" ++ show a ++ ")(" ++ show b ++ ")"
+        | M2 _ x y => "M2 (" ++ aux x ++ ") (" ++ aux y ++ ")"
         end
     in aux 
 |}.
@@ -239,7 +244,7 @@ Fixpoint show_prec_list_fix p :=
     | prec_empty => "prec_empty"
     end.
 
-Instance show_term : Show (prec_list) := {| show := show_prec_list_fix |}.
+Instance show_prec_list : Show (prec_list) := {| show := show_prec_list_fix |}.
 
 Derive Arbitrary for prec_list.
 
@@ -300,9 +305,6 @@ Proof.
     - auto.
 Qed.
 
-Lemma add_neqb (b : bool) : b = false -> ~b = true.
-Proof. destruct b. intros. inversion H. intros. auto. Qed.
-
 Instance Dec_Eq_prec_list : Dec_Eq prec_list.
 Proof. 
     constructor. intros. unfold ssrbool.decidable.
@@ -333,16 +335,16 @@ Instance genDTAInstanceShrink : Shrink (DTA) := {| shrink := mapShrink |}.
 
 Fixpoint show_state_fix s := 
     match s with
-    | M0 => "M0 prec_list"
-    | M1 a p => "M1 prec_list (" ++ show_N a ++ ") (" ++ show_prec_list_fix p ++ ")"
-    | M2 s1 s2 => "M2 prec_list (" ++ show_state_fix s1 ++ ") (" ++ show_state_fix s2 ++ ")"
+    | M0 _ => "M0 prec_list"
+    | M1 _ a p => "M1 prec_list (" ++ show_N a ++ ") (" ++ show_prec_list_fix p ++ ")"
+    | M2 _ s1 s2 => "M2 prec_list (" ++ show_state_fix s1 ++ ") (" ++ show_state_fix s2 ++ ")"
     end.
 
 Fixpoint show_PreDTA_fix s := 
     match s with
-    | M0 => "M0 state"
-    | M1 a p => "M1 state (" ++ show_N a ++ ") (" ++ show_state_fix p ++ ")"
-    | M2 s1 s2 => "M2 state (" ++ show_PreDTA_fix s1 ++ ") (" ++ show_PreDTA_fix s2 ++ ")"
+    | M0 _ => "M0 state"
+    | M1 _ a p => "M1 state (" ++ show_N a ++ ") (" ++ show_state_fix p ++ ")"
+    | M2 _ s1 s2 => "M2 state (" ++ show_PreDTA_fix s1 ++ ") (" ++ show_PreDTA_fix s2 ++ ")"
     end.
 
 Fixpoint show_DTA_fix d := 
@@ -416,7 +418,7 @@ Proof.
     +++ unfold not in H. apply H. exists (N.div2 x). rewrite <- H2. apply eq_sym. apply MapGet_M2_bit_0_0. auto.
 Qed.
 
-Fixpoint taille_0 (l : prec_list) : nat :=
+(* Fixpoint taille_0 (l : prec_list) : nat :=
   match l with
   | prec_empty => 0
   | prec_cons x y z => S (taille_0 y + taille_0 z)
@@ -424,18 +426,18 @@ Fixpoint taille_0 (l : prec_list) : nat :=
 
 Fixpoint taille_1 (s : state) : nat :=
   match s with
-  | M0 => 0
-  | M1 x y => taille_0 y
-  | M2 x y => max (taille_1 x) (taille_1 y)
-  end.
+  | M0 _ => 0
+  | M1 _ x y => taille_0 y
+  | M2 _ x y => max (taille_1 x) (taille_1 y)
+  end. *)
 
 Definition smaller (s s1 s2 : state) : bool := (andb (Nat.leb (taille_1 s1) (taille_1 s)) (Nat.leb (taille_1 s2) (taille_1 s))).
 
 Fixpoint state_eqb (s1 s2 : state) : bool :=
     match s1,s2 with
-    | M0, M0 => true
-    | M1 a1 p1, M1 a2 p2 => andb (Neqb a1 a2) (prec_list_eqb p1 p2)
-    | M2 s1_1 s1_2, M2 s2_1 s2_2 => 
+    | M0 _, M0 _ => true
+    | M1 _ a1 p1, M1 _ a2 p2 => andb (Neqb a1 a2) (prec_list_eqb p1 p2)
+    | M2 _ s1_1 s1_2, M2 _ s2_1 s2_2 => 
         andb (andb (smaller s1 s1_1 s1_2)  (smaller s2 s2_1 s2_2))  (andb (state_eqb s1_1 s2_1) (state_eqb s1_2 s2_2))
     |_,_ => false
     end.
