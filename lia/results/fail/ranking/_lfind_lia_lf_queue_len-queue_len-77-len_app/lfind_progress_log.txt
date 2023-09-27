@@ -1,0 +1,1231 @@
+File Information
+- File name: queue_len
+- Original Directory: /home/anabrendel/lfind/benchmarks/lia/sources/lia_lf_queue_len-queue_len-77-len_app
+- LFind Directory: /home/anabrendel/lfind/benchmarks/lia/sources/_lfind_lia_lf_queue_len-queue_len-77-len_app
+- Namespace: adtind
+- Proof name: queue_len
+- Theorem: Theorem queue_len: forall l0 l3 : lst,
+@eq nat (qlen (amortizeQueue l0 l3)) (add (len l0) (len l3)).
+- Declarations: 
+From lfind Require Import LFind.
+Require Import Nat.
+
+Proof Context
+* Goal State: @eq nat (len (app l1 (rev l2))) (add (len l1) (len l2))
+
+* Hypothesis:
+l1 : lst
+l2 : lst
+
+* Types:
+Set
+Prop
+lst
+nat
+
+* Polymorphic Types:
+
+
+* Variables:
+l1 : lst
+l2 : lst
+
+* Terms:
+app l1 (rev l2) : lst
+len l2 : nat
+l1 : lst
+add (len l1) (len l2) : nat
+nat : Set
+rev l2 : lst
+len (app l1 (rev l2)) : nat
+@eq nat (len (app l1 (rev l2))) (add (len l1) (len l2)) : Prop
+lst : Set
+len l1 : nat
+l2 : lst
+
+* Functions:
+app  : forall (_ : lst) (_ : lst), lst
+len  : forall _ : lst, nat
+rev  : forall _ : lst, lst
+add  : forall (_ : nat) (_ : nat), nat
+@eq  : forall (A : Type) (_ : A) (_ : A), Prop
+
+<---GENERALIZATION--->
+Time elapsed: 2 seconds
+Generalized Variables:
+lf3 : lst = app l1 (rev l2)
+lf1 : nat = add (len l1) (len l2)
+lf4 : nat = len l2
+lf5 : lst = rev l2
+lf2 : nat = len (app l1 (rev l2))
+lf6 : nat = len l1
+
+Generalizations:
+Lemma conj1: forall (lf2 : nat) (lf1 : nat), @eq nat lf2 lf1.
+Lemma conj3: forall (lf1 : nat) (lf3 : lst), @eq nat (len lf3) lf1.
+Lemma conj17: forall (lf6 : nat) (lf2 : nat) (lf4 : nat), @eq nat lf2 (add lf6 lf4).
+Lemma conj18: forall (l1 : lst) (lf2 : nat) (lf4 : nat), @eq nat lf2 (add (len l1) lf4).
+Lemma conj19: forall (lf6 : nat) (lf4 : nat) (lf3 : lst), @eq nat (len lf3) (add lf6 lf4).
+Lemma conj20: forall (l1 : lst) (lf4 : nat) (lf3 : lst), @eq nat (len lf3) (add (len l1) lf4).
+Lemma conj25: forall (lf6 : nat) (lf2 : nat) (l2 : lst), @eq nat lf2 (add lf6 (len l2)).
+Lemma conj26: forall (l1 : lst) (lf2 : nat) (l2 : lst), @eq nat lf2 (add (len l1) (len l2)).
+Lemma conj27: forall (lf6 : nat) (l2 : lst) (lf3 : lst), @eq nat (len lf3) (add lf6 (len l2)).
+Lemma conj28: forall (l1 : lst) (l2 : lst) (lf3 : lst), @eq nat (len lf3) (add (len l1) (len l2)).
+Lemma conj35: forall (l1 : lst) (lf5 : lst) (lf1 : nat), @eq nat (len (app l1 lf5)) lf1.
+Lemma conj39: forall (l1 : lst) (lf1 : nat) (l2 : lst), @eq nat (len (app l1 (rev l2))) lf1.
+Lemma conj51: forall (lf6 : nat) (l1 : lst) (lf5 : lst) (lf4 : nat), @eq nat (len (app l1 lf5)) (add lf6 lf4).
+Lemma conj52: forall (l1 : lst) (lf5 : lst) (lf4 : nat), @eq nat (len (app l1 lf5)) (add (len l1) lf4).
+Lemma conj55: forall (lf6 : nat) (l1 : lst) (lf4 : nat) (l2 : lst), @eq nat (len (app l1 (rev l2))) (add lf6 lf4).
+Lemma conj56: forall (l1 : lst) (lf4 : nat) (l2 : lst), @eq nat (len (app l1 (rev l2))) (add (len l1) lf4).
+Lemma conj59: forall (lf6 : nat) (l1 : lst) (lf5 : lst) (l2 : lst), @eq nat (len (app l1 lf5)) (add lf6 (len l2)).
+Lemma conj60: forall (l1 : lst) (lf5 : lst) (l2 : lst), @eq nat (len (app l1 lf5)) (add (len l1) (len l2)).
+Lemma conj63: forall (lf6 : nat) (l1 : lst) (l2 : lst), @eq nat (len (app l1 (rev l2))) (add lf6 (len l2)).
+Lemma conj64: forall (l1 : lst) (l2 : lst), @eq nat (len (app l1 (rev l2))) (add (len l1) (len l2)).
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 44 seconds
+Valid:
+Lemma conj64: forall (l1 : lst) (l2 : lst), @eq nat (len (app l1 (rev l2))) (add (len l1) (len l2)).
+
+Invalid:
+Lemma conj63: forall (lf6 : nat) (l1 : lst) (l2 : lst), @eq nat (len (app l1 (rev l2))) (add lf6 (len l2)).
+Lemma conj60: forall (l1 : lst) (lf5 : lst) (l2 : lst), @eq nat (len (app l1 lf5)) (add (len l1) (len l2)).
+Lemma conj59: forall (lf6 : nat) (l1 : lst) (lf5 : lst) (l2 : lst), @eq nat (len (app l1 lf5)) (add lf6 (len l2)).
+Lemma conj56: forall (l1 : lst) (lf4 : nat) (l2 : lst), @eq nat (len (app l1 (rev l2))) (add (len l1) lf4).
+Lemma conj55: forall (lf6 : nat) (l1 : lst) (lf4 : nat) (l2 : lst), @eq nat (len (app l1 (rev l2))) (add lf6 lf4).
+Lemma conj52: forall (l1 : lst) (lf5 : lst) (lf4 : nat), @eq nat (len (app l1 lf5)) (add (len l1) lf4).
+Lemma conj51: forall (lf6 : nat) (l1 : lst) (lf5 : lst) (lf4 : nat), @eq nat (len (app l1 lf5)) (add lf6 lf4).
+Lemma conj39: forall (l1 : lst) (lf1 : nat) (l2 : lst), @eq nat (len (app l1 (rev l2))) lf1.
+Lemma conj35: forall (l1 : lst) (lf5 : lst) (lf1 : nat), @eq nat (len (app l1 lf5)) lf1.
+Lemma conj28: forall (l1 : lst) (l2 : lst) (lf3 : lst), @eq nat (len lf3) (add (len l1) (len l2)).
+Lemma conj27: forall (lf6 : nat) (l2 : lst) (lf3 : lst), @eq nat (len lf3) (add lf6 (len l2)).
+Lemma conj26: forall (l1 : lst) (lf2 : nat) (l2 : lst), @eq nat lf2 (add (len l1) (len l2)).
+Lemma conj25: forall (lf6 : nat) (lf2 : nat) (l2 : lst), @eq nat lf2 (add lf6 (len l2)).
+Lemma conj20: forall (l1 : lst) (lf4 : nat) (lf3 : lst), @eq nat (len lf3) (add (len l1) lf4).
+Lemma conj19: forall (lf6 : nat) (lf4 : nat) (lf3 : lst), @eq nat (len lf3) (add lf6 lf4).
+Lemma conj18: forall (l1 : lst) (lf2 : nat) (lf4 : nat), @eq nat lf2 (add (len l1) lf4).
+Lemma conj17: forall (lf6 : nat) (lf2 : nat) (lf4 : nat), @eq nat lf2 (add lf6 lf4).
+Lemma conj3: forall (lf1 : nat) (lf3 : lst), @eq nat (len lf3) lf1.
+Lemma conj1: forall (lf2 : nat) (lf1 : nat), @eq nat lf2 lf1.
+
+<---ADD IMPLICATIONS--->
+Time elapsed: 44 seconds
+Generalizations:
+Lemma conj63: forall (lf6 : nat) (l1 : lst) (l2 : lst), @eq nat (len (app l1 (rev l2))) (add lf6 (len l2)).
+Lemma conj60: forall (l1 : lst) (lf5 : lst) (l2 : lst), @eq nat (len (app l1 lf5)) (add (len l1) (len l2)).
+Lemma conj59: forall (lf6 : nat) (l1 : lst) (lf5 : lst) (l2 : lst), @eq nat (len (app l1 lf5)) (add lf6 (len l2)).
+Lemma conj56: forall (l1 : lst) (lf4 : nat) (l2 : lst), @eq nat (len (app l1 (rev l2))) (add (len l1) lf4).
+Lemma conj55: forall (lf6 : nat) (l1 : lst) (lf4 : nat) (l2 : lst), @eq nat (len (app l1 (rev l2))) (add lf6 lf4).
+Lemma conj52: forall (l1 : lst) (lf5 : lst) (lf4 : nat), @eq nat (len (app l1 lf5)) (add (len l1) lf4).
+Lemma conj51: forall (lf6 : nat) (l1 : lst) (lf5 : lst) (lf4 : nat), @eq nat (len (app l1 lf5)) (add lf6 lf4).
+Lemma conj39: forall (l1 : lst) (lf1 : nat) (l2 : lst), @eq nat (len (app l1 (rev l2))) lf1.
+Lemma conj35: forall (l1 : lst) (lf5 : lst) (lf1 : nat), @eq nat (len (app l1 lf5)) lf1.
+Lemma conj28: forall (l1 : lst) (l2 : lst) (lf3 : lst), @eq nat (len lf3) (add (len l1) (len l2)).
+Lemma conj27: forall (lf6 : nat) (l2 : lst) (lf3 : lst), @eq nat (len lf3) (add lf6 (len l2)).
+Lemma conj26: forall (l1 : lst) (lf2 : nat) (l2 : lst), @eq nat lf2 (add (len l1) (len l2)).
+Lemma conj25: forall (lf6 : nat) (lf2 : nat) (l2 : lst), @eq nat lf2 (add lf6 (len l2)).
+Lemma conj20: forall (l1 : lst) (lf4 : nat) (lf3 : lst), @eq nat (len lf3) (add (len l1) lf4).
+Lemma conj19: forall (lf6 : nat) (lf4 : nat) (lf3 : lst), @eq nat (len lf3) (add lf6 lf4).
+Lemma conj18: forall (l1 : lst) (lf2 : nat) (lf4 : nat), @eq nat lf2 (add (len l1) lf4).
+Lemma conj17: forall (lf6 : nat) (lf2 : nat) (lf4 : nat), @eq nat lf2 (add lf6 lf4).
+Lemma conj3: forall (lf1 : nat) (lf3 : lst), @eq nat (len lf3) lf1.
+Lemma conj1: forall (lf2 : nat) (lf1 : nat), @eq nat lf2 lf1.
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 74 seconds
+Valid:
+
+Invalid:
+Lemma conj1: forall (lf2 : nat) (lf1 : nat), @eq nat lf2 lf1.
+Lemma conj3: forall (lf1 : nat) (lf3 : lst), @eq nat (len lf3) lf1.
+Lemma conj17: forall (lf6 : nat) (lf2 : nat) (lf4 : nat), @eq nat lf2 (add lf6 lf4).
+Lemma conj18: forall (l1 : lst) (lf2 : nat) (lf4 : nat), @eq nat lf2 (add (len l1) lf4).
+Lemma conj19: forall (lf6 : nat) (lf4 : nat) (lf3 : lst), @eq nat (len lf3) (add lf6 lf4).
+Lemma conj20: forall (l1 : lst) (lf4 : nat) (lf3 : lst), @eq nat (len lf3) (add (len l1) lf4).
+Lemma conj25: forall (lf6 : nat) (lf2 : nat) (l2 : lst), @eq nat lf2 (add lf6 (len l2)).
+Lemma conj26: forall (l1 : lst) (lf2 : nat) (l2 : lst), @eq nat lf2 (add (len l1) (len l2)).
+Lemma conj27: forall (lf6 : nat) (l2 : lst) (lf3 : lst), @eq nat (len lf3) (add lf6 (len l2)).
+Lemma conj28: forall (l1 : lst) (l2 : lst) (lf3 : lst), @eq nat (len lf3) (add (len l1) (len l2)).
+Lemma conj35: forall (l1 : lst) (lf5 : lst) (lf1 : nat), @eq nat (len (app l1 lf5)) lf1.
+Lemma conj39: forall (l1 : lst) (lf1 : nat) (l2 : lst), @eq nat (len (app l1 (rev l2))) lf1.
+Lemma conj51: forall (lf6 : nat) (l1 : lst) (lf5 : lst) (lf4 : nat), @eq nat (len (app l1 lf5)) (add lf6 lf4).
+Lemma conj52: forall (l1 : lst) (lf5 : lst) (lf4 : nat), @eq nat (len (app l1 lf5)) (add (len l1) lf4).
+Lemma conj55: forall (lf6 : nat) (l1 : lst) (lf4 : nat) (l2 : lst), @eq nat (len (app l1 (rev l2))) (add lf6 lf4).
+Lemma conj56: forall (l1 : lst) (lf4 : nat) (l2 : lst), @eq nat (len (app l1 (rev l2))) (add (len l1) lf4).
+Lemma conj59: forall (lf6 : nat) (l1 : lst) (lf5 : lst) (l2 : lst), @eq nat (len (app l1 lf5)) (add lf6 (len l2)).
+Lemma conj60: forall (l1 : lst) (lf5 : lst) (l2 : lst), @eq nat (len (app l1 lf5)) (add (len l1) (len l2)).
+Lemma conj63: forall (lf6 : nat) (l1 : lst) (l2 : lst), @eq nat (len (app l1 (rev l2))) (add lf6 (len l2)).
+
+
+<---CREATE SKETCHES--->
+Time elapsed: 74 seconds
+Sketches:
+Sketch conj3_sketch0 : @eq nat (##hole##) lf1
+Sketch conj3_term_sketch0 : @eq nat (len lf3) (##hole##)
+Sketch conj17_sketch0 : @eq nat lf2 (##hole##)
+Sketch conj17_term_sketch0 : @eq nat (add lf6 lf4) (##hole##)
+Sketch conj18_sketch0 : @eq nat lf2 (##hole##)
+Sketch conj18_sketch1 : @eq nat lf2 (add (##hole##) lf4)
+Sketch conj18_term_sketch0 : @eq nat (add (len l1) lf4) (##hole##)
+Sketch conj18_term_sketch1 : @eq nat (len l1) (##hole##)
+Sketch conj19_sketch0 : @eq nat (##hole##) (add lf6 lf4)
+Sketch conj19_sketch1 : @eq nat (len lf3) (##hole##)
+Sketch conj19_term_sketch0 : @eq nat (len lf3) (##hole##)
+Sketch conj19_term_sketch1 : @eq nat (add lf6 lf4) (##hole##)
+Sketch conj20_sketch0 : @eq nat (##hole##) (add (len l1) lf4)
+Sketch conj20_sketch1 : @eq nat (len lf3) (##hole##)
+Sketch conj20_sketch2 : @eq nat (len lf3) (add (##hole##) lf4)
+Sketch conj20_term_sketch0 : @eq nat (len lf3) (##hole##)
+Sketch conj20_term_sketch1 : @eq nat (add (len l1) lf4) (##hole##)
+Sketch conj20_term_sketch2 : @eq nat (len l1) (##hole##)
+Sketch conj25_sketch0 : @eq nat lf2 (add lf6 (##hole##))
+Sketch conj25_sketch1 : @eq nat lf2 (##hole##)
+Sketch conj25_term_sketch0 : @eq nat (len l2) (##hole##)
+Sketch conj25_term_sketch1 : @eq nat (add lf6 (len l2)) (##hole##)
+Sketch conj26_sketch0 : @eq nat lf2 (add (len l1) (##hole##))
+Sketch conj26_sketch1 : @eq nat lf2 (##hole##)
+Sketch conj26_sketch2 : @eq nat lf2 (add (##hole##) (len l2))
+Sketch conj26_term_sketch0 : @eq nat (len l2) (##hole##)
+Sketch conj26_term_sketch1 : @eq nat (add (len l1) (len l2)) (##hole##)
+Sketch conj26_term_sketch2 : @eq nat (len l1) (##hole##)
+Sketch conj27_sketch0 : @eq nat (##hole##) (add lf6 (len l2))
+Sketch conj27_sketch1 : @eq nat (len lf3) (add lf6 (##hole##))
+Sketch conj27_sketch2 : @eq nat (len lf3) (##hole##)
+Sketch conj27_term_sketch0 : @eq nat (len lf3) (##hole##)
+Sketch conj27_term_sketch1 : @eq nat (len l2) (##hole##)
+Sketch conj27_term_sketch2 : @eq nat (add lf6 (len l2)) (##hole##)
+Sketch conj28_sketch0 : @eq nat (##hole##) (add (len l1) (len l2))
+Sketch conj28_sketch1 : @eq nat (len lf3) (add (len l1) (##hole##))
+Sketch conj28_sketch2 : @eq nat (len lf3) (##hole##)
+Sketch conj28_sketch3 : @eq nat (len lf3) (add (##hole##) (len l2))
+Sketch conj28_term_sketch0 : @eq nat (len lf3) (##hole##)
+Sketch conj28_term_sketch1 : @eq nat (len l2) (##hole##)
+Sketch conj28_term_sketch2 : @eq nat (add (len l1) (len l2)) (##hole##)
+Sketch conj28_term_sketch3 : @eq nat (len l1) (##hole##)
+Sketch conj35_sketch0 : @eq nat (##hole##) lf1
+Sketch conj35_sketch1 : @eq nat (len (##hole##)) lf1
+Sketch conj35_term_sketch0 : @eq nat (len (app l1 lf5)) (##hole##)
+Sketch conj35_term_sketch1 : @eq lst (app l1 lf5) (##hole##)
+Sketch conj39_sketch0 : @eq nat (len (##hole##)) lf1
+Sketch conj39_sketch1 : @eq nat (len (app l1 (##hole##))) lf1
+Sketch conj39_sketch2 : @eq nat (##hole##) lf1
+Sketch conj39_term_sketch0 : @eq lst (app l1 (rev l2)) (##hole##)
+Sketch conj39_term_sketch1 : @eq lst (rev l2) (##hole##)
+Sketch conj39_term_sketch2 : @eq nat (len (app l1 (rev l2))) (##hole##)
+Sketch conj51_sketch0 : @eq nat (len (app l1 lf5)) (##hole##)
+Sketch conj51_sketch1 : @eq nat (##hole##) (add lf6 lf4)
+Sketch conj51_sketch2 : @eq nat (len (##hole##)) (add lf6 lf4)
+Sketch conj51_term_sketch0 : @eq nat (add lf6 lf4) (##hole##)
+Sketch conj51_term_sketch1 : @eq nat (len (app l1 lf5)) (##hole##)
+Sketch conj51_term_sketch2 : @eq lst (app l1 lf5) (##hole##)
+Sketch conj52_sketch0 : @eq nat (len (app l1 lf5)) (##hole##)
+Sketch conj52_sketch1 : @eq nat (##hole##) (add (len l1) lf4)
+Sketch conj52_sketch2 : @eq nat (len (app l1 lf5)) (add (##hole##) lf4)
+Sketch conj52_sketch3 : @eq nat (len (##hole##)) (add (len l1) lf4)
+Sketch conj52_term_sketch0 : @eq nat (add (len l1) lf4) (##hole##)
+Sketch conj52_term_sketch1 : @eq nat (len (app l1 lf5)) (##hole##)
+Sketch conj52_term_sketch2 : @eq nat (len l1) (##hole##)
+Sketch conj52_term_sketch3 : @eq lst (app l1 lf5) (##hole##)
+Sketch conj55_sketch0 : @eq nat (len (##hole##)) (add lf6 lf4)
+Sketch conj55_sketch1 : @eq nat (len (app l1 (rev l2))) (##hole##)
+Sketch conj55_sketch2 : @eq nat (len (app l1 (##hole##))) (add lf6 lf4)
+Sketch conj55_sketch3 : @eq nat (##hole##) (add lf6 lf4)
+Sketch conj55_term_sketch0 : @eq lst (app l1 (rev l2)) (##hole##)
+Sketch conj55_term_sketch1 : @eq nat (add lf6 lf4) (##hole##)
+Sketch conj55_term_sketch2 : @eq lst (rev l2) (##hole##)
+Sketch conj55_term_sketch3 : @eq nat (len (app l1 (rev l2))) (##hole##)
+Sketch conj56_sketch0 : @eq nat (len (##hole##)) (add (len l1) lf4)
+Sketch conj56_sketch1 : @eq nat (len (app l1 (rev l2))) (##hole##)
+Sketch conj56_sketch2 : @eq nat (len (app l1 (##hole##))) (add (len l1) lf4)
+Sketch conj56_sketch3 : @eq nat (##hole##) (add (len l1) lf4)
+Sketch conj56_sketch4 : @eq nat (len (app l1 (rev l2))) (add (##hole##) lf4)
+Sketch conj56_term_sketch0 : @eq lst (app l1 (rev l2)) (##hole##)
+Sketch conj56_term_sketch1 : @eq nat (add (len l1) lf4) (##hole##)
+Sketch conj56_term_sketch2 : @eq lst (rev l2) (##hole##)
+Sketch conj56_term_sketch3 : @eq nat (len (app l1 (rev l2))) (##hole##)
+Sketch conj56_term_sketch4 : @eq nat (len l1) (##hole##)
+Sketch conj59_sketch0 : @eq nat (len (app l1 lf5)) (add lf6 (##hole##))
+Sketch conj59_sketch1 : @eq nat (len (app l1 lf5)) (##hole##)
+Sketch conj59_sketch2 : @eq nat (##hole##) (add lf6 (len l2))
+Sketch conj59_sketch3 : @eq nat (len (##hole##)) (add lf6 (len l2))
+Sketch conj59_term_sketch0 : @eq nat (len l2) (##hole##)
+Sketch conj59_term_sketch1 : @eq nat (add lf6 (len l2)) (##hole##)
+Sketch conj59_term_sketch2 : @eq nat (len (app l1 lf5)) (##hole##)
+Sketch conj59_term_sketch3 : @eq lst (app l1 lf5) (##hole##)
+Sketch conj60_sketch0 : @eq nat (len (app l1 lf5)) (add (len l1) (##hole##))
+Sketch conj60_sketch1 : @eq nat (len (app l1 lf5)) (##hole##)
+Sketch conj60_sketch2 : @eq nat (##hole##) (add (len l1) (len l2))
+Sketch conj60_sketch3 : @eq nat (len (app l1 lf5)) (add (##hole##) (len l2))
+Sketch conj60_sketch4 : @eq nat (len (##hole##)) (add (len l1) (len l2))
+Sketch conj60_term_sketch0 : @eq nat (len l2) (##hole##)
+Sketch conj60_term_sketch1 : @eq nat (add (len l1) (len l2)) (##hole##)
+Sketch conj60_term_sketch2 : @eq nat (len (app l1 lf5)) (##hole##)
+Sketch conj60_term_sketch3 : @eq nat (len l1) (##hole##)
+Sketch conj60_term_sketch4 : @eq lst (app l1 lf5) (##hole##)
+Sketch conj63_sketch0 : @eq nat (len (##hole##)) (add lf6 (len l2))
+Sketch conj63_sketch1 : @eq nat (len (app l1 (rev l2))) (add lf6 (##hole##))
+Sketch conj63_sketch2 : @eq nat (len (app l1 (rev l2))) (##hole##)
+Sketch conj63_sketch3 : @eq nat (len (app l1 (##hole##))) (add lf6 (len l2))
+Sketch conj63_sketch4 : @eq nat (##hole##) (add lf6 (len l2))
+Sketch conj63_term_sketch0 : @eq lst (app l1 (rev l2)) (##hole##)
+Sketch conj63_term_sketch1 : @eq nat (len l2) (##hole##)
+Sketch conj63_term_sketch2 : @eq nat (add lf6 (len l2)) (##hole##)
+Sketch conj63_term_sketch3 : @eq lst (rev l2) (##hole##)
+Sketch conj63_term_sketch4 : @eq nat (len (app l1 (rev l2))) (##hole##)
+
+
+<---CREATE SYNTHESIS PROBLEMS--->
+Time elapsed: 401 seconds
+Problems per Sketch:
+Sketch conj52_sketch2 --> Problem  synth_25
+Sketch conj35_term_sketch1 --> Problem  synth_20
+Sketch conj52_sketch1 --> Problem  synth_6
+Sketch conj28_sketch0 --> Problem  synth_14
+Sketch conj60_term_sketch1 --> Problem  synth_14
+Sketch conj59_term_sketch2 --> Problem  synth_19
+Sketch conj26_sketch2 --> Problem  synth_13
+Sketch conj25_sketch1 --> Problem  synth_3
+Sketch conj63_sketch4 --> Problem  synth_11
+Sketch conj60_term_sketch4 --> Problem  synth_20
+Sketch conj59_term_sketch1 --> Problem  synth_11
+Sketch conj59_sketch1 --> Problem  synth_19
+Sketch conj60_sketch0 --> Problem  synth_32
+Sketch conj20_term_sketch2 --> Problem  synth_7
+Sketch conj56_sketch4 --> Problem  synth_29
+Sketch conj39_term_sketch2 --> Problem  synth_14
+Sketch conj17_term_sketch0 --> Problem  synth_4
+Sketch conj28_term_sketch1 --> Problem  synth_10
+Sketch conj63_term_sketch0 --> Problem  synth_22
+Sketch conj56_term_sketch0 --> Problem  synth_22
+Sketch conj55_sketch3 --> Problem  synth_4
+Sketch conj39_sketch0 --> Problem  synth_18
+Sketch conj26_term_sketch2 --> Problem  synth_7
+Sketch conj60_term_sketch3 --> Problem  synth_7
+Sketch conj60_term_sketch2 --> Problem  synth_19
+Sketch conj60_sketch1 --> Problem  synth_19
+Sketch conj55_sketch1 --> Problem  synth_14
+Sketch conj28_term_sketch3 --> Problem  synth_7
+Sketch conj60_sketch2 --> Problem  synth_14
+Sketch conj59_sketch3 --> Problem  synth_31
+Sketch conj27_term_sketch2 --> Problem  synth_11
+Sketch conj63_term_sketch4 --> Problem  synth_14
+Sketch conj35_sketch0 --> Problem  synth_1
+Sketch conj3_term_sketch0 --> Problem  synth_2
+Sketch conj59_sketch2 --> Problem  synth_11
+Sketch conj28_sketch2 --> Problem  synth_2
+Sketch conj52_term_sketch1 --> Problem  synth_19
+Sketch conj20_sketch0 --> Problem  synth_6
+Sketch conj26_term_sketch0 --> Problem  synth_10
+Sketch conj20_term_sketch0 --> Problem  synth_2
+Sketch conj39_sketch2 --> Problem  synth_1
+Sketch conj18_term_sketch1 --> Problem  synth_7
+Sketch conj19_term_sketch1 --> Problem  synth_4
+Sketch conj51_term_sketch2 --> Problem  synth_20
+Sketch conj27_sketch2 --> Problem  synth_2
+Sketch conj28_term_sketch2 --> Problem  synth_14
+Sketch conj60_term_sketch0 --> Problem  synth_10
+Sketch conj52_term_sketch2 --> Problem  synth_7
+Sketch conj27_sketch1 --> Problem  synth_15
+Sketch conj60_sketch3 --> Problem  synth_33
+Sketch conj51_sketch0 --> Problem  synth_19
+Sketch conj56_term_sketch3 --> Problem  synth_14
+Sketch conj19_term_sketch0 --> Problem  synth_2
+Sketch conj52_term_sketch3 --> Problem  synth_20
+Sketch conj63_term_sketch1 --> Problem  synth_10
+Sketch conj39_term_sketch0 --> Problem  synth_22
+Sketch conj18_sketch1 --> Problem  synth_5
+Sketch conj51_term_sketch1 --> Problem  synth_19
+Sketch conj51_term_sketch0 --> Problem  synth_4
+Sketch conj56_sketch3 --> Problem  synth_6
+Sketch conj26_term_sketch1 --> Problem  synth_14
+Sketch conj55_term_sketch0 --> Problem  synth_22
+Sketch conj52_term_sketch0 --> Problem  synth_6
+Sketch conj27_term_sketch1 --> Problem  synth_10
+Sketch conj19_sketch0 --> Problem  synth_4
+Sketch conj17_sketch0 --> Problem  synth_3
+Sketch conj63_sketch2 --> Problem  synth_14
+Sketch conj20_sketch2 --> Problem  synth_8
+Sketch conj25_term_sketch1 --> Problem  synth_11
+Sketch conj55_term_sketch1 --> Problem  synth_4
+Sketch conj52_sketch0 --> Problem  synth_19
+Sketch conj26_sketch0 --> Problem  synth_12
+Sketch conj56_term_sketch4 --> Problem  synth_7
+Sketch conj3_sketch0 --> Problem  synth_1
+Sketch conj59_sketch0 --> Problem  synth_30
+Sketch conj20_sketch1 --> Problem  synth_2
+Sketch conj63_term_sketch3 --> Problem  synth_23
+Sketch conj63_sketch0 --> Problem  synth_31
+Sketch conj55_term_sketch3 --> Problem  synth_14
+Sketch conj63_sketch3 --> Problem  synth_35
+Sketch conj39_term_sketch1 --> Problem  synth_23
+Sketch conj26_sketch1 --> Problem  synth_3
+Sketch conj59_term_sketch0 --> Problem  synth_10
+Sketch conj52_sketch3 --> Problem  synth_26
+Sketch conj28_term_sketch0 --> Problem  synth_2
+Sketch conj59_term_sketch3 --> Problem  synth_20
+Sketch conj51_sketch1 --> Problem  synth_4
+Sketch conj55_sketch0 --> Problem  synth_24
+Sketch conj63_sketch1 --> Problem  synth_34
+Sketch conj56_term_sketch2 --> Problem  synth_23
+Sketch conj27_sketch0 --> Problem  synth_11
+Sketch conj18_sketch0 --> Problem  synth_3
+Sketch conj20_term_sketch1 --> Problem  synth_6
+Sketch conj56_term_sketch1 --> Problem  synth_6
+Sketch conj56_sketch2 --> Problem  synth_28
+Sketch conj19_sketch1 --> Problem  synth_2
+Sketch conj28_sketch3 --> Problem  synth_17
+Sketch conj18_term_sketch0 --> Problem  synth_6
+Sketch conj25_sketch0 --> Problem  synth_9
+Sketch conj35_term_sketch0 --> Problem  synth_19
+Sketch conj28_sketch1 --> Problem  synth_16
+Sketch conj35_sketch1 --> Problem  synth_18
+Sketch conj60_sketch4 --> Problem  synth_22
+Sketch conj56_sketch0 --> Problem  synth_26
+Sketch conj56_sketch1 --> Problem  synth_14
+Sketch conj55_term_sketch2 --> Problem  synth_23
+Sketch conj27_term_sketch0 --> Problem  synth_2
+Sketch conj51_sketch2 --> Problem  synth_24
+Sketch conj25_term_sketch0 --> Problem  synth_10
+Sketch conj63_term_sketch2 --> Problem  synth_11
+Sketch conj55_sketch2 --> Problem  synth_27
+Sketch conj39_sketch1 --> Problem  synth_21
+
+
+<--- SYNTHESIS PROBLEM RESULTS--->
+Time elapsed: 663 seconds
+
+Problem: synth_28
+
+Problem: synth_17
+
+Problem: synth_29
+ Nat.add (len (rev l1)) O
+ len (rev (rev l1))
+ len (app l1 Nil)
+ Nat.add (len l1) O
+ len (rev l1)
+ len l1
+
+Problem: synth_26
+
+Problem: synth_9
+
+Problem: synth_30
+ Nat.add (len (rev lf5)) O
+ len (rev (rev lf5))
+ len (app lf5 Nil)
+ Nat.add (len lf5) O
+ len (rev lf5)
+ len lf5
+
+Problem: synth_11
+ Nat.add (len (rev l2)) lf6
+ Nat.add (Nat.add lf6 (len l2)) O
+ Nat.add (len l2) (Nat.add lf6 O)
+ Nat.add lf6 (len (rev l2))
+ Nat.add (len l2) lf6
+ Nat.add lf6 (len l2)
+
+Problem: synth_1
+ Nat.add (Nat.add (Nat.add lf1 O) O) O
+ Nat.add (Nat.add lf1 O) O
+ Nat.add lf1 O
+ lf1
+
+Problem: synth_15
+
+Problem: synth_31
+
+Problem: synth_14
+ Nat.add (len l1) (len l2)
+ Nat.add (len l2) (len l1)
+ len (app l1 (rev l2))
+ len (app l2 (rev l1))
+ len (app l1 l2)
+ len (app l2 l1)
+
+Problem: synth_8
+
+Problem: synth_34
+ Nat.add (len (rev l2)) O
+ len (rev (rev l2))
+ len (app l2 Nil)
+ Nat.add (len l2) O
+ len (rev l2)
+ len l2
+
+Problem: synth_12
+
+Problem: synth_5
+
+Problem: synth_2
+ Nat.add (len (rev lf3)) O
+ len (rev (rev lf3))
+ len (app lf3 Nil)
+ Nat.add (len lf3) O
+ len (rev lf3)
+ len lf3
+
+Problem: synth_22
+ app (rev (rev l1)) (rev l2)
+ app (app l1 Nil) (rev l2)
+ rev (rev (app l1 (rev l2)))
+ app (app l1 (rev l2)) Nil
+ rev (app l2 (rev l1))
+ app l1 (rev l2)
+
+Problem: synth_20
+ app (rev (rev l1)) lf5
+ app (app l1 Nil) lf5
+ app (app l1 lf5) Nil
+ app l1 (rev (rev lf5))
+ app l1 (app lf5 Nil)
+ app l1 lf5
+
+Problem: synth_18
+
+Problem: synth_21
+
+Problem: synth_25
+ Nat.add (len (rev l1)) O
+ len (rev (rev l1))
+ len (app l1 Nil)
+ Nat.add (len l1) O
+ len (rev l1)
+ len l1
+
+Problem: synth_13
+
+Problem: synth_6
+ Nat.add (len (rev l1)) lf4
+ Nat.add (Nat.add lf4 (len l1)) O
+ Nat.add (len l1) (Nat.add lf4 O)
+ Nat.add lf4 (len (rev l1))
+ Nat.add (len l1) lf4
+ Nat.add lf4 (len l1)
+
+Problem: synth_7
+ Nat.add (len (rev l1)) O
+ len (rev (rev l1))
+ len (app l1 Nil)
+ Nat.add (len l1) O
+ len (rev l1)
+ len l1
+
+Problem: synth_4
+ Nat.add (Nat.add lf6 lf4) O
+ Nat.add (Nat.add lf4 lf6) O
+ Nat.add lf6 (Nat.add lf4 O)
+ Nat.add lf4 (Nat.add lf6 O)
+ Nat.add lf6 lf4
+ Nat.add lf4 lf6
+
+Problem: synth_23
+ app (rev (app l2 Nil)) Nil
+ app (app (rev l2) Nil) Nil
+ rev (rev (rev l2))
+ rev (app l2 Nil)
+ app (rev l2) Nil
+ rev l2
+
+Problem: synth_27
+
+Problem: synth_16
+
+Problem: synth_19
+ Nat.add (len l1) (len lf5)
+ Nat.add (len lf5) (len l1)
+ len (app l1 (rev lf5))
+ len (app lf5 (rev l1))
+ len (app l1 lf5)
+ len (app lf5 l1)
+
+Problem: synth_10
+ Nat.add (len (rev l2)) O
+ len (rev (rev l2))
+ len (app l2 Nil)
+ Nat.add (len l2) O
+ len (rev l2)
+ len l2
+
+Problem: synth_33
+ Nat.add (len (rev l1)) O
+ len (rev (rev l1))
+ len (app l1 Nil)
+ Nat.add (len l1) O
+ len (rev l1)
+ len l1
+
+Problem: synth_24
+
+Problem: synth_3
+ Nat.add (Nat.add (Nat.add lf2 O) O) O
+ Nat.add (Nat.add lf2 O) O
+ Nat.add lf2 O
+ lf2
+
+Problem: synth_32
+ Nat.add (len (rev lf5)) O
+ len (rev (rev lf5))
+ len (app lf5 Nil)
+ Nat.add (len lf5) O
+ len (rev lf5)
+ len lf5
+
+Problem: synth_35
+ app (rev (app l2 Nil)) Nil
+ app (app (rev l2) Nil) Nil
+ rev (rev (rev l2))
+ rev (app l2 Nil)
+ app (rev l2) Nil
+ rev l2
+
+<---INITIAL CANDIDATE LEMMAS--->
+Time elapsed: 664 seconds
+Lemmas:
+Lemma candidate_1: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (add (len l1) (len l2)).
+Lemma candidate_2: forall (lf1 : nat), @eq nat (Nat.add (Nat.add (Nat.add lf1 O) O) O) lf1.
+Lemma candidate_3: forall (lf1 : nat), @eq nat (Nat.add (Nat.add lf1 O) O) lf1.
+Lemma candidate_4: forall (lf1 : nat), @eq nat (Nat.add lf1 O) lf1.
+Lemma candidate_5: forall (lf1 : nat), @eq nat (lf1) lf1.
+Lemma candidate_6: forall (lf3 : lst), @eq nat (len lf3) (Nat.add (len (rev lf3)) O).
+Lemma candidate_7: forall (lf3 : lst), @eq nat (len lf3) (len (rev (rev lf3))).
+Lemma candidate_8: forall (lf3 : lst), @eq nat (len lf3) (len (app lf3 Nil)).
+Lemma candidate_9: forall (lf3 : lst), @eq nat (len lf3) (Nat.add (len lf3) O).
+Lemma candidate_10: forall (lf3 : lst), @eq nat (len lf3) (len (rev lf3)).
+Lemma candidate_11: forall (lf3 : lst), @eq nat (len lf3) (len lf3).
+Lemma candidate_12: forall (lf2 : nat), @eq nat lf2 (Nat.add (Nat.add (Nat.add lf2 O) O) O).
+Lemma candidate_13: forall (lf2 : nat), @eq nat lf2 (Nat.add (Nat.add lf2 O) O).
+Lemma candidate_14: forall (lf2 : nat), @eq nat lf2 (Nat.add lf2 O).
+Lemma candidate_15: forall (lf2 : nat), @eq nat lf2 (lf2).
+Lemma candidate_16: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add (Nat.add lf6 lf4) O).
+Lemma candidate_17: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add (Nat.add lf4 lf6) O).
+Lemma candidate_18: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add lf6 (Nat.add lf4 O)).
+Lemma candidate_19: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add lf4 (Nat.add lf6 O)).
+Lemma candidate_20: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add lf6 lf4).
+Lemma candidate_21: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add lf4 lf6).
+Lemma candidate_22: forall (lf2 : nat), @eq nat lf2 (Nat.add (Nat.add (Nat.add lf2 O) O) O).
+Lemma candidate_23: forall (lf2 : nat), @eq nat lf2 (Nat.add (Nat.add lf2 O) O).
+Lemma candidate_24: forall (lf2 : nat), @eq nat lf2 (Nat.add lf2 O).
+Lemma candidate_25: forall (lf2 : nat), @eq nat lf2 (lf2).
+Lemma candidate_26: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add (len (rev l1)) lf4).
+Lemma candidate_27: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add (Nat.add lf4 (len l1)) O).
+Lemma candidate_28: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add (len l1) (Nat.add lf4 O)).
+Lemma candidate_29: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add lf4 (len (rev l1))).
+Lemma candidate_30: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add (len l1) lf4).
+Lemma candidate_31: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add lf4 (len l1)).
+Lemma candidate_32: forall (l1 : lst), @eq nat (len l1) (Nat.add (len (rev l1)) O).
+Lemma candidate_33: forall (l1 : lst), @eq nat (len l1) (len (rev (rev l1))).
+Lemma candidate_34: forall (l1 : lst), @eq nat (len l1) (len (app l1 Nil)).
+Lemma candidate_35: forall (l1 : lst), @eq nat (len l1) (Nat.add (len l1) O).
+Lemma candidate_36: forall (l1 : lst), @eq nat (len l1) (len (rev l1)).
+Lemma candidate_37: forall (l1 : lst), @eq nat (len l1) (len l1).
+Lemma candidate_38: forall (lf4 : nat) (lf6 : nat), @eq nat (Nat.add (Nat.add lf6 lf4) O) (add lf6 lf4).
+Lemma candidate_39: forall (lf4 : nat) (lf6 : nat), @eq nat (Nat.add (Nat.add lf4 lf6) O) (add lf6 lf4).
+Lemma candidate_40: forall (lf4 : nat) (lf6 : nat), @eq nat (Nat.add lf6 (Nat.add lf4 O)) (add lf6 lf4).
+Lemma candidate_41: forall (lf4 : nat) (lf6 : nat), @eq nat (Nat.add lf4 (Nat.add lf6 O)) (add lf6 lf4).
+Lemma candidate_42: forall (lf4 : nat) (lf6 : nat), @eq nat (Nat.add lf6 lf4) (add lf6 lf4).
+Lemma candidate_43: forall (lf4 : nat) (lf6 : nat), @eq nat (Nat.add lf4 lf6) (add lf6 lf4).
+Lemma candidate_44: forall (lf3 : lst), @eq nat (len lf3) (Nat.add (len (rev lf3)) O).
+Lemma candidate_45: forall (lf3 : lst), @eq nat (len lf3) (len (rev (rev lf3))).
+Lemma candidate_46: forall (lf3 : lst), @eq nat (len lf3) (len (app lf3 Nil)).
+Lemma candidate_47: forall (lf3 : lst), @eq nat (len lf3) (Nat.add (len lf3) O).
+Lemma candidate_48: forall (lf3 : lst), @eq nat (len lf3) (len (rev lf3)).
+Lemma candidate_49: forall (lf3 : lst), @eq nat (len lf3) (len lf3).
+Lemma candidate_50: forall (lf3 : lst), @eq nat (len lf3) (Nat.add (len (rev lf3)) O).
+Lemma candidate_51: forall (lf3 : lst), @eq nat (len lf3) (len (rev (rev lf3))).
+Lemma candidate_52: forall (lf3 : lst), @eq nat (len lf3) (len (app lf3 Nil)).
+Lemma candidate_53: forall (lf3 : lst), @eq nat (len lf3) (Nat.add (len lf3) O).
+Lemma candidate_54: forall (lf3 : lst), @eq nat (len lf3) (len (rev lf3)).
+Lemma candidate_55: forall (lf3 : lst), @eq nat (len lf3) (len lf3).
+Lemma candidate_56: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add (Nat.add lf6 lf4) O).
+Lemma candidate_57: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add (Nat.add lf4 lf6) O).
+Lemma candidate_58: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add lf6 (Nat.add lf4 O)).
+Lemma candidate_59: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add lf4 (Nat.add lf6 O)).
+Lemma candidate_60: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add lf6 lf4).
+Lemma candidate_61: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add lf4 lf6).
+Lemma candidate_62: forall (lf4 : nat) (l1 : lst), @eq nat (Nat.add (len (rev l1)) lf4) (add (len l1) lf4).
+Lemma candidate_63: forall (lf4 : nat) (l1 : lst), @eq nat (Nat.add (Nat.add lf4 (len l1)) O) (add (len l1) lf4).
+Lemma candidate_64: forall (lf4 : nat) (l1 : lst), @eq nat (Nat.add (len l1) (Nat.add lf4 O)) (add (len l1) lf4).
+Lemma candidate_65: forall (lf4 : nat) (l1 : lst), @eq nat (Nat.add lf4 (len (rev l1))) (add (len l1) lf4).
+Lemma candidate_66: forall (lf4 : nat) (l1 : lst), @eq nat (Nat.add (len l1) lf4) (add (len l1) lf4).
+Lemma candidate_67: forall (lf4 : nat) (l1 : lst), @eq nat (Nat.add lf4 (len l1)) (add (len l1) lf4).
+Lemma candidate_68: forall (lf3 : lst), @eq nat (len lf3) (Nat.add (len (rev lf3)) O).
+Lemma candidate_69: forall (lf3 : lst), @eq nat (len lf3) (len (rev (rev lf3))).
+Lemma candidate_70: forall (lf3 : lst), @eq nat (len lf3) (len (app lf3 Nil)).
+Lemma candidate_71: forall (lf3 : lst), @eq nat (len lf3) (Nat.add (len lf3) O).
+Lemma candidate_72: forall (lf3 : lst), @eq nat (len lf3) (len (rev lf3)).
+Lemma candidate_73: forall (lf3 : lst), @eq nat (len lf3) (len lf3).
+Lemma candidate_74: forall (lf3 : lst), @eq nat (len lf3) (Nat.add (len (rev lf3)) O).
+Lemma candidate_75: forall (lf3 : lst), @eq nat (len lf3) (len (rev (rev lf3))).
+Lemma candidate_76: forall (lf3 : lst), @eq nat (len lf3) (len (app lf3 Nil)).
+Lemma candidate_77: forall (lf3 : lst), @eq nat (len lf3) (Nat.add (len lf3) O).
+Lemma candidate_78: forall (lf3 : lst), @eq nat (len lf3) (len (rev lf3)).
+Lemma candidate_79: forall (lf3 : lst), @eq nat (len lf3) (len lf3).
+Lemma candidate_80: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add (len (rev l1)) lf4).
+Lemma candidate_81: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add (Nat.add lf4 (len l1)) O).
+Lemma candidate_82: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add (len l1) (Nat.add lf4 O)).
+Lemma candidate_83: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add lf4 (len (rev l1))).
+Lemma candidate_84: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add (len l1) lf4).
+Lemma candidate_85: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add lf4 (len l1)).
+Lemma candidate_86: forall (l1 : lst), @eq nat (len l1) (Nat.add (len (rev l1)) O).
+Lemma candidate_87: forall (l1 : lst), @eq nat (len l1) (len (rev (rev l1))).
+Lemma candidate_88: forall (l1 : lst), @eq nat (len l1) (len (app l1 Nil)).
+Lemma candidate_89: forall (l1 : lst), @eq nat (len l1) (Nat.add (len l1) O).
+Lemma candidate_90: forall (l1 : lst), @eq nat (len l1) (len (rev l1)).
+Lemma candidate_91: forall (l1 : lst), @eq nat (len l1) (len l1).
+Lemma candidate_92: forall (lf2 : nat), @eq nat lf2 (Nat.add (Nat.add (Nat.add lf2 O) O) O).
+Lemma candidate_93: forall (lf2 : nat), @eq nat lf2 (Nat.add (Nat.add lf2 O) O).
+Lemma candidate_94: forall (lf2 : nat), @eq nat lf2 (Nat.add lf2 O).
+Lemma candidate_95: forall (lf2 : nat), @eq nat lf2 (lf2).
+Lemma candidate_96: forall (l2 : lst), @eq nat (len l2) (Nat.add (len (rev l2)) O).
+Lemma candidate_97: forall (l2 : lst), @eq nat (len l2) (len (rev (rev l2))).
+Lemma candidate_98: forall (l2 : lst), @eq nat (len l2) (len (app l2 Nil)).
+Lemma candidate_99: forall (l2 : lst), @eq nat (len l2) (Nat.add (len l2) O).
+Lemma candidate_100: forall (l2 : lst), @eq nat (len l2) (len (rev l2)).
+Lemma candidate_101: forall (l2 : lst), @eq nat (len l2) (len l2).
+Lemma candidate_102: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add (len (rev l2)) lf6).
+Lemma candidate_103: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add (Nat.add lf6 (len l2)) O).
+Lemma candidate_104: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add (len l2) (Nat.add lf6 O)).
+Lemma candidate_105: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add lf6 (len (rev l2))).
+Lemma candidate_106: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add (len l2) lf6).
+Lemma candidate_107: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add lf6 (len l2)).
+Lemma candidate_108: forall (lf2 : nat), @eq nat lf2 (Nat.add (Nat.add (Nat.add lf2 O) O) O).
+Lemma candidate_109: forall (lf2 : nat), @eq nat lf2 (Nat.add (Nat.add lf2 O) O).
+Lemma candidate_110: forall (lf2 : nat), @eq nat lf2 (Nat.add lf2 O).
+Lemma candidate_111: forall (lf2 : nat), @eq nat lf2 (lf2).
+Lemma candidate_112: forall (l2 : lst), @eq nat (len l2) (Nat.add (len (rev l2)) O).
+Lemma candidate_113: forall (l2 : lst), @eq nat (len l2) (len (rev (rev l2))).
+Lemma candidate_114: forall (l2 : lst), @eq nat (len l2) (len (app l2 Nil)).
+Lemma candidate_115: forall (l2 : lst), @eq nat (len l2) (Nat.add (len l2) O).
+Lemma candidate_116: forall (l2 : lst), @eq nat (len l2) (len (rev l2)).
+Lemma candidate_117: forall (l2 : lst), @eq nat (len l2) (len l2).
+Lemma candidate_118: forall (l2 : lst) (l1 : lst), @eq nat (add (len l1) (len l2)) (Nat.add (len l1) (len l2)).
+Lemma candidate_119: forall (l2 : lst) (l1 : lst), @eq nat (add (len l1) (len l2)) (Nat.add (len l2) (len l1)).
+Lemma candidate_120: forall (l2 : lst) (l1 : lst), @eq nat (add (len l1) (len l2)) (len (app l1 (rev l2))).
+Lemma candidate_121: forall (l2 : lst) (l1 : lst), @eq nat (add (len l1) (len l2)) (len (app l2 (rev l1))).
+Lemma candidate_122: forall (l2 : lst) (l1 : lst), @eq nat (add (len l1) (len l2)) (len (app l1 l2)).
+Lemma candidate_123: forall (l2 : lst) (l1 : lst), @eq nat (add (len l1) (len l2)) (len (app l2 l1)).
+Lemma candidate_124: forall (l1 : lst), @eq nat (len l1) (Nat.add (len (rev l1)) O).
+Lemma candidate_125: forall (l1 : lst), @eq nat (len l1) (len (rev (rev l1))).
+Lemma candidate_126: forall (l1 : lst), @eq nat (len l1) (len (app l1 Nil)).
+Lemma candidate_127: forall (l1 : lst), @eq nat (len l1) (Nat.add (len l1) O).
+Lemma candidate_128: forall (l1 : lst), @eq nat (len l1) (len (rev l1)).
+Lemma candidate_129: forall (l1 : lst), @eq nat (len l1) (len l1).
+Lemma candidate_130: forall (l2 : lst) (lf6 : nat), @eq nat (Nat.add (len (rev l2)) lf6) (add lf6 (len l2)).
+Lemma candidate_131: forall (l2 : lst) (lf6 : nat), @eq nat (Nat.add (Nat.add lf6 (len l2)) O) (add lf6 (len l2)).
+Lemma candidate_132: forall (l2 : lst) (lf6 : nat), @eq nat (Nat.add (len l2) (Nat.add lf6 O)) (add lf6 (len l2)).
+Lemma candidate_133: forall (l2 : lst) (lf6 : nat), @eq nat (Nat.add lf6 (len (rev l2))) (add lf6 (len l2)).
+Lemma candidate_134: forall (l2 : lst) (lf6 : nat), @eq nat (Nat.add (len l2) lf6) (add lf6 (len l2)).
+Lemma candidate_135: forall (l2 : lst) (lf6 : nat), @eq nat (Nat.add lf6 (len l2)) (add lf6 (len l2)).
+Lemma candidate_136: forall (lf3 : lst), @eq nat (len lf3) (Nat.add (len (rev lf3)) O).
+Lemma candidate_137: forall (lf3 : lst), @eq nat (len lf3) (len (rev (rev lf3))).
+Lemma candidate_138: forall (lf3 : lst), @eq nat (len lf3) (len (app lf3 Nil)).
+Lemma candidate_139: forall (lf3 : lst), @eq nat (len lf3) (Nat.add (len lf3) O).
+Lemma candidate_140: forall (lf3 : lst), @eq nat (len lf3) (len (rev lf3)).
+Lemma candidate_141: forall (lf3 : lst), @eq nat (len lf3) (len lf3).
+Lemma candidate_142: forall (lf3 : lst), @eq nat (len lf3) (Nat.add (len (rev lf3)) O).
+Lemma candidate_143: forall (lf3 : lst), @eq nat (len lf3) (len (rev (rev lf3))).
+Lemma candidate_144: forall (lf3 : lst), @eq nat (len lf3) (len (app lf3 Nil)).
+Lemma candidate_145: forall (lf3 : lst), @eq nat (len lf3) (Nat.add (len lf3) O).
+Lemma candidate_146: forall (lf3 : lst), @eq nat (len lf3) (len (rev lf3)).
+Lemma candidate_147: forall (lf3 : lst), @eq nat (len lf3) (len lf3).
+Lemma candidate_148: forall (l2 : lst), @eq nat (len l2) (Nat.add (len (rev l2)) O).
+Lemma candidate_149: forall (l2 : lst), @eq nat (len l2) (len (rev (rev l2))).
+Lemma candidate_150: forall (l2 : lst), @eq nat (len l2) (len (app l2 Nil)).
+Lemma candidate_151: forall (l2 : lst), @eq nat (len l2) (Nat.add (len l2) O).
+Lemma candidate_152: forall (l2 : lst), @eq nat (len l2) (len (rev l2)).
+Lemma candidate_153: forall (l2 : lst), @eq nat (len l2) (len l2).
+Lemma candidate_154: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add (len (rev l2)) lf6).
+Lemma candidate_155: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add (Nat.add lf6 (len l2)) O).
+Lemma candidate_156: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add (len l2) (Nat.add lf6 O)).
+Lemma candidate_157: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add lf6 (len (rev l2))).
+Lemma candidate_158: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add (len l2) lf6).
+Lemma candidate_159: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add lf6 (len l2)).
+Lemma candidate_160: forall (l2 : lst) (l1 : lst), @eq nat (Nat.add (len l1) (len l2)) (add (len l1) (len l2)).
+Lemma candidate_161: forall (l2 : lst) (l1 : lst), @eq nat (Nat.add (len l2) (len l1)) (add (len l1) (len l2)).
+Lemma candidate_162: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (add (len l1) (len l2)).
+Lemma candidate_163: forall (l2 : lst) (l1 : lst), @eq nat (len (app l2 (rev l1))) (add (len l1) (len l2)).
+Lemma candidate_164: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 l2)) (add (len l1) (len l2)).
+Lemma candidate_165: forall (l2 : lst) (l1 : lst), @eq nat (len (app l2 l1)) (add (len l1) (len l2)).
+Lemma candidate_166: forall (lf3 : lst), @eq nat (len lf3) (Nat.add (len (rev lf3)) O).
+Lemma candidate_167: forall (lf3 : lst), @eq nat (len lf3) (len (rev (rev lf3))).
+Lemma candidate_168: forall (lf3 : lst), @eq nat (len lf3) (len (app lf3 Nil)).
+Lemma candidate_169: forall (lf3 : lst), @eq nat (len lf3) (Nat.add (len lf3) O).
+Lemma candidate_170: forall (lf3 : lst), @eq nat (len lf3) (len (rev lf3)).
+Lemma candidate_171: forall (lf3 : lst), @eq nat (len lf3) (len lf3).
+Lemma candidate_172: forall (lf3 : lst), @eq nat (len lf3) (Nat.add (len (rev lf3)) O).
+Lemma candidate_173: forall (lf3 : lst), @eq nat (len lf3) (len (rev (rev lf3))).
+Lemma candidate_174: forall (lf3 : lst), @eq nat (len lf3) (len (app lf3 Nil)).
+Lemma candidate_175: forall (lf3 : lst), @eq nat (len lf3) (Nat.add (len lf3) O).
+Lemma candidate_176: forall (lf3 : lst), @eq nat (len lf3) (len (rev lf3)).
+Lemma candidate_177: forall (lf3 : lst), @eq nat (len lf3) (len lf3).
+Lemma candidate_178: forall (l2 : lst), @eq nat (len l2) (Nat.add (len (rev l2)) O).
+Lemma candidate_179: forall (l2 : lst), @eq nat (len l2) (len (rev (rev l2))).
+Lemma candidate_180: forall (l2 : lst), @eq nat (len l2) (len (app l2 Nil)).
+Lemma candidate_181: forall (l2 : lst), @eq nat (len l2) (Nat.add (len l2) O).
+Lemma candidate_182: forall (l2 : lst), @eq nat (len l2) (len (rev l2)).
+Lemma candidate_183: forall (l2 : lst), @eq nat (len l2) (len l2).
+Lemma candidate_184: forall (l2 : lst) (l1 : lst), @eq nat (add (len l1) (len l2)) (Nat.add (len l1) (len l2)).
+Lemma candidate_185: forall (l2 : lst) (l1 : lst), @eq nat (add (len l1) (len l2)) (Nat.add (len l2) (len l1)).
+Lemma candidate_186: forall (l2 : lst) (l1 : lst), @eq nat (add (len l1) (len l2)) (len (app l1 (rev l2))).
+Lemma candidate_187: forall (l2 : lst) (l1 : lst), @eq nat (add (len l1) (len l2)) (len (app l2 (rev l1))).
+Lemma candidate_188: forall (l2 : lst) (l1 : lst), @eq nat (add (len l1) (len l2)) (len (app l1 l2)).
+Lemma candidate_189: forall (l2 : lst) (l1 : lst), @eq nat (add (len l1) (len l2)) (len (app l2 l1)).
+Lemma candidate_190: forall (l1 : lst), @eq nat (len l1) (Nat.add (len (rev l1)) O).
+Lemma candidate_191: forall (l1 : lst), @eq nat (len l1) (len (rev (rev l1))).
+Lemma candidate_192: forall (l1 : lst), @eq nat (len l1) (len (app l1 Nil)).
+Lemma candidate_193: forall (l1 : lst), @eq nat (len l1) (Nat.add (len l1) O).
+Lemma candidate_194: forall (l1 : lst), @eq nat (len l1) (len (rev l1)).
+Lemma candidate_195: forall (l1 : lst), @eq nat (len l1) (len l1).
+Lemma candidate_196: forall (lf1 : nat), @eq nat (Nat.add (Nat.add (Nat.add lf1 O) O) O) lf1.
+Lemma candidate_197: forall (lf1 : nat), @eq nat (Nat.add (Nat.add lf1 O) O) lf1.
+Lemma candidate_198: forall (lf1 : nat), @eq nat (Nat.add lf1 O) lf1.
+Lemma candidate_199: forall (lf1 : nat), @eq nat (lf1) lf1.
+Lemma candidate_200: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (Nat.add (len l1) (len lf5)).
+Lemma candidate_201: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (Nat.add (len lf5) (len l1)).
+Lemma candidate_202: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app l1 (rev lf5))).
+Lemma candidate_203: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app lf5 (rev l1))).
+Lemma candidate_204: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app l1 lf5)).
+Lemma candidate_205: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app lf5 l1)).
+Lemma candidate_206: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app (rev (rev l1)) lf5).
+Lemma candidate_207: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app (app l1 Nil) lf5).
+Lemma candidate_208: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app (app l1 lf5) Nil).
+Lemma candidate_209: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app l1 (rev (rev lf5))).
+Lemma candidate_210: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app l1 (app lf5 Nil)).
+Lemma candidate_211: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app l1 lf5).
+Lemma candidate_212: forall (lf1 : nat), @eq nat (Nat.add (Nat.add (Nat.add lf1 O) O) O) lf1.
+Lemma candidate_213: forall (lf1 : nat), @eq nat (Nat.add (Nat.add lf1 O) O) lf1.
+Lemma candidate_214: forall (lf1 : nat), @eq nat (Nat.add lf1 O) lf1.
+Lemma candidate_215: forall (lf1 : nat), @eq nat (lf1) lf1.
+Lemma candidate_216: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (app (rev (rev l1)) (rev l2)).
+Lemma candidate_217: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (app (app l1 Nil) (rev l2)).
+Lemma candidate_218: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (rev (rev (app l1 (rev l2)))).
+Lemma candidate_219: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (app (app l1 (rev l2)) Nil).
+Lemma candidate_220: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (rev (app l2 (rev l1))).
+Lemma candidate_221: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (app l1 (rev l2)).
+Lemma candidate_222: forall (l2 : lst), @eq lst (rev l2) (app (rev (app l2 Nil)) Nil).
+Lemma candidate_223: forall (l2 : lst), @eq lst (rev l2) (app (app (rev l2) Nil) Nil).
+Lemma candidate_224: forall (l2 : lst), @eq lst (rev l2) (rev (rev (rev l2))).
+Lemma candidate_225: forall (l2 : lst), @eq lst (rev l2) (rev (app l2 Nil)).
+Lemma candidate_226: forall (l2 : lst), @eq lst (rev l2) (app (rev l2) Nil).
+Lemma candidate_227: forall (l2 : lst), @eq lst (rev l2) (rev l2).
+Lemma candidate_228: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (Nat.add (len l1) (len l2)).
+Lemma candidate_229: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (Nat.add (len l2) (len l1)).
+Lemma candidate_230: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l1 (rev l2))).
+Lemma candidate_231: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l2 (rev l1))).
+Lemma candidate_232: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l1 l2)).
+Lemma candidate_233: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l2 l1)).
+Lemma candidate_234: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (Nat.add (len l1) (len lf5)).
+Lemma candidate_235: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (Nat.add (len lf5) (len l1)).
+Lemma candidate_236: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app l1 (rev lf5))).
+Lemma candidate_237: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app lf5 (rev l1))).
+Lemma candidate_238: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app l1 lf5)).
+Lemma candidate_239: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app lf5 l1)).
+Lemma candidate_240: forall (lf4 : nat) (lf6 : nat), @eq nat (Nat.add (Nat.add lf6 lf4) O) (add lf6 lf4).
+Lemma candidate_241: forall (lf4 : nat) (lf6 : nat), @eq nat (Nat.add (Nat.add lf4 lf6) O) (add lf6 lf4).
+Lemma candidate_242: forall (lf4 : nat) (lf6 : nat), @eq nat (Nat.add lf6 (Nat.add lf4 O)) (add lf6 lf4).
+Lemma candidate_243: forall (lf4 : nat) (lf6 : nat), @eq nat (Nat.add lf4 (Nat.add lf6 O)) (add lf6 lf4).
+Lemma candidate_244: forall (lf4 : nat) (lf6 : nat), @eq nat (Nat.add lf6 lf4) (add lf6 lf4).
+Lemma candidate_245: forall (lf4 : nat) (lf6 : nat), @eq nat (Nat.add lf4 lf6) (add lf6 lf4).
+Lemma candidate_246: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add (Nat.add lf6 lf4) O).
+Lemma candidate_247: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add (Nat.add lf4 lf6) O).
+Lemma candidate_248: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add lf6 (Nat.add lf4 O)).
+Lemma candidate_249: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add lf4 (Nat.add lf6 O)).
+Lemma candidate_250: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add lf6 lf4).
+Lemma candidate_251: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add lf4 lf6).
+Lemma candidate_252: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (Nat.add (len l1) (len lf5)).
+Lemma candidate_253: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (Nat.add (len lf5) (len l1)).
+Lemma candidate_254: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app l1 (rev lf5))).
+Lemma candidate_255: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app lf5 (rev l1))).
+Lemma candidate_256: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app l1 lf5)).
+Lemma candidate_257: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app lf5 l1)).
+Lemma candidate_258: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app (rev (rev l1)) lf5).
+Lemma candidate_259: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app (app l1 Nil) lf5).
+Lemma candidate_260: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app (app l1 lf5) Nil).
+Lemma candidate_261: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app l1 (rev (rev lf5))).
+Lemma candidate_262: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app l1 (app lf5 Nil)).
+Lemma candidate_263: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app l1 lf5).
+Lemma candidate_264: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (Nat.add (len l1) (len lf5)).
+Lemma candidate_265: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (Nat.add (len lf5) (len l1)).
+Lemma candidate_266: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app l1 (rev lf5))).
+Lemma candidate_267: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app lf5 (rev l1))).
+Lemma candidate_268: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app l1 lf5)).
+Lemma candidate_269: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app lf5 l1)).
+Lemma candidate_270: forall (lf4 : nat) (l1 : lst), @eq nat (Nat.add (len (rev l1)) lf4) (add (len l1) lf4).
+Lemma candidate_271: forall (lf4 : nat) (l1 : lst), @eq nat (Nat.add (Nat.add lf4 (len l1)) O) (add (len l1) lf4).
+Lemma candidate_272: forall (lf4 : nat) (l1 : lst), @eq nat (Nat.add (len l1) (Nat.add lf4 O)) (add (len l1) lf4).
+Lemma candidate_273: forall (lf4 : nat) (l1 : lst), @eq nat (Nat.add lf4 (len (rev l1))) (add (len l1) lf4).
+Lemma candidate_274: forall (lf4 : nat) (l1 : lst), @eq nat (Nat.add (len l1) lf4) (add (len l1) lf4).
+Lemma candidate_275: forall (lf4 : nat) (l1 : lst), @eq nat (Nat.add lf4 (len l1)) (add (len l1) lf4).
+Lemma candidate_276: forall (lf4 : nat) (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (add (Nat.add (len (rev l1)) O) lf4).
+Lemma candidate_277: forall (lf4 : nat) (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (add (len (rev (rev l1))) lf4).
+Lemma candidate_278: forall (lf4 : nat) (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (add (len (app l1 Nil)) lf4).
+Lemma candidate_279: forall (lf4 : nat) (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (add (Nat.add (len l1) O) lf4).
+Lemma candidate_280: forall (lf4 : nat) (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (add (len (rev l1)) lf4).
+Lemma candidate_281: forall (lf4 : nat) (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (add (len l1) lf4).
+Lemma candidate_282: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add (len (rev l1)) lf4).
+Lemma candidate_283: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add (Nat.add lf4 (len l1)) O).
+Lemma candidate_284: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add (len l1) (Nat.add lf4 O)).
+Lemma candidate_285: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add lf4 (len (rev l1))).
+Lemma candidate_286: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add (len l1) lf4).
+Lemma candidate_287: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add lf4 (len l1)).
+Lemma candidate_288: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (Nat.add (len l1) (len lf5)).
+Lemma candidate_289: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (Nat.add (len lf5) (len l1)).
+Lemma candidate_290: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app l1 (rev lf5))).
+Lemma candidate_291: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app lf5 (rev l1))).
+Lemma candidate_292: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app l1 lf5)).
+Lemma candidate_293: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app lf5 l1)).
+Lemma candidate_294: forall (l1 : lst), @eq nat (len l1) (Nat.add (len (rev l1)) O).
+Lemma candidate_295: forall (l1 : lst), @eq nat (len l1) (len (rev (rev l1))).
+Lemma candidate_296: forall (l1 : lst), @eq nat (len l1) (len (app l1 Nil)).
+Lemma candidate_297: forall (l1 : lst), @eq nat (len l1) (Nat.add (len l1) O).
+Lemma candidate_298: forall (l1 : lst), @eq nat (len l1) (len (rev l1)).
+Lemma candidate_299: forall (l1 : lst), @eq nat (len l1) (len l1).
+Lemma candidate_300: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app (rev (rev l1)) lf5).
+Lemma candidate_301: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app (app l1 Nil) lf5).
+Lemma candidate_302: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app (app l1 lf5) Nil).
+Lemma candidate_303: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app l1 (rev (rev lf5))).
+Lemma candidate_304: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app l1 (app lf5 Nil)).
+Lemma candidate_305: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app l1 lf5).
+Lemma candidate_306: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (Nat.add (len l1) (len l2)).
+Lemma candidate_307: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (Nat.add (len l2) (len l1)).
+Lemma candidate_308: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l1 (rev l2))).
+Lemma candidate_309: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l2 (rev l1))).
+Lemma candidate_310: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l1 l2)).
+Lemma candidate_311: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l2 l1)).
+Lemma candidate_312: forall (lf4 : nat) (lf6 : nat), @eq nat (Nat.add (Nat.add lf6 lf4) O) (add lf6 lf4).
+Lemma candidate_313: forall (lf4 : nat) (lf6 : nat), @eq nat (Nat.add (Nat.add lf4 lf6) O) (add lf6 lf4).
+Lemma candidate_314: forall (lf4 : nat) (lf6 : nat), @eq nat (Nat.add lf6 (Nat.add lf4 O)) (add lf6 lf4).
+Lemma candidate_315: forall (lf4 : nat) (lf6 : nat), @eq nat (Nat.add lf4 (Nat.add lf6 O)) (add lf6 lf4).
+Lemma candidate_316: forall (lf4 : nat) (lf6 : nat), @eq nat (Nat.add lf6 lf4) (add lf6 lf4).
+Lemma candidate_317: forall (lf4 : nat) (lf6 : nat), @eq nat (Nat.add lf4 lf6) (add lf6 lf4).
+Lemma candidate_318: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (app (rev (rev l1)) (rev l2)).
+Lemma candidate_319: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (app (app l1 Nil) (rev l2)).
+Lemma candidate_320: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (rev (rev (app l1 (rev l2)))).
+Lemma candidate_321: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (app (app l1 (rev l2)) Nil).
+Lemma candidate_322: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (rev (app l2 (rev l1))).
+Lemma candidate_323: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (app l1 (rev l2)).
+Lemma candidate_324: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add (Nat.add lf6 lf4) O).
+Lemma candidate_325: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add (Nat.add lf4 lf6) O).
+Lemma candidate_326: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add lf6 (Nat.add lf4 O)).
+Lemma candidate_327: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add lf4 (Nat.add lf6 O)).
+Lemma candidate_328: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add lf6 lf4).
+Lemma candidate_329: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add lf4 lf6).
+Lemma candidate_330: forall (l2 : lst), @eq lst (rev l2) (app (rev (app l2 Nil)) Nil).
+Lemma candidate_331: forall (l2 : lst), @eq lst (rev l2) (app (app (rev l2) Nil) Nil).
+Lemma candidate_332: forall (l2 : lst), @eq lst (rev l2) (rev (rev (rev l2))).
+Lemma candidate_333: forall (l2 : lst), @eq lst (rev l2) (rev (app l2 Nil)).
+Lemma candidate_334: forall (l2 : lst), @eq lst (rev l2) (app (rev l2) Nil).
+Lemma candidate_335: forall (l2 : lst), @eq lst (rev l2) (rev l2).
+Lemma candidate_336: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (Nat.add (len l1) (len l2)).
+Lemma candidate_337: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (Nat.add (len l2) (len l1)).
+Lemma candidate_338: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l1 (rev l2))).
+Lemma candidate_339: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l2 (rev l1))).
+Lemma candidate_340: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l1 l2)).
+Lemma candidate_341: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l2 l1)).
+Lemma candidate_342: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (Nat.add (len l1) (len l2)).
+Lemma candidate_343: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (Nat.add (len l2) (len l1)).
+Lemma candidate_344: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l1 (rev l2))).
+Lemma candidate_345: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l2 (rev l1))).
+Lemma candidate_346: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l1 l2)).
+Lemma candidate_347: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l2 l1)).
+Lemma candidate_348: forall (lf4 : nat) (l1 : lst), @eq nat (Nat.add (len (rev l1)) lf4) (add (len l1) lf4).
+Lemma candidate_349: forall (lf4 : nat) (l1 : lst), @eq nat (Nat.add (Nat.add lf4 (len l1)) O) (add (len l1) lf4).
+Lemma candidate_350: forall (lf4 : nat) (l1 : lst), @eq nat (Nat.add (len l1) (Nat.add lf4 O)) (add (len l1) lf4).
+Lemma candidate_351: forall (lf4 : nat) (l1 : lst), @eq nat (Nat.add lf4 (len (rev l1))) (add (len l1) lf4).
+Lemma candidate_352: forall (lf4 : nat) (l1 : lst), @eq nat (Nat.add (len l1) lf4) (add (len l1) lf4).
+Lemma candidate_353: forall (lf4 : nat) (l1 : lst), @eq nat (Nat.add lf4 (len l1)) (add (len l1) lf4).
+Lemma candidate_354: forall (l2 : lst) (lf4 : nat) (l1 : lst), @eq nat (len (app l1 (rev l2))) (add (Nat.add (len (rev l1)) O) lf4).
+Lemma candidate_355: forall (l2 : lst) (lf4 : nat) (l1 : lst), @eq nat (len (app l1 (rev l2))) (add (len (rev (rev l1))) lf4).
+Lemma candidate_356: forall (l2 : lst) (lf4 : nat) (l1 : lst), @eq nat (len (app l1 (rev l2))) (add (len (app l1 Nil)) lf4).
+Lemma candidate_357: forall (l2 : lst) (lf4 : nat) (l1 : lst), @eq nat (len (app l1 (rev l2))) (add (Nat.add (len l1) O) lf4).
+Lemma candidate_358: forall (l2 : lst) (lf4 : nat) (l1 : lst), @eq nat (len (app l1 (rev l2))) (add (len (rev l1)) lf4).
+Lemma candidate_359: forall (l2 : lst) (lf4 : nat) (l1 : lst), @eq nat (len (app l1 (rev l2))) (add (len l1) lf4).
+Lemma candidate_360: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (app (rev (rev l1)) (rev l2)).
+Lemma candidate_361: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (app (app l1 Nil) (rev l2)).
+Lemma candidate_362: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (rev (rev (app l1 (rev l2)))).
+Lemma candidate_363: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (app (app l1 (rev l2)) Nil).
+Lemma candidate_364: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (rev (app l2 (rev l1))).
+Lemma candidate_365: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (app l1 (rev l2)).
+Lemma candidate_366: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add (len (rev l1)) lf4).
+Lemma candidate_367: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add (Nat.add lf4 (len l1)) O).
+Lemma candidate_368: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add (len l1) (Nat.add lf4 O)).
+Lemma candidate_369: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add lf4 (len (rev l1))).
+Lemma candidate_370: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add (len l1) lf4).
+Lemma candidate_371: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add lf4 (len l1)).
+Lemma candidate_372: forall (l2 : lst), @eq lst (rev l2) (app (rev (app l2 Nil)) Nil).
+Lemma candidate_373: forall (l2 : lst), @eq lst (rev l2) (app (app (rev l2) Nil) Nil).
+Lemma candidate_374: forall (l2 : lst), @eq lst (rev l2) (rev (rev (rev l2))).
+Lemma candidate_375: forall (l2 : lst), @eq lst (rev l2) (rev (app l2 Nil)).
+Lemma candidate_376: forall (l2 : lst), @eq lst (rev l2) (app (rev l2) Nil).
+Lemma candidate_377: forall (l2 : lst), @eq lst (rev l2) (rev l2).
+Lemma candidate_378: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (Nat.add (len l1) (len l2)).
+Lemma candidate_379: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (Nat.add (len l2) (len l1)).
+Lemma candidate_380: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l1 (rev l2))).
+Lemma candidate_381: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l2 (rev l1))).
+Lemma candidate_382: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l1 l2)).
+Lemma candidate_383: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l2 l1)).
+Lemma candidate_384: forall (l1 : lst), @eq nat (len l1) (Nat.add (len (rev l1)) O).
+Lemma candidate_385: forall (l1 : lst), @eq nat (len l1) (len (rev (rev l1))).
+Lemma candidate_386: forall (l1 : lst), @eq nat (len l1) (len (app l1 Nil)).
+Lemma candidate_387: forall (l1 : lst), @eq nat (len l1) (Nat.add (len l1) O).
+Lemma candidate_388: forall (l1 : lst), @eq nat (len l1) (len (rev l1)).
+Lemma candidate_389: forall (l1 : lst), @eq nat (len l1) (len l1).
+Lemma candidate_390: forall (lf5 : lst) (l1 : lst) (lf6 : nat), @eq nat (len (app l1 lf5)) (add lf6 (Nat.add (len (rev lf5)) O)).
+Lemma candidate_391: forall (lf5 : lst) (l1 : lst) (lf6 : nat), @eq nat (len (app l1 lf5)) (add lf6 (len (rev (rev lf5)))).
+Lemma candidate_392: forall (lf5 : lst) (l1 : lst) (lf6 : nat), @eq nat (len (app l1 lf5)) (add lf6 (len (app lf5 Nil))).
+Lemma candidate_393: forall (lf5 : lst) (l1 : lst) (lf6 : nat), @eq nat (len (app l1 lf5)) (add lf6 (Nat.add (len lf5) O)).
+Lemma candidate_394: forall (lf5 : lst) (l1 : lst) (lf6 : nat), @eq nat (len (app l1 lf5)) (add lf6 (len (rev lf5))).
+Lemma candidate_395: forall (lf5 : lst) (l1 : lst) (lf6 : nat), @eq nat (len (app l1 lf5)) (add lf6 (len lf5)).
+Lemma candidate_396: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (Nat.add (len l1) (len lf5)).
+Lemma candidate_397: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (Nat.add (len lf5) (len l1)).
+Lemma candidate_398: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app l1 (rev lf5))).
+Lemma candidate_399: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app lf5 (rev l1))).
+Lemma candidate_400: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app l1 lf5)).
+Lemma candidate_401: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app lf5 l1)).
+Lemma candidate_402: forall (l2 : lst) (lf6 : nat), @eq nat (Nat.add (len (rev l2)) lf6) (add lf6 (len l2)).
+Lemma candidate_403: forall (l2 : lst) (lf6 : nat), @eq nat (Nat.add (Nat.add lf6 (len l2)) O) (add lf6 (len l2)).
+Lemma candidate_404: forall (l2 : lst) (lf6 : nat), @eq nat (Nat.add (len l2) (Nat.add lf6 O)) (add lf6 (len l2)).
+Lemma candidate_405: forall (l2 : lst) (lf6 : nat), @eq nat (Nat.add lf6 (len (rev l2))) (add lf6 (len l2)).
+Lemma candidate_406: forall (l2 : lst) (lf6 : nat), @eq nat (Nat.add (len l2) lf6) (add lf6 (len l2)).
+Lemma candidate_407: forall (l2 : lst) (lf6 : nat), @eq nat (Nat.add lf6 (len l2)) (add lf6 (len l2)).
+Lemma candidate_408: forall (l2 : lst), @eq nat (len l2) (Nat.add (len (rev l2)) O).
+Lemma candidate_409: forall (l2 : lst), @eq nat (len l2) (len (rev (rev l2))).
+Lemma candidate_410: forall (l2 : lst), @eq nat (len l2) (len (app l2 Nil)).
+Lemma candidate_411: forall (l2 : lst), @eq nat (len l2) (Nat.add (len l2) O).
+Lemma candidate_412: forall (l2 : lst), @eq nat (len l2) (len (rev l2)).
+Lemma candidate_413: forall (l2 : lst), @eq nat (len l2) (len l2).
+Lemma candidate_414: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add (len (rev l2)) lf6).
+Lemma candidate_415: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add (Nat.add lf6 (len l2)) O).
+Lemma candidate_416: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add (len l2) (Nat.add lf6 O)).
+Lemma candidate_417: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add lf6 (len (rev l2))).
+Lemma candidate_418: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add (len l2) lf6).
+Lemma candidate_419: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add lf6 (len l2)).
+Lemma candidate_420: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (Nat.add (len l1) (len lf5)).
+Lemma candidate_421: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (Nat.add (len lf5) (len l1)).
+Lemma candidate_422: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app l1 (rev lf5))).
+Lemma candidate_423: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app lf5 (rev l1))).
+Lemma candidate_424: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app l1 lf5)).
+Lemma candidate_425: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app lf5 l1)).
+Lemma candidate_426: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app (rev (rev l1)) lf5).
+Lemma candidate_427: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app (app l1 Nil) lf5).
+Lemma candidate_428: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app (app l1 lf5) Nil).
+Lemma candidate_429: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app l1 (rev (rev lf5))).
+Lemma candidate_430: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app l1 (app lf5 Nil)).
+Lemma candidate_431: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app l1 lf5).
+Lemma candidate_432: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (add (len l1) (Nat.add (len (rev lf5)) O)).
+Lemma candidate_433: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (add (len l1) (len (rev (rev lf5)))).
+Lemma candidate_434: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (add (len l1) (len (app lf5 Nil))).
+Lemma candidate_435: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (add (len l1) (Nat.add (len lf5) O)).
+Lemma candidate_436: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (add (len l1) (len (rev lf5))).
+Lemma candidate_437: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (add (len l1) (len lf5)).
+Lemma candidate_438: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (Nat.add (len l1) (len lf5)).
+Lemma candidate_439: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (Nat.add (len lf5) (len l1)).
+Lemma candidate_440: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app l1 (rev lf5))).
+Lemma candidate_441: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app lf5 (rev l1))).
+Lemma candidate_442: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app l1 lf5)).
+Lemma candidate_443: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app lf5 l1)).
+Lemma candidate_444: forall (l2 : lst) (l1 : lst), @eq nat (Nat.add (len l1) (len l2)) (add (len l1) (len l2)).
+Lemma candidate_445: forall (l2 : lst) (l1 : lst), @eq nat (Nat.add (len l2) (len l1)) (add (len l1) (len l2)).
+Lemma candidate_446: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (add (len l1) (len l2)).
+Lemma candidate_447: forall (l2 : lst) (l1 : lst), @eq nat (len (app l2 (rev l1))) (add (len l1) (len l2)).
+Lemma candidate_448: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 l2)) (add (len l1) (len l2)).
+Lemma candidate_449: forall (l2 : lst) (l1 : lst), @eq nat (len (app l2 l1)) (add (len l1) (len l2)).
+Lemma candidate_450: forall (l2 : lst) (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (add (Nat.add (len (rev l1)) O) (len l2)).
+Lemma candidate_451: forall (l2 : lst) (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (add (len (rev (rev l1))) (len l2)).
+Lemma candidate_452: forall (l2 : lst) (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (add (len (app l1 Nil)) (len l2)).
+Lemma candidate_453: forall (l2 : lst) (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (add (Nat.add (len l1) O) (len l2)).
+Lemma candidate_454: forall (l2 : lst) (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (add (len (rev l1)) (len l2)).
+Lemma candidate_455: forall (l2 : lst) (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (add (len l1) (len l2)).
+Lemma candidate_456: forall (l2 : lst) (l1 : lst), @eq nat (len (app (rev (rev l1)) (rev l2))) (add (len l1) (len l2)).
+Lemma candidate_457: forall (l2 : lst) (l1 : lst), @eq nat (len (app (app l1 Nil) (rev l2))) (add (len l1) (len l2)).
+Lemma candidate_458: forall (l2 : lst) (l1 : lst), @eq nat (len (rev (rev (app l1 (rev l2))))) (add (len l1) (len l2)).
+Lemma candidate_459: forall (l2 : lst) (l1 : lst), @eq nat (len (app (app l1 (rev l2)) Nil)) (add (len l1) (len l2)).
+Lemma candidate_460: forall (l2 : lst) (l1 : lst), @eq nat (len (rev (app l2 (rev l1)))) (add (len l1) (len l2)).
+Lemma candidate_461: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (add (len l1) (len l2)).
+Lemma candidate_462: forall (l2 : lst), @eq nat (len l2) (Nat.add (len (rev l2)) O).
+Lemma candidate_463: forall (l2 : lst), @eq nat (len l2) (len (rev (rev l2))).
+Lemma candidate_464: forall (l2 : lst), @eq nat (len l2) (len (app l2 Nil)).
+Lemma candidate_465: forall (l2 : lst), @eq nat (len l2) (Nat.add (len l2) O).
+Lemma candidate_466: forall (l2 : lst), @eq nat (len l2) (len (rev l2)).
+Lemma candidate_467: forall (l2 : lst), @eq nat (len l2) (len l2).
+Lemma candidate_468: forall (l2 : lst) (l1 : lst), @eq nat (add (len l1) (len l2)) (Nat.add (len l1) (len l2)).
+Lemma candidate_469: forall (l2 : lst) (l1 : lst), @eq nat (add (len l1) (len l2)) (Nat.add (len l2) (len l1)).
+Lemma candidate_470: forall (l2 : lst) (l1 : lst), @eq nat (add (len l1) (len l2)) (len (app l1 (rev l2))).
+Lemma candidate_471: forall (l2 : lst) (l1 : lst), @eq nat (add (len l1) (len l2)) (len (app l2 (rev l1))).
+Lemma candidate_472: forall (l2 : lst) (l1 : lst), @eq nat (add (len l1) (len l2)) (len (app l1 l2)).
+Lemma candidate_473: forall (l2 : lst) (l1 : lst), @eq nat (add (len l1) (len l2)) (len (app l2 l1)).
+Lemma candidate_474: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (Nat.add (len l1) (len lf5)).
+Lemma candidate_475: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (Nat.add (len lf5) (len l1)).
+Lemma candidate_476: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app l1 (rev lf5))).
+Lemma candidate_477: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app lf5 (rev l1))).
+Lemma candidate_478: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app l1 lf5)).
+Lemma candidate_479: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app lf5 l1)).
+Lemma candidate_480: forall (l1 : lst), @eq nat (len l1) (Nat.add (len (rev l1)) O).
+Lemma candidate_481: forall (l1 : lst), @eq nat (len l1) (len (rev (rev l1))).
+Lemma candidate_482: forall (l1 : lst), @eq nat (len l1) (len (app l1 Nil)).
+Lemma candidate_483: forall (l1 : lst), @eq nat (len l1) (Nat.add (len l1) O).
+Lemma candidate_484: forall (l1 : lst), @eq nat (len l1) (len (rev l1)).
+Lemma candidate_485: forall (l1 : lst), @eq nat (len l1) (len l1).
+Lemma candidate_486: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app (rev (rev l1)) lf5).
+Lemma candidate_487: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app (app l1 Nil) lf5).
+Lemma candidate_488: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app (app l1 lf5) Nil).
+Lemma candidate_489: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app l1 (rev (rev lf5))).
+Lemma candidate_490: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app l1 (app lf5 Nil)).
+Lemma candidate_491: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app l1 lf5).
+Lemma candidate_492: forall (l2 : lst) (l1 : lst) (lf6 : nat), @eq nat (len (app l1 (rev l2))) (add lf6 (Nat.add (len (rev l2)) O)).
+Lemma candidate_493: forall (l2 : lst) (l1 : lst) (lf6 : nat), @eq nat (len (app l1 (rev l2))) (add lf6 (len (rev (rev l2)))).
+Lemma candidate_494: forall (l2 : lst) (l1 : lst) (lf6 : nat), @eq nat (len (app l1 (rev l2))) (add lf6 (len (app l2 Nil))).
+Lemma candidate_495: forall (l2 : lst) (l1 : lst) (lf6 : nat), @eq nat (len (app l1 (rev l2))) (add lf6 (Nat.add (len l2) O)).
+Lemma candidate_496: forall (l2 : lst) (l1 : lst) (lf6 : nat), @eq nat (len (app l1 (rev l2))) (add lf6 (len (rev l2))).
+Lemma candidate_497: forall (l2 : lst) (l1 : lst) (lf6 : nat), @eq nat (len (app l1 (rev l2))) (add lf6 (len l2)).
+Lemma candidate_498: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (Nat.add (len l1) (len l2)).
+Lemma candidate_499: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (Nat.add (len l2) (len l1)).
+Lemma candidate_500: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l1 (rev l2))).
+Lemma candidate_501: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l2 (rev l1))).
+Lemma candidate_502: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l1 l2)).
+Lemma candidate_503: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l2 l1)).
+Lemma candidate_504: forall (l2 : lst) (l1 : lst) (lf6 : nat), @eq nat (len (app l1 (app (rev (app l2 Nil)) Nil))) (add lf6 (len l2)).
+Lemma candidate_505: forall (l2 : lst) (l1 : lst) (lf6 : nat), @eq nat (len (app l1 (app (app (rev l2) Nil) Nil))) (add lf6 (len l2)).
+Lemma candidate_506: forall (l2 : lst) (l1 : lst) (lf6 : nat), @eq nat (len (app l1 (rev (rev (rev l2))))) (add lf6 (len l2)).
+Lemma candidate_507: forall (l2 : lst) (l1 : lst) (lf6 : nat), @eq nat (len (app l1 (rev (app l2 Nil)))) (add lf6 (len l2)).
+Lemma candidate_508: forall (l2 : lst) (l1 : lst) (lf6 : nat), @eq nat (len (app l1 (app (rev l2) Nil))) (add lf6 (len l2)).
+Lemma candidate_509: forall (l2 : lst) (l1 : lst) (lf6 : nat), @eq nat (len (app l1 (rev l2))) (add lf6 (len l2)).
+Lemma candidate_510: forall (l2 : lst) (lf6 : nat), @eq nat (Nat.add (len (rev l2)) lf6) (add lf6 (len l2)).
+Lemma candidate_511: forall (l2 : lst) (lf6 : nat), @eq nat (Nat.add (Nat.add lf6 (len l2)) O) (add lf6 (len l2)).
+Lemma candidate_512: forall (l2 : lst) (lf6 : nat), @eq nat (Nat.add (len l2) (Nat.add lf6 O)) (add lf6 (len l2)).
+Lemma candidate_513: forall (l2 : lst) (lf6 : nat), @eq nat (Nat.add lf6 (len (rev l2))) (add lf6 (len l2)).
+Lemma candidate_514: forall (l2 : lst) (lf6 : nat), @eq nat (Nat.add (len l2) lf6) (add lf6 (len l2)).
+Lemma candidate_515: forall (l2 : lst) (lf6 : nat), @eq nat (Nat.add lf6 (len l2)) (add lf6 (len l2)).
+Lemma candidate_516: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (app (rev (rev l1)) (rev l2)).
+Lemma candidate_517: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (app (app l1 Nil) (rev l2)).
+Lemma candidate_518: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (rev (rev (app l1 (rev l2)))).
+Lemma candidate_519: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (app (app l1 (rev l2)) Nil).
+Lemma candidate_520: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (rev (app l2 (rev l1))).
+Lemma candidate_521: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (app l1 (rev l2)).
+Lemma candidate_522: forall (l2 : lst), @eq nat (len l2) (Nat.add (len (rev l2)) O).
+Lemma candidate_523: forall (l2 : lst), @eq nat (len l2) (len (rev (rev l2))).
+Lemma candidate_524: forall (l2 : lst), @eq nat (len l2) (len (app l2 Nil)).
+Lemma candidate_525: forall (l2 : lst), @eq nat (len l2) (Nat.add (len l2) O).
+Lemma candidate_526: forall (l2 : lst), @eq nat (len l2) (len (rev l2)).
+Lemma candidate_527: forall (l2 : lst), @eq nat (len l2) (len l2).
+Lemma candidate_528: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add (len (rev l2)) lf6).
+Lemma candidate_529: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add (Nat.add lf6 (len l2)) O).
+Lemma candidate_530: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add (len l2) (Nat.add lf6 O)).
+Lemma candidate_531: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add lf6 (len (rev l2))).
+Lemma candidate_532: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add (len l2) lf6).
+Lemma candidate_533: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add lf6 (len l2)).
+Lemma candidate_534: forall (l2 : lst), @eq lst (rev l2) (app (rev (app l2 Nil)) Nil).
+Lemma candidate_535: forall (l2 : lst), @eq lst (rev l2) (app (app (rev l2) Nil) Nil).
+Lemma candidate_536: forall (l2 : lst), @eq lst (rev l2) (rev (rev (rev l2))).
+Lemma candidate_537: forall (l2 : lst), @eq lst (rev l2) (rev (app l2 Nil)).
+Lemma candidate_538: forall (l2 : lst), @eq lst (rev l2) (app (rev l2) Nil).
+Lemma candidate_539: forall (l2 : lst), @eq lst (rev l2) (rev l2).
+Lemma candidate_540: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (Nat.add (len l1) (len l2)).
+Lemma candidate_541: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (Nat.add (len l2) (len l1)).
+Lemma candidate_542: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l1 (rev l2))).
+Lemma candidate_543: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l2 (rev l1))).
+Lemma candidate_544: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l1 l2)).
+Lemma candidate_545: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l2 l1)).
+
+<---FILTERED CANDIDATE LEMMAS--->
+Time elapsed: 1077 seconds
+Duplicates removed: 396
+Filtered by Quickchick: 35
+Filtered by script: 24
+Remaining: 90
+
+Lemmas: 
+Lemma candidate_4: forall (lf1 : nat), @eq nat (Nat.add lf1 O) lf1.
+Lemma candidate_100: forall (l2 : lst), @eq nat (len l2) (len (rev l2)).
+Lemma candidate_36: forall (l1 : lst), @eq nat (len l1) (len (rev l1)).
+Lemma candidate_10: forall (lf3 : lst), @eq nat (len lf3) (len (rev lf3)).
+Lemma candidate_226: forall (l2 : lst), @eq lst (rev l2) (app (rev l2) Nil).
+Lemma candidate_225: forall (l2 : lst), @eq lst (rev l2) (rev (app l2 Nil)).
+Lemma candidate_98: forall (l2 : lst), @eq nat (len l2) (len (app l2 Nil)).
+Lemma candidate_34: forall (l1 : lst), @eq nat (len l1) (len (app l1 Nil)).
+Lemma candidate_224: forall (l2 : lst), @eq lst (rev l2) (rev (rev (rev l2))).
+Lemma candidate_97: forall (l2 : lst), @eq nat (len l2) (len (rev (rev l2))).
+Lemma candidate_33: forall (l1 : lst), @eq nat (len l1) (len (rev (rev l1))).
+Lemma candidate_8: forall (lf3 : lst), @eq nat (len lf3) (len (app lf3 Nil)).
+Lemma candidate_43: forall (lf4 : nat) (lf6 : nat), @eq nat (Nat.add lf4 lf6) (add lf6 lf4).
+Lemma candidate_21: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add lf4 lf6).
+Lemma candidate_13: forall (lf2 : nat), @eq nat lf2 (Nat.add (Nat.add lf2 O) O).
+Lemma candidate_7: forall (lf3 : lst), @eq nat (len lf3) (len (rev (rev lf3))).
+Lemma candidate_3: forall (lf1 : nat), @eq nat (Nat.add (Nat.add lf1 O) O) lf1.
+Lemma candidate_210: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app l1 (app lf5 Nil)).
+Lemma candidate_208: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app (app l1 lf5) Nil).
+Lemma candidate_207: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app (app l1 Nil) lf5).
+Lemma candidate_96: forall (l2 : lst), @eq nat (len l2) (Nat.add (len (rev l2)) O).
+Lemma candidate_32: forall (l1 : lst), @eq nat (len l1) (Nat.add (len (rev l1)) O).
+Lemma candidate_223: forall (l2 : lst), @eq lst (rev l2) (app (app (rev l2) Nil) Nil).
+Lemma candidate_222: forall (l2 : lst), @eq lst (rev l2) (app (rev (app l2 Nil)) Nil).
+Lemma candidate_209: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app l1 (rev (rev lf5))).
+Lemma candidate_206: forall (lf5 : lst) (l1 : lst), @eq lst (app l1 lf5) (app (rev (rev l1)) lf5).
+Lemma candidate_205: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app lf5 l1)).
+Lemma candidate_6: forall (lf3 : lst), @eq nat (len lf3) (Nat.add (len (rev lf3)) O).
+Lemma candidate_233: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l2 l1)).
+Lemma candidate_232: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l1 l2)).
+Lemma candidate_220: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (rev (app l2 (rev l1))).
+Lemma candidate_165: forall (l2 : lst) (l1 : lst), @eq nat (len (app l2 l1)) (add (len l1) (len l2)).
+Lemma candidate_164: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 l2)) (add (len l1) (len l2)).
+Lemma candidate_134: forall (l2 : lst) (lf6 : nat), @eq nat (Nat.add (len l2) lf6) (add lf6 (len l2)).
+Lemma candidate_123: forall (l2 : lst) (l1 : lst), @eq nat (add (len l1) (len l2)) (len (app l2 l1)).
+Lemma candidate_122: forall (l2 : lst) (l1 : lst), @eq nat (add (len l1) (len l2)) (len (app l1 l2)).
+Lemma candidate_106: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add (len l2) lf6).
+Lemma candidate_67: forall (lf4 : nat) (l1 : lst), @eq nat (Nat.add lf4 (len l1)) (add (len l1) lf4).
+Lemma candidate_31: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add lf4 (len l1)).
+Lemma candidate_437: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (add (len l1) (len lf5)).
+Lemma candidate_203: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app lf5 (rev l1))).
+Lemma candidate_202: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (len (app l1 (rev lf5))).
+Lemma candidate_41: forall (lf4 : nat) (lf6 : nat), @eq nat (Nat.add lf4 (Nat.add lf6 O)) (add lf6 lf4).
+Lemma candidate_40: forall (lf4 : nat) (lf6 : nat), @eq nat (Nat.add lf6 (Nat.add lf4 O)) (add lf6 lf4).
+Lemma candidate_39: forall (lf4 : nat) (lf6 : nat), @eq nat (Nat.add (Nat.add lf4 lf6) O) (add lf6 lf4).
+Lemma candidate_38: forall (lf4 : nat) (lf6 : nat), @eq nat (Nat.add (Nat.add lf6 lf4) O) (add lf6 lf4).
+Lemma candidate_19: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add lf4 (Nat.add lf6 O)).
+Lemma candidate_18: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add lf6 (Nat.add lf4 O)).
+Lemma candidate_17: forall (lf4 : nat) (lf6 : nat), @eq nat (add lf6 lf4) (Nat.add (Nat.add lf4 lf6) O).
+Lemma candidate_12: forall (lf2 : nat), @eq nat lf2 (Nat.add (Nat.add (Nat.add lf2 O) O) O).
+Lemma candidate_2: forall (lf1 : nat), @eq nat (Nat.add (Nat.add (Nat.add lf1 O) O) O) lf1.
+Lemma candidate_219: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (app (app l1 (rev l2)) Nil).
+Lemma candidate_217: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (app (app l1 Nil) (rev l2)).
+Lemma candidate_231: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (len (app l2 (rev l1))).
+Lemma candidate_218: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (rev (rev (app l1 (rev l2)))).
+Lemma candidate_216: forall (l2 : lst) (l1 : lst), @eq lst (app l1 (rev l2)) (app (rev (rev l1)) (rev l2)).
+Lemma candidate_201: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (Nat.add (len lf5) (len l1)).
+Lemma candidate_200: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (Nat.add (len l1) (len lf5)).
+Lemma candidate_163: forall (l2 : lst) (l1 : lst), @eq nat (len (app l2 (rev l1))) (add (len l1) (len l2)).
+Lemma candidate_133: forall (l2 : lst) (lf6 : nat), @eq nat (Nat.add lf6 (len (rev l2))) (add lf6 (len l2)).
+Lemma candidate_130: forall (l2 : lst) (lf6 : nat), @eq nat (Nat.add (len (rev l2)) lf6) (add lf6 (len l2)).
+Lemma candidate_121: forall (l2 : lst) (l1 : lst), @eq nat (add (len l1) (len l2)) (len (app l2 (rev l1))).
+Lemma candidate_120: forall (l2 : lst) (l1 : lst), @eq nat (add (len l1) (len l2)) (len (app l1 (rev l2))).
+Lemma candidate_105: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add lf6 (len (rev l2))).
+Lemma candidate_102: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add (len (rev l2)) lf6).
+Lemma candidate_65: forall (lf4 : nat) (l1 : lst), @eq nat (Nat.add lf4 (len (rev l1))) (add (len l1) lf4).
+Lemma candidate_62: forall (lf4 : nat) (l1 : lst), @eq nat (Nat.add (len (rev l1)) lf4) (add (len l1) lf4).
+Lemma candidate_29: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add lf4 (len (rev l1))).
+Lemma candidate_26: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add (len (rev l1)) lf4).
+Lemma candidate_436: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (add (len l1) (len (rev lf5))).
+Lemma candidate_229: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (Nat.add (len l2) (len l1)).
+Lemma candidate_228: forall (l2 : lst) (l1 : lst), @eq nat (len (app l1 (rev l2))) (Nat.add (len l1) (len l2)).
+Lemma candidate_161: forall (l2 : lst) (l1 : lst), @eq nat (Nat.add (len l2) (len l1)) (add (len l1) (len l2)).
+Lemma candidate_119: forall (l2 : lst) (l1 : lst), @eq nat (add (len l1) (len l2)) (Nat.add (len l2) (len l1)).
+Lemma candidate_460: forall (l2 : lst) (l1 : lst), @eq nat (len (rev (app l2 (rev l1)))) (add (len l1) (len l2)).
+Lemma candidate_434: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (add (len l1) (len (app lf5 Nil))).
+Lemma candidate_132: forall (l2 : lst) (lf6 : nat), @eq nat (Nat.add (len l2) (Nat.add lf6 O)) (add lf6 (len l2)).
+Lemma candidate_131: forall (l2 : lst) (lf6 : nat), @eq nat (Nat.add (Nat.add lf6 (len l2)) O) (add lf6 (len l2)).
+Lemma candidate_104: forall (l2 : lst) (lf6 : nat), @eq nat (add lf6 (len l2)) (Nat.add (len l2) (Nat.add lf6 O)).
+Lemma candidate_64: forall (lf4 : nat) (l1 : lst), @eq nat (Nat.add (len l1) (Nat.add lf4 O)) (add (len l1) lf4).
+Lemma candidate_63: forall (lf4 : nat) (l1 : lst), @eq nat (Nat.add (Nat.add lf4 (len l1)) O) (add (len l1) lf4).
+Lemma candidate_28: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add (len l1) (Nat.add lf4 O)).
+Lemma candidate_27: forall (lf4 : nat) (l1 : lst), @eq nat (add (len l1) lf4) (Nat.add (Nat.add lf4 (len l1)) O).
+Lemma candidate_435: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (add (len l1) (Nat.add (len lf5) O)).
+Lemma candidate_433: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (add (len l1) (len (rev (rev lf5)))).
+Lemma candidate_459: forall (l2 : lst) (l1 : lst), @eq nat (len (app (app l1 (rev l2)) Nil)) (add (len l1) (len l2)).
+Lemma candidate_457: forall (l2 : lst) (l1 : lst), @eq nat (len (app (app l1 Nil) (rev l2))) (add (len l1) (len l2)).
+Lemma candidate_458: forall (l2 : lst) (l1 : lst), @eq nat (len (rev (rev (app l1 (rev l2))))) (add (len l1) (len l2)).
+Lemma candidate_456: forall (l2 : lst) (l1 : lst), @eq nat (len (app (rev (rev l1)) (rev l2))) (add (len l1) (len l2)).
+Lemma candidate_432: forall (lf5 : lst) (l1 : lst), @eq nat (len (app l1 lf5)) (add (len l1) (Nat.add (len (rev lf5)) O)).

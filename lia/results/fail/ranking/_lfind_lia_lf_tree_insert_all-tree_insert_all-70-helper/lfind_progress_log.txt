@@ -1,0 +1,332 @@
+File Information
+- File name: tree_insert_all
+- Original Directory: /home/anabrendel/lfind/benchmarks/lia/sources/lia_lf_tree_insert_all-tree_insert_all-70-helper
+- LFind Directory: /home/anabrendel/lfind/benchmarks/lia/sources/_lfind_lia_lf_tree_insert_all-tree_insert_all-70-helper
+- Namespace: adtind
+- Proof name: tree_insert_all
+- Theorem: Theorem tree_insert_all: forall (l0 : lst) (t0 : tree), le (tsize t0) (tsize (tinsert_all t0 l0)).
+- Declarations: 
+From lfind Require Import LFind.
+Require Import Arith.
+
+Proof Context
+* Goal State: le (tsize (tinsert_all t l)) (tsize (tinsert (tinsert_all t l) n))
+
+* Hypothesis:
+IHl : le (tsize t) (tsize (tinsert_all t l))
+t : tree
+l : lst
+n : nat
+
+* Types:
+Set
+Prop
+tree
+lst
+nat
+
+* Polymorphic Types:
+
+
+* Variables:
+t : tree
+n : nat
+l : lst
+
+* Terms:
+tinsert (tinsert_all t l) n : tree
+tsize (tinsert (tinsert_all t l) n) : nat
+le (tsize (tinsert_all t l)) (tsize (tinsert (tinsert_all t l) n)) : Prop
+nat : Set
+tsize t : nat
+lst : Set
+tree : Set
+tinsert_all t l : tree
+t : tree
+le (tsize t) (tsize (tinsert_all t l)) : Prop
+l : lst
+tsize (tinsert_all t l) : nat
+n : nat
+
+* Functions:
+tinsert  : forall (_ : tree) (_ : nat), tree
+le  : forall (_ : nat) (_ : nat), Prop
+tinsert_all  : forall (_ : tree) (_ : lst), tree
+tsize  : forall _ : tree, nat
+
+<---GENERALIZATION--->
+Time elapsed: 2 seconds
+Generalized Variables:
+lf3 : nat = tsize (tinsert_all t l)
+lf1 : nat = tsize (tinsert (tinsert_all t l) n)
+lf4 : tree = tinsert_all t l
+lf2 : tree = tinsert (tinsert_all t l) n
+
+Generalizations:
+Lemma conj1: forall (lf1 : nat) (lf3 : nat), le lf3 lf1.
+Lemma conj5: forall (lf2 : tree) (lf3 : nat), le lf3 (tsize lf2).
+Lemma conj6: forall (lf4 : tree) (n : nat) (lf3 : nat), le lf3 (tsize (tinsert lf4 n)).
+Lemma conj8: forall (t : tree) (n : nat) (l : lst) (lf3 : nat), le lf3 (tsize (tinsert (tinsert_all t l) n)).
+Lemma conj9: forall (lf4 : tree) (lf1 : nat), le (tsize lf4) lf1.
+Lemma conj11: forall (lf1 : nat) (t : tree) (l : lst), le (tsize (tinsert_all t l)) lf1.
+Lemma conj13: forall (lf2 : tree) (lf4 : tree), le (tsize lf4) (tsize lf2).
+Lemma conj14: forall (lf4 : tree) (n : nat), le (tsize lf4) (tsize (tinsert lf4 n)).
+Lemma conj15: forall (lf2 : tree) (t : tree) (l : lst), le (tsize (tinsert_all t l)) (tsize lf2).
+Lemma conj16: forall (t : tree) (n : nat) (l : lst), le (tsize (tinsert_all t l)) (tsize (tinsert (tinsert_all t l) n)).
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 50 seconds
+Valid:
+Lemma conj16: forall (t : tree) (n : nat) (l : lst), le (tsize (tinsert_all t l)) (tsize (tinsert (tinsert_all t l) n)).
+Lemma conj14: forall (lf4 : tree) (n : nat), le (tsize lf4) (tsize (tinsert lf4 n)).
+
+Invalid:
+Lemma conj15: forall (lf2 : tree) (t : tree) (l : lst), le (tsize (tinsert_all t l)) (tsize lf2).
+Lemma conj13: forall (lf2 : tree) (lf4 : tree), le (tsize lf4) (tsize lf2).
+Lemma conj11: forall (lf1 : nat) (t : tree) (l : lst), le (tsize (tinsert_all t l)) lf1.
+Lemma conj9: forall (lf4 : tree) (lf1 : nat), le (tsize lf4) lf1.
+Lemma conj8: forall (t : tree) (n : nat) (l : lst) (lf3 : nat), le lf3 (tsize (tinsert (tinsert_all t l) n)).
+Lemma conj6: forall (lf4 : tree) (n : nat) (lf3 : nat), le lf3 (tsize (tinsert lf4 n)).
+Lemma conj5: forall (lf2 : tree) (lf3 : nat), le lf3 (tsize lf2).
+Lemma conj1: forall (lf1 : nat) (lf3 : nat), le lf3 lf1.
+
+<---ADD IMPLICATIONS--->
+Time elapsed: 57 seconds
+Generalizations:
+Lemma conj15: forall (lf2 : tree) (t : tree) (l : lst), le (tsize (tinsert_all t l)) (tsize lf2).
+Lemma conj13: forall (lf2 : tree) (lf4 : tree), le (tsize lf4) (tsize lf2).
+Lemma conj11: forall (lf1 : nat) (t : tree) (l : lst), le (tsize (tinsert_all t l)) lf1.
+Lemma conj9: forall (lf4 : tree) (lf1 : nat), le (tsize lf4) lf1.
+Lemma conj8: forall (t : tree) (n : nat) (l : lst) (lf3 : nat), le lf3 (tsize (tinsert (tinsert_all t l) n)).
+Lemma conj6: forall (lf4 : tree) (n : nat) (lf3 : nat), le lf3 (tsize (tinsert lf4 n)).
+Lemma conj5: forall (lf2 : tree) (lf3 : nat), le lf3 (tsize lf2).
+Lemma conj1: forall (lf1 : nat) (lf3 : nat), le lf3 lf1.
+
+
+<---VALIDITY CHECKS--->
+Time elapsed: 70 seconds
+Valid:
+
+Invalid:
+Lemma conj1: forall (lf1 : nat) (lf3 : nat), le lf3 lf1.
+Lemma conj5: forall (lf2 : tree) (lf3 : nat), le lf3 (tsize lf2).
+Lemma conj6: forall (lf4 : tree) (n : nat) (lf3 : nat), le lf3 (tsize (tinsert lf4 n)).
+Lemma conj8: forall (t : tree) (n : nat) (l : lst) (lf3 : nat), le lf3 (tsize (tinsert (tinsert_all t l) n)).
+Lemma conj9: forall (lf4 : tree) (lf1 : nat), le (tsize lf4) lf1.
+Lemma conj11: forall (lf1 : nat) (t : tree) (l : lst), le (tsize (tinsert_all t l)) lf1.
+Lemma conj13: forall (lf2 : tree) (lf4 : tree), le (tsize lf4) (tsize lf2).
+Lemma conj15: forall (lf2 : tree) (t : tree) (l : lst), le (tsize (tinsert_all t l)) (tsize lf2).
+
+
+<---CREATE SKETCHES--->
+Time elapsed: 70 seconds
+Sketches:
+Sketch conj5_sketch0 : le lf3 (##hole##)
+Sketch conj5_term_sketch0 : @eq nat (tsize lf2) (##hole##)
+Sketch conj6_sketch0 : le lf3 (tsize (##hole##))
+Sketch conj6_sketch1 : le lf3 (##hole##)
+Sketch conj6_term_sketch0 : @eq tree (tinsert lf4 n) (##hole##)
+Sketch conj6_term_sketch1 : @eq nat (tsize (tinsert lf4 n)) (##hole##)
+Sketch conj8_sketch0 : le lf3 (tsize (##hole##))
+Sketch conj8_sketch1 : le lf3 (##hole##)
+Sketch conj8_sketch2 : le lf3 (tsize (tinsert (##hole##) n))
+Sketch conj8_term_sketch0 : @eq tree (tinsert (tinsert_all t l) n) (##hole##)
+Sketch conj8_term_sketch1 : @eq nat (tsize (tinsert (tinsert_all t l) n)) (##hole##)
+Sketch conj8_term_sketch2 : @eq tree (tinsert_all t l) (##hole##)
+Sketch conj9_sketch0 : le (##hole##) lf1
+Sketch conj9_term_sketch0 : @eq nat (tsize lf4) (##hole##)
+Sketch conj11_sketch0 : le (tsize (##hole##)) lf1
+Sketch conj11_sketch1 : le (##hole##) lf1
+Sketch conj11_term_sketch0 : @eq tree (tinsert_all t l) (##hole##)
+Sketch conj11_term_sketch1 : @eq nat (tsize (tinsert_all t l)) (##hole##)
+Sketch conj13_sketch0 : le (##hole##) (tsize lf2)
+Sketch conj13_sketch1 : le (tsize lf4) (##hole##)
+Sketch conj13_term_sketch0 : @eq nat (tsize lf4) (##hole##)
+Sketch conj13_term_sketch1 : @eq nat (tsize lf2) (##hole##)
+Sketch conj15_sketch0 : le (tsize (tinsert_all t l)) (##hole##)
+Sketch conj15_sketch1 : le (tsize (##hole##)) (tsize lf2)
+Sketch conj15_sketch2 : le (##hole##) (tsize lf2)
+Sketch conj15_term_sketch0 : @eq nat (tsize lf2) (##hole##)
+Sketch conj15_term_sketch1 : @eq tree (tinsert_all t l) (##hole##)
+Sketch conj15_term_sketch2 : @eq nat (tsize (tinsert_all t l)) (##hole##)
+
+
+<---CREATE SYNTHESIS PROBLEMS--->
+Time elapsed: 315 seconds
+Problems per Sketch:
+Sketch conj15_sketch1 --> Problem  synth_17
+Sketch conj6_sketch1 --> Problem  synth_1
+Sketch conj5_sketch0 --> Problem  synth_1
+Sketch conj15_sketch2 --> Problem  synth_14
+Sketch conj15_term_sketch1 --> Problem  synth_9
+Sketch conj11_term_sketch0 --> Problem  synth_9
+Sketch conj11_term_sketch1 --> Problem  synth_13
+Sketch conj15_term_sketch2 --> Problem  synth_13
+Sketch conj13_term_sketch0 --> Problem  synth_11
+Sketch conj15_sketch0 --> Problem  synth_16
+Sketch conj6_term_sketch1 --> Problem  synth_5
+Sketch conj8_sketch1 --> Problem  synth_1
+Sketch conj6_term_sketch0 --> Problem  synth_4
+Sketch conj13_sketch1 --> Problem  synth_15
+Sketch conj11_sketch1 --> Problem  synth_10
+Sketch conj13_term_sketch1 --> Problem  synth_2
+Sketch conj8_term_sketch0 --> Problem  synth_7
+Sketch conj13_sketch0 --> Problem  synth_14
+Sketch conj9_sketch0 --> Problem  synth_10
+Sketch conj8_sketch2 --> Problem  synth_6
+Sketch conj8_sketch0 --> Problem  synth_3
+Sketch conj8_term_sketch1 --> Problem  synth_8
+Sketch conj11_sketch0 --> Problem  synth_12
+Sketch conj8_term_sketch2 --> Problem  synth_9
+Sketch conj15_term_sketch0 --> Problem  synth_2
+Sketch conj5_term_sketch0 --> Problem  synth_2
+Sketch conj6_sketch0 --> Problem  synth_3
+Sketch conj9_term_sketch0 --> Problem  synth_11
+
+
+<--- SYNTHESIS PROBLEM RESULTS--->
+Time elapsed: 513 seconds
+
+Problem: synth_17
+
+Problem: synth_9
+ tinsert_all t l
+
+Problem: synth_13
+ tsize (tinsert_all t l)
+
+Problem: synth_6
+
+Problem: synth_11
+ tsize lf4
+
+Problem: synth_7
+ tinsert (tinsert_all t l) n
+
+Problem: synth_4
+ tinsert lf4 n
+
+Problem: synth_1
+ S lf3
+
+Problem: synth_16
+ tsize (tinsert_all (tinsert t (S O)) l)
+ tsize (tinsert_all (tinsert t (tsize t)) l)
+ tsize (tinsert_all (tinsert t O) l)
+ S (tsize (tinsert_all t l))
+ S (Nat.add (tsize t) (tsize (tinsert_all Leaf l)))
+ tsize (tinsert (tinsert_all t l) O)
+
+Problem: synth_15
+ tsize (tinsert lf4 (S (tsize lf4)))
+ S (Nat.add (tsize lf4) O)
+ tsize (tinsert lf4 (S O))
+ tsize (tinsert lf4 (tsize lf4))
+ tsize (tinsert lf4 O)
+ S (tsize lf4)
+
+Problem: synth_14
+
+Problem: synth_10
+
+Problem: synth_8
+ tsize (tinsert_all (tinsert t n) l)
+ tsize (tinsert_all (tinsert t O) l)
+ S (tsize (tinsert_all t l))
+ S (Nat.add (tsize t) (tsize (tinsert_all Leaf l)))
+ tsize (tinsert (tinsert_all t l) n)
+ tsize (tinsert (tinsert_all t l) O)
+
+Problem: synth_3
+
+Problem: synth_12
+
+Problem: synth_5
+ tsize (tinsert lf4 (S n))
+ tsize (tinsert lf4 (S O))
+ tsize (tinsert lf4 (tsize lf4))
+ tsize (tinsert lf4 n)
+ tsize (tinsert lf4 O)
+ S (tsize lf4)
+
+Problem: synth_2
+ tsize lf2
+
+<---INITIAL CANDIDATE LEMMAS--->
+Time elapsed: 513 seconds
+Lemmas:
+Lemma candidate_1: forall (l : lst) (n : nat) (t : tree), le (tsize (tinsert_all t l)) (tsize (tinsert (tinsert_all t l) n)).
+Lemma candidate_2: forall (n : nat) (lf4 : tree), le (tsize lf4) (tsize (tinsert lf4 n)).
+Lemma candidate_3: forall (lf3 : nat), le lf3 (S lf3).
+Lemma candidate_4: forall (lf2 : tree), @eq nat (tsize lf2) (tsize lf2).
+Lemma candidate_5: forall (lf3 : nat), le lf3 (S lf3).
+Lemma candidate_6: forall (n : nat) (lf4 : tree), @eq tree (tinsert lf4 n) (tinsert lf4 n).
+Lemma candidate_7: forall (n : nat) (lf4 : tree), @eq nat (tsize (tinsert lf4 n)) (tsize (tinsert lf4 (S n))).
+Lemma candidate_8: forall (n : nat) (lf4 : tree), @eq nat (tsize (tinsert lf4 n)) (tsize (tinsert lf4 (S O))).
+Lemma candidate_9: forall (n : nat) (lf4 : tree), @eq nat (tsize (tinsert lf4 n)) (tsize (tinsert lf4 (tsize lf4))).
+Lemma candidate_10: forall (n : nat) (lf4 : tree), @eq nat (tsize (tinsert lf4 n)) (tsize (tinsert lf4 n)).
+Lemma candidate_11: forall (n : nat) (lf4 : tree), @eq nat (tsize (tinsert lf4 n)) (tsize (tinsert lf4 O)).
+Lemma candidate_12: forall (n : nat) (lf4 : tree), @eq nat (tsize (tinsert lf4 n)) (S (tsize lf4)).
+Lemma candidate_13: forall (lf3 : nat), le lf3 (S lf3).
+Lemma candidate_14: forall (n : nat) (l : lst) (t : tree), @eq tree (tinsert (tinsert_all t l) n) (tinsert (tinsert_all t l) n).
+Lemma candidate_15: forall (n : nat) (l : lst) (t : tree), @eq nat (tsize (tinsert (tinsert_all t l) n))   (tsize (tinsert_all (tinsert t n) l)).
+Lemma candidate_16: forall (n : nat) (l : lst) (t : tree), @eq nat (tsize (tinsert (tinsert_all t l) n))   (tsize (tinsert_all (tinsert t O) l)).
+Lemma candidate_17: forall (n : nat) (l : lst) (t : tree), @eq nat (tsize (tinsert (tinsert_all t l) n)) (S (tsize (tinsert_all t l))).
+Lemma candidate_18: forall (n : nat) (l : lst) (t : tree), @eq nat (tsize (tinsert (tinsert_all t l) n))   (S (Nat.add (tsize t) (tsize (tinsert_all Leaf l)))).
+Lemma candidate_19: forall (n : nat) (l : lst) (t : tree), @eq nat (tsize (tinsert (tinsert_all t l) n))   (tsize (tinsert (tinsert_all t l) n)).
+Lemma candidate_20: forall (n : nat) (l : lst) (t : tree), @eq nat (tsize (tinsert (tinsert_all t l) n))   (tsize (tinsert (tinsert_all t l) O)).
+Lemma candidate_21: forall (l : lst) (t : tree), @eq tree (tinsert_all t l) (tinsert_all t l).
+Lemma candidate_22: forall (lf4 : tree), @eq nat (tsize lf4) (tsize lf4).
+Lemma candidate_23: forall (l : lst) (t : tree), @eq tree (tinsert_all t l) (tinsert_all t l).
+Lemma candidate_24: forall (l : lst) (t : tree), @eq nat (tsize (tinsert_all t l)) (tsize (tinsert_all t l)).
+Lemma candidate_25: forall (lf4 : tree), le (tsize lf4) (tsize (tinsert lf4 (S (tsize lf4)))).
+Lemma candidate_26: forall (lf4 : tree), le (tsize lf4) (S (Nat.add (tsize lf4) O)).
+Lemma candidate_27: forall (lf4 : tree), le (tsize lf4) (tsize (tinsert lf4 (S O))).
+Lemma candidate_28: forall (lf4 : tree), le (tsize lf4) (tsize (tinsert lf4 (tsize lf4))).
+Lemma candidate_29: forall (lf4 : tree), le (tsize lf4) (tsize (tinsert lf4 O)).
+Lemma candidate_30: forall (lf4 : tree), le (tsize lf4) (S (tsize lf4)).
+Lemma candidate_31: forall (lf4 : tree), @eq nat (tsize lf4) (tsize lf4).
+Lemma candidate_32: forall (lf2 : tree), @eq nat (tsize lf2) (tsize lf2).
+Lemma candidate_33: forall (l : lst) (t : tree), le (tsize (tinsert_all t l)) (tsize (tinsert_all (tinsert t (S O)) l)).
+Lemma candidate_34: forall (l : lst) (t : tree), le (tsize (tinsert_all t l)) (tsize (tinsert_all (tinsert t (tsize t)) l)).
+Lemma candidate_35: forall (l : lst) (t : tree), le (tsize (tinsert_all t l)) (tsize (tinsert_all (tinsert t O) l)).
+Lemma candidate_36: forall (l : lst) (t : tree), le (tsize (tinsert_all t l)) (S (tsize (tinsert_all t l))).
+Lemma candidate_37: forall (l : lst) (t : tree), le (tsize (tinsert_all t l))   (S (Nat.add (tsize t) (tsize (tinsert_all Leaf l)))).
+Lemma candidate_38: forall (l : lst) (t : tree), le (tsize (tinsert_all t l)) (tsize (tinsert (tinsert_all t l) O)).
+Lemma candidate_39: forall (lf2 : tree), @eq nat (tsize lf2) (tsize lf2).
+Lemma candidate_40: forall (l : lst) (t : tree), @eq tree (tinsert_all t l) (tinsert_all t l).
+Lemma candidate_41: forall (l : lst) (t : tree), @eq nat (tsize (tinsert_all t l)) (tsize (tinsert_all t l)).
+
+<---FILTERED CANDIDATE LEMMAS--->
+Time elapsed: 609 seconds
+Duplicates removed: 9
+Filtered by Quickchick: 0
+Filtered by script: 8
+Remaining: 24
+
+Lemmas: 
+Lemma candidate_3: forall (lf3 : nat), le lf3 (S lf3).
+Lemma candidate_30: forall (lf4 : tree), le (tsize lf4) (S (tsize lf4)).
+Lemma candidate_29: forall (lf4 : tree), le (tsize lf4) (tsize (tinsert lf4 O)).
+Lemma candidate_2: forall (n : nat) (lf4 : tree), le (tsize lf4) (tsize (tinsert lf4 n)).
+Lemma candidate_27: forall (lf4 : tree), le (tsize lf4) (tsize (tinsert lf4 (S O))).
+Lemma candidate_26: forall (lf4 : tree), le (tsize lf4) (S (Nat.add (tsize lf4) O)).
+Lemma candidate_12: forall (n : nat) (lf4 : tree), @eq nat (tsize (tinsert lf4 n)) (S (tsize lf4)).
+Lemma candidate_28: forall (lf4 : tree), le (tsize lf4) (tsize (tinsert lf4 (tsize lf4))).
+Lemma candidate_25: forall (lf4 : tree), le (tsize lf4) (tsize (tinsert lf4 (S (tsize lf4)))).
+Lemma candidate_11: forall (n : nat) (lf4 : tree), @eq nat (tsize (tinsert lf4 n)) (tsize (tinsert lf4 O)).
+Lemma candidate_36: forall (l : lst) (t : tree), le (tsize (tinsert_all t l)) (S (tsize (tinsert_all t l))).
+Lemma candidate_8: forall (n : nat) (lf4 : tree), @eq nat (tsize (tinsert lf4 n)) (tsize (tinsert lf4 (S O))).
+Lemma candidate_7: forall (n : nat) (lf4 : tree), @eq nat (tsize (tinsert lf4 n)) (tsize (tinsert lf4 (S n))).
+Lemma candidate_9: forall (n : nat) (lf4 : tree), @eq nat (tsize (tinsert lf4 n)) (tsize (tinsert lf4 (tsize lf4))).
+Lemma candidate_38: forall (l : lst) (t : tree), le (tsize (tinsert_all t l)) (tsize (tinsert (tinsert_all t l) O)).
+Lemma candidate_35: forall (l : lst) (t : tree), le (tsize (tinsert_all t l)) (tsize (tinsert_all (tinsert t O) l)).
+Lemma candidate_33: forall (l : lst) (t : tree), le (tsize (tinsert_all t l)) (tsize (tinsert_all (tinsert t (S O)) l)).
+Lemma candidate_34: forall (l : lst) (t : tree), le (tsize (tinsert_all t l)) (tsize (tinsert_all (tinsert t (tsize t)) l)).
+Lemma candidate_17: forall (n : nat) (l : lst) (t : tree), @eq nat (tsize (tinsert (tinsert_all t l) n)) (S (tsize (tinsert_all t l))).
+Lemma candidate_37: forall (l : lst) (t : tree), le (tsize (tinsert_all t l))   (S (Nat.add (tsize t) (tsize (tinsert_all Leaf l)))).
+Lemma candidate_20: forall (n : nat) (l : lst) (t : tree), @eq nat (tsize (tinsert (tinsert_all t l) n))   (tsize (tinsert (tinsert_all t l) O)).
+Lemma candidate_16: forall (n : nat) (l : lst) (t : tree), @eq nat (tsize (tinsert (tinsert_all t l) n))   (tsize (tinsert_all (tinsert t O) l)).
+Lemma candidate_15: forall (n : nat) (l : lst) (t : tree), @eq nat (tsize (tinsert (tinsert_all t l) n))   (tsize (tinsert_all (tinsert t n) l)).
+Lemma candidate_18: forall (n : nat) (l : lst) (t : tree), @eq nat (tsize (tinsert (tinsert_all t l) n))   (S (Nat.add (tsize t) (tsize (tinsert_all Leaf l)))).
