@@ -1,0 +1,58 @@
+File Information
+- File name: FullAdder
+- Original Directory: /home/anabrendel/lfind/benchmarks/circuits/ADDER_tests/FullAdder/FullAdder_lemma_half_adder_sum_false_64
+- LFind Directory: /home/anabrendel/lfind/benchmarks/circuits/ADDER_tests/FullAdder/_lfind_FullAdder_lemma_half_adder_sum_false_64
+- Namespace: Circuits
+- Proof name: full_adder_sum_sym2
+- Theorem: Theorem full_adder_sum_sym2: forall a0 b0 c : bool,
+@eq bool (full_adder_sum a0 b0 c) (full_adder_sum a0 c b0).
+- Declarations: 
+From lfind Require Import LFind.
+From CircuitsCoqGym Require Import HalfAdder. 
+
+Proof Context
+* Goal State: forall c : bool,
+@eq bool (half_adder_sum a c) (half_adder_sum (half_adder_sum a c) false)
+
+* Hypothesis:
+b : bool
+a : bool
+
+* Types:
+Set
+Prop
+bool
+
+* Polymorphic Types:
+
+
+* Variables:
+a : bool
+
+* Terms:
+half_adder_sum (half_adder_sum a _UNBOUND_REL_1) false : bool
+false : bool
+forall c : bool,
+@eq bool (half_adder_sum a c) (half_adder_sum (half_adder_sum a c) false) : Prop
+bool : Set
+half_adder_sum a _UNBOUND_REL_1 : bool
+a : bool
+@eq bool (half_adder_sum a _UNBOUND_REL_1)
+  (half_adder_sum (half_adder_sum a _UNBOUND_REL_1) false) : Prop
+
+* Functions:
+half_adder_sum  : forall (_ : bool) (_ : bool), bool
+@eq  : forall (A : Type) (_ : A) (_ : A), Prop
+
+<---GENERALIZATION--->
+Time elapsed: 2 seconds
+Generalized Variables:
+lf3 : bool = false
+lf1 : bool = half_adder_sum (half_adder_sum a _UNBOUND_REL_1) false
+lf2 : bool = half_adder_sum a _UNBOUND_REL_1
+
+Generalizations:
+Lemma conj1: forall (a : bool) (lf3 : bool), forall c : bool,
+@eq bool (half_adder_sum a c) (half_adder_sum (half_adder_sum a c) lf3).
+Lemma conj5: forall (a : bool), forall c : bool,
+@eq bool (half_adder_sum a c) (half_adder_sum (half_adder_sum a c) false).

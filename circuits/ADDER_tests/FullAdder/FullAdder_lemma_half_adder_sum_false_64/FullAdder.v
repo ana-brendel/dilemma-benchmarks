@@ -28,11 +28,11 @@ Proof.
   rewrite half_adder_sum_false.
   auto.
   unfold full_adder_sum in |- *.
+  rewrite half_adder_sum_false.
   lfind_debug.
   Admitted.
 
   (* rewrite half_adder_sum_false.
-  rewrite half_adder_sum_false.
   intro.
   auto.
 Qed.  *)

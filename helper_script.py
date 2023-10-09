@@ -142,25 +142,13 @@ clam_tests_from_lfind_paper = {"goal1.v": [["theorem0", 31, "lem"]],"goal2.v": [
 lia_benches_from_lfind_paper  = {"list_rev_append.v": [["rev_append", 37, "app_nil"], ["rev_append", 38, "app_assoc"]], "list_rev.v": [["double_rev", 46, "rev_append"]], "list_rev_len.v": [["len_rev", 38, "len_append"]], "queue_push.v": [["queue_push", 76, "len_app"], ["queue_push", 77, "len_app"], ["queue_push", 77, "len_rev"], ["queue_push", 78, "plus_comm"]], "list_rev2_append.v": [["rev2_append", 41, "append_single"], ["rev2_append", 42, "rev2_append_aux"]], "list_rev2_len.v": [["list_rev2_len", 32, "list_rev2_len_lem"]], "list_rev2.v": [["rev2_append", 47, "append_single"], ["rev2_append", 48, "rev2_append_aux"], ["rev_eq_rev2", 59, "rev2_append"]], "tree_insert_all.v": [["tree_insert_all", 70, "helper"]], "queue_len.v": [["len_rev", 69, "len_app"], ["len_rev", 69, "plus_comm"], ["queue_len", 77, "len_app"], ["queue_len", 80, "len_rev"]]}
 
 full_adder_from_lfind_paper  = {"fulladder.v": [["full_adder_sum_sym2", 95, "half_adder_sum_false"], ["full_adder_sum_sym2", 96, "half_adder_sum_false"], ["full_adder_sum_sym2", 99, "half_adder_sum_false"], ["full_adder_sum_sym2", 100, "half_adder_sum_false"], ["full_adder_carry_sym2", 128, "half_adder_sum_false"], ["full_adder_carry_sym2", 129, "half_adder_carry_false"], ["full_adder_carry_sym2", 130, "half_adder_carry_false"], ["full_adder_carry_sym2", 135, "half_adder_carry_false"], ["full_adder_carry_sym2", 136, "half_adder_sum_false"], ["full_adder_carry_sym2", 137, "half_adder_carry_false"], ["full_adder_carry_neg", 168, "full_adder_carry_sym1"], ["full_adder_carry_neg", 169, "full_adder_carry_true"], ["full_adder_carry_neg", 170, "full_adder_carry_false"], ["full_adder_carry_neg", 171, "full_adder_carry_true"], ["full_adder_carry_neg", 172, "full_adder_carry_sym1"], ["full_adder_carry_neg", 173, "full_adder_carry_false"], ["BV_full_adder_sum_v_nil_false", 351, "BV_full_adder_sum_eq3"], ["BV_full_adder_sum_v_nil_false", 352, "half_adder_carry_false"], ["BV_full_adder_sum_v_nil_false", 353, "half_adder_sum_false"], ["BV_full_adder_carry_v_nil_false", 361, "BV_full_adder_carry_eq3"], ["BV_full_adder_carry_v_nil_false", 362, "half_adder_carry_false"], ["BV_full_adder_sum_sym", 371, "BV_full_adder_sum_eq2"], ["BV_full_adder_sum_sym", 372, "BV_full_adder_sum_eq3"], ["BV_full_adder_sum_sym", 374, "BV_full_adder_sum_eq2"], ["BV_full_adder_sum_sym", 375, "BV_full_adder_sum_eq3"], ["BV_full_adder_sum_sym", 376, "BV_full_adder_sum_eq4"], ["BV_full_adder_sum_sym", 377, "full_adder_carry_sym1"], ["BV_full_adder_sum_sym", 378, "full_adder_sum_sym1"], ["BV_full_adder_carry_sym", 397, "BV_full_adder_carry_eq2"], ["BV_full_adder_carry_sym", 398, "BV_full_adder_carry_eq3"], ["BV_full_adder_carry_sym", 400, "BV_full_adder_carry_eq2"], ["BV_full_adder_carry_sym", 401, "BV_full_adder_carry_eq3"], ["BV_full_adder_carry_sym", 403, "BV_full_adder_carry_eq4"], ["BV_full_adder_carry_sym", 404, "full_adder_carry_sym1"], ["BV_full_adder_sym", 413, "BV_full_adder_sum_sym"], ["BV_full_adder_sym", 414, "BV_full_adder_carry_sym"], ["BV_to_nat_app2", 460, "BV_to_nat_app"], ["BV_full_adder_nil_true_ok", 467, "BV_full_adder_sum_eq3"], ["BV_full_adder_nil_true_ok", 468, "BV_full_adder_carry_eq3"], ["BV_full_adder_nil_true_ok", 469, "app_eq2"], ["BV_full_adder_nil_true_ok", 470, "half_adder_carry_true"], ["BV_full_adder_nil_true_ok", 472, "BV_full_adder_sum_v_nil_false"], ["BV_full_adder_nil_true_ok", 473, "BV_full_adder_carry_v_nil_false"], ["BV_full_adder_nil_true_ok", 474, "BV_to_nat_app2"], ["BV_full_adder_nil_ok", 484, "BV_full_adder_nil_true_ok"], ["BV_full_adder_nil_ok", 485, "BV_full_adder_sum_v_nil_false"], ["BV_full_adder_nil_ok", 486, "BV_full_adder_carry_v_nil_false"], ["BV_full_adder_nil_ok", 487, "BV_to_nat_app2"], ["BV_full_adder_ok", 500, "BV_full_adder_sym"], ["BV_full_adder_ok", 502, "BV_full_adder_nil_ok"], ["BV_full_adder_ok", 527, "half_adder_ok"], ["BV_full_adder_ok", 528, "plus_permute2"], ["BV_full_adder_ok", 556, "full_adder_carry_sym1"], ["BV_full_adder_ok", 557, "full_adder_carry_true"], ["BV_full_adder_ok", 558, "full_adder_sum_sym1"], ["BV_full_adder_ok", 559, "full_adder_sum_true"], ["BV_full_adder_ok", 572, "plus_permute2"], ["BV_full_adder_ok", 585, "plus_permute2"], ["BV_full_adder_ok", 593, "plus_permute2"], ["BV_full_adder_ok", 602, "plus_permute2"], ["BV_full_adder_ok", 608, "plus_permute2"], ["BV_full_adder_ok", 613, "plus_permute2"]]}
+len(full_adder_from_lfind_paper["fulladder.v"])
 
-# for test in full_adder_from_lfind_paper["fulladder.v"]:
-#     p = f"IN: {test[0]} on line {test[1]} -- TARGET: {test[2]}"
-#     print(p)
 
-# c = "/home/anabrendel/lfind/benchmarks/circuits/ADDER_results"
-# ran_tests = []
-# for a in os.listdir(c):
-#     fa = os.path.join(c,a)
-#     if os.path.isdir(fa):
-#         for b in os.listdir(fa):
-#             fb = os.path.join(fa,b)
-#             if os.path.isdir(fb):
-#                 for f in os.listdir(fb):
-#                     ff = os.path.join(fb,f)
-#                     ran_tests.append(ff)
-
-sources = "/home/anabrendel/lfind/benchmarks/lia/sources"
-for f in os.listdir(sources):
-    ff = os.path.join(sources,f)
-    cmd = f"cd {ff} && make"
-    os.system(cmd)
+tests = "/home/anabrendel/lfind/benchmarks/clam/results/incomplete/__rename_fixpoint"
+for f in os.listdir(tests):
+    test = f.removeprefix("_lfind_")
+    print(test)
+    path = os.path.join("/home/anabrendel/lfind/benchmarks/clam/sources",test)
+    make_cmd = f"cd {path} && make"
+    os.system(make_cmd)
