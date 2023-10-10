@@ -145,10 +145,11 @@ full_adder_from_lfind_paper  = {"fulladder.v": [["full_adder_sum_sym2", 95, "hal
 len(full_adder_from_lfind_paper["fulladder.v"])
 
 
-tests = "/home/anabrendel/lfind/benchmarks/clam/results/incomplete/__rename_fixpoint"
+tests = "/home/anabrendel/lfind/benchmarks/lia/results/incomplete/need-to-rename-append"
 for f in os.listdir(tests):
     test = f.removeprefix("_lfind_")
-    print(test)
-    path = os.path.join("/home/anabrendel/lfind/benchmarks/clam/sources",test)
+    path = os.path.join("/home/anabrendel/lfind/benchmarks/lia/sources",test)
     make_cmd = f"cd {path} && make"
-    os.system(make_cmd)
+    if f not in os.listdir("/home/anabrendel/lfind/benchmarks/lia/sources"):
+        print(test)
+        os.system(make_cmd)
