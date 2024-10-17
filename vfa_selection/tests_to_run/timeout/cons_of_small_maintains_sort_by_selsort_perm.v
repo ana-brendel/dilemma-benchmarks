@@ -186,9 +186,7 @@ Proof. intros.
   ** simpl. apply or_comm. apply or_assoc. 
   right. apply or_comm.
   (* HELPER LEMMA - case 3 (non-generalized) *)
-  find_lemma. Admitted.
-
-  (* apply in_inv.
+  apply in_inv.
   pose (select_exists al x). inversion e. inversion H2. rewrite H3 in H1. 
   inversion H1. eapply IHal. rewrite <- H5. eauto.
   ** (* HELPER LEMMA - case 2 *)
@@ -198,4 +196,26 @@ Proof. intros.
   (* HELPER LEMMA - case 3 (generalized) *)
   eapply select_perm. eassumption.
   simpl. left. auto.
+Qed.
+
+Lemma cons_of_small_maintains_sort: forall bl y n,
+  n = length bl -> y <=* bl -> sorted (selsort bl n) -> sorted (y :: selsort bl n).
+Proof.
+  intros. 
+  (* symmetry in H. apply selsort_perm in H.  *)
+  induction (selsort bl n) eqn:K.
+  - apply sorted_1.
+  - apply sorted_cons.
+  (* HELPER LEMMA - case 3 (non-generalized) *)
+  eapply le_all__le_one. eauto. 
+  (* HELPER LEMMA - case 3 (non-generalized) *)
+  apply Permutation_in with (l := selsort bl n).
+  (* HELPER LEMMA - case 3 (non-generalized) *)
+  apply Permutation_sym.
+  (* HELPER LEMMA - case 3 (non-generalized) *) 
+  findlemma. Admitted.
+
+  (* apply selsort_perm. eauto.
+  rewrite <- H. rewrite K. simpl. auto. 
+  auto.
 Qed. *)

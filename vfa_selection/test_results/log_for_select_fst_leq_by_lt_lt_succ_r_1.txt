@@ -1,0 +1,953 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (x :: x1 = bl)
+ -- ((x0, x :: x1) = (y, bl))
+ -- (exists j : list nat, select a al = (x0, j))
+ -- (a < x)
+ -- (exists (i : nat) (j : list nat), select a al = (i, j))
+ -- (forall (bl : list nat) (y x : nat), select x al = (y, bl) -> y <= x)
+ -- (x0 = y)
+ -- (x0 = a)
+ -- (x0 <= a)
+
+----------------------------------
+Goal: (a < S x)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 0.001 seconds
+
+gv0 : nat = (S x)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 207.839 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (x :: x1 = bl)
+ -- ((x0, x :: x1) = (y, bl))
+ -- (a < x)
+ -- (x0 = y)
+ -- (x0 = a)
+ -- (x0 <= a)
+
+----------------------------------
+Goal: (a < gv0)
+Case: 2
+
+Label: Generalization #1
+Assumptions: 
+ -- (a < x)
+
+----------------------------------
+Goal: (a < S x)
+Case: 3
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 208.358 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+@fst : (forall A B : Type, A * B -> A)
+@snd : (forall A B : Type, A * B -> B)
+length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+In : (forall A : Type, A -> list A -> Prop)
+existsb : (forall A : Type, (A -> bool) -> list A -> bool)
+forallb : (forall A : Type, (A -> bool) -> list A -> bool)
+Forall : (forall A : Type, (A -> Prop) -> list A -> Prop)
+nodup : (forall A : Type, (forall x y : A, {x = y} + {x <> y}) -> list A -> list A)
+Permutation : (forall A : Type, list A -> list A -> Prop)
+sorted : (list nat -> Prop)
+is_a_sorting_algorithm : ((list nat -> list nat) -> Prop)
+select : (nat -> list nat -> nat * list nat)
+selsort : (list nat -> nat -> list nat)
+selection_sort : (list nat -> list nat)
+le_all : (nat -> list nat -> Prop)
+sorted_bool : (list nat -> bool)
+
+Label: 0 (0)
+Abducted Assumption: n/a
+Positive Examples:
+   [a := 0; bl := [1]; gv0 := 2; x := 1; x0 := 0; x1 := []; y := 0]
+   [a := 0; bl := [2]; gv0 := 3; x := 2; x0 := 0; x1 := []; y := 0]
+
+Negative Examples:
+   [a := 0; bl := [2]; gv0 := 0; x := 2; x0 := 0; x1 := []; y := 0]
+   [a := 0; bl := [1]; gv0 := 0; x := 1; x0 := 0; x1 := []; y := 0]
+
+
+Label: 1 (1)
+Abducted Assumption: (a < x)
+Positive Examples:
+   [a := 1; x := 6]
+   [a := 4; x := 6]
+   [a := 1; x := 5]
+   [a := 5; x := 6]
+   [a := 2; x := 6]
+   [a := 0; x := 5]
+   [a := 2; x := 3]
+   [a := 4; x := 5]
+   [a := 3; x := 4]
+   [a := 0; x := 4]
+   etc ...
+
+Negative Examples:
+   [a := 6; x := 0]
+   [a := 6; x := 2]
+   [a := 6; x := 3]
+   [a := 5; x := 2]
+   [a := 6; x := 1]
+   [a := 5; x := 4]
+   [a := 3; x := 1]
+   [a := 5; x := 1]
+   [a := 6; x := 4]
+   [a := 4; x := 1]
+   etc ...
+
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 209.156 seconds
+
+
+Label: 0 (0)
+(x <=* gv0 :: bl), (x <=* gv0 :: x1), (x <=* selsort bl gv0), (x <=* selsort x1 gv0), (y <=* gv0 :: bl), (y <=* gv0 :: x1), (y <=* selsort bl gv0), (y <=* selsort x1 gv0), (x0 <=* gv0 :: bl), (x0 <=* gv0 :: x1)
+(x0 <=* selsort x1 gv0), (gv0 <=* bl), (gv0 <=* x1), (gv0 <=* x :: bl), (gv0 <=* x :: x1), (gv0 <=* y :: bl), (gv0 <=* y :: x1), (gv0 <=* x0 :: bl), (gv0 <=* x0 :: x1), (gv0 <=* gv0 :: bl)
+(gv0 <=* a :: bl), (gv0 <=* a :: x1), (gv0 <=* selection_sort bl), (gv0 <=* selection_sort x1), (gv0 <=* selsort bl x), (gv0 <=* selsort bl y), (gv0 <=* selsort bl x0), (gv0 <=* selsort bl gv0), (gv0 <=* selsort bl a), (gv0 <=* selsort x1 x)
+(gv0 <=* selsort x1 x0), (gv0 <=* selsort x1 gv0), (gv0 <=* selsort x1 a), (gv0 <=* bl ++ bl), (gv0 <=* bl ++ x1), (gv0 <=* x1 ++ bl), (gv0 <=* x1 ++ x1), (gv0 <=* []), (a <=* gv0 :: bl), (a <=* gv0 :: x1)
+(a <=* selsort x1 gv0), (length bl <=* gv0 :: bl), (length bl <=* gv0 :: x1), (length bl <=* selsort bl gv0), (length bl <=* selsort x1 gv0), (length x1 <=* gv0 :: bl), (length x1 <=* gv0 :: x1), (length x1 <=* selsort bl gv0), (length x1 <=* selsort x1 gv0), (sorted (gv0 :: bl))
+(sorted (selsort bl gv0)), (sorted (selsort x1 gv0)), (Permutation bl (gv0 :: bl)), (Permutation bl (gv0 :: x1)), (Permutation bl (selsort bl gv0)), (Permutation bl (selsort x1 gv0)), (Permutation x1 (gv0 :: bl)), (Permutation x1 (gv0 :: x1)), (Permutation x1 (selsort bl gv0)), (Permutation x1 (selsort x1 gv0))
+(Permutation (x :: bl) (gv0 :: x1)), (Permutation (x :: bl) (selsort bl gv0)), (Permutation (x :: bl) (selsort x1 gv0)), (Permutation (x :: x1) (gv0 :: bl)), (Permutation (x :: x1) (gv0 :: x1)), (Permutation (x :: x1) (selsort bl gv0)), (Permutation (x :: x1) (selsort x1 gv0)), (Permutation (y :: bl) (gv0 :: bl)), (Permutation (y :: bl) (gv0 :: x1)), (Permutation (y :: bl) (selsort bl gv0))
+(Permutation (y :: x1) (gv0 :: bl)), (Permutation (y :: x1) (gv0 :: x1)), (Permutation (y :: x1) (selsort bl gv0)), (Permutation (y :: x1) (selsort x1 gv0)), (Permutation (x0 :: bl) (gv0 :: bl)), (Permutation (x0 :: bl) (gv0 :: x1)), (Permutation (x0 :: bl) (selsort bl gv0)), (Permutation (x0 :: bl) (selsort x1 gv0)), (Permutation (x0 :: x1) (gv0 :: bl)), (Permutation (x0 :: x1) (gv0 :: x1))
+(Permutation (x0 :: x1) (selsort x1 gv0)), (Permutation (gv0 :: bl) bl), (Permutation (gv0 :: bl) x1), (Permutation (gv0 :: bl) (x :: bl)), (Permutation (gv0 :: bl) (x :: x1)), (Permutation (gv0 :: bl) (y :: bl)), (Permutation (gv0 :: bl) (y :: x1)), (Permutation (gv0 :: bl) (x0 :: bl)), (Permutation (gv0 :: bl) (x0 :: x1)), (Permutation (gv0 :: bl) (gv0 :: x1))
+(Permutation (gv0 :: bl) (a :: x1)), (Permutation (gv0 :: bl) (selection_sort bl)), (Permutation (gv0 :: bl) (selection_sort x1)), (Permutation (gv0 :: bl) (selsort bl x)), (Permutation (gv0 :: bl) (selsort bl y)), (Permutation (gv0 :: bl) (selsort bl x0)), (Permutation (gv0 :: bl) (selsort bl gv0)), (Permutation (gv0 :: bl) (selsort bl a)), (Permutation (gv0 :: bl) (selsort x1 x)), (Permutation (gv0 :: bl) (selsort x1 y))
+(Permutation (gv0 :: bl) (selsort x1 gv0)), (Permutation (gv0 :: bl) (selsort x1 a)), (Permutation (gv0 :: bl) (bl ++ bl)), (Permutation (gv0 :: bl) (bl ++ x1)), (Permutation (gv0 :: bl) (x1 ++ bl)), (Permutation (gv0 :: bl) (x1 ++ x1)), (Permutation (gv0 :: bl) []), (Permutation (gv0 :: x1) bl), (Permutation (gv0 :: x1) x1), (Permutation (gv0 :: x1) (x :: bl))
+(Permutation (gv0 :: x1) (y :: bl)), (Permutation (gv0 :: x1) (y :: x1)), (Permutation (gv0 :: x1) (x0 :: bl)), (Permutation (gv0 :: x1) (x0 :: x1)), (Permutation (gv0 :: x1) (gv0 :: bl)), (Permutation (gv0 :: x1) (a :: bl)), (Permutation (gv0 :: x1) (a :: x1)), (Permutation (gv0 :: x1) (selection_sort bl)), (Permutation (gv0 :: x1) (selection_sort x1)), (Permutation (gv0 :: x1) (selsort bl x))
+(Permutation (gv0 :: x1) (selsort bl x0)), (Permutation (gv0 :: x1) (selsort bl gv0)), (Permutation (gv0 :: x1) (selsort bl a)), (Permutation (gv0 :: x1) (selsort x1 x)), (Permutation (gv0 :: x1) (selsort x1 y)), (Permutation (gv0 :: x1) (selsort x1 x0)), (Permutation (gv0 :: x1) (selsort x1 gv0)), (Permutation (gv0 :: x1) (selsort x1 a)), (Permutation (gv0 :: x1) (bl ++ bl)), (Permutation (gv0 :: x1) (bl ++ x1))
+(Permutation (gv0 :: x1) (x1 ++ x1)), (Permutation (gv0 :: x1) []), (Permutation (a :: bl) (gv0 :: bl)), (Permutation (a :: bl) (gv0 :: x1)), (Permutation (a :: bl) (selsort bl gv0)), (Permutation (a :: bl) (selsort x1 gv0)), (Permutation (a :: x1) (gv0 :: bl)), (Permutation (a :: x1) (gv0 :: x1)), (Permutation (a :: x1) (selsort bl gv0)), (Permutation (a :: x1) (selsort x1 gv0))
+(Permutation (selection_sort bl) (gv0 :: x1)), (Permutation (selection_sort bl) (selsort bl gv0)), (Permutation (selection_sort bl) (selsort x1 gv0)), (Permutation (selection_sort x1) (gv0 :: bl)), (Permutation (selection_sort x1) (gv0 :: x1)), (Permutation (selection_sort x1) (selsort bl gv0)), (Permutation (selection_sort x1) (selsort x1 gv0)), (Permutation (selsort bl x) (gv0 :: bl)), (Permutation (selsort bl x) (gv0 :: x1)), (Permutation (selsort bl x) (selsort bl gv0))
+(Permutation (selsort bl y) (gv0 :: bl)), (Permutation (selsort bl y) (gv0 :: x1)), (Permutation (selsort bl y) (selsort bl gv0)), (Permutation (selsort bl y) (selsort x1 gv0)), (Permutation (selsort bl x0) (gv0 :: bl)), (Permutation (selsort bl x0) (gv0 :: x1)), (Permutation (selsort bl x0) (selsort bl gv0)), (Permutation (selsort bl x0) (selsort x1 gv0)), (Permutation (selsort bl gv0) bl), (Permutation (selsort bl gv0) x1)
+(Permutation (selsort bl gv0) (x :: x1)), (Permutation (selsort bl gv0) (y :: bl)), (Permutation (selsort bl gv0) (y :: x1)), (Permutation (selsort bl gv0) (x0 :: bl)), (Permutation (selsort bl gv0) (x0 :: x1)), (Permutation (selsort bl gv0) (gv0 :: bl)), (Permutation (selsort bl gv0) (gv0 :: x1)), (Permutation (selsort bl gv0) (a :: bl)), (Permutation (selsort bl gv0) (a :: x1)), (Permutation (selsort bl gv0) (selection_sort bl))
+(Permutation (selsort bl gv0) (selsort bl x)), (Permutation (selsort bl gv0) (selsort bl y)), (Permutation (selsort bl gv0) (selsort bl x0)), (Permutation (selsort bl gv0) (selsort bl a)), (Permutation (selsort bl gv0) (selsort x1 x)), (Permutation (selsort bl gv0) (selsort x1 y)), (Permutation (selsort bl gv0) (selsort x1 x0)), (Permutation (selsort bl gv0) (selsort x1 gv0)), (Permutation (selsort bl gv0) (selsort x1 a)), (Permutation (selsort bl gv0) (bl ++ bl))
+(Permutation (selsort bl gv0) (x1 ++ bl)), (Permutation (selsort bl gv0) (x1 ++ x1)), (Permutation (selsort bl gv0) []), (Permutation (selsort bl a) (gv0 :: bl)), (Permutation (selsort bl a) (gv0 :: x1)), (Permutation (selsort bl a) (selsort bl gv0)), (Permutation (selsort bl a) (selsort x1 gv0)), (Permutation (selsort x1 x) (gv0 :: bl)), (Permutation (selsort x1 x) (gv0 :: x1)), (Permutation (selsort x1 x) (selsort bl gv0))
+(Permutation (selsort x1 y) (gv0 :: bl)), (Permutation (selsort x1 y) (gv0 :: x1)), (Permutation (selsort x1 y) (selsort bl gv0)), (Permutation (selsort x1 y) (selsort x1 gv0)), (Permutation (selsort x1 x0) (gv0 :: bl)), (Permutation (selsort x1 x0) (gv0 :: x1)), (Permutation (selsort x1 x0) (selsort bl gv0)), (Permutation (selsort x1 x0) (selsort x1 gv0)), (Permutation (selsort x1 gv0) bl), (Permutation (selsort x1 gv0) x1)
+(Permutation (selsort x1 gv0) (x :: x1)), (Permutation (selsort x1 gv0) (y :: bl)), (Permutation (selsort x1 gv0) (y :: x1)), (Permutation (selsort x1 gv0) (x0 :: bl)), (Permutation (selsort x1 gv0) (x0 :: x1)), (Permutation (selsort x1 gv0) (gv0 :: bl)), (Permutation (selsort x1 gv0) (gv0 :: x1)), (Permutation (selsort x1 gv0) (a :: bl)), (Permutation (selsort x1 gv0) (a :: x1)), (Permutation (selsort x1 gv0) (selection_sort bl))
+(Permutation (selsort x1 gv0) (selsort bl x)), (Permutation (selsort x1 gv0) (selsort bl y)), (Permutation (selsort x1 gv0) (selsort bl x0)), (Permutation (selsort x1 gv0) (selsort bl gv0)), (Permutation (selsort x1 gv0) (selsort bl a)), (Permutation (selsort x1 gv0) (selsort x1 x)), (Permutation (selsort x1 gv0) (selsort x1 y)), (Permutation (selsort x1 gv0) (selsort x1 x0)), (Permutation (selsort x1 gv0) (selsort x1 a)), (Permutation (selsort x1 gv0) (bl ++ bl))
+(Permutation (selsort x1 gv0) (x1 ++ bl)), (Permutation (selsort x1 gv0) (x1 ++ x1)), (Permutation (selsort x1 gv0) []), (Permutation (selsort x1 a) (gv0 :: bl)), (Permutation (selsort x1 a) (gv0 :: x1)), (Permutation (selsort x1 a) (selsort bl gv0)), (Permutation (selsort x1 a) (selsort x1 gv0)), (Permutation (bl ++ bl) (gv0 :: bl)), (Permutation (bl ++ bl) (gv0 :: x1)), (Permutation (bl ++ bl) (selsort bl gv0))
+(Permutation (bl ++ x1) (gv0 :: bl)), (Permutation (bl ++ x1) (gv0 :: x1)), (Permutation (bl ++ x1) (selsort bl gv0)), (Permutation (bl ++ x1) (selsort x1 gv0)), (Permutation (x1 ++ bl) (gv0 :: bl)), (Permutation (x1 ++ bl) (gv0 :: x1)), (Permutation (x1 ++ bl) (selsort bl gv0)), (Permutation (x1 ++ bl) (selsort x1 gv0)), (Permutation (x1 ++ x1) (gv0 :: bl)), (Permutation (x1 ++ x1) (gv0 :: x1))
+(Permutation (x1 ++ x1) (selsort x1 gv0)), (Permutation [] (gv0 :: bl)), (Permutation [] (gv0 :: x1)), (Permutation [] (selsort bl gv0)), (Permutation [] (selsort x1 gv0)), (In x (gv0 :: bl)), (In x (gv0 :: x1)), (In x (selsort bl gv0)), (In x (selsort x1 gv0)), (In y (gv0 :: bl))
+(In y (selsort bl gv0)), (In y (selsort x1 gv0)), (In x0 (gv0 :: bl)), (In x0 (gv0 :: x1)), (In x0 (selsort bl gv0)), (In x0 (selsort x1 gv0)), (In gv0 bl), (In gv0 x1), (In gv0 (x :: bl)), (In gv0 (x :: x1))
+(In gv0 (y :: x1)), (In gv0 (x0 :: bl)), (In gv0 (x0 :: x1)), (In gv0 (gv0 :: bl)), (In gv0 (gv0 :: x1)), (In gv0 (a :: bl)), (In gv0 (a :: x1)), (In gv0 (selection_sort bl)), (In gv0 (selection_sort x1)), (In gv0 (selsort bl x))
+(In gv0 (selsort bl x0)), (In gv0 (selsort bl gv0)), (In gv0 (selsort bl a)), (In gv0 (selsort x1 x)), (In gv0 (selsort x1 y)), (In gv0 (selsort x1 x0)), (In gv0 (selsort x1 gv0)), (In gv0 (selsort x1 a)), (In gv0 (bl ++ bl)), (In gv0 (bl ++ x1))
+(In gv0 (x1 ++ x1)), (In a (gv0 :: bl)), (In a (gv0 :: x1)), (In a (selsort bl gv0)), (In a (selsort x1 gv0)), (In (length bl) (gv0 :: bl)), (In (length bl) (gv0 :: x1)), (In (length bl) (selsort bl gv0)), (In (length bl) (selsort x1 gv0)), (In (length x1) (gv0 :: bl))
+(In (length x1) (selsort bl gv0)), (In (length x1) (selsort x1 gv0)), (x < gv0), (y < gv0), (x0 < gv0), (gv0 < x), (gv0 < y), (gv0 < x0), (gv0 < a), (gv0 < length bl)
+(a < gv0), (length bl < gv0), (length x1 < gv0), (x <= gv0), (y <= gv0), (x0 <= gv0), (gv0 <= x), (gv0 <= y), (gv0 <= x0), (gv0 <= a)
+(gv0 <= length x1), (a <= gv0), (length bl <= gv0), (length x1 <= gv0), (selsort bl gv0 = bl), (selsort bl gv0 = x1), (selsort bl gv0 = selection_sort bl), (selsort bl gv0 = selection_sort x1), (selsort bl gv0 = bl ++ bl), (selsort bl gv0 = bl ++ x1)
+(selsort bl gv0 = x1 ++ x1), (selsort x1 gv0 = bl), (selsort x1 gv0 = x1), (selsort x1 gv0 = selection_sort bl), (selsort x1 gv0 = selection_sort x1), (selsort x1 gv0 = bl ++ bl), (selsort x1 gv0 = bl ++ x1), (selsort x1 gv0 = x1 ++ bl), (selsort x1 gv0 = x1 ++ x1), (length bl = gv0)
+
+Label: 1 (1)
+(x <=* []), (a <=* []), (sorted []), (x < a), (a < x), (x <= a), (a <= x)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 405.605 seconds
+
+
+Label: 0 (0)
+(x <=* gv0 :: bl), (x <=* gv0 :: x1), (length bl <=* gv0 :: bl), (length bl <=* gv0 :: x1), (Permutation bl (selsort bl gv0)), (Permutation (x :: x1) (selsort bl gv0)), (Permutation (selection_sort bl) (selsort bl gv0)), (Permutation (selsort bl x) (selsort bl gv0)), (Permutation (selsort bl gv0) (x :: x1)), (Permutation (selsort bl gv0) (selection_sort bl))
+(Permutation (selsort bl gv0) (bl ++ x1)), (Permutation (selsort bl gv0) (x1 ++ bl)), (Permutation (bl ++ x1) (selsort bl gv0)), (Permutation (x1 ++ bl) (selsort bl gv0)), (In x (selsort bl gv0)), (x < gv0), (y < gv0), (x0 < gv0), (a < gv0), (length bl < gv0)
+(x <= gv0), (length bl <= gv0), (selsort bl gv0 = bl), (selsort bl gv0 = selection_sort bl), (selsort bl gv0 = bl ++ x1), (selsort bl gv0 = x1 ++ bl)
+
+Label: 1 (1)
+(a < x), (a <= x)
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 1666.629 seconds
+
+
+(a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> selsort bl gv0 = x1 ++ bl -> a < gv0)
+(x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> selsort bl gv0 = x1 ++ bl -> a < gv0)
+(x0 = a -> a < x -> x :: x1 = bl -> selsort bl gv0 = x1 ++ bl -> a < gv0)
+(x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> selsort bl gv0 = x1 ++ bl -> a < gv0)
+(x0 = a ->
+ x0 = y -> a < x -> x :: x1 = bl -> selsort bl gv0 = x1 ++ bl -> a < gv0)
+(x0 = a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> selsort bl gv0 = x1 ++ bl -> a < gv0)
+(x0 <= a ->
+ x0 = y -> a < x -> x :: x1 = bl -> selsort bl gv0 = x1 ++ bl -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y -> a < x -> x :: x1 = bl -> selsort bl gv0 = x1 ++ bl -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> selsort bl gv0 = x1 ++ bl -> a < gv0)
+(a < x -> (x0, x :: x1) = (y, bl) -> selsort bl gv0 = bl -> a < gv0)
+(a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> selsort bl gv0 = bl -> a < gv0)
+(x0 = a -> a < x -> (x0, x :: x1) = (y, bl) -> selsort bl gv0 = bl -> a < gv0)
+(x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> selsort bl gv0 = bl -> a < gv0)
+(x0 = a -> x0 = y -> a < x -> x :: x1 = bl -> selsort bl gv0 = bl -> a < gv0)
+(x0 <= a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> selsort bl gv0 = bl -> a < gv0)
+(x0 <= a -> x0 = y -> a < x -> x :: x1 = bl -> selsort bl gv0 = bl -> a < gv0)
+(x0 <= a ->
+ x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> selsort bl gv0 = bl -> a < gv0)
+(x0 <= a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> selsort bl gv0 = bl -> a < gv0)
+(x0 <= a ->
+ x0 = a -> a < x -> (x0, x :: x1) = (y, bl) -> selsort bl gv0 = bl -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> selsort bl gv0 = bl -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> selsort bl gv0 = bl -> a < gv0)
+(a < x -> x <= gv0 -> a < gv0)
+(a < x -> x :: x1 = bl -> x <= gv0 -> a < gv0)
+(a < x -> (x0, x :: x1) = (y, bl) -> x <= gv0 -> a < gv0)
+(a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x <= gv0 -> a < gv0)
+(x0 = y -> a < x -> x <= gv0 -> a < gv0)
+(x0 = y -> a < x -> x :: x1 = bl -> x <= gv0 -> a < gv0)
+(x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> x <= gv0 -> a < gv0)
+(x0 = y ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x <= gv0 -> a < gv0)
+(x0 = a -> a < x -> x <= gv0 -> a < gv0)
+(x0 = a -> a < x -> x :: x1 = bl -> x <= gv0 -> a < gv0)
+(x0 = a -> a < x -> (x0, x :: x1) = (y, bl) -> x <= gv0 -> a < gv0)
+(x0 = a ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x <= gv0 -> a < gv0)
+(x0 = a -> x0 = y -> a < x -> x <= gv0 -> a < gv0)
+(x0 = a -> x0 = y -> a < x -> x :: x1 = bl -> x <= gv0 -> a < gv0)
+(x0 = a -> x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> x <= gv0 -> a < gv0)
+(x0 = a ->
+ x0 = y ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x <= gv0 -> a < gv0)
+(x0 <= a -> a < x -> x <= gv0 -> a < gv0)
+(x0 <= a -> a < x -> x :: x1 = bl -> x <= gv0 -> a < gv0)
+(x0 <= a -> a < x -> (x0, x :: x1) = (y, bl) -> x <= gv0 -> a < gv0)
+(x0 <= a ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x <= gv0 -> a < gv0)
+(x0 <= a -> x0 = y -> a < x -> x <= gv0 -> a < gv0)
+(x0 <= a -> x0 = y -> a < x -> x :: x1 = bl -> x <= gv0 -> a < gv0)
+(x0 <= a -> x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> x <= gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = y ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x <= gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> a < x -> x <= gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> a < x -> x :: x1 = bl -> x <= gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> a < x -> (x0, x :: x1) = (y, bl) -> x <= gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x <= gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> x0 = y -> a < x -> x <= gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> x0 = y -> a < x -> x :: x1 = bl -> x <= gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = a -> x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> x <= gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x <= gv0 -> a < gv0)
+(a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> length x1 < gv0 -> a < gv0)
+(x0 = a -> x0 = y -> a < x -> x :: x1 = bl -> length x1 < gv0 -> a < gv0)
+(x0 <= a -> a < x -> (x0, x :: x1) = (y, bl) -> length x1 < gv0 -> a < gv0)
+(x0 <= a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> length x1 < gv0 -> a < gv0)
+(x0 <= a -> x0 = y -> a < x -> x :: x1 = bl -> length x1 < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> length x1 < gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> a < x -> x :: x1 = bl -> length x1 < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> length x1 < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> length x1 < gv0 -> a < gv0)
+(a < x -> x :: x1 = bl -> length bl < gv0 -> a < gv0)
+(a < x -> (x0, x :: x1) = (y, bl) -> length bl < gv0 -> a < gv0)
+(a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> length bl < gv0 -> a < gv0)
+(x0 = a ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> length bl < gv0 -> a < gv0)
+(x0 = a -> a < x -> x :: x1 = bl -> length bl < gv0 -> a < gv0)
+(x0 = a -> a < x -> (x0, x :: x1) = (y, bl) -> length bl < gv0 -> a < gv0)
+(x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> length bl < gv0 -> a < gv0)
+(x0 = a ->
+ x0 = y ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> length bl < gv0 -> a < gv0)
+(x0 = a -> x0 = y -> a < x -> x :: x1 = bl -> length bl < gv0 -> a < gv0)
+(x0 = a ->
+ x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> length bl < gv0 -> a < gv0)
+(x0 <= a -> a < x -> (x0, x :: x1) = (y, bl) -> length bl < gv0 -> a < gv0)
+(x0 <= a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> length bl < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> length bl < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> length bl < gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> a < x -> x :: x1 = bl -> length bl < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = a -> a < x -> (x0, x :: x1) = (y, bl) -> length bl < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> length bl < gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> x0 = y -> x :: x1 = bl -> length bl < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = a -> x0 = y -> a < x -> x :: x1 = bl -> length bl < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> length bl < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> length bl < gv0 -> a < gv0)
+(a < x -> (x0, x :: x1) = (y, bl) -> x0 < gv0 -> a < gv0)
+(x0 = y -> a < x -> x :: x1 = bl -> x0 < gv0 -> a < gv0)
+(x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> x0 < gv0 -> a < gv0)
+(x0 = a -> x0 < gv0 -> a < gv0)
+(x0 = a -> x :: x1 = bl -> x0 < gv0 -> a < gv0)
+(x0 = a -> (x0, x :: x1) = (y, bl) -> x0 < gv0 -> a < gv0)
+(x0 = a -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x0 < gv0 -> a < gv0)
+(x0 = a -> a < x -> x0 < gv0 -> a < gv0)
+(x0 = a -> a < x -> x :: x1 = bl -> x0 < gv0 -> a < gv0)
+(x0 = a -> a < x -> (x0, x :: x1) = (y, bl) -> x0 < gv0 -> a < gv0)
+(x0 = a ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x0 < gv0 -> a < gv0)
+(x0 = a -> x0 = y -> x0 < gv0 -> a < gv0)
+(x0 = a -> x0 = y -> x :: x1 = bl -> x0 < gv0 -> a < gv0)
+(x0 = a -> x0 = y -> (x0, x :: x1) = (y, bl) -> x0 < gv0 -> a < gv0)
+(x0 = a ->
+ x0 = y -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x0 < gv0 -> a < gv0)
+(x0 = a -> x0 = y -> a < x -> x0 < gv0 -> a < gv0)
+(x0 = a -> x0 = y -> a < x -> x :: x1 = bl -> x0 < gv0 -> a < gv0)
+(x0 = a -> x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> x0 < gv0 -> a < gv0)
+(x0 = a ->
+ x0 = y ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x0 < gv0 -> a < gv0)
+(x0 <= a -> a < x -> (x0, x :: x1) = (y, bl) -> x0 < gv0 -> a < gv0)
+(x0 <= a ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x0 < gv0 -> a < gv0)
+(x0 <= a -> x0 = y -> a < x -> x :: x1 = bl -> x0 < gv0 -> a < gv0)
+(x0 <= a -> x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> x0 < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = y ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x0 < gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> x0 < gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> x :: x1 = bl -> x0 < gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> (x0, x :: x1) = (y, bl) -> x0 < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = a -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x0 < gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> a < x -> x0 < gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> a < x -> x :: x1 = bl -> x0 < gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> a < x -> (x0, x :: x1) = (y, bl) -> x0 < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x0 < gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> x0 = y -> x0 < gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> x0 = y -> x :: x1 = bl -> x0 < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = a -> x0 = y -> (x0, x :: x1) = (y, bl) -> x0 < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x0 < gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> x0 = y -> a < x -> x0 < gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> x0 = y -> a < x -> x :: x1 = bl -> x0 < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = a -> x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> x0 < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x0 < gv0 -> a < gv0)
+(a < x -> (x0, x :: x1) = (y, bl) -> y < gv0 -> a < gv0)
+(a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> y < gv0 -> a < gv0)
+(x0 = y -> a < x -> x :: x1 = bl -> y < gv0 -> a < gv0)
+(x0 = y ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> y < gv0 -> a < gv0)
+(x0 = a -> (x0, x :: x1) = (y, bl) -> y < gv0 -> a < gv0)
+(x0 = a -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> y < gv0 -> a < gv0)
+(x0 = a -> a < x -> (x0, x :: x1) = (y, bl) -> y < gv0 -> a < gv0)
+(x0 = a ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> y < gv0 -> a < gv0)
+(x0 = a -> x0 = y -> y < gv0 -> a < gv0)
+(x0 = a -> x0 = y -> x :: x1 = bl -> y < gv0 -> a < gv0)
+(x0 = a -> x0 = y -> (x0, x :: x1) = (y, bl) -> y < gv0 -> a < gv0)
+(x0 = a ->
+ x0 = y -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> y < gv0 -> a < gv0)
+(x0 = a -> x0 = y -> a < x -> y < gv0 -> a < gv0)
+(x0 = a -> x0 = y -> a < x -> x :: x1 = bl -> y < gv0 -> a < gv0)
+(x0 = a -> x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> y < gv0 -> a < gv0)
+(x0 = a ->
+ x0 = y ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> y < gv0 -> a < gv0)
+(x0 <= a -> a < x -> x :: x1 = bl -> y < gv0 -> a < gv0)
+(x0 <= a ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> y < gv0 -> a < gv0)
+(x0 <= a -> x0 = y -> a < x -> x :: x1 = bl -> y < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = y ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> y < gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> (x0, x :: x1) = (y, bl) -> y < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = a -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> y < gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> a < x -> (x0, x :: x1) = (y, bl) -> y < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> y < gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> x0 = y -> y < gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> x0 = y -> x :: x1 = bl -> y < gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> x0 = y -> (x0, x :: x1) = (y, bl) -> y < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> y < gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> x0 = y -> a < x -> y < gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> x0 = y -> a < x -> x :: x1 = bl -> y < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = a -> x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> y < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> y < gv0 -> a < gv0)
+(a < x -> x < gv0 -> a < gv0)
+(a < x -> x :: x1 = bl -> x < gv0 -> a < gv0)
+(a < x -> (x0, x :: x1) = (y, bl) -> x < gv0 -> a < gv0)
+(a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x < gv0 -> a < gv0)
+(x0 = y -> a < x -> x < gv0 -> a < gv0)
+(x0 = y -> a < x -> x :: x1 = bl -> x < gv0 -> a < gv0)
+(x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> x < gv0 -> a < gv0)
+(x0 = y ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x < gv0 -> a < gv0)
+(x0 = a -> a < x -> x < gv0 -> a < gv0)
+(x0 = a -> a < x -> x :: x1 = bl -> x < gv0 -> a < gv0)
+(x0 = a -> a < x -> (x0, x :: x1) = (y, bl) -> x < gv0 -> a < gv0)
+(x0 = a ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x < gv0 -> a < gv0)
+(x0 = a -> x0 = y -> a < x -> x < gv0 -> a < gv0)
+(x0 = a -> x0 = y -> a < x -> x :: x1 = bl -> x < gv0 -> a < gv0)
+(x0 = a -> x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> x < gv0 -> a < gv0)
+(x0 = a ->
+ x0 = y ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x < gv0 -> a < gv0)
+(x0 <= a -> a < x -> x < gv0 -> a < gv0)
+(x0 <= a -> a < x -> x :: x1 = bl -> x < gv0 -> a < gv0)
+(x0 <= a -> a < x -> (x0, x :: x1) = (y, bl) -> x < gv0 -> a < gv0)
+(x0 <= a ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x < gv0 -> a < gv0)
+(x0 <= a -> x0 = y -> a < x -> x < gv0 -> a < gv0)
+(x0 <= a -> x0 = y -> a < x -> x :: x1 = bl -> x < gv0 -> a < gv0)
+(x0 <= a -> x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> x < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = y ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x < gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> a < x -> x < gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> a < x -> x :: x1 = bl -> x < gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> a < x -> (x0, x :: x1) = (y, bl) -> x < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x < gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> x0 = y -> a < x -> x < gv0 -> a < gv0)
+(x0 <= a -> x0 = a -> x0 = y -> a < x -> x :: x1 = bl -> x < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = a -> x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> x < gv0 -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y ->
+ a < x -> (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x < gv0 -> a < gv0)
+(x0 = y -> a < x -> x :: x1 = bl -> In x (selsort bl gv0) -> a < gv0)
+(x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> In x (selsort bl gv0) -> a < gv0)
+(x0 = a ->
+ x0 = y -> a < x -> x :: x1 = bl -> In x (selsort bl gv0) -> a < gv0)
+(x0 <= a ->
+ a < x -> (x0, x :: x1) = (y, bl) -> In x (selsort bl gv0) -> a < gv0)
+(x0 <= a ->
+ x0 = y -> a < x -> x :: x1 = bl -> In x (selsort bl gv0) -> a < gv0)
+(x0 <= a ->
+ x0 = y ->
+ a < x -> (x0, x :: x1) = (y, bl) -> In x (selsort bl gv0) -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ a < x -> (x0, x :: x1) = (y, bl) -> In x (selsort bl gv0) -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> In x (selsort bl gv0) -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y -> a < x -> x :: x1 = bl -> In x (selsort bl gv0) -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y ->
+ a < x -> (x0, x :: x1) = (y, bl) -> In x (selsort bl gv0) -> a < gv0)
+(x0 = y ->
+ a < x -> x :: x1 = bl -> Permutation (selsort bl gv0) (x1 ++ bl) -> a < gv0)
+(x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ Permutation (selsort bl gv0) (x1 ++ bl) -> a < gv0)
+(x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ Permutation (selsort bl gv0) (x1 ++ bl) -> a < gv0)
+(x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> Permutation (selsort bl gv0) (x1 ++ bl) -> a < gv0)
+(x0 <= a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ Permutation (selsort bl gv0) (x1 ++ bl) -> a < gv0)
+(x0 <= a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> Permutation (selsort bl gv0) (x1 ++ bl) -> a < gv0)
+(x0 <= a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> Permutation (selsort bl gv0) (x1 ++ bl) -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ Permutation (selsort bl gv0) (x1 ++ bl) -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> Permutation (selsort bl gv0) (x1 ++ bl) -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y ->
+ a < x -> x :: x1 = bl -> Permutation (selsort bl gv0) (x1 ++ bl) -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ Permutation (selsort bl gv0) (x1 ++ bl) -> a < gv0)
+(a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ Permutation (selsort bl x) (selsort bl gv0) -> a < gv0)
+(a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> Permutation (selsort bl x) (selsort bl gv0) -> a < gv0)
+(x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ Permutation (selsort bl x) (selsort bl gv0) -> a < gv0)
+(x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ Permutation (selsort bl x) (selsort bl gv0) -> a < gv0)
+(x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> Permutation (selsort bl x) (selsort bl gv0) -> a < gv0)
+(x0 = a ->
+ x0 = y ->
+ a < x ->
+ x :: x1 = bl -> Permutation (selsort bl x) (selsort bl gv0) -> a < gv0)
+(x0 = a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ Permutation (selsort bl x) (selsort bl gv0) -> a < gv0)
+(x0 = a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> Permutation (selsort bl x) (selsort bl gv0) -> a < gv0)
+(x0 <= a ->
+ x0 = y ->
+ a < x ->
+ x :: x1 = bl -> Permutation (selsort bl x) (selsort bl gv0) -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ Permutation (selsort bl x) (selsort bl gv0) -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y ->
+ a < x ->
+ x :: x1 = bl -> Permutation (selsort bl x) (selsort bl gv0) -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ Permutation (selsort bl x) (selsort bl gv0) -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> Permutation (selsort bl x) (selsort bl gv0) -> a < gv0)
+(x0 = y ->
+ a < x -> x :: x1 = bl -> Permutation (x :: x1) (selsort bl gv0) -> a < gv0)
+(x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> Permutation (x :: x1) (selsort bl gv0) -> a < gv0)
+(x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> Permutation (x :: x1) (selsort bl gv0) -> a < gv0)
+(x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> Permutation (x :: x1) (selsort bl gv0) -> a < gv0)
+(x0 = a ->
+ x0 = y -> a < x -> Permutation (x :: x1) (selsort bl gv0) -> a < gv0)
+(x0 = a ->
+ x0 = y ->
+ a < x -> x :: x1 = bl -> Permutation (x :: x1) (selsort bl gv0) -> a < gv0)
+(x0 = a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> Permutation (x :: x1) (selsort bl gv0) -> a < gv0)
+(x0 = a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> Permutation (x :: x1) (selsort bl gv0) -> a < gv0)
+(x0 <= a ->
+ x0 = a -> a < x -> Permutation (x :: x1) (selsort bl gv0) -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ a < x -> x :: x1 = bl -> Permutation (x :: x1) (selsort bl gv0) -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> Permutation (x :: x1) (selsort bl gv0) -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> Permutation (x :: x1) (selsort bl gv0) -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> Permutation (x :: x1) (selsort bl gv0) -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> Permutation (x :: x1) (selsort bl gv0) -> a < gv0)
+(a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> Permutation (selsort bl gv0) (selection_sort bl) -> a < gv0)
+(x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ Permutation (selsort bl gv0) (selection_sort bl) -> a < gv0)
+(x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> Permutation (selsort bl gv0) (selection_sort bl) -> a < gv0)
+(x0 = a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ Permutation (selsort bl gv0) (selection_sort bl) -> a < gv0)
+(x0 = a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> Permutation (selsort bl gv0) (selection_sort bl) -> a < gv0)
+(x0 <= a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ Permutation (selsort bl gv0) (selection_sort bl) -> a < gv0)
+(x0 <= a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> Permutation (selsort bl gv0) (selection_sort bl) -> a < gv0)
+(x0 <= a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ Permutation (selsort bl gv0) (selection_sort bl) -> a < gv0)
+(x0 <= a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> Permutation (selsort bl gv0) (selection_sort bl) -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ Permutation (selsort bl gv0) (selection_sort bl) -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> Permutation (selsort bl gv0) (selection_sort bl) -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y ->
+ a < x ->
+ x :: x1 = bl -> Permutation (selsort bl gv0) (selection_sort bl) -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> Permutation (selsort bl gv0) (selection_sort bl) -> a < gv0)
+(a < x -> (x0, x :: x1) = (y, bl) -> length bl <=* gv0 :: x1 -> a < gv0)
+(a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> length bl <=* gv0 :: x1 -> a < gv0)
+(x0 = a -> a < x -> x :: x1 = bl -> length bl <=* gv0 :: x1 -> a < gv0)
+(x0 = a ->
+ a < x -> (x0, x :: x1) = (y, bl) -> length bl <=* gv0 :: x1 -> a < gv0)
+(x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> length bl <=* gv0 :: x1 -> a < gv0)
+(x0 = a ->
+ x0 = y -> a < x -> x :: x1 = bl -> length bl <=* gv0 :: x1 -> a < gv0)
+(x0 = a ->
+ x0 = y ->
+ a < x -> (x0, x :: x1) = (y, bl) -> length bl <=* gv0 :: x1 -> a < gv0)
+(x0 = a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> length bl <=* gv0 :: x1 -> a < gv0)
+(x0 <= a ->
+ a < x -> (x0, x :: x1) = (y, bl) -> length bl <=* gv0 :: x1 -> a < gv0)
+(x0 <= a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> length bl <=* gv0 :: x1 -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ a < x -> (x0, x :: x1) = (y, bl) -> length bl <=* gv0 :: x1 -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y ->
+ a < x -> (x0, x :: x1) = (y, bl) -> length bl <=* gv0 :: x1 -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> length bl <=* gv0 :: x1 -> a < gv0)
+(x0 = y -> a < x -> x :: x1 = bl -> length bl <=* gv0 :: bl -> a < gv0)
+(x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> length bl <=* gv0 :: bl -> a < gv0)
+(x0 = a -> a < x -> x :: x1 = bl -> length bl <=* gv0 :: bl -> a < gv0)
+(x0 = a ->
+ a < x -> (x0, x :: x1) = (y, bl) -> length bl <=* gv0 :: bl -> a < gv0)
+(x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> length bl <=* gv0 :: bl -> a < gv0)
+(x0 = a ->
+ x0 = y -> a < x -> x :: x1 = bl -> length bl <=* gv0 :: bl -> a < gv0)
+(x0 = a ->
+ x0 = y ->
+ a < x -> (x0, x :: x1) = (y, bl) -> length bl <=* gv0 :: bl -> a < gv0)
+(x0 = a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> length bl <=* gv0 :: bl -> a < gv0)
+(x0 <= a -> a < x -> x :: x1 = bl -> length bl <=* gv0 :: bl -> a < gv0)
+(x0 <= a ->
+ a < x -> (x0, x :: x1) = (y, bl) -> length bl <=* gv0 :: bl -> a < gv0)
+(x0 <= a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> length bl <=* gv0 :: bl -> a < gv0)
+(x0 <= a ->
+ x0 = y -> a < x -> x :: x1 = bl -> length bl <=* gv0 :: bl -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ a < x -> (x0, x :: x1) = (y, bl) -> length bl <=* gv0 :: bl -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> length bl <=* gv0 :: bl -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y -> a < x -> x :: x1 = bl -> length bl <=* gv0 :: bl -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y ->
+ a < x -> (x0, x :: x1) = (y, bl) -> length bl <=* gv0 :: bl -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) ->
+ x :: x1 = bl -> length bl <=* gv0 :: bl -> a < gv0)
+(a < x -> x <=* gv0 :: x1 -> a < gv0)
+(a < x -> x :: x1 = bl -> x <=* gv0 :: x1 -> a < gv0)
+(a < x -> (x0, x :: x1) = (y, bl) -> x <=* gv0 :: x1 -> a < gv0)
+(a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x <=* gv0 :: x1 -> a < gv0)
+(x0 = y -> a < x -> x <=* gv0 :: x1 -> a < gv0)
+(x0 = y -> a < x -> x :: x1 = bl -> x <=* gv0 :: x1 -> a < gv0)
+(x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> x <=* gv0 :: x1 -> a < gv0)
+(x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x <=* gv0 :: x1 -> a < gv0)
+(x0 = a -> a < x -> x <=* gv0 :: x1 -> a < gv0)
+(x0 = a -> a < x -> x :: x1 = bl -> x <=* gv0 :: x1 -> a < gv0)
+(x0 = a -> a < x -> (x0, x :: x1) = (y, bl) -> x <=* gv0 :: x1 -> a < gv0)
+(x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x <=* gv0 :: x1 -> a < gv0)
+(x0 = a -> x0 = y -> a < x -> x <=* gv0 :: x1 -> a < gv0)
+(x0 = a -> x0 = y -> a < x -> x :: x1 = bl -> x <=* gv0 :: x1 -> a < gv0)
+(x0 = a ->
+ x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> x <=* gv0 :: x1 -> a < gv0)
+(x0 = a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x <=* gv0 :: x1 -> a < gv0)
+(x0 <= a -> a < x -> x <=* gv0 :: x1 -> a < gv0)
+(x0 <= a -> a < x -> x :: x1 = bl -> x <=* gv0 :: x1 -> a < gv0)
+(x0 <= a -> a < x -> (x0, x :: x1) = (y, bl) -> x <=* gv0 :: x1 -> a < gv0)
+(x0 <= a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x <=* gv0 :: x1 -> a < gv0)
+(x0 <= a -> x0 = y -> a < x -> x <=* gv0 :: x1 -> a < gv0)
+(x0 <= a -> x0 = y -> a < x -> x :: x1 = bl -> x <=* gv0 :: x1 -> a < gv0)
+(x0 <= a ->
+ x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> x <=* gv0 :: x1 -> a < gv0)
+(x0 <= a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x <=* gv0 :: x1 -> a < gv0)
+(x0 <= a -> x0 = a -> a < x -> x <=* gv0 :: x1 -> a < gv0)
+(x0 <= a -> x0 = a -> a < x -> x :: x1 = bl -> x <=* gv0 :: x1 -> a < gv0)
+(x0 <= a ->
+ x0 = a -> a < x -> (x0, x :: x1) = (y, bl) -> x <=* gv0 :: x1 -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x <=* gv0 :: x1 -> a < gv0)
+(x0 <= a -> x0 = a -> x0 = y -> a < x -> x <=* gv0 :: x1 -> a < gv0)
+(x0 <= a ->
+ x0 = a -> x0 = y -> a < x -> x :: x1 = bl -> x <=* gv0 :: x1 -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> x <=* gv0 :: x1 -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x <=* gv0 :: x1 -> a < gv0)
+(a < x -> x <=* gv0 :: bl -> a < gv0)
+(a < x -> x :: x1 = bl -> x <=* gv0 :: bl -> a < gv0)
+(a < x -> (x0, x :: x1) = (y, bl) -> x <=* gv0 :: bl -> a < gv0)
+(a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x <=* gv0 :: bl -> a < gv0)
+(x0 = y -> a < x -> x <=* gv0 :: bl -> a < gv0)
+(x0 = y -> a < x -> x :: x1 = bl -> x <=* gv0 :: bl -> a < gv0)
+(x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> x <=* gv0 :: bl -> a < gv0)
+(x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x <=* gv0 :: bl -> a < gv0)
+(x0 = a -> a < x -> x <=* gv0 :: bl -> a < gv0)
+(x0 = a -> a < x -> x :: x1 = bl -> x <=* gv0 :: bl -> a < gv0)
+(x0 = a -> a < x -> (x0, x :: x1) = (y, bl) -> x <=* gv0 :: bl -> a < gv0)
+(x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x <=* gv0 :: bl -> a < gv0)
+(x0 = a -> x0 = y -> a < x -> x <=* gv0 :: bl -> a < gv0)
+(x0 = a -> x0 = y -> a < x -> x :: x1 = bl -> x <=* gv0 :: bl -> a < gv0)
+(x0 = a ->
+ x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> x <=* gv0 :: bl -> a < gv0)
+(x0 = a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x <=* gv0 :: bl -> a < gv0)
+(x0 <= a -> a < x -> x <=* gv0 :: bl -> a < gv0)
+(x0 <= a -> a < x -> x :: x1 = bl -> x <=* gv0 :: bl -> a < gv0)
+(x0 <= a -> a < x -> (x0, x :: x1) = (y, bl) -> x <=* gv0 :: bl -> a < gv0)
+(x0 <= a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x <=* gv0 :: bl -> a < gv0)
+(x0 <= a -> x0 = y -> a < x -> x <=* gv0 :: bl -> a < gv0)
+(x0 <= a -> x0 = y -> a < x -> x :: x1 = bl -> x <=* gv0 :: bl -> a < gv0)
+(x0 <= a ->
+ x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> x <=* gv0 :: bl -> a < gv0)
+(x0 <= a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x <=* gv0 :: bl -> a < gv0)
+(x0 <= a -> x0 = a -> a < x -> x <=* gv0 :: bl -> a < gv0)
+(x0 <= a -> x0 = a -> a < x -> x :: x1 = bl -> x <=* gv0 :: bl -> a < gv0)
+(x0 <= a ->
+ x0 = a -> a < x -> (x0, x :: x1) = (y, bl) -> x <=* gv0 :: bl -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x <=* gv0 :: bl -> a < gv0)
+(x0 <= a -> x0 = a -> x0 = y -> a < x -> x <=* gv0 :: bl -> a < gv0)
+(x0 <= a ->
+ x0 = a -> x0 = y -> a < x -> x :: x1 = bl -> x <=* gv0 :: bl -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y -> a < x -> (x0, x :: x1) = (y, bl) -> x <=* gv0 :: bl -> a < gv0)
+(x0 <= a ->
+ x0 = a ->
+ x0 = y ->
+ a < x ->
+ (x0, x :: x1) = (y, bl) -> x :: x1 = bl -> x <=* gv0 :: bl -> a < gv0)
