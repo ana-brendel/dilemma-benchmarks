@@ -1,5 +1,5 @@
 From QuickChick Require Import QuickChick.
-From vfa_selection_benchmarks Require Import Definitions.
+From vfa_merge_benchmarks Require Import Definitions.
 
 Require Import String. Open Scope string.
 

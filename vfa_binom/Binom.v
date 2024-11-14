@@ -1,0 +1,658 @@
+From Coq Require Import Strings.String. (* for manual grading *)
+From VFA Require Import Perm.
+From VFA Require Import Priqueue.
+Require Import Lia.
+
+Module BinomQueue <: PRIQUEUE.
+
+Definition key := nat.
+
+Inductive tree : Type :=
+|  Node: key -> tree -> tree -> tree
+|  Leaf : tree.
+
+Definition priqueue := list tree.
+
+Definition empty : priqueue := nil.
+
+Definition smash (t u:  tree) : tree :=
+  match t , u with
+  |  Node x t1 Leaf, Node y u1 Leaf =>
+                   if  x >? y then Node x (Node y u1 t1) Leaf
+                                else Node y (Node x t1 u1) Leaf
+  | _ , _ => Leaf  (* arbitrary bogus tree *)
+  end.
+
+Fixpoint carry (q: list tree) (t: tree) : list tree :=
+  match q, t with
+  | nil, Leaf        => nil
+  | nil, _            => t :: nil
+  | Leaf :: q', _  => t :: q'
+  | u :: q', Leaf  => u :: q'
+  | u :: q', _       => Leaf :: carry q' (smash t u)
+ end.
+
+Definition insert (x: key) (q: priqueue) : priqueue :=
+     carry q (Node x Leaf Leaf).
+
+Fixpoint join (p q: priqueue) (c: tree) : priqueue :=
+  match p, q, c with
+    [], _ , _            => carry q c
+  | _, [], _             => carry p c
+  | Leaf::p', Leaf::q', _              => c :: join p' q' Leaf
+  | Leaf::p', q1::q', Leaf            => q1 :: join p' q' Leaf
+  | Leaf::p', q1::q', Node _ _ _  => Leaf :: join p' q' (smash c q1)
+  | p1::p', Leaf::q', Leaf            => p1 :: join p' q' Leaf
+  | p1::p', Leaf::q',Node _ _ _   => Leaf :: join p' q' (smash c p1)
+  | p1::p', q1::q', _                   => c :: join p' q' (smash p1 q1)
+ end.
+
+Fixpoint unzip (t: tree) (cont: priqueue -> priqueue) : priqueue :=
+  match t with
+  |  Node x t1 t2   => unzip t2 (fun q => Node x t1 Leaf  :: cont q)
+  | Leaf => cont nil
+  end.
+
+Definition heap_delete_max (t: tree) : priqueue :=
+  match t with
+    Node x t1 Leaf  => unzip t1 (fun u => u)
+  | _ => nil   (* bogus value for ill-formed or empty trees *)
+  end.
+
+Fixpoint find_max' (current: key) (q: priqueue) : key :=
+  match q with
+  |  []         => current
+  | Leaf::q' => find_max' current q'
+  | Node x _ _ :: q' => find_max' (if x >? current then x else current) q'
+  end.
+
+Fixpoint find_max (q: priqueue) : option key :=
+  match q with
+  | [] => None
+  | Leaf::q' => find_max q'
+  | Node x _ _ :: q' => Some (find_max' x q')
+ end.
+
+Fixpoint delete_max_aux (m: key) (p: priqueue) : priqueue * priqueue :=
+  match p with
+  | Leaf :: p'   => let (j,k) := delete_max_aux m p'  in (Leaf::j, k)
+  | Node x t1 Leaf :: p' =>
+       if m >? x
+       then (let (j,k) := delete_max_aux m p'
+             in (Node x t1 Leaf::j,k))
+       else (Leaf::p', heap_delete_max (Node x t1 Leaf))
+  | _ => (nil, nil) (* Bogus value *)
+  end.
+
+Definition delete_max (q: priqueue) : option (key * priqueue) :=
+  match find_max q with
+  | None => None
+  | Some  m => let (p',q') := delete_max_aux m q
+                            in Some (m, join p' q' Leaf)
+  end.
+
+Definition merge (p q: priqueue) := join p q Leaf.
+
+(* ################################################################# *)
+(** * Characterization Predicates *)
+
+Fixpoint pow2heap' (n: nat) (m: key) (t: tree) :=
+ match n, m, t with
+    0, m, Leaf       => True
+  | 0, m, Node _ _ _  => False
+  | S _, m,Leaf    => False
+  | S n', m, Node k l r  =>
+       m >= k /\ pow2heap' n' k l /\ pow2heap' n' m r
+ end.
+
+Definition pow2heap (n: nat) (t: tree) :=
+  match t with
+    Node m t1 Leaf => pow2heap' n m t1
+  | _ => False
+  end.
+
+Fixpoint priq'  (i: nat) (l: list tree) : Prop :=
+   match l with
+  | t :: l' => (t=Leaf \/ pow2heap i t) /\ priq' (S i) l'
+  | nil => True
+ end.
+
+Definition priq (q: priqueue) : Prop := priq' 0 q.
+
+(* ################################################################# *)
+(** * Proof of Algorithm Correctness *)
+
+(** **** Exercise: 1 star, standard (empty_priq)  *)
+Theorem empty_priq: priq empty.
+Proof. constructor. Qed.
+
+Lemma smash_valid_helper_1: forall k k2: key, (k >? k2) = true -> k >= k2.
+Proof.
+    intros.
+    apply Nat.ltb_lt in H.
+    unfold ">=".
+    apply Nat.lt_le_incl.
+    assumption.
+Qed.
+
+Lemma smash_valid_helper_2: forall k k2: key, (k >? k2) = false -> k2 >= k.
+Proof.
+    intros.
+    unfold ">=".
+    apply Nat.ltb_ge.
+    assumption.
+Qed.
+
+Theorem smash_valid: forall n t u, pow2heap n t -> pow2heap n u -> pow2heap (S n) (smash t u).
+Proof.
+    intros.
+    destruct t; destruct u.
+    {
+    simpl.
+    destruct t2; destruct u2; auto.
+    destruct (k >? k0) eqn:k_eq.
+    {
+        simpl. split; auto.
+        (* HELPER LEMMA - case 3 (non-generalized) *)
+        apply smash_valid_helper_1.
+        assumption.
+    }
+    {
+        simpl. split; auto.
+        (* HELPER LEMMA - case 3 (non-generalized) *)
+        apply smash_valid_helper_2.
+        assumption.
+    }
+    }
+    {
+    inversion H0. }
+    { inversion H. }
+    { inversion H. }
+Qed.
+
+(* INCOMPLETE *)
+Theorem carry_valid: forall n q,  priq' n q -> forall t, (t=Leaf \/ pow2heap n t) -> priq' n (carry q t).
+Proof.
+(* FILL IN HERE *) Admitted.
+
+Theorem insert_priq: forall x q, priq q -> priq (insert x q).
+  induction q.
+  intros.
+  {
+    unfold priq.
+    unfold insert.
+    simpl. auto.
+  }
+  {
+    intros.
+    induction a.
+    {
+      unfold priq, insert in *.
+      simpl in H.
+      inversion H.
+      {
+        apply carry_valid.
+        {
+          simpl.
+          split; auto.
+        }
+        {
+          right. simpl. auto.
+        }
+      }
+    }
+    {
+      unfold priq, insert in *.
+      (* HELPER LEMMA - case 2 *)
+      apply carry_valid.
+      - auto.
+      - right. simpl. auto.
+    }
+  }
+Qed.
+
+(* INCOMPLETE *)
+Theorem join_valid: forall p q c n, priq' n p -> priq' n q -> (c=Leaf \/ pow2heap n c) -> priq' n (join p q c).
+  induction p; induction q.
+  {
+    intros; simpl.
+    inversion H1; subst; auto.
+    unfold pow2heap in H2.
+    destruct c.
+    {
+      destruct c2. { inversion H2. }
+      { simpl. split; auto. }
+    }
+    {
+      auto.
+    }
+  }
+  {
+    intros.
+    simpl.
+    simpl in H0.
+    inversion H0.
+    inversion H2.
+    { subst.
+      simpl. auto.
+    }
+    { unfold pow2heap in H4.
+      destruct a.
+      destruct a2. inversion H4.
+      inversion H1; subst; auto.
+      unfold pow2heap in H5.
+      destruct c; simpl in H5; auto.
+      simpl. destruct c2; simpl in H5; auto.
+      split; auto.
+      (* HELPER LEMMA - case 2 *)
+      apply carry_valid. 
+      auto.
+      destruct (k0 >? k) eqn:Hk.
+      {
+        right. simpl.
+        split.
+        (* HELPER LEMMA - case 3 (non-generalized) *)
+        apply smash_valid_helper_1. auto.
+        auto.
+      }
+      {
+        right.
+        simpl.
+        split; auto.
+        (* HELPER LEMMA - case 3 (non-generalized) *)
+        apply smash_valid_helper_2; auto.
+      }
+      {
+        simpl.
+        split; auto.
+      }
+    }
+  }
+  {
+    intros.
+    simpl. simpl in H.
+    inversion H.
+    inversion H2.
+    {
+      subst. simpl.
+      split; auto.
+    }
+    {
+      unfold pow2heap in H4.
+      destruct a.
+      destruct a2.
+      {
+        inversion H4.
+      }
+      {
+        inversion H1.
+        subst.
+        simpl.
+        split; auto.
+        unfold pow2heap in H5.
+        destruct c.
+        destruct c2.
+        inversion H5.
+        simpl.
+        split; auto.
+        destruct (k0 >? k) eqn:Hk.
+        {
+            (* HELPER LEMMA - case 2 *)
+            apply carry_valid. auto.
+            right. simpl.
+            (* HELPER LEMMA - (could rewrite to) case 3 (non-generalized) *)
+            apply smash_valid_helper_1 in Hk.
+            split; auto.
+        }
+        {
+            (* HELPER LEMMA - case 2 *)
+            apply carry_valid. auto.
+            right. simpl.
+            split; auto. 
+            (* HELPER LEMMA - case 3 (non-generalized) *)
+            apply smash_valid_helper_2; auto.
+        }
+        { inversion H5.
+        }
+      }
+      {
+        inversion H4.
+      }
+    }
+  }
+  { (* No HLemmas used*)
+    intros.
+    simpl. destruct a.
+    + destruct a0.
+    ++ simpl. split. assumption. destruct a2. 
+    * apply IHp. inversion H. assumption. inversion H0. assumption. left. reflexivity.
+    * destruct a0_2.
+    ** apply IHp. inversion H. assumption. inversion H0. assumption. left. reflexivity.
+    ** bdestruct (k >? k0).
+        { apply IHp. inversion H. assumption. inversion H0. assumption. right. inversion H. inversion H0. simpl. split.
+        { unfold ge. lia. }
+        { split. 
+        { destruct H5. inversion H5. unfold pow2heap in H5. assumption. }
+        { destruct H3. inversion H3. unfold pow2heap in H3. assumption. } } } 
+        { apply IHp. inversion H. assumption. inversion H0. assumption. right. inversion H. inversion H0. simpl. split.
+        { unfold ge. lia. }
+        { split.
+        { destruct H3. inversion H3. unfold pow2heap in H3. assumption. }
+        { destruct H5. inversion H5. unfold pow2heap in H5. assumption. } } }
+    ++ destruct c.
+    { simpl. split. auto. apply IHp.
+    { inversion H. assumption. }
+    { inversion H0. assumption. }
+    { destruct H1.
+    { inversion H1. }
+    { unfold pow2heap in H1. destruct c2.
+    { auto. }  { destruct a2. { auto. }
+    { bdestruct (k0 >? k).
+        { right. simpl. split. { unfold ge. lia. }
+        { split. { destruct H. inversion H. inversion H4. unfold pow2heap in H4.  assumption. }  { assumption. } } }
+        { right. unfold pow2heap. inversion H. inversion H3. inversion H5. unfold pow2heap in H5. simpl. split.
+        { unfold ge. lia. }
+        { split. assumption. assumption. } } } } } } }
+    { simpl. split.
+    { destruct a2.
+    { left. inversion H. inversion H2. assumption. unfold pow2heap in H4. contradiction. } 
+    { inversion H. unfold pow2heap in H2. assumption. } }
+    { apply IHp. inversion H. assumption. inversion H0. assumption. left. reflexivity. } }
+    + destruct a0.
+    { inversion H1.
+    { rewrite H2. inversion H0. simpl. split.
+    { assumption. } { apply IHp. inversion H. assumption. assumption. left. reflexivity. } }
+    { destruct c. 
+    { simpl. split. auto. apply IHp.
+    { inversion H. assumption. } { inversion H0. assumption. }
+    { unfold pow2heap in H2. destruct c2.
+    { left. reflexivity. }
+    { left. destruct a0_2.
+    { reflexivity. } { Admitted. 
+    (* } } }} } } *)
+
+Theorem merge_priq:  forall p q, priq p -> priq q -> priq (merge p q).
+Proof.
+    intros. unfold merge.
+    (* unfold priq. *)
+    (* HELPER LEMMA - case 2 *)
+    apply join_valid.
+    - assumption.
+    - assumption.
+    - left; reflexivity. 
+Qed.
+
+(* INCOMPLETE *)
+Theorem delete_max_Some_priq:
+  forall p q k, priq p -> delete_max p = Some(k,q) -> priq q.
+Proof.
+(* FILL IN HERE *) Admitted.
+
+(* ================================================================= *)
+(** ** The Abstraction Relation *)
+
+Inductive tree_elems: tree -> list key -> Prop :=
+| tree_elems_leaf: tree_elems Leaf nil
+| tree_elems_node:  forall bl br v tl tr b,
+           tree_elems tl bl ->
+           tree_elems tr br ->
+           Permutation b (v::bl++br) ->
+           tree_elems (Node v tl tr) b.
+
+Inductive priqueue_elems: list tree -> list key -> Prop :=
+| priqueue_elems_nil: priqueue_elems [] []
+| priqueue_elems_cons: forall cons_tree rest_trees cons_elems rest_elems new_elems,
+    tree_elems cons_tree cons_elems ->
+    priqueue_elems rest_trees rest_elems ->
+    Permutation new_elems (cons_elems ++ rest_elems) ->
+    priqueue_elems (cons_tree :: rest_trees) new_elems.
+
+Definition Abs (p: priqueue) (al: list key) := priqueue_elems p al.
+
+(* ================================================================= *)
+(** ** Sanity Checks on the Abstraction Relation *)
+
+Theorem tree_elems_ext: forall t e1 e2, Permutation e1 e2 -> tree_elems t e1 -> tree_elems t e2.
+Proof.
+    induction t; intros; simpl in *.
+    {
+    inversion H0; subst.
+    econstructor. { exact H4. } { exact H6. }
+    {
+        (* HELPER LEMMA - case 3 (generalized)*)
+        eapply Permutation_trans.
+        (* HELPER LEMMA - case 3 (non-generalized) -- includes existential variable *)
+        eapply Permutation_sym.
+        eassumption. assumption.
+    }
+    }
+    {
+    inversion H0; subst.
+    assert (e2 = []).
+    (* HELPER LEMMA - case 3 (non-generalized) *)
+    apply Permutation_nil.
+    assumption.
+    subst. assumption.
+    }
+Qed.
+
+Lemma Permutation_inv_cons: forall (A : Type) (l l' : list A) (a: A),
+    Permutation l l' -> Permutation (a :: l) (a :: l').
+Proof.
+    intros.
+    (* HELPER LEMMA - case 2 (new variables added - ghost) *)
+    eapply Permutation_trans.
+    - (* HELPER LEMMA - case 1 (existential needs to be filled) *)
+    apply Permutation_cons_append.
+    - (* HELPER LEMMA - case 2 *)
+    apply Permutation_sym.
+    (* HELPER LEMMA - case 2 (new variables added - ghost) *)
+    eapply Permutation_trans.
+    -- (* HELPER LEMMA - case 1 (existential needs to be filled) *)
+    apply Permutation_cons_append.
+    -- (* HELPER LEMMA - case 3 (generalized) *)
+    eapply Permutation_app_tail.
+    (* HELPER LEMMA - case 3 (non-generalized) *)
+    apply Permutation_sym.
+    assumption.
+Qed.
+
+Theorem tree_perm: forall t e1 e2, tree_elems t e1 -> tree_elems t e2 -> Permutation e1 e2.
+Proof.
+    induction t; intros; simpl in *.
+    {
+        inversion H; subst.
+        inversion H0; subst.
+        apply (IHt1 bl bl0) in H4; auto.
+        apply (IHt2 br br0) in H6; auto.
+        (* HELPER LEMMA - case 3 (non-generalized) *)
+        eapply Permutation_trans; try eassumption.
+        (* HELPER LEMMA - case 2 *)
+        eapply Permutation_sym.
+        (* HELPER LEMMA - case 2 (new variables added - ghost) *)
+        eapply Permutation_trans; try eassumption.
+        (* HELPER LEMMA - case 2 *)
+        apply Permutation_inv_cons.
+        (* HELPER LEMMA - case 3 (non-generalized) *)
+        apply Permutation_app.
+        { apply Permutation_sym. assumption. }
+        { apply Permutation_sym. assumption. }
+    }
+    {
+        inversion H; subst.
+        inversion H0; subst.
+        constructor.
+    }
+Qed.
+
+Theorem priqueue_elems_ext: forall q e1 e2, Permutation e1 e2 -> priqueue_elems q e1 -> priqueue_elems q e2.
+Proof.
+  induction q; intros;
+  inversion H0; subst.
+  {
+    assert (e2 = []).
+    {
+        (* HELPER LEMMA - case 3 (non-generalized) *)
+        apply Permutation_nil.
+        assumption.
+    }
+    { subst. constructor. }
+  }
+  {
+    econstructor; try eassumption.
+    (* HELPER LEMMA - case 2 *)
+    eapply Permutation_sym.
+    (* HELPER LEMMA - case 3 (generalized) (includes existential var)*)
+    eapply Permutation_trans.
+    (* HELPER LEMMA - case 3 (generalized) (includes existential var)*)
+    eapply Permutation_sym.
+    eassumption.
+    assumption.
+  }
+Qed.
+
+Lemma priqueue_perm: forall p elems1 elems2, priqueue_elems p elems1 -> priqueue_elems p elems2 -> Permutation elems1 elems2.
+Proof.
+  induction p; intros; simpl in *.
+  {
+    inversion H.
+    inversion H0.
+    constructor.
+  }
+  {
+    inversion H; subst.
+    inversion H0; subst.
+    (* HELPER LEMMA - case 3 (non-generalized) *)
+    eapply Permutation_trans; try eassumption.
+    (* HELPER LEMMA - case 2 *)
+    eapply Permutation_sym.
+    (* HELPER LEMMA - case 2 (new variables added - ghost) *)
+    eapply Permutation_trans; try eassumption.
+    (* HELPER LEMMA - case 3 (non-generalized) *)
+    apply Permutation_app.
+    {
+        (* HELPER LEMMA - case 3 (non-generalized) *)
+        eapply tree_perm; eassumption.
+    }
+    {
+        apply IHp; assumption.
+    }
+  }
+Qed.
+
+Theorem abs_perm: forall p al bl, priq p -> Abs p al -> Abs p bl -> Permutation al bl.
+Proof.
+  destruct p; intros; simpl in *.
+  {
+    inversion H0. inversion H1.
+    constructor.
+  }
+  {
+    inversion H0; subst.
+    inversion H1; subst.
+    (* HELPER LEMMA - case 3 (non-generalized) *)
+    eapply Permutation_trans.
+    eassumption.
+    (* HELPER LEMMA - case 2 *)
+    apply Permutation_sym.
+    (* HELPER LEMMA - case 2 (new variables added - ghost) *)
+    eapply Permutation_trans; try eassumption.
+    clear H7 H10 H H0 H1.
+    (* HELPER LEMMA - case 3 (non-generalized) *)
+    apply Permutation_app.
+    {
+        (* HELPER LEMMA - case 3 (non-generalized) *)
+        eapply tree_perm; eassumption.
+    }
+    {
+        (* HELPER LEMMA - case 3 (non-generalized) *)
+        eapply priqueue_perm; eassumption.
+    }
+  }
+Qed.
+
+Lemma tree_can_relate: forall t, exists al, tree_elems t al.
+Proof.
+  induction t.
+  {
+    inversion IHt1.
+    inversion IHt2.
+    eexists.
+    econstructor; try eassumption.
+    (* HELPER LEMMA - case 1 (existential variable) *)
+    apply Permutation_refl.
+  }
+  {
+    eexists.
+    constructor.
+  }
+Qed.
+
+Theorem can_relate:  forall p, priq p -> exists al, Abs p al.
+Proof.
+(* FILL IN HERE *) Admitted.
+
+
+(* ================================================================= *)
+Theorem empty_relate:  Abs empty nil.
+Proof.
+(* FILL IN HERE *) Admitted.
+
+(* Warning:  This proof is rather long. *)
+Theorem smash_elems: forall n t u bt bu,
+                     pow2heap n t -> pow2heap n u ->
+                     tree_elems t bt -> tree_elems u bu ->
+                     tree_elems (smash t u) (bt ++ bu).
+(* FILL IN HERE *) Admitted.
+
+(* ================================================================= *)
+(** ** Optional Exercises *)
+(**  Some of these proofs are quite long, but they're not especially tricky. *)
+
+Theorem carry_elems:
+      forall n q,  priq' n q ->
+      forall t, (t=Leaf \/ pow2heap n t) ->
+      forall eq et, priqueue_elems q eq ->
+                          tree_elems t et ->
+                          priqueue_elems (carry q t) (eq++et).
+(* FILL IN HERE *) Admitted.
+
+Theorem insert_relate:
+        forall p al k, priq p -> Abs p al -> Abs (insert k p) (k::al).
+(* FILL IN HERE *) Admitted.
+
+Theorem join_elems:
+                forall p q c n,
+                      priq' n p ->
+                      priq' n q ->
+                      (c=Leaf \/ pow2heap n c) ->
+                  forall pe qe ce,
+                             priqueue_elems p pe ->
+                             priqueue_elems q qe ->
+                             tree_elems c ce ->
+                              priqueue_elems (join p q c) (ce++pe++qe).
+(* FILL IN HERE *) Admitted.
+
+Theorem merge_relate:
+    forall p q pl ql al,
+       priq p -> priq q ->
+       Abs p pl -> Abs q ql -> Abs (merge p q) al ->
+       Permutation al (pl++ql).
+Proof.
+(* FILL IN HERE *) Admitted.
+
+Theorem delete_max_None_relate:
+        forall p, priq p -> (Abs p nil <-> delete_max p = None).
+(* FILL IN HERE *) Admitted.
+
+Theorem delete_max_Some_relate:
+  forall (p q: priqueue) k (pl ql: list key), priq p ->
+   Abs p pl ->
+   delete_max p = Some (k,q) ->
+   Abs q ql ->
+   Permutation pl (k::ql) /\ Forall (ge k) ql.
+(* FILL IN HERE *) Admitted.
+
+
+End BinomQueue.
+
