@@ -1,4 +1,4 @@
-# Verified Functional Algorithms - Selection Chapter
+# Verified Functional Algorithms - Binom Chapter
 
 **How to Run**
 1. Install findlemma before running any tests.

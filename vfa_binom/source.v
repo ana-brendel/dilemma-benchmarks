@@ -1,97 +1,13 @@
-From Coq Require Import Strings.String. (* for manual grading *)
-From VFA Require Import Perm.
-From VFA Require Import Priqueue.
-Require Import Lia.
+(* From LFindToo Require Import LFindToo. *)
 
-Module BinomQueue <: PRIQUEUE.
+Require Import vfa_binom_benchmarks.Definitions.
+Require Import vfa_binom_benchmarks.Decide.
 
-Definition key := nat.
 
-Inductive tree : Type :=
-|  Node: key -> tree -> tree -> tree
-|  Leaf : tree.
-
-Definition priqueue := list tree.
-
-Definition empty : priqueue := nil.
-
-Definition smash (t u:  tree) : tree :=
-  match t , u with
-  |  Node x t1 Leaf, Node y u1 Leaf =>
-                   if  x >? y then Node x (Node y u1 t1) Leaf
-                                else Node y (Node x t1 u1) Leaf
-  | _ , _ => Leaf  (* arbitrary bogus tree *)
-  end.
-
-Fixpoint carry (q: list tree) (t: tree) : list tree :=
-  match q, t with
-  | nil, Leaf        => nil
-  | nil, _            => t :: nil
-  | Leaf :: q', _  => t :: q'
-  | u :: q', Leaf  => u :: q'
-  | u :: q', _       => Leaf :: carry q' (smash t u)
- end.
-
-Definition insert (x: key) (q: priqueue) : priqueue :=
-     carry q (Node x Leaf Leaf).
-
-Fixpoint join (p q: priqueue) (c: tree) : priqueue :=
-  match p, q, c with
-    [], _ , _            => carry q c
-  | _, [], _             => carry p c
-  | Leaf::p', Leaf::q', _              => c :: join p' q' Leaf
-  | Leaf::p', q1::q', Leaf            => q1 :: join p' q' Leaf
-  | Leaf::p', q1::q', Node _ _ _  => Leaf :: join p' q' (smash c q1)
-  | p1::p', Leaf::q', Leaf            => p1 :: join p' q' Leaf
-  | p1::p', Leaf::q',Node _ _ _   => Leaf :: join p' q' (smash c p1)
-  | p1::p', q1::q', _                   => c :: join p' q' (smash p1 q1)
- end.
-
-Fixpoint unzip (t: tree) (cont: priqueue -> priqueue) : priqueue :=
-  match t with
-  |  Node x t1 t2   => unzip t2 (fun q => Node x t1 Leaf  :: cont q)
-  | Leaf => cont nil
-  end.
-
-Definition heap_delete_max (t: tree) : priqueue :=
-  match t with
-    Node x t1 Leaf  => unzip t1 (fun u => u)
-  | _ => nil   (* bogus value for ill-formed or empty trees *)
-  end.
-
-Fixpoint find_max' (current: key) (q: priqueue) : key :=
-  match q with
-  |  []         => current
-  | Leaf::q' => find_max' current q'
-  | Node x _ _ :: q' => find_max' (if x >? current then x else current) q'
-  end.
-
-Fixpoint find_max (q: priqueue) : option key :=
-  match q with
-  | [] => None
-  | Leaf::q' => find_max q'
-  | Node x _ _ :: q' => Some (find_max' x q')
- end.
-
-Fixpoint delete_max_aux (m: key) (p: priqueue) : priqueue * priqueue :=
-  match p with
-  | Leaf :: p'   => let (j,k) := delete_max_aux m p'  in (Leaf::j, k)
-  | Node x t1 Leaf :: p' =>
-       if m >? x
-       then (let (j,k) := delete_max_aux m p'
-             in (Node x t1 Leaf::j,k))
-       else (Leaf::p', heap_delete_max (Node x t1 Leaf))
-  | _ => (nil, nil) (* Bogus value *)
-  end.
-
-Definition delete_max (q: priqueue) : option (key * priqueue) :=
-  match find_max q with
-  | None => None
-  | Some  m => let (p',q') := delete_max_aux m q
-                            in Some (m, join p' q' Leaf)
-  end.
-
-Definition merge (p q: priqueue) := join p q Leaf.
+(* These specify the libraries of functions that should be considered during synthesis that 
+    are not defined within the above libraries. *)
+Require Import Coq.Lists.List.
+Require Import Coq.Sorting.Permutation. 
 
 (* ################################################################# *)
 (** * Characterization Predicates *)
@@ -328,48 +244,7 @@ Theorem join_valid: forall p q c n, priq' n p -> priq' n q -> (c=Leaf \/ pow2hea
     * apply IHp. inversion H. assumption. inversion H0. assumption. left. reflexivity.
     * destruct a0_2.
     ** apply IHp. inversion H. assumption. inversion H0. assumption. left. reflexivity.
-    ** bdestruct (k >? k0).
-        { apply IHp. inversion H. assumption. inversion H0. assumption. right. inversion H. inversion H0. simpl. split.
-        { unfold ge. lia. }
-        { split. 
-        { destruct H5. inversion H5. unfold pow2heap in H5. assumption. }
-        { destruct H3. inversion H3. unfold pow2heap in H3. assumption. } } } 
-        { apply IHp. inversion H. assumption. inversion H0. assumption. right. inversion H. inversion H0. simpl. split.
-        { unfold ge. lia. }
-        { split.
-        { destruct H3. inversion H3. unfold pow2heap in H3. assumption. }
-        { destruct H5. inversion H5. unfold pow2heap in H5. assumption. } } }
-    ++ destruct c.
-    { simpl. split. auto. apply IHp.
-    { inversion H. assumption. }
-    { inversion H0. assumption. }
-    { destruct H1.
-    { inversion H1. }
-    { unfold pow2heap in H1. destruct c2.
-    { auto. }  { destruct a2. { auto. }
-    { bdestruct (k0 >? k).
-        { right. simpl. split. { unfold ge. lia. }
-        { split. { destruct H. inversion H. inversion H4. unfold pow2heap in H4.  assumption. }  { assumption. } } }
-        { right. unfold pow2heap. inversion H. inversion H3. inversion H5. unfold pow2heap in H5. simpl. split.
-        { unfold ge. lia. }
-        { split. assumption. assumption. } } } } } } }
-    { simpl. split.
-    { destruct a2.
-    { left. inversion H. inversion H2. assumption. unfold pow2heap in H4. contradiction. } 
-    { inversion H. unfold pow2heap in H2. assumption. } }
-    { apply IHp. inversion H. assumption. inversion H0. assumption. left. reflexivity. } }
-    + destruct a0.
-    { inversion H1.
-    { rewrite H2. inversion H0. simpl. split.
-    { assumption. } { apply IHp. inversion H. assumption. assumption. left. reflexivity. } }
-    { destruct c. 
-    { simpl. split. auto. apply IHp.
-    { inversion H. assumption. } { inversion H0. assumption. }
-    { unfold pow2heap in H2. destruct c2.
-    { left. reflexivity. }
-    { left. destruct a0_2.
-    { reflexivity. } { Admitted. 
-    (* } } }} } } *)
+    ** Admitted.
 
 Theorem merge_priq:  forall p q, priq p -> priq q -> priq (merge p q).
 Proof.
@@ -653,6 +528,4 @@ Theorem delete_max_Some_relate:
    Permutation pl (k::ql) /\ Forall (ge k) ql.
 (* FILL IN HERE *) Admitted.
 
-
-End BinomQueue.
 
