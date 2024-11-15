@@ -10,32 +10,6 @@ Require Import Coq.Lists.List.
 Require Import Coq.Sorting.Permutation. 
 
 (* ################################################################# *)
-(** * Characterization Predicates *)
-
-Fixpoint pow2heap' (n: nat) (m: key) (t: tree) :=
- match n, m, t with
-    0, m, Leaf       => True
-  | 0, m, Node _ _ _  => False
-  | S _, m,Leaf    => False
-  | S n', m, Node k l r  =>
-       m >= k /\ pow2heap' n' k l /\ pow2heap' n' m r
- end.
-
-Definition pow2heap (n: nat) (t: tree) :=
-  match t with
-    Node m t1 Leaf => pow2heap' n m t1
-  | _ => False
-  end.
-
-Fixpoint priq'  (i: nat) (l: list tree) : Prop :=
-   match l with
-  | t :: l' => (t=Leaf \/ pow2heap i t) /\ priq' (S i) l'
-  | nil => True
- end.
-
-Definition priq (q: priqueue) : Prop := priq' 0 q.
-
-(* ################################################################# *)
 (** * Proof of Algorithm Correctness *)
 
 (** **** Exercise: 1 star, standard (empty_priq)  *)
