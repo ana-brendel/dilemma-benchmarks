@@ -1,3 +1,4 @@
+From LFindToo Require Import LFindToo.
 
 Require Import Bool.
 Require Import Arith.
@@ -67,3 +68,14 @@ Proof.
   - unfold has_leftist_property. reflexivity.
   - assumption.
 Qed.
+
+Theorem leftist_hinsert_mulit : forall (l : lst) (h : heap), (has_leftist_property h) = true -> (has_leftist_property (hinsert_all l h)) = true.
+Proof.
+  intros.
+  induction l.
+  - simpl. 
+  findlemma. Admitted.
+
+  (* apply leftist_hinsert. assumption.
+  - simpl. assumption.
+Qed. *)

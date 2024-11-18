@@ -1,3 +1,4 @@
+From LFindToo Require Import LFindToo.
 
 Require Import Bool.
 Require Import Arith.
@@ -63,7 +64,10 @@ Qed.
 Theorem leftist_hinsert : forall (x : heap) (n : nat),
   has_leftist_property x = true -> has_leftist_property (hinsert x n) = true.
 Proof.
-  intros. unfold hinsert. apply leftist_merge. apply andb_true_iff. split.
+  intros. unfold hinsert. 
+  findlemma. Admitted.
+  
+  (* apply leftist_merge. apply andb_true_iff. split.
   - unfold has_leftist_property. reflexivity.
   - assumption.
-Qed.
+Qed. *)

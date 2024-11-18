@@ -1,3 +1,4 @@
+From LFindToo Require Import LFindToo.
 
 Require Import Bool.
 Require Import Arith.
@@ -52,18 +53,12 @@ Proof.
   - intros. induction h2.
     + simpl. apply andb_true_iff in H. destruct H. simpl in H. assumption.
     + apply andb_true_iff in H. destruct H. simpl in H. apply andb_true_iff in H. destruct H. apply andb_true_iff in H. destruct H. apply andb_true_iff in H. destruct H. simpl. destruct (n2 <? n0).
-      * apply leftist_mergea. apply andb_true_iff. split.
+      * findlemma. Admitted.
+
+      (* apply leftist_mergea. apply andb_true_iff. split.
         -- assumption.
         -- apply IHh1_2. rewrite H3. rewrite H0. reflexivity.
       * simpl in H0. apply andb_true_iff in H0. destruct H0. apply andb_true_iff in H0. destruct H0. apply andb_true_iff in H0. destruct H0. simpl in IHh2_2. apply leftist_mergea. apply andb_true_iff. split.
         -- assumption.
         -- apply IHh2_2. rewrite H. rewrite H3. rewrite H2. rewrite H1. rewrite H6. reflexivity.
-Qed.
-
-Theorem leftist_hinsert : forall (x : heap) (n : nat),
-  has_leftist_property x = true -> has_leftist_property (hinsert x n) = true.
-Proof.
-  intros. unfold hinsert. apply leftist_merge. apply andb_true_iff. split.
-  - unfold has_leftist_property. reflexivity.
-  - assumption.
-Qed.
+Qed. *)
