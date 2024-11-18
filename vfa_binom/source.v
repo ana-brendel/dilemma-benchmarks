@@ -60,10 +60,16 @@ Proof.
     { inversion H. }
 Qed.
 
-(* INCOMPLETE *)
 Theorem carry_valid: forall n q,  priq' n q -> forall t, (t=Leaf \/ pow2heap n t) -> priq' n (carry q t).
 Proof.
-(* FILL IN HERE *) Admitted.
+  intros n q H. generalize dependent n. induction q. destruct t. simpl. split. 
+  right. inversion H0. contradict H1. discriminate. simpl in H1. assumption. auto.
+  simpl. auto.
+  intros. inversion H0. rewrite H1. simpl. destruct a. assumption. assumption.
+  destruct a. simpl. destruct t. 
+  assert (pow2heap (S n) (smash (Node k0 t1 t2) (Node k a1 a2))). apply smash_valid. assumption. inversion H. inversion H2. contradict H4. discriminate. assumption. inversion H. unfold priq'. split. left. reflexivity. fold priq'. apply IHq. assumption. right. assumption.
+  contradict H1. simpl. split. assumption. inversion H. assumption.
+Qed.
 
 Theorem insert_priq: forall x q, priq q -> priq (insert x q).
   induction q.
@@ -101,165 +107,99 @@ Theorem insert_priq: forall x q, priq q -> priq (insert x q).
   }
 Qed.
 
-(* INCOMPLETE *)
 Theorem join_valid: forall p q c n, priq' n p -> priq' n q -> (c=Leaf \/ pow2heap n c) -> priq' n (join p q c).
-  induction p; induction q.
-  {
-    intros; simpl.
-    inversion H1; subst; auto.
-    unfold pow2heap in H2.
-    destruct c.
-    {
-      destruct c2. { inversion H2. }
-      { simpl. split; auto. }
-    }
-    {
-      auto.
-    }
-  }
-  {
-    intros.
-    simpl.
-    simpl in H0.
-    inversion H0.
-    inversion H2.
-    { subst.
-      simpl. auto.
-    }
-    { unfold pow2heap in H4.
-      destruct a.
-      destruct a2. inversion H4.
-      inversion H1; subst; auto.
-      unfold pow2heap in H5.
-      destruct c; simpl in H5; auto.
-      simpl. destruct c2; simpl in H5; auto.
-      split; auto.
-      (* HELPER LEMMA - case 2 *)
-      apply carry_valid. 
-      auto.
-      destruct (k0 >? k) eqn:Hk.
-      {
-        right. simpl.
-        split.
-        (* HELPER LEMMA - case 3 (non-generalized) *)
-        apply smash_valid_helper_1. auto.
-        auto.
-      }
-      {
-        right.
-        simpl.
-        split; auto.
-        (* HELPER LEMMA - case 3 (non-generalized) *)
-        apply smash_valid_helper_2; auto.
-      }
-      {
-        simpl.
-        split; auto.
-      }
-    }
-  }
-  {
-    intros.
-    simpl. simpl in H.
-    inversion H.
-    inversion H2.
-    {
-      subst. simpl.
-      split; auto.
-    }
-    {
-      unfold pow2heap in H4.
-      destruct a.
-      destruct a2.
-      {
-        inversion H4.
-      }
-      {
-        inversion H1.
-        subst.
-        simpl.
-        split; auto.
-        unfold pow2heap in H5.
-        destruct c.
-        destruct c2.
-        inversion H5.
-        simpl.
-        split; auto.
-        destruct (k0 >? k) eqn:Hk.
-        {
-            (* HELPER LEMMA - case 2 *)
-            apply carry_valid. auto.
-            right. simpl.
-            (* HELPER LEMMA - (could rewrite to) case 3 (non-generalized) *)
-            apply smash_valid_helper_1 in Hk.
-            split; auto.
-        }
-        {
-            (* HELPER LEMMA - case 2 *)
-            apply carry_valid. auto.
-            right. simpl.
-            split; auto. 
-            (* HELPER LEMMA - case 3 (non-generalized) *)
-            apply smash_valid_helper_2; auto.
-        }
-        { inversion H5.
-        }
-      }
-      {
-        inversion H4.
-      }
-    }
-  }
-  { (* No HLemmas used*)
-    intros.
-    simpl. destruct a.
-    + destruct a0.
-    ++ simpl. split. assumption. destruct a2. 
-    * apply IHp. inversion H. assumption. inversion H0. assumption. left. reflexivity.
-    * destruct a0_2.
-    ** apply IHp. inversion H. assumption. inversion H0. assumption. left. reflexivity.
-    ** Admitted.
+Proof.
+  induction p. 
+  - intros. simpl. apply carry_valid. assumption. assumption.
+  - intros. destruct a. 
+  * destruct q.
+  ** unfold join. apply carry_valid. assumption. assumption.
+  ** destruct t.
+  + destruct c.
+  ++ unfold join. fold join. unfold priq'. fold priq'. split. assumption. apply IHp.
+  +++ inversion H. assumption.
+  +++ inversion H0. assumption.
+  +++ right. apply smash_valid.
+  ++++ inversion H. inversion H2. discriminate. assumption.
+  ++++ inversion H0. inversion H2. discriminate. assumption.
+  ++ unfold join. fold join. unfold priq'. fold priq'. split.
+  +++ left. reflexivity.
+  +++ apply IHp. inversion H. assumption. inversion H0. assumption. right. apply smash_valid.
+  -- inversion H. inversion H2. discriminate. assumption.
+  -- inversion H0. inversion H2. discriminate. assumption.
+  + destruct c.
+  ++ unfold join. fold join. unfold priq'. fold priq'. split.
+  +++ left. reflexivity.
+  +++ apply IHp. inversion H. assumption. inversion H0. assumption. right. apply smash_valid. 
+  -- inversion H. inversion H2. discriminate. inversion H1. discriminate. assumption.
+  -- inversion H. inversion H2. discriminate. assumption.
+  ++ unfold join. fold join. unfold priq'. fold priq'. split. 
+  +++ right. inversion H. inversion H2. discriminate. assumption.
+  +++ apply IHp. inversion H. assumption. inversion H0. assumption. left. reflexivity.
+  * destruct q. 
+  ** simpl. split. assumption. inversion H. assumption.
+  ** destruct c. 
+  *** unfold join. fold join. destruct t.
+  + unfold priq'. fold priq'. split.
+  ++ left. reflexivity.
+  ++ apply IHp. inversion H. assumption. inversion H0. assumption. right. apply smash_valid. inversion H1. discriminate. assumption. inversion H0. inversion H2. discriminate. assumption.
+  + unfold priq'. fold priq'. split. assumption. apply IHp. inversion H. assumption. inversion H0. assumption. left. reflexivity.
+  *** unfold join. fold join. destruct t.
+  + unfold priq'. fold priq'. split.
+  ++ right. inversion H0. inversion H2. discriminate. assumption.
+  ++ apply IHp. inversion H. assumption. inversion H0. assumption. left. reflexivity.
+  + unfold priq'. fold priq'. split. assumption. apply IHp. inversion H. assumption. inversion H0. assumption. assumption.
+Qed.
 
 Theorem merge_priq:  forall p q, priq p -> priq q -> priq (merge p q).
 Proof.
-    intros. unfold merge.
-    (* unfold priq. *)
-    (* HELPER LEMMA - case 2 *)
-    apply join_valid.
-    - assumption.
-    - assumption.
-    - left; reflexivity. 
+ intros. unfold merge. apply join_valid; auto.
 Qed.
 
-(* INCOMPLETE *)
-Theorem delete_max_Some_priq:
-  forall p q k, priq p -> delete_max p = Some(k,q) -> priq q.
+Lemma unzip_preq: forall t f n k, pow2heap' n k t -> priq' n (f nil) -> priq (unzip t f).
 Proof.
-(* FILL IN HERE *) Admitted.
+  induction t. 
+  - intros. simpl. destruct n. contradict H. apply (IHt2 _ n k0).
+  -- inversion H. inversion H2. assumption.
+  -- simpl. split.
+  * inversion H. inversion H2. right. assumption.
+  * assumption.
+  - intros. simpl. destruct n.
+  -- assumption.
+  -- inversion H.
+Qed.
 
-(* ================================================================= *)
-(** ** The Abstraction Relation *)
+Lemma delete_max_aux_priq: forall p n m q q', priq' n p -> delete_max_aux m p = (q,q') -> priq' n q /\ priq q'.
+Proof.
+  induction p. 
+  - intros. simpl in H0. inversion H0. split. assumption. assumption.
+  - intros. simpl in H0. destruct a.
+  -- destruct a2.
+  + inversion H0. split. unfold priq. reflexivity. unfold priq. reflexivity.
+  + destruct (m >? k).
+  ++ inversion H. destruct (delete_max_aux m p) eqn : D. apply (IHp (S n)) in D.
+  +++ inversion D. inversion H0. split.
+  * unfold priq'. fold priq'. inversion H. split. assumption. assumption.
+  * inversion H0. rewrite <- H9. assumption.
+  +++ assumption.
+  ++ inversion H0. split.
+  +++ simpl. split. left. reflexivity. inversion H. assumption.
+  +++ apply (unzip_preq _ _ n k). inversion H. inversion H1. discriminate. assumption. reflexivity.
+  -- destruct (delete_max_aux m p) eqn : D. apply (IHp (S n)) in D.
+  + inversion D. inversion H0. split.
+  ++ unfold priq'. fold priq'. inversion H. split. assumption. assumption.
+  ++ rewrite <- H5. assumption.
+  + inversion H. assumption.
+Qed.
 
-Inductive tree_elems: tree -> list key -> Prop :=
-| tree_elems_leaf: tree_elems Leaf nil
-| tree_elems_node:  forall bl br v tl tr b,
-           tree_elems tl bl ->
-           tree_elems tr br ->
-           Permutation b (v::bl++br) ->
-           tree_elems (Node v tl tr) b.
-
-Inductive priqueue_elems: list tree -> list key -> Prop :=
-| priqueue_elems_nil: priqueue_elems [] []
-| priqueue_elems_cons: forall cons_tree rest_trees cons_elems rest_elems new_elems,
-    tree_elems cons_tree cons_elems ->
-    priqueue_elems rest_trees rest_elems ->
-    Permutation new_elems (cons_elems ++ rest_elems) ->
-    priqueue_elems (cons_tree :: rest_trees) new_elems.
-
-Definition Abs (p: priqueue) (al: list key) := priqueue_elems p al.
-
-(* ================================================================= *)
-(** ** Sanity Checks on the Abstraction Relation *)
+Theorem delete_max_Some_priq: forall p q k, priq p -> delete_max p = Some(k,q) -> priq q.
+Proof.
+  intros. unfold delete_max in H0. destruct (find_max p) eqn : F.
+  - destruct (delete_max_aux k0 p) eqn : D. inversion H0. apply (delete_max_aux_priq _ 0) in D.
+  -- inversion D. apply join_valid. assumption. assumption. left. reflexivity.
+  -- assumption.
+  - discriminate.
+Qed. 
 
 Theorem tree_elems_ext: forall t e1 e2, Permutation e1 e2 -> tree_elems t e1 -> tree_elems t e2.
 Proof.
@@ -437,69 +377,80 @@ Proof.
   }
 Qed.
 
+Lemma priq'_can_relate: forall p n, priq' n p -> exists al, priqueue_elems p al.
+Proof.
+  induction p. 
+  - intros. exists nil. apply priqueue_elems_nil.
+  - intros. inversion H. assert (exists al, tree_elems a al).
+  -- apply tree_can_relate.
+  -- inversion H2. apply IHp in H1. inversion H1. exists (x++x0). eapply priqueue_elems_cons.
+  + apply H3. + apply H4. + apply Permutation_refl.
+Qed.
+
 Theorem can_relate:  forall p, priq p -> exists al, Abs p al.
 Proof.
-(* FILL IN HERE *) Admitted.
-
+  intros. eapply priq'_can_relate. apply H.
+Qed.
 
 (* ================================================================= *)
 Theorem empty_relate:  Abs empty nil.
 Proof.
-(* FILL IN HERE *) Admitted.
+  unfold Abs. apply priqueue_elems_nil.
+Qed.
 
-(* Warning:  This proof is rather long. *)
-Theorem smash_elems: forall n t u bt bu,
-                     pow2heap n t -> pow2heap n u ->
-                     tree_elems t bt -> tree_elems u bu ->
-                     tree_elems (smash t u) (bt ++ bu).
-(* FILL IN HERE *) Admitted.
+Theorem smash_elems: forall n t u bt bu, pow2heap n t -> pow2heap n u -> tree_elems t bt -> 
+  tree_elems u bu -> tree_elems (smash t u) (bt ++ bu).
+Proof.
+  intros. unfold pow2heap in H. unfold pow2heap in H0. destruct t.
+  - destruct u.
+  -- destruct t2. 
+  --- contradict H.
+  --- destruct u2.
+  + contradict H0.
+  + simpl. destruct (k >? k0).
+  ++ inversion H1. inversion H2. apply (tree_elems_node (k0::bl0++bl) nil).
+  +++ eapply tree_elems_node. apply H13. apply H6. apply Permutation_refl.
+  +++ apply tree_elems_leaf.
+  +++ simpl. inversion H15. rewrite <- H18 in H16. inversion H8. rewrite <- H19 in H9. rewrite app_nil_r. rewrite app_nil_r in H9.
+   rewrite app_nil_r in H16. apply (@Permutation_trans _ _ ((k::bl) ++ (k0::bl0))).
+   * apply Permutation_app. assumption. assumption.
+   * simpl. apply perm_skip. apply Permutation_app_comm.
+  ++ inversion H1. inversion H2. apply (tree_elems_node (k::bl++bl0) nil).
+  +++ eapply tree_elems_node. apply H6. apply H13. apply Permutation_refl.
+  +++ apply tree_elems_leaf.
+  +++ simpl. inversion H15. rewrite <- H18 in H16. inversion H8. rewrite <- H19 in H9. rewrite app_nil_r. rewrite app_nil_r in H9.
+   rewrite app_nil_r in H16. apply (@Permutation_trans _ _ ((k::bl) ++ (k0::bl0))).
+   * apply Permutation_app. assumption. assumption.
+   * apply (@Permutation_trans _ _ ((k0::bl0) ++ (k::bl))). apply Permutation_app_comm. simpl. apply perm_skip. apply Permutation_app_comm.
+  -- contradict H0.
+  - contradict H.
+Qed.
 
 (* ================================================================= *)
 (** ** Optional Exercises *)
 (**  Some of these proofs are quite long, but they're not especially tricky. *)
 
-Theorem carry_elems:
-      forall n q,  priq' n q ->
-      forall t, (t=Leaf \/ pow2heap n t) ->
-      forall eq et, priqueue_elems q eq ->
-                          tree_elems t et ->
-                          priqueue_elems (carry q t) (eq++et).
-(* FILL IN HERE *) Admitted.
+Theorem carry_elems: forall n q,  priq' n q -> 
+  forall t, (t=Leaf \/ pow2heap n t) ->
+  forall eq et, priqueue_elems q eq -> tree_elems t et -> priqueue_elems (carry q t) (eq++et).
+Proof. (* FILL IN HERE *) Admitted.
 
-Theorem insert_relate:
-        forall p al k, priq p -> Abs p al -> Abs (insert k p) (k::al).
-(* FILL IN HERE *) Admitted.
+Theorem insert_relate: forall p al k, priq p -> Abs p al -> Abs (insert k p) (k::al).
+Proof. (* FILL IN HERE *) Admitted.
 
-Theorem join_elems:
-                forall p q c n,
-                      priq' n p ->
-                      priq' n q ->
-                      (c=Leaf \/ pow2heap n c) ->
-                  forall pe qe ce,
-                             priqueue_elems p pe ->
-                             priqueue_elems q qe ->
-                             tree_elems c ce ->
-                              priqueue_elems (join p q c) (ce++pe++qe).
-(* FILL IN HERE *) Admitted.
+Theorem join_elems: forall p q c n, priq' n p -> priq' n q -> (c=Leaf \/ pow2heap n c) ->
+  forall pe qe ce, priqueue_elems p pe -> priqueue_elems q qe -> tree_elems c ce -> priqueue_elems (join p q c) (ce++pe++qe).
+Proof. (* FILL IN HERE *) Admitted.
 
-Theorem merge_relate:
-    forall p q pl ql al,
-       priq p -> priq q ->
-       Abs p pl -> Abs q ql -> Abs (merge p q) al ->
-       Permutation al (pl++ql).
-Proof.
-(* FILL IN HERE *) Admitted.
+Theorem merge_relate: forall p q pl ql al,
+  priq p -> priq q -> Abs p pl -> Abs q ql -> Abs (merge p q) al -> Permutation al (pl++ql).
+Proof. (* FILL IN HERE *) Admitted.
 
-Theorem delete_max_None_relate:
-        forall p, priq p -> (Abs p nil <-> delete_max p = None).
-(* FILL IN HERE *) Admitted.
+Theorem delete_max_None_relate: forall p, priq p -> (Abs p nil <-> delete_max p = None).
+Proof. (* FILL IN HERE *) Admitted.
 
-Theorem delete_max_Some_relate:
-  forall (p q: priqueue) k (pl ql: list key), priq p ->
-   Abs p pl ->
-   delete_max p = Some (k,q) ->
-   Abs q ql ->
-   Permutation pl (k::ql) /\ Forall (ge k) ql.
-(* FILL IN HERE *) Admitted.
+Theorem delete_max_Some_relate: forall (p q: priqueue) k (pl ql: list key), 
+  priq p -> Abs p pl -> delete_max p = Some (k,q) -> Abs q ql -> Permutation pl (k::ql) /\ Forall (ge k) ql.
+Proof. (* FILL IN HERE *) Admitted.
 
 
