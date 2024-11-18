@@ -1,7 +1,3 @@
-Load LFindLoad.
-From lfind Require Import LFind.
-Unset Printing Notations.
-Set Printing Implicit.
 Require Import Arith.
 Inductive tree : Type :=
   | Leaf : tree
@@ -43,20 +39,6 @@ match (n, m) with
   | _ => false
 end. 
 
-Lemma leb_refl : forall n, leb n n = true.
-Proof.
-induction n. reflexivity. simpl. apply IHn.
-Qed.
-
-Lemma leb_m_Sn : forall m n, leb m n = true -> leb m (S n) = true.
-Proof.
-induction m.
-- intros. reflexivity.
-- intros. simpl. destruct n.
-  + inversion H.
-  + apply IHm. simpl in H. apply H.
-Qed.
-
 Lemma helper : forall t n, (tsize (tinsert t n)) = S (tsize t).
 Proof.
 intros. induction t.
@@ -72,7 +54,5 @@ Proof.
   intros. induction l.
   - simpl. auto with arith.
   - simpl. rewrite IHl.
-  lfind_debug.
-  Admitted.
-    (* rewrite helper. auto.
-Qed. *)
+    rewrite helper. auto.
+Qed.

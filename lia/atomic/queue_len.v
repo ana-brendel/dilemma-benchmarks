@@ -1,7 +1,3 @@
-Load LFindLoad.
-From lfind Require Import LFind.
-Unset Printing Notations.
-Set Printing Implicit.
 Require Import Nat.
 
 Inductive lst : Type :=
@@ -16,6 +12,13 @@ match l with
   | Nil => 0
   | Cons a l1 => 1 + (len l1)
 end.
+
+Lemma len_pos: forall l, (len l) >= 0.
+Proof.
+  induction l.
+  - simpl. apply le_0_n.
+  - simpl. apply le_0_n.
+Qed.
 
 Definition qlen (q : queue) : nat :=
 match q with
@@ -45,11 +48,6 @@ Definition amortizeQueue (l1 l2 : lst) : queue :=
   if leb (len l2)  (len l1) then Queue l1 l2
   else Queue (app l1 (rev l2)) Nil.
 
-Definition qpush (q : queue) (n : nat) : queue :=
-match q with
-  | Queue l1 l2 => amortizeQueue l1 (Cons n l2)
-end.
-
 
 Lemma len_app : forall l1 l2, len (app l1 l2) = (len l1) + (len l2).
 Proof.
@@ -72,16 +70,10 @@ induction l.
 - simpl. rewrite len_app. simpl. rewrite plus_comm. simpl. rewrite IHl. reflexivity.
 Qed.
 
-Theorem queue_push : forall q n, qlen (qpush q n) = 1 + (qlen q).
+Theorem queue_len : forall l1 l2, qlen (amortizeQueue l1 l2) = (len l1) + (len l2).
 Proof.
-  intros. simpl. destruct q. unfold qpush. unfold qlen. unfold amortizeQueue.
-  destruct (leb (len (Cons n l0)) (len l)).
-  - simpl. rewrite plus_n_Sm. reflexivity.
+  intros. unfold amortizeQueue. destruct (leb (len l2) (len l1)).
+  - simpl. reflexivity.
   - simpl. rewrite <- plus_n_O. 
-    rewrite len_app. 
-    lfind_debug.
-  Admitted.
-
-    (* rewrite len_app. rewrite len_rev. 
-    simpl. rewrite plus_n_Sm. rewrite (plus_comm (len l0)). reflexivity. 
-Qed. *)
+    rewrite len_app. f_equal. rewrite len_rev. reflexivity.
+Qed.
