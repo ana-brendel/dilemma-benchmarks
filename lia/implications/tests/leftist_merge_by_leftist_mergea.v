@@ -1,10 +1,12 @@
 From LFindToo Require Import LFindToo.
 
+Require Import lia_heap_benchmarks.Definitions.
+Require Import lia_heap_benchmarks.Decide.
+
 Require Import Bool.
 Require Import Arith.
 
-Require Import lia_heap_benchmarks.Definitions.
-Require Import lia_heap_benchmarks.Decide.
+Open Scope nat_scope.
 
 Lemma rank_right_height : forall h : heap,
   has_leftist_property h = true -> rank h = right_height h.
