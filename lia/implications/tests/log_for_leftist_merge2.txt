@@ -1,0 +1,35 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (forall h2 : heap,
+ has_leftist_property h1_1 && has_leftist_property h2 = true ->
+ has_leftist_property (merge h1_1 h2) = true)
+ -- (has_leftist_property (Heap n n0 h1_1 h1_2) && has_leftist_property h2_1 =
+ true -> has_leftist_property (merge (Heap n n0 h1_1 h1_2) h2_1) = true)
+ -- (has_leftist_property (Heap n n0 h1_1 h1_2) && has_leftist_property h2_2 =
+ true -> has_leftist_property (merge (Heap n n0 h1_1 h1_2) h2_2) = true)
+ -- ((right_height h1_2 <=? right_height h1_1) = true)
+ -- (has_leftist_property (Heap n1 n2 h2_1 h2_2) = true)
+ -- (forall h2 : heap,
+ has_leftist_property h1_2 && has_leftist_property h2 = true ->
+ has_leftist_property (merge h1_2 h2) = true)
+ -- (has_leftist_property h1_1 = true)
+ -- (has_leftist_property h1_2 = true)
+ -- ((n =? right_height h1_2 + 1) = true)
+
+----------------------------------
+Goal: (has_leftist_property (mergea n0 h1_1 (merge h1_2 (Heap n1 n2 h2_1 h2_2))) =
+ true)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 0.001 seconds
+
+gv3 : heap = (Heap n1 n2 h2_1 h2_2)
+gv1 : heap = (mergea n0 h1_1 (merge h1_2 (Heap n1 n2 h2_1 h2_2)))
+gv2 : heap = (merge h1_2 (Heap n1 n2 h2_1 h2_2))
+gv0 : bool = (has_leftist_property (mergea n0 h1_1 (merge h1_2 (Heap n1 n2 h2_1 h2_2))))
+gv4 : bool = true
