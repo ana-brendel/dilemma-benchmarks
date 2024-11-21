@@ -609,3 +609,5 @@ Proof.
   + left. rewrite <- disjoint_cons. auto.
   + right. rewrite <- disjoint_cons. unfold not. intros. destruct H0. contradiction.
 Qed.
+
+Close Scope string.

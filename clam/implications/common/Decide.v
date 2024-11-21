@@ -73,3 +73,5 @@ Proof.
   - destruct Q. left. split; assumption; assumption. right. unfold not; intros; destruct H; contradiction.
   - right. unfold not; intros; destruct H; contradiction.
 Qed.
+
+Close Scope string.

@@ -528,3 +528,5 @@ Proof.
     unfold not; intros.  apply Forall_inv_tail in H. contradiction.
   + right. unfold not. intros. apply Forall_inv in H. contradiction.
 Qed. *)
+
+Close Scope string.
