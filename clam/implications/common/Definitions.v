@@ -1,4 +1,4 @@
-Require Import Nat Arith Bool.
+Require Import Bool.
 
 Inductive Nat : Type := succ : Nat -> Nat |  zero : Nat.
 

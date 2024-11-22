@@ -419,3 +419,5 @@ Qed.
 (* ********************************************************************** *)
 
 (* There are more missing for the binom file *)
+
+Close Scope string.

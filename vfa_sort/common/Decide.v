@@ -516,3 +516,5 @@ Proof.
   + right. unfold not; intros. unfold not in n. apply n. apply Forall_inv_tail in H1. auto.
 Qed.
 
+
+Close Scope string.

@@ -36,7 +36,7 @@ Instance show_heap : Show heap :=
     let fix aux l :=
       match l with
       | Hleaf => "Hleaf"
-      | Some n1 n2 h1 h2 => "Heap (" ++ show n1 ++ ") (" ++ show n2 ++ ") (" ++ aux h1 ++ ") (" ++ aux h2 ++ ")"
+      | Heap n1 n2 h1 h2 => "Heap (" ++ show n1 ++ ") (" ++ show n2 ++ ") (" ++ aux h1 ++ ") (" ++ aux h2 ++ ")"
       end
     in aux
 |}.
@@ -55,3 +55,5 @@ Instance show_option {T} `{_ : Show T} : Show (option T) :=
       end
     in aux
 |}.
+
+Close Scope string.
