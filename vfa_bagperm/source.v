@@ -9,33 +9,26 @@ Require Import Lia.
 
 Lemma bag_eqv_refl : forall b, bag_eqv b b.
 Proof.
-(* FILL IN HERE *) 
   unfold bag_eqv. intros. reflexivity.
 Qed.
 
 Lemma bag_eqv_sym: forall b1 b2, bag_eqv b1 b2 -> bag_eqv b2 b1. 
 Proof.
-(* FILL IN HERE *)
   unfold bag_eqv. intros. symmetry. apply H.
 Qed.
 
 Lemma bag_eqv_trans: forall b1 b2 b3, bag_eqv b1 b2 -> bag_eqv b2 b3 -> bag_eqv b1 b3.
 Proof.
-(* FILL IN HERE *)
   unfold bag_eqv. intros. rewrite H. apply H0.
 Qed.
 
 Lemma bag_eqv_cons : forall x b1 b2, bag_eqv b1 b2 -> bag_eqv (x::b1) (x::b2).
 Proof.
-  (* FILL IN HERE *)
   unfold bag_eqv. intros. simpl. rewrite H. reflexivity.
 Qed.
 
-(* Definition is_a_sorting_algorithm' (f: list nat -> list nat) := forall al, bag_eqv al (f al) /\ sorted (f al). *)
-
 Lemma insert_bag: forall x l, bag_eqv (x::l) (insert x l).
 Proof.
-(* FILL IN HERE *)
   unfold bag_eqv. intros. induction l.
   - simpl. reflexivity.
   - simpl. destruct (x <=? a). simpl. reflexivity. simpl. rewrite <- IHl.
@@ -43,17 +36,12 @@ Proof.
 Qed.
 
 Theorem sort_bag: forall l, bag_eqv l (sort l).
-(* FILL IN HERE *)
   unfold bag_eqv. intros. induction l.
   simpl. reflexivity.
   simpl. rewrite <- insert_bag. simpl. rewrite IHl. reflexivity.
 Qed.
 
-(* Theorem insertion_sort_correct: is_a_sorting_algorithm' sort.
-Proof. split. apply sort_bag. apply sort_sorted. Qed. *)
-
 Lemma perm_bag: forall al bl : list nat, Permutation al bl -> bag_eqv al bl. 
-(* FILL IN HERE *)
 Proof.
   intros. induction H.
   - unfold bag_eqv. intros. reflexivity.
@@ -64,7 +52,6 @@ Qed.
 
 Lemma bag_nil_inv : forall b, bag_eqv [] b -> b = []. 
 Proof.
-  (* FILL IN HERE *)
   intros. induction b.
   - reflexivity.
   - unfold bag_eqv in H. simpl in H. remember (a =? a) as H1. destruct H1.
@@ -73,7 +60,6 @@ Qed.
 
 Lemma bag_cons_inv : forall l x n, S n = count x l -> exists l1 l2, l = l1 ++ x :: l2 /\ count x (l1 ++ l2) = n.
 Proof.
-  (* FILL IN HERE *)
   induction l.
   - intros. simpl in H. lia.
   - intros. simpl in H. bdestruct (a =? x). destruct n. exists [], l. split. simpl. rewrite H0. reflexivity. simpl. lia.
@@ -82,7 +68,6 @@ Qed.
 
 Lemma count_insert_other : forall l1 l2 x y, y <> x -> count y (l1 ++ x :: l2) = count y (l1 ++ l2).
 Proof.
-  (* FILL IN HERE *)
   induction l1.
   - intros. simpl. bdestruct (x =? y). lia. reflexivity.
   - intros. simpl. bdestruct (a =? y). simpl. rewrite IHl1. reflexivity. assumption. apply IHl1. assumption.
@@ -97,12 +82,9 @@ Proof.
 (if b =? n then 1 else 0) + count n l2). apply H. lia.
 Qed.
 
-Search Permutation.
-
 Lemma bag_perm:
   forall al bl, bag_eqv al bl -> Permutation al bl.
 Proof.
-(* FILL IN HERE *)
   induction al.
   - intros. apply bag_nil_inv in H. rewrite H. constructor.
   - intros. destruct bl. unfold bag_eqv in H. assert (count a (a :: al) = count a []). apply H. simpl in H0. bdestruct (a =? a). lia. lia.
@@ -120,11 +102,3 @@ Theorem bag_eqv_iff_perm: forall al bl, bag_eqv al bl <-> Permutation al bl.
 Proof.
   intros. split. apply bag_perm. apply perm_bag.
 Qed.
-
-(* Corollary sort_specifications_equivalent: forall sort, is_a_sorting_algorithm sort <->  is_a_sorting_algorithm' sort.
-Proof.
-  unfold is_a_sorting_algorithm, is_a_sorting_algorithm'.
-  split; intros;
-  destruct (H al); split; auto;
-  apply bag_eqv_iff_perm; auto.
-Qed. *)
