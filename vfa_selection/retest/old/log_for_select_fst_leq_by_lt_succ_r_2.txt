@@ -1,0 +1,265 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (x :: x1 = bl)
+ -- (exists (i : nat) (j : list nat), select a al = (i, j))
+ -- (forall (bl : list nat) (y x : nat), select x al = (y, bl) -> y <= x)
+ -- (x0 = y)
+ -- (x0 <= m)
+ -- (S m = a)
+ -- ((x0, x :: x1) = (y, bl))
+ -- (exists j : list nat, select a al = (x0, j))
+ -- (a < x)
+ -- (x0 <= a)
+
+----------------------------------
+Goal: (x0 <= x)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 0. seconds
+
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 153.701 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (a < x)
+ -- (x0 <= a)
+
+----------------------------------
+Goal: (x0 <= x)
+Case: 3
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 154.24 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+@fst : (forall A B : Type, A * B -> A)
+@snd : (forall A B : Type, A * B -> B)
+length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+In : (forall A : Type, A -> list A -> Prop)
+existsb : (forall A : Type, (A -> bool) -> list A -> bool)
+forallb : (forall A : Type, (A -> bool) -> list A -> bool)
+Forall : (forall A : Type, (A -> Prop) -> list A -> Prop)
+nodup : (forall A : Type, (forall x y : A, {x = y} + {x <> y}) -> list A -> list A)
+Permutation : (forall A : Type, list A -> list A -> Prop)
+sorted : (list nat -> Prop)
+is_a_sorting_algorithm : ((list nat -> list nat) -> Prop)
+select : (nat -> list nat -> nat * list nat)
+selsort : (list nat -> nat -> list nat)
+selection_sort : (list nat -> list nat)
+le_all : (nat -> list nat -> Prop)
+sorted_bool : (list nat -> bool)
+
+Label: 0 (0)
+Abducted Assumption: (a < x)
+Positive Examples:
+   [a := 5; x := 6; x0 := 5]
+   [a := 3; x := 6; x0 := 0]
+   [a := 1; x := 6; x0 := 1]
+   [a := 3; x := 6; x0 := 3]
+   [a := 4; x := 6; x0 := 3]
+   [a := 2; x := 6; x0 := 2]
+   [a := 5; x := 6; x0 := 1]
+   [a := 0; x := 6; x0 := 0]
+   [a := 1; x := 6; x0 := 0]
+   [a := 2; x := 5; x0 := 0]
+   etc ...
+
+Negative Examples:
+   [a := 6; x := 0; x0 := 3]
+   [a := 6; x := 4; x0 := 6]
+   [a := 6; x := 5; x0 := 6]
+   [a := 6; x := 2; x0 := 5]
+   [a := 6; x := 3; x0 := 5]
+   [a := 6; x := 1; x0 := 4]
+   [a := 6; x := 3; x0 := 6]
+   [a := 5; x := 2; x0 := 5]
+   [a := 5; x := 3; x0 := 4]
+   [a := 4; x := 2; x0 := 4]
+   etc ...
+
+
+Label: 0 (1)
+Abducted Assumption: (x0 <= a)
+Positive Examples:
+   [a := 5; x := 6; x0 := 5]
+   [a := 3; x := 6; x0 := 0]
+   [a := 1; x := 6; x0 := 1]
+   [a := 3; x := 6; x0 := 3]
+   [a := 4; x := 6; x0 := 3]
+   [a := 2; x := 6; x0 := 2]
+   [a := 5; x := 6; x0 := 1]
+   [a := 0; x := 6; x0 := 0]
+   [a := 1; x := 6; x0 := 0]
+   [a := 2; x := 5; x0 := 0]
+   etc ...
+
+Negative Examples:
+   [a := 4; x := 5; x0 := 6]
+   [a := 2; x := 4; x0 := 6]
+   [a := 2; x := 4; x0 := 5]
+   [a := 0; x := 3; x0 := 5]
+   [a := 0; x := 5; x0 := 6]
+   [a := 1; x := 5; x0 := 6]
+   [a := 3; x := 5; x0 := 6]
+   [a := 1; x := 2; x0 := 6]
+   [a := 2; x := 3; x0 := 6]
+   [a := 1; x := 2; x0 := 4]
+   etc ...
+
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 154.882 seconds
+
+
+Label: 0 (0)
+(a < a), (a < x), (a < x0), (x < a), (x < x), (x < x0), (x0 < a), (x0 < x), (x0 < x0), (a <= a)
+(a <= x0), (x <= a), (x <= x), (x <= x0), (x0 <= a), (x0 <= x), (x0 <= x0), (a = a), (a = x), (a = x0)
+(x = x), (x = x0), (x0 = a), (x0 = x), (x0 = x0), (a <=* []), (x <=* []), (x0 <=* []), (sorted []), (~ a < a)
+(~ a < x0), (~ x < a), (~ x < x), (~ x < x0), (~ x0 < a), (~ x0 < x), (~ x0 < x0), (~ a <= a), (~ a <= x), (~ a <= x0)
+(~ x <= x), (~ x <= x0), (~ x0 <= a), (~ x0 <= x), (~ x0 <= x0), (a <> a), (a <> x), (a <> x0), (x <> a), (x <> x)
+(x0 <> a), (x0 <> x), (x0 <> x0), (None = Some a), (None = Some x), (None = Some x0)
+
+Label: 0 (1)
+(a < a), (a < x), (a < x0), (x < a), (x < x), (x < x0), (x0 < a), (x0 < x), (x0 < x0), (a <= a)
+(a <= x0), (x <= a), (x <= x), (x <= x0), (x0 <= a), (x0 <= x), (x0 <= x0), (a = a), (a = x), (a = x0)
+(x = x), (x = x0), (x0 = a), (x0 = x), (x0 = x0), (a <=* []), (x <=* []), (x0 <=* []), (sorted []), (~ a < a)
+(~ a < x0), (~ x < a), (~ x < x), (~ x < x0), (~ x0 < a), (~ x0 < x), (~ x0 < x0), (~ a <= a), (~ a <= x), (~ a <= x0)
+(~ x <= x), (~ x <= x0), (~ x0 <= a), (~ x0 <= x), (~ x0 <= x0), (a <> a), (a <> x), (a <> x0), (x <> a), (x <> x)
+(x0 <> a), (x0 <> x), (x0 <> x0), (None = Some a), (None = Some x), (None = Some x0)
+
+
+------------------------------ COMBINED SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 154.885 seconds
+
+
+Label: 0 (0)
+Abducted Assumption: (x0 <= a)
+Positive Examples:
+   [a := 5; x := 6; x0 := 5]
+   [a := 3; x := 6; x0 := 0]
+   [a := 1; x := 6; x0 := 1]
+   [a := 3; x := 6; x0 := 3]
+   [a := 4; x := 6; x0 := 3]
+   [a := 2; x := 6; x0 := 2]
+   [a := 5; x := 6; x0 := 1]
+   [a := 0; x := 6; x0 := 0]
+   [a := 1; x := 6; x0 := 0]
+   [a := 2; x := 5; x0 := 0]
+   etc ...
+
+Negative Examples:
+   [a := 4; x := 5; x0 := 6]
+   [a := 2; x := 4; x0 := 6]
+   [a := 2; x := 4; x0 := 5]
+   [a := 0; x := 3; x0 := 5]
+   [a := 0; x := 5; x0 := 6]
+   [a := 1; x := 5; x0 := 6]
+   [a := 3; x := 5; x0 := 6]
+   [a := 1; x := 2; x0 := 6]
+   [a := 2; x := 3; x0 := 6]
+   [a := 1; x := 2; x0 := 4]
+   etc ...
+
+(a < a), (a < x), (a < x0), (x < a), (x < x), (x < x0), (x0 < a), (x0 < x), (x0 < x0), (a <= a)
+(a <= x0), (x <= a), (x <= x), (x <= x0), (x0 <= a), (x0 <= x), (x0 <= x0), (a = a), (a = x), (a = x0)
+(x = x), (x = x0), (x0 = a), (x0 = x), (x0 = x0), (a <=* []), (x <=* []), (x0 <=* []), (sorted []), (~ a < a)
+(~ a < x0), (~ x < a), (~ x < x), (~ x < x0), (~ x0 < a), (~ x0 < x), (~ x0 < x0), (~ a <= a), (~ a <= x), (~ a <= x0)
+(~ x <= x), (~ x <= x0), (~ x0 <= a), (~ x0 <= x), (~ x0 <= x0), (a <> a), (a <> x), (a <> x0), (x <> a), (x <> x)
+(x0 <> a), (x0 <> x), (x0 <> x0), (None = Some a), (None = Some x), (None = Some x0)
+
+Label: 0 (1)
+Abducted Assumption: (a < x)
+Positive Examples:
+   [a := 5; x := 6; x0 := 5]
+   [a := 3; x := 6; x0 := 0]
+   [a := 1; x := 6; x0 := 1]
+   [a := 3; x := 6; x0 := 3]
+   [a := 4; x := 6; x0 := 3]
+   [a := 2; x := 6; x0 := 2]
+   [a := 5; x := 6; x0 := 1]
+   [a := 0; x := 6; x0 := 0]
+   [a := 1; x := 6; x0 := 0]
+   [a := 2; x := 5; x0 := 0]
+   etc ...
+
+Negative Examples:
+   [a := 6; x := 0; x0 := 3]
+   [a := 6; x := 4; x0 := 6]
+   [a := 6; x := 5; x0 := 6]
+   [a := 6; x := 2; x0 := 5]
+   [a := 6; x := 3; x0 := 5]
+   [a := 6; x := 1; x0 := 4]
+   [a := 6; x := 3; x0 := 6]
+   [a := 5; x := 2; x0 := 5]
+   [a := 5; x := 3; x0 := 4]
+   [a := 4; x := 2; x0 := 4]
+   etc ...
+
+(a < a), (a < x), (a < x0), (x < a), (x < x), (x < x0), (x0 < a), (x0 < x), (x0 < x0), (a <= a)
+(a <= x0), (x <= a), (x <= x), (x <= x0), (x0 <= a), (x0 <= x), (x0 <= x0), (a = a), (a = x), (a = x0)
+(x = x), (x = x0), (x0 = a), (x0 = x), (x0 = x0), (a <=* []), (x <=* []), (x0 <=* []), (sorted []), (~ a < a)
+(~ a < x0), (~ x < a), (~ x < x), (~ x < x0), (~ x0 < a), (~ x0 < x), (~ x0 < x0), (~ a <= a), (~ a <= x), (~ a <= x0)
+(~ x <= x), (~ x <= x0), (~ x0 <= a), (~ x0 <= x), (~ x0 <= x0), (a <> a), (a <> x), (a <> x0), (x <> a), (x <> x)
+(x0 <> a), (x0 <> x), (x0 <> x0), (None = Some a), (None = Some x), (None = Some x0)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 200.665 seconds
+
+
+Label: 0 (0)
+(x0 < x), (x0 <= a), (~ x < x0), (~ x <= x0)
+
+Label: 0 (1)
+(a < x), (x0 < x), (a <= x), (~ x < x0), (~ x <= a), (~ x <= x0)
+
+
+------------------------------ PROCESSED SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 223.074 seconds
+
+
+(a < x)
+ - (x0 < x)
+ - (a <= x)
+ - (~ x < x0)
+ - (~ x <= a)
+ - (~ x <= x0)
+
+(x0 <= a)
+ - (x0 < x)
+ - (~ x < x0)
+ - (~ x <= x0)
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 223.074 seconds
+
+Number of Lemmas Returned: 10
+
+(a < x -> a <= x)
+(a < x -> ~ x <= a)
+(x0 < x -> x0 <= a -> x0 <= x)
+(a <= x -> x0 <= a -> x0 <= x)
+(~ x < x0 -> x0 <= a -> x0 <= x)
+(~ x <= a -> x0 <= a -> x0 <= x)
+(~ x <= x0 -> x0 <= a -> x0 <= x)
+(x0 < x -> a < x -> x0 <= x)
+(~ x < x0 -> a < x -> x0 <= x)
+(~ x <= x0 -> a < x -> x0 <= x)
