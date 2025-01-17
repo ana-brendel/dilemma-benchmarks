@@ -35,14 +35,14 @@ ran = [
 
 new_run = []
 
-for test in os.listdir(folder):
-    if not test.endswith(".v"):
-        full = os.path.join(folder,test)
-        rm = f"rm {full}"
-        os.system(rm)
+# for test in os.listdir(folder):
+#     if not test.endswith(".v"):
+#         full = os.path.join(folder,test)
+#         rm = f"rm {full}"
+#         os.system(rm)
 
 # for test in os.listdir(folder):
-#     if len(new_run) < 9 and test.endswith(".v") and test not in ran:
+#     if len(new_run) < 10 and test.endswith(".v") and test not in ran:
 #         full = os.path.join(folder,test)
 #         cmd = f"cd {folder} && coqc {full}"
 #         os.system(cmd)
