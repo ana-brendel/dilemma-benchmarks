@@ -1,0 +1,755 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (has_leftist_property h = true)
+ -- (has_leftist_property (hinsert_all l h) = true)
+
+----------------------------------
+Goal: (has_leftist_property (hinsert (hinsert_all l h) n) = true)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 0. seconds
+
+gv1 : heap = (hinsert (hinsert_all l h) n)
+gv2 : heap = (hinsert_all l h)
+gv0 : bool = (has_leftist_property (hinsert (hinsert_all l h) n))
+gv3 : bool = true
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 63.471 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (has_leftist_property h = gv3)
+ -- (true = gv3)
+
+----------------------------------
+Goal: (has_leftist_property (hinsert (hinsert_all l h) n) = gv3)
+Case: 3
+
+Label: Generalization #1
+Assumptions: 
+ -- (has_leftist_property h = true)
+ -- (has_leftist_property (hinsert (hinsert_all l h) n) = gv0)
+
+----------------------------------
+Goal: (gv0 = true)
+Case: 3
+
+Label: Generalization #2
+Assumptions: 
+ -- (has_leftist_property gv2 = true)
+
+----------------------------------
+Goal: (has_leftist_property (hinsert gv2 n) = true)
+Case: 3
+
+Label: Generalization #3
+Assumptions: 
+ -- (has_leftist_property h = true)
+ -- (hinsert (hinsert_all l h) n = gv1)
+
+----------------------------------
+Goal: (has_leftist_property gv1 = true)
+Case: 3
+
+Label: Generalization #4
+Assumptions: 
+ -- (has_leftist_property h = true)
+
+----------------------------------
+Goal: (has_leftist_property (hinsert (hinsert_all l h) n) = true)
+Case: 3
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 64.579 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+@fst : (forall A B : Type, A * B -> A)
+@snd : (forall A B : Type, A * B -> B)
+length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+lst : Set
+lst_rect : (forall P : lst -> Type,
+ (forall (n : nat) (l : lst), P l -> P (Cons n l)) ->
+ P Nil -> forall l : lst, P l)
+lst_rec : (forall P : lst -> Set,
+ (forall (n : nat) (l : lst), P l -> P (Cons n l)) ->
+ P Nil -> forall l : lst, P l)
+heap : Set
+heap_rect : (forall P : heap -> Type,
+ P Hleaf ->
+ (forall (n n0 : nat) (h : heap),
+  P h -> forall h0 : heap, P h0 -> P (Heap n n0 h h0)) ->
+ forall h : heap, P h)
+heap_rec : (forall P : heap -> Set,
+ P Hleaf ->
+ (forall (n n0 : nat) (h : heap),
+  P h -> forall h0 : heap, P h0 -> P (Heap n n0 h h0)) ->
+ forall h : heap, P h)
+right_height : (heap -> nat)
+rank : (heap -> nat)
+has_leftist_property : (heap -> bool)
+hsize : (heap -> nat)
+mergea : (nat -> heap -> heap -> heap)
+merge : (heap -> heap -> heap)
+hinsert : (heap -> nat -> heap)
+hinsert_all : (lst -> heap -> heap)
+show_lst : (Show.Show lst)
+show_heap : (Show.Show heap)
+
+Label: 0 (0)
+Abducted Assumption: (has_leftist_property h = gv3)
+Positive Examples:
+   [gv3 := true; h := Hleaf; l := (Cons 4 (Cons 6 Nil)); n := 2]
+   [gv3 := true; h := (Heap 1 2 Hleaf Hleaf); l := (Cons 3 (Cons 0 Nil)); n := 1]
+   [gv3 := true; h := Hleaf; l := (Cons 3 (Cons 1 (Cons 4 (Cons 4 Nil)))); n := 2]
+   [gv3 := true; h := Hleaf; l := (Cons 4 (Cons 1 (Cons 3 (Cons 1 Nil)))); n := 3]
+   [gv3 := true; h := Hleaf; l := (Cons 5 (Cons 6 Nil)); n := 6]
+   [gv3 := true; h := Hleaf; l := (Cons 5 (Cons 4 Nil)); n := 1]
+   [gv3 := true; h := Hleaf; l := (Cons 1 (Cons 3 Nil)); n := 2]
+   [gv3 := true; h := (Heap 1 1 Hleaf Hleaf); l := (Cons 0 (Cons 0 Nil)); n := 2]
+   [gv3 := true; h := Hleaf; l := (Cons 5 (Cons 6 (Cons 0 (Cons 2 (Cons 0 (Cons 1 Nil)))))); n := 2]
+   [gv3 := true; h := Hleaf; l := (Cons 0 (Cons 2 (Cons 3 Nil))); n := 4]
+   etc ...
+
+Negative Examples:
+   [gv3 := true; h := (Heap 2 0 (Heap 3 2 Hleaf (Heap 3 0 Hleaf Hleaf))
+   (Heap 2 0 Hleaf (Heap 2 2 Hleaf Hleaf))); l := Nil; n := 2]
+   [gv3 := true; h := (Heap 0 2 Hleaf (Heap 0 1 Hleaf Hleaf)); l := Nil; n := 2]
+   [gv3 := true; h := (Heap 0 1 (Heap 4 2 (Heap 1 3 (Heap 4 4 Hleaf Hleaf) Hleaf) Hleaf)
+   (Heap 2 0 Hleaf (Heap 4 1 Hleaf (Heap 2 3 Hleaf Hleaf)))); l := Nil; n := 0]
+   [gv3 := true; h := (Heap 0 2 (Heap 2 2 (Heap 0 2 Hleaf Hleaf) (Heap 1 0 Hleaf Hleaf))
+   (Heap 1 0 Hleaf Hleaf)); l := (Cons 1 Nil); n := 2]
+   [gv3 := true; h := (Heap 6 3 (Heap 1 3 Hleaf Hleaf) Hleaf); l := Nil; n := 5]
+   [gv3 := true; h := (Heap 2 1 (Heap 1 1 (Heap 1 1 Hleaf Hleaf) Hleaf)
+   (Heap 1 2 Hleaf (Heap 3 1 Hleaf Hleaf))); l := Nil; n := 2]
+   [gv3 := true; h := (Heap 0 0 (Heap 2 1 Hleaf Hleaf) Hleaf); l := Nil; n := 1]
+   [gv3 := true; h := (Heap 5 5 Hleaf
+   (Heap 0 0 Hleaf (Heap 3 2 Hleaf (Heap 2 4 Hleaf (Heap 1 3 Hleaf Hleaf))))); l := Nil; n := 3]
+   [gv3 := true; h := (Heap 1 3 Hleaf
+   (Heap 0 3 Hleaf (Heap 1 4 (Heap 2 3 Hleaf Hleaf) (Heap 1 4 Hleaf Hleaf)))); l := Nil; n := 4]
+   [gv3 := true; h := (Heap 0 3 Hleaf
+   (Heap 4 0 (Heap 1 3 (Heap 0 3 Hleaf (Heap 2 1 Hleaf Hleaf)) Hleaf) Hleaf)); l := (Cons 2 (Cons 1 Nil)); n := 0]
+   etc ...
+
+
+Label: 0 (1)
+Abducted Assumption: (true = gv3)
+Positive Examples:
+   [gv3 := true; h := Hleaf; l := (Cons 4 (Cons 6 Nil)); n := 2]
+   [gv3 := true; h := (Heap 1 2 Hleaf Hleaf); l := (Cons 3 (Cons 0 Nil)); n := 1]
+   [gv3 := true; h := Hleaf; l := (Cons 3 (Cons 1 (Cons 4 (Cons 4 Nil)))); n := 2]
+   [gv3 := true; h := Hleaf; l := (Cons 4 (Cons 1 (Cons 3 (Cons 1 Nil)))); n := 3]
+   [gv3 := true; h := Hleaf; l := (Cons 5 (Cons 6 Nil)); n := 6]
+   [gv3 := true; h := Hleaf; l := (Cons 5 (Cons 4 Nil)); n := 1]
+   [gv3 := true; h := Hleaf; l := (Cons 1 (Cons 3 Nil)); n := 2]
+   [gv3 := true; h := (Heap 1 1 Hleaf Hleaf); l := (Cons 0 (Cons 0 Nil)); n := 2]
+   [gv3 := true; h := Hleaf; l := (Cons 5 (Cons 6 (Cons 0 (Cons 2 (Cons 0 (Cons 1 Nil)))))); n := 2]
+   [gv3 := true; h := Hleaf; l := (Cons 0 (Cons 2 (Cons 3 Nil))); n := 4]
+   etc ...
+
+Negative Examples:
+   [gv3 := false; h := (Heap 0 1 Hleaf Hleaf); l := (Cons 1 (Cons 1 Nil)); n := 1]
+   [gv3 := false; h := (Heap 5 3 Hleaf Hleaf); l := Nil; n := 0]
+   [gv3 := false; h := (Heap 2 2 (Heap 0 2 Hleaf Hleaf) (Heap 1 0 Hleaf Hleaf)); l := (Cons 0 Nil); n := 1]
+   [gv3 := false; h := (Heap 2 3 Hleaf Hleaf); l := (Cons 0 Nil); n := 1]
+   [gv3 := false; h := (Heap 2 0 Hleaf (Heap 2 2 Hleaf Hleaf)); l := Nil; n := 0]
+   [gv3 := false; h := (Heap 0 2 (Heap 1 2 Hleaf Hleaf) Hleaf); l := Nil; n := 0]
+   [gv3 := false; h := (Heap 4 3 (Heap 1 2 Hleaf Hleaf) Hleaf); l := Nil; n := 2]
+   [gv3 := false; h := (Heap 0 3 Hleaf Hleaf); l := (Cons 0 Nil); n := 2]
+   [gv3 := false; h := (Heap 0 2 Hleaf (Heap 1 2 Hleaf Hleaf)); l := Nil; n := 0]
+   [gv3 := false; h := (Heap 4 5 Hleaf Hleaf); l := Nil; n := 3]
+   etc ...
+
+
+Label: 1 (2)
+Abducted Assumption: (has_leftist_property (hinsert (hinsert_all l h) n) = gv0)
+Positive Examples:
+   [gv0 := true; h := Hleaf; l := (Cons 3 (Cons 5 (Cons 3 Nil))); n := 0]
+   [gv0 := true; h := (Heap 1 3 Hleaf Hleaf); l := Nil; n := 3]
+   [gv0 := true; h := Hleaf; l := (Cons 5 (Cons 1 (Cons 2 (Cons 3 (Cons 4 Nil))))); n := 2]
+   [gv0 := true; h := Hleaf; l := (Cons 4 (Cons 3 Nil)); n := 2]
+   [gv0 := true; h := Hleaf; l := (Cons 2 (Cons 2 (Cons 0 Nil))); n := 0]
+   [gv0 := true; h := Hleaf; l := (Cons 4 (Cons 1 Nil)); n := 3]
+   [gv0 := true; h := (Heap 1 2 (Heap 1 2 Hleaf Hleaf) Hleaf); l := (Cons 2 Nil); n := 0]
+   [gv0 := true; h := Hleaf; l := (Cons 4 (Cons 2 (Cons 2 Nil))); n := 4]
+   [gv0 := true; h := (Heap 1 3 Hleaf Hleaf); l := (Cons 5 Nil); n := 1]
+   [gv0 := true; h := Hleaf; l := (Cons 4 (Cons 3 (Cons 2 Nil))); n := 0]
+   etc ...
+
+Negative Examples:
+   [gv0 := false; h := Hleaf; l := (Cons 1 (Cons 4 (Cons 3 (Cons 6 Nil)))); n := 5]
+   [gv0 := false; h := Hleaf; l := (Cons 4 (Cons 3 Nil)); n := 2]
+   [gv0 := false; h := Hleaf; l := (Cons 1 (Cons 3 (Cons 1 Nil))); n := 3]
+   [gv0 := false; h := Hleaf; l := (Cons 3 (Cons 6 (Cons 1 Nil))); n := 5]
+   [gv0 := false; h := (Heap 1 0 Hleaf Hleaf); l := Nil; n := 2]
+   [gv0 := false; h := (Heap 1 5 Hleaf Hleaf); l := (Cons 3 Nil); n := 0]
+   [gv0 := false; h := (Heap 1 2 Hleaf Hleaf); l := (Cons 2 Nil); n := 0]
+   [gv0 := false; h := (Heap 1 6 Hleaf Hleaf); l := Nil; n := 4]
+   [gv0 := false; h := Hleaf; l := (Cons 4 (Cons 4 Nil)); n := 5]
+   [gv0 := false; h := Hleaf; l := (Cons 0 (Cons 1 (Cons 1 Nil))); n := 2]
+   etc ...
+
+
+Label: 2 (3)
+Abducted Assumption: (has_leftist_property gv2 = true)
+Positive Examples:
+   [gv2 := Hleaf; h := (Heap 6 5 (Heap 1 6 (Heap 5 6 Hleaf Hleaf) (Heap 6 1 Hleaf Hleaf)) Hleaf); l := Nil; n := 5]
+   [gv2 := Hleaf; h := (Heap 0 1 (Heap 0 3 Hleaf Hleaf) (Heap 1 0 Hleaf (Heap 2 3 Hleaf Hleaf))); l := Nil; n := 2]
+   [gv2 := Hleaf; h := Hleaf; l := (Cons 4 (Cons 3 (Cons 4 (Cons 4 Nil)))); n := 3]
+   [gv2 := Hleaf; h := (Heap 3 2 Hleaf Hleaf); l := (Cons 0 Nil); n := 5]
+   [gv2 := Hleaf; h := (Heap 0 2 (Heap 3 2 (Heap 4 4 Hleaf (Heap 0 0 Hleaf Hleaf)) Hleaf)
+   (Heap 1 3 (Heap 0 0 (Heap 1 3 Hleaf Hleaf) Hleaf)
+      (Heap 2 2 (Heap 1 0 Hleaf Hleaf) (Heap 0 0 Hleaf Hleaf)))); l := (Cons 2 (Cons 0 (Cons 3 Nil))); n := 2]
+   [gv2 := Hleaf; h := (Heap 0 1 Hleaf Hleaf); l := (Cons 1 (Cons 1 (Cons 2 Nil))); n := 0]
+   [gv2 := (Heap 1 5 Hleaf Hleaf); h := Hleaf; l := (Cons 4 (Cons 5 (Cons 3 Nil))); n := 6]
+   [gv2 := Hleaf; h := (Heap 3 2 Hleaf Hleaf); l := Nil; n := 1]
+   [gv2 := Hleaf; h := (Heap 1 3
+   (Heap 2 4 Hleaf
+      (Heap 4 0 (Heap 0 2 (Heap 6 5 Hleaf Hleaf) Hleaf)
+         (Heap 6 6 (Heap 3 2 (Heap 5 4 Hleaf Hleaf) Hleaf) Hleaf)))
+   (Heap 1 2 (Heap 3 4 Hleaf (Heap 6 4 Hleaf Hleaf)) Hleaf)); l := (Cons 1 (Cons 0 Nil)); n := 3]
+   [gv2 := Hleaf; h := (Heap 3 3
+   (Heap 1 2 Hleaf (Heap 3 4 (Heap 1 3 Hleaf Hleaf) (Heap 3 1 Hleaf Hleaf)))
+   Hleaf); l := Nil; n := 0]
+   etc ...
+
+Negative Examples:
+   [gv2 := (Heap 2 0
+   (Heap 0 0 Hleaf (Heap 2 1 (Heap 0 0 Hleaf Hleaf) (Heap 2 2 Hleaf Hleaf)))
+   (Heap 0 4 Hleaf Hleaf)); h := (Heap 1 0 Hleaf (Heap 0 0 (Heap 2 1 Hleaf (Heap 3 4 Hleaf Hleaf)) Hleaf)); l := Nil; n := 1]
+   [gv2 := (Heap 1 3
+   (Heap 0 1 (Heap 3 3 Hleaf Hleaf)
+      (Heap 3 0 (Heap 1 3 Hleaf (Heap 3 1 Hleaf Hleaf))
+         (Heap 4 2 (Heap 1 5 Hleaf Hleaf) Hleaf))) Hleaf); h := Hleaf; l := (Cons 1 Nil); n := 5]
+   [gv2 := (Heap 1 3 (Heap 1 4 Hleaf Hleaf)
+   (Heap 3 2 Hleaf (Heap 1 1 (Heap 0 4 Hleaf Hleaf) (Heap 1 2 Hleaf Hleaf)))); h := (Heap 3 0
+   (Heap 1 1 Hleaf (Heap 4 4 (Heap 2 2 Hleaf Hleaf) (Heap 0 1 Hleaf Hleaf)))
+   (Heap 1 0 (Heap 3 1 (Heap 1 1 Hleaf Hleaf) Hleaf) Hleaf)); l := (Cons 1 Nil); n := 0]
+   [gv2 := (Heap 2 0 Hleaf (Heap 0 1 Hleaf Hleaf)); h := (Heap 1 0 (Heap 1 0 Hleaf (Heap 2 0 Hleaf Hleaf)) Hleaf); l := (Cons 1 (Cons 1 Nil)); n := 2]
+   [gv2 := (Heap 5 1
+   (Heap 3 1 Hleaf
+      (Heap 6 3 (Heap 0 5 Hleaf Hleaf)
+         (Heap 3 4 (Heap 2 3 (Heap 4 1 Hleaf Hleaf) Hleaf) Hleaf)))
+   (Heap 5 1
+      (Heap 5 5 (Heap 2 3 Hleaf (Heap 0 3 Hleaf (Heap 3 5 Hleaf Hleaf)))
+         (Heap 5 2 (Heap 5 2 (Heap 6 6 Hleaf Hleaf) Hleaf) Hleaf)) Hleaf)); h := (Heap 3 3 (Heap 5 4 Hleaf Hleaf) Hleaf); l := Nil; n := 1]
+   [gv2 := (Heap 3 1 Hleaf
+   (Heap 5 0
+      (Heap 1 1 (Heap 0 5 Hleaf (Heap 1 2 Hleaf Hleaf))
+         (Heap 4 4 Hleaf Hleaf))
+      (Heap 3 4 (Heap 1 2 (Heap 0 4 Hleaf Hleaf) Hleaf) Hleaf))); h := (Heap 0 3 (Heap 2 3 Hleaf (Heap 4 2 (Heap 0 0 Hleaf Hleaf) Hleaf))
+   (Heap 0 2 (Heap 1 3 (Heap 0 3 Hleaf (Heap 0 0 Hleaf Hleaf)) Hleaf) Hleaf)); l := (Cons 2 (Cons 5 Nil)); n := 0]
+   [gv2 := (Heap 0 4 Hleaf (Heap 3 0 (Heap 4 0 Hleaf (Heap 4 2 Hleaf Hleaf)) Hleaf)); h := Hleaf; l := (Cons 3 Nil); n := 4]
+   [gv2 := (Heap 2 2 Hleaf Hleaf); h := (Heap 3 4 Hleaf Hleaf); l := (Cons 2 (Cons 2 Nil)); n := 5]
+   [gv2 := (Heap 0 0
+   (Heap 5 1
+      (Heap 5 4 (Heap 2 5 (Heap 2 0 Hleaf Hleaf) Hleaf)
+         (Heap 1 1 (Heap 1 0 Hleaf Hleaf) (Heap 2 1 Hleaf Hleaf))) Hleaf)
+   (Heap 2 2 (Heap 5 1 Hleaf Hleaf) Hleaf)); h := Hleaf; l := Nil; n := 1]
+   [gv2 := (Heap 1 2
+   (Heap 4 2 (Heap 4 1 Hleaf Hleaf) (Heap 3 4 (Heap 4 2 Hleaf Hleaf) Hleaf))
+   (Heap 1 2 (Heap 2 1 Hleaf Hleaf) (Heap 3 1 Hleaf (Heap 0 4 Hleaf Hleaf)))); h := (Heap 2 0 (Heap 2 4 Hleaf Hleaf) Hleaf); l := (Cons 1 Nil); n := 1]
+   etc ...
+
+
+Label: 3 (4)
+Abducted Assumption: (hinsert (hinsert_all l h) n = gv1)
+Positive Examples:
+   [gv1 := (Heap 1 2 (Heap 1 0 Hleaf Hleaf) Hleaf); h := Hleaf; l := (Cons 2 Nil); n := 0]
+   [gv1 := (Heap 1 2 Hleaf Hleaf); h := Hleaf; l := Nil; n := 2]
+   [gv1 := (Heap 1 1 Hleaf Hleaf); h := Hleaf; l := Nil; n := 1]
+   [gv1 := (Heap 1 0 Hleaf Hleaf); h := Hleaf; l := Nil; n := 0]
+
+Negative Examples:
+   [gv1 := (Heap 0 0 Hleaf Hleaf); h := Hleaf; l := (Cons 2 Nil); n := 2]
+   [gv1 := (Heap 6 5 (Heap 0 0 Hleaf Hleaf)
+   (Heap 0 0
+      (Heap 6 5
+         (Heap 0 2 (Heap 4 2 (Heap 0 3 Hleaf Hleaf) (Heap 0 3 Hleaf Hleaf))
+            Hleaf) (Heap 2 0 Hleaf Hleaf))
+      (Heap 3 2 Hleaf
+         (Heap 3 5 (Heap 5 0 Hleaf Hleaf)
+            (Heap 3 1 Hleaf (Heap 3 1 Hleaf Hleaf)))))); h := Hleaf; l := Nil; n := 6]
+   [gv1 := (Heap 0 0 Hleaf Hleaf); h := Hleaf; l := (Cons 4 (Cons 1 (Cons 4 (Cons 0 (Cons 2 Nil))))); n := 5]
+   [gv1 := (Heap 2 0 Hleaf Hleaf); h := Hleaf; l := Nil; n := 3]
+   [gv1 := (Heap 1 0 (Heap 0 2 Hleaf Hleaf) (Heap 1 1 Hleaf Hleaf)); h := Hleaf; l := Nil; n := 0]
+   [gv1 := (Heap 3 2 (Heap 3 2 (Heap 2 3 Hleaf Hleaf) (Heap 3 3 Hleaf Hleaf))
+   (Heap 1 1 Hleaf (Heap 3 0 Hleaf Hleaf))); h := Hleaf; l := (Cons 1 Nil); n := 1]
+   [gv1 := (Heap 4 0 Hleaf (Heap 2 3 Hleaf Hleaf)); h := Hleaf; l := Nil; n := 3]
+   [gv1 := (Heap 1 1 (Heap 2 2 Hleaf Hleaf)
+   (Heap 1 0 (Heap 0 4 (Heap 0 1 Hleaf Hleaf) Hleaf) Hleaf)); h := Hleaf; l := Nil; n := 1]
+   [gv1 := (Heap 1 0
+   (Heap 2 5 (Heap 4 1 Hleaf (Heap 1 5 (Heap 3 2 Hleaf Hleaf) Hleaf))
+      (Heap 5 0 (Heap 3 1 (Heap 3 4 Hleaf Hleaf) Hleaf) Hleaf)) Hleaf); h := Hleaf; l := (Cons 5 Nil); n := 0]
+   [gv1 := (Heap 1 1 Hleaf (Heap 2 1 Hleaf Hleaf)); h := (Heap 1 2 Hleaf Hleaf); l := Nil; n := 2]
+   etc ...
+
+
+Label: 4 (5)
+Abducted Assumption: (has_leftist_property h = true)
+Positive Examples:
+   [h := Hleaf; l := (Cons 2 (Cons 5 (Cons 0 Nil))); n := 0]
+   [h := (Heap 1 2 Hleaf Hleaf); l := (Cons 3 (Cons 1 (Cons 1 Nil))); n := 1]
+   [h := (Heap 1 3 Hleaf Hleaf); l := (Cons 0 (Cons 1 Nil)); n := 2]
+   [h := Hleaf; l := (Cons 1 (Cons 1 (Cons 0 Nil))); n := 2]
+   [h := Hleaf; l := (Cons 5 (Cons 2 (Cons 0 (Cons 5 Nil)))); n := 5]
+   [h := Hleaf; l := (Cons 6 (Cons 2 Nil)); n := 6]
+   [h := Hleaf; l := (Cons 2 (Cons 4 (Cons 1 (Cons 4 Nil)))); n := 2]
+   [h := Hleaf; l := (Cons 1 (Cons 4 Nil)); n := 3]
+   [h := Hleaf; l := (Cons 0 (Cons 4 Nil)); n := 1]
+   [h := (Heap 1 0 (Heap 1 0 Hleaf Hleaf) Hleaf); l := Nil; n := 2]
+   etc ...
+
+Negative Examples:
+   [h := (Heap 2 0 (Heap 1 1 Hleaf Hleaf) Hleaf); l := Nil; n := 1]
+   [h := (Heap 3 5 Hleaf (Heap 2 2 Hleaf Hleaf)); l := Nil; n := 5]
+   [h := (Heap 1 1 (Heap 4 4 (Heap 3 1 Hleaf Hleaf) Hleaf)
+   (Heap 4 0 Hleaf (Heap 0 1 Hleaf (Heap 1 2 (Heap 1 2 Hleaf Hleaf) Hleaf)))); l := (Cons 1 (Cons 0 (Cons 2 Nil))); n := 5]
+   [h := (Heap 2 1
+   (Heap 1 3 (Heap 4 0 Hleaf (Heap 0 3 Hleaf Hleaf))
+      (Heap 4 1 Hleaf (Heap 4 2 Hleaf Hleaf))) Hleaf); l := (Cons 4 (Cons 4 Nil)); n := 3]
+   [h := (Heap 4 2
+   (Heap 4 5 Hleaf
+      (Heap 0 6
+         (Heap 2 4 (Heap 2 2 (Heap 3 1 Hleaf Hleaf) Hleaf)
+            (Heap 2 4 (Heap 3 3 Hleaf Hleaf) (Heap 1 6 Hleaf Hleaf)))
+         (Heap 4 3 Hleaf (Heap 6 2 Hleaf (Heap 5 6 Hleaf Hleaf))))) Hleaf); l := Nil; n := 3]
+   [h := (Heap 2 0 Hleaf (Heap 4 2 Hleaf Hleaf)); l := Nil; n := 3]
+   [h := (Heap 0 0
+   (Heap 1 3 (Heap 0 0 Hleaf (Heap 3 2 Hleaf (Heap 2 6 Hleaf Hleaf)))
+      (Heap 6 1 Hleaf Hleaf)) (Heap 4 1 (Heap 3 1 Hleaf Hleaf) Hleaf)); l := (Cons 0 (Cons 5 Nil)); n := 0]
+   [h := (Heap 0 2 (Heap 2 0 Hleaf Hleaf) Hleaf); l := Nil; n := 0]
+   [h := (Heap 0 3
+   (Heap 4 4 Hleaf
+      (Heap 1 0 (Heap 2 2 (Heap 0 4 Hleaf Hleaf) Hleaf)
+         (Heap 3 5 (Heap 5 4 Hleaf Hleaf) Hleaf)))
+   (Heap 1 2
+      (Heap 1 4 (Heap 4 5 Hleaf (Heap 3 5 Hleaf Hleaf))
+         (Heap 1 3 (Heap 4 1 Hleaf Hleaf) Hleaf))
+      (Heap 5 2 (Heap 5 2 Hleaf Hleaf) Hleaf))); l := Nil; n := 5]
+   [h := (Heap 0 3 (Heap 3 3 Hleaf Hleaf) (Heap 2 1 (Heap 2 1 Hleaf Hleaf) Hleaf)); l := (Cons 3 Nil); n := 0]
+   etc ...
+
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 66.721 seconds
+
+
+Label: 0 (0)
+(false = gv3), (true = gv3), (n < n), (n <= n), (gv3 = gv3), (n = n), (h = h), (l = l), (false = has_leftist_property h), (true = has_leftist_property h)
+(n < rank h), (n < right_height h), (hsize h < n), (hsize h < rank h), (hsize h < right_height h), (rank h < n), (rank h < hsize h), (rank h < right_height h), (right_height h < n), (right_height h < hsize h)
+(n <= hsize h), (n <= rank h), (n <= right_height h), (hsize h <= n), (hsize h <= rank h), (hsize h <= right_height h), (rank h <= n), (rank h <= hsize h), (rank h <= right_height h), (right_height h <= n)
+(right_height h <= rank h), (false <> gv3), (true <> gv3), (~ n < n), (~ n <= n), (gv3 <> gv3), (n <> n), (h <> h), (l <> l), (hinsert_all l h = h)
+(hinsert h n = h), (merge h h = h), (merge h h = hinsert_all l h), (merge h h = hinsert h n), (mergea n h h = h), (mergea n h h = hinsert_all l h), (mergea n h h = hinsert h n), (mergea n h h = merge h h), (None = Some n), (None = Some l)
+(hsize h = n), (rank h = n), (rank h = hsize h), (right_height h = n), (right_height h = hsize h), (right_height h = rank h), (None = Some gv3), (has_leftist_property h = gv3)
+
+Label: 0 (1)
+(false = gv3), (true = gv3), (n < n), (n <= n), (gv3 = gv3), (n = n), (h = h), (l = l), (false = has_leftist_property h), (true = has_leftist_property h)
+(n < rank h), (n < right_height h), (hsize h < n), (hsize h < rank h), (hsize h < right_height h), (rank h < n), (rank h < hsize h), (rank h < right_height h), (right_height h < n), (right_height h < hsize h)
+(n <= hsize h), (n <= rank h), (n <= right_height h), (hsize h <= n), (hsize h <= rank h), (hsize h <= right_height h), (rank h <= n), (rank h <= hsize h), (rank h <= right_height h), (right_height h <= n)
+(right_height h <= rank h), (false <> gv3), (true <> gv3), (~ n < n), (~ n <= n), (gv3 <> gv3), (n <> n), (h <> h), (l <> l), (hinsert_all l h = h)
+(hinsert h n = h), (merge h h = h), (merge h h = hinsert_all l h), (merge h h = hinsert h n), (mergea n h h = h), (mergea n h h = hinsert_all l h), (mergea n h h = hinsert h n), (mergea n h h = merge h h), (None = Some n), (None = Some l)
+(hsize h = n), (rank h = n), (rank h = hsize h), (right_height h = n), (right_height h = hsize h), (right_height h = rank h), (None = Some gv3), (has_leftist_property h = gv3)
+
+Label: 1 (2)
+(false = gv0), (true = gv0), (n < n), (n <= n), (n = n), (h = h), (l = l), (gv0 = gv0), (false = has_leftist_property h), (true = has_leftist_property h)
+(n < rank h), (n < right_height h), (hsize h < n), (hsize h < rank h), (hsize h < right_height h), (rank h < n), (rank h < hsize h), (rank h < right_height h), (right_height h < n), (right_height h < hsize h)
+(n <= hsize h), (n <= rank h), (n <= right_height h), (hsize h <= n), (hsize h <= rank h), (hsize h <= right_height h), (rank h <= n), (rank h <= hsize h), (rank h <= right_height h), (right_height h <= n)
+(right_height h <= rank h), (false <> gv0), (true <> gv0), (~ n < n), (~ n <= n), (n <> n), (h <> h), (l <> l), (gv0 <> gv0), (hinsert_all l h = h)
+(hinsert h n = h), (merge h h = h), (merge h h = hinsert_all l h), (merge h h = hinsert h n), (mergea n h h = h), (mergea n h h = hinsert_all l h), (mergea n h h = hinsert h n), (mergea n h h = merge h h), (None = Some n), (None = Some l)
+(hsize h = n), (rank h = n), (rank h = hsize h), (right_height h = n), (right_height h = hsize h), (right_height h = rank h), (None = Some gv0), (has_leftist_property h = gv0)
+
+Label: 2 (3)
+(n < n), (n <= n), (n = n), (gv2 = gv2), (false = has_leftist_property gv2), (true = has_leftist_property gv2), (n < hsize gv2), (n < rank gv2), (n < right_height gv2), (hsize gv2 < n)
+(hsize gv2 < right_height gv2), (rank gv2 < n), (rank gv2 < hsize gv2), (rank gv2 < right_height gv2), (right_height gv2 < n), (right_height gv2 < hsize gv2), (right_height gv2 < rank gv2), (n <= hsize gv2), (n <= rank gv2), (n <= right_height gv2)
+(hsize gv2 <= rank gv2), (hsize gv2 <= right_height gv2), (rank gv2 <= n), (rank gv2 <= hsize gv2), (rank gv2 <= right_height gv2), (right_height gv2 <= n), (right_height gv2 <= hsize gv2), (right_height gv2 <= rank gv2), (~ n < n), (~ n <= n)
+(gv2 <> gv2), (None = Some gv2), (None = Some n), (hinsert gv2 n = gv2), (merge gv2 gv2 = gv2), (merge gv2 gv2 = hinsert gv2 n), (mergea n gv2 gv2 = gv2), (mergea n gv2 gv2 = hinsert gv2 n), (mergea n gv2 gv2 = merge gv2 gv2), (hsize gv2 = n)
+(rank gv2 = hsize gv2), (right_height gv2 = n), (right_height gv2 = hsize gv2), (right_height gv2 = rank gv2)
+
+Label: 3 (4)
+(n < n), (n <= n), (n = n), (l = l), (h = h), (h = gv1), (gv1 = h), (gv1 = gv1), (false = has_leftist_property h), (false = has_leftist_property gv1)
+(true = has_leftist_property gv1), (n < hsize h), (n < hsize gv1), (n < rank h), (n < rank gv1), (n < right_height h), (n < right_height gv1), (hsize h < n), (hsize h < hsize gv1), (hsize h < rank h)
+(hsize h < right_height h), (hsize h < right_height gv1), (hsize gv1 < n), (hsize gv1 < hsize h), (hsize gv1 < rank h), (hsize gv1 < rank gv1), (hsize gv1 < right_height h), (hsize gv1 < right_height gv1), (rank h < n), (rank h < hsize h)
+(rank h < rank gv1), (rank h < right_height h), (rank h < right_height gv1), (rank gv1 < n), (rank gv1 < hsize h), (rank gv1 < hsize gv1), (rank gv1 < rank h), (rank gv1 < right_height h), (rank gv1 < right_height gv1), (right_height h < n)
+(right_height h < hsize gv1), (right_height h < rank h), (right_height h < rank gv1), (right_height h < right_height gv1), (right_height gv1 < n), (right_height gv1 < hsize h), (right_height gv1 < hsize gv1), (right_height gv1 < rank h), (right_height gv1 < rank gv1), (right_height gv1 < right_height h)
+(n <= hsize gv1), (n <= rank h), (n <= rank gv1), (n <= right_height h), (n <= right_height gv1), (hsize h <= n), (hsize h <= hsize gv1), (hsize h <= rank h), (hsize h <= rank gv1), (hsize h <= right_height h)
+(hsize gv1 <= n), (hsize gv1 <= hsize h), (hsize gv1 <= rank h), (hsize gv1 <= rank gv1), (hsize gv1 <= right_height h), (hsize gv1 <= right_height gv1), (rank h <= n), (rank h <= hsize h), (rank h <= hsize gv1), (rank h <= rank gv1)
+(rank h <= right_height gv1), (rank gv1 <= n), (rank gv1 <= hsize h), (rank gv1 <= hsize gv1), (rank gv1 <= rank h), (rank gv1 <= right_height h), (rank gv1 <= right_height gv1), (right_height h <= n), (right_height h <= hsize h), (right_height h <= hsize gv1)
+(right_height h <= rank gv1), (right_height h <= right_height gv1), (right_height gv1 <= n), (right_height gv1 <= hsize h), (right_height gv1 <= hsize gv1), (right_height gv1 <= rank h), (right_height gv1 <= rank gv1), (right_height gv1 <= right_height h), (~ n < n), (~ n <= n)
+(l <> l), (h <> h), (h <> gv1), (gv1 <> h), (gv1 <> gv1), (None = Some h), (None = Some gv1), (hinsert_all l h = h), (hinsert_all l h = gv1), (hinsert_all l h = hinsert h n)
+(hinsert_all l gv1 = h), (hinsert_all l gv1 = gv1), (hinsert_all l gv1 = hinsert h n), (hinsert_all l gv1 = hinsert gv1 n), (hinsert h n = h), (hinsert h n = gv1), (hinsert gv1 n = h), (hinsert gv1 n = gv1), (merge h h = h), (merge h h = gv1)
+(merge h h = hinsert_all l gv1), (merge h h = hinsert h n), (merge h h = hinsert gv1 n), (merge h gv1 = h), (merge h gv1 = gv1), (merge h gv1 = hinsert_all l h), (merge h gv1 = hinsert_all l gv1), (merge h gv1 = hinsert h n), (merge h gv1 = hinsert gv1 n), (merge gv1 h = h)
+(merge gv1 h = hinsert_all l h), (merge gv1 h = hinsert_all l gv1), (merge gv1 h = hinsert h n), (merge gv1 h = hinsert gv1 n), (merge gv1 gv1 = h), (merge gv1 gv1 = gv1), (merge gv1 gv1 = hinsert_all l h), (merge gv1 gv1 = hinsert_all l gv1), (merge gv1 gv1 = hinsert h n), (merge gv1 gv1 = hinsert gv1 n)
+(mergea n h h = gv1), (mergea n h h = hinsert_all l h), (mergea n h h = hinsert_all l gv1), (mergea n h h = hinsert h n), (mergea n h h = hinsert gv1 n), (mergea n h h = merge h h), (mergea n h h = merge h gv1), (mergea n h h = merge gv1 h), (mergea n h h = merge gv1 gv1), (mergea n h gv1 = h)
+(mergea n h gv1 = hinsert_all l h), (mergea n h gv1 = hinsert_all l gv1), (mergea n h gv1 = hinsert h n), (mergea n h gv1 = hinsert gv1 n), (mergea n h gv1 = merge h h), (mergea n h gv1 = merge h gv1), (mergea n h gv1 = merge gv1 h), (mergea n h gv1 = merge gv1 gv1), (mergea n gv1 h = h), (mergea n gv1 h = gv1)
+(mergea n gv1 h = hinsert_all l gv1), (mergea n gv1 h = hinsert h n), (mergea n gv1 h = hinsert gv1 n), (mergea n gv1 h = merge h h), (mergea n gv1 h = merge h gv1), (mergea n gv1 h = merge gv1 h), (mergea n gv1 h = merge gv1 gv1), (mergea n gv1 gv1 = h), (mergea n gv1 gv1 = gv1), (mergea n gv1 gv1 = hinsert_all l h)
+(mergea n gv1 gv1 = hinsert h n), (mergea n gv1 gv1 = hinsert gv1 n), (mergea n gv1 gv1 = merge h h), (mergea n gv1 gv1 = merge h gv1), (mergea n gv1 gv1 = merge gv1 h), (mergea n gv1 gv1 = merge gv1 gv1), (hsize h = n), (hsize gv1 = n), (rank h = n), (rank h = hsize h)
+(rank gv1 = n), (rank gv1 = hsize h), (rank gv1 = hsize gv1), (right_height h = n), (right_height h = hsize h), (right_height h = hsize gv1), (right_height h = rank h), (right_height h = rank gv1), (right_height gv1 = n), (right_height gv1 = hsize h)
+(right_height gv1 = rank h), (right_height gv1 = rank gv1), (None = Some n), (None = Some l)
+
+Label: 4 (5)
+(n < n), (n <= n), (n = n), (h = h), (l = l), (false = has_leftist_property h), (true = has_leftist_property h), (n < hsize h), (n < rank h), (n < right_height h)
+(hsize h < rank h), (hsize h < right_height h), (rank h < n), (rank h < hsize h), (rank h < right_height h), (right_height h < n), (right_height h < hsize h), (right_height h < rank h), (n <= hsize h), (n <= rank h)
+(hsize h <= n), (hsize h <= rank h), (hsize h <= right_height h), (rank h <= n), (rank h <= hsize h), (rank h <= right_height h), (right_height h <= n), (right_height h <= hsize h), (right_height h <= rank h), (~ n < n)
+(n <> n), (h <> h), (l <> l), (None = Some h), (hinsert_all l h = h), (hinsert_all l h = hinsert h n), (hinsert h n = h), (merge h h = h), (merge h h = hinsert_all l h), (merge h h = hinsert h n)
+(mergea n h h = hinsert_all l h), (mergea n h h = hinsert h n), (mergea n h h = merge h h), (hsize h = n), (rank h = n), (rank h = hsize h), (right_height h = n), (right_height h = hsize h), (right_height h = rank h), (None = Some n)
+
+
+------------------------------ COMBINED SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 66.728 seconds
+
+
+Label: 1 (0)
+Abducted Assumption: (has_leftist_property (hinsert (hinsert_all l h) n) = gv0)
+Positive Examples:
+   [gv0 := true; h := Hleaf; l := (Cons 3 (Cons 5 (Cons 3 Nil))); n := 0]
+   [gv0 := true; h := (Heap 1 3 Hleaf Hleaf); l := Nil; n := 3]
+   [gv0 := true; h := Hleaf; l := (Cons 5 (Cons 1 (Cons 2 (Cons 3 (Cons 4 Nil))))); n := 2]
+   [gv0 := true; h := Hleaf; l := (Cons 4 (Cons 3 Nil)); n := 2]
+   [gv0 := true; h := Hleaf; l := (Cons 2 (Cons 2 (Cons 0 Nil))); n := 0]
+   [gv0 := true; h := Hleaf; l := (Cons 4 (Cons 1 Nil)); n := 3]
+   [gv0 := true; h := (Heap 1 2 (Heap 1 2 Hleaf Hleaf) Hleaf); l := (Cons 2 Nil); n := 0]
+   [gv0 := true; h := Hleaf; l := (Cons 4 (Cons 2 (Cons 2 Nil))); n := 4]
+   [gv0 := true; h := (Heap 1 3 Hleaf Hleaf); l := (Cons 5 Nil); n := 1]
+   [gv0 := true; h := Hleaf; l := (Cons 4 (Cons 3 (Cons 2 Nil))); n := 0]
+   etc ...
+
+Negative Examples:
+   [gv0 := false; h := Hleaf; l := (Cons 1 (Cons 4 (Cons 3 (Cons 6 Nil)))); n := 5]
+   [gv0 := false; h := Hleaf; l := (Cons 4 (Cons 3 Nil)); n := 2]
+   [gv0 := false; h := Hleaf; l := (Cons 1 (Cons 3 (Cons 1 Nil))); n := 3]
+   [gv0 := false; h := Hleaf; l := (Cons 3 (Cons 6 (Cons 1 Nil))); n := 5]
+   [gv0 := false; h := (Heap 1 0 Hleaf Hleaf); l := Nil; n := 2]
+   [gv0 := false; h := (Heap 1 5 Hleaf Hleaf); l := (Cons 3 Nil); n := 0]
+   [gv0 := false; h := (Heap 1 2 Hleaf Hleaf); l := (Cons 2 Nil); n := 0]
+   [gv0 := false; h := (Heap 1 6 Hleaf Hleaf); l := Nil; n := 4]
+   [gv0 := false; h := Hleaf; l := (Cons 4 (Cons 4 Nil)); n := 5]
+   [gv0 := false; h := Hleaf; l := (Cons 0 (Cons 1 (Cons 1 Nil))); n := 2]
+   etc ...
+
+(false = gv0), (true = gv0), (n < n), (n <= n), (n = n), (h = h), (l = l), (gv0 = gv0), (false = has_leftist_property h), (true = has_leftist_property h)
+(n < rank h), (n < right_height h), (hsize h < n), (hsize h < rank h), (hsize h < right_height h), (rank h < n), (rank h < hsize h), (rank h < right_height h), (right_height h < n), (right_height h < hsize h)
+(n <= hsize h), (n <= rank h), (n <= right_height h), (hsize h <= n), (hsize h <= rank h), (hsize h <= right_height h), (rank h <= n), (rank h <= hsize h), (rank h <= right_height h), (right_height h <= n)
+(right_height h <= rank h), (false <> gv0), (true <> gv0), (~ n < n), (~ n <= n), (n <> n), (h <> h), (l <> l), (gv0 <> gv0), (hinsert_all l h = h)
+(hinsert h n = h), (merge h h = h), (merge h h = hinsert_all l h), (merge h h = hinsert h n), (mergea n h h = h), (mergea n h h = hinsert_all l h), (mergea n h h = hinsert h n), (mergea n h h = merge h h), (None = Some n), (None = Some l)
+(hsize h = n), (rank h = n), (rank h = hsize h), (right_height h = n), (right_height h = hsize h), (right_height h = rank h), (None = Some gv0), (has_leftist_property h = gv0)
+
+Label: 2 (1)
+Abducted Assumption: (has_leftist_property gv2 = true)
+Positive Examples:
+   [gv2 := Hleaf; h := (Heap 6 5 (Heap 1 6 (Heap 5 6 Hleaf Hleaf) (Heap 6 1 Hleaf Hleaf)) Hleaf); l := Nil; n := 5]
+   [gv2 := Hleaf; h := (Heap 0 1 (Heap 0 3 Hleaf Hleaf) (Heap 1 0 Hleaf (Heap 2 3 Hleaf Hleaf))); l := Nil; n := 2]
+   [gv2 := Hleaf; h := Hleaf; l := (Cons 4 (Cons 3 (Cons 4 (Cons 4 Nil)))); n := 3]
+   [gv2 := Hleaf; h := (Heap 3 2 Hleaf Hleaf); l := (Cons 0 Nil); n := 5]
+   [gv2 := Hleaf; h := (Heap 0 2 (Heap 3 2 (Heap 4 4 Hleaf (Heap 0 0 Hleaf Hleaf)) Hleaf)
+   (Heap 1 3 (Heap 0 0 (Heap 1 3 Hleaf Hleaf) Hleaf)
+      (Heap 2 2 (Heap 1 0 Hleaf Hleaf) (Heap 0 0 Hleaf Hleaf)))); l := (Cons 2 (Cons 0 (Cons 3 Nil))); n := 2]
+   [gv2 := Hleaf; h := (Heap 0 1 Hleaf Hleaf); l := (Cons 1 (Cons 1 (Cons 2 Nil))); n := 0]
+   [gv2 := (Heap 1 5 Hleaf Hleaf); h := Hleaf; l := (Cons 4 (Cons 5 (Cons 3 Nil))); n := 6]
+   [gv2 := Hleaf; h := (Heap 3 2 Hleaf Hleaf); l := Nil; n := 1]
+   [gv2 := Hleaf; h := (Heap 1 3
+   (Heap 2 4 Hleaf
+      (Heap 4 0 (Heap 0 2 (Heap 6 5 Hleaf Hleaf) Hleaf)
+         (Heap 6 6 (Heap 3 2 (Heap 5 4 Hleaf Hleaf) Hleaf) Hleaf)))
+   (Heap 1 2 (Heap 3 4 Hleaf (Heap 6 4 Hleaf Hleaf)) Hleaf)); l := (Cons 1 (Cons 0 Nil)); n := 3]
+   [gv2 := Hleaf; h := (Heap 3 3
+   (Heap 1 2 Hleaf (Heap 3 4 (Heap 1 3 Hleaf Hleaf) (Heap 3 1 Hleaf Hleaf)))
+   Hleaf); l := Nil; n := 0]
+   etc ...
+
+Negative Examples:
+   [gv2 := (Heap 2 0
+   (Heap 0 0 Hleaf (Heap 2 1 (Heap 0 0 Hleaf Hleaf) (Heap 2 2 Hleaf Hleaf)))
+   (Heap 0 4 Hleaf Hleaf)); h := (Heap 1 0 Hleaf (Heap 0 0 (Heap 2 1 Hleaf (Heap 3 4 Hleaf Hleaf)) Hleaf)); l := Nil; n := 1]
+   [gv2 := (Heap 1 3
+   (Heap 0 1 (Heap 3 3 Hleaf Hleaf)
+      (Heap 3 0 (Heap 1 3 Hleaf (Heap 3 1 Hleaf Hleaf))
+         (Heap 4 2 (Heap 1 5 Hleaf Hleaf) Hleaf))) Hleaf); h := Hleaf; l := (Cons 1 Nil); n := 5]
+   [gv2 := (Heap 1 3 (Heap 1 4 Hleaf Hleaf)
+   (Heap 3 2 Hleaf (Heap 1 1 (Heap 0 4 Hleaf Hleaf) (Heap 1 2 Hleaf Hleaf)))); h := (Heap 3 0
+   (Heap 1 1 Hleaf (Heap 4 4 (Heap 2 2 Hleaf Hleaf) (Heap 0 1 Hleaf Hleaf)))
+   (Heap 1 0 (Heap 3 1 (Heap 1 1 Hleaf Hleaf) Hleaf) Hleaf)); l := (Cons 1 Nil); n := 0]
+   [gv2 := (Heap 2 0 Hleaf (Heap 0 1 Hleaf Hleaf)); h := (Heap 1 0 (Heap 1 0 Hleaf (Heap 2 0 Hleaf Hleaf)) Hleaf); l := (Cons 1 (Cons 1 Nil)); n := 2]
+   [gv2 := (Heap 5 1
+   (Heap 3 1 Hleaf
+      (Heap 6 3 (Heap 0 5 Hleaf Hleaf)
+         (Heap 3 4 (Heap 2 3 (Heap 4 1 Hleaf Hleaf) Hleaf) Hleaf)))
+   (Heap 5 1
+      (Heap 5 5 (Heap 2 3 Hleaf (Heap 0 3 Hleaf (Heap 3 5 Hleaf Hleaf)))
+         (Heap 5 2 (Heap 5 2 (Heap 6 6 Hleaf Hleaf) Hleaf) Hleaf)) Hleaf)); h := (Heap 3 3 (Heap 5 4 Hleaf Hleaf) Hleaf); l := Nil; n := 1]
+   [gv2 := (Heap 3 1 Hleaf
+   (Heap 5 0
+      (Heap 1 1 (Heap 0 5 Hleaf (Heap 1 2 Hleaf Hleaf))
+         (Heap 4 4 Hleaf Hleaf))
+      (Heap 3 4 (Heap 1 2 (Heap 0 4 Hleaf Hleaf) Hleaf) Hleaf))); h := (Heap 0 3 (Heap 2 3 Hleaf (Heap 4 2 (Heap 0 0 Hleaf Hleaf) Hleaf))
+   (Heap 0 2 (Heap 1 3 (Heap 0 3 Hleaf (Heap 0 0 Hleaf Hleaf)) Hleaf) Hleaf)); l := (Cons 2 (Cons 5 Nil)); n := 0]
+   [gv2 := (Heap 0 4 Hleaf (Heap 3 0 (Heap 4 0 Hleaf (Heap 4 2 Hleaf Hleaf)) Hleaf)); h := Hleaf; l := (Cons 3 Nil); n := 4]
+   [gv2 := (Heap 2 2 Hleaf Hleaf); h := (Heap 3 4 Hleaf Hleaf); l := (Cons 2 (Cons 2 Nil)); n := 5]
+   [gv2 := (Heap 0 0
+   (Heap 5 1
+      (Heap 5 4 (Heap 2 5 (Heap 2 0 Hleaf Hleaf) Hleaf)
+         (Heap 1 1 (Heap 1 0 Hleaf Hleaf) (Heap 2 1 Hleaf Hleaf))) Hleaf)
+   (Heap 2 2 (Heap 5 1 Hleaf Hleaf) Hleaf)); h := Hleaf; l := Nil; n := 1]
+   [gv2 := (Heap 1 2
+   (Heap 4 2 (Heap 4 1 Hleaf Hleaf) (Heap 3 4 (Heap 4 2 Hleaf Hleaf) Hleaf))
+   (Heap 1 2 (Heap 2 1 Hleaf Hleaf) (Heap 3 1 Hleaf (Heap 0 4 Hleaf Hleaf)))); h := (Heap 2 0 (Heap 2 4 Hleaf Hleaf) Hleaf); l := (Cons 1 Nil); n := 1]
+   etc ...
+
+(n < n), (n <= n), (n = n), (gv2 = gv2), (false = has_leftist_property gv2), (true = has_leftist_property gv2), (n < hsize gv2), (n < rank gv2), (n < right_height gv2), (hsize gv2 < n)
+(hsize gv2 < right_height gv2), (rank gv2 < n), (rank gv2 < hsize gv2), (rank gv2 < right_height gv2), (right_height gv2 < n), (right_height gv2 < hsize gv2), (right_height gv2 < rank gv2), (n <= hsize gv2), (n <= rank gv2), (n <= right_height gv2)
+(hsize gv2 <= rank gv2), (hsize gv2 <= right_height gv2), (rank gv2 <= n), (rank gv2 <= hsize gv2), (rank gv2 <= right_height gv2), (right_height gv2 <= n), (right_height gv2 <= hsize gv2), (right_height gv2 <= rank gv2), (~ n < n), (~ n <= n)
+(gv2 <> gv2), (None = Some gv2), (None = Some n), (hinsert gv2 n = gv2), (merge gv2 gv2 = gv2), (merge gv2 gv2 = hinsert gv2 n), (mergea n gv2 gv2 = gv2), (mergea n gv2 gv2 = hinsert gv2 n), (mergea n gv2 gv2 = merge gv2 gv2), (hsize gv2 = n)
+(rank gv2 = hsize gv2), (right_height gv2 = n), (right_height gv2 = hsize gv2), (right_height gv2 = rank gv2)
+
+Label: 0 (2)
+Abducted Assumption: (has_leftist_property h = gv3)
+Positive Examples:
+   [gv3 := true; h := Hleaf; l := (Cons 4 (Cons 6 Nil)); n := 2]
+   [gv3 := true; h := (Heap 1 2 Hleaf Hleaf); l := (Cons 3 (Cons 0 Nil)); n := 1]
+   [gv3 := true; h := Hleaf; l := (Cons 3 (Cons 1 (Cons 4 (Cons 4 Nil)))); n := 2]
+   [gv3 := true; h := Hleaf; l := (Cons 4 (Cons 1 (Cons 3 (Cons 1 Nil)))); n := 3]
+   [gv3 := true; h := Hleaf; l := (Cons 5 (Cons 6 Nil)); n := 6]
+   [gv3 := true; h := Hleaf; l := (Cons 5 (Cons 4 Nil)); n := 1]
+   [gv3 := true; h := Hleaf; l := (Cons 1 (Cons 3 Nil)); n := 2]
+   [gv3 := true; h := (Heap 1 1 Hleaf Hleaf); l := (Cons 0 (Cons 0 Nil)); n := 2]
+   [gv3 := true; h := Hleaf; l := (Cons 5 (Cons 6 (Cons 0 (Cons 2 (Cons 0 (Cons 1 Nil)))))); n := 2]
+   [gv3 := true; h := Hleaf; l := (Cons 0 (Cons 2 (Cons 3 Nil))); n := 4]
+   etc ...
+
+Negative Examples:
+   [gv3 := true; h := (Heap 2 0 (Heap 3 2 Hleaf (Heap 3 0 Hleaf Hleaf))
+   (Heap 2 0 Hleaf (Heap 2 2 Hleaf Hleaf))); l := Nil; n := 2]
+   [gv3 := true; h := (Heap 0 2 Hleaf (Heap 0 1 Hleaf Hleaf)); l := Nil; n := 2]
+   [gv3 := true; h := (Heap 0 1 (Heap 4 2 (Heap 1 3 (Heap 4 4 Hleaf Hleaf) Hleaf) Hleaf)
+   (Heap 2 0 Hleaf (Heap 4 1 Hleaf (Heap 2 3 Hleaf Hleaf)))); l := Nil; n := 0]
+   [gv3 := true; h := (Heap 0 2 (Heap 2 2 (Heap 0 2 Hleaf Hleaf) (Heap 1 0 Hleaf Hleaf))
+   (Heap 1 0 Hleaf Hleaf)); l := (Cons 1 Nil); n := 2]
+   [gv3 := true; h := (Heap 6 3 (Heap 1 3 Hleaf Hleaf) Hleaf); l := Nil; n := 5]
+   [gv3 := true; h := (Heap 2 1 (Heap 1 1 (Heap 1 1 Hleaf Hleaf) Hleaf)
+   (Heap 1 2 Hleaf (Heap 3 1 Hleaf Hleaf))); l := Nil; n := 2]
+   [gv3 := true; h := (Heap 0 0 (Heap 2 1 Hleaf Hleaf) Hleaf); l := Nil; n := 1]
+   [gv3 := true; h := (Heap 5 5 Hleaf
+   (Heap 0 0 Hleaf (Heap 3 2 Hleaf (Heap 2 4 Hleaf (Heap 1 3 Hleaf Hleaf))))); l := Nil; n := 3]
+   [gv3 := true; h := (Heap 1 3 Hleaf
+   (Heap 0 3 Hleaf (Heap 1 4 (Heap 2 3 Hleaf Hleaf) (Heap 1 4 Hleaf Hleaf)))); l := Nil; n := 4]
+   [gv3 := true; h := (Heap 0 3 Hleaf
+   (Heap 4 0 (Heap 1 3 (Heap 0 3 Hleaf (Heap 2 1 Hleaf Hleaf)) Hleaf) Hleaf)); l := (Cons 2 (Cons 1 Nil)); n := 0]
+   etc ...
+
+(false = gv3), (true = gv3), (n < n), (n <= n), (gv3 = gv3), (n = n), (h = h), (l = l), (false = has_leftist_property h), (true = has_leftist_property h)
+(n < rank h), (n < right_height h), (hsize h < n), (hsize h < rank h), (hsize h < right_height h), (rank h < n), (rank h < hsize h), (rank h < right_height h), (right_height h < n), (right_height h < hsize h)
+(n <= hsize h), (n <= rank h), (n <= right_height h), (hsize h <= n), (hsize h <= rank h), (hsize h <= right_height h), (rank h <= n), (rank h <= hsize h), (rank h <= right_height h), (right_height h <= n)
+(right_height h <= rank h), (false <> gv3), (true <> gv3), (~ n < n), (~ n <= n), (gv3 <> gv3), (n <> n), (h <> h), (l <> l), (hinsert_all l h = h)
+(hinsert h n = h), (merge h h = h), (merge h h = hinsert_all l h), (merge h h = hinsert h n), (mergea n h h = h), (mergea n h h = hinsert_all l h), (mergea n h h = hinsert h n), (mergea n h h = merge h h), (None = Some n), (None = Some l)
+(hsize h = n), (rank h = n), (rank h = hsize h), (right_height h = n), (right_height h = hsize h), (right_height h = rank h), (None = Some gv3), (has_leftist_property h = gv3)
+
+Label: 0 (3)
+Abducted Assumption: (true = gv3)
+Positive Examples:
+   [gv3 := true; h := Hleaf; l := (Cons 4 (Cons 6 Nil)); n := 2]
+   [gv3 := true; h := (Heap 1 2 Hleaf Hleaf); l := (Cons 3 (Cons 0 Nil)); n := 1]
+   [gv3 := true; h := Hleaf; l := (Cons 3 (Cons 1 (Cons 4 (Cons 4 Nil)))); n := 2]
+   [gv3 := true; h := Hleaf; l := (Cons 4 (Cons 1 (Cons 3 (Cons 1 Nil)))); n := 3]
+   [gv3 := true; h := Hleaf; l := (Cons 5 (Cons 6 Nil)); n := 6]
+   [gv3 := true; h := Hleaf; l := (Cons 5 (Cons 4 Nil)); n := 1]
+   [gv3 := true; h := Hleaf; l := (Cons 1 (Cons 3 Nil)); n := 2]
+   [gv3 := true; h := (Heap 1 1 Hleaf Hleaf); l := (Cons 0 (Cons 0 Nil)); n := 2]
+   [gv3 := true; h := Hleaf; l := (Cons 5 (Cons 6 (Cons 0 (Cons 2 (Cons 0 (Cons 1 Nil)))))); n := 2]
+   [gv3 := true; h := Hleaf; l := (Cons 0 (Cons 2 (Cons 3 Nil))); n := 4]
+   etc ...
+
+Negative Examples:
+   [gv3 := false; h := (Heap 0 1 Hleaf Hleaf); l := (Cons 1 (Cons 1 Nil)); n := 1]
+   [gv3 := false; h := (Heap 5 3 Hleaf Hleaf); l := Nil; n := 0]
+   [gv3 := false; h := (Heap 2 2 (Heap 0 2 Hleaf Hleaf) (Heap 1 0 Hleaf Hleaf)); l := (Cons 0 Nil); n := 1]
+   [gv3 := false; h := (Heap 2 3 Hleaf Hleaf); l := (Cons 0 Nil); n := 1]
+   [gv3 := false; h := (Heap 2 0 Hleaf (Heap 2 2 Hleaf Hleaf)); l := Nil; n := 0]
+   [gv3 := false; h := (Heap 0 2 (Heap 1 2 Hleaf Hleaf) Hleaf); l := Nil; n := 0]
+   [gv3 := false; h := (Heap 4 3 (Heap 1 2 Hleaf Hleaf) Hleaf); l := Nil; n := 2]
+   [gv3 := false; h := (Heap 0 3 Hleaf Hleaf); l := (Cons 0 Nil); n := 2]
+   [gv3 := false; h := (Heap 0 2 Hleaf (Heap 1 2 Hleaf Hleaf)); l := Nil; n := 0]
+   [gv3 := false; h := (Heap 4 5 Hleaf Hleaf); l := Nil; n := 3]
+   etc ...
+
+(false = gv3), (true = gv3), (n < n), (n <= n), (gv3 = gv3), (n = n), (h = h), (l = l), (false = has_leftist_property h), (true = has_leftist_property h)
+(n < rank h), (n < right_height h), (hsize h < n), (hsize h < rank h), (hsize h < right_height h), (rank h < n), (rank h < hsize h), (rank h < right_height h), (right_height h < n), (right_height h < hsize h)
+(n <= hsize h), (n <= rank h), (n <= right_height h), (hsize h <= n), (hsize h <= rank h), (hsize h <= right_height h), (rank h <= n), (rank h <= hsize h), (rank h <= right_height h), (right_height h <= n)
+(right_height h <= rank h), (false <> gv3), (true <> gv3), (~ n < n), (~ n <= n), (gv3 <> gv3), (n <> n), (h <> h), (l <> l), (hinsert_all l h = h)
+(hinsert h n = h), (merge h h = h), (merge h h = hinsert_all l h), (merge h h = hinsert h n), (mergea n h h = h), (mergea n h h = hinsert_all l h), (mergea n h h = hinsert h n), (mergea n h h = merge h h), (None = Some n), (None = Some l)
+(hsize h = n), (rank h = n), (rank h = hsize h), (right_height h = n), (right_height h = hsize h), (right_height h = rank h), (None = Some gv3), (has_leftist_property h = gv3)
+
+Label: 4 (4)
+Abducted Assumption: (has_leftist_property h = true)
+Positive Examples:
+   [h := Hleaf; l := (Cons 2 (Cons 5 (Cons 0 Nil))); n := 0]
+   [h := (Heap 1 2 Hleaf Hleaf); l := (Cons 3 (Cons 1 (Cons 1 Nil))); n := 1]
+   [h := (Heap 1 3 Hleaf Hleaf); l := (Cons 0 (Cons 1 Nil)); n := 2]
+   [h := Hleaf; l := (Cons 1 (Cons 1 (Cons 0 Nil))); n := 2]
+   [h := Hleaf; l := (Cons 5 (Cons 2 (Cons 0 (Cons 5 Nil)))); n := 5]
+   [h := Hleaf; l := (Cons 6 (Cons 2 Nil)); n := 6]
+   [h := Hleaf; l := (Cons 2 (Cons 4 (Cons 1 (Cons 4 Nil)))); n := 2]
+   [h := Hleaf; l := (Cons 1 (Cons 4 Nil)); n := 3]
+   [h := Hleaf; l := (Cons 0 (Cons 4 Nil)); n := 1]
+   [h := (Heap 1 0 (Heap 1 0 Hleaf Hleaf) Hleaf); l := Nil; n := 2]
+   etc ...
+
+Negative Examples:
+   [h := (Heap 2 0 (Heap 1 1 Hleaf Hleaf) Hleaf); l := Nil; n := 1]
+   [h := (Heap 3 5 Hleaf (Heap 2 2 Hleaf Hleaf)); l := Nil; n := 5]
+   [h := (Heap 1 1 (Heap 4 4 (Heap 3 1 Hleaf Hleaf) Hleaf)
+   (Heap 4 0 Hleaf (Heap 0 1 Hleaf (Heap 1 2 (Heap 1 2 Hleaf Hleaf) Hleaf)))); l := (Cons 1 (Cons 0 (Cons 2 Nil))); n := 5]
+   [h := (Heap 2 1
+   (Heap 1 3 (Heap 4 0 Hleaf (Heap 0 3 Hleaf Hleaf))
+      (Heap 4 1 Hleaf (Heap 4 2 Hleaf Hleaf))) Hleaf); l := (Cons 4 (Cons 4 Nil)); n := 3]
+   [h := (Heap 4 2
+   (Heap 4 5 Hleaf
+      (Heap 0 6
+         (Heap 2 4 (Heap 2 2 (Heap 3 1 Hleaf Hleaf) Hleaf)
+            (Heap 2 4 (Heap 3 3 Hleaf Hleaf) (Heap 1 6 Hleaf Hleaf)))
+         (Heap 4 3 Hleaf (Heap 6 2 Hleaf (Heap 5 6 Hleaf Hleaf))))) Hleaf); l := Nil; n := 3]
+   [h := (Heap 2 0 Hleaf (Heap 4 2 Hleaf Hleaf)); l := Nil; n := 3]
+   [h := (Heap 0 0
+   (Heap 1 3 (Heap 0 0 Hleaf (Heap 3 2 Hleaf (Heap 2 6 Hleaf Hleaf)))
+      (Heap 6 1 Hleaf Hleaf)) (Heap 4 1 (Heap 3 1 Hleaf Hleaf) Hleaf)); l := (Cons 0 (Cons 5 Nil)); n := 0]
+   [h := (Heap 0 2 (Heap 2 0 Hleaf Hleaf) Hleaf); l := Nil; n := 0]
+   [h := (Heap 0 3
+   (Heap 4 4 Hleaf
+      (Heap 1 0 (Heap 2 2 (Heap 0 4 Hleaf Hleaf) Hleaf)
+         (Heap 3 5 (Heap 5 4 Hleaf Hleaf) Hleaf)))
+   (Heap 1 2
+      (Heap 1 4 (Heap 4 5 Hleaf (Heap 3 5 Hleaf Hleaf))
+         (Heap 1 3 (Heap 4 1 Hleaf Hleaf) Hleaf))
+      (Heap 5 2 (Heap 5 2 Hleaf Hleaf) Hleaf))); l := Nil; n := 5]
+   [h := (Heap 0 3 (Heap 3 3 Hleaf Hleaf) (Heap 2 1 (Heap 2 1 Hleaf Hleaf) Hleaf)); l := (Cons 3 Nil); n := 0]
+   etc ...
+
+(n < n), (n <= n), (n = n), (h = h), (l = l), (false = has_leftist_property h), (true = has_leftist_property h), (n < hsize h), (n < rank h), (n < right_height h)
+(hsize h < rank h), (hsize h < right_height h), (rank h < n), (rank h < hsize h), (rank h < right_height h), (right_height h < n), (right_height h < hsize h), (right_height h < rank h), (n <= hsize h), (n <= rank h)
+(hsize h <= n), (hsize h <= rank h), (hsize h <= right_height h), (rank h <= n), (rank h <= hsize h), (rank h <= right_height h), (right_height h <= n), (right_height h <= hsize h), (right_height h <= rank h), (~ n < n)
+(n <> n), (h <> h), (l <> l), (None = Some h), (hinsert_all l h = h), (hinsert_all l h = hinsert h n), (hinsert h n = h), (merge h h = h), (merge h h = hinsert_all l h), (merge h h = hinsert h n)
+(mergea n h h = hinsert_all l h), (mergea n h h = hinsert h n), (mergea n h h = merge h h), (hsize h = n), (rank h = n), (rank h = hsize h), (right_height h = n), (right_height h = hsize h), (right_height h = rank h), (None = Some n)
+
+Label: 3 (5)
+Abducted Assumption: (hinsert (hinsert_all l h) n = gv1)
+Positive Examples:
+   [gv1 := (Heap 1 2 (Heap 1 0 Hleaf Hleaf) Hleaf); h := Hleaf; l := (Cons 2 Nil); n := 0]
+   [gv1 := (Heap 1 2 Hleaf Hleaf); h := Hleaf; l := Nil; n := 2]
+   [gv1 := (Heap 1 1 Hleaf Hleaf); h := Hleaf; l := Nil; n := 1]
+   [gv1 := (Heap 1 0 Hleaf Hleaf); h := Hleaf; l := Nil; n := 0]
+
+Negative Examples:
+   [gv1 := (Heap 0 0 Hleaf Hleaf); h := Hleaf; l := (Cons 2 Nil); n := 2]
+   [gv1 := (Heap 6 5 (Heap 0 0 Hleaf Hleaf)
+   (Heap 0 0
+      (Heap 6 5
+         (Heap 0 2 (Heap 4 2 (Heap 0 3 Hleaf Hleaf) (Heap 0 3 Hleaf Hleaf))
+            Hleaf) (Heap 2 0 Hleaf Hleaf))
+      (Heap 3 2 Hleaf
+         (Heap 3 5 (Heap 5 0 Hleaf Hleaf)
+            (Heap 3 1 Hleaf (Heap 3 1 Hleaf Hleaf)))))); h := Hleaf; l := Nil; n := 6]
+   [gv1 := (Heap 0 0 Hleaf Hleaf); h := Hleaf; l := (Cons 4 (Cons 1 (Cons 4 (Cons 0 (Cons 2 Nil))))); n := 5]
+   [gv1 := (Heap 2 0 Hleaf Hleaf); h := Hleaf; l := Nil; n := 3]
+   [gv1 := (Heap 1 0 (Heap 0 2 Hleaf Hleaf) (Heap 1 1 Hleaf Hleaf)); h := Hleaf; l := Nil; n := 0]
+   [gv1 := (Heap 3 2 (Heap 3 2 (Heap 2 3 Hleaf Hleaf) (Heap 3 3 Hleaf Hleaf))
+   (Heap 1 1 Hleaf (Heap 3 0 Hleaf Hleaf))); h := Hleaf; l := (Cons 1 Nil); n := 1]
+   [gv1 := (Heap 4 0 Hleaf (Heap 2 3 Hleaf Hleaf)); h := Hleaf; l := Nil; n := 3]
+   [gv1 := (Heap 1 1 (Heap 2 2 Hleaf Hleaf)
+   (Heap 1 0 (Heap 0 4 (Heap 0 1 Hleaf Hleaf) Hleaf) Hleaf)); h := Hleaf; l := Nil; n := 1]
+   [gv1 := (Heap 1 0
+   (Heap 2 5 (Heap 4 1 Hleaf (Heap 1 5 (Heap 3 2 Hleaf Hleaf) Hleaf))
+      (Heap 5 0 (Heap 3 1 (Heap 3 4 Hleaf Hleaf) Hleaf) Hleaf)) Hleaf); h := Hleaf; l := (Cons 5 Nil); n := 0]
+   [gv1 := (Heap 1 1 Hleaf (Heap 2 1 Hleaf Hleaf)); h := (Heap 1 2 Hleaf Hleaf); l := Nil; n := 2]
+   etc ...
+
+(n < n), (n <= n), (n = n), (l = l), (h = h), (h = gv1), (gv1 = h), (gv1 = gv1), (false = has_leftist_property h), (false = has_leftist_property gv1)
+(true = has_leftist_property gv1), (n < hsize h), (n < hsize gv1), (n < rank h), (n < rank gv1), (n < right_height h), (n < right_height gv1), (hsize h < n), (hsize h < hsize gv1), (hsize h < rank h)
+(hsize h < right_height h), (hsize h < right_height gv1), (hsize gv1 < n), (hsize gv1 < hsize h), (hsize gv1 < rank h), (hsize gv1 < rank gv1), (hsize gv1 < right_height h), (hsize gv1 < right_height gv1), (rank h < n), (rank h < hsize h)
+(rank h < rank gv1), (rank h < right_height h), (rank h < right_height gv1), (rank gv1 < n), (rank gv1 < hsize h), (rank gv1 < hsize gv1), (rank gv1 < rank h), (rank gv1 < right_height h), (rank gv1 < right_height gv1), (right_height h < n)
+(right_height h < hsize gv1), (right_height h < rank h), (right_height h < rank gv1), (right_height h < right_height gv1), (right_height gv1 < n), (right_height gv1 < hsize h), (right_height gv1 < hsize gv1), (right_height gv1 < rank h), (right_height gv1 < rank gv1), (right_height gv1 < right_height h)
+(n <= hsize gv1), (n <= rank h), (n <= rank gv1), (n <= right_height h), (n <= right_height gv1), (hsize h <= n), (hsize h <= hsize gv1), (hsize h <= rank h), (hsize h <= rank gv1), (hsize h <= right_height h)
+(hsize gv1 <= n), (hsize gv1 <= hsize h), (hsize gv1 <= rank h), (hsize gv1 <= rank gv1), (hsize gv1 <= right_height h), (hsize gv1 <= right_height gv1), (rank h <= n), (rank h <= hsize h), (rank h <= hsize gv1), (rank h <= rank gv1)
+(rank h <= right_height gv1), (rank gv1 <= n), (rank gv1 <= hsize h), (rank gv1 <= hsize gv1), (rank gv1 <= rank h), (rank gv1 <= right_height h), (rank gv1 <= right_height gv1), (right_height h <= n), (right_height h <= hsize h), (right_height h <= hsize gv1)
+(right_height h <= rank gv1), (right_height h <= right_height gv1), (right_height gv1 <= n), (right_height gv1 <= hsize h), (right_height gv1 <= hsize gv1), (right_height gv1 <= rank h), (right_height gv1 <= rank gv1), (right_height gv1 <= right_height h), (~ n < n), (~ n <= n)
+(l <> l), (h <> h), (h <> gv1), (gv1 <> h), (gv1 <> gv1), (None = Some h), (None = Some gv1), (hinsert_all l h = h), (hinsert_all l h = gv1), (hinsert_all l h = hinsert h n)
+(hinsert_all l gv1 = h), (hinsert_all l gv1 = gv1), (hinsert_all l gv1 = hinsert h n), (hinsert_all l gv1 = hinsert gv1 n), (hinsert h n = h), (hinsert h n = gv1), (hinsert gv1 n = h), (hinsert gv1 n = gv1), (merge h h = h), (merge h h = gv1)
+(merge h h = hinsert_all l gv1), (merge h h = hinsert h n), (merge h h = hinsert gv1 n), (merge h gv1 = h), (merge h gv1 = gv1), (merge h gv1 = hinsert_all l h), (merge h gv1 = hinsert_all l gv1), (merge h gv1 = hinsert h n), (merge h gv1 = hinsert gv1 n), (merge gv1 h = h)
+(merge gv1 h = hinsert_all l h), (merge gv1 h = hinsert_all l gv1), (merge gv1 h = hinsert h n), (merge gv1 h = hinsert gv1 n), (merge gv1 gv1 = h), (merge gv1 gv1 = gv1), (merge gv1 gv1 = hinsert_all l h), (merge gv1 gv1 = hinsert_all l gv1), (merge gv1 gv1 = hinsert h n), (merge gv1 gv1 = hinsert gv1 n)
+(mergea n h h = gv1), (mergea n h h = hinsert_all l h), (mergea n h h = hinsert_all l gv1), (mergea n h h = hinsert h n), (mergea n h h = hinsert gv1 n), (mergea n h h = merge h h), (mergea n h h = merge h gv1), (mergea n h h = merge gv1 h), (mergea n h h = merge gv1 gv1), (mergea n h gv1 = h)
+(mergea n h gv1 = hinsert_all l h), (mergea n h gv1 = hinsert_all l gv1), (mergea n h gv1 = hinsert h n), (mergea n h gv1 = hinsert gv1 n), (mergea n h gv1 = merge h h), (mergea n h gv1 = merge h gv1), (mergea n h gv1 = merge gv1 h), (mergea n h gv1 = merge gv1 gv1), (mergea n gv1 h = h), (mergea n gv1 h = gv1)
+(mergea n gv1 h = hinsert_all l gv1), (mergea n gv1 h = hinsert h n), (mergea n gv1 h = hinsert gv1 n), (mergea n gv1 h = merge h h), (mergea n gv1 h = merge h gv1), (mergea n gv1 h = merge gv1 h), (mergea n gv1 h = merge gv1 gv1), (mergea n gv1 gv1 = h), (mergea n gv1 gv1 = gv1), (mergea n gv1 gv1 = hinsert_all l h)
+(mergea n gv1 gv1 = hinsert h n), (mergea n gv1 gv1 = hinsert gv1 n), (mergea n gv1 gv1 = merge h h), (mergea n gv1 gv1 = merge h gv1), (mergea n gv1 gv1 = merge gv1 h), (mergea n gv1 gv1 = merge gv1 gv1), (hsize h = n), (hsize gv1 = n), (rank h = n), (rank h = hsize h)
+(rank gv1 = n), (rank gv1 = hsize h), (rank gv1 = hsize gv1), (right_height h = n), (right_height h = hsize h), (right_height h = hsize gv1), (right_height h = rank h), (right_height h = rank gv1), (right_height gv1 = n), (right_height gv1 = hsize h)
+(right_height gv1 = rank h), (right_height gv1 = rank gv1), (None = Some n), (None = Some l)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 213.217 seconds
+
+
+Label: 1 (0)
+(true = gv0)
+
+Label: 2 (1)
+
+Label: 0 (2)
+
+Label: 0 (3)
+(true = gv3)
+
+Label: 4 (4)
+(true = has_leftist_property h)
+
+Label: 3 (5)
+(true = has_leftist_property gv1)
+
+
+------------------------------ PROCESSED SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 244.258 seconds
+
+
+(hinsert (hinsert_all l h) n = gv1)
+ - (hinsert (hinsert_all l h) n = gv1)
+ - (true = has_leftist_property gv1)
+
+(has_leftist_property h = true)
+ - (has_leftist_property h = true)
+
+(has_leftist_property h = gv3)
+ - (has_leftist_property h = gv3)
+
+(true = gv3)
+ - (true = gv3)
+
+(has_leftist_property (hinsert (hinsert_all l h) n) = gv0)
+ - (has_leftist_property (hinsert (hinsert_all l h) n) = gv0)
+ - (true = gv0)
+
+(has_leftist_property gv2 = true)
+ - (has_leftist_property gv2 = true)
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 244.258 seconds
+
+Number of Result Pairs Returned: 2
+
+(has_leftist_property gv2 = true ->
+ has_leftist_property (hinsert gv2 n) = true)
+
+(has_leftist_property h = true ->
+ has_leftist_property (hinsert (hinsert_all l h) n) = true)
