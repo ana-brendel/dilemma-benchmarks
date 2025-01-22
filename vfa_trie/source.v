@@ -1,12 +1,15 @@
 (** * Trie:  Number Representations and Efficient Lookup Tables *)
 
-(** * A Simple Program That's Waaaaay Too Slow. *)
-
-From Coq Require Import Strings.String.  (* for manual grading *)
 From Coq Require Import ZArith.
 From Coq Require Import PArith.
-From VFA Require Import Perm.
-Import FunctionalExtensionality.
+
+Require Import vfa_trie_benchmarks.Definitions.
+Require Import vfa_trie_benchmarks.Decide.
+
+(* These specify the libraries of functions that should be considered during synthesis that 
+    are not defined within the above libraries. *)
+Require Import Coq.Lists.List.
+Require Import Coq.Sorting.Permutation. 
 
 (* ################################################################# *)
 (** * Efficient Positive Numbers
@@ -238,8 +241,9 @@ Definition is_trie {A: Type} (t: trie_table A) : Prop
 Definition abstract {A: Type} (t: trie_table A) (n: nat) : A :=
   lookup (nat2pos n) t.
 
-Definition Abs {A: Type} (t: trie_table A) (m: total_map A) :=
-  abstract t = m.
+(* Commented out because it uses a total_map *)
+(* Definition Abs {A: Type} (t: trie_table A) (m: total_map A) :=
+  abstract t = m. *)
 
 (** **** Exercise: 2 stars, standard (is_trie)
 
@@ -254,44 +258,29 @@ Theorem insert_is_trie: forall {A} i x (t: trie_table A),
    is_trie t -> is_trie (insert i x t).
 (* FILL IN HERE *) Admitted.
 
-(** **** Exercise: 2 stars, standard (empty_relate)
-
-    Just unfold a bunch of definitions, use [extensionality], and
-    use one of the lemmas you proved above, in the section
-    "Lemmas about the relation between [lookup] and [insert]." *)
-
-Theorem empty_relate: forall {A} (default: A),
+(* *** Commented out because it uses Abs which uses total_map *** *)
+(* Theorem empty_relate: forall {A} (default: A),
     Abs (empty default) (t_empty default).
 Proof.
-(* FILL IN HERE *) Admitted.
+(* FILL IN HERE *) Admitted. *)
 
-(** **** Exercise: 2 stars, standard (lookup_relate)
-
-    Given the abstraction relation we've chosen, this one should be really simple. *)
-
-Theorem lookup_relate: forall {A} i (t: trie_table A) m,
+(* *** Commented out because it uses Abs which uses total_map *** *)
+(* Theorem lookup_relate: forall {A} i (t: trie_table A) m,
     is_trie t -> Abs t m -> lookup i t = m (pos2nat i).
-(* FILL IN HERE *) Admitted.
+(* FILL IN HERE *) Admitted. *)
 
-(** **** Exercise: 3 stars, standard (insert_relate)
-
-    Given the abstraction relation we've chosen, this one should NOT be simple.
-   However, you've already done the heavy lifting, with the lemmas
-  [look_ins_same] and [look_ins_other].   You will not need induction here.
-  Instead, unfold a bunch of things, use extensionality, and get to a case analysis
-  on whether [pos2nat k =? pos2nat j].   To handle that case analysis,
-   use [bdestruct]. You may also need [pos2nat_injective]. *)
-
-Theorem insert_relate: forall {A} k (v: A) t cts,
+(* *** Commented out because it uses Abs which uses total_map *** *)
+(* Theorem insert_relate: forall {A} k (v: A) t cts,
     is_trie t ->
     Abs t cts ->
     Abs (insert k v t) (t_update cts (pos2nat k) v).
-(* FILL IN HERE *) Admitted.
+(* FILL IN HERE *) Admitted. *)
 
 (* ================================================================= *)
 (** ** Sanity Check *)
 
-Example Abs_three_ten:
+(* *** Commented out because it uses Abs which uses total_map *** *)
+(* Example Abs_three_ten:
     Abs
        (insert 3 true (insert 10 true (empty false)))
        (t_update (t_update (t_empty false) (pos2nat 10) true) (pos2nat 3) true).
@@ -300,5 +289,5 @@ try (apply insert_relate; [hnf; auto | ]).
 try (apply insert_relate; [hnf; auto | ]).
 try (apply empty_relate).
 (* Change this to Qed once you have [is_trie] defined and working. *)
-(* FILL IN HERE *) Admitted.
+(* FILL IN HERE *) Admitted. *)
 

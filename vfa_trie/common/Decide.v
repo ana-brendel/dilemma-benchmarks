@@ -1,5 +1,5 @@
 From QuickChick Require Import QuickChick.
-From vfa_selection_benchmarks Require Import Definitions.
+From vfa_perm_benchmarks Require Import Definitions.
 
 Require Import String. Open Scope string.
 
@@ -398,109 +398,6 @@ dec_eq. assert (P: Permutation n m <-> isPerm n m = true). apply Permutation_isP
 - right. unfold not. intro. apply P in H0. discriminate H0.
 Qed.
 
-
-(* ************************************************************** *)
-(* ************************** [ SORT ] ************************** *)
-(* ************************************************************** *)
-
-Fixpoint sorted_bool (l : list nat) : bool :=
-  match l with 
-  | [] => true
-  | a :: l' => 
-    match l' with
-    | [] => true
-    | b :: _ => andb (Nat.leb a b) (sorted_bool l')
-  end
-end.
-
-Lemma if_sorted_bool_eq (l : list nat) : sorted l -> sorted_bool l = true.
-Proof.
-  intros. induction l. auto. destruct l. auto.
-  unfold sorted_bool. fold sorted_bool. simpl in IHl.
-  assert (Q : Nat.leb a n = false -> ~ (le a n)). intros. unfold not. intros. 
-    apply leb_correct in H1. rewrite H0 in H1. discriminate H1.
-  destruct (Nat.leb a n).
-  * rewrite andb_true_l. apply IHl. inversion H. auto.
-  * inversion H. assert (Q' : false = false). auto. apply Q in Q'. contradiction.
-Qed.
-
-Lemma fi_sorted_bool_eq (l : list nat) : sorted_bool l = true -> sorted l.
-Proof.
-  intros. induction l.
-  - apply sorted_nil.
-  - destruct l.
-  -- apply sorted_1.
-  -- apply sorted_cons. inversion H. 
-  assert (Q : Nat.leb a n = true -> (le a n)). apply leb_complete.
-  apply Q. destruct (Nat.leb a n). auto. rewrite andb_false_l in H1. discriminate H1.
-  apply IHl. inversion H. rewrite H1. symmetry in H1. apply andb_true_eq in H1. destruct H1.
-  simpl. auto.
-Qed.
-
-Theorem sorted_bool_eq (l : list nat) : sorted_bool l = true <-> sorted l.
-Proof. split. apply fi_sorted_bool_eq. apply if_sorted_bool_eq. Qed.
-
-Instance sorted_dec (l : list nat) : Dec (sorted l).
-Proof.
-  dec_eq. assert (P: sorted_bool l = true <-> sorted l). apply sorted_bool_eq.
-  destruct (sorted_bool l). left. apply P. auto. 
-  right. unfold not. intros. apply P in H. discriminate H.
-Qed.
-
-(* Lemma if_sortedd_sorted_eq (l : list nat) : sortedd l -> sorted l.
-Proof.
-  induction l.
-  * constructor.
-  * unfold sortedd in *. intro H. 
-    destruct l; constructor.
-    + apply (H 0 1). simpl. auto. reflexivity. reflexivity.
-    + apply IHl.
-      intros. apply (H (S i) (S j)).
-      simpl in *. apply lt_n_S in H0. auto. simpl. auto. simpl. auto.
-Qed. *)
-
-(* Lemma if_sorted_sortedd_eq (l : list nat) : sorted l -> sortedd l.
-Proof.
-  intros. unfold sortedd. 
-  induction l. destruct i. simpl. intros. discriminate H1. simpl. intros. discriminate H1.
-  induction H; intros.
-  * simpl in H. destruct i. 
-    simpl in H0; discriminate H0.
-    simpl in H0; discriminate H0.
-  * simpl in H0. destruct i. destruct j.
-    inversion H. simpl in H1. destruct j.
-    simpl in H1; discriminate H1.
-    simpl in H1; discriminate H1.
-    simpl in H0. destruct i.
-    simpl in H0; discriminate H0.
-    simpl in H0; discriminate H0.
-  * destruct i,j.
-  + inversion H1.
-  + apply le_trans with y. simpl in H2. inversion H2. rewrite <- H5. auto.
-    destruct j. simpl in H3. inversion H3. rewrite <- H5. auto.
-    specialize (IHsorted 0 (S j)). apply IHsorted. apply lt_0_Sn. reflexivity. simpl.
-    simpl in H3. auto.
-  + inversion H1.
-  + simpl in H2. simpl in H3. apply lt_S_n in H1. apply IHsorted with (i:=i) (j:=j).
-    auto. auto. auto.
-Qed. *)
-
-(* Theorem sorted_eq_sortedd (l : list nat) : sorted l <-> sortedd l.
-Proof. split. apply if_sorted_sortedd_eq. apply if_sortedd_sorted_eq. Qed. *)
-
-(* Theorem sortedd_eq_bool (l : list nat) : sortedd l <-> sorted_bool l = true.
-Proof. split. 
-  intros. apply sorted_bool_eq. apply sorted_eq_sortedd. auto.
-  intros. apply sorted_eq_sortedd. apply sorted_bool_eq. auto.
-Qed. *)
-
-(* Instance sortedd_dec (l : list nat) : Dec (sortedd l).
-Proof.
-  dec_eq. assert (P: sortedd l <-> sorted_bool l = true). apply sortedd_eq_bool.
-  destruct (sorted_bool l). left. apply P. auto. 
-  right. unfold not. intros. apply P in H. discriminate H.
-Qed. *)
-
 (* **************************************************************** *)
 (* ************************** [ FORALL ] ************************** *)
 (* **************************************************************** *)
@@ -516,17 +413,16 @@ Proof.
   + right. unfold not; intros. unfold not in n. apply n. apply Forall_inv_tail in H1. auto.
 Qed.
 
-(* ************************************************************* *)
-(* ************************** [ <=* ] ************************** *)
-(* ************************************************************* *)
-Instance leall_dec (x : nat) (ls : list nat) : (Dec (x <=* ls)).
-Proof.
-  dec_eq. unfold le_all. induction ls.
-  - left. apply Forall_nil.
-  - pose le_dec. assert (P: {x <= a} + {~ x <= a}). apply s. destruct P.
-  + destruct IHls. left. apply Forall_cons. auto. auto. right. 
-    unfold not; intros.  apply Forall_inv_tail in H. contradiction.
-  + right. unfold not. intros. apply Forall_inv in H. contradiction.
-Qed.
-
 Close Scope string.
+
+(* **************************************************************** *)
+(* ************************** [ first_le_second ] ************************** *)
+(* **************************************************************** *)
+Instance first_le_second_dec (l : list nat) : Dec (first_le_second l).
+Proof. 
+  dec_eq. destruct l.
+  - simpl. auto.
+  - destruct l.
+  -- left. unfold first_le_second. auto.
+  -- unfold first_le_second. bdestruct (n <=? n0). auto. right. lia.
+Qed.
