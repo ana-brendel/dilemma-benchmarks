@@ -413,5 +413,16 @@ Proof.
   + right. unfold not; intros. unfold not in n. apply n. apply Forall_inv_tail in H1. auto.
 Qed.
 
-
 Close Scope string.
+
+(* **************************************************************** *)
+(* ************************** [ first_le_second ] ************************** *)
+(* **************************************************************** *)
+Instance first_le_second_dec (l : list nat) : Dec (first_le_second l).
+Proof. 
+  dec_eq. destruct l.
+  - simpl. auto.
+  - destruct l.
+  -- left. unfold first_le_second. auto.
+  -- unfold first_le_second. bdestruct (n <=? n0). auto. right. lia.
+Qed.
