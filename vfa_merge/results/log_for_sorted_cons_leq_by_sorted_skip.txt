@@ -1,0 +1,357 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (sorted (b :: a :: l))
+ -- (forall b : nat, sorted (b :: l) -> b <=* l)
+
+----------------------------------
+Goal: (sorted (b :: l))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 0. seconds
+
+gv0 : (list nat) = (b :: l)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 37.668 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (b :: l = gv0)
+ -- (sorted (b :: a :: l))
+
+----------------------------------
+Goal: (sorted gv0)
+Case: 3
+
+Label: Generalization #1
+Assumptions: 
+ -- (sorted (b :: a :: l))
+
+----------------------------------
+Goal: (sorted (b :: l))
+Case: 3
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 38.314 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+@fst : (forall A B : Type, A * B -> A)
+@snd : (forall A B : Type, A * B -> B)
+length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+In : (forall A : Type, A -> list A -> Prop)
+existsb : (forall A : Type, (A -> bool) -> list A -> bool)
+forallb : (forall A : Type, (A -> bool) -> list A -> bool)
+Forall : (forall A : Type, (A -> Prop) -> list A -> Prop)
+nodup : (forall A : Type, (forall x y : A, {x = y} + {x <> y}) -> list A -> list A)
+Permutation : (forall A : Type, list A -> list A -> Prop)
+sorted : (list nat -> Prop)
+is_a_sorting_algorithm : ((list nat -> list nat) -> Prop)
+@split : (forall X : Type, list X -> list X * list X)
+merge : (list nat -> list nat -> list nat)
+le_all : (nat -> list nat -> Prop)
+list_ind2 : (forall (A : Type) (P : list A -> Prop),
+ P [] ->
+ (forall a : A, P [a]) ->
+ (forall (a b : A) (l : list A), P l -> P (a :: b :: l)) ->
+ forall l : list A, P l)
+sorted_bool : (list nat -> bool)
+
+Label: 0 (0)
+Abducted Assumption: (b :: l = gv0)
+Positive Examples:
+   [a := 3; b := 2; gv0 := [2; 3]; l := [3]]
+   [a := 2; b := 0; gv0 := [0; 2]; l := [2]]
+   [a := 3; b := 2; gv0 := [2]; l := []]
+   [a := 4; b := 3; gv0 := [3]; l := []]
+   [a := 2; b := 1; gv0 := [1; 2]; l := [2]]
+   [a := 0; b := 0; gv0 := [0; 0]; l := [0]]
+   [a := 2; b := 1; gv0 := [1; 3]; l := [3]]
+   [a := 0; b := 0; gv0 := [0; 2]; l := [2]]
+   [a := 2; b := 2; gv0 := [2]; l := []]
+   [a := 3; b := 3; gv0 := [3]; l := []]
+   etc ...
+
+Negative Examples:
+   [a := 2; b := 0; gv0 := [3; 0; 4; 0]; l := [3]]
+   [a := 2; b := 2; gv0 := [3; 5; 0]; l := []]
+   [a := 2; b := 0; gv0 := [1; 3; 3; 2]; l := []]
+   [a := 2; b := 2; gv0 := [0; 3; 1]; l := []]
+   [a := 6; b := 4; gv0 := [1; 4; 1]; l := []]
+   [a := 2; b := 2; gv0 := [3; 3; 3; 0; 0]; l := []]
+   [a := 5; b := 4; gv0 := [2; 5; 1]; l := []]
+   [a := 3; b := 3; gv0 := [3; 2; 1]; l := []]
+   [a := 2; b := 2; gv0 := [2; 5; 1; 5; 5]; l := []]
+   [a := 3; b := 1; gv0 := [3; 3; 0; 4]; l := []]
+   etc ...
+
+
+Label: 1 (1)
+Abducted Assumption: (sorted (b :: a :: l))
+Positive Examples:
+   [a := 1; b := 1; l := [1; 3]]
+   [a := 1; b := 0; l := [1; 2; 3]]
+   [a := 2; b := 2; l := [3; 3]]
+   [a := 1; b := 1; l := [1; 4]]
+   [a := 4; b := 2; l := [4]]
+   [a := 3; b := 1; l := [4; 6]]
+   [a := 3; b := 3; l := [6]]
+   [a := 1; b := 1; l := [1; 1; 1]]
+   [a := 6; b := 2; l := [6]]
+   [a := 3; b := 2; l := [5; 5]]
+   etc ...
+
+Negative Examples:
+   [a := 2; b := 5; l := [4]]
+   [a := 1; b := 3; l := [0; 3; 3]]
+   [a := 3; b := 3; l := [3; 5; 0; 6; 4]]
+   [a := 4; b := 4; l := [4; 1; 4]]
+   [a := 3; b := 2; l := [5; 3; 3]]
+   [a := 4; b := 4; l := [2; 4; 3; 0]]
+   [a := 3; b := 5; l := [5; 1; 1; 3; 0; 6]]
+   [a := 3; b := 2; l := [0; 4; 5; 0]]
+   [a := 0; b := 1; l := [3; 2; 3]]
+   [a := 3; b := 0; l := [3; 0; 0]]
+   etc ...
+
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 39.036 seconds
+
+
+Label: 0 (0)
+(a <=* l), (a <=* gv0), (b <=* l), (b <=* gv0), (sorted l), (sorted gv0), (Permutation l l), (Permutation l gv0), (Permutation gv0 l), (Permutation gv0 gv0)
+(In a gv0), (In b l), (In b gv0), (a < a), (a < b), (b < a), (b < b), (a <= a), (a <= b), (b <= a)
+(a = a), (a = b), (b = a), (b = b), (l = l), (l = gv0), (gv0 = l), (gv0 = gv0), (false = sorted_bool l), (false = sorted_bool gv0)
+(true = sorted_bool gv0), (a <=* a :: l), (a <=* a :: gv0), (a <=* b :: l), (a <=* b :: gv0), (a <=* merge l l), (a <=* merge l gv0), (a <=* merge gv0 l), (a <=* merge gv0 gv0), (a <=* l ++ l)
+(a <=* gv0 ++ l), (a <=* gv0 ++ gv0), (a <=* []), (b <=* a :: l), (b <=* a :: gv0), (b <=* b :: l), (b <=* b :: gv0), (b <=* merge l l), (b <=* merge l gv0), (b <=* merge gv0 l)
+(b <=* l ++ l), (b <=* l ++ gv0), (b <=* gv0 ++ l), (b <=* gv0 ++ gv0), (b <=* []), (length l <=* l), (length l <=* gv0), (length l <=* a :: l), (length l <=* a :: gv0), (length l <=* b :: l)
+(length l <=* merge l l), (length l <=* merge l gv0), (length l <=* merge gv0 l), (length l <=* merge gv0 gv0), (length l <=* l ++ l), (length l <=* l ++ gv0), (length l <=* gv0 ++ l), (length l <=* gv0 ++ gv0), (length l <=* []), (length gv0 <=* l)
+(length gv0 <=* a :: l), (length gv0 <=* a :: gv0), (length gv0 <=* b :: l), (length gv0 <=* b :: gv0), (length gv0 <=* merge l l), (length gv0 <=* merge l gv0), (length gv0 <=* merge gv0 l), (length gv0 <=* merge gv0 gv0), (length gv0 <=* l ++ l), (length gv0 <=* l ++ gv0)
+(length gv0 <=* gv0 ++ gv0), (length gv0 <=* []), (sorted (a :: l)), (sorted (a :: gv0)), (sorted (b :: l)), (sorted (b :: gv0)), (sorted (merge l l)), (sorted (merge l gv0)), (sorted (merge gv0 l)), (sorted (merge gv0 gv0))
+(sorted (l ++ gv0)), (sorted (gv0 ++ l)), (sorted (gv0 ++ gv0)), (sorted []), (Permutation l (a :: l)), (Permutation l (a :: gv0)), (Permutation l (b :: l)), (Permutation l (b :: gv0)), (Permutation l (merge l l)), (Permutation l (merge l gv0))
+(Permutation l (merge gv0 gv0)), (Permutation l (l ++ l)), (Permutation l (l ++ gv0)), (Permutation l (gv0 ++ l)), (Permutation l (gv0 ++ gv0)), (Permutation l []), (Permutation gv0 (a :: l)), (Permutation gv0 (a :: gv0)), (Permutation gv0 (b :: l)), (Permutation gv0 (b :: gv0))
+(Permutation gv0 (merge l gv0)), (Permutation gv0 (merge gv0 l)), (Permutation gv0 (merge gv0 gv0)), (Permutation gv0 (l ++ l)), (Permutation gv0 (l ++ gv0)), (Permutation gv0 (gv0 ++ l)), (Permutation gv0 (gv0 ++ gv0)), (Permutation gv0 []), (Permutation (a :: l) l), (Permutation (a :: l) gv0)
+(Permutation (a :: l) (b :: l)), (Permutation (a :: l) (b :: gv0)), (Permutation (a :: l) (merge l l)), (Permutation (a :: l) (merge l gv0)), (Permutation (a :: l) (merge gv0 l)), (Permutation (a :: l) (merge gv0 gv0)), (Permutation (a :: l) (l ++ l)), (Permutation (a :: l) (l ++ gv0)), (Permutation (a :: l) (gv0 ++ l)), (Permutation (a :: l) (gv0 ++ gv0))
+(Permutation (a :: gv0) l), (Permutation (a :: gv0) gv0), (Permutation (a :: gv0) (a :: l)), (Permutation (a :: gv0) (b :: l)), (Permutation (a :: gv0) (b :: gv0)), (Permutation (a :: gv0) (merge l l)), (Permutation (a :: gv0) (merge l gv0)), (Permutation (a :: gv0) (merge gv0 l)), (Permutation (a :: gv0) (merge gv0 gv0)), (Permutation (a :: gv0) (l ++ l))
+(Permutation (a :: gv0) (gv0 ++ l)), (Permutation (a :: gv0) (gv0 ++ gv0)), (Permutation (a :: gv0) []), (Permutation (b :: l) l), (Permutation (b :: l) gv0), (Permutation (b :: l) (a :: l)), (Permutation (b :: l) (a :: gv0)), (Permutation (b :: l) (b :: gv0)), (Permutation (b :: l) (merge l l)), (Permutation (b :: l) (merge l gv0))
+(Permutation (b :: l) (merge gv0 gv0)), (Permutation (b :: l) (l ++ l)), (Permutation (b :: l) (l ++ gv0)), (Permutation (b :: l) (gv0 ++ l)), (Permutation (b :: l) (gv0 ++ gv0)), (Permutation (b :: l) []), (Permutation (b :: gv0) l), (Permutation (b :: gv0) gv0), (Permutation (b :: gv0) (a :: l)), (Permutation (b :: gv0) (a :: gv0))
+(Permutation (b :: gv0) (merge l l)), (Permutation (b :: gv0) (merge l gv0)), (Permutation (b :: gv0) (merge gv0 l)), (Permutation (b :: gv0) (merge gv0 gv0)), (Permutation (b :: gv0) (l ++ l)), (Permutation (b :: gv0) (l ++ gv0)), (Permutation (b :: gv0) (gv0 ++ l)), (Permutation (b :: gv0) (gv0 ++ gv0)), (Permutation (b :: gv0) []), (Permutation (merge l l) l)
+(Permutation (merge l l) (a :: l)), (Permutation (merge l l) (a :: gv0)), (Permutation (merge l l) (b :: l)), (Permutation (merge l l) (b :: gv0)), (Permutation (merge l l) (merge l gv0)), (Permutation (merge l l) (merge gv0 l)), (Permutation (merge l l) (merge gv0 gv0)), (Permutation (merge l l) (l ++ l)), (Permutation (merge l l) (l ++ gv0)), (Permutation (merge l l) (gv0 ++ l))
+(Permutation (merge l l) []), (Permutation (merge l gv0) l), (Permutation (merge l gv0) gv0), (Permutation (merge l gv0) (a :: l)), (Permutation (merge l gv0) (a :: gv0)), (Permutation (merge l gv0) (b :: l)), (Permutation (merge l gv0) (b :: gv0)), (Permutation (merge l gv0) (merge l l)), (Permutation (merge l gv0) (merge gv0 l)), (Permutation (merge l gv0) (merge gv0 gv0))
+(Permutation (merge l gv0) (l ++ gv0)), (Permutation (merge l gv0) (gv0 ++ l)), (Permutation (merge l gv0) (gv0 ++ gv0)), (Permutation (merge l gv0) []), (Permutation (merge gv0 l) l), (Permutation (merge gv0 l) gv0), (Permutation (merge gv0 l) (a :: l)), (Permutation (merge gv0 l) (a :: gv0)), (Permutation (merge gv0 l) (b :: l)), (Permutation (merge gv0 l) (b :: gv0))
+(Permutation (merge gv0 l) (merge l gv0)), (Permutation (merge gv0 l) (merge gv0 gv0)), (Permutation (merge gv0 l) (l ++ l)), (Permutation (merge gv0 l) (l ++ gv0)), (Permutation (merge gv0 l) (gv0 ++ l)), (Permutation (merge gv0 l) (gv0 ++ gv0)), (Permutation (merge gv0 l) []), (Permutation (merge gv0 gv0) l), (Permutation (merge gv0 gv0) gv0), (Permutation (merge gv0 gv0) (a :: l))
+(Permutation (merge gv0 gv0) (b :: l)), (Permutation (merge gv0 gv0) (b :: gv0)), (Permutation (merge gv0 gv0) (merge l l)), (Permutation (merge gv0 gv0) (merge l gv0)), (Permutation (merge gv0 gv0) (merge gv0 l)), (Permutation (merge gv0 gv0) (l ++ l)), (Permutation (merge gv0 gv0) (l ++ gv0)), (Permutation (merge gv0 gv0) (gv0 ++ l)), (Permutation (merge gv0 gv0) (gv0 ++ gv0)), (Permutation (merge gv0 gv0) [])
+(Permutation (l ++ l) gv0), (Permutation (l ++ l) (a :: l)), (Permutation (l ++ l) (a :: gv0)), (Permutation (l ++ l) (b :: l)), (Permutation (l ++ l) (b :: gv0)), (Permutation (l ++ l) (merge l l)), (Permutation (l ++ l) (merge l gv0)), (Permutation (l ++ l) (merge gv0 l)), (Permutation (l ++ l) (merge gv0 gv0)), (Permutation (l ++ l) (l ++ gv0))
+(Permutation (l ++ l) (gv0 ++ gv0)), (Permutation (l ++ l) []), (Permutation (l ++ gv0) l), (Permutation (l ++ gv0) gv0), (Permutation (l ++ gv0) (a :: l)), (Permutation (l ++ gv0) (a :: gv0)), (Permutation (l ++ gv0) (b :: l)), (Permutation (l ++ gv0) (b :: gv0)), (Permutation (l ++ gv0) (merge l l)), (Permutation (l ++ gv0) (merge l gv0))
+(Permutation (l ++ gv0) (merge gv0 gv0)), (Permutation (l ++ gv0) (l ++ l)), (Permutation (l ++ gv0) (gv0 ++ l)), (Permutation (l ++ gv0) (gv0 ++ gv0)), (Permutation (l ++ gv0) []), (Permutation (gv0 ++ l) l), (Permutation (gv0 ++ l) gv0), (Permutation (gv0 ++ l) (a :: l)), (Permutation (gv0 ++ l) (a :: gv0)), (Permutation (gv0 ++ l) (b :: l))
+(Permutation (gv0 ++ l) (merge l l)), (Permutation (gv0 ++ l) (merge l gv0)), (Permutation (gv0 ++ l) (merge gv0 l)), (Permutation (gv0 ++ l) (merge gv0 gv0)), (Permutation (gv0 ++ l) (l ++ l)), (Permutation (gv0 ++ l) (l ++ gv0)), (Permutation (gv0 ++ l) (gv0 ++ gv0)), (Permutation (gv0 ++ l) []), (Permutation (gv0 ++ gv0) l), (Permutation (gv0 ++ gv0) gv0)
+(Permutation (gv0 ++ gv0) (a :: gv0)), (Permutation (gv0 ++ gv0) (b :: l)), (Permutation (gv0 ++ gv0) (b :: gv0)), (Permutation (gv0 ++ gv0) (merge l l)), (Permutation (gv0 ++ gv0) (merge l gv0)), (Permutation (gv0 ++ gv0) (merge gv0 l)), (Permutation (gv0 ++ gv0) (merge gv0 gv0)), (Permutation (gv0 ++ gv0) (l ++ l)), (Permutation (gv0 ++ gv0) (l ++ gv0)), (Permutation (gv0 ++ gv0) (gv0 ++ l))
+(Permutation [] l), (Permutation [] gv0), (Permutation [] (a :: l)), (Permutation [] (a :: gv0)), (Permutation [] (b :: l)), (Permutation [] (b :: gv0)), (Permutation [] (merge l l)), (Permutation [] (merge l gv0)), (Permutation [] (merge gv0 l)), (Permutation [] (merge gv0 gv0))
+(Permutation [] (l ++ gv0)), (Permutation [] (gv0 ++ l)), (Permutation [] (gv0 ++ gv0)), (In a (a :: l)), (In a (a :: gv0)), (In a (b :: l)), (In a (b :: gv0)), (In a (merge l l)), (In a (merge l gv0)), (In a (merge gv0 l))
+(In a (l ++ l)), (In a (l ++ gv0)), (In a (gv0 ++ l)), (In a (gv0 ++ gv0)), (In b (a :: l)), (In b (a :: gv0)), (In b (b :: l)), (In b (b :: gv0)), (In b (merge l l)), (In b (merge l gv0))
+(In b (merge gv0 gv0)), (In b (l ++ l)), (In b (l ++ gv0)), (In b (gv0 ++ l)), (In b (gv0 ++ gv0)), (In (length l) l), (In (length l) gv0), (In (length l) (a :: l)), (In (length l) (a :: gv0)), (In (length l) (b :: l))
+(In (length l) (merge l l)), (In (length l) (merge l gv0)), (In (length l) (merge gv0 l)), (In (length l) (merge gv0 gv0)), (In (length l) (l ++ l)), (In (length l) (l ++ gv0)), (In (length l) (gv0 ++ l)), (In (length l) (gv0 ++ gv0)), (In (length gv0) l), (In (length gv0) gv0)
+(In (length gv0) (a :: gv0)), (In (length gv0) (b :: l)), (In (length gv0) (b :: gv0)), (In (length gv0) (merge l l)), (In (length gv0) (merge l gv0)), (In (length gv0) (merge gv0 l)), (In (length gv0) (merge gv0 gv0)), (In (length gv0) (l ++ l)), (In (length gv0) (l ++ gv0)), (In (length gv0) (gv0 ++ l))
+(a < length l), (a < length gv0), (b < length l), (b < length gv0), (length l < a), (length l < b), (length l < length gv0), (length gv0 < a), (length gv0 < b), (length gv0 < length l)
+(a <= length gv0), (b <= length l), (b <= length gv0), (length l <= a), (length l <= b), (length l <= length gv0), (length gv0 <= a), (length gv0 <= b), (length gv0 <= length l), (~ a <=* l)
+(~ b <=* l), (~ b <=* gv0), (~ sorted l), (~ sorted gv0), (~ Permutation l l), (~ Permutation l gv0), (~ Permutation gv0 l), (~ Permutation gv0 gv0), (~ In a l), (~ In a gv0)
+(~ In b gv0), (~ a < a), (~ a < b), (~ b < a), (~ b < b), (~ a <= a), (~ a <= b), (~ b <= a), (~ b <= b), (a <> a)
+(b <> a), (b <> b), (l <> l), (l <> gv0), (gv0 <> l), (gv0 <> gv0), (None = Some l), (None = Some gv0), (a :: l = l), (a :: l = gv0)
+(a :: l = merge l gv0), (a :: l = merge gv0 l), (a :: l = merge gv0 gv0), (a :: l = l ++ l), (a :: l = l ++ gv0), (a :: l = gv0 ++ l), (a :: l = gv0 ++ gv0), (a :: l = []), (a :: gv0 = l), (a :: gv0 = gv0)
+(a :: gv0 = merge l gv0), (a :: gv0 = merge gv0 l), (a :: gv0 = merge gv0 gv0), (a :: gv0 = l ++ l), (a :: gv0 = l ++ gv0), (a :: gv0 = gv0 ++ l), (a :: gv0 = gv0 ++ gv0), (a :: gv0 = []), (b :: l = l), (b :: l = gv0)
+(b :: l = merge l gv0), (b :: l = merge gv0 l), (b :: l = merge gv0 gv0), (b :: l = l ++ l), (b :: l = l ++ gv0), (b :: l = gv0 ++ l), (b :: l = gv0 ++ gv0), (b :: l = []), (b :: gv0 = l), (b :: gv0 = gv0)
+(b :: gv0 = merge l gv0), (b :: gv0 = merge gv0 l), (b :: gv0 = merge gv0 gv0), (b :: gv0 = l ++ l), (b :: gv0 = l ++ gv0), (b :: gv0 = gv0 ++ l), (b :: gv0 = gv0 ++ gv0), (b :: gv0 = []), (merge l l = l), (merge l l = gv0)
+(merge l l = l ++ gv0), (merge l l = gv0 ++ l), (merge l l = gv0 ++ gv0), (merge l gv0 = l), (merge l gv0 = gv0), (merge l gv0 = l ++ l), (merge l gv0 = l ++ gv0), (merge l gv0 = gv0 ++ l), (merge l gv0 = gv0 ++ gv0), (merge gv0 l = l)
+(merge gv0 l = l ++ l), (merge gv0 l = l ++ gv0), (merge gv0 l = gv0 ++ l), (merge gv0 l = gv0 ++ gv0), (merge gv0 gv0 = l), (merge gv0 gv0 = gv0), (merge gv0 gv0 = l ++ l), (merge gv0 gv0 = l ++ gv0), (merge gv0 gv0 = gv0 ++ l), (merge gv0 gv0 = gv0 ++ gv0)
+(l ++ l = gv0), (l ++ gv0 = l), (l ++ gv0 = gv0), (gv0 ++ l = l), (gv0 ++ l = gv0), (gv0 ++ gv0 = l), (gv0 ++ gv0 = gv0), ([] = l), ([] = gv0), ([] = merge l l)
+([] = merge gv0 l), ([] = merge gv0 gv0), ([] = l ++ l), ([] = l ++ gv0), ([] = gv0 ++ l), ([] = gv0 ++ gv0), (None = Some a), (None = Some b), ((l, l) = split l), ((l, l) = split gv0)
+((l, gv0) = split gv0), ((gv0, l) = split l), ((gv0, l) = split gv0), ((gv0, gv0) = split l), ((gv0, gv0) = split gv0), (length l = a), (length l = b), (length gv0 = a), (length gv0 = b)
+
+Label: 1 (1)
+(a <=* l), (b <=* l), (sorted l), (Permutation l l), (In a l), (In b l), (a < a), (a < b), (b < a), (b < b)
+(a <= b), (b <= a), (b <= b), (l = l), (a = a), (a = b), (b = a), (b = b), (false = sorted_bool l), (true = sorted_bool l)
+(a <=* b :: l), (a <=* merge l l), (a <=* l ++ l), (a <=* []), (b <=* a :: l), (b <=* b :: l), (b <=* merge l l), (b <=* l ++ l), (b <=* []), (length l <=* l)
+(length l <=* b :: l), (length l <=* merge l l), (length l <=* l ++ l), (length l <=* []), (sorted (a :: l)), (sorted (b :: l)), (sorted (merge l l)), (sorted (l ++ l)), (sorted []), (Permutation l (a :: l))
+(Permutation l (merge l l)), (Permutation l (l ++ l)), (Permutation l []), (Permutation (a :: l) l), (Permutation (a :: l) (b :: l)), (Permutation (a :: l) (merge l l)), (Permutation (a :: l) (l ++ l)), (Permutation (a :: l) []), (Permutation (b :: l) l), (Permutation (b :: l) (a :: l))
+(Permutation (b :: l) (l ++ l)), (Permutation (b :: l) []), (Permutation (merge l l) l), (Permutation (merge l l) (a :: l)), (Permutation (merge l l) (b :: l)), (Permutation (merge l l) (l ++ l)), (Permutation (merge l l) []), (Permutation (l ++ l) l), (Permutation (l ++ l) (a :: l)), (Permutation (l ++ l) (b :: l))
+(Permutation (l ++ l) []), (Permutation [] l), (Permutation [] (a :: l)), (Permutation [] (b :: l)), (Permutation [] (merge l l)), (Permutation [] (l ++ l)), (In a (a :: l)), (In a (b :: l)), (In a (merge l l)), (In a (l ++ l))
+(In b (b :: l)), (In b (merge l l)), (In b (l ++ l)), (In (length l) l), (In (length l) (a :: l)), (In (length l) (b :: l)), (In (length l) (merge l l)), (In (length l) (l ++ l)), (a < length l), (b < length l)
+(length l < b), (a <= length l), (b <= length l), (length l <= a), (length l <= b), (~ a <=* l), (~ b <=* l), (~ sorted l), (~ Permutation l l), (~ In a l)
+(~ a < a), (~ a < b), (~ b < a), (~ b < b), (~ a <= a), (~ a <= b), (~ b <= a), (~ b <= b), (l <> l), (a <> a)
+(b <> a), (b <> b), (None = Some l), (a :: l = l), (a :: l = merge l l), (a :: l = l ++ l), (a :: l = []), (b :: l = l), (b :: l = merge l l), (b :: l = l ++ l)
+(merge l l = l), (merge l l = l ++ l), (l ++ l = l), ([] = l), ([] = merge l l), ([] = l ++ l), (None = Some a), (None = Some b), ((l, l) = split l), (length l = a)
+
+
+------------------------------ COMBINED SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 39.06 seconds
+
+
+Label: 0 (0)
+Abducted Assumption: (b :: l = gv0)
+Positive Examples:
+   [a := 3; b := 2; gv0 := [2; 3]; l := [3]]
+   [a := 2; b := 0; gv0 := [0; 2]; l := [2]]
+   [a := 3; b := 2; gv0 := [2]; l := []]
+   [a := 4; b := 3; gv0 := [3]; l := []]
+   [a := 2; b := 1; gv0 := [1; 2]; l := [2]]
+   [a := 0; b := 0; gv0 := [0; 0]; l := [0]]
+   [a := 2; b := 1; gv0 := [1; 3]; l := [3]]
+   [a := 0; b := 0; gv0 := [0; 2]; l := [2]]
+   [a := 2; b := 2; gv0 := [2]; l := []]
+   [a := 3; b := 3; gv0 := [3]; l := []]
+   etc ...
+
+Negative Examples:
+   [a := 2; b := 0; gv0 := [3; 0; 4; 0]; l := [3]]
+   [a := 2; b := 2; gv0 := [3; 5; 0]; l := []]
+   [a := 2; b := 0; gv0 := [1; 3; 3; 2]; l := []]
+   [a := 2; b := 2; gv0 := [0; 3; 1]; l := []]
+   [a := 6; b := 4; gv0 := [1; 4; 1]; l := []]
+   [a := 2; b := 2; gv0 := [3; 3; 3; 0; 0]; l := []]
+   [a := 5; b := 4; gv0 := [2; 5; 1]; l := []]
+   [a := 3; b := 3; gv0 := [3; 2; 1]; l := []]
+   [a := 2; b := 2; gv0 := [2; 5; 1; 5; 5]; l := []]
+   [a := 3; b := 1; gv0 := [3; 3; 0; 4]; l := []]
+   etc ...
+
+(a <=* l), (a <=* gv0), (b <=* l), (b <=* gv0), (sorted l), (sorted gv0), (Permutation l l), (Permutation l gv0), (Permutation gv0 l), (Permutation gv0 gv0)
+(In a gv0), (In b l), (In b gv0), (a < a), (a < b), (b < a), (b < b), (a <= a), (a <= b), (b <= a)
+(a = a), (a = b), (b = a), (b = b), (l = l), (l = gv0), (gv0 = l), (gv0 = gv0), (false = sorted_bool l), (false = sorted_bool gv0)
+(true = sorted_bool gv0), (a <=* a :: l), (a <=* a :: gv0), (a <=* b :: l), (a <=* b :: gv0), (a <=* merge l l), (a <=* merge l gv0), (a <=* merge gv0 l), (a <=* merge gv0 gv0), (a <=* l ++ l)
+(a <=* gv0 ++ l), (a <=* gv0 ++ gv0), (a <=* []), (b <=* a :: l), (b <=* a :: gv0), (b <=* b :: l), (b <=* b :: gv0), (b <=* merge l l), (b <=* merge l gv0), (b <=* merge gv0 l)
+(b <=* l ++ l), (b <=* l ++ gv0), (b <=* gv0 ++ l), (b <=* gv0 ++ gv0), (b <=* []), (length l <=* l), (length l <=* gv0), (length l <=* a :: l), (length l <=* a :: gv0), (length l <=* b :: l)
+(length l <=* merge l l), (length l <=* merge l gv0), (length l <=* merge gv0 l), (length l <=* merge gv0 gv0), (length l <=* l ++ l), (length l <=* l ++ gv0), (length l <=* gv0 ++ l), (length l <=* gv0 ++ gv0), (length l <=* []), (length gv0 <=* l)
+(length gv0 <=* a :: l), (length gv0 <=* a :: gv0), (length gv0 <=* b :: l), (length gv0 <=* b :: gv0), (length gv0 <=* merge l l), (length gv0 <=* merge l gv0), (length gv0 <=* merge gv0 l), (length gv0 <=* merge gv0 gv0), (length gv0 <=* l ++ l), (length gv0 <=* l ++ gv0)
+(length gv0 <=* gv0 ++ gv0), (length gv0 <=* []), (sorted (a :: l)), (sorted (a :: gv0)), (sorted (b :: l)), (sorted (b :: gv0)), (sorted (merge l l)), (sorted (merge l gv0)), (sorted (merge gv0 l)), (sorted (merge gv0 gv0))
+(sorted (l ++ gv0)), (sorted (gv0 ++ l)), (sorted (gv0 ++ gv0)), (sorted []), (Permutation l (a :: l)), (Permutation l (a :: gv0)), (Permutation l (b :: l)), (Permutation l (b :: gv0)), (Permutation l (merge l l)), (Permutation l (merge l gv0))
+(Permutation l (merge gv0 gv0)), (Permutation l (l ++ l)), (Permutation l (l ++ gv0)), (Permutation l (gv0 ++ l)), (Permutation l (gv0 ++ gv0)), (Permutation l []), (Permutation gv0 (a :: l)), (Permutation gv0 (a :: gv0)), (Permutation gv0 (b :: l)), (Permutation gv0 (b :: gv0))
+(Permutation gv0 (merge l gv0)), (Permutation gv0 (merge gv0 l)), (Permutation gv0 (merge gv0 gv0)), (Permutation gv0 (l ++ l)), (Permutation gv0 (l ++ gv0)), (Permutation gv0 (gv0 ++ l)), (Permutation gv0 (gv0 ++ gv0)), (Permutation gv0 []), (Permutation (a :: l) l), (Permutation (a :: l) gv0)
+(Permutation (a :: l) (b :: l)), (Permutation (a :: l) (b :: gv0)), (Permutation (a :: l) (merge l l)), (Permutation (a :: l) (merge l gv0)), (Permutation (a :: l) (merge gv0 l)), (Permutation (a :: l) (merge gv0 gv0)), (Permutation (a :: l) (l ++ l)), (Permutation (a :: l) (l ++ gv0)), (Permutation (a :: l) (gv0 ++ l)), (Permutation (a :: l) (gv0 ++ gv0))
+(Permutation (a :: gv0) l), (Permutation (a :: gv0) gv0), (Permutation (a :: gv0) (a :: l)), (Permutation (a :: gv0) (b :: l)), (Permutation (a :: gv0) (b :: gv0)), (Permutation (a :: gv0) (merge l l)), (Permutation (a :: gv0) (merge l gv0)), (Permutation (a :: gv0) (merge gv0 l)), (Permutation (a :: gv0) (merge gv0 gv0)), (Permutation (a :: gv0) (l ++ l))
+(Permutation (a :: gv0) (gv0 ++ l)), (Permutation (a :: gv0) (gv0 ++ gv0)), (Permutation (a :: gv0) []), (Permutation (b :: l) l), (Permutation (b :: l) gv0), (Permutation (b :: l) (a :: l)), (Permutation (b :: l) (a :: gv0)), (Permutation (b :: l) (b :: gv0)), (Permutation (b :: l) (merge l l)), (Permutation (b :: l) (merge l gv0))
+(Permutation (b :: l) (merge gv0 gv0)), (Permutation (b :: l) (l ++ l)), (Permutation (b :: l) (l ++ gv0)), (Permutation (b :: l) (gv0 ++ l)), (Permutation (b :: l) (gv0 ++ gv0)), (Permutation (b :: l) []), (Permutation (b :: gv0) l), (Permutation (b :: gv0) gv0), (Permutation (b :: gv0) (a :: l)), (Permutation (b :: gv0) (a :: gv0))
+(Permutation (b :: gv0) (merge l l)), (Permutation (b :: gv0) (merge l gv0)), (Permutation (b :: gv0) (merge gv0 l)), (Permutation (b :: gv0) (merge gv0 gv0)), (Permutation (b :: gv0) (l ++ l)), (Permutation (b :: gv0) (l ++ gv0)), (Permutation (b :: gv0) (gv0 ++ l)), (Permutation (b :: gv0) (gv0 ++ gv0)), (Permutation (b :: gv0) []), (Permutation (merge l l) l)
+(Permutation (merge l l) (a :: l)), (Permutation (merge l l) (a :: gv0)), (Permutation (merge l l) (b :: l)), (Permutation (merge l l) (b :: gv0)), (Permutation (merge l l) (merge l gv0)), (Permutation (merge l l) (merge gv0 l)), (Permutation (merge l l) (merge gv0 gv0)), (Permutation (merge l l) (l ++ l)), (Permutation (merge l l) (l ++ gv0)), (Permutation (merge l l) (gv0 ++ l))
+(Permutation (merge l l) []), (Permutation (merge l gv0) l), (Permutation (merge l gv0) gv0), (Permutation (merge l gv0) (a :: l)), (Permutation (merge l gv0) (a :: gv0)), (Permutation (merge l gv0) (b :: l)), (Permutation (merge l gv0) (b :: gv0)), (Permutation (merge l gv0) (merge l l)), (Permutation (merge l gv0) (merge gv0 l)), (Permutation (merge l gv0) (merge gv0 gv0))
+(Permutation (merge l gv0) (l ++ gv0)), (Permutation (merge l gv0) (gv0 ++ l)), (Permutation (merge l gv0) (gv0 ++ gv0)), (Permutation (merge l gv0) []), (Permutation (merge gv0 l) l), (Permutation (merge gv0 l) gv0), (Permutation (merge gv0 l) (a :: l)), (Permutation (merge gv0 l) (a :: gv0)), (Permutation (merge gv0 l) (b :: l)), (Permutation (merge gv0 l) (b :: gv0))
+(Permutation (merge gv0 l) (merge l gv0)), (Permutation (merge gv0 l) (merge gv0 gv0)), (Permutation (merge gv0 l) (l ++ l)), (Permutation (merge gv0 l) (l ++ gv0)), (Permutation (merge gv0 l) (gv0 ++ l)), (Permutation (merge gv0 l) (gv0 ++ gv0)), (Permutation (merge gv0 l) []), (Permutation (merge gv0 gv0) l), (Permutation (merge gv0 gv0) gv0), (Permutation (merge gv0 gv0) (a :: l))
+(Permutation (merge gv0 gv0) (b :: l)), (Permutation (merge gv0 gv0) (b :: gv0)), (Permutation (merge gv0 gv0) (merge l l)), (Permutation (merge gv0 gv0) (merge l gv0)), (Permutation (merge gv0 gv0) (merge gv0 l)), (Permutation (merge gv0 gv0) (l ++ l)), (Permutation (merge gv0 gv0) (l ++ gv0)), (Permutation (merge gv0 gv0) (gv0 ++ l)), (Permutation (merge gv0 gv0) (gv0 ++ gv0)), (Permutation (merge gv0 gv0) [])
+(Permutation (l ++ l) gv0), (Permutation (l ++ l) (a :: l)), (Permutation (l ++ l) (a :: gv0)), (Permutation (l ++ l) (b :: l)), (Permutation (l ++ l) (b :: gv0)), (Permutation (l ++ l) (merge l l)), (Permutation (l ++ l) (merge l gv0)), (Permutation (l ++ l) (merge gv0 l)), (Permutation (l ++ l) (merge gv0 gv0)), (Permutation (l ++ l) (l ++ gv0))
+(Permutation (l ++ l) (gv0 ++ gv0)), (Permutation (l ++ l) []), (Permutation (l ++ gv0) l), (Permutation (l ++ gv0) gv0), (Permutation (l ++ gv0) (a :: l)), (Permutation (l ++ gv0) (a :: gv0)), (Permutation (l ++ gv0) (b :: l)), (Permutation (l ++ gv0) (b :: gv0)), (Permutation (l ++ gv0) (merge l l)), (Permutation (l ++ gv0) (merge l gv0))
+(Permutation (l ++ gv0) (merge gv0 gv0)), (Permutation (l ++ gv0) (l ++ l)), (Permutation (l ++ gv0) (gv0 ++ l)), (Permutation (l ++ gv0) (gv0 ++ gv0)), (Permutation (l ++ gv0) []), (Permutation (gv0 ++ l) l), (Permutation (gv0 ++ l) gv0), (Permutation (gv0 ++ l) (a :: l)), (Permutation (gv0 ++ l) (a :: gv0)), (Permutation (gv0 ++ l) (b :: l))
+(Permutation (gv0 ++ l) (merge l l)), (Permutation (gv0 ++ l) (merge l gv0)), (Permutation (gv0 ++ l) (merge gv0 l)), (Permutation (gv0 ++ l) (merge gv0 gv0)), (Permutation (gv0 ++ l) (l ++ l)), (Permutation (gv0 ++ l) (l ++ gv0)), (Permutation (gv0 ++ l) (gv0 ++ gv0)), (Permutation (gv0 ++ l) []), (Permutation (gv0 ++ gv0) l), (Permutation (gv0 ++ gv0) gv0)
+(Permutation (gv0 ++ gv0) (a :: gv0)), (Permutation (gv0 ++ gv0) (b :: l)), (Permutation (gv0 ++ gv0) (b :: gv0)), (Permutation (gv0 ++ gv0) (merge l l)), (Permutation (gv0 ++ gv0) (merge l gv0)), (Permutation (gv0 ++ gv0) (merge gv0 l)), (Permutation (gv0 ++ gv0) (merge gv0 gv0)), (Permutation (gv0 ++ gv0) (l ++ l)), (Permutation (gv0 ++ gv0) (l ++ gv0)), (Permutation (gv0 ++ gv0) (gv0 ++ l))
+(Permutation [] l), (Permutation [] gv0), (Permutation [] (a :: l)), (Permutation [] (a :: gv0)), (Permutation [] (b :: l)), (Permutation [] (b :: gv0)), (Permutation [] (merge l l)), (Permutation [] (merge l gv0)), (Permutation [] (merge gv0 l)), (Permutation [] (merge gv0 gv0))
+(Permutation [] (l ++ gv0)), (Permutation [] (gv0 ++ l)), (Permutation [] (gv0 ++ gv0)), (In a (a :: l)), (In a (a :: gv0)), (In a (b :: l)), (In a (b :: gv0)), (In a (merge l l)), (In a (merge l gv0)), (In a (merge gv0 l))
+(In a (l ++ l)), (In a (l ++ gv0)), (In a (gv0 ++ l)), (In a (gv0 ++ gv0)), (In b (a :: l)), (In b (a :: gv0)), (In b (b :: l)), (In b (b :: gv0)), (In b (merge l l)), (In b (merge l gv0))
+(In b (merge gv0 gv0)), (In b (l ++ l)), (In b (l ++ gv0)), (In b (gv0 ++ l)), (In b (gv0 ++ gv0)), (In (length l) l), (In (length l) gv0), (In (length l) (a :: l)), (In (length l) (a :: gv0)), (In (length l) (b :: l))
+(In (length l) (merge l l)), (In (length l) (merge l gv0)), (In (length l) (merge gv0 l)), (In (length l) (merge gv0 gv0)), (In (length l) (l ++ l)), (In (length l) (l ++ gv0)), (In (length l) (gv0 ++ l)), (In (length l) (gv0 ++ gv0)), (In (length gv0) l), (In (length gv0) gv0)
+(In (length gv0) (a :: gv0)), (In (length gv0) (b :: l)), (In (length gv0) (b :: gv0)), (In (length gv0) (merge l l)), (In (length gv0) (merge l gv0)), (In (length gv0) (merge gv0 l)), (In (length gv0) (merge gv0 gv0)), (In (length gv0) (l ++ l)), (In (length gv0) (l ++ gv0)), (In (length gv0) (gv0 ++ l))
+(a < length l), (a < length gv0), (b < length l), (b < length gv0), (length l < a), (length l < b), (length l < length gv0), (length gv0 < a), (length gv0 < b), (length gv0 < length l)
+(a <= length gv0), (b <= length l), (b <= length gv0), (length l <= a), (length l <= b), (length l <= length gv0), (length gv0 <= a), (length gv0 <= b), (length gv0 <= length l), (~ a <=* l)
+(~ b <=* l), (~ b <=* gv0), (~ sorted l), (~ sorted gv0), (~ Permutation l l), (~ Permutation l gv0), (~ Permutation gv0 l), (~ Permutation gv0 gv0), (~ In a l), (~ In a gv0)
+(~ In b gv0), (~ a < a), (~ a < b), (~ b < a), (~ b < b), (~ a <= a), (~ a <= b), (~ b <= a), (~ b <= b), (a <> a)
+(b <> a), (b <> b), (l <> l), (l <> gv0), (gv0 <> l), (gv0 <> gv0), (None = Some l), (None = Some gv0), (a :: l = l), (a :: l = gv0)
+(a :: l = merge l gv0), (a :: l = merge gv0 l), (a :: l = merge gv0 gv0), (a :: l = l ++ l), (a :: l = l ++ gv0), (a :: l = gv0 ++ l), (a :: l = gv0 ++ gv0), (a :: l = []), (a :: gv0 = l), (a :: gv0 = gv0)
+(a :: gv0 = merge l gv0), (a :: gv0 = merge gv0 l), (a :: gv0 = merge gv0 gv0), (a :: gv0 = l ++ l), (a :: gv0 = l ++ gv0), (a :: gv0 = gv0 ++ l), (a :: gv0 = gv0 ++ gv0), (a :: gv0 = []), (b :: l = l), (b :: l = gv0)
+(b :: l = merge l gv0), (b :: l = merge gv0 l), (b :: l = merge gv0 gv0), (b :: l = l ++ l), (b :: l = l ++ gv0), (b :: l = gv0 ++ l), (b :: l = gv0 ++ gv0), (b :: l = []), (b :: gv0 = l), (b :: gv0 = gv0)
+(b :: gv0 = merge l gv0), (b :: gv0 = merge gv0 l), (b :: gv0 = merge gv0 gv0), (b :: gv0 = l ++ l), (b :: gv0 = l ++ gv0), (b :: gv0 = gv0 ++ l), (b :: gv0 = gv0 ++ gv0), (b :: gv0 = []), (merge l l = l), (merge l l = gv0)
+(merge l l = l ++ gv0), (merge l l = gv0 ++ l), (merge l l = gv0 ++ gv0), (merge l gv0 = l), (merge l gv0 = gv0), (merge l gv0 = l ++ l), (merge l gv0 = l ++ gv0), (merge l gv0 = gv0 ++ l), (merge l gv0 = gv0 ++ gv0), (merge gv0 l = l)
+(merge gv0 l = l ++ l), (merge gv0 l = l ++ gv0), (merge gv0 l = gv0 ++ l), (merge gv0 l = gv0 ++ gv0), (merge gv0 gv0 = l), (merge gv0 gv0 = gv0), (merge gv0 gv0 = l ++ l), (merge gv0 gv0 = l ++ gv0), (merge gv0 gv0 = gv0 ++ l), (merge gv0 gv0 = gv0 ++ gv0)
+(l ++ l = gv0), (l ++ gv0 = l), (l ++ gv0 = gv0), (gv0 ++ l = l), (gv0 ++ l = gv0), (gv0 ++ gv0 = l), (gv0 ++ gv0 = gv0), ([] = l), ([] = gv0), ([] = merge l l)
+([] = merge gv0 l), ([] = merge gv0 gv0), ([] = l ++ l), ([] = l ++ gv0), ([] = gv0 ++ l), ([] = gv0 ++ gv0), (None = Some a), (None = Some b), ((l, l) = split l), ((l, l) = split gv0)
+((l, gv0) = split gv0), ((gv0, l) = split l), ((gv0, l) = split gv0), ((gv0, gv0) = split l), ((gv0, gv0) = split gv0), (length l = a), (length l = b), (length gv0 = a), (length gv0 = b)
+
+Label: 1 (1)
+Abducted Assumption: (sorted (b :: a :: l))
+Positive Examples:
+   [a := 1; b := 1; l := [1; 3]]
+   [a := 1; b := 0; l := [1; 2; 3]]
+   [a := 2; b := 2; l := [3; 3]]
+   [a := 1; b := 1; l := [1; 4]]
+   [a := 4; b := 2; l := [4]]
+   [a := 3; b := 1; l := [4; 6]]
+   [a := 3; b := 3; l := [6]]
+   [a := 1; b := 1; l := [1; 1; 1]]
+   [a := 6; b := 2; l := [6]]
+   [a := 3; b := 2; l := [5; 5]]
+   etc ...
+
+Negative Examples:
+   [a := 2; b := 5; l := [4]]
+   [a := 1; b := 3; l := [0; 3; 3]]
+   [a := 3; b := 3; l := [3; 5; 0; 6; 4]]
+   [a := 4; b := 4; l := [4; 1; 4]]
+   [a := 3; b := 2; l := [5; 3; 3]]
+   [a := 4; b := 4; l := [2; 4; 3; 0]]
+   [a := 3; b := 5; l := [5; 1; 1; 3; 0; 6]]
+   [a := 3; b := 2; l := [0; 4; 5; 0]]
+   [a := 0; b := 1; l := [3; 2; 3]]
+   [a := 3; b := 0; l := [3; 0; 0]]
+   etc ...
+
+(a <=* l), (b <=* l), (sorted l), (Permutation l l), (In a l), (In b l), (a < a), (a < b), (b < a), (b < b)
+(a <= b), (b <= a), (b <= b), (l = l), (a = a), (a = b), (b = a), (b = b), (false = sorted_bool l), (true = sorted_bool l)
+(a <=* b :: l), (a <=* merge l l), (a <=* l ++ l), (a <=* []), (b <=* a :: l), (b <=* b :: l), (b <=* merge l l), (b <=* l ++ l), (b <=* []), (length l <=* l)
+(length l <=* b :: l), (length l <=* merge l l), (length l <=* l ++ l), (length l <=* []), (sorted (a :: l)), (sorted (b :: l)), (sorted (merge l l)), (sorted (l ++ l)), (sorted []), (Permutation l (a :: l))
+(Permutation l (merge l l)), (Permutation l (l ++ l)), (Permutation l []), (Permutation (a :: l) l), (Permutation (a :: l) (b :: l)), (Permutation (a :: l) (merge l l)), (Permutation (a :: l) (l ++ l)), (Permutation (a :: l) []), (Permutation (b :: l) l), (Permutation (b :: l) (a :: l))
+(Permutation (b :: l) (l ++ l)), (Permutation (b :: l) []), (Permutation (merge l l) l), (Permutation (merge l l) (a :: l)), (Permutation (merge l l) (b :: l)), (Permutation (merge l l) (l ++ l)), (Permutation (merge l l) []), (Permutation (l ++ l) l), (Permutation (l ++ l) (a :: l)), (Permutation (l ++ l) (b :: l))
+(Permutation (l ++ l) []), (Permutation [] l), (Permutation [] (a :: l)), (Permutation [] (b :: l)), (Permutation [] (merge l l)), (Permutation [] (l ++ l)), (In a (a :: l)), (In a (b :: l)), (In a (merge l l)), (In a (l ++ l))
+(In b (b :: l)), (In b (merge l l)), (In b (l ++ l)), (In (length l) l), (In (length l) (a :: l)), (In (length l) (b :: l)), (In (length l) (merge l l)), (In (length l) (l ++ l)), (a < length l), (b < length l)
+(length l < b), (a <= length l), (b <= length l), (length l <= a), (length l <= b), (~ a <=* l), (~ b <=* l), (~ sorted l), (~ Permutation l l), (~ In a l)
+(~ a < a), (~ a < b), (~ b < a), (~ b < b), (~ a <= a), (~ a <= b), (~ b <= a), (~ b <= b), (l <> l), (a <> a)
+(b <> a), (b <> b), (None = Some l), (a :: l = l), (a :: l = merge l l), (a :: l = l ++ l), (a :: l = []), (b :: l = l), (b :: l = merge l l), (b :: l = l ++ l)
+(merge l l = l), (merge l l = l ++ l), (l ++ l = l), ([] = l), ([] = merge l l), ([] = l ++ l), (None = Some a), (None = Some b), ((l, l) = split l), (length l = a)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 215.44 seconds
+
+
+Label: 0 (0)
+(sorted gv0), (true = sorted_bool gv0), (sorted (b :: gv0)), (sorted (merge l gv0)), (sorted (merge gv0 l)), (sorted (merge gv0 gv0)), (sorted (gv0 ++ l)), (Permutation gv0 (b :: l)), (Permutation (b :: l) gv0), (b :: l = gv0)
+
+Label: 1 (1)
+
+
+------------------------------ PROCESSED SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 240.422 seconds
+
+
+(sorted (b :: a :: l))
+ - (sorted (b :: a :: l))
+
+(b :: l = gv0)
+ - (b :: l = gv0)
+ - (sorted gv0)
+ - (true = sorted_bool gv0)
+ - (sorted (b :: gv0))
+ - (sorted (merge l gv0))
+ - (sorted (merge gv0 l))
+ - (sorted (merge gv0 gv0))
+ - (sorted (gv0 ++ l))
+ - (Permutation gv0 (b :: l))
+ - (Permutation (b :: l) gv0)
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 240.423 seconds
+
+Number of Result Pairs Returned: 1
+
+(sorted (b :: a :: l) -> sorted (b :: l))

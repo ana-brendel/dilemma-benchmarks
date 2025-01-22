@@ -311,7 +311,10 @@ Proof.
   intros. generalize dependent l2. induction l1.
   - intros. rewrite merge_nil_l. simpl. apply Permutation_refl.
   - induction l2.
-  + simpl. rewrite app_nil_r. apply Permutation_refl.
+  + simpl. rewrite app_nil_r. 
+  findlemma. Admitted.
+  
+  (* apply Permutation_refl.
   + simpl. destruct (Nat.leb a a0).
   ++ apply perm_skip. apply IHl1.
   ++ apply Permutation_trans with (l' := (a0 :: l2) ++ (a :: l1)).
@@ -319,24 +322,4 @@ Proof.
     * simpl. apply perm_skip. apply Permutation_trans with (l' := (a :: l1) ++ l2).
     ** apply Permutation_app_comm.
     ** assumption.
-Qed. 
-
-Lemma mergesort_perm: forall l, Permutation l (mergesort l).
-Proof. 
-  apply mergesort_ind; intros.
-  - auto.
-  - auto.
-  - apply Permutation_trans with (l' := mergesort l1 ++ mergesort l2).
-  apply Permutation_trans with (l' := l1 ++ l2).
-  apply split_perm. rewrite <- e. assumption.
-  apply Permutation_app. assumption. assumption. apply merge_perm.
-Qed. 
-
-Theorem mergesort_correct:
-  is_a_sorting_algorithm mergesort.
-Proof.
-  split.
-  apply mergesort_perm.
-  apply mergesort_sorts.
-Qed.
-
+Qed.  *)

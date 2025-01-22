@@ -1,17 +1,23 @@
-Require Import Nat Arith.
+From LFindToo Require Import LFindToo.
 
-Inductive Heap : Type := hleaf : Heap |  heap : nat -> nat -> Heap -> Heap -> Heap.
+Require Import Bool.
+Require Import Arith.
+Require Import Nat.
 
-Fixpoint hsize (hsize_arg0 : Heap) : nat
-           := match hsize_arg0 with
-              | hleaf => 0
-              | heap k v l r => plus 1 (plus (hsize l) (hsize r))
-              end.
+Require Import lia_atomic_benchmarks.Definitions.
+Require Import lia_atomic_benchmarks.Decide.
 
-Theorem theorem0 : forall (x : Heap), ge (hsize x) 0.
+Open Scope nat_scope.
+
+Fixpoint hsize (hsize_arg0 : heap) : nat := match hsize_arg0 with
+   | Hleaf => 0
+   | Heap k v l r => plus 1 (plus (hsize l) (hsize r))
+   end.
+
+Theorem theorem0 : forall (x : heap), ge (hsize x) 0.
 Proof.
    intros.
    induction x.
    - simpl. auto.
-   - simpl. apply le_O_n.
+   - simpl. apply Nat.le_O_n.
 Qed.

@@ -326,17 +326,10 @@ Proof.
   apply mergesort_ind; intros.
   - auto.
   - auto.
-  - apply Permutation_trans with (l' := mergesort l1 ++ mergesort l2).
+  - clear y. apply Permutation_trans with (l' := mergesort l1 ++ mergesort l2).
   apply Permutation_trans with (l' := l1 ++ l2).
   apply split_perm. rewrite <- e. assumption.
-  apply Permutation_app. assumption. assumption. apply merge_perm.
-Qed. 
+  findlemma. Admitted.
 
-Theorem mergesort_correct:
-  is_a_sorting_algorithm mergesort.
-Proof.
-  split.
-  apply mergesort_perm.
-  apply mergesort_sorts.
-Qed.
-
+  (* apply Permutation_app. assumption. assumption. apply merge_perm.
+Qed.  *)
