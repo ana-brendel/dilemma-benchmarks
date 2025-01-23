@@ -1,5 +1,5 @@
 From QuickChick Require Import QuickChick.
-From vfa_perm_benchmarks Require Import Definitions.
+From vfa_priqueue_benchmarks Require Import Definitions.
 
 Require Import String. Open Scope string.
 
