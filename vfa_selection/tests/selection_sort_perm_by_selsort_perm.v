@@ -18,7 +18,6 @@ Proof.
   intros x l; revert x.
   induction l; intros.
   - simpl in *. inversion H.
-  (* HELPER LEMMA - case 1 *)
   apply Permutation_refl.
   - unfold select in H.  
     bdestruct (x <=? a); fold select in H.
@@ -53,29 +52,8 @@ Proof. intros. inversion H. reflexivity. Qed.
 Lemma select_rest_length : forall x l y r, select x l = (y, r) -> length l = length r.
 Proof.
   intros. 
-  (* NO HELPER LEMMAS *)
-  (* generalize dependent x; generalize dependent y; generalize dependent r. induction l.
-  - intros. inversion H. reflexivity.
-  - intros. inversion H. destruct (a >=? x).
-  + pose (select_exists l x). inversion e. inversion H0. rewrite H2 in H1.
-  apply IHl in H2. inversion H1. simpl. auto.
-  + pose (select_exists l a). inversion e. inversion H0. rewrite H2 in H1.
-  apply IHl in H2. inversion H1. simpl. auto. *)
-  
-  (* HELPER LEMMAS (FORWARDS REASONING) *)
-(*   
-  (* HELPER LEMMA - case 3 (non-generalized) *)
-  apply select_perm in H.
-  (* HELPER LEMMA - case 3 (non-generalized) *)
-  apply Permutation_length in H. 
-  assumption. *)
-
-  (* HELPER LEMMAS (BACKWARDS REASONING) *)
-  (* HELPER LEMMA - case 3 (non-generalized) *)
   eapply cons_equal_length.
-  (* HELPER LEMMA - case 2 *)
   eapply Permutation_length.
-  (* HELPER LEMMA - case 3 *)
   eapply select_perm.
   eassumption.
 Qed.
@@ -84,20 +62,15 @@ Lemma selsort_perm: forall n l, length l = n -> Permutation l (selsort l n).
 Proof.
   induction n.
   - intros.
-    (* HELPER LEMMA - case 3 (in assumption)  *)
     rewrite length_zero_iff_nil in H. subst.
-    (* HELPER LEMMA - case 1 *)
     apply Permutation_refl.
   - intros. destruct l. inversion H.
     simpl.  destruct (select n0 l) eqn:Seq.
     apply perm_trans with (n1 :: l0).
-    (* HELPER LEMMA - case 3 (non-generalized) *)
     apply select_perm. auto.
     apply perm_skip. apply IHn. inversion H.
     symmetry. 
-    (* HELPER LEMMA - case 3 (non-generalized) *)
     eapply select_rest_length. eauto.
-    (* apply select_rest_length in Seq. auto. *)
 Qed.
 
 Lemma selection_sort_perm: forall l, Permutation l (selection_sort l).

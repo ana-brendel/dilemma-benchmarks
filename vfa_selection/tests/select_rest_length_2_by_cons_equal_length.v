@@ -18,7 +18,6 @@ Proof.
   intros x l; revert x.
   induction l; intros.
   - simpl in *. inversion H.
-  (* HELPER LEMMA - case 1 *)
   apply Permutation_refl.
   - unfold select in H.  
     bdestruct (x <=? a); fold select in H.
@@ -53,8 +52,6 @@ Proof. intros. inversion H. reflexivity. Qed.
 Lemma select_rest_length : forall x l y r, select x l = (y, r) -> length l = length r.
 Proof.
   intros. 
-  (* HELPER LEMMAS (BACKWARDS REASONING) *)
-  (* HELPER LEMMA - case 3 (non-generalized) *)
   findlemma. Admitted.
 
   (* eapply cons_equal_length.

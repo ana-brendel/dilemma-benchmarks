@@ -5,6 +5,7 @@ From Coq Require Export Arith.Arith.
 From Coq Require Export Arith.EqNat.
 From Coq Require Export Permutation.
 Export ListNotations.
+Require Export Lia.
 
 Inductive sorted: list nat -> Prop :=
  | sorted_nil: sorted []
