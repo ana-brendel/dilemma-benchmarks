@@ -34,22 +34,22 @@ ran = [
 
 new_run = []
 
-# for test in os.listdir(folder):
-#     if not test.endswith(".v"):
-#         full = os.path.join(folder,test)
-#         rm = f"rm {full}"
-#         os.system(rm)
-
 for test in os.listdir(folder):
-    if len(new_run) < 12 and test.endswith(".v") and test not in ran:
+    if not (test.endswith(".v") or test.endswith(".txt")):
         full = os.path.join(folder,test)
-        cmd = f"cd {folder} && coqc {full}"
-        # os.system(cmd)
-        new_run += [test]
+        rm = f"rm {full}"
+        os.system(rm)
 
-index = 1
-for i in new_run: 
-    print(f"{index}. {i}")
-    index += 1
+# for test in os.listdir(folder):
+#     if len(new_run) < 12 and test.endswith(".v") and test not in ran:
+#         full = os.path.join(folder,test)
+#         cmd = f"cd {folder} && coqc {full}"
+#         # os.system(cmd)
+#         new_run += [test]
+
+# index = 1
+# for i in new_run: 
+#     print(f"{index}. {i}")
+#     index += 1
 
 # GIT CLEANUP: git gc --aggressive --prune
