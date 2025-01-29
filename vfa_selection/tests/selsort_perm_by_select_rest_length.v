@@ -62,14 +62,11 @@ Lemma selsort_perm: forall n l, length l = n -> Permutation l (selsort l n).
 Proof.
   induction n.
   - intros.
-    (* HELPER LEMMA - case 3 (in assumption)  *)
     rewrite length_zero_iff_nil in H. subst.
-    (* HELPER LEMMA - case 1 *)
     apply Permutation_refl.
   - intros. destruct l. inversion H.
     simpl.  destruct (select n0 l) eqn:Seq.
     apply perm_trans with (n1 :: l0).
-    (* HELPER LEMMA - case 3 (non-generalized) *)
     apply select_perm. auto.
     apply perm_skip. apply IHn. inversion H.
     symmetry. 
