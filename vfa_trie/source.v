@@ -35,7 +35,7 @@ Fixpoint positive2nat (p: positive) : nat :=
   | xO q => 0 + 2 * positive2nat q
   | xH => 1
  end.
-
+ 
 Fixpoint print_in_binary (p: positive) : list nat :=
   match p with
   | xI q => print_in_binary q ++ [1]
@@ -82,13 +82,35 @@ Definition add (x y: positive) : positive := addc false x y.
 Lemma succ_correct: forall p,
    positive2nat (succ p) = S (positive2nat p).
 Proof.
-(* FILL IN HERE *) Admitted.
+  induction p. simpl. lia. simpl. reflexivity. simpl. reflexivity.
+Qed.
 
 Lemma addc_correct: forall (c: bool) (p q: positive),
    positive2nat (addc c p q) =
         (if c then 1 else 0) + positive2nat p + positive2nat q.
 Proof.
-(* FILL IN HERE *) Admitted.
+  intros c p. generalize dependent c. induction p. intros. simpl. destruct c. destruct q.
+  simpl. specialize (IHp true q). simpl in IHp. lia.
+  simpl. specialize (IHp true q). simpl in IHp. lia.
+  simpl. rewrite succ_correct. lia.
+  destruct q. simpl. specialize (IHp true q). simpl in IHp. lia.
+  simpl. specialize (IHp false q). simpl in IHp. lia.
+  simpl. rewrite succ_correct. lia.
+  intros. simpl. destruct c. destruct q.
+  simpl. specialize (IHp true q). simpl in IHp. lia.
+  simpl. specialize (IHp false q). simpl in IHp. lia.
+  simpl. rewrite succ_correct. lia.
+  destruct q. simpl. specialize (IHp false q). simpl in IHp. lia.
+  simpl. specialize (IHp false q). simpl in IHp. lia.
+  simpl. lia.
+  intros. simpl. destruct c. destruct q.
+  simpl.  rewrite succ_correct. lia.
+  simpl. rewrite succ_correct. lia.
+  simpl. reflexivity.
+  destruct q. simpl. rewrite succ_correct. lia.
+  simpl. lia. simpl. reflexivity.
+Qed.
+  
 
 Theorem add_correct: forall (p q: positive),
    positive2nat (add p q) = positive2nat p + positive2nat q.
@@ -106,9 +128,12 @@ Fixpoint compare x y {struct x}:=
     | p~1, q~1 => compare p q
     | p~1, q~0 => match compare p q with Lt => Lt | _ => Gt end
     | p~1, xH => Gt
-
-  (* DELETE THIS CASE!  Replace it with cases that actually work. *)
-    | _, _ => Lt
+    | p~0, q~1 => match compare p q with Gt => Gt | _ => Lt end
+    | p~0, q~0 => compare p q
+    | p~0, xH => Gt
+    | xH, q~1 => Lt
+    | xH, q~0 => Lt
+    | xH, xH => Eq
   end.
 
 Lemma positive2nat_pos:
@@ -127,7 +152,17 @@ Theorem compare_correct:
  end.
 Proof.
 induction x; destruct y; simpl.
-(* FILL IN HERE *) Admitted.
+specialize (IHx y). destruct (compare x y); lia.
+specialize (IHx y). destruct (compare x y); lia.
+assert (positive2nat x > 0). apply positive2nat_pos. lia.
+specialize (IHx y). destruct (compare x y); lia.
+specialize (IHx y). destruct (compare x y); lia.
+assert (positive2nat x > 0). apply positive2nat_pos. lia.
+assert (positive2nat y > 0). apply positive2nat_pos. lia.
+assert (positive2nat y > 0). apply positive2nat_pos. lia.
+reflexivity.
+Qed.
+
 
 Inductive Z : Set :=
   | Z0 : Z
@@ -189,15 +224,35 @@ Definition three_ten : trie_table bool :=
 
 Lemma look_leaf:
  forall {A} (a:A) j, look a j Leaf = a.
-(* FILL IN HERE *) Admitted.
+ Proof.
+  intros. destruct j; reflexivity.
+Qed.
 
 
 Lemma look_ins_same: forall {A} a k (v:A) t, look a k (ins a k v t) = v.
-(* FILL IN HERE *) Admitted.
+Proof.
+  induction k. intros. simpl. destruct t. apply (IHk v Leaf). apply (IHk v t2).
+  intros. simpl. destruct t. apply (IHk v Leaf). apply (IHk v t1).
+  intros. simpl. destruct t. reflexivity. reflexivity.
+Qed.
+
 
 Lemma look_ins_other: forall {A} a j k (v:A) t,
    j <> k -> look a j (ins a k v t) = look a j t.
-(* FILL IN HERE *) Admitted.
+Proof.
+  induction j; destruct k; intros; simpl; auto.
+  - destruct t. rewrite (IHj k v Leaf). apply look_leaf. lia.
+    rewrite (IHj k v t2). reflexivity. lia.
+  - destruct t. apply look_leaf. reflexivity.
+  - destruct t. apply look_leaf. reflexivity.
+  - destruct t. apply look_leaf. reflexivity.
+  - destruct t. rewrite (IHj k v Leaf). apply look_leaf. lia.
+    rewrite (IHj k v t1). reflexivity. lia.
+  - destruct t. apply look_leaf. reflexivity.
+  - destruct t. reflexivity. reflexivity.
+  - destruct t. reflexivity. reflexivity.
+  - destruct t. contradict H. reflexivity. contradict H. reflexivity.
+Qed. 
 
 (* ================================================================= *)
 (** ** Bijection Between [positive] and [nat]. *)
@@ -222,11 +277,31 @@ rewrite SuccNat2Pos.id_succ.
 reflexivity.
 Qed.
 
+Search Pos.to_nat.
+
 Lemma pos2nat_injective: forall p q, pos2nat p = pos2nat q -> p=q.
-(* FILL IN HERE *) Admitted.
+Proof.
+induction p. destruct q. intros. f_equal. apply IHp. unfold pos2nat in H. unfold pos2nat. rewrite Pos2Nat.inj_xI in H. rewrite Pos2Nat.inj_xI in H. simpl in H. assert (Pos.to_nat p = Pos.to_nat q). lia. rewrite H0. reflexivity.
+intros. unfold pos2nat in H. unfold pos2nat. rewrite Pos2Nat.inj_xI in H. rewrite Pos2Nat.inj_xO in H.
+contradict H. lia.
+intros. unfold pos2nat in H. rewrite Pos2Nat.inj_xI in H. simpl in H. assert (0 < Pos.to_nat p). apply Pos2Nat.is_pos. lia.
+intros. destruct q. unfold pos2nat in H. unfold pos2nat. rewrite Pos2Nat.inj_xO in H. rewrite Pos2Nat.inj_xI in H. contradict H. lia.
+intros. f_equal. apply IHp. unfold pos2nat in H. unfold pos2nat. rewrite Pos2Nat.inj_xO in H. rewrite Pos2Nat.inj_xO in H. simpl in H. assert (Pos.to_nat p = Pos.to_nat q). lia. rewrite H0. reflexivity.
+intros. unfold pos2nat in H. unfold pos2nat. rewrite Pos2Nat.inj_xO in H. simpl in H. assert (0 < Pos.to_nat p). apply Pos2Nat.is_pos. lia.
+intros. destruct q. unfold pos2nat in H. rewrite Pos2Nat.inj_xI in H. simpl in H. assert (0 < Pos.to_nat q). apply Pos2Nat.is_pos. lia.
+unfold pos2nat in H. rewrite Pos2Nat.inj_xO in H. simpl in H. assert (0 < Pos.to_nat q). apply Pos2Nat.is_pos. lia.
+reflexivity.
+Qed.
+
+Search Pos.of_succ_nat.
 
 Lemma nat2pos_injective: forall i j, nat2pos i = nat2pos j -> i=j.
-(* FILL IN HERE *) Admitted.
+Proof.
+  induction i. destruct j. intros. reflexivity.
+  intros. unfold nat2pos in H. apply SuccNat2Pos.inj. assumption.
+  destruct j. intros. unfold nat2pos in H. apply SuccNat2Pos.inj. assumption.
+  intros. f_equal. apply IHi. unfold nat2pos in H. apply SuccNat2Pos.inj in H. inversion H. reflexivity.
+Qed.
 
 (* ================================================================= *)
 (** ** Proving That Tries are a "Table" ADT. *)
@@ -236,7 +311,7 @@ Lemma nat2pos_injective: forall i j, nat2pos i = nat2pos j -> i=j.
     correct it later as necessary. *)
 
 Definition is_trie {A: Type} (t: trie_table A) : Prop
-(* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+:= True.
 
 Definition abstract {A: Type} (t: trie_table A) (n: nat) : A :=
   lookup (nat2pos n) t.
@@ -252,11 +327,11 @@ Definition abstract {A: Type} (t: trie_table A) (n: nat) : A :=
     get the [_relate] proofs to work, then you'll need to fix these proofs. *)
 
 Theorem empty_is_trie: forall {A} (default: A), is_trie (empty default).
-(* FILL IN HERE *) Admitted.
+Proof. intros. constructor. Qed.
 
 Theorem insert_is_trie: forall {A} i x (t: trie_table A),
    is_trie t -> is_trie (insert i x t).
-(* FILL IN HERE *) Admitted.
+Proof. intros. constructor. Qed.
 
 (* *** Commented out because it uses Abs which uses total_map *** *)
 (* Theorem empty_relate: forall {A} (default: A),
