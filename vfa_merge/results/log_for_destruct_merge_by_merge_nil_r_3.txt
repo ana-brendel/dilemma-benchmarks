@@ -1,0 +1,191 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (sorted (merge (a :: l1) []))
+ -- (sorted [])
+ -- (b <=* a :: l1)
+ -- (forall b : nat,
+ b <=* l1 ->
+ forall l2 : list nat,
+ sorted (merge l1 l2) -> sorted l2 -> sorted (merge (b :: l1) l2))
+
+----------------------------------
+Goal: (sorted (a :: l1))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 0. seconds
+
+gv0 : (list nat) = (a :: l1)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 135.267 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (sorted (merge gv0 []))
+
+----------------------------------
+Goal: (sorted gv0)
+Case: 3
+
+Label: Generalization #1
+Assumptions: 
+ -- (sorted (merge (a :: l1) []))
+
+----------------------------------
+Goal: (sorted (a :: l1))
+Case: 3
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 136.192 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+In : (forall A : Type, A -> list A -> Prop)
+existsb : (forall A : Type, (A -> bool) -> list A -> bool)
+forallb : (forall A : Type, (A -> bool) -> list A -> bool)
+Forall : (forall A : Type, (A -> Prop) -> list A -> Prop)
+nodup : (forall A : Type, (forall x y : A, {x = y} + {x <> y}) -> list A -> list A)
+Permutation : (forall A : Type, list A -> list A -> Prop)
+sorted : (list nat -> Prop)
+is_a_sorting_algorithm : ((list nat -> list nat) -> Prop)
+@split : (forall X : Type, list X -> list X * list X)
+merge : (list nat -> list nat -> list nat)
+le_all : (nat -> list nat -> Prop)
+list_ind2 : (forall (A : Type) (P : list A -> Prop),
+ P [] ->
+ (forall a : A, P [a]) ->
+ (forall (a b : A) (l : list A), P l -> P (a :: b :: l)) ->
+ forall l : list A, P l)
+sorted_bool : (list nat -> bool)
+
+Label: 0 (0)
+Abducted Assumption: (sorted (merge gv0 []))
+Positive Examples:
+   [a := 3; gv0 := [1; 2; 2]; l1 := [1; 0; 2; 1]]
+   [a := 2; gv0 := [2; 3]; l1 := [2]]
+   [a := 2; gv0 := [2; 2]; l1 := [2; 1]]
+   [a := 2; gv0 := [2]; l1 := [0; 3; 1]]
+   [a := 1; gv0 := [0; 0]; l1 := [1; 5; 5; 3]]
+   [a := 2; gv0 := [2; 3]; l1 := [3; 1; 2; 4]]
+   [a := 4; gv0 := [3; 4]; l1 := [1; 0; 2; 1; 2]]
+   [a := 3; gv0 := []; l1 := [2; 2]]
+   [a := 5; gv0 := [1]; l1 := [0; 1; 1; 1; 3]]
+   [a := 3; gv0 := []; l1 := [0; 1]]
+   etc ...
+
+Negative Examples:
+   [a := 4; gv0 := [6; 5; 0]; l1 := [2; 0; 5; 1]]
+   [a := 2; gv0 := [5; 2; 2; 0; 2]; l1 := []]
+   [a := 2; gv0 := [2; 0]; l1 := [4; 0]]
+   [a := 6; gv0 := [3; 1; 3; 0]; l1 := [0; 1; 0; 6; 0]]
+   [a := 2; gv0 := [5; 0]; l1 := [4; 3; 3; 3; 1]]
+   [a := 4; gv0 := [2; 0; 2]; l1 := []]
+   [a := 2; gv0 := [6; 5]; l1 := [5; 3; 4; 1; 1]]
+   [a := 1; gv0 := [0; 2; 4; 3; 0]; l1 := [1; 2; 2; 0; 5]]
+   [a := 0; gv0 := [2; 1; 4; 3]; l1 := [0]]
+   [a := 2; gv0 := [4; 3]; l1 := [6; 2; 6; 1]]
+   etc ...
+
+
+Label: 1 (1)
+Abducted Assumption: (sorted (merge (a :: l1) []))
+Positive Examples:
+   [a := 1; l1 := [2; 2; 2]]
+   [a := 1; l1 := [1; 1; 4]]
+   [a := 0; l1 := [1; 4; 4]]
+   [a := 1; l1 := [1; 1; 1; 5; 5]]
+   [a := 1; l1 := [2; 4; 4]]
+   [a := 0; l1 := [0; 3; 3; 3]]
+   [a := 0; l1 := [5; 5]]
+   [a := 2; l1 := [2; 4; 4; 4]]
+   [a := 0; l1 := [0; 0; 0]]
+   [a := 1; l1 := [1; 1; 5]]
+   etc ...
+
+Negative Examples:
+   [a := 1; l1 := [4; 0; 0; 0]]
+   [a := 0; l1 := [3; 2; 2; 0]]
+   [a := 0; l1 := [2; 1; 3; 0]]
+   [a := 0; l1 := [4; 3; 3; 6; 6; 1]]
+   [a := 6; l1 := [2; 0; 0]]
+   [a := 2; l1 := [4; 4; 4; 5; 0; 3]]
+   [a := 3; l1 := [0; 4; 1]]
+   [a := 4; l1 := [3; 4; 0; 5]]
+   [a := 2; l1 := [0; 0; 4]]
+   [a := 5; l1 := [0; 4; 2]]
+   etc ...
+
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 137.172 seconds
+
+
+Label: 0 (0)
+(sorted gv0), (Permutation gv0 gv0), (gv0 = gv0), (false = sorted_bool gv0), (true = sorted_bool gv0), (length gv0 <=* gv0), (length gv0 <=* merge gv0 gv0), (length gv0 <=* gv0 ++ gv0), (length gv0 <=* []), (sorted (merge gv0 gv0))
+(sorted (gv0 ++ gv0)), (sorted []), (Permutation gv0 (merge gv0 gv0)), (Permutation gv0 (gv0 ++ gv0)), (Permutation gv0 []), (Permutation (merge gv0 gv0) gv0), (Permutation (merge gv0 gv0) (gv0 ++ gv0)), (Permutation (merge gv0 gv0) []), (Permutation (gv0 ++ gv0) gv0), (Permutation (gv0 ++ gv0) (merge gv0 gv0))
+(Permutation (gv0 ++ gv0) []), (Permutation [] gv0), (Permutation [] (merge gv0 gv0)), (Permutation [] (gv0 ++ gv0)), (In (length gv0) gv0), (In (length gv0) (merge gv0 gv0)), (In (length gv0) (gv0 ++ gv0)), (~ sorted gv0), (~ Permutation gv0 gv0), (gv0 <> gv0)
+(None = Some gv0), (merge gv0 gv0 = gv0), (merge gv0 gv0 = gv0 ++ gv0), (gv0 ++ gv0 = gv0), ([] = gv0), ([] = merge gv0 gv0), ([] = gv0 ++ gv0), ((gv0, gv0) = split gv0)
+
+Label: 1 (1)
+(a <=* l1), (sorted l1), (Permutation l1 l1), (In a l1), (a < a), (a <= a), (l1 = l1), (a = a), (false = sorted_bool l1), (true = sorted_bool l1)
+(a <=* a :: l1), (a <=* merge l1 l1), (a <=* l1 ++ l1), (a <=* []), (length l1 <=* l1), (length l1 <=* a :: l1), (length l1 <=* merge l1 l1), (length l1 <=* l1 ++ l1), (length l1 <=* []), (sorted (a :: l1))
+(sorted (merge l1 l1)), (sorted (l1 ++ l1)), (sorted []), (Permutation l1 (a :: l1)), (Permutation l1 (merge l1 l1)), (Permutation l1 (l1 ++ l1)), (Permutation l1 []), (Permutation (a :: l1) l1), (Permutation (a :: l1) (merge l1 l1)), (Permutation (a :: l1) (l1 ++ l1))
+(Permutation (a :: l1) []), (Permutation (merge l1 l1) l1), (Permutation (merge l1 l1) (a :: l1)), (Permutation (merge l1 l1) (l1 ++ l1)), (Permutation (merge l1 l1) []), (Permutation (l1 ++ l1) l1), (Permutation (l1 ++ l1) (a :: l1)), (Permutation (l1 ++ l1) (merge l1 l1)), (Permutation (l1 ++ l1) []), (Permutation [] l1)
+(Permutation [] (a :: l1)), (Permutation [] (merge l1 l1)), (Permutation [] (l1 ++ l1)), (In a (a :: l1)), (In a (merge l1 l1)), (In a (l1 ++ l1)), (In (length l1) l1), (In (length l1) (a :: l1)), (In (length l1) (merge l1 l1)), (In (length l1) (l1 ++ l1))
+(a < length l1), (length l1 < a), (a <= length l1), (length l1 <= a), (~ a <=* l1), (~ sorted l1), (~ Permutation l1 l1), (~ In a l1), (~ a < a), (~ a <= a)
+(l1 <> l1), (a <> a), (None = Some l1), (a :: l1 = l1), (a :: l1 = merge l1 l1), (a :: l1 = l1 ++ l1), (a :: l1 = []), (merge l1 l1 = l1), (merge l1 l1 = l1 ++ l1), (l1 ++ l1 = l1)
+([] = l1), ([] = merge l1 l1), ([] = l1 ++ l1), (None = Some a), ((l1, l1) = split l1), (length l1 = a)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 193.465 seconds
+
+
+Label: 0 (0)
+(sorted gv0), (true = sorted_bool gv0), (sorted (merge gv0 gv0))
+
+Label: 1 (1)
+(sorted (a :: l1))
+
+
+------------------------------ PROCESSED SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 211.997 seconds
+
+
+(sorted (merge gv0 []))
+ - (sorted (merge gv0 []))
+ - (sorted gv0)
+ - (true = sorted_bool gv0)
+ - (sorted (merge gv0 gv0))
+
+(sorted (merge (a :: l1) []))
+ - (sorted (merge (a :: l1) []))
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 211.998 seconds
+
+Number of Result Pairs Returned: 3
+
+(sorted (merge gv0 []) -> sorted gv0)
+
+(sorted (merge gv0 []) -> true = sorted_bool gv0)
+(true = sorted_bool gv0 -> sorted gv0)
+
+(sorted (merge gv0 []) -> sorted (merge gv0 gv0))
+(sorted (merge gv0 gv0) -> sorted gv0)
