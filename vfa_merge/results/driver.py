@@ -29,20 +29,25 @@ new_run = []
 #         rm = f"rm {full}"
 #         os.system(rm)
 
-for test in os.listdir(folder):
-    if len(new_run) < 6 and test.endswith(".v") and test not in ran:
-        if not test.startswith("sorted_merge_by") and test != "destruct_merge_by_Forall_trans_1.v":
-            full = os.path.join(folder,test)
-            cmd = f"cd {folder} && coqc {full}"
-            # os.system(cmd)
-            new_run += [test]
+# for test in os.listdir(folder):
+#     if len(new_run) < 6 and test.endswith(".v") and test not in ran:
+#         if not test.startswith("sorted_merge_by") and test != "destruct_merge_by_Forall_trans_1.v":
+#             full = os.path.join(folder,test)
+#             cmd = f"cd {folder} && coqc {full}"
+#             # os.system(cmd)
+#             new_run += [test]
 
-index = 1
-for i in new_run: 
-    print(f"{index}. {i}")
-    index += 1
+# index = 1
+# for i in new_run: 
+#     print(f"{index}. {i}")
+#     index += 1
 
 # GIT CLEANUP: git gc --aggressive --prune
 
 # Error in 1. destruct_merge_by_Forall_trans_1 (log_for_destruct_merge1) 
 #   need to generalize functions but need to make concrete for QuickChick
+
+for i in os.listdir("/Users/anabrendel/Desktop/LemmaSynthesis/benchmarks/vfa_merge/results"):
+    if i.endswith(".txt"):
+        print(i.removeprefix("log_for_").removesuffix(".txt"))
+

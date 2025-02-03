@@ -1,13 +1,22 @@
+From LFindToo Require Import LFindToo.
+From QuickChick Require Import QuickChick.
+
 Require Import Nat Arith.
 
 Inductive Nat : Type := succ : Nat -> Nat |  zero : Nat.
 
 Inductive Lst : Type := cons : Nat -> Lst -> Lst |  nil : Lst.
 
-Inductive Tree : Type := node : Nat -> Tree -> Tree -> Tree |  leaf : Tree.
+(* ************************** [ QuickChick Stuff ] *************************** *)
+Derive Show for Nat.
+Derive Arbitrary for Nat.
+Instance Dec_Eq_Nat : Dec_Eq (Nat).
+Proof. dec_eq. Qed.
 
-Inductive Pair : Type := mkpair : Nat -> Nat -> Pair
-with ZLst : Type := zcons : Pair -> ZLst -> ZLst |  znil : ZLst.
+Derive Show for Lst.
+Derive Arbitrary for Lst.
+Instance Dec_Eq_lst : Dec_Eq (Lst).
+Proof. dec_eq. Qed.
 
 Fixpoint eqb (n m: Nat) : bool :=
   match n, m with
@@ -19,7 +28,7 @@ Fixpoint eqb (n m: Nat) : bool :=
 
 Fixpoint less (less_arg0 : Nat) (less_arg1 : Nat) : bool
            := match less_arg0, less_arg1 with
-              | x, zero => false
+              | _, zero => false
               | zero, succ x => true
               | succ x, succ y => less x y
               end.
@@ -106,63 +115,41 @@ Theorem mem_insort: forall (x n: Nat) (l: Lst), mem x (insort n l) = true -> x =
 Proof.
   intros.
   induction l.
-  {
     simpl in H.
     destruct (less n n0).
-    {
       apply mem_cons in H.
       assumption.
-    }
-    {
       apply mem_cons in H.
       destruct H.
-      {
         right.
         simpl.
         subst.
         rewrite eqb_refl. simpl. reflexivity.
-      }
-      {
         apply IHl in H.
         destruct H.
-        { left. assumption. }
-        {
+          left. assumption.
           right. simpl. rewrite H. apply Bool.orb_true_r.
-        }
-      }
-    }
-  }
-  {
     simpl in H.
     apply Bool.Is_true_eq_left in H.
     apply Bool.orb_prop_elim in H.
     destruct H.
-    {
       left. apply eqb_elim. assumption.
-    }
-    {
       destruct H.
-    }
-  }
 Qed.
 
 Theorem theorem0 : forall (x : Nat) (y : Lst), eq (mem x (sort y)) true -> eq (mem x y) true.
 Proof.
   intros.
   induction y.
-  {
     simpl in *.
-    apply mem_insort in H.
+    findlemma. Admitted.
+
+    (* apply mem_insort in H.
     destruct H.
-    {
       subst. rewrite eqb_refl. simpl. reflexivity.
-    }
-    {
       apply IHy in H.
       rewrite H.
       apply Bool.orb_true_r.
-    }
-  }
   simpl in H.
   inversion H.
-Qed.
+Qed. *)

@@ -1,0 +1,384 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (sorted (sort x) = true)
+
+----------------------------------
+Goal: (sorted (insort n (sort x)) = true)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 0. seconds
+
+gv2 : Lst = (sort x)
+gv1 : Lst = (insort n (sort x))
+gv0 : bool = (sorted (insort n (sort x)))
+gv3 : bool = true
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 15.607 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (sorted (sort x) = gv3)
+
+----------------------------------
+Goal: (sorted (insort n (sort x)) = gv3)
+Case: 3
+
+Label: Generalization #1
+Assumptions: 
+ -- (sorted (insort n (sort x)) = gv0)
+
+----------------------------------
+Goal: (gv0 = true)
+Case: 3
+
+Label: Generalization #2
+Assumptions: 
+ -- (insort n (sort x) = gv1)
+
+----------------------------------
+Goal: (sorted gv1 = true)
+Case: 3
+
+Label: Generalization #3
+Assumptions: 
+ -- (sorted gv2 = true)
+
+----------------------------------
+Goal: (sorted (insort n gv2) = true)
+Case: 3
+
+Label: Generalization #4
+Assumptions: 
+ -- (sorted (sort x) = true)
+
+----------------------------------
+Goal: (sorted (insort n (sort x)) = true)
+Case: 1
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 16.586 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+less : (Nat -> Nat -> bool)
+eqn : (Nat -> Nat -> bool)
+leq : (Nat -> Nat -> bool)
+insort : (Nat -> Lst -> Lst)
+sorted : (Lst -> bool)
+sort : (Lst -> Lst)
+
+Label: 0 (0)
+Abducted Assumption: (sorted (sort x) = gv3)
+Positive Examples:
+   [gv3 := true; n := (succ (succ (succ (succ zero)))); x := (cons zero
+   (cons (succ zero) (cons (succ zero) (cons (succ zero) (cons zero nil)))))]
+   [gv3 := true; n := zero; x := (cons zero
+   (cons zero
+      (cons (succ (succ zero)) (cons (succ (succ zero)) (cons zero nil)))))]
+   [gv3 := true; n := zero; x := (cons (succ (succ zero))
+   (cons (succ (succ zero)) (cons zero (cons zero (cons zero nil)))))]
+   [gv3 := true; n := zero; x := (cons (succ (succ (succ zero)))
+   (cons zero (cons (succ zero) (cons zero nil))))]
+   [gv3 := true; n := zero; x := (cons zero
+   (cons (succ (succ zero)) (cons zero (cons (succ (succ zero)) nil))))]
+   [gv3 := true; n := zero; x := (cons (succ (succ (succ zero))) (cons (succ zero) nil))]
+   [gv3 := true; n := zero; x := (cons (succ zero)
+   (cons zero
+      (cons zero
+         (cons (succ (succ (succ (succ zero)))) (cons zero (cons zero nil))))))]
+   [gv3 := true; n := zero; x := (cons (succ zero)
+   (cons zero (cons (succ zero) (cons (succ (succ (succ (succ zero)))) nil))))]
+   [gv3 := true; n := (succ zero); x := (cons (succ (succ (succ zero))) (cons (succ zero) nil))]
+   [gv3 := true; n := (succ zero); x := (cons (succ zero) (cons (succ zero) (cons (succ zero) nil)))]
+   etc ...
+
+Negative Examples:
+   [gv3 := false; n := zero; x := (cons zero (cons zero (cons (succ (succ (succ (succ zero)))) nil)))]
+   [gv3 := false; n := (succ zero); x := (cons (succ (succ zero))
+   (cons (succ (succ (succ (succ (succ zero)))))
+      (cons zero (cons zero (cons zero nil)))))]
+   [gv3 := false; n := (succ (succ (succ zero))); x := (cons (succ (succ zero)) (cons zero (cons (succ (succ zero)) nil)))]
+   [gv3 := false; n := (succ (succ zero)); x := (cons (succ (succ (succ (succ (succ zero)))))
+   (cons zero (cons (succ zero) (cons zero (cons zero nil)))))]
+   [gv3 := false; n := zero; x := (cons zero (cons (succ (succ zero)) (cons (succ zero) (cons zero nil))))]
+   [gv3 := false; n := zero; x := (cons zero
+   (cons (succ (succ zero)) (cons zero (cons (succ zero) (cons zero nil)))))]
+   [gv3 := false; n := zero; x := (cons (succ zero)
+   (cons zero
+      (cons (succ (succ (succ (succ zero))))
+         (cons (succ (succ (succ (succ (succ zero)))))
+            (cons (succ (succ zero)) (cons (succ (succ zero)) nil))))))]
+   [gv3 := false; n := (succ (succ zero)); x := (cons zero (cons zero (cons zero (cons (succ zero) nil))))]
+   [gv3 := false; n := zero; x := (cons (succ zero)
+   (cons (succ (succ (succ zero))) (cons (succ zero) (cons zero nil))))]
+   [gv3 := false; n := zero; x := (cons (succ zero)
+   (cons zero (cons (succ zero) (cons (succ (succ zero)) nil))))]
+   etc ...
+
+
+Label: 1 (1)
+Abducted Assumption: (sorted (insort n (sort x)) = gv0)
+Positive Examples:
+   [gv0 := true; n := zero; x := (cons zero (cons (succ (succ (succ (succ (succ zero))))) (cons zero nil)))]
+   [gv0 := true; n := zero; x := (cons (succ (succ zero)) (cons zero (cons (succ (succ zero)) nil)))]
+   [gv0 := true; n := zero; x := (cons (succ zero)
+   (cons zero (cons (succ (succ zero)) (cons (succ zero) nil))))]
+   [gv0 := true; n := (succ zero); x := (cons (succ (succ (succ zero)))
+   (cons (succ (succ (succ (succ zero)))) (cons zero nil)))]
+   [gv0 := true; n := zero; x := (cons zero
+   (cons (succ zero)
+      (cons zero (cons zero (cons (succ (succ (succ zero))) nil)))))]
+   [gv0 := true; n := (succ (succ (succ (succ (succ zero))))); x := (cons (succ zero) nil)]
+   [gv0 := true; n := (succ (succ (succ (succ zero)))); x := (cons zero (cons (succ (succ (succ (succ zero)))) (cons zero nil)))]
+   [gv0 := true; n := (succ (succ (succ zero))); x := (cons zero
+   (cons (succ (succ (succ (succ zero))))
+      (cons zero (cons (succ (succ (succ zero))) nil))))]
+   [gv0 := true; n := zero; x := (cons zero
+   (cons zero
+      (cons (succ zero)
+         (cons (succ (succ (succ zero)))
+            (cons (succ zero) (cons (succ (succ (succ (succ zero)))) nil))))))]
+   [gv0 := true; n := (succ zero); x := (cons (succ zero)
+   (cons zero
+      (cons (succ (succ zero))
+         (cons (succ (succ (succ zero)))
+            (cons (succ (succ (succ zero))) (cons (succ zero) nil))))))]
+   etc ...
+
+Negative Examples:
+   [gv0 := false; n := zero; x := (cons (succ (succ (succ (succ zero))))
+   (cons zero (cons zero (cons (succ zero) nil))))]
+   [gv0 := false; n := zero; x := (cons (succ (succ (succ zero))) (cons zero (cons zero nil)))]
+   [gv0 := false; n := zero; x := (cons (succ (succ zero)) (cons (succ (succ zero)) (cons (succ zero) nil)))]
+   [gv0 := false; n := zero; x := (cons zero
+   (cons (succ (succ zero))
+      (cons zero (cons zero (cons (succ (succ zero)) nil)))))]
+   [gv0 := false; n := (succ zero); x := (cons (succ zero) (cons (succ (succ zero)) (cons (succ zero) nil)))]
+   [gv0 := false; n := (succ zero); x := (cons (succ (succ (succ (succ (succ (succ zero)))))) (cons zero nil))]
+   [gv0 := false; n := (succ (succ zero)); x := (cons (succ (succ (succ zero))) (cons zero (cons (succ (succ zero)) nil)))]
+   [gv0 := false; n := (succ (succ (succ zero))); x := (cons (succ (succ (succ zero))) (cons (succ zero) nil))]
+   [gv0 := false; n := zero; x := (cons zero (cons (succ zero) (cons zero (cons zero (cons zero nil)))))]
+   [gv0 := false; n := (succ (succ (succ zero))); x := (cons (succ (succ (succ zero)))
+   (cons (succ (succ (succ zero))) (cons zero nil)))]
+   etc ...
+
+
+Label: 2 (2)
+Abducted Assumption: (insort n (sort x) = gv1)
+Positive Examples:
+   [gv1 := (cons (succ (succ (succ (succ (succ (succ zero)))))) nil); n := (succ (succ (succ (succ (succ (succ zero)))))); x := nil]
+   [gv1 := (cons zero (cons (succ (succ zero)) (cons (succ (succ zero)) nil))); n := (succ (succ zero)); x := (cons zero (cons (succ (succ zero)) nil))]
+   [gv1 := (cons (succ (succ (succ (succ zero)))) nil); n := (succ (succ (succ (succ zero)))); x := nil]
+   [gv1 := (cons zero (cons (succ (succ (succ zero))) nil)); n := zero; x := (cons (succ (succ (succ zero))) nil)]
+   [gv1 := (cons zero (cons (succ (succ zero)) nil)); n := zero; x := (cons (succ (succ zero)) nil)]
+   [gv1 := (cons zero (cons (succ zero) nil)); n := zero; x := (cons (succ zero) nil)]
+   [gv1 := (cons (succ (succ (succ zero))) nil); n := (succ (succ (succ zero))); x := nil]
+   [gv1 := (cons (succ (succ zero)) nil); n := (succ (succ zero)); x := nil]
+   [gv1 := (cons zero (cons (succ zero) nil)); n := (succ zero); x := (cons zero nil)]
+   [gv1 := (cons zero (cons zero nil)); n := zero; x := (cons zero nil)]
+   etc ...
+
+Negative Examples:
+   [gv1 := (cons (succ zero)
+   (cons (succ (succ (succ (succ (succ (succ zero))))))
+      (cons zero (cons zero (cons zero nil))))); n := (succ (succ (succ zero))); x := nil]
+   [gv1 := (cons (succ (succ zero)) (cons zero (cons zero (cons zero nil)))); n := (succ zero); x := (cons zero (cons zero (cons (succ (succ zero)) nil)))]
+   [gv1 := (cons zero (cons (succ (succ (succ zero))) (cons zero nil))); n := (succ (succ (succ (succ zero)))); x := (cons zero nil)]
+   [gv1 := (cons zero (cons zero (cons (succ zero) (cons zero (cons (succ zero) nil))))); n := (succ zero); x := (cons zero (cons zero (cons (succ (succ zero)) (cons zero nil))))]
+   [gv1 := (cons (succ (succ zero)) (cons zero (cons (succ zero) nil))); n := (succ (succ zero)); x := (cons zero
+   (cons (succ (succ (succ (succ (succ (succ zero)))))) (cons zero nil)))]
+   [gv1 := (cons (succ (succ (succ (succ zero)))) (cons zero (cons zero nil))); n := (succ (succ (succ (succ zero)))); x := (cons zero nil)]
+   [gv1 := (cons (succ zero) (cons zero (cons (succ zero) nil))); n := (succ (succ (succ zero))); x := nil]
+   [gv1 := (cons zero (cons (succ (succ zero)) (cons zero nil))); n := (succ (succ zero)); x := (cons (succ zero) nil)]
+   [gv1 := (cons (succ zero) (cons (succ (succ zero)) (cons zero (cons zero nil)))); n := zero; x := (cons zero (cons (succ zero) nil))]
+   [gv1 := (cons zero (cons (succ (succ (succ (succ zero)))) (cons zero nil))); n := (succ zero); x := (cons zero nil)]
+   etc ...
+
+
+Label: 3 (3)
+Abducted Assumption: (sorted gv2 = true)
+Positive Examples:
+   [gv2 := (cons (succ zero) (cons (succ (succ zero)) nil)); n := zero; x := (cons zero nil)]
+   [gv2 := nil; n := zero; x := (cons (succ (succ (succ (succ (succ zero)))))
+   (cons (succ zero) (cons (succ zero) (cons (succ zero) nil))))]
+   [gv2 := nil; n := zero; x := (cons zero
+   (cons (succ (succ (succ (succ (succ zero))))) (cons (succ zero) nil)))]
+   [gv2 := (cons (succ (succ (succ zero)))
+   (cons (succ (succ (succ zero))) (cons (succ (succ (succ zero))) nil))); n := zero; x := (cons (succ zero) nil)]
+   [gv2 := (cons zero (cons zero nil)); n := zero; x := (cons zero (cons (succ (succ (succ (succ (succ zero))))) nil))]
+   [gv2 := (cons zero (cons zero (cons (succ (succ zero)) nil))); n := (succ (succ (succ zero))); x := (cons (succ (succ (succ zero)))
+   (cons (succ (succ zero))
+      (cons (succ (succ zero)) (cons zero (cons (succ zero) nil)))))]
+   [gv2 := (cons zero nil); n := zero; x := (cons (succ zero) (cons (succ zero) (cons (succ zero) nil)))]
+   [gv2 := nil; n := (succ zero); x := (cons (succ zero)
+   (cons (succ zero) (cons zero (cons (succ (succ (succ (succ zero)))) nil))))]
+   [gv2 := nil; n := zero; x := (cons (succ (succ zero))
+   (cons zero (cons zero (cons zero (cons (succ zero) nil)))))]
+   [gv2 := (cons zero nil); n := (succ zero); x := (cons (succ (succ (succ zero))) (cons (succ zero) nil))]
+   etc ...
+
+Negative Examples:
+   [gv2 := (cons (succ zero) (cons zero nil)); n := (succ (succ (succ (succ (succ zero))))); x := nil]
+   [gv2 := (cons zero (cons (succ (succ (succ zero))) (cons (succ zero) nil))); n := zero; x := nil]
+   [gv2 := (cons (succ zero)
+   (cons zero (cons (succ (succ (succ zero))) (cons zero nil)))); n := (succ zero); x := nil]
+   [gv2 := (cons (succ (succ (succ (succ zero))))
+   (cons (succ (succ (succ zero))) (cons (succ (succ zero)) (cons zero nil)))); n := (succ (succ (succ zero))); x := (cons zero nil)]
+   [gv2 := (cons zero
+   (cons (succ (succ (succ (succ zero))))
+      (cons zero (cons (succ (succ (succ zero))) nil)))); n := (succ (succ (succ zero))); x := nil]
+   [gv2 := (cons (succ zero) (cons zero nil)); n := (succ zero); x := (cons (succ (succ (succ zero))) nil)]
+   [gv2 := (cons (succ (succ zero))
+   (cons zero (cons zero (cons zero (cons (succ (succ zero)) nil))))); n := (succ (succ (succ zero))); x := nil]
+   [gv2 := (cons zero (cons (succ (succ (succ zero))) (cons zero nil))); n := zero; x := nil]
+   [gv2 := (cons (succ (succ (succ (succ zero)))) (cons (succ zero) nil)); n := zero; x := (cons (succ zero) (cons zero (cons zero (cons (succ zero) (cons zero nil)))))]
+   [gv2 := (cons (succ (succ (succ zero)))
+   (cons zero (cons (succ zero) (cons (succ (succ (succ zero))) nil)))); n := zero; x := nil]
+   etc ...
+
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 18.282 seconds
+
+
+Label: 0 (0)
+(false = gv3), (true = gv3), (gv3 = gv3), (x = x), (n = n), (false = sorted x), (false = leq n n), (false = eqn n n), (false = less n n), (true = sorted x)
+(true = leq n n), (true = eqn n n), (true = less n n), (false <> gv3), (true <> gv3), (gv3 <> gv3), (x <> x), (n <> n), (None = Some x), (sort x = x)
+(sort x = insort n x), (insort n x = x), (None = Some gv3), (None = Some n), (sorted x = gv3), (sorted x = leq n n), (sorted x = eqn n n), (sorted x = less n n), (leq n n = gv3), (leq n n = eqn n n)
+(eqn n n = gv3), (less n n = gv3), (less n n = leq n n), (less n n = eqn n n)
+
+Label: 1 (1)
+(false = gv0), (true = gv0), (x = x), (n = n), (gv0 = gv0), (false = sorted x), (false = leq n n), (false = eqn n n), (false = less n n), (true = sorted x)
+(true = leq n n), (true = eqn n n), (true = less n n), (false <> gv0), (true <> gv0), (x <> x), (n <> n), (gv0 <> gv0), (None = Some x), (sort x = x)
+(sort x = insort n x), (insort n x = x), (None = Some gv0), (None = Some n), (sorted x = gv0), (sorted x = leq n n), (sorted x = eqn n n), (sorted x = less n n), (leq n n = gv0), (leq n n = eqn n n)
+(eqn n n = gv0), (less n n = gv0), (less n n = leq n n), (less n n = eqn n n)
+
+Label: 2 (2)
+(n = n), (x = x), (x = gv1), (gv1 = x), (gv1 = gv1), (false = sorted x), (false = sorted gv1), (false = leq n n), (false = eqn n n), (false = less n n)
+(true = sorted x), (true = sorted gv1), (true = leq n n), (true = eqn n n), (true = less n n), (n <> n), (x <> x), (x <> gv1), (gv1 <> x), (gv1 <> gv1)
+(None = Some x), (None = Some gv1), (None = Some n), (sort x = x), (sort x = gv1), (sort x = insort n x), (sort x = insort n gv1), (sort gv1 = x), (sort gv1 = gv1), (sort gv1 = insort n x)
+(sort gv1 = insort n gv1), (insort n x = x), (insort n x = gv1), (insort n gv1 = x), (insort n gv1 = gv1), (sorted x = leq n n), (sorted x = eqn n n), (sorted x = less n n), (sorted gv1 = leq n n), (sorted gv1 = eqn n n)
+(sorted gv1 = less n n), (leq n n = eqn n n), (less n n = leq n n), (less n n = eqn n n)
+
+Label: 3 (3)
+(gv2 = gv2), (n = n), (false = sorted gv2), (false = leq n n), (false = eqn n n), (false = less n n), (true = sorted gv2), (true = leq n n), (true = eqn n n), (true = less n n)
+(gv2 <> gv2), (n <> n), (None = Some gv2), (None = Some n), (sort gv2 = gv2), (sort gv2 = insort n gv2), (insort n gv2 = gv2), (sorted gv2 = leq n n), (sorted gv2 = eqn n n), (sorted gv2 = less n n)
+(leq n n = eqn n n), (less n n = leq n n), (less n n = eqn n n)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 78.197 seconds
+
+
+Label: 0 (0)
+(true = gv3), (false <> gv3), (leq n n = gv3), (eqn n n = gv3)
+
+Label: 1 (1)
+(true = gv0), (false <> gv0), (leq n n = gv0), (eqn n n = gv0)
+
+Label: 2 (2)
+(true = sorted gv1), (sort gv1 = gv1), (sort gv1 = insort n x), (insort n x = gv1), (sorted gv1 = leq n n), (sorted gv1 = eqn n n)
+
+Label: 3 (3)
+(true = sorted gv2), (sort gv2 = gv2), (sorted gv2 = leq n n), (sorted gv2 = eqn n n)
+
+
+------------------------------ PROCESSED SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 132.616 seconds
+
+
+(insort n (sort x) = gv1)
+ - (insort n (sort x) = gv1)
+ - (true = sorted gv1)
+ - (sort gv1 = gv1)
+ - (sort gv1 = insort n x)
+ - (insort n x = gv1)
+ - (sorted gv1 = leq n n)
+ - (sorted gv1 = eqn n n)
+
+(sorted (sort x) = gv3)
+ - (sorted (sort x) = gv3)
+ - (true = gv3)
+ - (false <> gv3)
+ - (leq n n = gv3)
+ - (eqn n n = gv3)
+
+(sorted gv2 = true)
+ - (sorted gv2 = true)
+ - (sort gv2 = gv2)
+ - (sorted gv2 = leq n n)
+ - (sorted gv2 = eqn n n)
+
+(sorted (insort n (sort x)) = gv0)
+ - (sorted (insort n (sort x)) = gv0)
+ - (true = gv0)
+ - (false <> gv0)
+ - (leq n n = gv0)
+ - (eqn n n = gv0)
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 132.616 seconds
+
+Number of Result Pairs Returned: 15
+
+(sorted (sort x) = gv3 -> sorted (insort n (sort x)) = gv3)
+
+(sorted (sort x) = gv3 -> true = gv3)
+(true = gv3 -> sorted (insort n (sort x)) = gv3)
+
+(sorted (sort x) = gv3 -> false <> gv3)
+(false <> gv3 -> sorted (insort n (sort x)) = gv3)
+
+(sorted (sort x) = gv3 -> leq n n = gv3)
+(leq n n = gv3 -> sorted (insort n (sort x)) = gv3)
+
+(sorted (sort x) = gv3 -> eqn n n = gv3)
+(eqn n n = gv3 -> sorted (insort n (sort x)) = gv3)
+
+(sorted (insort n (sort x)) = gv0 -> false <> gv0)
+(false <> gv0 -> gv0 = true)
+
+(sorted (insort n (sort x)) = gv0 -> leq n n = gv0)
+(leq n n = gv0 -> gv0 = true)
+
+(sorted (insort n (sort x)) = gv0 -> eqn n n = gv0)
+(eqn n n = gv0 -> gv0 = true)
+
+(insort n (sort x) = gv1 -> sort gv1 = gv1)
+(sort gv1 = gv1 -> sorted gv1 = true)
+
+(insort n (sort x) = gv1 -> sorted gv1 = leq n n)
+(sorted gv1 = leq n n -> sorted gv1 = true)
+
+(insort n (sort x) = gv1 -> sorted gv1 = eqn n n)
+(sorted gv1 = eqn n n -> sorted gv1 = true)
+
+(sorted gv2 = true -> sorted (insort n gv2) = true)
+
+(sorted gv2 = true -> sort gv2 = gv2)
+(sort gv2 = gv2 -> sorted (insort n gv2) = true)
+
+(sorted gv2 = true -> sorted gv2 = leq n n)
+(sorted gv2 = leq n n -> sorted (insort n gv2) = true)
+
+(sorted gv2 = true -> sorted gv2 = eqn n n)
+(sorted gv2 = eqn n n -> sorted (insort n gv2) = true)

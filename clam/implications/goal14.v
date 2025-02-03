@@ -1,17 +1,26 @@
+From LFindToo Require Import LFindToo.
+From QuickChick Require Import QuickChick.
+
 Require Import Nat Arith.
 
 Inductive Nat : Type := succ : Nat -> Nat |  zero : Nat.
 
 Inductive Lst : Type := cons : Nat -> Lst -> Lst |  nil : Lst.
 
-Inductive Tree : Type := node : Nat -> Tree -> Tree -> Tree |  leaf : Tree.
+(* ************************** [ QuickChick Stuff ] *************************** *)
+Derive Show for Nat.
+Derive Arbitrary for Nat.
+Instance Dec_Eq_Nat : Dec_Eq (Nat).
+Proof. dec_eq. Qed.
 
-Inductive Pair : Type := mkpair : Nat -> Nat -> Pair
-with ZLst : Type := zcons : Pair -> ZLst -> ZLst |  znil : ZLst.
+Derive Show for Lst.
+Derive Arbitrary for Lst.
+Instance Dec_Eq_lst : Dec_Eq (Lst).
+Proof. dec_eq. Qed.
 
 Fixpoint less (less_arg0 : Nat) (less_arg1 : Nat) : bool
            := match less_arg0, less_arg1 with
-              | x, zero => false
+              | _, zero => false
               | zero, succ x => true
               | succ x, succ y => less x y
               end.
@@ -63,6 +72,9 @@ Proof. Admitted.
 Theorem theorem0 : forall (x : Lst), eq (sorted (sort x)) true.
 Proof.
 induction x.
-  - simpl. apply lem. apply IHx.
+  - simpl. 
+  findlemma. Admitted.
+  
+  (* apply lem. apply IHx.
   - reflexivity.
-Qed.
+Qed. *)

@@ -1,0 +1,486 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (mem x (insort n l) = true -> x = n \/ mem x l = true)
+ -- (mem x (cons n0 (insort n l)) = true)
+
+----------------------------------
+Goal: (x = n \/ mem x (cons n0 l) = true)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 0. seconds
+
+gv1 : Lst = (cons n0 l)
+gv0 : bool = (mem x (cons n0 l))
+gv2 : bool = true
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 35.49 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (mem x (cons n0 (insort n l)) = gv2)
+
+----------------------------------
+Goal: (x = n \/ mem x (cons n0 l) = gv2)
+Case: 3
+
+Label: Generalization #1
+Assumptions: 
+ -- (mem x (cons n0 l) = gv0)
+ -- (mem x (cons n0 (insort n l)) = true)
+
+----------------------------------
+Goal: (x = n \/ gv0 = true)
+Case: 3
+
+Label: Generalization #2
+Assumptions: 
+ -- (cons n0 l = gv1)
+ -- (mem x (cons n0 (insort n l)) = true)
+
+----------------------------------
+Goal: (x = n \/ mem x gv1 = true)
+Case: 3
+
+Label: Generalization #3
+Assumptions: 
+ -- (mem x (cons n0 (insort n l)) = true)
+
+----------------------------------
+Goal: (x = n \/ mem x (cons n0 l) = true)
+Case: 3
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 36.567 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+eqb : (Nat -> Nat -> bool)
+less : (Nat -> Nat -> bool)
+mem : (Nat -> Lst -> bool)
+insort : (Nat -> Lst -> Lst)
+sort : (Lst -> Lst)
+
+Label: 0 (0)
+Abducted Assumption: (mem x (cons n0 (insort n l)) = gv2)
+Positive Examples:
+   [gv2 := true; l := (cons zero (cons zero nil)); n := (succ (succ zero)); n0 := (succ zero); x := zero]
+   [gv2 := true; l := (cons (succ zero) (cons zero nil)); n := (succ (succ zero)); n0 := (succ (succ zero)); x := (succ zero)]
+   [gv2 := false; l := (cons (succ zero)
+   (cons (succ (succ (succ zero)))
+      (cons (succ (succ zero)) (cons (succ zero) nil)))); n := (succ (succ (succ zero))); n0 := (succ (succ (succ zero))); x := zero]
+   [gv2 := true; l := (cons (succ zero) (cons zero nil)); n := (succ (succ (succ (succ zero)))); n0 := (succ zero); x := zero]
+   [gv2 := true; l := (cons zero (cons (succ (succ (succ zero))) nil)); n := (succ (succ (succ zero))); n0 := zero; x := zero]
+   [gv2 := true; l := (cons zero (cons (succ (succ (succ zero))) nil)); n := zero; n0 := (succ (succ (succ zero))); x := zero]
+   [gv2 := true; l := (cons (succ zero) (cons zero nil)); n := (succ (succ (succ zero))); n0 := (succ (succ zero)); x := zero]
+   [gv2 := true; l := (cons (succ (succ zero)) nil); n := (succ (succ (succ zero))); n0 := zero; x := (succ (succ zero))]
+   [gv2 := true; l := (cons zero (cons (succ (succ (succ (succ zero)))) nil)); n := (succ (succ (succ zero))); n0 := zero; x := zero]
+   [gv2 := true; l := (cons zero nil); n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); x := zero]
+   etc ...
+
+Negative Examples:
+   [gv2 := false; l := (cons (succ zero) (cons zero nil)); n := zero; n0 := (succ (succ zero)); x := (succ zero)]
+   [gv2 := true; l := (cons zero (cons (succ (succ (succ (succ zero)))) (cons zero nil))); n := zero; n0 := (succ (succ (succ zero))); x := (succ zero)]
+   [gv2 := false; l := (cons (succ (succ zero)) (cons zero nil)); n := (succ (succ (succ zero))); n0 := (succ (succ zero)); x := zero]
+   [gv2 := true; l := (cons (succ zero) (cons (succ (succ (succ (succ zero)))) nil)); n := (succ zero); n0 := (succ zero); x := zero]
+   [gv2 := true; l := (cons zero
+   (cons (succ (succ (succ (succ (succ zero)))))
+      (cons zero (cons (succ (succ (succ zero))) nil)))); n := zero; n0 := (succ zero); x := (succ (succ (succ (succ zero))))]
+   [gv2 := false; l := (cons (succ zero) (cons (succ zero) (cons zero (cons zero nil)))); n := (succ (succ (succ zero))); n0 := (succ (succ zero)); x := zero]
+   [gv2 := false; l := (cons (succ zero) (cons (succ (succ zero)) nil)); n := zero; n0 := zero; x := (succ zero)]
+   [gv2 := false; l := (cons zero (cons (succ zero) (cons zero nil))); n := zero; n0 := (succ (succ zero)); x := (succ zero)]
+   [gv2 := true; l := (cons zero (cons zero nil)); n := zero; n0 := (succ (succ zero)); x := (succ (succ (succ zero)))]
+   [gv2 := true; l := (cons (succ (succ (succ (succ (succ zero))))) (cons zero (cons zero nil))); n := zero; n0 := zero; x := (succ zero)]
+   etc ...
+
+
+Label: 1 (1)
+Abducted Assumption: (mem x (cons n0 l) = gv0)
+Positive Examples:
+   [gv0 := true; l := (cons (succ (succ zero)) (cons (succ zero) nil)); n := zero; n0 := (succ zero); x := (succ zero)]
+   [gv0 := true; l := (cons (succ (succ (succ (succ zero)))) nil); n := (succ zero); n0 := (succ zero); x := (succ zero)]
+   [gv0 := true; l := (cons zero
+   (cons zero (cons zero (cons (succ zero) (cons (succ (succ zero)) nil))))); n := (succ (succ (succ (succ (succ (succ zero)))))); n0 := zero; x := (succ (succ zero))]
+   [gv0 := true; l := (cons zero
+   (cons (succ (succ (succ zero)))
+      (cons (succ zero)
+         (cons (succ zero) (cons (succ (succ (succ (succ zero)))) nil))))); n := (succ zero); n0 := (succ zero); x := (succ zero)]
+   [gv0 := true; l := (cons zero (cons (succ zero) nil)); n := (succ (succ (succ zero))); n0 := zero; x := zero]
+   [gv0 := true; l := nil; n := (succ (succ zero)); n0 := (succ (succ (succ zero))); x := (succ (succ (succ zero)))]
+   [gv0 := true; l := (cons (succ (succ (succ (succ (succ zero))))) (cons zero nil)); n := zero; n0 := zero; x := zero]
+   [gv0 := false; l := (cons (succ (succ (succ zero))) nil); n := (succ zero); n0 := (succ (succ (succ zero))); x := (succ zero)]
+   [gv0 := true; l := (cons (succ zero) (cons (succ zero) (cons zero (cons zero nil)))); n := (succ zero); n0 := (succ (succ (succ (succ zero)))); x := (succ zero)]
+   [gv0 := true; l := (cons (succ zero) (cons (succ (succ (succ zero))) (cons (succ zero) nil))); n := zero; n0 := (succ (succ (succ (succ zero)))); x := (succ (succ (succ (succ zero))))]
+   etc ...
+
+Negative Examples:
+   [gv0 := false; l := (cons (succ (succ zero)) (cons (succ (succ (succ zero))) nil)); n := (succ zero); n0 := zero; x := (succ (succ zero))]
+   [gv0 := false; l := (cons (succ (succ zero)) nil); n := zero; n0 := (succ zero); x := (succ (succ zero))]
+   [gv0 := false; l := (cons (succ zero) nil); n := (succ (succ (succ (succ zero)))); n0 := (succ zero); x := (succ zero)]
+   [gv0 := false; l := (cons zero (cons (succ (succ (succ (succ zero)))) nil)); n := (succ (succ (succ (succ zero)))); n0 := zero; x := zero]
+   [gv0 := false; l := (cons (succ zero) (cons zero nil)); n := zero; n0 := (succ (succ zero)); x := (succ zero)]
+   [gv0 := false; l := (cons zero (cons (succ zero) nil)); n := (succ zero); n0 := (succ zero); x := zero]
+   [gv0 := false; l := (cons (succ zero) (cons (succ zero) (cons (succ zero) nil))); n := (succ zero); n0 := zero; x := zero]
+   [gv0 := false; l := (cons (succ zero) (cons (succ (succ zero)) (cons (succ zero) nil))); n := zero; n0 := zero; x := (succ zero)]
+   [gv0 := false; l := (cons zero (cons (succ (succ zero)) (cons (succ zero) nil))); n := (succ (succ (succ (succ (succ zero))))); n0 := (succ (succ zero)); x := (succ (succ zero))]
+   [gv0 := false; l := (cons (succ zero)
+   (cons (succ (succ zero)) (cons (succ zero) (cons (succ zero) nil)))); n := zero; n0 := zero; x := (succ (succ zero))]
+   etc ...
+
+
+Label: 1 (2)
+Abducted Assumption: (mem x (cons n0 (insort n l)) = true)
+Positive Examples:
+   [gv0 := true; l := (cons (succ (succ zero)) (cons (succ zero) nil)); n := zero; n0 := (succ zero); x := (succ zero)]
+   [gv0 := true; l := (cons (succ (succ (succ (succ zero)))) nil); n := (succ zero); n0 := (succ zero); x := (succ zero)]
+   [gv0 := true; l := (cons zero
+   (cons zero (cons zero (cons (succ zero) (cons (succ (succ zero)) nil))))); n := (succ (succ (succ (succ (succ (succ zero)))))); n0 := zero; x := (succ (succ zero))]
+   [gv0 := true; l := (cons zero
+   (cons (succ (succ (succ zero)))
+      (cons (succ zero)
+         (cons (succ zero) (cons (succ (succ (succ (succ zero)))) nil))))); n := (succ zero); n0 := (succ zero); x := (succ zero)]
+   [gv0 := true; l := (cons zero (cons (succ zero) nil)); n := (succ (succ (succ zero))); n0 := zero; x := zero]
+   [gv0 := true; l := nil; n := (succ (succ zero)); n0 := (succ (succ (succ zero))); x := (succ (succ (succ zero)))]
+   [gv0 := true; l := (cons (succ (succ (succ (succ (succ zero))))) (cons zero nil)); n := zero; n0 := zero; x := zero]
+   [gv0 := false; l := (cons (succ (succ (succ zero))) nil); n := (succ zero); n0 := (succ (succ (succ zero))); x := (succ zero)]
+   [gv0 := true; l := (cons (succ zero) (cons (succ zero) (cons zero (cons zero nil)))); n := (succ zero); n0 := (succ (succ (succ (succ zero)))); x := (succ zero)]
+   [gv0 := true; l := (cons (succ zero) (cons (succ (succ (succ zero))) (cons (succ zero) nil))); n := zero; n0 := (succ (succ (succ (succ zero)))); x := (succ (succ (succ (succ zero))))]
+   etc ...
+
+Negative Examples:
+   [gv0 := false; l := (cons (succ (succ (succ zero))) (cons (succ zero) nil)); n := (succ (succ (succ zero))); n0 := (succ (succ (succ zero))); x := (succ (succ zero))]
+   [gv0 := false; l := (cons (succ (succ zero)) nil); n := zero; n0 := (succ (succ (succ (succ zero)))); x := (succ zero)]
+   [gv0 := false; l := nil; n := (succ (succ (succ (succ (succ (succ zero)))))); n0 := zero; x := (succ (succ zero))]
+   [gv0 := false; l := (cons (succ (succ zero)) nil); n := (succ (succ (succ zero))); n0 := (succ (succ (succ zero))); x := zero]
+   [gv0 := false; l := nil; n := (succ (succ (succ (succ zero)))); n0 := (succ (succ (succ (succ zero)))); x := (succ zero)]
+   [gv0 := false; l := nil; n := (succ (succ (succ (succ zero)))); n0 := (succ (succ (succ (succ (succ zero))))); x := zero]
+   [gv0 := false; l := (cons (succ zero) (cons zero nil)); n := (succ (succ zero)); n0 := zero; x := (succ (succ (succ (succ zero))))]
+   [gv0 := false; l := (cons zero (cons (succ zero) (cons (succ (succ (succ zero))) nil))); n := zero; n0 := (succ (succ (succ zero))); x := (succ (succ zero))]
+   [gv0 := false; l := (cons (succ (succ (succ zero))) nil); n := (succ (succ (succ zero))); n0 := (succ zero); x := zero]
+   [gv0 := false; l := (cons (succ (succ (succ zero))) nil); n := (succ (succ zero)); n0 := (succ (succ zero)); x := zero]
+   etc ...
+
+
+Label: 2 (3)
+Abducted Assumption: (cons n0 l = gv1)
+Positive Examples:
+   [gv1 := (cons (succ zero) (cons zero nil)); l := (cons zero nil); n := zero; n0 := (succ zero); x := zero]
+   [gv1 := (cons zero (cons (succ zero) nil)); l := (cons (succ zero) nil); n := zero; n0 := zero; x := zero]
+   [gv1 := (cons (succ zero) (cons zero nil)); l := (cons zero nil); n := zero; n0 := (succ zero); x := (succ zero)]
+   [gv1 := (cons zero nil); l := nil; n := (succ (succ (succ (succ zero)))); n0 := zero; x := zero]
+   [gv1 := (cons zero (cons (succ (succ zero)) nil)); l := (cons (succ (succ zero)) nil); n := (succ (succ (succ zero))); n0 := zero; x := zero]
+   [gv1 := (cons (succ (succ zero)) nil); l := nil; n := (succ (succ zero)); n0 := (succ (succ zero)); x := (succ (succ zero))]
+   [gv1 := (cons (succ zero) nil); l := nil; n := (succ (succ zero)); n0 := (succ zero); x := (succ (succ zero))]
+   [gv1 := (cons (succ zero) (cons zero nil)); l := (cons zero nil); n := (succ (succ (succ (succ zero)))); n0 := (succ zero); x := zero]
+   [gv1 := (cons zero (cons (succ zero) nil)); l := (cons (succ zero) nil); n := (succ (succ zero)); n0 := zero; x := (succ (succ zero))]
+   [gv1 := (cons (succ (succ zero)) (cons (succ zero) nil)); l := (cons (succ zero) nil); n := zero; n0 := (succ (succ zero)); x := zero]
+   etc ...
+
+Negative Examples:
+   [gv1 := (cons (succ (succ zero)) (cons (succ (succ (succ zero))) (cons zero nil))); l := (cons zero nil); n := zero; n0 := (succ zero); x := (succ zero)]
+   [gv1 := nil; l := (cons (succ (succ zero)) (cons (succ (succ zero)) nil)); n := zero; n0 := (succ zero); x := (succ (succ zero))]
+   [gv1 := nil; l := (cons zero nil); n := (succ (succ (succ (succ (succ zero))))); n0 := (succ (succ (succ (succ (succ zero))))); x := zero]
+   [gv1 := nil; l := (cons zero (cons zero (cons zero nil))); n := (succ (succ (succ (succ zero)))); n0 := (succ (succ (succ (succ zero)))); x := zero]
+   [gv1 := (cons zero (cons zero nil)); l := (cons (succ zero) nil); n := zero; n0 := (succ (succ (succ (succ (succ zero))))); x := (succ zero)]
+   [gv1 := (cons (succ (succ (succ zero))) (cons (succ zero) nil)); l := (cons (succ (succ (succ zero))) (cons (succ (succ zero)) (cons zero nil))); n := (succ zero); n0 := zero; x := zero]
+   [gv1 := (cons (succ (succ zero)) nil); l := (cons (succ zero)
+   (cons (succ zero) (cons (succ (succ (succ (succ zero)))) (cons zero nil)))); n := (succ (succ zero)); n0 := zero; x := zero]
+   [gv1 := nil; l := (cons (succ zero) (cons (succ (succ zero)) nil)); n := zero; n0 := (succ (succ zero)); x := (succ zero)]
+   [gv1 := nil; l := (cons zero (cons zero (cons zero nil))); n := (succ (succ (succ zero))); n0 := (succ zero); x := (succ zero)]
+   [gv1 := (cons (succ zero) nil); l := (cons zero (cons zero nil)); n := (succ (succ zero)); n0 := (succ (succ zero)); x := zero]
+   etc ...
+
+
+Label: 2 (4)
+Abducted Assumption: (mem x (cons n0 (insort n l)) = true)
+Positive Examples:
+   [gv1 := (cons (succ zero) (cons zero nil)); l := (cons zero nil); n := zero; n0 := (succ zero); x := zero]
+   [gv1 := (cons zero (cons (succ zero) nil)); l := (cons (succ zero) nil); n := zero; n0 := zero; x := zero]
+   [gv1 := (cons (succ zero) (cons zero nil)); l := (cons zero nil); n := zero; n0 := (succ zero); x := (succ zero)]
+   [gv1 := (cons zero nil); l := nil; n := (succ (succ (succ (succ zero)))); n0 := zero; x := zero]
+   [gv1 := (cons zero (cons (succ (succ zero)) nil)); l := (cons (succ (succ zero)) nil); n := (succ (succ (succ zero))); n0 := zero; x := zero]
+   [gv1 := (cons (succ (succ zero)) nil); l := nil; n := (succ (succ zero)); n0 := (succ (succ zero)); x := (succ (succ zero))]
+   [gv1 := (cons (succ zero) nil); l := nil; n := (succ (succ zero)); n0 := (succ zero); x := (succ (succ zero))]
+   [gv1 := (cons (succ zero) (cons zero nil)); l := (cons zero nil); n := (succ (succ (succ (succ zero)))); n0 := (succ zero); x := zero]
+   [gv1 := (cons zero (cons (succ zero) nil)); l := (cons (succ zero) nil); n := (succ (succ zero)); n0 := zero; x := (succ (succ zero))]
+   [gv1 := (cons (succ (succ zero)) (cons (succ zero) nil)); l := (cons (succ zero) nil); n := zero; n0 := (succ (succ zero)); x := zero]
+   etc ...
+
+Negative Examples:
+   [gv1 := (cons (succ zero) (cons zero (cons zero nil))); l := (cons zero (cons zero nil)); n := zero; n0 := (succ zero); x := (succ (succ zero))]
+   [gv1 := (cons (succ (succ (succ (succ (succ zero))))) nil); l := nil; n := (succ (succ zero)); n0 := (succ (succ (succ (succ (succ zero))))); x := (succ zero)]
+   [gv1 := (cons (succ (succ (succ zero))) nil); l := nil; n := (succ (succ (succ zero))); n0 := (succ (succ (succ zero))); x := (succ (succ zero))]
+   [gv1 := (cons zero (cons zero nil)); l := (cons zero nil); n := zero; n0 := zero; x := (succ zero)]
+   [gv1 := (cons (succ zero) nil); l := nil; n := zero; n0 := (succ zero); x := (succ (succ (succ zero)))]
+   [gv1 := (cons zero nil); l := nil; n := (succ zero); n0 := zero; x := (succ (succ (succ (succ zero))))]
+   [gv1 := (cons zero nil); l := nil; n := (succ (succ zero)); n0 := zero; x := (succ (succ (succ zero)))]
+   [gv1 := (cons zero nil); l := nil; n := zero; n0 := zero; x := (succ (succ (succ (succ (succ (succ zero))))))]
+   [gv1 := (cons (succ zero) nil); l := nil; n := (succ (succ zero)); n0 := (succ zero); x := (succ (succ (succ zero)))]
+   [gv1 := (cons (succ (succ zero)) nil); l := nil; n := (succ (succ (succ (succ zero)))); n0 := (succ (succ zero)); x := (succ (succ (succ zero)))]
+   etc ...
+
+
+Label: 3 (5)
+Abducted Assumption: (mem x (cons n0 (insort n l)) = true)
+Positive Examples:
+   [l := (cons zero (cons (succ zero) nil)); n := (succ zero); n0 := (succ zero); x := (succ zero)]
+   [l := (cons zero (cons (succ (succ zero)) nil)); n := (succ (succ (succ (succ (succ zero))))); n0 := (succ zero); x := zero]
+   [l := (cons (succ zero) (cons (succ zero) nil)); n := (succ (succ (succ zero))); n0 := zero; x := zero]
+   [l := (cons zero (cons zero (cons zero (cons (succ (succ (succ zero))) nil)))); n := zero; n0 := (succ (succ zero)); x := zero]
+   [l := (cons zero
+   (cons zero (cons (succ (succ (succ zero))) (cons (succ zero) nil)))); n := zero; n0 := (succ zero); x := zero]
+   [l := (cons (succ (succ zero)) (cons zero (cons zero (cons zero nil)))); n := zero; n0 := zero; x := (succ (succ zero))]
+   [l := (cons zero (cons (succ (succ zero)) (cons zero nil))); n := (succ zero); n0 := (succ (succ (succ zero))); x := (succ (succ (succ zero)))]
+   [l := (cons (succ (succ zero)) (cons (succ (succ zero)) (cons (succ zero) nil))); n := zero; n0 := (succ zero); x := zero]
+   [l := (cons (succ zero) (cons zero (cons (succ (succ zero)) nil))); n := zero; n0 := zero; x := zero]
+   [l := (cons zero (cons (succ (succ (succ (succ zero)))) (cons zero nil))); n := zero; n0 := (succ zero); x := zero]
+   etc ...
+
+Negative Examples:
+   [l := nil; n := (succ (succ (succ zero))); n0 := (succ (succ (succ (succ zero)))); x := (succ (succ zero))]
+   [l := (cons zero (cons (succ (succ (succ (succ zero)))) (cons zero nil))); n := zero; n0 := (succ (succ zero)); x := (succ zero)]
+   [l := (cons zero
+   (cons zero
+      (cons zero (cons zero (cons (succ (succ zero)) (cons (succ zero) nil)))))); n := zero; n0 := zero; x := (succ (succ (succ zero)))]
+   [l := (cons (succ (succ (succ zero))) nil); n := zero; n0 := zero; x := (succ (succ (succ (succ zero))))]
+   [l := (cons zero (cons (succ (succ (succ (succ zero)))) nil)); n := (succ zero); n0 := (succ (succ (succ (succ zero)))); x := (succ (succ (succ zero)))]
+   [l := (cons zero (cons (succ (succ (succ (succ zero)))) nil)); n := (succ zero); n0 := zero; x := (succ (succ zero))]
+   [l := (cons (succ (succ (succ (succ zero))))
+   (cons (succ (succ (succ (succ (succ zero))))) nil)); n := zero; n0 := zero; x := (succ (succ zero))]
+   [l := (cons (succ (succ zero)) (cons (succ (succ zero)) (cons (succ zero) nil))); n := zero; n0 := zero; x := (succ (succ (succ (succ (succ zero)))))]
+   [l := (cons (succ (succ (succ zero))) (cons zero nil)); n := (succ (succ (succ zero))); n0 := (succ (succ (succ zero))); x := (succ (succ zero))]
+   [l := (cons (succ zero) (cons (succ zero) nil)); n := (succ zero); n0 := zero; x := (succ (succ (succ zero)))]
+   etc ...
+
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 38.693 seconds
+
+
+Label: 0 (0)
+(false = gv2), (true = gv2), (gv2 = gv2), (l = l), (n0 = n0), (n0 = n), (n0 = x), (n = n0), (n = n), (n = x)
+(x = n0), (x = n), (x = x), (false = mem n0 l), (false = mem n l), (false = mem x l), (false = less n0 n0), (false = less n0 n), (false = less n0 x), (false = less n n0)
+(false = less n n), (false = less n x), (false = less x n0), (false = less x n), (false = less x x), (false = eqb n0 n0), (false = eqb n0 n), (false = eqb n0 x), (false = eqb n n0), (false = eqb n n)
+(false = eqb n x), (false = eqb x n0), (false = eqb x n), (false = eqb x x), (true = mem n0 l), (true = mem n l), (true = mem x l), (true = less n0 n0), (true = less n0 n), (true = less n0 x)
+(true = less n n0), (true = less n n), (true = less n x), (true = less x n0), (true = less x n), (true = less x x), (true = eqb n0 n0), (true = eqb n0 n), (true = eqb n0 x), (true = eqb n n0)
+(true = eqb n n), (true = eqb n x), (true = eqb x n0), (true = eqb x n), (true = eqb x x), (false <> gv2), (true <> gv2), (gv2 <> gv2), (l <> l), (n0 <> n0)
+(n0 <> n), (n0 <> x), (n <> n0), (n <> n), (n <> x), (x <> n0), (x <> n), (x <> x), (None = Some n0), (None = Some n)
+(None = Some x), (None = Some gv2), (sort l = l), (sort l = insort n0 l), (sort l = insort n l), (sort l = insort x l), (insort n0 l = l), (insort n l = l), (insort x l = l), (None = Some l)
+(mem n0 l = gv2), (mem n0 l = less n0 n0), (mem n0 l = less n0 n), (mem n0 l = less n0 x), (mem n0 l = less n n0), (mem n0 l = less n n), (mem n0 l = less n x), (mem n0 l = less x n0), (mem n0 l = less x n), (mem n0 l = less x x)
+(mem n0 l = eqb n0 n0), (mem n0 l = eqb n0 n), (mem n0 l = eqb n0 x), (mem n0 l = eqb n n0), (mem n0 l = eqb n n), (mem n0 l = eqb n x), (mem n0 l = eqb x n0), (mem n0 l = eqb x n), (mem n0 l = eqb x x), (mem n l = gv2)
+(mem n l = less n0 n0), (mem n l = less n0 n), (mem n l = less n0 x), (mem n l = less n n0), (mem n l = less n n), (mem n l = less n x), (mem n l = less x n0), (mem n l = less x n), (mem n l = less x x), (mem n l = eqb n0 n0)
+(mem n l = eqb n0 n), (mem n l = eqb n0 x), (mem n l = eqb n n0), (mem n l = eqb n n), (mem n l = eqb n x), (mem n l = eqb x n0), (mem n l = eqb x n), (mem n l = eqb x x), (mem x l = gv2), (mem x l = less n0 n0)
+(mem x l = less n0 n), (mem x l = less n0 x), (mem x l = less n n0), (mem x l = less n n), (mem x l = less n x), (mem x l = less x n0), (mem x l = less x n), (mem x l = less x x), (mem x l = eqb n0 n0), (mem x l = eqb n0 n)
+(mem x l = eqb n0 x), (mem x l = eqb n n0), (mem x l = eqb n n), (mem x l = eqb n x), (mem x l = eqb x n0), (mem x l = eqb x n), (mem x l = eqb x x), (less n0 n0 = gv2), (less n0 n0 = eqb n0 n0), (less n0 n0 = eqb n0 n)
+(less n0 n0 = eqb n0 x), (less n0 n0 = eqb n n0), (less n0 n0 = eqb n n), (less n0 n0 = eqb n x), (less n0 n0 = eqb x n0), (less n0 n0 = eqb x n), (less n0 n0 = eqb x x), (less n0 n = gv2), (less n0 n = eqb n0 n0), (less n0 n = eqb n0 n)
+(less n0 n = eqb n0 x), (less n0 n = eqb n n0), (less n0 n = eqb n n), (less n0 n = eqb n x), (less n0 n = eqb x n0), (less n0 n = eqb x n), (less n0 n = eqb x x), (less n0 x = gv2), (less n0 x = eqb n0 n0), (less n0 x = eqb n0 n)
+(less n0 x = eqb n0 x), (less n0 x = eqb n n0), (less n0 x = eqb n n), (less n0 x = eqb n x), (less n0 x = eqb x n0), (less n0 x = eqb x n), (less n0 x = eqb x x), (less n n0 = gv2), (less n n0 = eqb n0 n0), (less n n0 = eqb n0 n)
+(less n n0 = eqb n0 x), (less n n0 = eqb n n0), (less n n0 = eqb n n), (less n n0 = eqb n x), (less n n0 = eqb x n0), (less n n0 = eqb x n), (less n n0 = eqb x x), (less n n = gv2), (less n n = eqb n0 n0), (less n n = eqb n0 n)
+(less n n = eqb n0 x), (less n n = eqb n n0), (less n n = eqb n n), (less n n = eqb n x), (less n n = eqb x n0), (less n n = eqb x n), (less n n = eqb x x), (less n x = gv2), (less n x = eqb n0 n0), (less n x = eqb n0 n)
+(less n x = eqb n0 x), (less n x = eqb n n0), (less n x = eqb n n), (less n x = eqb n x), (less n x = eqb x n0), (less n x = eqb x n), (less n x = eqb x x), (less x n0 = gv2), (less x n0 = eqb n0 n0), (less x n0 = eqb n0 n)
+(less x n0 = eqb n0 x), (less x n0 = eqb n n0), (less x n0 = eqb n n), (less x n0 = eqb n x), (less x n0 = eqb x n0), (less x n0 = eqb x n), (less x n0 = eqb x x), (less x n = gv2), (less x n = eqb n0 n0), (less x n = eqb n0 n)
+(less x n = eqb n0 x), (less x n = eqb n n0), (less x n = eqb n n), (less x n = eqb n x), (less x n = eqb x n0), (less x n = eqb x n), (less x n = eqb x x), (less x x = gv2), (less x x = eqb n0 n0), (less x x = eqb n0 n)
+(less x x = eqb n0 x), (less x x = eqb n n0), (less x x = eqb n n), (less x x = eqb n x), (less x x = eqb x n0), (less x x = eqb x n), (less x x = eqb x x), (eqb n0 n0 = gv2), (eqb n0 n = gv2), (eqb n0 x = gv2)
+(eqb n n0 = gv2), (eqb n n = gv2), (eqb n x = gv2), (eqb x n0 = gv2), (eqb x n = gv2), (eqb x x = gv2)
+
+Label: 1 (1)
+(false = gv0), (true = gv0), (l = l), (gv0 = gv0), (n0 = n0), (n0 = n), (n0 = x), (n = n0), (n = n), (n = x)
+(x = n0), (x = n), (x = x), (false = mem n0 l), (false = mem n l), (false = mem x l), (false = less n0 n0), (false = less n0 n), (false = less n0 x), (false = less n n0)
+(false = less n n), (false = less n x), (false = less x n0), (false = less x n), (false = less x x), (false = eqb n0 n0), (false = eqb n0 n), (false = eqb n0 x), (false = eqb n n0), (false = eqb n n)
+(false = eqb n x), (false = eqb x n0), (false = eqb x n), (false = eqb x x), (true = mem n0 l), (true = mem n l), (true = mem x l), (true = less n0 n0), (true = less n0 n), (true = less n0 x)
+(true = less n n0), (true = less n n), (true = less n x), (true = less x n0), (true = less x n), (true = less x x), (true = eqb n0 n0), (true = eqb n0 n), (true = eqb n0 x), (true = eqb n n0)
+(true = eqb n n), (true = eqb n x), (true = eqb x n0), (true = eqb x n), (true = eqb x x), (false <> gv0), (true <> gv0), (l <> l), (gv0 <> gv0), (n0 <> n0)
+(n0 <> n), (n0 <> x), (n <> n0), (n <> n), (n <> x), (x <> n0), (x <> n), (x <> x), (None = Some n0), (None = Some n)
+(None = Some x), (None = Some gv0), (sort l = l), (sort l = insort n0 l), (sort l = insort n l), (sort l = insort x l), (insort n0 l = l), (insort n l = l), (insort x l = l), (None = Some l)
+(mem n0 l = gv0), (mem n0 l = less n0 n0), (mem n0 l = less n0 n), (mem n0 l = less n0 x), (mem n0 l = less n n0), (mem n0 l = less n n), (mem n0 l = less n x), (mem n0 l = less x n0), (mem n0 l = less x n), (mem n0 l = less x x)
+(mem n0 l = eqb n0 n0), (mem n0 l = eqb n0 n), (mem n0 l = eqb n0 x), (mem n0 l = eqb n n0), (mem n0 l = eqb n n), (mem n0 l = eqb n x), (mem n0 l = eqb x n0), (mem n0 l = eqb x n), (mem n0 l = eqb x x), (mem n l = gv0)
+(mem n l = less n0 n0), (mem n l = less n0 n), (mem n l = less n0 x), (mem n l = less n n0), (mem n l = less n n), (mem n l = less n x), (mem n l = less x n0), (mem n l = less x n), (mem n l = less x x), (mem n l = eqb n0 n0)
+(mem n l = eqb n0 n), (mem n l = eqb n0 x), (mem n l = eqb n n0), (mem n l = eqb n n), (mem n l = eqb n x), (mem n l = eqb x n0), (mem n l = eqb x n), (mem n l = eqb x x), (mem x l = gv0), (mem x l = less n0 n0)
+(mem x l = less n0 n), (mem x l = less n0 x), (mem x l = less n n0), (mem x l = less n n), (mem x l = less n x), (mem x l = less x n0), (mem x l = less x n), (mem x l = less x x), (mem x l = eqb n0 n0), (mem x l = eqb n0 n)
+(mem x l = eqb n0 x), (mem x l = eqb n n0), (mem x l = eqb n n), (mem x l = eqb n x), (mem x l = eqb x n0), (mem x l = eqb x n), (mem x l = eqb x x), (less n0 n0 = gv0), (less n0 n0 = eqb n0 n0), (less n0 n0 = eqb n0 n)
+(less n0 n0 = eqb n0 x), (less n0 n0 = eqb n n0), (less n0 n0 = eqb n n), (less n0 n0 = eqb n x), (less n0 n0 = eqb x n0), (less n0 n0 = eqb x n), (less n0 n0 = eqb x x), (less n0 n = gv0), (less n0 n = eqb n0 n0), (less n0 n = eqb n0 n)
+(less n0 n = eqb n0 x), (less n0 n = eqb n n0), (less n0 n = eqb n n), (less n0 n = eqb n x), (less n0 n = eqb x n0), (less n0 n = eqb x n), (less n0 n = eqb x x), (less n0 x = gv0), (less n0 x = eqb n0 n0), (less n0 x = eqb n0 n)
+(less n0 x = eqb n0 x), (less n0 x = eqb n n0), (less n0 x = eqb n n), (less n0 x = eqb n x), (less n0 x = eqb x n0), (less n0 x = eqb x n), (less n0 x = eqb x x), (less n n0 = gv0), (less n n0 = eqb n0 n0), (less n n0 = eqb n0 n)
+(less n n0 = eqb n0 x), (less n n0 = eqb n n0), (less n n0 = eqb n n), (less n n0 = eqb n x), (less n n0 = eqb x n0), (less n n0 = eqb x n), (less n n0 = eqb x x), (less n n = gv0), (less n n = eqb n0 n0), (less n n = eqb n0 n)
+(less n n = eqb n0 x), (less n n = eqb n n0), (less n n = eqb n n), (less n n = eqb n x), (less n n = eqb x n0), (less n n = eqb x n), (less n n = eqb x x), (less n x = gv0), (less n x = eqb n0 n0), (less n x = eqb n0 n)
+(less n x = eqb n0 x), (less n x = eqb n n0), (less n x = eqb n n), (less n x = eqb n x), (less n x = eqb x n0), (less n x = eqb x n), (less n x = eqb x x), (less x n0 = gv0), (less x n0 = eqb n0 n0), (less x n0 = eqb n0 n)
+(less x n0 = eqb n0 x), (less x n0 = eqb n n0), (less x n0 = eqb n n), (less x n0 = eqb n x), (less x n0 = eqb x n0), (less x n0 = eqb x n), (less x n0 = eqb x x), (less x n = gv0), (less x n = eqb n0 n0), (less x n = eqb n0 n)
+(less x n = eqb n0 x), (less x n = eqb n n0), (less x n = eqb n n), (less x n = eqb n x), (less x n = eqb x n0), (less x n = eqb x n), (less x n = eqb x x), (less x x = gv0), (less x x = eqb n0 n0), (less x x = eqb n0 n)
+(less x x = eqb n0 x), (less x x = eqb n n0), (less x x = eqb n n), (less x x = eqb n x), (less x x = eqb x n0), (less x x = eqb x n), (less x x = eqb x x), (eqb n0 n0 = gv0), (eqb n0 n = gv0), (eqb n0 x = gv0)
+(eqb n n0 = gv0), (eqb n n = gv0), (eqb n x = gv0), (eqb x n0 = gv0), (eqb x n = gv0), (eqb x x = gv0)
+
+Label: 1 (2)
+(false = gv0), (true = gv0), (l = l), (gv0 = gv0), (n0 = n0), (n0 = n), (n0 = x), (n = n0), (n = n), (n = x)
+(x = n0), (x = n), (x = x), (false = mem n0 l), (false = mem n l), (false = mem x l), (false = less n0 n0), (false = less n0 n), (false = less n0 x), (false = less n n0)
+(false = less n n), (false = less n x), (false = less x n0), (false = less x n), (false = less x x), (false = eqb n0 n0), (false = eqb n0 n), (false = eqb n0 x), (false = eqb n n0), (false = eqb n n)
+(false = eqb n x), (false = eqb x n0), (false = eqb x n), (false = eqb x x), (true = mem n0 l), (true = mem n l), (true = mem x l), (true = less n0 n0), (true = less n0 n), (true = less n0 x)
+(true = less n n0), (true = less n n), (true = less n x), (true = less x n0), (true = less x n), (true = less x x), (true = eqb n0 n0), (true = eqb n0 n), (true = eqb n0 x), (true = eqb n n0)
+(true = eqb n n), (true = eqb n x), (true = eqb x n0), (true = eqb x n), (true = eqb x x), (false <> gv0), (true <> gv0), (l <> l), (gv0 <> gv0), (n0 <> n0)
+(n0 <> n), (n0 <> x), (n <> n0), (n <> n), (n <> x), (x <> n0), (x <> n), (x <> x), (None = Some n0), (None = Some n)
+(None = Some x), (None = Some gv0), (sort l = l), (sort l = insort n0 l), (sort l = insort n l), (sort l = insort x l), (insort n0 l = l), (insort n l = l), (insort x l = l), (None = Some l)
+(mem n0 l = gv0), (mem n0 l = less n0 n0), (mem n0 l = less n0 n), (mem n0 l = less n0 x), (mem n0 l = less n n0), (mem n0 l = less n n), (mem n0 l = less n x), (mem n0 l = less x n0), (mem n0 l = less x n), (mem n0 l = less x x)
+(mem n0 l = eqb n0 n0), (mem n0 l = eqb n0 n), (mem n0 l = eqb n0 x), (mem n0 l = eqb n n0), (mem n0 l = eqb n n), (mem n0 l = eqb n x), (mem n0 l = eqb x n0), (mem n0 l = eqb x n), (mem n0 l = eqb x x), (mem n l = gv0)
+(mem n l = less n0 n0), (mem n l = less n0 n), (mem n l = less n0 x), (mem n l = less n n0), (mem n l = less n n), (mem n l = less n x), (mem n l = less x n0), (mem n l = less x n), (mem n l = less x x), (mem n l = eqb n0 n0)
+(mem n l = eqb n0 n), (mem n l = eqb n0 x), (mem n l = eqb n n0), (mem n l = eqb n n), (mem n l = eqb n x), (mem n l = eqb x n0), (mem n l = eqb x n), (mem n l = eqb x x), (mem x l = gv0), (mem x l = less n0 n0)
+(mem x l = less n0 n), (mem x l = less n0 x), (mem x l = less n n0), (mem x l = less n n), (mem x l = less n x), (mem x l = less x n0), (mem x l = less x n), (mem x l = less x x), (mem x l = eqb n0 n0), (mem x l = eqb n0 n)
+(mem x l = eqb n0 x), (mem x l = eqb n n0), (mem x l = eqb n n), (mem x l = eqb n x), (mem x l = eqb x n0), (mem x l = eqb x n), (mem x l = eqb x x), (less n0 n0 = gv0), (less n0 n0 = eqb n0 n0), (less n0 n0 = eqb n0 n)
+(less n0 n0 = eqb n0 x), (less n0 n0 = eqb n n0), (less n0 n0 = eqb n n), (less n0 n0 = eqb n x), (less n0 n0 = eqb x n0), (less n0 n0 = eqb x n), (less n0 n0 = eqb x x), (less n0 n = gv0), (less n0 n = eqb n0 n0), (less n0 n = eqb n0 n)
+(less n0 n = eqb n0 x), (less n0 n = eqb n n0), (less n0 n = eqb n n), (less n0 n = eqb n x), (less n0 n = eqb x n0), (less n0 n = eqb x n), (less n0 n = eqb x x), (less n0 x = gv0), (less n0 x = eqb n0 n0), (less n0 x = eqb n0 n)
+(less n0 x = eqb n0 x), (less n0 x = eqb n n0), (less n0 x = eqb n n), (less n0 x = eqb n x), (less n0 x = eqb x n0), (less n0 x = eqb x n), (less n0 x = eqb x x), (less n n0 = gv0), (less n n0 = eqb n0 n0), (less n n0 = eqb n0 n)
+(less n n0 = eqb n0 x), (less n n0 = eqb n n0), (less n n0 = eqb n n), (less n n0 = eqb n x), (less n n0 = eqb x n0), (less n n0 = eqb x n), (less n n0 = eqb x x), (less n n = gv0), (less n n = eqb n0 n0), (less n n = eqb n0 n)
+(less n n = eqb n0 x), (less n n = eqb n n0), (less n n = eqb n n), (less n n = eqb n x), (less n n = eqb x n0), (less n n = eqb x n), (less n n = eqb x x), (less n x = gv0), (less n x = eqb n0 n0), (less n x = eqb n0 n)
+(less n x = eqb n0 x), (less n x = eqb n n0), (less n x = eqb n n), (less n x = eqb n x), (less n x = eqb x n0), (less n x = eqb x n), (less n x = eqb x x), (less x n0 = gv0), (less x n0 = eqb n0 n0), (less x n0 = eqb n0 n)
+(less x n0 = eqb n0 x), (less x n0 = eqb n n0), (less x n0 = eqb n n), (less x n0 = eqb n x), (less x n0 = eqb x n0), (less x n0 = eqb x n), (less x n0 = eqb x x), (less x n = gv0), (less x n = eqb n0 n0), (less x n = eqb n0 n)
+(less x n = eqb n0 x), (less x n = eqb n n0), (less x n = eqb n n), (less x n = eqb n x), (less x n = eqb x n0), (less x n = eqb x n), (less x n = eqb x x), (less x x = gv0), (less x x = eqb n0 n0), (less x x = eqb n0 n)
+(less x x = eqb n0 x), (less x x = eqb n n0), (less x x = eqb n n), (less x x = eqb n x), (less x x = eqb x n0), (less x x = eqb x n), (less x x = eqb x x), (eqb n0 n0 = gv0), (eqb n0 n = gv0), (eqb n0 x = gv0)
+(eqb n n0 = gv0), (eqb n n = gv0), (eqb n x = gv0), (eqb x n0 = gv0), (eqb x n = gv0), (eqb x x = gv0)
+
+Label: 2 (3)
+(l = l), (l = gv1), (gv1 = l), (gv1 = gv1), (n0 = n0), (n0 = n), (n0 = x), (n = n0), (n = n), (n = x)
+(x = n0), (x = n), (x = x), (false = mem n0 l), (false = mem n0 gv1), (false = mem n l), (false = mem n gv1), (false = mem x l), (false = mem x gv1), (false = less n0 n0)
+(false = less n0 n), (false = less n0 x), (false = less n n0), (false = less n n), (false = less n x), (false = less x n0), (false = less x n), (false = less x x), (false = eqb n0 n0), (false = eqb n0 n)
+(false = eqb n0 x), (false = eqb n n0), (false = eqb n n), (false = eqb n x), (false = eqb x n0), (false = eqb x n), (false = eqb x x), (true = mem n0 l), (true = mem n0 gv1), (true = mem n l)
+(true = mem n gv1), (true = mem x l), (true = mem x gv1), (true = less n0 n0), (true = less n0 n), (true = less n0 x), (true = less n n0), (true = less n n), (true = less n x), (true = less x n0)
+(true = less x n), (true = less x x), (true = eqb n0 n0), (true = eqb n0 n), (true = eqb n0 x), (true = eqb n n0), (true = eqb n n), (true = eqb n x), (true = eqb x n0), (true = eqb x n)
+(true = eqb x x), (l <> l), (l <> gv1), (gv1 <> l), (gv1 <> gv1), (n0 <> n0), (n0 <> n), (n0 <> x), (n <> n0), (n <> n)
+(n <> x), (x <> n0), (x <> n), (x <> x), (sort l = l), (sort l = gv1), (sort l = insort n0 l), (sort l = insort n0 gv1), (sort l = insort n l), (sort l = insort n gv1)
+(sort l = insort x l), (sort l = insort x gv1), (sort gv1 = l), (sort gv1 = gv1), (sort gv1 = insort n0 l), (sort gv1 = insort n0 gv1), (sort gv1 = insort n l), (sort gv1 = insort n gv1), (sort gv1 = insort x l), (sort gv1 = insort x gv1)
+(insort n0 l = l), (insort n0 l = gv1), (insort n0 gv1 = l), (insort n0 gv1 = gv1), (insort n l = l), (insort n l = gv1), (insort n gv1 = l), (insort n gv1 = gv1), (insort x l = l), (insort x l = gv1)
+(insort x gv1 = l), (insort x gv1 = gv1), (mem n0 l = less n0 n0), (mem n0 l = less n0 n), (mem n0 l = less n0 x), (mem n0 l = less n n0), (mem n0 l = less n n), (mem n0 l = less n x), (mem n0 l = less x n0), (mem n0 l = less x n)
+(mem n0 l = less x x), (mem n0 l = eqb n0 n0), (mem n0 l = eqb n0 n), (mem n0 l = eqb n0 x), (mem n0 l = eqb n n0), (mem n0 l = eqb n n), (mem n0 l = eqb n x), (mem n0 l = eqb x n0), (mem n0 l = eqb x n), (mem n0 l = eqb x x)
+(mem n0 gv1 = less n0 n0), (mem n0 gv1 = less n0 n), (mem n0 gv1 = less n0 x), (mem n0 gv1 = less n n0), (mem n0 gv1 = less n n), (mem n0 gv1 = less n x), (mem n0 gv1 = less x n0), (mem n0 gv1 = less x n), (mem n0 gv1 = less x x), (mem n0 gv1 = eqb n0 n0)
+(mem n0 gv1 = eqb n0 n), (mem n0 gv1 = eqb n0 x), (mem n0 gv1 = eqb n n0), (mem n0 gv1 = eqb n n), (mem n0 gv1 = eqb n x), (mem n0 gv1 = eqb x n0), (mem n0 gv1 = eqb x n), (mem n0 gv1 = eqb x x), (mem n l = less n0 n0), (mem n l = less n0 n)
+(mem n l = less n0 x), (mem n l = less n n0), (mem n l = less n n), (mem n l = less n x), (mem n l = less x n0), (mem n l = less x n), (mem n l = less x x), (mem n l = eqb n0 n0), (mem n l = eqb n0 n), (mem n l = eqb n0 x)
+(mem n l = eqb n n0), (mem n l = eqb n n), (mem n l = eqb n x), (mem n l = eqb x n0), (mem n l = eqb x n), (mem n l = eqb x x), (mem n gv1 = less n0 n0), (mem n gv1 = less n0 n), (mem n gv1 = less n0 x), (mem n gv1 = less n n0)
+(mem n gv1 = less n n), (mem n gv1 = less n x), (mem n gv1 = less x n0), (mem n gv1 = less x n), (mem n gv1 = less x x), (mem n gv1 = eqb n0 n0), (mem n gv1 = eqb n0 n), (mem n gv1 = eqb n0 x), (mem n gv1 = eqb n n0), (mem n gv1 = eqb n n)
+(mem n gv1 = eqb n x), (mem n gv1 = eqb x n0), (mem n gv1 = eqb x n), (mem n gv1 = eqb x x), (mem x l = less n0 n0), (mem x l = less n0 n), (mem x l = less n0 x), (mem x l = less n n0), (mem x l = less n n), (mem x l = less n x)
+(mem x l = less x n0), (mem x l = less x n), (mem x l = less x x), (mem x l = eqb n0 n0), (mem x l = eqb n0 n), (mem x l = eqb n0 x), (mem x l = eqb n n0), (mem x l = eqb n n), (mem x l = eqb n x), (mem x l = eqb x n0)
+(mem x l = eqb x n), (mem x l = eqb x x), (mem x gv1 = less n0 n0), (mem x gv1 = less n0 n), (mem x gv1 = less n0 x), (mem x gv1 = less n n0), (mem x gv1 = less n n), (mem x gv1 = less n x), (mem x gv1 = less x n0), (mem x gv1 = less x n)
+(mem x gv1 = less x x), (mem x gv1 = eqb n0 n0), (mem x gv1 = eqb n0 n), (mem x gv1 = eqb n0 x), (mem x gv1 = eqb n n0), (mem x gv1 = eqb n n), (mem x gv1 = eqb n x), (mem x gv1 = eqb x n0), (mem x gv1 = eqb x n), (mem x gv1 = eqb x x)
+(less n0 n0 = eqb n0 n0), (less n0 n0 = eqb n0 n), (less n0 n0 = eqb n0 x), (less n0 n0 = eqb n n0), (less n0 n0 = eqb n n), (less n0 n0 = eqb n x), (less n0 n0 = eqb x n0), (less n0 n0 = eqb x n), (less n0 n0 = eqb x x), (less n0 n = eqb n0 n0)
+(less n0 n = eqb n0 n), (less n0 n = eqb n0 x), (less n0 n = eqb n n0), (less n0 n = eqb n n), (less n0 n = eqb n x), (less n0 n = eqb x n0), (less n0 n = eqb x n), (less n0 n = eqb x x), (less n0 x = eqb n0 n0), (less n0 x = eqb n0 n)
+(less n0 x = eqb n0 x), (less n0 x = eqb n n0), (less n0 x = eqb n n), (less n0 x = eqb n x), (less n0 x = eqb x n0), (less n0 x = eqb x n), (less n0 x = eqb x x), (less n n0 = eqb n0 n0), (less n n0 = eqb n0 n), (less n n0 = eqb n0 x)
+(less n n0 = eqb n n0), (less n n0 = eqb n n), (less n n0 = eqb n x), (less n n0 = eqb x n0), (less n n0 = eqb x n), (less n n0 = eqb x x), (less n n = eqb n0 n0), (less n n = eqb n0 n), (less n n = eqb n0 x), (less n n = eqb n n0)
+(less n n = eqb n n), (less n n = eqb n x), (less n n = eqb x n0), (less n n = eqb x n), (less n n = eqb x x), (less n x = eqb n0 n0), (less n x = eqb n0 n), (less n x = eqb n0 x), (less n x = eqb n n0), (less n x = eqb n n)
+(less n x = eqb n x), (less n x = eqb x n0), (less n x = eqb x n), (less n x = eqb x x), (less x n0 = eqb n0 n0), (less x n0 = eqb n0 n), (less x n0 = eqb n0 x), (less x n0 = eqb n n0), (less x n0 = eqb n n), (less x n0 = eqb n x)
+(less x n0 = eqb x n0), (less x n0 = eqb x n), (less x n0 = eqb x x), (less x n = eqb n0 n0), (less x n = eqb n0 n), (less x n = eqb n0 x), (less x n = eqb n n0), (less x n = eqb n n), (less x n = eqb n x), (less x n = eqb x n0)
+(less x n = eqb x n), (less x n = eqb x x), (less x x = eqb n0 n0), (less x x = eqb n0 n), (less x x = eqb n0 x), (less x x = eqb n n0), (less x x = eqb n n), (less x x = eqb n x), (less x x = eqb x n0), (less x x = eqb x n)
+(less x x = eqb x x), (None = Some l), (None = Some gv1), (None = Some n0), (None = Some n), (None = Some x)
+
+Label: 2 (4)
+(l = l), (l = gv1), (gv1 = l), (gv1 = gv1), (n0 = n0), (n0 = n), (n0 = x), (n = n0), (n = n), (n = x)
+(x = n0), (x = n), (x = x), (false = mem n0 l), (false = mem n0 gv1), (false = mem n l), (false = mem n gv1), (false = mem x l), (false = mem x gv1), (false = less n0 n0)
+(false = less n0 n), (false = less n0 x), (false = less n n0), (false = less n n), (false = less n x), (false = less x n0), (false = less x n), (false = less x x), (false = eqb n0 n0), (false = eqb n0 n)
+(false = eqb n0 x), (false = eqb n n0), (false = eqb n n), (false = eqb n x), (false = eqb x n0), (false = eqb x n), (false = eqb x x), (true = mem n0 l), (true = mem n0 gv1), (true = mem n l)
+(true = mem n gv1), (true = mem x l), (true = mem x gv1), (true = less n0 n0), (true = less n0 n), (true = less n0 x), (true = less n n0), (true = less n n), (true = less n x), (true = less x n0)
+(true = less x n), (true = less x x), (true = eqb n0 n0), (true = eqb n0 n), (true = eqb n0 x), (true = eqb n n0), (true = eqb n n), (true = eqb n x), (true = eqb x n0), (true = eqb x n)
+(true = eqb x x), (l <> l), (l <> gv1), (gv1 <> l), (gv1 <> gv1), (n0 <> n0), (n0 <> n), (n0 <> x), (n <> n0), (n <> n)
+(n <> x), (x <> n0), (x <> n), (x <> x), (sort l = l), (sort l = gv1), (sort l = insort n0 l), (sort l = insort n0 gv1), (sort l = insort n l), (sort l = insort n gv1)
+(sort l = insort x l), (sort l = insort x gv1), (sort gv1 = l), (sort gv1 = gv1), (sort gv1 = insort n0 l), (sort gv1 = insort n0 gv1), (sort gv1 = insort n l), (sort gv1 = insort n gv1), (sort gv1 = insort x l), (sort gv1 = insort x gv1)
+(insort n0 l = l), (insort n0 l = gv1), (insort n0 gv1 = l), (insort n0 gv1 = gv1), (insort n l = l), (insort n l = gv1), (insort n gv1 = l), (insort n gv1 = gv1), (insort x l = l), (insort x l = gv1)
+(insort x gv1 = l), (insort x gv1 = gv1), (mem n0 l = less n0 n0), (mem n0 l = less n0 n), (mem n0 l = less n0 x), (mem n0 l = less n n0), (mem n0 l = less n n), (mem n0 l = less n x), (mem n0 l = less x n0), (mem n0 l = less x n)
+(mem n0 l = less x x), (mem n0 l = eqb n0 n0), (mem n0 l = eqb n0 n), (mem n0 l = eqb n0 x), (mem n0 l = eqb n n0), (mem n0 l = eqb n n), (mem n0 l = eqb n x), (mem n0 l = eqb x n0), (mem n0 l = eqb x n), (mem n0 l = eqb x x)
+(mem n0 gv1 = less n0 n0), (mem n0 gv1 = less n0 n), (mem n0 gv1 = less n0 x), (mem n0 gv1 = less n n0), (mem n0 gv1 = less n n), (mem n0 gv1 = less n x), (mem n0 gv1 = less x n0), (mem n0 gv1 = less x n), (mem n0 gv1 = less x x), (mem n0 gv1 = eqb n0 n0)
+(mem n0 gv1 = eqb n0 n), (mem n0 gv1 = eqb n0 x), (mem n0 gv1 = eqb n n0), (mem n0 gv1 = eqb n n), (mem n0 gv1 = eqb n x), (mem n0 gv1 = eqb x n0), (mem n0 gv1 = eqb x n), (mem n0 gv1 = eqb x x), (mem n l = less n0 n0), (mem n l = less n0 n)
+(mem n l = less n0 x), (mem n l = less n n0), (mem n l = less n n), (mem n l = less n x), (mem n l = less x n0), (mem n l = less x n), (mem n l = less x x), (mem n l = eqb n0 n0), (mem n l = eqb n0 n), (mem n l = eqb n0 x)
+(mem n l = eqb n n0), (mem n l = eqb n n), (mem n l = eqb n x), (mem n l = eqb x n0), (mem n l = eqb x n), (mem n l = eqb x x), (mem n gv1 = less n0 n0), (mem n gv1 = less n0 n), (mem n gv1 = less n0 x), (mem n gv1 = less n n0)
+(mem n gv1 = less n n), (mem n gv1 = less n x), (mem n gv1 = less x n0), (mem n gv1 = less x n), (mem n gv1 = less x x), (mem n gv1 = eqb n0 n0), (mem n gv1 = eqb n0 n), (mem n gv1 = eqb n0 x), (mem n gv1 = eqb n n0), (mem n gv1 = eqb n n)
+(mem n gv1 = eqb n x), (mem n gv1 = eqb x n0), (mem n gv1 = eqb x n), (mem n gv1 = eqb x x), (mem x l = less n0 n0), (mem x l = less n0 n), (mem x l = less n0 x), (mem x l = less n n0), (mem x l = less n n), (mem x l = less n x)
+(mem x l = less x n0), (mem x l = less x n), (mem x l = less x x), (mem x l = eqb n0 n0), (mem x l = eqb n0 n), (mem x l = eqb n0 x), (mem x l = eqb n n0), (mem x l = eqb n n), (mem x l = eqb n x), (mem x l = eqb x n0)
+(mem x l = eqb x n), (mem x l = eqb x x), (mem x gv1 = less n0 n0), (mem x gv1 = less n0 n), (mem x gv1 = less n0 x), (mem x gv1 = less n n0), (mem x gv1 = less n n), (mem x gv1 = less n x), (mem x gv1 = less x n0), (mem x gv1 = less x n)
+(mem x gv1 = less x x), (mem x gv1 = eqb n0 n0), (mem x gv1 = eqb n0 n), (mem x gv1 = eqb n0 x), (mem x gv1 = eqb n n0), (mem x gv1 = eqb n n), (mem x gv1 = eqb n x), (mem x gv1 = eqb x n0), (mem x gv1 = eqb x n), (mem x gv1 = eqb x x)
+(less n0 n0 = eqb n0 n0), (less n0 n0 = eqb n0 n), (less n0 n0 = eqb n0 x), (less n0 n0 = eqb n n0), (less n0 n0 = eqb n n), (less n0 n0 = eqb n x), (less n0 n0 = eqb x n0), (less n0 n0 = eqb x n), (less n0 n0 = eqb x x), (less n0 n = eqb n0 n0)
+(less n0 n = eqb n0 n), (less n0 n = eqb n0 x), (less n0 n = eqb n n0), (less n0 n = eqb n n), (less n0 n = eqb n x), (less n0 n = eqb x n0), (less n0 n = eqb x n), (less n0 n = eqb x x), (less n0 x = eqb n0 n0), (less n0 x = eqb n0 n)
+(less n0 x = eqb n0 x), (less n0 x = eqb n n0), (less n0 x = eqb n n), (less n0 x = eqb n x), (less n0 x = eqb x n0), (less n0 x = eqb x n), (less n0 x = eqb x x), (less n n0 = eqb n0 n0), (less n n0 = eqb n0 n), (less n n0 = eqb n0 x)
+(less n n0 = eqb n n0), (less n n0 = eqb n n), (less n n0 = eqb n x), (less n n0 = eqb x n0), (less n n0 = eqb x n), (less n n0 = eqb x x), (less n n = eqb n0 n0), (less n n = eqb n0 n), (less n n = eqb n0 x), (less n n = eqb n n0)
+(less n n = eqb n n), (less n n = eqb n x), (less n n = eqb x n0), (less n n = eqb x n), (less n n = eqb x x), (less n x = eqb n0 n0), (less n x = eqb n0 n), (less n x = eqb n0 x), (less n x = eqb n n0), (less n x = eqb n n)
+(less n x = eqb n x), (less n x = eqb x n0), (less n x = eqb x n), (less n x = eqb x x), (less x n0 = eqb n0 n0), (less x n0 = eqb n0 n), (less x n0 = eqb n0 x), (less x n0 = eqb n n0), (less x n0 = eqb n n), (less x n0 = eqb n x)
+(less x n0 = eqb x n0), (less x n0 = eqb x n), (less x n0 = eqb x x), (less x n = eqb n0 n0), (less x n = eqb n0 n), (less x n = eqb n0 x), (less x n = eqb n n0), (less x n = eqb n n), (less x n = eqb n x), (less x n = eqb x n0)
+(less x n = eqb x n), (less x n = eqb x x), (less x x = eqb n0 n0), (less x x = eqb n0 n), (less x x = eqb n0 x), (less x x = eqb n n0), (less x x = eqb n n), (less x x = eqb n x), (less x x = eqb x n0), (less x x = eqb x n)
+(less x x = eqb x x), (None = Some l), (None = Some gv1), (None = Some n0), (None = Some n), (None = Some x)
+
+Label: 3 (5)
+(l = l), (n0 = n0), (n0 = n), (n0 = x), (n = n0), (n = n), (n = x), (x = n0), (x = n), (x = x)
+(false = mem n0 l), (false = mem n l), (false = mem x l), (false = less n0 n0), (false = less n0 n), (false = less n0 x), (false = less n n0), (false = less n n), (false = less n x), (false = less x n0)
+(false = less x n), (false = less x x), (false = eqb n0 n0), (false = eqb n0 n), (false = eqb n0 x), (false = eqb n n0), (false = eqb n n), (false = eqb n x), (false = eqb x n0), (false = eqb x n)
+(false = eqb x x), (true = mem n0 l), (true = mem n l), (true = mem x l), (true = less n0 n0), (true = less n0 n), (true = less n0 x), (true = less n n0), (true = less n n), (true = less n x)
+(true = less x n0), (true = less x n), (true = less x x), (true = eqb n0 n0), (true = eqb n0 n), (true = eqb n0 x), (true = eqb n n0), (true = eqb n n), (true = eqb n x), (true = eqb x n0)
+(true = eqb x n), (true = eqb x x), (l <> l), (n0 <> n0), (n0 <> n), (n0 <> x), (n <> n0), (n <> n), (n <> x), (x <> n0)
+(x <> n), (x <> x), (sort l = l), (sort l = insort n0 l), (sort l = insort n l), (sort l = insort x l), (insort n0 l = l), (insort n l = l), (insort x l = l), (mem n0 l = less n0 n0)
+(mem n0 l = less n0 n), (mem n0 l = less n0 x), (mem n0 l = less n n0), (mem n0 l = less n n), (mem n0 l = less n x), (mem n0 l = less x n0), (mem n0 l = less x n), (mem n0 l = less x x), (mem n0 l = eqb n0 n0), (mem n0 l = eqb n0 n)
+(mem n0 l = eqb n0 x), (mem n0 l = eqb n n0), (mem n0 l = eqb n n), (mem n0 l = eqb n x), (mem n0 l = eqb x n0), (mem n0 l = eqb x n), (mem n0 l = eqb x x), (mem n l = less n0 n0), (mem n l = less n0 n), (mem n l = less n0 x)
+(mem n l = less n n0), (mem n l = less n n), (mem n l = less n x), (mem n l = less x n0), (mem n l = less x n), (mem n l = less x x), (mem n l = eqb n0 n0), (mem n l = eqb n0 n), (mem n l = eqb n0 x), (mem n l = eqb n n0)
+(mem n l = eqb n n), (mem n l = eqb n x), (mem n l = eqb x n0), (mem n l = eqb x n), (mem n l = eqb x x), (mem x l = less n0 n0), (mem x l = less n0 n), (mem x l = less n0 x), (mem x l = less n n0), (mem x l = less n n)
+(mem x l = less n x), (mem x l = less x n0), (mem x l = less x n), (mem x l = less x x), (mem x l = eqb n0 n0), (mem x l = eqb n0 n), (mem x l = eqb n0 x), (mem x l = eqb n n0), (mem x l = eqb n n), (mem x l = eqb n x)
+(mem x l = eqb x n0), (mem x l = eqb x n), (mem x l = eqb x x), (less n0 n0 = eqb n0 n0), (less n0 n0 = eqb n0 n), (less n0 n0 = eqb n0 x), (less n0 n0 = eqb n n0), (less n0 n0 = eqb n n), (less n0 n0 = eqb n x), (less n0 n0 = eqb x n0)
+(less n0 n0 = eqb x n), (less n0 n0 = eqb x x), (less n0 n = eqb n0 n0), (less n0 n = eqb n0 n), (less n0 n = eqb n0 x), (less n0 n = eqb n n0), (less n0 n = eqb n n), (less n0 n = eqb n x), (less n0 n = eqb x n0), (less n0 n = eqb x n)
+(less n0 n = eqb x x), (less n0 x = eqb n0 n0), (less n0 x = eqb n0 n), (less n0 x = eqb n0 x), (less n0 x = eqb n n0), (less n0 x = eqb n n), (less n0 x = eqb n x), (less n0 x = eqb x n0), (less n0 x = eqb x n), (less n0 x = eqb x x)
+(less n n0 = eqb n0 n0), (less n n0 = eqb n0 n), (less n n0 = eqb n0 x), (less n n0 = eqb n n0), (less n n0 = eqb n n), (less n n0 = eqb n x), (less n n0 = eqb x n0), (less n n0 = eqb x n), (less n n0 = eqb x x), (less n n = eqb n0 n0)
+(less n n = eqb n0 n), (less n n = eqb n0 x), (less n n = eqb n n0), (less n n = eqb n n), (less n n = eqb n x), (less n n = eqb x n0), (less n n = eqb x n), (less n n = eqb x x), (less n x = eqb n0 n0), (less n x = eqb n0 n)
+(less n x = eqb n0 x), (less n x = eqb n n0), (less n x = eqb n n), (less n x = eqb n x), (less n x = eqb x n0), (less n x = eqb x n), (less n x = eqb x x), (less x n0 = eqb n0 n0), (less x n0 = eqb n0 n), (less x n0 = eqb n0 x)
+(less x n0 = eqb n n0), (less x n0 = eqb n n), (less x n0 = eqb n x), (less x n0 = eqb x n0), (less x n0 = eqb x n), (less x n0 = eqb x x), (less x n = eqb n0 n0), (less x n = eqb n0 n), (less x n = eqb n0 x), (less x n = eqb n n0)
+(less x n = eqb n n), (less x n = eqb n x), (less x n = eqb x n0), (less x n = eqb x n), (less x n = eqb x x), (less x x = eqb n0 n0), (less x x = eqb n0 n), (less x x = eqb n0 x), (less x x = eqb n n0), (less x x = eqb n n)
+(less x x = eqb n x), (less x x = eqb x n0), (less x x = eqb x n), (less x x = eqb x x), (None = Some l), (None = Some n0), (None = Some n), (None = Some x)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 497.224 seconds
+
+
+Label: 0 (0)
+
+Label: 1 (1)
+
+Label: 1 (2)
+
+Label: 2 (3)
+(sort gv1 = insort n0 l)
+
+Label: 2 (4)
+
+Label: 3 (5)
+
+
+------------------------------ PROCESSED SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 523.129 seconds
+
+
+(cons n0 l = gv1)
+ - (cons n0 l = gv1)
+ - (sort gv1 = insort n0 l)
+
+(mem x (cons n0 l) = gv0)
+ - (mem x (cons n0 l) = gv0)
+
+(mem x (cons n0 (insort n l)) = true)
+ - (mem x (cons n0 (insort n l)) = true)
+
+(mem x (cons n0 (insort n l)) = gv2)
+ - (mem x (cons n0 (insort n l)) = gv2)
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 523.129 seconds
+
+Number of Result Pairs Returned: 2
+
+(mem x (cons n0 (insort n l)) = gv2 -> x = n \/ mem x (cons n0 l) = gv2)
+
+(mem x (cons n0 (insort n l)) = true -> x = n \/ mem x (cons n0 l) = true)

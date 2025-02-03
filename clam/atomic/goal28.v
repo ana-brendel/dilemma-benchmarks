@@ -1,13 +1,22 @@
+From LFindToo Require Import LFindToo.
+From QuickChick Require Import QuickChick.
+
 Require Import Nat Arith.
 
 Inductive Nat : Type := succ : Nat -> Nat |  zero : Nat.
 
-Inductive Lst : Type := cons : Nat -> Lst -> Lst |  nil : Lst.
+Inductive Lst : Type := nil : Lst | cons : Nat -> Lst -> Lst.
 
-Inductive Tree : Type := node : Nat -> Tree -> Tree -> Tree |  leaf : Tree.
+(* ************************** [ QuickChick Stuff ] *************************** *)
+Derive Show for Nat.
+Derive Arbitrary for Nat.
+Instance Dec_Eq_Nat : Dec_Eq (Nat).
+Proof. dec_eq. Qed.
 
-Inductive Pair : Type := mkpair : Nat -> Nat -> Pair
-with ZLst : Type := zcons : Pair -> ZLst -> ZLst |  znil : ZLst.
+Derive Show for Lst.
+Derive Arbitrary for Lst.
+Instance Dec_Eq_lst : Dec_Eq (Lst).
+Proof. dec_eq. Qed.
 
 Fixpoint append (append_arg0 : Lst) (append_arg1 : Lst) : Lst
            := match append_arg0, append_arg1 with

@@ -1,0 +1,265 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (Nat_beq x n = true)
+ -- (lst_mem x y = true -> lst_mem x (lst_intersection y z) = true)
+ -- (lst_mem x z = true)
+ -- (lst_mem n z = false)
+
+----------------------------------
+Goal: (lst_mem x (lst_intersection y z) = true)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 0. seconds
+
+gv1 : Lst = (lst_intersection y z)
+gv0 : bool = (lst_mem x (lst_intersection y z))
+gv2 : bool = true
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 65.343 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (Nat_beq x n = gv2)
+ -- (lst_mem x z = gv2)
+ -- (lst_mem n z = false)
+
+----------------------------------
+Goal: (lst_mem x (lst_intersection y z) = gv2)
+Case: 3
+
+Label: Generalization #1
+Assumptions: 
+ -- (Nat_beq x n = true)
+ -- (lst_mem x z = true)
+ -- (lst_mem n z = false)
+
+----------------------------------
+Goal: (gv0 = true)
+Case: 4
+
+Label: Generalization #2
+Assumptions: 
+ -- (Nat_beq x n = true)
+ -- (lst_mem x z = true)
+ -- (lst_mem n z = false)
+
+----------------------------------
+Goal: (lst_mem x gv1 = true)
+Case: 4
+
+Label: Generalization #3
+Assumptions: 
+ -- (Nat_beq x n = true)
+ -- (lst_mem x z = true)
+ -- (lst_mem n z = false)
+
+----------------------------------
+Goal: (lst_mem x (lst_intersection y z) = true)
+Case: 4
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 66.037 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+mem : (Nat -> Lst -> bool)
+lst_mem : (Nat -> Lst -> bool)
+lst_intersection : (Lst -> Lst -> Lst)
+
+Label: 0 (0)
+Abducted Assumption: (Nat_beq x n = gv2)
+Positive Examples:
+   [gv2 := false; n := (succ (succ zero)); x := (succ zero); y := nil; z := (cons (succ (succ (succ (succ (succ zero))))) nil)]
+   [gv2 := false; n := (succ zero); x := zero; y := nil; z := (cons (succ (succ zero)) (cons (succ (succ (succ zero))) nil))]
+   [gv2 := false; n := (succ zero); x := (succ (succ (succ (succ zero)))); y := (cons (succ (succ zero)) nil); z := (cons zero nil)]
+   [gv2 := false; n := zero; x := (succ zero); y := (cons zero (cons zero (cons zero (cons zero nil)))); z := nil]
+   [gv2 := false; n := (succ zero); x := zero; y := (cons (succ (succ (succ zero))) nil); z := nil]
+   [gv2 := false; n := zero; x := (succ (succ zero)); y := (cons zero (cons zero (cons zero nil))); z := nil]
+   [gv2 := false; n := (succ zero); x := (succ (succ (succ (succ zero)))); y := nil; z := (cons (succ (succ (succ zero))) nil)]
+   [gv2 := false; n := (succ zero); x := (succ (succ (succ (succ zero)))); y := (cons zero nil); z := nil]
+   [gv2 := false; n := zero; x := (succ (succ (succ (succ zero)))); y := (cons zero nil); z := (cons (succ (succ zero)) nil)]
+   [gv2 := false; n := (succ zero); x := (succ (succ zero)); y := (cons (succ (succ (succ zero))) (cons zero nil)); z := nil]
+   etc ...
+
+Negative Examples:
+   [gv2 := true; n := (succ (succ (succ zero))); x := (succ zero); y := nil; z := (cons zero (cons (succ zero) nil))]
+   [gv2 := true; n := zero; x := (succ (succ zero)); y := (cons zero (cons zero nil)); z := (cons (succ (succ zero)) (cons (succ (succ zero)) nil))]
+   [gv2 := true; n := (succ (succ (succ zero))); x := zero; y := (cons (succ (succ (succ (succ zero)))) nil); z := (cons (succ zero) (cons zero (cons (succ zero) nil)))]
+   [gv2 := true; n := zero; x := (succ zero); y := (cons zero nil); z := (cons (succ (succ (succ (succ zero))))
+   (cons (succ (succ zero)) (cons (succ zero) (cons (succ zero) nil))))]
+   [gv2 := true; n := (succ zero); x := zero; y := nil; z := (cons zero (cons zero (cons (succ (succ zero)) nil)))]
+   [gv2 := true; n := zero; x := (succ (succ zero)); y := nil; z := (cons (succ (succ zero)) (cons (succ (succ (succ (succ zero)))) nil))]
+   [gv2 := true; n := (succ (succ zero)); x := (succ zero); y := nil; z := (cons (succ zero) (cons zero (cons zero nil)))]
+   [gv2 := true; n := (succ (succ zero)); x := (succ zero); y := nil; z := (cons zero (cons zero (cons zero (cons (succ zero) nil))))]
+   [gv2 := true; n := (succ zero); x := zero; y := (cons (succ zero) (cons (succ zero) (cons (succ zero) nil))); z := (cons zero nil)]
+   [gv2 := true; n := (succ zero); x := zero; y := (cons (succ (succ (succ (succ zero)))) nil); z := (cons zero (cons (succ (succ zero)) nil))]
+   etc ...
+
+
+Label: 0 (1)
+Abducted Assumption: (lst_mem x z = gv2)
+Positive Examples:
+   [gv2 := false; n := (succ (succ zero)); x := (succ zero); y := nil; z := (cons (succ (succ (succ (succ (succ zero))))) nil)]
+   [gv2 := false; n := (succ zero); x := zero; y := nil; z := (cons (succ (succ zero)) (cons (succ (succ (succ zero))) nil))]
+   [gv2 := false; n := (succ zero); x := (succ (succ (succ (succ zero)))); y := (cons (succ (succ zero)) nil); z := (cons zero nil)]
+   [gv2 := false; n := zero; x := (succ zero); y := (cons zero (cons zero (cons zero (cons zero nil)))); z := nil]
+   [gv2 := false; n := (succ zero); x := zero; y := (cons (succ (succ (succ zero))) nil); z := nil]
+   [gv2 := false; n := zero; x := (succ (succ zero)); y := (cons zero (cons zero (cons zero nil))); z := nil]
+   [gv2 := false; n := (succ zero); x := (succ (succ (succ (succ zero)))); y := nil; z := (cons (succ (succ (succ zero))) nil)]
+   [gv2 := false; n := (succ zero); x := (succ (succ (succ (succ zero)))); y := (cons zero nil); z := nil]
+   [gv2 := false; n := zero; x := (succ (succ (succ (succ zero)))); y := (cons zero nil); z := (cons (succ (succ zero)) nil)]
+   [gv2 := false; n := (succ zero); x := (succ (succ zero)); y := (cons (succ (succ (succ zero))) (cons zero nil)); z := nil]
+   etc ...
+
+Negative Examples:
+   [gv2 := true; n := zero; x := zero; y := (cons (succ zero) (cons zero (cons zero nil))); z := nil]
+   [gv2 := true; n := (succ zero); x := (succ zero); y := nil; z := (cons (succ (succ (succ (succ zero)))) (cons zero nil))]
+   [gv2 := true; n := zero; x := zero; y := (cons (succ zero) (cons (succ (succ (succ zero))) (cons zero nil))); z := nil]
+   [gv2 := true; n := (succ zero); x := (succ zero); y := (cons zero (cons zero (cons (succ (succ zero)) nil))); z := nil]
+   [gv2 := true; n := zero; x := zero; y := (cons (succ zero) (cons zero nil)); z := (cons (succ (succ zero)) (cons (succ (succ zero)) nil))]
+   [gv2 := true; n := zero; x := zero; y := (cons zero nil); z := (cons (succ zero) (cons (succ (succ (succ zero))) nil))]
+   [gv2 := true; n := (succ (succ (succ zero))); x := (succ (succ (succ zero))); y := nil; z := (cons zero nil)]
+   [gv2 := false; n := zero; x := (succ zero); y := (cons (succ zero) (cons (succ zero) (cons zero nil))); z := (cons (succ zero) nil)]
+   [gv2 := false; n := zero; x := (succ zero); y := (cons (succ zero) (cons (succ zero) nil)); z := (cons (succ zero) nil)]
+   [gv2 := true; n := zero; x := zero; y := (cons zero (cons (succ zero) (cons (succ (succ (succ zero))) nil))); z := nil]
+   etc ...
+
+
+Label: 0 (2)
+Abducted Assumption: (lst_mem n z = false)
+Positive Examples:
+   [gv2 := false; n := (succ (succ zero)); x := (succ zero); y := nil; z := (cons (succ (succ (succ (succ (succ zero))))) nil)]
+   [gv2 := false; n := (succ zero); x := zero; y := nil; z := (cons (succ (succ zero)) (cons (succ (succ (succ zero))) nil))]
+   [gv2 := false; n := (succ zero); x := (succ (succ (succ (succ zero)))); y := (cons (succ (succ zero)) nil); z := (cons zero nil)]
+   [gv2 := false; n := zero; x := (succ zero); y := (cons zero (cons zero (cons zero (cons zero nil)))); z := nil]
+   [gv2 := false; n := (succ zero); x := zero; y := (cons (succ (succ (succ zero))) nil); z := nil]
+   [gv2 := false; n := zero; x := (succ (succ zero)); y := (cons zero (cons zero (cons zero nil))); z := nil]
+   [gv2 := false; n := (succ zero); x := (succ (succ (succ (succ zero)))); y := nil; z := (cons (succ (succ (succ zero))) nil)]
+   [gv2 := false; n := (succ zero); x := (succ (succ (succ (succ zero)))); y := (cons zero nil); z := nil]
+   [gv2 := false; n := zero; x := (succ (succ (succ (succ zero)))); y := (cons zero nil); z := (cons (succ (succ zero)) nil)]
+   [gv2 := false; n := (succ zero); x := (succ (succ zero)); y := (cons (succ (succ (succ zero))) (cons zero nil)); z := nil]
+   etc ...
+
+Negative Examples:
+   [gv2 := true; n := (succ zero); x := (succ zero); y := (cons (succ (succ (succ (succ (succ zero))))) (cons zero nil)); z := (cons (succ zero) (cons zero (cons (succ (succ zero)) (cons zero nil))))]
+   [gv2 := true; n := (succ (succ zero)); x := (succ (succ zero)); y := (cons (succ zero) (cons (succ zero) nil)); z := (cons (succ (succ zero)) (cons zero nil))]
+   [gv2 := true; n := (succ zero); x := (succ zero); y := (cons zero nil); z := (cons (succ (succ (succ (succ (succ zero))))) (cons (succ zero) nil))]
+   [gv2 := true; n := zero; x := zero; y := nil; z := (cons zero
+   (cons (succ (succ (succ zero)))
+      (cons (succ zero) (cons zero (cons (succ zero) nil)))))]
+   [gv2 := true; n := zero; x := zero; y := (cons (succ (succ (succ zero))) (cons (succ zero) nil)); z := (cons (succ zero) (cons zero (cons (succ (succ (succ zero))) nil)))]
+   [gv2 := true; n := (succ (succ (succ zero))); x := (succ (succ (succ zero))); y := nil; z := (cons zero (cons (succ (succ (succ zero))) (cons (succ zero) nil)))]
+   [gv2 := true; n := zero; x := zero; y := (cons (succ zero) (cons (succ (succ zero)) nil)); z := (cons (succ zero) (cons zero nil))]
+   [gv2 := true; n := zero; x := zero; y := (cons (succ zero) (cons (succ (succ zero)) nil)); z := (cons zero nil)]
+   [gv2 := true; n := zero; x := zero; y := nil; z := (cons zero (cons (succ zero) (cons zero nil)))]
+   [gv2 := true; n := zero; x := zero; y := nil; z := (cons zero (cons (succ (succ (succ zero))) nil))]
+   etc ...
+
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 66.879 seconds
+
+
+Label: 0 (0)
+(false = gv2), (true = gv2), (gv2 = gv2), (z = z), (z = y), (y = z), (y = y), (n = n), (n = x), (x = n)
+(x = x), (false = lst_mem n z), (false = lst_mem n y), (false = lst_mem x z), (false = lst_mem x y), (false = mem n z), (false = mem n y), (false = mem x z), (false = mem x y), (true = lst_mem n z)
+(true = lst_mem n y), (true = lst_mem x z), (true = lst_mem x y), (true = mem n z), (true = mem n y), (true = mem x z), (true = mem x y), (false <> gv2), (true <> gv2), (gv2 <> gv2)
+(z <> z), (z <> y), (y <> z), (y <> y), (n <> n), (n <> x), (x <> n), (x <> x), (None = Some n), (None = Some x)
+(lst_intersection z z = z), (lst_intersection z z = y), (lst_intersection z y = z), (lst_intersection z y = y), (lst_intersection y z = z), (lst_intersection y z = y), (lst_intersection y y = z), (lst_intersection y y = y), (None = Some gv2), (lst_mem n z = gv2)
+(lst_mem n y = gv2), (lst_mem x z = gv2), (lst_mem x y = gv2), (mem n z = gv2), (mem n z = lst_mem n z), (mem n z = lst_mem n y), (mem n z = lst_mem x z), (mem n z = lst_mem x y), (mem n y = gv2), (mem n y = lst_mem n z)
+(mem n y = lst_mem n y), (mem n y = lst_mem x z), (mem n y = lst_mem x y), (mem x z = gv2), (mem x z = lst_mem n z), (mem x z = lst_mem n y), (mem x z = lst_mem x z), (mem x z = lst_mem x y), (mem x y = gv2), (mem x y = lst_mem n z)
+(mem x y = lst_mem n y), (mem x y = lst_mem x z), (mem x y = lst_mem x y), (None = Some z), (None = Some y)
+
+Label: 0 (1)
+(false = gv2), (true = gv2), (gv2 = gv2), (z = z), (z = y), (y = z), (y = y), (n = n), (n = x), (x = n)
+(x = x), (false = lst_mem n z), (false = lst_mem n y), (false = lst_mem x z), (false = lst_mem x y), (false = mem n z), (false = mem n y), (false = mem x z), (false = mem x y), (true = lst_mem n z)
+(true = lst_mem n y), (true = lst_mem x z), (true = lst_mem x y), (true = mem n z), (true = mem n y), (true = mem x z), (true = mem x y), (false <> gv2), (true <> gv2), (gv2 <> gv2)
+(z <> z), (z <> y), (y <> z), (y <> y), (n <> n), (n <> x), (x <> n), (x <> x), (None = Some n), (None = Some x)
+(lst_intersection z z = z), (lst_intersection z z = y), (lst_intersection z y = z), (lst_intersection z y = y), (lst_intersection y z = z), (lst_intersection y z = y), (lst_intersection y y = z), (lst_intersection y y = y), (None = Some gv2), (lst_mem n z = gv2)
+(lst_mem n y = gv2), (lst_mem x z = gv2), (lst_mem x y = gv2), (mem n z = gv2), (mem n z = lst_mem n z), (mem n z = lst_mem n y), (mem n z = lst_mem x z), (mem n z = lst_mem x y), (mem n y = gv2), (mem n y = lst_mem n z)
+(mem n y = lst_mem n y), (mem n y = lst_mem x z), (mem n y = lst_mem x y), (mem x z = gv2), (mem x z = lst_mem n z), (mem x z = lst_mem n y), (mem x z = lst_mem x z), (mem x z = lst_mem x y), (mem x y = gv2), (mem x y = lst_mem n z)
+(mem x y = lst_mem n y), (mem x y = lst_mem x z), (mem x y = lst_mem x y), (None = Some z), (None = Some y)
+
+Label: 0 (2)
+(false = gv2), (true = gv2), (gv2 = gv2), (z = z), (z = y), (y = z), (y = y), (n = n), (n = x), (x = n)
+(x = x), (false = lst_mem n z), (false = lst_mem n y), (false = lst_mem x z), (false = lst_mem x y), (false = mem n z), (false = mem n y), (false = mem x z), (false = mem x y), (true = lst_mem n z)
+(true = lst_mem n y), (true = lst_mem x z), (true = lst_mem x y), (true = mem n z), (true = mem n y), (true = mem x z), (true = mem x y), (false <> gv2), (true <> gv2), (gv2 <> gv2)
+(z <> z), (z <> y), (y <> z), (y <> y), (n <> n), (n <> x), (x <> n), (x <> x), (None = Some n), (None = Some x)
+(lst_intersection z z = z), (lst_intersection z z = y), (lst_intersection z y = z), (lst_intersection z y = y), (lst_intersection y z = z), (lst_intersection y z = y), (lst_intersection y y = z), (lst_intersection y y = y), (None = Some gv2), (lst_mem n z = gv2)
+(lst_mem n y = gv2), (lst_mem x z = gv2), (lst_mem x y = gv2), (mem n z = gv2), (mem n z = lst_mem n z), (mem n z = lst_mem n y), (mem n z = lst_mem x z), (mem n z = lst_mem x y), (mem n y = gv2), (mem n y = lst_mem n z)
+(mem n y = lst_mem n y), (mem n y = lst_mem x z), (mem n y = lst_mem x y), (mem x z = gv2), (mem x z = lst_mem n z), (mem x z = lst_mem n y), (mem x z = lst_mem x z), (mem x z = lst_mem x y), (mem x y = gv2), (mem x y = lst_mem n z)
+(mem x y = lst_mem n y), (mem x y = lst_mem x z), (mem x y = lst_mem x y), (None = Some z), (None = Some y)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 148.728 seconds
+
+
+Label: 0 (0)
+(false = gv2), (false = lst_mem x z), (false = mem x z), (true <> gv2), (lst_mem n z = gv2), (mem n z = gv2), (mem n z = lst_mem x z), (mem x z = lst_mem n z)
+
+Label: 0 (1)
+(lst_mem x z = gv2), (mem x z = gv2)
+
+Label: 0 (2)
+(false = gv2), (false = lst_mem n z), (false = lst_mem x z), (false = mem n z), (false = mem x z), (true <> gv2), (n <> x), (x <> n)
+
+
+------------------------------ PROCESSED SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 229.556 seconds
+
+
+(lst_mem x z = gv2)
+ - (lst_mem x z = gv2)
+
+(Nat_beq x n = gv2)
+ - (Nat_beq x n = gv2)
+ - (false = gv2)
+ - (false = lst_mem x z)
+ - (false = mem x z)
+ - (true <> gv2)
+ - (lst_mem n z = gv2)
+ - (mem n z = gv2)
+ - (mem n z = lst_mem x z)
+ - (mem x z = lst_mem n z)
+
+(lst_mem n z = false)
+ - (lst_mem n z = false)
+ - (false = gv2)
+ - (false = lst_mem x z)
+ - (false = mem x z)
+ - (true <> gv2)
+ - (n <> x)
+ - (x <> n)
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 229.557 seconds
+
+Number of Result Pairs Returned: 4
+
+(Nat_beq x n = gv2 ->  lst_mem x z = gv2 ->  lst_mem n z = false -> lst_mem x (lst_intersection y z) = gv2)
+
+(lst_mem n z = false ->  Nat_beq x n = true -> lst_mem x z = true -> gv0 = true)
+
+(lst_mem n z = false ->  Nat_beq x n = true -> lst_mem x z = true -> lst_mem x gv1 = true)
+
+(lst_mem n z = false ->  Nat_beq x n = true ->  lst_mem x z = true -> lst_mem x (lst_intersection y z) = true)

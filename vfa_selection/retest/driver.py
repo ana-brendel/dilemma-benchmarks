@@ -41,11 +41,15 @@ for test in os.listdir(folder):
         os.system(rm)
 
 # for test in os.listdir(folder):
-#     if len(new_run) < 12 and test.endswith(".v") and test not in ran:
-#         full = os.path.join(folder,test)
-#         cmd = f"cd {folder} && coqc {full}"
-#         # os.system(cmd)
+#     if test.endswith(".v"):
 #         new_run += [test]
+#         if len(new_run) <= 10:
+#             print(f"ALREADY COMPLETED {len(new_run)}. {test}")
+#         else:
+#             full = os.path.join(folder,test)
+#             cmd = f"cd {folder} && coqc {full}"
+#             os.system(cmd)
+#             print(f"LAST COMPLETED {len(new_run)}. {test}")
 
 # index = 1
 # for i in new_run: 

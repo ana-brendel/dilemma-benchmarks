@@ -1,3 +1,6 @@
+From LFindToo Require Import LFindToo.
+From QuickChick Require Import QuickChick.
+
 Require Import Nat Arith Bool.
 
 Inductive Nat : Type := zero : Nat | succ : Nat -> Nat.
@@ -6,14 +9,20 @@ Scheme Equality for Nat.
 
 Inductive Lst : Type := nil : Lst | cons : Nat -> Lst -> Lst.
 
-Inductive Tree : Type := node : Nat -> Tree -> Tree -> Tree |  leaf : Tree.
+(* ************************** [ QuickChick Stuff ] *************************** *)
+Derive Show for Nat.
+Derive Arbitrary for Nat.
+Instance Dec_Eq_Nat : Dec_Eq (Nat).
+Proof. dec_eq. Qed.
 
-Inductive Pair : Type := mkpair : Nat -> Nat -> Pair
-with ZLst : Type := zcons : Pair -> ZLst -> ZLst |  znil : ZLst.
+Derive Show for Lst.
+Derive Arbitrary for Lst.
+Instance Dec_Eq_lst : Dec_Eq (Lst).
+Proof. dec_eq. Qed.
 
 Fixpoint mem (mem_arg0 : Nat) (mem_arg1 : Lst) : bool
            := match mem_arg0, mem_arg1 with
-              | x, nil => false
+              | _, nil => false
               | x, cons y z => orb (Nat_beq x y) (mem x z)
               end.
 
@@ -55,11 +64,13 @@ Proof.
   - discriminate.
   - simpl in H. apply orb_prop in H. destruct H.
     + simpl. destruct (lst_mem n z) eqn:?.
-      * rewrite mem_union.
+      * findlemma. Admitted.
+      
+      (* rewrite mem_union.
         -- reflexivity.
         -- rewrite (Nat_beq_eq x n H). assumption.
       * simpl. rewrite H. reflexivity.
     + apply IHy in H. simpl. destruct (lst_mem n z).
       * assumption.
       * simpl. rewrite H. apply orb_true_r.
-Qed.
+Qed. *)

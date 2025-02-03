@@ -1,3 +1,6 @@
+From LFindToo Require Import LFindToo.
+From QuickChick Require Import QuickChick.
+
 Require Import Nat Arith Bool.
 
 Inductive Nat : Type := zero : Nat | succ : Nat -> Nat.
@@ -6,14 +9,20 @@ Scheme Equality for Nat.
 
 Inductive Lst : Type := nil : Lst | cons : Nat -> Lst -> Lst.
 
-Inductive Tree : Type := node : Nat -> Tree -> Tree -> Tree |  leaf : Tree.
+(* ************************** [ QuickChick Stuff ] *************************** *)
+Derive Show for Nat.
+Derive Arbitrary for Nat.
+Instance Dec_Eq_Nat : Dec_Eq (Nat).
+Proof. dec_eq. Qed.
 
-Inductive Pair : Type := mkpair : Nat -> Nat -> Pair
-with ZLst : Type := zcons : Pair -> ZLst -> ZLst |  znil : ZLst.
+Derive Show for Lst.
+Derive Arbitrary for Lst.
+Instance Dec_Eq_lst : Dec_Eq (Lst).
+Proof. dec_eq. Qed.
 
 Fixpoint less (less_arg0 : Nat) (less_arg1 : Nat) : bool
            := match less_arg0, less_arg1 with
-              | x, zero => false
+              | _, zero => false
               | zero, succ x => true
               | succ x, succ y => less x y
               end.
@@ -63,10 +72,13 @@ Proof.
   - destruct x.
     + simpl. destruct (less y n) eqn:?.
       * simpl. unfold leq. rewrite Heqb. apply orb_true_r.
-      * simpl. apply not_less. assumption.
+      * simpl. 
+      findlemma. Admitted.
+      
+      (* apply not_less. assumption.
     + simpl in H. apply andb_true_iff in H. destruct H. simpl in IHx. simpl. destruct (less y n) eqn:?.
       * simpl. rewrite H. rewrite H0. unfold leq. rewrite Heqb. apply orb_true_r.
       * destruct (less y n0) eqn:?.
         -- simpl. rewrite H. apply not_less in Heqb. rewrite Heqb. unfold leq. rewrite Heqb0. rewrite orb_true_r. reflexivity.
         -- simpl. apply IHx in H. simpl in H. rewrite H. rewrite H0. reflexivity.
-Qed.
+Qed. *)

@@ -1,0 +1,985 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (lst_mem n y = true)
+ -- (lst_subset x (append z y))
+ -- (lst_subset x y -> lst_subset x (append z y))
+
+----------------------------------
+Goal: (lst_mem n (append z y) = true)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 0. seconds
+
+gv1 : Lst = (append z y)
+gv0 : bool = (lst_mem n (append z y))
+gv2 : bool = true
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 40.62 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (true = gv2)
+ -- (lst_mem n y = gv2)
+
+----------------------------------
+Goal: (lst_mem n (append z y) = gv2)
+Case: 3
+
+Label: Generalization #1
+Assumptions: 
+ -- (lst_mem n (append z y) = gv0)
+ -- (lst_mem n y = true)
+
+----------------------------------
+Goal: (gv0 = true)
+Case: 3
+
+Label: Generalization #2
+Assumptions: 
+ -- (append z y = gv1)
+ -- (lst_mem n y = true)
+
+----------------------------------
+Goal: (lst_mem n gv1 = true)
+Case: 3
+
+Label: Generalization #3
+Assumptions: 
+ -- (lst_mem n y = true)
+
+----------------------------------
+Goal: (lst_mem n (append z y) = true)
+Case: 3
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 41.859 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+append : (Lst -> Lst -> Lst)
+mem : (Nat -> Lst -> bool)
+lst_mem : (Nat -> Lst -> bool)
+lst_subset : (Lst -> Lst -> Prop)
+lst_eq : (Lst -> Lst -> Prop)
+lst_intersection : (Lst -> Lst -> Lst)
+
+Label: 0 (0)
+Abducted Assumption: (true = gv2)
+Positive Examples:
+   [gv2 := true; n := zero; y := (cons (succ zero)
+   (cons zero (cons (succ (succ (succ (succ zero)))) (cons (succ zero) nil)))); z := nil]
+   [gv2 := true; n := (succ (succ zero)); y := (cons (succ zero)
+   (cons (succ (succ zero))
+      (cons zero (cons zero (cons (succ (succ (succ (succ zero)))) nil))))); z := nil]
+   [gv2 := true; n := zero; y := (cons zero
+   (cons (succ zero) (cons (succ (succ zero)) (cons (succ (succ zero)) nil)))); z := nil]
+   [gv2 := true; n := (succ (succ (succ (succ zero)))); y := (cons (succ (succ (succ (succ zero)))) nil); z := (cons zero nil)]
+   [gv2 := true; n := zero; y := (cons (succ zero)
+   (cons (succ (succ (succ zero))) (cons zero (cons (succ zero) nil)))); z := (cons zero nil)]
+   [gv2 := true; n := zero; y := (cons zero (cons zero (cons zero nil))); z := (cons (succ (succ (succ (succ zero)))) nil)]
+   [gv2 := true; n := zero; y := (cons (succ (succ zero))
+   (cons zero (cons (succ zero) (cons (succ zero) nil)))); z := (cons zero nil)]
+   [gv2 := true; n := zero; y := (cons (succ zero) (cons zero nil)); z := (cons zero (cons zero (cons (succ (succ zero)) (cons zero nil))))]
+   [gv2 := true; n := zero; y := (cons zero nil); z := (cons (succ zero)
+   (cons zero (cons (succ (succ (succ (succ (succ (succ zero)))))) nil)))]
+   [gv2 := true; n := zero; y := (cons (succ (succ zero)) (cons zero (cons (succ zero) nil))); z := (cons zero (cons zero (cons (succ (succ zero)) nil)))]
+   etc ...
+
+Negative Examples:
+   [gv2 := false; n := zero; y := nil; z := (cons (succ (succ zero)) (cons zero (cons (succ zero) nil)))]
+   [gv2 := false; n := zero; y := nil; z := (cons zero (cons (succ (succ zero)) (cons zero nil)))]
+   [gv2 := false; n := (succ zero); y := nil; z := (cons (succ (succ (succ zero))) (cons (succ zero) nil))]
+   [gv2 := false; n := (succ zero); y := nil; z := (cons (succ zero) (cons zero (cons zero nil)))]
+   [gv2 := false; n := zero; y := (cons (succ (succ zero)) (cons (succ zero) nil)); z := (cons (succ zero)
+   (cons zero
+      (cons zero (cons (succ (succ (succ (succ (succ (succ zero)))))) nil))))]
+   [gv2 := false; n := zero; y := (cons (succ (succ (succ (succ zero)))) nil); z := (cons zero nil)]
+   [gv2 := false; n := (succ zero); y := nil; z := (cons zero
+   (cons (succ (succ (succ (succ zero))))
+      (cons (succ zero) (cons zero (cons (succ zero) nil)))))]
+   [gv2 := false; n := zero; y := (cons (succ (succ (succ (succ zero)))) nil); z := (cons zero (cons (succ zero) nil))]
+   [gv2 := false; n := (succ zero); y := (cons (succ (succ zero)) nil); z := (cons zero (cons zero (cons (succ zero) nil)))]
+   [gv2 := false; n := zero; y := nil; z := (cons (succ zero)
+   (cons (succ (succ (succ zero))) (cons zero (cons zero nil))))]
+   etc ...
+
+
+Label: 0 (1)
+Abducted Assumption: (lst_mem n y = gv2)
+Positive Examples:
+   [gv2 := true; n := zero; y := (cons (succ zero)
+   (cons zero (cons (succ (succ (succ (succ zero)))) (cons (succ zero) nil)))); z := nil]
+   [gv2 := true; n := (succ (succ zero)); y := (cons (succ zero)
+   (cons (succ (succ zero))
+      (cons zero (cons zero (cons (succ (succ (succ (succ zero)))) nil))))); z := nil]
+   [gv2 := true; n := zero; y := (cons zero
+   (cons (succ zero) (cons (succ (succ zero)) (cons (succ (succ zero)) nil)))); z := nil]
+   [gv2 := true; n := (succ (succ (succ (succ zero)))); y := (cons (succ (succ (succ (succ zero)))) nil); z := (cons zero nil)]
+   [gv2 := true; n := zero; y := (cons (succ zero)
+   (cons (succ (succ (succ zero))) (cons zero (cons (succ zero) nil)))); z := (cons zero nil)]
+   [gv2 := true; n := zero; y := (cons zero (cons zero (cons zero nil))); z := (cons (succ (succ (succ (succ zero)))) nil)]
+   [gv2 := true; n := zero; y := (cons (succ (succ zero))
+   (cons zero (cons (succ zero) (cons (succ zero) nil)))); z := (cons zero nil)]
+   [gv2 := true; n := zero; y := (cons (succ zero) (cons zero nil)); z := (cons zero (cons zero (cons (succ (succ zero)) (cons zero nil))))]
+   [gv2 := true; n := zero; y := (cons zero nil); z := (cons (succ zero)
+   (cons zero (cons (succ (succ (succ (succ (succ (succ zero)))))) nil)))]
+   [gv2 := true; n := zero; y := (cons (succ (succ zero)) (cons zero (cons (succ zero) nil))); z := (cons zero (cons zero (cons (succ (succ zero)) nil)))]
+   etc ...
+
+Negative Examples:
+   [gv2 := true; n := (succ (succ zero)); y := nil; z := (cons zero (cons (succ zero) (cons (succ zero) nil)))]
+   [gv2 := true; n := (succ (succ (succ (succ zero)))); y := (cons (succ (succ zero)) nil); z := nil]
+   [gv2 := true; n := (succ zero); y := (cons (succ (succ (succ (succ (succ zero))))) nil); z := (cons zero (cons zero nil))]
+   [gv2 := true; n := (succ zero); y := (cons zero
+   (cons zero
+      (cons (succ (succ (succ zero))) (cons zero (cons zero (cons zero nil)))))); z := (cons (succ (succ zero)) nil)]
+   [gv2 := true; n := (succ zero); y := nil; z := (cons zero (cons (succ (succ zero)) (cons zero nil)))]
+   [gv2 := true; n := (succ zero); y := (cons (succ (succ (succ (succ zero)))) (cons zero nil)); z := (cons (succ (succ (succ (succ zero)))) nil)]
+   [gv2 := true; n := (succ (succ (succ (succ (succ (succ zero)))))); y := (cons (succ (succ zero)) (cons (succ (succ (succ (succ (succ zero))))) nil)); z := (cons zero nil)]
+   [gv2 := true; n := (succ zero); y := (cons zero nil); z := (cons (succ (succ (succ zero))) (cons (succ (succ zero)) (cons zero nil)))]
+   [gv2 := true; n := (succ (succ zero)); y := nil; z := (cons (succ zero) (cons zero (cons (succ zero) nil)))]
+   [gv2 := true; n := (succ (succ (succ (succ zero)))); y := (cons (succ zero) (cons (succ (succ zero)) (cons zero nil))); z := (cons (succ zero)
+   (cons (succ zero) (cons zero (cons (succ (succ zero)) nil))))]
+   etc ...
+
+
+Label: 1 (2)
+Abducted Assumption: (lst_mem n (append z y) = gv0)
+Positive Examples:
+   [gv0 := true; n := (succ zero); y := (cons zero (cons (succ zero) nil)); z := (cons (succ (succ zero)) (cons (succ zero) nil))]
+   [gv0 := true; n := zero; y := (cons (succ zero) (cons zero nil)); z := (cons (succ (succ (succ (succ zero)))) nil)]
+   [gv0 := true; n := (succ (succ (succ zero))); y := (cons (succ (succ (succ zero))) (cons (succ (succ zero)) nil)); z := (cons zero nil)]
+   [gv0 := true; n := (succ zero); y := (cons zero
+   (cons zero
+      (cons (succ zero) (cons (succ (succ (succ (succ (succ zero))))) nil)))); z := (cons (succ (succ (succ (succ zero)))) (cons zero nil))]
+   [gv0 := true; n := zero; y := (cons zero nil); z := (cons zero
+   (cons zero (cons (succ (succ zero)) (cons (succ (succ zero)) nil))))]
+   [gv0 := true; n := zero; y := (cons zero (cons zero nil)); z := (cons (succ (succ (succ zero))) nil)]
+   [gv0 := true; n := zero; y := (cons zero
+   (cons zero (cons (succ (succ zero)) (cons (succ zero) (cons zero nil))))); z := nil]
+   [gv0 := true; n := (succ zero); y := (cons zero (cons (succ zero) nil)); z := (cons (succ zero) nil)]
+   [gv0 := true; n := zero; y := (cons (succ zero) (cons zero nil)); z := (cons (succ zero) (cons zero (cons zero nil)))]
+   [gv0 := true; n := zero; y := (cons (succ zero)
+   (cons zero
+      (cons zero (cons (succ (succ zero)) (cons zero (cons zero nil)))))); z := nil]
+   etc ...
+
+Negative Examples:
+   [gv0 := false; n := zero; y := (cons (succ zero) (cons zero (cons (succ zero) (cons (succ zero) nil)))); z := nil]
+   [gv0 := false; n := zero; y := (cons zero (cons (succ (succ zero)) nil)); z := (cons zero
+   (cons (succ zero)
+      (cons zero (cons zero (cons (succ zero) (cons zero nil))))))]
+   [gv0 := false; n := zero; y := (cons zero nil); z := (cons (succ (succ zero)) (cons (succ (succ (succ zero))) nil))]
+   [gv0 := false; n := zero; y := (cons zero nil); z := (cons zero
+   (cons (succ (succ zero))
+      (cons (succ (succ zero)) (cons (succ (succ (succ (succ zero)))) nil))))]
+   [gv0 := false; n := (succ zero); y := (cons (succ zero) (cons (succ zero) nil)); z := (cons zero (cons (succ zero) nil))]
+   [gv0 := false; n := (succ zero); y := (cons (succ zero)
+   (cons (succ (succ zero))
+      (cons (succ zero) (cons (succ (succ (succ (succ zero)))) nil)))); z := nil]
+   [gv0 := false; n := (succ zero); y := (cons (succ zero) (cons (succ zero) nil)); z := nil]
+   [gv0 := false; n := (succ (succ zero)); y := (cons (succ zero) (cons (succ (succ zero)) (cons zero nil))); z := nil]
+   [gv0 := false; n := (succ zero); y := (cons zero (cons zero (cons (succ zero) (cons (succ zero) nil)))); z := nil]
+   [gv0 := false; n := zero; y := (cons zero nil); z := (cons zero (cons zero (cons (succ zero) (cons (succ zero) nil))))]
+   etc ...
+
+
+Label: 2 (3)
+Abducted Assumption: (append z y = gv1)
+Positive Examples:
+   [gv1 := (cons zero (cons (succ zero) nil)); n := (succ zero); y := (cons zero (cons (succ zero) nil)); z := nil]
+   [gv1 := (cons zero (cons (succ (succ zero)) nil)); n := (succ (succ zero)); y := (cons zero (cons (succ (succ zero)) nil)); z := nil]
+   [gv1 := (cons zero (cons zero nil)); n := zero; y := (cons zero (cons zero nil)); z := nil]
+   [gv1 := (cons zero (cons (succ zero) nil)); n := zero; y := (cons zero (cons (succ zero) nil)); z := nil]
+   [gv1 := (cons (succ zero) (cons zero nil)); n := (succ zero); y := (cons (succ zero) (cons zero nil)); z := nil]
+   [gv1 := (cons (succ zero) (cons zero nil)); n := zero; y := (cons (succ zero) (cons zero nil)); z := nil]
+   [gv1 := (cons (succ (succ zero)) nil); n := (succ (succ zero)); y := (cons (succ (succ zero)) nil); z := nil]
+   [gv1 := (cons (succ zero) (cons zero nil)); n := zero; y := (cons zero nil); z := (cons (succ zero) nil)]
+   [gv1 := (cons (succ zero) nil); n := (succ zero); y := (cons (succ zero) nil); z := nil]
+   [gv1 := (cons zero nil); n := zero; y := (cons zero nil); z := nil]
+
+Negative Examples:
+   [gv1 := nil; n := (succ (succ zero)); y := (cons (succ (succ (succ zero)))
+   (cons (succ (succ zero)) (cons zero (cons (succ (succ (succ zero))) nil)))); z := (cons zero nil)]
+   [gv1 := (cons (succ (succ (succ zero))) nil); n := zero; y := (cons (succ (succ (succ zero)))
+   (cons (succ (succ zero)) (cons zero (cons (succ zero) nil)))); z := (cons (succ (succ (succ zero))) nil)]
+   [gv1 := (cons (succ zero)
+   (cons (succ (succ (succ (succ (succ zero)))))
+      (cons (succ (succ (succ (succ (succ zero)))))
+         (cons (succ zero) (cons zero nil))))); n := (succ (succ zero)); y := (cons (succ (succ zero)) (cons (succ (succ zero)) (cons zero nil))); z := (cons zero (cons (succ zero) nil))]
+   [gv1 := (cons (succ zero) (cons (succ zero) (cons zero nil))); n := (succ (succ (succ zero))); y := (cons (succ (succ (succ zero)))
+   (cons (succ zero) (cons (succ (succ zero)) nil))); z := nil]
+   [gv1 := nil; n := (succ zero); y := (cons (succ (succ zero)) (cons (succ zero) nil)); z := (cons zero (cons (succ (succ zero)) nil))]
+   [gv1 := (cons zero (cons (succ (succ zero)) (cons (succ (succ (succ zero))) nil))); n := (succ zero); y := (cons zero
+   (cons zero
+      (cons (succ zero) (cons (succ (succ zero)) (cons (succ zero) nil))))); z := nil]
+   [gv1 := nil; n := (succ zero); y := (cons (succ zero) (cons (succ (succ zero)) nil)); z := (cons (succ (succ (succ (succ zero)))) (cons (succ zero) nil))]
+   [gv1 := nil; n := (succ zero); y := (cons (succ zero)
+   (cons (succ (succ (succ zero))) (cons (succ (succ (succ zero))) nil))); z := nil]
+   [gv1 := nil; n := (succ (succ zero)); y := (cons zero (cons (succ (succ zero)) nil)); z := (cons (succ (succ zero)) nil)]
+   [gv1 := (cons (succ zero) nil); n := zero; y := (cons zero (cons zero nil)); z := (cons zero (cons zero (cons zero (cons (succ (succ zero)) nil))))]
+   etc ...
+
+
+Label: 2 (4)
+Abducted Assumption: (lst_mem n y = true)
+Positive Examples:
+   [gv1 := (cons zero (cons (succ zero) nil)); n := (succ zero); y := (cons zero (cons (succ zero) nil)); z := nil]
+   [gv1 := (cons zero (cons (succ (succ zero)) nil)); n := (succ (succ zero)); y := (cons zero (cons (succ (succ zero)) nil)); z := nil]
+   [gv1 := (cons zero (cons zero nil)); n := zero; y := (cons zero (cons zero nil)); z := nil]
+   [gv1 := (cons zero (cons (succ zero) nil)); n := zero; y := (cons zero (cons (succ zero) nil)); z := nil]
+   [gv1 := (cons (succ zero) (cons zero nil)); n := (succ zero); y := (cons (succ zero) (cons zero nil)); z := nil]
+   [gv1 := (cons (succ zero) (cons zero nil)); n := zero; y := (cons (succ zero) (cons zero nil)); z := nil]
+   [gv1 := (cons (succ (succ zero)) nil); n := (succ (succ zero)); y := (cons (succ (succ zero)) nil); z := nil]
+   [gv1 := (cons (succ zero) (cons zero nil)); n := zero; y := (cons zero nil); z := (cons (succ zero) nil)]
+   [gv1 := (cons (succ zero) nil); n := (succ zero); y := (cons (succ zero) nil); z := nil]
+   [gv1 := (cons zero nil); n := zero; y := (cons zero nil); z := nil]
+
+Negative Examples:
+   [gv1 := (cons zero nil); n := (succ (succ (succ (succ zero)))); y := nil; z := (cons zero nil)]
+   [gv1 := (cons zero (cons (succ (succ zero)) nil)); n := (succ zero); y := (cons zero (cons (succ (succ zero)) nil)); z := nil]
+   [gv1 := (cons zero (cons zero nil)); n := (succ zero); y := nil; z := (cons zero (cons zero nil))]
+   [gv1 := (cons (succ zero) nil); n := (succ (succ (succ (succ zero)))); y := (cons (succ zero) nil); z := nil]
+   [gv1 := (cons zero (cons (succ zero) nil)); n := (succ (succ zero)); y := (cons (succ zero) nil); z := (cons zero nil)]
+   [gv1 := (cons (succ (succ zero)) (cons (succ zero) nil)); n := (succ (succ (succ zero))); y := (cons (succ (succ zero)) (cons (succ zero) nil)); z := nil]
+   [gv1 := (cons (succ zero) nil); n := (succ (succ zero)); y := nil; z := (cons (succ zero) nil)]
+   [gv1 := (cons (succ zero) nil); n := (succ (succ (succ zero))); y := (cons (succ zero) nil); z := nil]
+   [gv1 := (cons zero (cons zero nil)); n := (succ (succ (succ (succ (succ zero))))); y := (cons zero (cons zero nil)); z := nil]
+   [gv1 := (cons zero (cons zero nil)); n := (succ zero); y := (cons zero (cons zero nil)); z := nil]
+   etc ...
+
+
+Label: 3 (5)
+Abducted Assumption: (lst_mem n y = true)
+Positive Examples:
+   [n := zero; y := (cons zero (cons zero (cons (succ zero) (cons (succ (succ zero)) nil)))); z := (cons zero (cons (succ (succ (succ zero))) nil))]
+   [n := (succ (succ zero)); y := (cons (succ (succ zero)) (cons (succ zero) nil)); z := (cons (succ (succ zero)) (cons (succ zero) nil))]
+   [n := (succ (succ (succ zero))); y := (cons (succ (succ zero)) (cons zero (cons (succ (succ (succ zero))) nil))); z := nil]
+   [n := zero; y := (cons (succ (succ zero)) (cons zero nil)); z := (cons zero (cons zero (cons zero nil)))]
+   [n := (succ zero); y := (cons (succ zero)
+   (cons (succ (succ (succ zero)))
+      (cons (succ (succ (succ (succ (succ zero))))) nil))); z := nil]
+   [n := zero; y := (cons zero (cons (succ (succ (succ (succ zero)))) (cons (succ zero) nil))); z := nil]
+   [n := (succ zero); y := (cons zero (cons (succ zero) nil)); z := (cons zero (cons zero nil))]
+   [n := (succ (succ (succ zero))); y := (cons (succ zero) (cons (succ (succ (succ zero))) nil)); z := (cons (succ zero) (cons (succ zero) (cons zero nil)))]
+   [n := zero; y := (cons zero (cons zero (cons (succ (succ (succ zero))) nil))); z := (cons (succ (succ (succ zero))) nil)]
+   [n := (succ zero); y := (cons (succ zero)
+   (cons (succ zero) (cons (succ zero) (cons zero (cons zero nil))))); z := (cons zero (cons zero nil))]
+   etc ...
+
+Negative Examples:
+   [n := (succ (succ (succ (succ zero)))); y := (cons zero (cons zero (cons zero (cons zero nil)))); z := nil]
+   [n := (succ (succ (succ zero))); y := (cons (succ zero) nil); z := (cons zero nil)]
+   [n := (succ (succ zero)); y := (cons zero (cons zero (cons zero (cons (succ zero) nil)))); z := nil]
+   [n := (succ (succ zero)); y := (cons zero (cons (succ zero) nil)); z := (cons zero (cons zero (cons (succ zero) nil)))]
+   [n := zero; y := nil; z := (cons (succ (succ zero))
+   (cons (succ zero) (cons (succ (succ (succ zero))) nil)))]
+   [n := (succ (succ zero)); y := (cons zero (cons (succ zero) (cons zero nil))); z := (cons zero
+   (cons (succ (succ (succ (succ (succ (succ zero))))))
+      (cons zero (cons zero nil))))]
+   [n := (succ (succ (succ (succ zero)))); y := (cons (succ zero) (cons (succ zero) nil)); z := (cons zero (cons zero nil))]
+   [n := (succ zero); y := (cons (succ (succ (succ (succ (succ zero))))) (cons zero nil)); z := nil]
+   [n := zero; y := (cons (succ zero) (cons (succ (succ zero)) nil)); z := (cons (succ (succ zero)) nil)]
+   [n := (succ zero); y := nil; z := (cons zero
+   (cons zero (cons zero (cons (succ (succ (succ (succ (succ zero))))) nil))))]
+   etc ...
+
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 44.29 seconds
+
+
+Label: 0 (0)
+(false = gv2), (true = gv2), (lst_eq y y), (lst_eq y z), (lst_eq z y), (lst_eq z z), (lst_subset y y), (lst_subset y z), (lst_subset z y), (lst_subset z z)
+(gv2 = gv2), (y = y), (y = z), (z = y), (z = z), (n = n), (false = lst_mem n y), (false = lst_mem n z), (false = mem n y), (false = mem n z)
+(true = lst_mem n y), (true = lst_mem n z), (true = mem n y), (true = mem n z), (lst_eq y (lst_intersection y y)), (lst_eq y (lst_intersection y z)), (lst_eq y (lst_intersection z y)), (lst_eq y (lst_intersection z z)), (lst_eq y (append y y)), (lst_eq y (append y z))
+(lst_eq y (append z y)), (lst_eq y (append z z)), (lst_eq z (lst_intersection y y)), (lst_eq z (lst_intersection y z)), (lst_eq z (lst_intersection z y)), (lst_eq z (lst_intersection z z)), (lst_eq z (append y y)), (lst_eq z (append y z)), (lst_eq z (append z y)), (lst_eq z (append z z))
+(lst_eq (lst_intersection y y) y), (lst_eq (lst_intersection y y) z), (lst_eq (lst_intersection y y) (lst_intersection y z)), (lst_eq (lst_intersection y y) (lst_intersection z y)), (lst_eq (lst_intersection y y) (lst_intersection z z)), (lst_eq (lst_intersection y y) (append y y)), (lst_eq (lst_intersection y y) (append y z)), (lst_eq (lst_intersection y y) (append z y)), (lst_eq (lst_intersection y y) (append z z)), (lst_eq (lst_intersection y z) y)
+(lst_eq (lst_intersection y z) z), (lst_eq (lst_intersection y z) (lst_intersection y y)), (lst_eq (lst_intersection y z) (lst_intersection z y)), (lst_eq (lst_intersection y z) (lst_intersection z z)), (lst_eq (lst_intersection y z) (append y y)), (lst_eq (lst_intersection y z) (append y z)), (lst_eq (lst_intersection y z) (append z y)), (lst_eq (lst_intersection y z) (append z z)), (lst_eq (lst_intersection z y) y), (lst_eq (lst_intersection z y) z)
+(lst_eq (lst_intersection z y) (lst_intersection y y)), (lst_eq (lst_intersection z y) (lst_intersection y z)), (lst_eq (lst_intersection z y) (lst_intersection z z)), (lst_eq (lst_intersection z y) (append y y)), (lst_eq (lst_intersection z y) (append y z)), (lst_eq (lst_intersection z y) (append z y)), (lst_eq (lst_intersection z y) (append z z)), (lst_eq (lst_intersection z z) y), (lst_eq (lst_intersection z z) z), (lst_eq (lst_intersection z z) (lst_intersection y y))
+(lst_eq (lst_intersection z z) (lst_intersection y z)), (lst_eq (lst_intersection z z) (lst_intersection z y)), (lst_eq (lst_intersection z z) (append y y)), (lst_eq (lst_intersection z z) (append y z)), (lst_eq (lst_intersection z z) (append z y)), (lst_eq (lst_intersection z z) (append z z)), (lst_eq (append y y) y), (lst_eq (append y y) z), (lst_eq (append y y) (lst_intersection y y)), (lst_eq (append y y) (lst_intersection y z))
+(lst_eq (append y y) (lst_intersection z y)), (lst_eq (append y y) (lst_intersection z z)), (lst_eq (append y y) (append y z)), (lst_eq (append y y) (append z y)), (lst_eq (append y y) (append z z)), (lst_eq (append y z) y), (lst_eq (append y z) z), (lst_eq (append y z) (lst_intersection y y)), (lst_eq (append y z) (lst_intersection y z)), (lst_eq (append y z) (lst_intersection z y))
+(lst_eq (append y z) (lst_intersection z z)), (lst_eq (append y z) (append y y)), (lst_eq (append y z) (append z y)), (lst_eq (append y z) (append z z)), (lst_eq (append z y) y), (lst_eq (append z y) z), (lst_eq (append z y) (lst_intersection y y)), (lst_eq (append z y) (lst_intersection y z)), (lst_eq (append z y) (lst_intersection z y)), (lst_eq (append z y) (lst_intersection z z))
+(lst_eq (append z y) (append y y)), (lst_eq (append z y) (append y z)), (lst_eq (append z y) (append z z)), (lst_eq (append z z) y), (lst_eq (append z z) z), (lst_eq (append z z) (lst_intersection y y)), (lst_eq (append z z) (lst_intersection y z)), (lst_eq (append z z) (lst_intersection z y)), (lst_eq (append z z) (lst_intersection z z)), (lst_eq (append z z) (append y y))
+(lst_eq (append z z) (append y z)), (lst_eq (append z z) (append z y)), (lst_subset y (lst_intersection y y)), (lst_subset y (lst_intersection y z)), (lst_subset y (lst_intersection z y)), (lst_subset y (lst_intersection z z)), (lst_subset y (append y y)), (lst_subset y (append y z)), (lst_subset y (append z y)), (lst_subset y (append z z))
+(lst_subset z (lst_intersection y y)), (lst_subset z (lst_intersection y z)), (lst_subset z (lst_intersection z y)), (lst_subset z (lst_intersection z z)), (lst_subset z (append y y)), (lst_subset z (append y z)), (lst_subset z (append z y)), (lst_subset z (append z z)), (lst_subset (lst_intersection y y) y), (lst_subset (lst_intersection y y) z)
+(lst_subset (lst_intersection y y) (lst_intersection y z)), (lst_subset (lst_intersection y y) (lst_intersection z y)), (lst_subset (lst_intersection y y) (lst_intersection z z)), (lst_subset (lst_intersection y y) (append y y)), (lst_subset (lst_intersection y y) (append y z)), (lst_subset (lst_intersection y y) (append z y)), (lst_subset (lst_intersection y y) (append z z)), (lst_subset (lst_intersection y z) y), (lst_subset (lst_intersection y z) z), (lst_subset (lst_intersection y z) (lst_intersection y y))
+(lst_subset (lst_intersection y z) (lst_intersection z y)), (lst_subset (lst_intersection y z) (lst_intersection z z)), (lst_subset (lst_intersection y z) (append y y)), (lst_subset (lst_intersection y z) (append y z)), (lst_subset (lst_intersection y z) (append z y)), (lst_subset (lst_intersection y z) (append z z)), (lst_subset (lst_intersection z y) y), (lst_subset (lst_intersection z y) z), (lst_subset (lst_intersection z y) (lst_intersection y y)), (lst_subset (lst_intersection z y) (lst_intersection y z))
+(lst_subset (lst_intersection z y) (lst_intersection z z)), (lst_subset (lst_intersection z y) (append y y)), (lst_subset (lst_intersection z y) (append y z)), (lst_subset (lst_intersection z y) (append z y)), (lst_subset (lst_intersection z y) (append z z)), (lst_subset (lst_intersection z z) y), (lst_subset (lst_intersection z z) z), (lst_subset (lst_intersection z z) (lst_intersection y y)), (lst_subset (lst_intersection z z) (lst_intersection y z)), (lst_subset (lst_intersection z z) (lst_intersection z y))
+(lst_subset (lst_intersection z z) (append y y)), (lst_subset (lst_intersection z z) (append y z)), (lst_subset (lst_intersection z z) (append z y)), (lst_subset (lst_intersection z z) (append z z)), (lst_subset (append y y) y), (lst_subset (append y y) z), (lst_subset (append y y) (lst_intersection y y)), (lst_subset (append y y) (lst_intersection y z)), (lst_subset (append y y) (lst_intersection z y)), (lst_subset (append y y) (lst_intersection z z))
+(lst_subset (append y y) (append y z)), (lst_subset (append y y) (append z y)), (lst_subset (append y y) (append z z)), (lst_subset (append y z) y), (lst_subset (append y z) z), (lst_subset (append y z) (lst_intersection y y)), (lst_subset (append y z) (lst_intersection y z)), (lst_subset (append y z) (lst_intersection z y)), (lst_subset (append y z) (lst_intersection z z)), (lst_subset (append y z) (append y y))
+(lst_subset (append y z) (append z y)), (lst_subset (append y z) (append z z)), (lst_subset (append z y) y), (lst_subset (append z y) z), (lst_subset (append z y) (lst_intersection y y)), (lst_subset (append z y) (lst_intersection y z)), (lst_subset (append z y) (lst_intersection z y)), (lst_subset (append z y) (lst_intersection z z)), (lst_subset (append z y) (append y y)), (lst_subset (append z y) (append y z))
+(lst_subset (append z y) (append z z)), (lst_subset (append z z) y), (lst_subset (append z z) z), (lst_subset (append z z) (lst_intersection y y)), (lst_subset (append z z) (lst_intersection y z)), (lst_subset (append z z) (lst_intersection z y)), (lst_subset (append z z) (lst_intersection z z)), (lst_subset (append z z) (append y y)), (lst_subset (append z z) (append y z)), (lst_subset (append z z) (append z y))
+(false <> gv2), (true <> gv2), (~ lst_eq y y), (~ lst_eq y z), (~ lst_eq z y), (~ lst_eq z z), (~ lst_subset y y), (~ lst_subset y z), (~ lst_subset z y), (~ lst_subset z z)
+(gv2 <> gv2), (y <> y), (y <> z), (z <> y), (z <> z), (n <> n), (None = Some n), (None = Some gv2), (None = Some y), (None = Some z)
+(lst_mem n y = gv2), (lst_mem n z = gv2), (mem n y = gv2), (mem n y = lst_mem n y), (mem n y = lst_mem n z), (mem n z = gv2), (mem n z = lst_mem n y), (mem n z = lst_mem n z), (lst_intersection y y = y), (lst_intersection y y = z)
+(lst_intersection y y = append y y), (lst_intersection y y = append y z), (lst_intersection y y = append z y), (lst_intersection y y = append z z), (lst_intersection y z = y), (lst_intersection y z = z), (lst_intersection y z = append y y), (lst_intersection y z = append y z), (lst_intersection y z = append z y), (lst_intersection y z = append z z)
+(lst_intersection z y = y), (lst_intersection z y = z), (lst_intersection z y = append y y), (lst_intersection z y = append y z), (lst_intersection z y = append z y), (lst_intersection z y = append z z), (lst_intersection z z = y), (lst_intersection z z = z), (lst_intersection z z = append y y), (lst_intersection z z = append y z)
+(lst_intersection z z = append z y), (lst_intersection z z = append z z), (append y y = y), (append y y = z), (append y z = y), (append y z = z), (append z y = y), (append z y = z), (append z z = y), (append z z = z)
+
+Label: 0 (1)
+(false = gv2), (true = gv2), (lst_eq y y), (lst_eq y z), (lst_eq z y), (lst_eq z z), (lst_subset y y), (lst_subset y z), (lst_subset z y), (lst_subset z z)
+(gv2 = gv2), (y = y), (y = z), (z = y), (z = z), (n = n), (false = lst_mem n y), (false = lst_mem n z), (false = mem n y), (false = mem n z)
+(true = lst_mem n y), (true = lst_mem n z), (true = mem n y), (true = mem n z), (lst_eq y (lst_intersection y y)), (lst_eq y (lst_intersection y z)), (lst_eq y (lst_intersection z y)), (lst_eq y (lst_intersection z z)), (lst_eq y (append y y)), (lst_eq y (append y z))
+(lst_eq y (append z y)), (lst_eq y (append z z)), (lst_eq z (lst_intersection y y)), (lst_eq z (lst_intersection y z)), (lst_eq z (lst_intersection z y)), (lst_eq z (lst_intersection z z)), (lst_eq z (append y y)), (lst_eq z (append y z)), (lst_eq z (append z y)), (lst_eq z (append z z))
+(lst_eq (lst_intersection y y) y), (lst_eq (lst_intersection y y) z), (lst_eq (lst_intersection y y) (lst_intersection y z)), (lst_eq (lst_intersection y y) (lst_intersection z y)), (lst_eq (lst_intersection y y) (lst_intersection z z)), (lst_eq (lst_intersection y y) (append y y)), (lst_eq (lst_intersection y y) (append y z)), (lst_eq (lst_intersection y y) (append z y)), (lst_eq (lst_intersection y y) (append z z)), (lst_eq (lst_intersection y z) y)
+(lst_eq (lst_intersection y z) z), (lst_eq (lst_intersection y z) (lst_intersection y y)), (lst_eq (lst_intersection y z) (lst_intersection z y)), (lst_eq (lst_intersection y z) (lst_intersection z z)), (lst_eq (lst_intersection y z) (append y y)), (lst_eq (lst_intersection y z) (append y z)), (lst_eq (lst_intersection y z) (append z y)), (lst_eq (lst_intersection y z) (append z z)), (lst_eq (lst_intersection z y) y), (lst_eq (lst_intersection z y) z)
+(lst_eq (lst_intersection z y) (lst_intersection y y)), (lst_eq (lst_intersection z y) (lst_intersection y z)), (lst_eq (lst_intersection z y) (lst_intersection z z)), (lst_eq (lst_intersection z y) (append y y)), (lst_eq (lst_intersection z y) (append y z)), (lst_eq (lst_intersection z y) (append z y)), (lst_eq (lst_intersection z y) (append z z)), (lst_eq (lst_intersection z z) y), (lst_eq (lst_intersection z z) z), (lst_eq (lst_intersection z z) (lst_intersection y y))
+(lst_eq (lst_intersection z z) (lst_intersection y z)), (lst_eq (lst_intersection z z) (lst_intersection z y)), (lst_eq (lst_intersection z z) (append y y)), (lst_eq (lst_intersection z z) (append y z)), (lst_eq (lst_intersection z z) (append z y)), (lst_eq (lst_intersection z z) (append z z)), (lst_eq (append y y) y), (lst_eq (append y y) z), (lst_eq (append y y) (lst_intersection y y)), (lst_eq (append y y) (lst_intersection y z))
+(lst_eq (append y y) (lst_intersection z y)), (lst_eq (append y y) (lst_intersection z z)), (lst_eq (append y y) (append y z)), (lst_eq (append y y) (append z y)), (lst_eq (append y y) (append z z)), (lst_eq (append y z) y), (lst_eq (append y z) z), (lst_eq (append y z) (lst_intersection y y)), (lst_eq (append y z) (lst_intersection y z)), (lst_eq (append y z) (lst_intersection z y))
+(lst_eq (append y z) (lst_intersection z z)), (lst_eq (append y z) (append y y)), (lst_eq (append y z) (append z y)), (lst_eq (append y z) (append z z)), (lst_eq (append z y) y), (lst_eq (append z y) z), (lst_eq (append z y) (lst_intersection y y)), (lst_eq (append z y) (lst_intersection y z)), (lst_eq (append z y) (lst_intersection z y)), (lst_eq (append z y) (lst_intersection z z))
+(lst_eq (append z y) (append y y)), (lst_eq (append z y) (append y z)), (lst_eq (append z y) (append z z)), (lst_eq (append z z) y), (lst_eq (append z z) z), (lst_eq (append z z) (lst_intersection y y)), (lst_eq (append z z) (lst_intersection y z)), (lst_eq (append z z) (lst_intersection z y)), (lst_eq (append z z) (lst_intersection z z)), (lst_eq (append z z) (append y y))
+(lst_eq (append z z) (append y z)), (lst_eq (append z z) (append z y)), (lst_subset y (lst_intersection y y)), (lst_subset y (lst_intersection y z)), (lst_subset y (lst_intersection z y)), (lst_subset y (lst_intersection z z)), (lst_subset y (append y y)), (lst_subset y (append y z)), (lst_subset y (append z y)), (lst_subset y (append z z))
+(lst_subset z (lst_intersection y y)), (lst_subset z (lst_intersection y z)), (lst_subset z (lst_intersection z y)), (lst_subset z (lst_intersection z z)), (lst_subset z (append y y)), (lst_subset z (append y z)), (lst_subset z (append z y)), (lst_subset z (append z z)), (lst_subset (lst_intersection y y) y), (lst_subset (lst_intersection y y) z)
+(lst_subset (lst_intersection y y) (lst_intersection y z)), (lst_subset (lst_intersection y y) (lst_intersection z y)), (lst_subset (lst_intersection y y) (lst_intersection z z)), (lst_subset (lst_intersection y y) (append y y)), (lst_subset (lst_intersection y y) (append y z)), (lst_subset (lst_intersection y y) (append z y)), (lst_subset (lst_intersection y y) (append z z)), (lst_subset (lst_intersection y z) y), (lst_subset (lst_intersection y z) z), (lst_subset (lst_intersection y z) (lst_intersection y y))
+(lst_subset (lst_intersection y z) (lst_intersection z y)), (lst_subset (lst_intersection y z) (lst_intersection z z)), (lst_subset (lst_intersection y z) (append y y)), (lst_subset (lst_intersection y z) (append y z)), (lst_subset (lst_intersection y z) (append z y)), (lst_subset (lst_intersection y z) (append z z)), (lst_subset (lst_intersection z y) y), (lst_subset (lst_intersection z y) z), (lst_subset (lst_intersection z y) (lst_intersection y y)), (lst_subset (lst_intersection z y) (lst_intersection y z))
+(lst_subset (lst_intersection z y) (lst_intersection z z)), (lst_subset (lst_intersection z y) (append y y)), (lst_subset (lst_intersection z y) (append y z)), (lst_subset (lst_intersection z y) (append z y)), (lst_subset (lst_intersection z y) (append z z)), (lst_subset (lst_intersection z z) y), (lst_subset (lst_intersection z z) z), (lst_subset (lst_intersection z z) (lst_intersection y y)), (lst_subset (lst_intersection z z) (lst_intersection y z)), (lst_subset (lst_intersection z z) (lst_intersection z y))
+(lst_subset (lst_intersection z z) (append y y)), (lst_subset (lst_intersection z z) (append y z)), (lst_subset (lst_intersection z z) (append z y)), (lst_subset (lst_intersection z z) (append z z)), (lst_subset (append y y) y), (lst_subset (append y y) z), (lst_subset (append y y) (lst_intersection y y)), (lst_subset (append y y) (lst_intersection y z)), (lst_subset (append y y) (lst_intersection z y)), (lst_subset (append y y) (lst_intersection z z))
+(lst_subset (append y y) (append y z)), (lst_subset (append y y) (append z y)), (lst_subset (append y y) (append z z)), (lst_subset (append y z) y), (lst_subset (append y z) z), (lst_subset (append y z) (lst_intersection y y)), (lst_subset (append y z) (lst_intersection y z)), (lst_subset (append y z) (lst_intersection z y)), (lst_subset (append y z) (lst_intersection z z)), (lst_subset (append y z) (append y y))
+(lst_subset (append y z) (append z y)), (lst_subset (append y z) (append z z)), (lst_subset (append z y) y), (lst_subset (append z y) z), (lst_subset (append z y) (lst_intersection y y)), (lst_subset (append z y) (lst_intersection y z)), (lst_subset (append z y) (lst_intersection z y)), (lst_subset (append z y) (lst_intersection z z)), (lst_subset (append z y) (append y y)), (lst_subset (append z y) (append y z))
+(lst_subset (append z y) (append z z)), (lst_subset (append z z) y), (lst_subset (append z z) z), (lst_subset (append z z) (lst_intersection y y)), (lst_subset (append z z) (lst_intersection y z)), (lst_subset (append z z) (lst_intersection z y)), (lst_subset (append z z) (lst_intersection z z)), (lst_subset (append z z) (append y y)), (lst_subset (append z z) (append y z)), (lst_subset (append z z) (append z y))
+(false <> gv2), (true <> gv2), (~ lst_eq y y), (~ lst_eq y z), (~ lst_eq z y), (~ lst_eq z z), (~ lst_subset y y), (~ lst_subset y z), (~ lst_subset z y), (~ lst_subset z z)
+(gv2 <> gv2), (y <> y), (y <> z), (z <> y), (z <> z), (n <> n), (None = Some n), (None = Some gv2), (None = Some y), (None = Some z)
+(lst_mem n y = gv2), (lst_mem n z = gv2), (mem n y = gv2), (mem n y = lst_mem n y), (mem n y = lst_mem n z), (mem n z = gv2), (mem n z = lst_mem n y), (mem n z = lst_mem n z), (lst_intersection y y = y), (lst_intersection y y = z)
+(lst_intersection y y = append y y), (lst_intersection y y = append y z), (lst_intersection y y = append z y), (lst_intersection y y = append z z), (lst_intersection y z = y), (lst_intersection y z = z), (lst_intersection y z = append y y), (lst_intersection y z = append y z), (lst_intersection y z = append z y), (lst_intersection y z = append z z)
+(lst_intersection z y = y), (lst_intersection z y = z), (lst_intersection z y = append y y), (lst_intersection z y = append y z), (lst_intersection z y = append z y), (lst_intersection z y = append z z), (lst_intersection z z = y), (lst_intersection z z = z), (lst_intersection z z = append y y), (lst_intersection z z = append y z)
+(lst_intersection z z = append z y), (lst_intersection z z = append z z), (append y y = y), (append y y = z), (append y z = y), (append y z = z), (append z y = y), (append z y = z), (append z z = y), (append z z = z)
+
+Label: 1 (2)
+(false = gv0), (true = gv0), (lst_eq z z), (lst_eq z y), (lst_eq y z), (lst_eq y y), (lst_subset z z), (lst_subset z y), (lst_subset y z), (lst_subset y y)
+(z = z), (z = y), (y = z), (y = y), (n = n), (gv0 = gv0), (false = lst_mem n z), (false = lst_mem n y), (false = mem n z), (false = mem n y)
+(true = lst_mem n z), (true = lst_mem n y), (true = mem n z), (true = mem n y), (lst_eq z (lst_intersection z z)), (lst_eq z (lst_intersection z y)), (lst_eq z (lst_intersection y z)), (lst_eq z (lst_intersection y y)), (lst_eq z (append z z)), (lst_eq z (append z y))
+(lst_eq z (append y z)), (lst_eq z (append y y)), (lst_eq y (lst_intersection z z)), (lst_eq y (lst_intersection z y)), (lst_eq y (lst_intersection y z)), (lst_eq y (lst_intersection y y)), (lst_eq y (append z z)), (lst_eq y (append z y)), (lst_eq y (append y z)), (lst_eq y (append y y))
+(lst_eq (lst_intersection z z) z), (lst_eq (lst_intersection z z) y), (lst_eq (lst_intersection z z) (lst_intersection z y)), (lst_eq (lst_intersection z z) (lst_intersection y z)), (lst_eq (lst_intersection z z) (lst_intersection y y)), (lst_eq (lst_intersection z z) (append z z)), (lst_eq (lst_intersection z z) (append z y)), (lst_eq (lst_intersection z z) (append y z)), (lst_eq (lst_intersection z z) (append y y)), (lst_eq (lst_intersection z y) z)
+(lst_eq (lst_intersection z y) y), (lst_eq (lst_intersection z y) (lst_intersection z z)), (lst_eq (lst_intersection z y) (lst_intersection y z)), (lst_eq (lst_intersection z y) (lst_intersection y y)), (lst_eq (lst_intersection z y) (append z z)), (lst_eq (lst_intersection z y) (append z y)), (lst_eq (lst_intersection z y) (append y z)), (lst_eq (lst_intersection z y) (append y y)), (lst_eq (lst_intersection y z) z), (lst_eq (lst_intersection y z) y)
+(lst_eq (lst_intersection y z) (lst_intersection z z)), (lst_eq (lst_intersection y z) (lst_intersection z y)), (lst_eq (lst_intersection y z) (lst_intersection y y)), (lst_eq (lst_intersection y z) (append z z)), (lst_eq (lst_intersection y z) (append z y)), (lst_eq (lst_intersection y z) (append y z)), (lst_eq (lst_intersection y z) (append y y)), (lst_eq (lst_intersection y y) z), (lst_eq (lst_intersection y y) y), (lst_eq (lst_intersection y y) (lst_intersection z z))
+(lst_eq (lst_intersection y y) (lst_intersection z y)), (lst_eq (lst_intersection y y) (lst_intersection y z)), (lst_eq (lst_intersection y y) (append z z)), (lst_eq (lst_intersection y y) (append z y)), (lst_eq (lst_intersection y y) (append y z)), (lst_eq (lst_intersection y y) (append y y)), (lst_eq (append z z) z), (lst_eq (append z z) y), (lst_eq (append z z) (lst_intersection z z)), (lst_eq (append z z) (lst_intersection z y))
+(lst_eq (append z z) (lst_intersection y z)), (lst_eq (append z z) (lst_intersection y y)), (lst_eq (append z z) (append z y)), (lst_eq (append z z) (append y z)), (lst_eq (append z z) (append y y)), (lst_eq (append z y) z), (lst_eq (append z y) y), (lst_eq (append z y) (lst_intersection z z)), (lst_eq (append z y) (lst_intersection z y)), (lst_eq (append z y) (lst_intersection y z))
+(lst_eq (append z y) (lst_intersection y y)), (lst_eq (append z y) (append z z)), (lst_eq (append z y) (append y z)), (lst_eq (append z y) (append y y)), (lst_eq (append y z) z), (lst_eq (append y z) y), (lst_eq (append y z) (lst_intersection z z)), (lst_eq (append y z) (lst_intersection z y)), (lst_eq (append y z) (lst_intersection y z)), (lst_eq (append y z) (lst_intersection y y))
+(lst_eq (append y z) (append z z)), (lst_eq (append y z) (append z y)), (lst_eq (append y z) (append y y)), (lst_eq (append y y) z), (lst_eq (append y y) y), (lst_eq (append y y) (lst_intersection z z)), (lst_eq (append y y) (lst_intersection z y)), (lst_eq (append y y) (lst_intersection y z)), (lst_eq (append y y) (lst_intersection y y)), (lst_eq (append y y) (append z z))
+(lst_eq (append y y) (append z y)), (lst_eq (append y y) (append y z)), (lst_subset z (lst_intersection z z)), (lst_subset z (lst_intersection z y)), (lst_subset z (lst_intersection y z)), (lst_subset z (lst_intersection y y)), (lst_subset z (append z z)), (lst_subset z (append z y)), (lst_subset z (append y z)), (lst_subset z (append y y))
+(lst_subset y (lst_intersection z z)), (lst_subset y (lst_intersection z y)), (lst_subset y (lst_intersection y z)), (lst_subset y (lst_intersection y y)), (lst_subset y (append z z)), (lst_subset y (append z y)), (lst_subset y (append y z)), (lst_subset y (append y y)), (lst_subset (lst_intersection z z) z), (lst_subset (lst_intersection z z) y)
+(lst_subset (lst_intersection z z) (lst_intersection z y)), (lst_subset (lst_intersection z z) (lst_intersection y z)), (lst_subset (lst_intersection z z) (lst_intersection y y)), (lst_subset (lst_intersection z z) (append z z)), (lst_subset (lst_intersection z z) (append z y)), (lst_subset (lst_intersection z z) (append y z)), (lst_subset (lst_intersection z z) (append y y)), (lst_subset (lst_intersection z y) z), (lst_subset (lst_intersection z y) y), (lst_subset (lst_intersection z y) (lst_intersection z z))
+(lst_subset (lst_intersection z y) (lst_intersection y z)), (lst_subset (lst_intersection z y) (lst_intersection y y)), (lst_subset (lst_intersection z y) (append z z)), (lst_subset (lst_intersection z y) (append z y)), (lst_subset (lst_intersection z y) (append y z)), (lst_subset (lst_intersection z y) (append y y)), (lst_subset (lst_intersection y z) z), (lst_subset (lst_intersection y z) y), (lst_subset (lst_intersection y z) (lst_intersection z z)), (lst_subset (lst_intersection y z) (lst_intersection z y))
+(lst_subset (lst_intersection y z) (lst_intersection y y)), (lst_subset (lst_intersection y z) (append z z)), (lst_subset (lst_intersection y z) (append z y)), (lst_subset (lst_intersection y z) (append y z)), (lst_subset (lst_intersection y z) (append y y)), (lst_subset (lst_intersection y y) z), (lst_subset (lst_intersection y y) y), (lst_subset (lst_intersection y y) (lst_intersection z z)), (lst_subset (lst_intersection y y) (lst_intersection z y)), (lst_subset (lst_intersection y y) (lst_intersection y z))
+(lst_subset (lst_intersection y y) (append z z)), (lst_subset (lst_intersection y y) (append z y)), (lst_subset (lst_intersection y y) (append y z)), (lst_subset (lst_intersection y y) (append y y)), (lst_subset (append z z) z), (lst_subset (append z z) y), (lst_subset (append z z) (lst_intersection z z)), (lst_subset (append z z) (lst_intersection z y)), (lst_subset (append z z) (lst_intersection y z)), (lst_subset (append z z) (lst_intersection y y))
+(lst_subset (append z z) (append z y)), (lst_subset (append z z) (append y z)), (lst_subset (append z z) (append y y)), (lst_subset (append z y) z), (lst_subset (append z y) y), (lst_subset (append z y) (lst_intersection z z)), (lst_subset (append z y) (lst_intersection z y)), (lst_subset (append z y) (lst_intersection y z)), (lst_subset (append z y) (lst_intersection y y)), (lst_subset (append z y) (append z z))
+(lst_subset (append z y) (append y z)), (lst_subset (append z y) (append y y)), (lst_subset (append y z) z), (lst_subset (append y z) y), (lst_subset (append y z) (lst_intersection z z)), (lst_subset (append y z) (lst_intersection z y)), (lst_subset (append y z) (lst_intersection y z)), (lst_subset (append y z) (lst_intersection y y)), (lst_subset (append y z) (append z z)), (lst_subset (append y z) (append z y))
+(lst_subset (append y z) (append y y)), (lst_subset (append y y) z), (lst_subset (append y y) y), (lst_subset (append y y) (lst_intersection z z)), (lst_subset (append y y) (lst_intersection z y)), (lst_subset (append y y) (lst_intersection y z)), (lst_subset (append y y) (lst_intersection y y)), (lst_subset (append y y) (append z z)), (lst_subset (append y y) (append z y)), (lst_subset (append y y) (append y z))
+(false <> gv0), (true <> gv0), (~ lst_eq z z), (~ lst_eq z y), (~ lst_eq y z), (~ lst_eq y y), (~ lst_subset z z), (~ lst_subset z y), (~ lst_subset y z), (~ lst_subset y y)
+(z <> z), (z <> y), (y <> z), (y <> y), (n <> n), (gv0 <> gv0), (None = Some n), (None = Some gv0), (None = Some z), (None = Some y)
+(lst_mem n z = gv0), (lst_mem n y = gv0), (mem n z = gv0), (mem n z = lst_mem n z), (mem n z = lst_mem n y), (mem n y = gv0), (mem n y = lst_mem n z), (mem n y = lst_mem n y), (lst_intersection z z = z), (lst_intersection z z = y)
+(lst_intersection z z = append z z), (lst_intersection z z = append z y), (lst_intersection z z = append y z), (lst_intersection z z = append y y), (lst_intersection z y = z), (lst_intersection z y = y), (lst_intersection z y = append z z), (lst_intersection z y = append z y), (lst_intersection z y = append y z), (lst_intersection z y = append y y)
+(lst_intersection y z = z), (lst_intersection y z = y), (lst_intersection y z = append z z), (lst_intersection y z = append z y), (lst_intersection y z = append y z), (lst_intersection y z = append y y), (lst_intersection y y = z), (lst_intersection y y = y), (lst_intersection y y = append z z), (lst_intersection y y = append z y)
+(lst_intersection y y = append y z), (lst_intersection y y = append y y), (append z z = z), (append z z = y), (append z y = z), (append z y = y), (append y z = z), (append y z = y), (append y y = z), (append y y = y)
+
+Label: 2 (3)
+(lst_eq z z), (lst_eq z y), (lst_eq z gv1), (lst_eq y z), (lst_eq y y), (lst_eq y gv1), (lst_eq gv1 z), (lst_eq gv1 y), (lst_eq gv1 gv1), (lst_subset z z)
+(lst_subset z y), (lst_subset z gv1), (lst_subset y z), (lst_subset y y), (lst_subset y gv1), (lst_subset gv1 z), (lst_subset gv1 y), (lst_subset gv1 gv1), (z = z), (z = y)
+(z = gv1), (y = z), (y = y), (y = gv1), (gv1 = z), (gv1 = y), (gv1 = gv1), (n = n), (false = lst_mem n z), (false = lst_mem n y)
+(false = lst_mem n gv1), (false = mem n z), (false = mem n y), (false = mem n gv1), (true = lst_mem n z), (true = lst_mem n y), (true = lst_mem n gv1), (true = mem n z), (true = mem n y), (true = mem n gv1)
+(lst_eq z (lst_intersection z z)), (lst_eq z (lst_intersection z y)), (lst_eq z (lst_intersection z gv1)), (lst_eq z (lst_intersection y z)), (lst_eq z (lst_intersection y y)), (lst_eq z (lst_intersection y gv1)), (lst_eq z (lst_intersection gv1 z)), (lst_eq z (lst_intersection gv1 y)), (lst_eq z (lst_intersection gv1 gv1)), (lst_eq z (append z z))
+(lst_eq z (append z y)), (lst_eq z (append z gv1)), (lst_eq z (append y z)), (lst_eq z (append y y)), (lst_eq z (append y gv1)), (lst_eq z (append gv1 z)), (lst_eq z (append gv1 y)), (lst_eq z (append gv1 gv1)), (lst_eq y (lst_intersection z z)), (lst_eq y (lst_intersection z y))
+(lst_eq y (lst_intersection z gv1)), (lst_eq y (lst_intersection y z)), (lst_eq y (lst_intersection y y)), (lst_eq y (lst_intersection y gv1)), (lst_eq y (lst_intersection gv1 z)), (lst_eq y (lst_intersection gv1 y)), (lst_eq y (lst_intersection gv1 gv1)), (lst_eq y (append z z)), (lst_eq y (append z y)), (lst_eq y (append z gv1))
+(lst_eq y (append y z)), (lst_eq y (append y y)), (lst_eq y (append y gv1)), (lst_eq y (append gv1 z)), (lst_eq y (append gv1 y)), (lst_eq y (append gv1 gv1)), (lst_eq gv1 (lst_intersection z z)), (lst_eq gv1 (lst_intersection z y)), (lst_eq gv1 (lst_intersection z gv1)), (lst_eq gv1 (lst_intersection y z))
+(lst_eq gv1 (lst_intersection y y)), (lst_eq gv1 (lst_intersection y gv1)), (lst_eq gv1 (lst_intersection gv1 z)), (lst_eq gv1 (lst_intersection gv1 y)), (lst_eq gv1 (lst_intersection gv1 gv1)), (lst_eq gv1 (append z z)), (lst_eq gv1 (append z y)), (lst_eq gv1 (append z gv1)), (lst_eq gv1 (append y z)), (lst_eq gv1 (append y y))
+(lst_eq gv1 (append y gv1)), (lst_eq gv1 (append gv1 z)), (lst_eq gv1 (append gv1 y)), (lst_eq gv1 (append gv1 gv1)), (lst_eq (lst_intersection z z) z), (lst_eq (lst_intersection z z) y), (lst_eq (lst_intersection z z) gv1), (lst_eq (lst_intersection z z) (lst_intersection z y)), (lst_eq (lst_intersection z z) (lst_intersection z gv1)), (lst_eq (lst_intersection z z) (lst_intersection y z))
+(lst_eq (lst_intersection z z) (lst_intersection y y)), (lst_eq (lst_intersection z z) (lst_intersection y gv1)), (lst_eq (lst_intersection z z) (lst_intersection gv1 z)), (lst_eq (lst_intersection z z) (lst_intersection gv1 y)), (lst_eq (lst_intersection z z) (lst_intersection gv1 gv1)), (lst_eq (lst_intersection z z) (append z z)), (lst_eq (lst_intersection z z) (append z y)), (lst_eq (lst_intersection z z) (append z gv1)), (lst_eq (lst_intersection z z) (append y z)), (lst_eq (lst_intersection z z) (append y y))
+(lst_eq (lst_intersection z z) (append y gv1)), (lst_eq (lst_intersection z z) (append gv1 z)), (lst_eq (lst_intersection z z) (append gv1 y)), (lst_eq (lst_intersection z z) (append gv1 gv1)), (lst_eq (lst_intersection z y) z), (lst_eq (lst_intersection z y) y), (lst_eq (lst_intersection z y) gv1), (lst_eq (lst_intersection z y) (lst_intersection z z)), (lst_eq (lst_intersection z y) (lst_intersection z gv1)), (lst_eq (lst_intersection z y) (lst_intersection y z))
+(lst_eq (lst_intersection z y) (lst_intersection y y)), (lst_eq (lst_intersection z y) (lst_intersection y gv1)), (lst_eq (lst_intersection z y) (lst_intersection gv1 z)), (lst_eq (lst_intersection z y) (lst_intersection gv1 y)), (lst_eq (lst_intersection z y) (lst_intersection gv1 gv1)), (lst_eq (lst_intersection z y) (append z z)), (lst_eq (lst_intersection z y) (append z y)), (lst_eq (lst_intersection z y) (append z gv1)), (lst_eq (lst_intersection z y) (append y z)), (lst_eq (lst_intersection z y) (append y y))
+(lst_eq (lst_intersection z y) (append y gv1)), (lst_eq (lst_intersection z y) (append gv1 z)), (lst_eq (lst_intersection z y) (append gv1 y)), (lst_eq (lst_intersection z y) (append gv1 gv1)), (lst_eq (lst_intersection z gv1) z), (lst_eq (lst_intersection z gv1) y), (lst_eq (lst_intersection z gv1) gv1), (lst_eq (lst_intersection z gv1) (lst_intersection z z)), (lst_eq (lst_intersection z gv1) (lst_intersection z y)), (lst_eq (lst_intersection z gv1) (lst_intersection y z))
+(lst_eq (lst_intersection z gv1) (lst_intersection y y)), (lst_eq (lst_intersection z gv1) (lst_intersection y gv1)), (lst_eq (lst_intersection z gv1) (lst_intersection gv1 z)), (lst_eq (lst_intersection z gv1) (lst_intersection gv1 y)), (lst_eq (lst_intersection z gv1) (lst_intersection gv1 gv1)), (lst_eq (lst_intersection z gv1) (append z z)), (lst_eq (lst_intersection z gv1) (append z y)), (lst_eq (lst_intersection z gv1) (append z gv1)), (lst_eq (lst_intersection z gv1) (append y z)), (lst_eq (lst_intersection z gv1) (append y y))
+(lst_eq (lst_intersection z gv1) (append y gv1)), (lst_eq (lst_intersection z gv1) (append gv1 z)), (lst_eq (lst_intersection z gv1) (append gv1 y)), (lst_eq (lst_intersection z gv1) (append gv1 gv1)), (lst_eq (lst_intersection y z) z), (lst_eq (lst_intersection y z) y), (lst_eq (lst_intersection y z) gv1), (lst_eq (lst_intersection y z) (lst_intersection z z)), (lst_eq (lst_intersection y z) (lst_intersection z y)), (lst_eq (lst_intersection y z) (lst_intersection z gv1))
+(lst_eq (lst_intersection y z) (lst_intersection y y)), (lst_eq (lst_intersection y z) (lst_intersection y gv1)), (lst_eq (lst_intersection y z) (lst_intersection gv1 z)), (lst_eq (lst_intersection y z) (lst_intersection gv1 y)), (lst_eq (lst_intersection y z) (lst_intersection gv1 gv1)), (lst_eq (lst_intersection y z) (append z z)), (lst_eq (lst_intersection y z) (append z y)), (lst_eq (lst_intersection y z) (append z gv1)), (lst_eq (lst_intersection y z) (append y z)), (lst_eq (lst_intersection y z) (append y y))
+(lst_eq (lst_intersection y z) (append y gv1)), (lst_eq (lst_intersection y z) (append gv1 z)), (lst_eq (lst_intersection y z) (append gv1 y)), (lst_eq (lst_intersection y z) (append gv1 gv1)), (lst_eq (lst_intersection y y) z), (lst_eq (lst_intersection y y) y), (lst_eq (lst_intersection y y) gv1), (lst_eq (lst_intersection y y) (lst_intersection z z)), (lst_eq (lst_intersection y y) (lst_intersection z y)), (lst_eq (lst_intersection y y) (lst_intersection z gv1))
+(lst_eq (lst_intersection y y) (lst_intersection y z)), (lst_eq (lst_intersection y y) (lst_intersection y gv1)), (lst_eq (lst_intersection y y) (lst_intersection gv1 z)), (lst_eq (lst_intersection y y) (lst_intersection gv1 y)), (lst_eq (lst_intersection y y) (lst_intersection gv1 gv1)), (lst_eq (lst_intersection y y) (append z z)), (lst_eq (lst_intersection y y) (append z y)), (lst_eq (lst_intersection y y) (append z gv1)), (lst_eq (lst_intersection y y) (append y z)), (lst_eq (lst_intersection y y) (append y y))
+(lst_eq (lst_intersection y y) (append y gv1)), (lst_eq (lst_intersection y y) (append gv1 z)), (lst_eq (lst_intersection y y) (append gv1 y)), (lst_eq (lst_intersection y y) (append gv1 gv1)), (lst_eq (lst_intersection y gv1) z), (lst_eq (lst_intersection y gv1) y), (lst_eq (lst_intersection y gv1) gv1), (lst_eq (lst_intersection y gv1) (lst_intersection z z)), (lst_eq (lst_intersection y gv1) (lst_intersection z y)), (lst_eq (lst_intersection y gv1) (lst_intersection z gv1))
+(lst_eq (lst_intersection y gv1) (lst_intersection y z)), (lst_eq (lst_intersection y gv1) (lst_intersection y y)), (lst_eq (lst_intersection y gv1) (lst_intersection gv1 z)), (lst_eq (lst_intersection y gv1) (lst_intersection gv1 y)), (lst_eq (lst_intersection y gv1) (lst_intersection gv1 gv1)), (lst_eq (lst_intersection y gv1) (append z z)), (lst_eq (lst_intersection y gv1) (append z y)), (lst_eq (lst_intersection y gv1) (append z gv1)), (lst_eq (lst_intersection y gv1) (append y z)), (lst_eq (lst_intersection y gv1) (append y y))
+(lst_eq (lst_intersection y gv1) (append y gv1)), (lst_eq (lst_intersection y gv1) (append gv1 z)), (lst_eq (lst_intersection y gv1) (append gv1 y)), (lst_eq (lst_intersection y gv1) (append gv1 gv1)), (lst_eq (lst_intersection gv1 z) z), (lst_eq (lst_intersection gv1 z) y), (lst_eq (lst_intersection gv1 z) gv1), (lst_eq (lst_intersection gv1 z) (lst_intersection z z)), (lst_eq (lst_intersection gv1 z) (lst_intersection z y)), (lst_eq (lst_intersection gv1 z) (lst_intersection z gv1))
+(lst_eq (lst_intersection gv1 z) (lst_intersection y z)), (lst_eq (lst_intersection gv1 z) (lst_intersection y y)), (lst_eq (lst_intersection gv1 z) (lst_intersection y gv1)), (lst_eq (lst_intersection gv1 z) (lst_intersection gv1 y)), (lst_eq (lst_intersection gv1 z) (lst_intersection gv1 gv1)), (lst_eq (lst_intersection gv1 z) (append z z)), (lst_eq (lst_intersection gv1 z) (append z y)), (lst_eq (lst_intersection gv1 z) (append z gv1)), (lst_eq (lst_intersection gv1 z) (append y z)), (lst_eq (lst_intersection gv1 z) (append y y))
+(lst_eq (lst_intersection gv1 z) (append y gv1)), (lst_eq (lst_intersection gv1 z) (append gv1 z)), (lst_eq (lst_intersection gv1 z) (append gv1 y)), (lst_eq (lst_intersection gv1 z) (append gv1 gv1)), (lst_eq (lst_intersection gv1 y) z), (lst_eq (lst_intersection gv1 y) y), (lst_eq (lst_intersection gv1 y) gv1), (lst_eq (lst_intersection gv1 y) (lst_intersection z z)), (lst_eq (lst_intersection gv1 y) (lst_intersection z y)), (lst_eq (lst_intersection gv1 y) (lst_intersection z gv1))
+(lst_eq (lst_intersection gv1 y) (lst_intersection y z)), (lst_eq (lst_intersection gv1 y) (lst_intersection y y)), (lst_eq (lst_intersection gv1 y) (lst_intersection y gv1)), (lst_eq (lst_intersection gv1 y) (lst_intersection gv1 z)), (lst_eq (lst_intersection gv1 y) (lst_intersection gv1 gv1)), (lst_eq (lst_intersection gv1 y) (append z z)), (lst_eq (lst_intersection gv1 y) (append z y)), (lst_eq (lst_intersection gv1 y) (append z gv1)), (lst_eq (lst_intersection gv1 y) (append y z)), (lst_eq (lst_intersection gv1 y) (append y y))
+(lst_eq (lst_intersection gv1 y) (append y gv1)), (lst_eq (lst_intersection gv1 y) (append gv1 z)), (lst_eq (lst_intersection gv1 y) (append gv1 y)), (lst_eq (lst_intersection gv1 y) (append gv1 gv1)), (lst_eq (lst_intersection gv1 gv1) z), (lst_eq (lst_intersection gv1 gv1) y), (lst_eq (lst_intersection gv1 gv1) gv1), (lst_eq (lst_intersection gv1 gv1) (lst_intersection z z)), (lst_eq (lst_intersection gv1 gv1) (lst_intersection z y)), (lst_eq (lst_intersection gv1 gv1) (lst_intersection z gv1))
+(lst_eq (lst_intersection gv1 gv1) (lst_intersection y z)), (lst_eq (lst_intersection gv1 gv1) (lst_intersection y y)), (lst_eq (lst_intersection gv1 gv1) (lst_intersection y gv1)), (lst_eq (lst_intersection gv1 gv1) (lst_intersection gv1 z)), (lst_eq (lst_intersection gv1 gv1) (lst_intersection gv1 y)), (lst_eq (lst_intersection gv1 gv1) (append z z)), (lst_eq (lst_intersection gv1 gv1) (append z y)), (lst_eq (lst_intersection gv1 gv1) (append z gv1)), (lst_eq (lst_intersection gv1 gv1) (append y z)), (lst_eq (lst_intersection gv1 gv1) (append y y))
+(lst_eq (lst_intersection gv1 gv1) (append y gv1)), (lst_eq (lst_intersection gv1 gv1) (append gv1 z)), (lst_eq (lst_intersection gv1 gv1) (append gv1 y)), (lst_eq (lst_intersection gv1 gv1) (append gv1 gv1)), (lst_eq (append z z) z), (lst_eq (append z z) y), (lst_eq (append z z) gv1), (lst_eq (append z z) (lst_intersection z z)), (lst_eq (append z z) (lst_intersection z y)), (lst_eq (append z z) (lst_intersection z gv1))
+(lst_eq (append z z) (lst_intersection y z)), (lst_eq (append z z) (lst_intersection y y)), (lst_eq (append z z) (lst_intersection y gv1)), (lst_eq (append z z) (lst_intersection gv1 z)), (lst_eq (append z z) (lst_intersection gv1 y)), (lst_eq (append z z) (lst_intersection gv1 gv1)), (lst_eq (append z z) (append z y)), (lst_eq (append z z) (append z gv1)), (lst_eq (append z z) (append y z)), (lst_eq (append z z) (append y y))
+(lst_eq (append z z) (append y gv1)), (lst_eq (append z z) (append gv1 z)), (lst_eq (append z z) (append gv1 y)), (lst_eq (append z z) (append gv1 gv1)), (lst_eq (append z y) z), (lst_eq (append z y) y), (lst_eq (append z y) gv1), (lst_eq (append z y) (lst_intersection z z)), (lst_eq (append z y) (lst_intersection z y)), (lst_eq (append z y) (lst_intersection z gv1))
+(lst_eq (append z y) (lst_intersection y z)), (lst_eq (append z y) (lst_intersection y y)), (lst_eq (append z y) (lst_intersection y gv1)), (lst_eq (append z y) (lst_intersection gv1 z)), (lst_eq (append z y) (lst_intersection gv1 y)), (lst_eq (append z y) (lst_intersection gv1 gv1)), (lst_eq (append z y) (append z z)), (lst_eq (append z y) (append z gv1)), (lst_eq (append z y) (append y z)), (lst_eq (append z y) (append y y))
+(lst_eq (append z y) (append y gv1)), (lst_eq (append z y) (append gv1 z)), (lst_eq (append z y) (append gv1 y)), (lst_eq (append z y) (append gv1 gv1)), (lst_eq (append z gv1) z), (lst_eq (append z gv1) y), (lst_eq (append z gv1) gv1), (lst_eq (append z gv1) (lst_intersection z z)), (lst_eq (append z gv1) (lst_intersection z y)), (lst_eq (append z gv1) (lst_intersection z gv1))
+(lst_eq (append z gv1) (lst_intersection y z)), (lst_eq (append z gv1) (lst_intersection y y)), (lst_eq (append z gv1) (lst_intersection y gv1)), (lst_eq (append z gv1) (lst_intersection gv1 z)), (lst_eq (append z gv1) (lst_intersection gv1 y)), (lst_eq (append z gv1) (lst_intersection gv1 gv1)), (lst_eq (append z gv1) (append z z)), (lst_eq (append z gv1) (append z y)), (lst_eq (append z gv1) (append y z)), (lst_eq (append z gv1) (append y y))
+(lst_eq (append z gv1) (append y gv1)), (lst_eq (append z gv1) (append gv1 z)), (lst_eq (append z gv1) (append gv1 y)), (lst_eq (append z gv1) (append gv1 gv1)), (lst_eq (append y z) z), (lst_eq (append y z) y), (lst_eq (append y z) gv1), (lst_eq (append y z) (lst_intersection z z)), (lst_eq (append y z) (lst_intersection z y)), (lst_eq (append y z) (lst_intersection z gv1))
+(lst_eq (append y z) (lst_intersection y z)), (lst_eq (append y z) (lst_intersection y y)), (lst_eq (append y z) (lst_intersection y gv1)), (lst_eq (append y z) (lst_intersection gv1 z)), (lst_eq (append y z) (lst_intersection gv1 y)), (lst_eq (append y z) (lst_intersection gv1 gv1)), (lst_eq (append y z) (append z z)), (lst_eq (append y z) (append z y)), (lst_eq (append y z) (append z gv1)), (lst_eq (append y z) (append y y))
+(lst_eq (append y z) (append y gv1)), (lst_eq (append y z) (append gv1 z)), (lst_eq (append y z) (append gv1 y)), (lst_eq (append y z) (append gv1 gv1)), (lst_eq (append y y) z), (lst_eq (append y y) y), (lst_eq (append y y) gv1), (lst_eq (append y y) (lst_intersection z z)), (lst_eq (append y y) (lst_intersection z y)), (lst_eq (append y y) (lst_intersection z gv1))
+(lst_eq (append y y) (lst_intersection y z)), (lst_eq (append y y) (lst_intersection y y)), (lst_eq (append y y) (lst_intersection y gv1)), (lst_eq (append y y) (lst_intersection gv1 z)), (lst_eq (append y y) (lst_intersection gv1 y)), (lst_eq (append y y) (lst_intersection gv1 gv1)), (lst_eq (append y y) (append z z)), (lst_eq (append y y) (append z y)), (lst_eq (append y y) (append z gv1)), (lst_eq (append y y) (append y z))
+(lst_eq (append y y) (append y gv1)), (lst_eq (append y y) (append gv1 z)), (lst_eq (append y y) (append gv1 y)), (lst_eq (append y y) (append gv1 gv1)), (lst_eq (append y gv1) z), (lst_eq (append y gv1) y), (lst_eq (append y gv1) gv1), (lst_eq (append y gv1) (lst_intersection z z)), (lst_eq (append y gv1) (lst_intersection z y)), (lst_eq (append y gv1) (lst_intersection z gv1))
+(lst_eq (append y gv1) (lst_intersection y z)), (lst_eq (append y gv1) (lst_intersection y y)), (lst_eq (append y gv1) (lst_intersection y gv1)), (lst_eq (append y gv1) (lst_intersection gv1 z)), (lst_eq (append y gv1) (lst_intersection gv1 y)), (lst_eq (append y gv1) (lst_intersection gv1 gv1)), (lst_eq (append y gv1) (append z z)), (lst_eq (append y gv1) (append z y)), (lst_eq (append y gv1) (append z gv1)), (lst_eq (append y gv1) (append y z))
+(lst_eq (append y gv1) (append y y)), (lst_eq (append y gv1) (append gv1 z)), (lst_eq (append y gv1) (append gv1 y)), (lst_eq (append y gv1) (append gv1 gv1)), (lst_eq (append gv1 z) z), (lst_eq (append gv1 z) y), (lst_eq (append gv1 z) gv1), (lst_eq (append gv1 z) (lst_intersection z z)), (lst_eq (append gv1 z) (lst_intersection z y)), (lst_eq (append gv1 z) (lst_intersection z gv1))
+(lst_eq (append gv1 z) (lst_intersection y z)), (lst_eq (append gv1 z) (lst_intersection y y)), (lst_eq (append gv1 z) (lst_intersection y gv1)), (lst_eq (append gv1 z) (lst_intersection gv1 z)), (lst_eq (append gv1 z) (lst_intersection gv1 y)), (lst_eq (append gv1 z) (lst_intersection gv1 gv1)), (lst_eq (append gv1 z) (append z z)), (lst_eq (append gv1 z) (append z y)), (lst_eq (append gv1 z) (append z gv1)), (lst_eq (append gv1 z) (append y z))
+(lst_eq (append gv1 z) (append y y)), (lst_eq (append gv1 z) (append y gv1)), (lst_eq (append gv1 z) (append gv1 y)), (lst_eq (append gv1 z) (append gv1 gv1)), (lst_eq (append gv1 y) z), (lst_eq (append gv1 y) y), (lst_eq (append gv1 y) gv1), (lst_eq (append gv1 y) (lst_intersection z z)), (lst_eq (append gv1 y) (lst_intersection z y)), (lst_eq (append gv1 y) (lst_intersection z gv1))
+(lst_eq (append gv1 y) (lst_intersection y z)), (lst_eq (append gv1 y) (lst_intersection y y)), (lst_eq (append gv1 y) (lst_intersection y gv1)), (lst_eq (append gv1 y) (lst_intersection gv1 z)), (lst_eq (append gv1 y) (lst_intersection gv1 y)), (lst_eq (append gv1 y) (lst_intersection gv1 gv1)), (lst_eq (append gv1 y) (append z z)), (lst_eq (append gv1 y) (append z y)), (lst_eq (append gv1 y) (append z gv1)), (lst_eq (append gv1 y) (append y z))
+(lst_eq (append gv1 y) (append y y)), (lst_eq (append gv1 y) (append y gv1)), (lst_eq (append gv1 y) (append gv1 z)), (lst_eq (append gv1 y) (append gv1 gv1)), (lst_eq (append gv1 gv1) z), (lst_eq (append gv1 gv1) y), (lst_eq (append gv1 gv1) gv1), (lst_eq (append gv1 gv1) (lst_intersection z z)), (lst_eq (append gv1 gv1) (lst_intersection z y)), (lst_eq (append gv1 gv1) (lst_intersection z gv1))
+(lst_eq (append gv1 gv1) (lst_intersection y z)), (lst_eq (append gv1 gv1) (lst_intersection y y)), (lst_eq (append gv1 gv1) (lst_intersection y gv1)), (lst_eq (append gv1 gv1) (lst_intersection gv1 z)), (lst_eq (append gv1 gv1) (lst_intersection gv1 y)), (lst_eq (append gv1 gv1) (lst_intersection gv1 gv1)), (lst_eq (append gv1 gv1) (append z z)), (lst_eq (append gv1 gv1) (append z y)), (lst_eq (append gv1 gv1) (append z gv1)), (lst_eq (append gv1 gv1) (append y z))
+(lst_eq (append gv1 gv1) (append y y)), (lst_eq (append gv1 gv1) (append y gv1)), (lst_eq (append gv1 gv1) (append gv1 z)), (lst_eq (append gv1 gv1) (append gv1 y)), (lst_subset z (lst_intersection z z)), (lst_subset z (lst_intersection z y)), (lst_subset z (lst_intersection z gv1)), (lst_subset z (lst_intersection y z)), (lst_subset z (lst_intersection y y)), (lst_subset z (lst_intersection y gv1))
+(lst_subset z (lst_intersection gv1 z)), (lst_subset z (lst_intersection gv1 y)), (lst_subset z (lst_intersection gv1 gv1)), (lst_subset z (append z z)), (lst_subset z (append z y)), (lst_subset z (append z gv1)), (lst_subset z (append y z)), (lst_subset z (append y y)), (lst_subset z (append y gv1)), (lst_subset z (append gv1 z))
+(lst_subset z (append gv1 y)), (lst_subset z (append gv1 gv1)), (lst_subset y (lst_intersection z z)), (lst_subset y (lst_intersection z y)), (lst_subset y (lst_intersection z gv1)), (lst_subset y (lst_intersection y z)), (lst_subset y (lst_intersection y y)), (lst_subset y (lst_intersection y gv1)), (lst_subset y (lst_intersection gv1 z)), (lst_subset y (lst_intersection gv1 y))
+(lst_subset y (lst_intersection gv1 gv1)), (lst_subset y (append z z)), (lst_subset y (append z y)), (lst_subset y (append z gv1)), (lst_subset y (append y z)), (lst_subset y (append y y)), (lst_subset y (append y gv1)), (lst_subset y (append gv1 z)), (lst_subset y (append gv1 y)), (lst_subset y (append gv1 gv1))
+(lst_subset gv1 (lst_intersection z z)), (lst_subset gv1 (lst_intersection z y)), (lst_subset gv1 (lst_intersection z gv1)), (lst_subset gv1 (lst_intersection y z)), (lst_subset gv1 (lst_intersection y y)), (lst_subset gv1 (lst_intersection y gv1)), (lst_subset gv1 (lst_intersection gv1 z)), (lst_subset gv1 (lst_intersection gv1 y)), (lst_subset gv1 (lst_intersection gv1 gv1)), (lst_subset gv1 (append z z))
+(lst_subset gv1 (append z y)), (lst_subset gv1 (append z gv1)), (lst_subset gv1 (append y z)), (lst_subset gv1 (append y y)), (lst_subset gv1 (append y gv1)), (lst_subset gv1 (append gv1 z)), (lst_subset gv1 (append gv1 y)), (lst_subset gv1 (append gv1 gv1)), (lst_subset (lst_intersection z z) z), (lst_subset (lst_intersection z z) y)
+(lst_subset (lst_intersection z z) gv1), (lst_subset (lst_intersection z z) (lst_intersection z y)), (lst_subset (lst_intersection z z) (lst_intersection z gv1)), (lst_subset (lst_intersection z z) (lst_intersection y z)), (lst_subset (lst_intersection z z) (lst_intersection y y)), (lst_subset (lst_intersection z z) (lst_intersection y gv1)), (lst_subset (lst_intersection z z) (lst_intersection gv1 z)), (lst_subset (lst_intersection z z) (lst_intersection gv1 y)), (lst_subset (lst_intersection z z) (lst_intersection gv1 gv1)), (lst_subset (lst_intersection z z) (append z z))
+(lst_subset (lst_intersection z z) (append z y)), (lst_subset (lst_intersection z z) (append z gv1)), (lst_subset (lst_intersection z z) (append y z)), (lst_subset (lst_intersection z z) (append y y)), (lst_subset (lst_intersection z z) (append y gv1)), (lst_subset (lst_intersection z z) (append gv1 z)), (lst_subset (lst_intersection z z) (append gv1 y)), (lst_subset (lst_intersection z z) (append gv1 gv1)), (lst_subset (lst_intersection z y) z), (lst_subset (lst_intersection z y) y)
+(lst_subset (lst_intersection z y) gv1), (lst_subset (lst_intersection z y) (lst_intersection z z)), (lst_subset (lst_intersection z y) (lst_intersection z gv1)), (lst_subset (lst_intersection z y) (lst_intersection y z)), (lst_subset (lst_intersection z y) (lst_intersection y y)), (lst_subset (lst_intersection z y) (lst_intersection y gv1)), (lst_subset (lst_intersection z y) (lst_intersection gv1 z)), (lst_subset (lst_intersection z y) (lst_intersection gv1 y)), (lst_subset (lst_intersection z y) (lst_intersection gv1 gv1)), (lst_subset (lst_intersection z y) (append z z))
+(lst_subset (lst_intersection z y) (append z y)), (lst_subset (lst_intersection z y) (append z gv1)), (lst_subset (lst_intersection z y) (append y z)), (lst_subset (lst_intersection z y) (append y y)), (lst_subset (lst_intersection z y) (append y gv1)), (lst_subset (lst_intersection z y) (append gv1 z)), (lst_subset (lst_intersection z y) (append gv1 y)), (lst_subset (lst_intersection z y) (append gv1 gv1)), (lst_subset (lst_intersection z gv1) z), (lst_subset (lst_intersection z gv1) y)
+(lst_subset (lst_intersection z gv1) gv1), (lst_subset (lst_intersection z gv1) (lst_intersection z z)), (lst_subset (lst_intersection z gv1) (lst_intersection z y)), (lst_subset (lst_intersection z gv1) (lst_intersection y z)), (lst_subset (lst_intersection z gv1) (lst_intersection y y)), (lst_subset (lst_intersection z gv1) (lst_intersection y gv1)), (lst_subset (lst_intersection z gv1) (lst_intersection gv1 z)), (lst_subset (lst_intersection z gv1) (lst_intersection gv1 y)), (lst_subset (lst_intersection z gv1) (lst_intersection gv1 gv1)), (lst_subset (lst_intersection z gv1) (append z z))
+(lst_subset (lst_intersection z gv1) (append z y)), (lst_subset (lst_intersection z gv1) (append z gv1)), (lst_subset (lst_intersection z gv1) (append y z)), (lst_subset (lst_intersection z gv1) (append y y)), (lst_subset (lst_intersection z gv1) (append y gv1)), (lst_subset (lst_intersection z gv1) (append gv1 z)), (lst_subset (lst_intersection z gv1) (append gv1 y)), (lst_subset (lst_intersection z gv1) (append gv1 gv1)), (lst_subset (lst_intersection y z) z), (lst_subset (lst_intersection y z) y)
+(lst_subset (lst_intersection y z) gv1), (lst_subset (lst_intersection y z) (lst_intersection z z)), (lst_subset (lst_intersection y z) (lst_intersection z y)), (lst_subset (lst_intersection y z) (lst_intersection z gv1)), (lst_subset (lst_intersection y z) (lst_intersection y y)), (lst_subset (lst_intersection y z) (lst_intersection y gv1)), (lst_subset (lst_intersection y z) (lst_intersection gv1 z)), (lst_subset (lst_intersection y z) (lst_intersection gv1 y)), (lst_subset (lst_intersection y z) (lst_intersection gv1 gv1)), (lst_subset (lst_intersection y z) (append z z))
+(lst_subset (lst_intersection y z) (append z y)), (lst_subset (lst_intersection y z) (append z gv1)), (lst_subset (lst_intersection y z) (append y z)), (lst_subset (lst_intersection y z) (append y y)), (lst_subset (lst_intersection y z) (append y gv1)), (lst_subset (lst_intersection y z) (append gv1 z)), (lst_subset (lst_intersection y z) (append gv1 y)), (lst_subset (lst_intersection y z) (append gv1 gv1)), (lst_subset (lst_intersection y y) z), (lst_subset (lst_intersection y y) y)
+(lst_subset (lst_intersection y y) gv1), (lst_subset (lst_intersection y y) (lst_intersection z z)), (lst_subset (lst_intersection y y) (lst_intersection z y)), (lst_subset (lst_intersection y y) (lst_intersection z gv1)), (lst_subset (lst_intersection y y) (lst_intersection y z)), (lst_subset (lst_intersection y y) (lst_intersection y gv1)), (lst_subset (lst_intersection y y) (lst_intersection gv1 z)), (lst_subset (lst_intersection y y) (lst_intersection gv1 y)), (lst_subset (lst_intersection y y) (lst_intersection gv1 gv1)), (lst_subset (lst_intersection y y) (append z z))
+(lst_subset (lst_intersection y y) (append z y)), (lst_subset (lst_intersection y y) (append z gv1)), (lst_subset (lst_intersection y y) (append y z)), (lst_subset (lst_intersection y y) (append y y)), (lst_subset (lst_intersection y y) (append y gv1)), (lst_subset (lst_intersection y y) (append gv1 z)), (lst_subset (lst_intersection y y) (append gv1 y)), (lst_subset (lst_intersection y y) (append gv1 gv1)), (lst_subset (lst_intersection y gv1) z), (lst_subset (lst_intersection y gv1) y)
+(lst_subset (lst_intersection y gv1) gv1), (lst_subset (lst_intersection y gv1) (lst_intersection z z)), (lst_subset (lst_intersection y gv1) (lst_intersection z y)), (lst_subset (lst_intersection y gv1) (lst_intersection z gv1)), (lst_subset (lst_intersection y gv1) (lst_intersection y z)), (lst_subset (lst_intersection y gv1) (lst_intersection y y)), (lst_subset (lst_intersection y gv1) (lst_intersection gv1 z)), (lst_subset (lst_intersection y gv1) (lst_intersection gv1 y)), (lst_subset (lst_intersection y gv1) (lst_intersection gv1 gv1)), (lst_subset (lst_intersection y gv1) (append z z))
+(lst_subset (lst_intersection y gv1) (append z y)), (lst_subset (lst_intersection y gv1) (append z gv1)), (lst_subset (lst_intersection y gv1) (append y z)), (lst_subset (lst_intersection y gv1) (append y y)), (lst_subset (lst_intersection y gv1) (append y gv1)), (lst_subset (lst_intersection y gv1) (append gv1 z)), (lst_subset (lst_intersection y gv1) (append gv1 y)), (lst_subset (lst_intersection y gv1) (append gv1 gv1)), (lst_subset (lst_intersection gv1 z) z), (lst_subset (lst_intersection gv1 z) y)
+(lst_subset (lst_intersection gv1 z) gv1), (lst_subset (lst_intersection gv1 z) (lst_intersection z z)), (lst_subset (lst_intersection gv1 z) (lst_intersection z y)), (lst_subset (lst_intersection gv1 z) (lst_intersection z gv1)), (lst_subset (lst_intersection gv1 z) (lst_intersection y z)), (lst_subset (lst_intersection gv1 z) (lst_intersection y y)), (lst_subset (lst_intersection gv1 z) (lst_intersection y gv1)), (lst_subset (lst_intersection gv1 z) (lst_intersection gv1 y)), (lst_subset (lst_intersection gv1 z) (lst_intersection gv1 gv1)), (lst_subset (lst_intersection gv1 z) (append z z))
+(lst_subset (lst_intersection gv1 z) (append z y)), (lst_subset (lst_intersection gv1 z) (append z gv1)), (lst_subset (lst_intersection gv1 z) (append y z)), (lst_subset (lst_intersection gv1 z) (append y y)), (lst_subset (lst_intersection gv1 z) (append y gv1)), (lst_subset (lst_intersection gv1 z) (append gv1 z)), (lst_subset (lst_intersection gv1 z) (append gv1 y)), (lst_subset (lst_intersection gv1 z) (append gv1 gv1)), (lst_subset (lst_intersection gv1 y) z), (lst_subset (lst_intersection gv1 y) y)
+(lst_subset (lst_intersection gv1 y) gv1), (lst_subset (lst_intersection gv1 y) (lst_intersection z z)), (lst_subset (lst_intersection gv1 y) (lst_intersection z y)), (lst_subset (lst_intersection gv1 y) (lst_intersection z gv1)), (lst_subset (lst_intersection gv1 y) (lst_intersection y z)), (lst_subset (lst_intersection gv1 y) (lst_intersection y y)), (lst_subset (lst_intersection gv1 y) (lst_intersection y gv1)), (lst_subset (lst_intersection gv1 y) (lst_intersection gv1 z)), (lst_subset (lst_intersection gv1 y) (lst_intersection gv1 gv1)), (lst_subset (lst_intersection gv1 y) (append z z))
+(lst_subset (lst_intersection gv1 y) (append z y)), (lst_subset (lst_intersection gv1 y) (append z gv1)), (lst_subset (lst_intersection gv1 y) (append y z)), (lst_subset (lst_intersection gv1 y) (append y y)), (lst_subset (lst_intersection gv1 y) (append y gv1)), (lst_subset (lst_intersection gv1 y) (append gv1 z)), (lst_subset (lst_intersection gv1 y) (append gv1 y)), (lst_subset (lst_intersection gv1 y) (append gv1 gv1)), (lst_subset (lst_intersection gv1 gv1) z), (lst_subset (lst_intersection gv1 gv1) y)
+(lst_subset (lst_intersection gv1 gv1) gv1), (lst_subset (lst_intersection gv1 gv1) (lst_intersection z z)), (lst_subset (lst_intersection gv1 gv1) (lst_intersection z y)), (lst_subset (lst_intersection gv1 gv1) (lst_intersection z gv1)), (lst_subset (lst_intersection gv1 gv1) (lst_intersection y z)), (lst_subset (lst_intersection gv1 gv1) (lst_intersection y y)), (lst_subset (lst_intersection gv1 gv1) (lst_intersection y gv1)), (lst_subset (lst_intersection gv1 gv1) (lst_intersection gv1 z)), (lst_subset (lst_intersection gv1 gv1) (lst_intersection gv1 y)), (lst_subset (lst_intersection gv1 gv1) (append z z))
+(lst_subset (lst_intersection gv1 gv1) (append z y)), (lst_subset (lst_intersection gv1 gv1) (append z gv1)), (lst_subset (lst_intersection gv1 gv1) (append y z)), (lst_subset (lst_intersection gv1 gv1) (append y y)), (lst_subset (lst_intersection gv1 gv1) (append y gv1)), (lst_subset (lst_intersection gv1 gv1) (append gv1 z)), (lst_subset (lst_intersection gv1 gv1) (append gv1 y)), (lst_subset (lst_intersection gv1 gv1) (append gv1 gv1)), (lst_subset (append z z) z), (lst_subset (append z z) y)
+(lst_subset (append z z) gv1), (lst_subset (append z z) (lst_intersection z z)), (lst_subset (append z z) (lst_intersection z y)), (lst_subset (append z z) (lst_intersection z gv1)), (lst_subset (append z z) (lst_intersection y z)), (lst_subset (append z z) (lst_intersection y y)), (lst_subset (append z z) (lst_intersection y gv1)), (lst_subset (append z z) (lst_intersection gv1 z)), (lst_subset (append z z) (lst_intersection gv1 y)), (lst_subset (append z z) (lst_intersection gv1 gv1))
+(lst_subset (append z z) (append z y)), (lst_subset (append z z) (append z gv1)), (lst_subset (append z z) (append y z)), (lst_subset (append z z) (append y y)), (lst_subset (append z z) (append y gv1)), (lst_subset (append z z) (append gv1 z)), (lst_subset (append z z) (append gv1 y)), (lst_subset (append z z) (append gv1 gv1)), (lst_subset (append z y) z), (lst_subset (append z y) y)
+(lst_subset (append z y) gv1), (lst_subset (append z y) (lst_intersection z z)), (lst_subset (append z y) (lst_intersection z y)), (lst_subset (append z y) (lst_intersection z gv1)), (lst_subset (append z y) (lst_intersection y z)), (lst_subset (append z y) (lst_intersection y y)), (lst_subset (append z y) (lst_intersection y gv1)), (lst_subset (append z y) (lst_intersection gv1 z)), (lst_subset (append z y) (lst_intersection gv1 y)), (lst_subset (append z y) (lst_intersection gv1 gv1))
+(lst_subset (append z y) (append z z)), (lst_subset (append z y) (append z gv1)), (lst_subset (append z y) (append y z)), (lst_subset (append z y) (append y y)), (lst_subset (append z y) (append y gv1)), (lst_subset (append z y) (append gv1 z)), (lst_subset (append z y) (append gv1 y)), (lst_subset (append z y) (append gv1 gv1)), (lst_subset (append z gv1) z), (lst_subset (append z gv1) y)
+(lst_subset (append z gv1) gv1), (lst_subset (append z gv1) (lst_intersection z z)), (lst_subset (append z gv1) (lst_intersection z y)), (lst_subset (append z gv1) (lst_intersection z gv1)), (lst_subset (append z gv1) (lst_intersection y z)), (lst_subset (append z gv1) (lst_intersection y y)), (lst_subset (append z gv1) (lst_intersection y gv1)), (lst_subset (append z gv1) (lst_intersection gv1 z)), (lst_subset (append z gv1) (lst_intersection gv1 y)), (lst_subset (append z gv1) (lst_intersection gv1 gv1))
+(lst_subset (append z gv1) (append z z)), (lst_subset (append z gv1) (append z y)), (lst_subset (append z gv1) (append y z)), (lst_subset (append z gv1) (append y y)), (lst_subset (append z gv1) (append y gv1)), (lst_subset (append z gv1) (append gv1 z)), (lst_subset (append z gv1) (append gv1 y)), (lst_subset (append z gv1) (append gv1 gv1)), (lst_subset (append y z) z), (lst_subset (append y z) y)
+(lst_subset (append y z) gv1), (lst_subset (append y z) (lst_intersection z z)), (lst_subset (append y z) (lst_intersection z y)), (lst_subset (append y z) (lst_intersection z gv1)), (lst_subset (append y z) (lst_intersection y z)), (lst_subset (append y z) (lst_intersection y y)), (lst_subset (append y z) (lst_intersection y gv1)), (lst_subset (append y z) (lst_intersection gv1 z)), (lst_subset (append y z) (lst_intersection gv1 y)), (lst_subset (append y z) (lst_intersection gv1 gv1))
+(lst_subset (append y z) (append z z)), (lst_subset (append y z) (append z y)), (lst_subset (append y z) (append z gv1)), (lst_subset (append y z) (append y y)), (lst_subset (append y z) (append y gv1)), (lst_subset (append y z) (append gv1 z)), (lst_subset (append y z) (append gv1 y)), (lst_subset (append y z) (append gv1 gv1)), (lst_subset (append y y) z), (lst_subset (append y y) y)
+(lst_subset (append y y) gv1), (lst_subset (append y y) (lst_intersection z z)), (lst_subset (append y y) (lst_intersection z y)), (lst_subset (append y y) (lst_intersection z gv1)), (lst_subset (append y y) (lst_intersection y z)), (lst_subset (append y y) (lst_intersection y y)), (lst_subset (append y y) (lst_intersection y gv1)), (lst_subset (append y y) (lst_intersection gv1 z)), (lst_subset (append y y) (lst_intersection gv1 y)), (lst_subset (append y y) (lst_intersection gv1 gv1))
+(lst_subset (append y y) (append z z)), (lst_subset (append y y) (append z y)), (lst_subset (append y y) (append z gv1)), (lst_subset (append y y) (append y z)), (lst_subset (append y y) (append y gv1)), (lst_subset (append y y) (append gv1 z)), (lst_subset (append y y) (append gv1 y)), (lst_subset (append y y) (append gv1 gv1)), (lst_subset (append y gv1) z), (lst_subset (append y gv1) y)
+(lst_subset (append y gv1) gv1), (lst_subset (append y gv1) (lst_intersection z z)), (lst_subset (append y gv1) (lst_intersection z y)), (lst_subset (append y gv1) (lst_intersection z gv1)), (lst_subset (append y gv1) (lst_intersection y z)), (lst_subset (append y gv1) (lst_intersection y y)), (lst_subset (append y gv1) (lst_intersection y gv1)), (lst_subset (append y gv1) (lst_intersection gv1 z)), (lst_subset (append y gv1) (lst_intersection gv1 y)), (lst_subset (append y gv1) (lst_intersection gv1 gv1))
+(lst_subset (append y gv1) (append z z)), (lst_subset (append y gv1) (append z y)), (lst_subset (append y gv1) (append z gv1)), (lst_subset (append y gv1) (append y z)), (lst_subset (append y gv1) (append y y)), (lst_subset (append y gv1) (append gv1 z)), (lst_subset (append y gv1) (append gv1 y)), (lst_subset (append y gv1) (append gv1 gv1)), (lst_subset (append gv1 z) z), (lst_subset (append gv1 z) y)
+(lst_subset (append gv1 z) gv1), (lst_subset (append gv1 z) (lst_intersection z z)), (lst_subset (append gv1 z) (lst_intersection z y)), (lst_subset (append gv1 z) (lst_intersection z gv1)), (lst_subset (append gv1 z) (lst_intersection y z)), (lst_subset (append gv1 z) (lst_intersection y y)), (lst_subset (append gv1 z) (lst_intersection y gv1)), (lst_subset (append gv1 z) (lst_intersection gv1 z)), (lst_subset (append gv1 z) (lst_intersection gv1 y)), (lst_subset (append gv1 z) (lst_intersection gv1 gv1))
+(lst_subset (append gv1 z) (append z z)), (lst_subset (append gv1 z) (append z y)), (lst_subset (append gv1 z) (append z gv1)), (lst_subset (append gv1 z) (append y z)), (lst_subset (append gv1 z) (append y y)), (lst_subset (append gv1 z) (append y gv1)), (lst_subset (append gv1 z) (append gv1 y)), (lst_subset (append gv1 z) (append gv1 gv1)), (lst_subset (append gv1 y) z), (lst_subset (append gv1 y) y)
+(lst_subset (append gv1 y) gv1), (lst_subset (append gv1 y) (lst_intersection z z)), (lst_subset (append gv1 y) (lst_intersection z y)), (lst_subset (append gv1 y) (lst_intersection z gv1)), (lst_subset (append gv1 y) (lst_intersection y z)), (lst_subset (append gv1 y) (lst_intersection y y)), (lst_subset (append gv1 y) (lst_intersection y gv1)), (lst_subset (append gv1 y) (lst_intersection gv1 z)), (lst_subset (append gv1 y) (lst_intersection gv1 y)), (lst_subset (append gv1 y) (lst_intersection gv1 gv1))
+(lst_subset (append gv1 y) (append z z)), (lst_subset (append gv1 y) (append z y)), (lst_subset (append gv1 y) (append z gv1)), (lst_subset (append gv1 y) (append y z)), (lst_subset (append gv1 y) (append y y)), (lst_subset (append gv1 y) (append y gv1)), (lst_subset (append gv1 y) (append gv1 z)), (lst_subset (append gv1 y) (append gv1 gv1)), (lst_subset (append gv1 gv1) z), (lst_subset (append gv1 gv1) y)
+(lst_subset (append gv1 gv1) gv1), (lst_subset (append gv1 gv1) (lst_intersection z z)), (lst_subset (append gv1 gv1) (lst_intersection z y)), (lst_subset (append gv1 gv1) (lst_intersection z gv1)), (lst_subset (append gv1 gv1) (lst_intersection y z)), (lst_subset (append gv1 gv1) (lst_intersection y y)), (lst_subset (append gv1 gv1) (lst_intersection y gv1)), (lst_subset (append gv1 gv1) (lst_intersection gv1 z)), (lst_subset (append gv1 gv1) (lst_intersection gv1 y)), (lst_subset (append gv1 gv1) (lst_intersection gv1 gv1))
+(lst_subset (append gv1 gv1) (append z z)), (lst_subset (append gv1 gv1) (append z y)), (lst_subset (append gv1 gv1) (append z gv1)), (lst_subset (append gv1 gv1) (append y z)), (lst_subset (append gv1 gv1) (append y y)), (lst_subset (append gv1 gv1) (append y gv1)), (lst_subset (append gv1 gv1) (append gv1 z)), (lst_subset (append gv1 gv1) (append gv1 y)), (~ lst_eq z z), (~ lst_eq z y)
+(~ lst_eq z gv1), (~ lst_eq y z), (~ lst_eq y y), (~ lst_eq y gv1), (~ lst_eq gv1 z), (~ lst_eq gv1 y), (~ lst_eq gv1 gv1), (~ lst_subset z z), (~ lst_subset z y), (~ lst_subset z gv1)
+(~ lst_subset y z), (~ lst_subset y y), (~ lst_subset y gv1), (~ lst_subset gv1 z), (~ lst_subset gv1 y), (~ lst_subset gv1 gv1), (z <> z), (z <> y), (z <> gv1), (y <> z)
+(y <> y), (y <> gv1), (gv1 <> z), (gv1 <> y), (gv1 <> gv1), (n <> n), (None = Some z), (None = Some y), (None = Some gv1), (None = Some n)
+(mem n z = lst_mem n z), (mem n z = lst_mem n y), (mem n z = lst_mem n gv1), (mem n y = lst_mem n z), (mem n y = lst_mem n y), (mem n y = lst_mem n gv1), (mem n gv1 = lst_mem n z), (mem n gv1 = lst_mem n y), (mem n gv1 = lst_mem n gv1), (lst_intersection z z = z)
+(lst_intersection z z = y), (lst_intersection z z = gv1), (lst_intersection z z = append z z), (lst_intersection z z = append z y), (lst_intersection z z = append z gv1), (lst_intersection z z = append y z), (lst_intersection z z = append y y), (lst_intersection z z = append y gv1), (lst_intersection z z = append gv1 z), (lst_intersection z z = append gv1 y)
+(lst_intersection z z = append gv1 gv1), (lst_intersection z y = z), (lst_intersection z y = y), (lst_intersection z y = gv1), (lst_intersection z y = append z z), (lst_intersection z y = append z y), (lst_intersection z y = append z gv1), (lst_intersection z y = append y z), (lst_intersection z y = append y y), (lst_intersection z y = append y gv1)
+(lst_intersection z y = append gv1 z), (lst_intersection z y = append gv1 y), (lst_intersection z y = append gv1 gv1), (lst_intersection z gv1 = z), (lst_intersection z gv1 = y), (lst_intersection z gv1 = gv1), (lst_intersection z gv1 = append z z), (lst_intersection z gv1 = append z y), (lst_intersection z gv1 = append z gv1), (lst_intersection z gv1 = append y z)
+(lst_intersection z gv1 = append y y), (lst_intersection z gv1 = append y gv1), (lst_intersection z gv1 = append gv1 z), (lst_intersection z gv1 = append gv1 y), (lst_intersection z gv1 = append gv1 gv1), (lst_intersection y z = z), (lst_intersection y z = y), (lst_intersection y z = gv1), (lst_intersection y z = append z z), (lst_intersection y z = append z y)
+(lst_intersection y z = append z gv1), (lst_intersection y z = append y z), (lst_intersection y z = append y y), (lst_intersection y z = append y gv1), (lst_intersection y z = append gv1 z), (lst_intersection y z = append gv1 y), (lst_intersection y z = append gv1 gv1), (lst_intersection y y = z), (lst_intersection y y = y), (lst_intersection y y = gv1)
+(lst_intersection y y = append z z), (lst_intersection y y = append z y), (lst_intersection y y = append z gv1), (lst_intersection y y = append y z), (lst_intersection y y = append y y), (lst_intersection y y = append y gv1), (lst_intersection y y = append gv1 z), (lst_intersection y y = append gv1 y), (lst_intersection y y = append gv1 gv1), (lst_intersection y gv1 = z)
+(lst_intersection y gv1 = y), (lst_intersection y gv1 = gv1), (lst_intersection y gv1 = append z z), (lst_intersection y gv1 = append z y), (lst_intersection y gv1 = append z gv1), (lst_intersection y gv1 = append y z), (lst_intersection y gv1 = append y y), (lst_intersection y gv1 = append y gv1), (lst_intersection y gv1 = append gv1 z), (lst_intersection y gv1 = append gv1 y)
+(lst_intersection y gv1 = append gv1 gv1), (lst_intersection gv1 z = z), (lst_intersection gv1 z = y), (lst_intersection gv1 z = gv1), (lst_intersection gv1 z = append z z), (lst_intersection gv1 z = append z y), (lst_intersection gv1 z = append z gv1), (lst_intersection gv1 z = append y z), (lst_intersection gv1 z = append y y), (lst_intersection gv1 z = append y gv1)
+(lst_intersection gv1 z = append gv1 z), (lst_intersection gv1 z = append gv1 y), (lst_intersection gv1 z = append gv1 gv1), (lst_intersection gv1 y = z), (lst_intersection gv1 y = y), (lst_intersection gv1 y = gv1), (lst_intersection gv1 y = append z z), (lst_intersection gv1 y = append z y), (lst_intersection gv1 y = append z gv1), (lst_intersection gv1 y = append y z)
+(lst_intersection gv1 y = append y y), (lst_intersection gv1 y = append y gv1), (lst_intersection gv1 y = append gv1 z), (lst_intersection gv1 y = append gv1 y), (lst_intersection gv1 y = append gv1 gv1), (lst_intersection gv1 gv1 = z), (lst_intersection gv1 gv1 = y), (lst_intersection gv1 gv1 = gv1), (lst_intersection gv1 gv1 = append z z), (lst_intersection gv1 gv1 = append z y)
+(lst_intersection gv1 gv1 = append z gv1), (lst_intersection gv1 gv1 = append y z), (lst_intersection gv1 gv1 = append y y), (lst_intersection gv1 gv1 = append y gv1), (lst_intersection gv1 gv1 = append gv1 z), (lst_intersection gv1 gv1 = append gv1 y), (lst_intersection gv1 gv1 = append gv1 gv1), (append z z = z), (append z z = y), (append z z = gv1)
+(append z y = z), (append z y = y), (append z y = gv1), (append z gv1 = z), (append z gv1 = y), (append z gv1 = gv1), (append y z = z), (append y z = y), (append y z = gv1), (append y y = z)
+(append y y = y), (append y y = gv1), (append y gv1 = z), (append y gv1 = y), (append y gv1 = gv1), (append gv1 z = z), (append gv1 z = y), (append gv1 z = gv1), (append gv1 y = z), (append gv1 y = y)
+(append gv1 y = gv1), (append gv1 gv1 = z), (append gv1 gv1 = y), (append gv1 gv1 = gv1)
+
+Label: 2 (4)
+(lst_eq z z), (lst_eq z y), (lst_eq z gv1), (lst_eq y z), (lst_eq y y), (lst_eq y gv1), (lst_eq gv1 z), (lst_eq gv1 y), (lst_eq gv1 gv1), (lst_subset z z)
+(lst_subset z y), (lst_subset z gv1), (lst_subset y z), (lst_subset y y), (lst_subset y gv1), (lst_subset gv1 z), (lst_subset gv1 y), (lst_subset gv1 gv1), (z = z), (z = y)
+(z = gv1), (y = z), (y = y), (y = gv1), (gv1 = z), (gv1 = y), (gv1 = gv1), (n = n), (false = lst_mem n z), (false = lst_mem n y)
+(false = lst_mem n gv1), (false = mem n z), (false = mem n y), (false = mem n gv1), (true = lst_mem n z), (true = lst_mem n y), (true = lst_mem n gv1), (true = mem n z), (true = mem n y), (true = mem n gv1)
+(lst_eq z (lst_intersection z z)), (lst_eq z (lst_intersection z y)), (lst_eq z (lst_intersection z gv1)), (lst_eq z (lst_intersection y z)), (lst_eq z (lst_intersection y y)), (lst_eq z (lst_intersection y gv1)), (lst_eq z (lst_intersection gv1 z)), (lst_eq z (lst_intersection gv1 y)), (lst_eq z (lst_intersection gv1 gv1)), (lst_eq z (append z z))
+(lst_eq z (append z y)), (lst_eq z (append z gv1)), (lst_eq z (append y z)), (lst_eq z (append y y)), (lst_eq z (append y gv1)), (lst_eq z (append gv1 z)), (lst_eq z (append gv1 y)), (lst_eq z (append gv1 gv1)), (lst_eq y (lst_intersection z z)), (lst_eq y (lst_intersection z y))
+(lst_eq y (lst_intersection z gv1)), (lst_eq y (lst_intersection y z)), (lst_eq y (lst_intersection y y)), (lst_eq y (lst_intersection y gv1)), (lst_eq y (lst_intersection gv1 z)), (lst_eq y (lst_intersection gv1 y)), (lst_eq y (lst_intersection gv1 gv1)), (lst_eq y (append z z)), (lst_eq y (append z y)), (lst_eq y (append z gv1))
+(lst_eq y (append y z)), (lst_eq y (append y y)), (lst_eq y (append y gv1)), (lst_eq y (append gv1 z)), (lst_eq y (append gv1 y)), (lst_eq y (append gv1 gv1)), (lst_eq gv1 (lst_intersection z z)), (lst_eq gv1 (lst_intersection z y)), (lst_eq gv1 (lst_intersection z gv1)), (lst_eq gv1 (lst_intersection y z))
+(lst_eq gv1 (lst_intersection y y)), (lst_eq gv1 (lst_intersection y gv1)), (lst_eq gv1 (lst_intersection gv1 z)), (lst_eq gv1 (lst_intersection gv1 y)), (lst_eq gv1 (lst_intersection gv1 gv1)), (lst_eq gv1 (append z z)), (lst_eq gv1 (append z y)), (lst_eq gv1 (append z gv1)), (lst_eq gv1 (append y z)), (lst_eq gv1 (append y y))
+(lst_eq gv1 (append y gv1)), (lst_eq gv1 (append gv1 z)), (lst_eq gv1 (append gv1 y)), (lst_eq gv1 (append gv1 gv1)), (lst_eq (lst_intersection z z) z), (lst_eq (lst_intersection z z) y), (lst_eq (lst_intersection z z) gv1), (lst_eq (lst_intersection z z) (lst_intersection z y)), (lst_eq (lst_intersection z z) (lst_intersection z gv1)), (lst_eq (lst_intersection z z) (lst_intersection y z))
+(lst_eq (lst_intersection z z) (lst_intersection y y)), (lst_eq (lst_intersection z z) (lst_intersection y gv1)), (lst_eq (lst_intersection z z) (lst_intersection gv1 z)), (lst_eq (lst_intersection z z) (lst_intersection gv1 y)), (lst_eq (lst_intersection z z) (lst_intersection gv1 gv1)), (lst_eq (lst_intersection z z) (append z z)), (lst_eq (lst_intersection z z) (append z y)), (lst_eq (lst_intersection z z) (append z gv1)), (lst_eq (lst_intersection z z) (append y z)), (lst_eq (lst_intersection z z) (append y y))
+(lst_eq (lst_intersection z z) (append y gv1)), (lst_eq (lst_intersection z z) (append gv1 z)), (lst_eq (lst_intersection z z) (append gv1 y)), (lst_eq (lst_intersection z z) (append gv1 gv1)), (lst_eq (lst_intersection z y) z), (lst_eq (lst_intersection z y) y), (lst_eq (lst_intersection z y) gv1), (lst_eq (lst_intersection z y) (lst_intersection z z)), (lst_eq (lst_intersection z y) (lst_intersection z gv1)), (lst_eq (lst_intersection z y) (lst_intersection y z))
+(lst_eq (lst_intersection z y) (lst_intersection y y)), (lst_eq (lst_intersection z y) (lst_intersection y gv1)), (lst_eq (lst_intersection z y) (lst_intersection gv1 z)), (lst_eq (lst_intersection z y) (lst_intersection gv1 y)), (lst_eq (lst_intersection z y) (lst_intersection gv1 gv1)), (lst_eq (lst_intersection z y) (append z z)), (lst_eq (lst_intersection z y) (append z y)), (lst_eq (lst_intersection z y) (append z gv1)), (lst_eq (lst_intersection z y) (append y z)), (lst_eq (lst_intersection z y) (append y y))
+(lst_eq (lst_intersection z y) (append y gv1)), (lst_eq (lst_intersection z y) (append gv1 z)), (lst_eq (lst_intersection z y) (append gv1 y)), (lst_eq (lst_intersection z y) (append gv1 gv1)), (lst_eq (lst_intersection z gv1) z), (lst_eq (lst_intersection z gv1) y), (lst_eq (lst_intersection z gv1) gv1), (lst_eq (lst_intersection z gv1) (lst_intersection z z)), (lst_eq (lst_intersection z gv1) (lst_intersection z y)), (lst_eq (lst_intersection z gv1) (lst_intersection y z))
+(lst_eq (lst_intersection z gv1) (lst_intersection y y)), (lst_eq (lst_intersection z gv1) (lst_intersection y gv1)), (lst_eq (lst_intersection z gv1) (lst_intersection gv1 z)), (lst_eq (lst_intersection z gv1) (lst_intersection gv1 y)), (lst_eq (lst_intersection z gv1) (lst_intersection gv1 gv1)), (lst_eq (lst_intersection z gv1) (append z z)), (lst_eq (lst_intersection z gv1) (append z y)), (lst_eq (lst_intersection z gv1) (append z gv1)), (lst_eq (lst_intersection z gv1) (append y z)), (lst_eq (lst_intersection z gv1) (append y y))
+(lst_eq (lst_intersection z gv1) (append y gv1)), (lst_eq (lst_intersection z gv1) (append gv1 z)), (lst_eq (lst_intersection z gv1) (append gv1 y)), (lst_eq (lst_intersection z gv1) (append gv1 gv1)), (lst_eq (lst_intersection y z) z), (lst_eq (lst_intersection y z) y), (lst_eq (lst_intersection y z) gv1), (lst_eq (lst_intersection y z) (lst_intersection z z)), (lst_eq (lst_intersection y z) (lst_intersection z y)), (lst_eq (lst_intersection y z) (lst_intersection z gv1))
+(lst_eq (lst_intersection y z) (lst_intersection y y)), (lst_eq (lst_intersection y z) (lst_intersection y gv1)), (lst_eq (lst_intersection y z) (lst_intersection gv1 z)), (lst_eq (lst_intersection y z) (lst_intersection gv1 y)), (lst_eq (lst_intersection y z) (lst_intersection gv1 gv1)), (lst_eq (lst_intersection y z) (append z z)), (lst_eq (lst_intersection y z) (append z y)), (lst_eq (lst_intersection y z) (append z gv1)), (lst_eq (lst_intersection y z) (append y z)), (lst_eq (lst_intersection y z) (append y y))
+(lst_eq (lst_intersection y z) (append y gv1)), (lst_eq (lst_intersection y z) (append gv1 z)), (lst_eq (lst_intersection y z) (append gv1 y)), (lst_eq (lst_intersection y z) (append gv1 gv1)), (lst_eq (lst_intersection y y) z), (lst_eq (lst_intersection y y) y), (lst_eq (lst_intersection y y) gv1), (lst_eq (lst_intersection y y) (lst_intersection z z)), (lst_eq (lst_intersection y y) (lst_intersection z y)), (lst_eq (lst_intersection y y) (lst_intersection z gv1))
+(lst_eq (lst_intersection y y) (lst_intersection y z)), (lst_eq (lst_intersection y y) (lst_intersection y gv1)), (lst_eq (lst_intersection y y) (lst_intersection gv1 z)), (lst_eq (lst_intersection y y) (lst_intersection gv1 y)), (lst_eq (lst_intersection y y) (lst_intersection gv1 gv1)), (lst_eq (lst_intersection y y) (append z z)), (lst_eq (lst_intersection y y) (append z y)), (lst_eq (lst_intersection y y) (append z gv1)), (lst_eq (lst_intersection y y) (append y z)), (lst_eq (lst_intersection y y) (append y y))
+(lst_eq (lst_intersection y y) (append y gv1)), (lst_eq (lst_intersection y y) (append gv1 z)), (lst_eq (lst_intersection y y) (append gv1 y)), (lst_eq (lst_intersection y y) (append gv1 gv1)), (lst_eq (lst_intersection y gv1) z), (lst_eq (lst_intersection y gv1) y), (lst_eq (lst_intersection y gv1) gv1), (lst_eq (lst_intersection y gv1) (lst_intersection z z)), (lst_eq (lst_intersection y gv1) (lst_intersection z y)), (lst_eq (lst_intersection y gv1) (lst_intersection z gv1))
+(lst_eq (lst_intersection y gv1) (lst_intersection y z)), (lst_eq (lst_intersection y gv1) (lst_intersection y y)), (lst_eq (lst_intersection y gv1) (lst_intersection gv1 z)), (lst_eq (lst_intersection y gv1) (lst_intersection gv1 y)), (lst_eq (lst_intersection y gv1) (lst_intersection gv1 gv1)), (lst_eq (lst_intersection y gv1) (append z z)), (lst_eq (lst_intersection y gv1) (append z y)), (lst_eq (lst_intersection y gv1) (append z gv1)), (lst_eq (lst_intersection y gv1) (append y z)), (lst_eq (lst_intersection y gv1) (append y y))
+(lst_eq (lst_intersection y gv1) (append y gv1)), (lst_eq (lst_intersection y gv1) (append gv1 z)), (lst_eq (lst_intersection y gv1) (append gv1 y)), (lst_eq (lst_intersection y gv1) (append gv1 gv1)), (lst_eq (lst_intersection gv1 z) z), (lst_eq (lst_intersection gv1 z) y), (lst_eq (lst_intersection gv1 z) gv1), (lst_eq (lst_intersection gv1 z) (lst_intersection z z)), (lst_eq (lst_intersection gv1 z) (lst_intersection z y)), (lst_eq (lst_intersection gv1 z) (lst_intersection z gv1))
+(lst_eq (lst_intersection gv1 z) (lst_intersection y z)), (lst_eq (lst_intersection gv1 z) (lst_intersection y y)), (lst_eq (lst_intersection gv1 z) (lst_intersection y gv1)), (lst_eq (lst_intersection gv1 z) (lst_intersection gv1 y)), (lst_eq (lst_intersection gv1 z) (lst_intersection gv1 gv1)), (lst_eq (lst_intersection gv1 z) (append z z)), (lst_eq (lst_intersection gv1 z) (append z y)), (lst_eq (lst_intersection gv1 z) (append z gv1)), (lst_eq (lst_intersection gv1 z) (append y z)), (lst_eq (lst_intersection gv1 z) (append y y))
+(lst_eq (lst_intersection gv1 z) (append y gv1)), (lst_eq (lst_intersection gv1 z) (append gv1 z)), (lst_eq (lst_intersection gv1 z) (append gv1 y)), (lst_eq (lst_intersection gv1 z) (append gv1 gv1)), (lst_eq (lst_intersection gv1 y) z), (lst_eq (lst_intersection gv1 y) y), (lst_eq (lst_intersection gv1 y) gv1), (lst_eq (lst_intersection gv1 y) (lst_intersection z z)), (lst_eq (lst_intersection gv1 y) (lst_intersection z y)), (lst_eq (lst_intersection gv1 y) (lst_intersection z gv1))
+(lst_eq (lst_intersection gv1 y) (lst_intersection y z)), (lst_eq (lst_intersection gv1 y) (lst_intersection y y)), (lst_eq (lst_intersection gv1 y) (lst_intersection y gv1)), (lst_eq (lst_intersection gv1 y) (lst_intersection gv1 z)), (lst_eq (lst_intersection gv1 y) (lst_intersection gv1 gv1)), (lst_eq (lst_intersection gv1 y) (append z z)), (lst_eq (lst_intersection gv1 y) (append z y)), (lst_eq (lst_intersection gv1 y) (append z gv1)), (lst_eq (lst_intersection gv1 y) (append y z)), (lst_eq (lst_intersection gv1 y) (append y y))
+(lst_eq (lst_intersection gv1 y) (append y gv1)), (lst_eq (lst_intersection gv1 y) (append gv1 z)), (lst_eq (lst_intersection gv1 y) (append gv1 y)), (lst_eq (lst_intersection gv1 y) (append gv1 gv1)), (lst_eq (lst_intersection gv1 gv1) z), (lst_eq (lst_intersection gv1 gv1) y), (lst_eq (lst_intersection gv1 gv1) gv1), (lst_eq (lst_intersection gv1 gv1) (lst_intersection z z)), (lst_eq (lst_intersection gv1 gv1) (lst_intersection z y)), (lst_eq (lst_intersection gv1 gv1) (lst_intersection z gv1))
+(lst_eq (lst_intersection gv1 gv1) (lst_intersection y z)), (lst_eq (lst_intersection gv1 gv1) (lst_intersection y y)), (lst_eq (lst_intersection gv1 gv1) (lst_intersection y gv1)), (lst_eq (lst_intersection gv1 gv1) (lst_intersection gv1 z)), (lst_eq (lst_intersection gv1 gv1) (lst_intersection gv1 y)), (lst_eq (lst_intersection gv1 gv1) (append z z)), (lst_eq (lst_intersection gv1 gv1) (append z y)), (lst_eq (lst_intersection gv1 gv1) (append z gv1)), (lst_eq (lst_intersection gv1 gv1) (append y z)), (lst_eq (lst_intersection gv1 gv1) (append y y))
+(lst_eq (lst_intersection gv1 gv1) (append y gv1)), (lst_eq (lst_intersection gv1 gv1) (append gv1 z)), (lst_eq (lst_intersection gv1 gv1) (append gv1 y)), (lst_eq (lst_intersection gv1 gv1) (append gv1 gv1)), (lst_eq (append z z) z), (lst_eq (append z z) y), (lst_eq (append z z) gv1), (lst_eq (append z z) (lst_intersection z z)), (lst_eq (append z z) (lst_intersection z y)), (lst_eq (append z z) (lst_intersection z gv1))
+(lst_eq (append z z) (lst_intersection y z)), (lst_eq (append z z) (lst_intersection y y)), (lst_eq (append z z) (lst_intersection y gv1)), (lst_eq (append z z) (lst_intersection gv1 z)), (lst_eq (append z z) (lst_intersection gv1 y)), (lst_eq (append z z) (lst_intersection gv1 gv1)), (lst_eq (append z z) (append z y)), (lst_eq (append z z) (append z gv1)), (lst_eq (append z z) (append y z)), (lst_eq (append z z) (append y y))
+(lst_eq (append z z) (append y gv1)), (lst_eq (append z z) (append gv1 z)), (lst_eq (append z z) (append gv1 y)), (lst_eq (append z z) (append gv1 gv1)), (lst_eq (append z y) z), (lst_eq (append z y) y), (lst_eq (append z y) gv1), (lst_eq (append z y) (lst_intersection z z)), (lst_eq (append z y) (lst_intersection z y)), (lst_eq (append z y) (lst_intersection z gv1))
+(lst_eq (append z y) (lst_intersection y z)), (lst_eq (append z y) (lst_intersection y y)), (lst_eq (append z y) (lst_intersection y gv1)), (lst_eq (append z y) (lst_intersection gv1 z)), (lst_eq (append z y) (lst_intersection gv1 y)), (lst_eq (append z y) (lst_intersection gv1 gv1)), (lst_eq (append z y) (append z z)), (lst_eq (append z y) (append z gv1)), (lst_eq (append z y) (append y z)), (lst_eq (append z y) (append y y))
+(lst_eq (append z y) (append y gv1)), (lst_eq (append z y) (append gv1 z)), (lst_eq (append z y) (append gv1 y)), (lst_eq (append z y) (append gv1 gv1)), (lst_eq (append z gv1) z), (lst_eq (append z gv1) y), (lst_eq (append z gv1) gv1), (lst_eq (append z gv1) (lst_intersection z z)), (lst_eq (append z gv1) (lst_intersection z y)), (lst_eq (append z gv1) (lst_intersection z gv1))
+(lst_eq (append z gv1) (lst_intersection y z)), (lst_eq (append z gv1) (lst_intersection y y)), (lst_eq (append z gv1) (lst_intersection y gv1)), (lst_eq (append z gv1) (lst_intersection gv1 z)), (lst_eq (append z gv1) (lst_intersection gv1 y)), (lst_eq (append z gv1) (lst_intersection gv1 gv1)), (lst_eq (append z gv1) (append z z)), (lst_eq (append z gv1) (append z y)), (lst_eq (append z gv1) (append y z)), (lst_eq (append z gv1) (append y y))
+(lst_eq (append z gv1) (append y gv1)), (lst_eq (append z gv1) (append gv1 z)), (lst_eq (append z gv1) (append gv1 y)), (lst_eq (append z gv1) (append gv1 gv1)), (lst_eq (append y z) z), (lst_eq (append y z) y), (lst_eq (append y z) gv1), (lst_eq (append y z) (lst_intersection z z)), (lst_eq (append y z) (lst_intersection z y)), (lst_eq (append y z) (lst_intersection z gv1))
+(lst_eq (append y z) (lst_intersection y z)), (lst_eq (append y z) (lst_intersection y y)), (lst_eq (append y z) (lst_intersection y gv1)), (lst_eq (append y z) (lst_intersection gv1 z)), (lst_eq (append y z) (lst_intersection gv1 y)), (lst_eq (append y z) (lst_intersection gv1 gv1)), (lst_eq (append y z) (append z z)), (lst_eq (append y z) (append z y)), (lst_eq (append y z) (append z gv1)), (lst_eq (append y z) (append y y))
+(lst_eq (append y z) (append y gv1)), (lst_eq (append y z) (append gv1 z)), (lst_eq (append y z) (append gv1 y)), (lst_eq (append y z) (append gv1 gv1)), (lst_eq (append y y) z), (lst_eq (append y y) y), (lst_eq (append y y) gv1), (lst_eq (append y y) (lst_intersection z z)), (lst_eq (append y y) (lst_intersection z y)), (lst_eq (append y y) (lst_intersection z gv1))
+(lst_eq (append y y) (lst_intersection y z)), (lst_eq (append y y) (lst_intersection y y)), (lst_eq (append y y) (lst_intersection y gv1)), (lst_eq (append y y) (lst_intersection gv1 z)), (lst_eq (append y y) (lst_intersection gv1 y)), (lst_eq (append y y) (lst_intersection gv1 gv1)), (lst_eq (append y y) (append z z)), (lst_eq (append y y) (append z y)), (lst_eq (append y y) (append z gv1)), (lst_eq (append y y) (append y z))
+(lst_eq (append y y) (append y gv1)), (lst_eq (append y y) (append gv1 z)), (lst_eq (append y y) (append gv1 y)), (lst_eq (append y y) (append gv1 gv1)), (lst_eq (append y gv1) z), (lst_eq (append y gv1) y), (lst_eq (append y gv1) gv1), (lst_eq (append y gv1) (lst_intersection z z)), (lst_eq (append y gv1) (lst_intersection z y)), (lst_eq (append y gv1) (lst_intersection z gv1))
+(lst_eq (append y gv1) (lst_intersection y z)), (lst_eq (append y gv1) (lst_intersection y y)), (lst_eq (append y gv1) (lst_intersection y gv1)), (lst_eq (append y gv1) (lst_intersection gv1 z)), (lst_eq (append y gv1) (lst_intersection gv1 y)), (lst_eq (append y gv1) (lst_intersection gv1 gv1)), (lst_eq (append y gv1) (append z z)), (lst_eq (append y gv1) (append z y)), (lst_eq (append y gv1) (append z gv1)), (lst_eq (append y gv1) (append y z))
+(lst_eq (append y gv1) (append y y)), (lst_eq (append y gv1) (append gv1 z)), (lst_eq (append y gv1) (append gv1 y)), (lst_eq (append y gv1) (append gv1 gv1)), (lst_eq (append gv1 z) z), (lst_eq (append gv1 z) y), (lst_eq (append gv1 z) gv1), (lst_eq (append gv1 z) (lst_intersection z z)), (lst_eq (append gv1 z) (lst_intersection z y)), (lst_eq (append gv1 z) (lst_intersection z gv1))
+(lst_eq (append gv1 z) (lst_intersection y z)), (lst_eq (append gv1 z) (lst_intersection y y)), (lst_eq (append gv1 z) (lst_intersection y gv1)), (lst_eq (append gv1 z) (lst_intersection gv1 z)), (lst_eq (append gv1 z) (lst_intersection gv1 y)), (lst_eq (append gv1 z) (lst_intersection gv1 gv1)), (lst_eq (append gv1 z) (append z z)), (lst_eq (append gv1 z) (append z y)), (lst_eq (append gv1 z) (append z gv1)), (lst_eq (append gv1 z) (append y z))
+(lst_eq (append gv1 z) (append y y)), (lst_eq (append gv1 z) (append y gv1)), (lst_eq (append gv1 z) (append gv1 y)), (lst_eq (append gv1 z) (append gv1 gv1)), (lst_eq (append gv1 y) z), (lst_eq (append gv1 y) y), (lst_eq (append gv1 y) gv1), (lst_eq (append gv1 y) (lst_intersection z z)), (lst_eq (append gv1 y) (lst_intersection z y)), (lst_eq (append gv1 y) (lst_intersection z gv1))
+(lst_eq (append gv1 y) (lst_intersection y z)), (lst_eq (append gv1 y) (lst_intersection y y)), (lst_eq (append gv1 y) (lst_intersection y gv1)), (lst_eq (append gv1 y) (lst_intersection gv1 z)), (lst_eq (append gv1 y) (lst_intersection gv1 y)), (lst_eq (append gv1 y) (lst_intersection gv1 gv1)), (lst_eq (append gv1 y) (append z z)), (lst_eq (append gv1 y) (append z y)), (lst_eq (append gv1 y) (append z gv1)), (lst_eq (append gv1 y) (append y z))
+(lst_eq (append gv1 y) (append y y)), (lst_eq (append gv1 y) (append y gv1)), (lst_eq (append gv1 y) (append gv1 z)), (lst_eq (append gv1 y) (append gv1 gv1)), (lst_eq (append gv1 gv1) z), (lst_eq (append gv1 gv1) y), (lst_eq (append gv1 gv1) gv1), (lst_eq (append gv1 gv1) (lst_intersection z z)), (lst_eq (append gv1 gv1) (lst_intersection z y)), (lst_eq (append gv1 gv1) (lst_intersection z gv1))
+(lst_eq (append gv1 gv1) (lst_intersection y z)), (lst_eq (append gv1 gv1) (lst_intersection y y)), (lst_eq (append gv1 gv1) (lst_intersection y gv1)), (lst_eq (append gv1 gv1) (lst_intersection gv1 z)), (lst_eq (append gv1 gv1) (lst_intersection gv1 y)), (lst_eq (append gv1 gv1) (lst_intersection gv1 gv1)), (lst_eq (append gv1 gv1) (append z z)), (lst_eq (append gv1 gv1) (append z y)), (lst_eq (append gv1 gv1) (append z gv1)), (lst_eq (append gv1 gv1) (append y z))
+(lst_eq (append gv1 gv1) (append y y)), (lst_eq (append gv1 gv1) (append y gv1)), (lst_eq (append gv1 gv1) (append gv1 z)), (lst_eq (append gv1 gv1) (append gv1 y)), (lst_subset z (lst_intersection z z)), (lst_subset z (lst_intersection z y)), (lst_subset z (lst_intersection z gv1)), (lst_subset z (lst_intersection y z)), (lst_subset z (lst_intersection y y)), (lst_subset z (lst_intersection y gv1))
+(lst_subset z (lst_intersection gv1 z)), (lst_subset z (lst_intersection gv1 y)), (lst_subset z (lst_intersection gv1 gv1)), (lst_subset z (append z z)), (lst_subset z (append z y)), (lst_subset z (append z gv1)), (lst_subset z (append y z)), (lst_subset z (append y y)), (lst_subset z (append y gv1)), (lst_subset z (append gv1 z))
+(lst_subset z (append gv1 y)), (lst_subset z (append gv1 gv1)), (lst_subset y (lst_intersection z z)), (lst_subset y (lst_intersection z y)), (lst_subset y (lst_intersection z gv1)), (lst_subset y (lst_intersection y z)), (lst_subset y (lst_intersection y y)), (lst_subset y (lst_intersection y gv1)), (lst_subset y (lst_intersection gv1 z)), (lst_subset y (lst_intersection gv1 y))
+(lst_subset y (lst_intersection gv1 gv1)), (lst_subset y (append z z)), (lst_subset y (append z y)), (lst_subset y (append z gv1)), (lst_subset y (append y z)), (lst_subset y (append y y)), (lst_subset y (append y gv1)), (lst_subset y (append gv1 z)), (lst_subset y (append gv1 y)), (lst_subset y (append gv1 gv1))
+(lst_subset gv1 (lst_intersection z z)), (lst_subset gv1 (lst_intersection z y)), (lst_subset gv1 (lst_intersection z gv1)), (lst_subset gv1 (lst_intersection y z)), (lst_subset gv1 (lst_intersection y y)), (lst_subset gv1 (lst_intersection y gv1)), (lst_subset gv1 (lst_intersection gv1 z)), (lst_subset gv1 (lst_intersection gv1 y)), (lst_subset gv1 (lst_intersection gv1 gv1)), (lst_subset gv1 (append z z))
+(lst_subset gv1 (append z y)), (lst_subset gv1 (append z gv1)), (lst_subset gv1 (append y z)), (lst_subset gv1 (append y y)), (lst_subset gv1 (append y gv1)), (lst_subset gv1 (append gv1 z)), (lst_subset gv1 (append gv1 y)), (lst_subset gv1 (append gv1 gv1)), (lst_subset (lst_intersection z z) z), (lst_subset (lst_intersection z z) y)
+(lst_subset (lst_intersection z z) gv1), (lst_subset (lst_intersection z z) (lst_intersection z y)), (lst_subset (lst_intersection z z) (lst_intersection z gv1)), (lst_subset (lst_intersection z z) (lst_intersection y z)), (lst_subset (lst_intersection z z) (lst_intersection y y)), (lst_subset (lst_intersection z z) (lst_intersection y gv1)), (lst_subset (lst_intersection z z) (lst_intersection gv1 z)), (lst_subset (lst_intersection z z) (lst_intersection gv1 y)), (lst_subset (lst_intersection z z) (lst_intersection gv1 gv1)), (lst_subset (lst_intersection z z) (append z z))
+(lst_subset (lst_intersection z z) (append z y)), (lst_subset (lst_intersection z z) (append z gv1)), (lst_subset (lst_intersection z z) (append y z)), (lst_subset (lst_intersection z z) (append y y)), (lst_subset (lst_intersection z z) (append y gv1)), (lst_subset (lst_intersection z z) (append gv1 z)), (lst_subset (lst_intersection z z) (append gv1 y)), (lst_subset (lst_intersection z z) (append gv1 gv1)), (lst_subset (lst_intersection z y) z), (lst_subset (lst_intersection z y) y)
+(lst_subset (lst_intersection z y) gv1), (lst_subset (lst_intersection z y) (lst_intersection z z)), (lst_subset (lst_intersection z y) (lst_intersection z gv1)), (lst_subset (lst_intersection z y) (lst_intersection y z)), (lst_subset (lst_intersection z y) (lst_intersection y y)), (lst_subset (lst_intersection z y) (lst_intersection y gv1)), (lst_subset (lst_intersection z y) (lst_intersection gv1 z)), (lst_subset (lst_intersection z y) (lst_intersection gv1 y)), (lst_subset (lst_intersection z y) (lst_intersection gv1 gv1)), (lst_subset (lst_intersection z y) (append z z))
+(lst_subset (lst_intersection z y) (append z y)), (lst_subset (lst_intersection z y) (append z gv1)), (lst_subset (lst_intersection z y) (append y z)), (lst_subset (lst_intersection z y) (append y y)), (lst_subset (lst_intersection z y) (append y gv1)), (lst_subset (lst_intersection z y) (append gv1 z)), (lst_subset (lst_intersection z y) (append gv1 y)), (lst_subset (lst_intersection z y) (append gv1 gv1)), (lst_subset (lst_intersection z gv1) z), (lst_subset (lst_intersection z gv1) y)
+(lst_subset (lst_intersection z gv1) gv1), (lst_subset (lst_intersection z gv1) (lst_intersection z z)), (lst_subset (lst_intersection z gv1) (lst_intersection z y)), (lst_subset (lst_intersection z gv1) (lst_intersection y z)), (lst_subset (lst_intersection z gv1) (lst_intersection y y)), (lst_subset (lst_intersection z gv1) (lst_intersection y gv1)), (lst_subset (lst_intersection z gv1) (lst_intersection gv1 z)), (lst_subset (lst_intersection z gv1) (lst_intersection gv1 y)), (lst_subset (lst_intersection z gv1) (lst_intersection gv1 gv1)), (lst_subset (lst_intersection z gv1) (append z z))
+(lst_subset (lst_intersection z gv1) (append z y)), (lst_subset (lst_intersection z gv1) (append z gv1)), (lst_subset (lst_intersection z gv1) (append y z)), (lst_subset (lst_intersection z gv1) (append y y)), (lst_subset (lst_intersection z gv1) (append y gv1)), (lst_subset (lst_intersection z gv1) (append gv1 z)), (lst_subset (lst_intersection z gv1) (append gv1 y)), (lst_subset (lst_intersection z gv1) (append gv1 gv1)), (lst_subset (lst_intersection y z) z), (lst_subset (lst_intersection y z) y)
+(lst_subset (lst_intersection y z) gv1), (lst_subset (lst_intersection y z) (lst_intersection z z)), (lst_subset (lst_intersection y z) (lst_intersection z y)), (lst_subset (lst_intersection y z) (lst_intersection z gv1)), (lst_subset (lst_intersection y z) (lst_intersection y y)), (lst_subset (lst_intersection y z) (lst_intersection y gv1)), (lst_subset (lst_intersection y z) (lst_intersection gv1 z)), (lst_subset (lst_intersection y z) (lst_intersection gv1 y)), (lst_subset (lst_intersection y z) (lst_intersection gv1 gv1)), (lst_subset (lst_intersection y z) (append z z))
+(lst_subset (lst_intersection y z) (append z y)), (lst_subset (lst_intersection y z) (append z gv1)), (lst_subset (lst_intersection y z) (append y z)), (lst_subset (lst_intersection y z) (append y y)), (lst_subset (lst_intersection y z) (append y gv1)), (lst_subset (lst_intersection y z) (append gv1 z)), (lst_subset (lst_intersection y z) (append gv1 y)), (lst_subset (lst_intersection y z) (append gv1 gv1)), (lst_subset (lst_intersection y y) z), (lst_subset (lst_intersection y y) y)
+(lst_subset (lst_intersection y y) gv1), (lst_subset (lst_intersection y y) (lst_intersection z z)), (lst_subset (lst_intersection y y) (lst_intersection z y)), (lst_subset (lst_intersection y y) (lst_intersection z gv1)), (lst_subset (lst_intersection y y) (lst_intersection y z)), (lst_subset (lst_intersection y y) (lst_intersection y gv1)), (lst_subset (lst_intersection y y) (lst_intersection gv1 z)), (lst_subset (lst_intersection y y) (lst_intersection gv1 y)), (lst_subset (lst_intersection y y) (lst_intersection gv1 gv1)), (lst_subset (lst_intersection y y) (append z z))
+(lst_subset (lst_intersection y y) (append z y)), (lst_subset (lst_intersection y y) (append z gv1)), (lst_subset (lst_intersection y y) (append y z)), (lst_subset (lst_intersection y y) (append y y)), (lst_subset (lst_intersection y y) (append y gv1)), (lst_subset (lst_intersection y y) (append gv1 z)), (lst_subset (lst_intersection y y) (append gv1 y)), (lst_subset (lst_intersection y y) (append gv1 gv1)), (lst_subset (lst_intersection y gv1) z), (lst_subset (lst_intersection y gv1) y)
+(lst_subset (lst_intersection y gv1) gv1), (lst_subset (lst_intersection y gv1) (lst_intersection z z)), (lst_subset (lst_intersection y gv1) (lst_intersection z y)), (lst_subset (lst_intersection y gv1) (lst_intersection z gv1)), (lst_subset (lst_intersection y gv1) (lst_intersection y z)), (lst_subset (lst_intersection y gv1) (lst_intersection y y)), (lst_subset (lst_intersection y gv1) (lst_intersection gv1 z)), (lst_subset (lst_intersection y gv1) (lst_intersection gv1 y)), (lst_subset (lst_intersection y gv1) (lst_intersection gv1 gv1)), (lst_subset (lst_intersection y gv1) (append z z))
+(lst_subset (lst_intersection y gv1) (append z y)), (lst_subset (lst_intersection y gv1) (append z gv1)), (lst_subset (lst_intersection y gv1) (append y z)), (lst_subset (lst_intersection y gv1) (append y y)), (lst_subset (lst_intersection y gv1) (append y gv1)), (lst_subset (lst_intersection y gv1) (append gv1 z)), (lst_subset (lst_intersection y gv1) (append gv1 y)), (lst_subset (lst_intersection y gv1) (append gv1 gv1)), (lst_subset (lst_intersection gv1 z) z), (lst_subset (lst_intersection gv1 z) y)
+(lst_subset (lst_intersection gv1 z) gv1), (lst_subset (lst_intersection gv1 z) (lst_intersection z z)), (lst_subset (lst_intersection gv1 z) (lst_intersection z y)), (lst_subset (lst_intersection gv1 z) (lst_intersection z gv1)), (lst_subset (lst_intersection gv1 z) (lst_intersection y z)), (lst_subset (lst_intersection gv1 z) (lst_intersection y y)), (lst_subset (lst_intersection gv1 z) (lst_intersection y gv1)), (lst_subset (lst_intersection gv1 z) (lst_intersection gv1 y)), (lst_subset (lst_intersection gv1 z) (lst_intersection gv1 gv1)), (lst_subset (lst_intersection gv1 z) (append z z))
+(lst_subset (lst_intersection gv1 z) (append z y)), (lst_subset (lst_intersection gv1 z) (append z gv1)), (lst_subset (lst_intersection gv1 z) (append y z)), (lst_subset (lst_intersection gv1 z) (append y y)), (lst_subset (lst_intersection gv1 z) (append y gv1)), (lst_subset (lst_intersection gv1 z) (append gv1 z)), (lst_subset (lst_intersection gv1 z) (append gv1 y)), (lst_subset (lst_intersection gv1 z) (append gv1 gv1)), (lst_subset (lst_intersection gv1 y) z), (lst_subset (lst_intersection gv1 y) y)
+(lst_subset (lst_intersection gv1 y) gv1), (lst_subset (lst_intersection gv1 y) (lst_intersection z z)), (lst_subset (lst_intersection gv1 y) (lst_intersection z y)), (lst_subset (lst_intersection gv1 y) (lst_intersection z gv1)), (lst_subset (lst_intersection gv1 y) (lst_intersection y z)), (lst_subset (lst_intersection gv1 y) (lst_intersection y y)), (lst_subset (lst_intersection gv1 y) (lst_intersection y gv1)), (lst_subset (lst_intersection gv1 y) (lst_intersection gv1 z)), (lst_subset (lst_intersection gv1 y) (lst_intersection gv1 gv1)), (lst_subset (lst_intersection gv1 y) (append z z))
+(lst_subset (lst_intersection gv1 y) (append z y)), (lst_subset (lst_intersection gv1 y) (append z gv1)), (lst_subset (lst_intersection gv1 y) (append y z)), (lst_subset (lst_intersection gv1 y) (append y y)), (lst_subset (lst_intersection gv1 y) (append y gv1)), (lst_subset (lst_intersection gv1 y) (append gv1 z)), (lst_subset (lst_intersection gv1 y) (append gv1 y)), (lst_subset (lst_intersection gv1 y) (append gv1 gv1)), (lst_subset (lst_intersection gv1 gv1) z), (lst_subset (lst_intersection gv1 gv1) y)
+(lst_subset (lst_intersection gv1 gv1) gv1), (lst_subset (lst_intersection gv1 gv1) (lst_intersection z z)), (lst_subset (lst_intersection gv1 gv1) (lst_intersection z y)), (lst_subset (lst_intersection gv1 gv1) (lst_intersection z gv1)), (lst_subset (lst_intersection gv1 gv1) (lst_intersection y z)), (lst_subset (lst_intersection gv1 gv1) (lst_intersection y y)), (lst_subset (lst_intersection gv1 gv1) (lst_intersection y gv1)), (lst_subset (lst_intersection gv1 gv1) (lst_intersection gv1 z)), (lst_subset (lst_intersection gv1 gv1) (lst_intersection gv1 y)), (lst_subset (lst_intersection gv1 gv1) (append z z))
+(lst_subset (lst_intersection gv1 gv1) (append z y)), (lst_subset (lst_intersection gv1 gv1) (append z gv1)), (lst_subset (lst_intersection gv1 gv1) (append y z)), (lst_subset (lst_intersection gv1 gv1) (append y y)), (lst_subset (lst_intersection gv1 gv1) (append y gv1)), (lst_subset (lst_intersection gv1 gv1) (append gv1 z)), (lst_subset (lst_intersection gv1 gv1) (append gv1 y)), (lst_subset (lst_intersection gv1 gv1) (append gv1 gv1)), (lst_subset (append z z) z), (lst_subset (append z z) y)
+(lst_subset (append z z) gv1), (lst_subset (append z z) (lst_intersection z z)), (lst_subset (append z z) (lst_intersection z y)), (lst_subset (append z z) (lst_intersection z gv1)), (lst_subset (append z z) (lst_intersection y z)), (lst_subset (append z z) (lst_intersection y y)), (lst_subset (append z z) (lst_intersection y gv1)), (lst_subset (append z z) (lst_intersection gv1 z)), (lst_subset (append z z) (lst_intersection gv1 y)), (lst_subset (append z z) (lst_intersection gv1 gv1))
+(lst_subset (append z z) (append z y)), (lst_subset (append z z) (append z gv1)), (lst_subset (append z z) (append y z)), (lst_subset (append z z) (append y y)), (lst_subset (append z z) (append y gv1)), (lst_subset (append z z) (append gv1 z)), (lst_subset (append z z) (append gv1 y)), (lst_subset (append z z) (append gv1 gv1)), (lst_subset (append z y) z), (lst_subset (append z y) y)
+(lst_subset (append z y) gv1), (lst_subset (append z y) (lst_intersection z z)), (lst_subset (append z y) (lst_intersection z y)), (lst_subset (append z y) (lst_intersection z gv1)), (lst_subset (append z y) (lst_intersection y z)), (lst_subset (append z y) (lst_intersection y y)), (lst_subset (append z y) (lst_intersection y gv1)), (lst_subset (append z y) (lst_intersection gv1 z)), (lst_subset (append z y) (lst_intersection gv1 y)), (lst_subset (append z y) (lst_intersection gv1 gv1))
+(lst_subset (append z y) (append z z)), (lst_subset (append z y) (append z gv1)), (lst_subset (append z y) (append y z)), (lst_subset (append z y) (append y y)), (lst_subset (append z y) (append y gv1)), (lst_subset (append z y) (append gv1 z)), (lst_subset (append z y) (append gv1 y)), (lst_subset (append z y) (append gv1 gv1)), (lst_subset (append z gv1) z), (lst_subset (append z gv1) y)
+(lst_subset (append z gv1) gv1), (lst_subset (append z gv1) (lst_intersection z z)), (lst_subset (append z gv1) (lst_intersection z y)), (lst_subset (append z gv1) (lst_intersection z gv1)), (lst_subset (append z gv1) (lst_intersection y z)), (lst_subset (append z gv1) (lst_intersection y y)), (lst_subset (append z gv1) (lst_intersection y gv1)), (lst_subset (append z gv1) (lst_intersection gv1 z)), (lst_subset (append z gv1) (lst_intersection gv1 y)), (lst_subset (append z gv1) (lst_intersection gv1 gv1))
+(lst_subset (append z gv1) (append z z)), (lst_subset (append z gv1) (append z y)), (lst_subset (append z gv1) (append y z)), (lst_subset (append z gv1) (append y y)), (lst_subset (append z gv1) (append y gv1)), (lst_subset (append z gv1) (append gv1 z)), (lst_subset (append z gv1) (append gv1 y)), (lst_subset (append z gv1) (append gv1 gv1)), (lst_subset (append y z) z), (lst_subset (append y z) y)
+(lst_subset (append y z) gv1), (lst_subset (append y z) (lst_intersection z z)), (lst_subset (append y z) (lst_intersection z y)), (lst_subset (append y z) (lst_intersection z gv1)), (lst_subset (append y z) (lst_intersection y z)), (lst_subset (append y z) (lst_intersection y y)), (lst_subset (append y z) (lst_intersection y gv1)), (lst_subset (append y z) (lst_intersection gv1 z)), (lst_subset (append y z) (lst_intersection gv1 y)), (lst_subset (append y z) (lst_intersection gv1 gv1))
+(lst_subset (append y z) (append z z)), (lst_subset (append y z) (append z y)), (lst_subset (append y z) (append z gv1)), (lst_subset (append y z) (append y y)), (lst_subset (append y z) (append y gv1)), (lst_subset (append y z) (append gv1 z)), (lst_subset (append y z) (append gv1 y)), (lst_subset (append y z) (append gv1 gv1)), (lst_subset (append y y) z), (lst_subset (append y y) y)
+(lst_subset (append y y) gv1), (lst_subset (append y y) (lst_intersection z z)), (lst_subset (append y y) (lst_intersection z y)), (lst_subset (append y y) (lst_intersection z gv1)), (lst_subset (append y y) (lst_intersection y z)), (lst_subset (append y y) (lst_intersection y y)), (lst_subset (append y y) (lst_intersection y gv1)), (lst_subset (append y y) (lst_intersection gv1 z)), (lst_subset (append y y) (lst_intersection gv1 y)), (lst_subset (append y y) (lst_intersection gv1 gv1))
+(lst_subset (append y y) (append z z)), (lst_subset (append y y) (append z y)), (lst_subset (append y y) (append z gv1)), (lst_subset (append y y) (append y z)), (lst_subset (append y y) (append y gv1)), (lst_subset (append y y) (append gv1 z)), (lst_subset (append y y) (append gv1 y)), (lst_subset (append y y) (append gv1 gv1)), (lst_subset (append y gv1) z), (lst_subset (append y gv1) y)
+(lst_subset (append y gv1) gv1), (lst_subset (append y gv1) (lst_intersection z z)), (lst_subset (append y gv1) (lst_intersection z y)), (lst_subset (append y gv1) (lst_intersection z gv1)), (lst_subset (append y gv1) (lst_intersection y z)), (lst_subset (append y gv1) (lst_intersection y y)), (lst_subset (append y gv1) (lst_intersection y gv1)), (lst_subset (append y gv1) (lst_intersection gv1 z)), (lst_subset (append y gv1) (lst_intersection gv1 y)), (lst_subset (append y gv1) (lst_intersection gv1 gv1))
+(lst_subset (append y gv1) (append z z)), (lst_subset (append y gv1) (append z y)), (lst_subset (append y gv1) (append z gv1)), (lst_subset (append y gv1) (append y z)), (lst_subset (append y gv1) (append y y)), (lst_subset (append y gv1) (append gv1 z)), (lst_subset (append y gv1) (append gv1 y)), (lst_subset (append y gv1) (append gv1 gv1)), (lst_subset (append gv1 z) z), (lst_subset (append gv1 z) y)
+(lst_subset (append gv1 z) gv1), (lst_subset (append gv1 z) (lst_intersection z z)), (lst_subset (append gv1 z) (lst_intersection z y)), (lst_subset (append gv1 z) (lst_intersection z gv1)), (lst_subset (append gv1 z) (lst_intersection y z)), (lst_subset (append gv1 z) (lst_intersection y y)), (lst_subset (append gv1 z) (lst_intersection y gv1)), (lst_subset (append gv1 z) (lst_intersection gv1 z)), (lst_subset (append gv1 z) (lst_intersection gv1 y)), (lst_subset (append gv1 z) (lst_intersection gv1 gv1))
+(lst_subset (append gv1 z) (append z z)), (lst_subset (append gv1 z) (append z y)), (lst_subset (append gv1 z) (append z gv1)), (lst_subset (append gv1 z) (append y z)), (lst_subset (append gv1 z) (append y y)), (lst_subset (append gv1 z) (append y gv1)), (lst_subset (append gv1 z) (append gv1 y)), (lst_subset (append gv1 z) (append gv1 gv1)), (lst_subset (append gv1 y) z), (lst_subset (append gv1 y) y)
+(lst_subset (append gv1 y) gv1), (lst_subset (append gv1 y) (lst_intersection z z)), (lst_subset (append gv1 y) (lst_intersection z y)), (lst_subset (append gv1 y) (lst_intersection z gv1)), (lst_subset (append gv1 y) (lst_intersection y z)), (lst_subset (append gv1 y) (lst_intersection y y)), (lst_subset (append gv1 y) (lst_intersection y gv1)), (lst_subset (append gv1 y) (lst_intersection gv1 z)), (lst_subset (append gv1 y) (lst_intersection gv1 y)), (lst_subset (append gv1 y) (lst_intersection gv1 gv1))
+(lst_subset (append gv1 y) (append z z)), (lst_subset (append gv1 y) (append z y)), (lst_subset (append gv1 y) (append z gv1)), (lst_subset (append gv1 y) (append y z)), (lst_subset (append gv1 y) (append y y)), (lst_subset (append gv1 y) (append y gv1)), (lst_subset (append gv1 y) (append gv1 z)), (lst_subset (append gv1 y) (append gv1 gv1)), (lst_subset (append gv1 gv1) z), (lst_subset (append gv1 gv1) y)
+(lst_subset (append gv1 gv1) gv1), (lst_subset (append gv1 gv1) (lst_intersection z z)), (lst_subset (append gv1 gv1) (lst_intersection z y)), (lst_subset (append gv1 gv1) (lst_intersection z gv1)), (lst_subset (append gv1 gv1) (lst_intersection y z)), (lst_subset (append gv1 gv1) (lst_intersection y y)), (lst_subset (append gv1 gv1) (lst_intersection y gv1)), (lst_subset (append gv1 gv1) (lst_intersection gv1 z)), (lst_subset (append gv1 gv1) (lst_intersection gv1 y)), (lst_subset (append gv1 gv1) (lst_intersection gv1 gv1))
+(lst_subset (append gv1 gv1) (append z z)), (lst_subset (append gv1 gv1) (append z y)), (lst_subset (append gv1 gv1) (append z gv1)), (lst_subset (append gv1 gv1) (append y z)), (lst_subset (append gv1 gv1) (append y y)), (lst_subset (append gv1 gv1) (append y gv1)), (lst_subset (append gv1 gv1) (append gv1 z)), (lst_subset (append gv1 gv1) (append gv1 y)), (~ lst_eq z z), (~ lst_eq z y)
+(~ lst_eq z gv1), (~ lst_eq y z), (~ lst_eq y y), (~ lst_eq y gv1), (~ lst_eq gv1 z), (~ lst_eq gv1 y), (~ lst_eq gv1 gv1), (~ lst_subset z z), (~ lst_subset z y), (~ lst_subset z gv1)
+(~ lst_subset y z), (~ lst_subset y y), (~ lst_subset y gv1), (~ lst_subset gv1 z), (~ lst_subset gv1 y), (~ lst_subset gv1 gv1), (z <> z), (z <> y), (z <> gv1), (y <> z)
+(y <> y), (y <> gv1), (gv1 <> z), (gv1 <> y), (gv1 <> gv1), (n <> n), (None = Some z), (None = Some y), (None = Some gv1), (None = Some n)
+(mem n z = lst_mem n z), (mem n z = lst_mem n y), (mem n z = lst_mem n gv1), (mem n y = lst_mem n z), (mem n y = lst_mem n y), (mem n y = lst_mem n gv1), (mem n gv1 = lst_mem n z), (mem n gv1 = lst_mem n y), (mem n gv1 = lst_mem n gv1), (lst_intersection z z = z)
+(lst_intersection z z = y), (lst_intersection z z = gv1), (lst_intersection z z = append z z), (lst_intersection z z = append z y), (lst_intersection z z = append z gv1), (lst_intersection z z = append y z), (lst_intersection z z = append y y), (lst_intersection z z = append y gv1), (lst_intersection z z = append gv1 z), (lst_intersection z z = append gv1 y)
+(lst_intersection z z = append gv1 gv1), (lst_intersection z y = z), (lst_intersection z y = y), (lst_intersection z y = gv1), (lst_intersection z y = append z z), (lst_intersection z y = append z y), (lst_intersection z y = append z gv1), (lst_intersection z y = append y z), (lst_intersection z y = append y y), (lst_intersection z y = append y gv1)
+(lst_intersection z y = append gv1 z), (lst_intersection z y = append gv1 y), (lst_intersection z y = append gv1 gv1), (lst_intersection z gv1 = z), (lst_intersection z gv1 = y), (lst_intersection z gv1 = gv1), (lst_intersection z gv1 = append z z), (lst_intersection z gv1 = append z y), (lst_intersection z gv1 = append z gv1), (lst_intersection z gv1 = append y z)
+(lst_intersection z gv1 = append y y), (lst_intersection z gv1 = append y gv1), (lst_intersection z gv1 = append gv1 z), (lst_intersection z gv1 = append gv1 y), (lst_intersection z gv1 = append gv1 gv1), (lst_intersection y z = z), (lst_intersection y z = y), (lst_intersection y z = gv1), (lst_intersection y z = append z z), (lst_intersection y z = append z y)
+(lst_intersection y z = append z gv1), (lst_intersection y z = append y z), (lst_intersection y z = append y y), (lst_intersection y z = append y gv1), (lst_intersection y z = append gv1 z), (lst_intersection y z = append gv1 y), (lst_intersection y z = append gv1 gv1), (lst_intersection y y = z), (lst_intersection y y = y), (lst_intersection y y = gv1)
+(lst_intersection y y = append z z), (lst_intersection y y = append z y), (lst_intersection y y = append z gv1), (lst_intersection y y = append y z), (lst_intersection y y = append y y), (lst_intersection y y = append y gv1), (lst_intersection y y = append gv1 z), (lst_intersection y y = append gv1 y), (lst_intersection y y = append gv1 gv1), (lst_intersection y gv1 = z)
+(lst_intersection y gv1 = y), (lst_intersection y gv1 = gv1), (lst_intersection y gv1 = append z z), (lst_intersection y gv1 = append z y), (lst_intersection y gv1 = append z gv1), (lst_intersection y gv1 = append y z), (lst_intersection y gv1 = append y y), (lst_intersection y gv1 = append y gv1), (lst_intersection y gv1 = append gv1 z), (lst_intersection y gv1 = append gv1 y)
+(lst_intersection y gv1 = append gv1 gv1), (lst_intersection gv1 z = z), (lst_intersection gv1 z = y), (lst_intersection gv1 z = gv1), (lst_intersection gv1 z = append z z), (lst_intersection gv1 z = append z y), (lst_intersection gv1 z = append z gv1), (lst_intersection gv1 z = append y z), (lst_intersection gv1 z = append y y), (lst_intersection gv1 z = append y gv1)
+(lst_intersection gv1 z = append gv1 z), (lst_intersection gv1 z = append gv1 y), (lst_intersection gv1 z = append gv1 gv1), (lst_intersection gv1 y = z), (lst_intersection gv1 y = y), (lst_intersection gv1 y = gv1), (lst_intersection gv1 y = append z z), (lst_intersection gv1 y = append z y), (lst_intersection gv1 y = append z gv1), (lst_intersection gv1 y = append y z)
+(lst_intersection gv1 y = append y y), (lst_intersection gv1 y = append y gv1), (lst_intersection gv1 y = append gv1 z), (lst_intersection gv1 y = append gv1 y), (lst_intersection gv1 y = append gv1 gv1), (lst_intersection gv1 gv1 = z), (lst_intersection gv1 gv1 = y), (lst_intersection gv1 gv1 = gv1), (lst_intersection gv1 gv1 = append z z), (lst_intersection gv1 gv1 = append z y)
+(lst_intersection gv1 gv1 = append z gv1), (lst_intersection gv1 gv1 = append y z), (lst_intersection gv1 gv1 = append y y), (lst_intersection gv1 gv1 = append y gv1), (lst_intersection gv1 gv1 = append gv1 z), (lst_intersection gv1 gv1 = append gv1 y), (lst_intersection gv1 gv1 = append gv1 gv1), (append z z = z), (append z z = y), (append z z = gv1)
+(append z y = z), (append z y = y), (append z y = gv1), (append z gv1 = z), (append z gv1 = y), (append z gv1 = gv1), (append y z = z), (append y z = y), (append y z = gv1), (append y y = z)
+(append y y = y), (append y y = gv1), (append y gv1 = z), (append y gv1 = y), (append y gv1 = gv1), (append gv1 z = z), (append gv1 z = y), (append gv1 z = gv1), (append gv1 y = z), (append gv1 y = y)
+(append gv1 y = gv1), (append gv1 gv1 = z), (append gv1 gv1 = y), (append gv1 gv1 = gv1)
+
+Label: 3 (5)
+(lst_eq y y), (lst_eq y z), (lst_eq z y), (lst_eq z z), (lst_subset y y), (lst_subset y z), (lst_subset z y), (lst_subset z z), (y = y), (y = z)
+(z = y), (z = z), (n = n), (false = lst_mem n y), (false = lst_mem n z), (false = mem n y), (false = mem n z), (true = lst_mem n y), (true = lst_mem n z), (true = mem n y)
+(true = mem n z), (lst_eq y (lst_intersection y y)), (lst_eq y (lst_intersection y z)), (lst_eq y (lst_intersection z y)), (lst_eq y (lst_intersection z z)), (lst_eq y (append y y)), (lst_eq y (append y z)), (lst_eq y (append z y)), (lst_eq y (append z z)), (lst_eq z (lst_intersection y y))
+(lst_eq z (lst_intersection y z)), (lst_eq z (lst_intersection z y)), (lst_eq z (lst_intersection z z)), (lst_eq z (append y y)), (lst_eq z (append y z)), (lst_eq z (append z y)), (lst_eq z (append z z)), (lst_eq (lst_intersection y y) y), (lst_eq (lst_intersection y y) z), (lst_eq (lst_intersection y y) (lst_intersection y z))
+(lst_eq (lst_intersection y y) (lst_intersection z y)), (lst_eq (lst_intersection y y) (lst_intersection z z)), (lst_eq (lst_intersection y y) (append y y)), (lst_eq (lst_intersection y y) (append y z)), (lst_eq (lst_intersection y y) (append z y)), (lst_eq (lst_intersection y y) (append z z)), (lst_eq (lst_intersection y z) y), (lst_eq (lst_intersection y z) z), (lst_eq (lst_intersection y z) (lst_intersection y y)), (lst_eq (lst_intersection y z) (lst_intersection z y))
+(lst_eq (lst_intersection y z) (lst_intersection z z)), (lst_eq (lst_intersection y z) (append y y)), (lst_eq (lst_intersection y z) (append y z)), (lst_eq (lst_intersection y z) (append z y)), (lst_eq (lst_intersection y z) (append z z)), (lst_eq (lst_intersection z y) y), (lst_eq (lst_intersection z y) z), (lst_eq (lst_intersection z y) (lst_intersection y y)), (lst_eq (lst_intersection z y) (lst_intersection y z)), (lst_eq (lst_intersection z y) (lst_intersection z z))
+(lst_eq (lst_intersection z y) (append y y)), (lst_eq (lst_intersection z y) (append y z)), (lst_eq (lst_intersection z y) (append z y)), (lst_eq (lst_intersection z y) (append z z)), (lst_eq (lst_intersection z z) y), (lst_eq (lst_intersection z z) z), (lst_eq (lst_intersection z z) (lst_intersection y y)), (lst_eq (lst_intersection z z) (lst_intersection y z)), (lst_eq (lst_intersection z z) (lst_intersection z y)), (lst_eq (lst_intersection z z) (append y y))
+(lst_eq (lst_intersection z z) (append y z)), (lst_eq (lst_intersection z z) (append z y)), (lst_eq (lst_intersection z z) (append z z)), (lst_eq (append y y) y), (lst_eq (append y y) z), (lst_eq (append y y) (lst_intersection y y)), (lst_eq (append y y) (lst_intersection y z)), (lst_eq (append y y) (lst_intersection z y)), (lst_eq (append y y) (lst_intersection z z)), (lst_eq (append y y) (append y z))
+(lst_eq (append y y) (append z y)), (lst_eq (append y y) (append z z)), (lst_eq (append y z) y), (lst_eq (append y z) z), (lst_eq (append y z) (lst_intersection y y)), (lst_eq (append y z) (lst_intersection y z)), (lst_eq (append y z) (lst_intersection z y)), (lst_eq (append y z) (lst_intersection z z)), (lst_eq (append y z) (append y y)), (lst_eq (append y z) (append z y))
+(lst_eq (append y z) (append z z)), (lst_eq (append z y) y), (lst_eq (append z y) z), (lst_eq (append z y) (lst_intersection y y)), (lst_eq (append z y) (lst_intersection y z)), (lst_eq (append z y) (lst_intersection z y)), (lst_eq (append z y) (lst_intersection z z)), (lst_eq (append z y) (append y y)), (lst_eq (append z y) (append y z)), (lst_eq (append z y) (append z z))
+(lst_eq (append z z) y), (lst_eq (append z z) z), (lst_eq (append z z) (lst_intersection y y)), (lst_eq (append z z) (lst_intersection y z)), (lst_eq (append z z) (lst_intersection z y)), (lst_eq (append z z) (lst_intersection z z)), (lst_eq (append z z) (append y y)), (lst_eq (append z z) (append y z)), (lst_eq (append z z) (append z y)), (lst_subset y (lst_intersection y y))
+(lst_subset y (lst_intersection y z)), (lst_subset y (lst_intersection z y)), (lst_subset y (lst_intersection z z)), (lst_subset y (append y y)), (lst_subset y (append y z)), (lst_subset y (append z y)), (lst_subset y (append z z)), (lst_subset z (lst_intersection y y)), (lst_subset z (lst_intersection y z)), (lst_subset z (lst_intersection z y))
+(lst_subset z (lst_intersection z z)), (lst_subset z (append y y)), (lst_subset z (append y z)), (lst_subset z (append z y)), (lst_subset z (append z z)), (lst_subset (lst_intersection y y) y), (lst_subset (lst_intersection y y) z), (lst_subset (lst_intersection y y) (lst_intersection y z)), (lst_subset (lst_intersection y y) (lst_intersection z y)), (lst_subset (lst_intersection y y) (lst_intersection z z))
+(lst_subset (lst_intersection y y) (append y y)), (lst_subset (lst_intersection y y) (append y z)), (lst_subset (lst_intersection y y) (append z y)), (lst_subset (lst_intersection y y) (append z z)), (lst_subset (lst_intersection y z) y), (lst_subset (lst_intersection y z) z), (lst_subset (lst_intersection y z) (lst_intersection y y)), (lst_subset (lst_intersection y z) (lst_intersection z y)), (lst_subset (lst_intersection y z) (lst_intersection z z)), (lst_subset (lst_intersection y z) (append y y))
+(lst_subset (lst_intersection y z) (append y z)), (lst_subset (lst_intersection y z) (append z y)), (lst_subset (lst_intersection y z) (append z z)), (lst_subset (lst_intersection z y) y), (lst_subset (lst_intersection z y) z), (lst_subset (lst_intersection z y) (lst_intersection y y)), (lst_subset (lst_intersection z y) (lst_intersection y z)), (lst_subset (lst_intersection z y) (lst_intersection z z)), (lst_subset (lst_intersection z y) (append y y)), (lst_subset (lst_intersection z y) (append y z))
+(lst_subset (lst_intersection z y) (append z y)), (lst_subset (lst_intersection z y) (append z z)), (lst_subset (lst_intersection z z) y), (lst_subset (lst_intersection z z) z), (lst_subset (lst_intersection z z) (lst_intersection y y)), (lst_subset (lst_intersection z z) (lst_intersection y z)), (lst_subset (lst_intersection z z) (lst_intersection z y)), (lst_subset (lst_intersection z z) (append y y)), (lst_subset (lst_intersection z z) (append y z)), (lst_subset (lst_intersection z z) (append z y))
+(lst_subset (lst_intersection z z) (append z z)), (lst_subset (append y y) y), (lst_subset (append y y) z), (lst_subset (append y y) (lst_intersection y y)), (lst_subset (append y y) (lst_intersection y z)), (lst_subset (append y y) (lst_intersection z y)), (lst_subset (append y y) (lst_intersection z z)), (lst_subset (append y y) (append y z)), (lst_subset (append y y) (append z y)), (lst_subset (append y y) (append z z))
+(lst_subset (append y z) y), (lst_subset (append y z) z), (lst_subset (append y z) (lst_intersection y y)), (lst_subset (append y z) (lst_intersection y z)), (lst_subset (append y z) (lst_intersection z y)), (lst_subset (append y z) (lst_intersection z z)), (lst_subset (append y z) (append y y)), (lst_subset (append y z) (append z y)), (lst_subset (append y z) (append z z)), (lst_subset (append z y) y)
+(lst_subset (append z y) z), (lst_subset (append z y) (lst_intersection y y)), (lst_subset (append z y) (lst_intersection y z)), (lst_subset (append z y) (lst_intersection z y)), (lst_subset (append z y) (lst_intersection z z)), (lst_subset (append z y) (append y y)), (lst_subset (append z y) (append y z)), (lst_subset (append z y) (append z z)), (lst_subset (append z z) y), (lst_subset (append z z) z)
+(lst_subset (append z z) (lst_intersection y y)), (lst_subset (append z z) (lst_intersection y z)), (lst_subset (append z z) (lst_intersection z y)), (lst_subset (append z z) (lst_intersection z z)), (lst_subset (append z z) (append y y)), (lst_subset (append z z) (append y z)), (lst_subset (append z z) (append z y)), (~ lst_eq y y), (~ lst_eq y z), (~ lst_eq z y)
+(~ lst_eq z z), (~ lst_subset y y), (~ lst_subset y z), (~ lst_subset z y), (~ lst_subset z z), (y <> y), (y <> z), (z <> y), (z <> z), (n <> n)
+(None = Some y), (None = Some z), (None = Some n), (mem n y = lst_mem n y), (mem n y = lst_mem n z), (mem n z = lst_mem n y), (mem n z = lst_mem n z), (lst_intersection y y = y), (lst_intersection y y = z), (lst_intersection y y = append y y)
+(lst_intersection y y = append y z), (lst_intersection y y = append z y), (lst_intersection y y = append z z), (lst_intersection y z = y), (lst_intersection y z = z), (lst_intersection y z = append y y), (lst_intersection y z = append y z), (lst_intersection y z = append z y), (lst_intersection y z = append z z), (lst_intersection z y = y)
+(lst_intersection z y = z), (lst_intersection z y = append y y), (lst_intersection z y = append y z), (lst_intersection z y = append z y), (lst_intersection z y = append z z), (lst_intersection z z = y), (lst_intersection z z = z), (lst_intersection z z = append y y), (lst_intersection z z = append y z), (lst_intersection z z = append z y)
+(lst_intersection z z = append z z), (append y y = y), (append y y = z), (append y z = y), (append y z = z), (append z y = y), (append z y = z), (append z z = y), (append z z = z)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 1229.455 seconds
+
+
+Label: 0 (0)
+(true = gv2), (true = lst_mem n y), (true = mem n y), (false <> gv2)
+
+Label: 0 (1)
+(true = lst_mem n y), (true = mem n y), (lst_mem n y = gv2), (mem n y = gv2)
+
+Label: 1 (2)
+(true = gv0), (false <> gv0), (lst_mem n y = gv0), (mem n y = gv0)
+
+Label: 2 (3)
+(lst_subset y gv1), (true = lst_mem n gv1), (true = mem n gv1), (lst_eq y (lst_intersection y gv1)), (lst_eq y (lst_intersection gv1 y)), (lst_eq gv1 (append z y)), (lst_eq gv1 (append y z)), (lst_eq gv1 (append y gv1)), (lst_eq gv1 (append gv1 y)), (lst_eq (lst_intersection y y) (lst_intersection y gv1))
+(lst_eq (lst_intersection y y) (lst_intersection gv1 y)), (lst_eq (lst_intersection y gv1) y), (lst_eq (lst_intersection y gv1) (lst_intersection y y)), (lst_eq (lst_intersection y gv1) (append y y)), (lst_eq (lst_intersection gv1 y) y), (lst_eq (lst_intersection gv1 y) (lst_intersection y y)), (lst_eq (lst_intersection gv1 y) (append y y)), (lst_eq (lst_intersection gv1 gv1) (append z y)), (lst_eq (lst_intersection gv1 gv1) (append y z)), (lst_eq (lst_intersection gv1 gv1) (append y gv1))
+(lst_eq (lst_intersection gv1 gv1) (append gv1 y)), (lst_eq (append z y) gv1), (lst_eq (append z y) (lst_intersection gv1 gv1)), (lst_eq (append z y) (append z gv1)), (lst_eq (append z y) (append gv1 z)), (lst_eq (append z y) (append gv1 gv1)), (lst_eq (append z gv1) (append z y)), (lst_eq (append z gv1) (append y z)), (lst_eq (append z gv1) (append y gv1)), (lst_eq (append z gv1) (append gv1 y))
+(lst_eq (append y z) gv1), (lst_eq (append y z) (lst_intersection gv1 gv1)), (lst_eq (append y z) (append z gv1)), (lst_eq (append y z) (append gv1 z)), (lst_eq (append y z) (append gv1 gv1)), (lst_eq (append y y) (lst_intersection y gv1)), (lst_eq (append y y) (lst_intersection gv1 y)), (lst_eq (append y gv1) gv1), (lst_eq (append y gv1) (lst_intersection gv1 gv1)), (lst_eq (append y gv1) (append z gv1))
+(lst_eq (append y gv1) (append gv1 z)), (lst_eq (append y gv1) (append gv1 gv1)), (lst_eq (append gv1 z) (append z y)), (lst_eq (append gv1 z) (append y z)), (lst_eq (append gv1 z) (append y gv1)), (lst_eq (append gv1 z) (append gv1 y)), (lst_eq (append gv1 y) gv1), (lst_eq (append gv1 y) (lst_intersection gv1 gv1)), (lst_eq (append gv1 y) (append z gv1)), (lst_eq (append gv1 y) (append gv1 z))
+(lst_eq (append gv1 y) (append gv1 gv1)), (lst_eq (append gv1 gv1) (append z y)), (lst_eq (append gv1 gv1) (append y z)), (lst_eq (append gv1 gv1) (append y gv1)), (lst_eq (append gv1 gv1) (append gv1 y)), (lst_subset y (lst_intersection y gv1)), (lst_subset y (lst_intersection gv1 y)), (lst_subset y (lst_intersection gv1 gv1)), (lst_subset y (append gv1 gv1)), (lst_subset (lst_intersection y y) gv1)
+(lst_subset (lst_intersection y y) (lst_intersection y gv1)), (lst_subset (lst_intersection y y) (lst_intersection gv1 y)), (lst_subset (lst_intersection y y) (lst_intersection gv1 gv1)), (lst_subset (lst_intersection y y) (append gv1 gv1)), (lst_subset (append z y) gv1), (lst_subset (append z y) (lst_intersection gv1 gv1)), (lst_subset (append z y) (append gv1 gv1)), (lst_subset (append y z) gv1), (lst_subset (append y z) (lst_intersection gv1 gv1)), (lst_subset (append y z) (append gv1 gv1))
+(lst_subset (append y y) gv1), (lst_subset (append y y) (lst_intersection y gv1)), (lst_subset (append y y) (lst_intersection gv1 y)), (lst_subset (append y y) (lst_intersection gv1 gv1)), (lst_subset (append y y) (append gv1 gv1)), (lst_subset (append y gv1) gv1), (lst_subset (append y gv1) (lst_intersection gv1 gv1)), (lst_subset (append y gv1) (append gv1 gv1)), (lst_subset (append gv1 y) gv1), (lst_subset (append gv1 y) (lst_intersection gv1 gv1))
+(lst_subset (append gv1 y) (append gv1 gv1)), (mem n y = lst_mem n gv1), (mem n gv1 = lst_mem n y), (lst_intersection y gv1 = y), (lst_intersection gv1 y = y), (lst_intersection gv1 gv1 = append z y), (append z y = gv1)
+
+Label: 2 (4)
+(true = lst_mem n y), (true = lst_mem n gv1), (true = mem n y), (true = mem n gv1)
+
+Label: 3 (5)
+(true = lst_mem n y), (true = mem n y)
+
+
+------------------------------ PROCESSED SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 1555.748 seconds
+
+
+(lst_mem n (append z y) = gv0)
+ - (lst_mem n (append z y) = gv0)
+ - (true = gv0)
+ - (false <> gv0)
+ - (lst_mem n y = gv0)
+ - (mem n y = gv0)
+
+(lst_mem n y = gv2)
+ - (lst_mem n y = gv2)
+ - (true = lst_mem n y)
+ - (true = mem n y)
+
+(true = gv2)
+ - (true = gv2)
+ - (true = lst_mem n y)
+ - (true = mem n y)
+ - (false <> gv2)
+
+(append z y = gv1)
+ - (append z y = gv1)
+ - (lst_subset y gv1)
+ - (true = lst_mem n gv1)
+ - (true = mem n gv1)
+ - (lst_eq y (lst_intersection y gv1))
+ - (lst_eq y (lst_intersection gv1 y))
+ - (lst_eq gv1 (append z y))
+ - (lst_eq gv1 (append y z))
+ - (lst_eq gv1 (append y gv1))
+ - (lst_eq gv1 (append gv1 y))
+ - (lst_eq (lst_intersection y y) (lst_intersection y gv1))
+ - (lst_eq (lst_intersection y y) (lst_intersection gv1 y))
+ - (lst_eq (lst_intersection y gv1) y)
+ - (lst_eq (lst_intersection y gv1) (lst_intersection y y))
+ - (lst_eq (lst_intersection y gv1) (append y y))
+ - (lst_eq (lst_intersection gv1 y) y)
+ - (lst_eq (lst_intersection gv1 y) (lst_intersection y y))
+ - (lst_eq (lst_intersection gv1 y) (append y y))
+ - (lst_eq (lst_intersection gv1 gv1) (append z y))
+ - (lst_eq (lst_intersection gv1 gv1) (append y z))
+ - (lst_eq (lst_intersection gv1 gv1) (append y gv1))
+ - (lst_eq (lst_intersection gv1 gv1) (append gv1 y))
+ - (lst_eq (append z y) gv1)
+ - (lst_eq (append z y) (lst_intersection gv1 gv1))
+ - (lst_eq (append z y) (append z gv1))
+ - (lst_eq (append z y) (append gv1 z))
+ - (lst_eq (append z y) (append gv1 gv1))
+ - (lst_eq (append z gv1) (append z y))
+ - (lst_eq (append z gv1) (append y z))
+ - (lst_eq (append z gv1) (append y gv1))
+ - (lst_eq (append z gv1) (append gv1 y))
+ - (lst_eq (append y z) gv1)
+ - (lst_eq (append y z) (lst_intersection gv1 gv1))
+ - (lst_eq (append y z) (append z gv1))
+ - (lst_eq (append y z) (append gv1 z))
+ - (lst_eq (append y z) (append gv1 gv1))
+ - (lst_eq (append y y) (lst_intersection y gv1))
+ - (lst_eq (append y y) (lst_intersection gv1 y))
+ - (lst_eq (append y gv1) gv1)
+ - (lst_eq (append y gv1) (lst_intersection gv1 gv1))
+ - (lst_eq (append y gv1) (append z gv1))
+ - (lst_eq (append y gv1) (append gv1 z))
+ - (lst_eq (append y gv1) (append gv1 gv1))
+ - (lst_eq (append gv1 z) (append z y))
+ - (lst_eq (append gv1 z) (append y z))
+ - (lst_eq (append gv1 z) (append y gv1))
+ - (lst_eq (append gv1 z) (append gv1 y))
+ - (lst_eq (append gv1 y) gv1)
+ - (lst_eq (append gv1 y) (lst_intersection gv1 gv1))
+ - (lst_eq (append gv1 y) (append z gv1))
+ - (lst_eq (append gv1 y) (append gv1 z))
+ - (lst_eq (append gv1 y) (append gv1 gv1))
+ - (lst_eq (append gv1 gv1) (append z y))
+ - (lst_eq (append gv1 gv1) (append y z))
+ - (lst_eq (append gv1 gv1) (append y gv1))
+ - (lst_eq (append gv1 gv1) (append gv1 y))
+ - (lst_subset y (lst_intersection y gv1))
+ - (lst_subset y (lst_intersection gv1 y))
+ - (lst_subset y (lst_intersection gv1 gv1))
+ - (lst_subset y (append gv1 gv1))
+ - (lst_subset (lst_intersection y y) gv1)
+ - (lst_subset (lst_intersection y y) (lst_intersection y gv1))
+ - (lst_subset (lst_intersection y y) (lst_intersection gv1 y))
+ - (lst_subset (lst_intersection y y) (lst_intersection gv1 gv1))
+ - (lst_subset (lst_intersection y y) (append gv1 gv1))
+ - (lst_subset (append z y) gv1)
+ - (lst_subset (append z y) (lst_intersection gv1 gv1))
+ - (lst_subset (append z y) (append gv1 gv1))
+ - (lst_subset (append y z) gv1)
+ - (lst_subset (append y z) (lst_intersection gv1 gv1))
+ - (lst_subset (append y z) (append gv1 gv1))
+ - (lst_subset (append y y) gv1)
+ - (lst_subset (append y y) (lst_intersection y gv1))
+ - (lst_subset (append y y) (lst_intersection gv1 y))
+ - (lst_subset (append y y) (lst_intersection gv1 gv1))
+ - (lst_subset (append y y) (append gv1 gv1))
+ - (lst_subset (append y gv1) gv1)
+ - (lst_subset (append y gv1) (lst_intersection gv1 gv1))
+ - (lst_subset (append y gv1) (append gv1 gv1))
+ - (lst_subset (append gv1 y) gv1)
+ - (lst_subset (append gv1 y) (lst_intersection gv1 gv1))
+ - (lst_subset (append gv1 y) (append gv1 gv1))
+ - (mem n y = lst_mem n gv1)
+ - (mem n gv1 = lst_mem n y)
+ - (lst_intersection y gv1 = y)
+ - (lst_intersection gv1 y = y)
+ - (lst_intersection gv1 gv1 = append z y)
+
+(lst_mem n y = true)
+ - (lst_mem n y = true)
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 1555.751 seconds
+
+Number of Result Pairs Returned: 67
+
+(true = gv2 -> false <> gv2)
+(false <> gv2 -> lst_mem n y = gv2 -> lst_mem n (append z y) = gv2)
+
+(append z y = gv1 -> lst_subset y gv1)
+(lst_subset y gv1 -> lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq y (lst_intersection y gv1))
+(lst_eq y (lst_intersection y gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq y (lst_intersection gv1 y))
+(lst_eq y (lst_intersection gv1 y) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq gv1 (append z y))
+(lst_eq gv1 (append z y) -> lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq gv1 (append y z))
+(lst_eq gv1 (append y z) -> lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq gv1 (append y gv1))
+(lst_eq gv1 (append y gv1) -> lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq gv1 (append gv1 y))
+(lst_eq gv1 (append gv1 y) -> lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (lst_intersection y y) (lst_intersection y gv1))
+(lst_eq (lst_intersection y y) (lst_intersection y gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (lst_intersection y y) (lst_intersection gv1 y))
+(lst_eq (lst_intersection y y) (lst_intersection gv1 y) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (lst_intersection y gv1) y)
+(lst_eq (lst_intersection y gv1) y ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (lst_intersection y gv1) (lst_intersection y y))
+(lst_eq (lst_intersection y gv1) (lst_intersection y y) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (lst_intersection y gv1) (append y y))
+(lst_eq (lst_intersection y gv1) (append y y) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (lst_intersection gv1 y) y)
+(lst_eq (lst_intersection gv1 y) y ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (lst_intersection gv1 y) (lst_intersection y y))
+(lst_eq (lst_intersection gv1 y) (lst_intersection y y) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (lst_intersection gv1 y) (append y y))
+(lst_eq (lst_intersection gv1 y) (append y y) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (lst_intersection gv1 gv1) (append z y))
+(lst_eq (lst_intersection gv1 gv1) (append z y) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (lst_intersection gv1 gv1) (append y z))
+(lst_eq (lst_intersection gv1 gv1) (append y z) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (lst_intersection gv1 gv1) (append y gv1))
+(lst_eq (lst_intersection gv1 gv1) (append y gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (lst_intersection gv1 gv1) (append gv1 y))
+(lst_eq (lst_intersection gv1 gv1) (append gv1 y) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (append z y) gv1)
+(lst_eq (append z y) gv1 -> lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (append z y) (lst_intersection gv1 gv1))
+(lst_eq (append z y) (lst_intersection gv1 gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (append z y) (append gv1 gv1))
+(lst_eq (append z y) (append gv1 gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (append y z) gv1)
+(lst_eq (append y z) gv1 -> lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (append y z) (lst_intersection gv1 gv1))
+(lst_eq (append y z) (lst_intersection gv1 gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (append y z) (append gv1 gv1))
+(lst_eq (append y z) (append gv1 gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (append y y) (lst_intersection y gv1))
+(lst_eq (append y y) (lst_intersection y gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (append y y) (lst_intersection gv1 y))
+(lst_eq (append y y) (lst_intersection gv1 y) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (append y gv1) gv1)
+(lst_eq (append y gv1) gv1 -> lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (append y gv1) (lst_intersection gv1 gv1))
+(lst_eq (append y gv1) (lst_intersection gv1 gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (append y gv1) (append gv1 gv1))
+(lst_eq (append y gv1) (append gv1 gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (append gv1 y) gv1)
+(lst_eq (append gv1 y) gv1 -> lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (append gv1 y) (lst_intersection gv1 gv1))
+(lst_eq (append gv1 y) (lst_intersection gv1 gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (append gv1 y) (append gv1 gv1))
+(lst_eq (append gv1 y) (append gv1 gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (append gv1 gv1) (append z y))
+(lst_eq (append gv1 gv1) (append z y) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (append gv1 gv1) (append y z))
+(lst_eq (append gv1 gv1) (append y z) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (append gv1 gv1) (append y gv1))
+(lst_eq (append gv1 gv1) (append y gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_eq (append gv1 gv1) (append gv1 y))
+(lst_eq (append gv1 gv1) (append gv1 y) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_subset y (lst_intersection y gv1))
+(lst_subset y (lst_intersection y gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_subset y (lst_intersection gv1 y))
+(lst_subset y (lst_intersection gv1 y) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_subset y (lst_intersection gv1 gv1))
+(lst_subset y (lst_intersection gv1 gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_subset y (append gv1 gv1))
+(lst_subset y (append gv1 gv1) -> lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_subset (lst_intersection y y) gv1)
+(lst_subset (lst_intersection y y) gv1 ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 ->  lst_subset (lst_intersection y y) (lst_intersection y gv1))
+(lst_subset (lst_intersection y y) (lst_intersection y gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 ->  lst_subset (lst_intersection y y) (lst_intersection gv1 y))
+(lst_subset (lst_intersection y y) (lst_intersection gv1 y) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 ->  lst_subset (lst_intersection y y) (lst_intersection gv1 gv1))
+(lst_subset (lst_intersection y y) (lst_intersection gv1 gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_subset (lst_intersection y y) (append gv1 gv1))
+(lst_subset (lst_intersection y y) (append gv1 gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_subset (append z y) gv1)
+(lst_subset (append z y) gv1 -> lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_subset (append z y) (lst_intersection gv1 gv1))
+(lst_subset (append z y) (lst_intersection gv1 gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_subset (append z y) (append gv1 gv1))
+(lst_subset (append z y) (append gv1 gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_subset (append y z) gv1)
+(lst_subset (append y z) gv1 -> lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_subset (append y z) (lst_intersection gv1 gv1))
+(lst_subset (append y z) (lst_intersection gv1 gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_subset (append y z) (append gv1 gv1))
+(lst_subset (append y z) (append gv1 gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_subset (append y y) gv1)
+(lst_subset (append y y) gv1 -> lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_subset (append y y) (lst_intersection y gv1))
+(lst_subset (append y y) (lst_intersection y gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_subset (append y y) (lst_intersection gv1 y))
+(lst_subset (append y y) (lst_intersection gv1 y) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_subset (append y y) (lst_intersection gv1 gv1))
+(lst_subset (append y y) (lst_intersection gv1 gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_subset (append y y) (append gv1 gv1))
+(lst_subset (append y y) (append gv1 gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_subset (append y gv1) gv1)
+(lst_subset (append y gv1) gv1 -> lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_subset (append y gv1) (lst_intersection gv1 gv1))
+(lst_subset (append y gv1) (lst_intersection gv1 gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_subset (append y gv1) (append gv1 gv1))
+(lst_subset (append y gv1) (append gv1 gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_subset (append gv1 y) gv1)
+(lst_subset (append gv1 y) gv1 -> lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_subset (append gv1 y) (lst_intersection gv1 gv1))
+(lst_subset (append gv1 y) (lst_intersection gv1 gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_subset (append gv1 y) (append gv1 gv1))
+(lst_subset (append gv1 y) (append gv1 gv1) ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_intersection y gv1 = y)
+(lst_intersection y gv1 = y -> lst_mem n y = true -> lst_mem n gv1 = true)
+
+(append z y = gv1 -> lst_intersection gv1 gv1 = append z y)
+(lst_intersection gv1 gv1 = append z y ->  lst_mem n y = true -> lst_mem n gv1 = true)
+
+(lst_mem n y = true -> lst_mem n (append z y) = true)
