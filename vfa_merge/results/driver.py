@@ -1,48 +1,59 @@
 import os
 import shutil
 
-folder = "/Users/anabrendel/Desktop/LemmaSynthesis/benchmarks/vfa_merge/tests"
+folder = "/home/anabrendel/Desktop/benchmarks/vfa_merge/tests"
 
 ran = [
-    "destruct_merge_by_sorted_cons_leq_2.v",
-    "destruct_merge_by_sorted_all_cons_2.v",
-    "destruct_merge_by_merge_nil_r_2.v",
-    "leq_all_merge_by_Forall_inv_1.v",
-    "mergesort_perm_by_Permutation_app.v",
     "mergesort_sorts_by_sorted_merge.v",
+    "merge_perm_by_Permutation_app_comm_2.v",
+    "leq_all_merge_by_Forall_inv_tail_1.v",
+    "single_merge_r_by_sorted_cons_leq.v",
+    "merge_perm_by_Permutation_refl_2.v",
+    "single_merge_r_by_destruct_sorted.v",
+    "single_merge_l_by_sorted_all_cons.v",
+    "single_merge_r_by_merge_nil_l.v",
     "destruct_merge_by_leq_all_merge_1.v",
-    "Forall_trans_by_Forall_inv_tail.v",
-    "Forall_trans_by_Forall_inv.v",
-    "mergesort_perm_by_Permutation_trans_1.v",
-    "single_merge_r_by_leq_all_merge.v",
-    "sorted_cons_leq_by_sorted_skip.v",
-    "single_merge_r_by_sorted_all_cons.v"
+    "merge_perm_by_merge_nil_l.v", 
+    "destruct_merge_by_sorted_all_cons_1.v",
+    "destruct_merge_by_merge_nil_r_3.v",
+    "leq_all_merge_by_Forall_inv_2.v", 
+]
+
+error = [
+    "merge_perm_by_Permutation_trans_2.v", # Constr kind FIX not handled in _ (Playground.ml)
+    "destruct_merge_by_leq_all_merge_1", # Quickchick error and segmentation fault -- not sure what causes
 ]
 
 new_run = []
 
-# COMPLETED: 13/101
+# COMPLETED: 13/100
 
 # for test in os.listdir(folder):
-#     if not test.endswith(".v"):
+#     if not (test.endswith(".v") or test.endswith(".txt")):
 #         full = os.path.join(folder,test)
 #         rm = f"rm {full}"
 #         os.system(rm)
 
-for test in os.listdir(folder):
-    if len(new_run) < 6 and test.endswith(".v") and test not in ran:
-        if not test.startswith("sorted_merge_by") and test != "destruct_merge_by_Forall_trans_1.v":
-            full = os.path.join(folder,test)
-            cmd = f"cd {folder} && coqc {full}"
-            # os.system(cmd)
-            new_run += [test]
+# for t in os.listdir("/home/anabrendel/Desktop/benchmarks/vfa_merge/results"):
+#     if t.endswith(".txt"):
+#         f = t.removeprefix("log_for_").removesuffix(".txt")
+#         print(f"\"{f}.v\",")
 
-index = 1
-for i in new_run: 
-    print(f"{index}. {i}")
-    index += 1
+# prune = "cd /home/anabrendel/Desktop/benchmarks && git gc --aggressive --prune"
+
+# for test in os.listdir(folder):
+#     if test.endswith(".v") and test not in ran and test not in error and len(new_run) < 5:
+#         if not test.startswith("sorted_merge_by"):
+#             full = os.path.join(folder,test)
+#             cmd = f"cd {folder} && coqc {full}"
+#             os.system(cmd)
+#             new_run += [test]
+#             print("LAST COMPLETED (" + str(len(new_run)) + "): " + test )
+
+# index = 1
+# for i in new_run: 
+#     print(f"\"{i}\", # {index}")
+#     index += 1
 
 # GIT CLEANUP: git gc --aggressive --prune
 
-# Error in 1. destruct_merge_by_Forall_trans_1 (log_for_destruct_merge1) 
-#   need to generalize functions but need to make concrete for QuickChick

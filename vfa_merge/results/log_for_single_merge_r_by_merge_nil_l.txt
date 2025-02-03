@@ -1,0 +1,388 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (sorted [])
+
+----------------------------------
+Goal: (sorted (merge [] [x]))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 0. seconds
+
+gv1 : (list nat) = []
+gv2 : (list nat) = [x]
+gv0 : (list nat) = (merge [] [x])
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 46.787 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (merge [] [x] = gv0)
+
+----------------------------------
+Goal: (sorted gv0)
+Case: 3
+
+Label: Generalization #1
+Assumptions: 
+ -- ([x] = gv2)
+
+----------------------------------
+Goal: (sorted (merge [] gv2))
+Case: 3
+
+Label: Generalization #2
+Assumptions: 
+ -- ([] = gv1)
+
+----------------------------------
+Goal: (sorted (merge gv1 (x :: gv1)))
+Case: 3
+
+Label: Generalization #3
+Assumptions: 
+ -- (sorted [])
+
+----------------------------------
+Goal: (sorted (merge [] [x]))
+Case: 1
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 48.259 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+In : (forall A : Type, A -> list A -> Prop)
+existsb : (forall A : Type, (A -> bool) -> list A -> bool)
+forallb : (forall A : Type, (A -> bool) -> list A -> bool)
+Forall : (forall A : Type, (A -> Prop) -> list A -> Prop)
+nodup : (forall A : Type, (forall x y : A, {x = y} + {x <> y}) -> list A -> list A)
+Permutation : (forall A : Type, list A -> list A -> Prop)
+sorted : (list nat -> Prop)
+is_a_sorting_algorithm : ((list nat -> list nat) -> Prop)
+@split : (forall X : Type, list X -> list X * list X)
+merge : (list nat -> list nat -> list nat)
+le_all : (nat -> list nat -> Prop)
+list_ind2 : (forall (A : Type) (P : list A -> Prop),
+ P [] ->
+ (forall a : A, P [a]) ->
+ (forall (a b : A) (l : list A), P l -> P (a :: b :: l)) ->
+ forall l : list A, P l)
+sorted_bool : (list nat -> bool)
+
+Label: 0 (0)
+Abducted Assumption: (merge [] [x] = gv0)
+Positive Examples:
+   [gv0 := [6]; x := 6]
+   [gv0 := [5]; x := 5]
+   [gv0 := [4]; x := 4]
+   [gv0 := [2]; x := 2]
+   [gv0 := [3]; x := 3]
+   [gv0 := [1]; x := 1]
+   [gv0 := [0]; x := 0]
+
+Negative Examples:
+   [gv0 := [3; 1; 4]; x := 0]
+   [gv0 := [4; 4; 0; 3; 3]; x := 4]
+   [gv0 := [3; 3; 6; 4]; x := 3]
+   [gv0 := [6; 2; 4; 0; 6; 5]; x := 0]
+   [gv0 := [2; 2; 0; 1]; x := 0]
+   [gv0 := [3; 4; 0]; x := 2]
+   [gv0 := [1; 4; 0]; x := 2]
+   [gv0 := [2; 6; 2; 4]; x := 6]
+   [gv0 := [5; 0; 1; 0]; x := 5]
+   [gv0 := [3; 1; 3; 4]; x := 1]
+   etc ...
+
+
+Label: 1 (1)
+Abducted Assumption: ([x] = gv2)
+Positive Examples:
+   [gv2 := [5]; x := 5]
+   [gv2 := [4]; x := 4]
+   [gv2 := [6]; x := 6]
+   [gv2 := [3]; x := 3]
+   [gv2 := [2]; x := 2]
+   [gv2 := [1]; x := 1]
+   [gv2 := [0]; x := 0]
+
+Negative Examples:
+   [gv2 := [5; 1; 2; 0; 1]; x := 0]
+   [gv2 := [6; 3]; x := 4]
+   [gv2 := [3; 1; 2; 2]; x := 2]
+   [gv2 := [2; 0; 2; 3; 2]; x := 3]
+   [gv2 := [1; 6; 4; 4]; x := 6]
+   [gv2 := [4; 2; 2]; x := 1]
+   [gv2 := [5; 3; 2; 2]; x := 4]
+   [gv2 := [5; 1; 3; 0; 6]; x := 0]
+   [gv2 := [4; 4; 0]; x := 6]
+   [gv2 := [1; 5; 4; 3]; x := 0]
+   etc ...
+
+
+Label: 2 (2)
+Abducted Assumption: ([] = gv1)
+Positive Examples:
+   [gv1 := []; x := 6]
+   [gv1 := []; x := 4]
+   [gv1 := []; x := 5]
+   [gv1 := []; x := 1]
+   [gv1 := []; x := 3]
+   [gv1 := []; x := 2]
+   [gv1 := []; x := 0]
+
+Negative Examples:
+   [gv1 := [1; 0; 4; 4]; x := 3]
+   [gv1 := [0; 0; 1; 5; 5; 0]; x := 2]
+   [gv1 := [5; 4; 2; 1]; x := 5]
+   [gv1 := [3; 0]; x := 6]
+   [gv1 := [0; 0; 4; 4]; x := 6]
+   [gv1 := [0; 0; 3; 2]; x := 3]
+   [gv1 := [0; 3; 4; 2; 0; 6]; x := 4]
+   [gv1 := [2; 1; 5; 2; 2]; x := 4]
+   [gv1 := [0; 0; 0; 3; 5]; x := 4]
+   [gv1 := [0; 4; 2; 4; 5]; x := 3]
+   etc ...
+
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 49.709 seconds
+
+
+Label: 0 (0)
+(x <=* gv0), (sorted gv0), (Permutation gv0 gv0), (In x gv0), (x < x), (x <= x), (x = x), (gv0 = gv0), (false = sorted_bool gv0), (true = sorted_bool gv0)
+(x <=* x :: gv0), (x <=* merge gv0 gv0), (x <=* gv0 ++ gv0), (x <=* []), (length gv0 <=* gv0), (length gv0 <=* x :: gv0), (length gv0 <=* merge gv0 gv0), (length gv0 <=* gv0 ++ gv0), (length gv0 <=* []), (sorted (x :: gv0))
+(sorted (merge gv0 gv0)), (sorted (gv0 ++ gv0)), (sorted []), (Permutation gv0 (x :: gv0)), (Permutation gv0 (merge gv0 gv0)), (Permutation gv0 (gv0 ++ gv0)), (Permutation gv0 []), (Permutation (x :: gv0) gv0), (Permutation (x :: gv0) (merge gv0 gv0)), (Permutation (x :: gv0) (gv0 ++ gv0))
+(Permutation (x :: gv0) []), (Permutation (merge gv0 gv0) gv0), (Permutation (merge gv0 gv0) (x :: gv0)), (Permutation (merge gv0 gv0) (gv0 ++ gv0)), (Permutation (merge gv0 gv0) []), (Permutation (gv0 ++ gv0) gv0), (Permutation (gv0 ++ gv0) (x :: gv0)), (Permutation (gv0 ++ gv0) (merge gv0 gv0)), (Permutation (gv0 ++ gv0) []), (Permutation [] gv0)
+(Permutation [] (x :: gv0)), (Permutation [] (merge gv0 gv0)), (Permutation [] (gv0 ++ gv0)), (In x (x :: gv0)), (In x (merge gv0 gv0)), (In x (gv0 ++ gv0)), (In (length gv0) gv0), (In (length gv0) (x :: gv0)), (In (length gv0) (merge gv0 gv0)), (In (length gv0) (gv0 ++ gv0))
+(x < length gv0), (length gv0 < x), (x <= length gv0), (length gv0 <= x), (~ x <=* gv0), (~ sorted gv0), (~ Permutation gv0 gv0), (~ In x gv0), (~ x < x), (~ x <= x)
+(x <> x), (gv0 <> gv0), (None = Some gv0), (x :: gv0 = gv0), (x :: gv0 = merge gv0 gv0), (x :: gv0 = gv0 ++ gv0), (x :: gv0 = []), (merge gv0 gv0 = gv0), (merge gv0 gv0 = gv0 ++ gv0), (gv0 ++ gv0 = gv0)
+([] = gv0), ([] = merge gv0 gv0), ([] = gv0 ++ gv0), (None = Some x), ((gv0, gv0) = split gv0), (length gv0 = x)
+
+Label: 1 (1)
+(x <=* gv2), (sorted gv2), (Permutation gv2 gv2), (In x gv2), (x < x), (x <= x), (x = x), (gv2 = gv2), (false = sorted_bool gv2), (true = sorted_bool gv2)
+(x <=* x :: gv2), (x <=* merge gv2 gv2), (x <=* gv2 ++ gv2), (x <=* []), (length gv2 <=* gv2), (length gv2 <=* x :: gv2), (length gv2 <=* merge gv2 gv2), (length gv2 <=* gv2 ++ gv2), (length gv2 <=* []), (sorted (x :: gv2))
+(sorted (merge gv2 gv2)), (sorted (gv2 ++ gv2)), (sorted []), (Permutation gv2 (x :: gv2)), (Permutation gv2 (merge gv2 gv2)), (Permutation gv2 (gv2 ++ gv2)), (Permutation gv2 []), (Permutation (x :: gv2) gv2), (Permutation (x :: gv2) (merge gv2 gv2)), (Permutation (x :: gv2) (gv2 ++ gv2))
+(Permutation (x :: gv2) []), (Permutation (merge gv2 gv2) gv2), (Permutation (merge gv2 gv2) (x :: gv2)), (Permutation (merge gv2 gv2) (gv2 ++ gv2)), (Permutation (merge gv2 gv2) []), (Permutation (gv2 ++ gv2) gv2), (Permutation (gv2 ++ gv2) (x :: gv2)), (Permutation (gv2 ++ gv2) (merge gv2 gv2)), (Permutation (gv2 ++ gv2) []), (Permutation [] gv2)
+(Permutation [] (x :: gv2)), (Permutation [] (merge gv2 gv2)), (Permutation [] (gv2 ++ gv2)), (In x (x :: gv2)), (In x (merge gv2 gv2)), (In x (gv2 ++ gv2)), (In (length gv2) gv2), (In (length gv2) (x :: gv2)), (In (length gv2) (merge gv2 gv2)), (In (length gv2) (gv2 ++ gv2))
+(x < length gv2), (length gv2 < x), (x <= length gv2), (length gv2 <= x), (~ x <=* gv2), (~ sorted gv2), (~ Permutation gv2 gv2), (~ In x gv2), (~ x < x), (~ x <= x)
+(x <> x), (gv2 <> gv2), (None = Some gv2), (x :: gv2 = gv2), (x :: gv2 = merge gv2 gv2), (x :: gv2 = gv2 ++ gv2), (x :: gv2 = []), (merge gv2 gv2 = gv2), (merge gv2 gv2 = gv2 ++ gv2), (gv2 ++ gv2 = gv2)
+([] = gv2), ([] = merge gv2 gv2), ([] = gv2 ++ gv2), (None = Some x), ((gv2, gv2) = split gv2), (length gv2 = x)
+
+Label: 2 (2)
+(x <=* gv1), (sorted gv1), (Permutation gv1 gv1), (In x gv1), (x < x), (x <= x), (x = x), (gv1 = gv1), (false = sorted_bool gv1), (true = sorted_bool gv1)
+(x <=* x :: gv1), (x <=* merge gv1 gv1), (x <=* gv1 ++ gv1), (x <=* []), (length gv1 <=* gv1), (length gv1 <=* x :: gv1), (length gv1 <=* merge gv1 gv1), (length gv1 <=* gv1 ++ gv1), (length gv1 <=* []), (sorted (x :: gv1))
+(sorted (merge gv1 gv1)), (sorted (gv1 ++ gv1)), (sorted []), (Permutation gv1 (x :: gv1)), (Permutation gv1 (merge gv1 gv1)), (Permutation gv1 (gv1 ++ gv1)), (Permutation gv1 []), (Permutation (x :: gv1) gv1), (Permutation (x :: gv1) (merge gv1 gv1)), (Permutation (x :: gv1) (gv1 ++ gv1))
+(Permutation (x :: gv1) []), (Permutation (merge gv1 gv1) gv1), (Permutation (merge gv1 gv1) (x :: gv1)), (Permutation (merge gv1 gv1) (gv1 ++ gv1)), (Permutation (merge gv1 gv1) []), (Permutation (gv1 ++ gv1) gv1), (Permutation (gv1 ++ gv1) (x :: gv1)), (Permutation (gv1 ++ gv1) (merge gv1 gv1)), (Permutation (gv1 ++ gv1) []), (Permutation [] gv1)
+(Permutation [] (x :: gv1)), (Permutation [] (merge gv1 gv1)), (Permutation [] (gv1 ++ gv1)), (In x (x :: gv1)), (In x (merge gv1 gv1)), (In x (gv1 ++ gv1)), (In (length gv1) gv1), (In (length gv1) (x :: gv1)), (In (length gv1) (merge gv1 gv1)), (In (length gv1) (gv1 ++ gv1))
+(x < length gv1), (length gv1 < x), (x <= length gv1), (length gv1 <= x), (~ x <=* gv1), (~ sorted gv1), (~ Permutation gv1 gv1), (~ In x gv1), (~ x < x), (~ x <= x)
+(x <> x), (gv1 <> gv1), (None = Some gv1), (x :: gv1 = gv1), (x :: gv1 = merge gv1 gv1), (x :: gv1 = gv1 ++ gv1), (x :: gv1 = []), (merge gv1 gv1 = gv1), (merge gv1 gv1 = gv1 ++ gv1), (gv1 ++ gv1 = gv1)
+([] = gv1), ([] = merge gv1 gv1), ([] = gv1 ++ gv1), (None = Some x), ((gv1, gv1) = split gv1), (length gv1 = x)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 167.354 seconds
+
+
+Label: 0 (0)
+(sorted gv0), (true = sorted_bool gv0), (sorted (x :: gv0)), (sorted (merge gv0 gv0)), (sorted (gv0 ++ gv0)), (Permutation (x :: gv0) (merge gv0 gv0)), (Permutation (x :: gv0) (gv0 ++ gv0)), (Permutation (merge gv0 gv0) (x :: gv0)), (Permutation (gv0 ++ gv0) (x :: gv0)), (x :: gv0 = merge gv0 gv0)
+(x :: gv0 = gv0 ++ gv0)
+
+Label: 1 (1)
+(sorted gv2), (true = sorted_bool gv2), (sorted (x :: gv2)), (sorted (merge gv2 gv2)), (sorted (gv2 ++ gv2)), (Permutation (x :: gv2) (merge gv2 gv2)), (Permutation (x :: gv2) (gv2 ++ gv2)), (Permutation (merge gv2 gv2) (x :: gv2)), (Permutation (gv2 ++ gv2) (x :: gv2)), (x :: gv2 = merge gv2 gv2)
+(x :: gv2 = gv2 ++ gv2)
+
+Label: 2 (2)
+(sorted (x :: gv1)), (sorted (gv1 ++ gv1)), (Permutation gv1 (merge gv1 gv1)), (Permutation gv1 (gv1 ++ gv1)), (Permutation gv1 []), (Permutation (merge gv1 gv1) gv1), (Permutation (merge gv1 gv1) []), (Permutation (gv1 ++ gv1) gv1), (Permutation (gv1 ++ gv1) []), (Permutation [] gv1)
+(Permutation [] (merge gv1 gv1)), (Permutation [] (gv1 ++ gv1)), (merge gv1 gv1 = gv1), (gv1 ++ gv1 = gv1), ([] = gv1), ([] = merge gv1 gv1), ([] = gv1 ++ gv1), ((gv1, gv1) = split gv1)
+
+
+------------------------------ PROCESSED SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 420.198 seconds
+
+
+(merge [] [x] = gv0)
+ - (merge [] [x] = gv0)
+ - (sorted gv0)
+ - (true = sorted_bool gv0)
+ - (sorted (x :: gv0))
+ - (sorted (merge gv0 gv0))
+ - (sorted (gv0 ++ gv0))
+ - (Permutation (x :: gv0) (merge gv0 gv0))
+ - (Permutation (x :: gv0) (gv0 ++ gv0))
+ - (Permutation (merge gv0 gv0) (x :: gv0))
+ - (Permutation (gv0 ++ gv0) (x :: gv0))
+ - (x :: gv0 = merge gv0 gv0)
+ - (x :: gv0 = gv0 ++ gv0)
+
+([] = gv1)
+ - ([] = gv1)
+ - (sorted (x :: gv1))
+ - (sorted (gv1 ++ gv1))
+ - (Permutation gv1 (merge gv1 gv1))
+ - (Permutation gv1 (gv1 ++ gv1))
+ - (Permutation gv1 [])
+ - (Permutation (merge gv1 gv1) gv1)
+ - (Permutation (merge gv1 gv1) [])
+ - (Permutation (gv1 ++ gv1) gv1)
+ - (Permutation (gv1 ++ gv1) [])
+ - (Permutation [] gv1)
+ - (Permutation [] (merge gv1 gv1))
+ - (Permutation [] (gv1 ++ gv1))
+ - (merge gv1 gv1 = gv1)
+ - (gv1 ++ gv1 = gv1)
+ - ([] = merge gv1 gv1)
+ - ([] = gv1 ++ gv1)
+ - ((gv1, gv1) = split gv1)
+
+([x] = gv2)
+ - ([x] = gv2)
+ - (sorted gv2)
+ - (true = sorted_bool gv2)
+ - (sorted (x :: gv2))
+ - (sorted (merge gv2 gv2))
+ - (sorted (gv2 ++ gv2))
+ - (Permutation (x :: gv2) (merge gv2 gv2))
+ - (Permutation (x :: gv2) (gv2 ++ gv2))
+ - (Permutation (merge gv2 gv2) (x :: gv2))
+ - (Permutation (gv2 ++ gv2) (x :: gv2))
+ - (x :: gv2 = merge gv2 gv2)
+ - (x :: gv2 = gv2 ++ gv2)
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 420.199 seconds
+
+Number of Result Pairs Returned: 40
+
+(merge [] [x] = gv0 -> sorted gv0)
+
+(merge [] [x] = gv0 -> true = sorted_bool gv0)
+(true = sorted_bool gv0 -> sorted gv0)
+
+(merge [] [x] = gv0 -> sorted (x :: gv0))
+(sorted (x :: gv0) -> sorted gv0)
+
+(merge [] [x] = gv0 -> sorted (merge gv0 gv0))
+(sorted (merge gv0 gv0) -> sorted gv0)
+
+(merge [] [x] = gv0 -> sorted (gv0 ++ gv0))
+(sorted (gv0 ++ gv0) -> sorted gv0)
+
+(merge [] [x] = gv0 -> Permutation (x :: gv0) (merge gv0 gv0))
+(Permutation (x :: gv0) (merge gv0 gv0) -> sorted gv0)
+
+(merge [] [x] = gv0 -> Permutation (x :: gv0) (gv0 ++ gv0))
+(Permutation (x :: gv0) (gv0 ++ gv0) -> sorted gv0)
+
+(merge [] [x] = gv0 -> Permutation (merge gv0 gv0) (x :: gv0))
+(Permutation (merge gv0 gv0) (x :: gv0) -> sorted gv0)
+
+(merge [] [x] = gv0 -> Permutation (gv0 ++ gv0) (x :: gv0))
+(Permutation (gv0 ++ gv0) (x :: gv0) -> sorted gv0)
+
+(merge [] [x] = gv0 -> x :: gv0 = merge gv0 gv0)
+(x :: gv0 = merge gv0 gv0 -> sorted gv0)
+
+(merge [] [x] = gv0 -> x :: gv0 = gv0 ++ gv0)
+(x :: gv0 = gv0 ++ gv0 -> sorted gv0)
+
+([x] = gv2 -> sorted (merge [] gv2))
+
+([x] = gv2 -> sorted gv2)
+(sorted gv2 -> sorted (merge [] gv2))
+
+([x] = gv2 -> true = sorted_bool gv2)
+(true = sorted_bool gv2 -> sorted (merge [] gv2))
+
+([x] = gv2 -> sorted (x :: gv2))
+(sorted (x :: gv2) -> sorted (merge [] gv2))
+
+([x] = gv2 -> sorted (merge gv2 gv2))
+(sorted (merge gv2 gv2) -> sorted (merge [] gv2))
+
+([x] = gv2 -> sorted (gv2 ++ gv2))
+(sorted (gv2 ++ gv2) -> sorted (merge [] gv2))
+
+([x] = gv2 -> Permutation (x :: gv2) (merge gv2 gv2))
+(Permutation (x :: gv2) (merge gv2 gv2) -> sorted (merge [] gv2))
+
+([x] = gv2 -> Permutation (x :: gv2) (gv2 ++ gv2))
+(Permutation (x :: gv2) (gv2 ++ gv2) -> sorted (merge [] gv2))
+
+([x] = gv2 -> Permutation (merge gv2 gv2) (x :: gv2))
+(Permutation (merge gv2 gv2) (x :: gv2) -> sorted (merge [] gv2))
+
+([x] = gv2 -> Permutation (gv2 ++ gv2) (x :: gv2))
+(Permutation (gv2 ++ gv2) (x :: gv2) -> sorted (merge [] gv2))
+
+([x] = gv2 -> x :: gv2 = merge gv2 gv2)
+(x :: gv2 = merge gv2 gv2 -> sorted (merge [] gv2))
+
+([x] = gv2 -> x :: gv2 = gv2 ++ gv2)
+(x :: gv2 = gv2 ++ gv2 -> sorted (merge [] gv2))
+
+([] = gv1 -> sorted (merge gv1 (x :: gv1)))
+
+([] = gv1 -> sorted (x :: gv1))
+(sorted (x :: gv1) -> sorted (merge gv1 (x :: gv1)))
+
+([] = gv1 -> Permutation gv1 (merge gv1 gv1))
+(Permutation gv1 (merge gv1 gv1) -> sorted (merge gv1 (x :: gv1)))
+
+([] = gv1 -> Permutation gv1 (gv1 ++ gv1))
+(Permutation gv1 (gv1 ++ gv1) -> sorted (merge gv1 (x :: gv1)))
+
+([] = gv1 -> Permutation gv1 [])
+(Permutation gv1 [] -> sorted (merge gv1 (x :: gv1)))
+
+([] = gv1 -> Permutation (merge gv1 gv1) gv1)
+(Permutation (merge gv1 gv1) gv1 -> sorted (merge gv1 (x :: gv1)))
+
+([] = gv1 -> Permutation (merge gv1 gv1) [])
+(Permutation (merge gv1 gv1) [] -> sorted (merge gv1 (x :: gv1)))
+
+([] = gv1 -> Permutation (gv1 ++ gv1) gv1)
+(Permutation (gv1 ++ gv1) gv1 -> sorted (merge gv1 (x :: gv1)))
+
+([] = gv1 -> Permutation (gv1 ++ gv1) [])
+(Permutation (gv1 ++ gv1) [] -> sorted (merge gv1 (x :: gv1)))
+
+([] = gv1 -> Permutation [] gv1)
+(Permutation [] gv1 -> sorted (merge gv1 (x :: gv1)))
+
+([] = gv1 -> Permutation [] (merge gv1 gv1))
+(Permutation [] (merge gv1 gv1) -> sorted (merge gv1 (x :: gv1)))
+
+([] = gv1 -> Permutation [] (gv1 ++ gv1))
+(Permutation [] (gv1 ++ gv1) -> sorted (merge gv1 (x :: gv1)))
+
+([] = gv1 -> merge gv1 gv1 = gv1)
+(merge gv1 gv1 = gv1 -> sorted (merge gv1 (x :: gv1)))
+
+([] = gv1 -> gv1 ++ gv1 = gv1)
+(gv1 ++ gv1 = gv1 -> sorted (merge gv1 (x :: gv1)))
+
+([] = gv1 -> [] = merge gv1 gv1)
+([] = merge gv1 gv1 -> sorted (merge gv1 (x :: gv1)))
+
+([] = gv1 -> [] = gv1 ++ gv1)
+([] = gv1 ++ gv1 -> sorted (merge gv1 (x :: gv1)))
+
+([] = gv1 -> (gv1, gv1) = split gv1)
+((gv1, gv1) = split gv1 -> sorted (merge gv1 (x :: gv1)))
