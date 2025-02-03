@@ -161,7 +161,7 @@ Proof.
   - intros. destruct al. simpl in H. inversion H.
   simpl in H. inversion H. simpl. pose (select_exists al n0).
   inversion e. inversion H0.
-  rewrite H2. 
+  rewrite H2.
   findlemma. Admitted.
 
   (* apply cons_of_small_maintains_sort.
