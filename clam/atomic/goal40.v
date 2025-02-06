@@ -48,6 +48,24 @@ Definition lst_eq (lst_eq_arg0 : Lst) (lst_eq_arg1 : Lst) : Prop
               | x, y => and (lst_subset x y) (lst_subset y x)
               end.
 
+Instance lst_subset_dec (m : Lst) (n : Lst) : (Dec (lst_subset m n)).
+Proof. 
+  dec_eq. induction m.
+  - simpl. auto.
+  - destruct IHm. simpl. destruct (lst_mem n0 n).
+  -- auto.
+  -- right. unfold not. intros. inversion H. auto.
+  -- right. unfold not. simpl. intros. destruct H. contradiction.
+Qed.
+
+Instance lst_eq_dec (m : Lst) (n : Lst) : (Dec (lst_eq m n)).
+Proof. 
+  dec_eq. unfold lst_eq. destruct (lst_subset_dec m n). destruct dec.
+  destruct (lst_subset_dec n m). destruct dec. auto.
+  right. unfold not. intros. destruct H. contradiction.
+  right. unfold not. intros. destruct H. contradiction.
+Qed.
+
 Fixpoint lst_union (lst_union_arg0 : Lst) (lst_union_arg1 : Lst) : Lst
            := match lst_union_arg0, lst_union_arg1 with
               | nil, x => x

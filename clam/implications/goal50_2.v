@@ -18,6 +18,13 @@ Derive Arbitrary for Lst.
 Instance Dec_Eq_lst : Dec_Eq (Lst).
 Proof. dec_eq. Qed.
 
+Instance IsTrue_dec (b : bool)  : (Dec (Bool.Is_true b)).
+Proof. 
+ dec_eq. destruct b. 
+ - simpl. auto.
+ - simpl. right. auto.
+Qed.
+
 Fixpoint less (less_arg0 : Nat) (less_arg1 : Nat) : bool
            := match less_arg0, less_arg1 with
               | _, zero => false

@@ -26,12 +26,3 @@ for t in os.listdir(folder):
 
 # for file in mapping:
 #     print(f"{file} <<-- {mapping[file]}")
-
-
-
-# Fails
-# goal38_1.v -- [in CoqInterface.process_satisfiable_results] File did not compile
-# goal41_3.v -- [in CoqInterface.process_satisfiable_results] File did not compile
-# goal41_2.v -- [in CoqInterface.process_satisfiable_results] File did not compile
-# goal50_2.v -- [in CoqInterface.process_satisfiable_results] File did not compile
-# goal41_5.v -- [in CoqInterface.process_satisfiable_results] File did not compile
