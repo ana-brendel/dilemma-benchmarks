@@ -17,22 +17,32 @@ ran = [
     "destruct_merge_by_sorted_all_cons_1.v",
     "destruct_merge_by_merge_nil_r_3.v",
     "leq_all_merge_by_Forall_inv_2.v", 
+    "single_merge_l_by_merge_nil_r.v", 
+    "sorted_cons_leq_by_sorted_skip.v", 
+    "leq_all_merge_by_Forall_inv_1.v",
+    "Forall_trans_by_Forall_inv_tail.v", 
+    "destruct_merge_by_Forall_inv_1.v",
+    "single_merge_l_by_sorted_cons_leq.v",
 ]
 
 error = [
     "merge_perm_by_Permutation_trans_2.v", # Constr kind FIX not handled in _ (Playground.ml)
     "destruct_merge_by_leq_all_merge_1", # Quickchick error and segmentation fault -- not sure what causes
+    "destruct_merge_by_Forall_trans_2.v", # Incomplete
+    "mergesort_perm_by_Permutation_trans_2.v", # Incomplete
+    "destruct_merge_by_sorted_all_cons_2.v", # Incomplete
+    "destruct_merge_by_leq_all_merge_2.v", # Incomplete
 ]
 
 new_run = []
 
-# COMPLETED: 13/100
+# COMPLETED: 22/100
 
-# for test in os.listdir(folder):
-#     if not (test.endswith(".v") or test.endswith(".txt")):
-#         full = os.path.join(folder,test)
-#         rm = f"rm {full}"
-#         os.system(rm)
+for test in os.listdir(folder):
+    if not (test.endswith(".v") or test.endswith(".txt")):
+        full = os.path.join(folder,test)
+        rm = f"rm {full}"
+        os.system(rm)
 
 # for t in os.listdir("/home/anabrendel/Desktop/benchmarks/vfa_merge/results"):
 #     if t.endswith(".txt"):
@@ -57,3 +67,6 @@ new_run = []
 
 # GIT CLEANUP: git gc --aggressive --prune
 
+
+# for t in os.listdir("/home/anabrendel/Desktop/benchmarks/vfa_merge/results"):
+#     print(t.removeprefix("log_for_").removesuffix(".txt"))
