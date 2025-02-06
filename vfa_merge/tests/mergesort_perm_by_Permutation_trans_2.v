@@ -327,6 +327,7 @@ Proof.
   - auto.
   - auto.
   - clear y. apply Permutation_trans with (l' := mergesort l1 ++ mergesort l2).
+  rewrite <- e. clear e. clear _x.
   findlemma. Admitted.
 
   (* apply Permutation_trans with (l' := l1 ++ l2).
