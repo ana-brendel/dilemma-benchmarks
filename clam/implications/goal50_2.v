@@ -1,17 +1,26 @@
+From LFindToo Require Import LFindToo.
+From QuickChick Require Import QuickChick.
+
 Require Import Nat Arith.
 
 Inductive Nat : Type := succ : Nat -> Nat |  zero : Nat.
 
 Inductive Lst : Type := cons : Nat -> Lst -> Lst |  nil : Lst.
 
-Inductive Tree : Type := node : Nat -> Tree -> Tree -> Tree |  leaf : Tree.
+(* ************************** [ QuickChick Stuff ] *************************** *)
+Derive Show for Nat.
+Derive Arbitrary for Nat.
+Instance Dec_Eq_Nat : Dec_Eq (Nat).
+Proof. dec_eq. Qed.
 
-Inductive Pair : Type := mkpair : Nat -> Nat -> Pair
-with ZLst : Type := zcons : Pair -> ZLst -> ZLst |  znil : ZLst.
+Derive Show for Lst.
+Derive Arbitrary for Lst.
+Instance Dec_Eq_lst : Dec_Eq (Lst).
+Proof. dec_eq. Qed.
 
 Fixpoint less (less_arg0 : Nat) (less_arg1 : Nat) : bool
            := match less_arg0, less_arg1 with
-              | x, zero => false
+              | _, zero => false
               | zero, succ x => true
               | succ x, succ y => less x y
               end.
@@ -149,51 +158,35 @@ Theorem count_insort_diff: forall (x y: Nat) (l: Lst), x <> y -> count x (insort
 Proof.
   intros.
   induction l.
-  {
     simpl.
     destruct (less y n) eqn:El; destruct (eqb x n) eqn:Ee.
-    {
       simpl.
       apply eqb_diff in H. rewrite H.
       rewrite Ee.
       reflexivity.
-    }
-    {
       rewrite count_cons_diff.
-      { simpl. rewrite Ee. reflexivity. }
-      { assumption. }
-    }
-    {
-      simpl. rewrite Ee. f_equal.
-      assumption.
-    }
-    {
+      simpl. rewrite Ee. reflexivity. assumption.
+      simpl. rewrite Ee. f_equal. assumption.
       simpl. rewrite Ee. assumption.
-    }
-  }
-  {
     simpl.
     apply eqb_diff in H.
     rewrite H.
     reflexivity.
-  }
 Qed.
 
 Theorem theorem0 : forall (x : Nat) (y : Lst), eq (count x (sort y)) (count x y).
 Proof.
   intros.
   induction y.
-  {
     simpl.
     destruct (eqb x n) eqn:E.
-    {
       apply Bool.Is_true_eq_left in E.
-      apply eqb_elim in E.
+      findlemma. Admitted.
+
+      (* apply eqb_elim in E.
       subst.
       rewrite count_insort.
       f_equal. assumption.
-    }
-    {
       simpl.
       rewrite count_insort_diff.
       assumption.
@@ -201,10 +194,6 @@ Proof.
       rewrite H in E.
       rewrite eqb_refl in E.
       inversion E.
-    }
-  }
-  {
     simpl.
     reflexivity.
-  }
-Qed.
+Qed. *)

@@ -1,0 +1,219 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (mem x z)
+
+----------------------------------
+Goal: (mem x (append y z))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 0. seconds
+
+gv0 : Lst = (append y z)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 16.64 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (append y z = gv0)
+ -- (mem x z)
+
+----------------------------------
+Goal: (mem x gv0)
+Case: 3
+
+Label: Generalization #1
+Assumptions: 
+ -- (mem x z)
+
+----------------------------------
+Goal: (mem x (append y z))
+Case: 3
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 17.42 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+append : (Lst -> Lst -> Lst)
+mem : (Nat -> Lst -> Prop)
+
+Label: 0 (0)
+Abducted Assumption: (append y z = gv0)
+Positive Examples:
+   [gv0 := (cons zero (cons zero nil)); x := zero; y := (cons zero nil); z := (cons zero nil)]
+   [gv0 := (cons (succ zero) (cons zero nil)); x := zero; y := (cons (succ zero) nil); z := (cons zero nil)]
+   [gv0 := (cons (succ (succ zero)) (cons zero nil)); x := zero; y := nil; z := (cons (succ (succ zero)) (cons zero nil))]
+   [gv0 := (cons zero (cons zero nil)); x := zero; y := nil; z := (cons zero (cons zero nil))]
+   [gv0 := (cons (succ zero) nil); x := (succ zero); y := nil; z := (cons (succ zero) nil)]
+   [gv0 := (cons zero nil); x := zero; y := nil; z := (cons zero nil)]
+
+Negative Examples:
+   [gv0 := (cons zero (cons zero nil)); x := (succ zero); y := nil; z := (cons zero (cons (succ zero) nil))]
+   [gv0 := (cons (succ (succ (succ (succ zero)))) (cons zero nil)); x := (succ zero); y := (cons zero nil); z := (cons (succ zero) nil)]
+   [gv0 := nil; x := zero; y := (cons (succ (succ (succ zero))) (cons zero nil)); z := (cons (succ (succ zero)) (cons zero nil))]
+   [gv0 := nil; x := (succ (succ (succ zero))); y := (cons zero nil); z := (cons (succ (succ (succ zero))) (cons zero nil))]
+   [gv0 := (cons (succ (succ (succ zero))) nil); x := (succ (succ (succ (succ (succ zero))))); y := (cons (succ zero)
+   (cons zero
+      (cons (succ (succ (succ (succ zero))))
+         (cons (succ (succ (succ zero))) nil)))); z := (cons (succ (succ (succ zero)))
+   (cons (succ zero) (cons (succ (succ (succ (succ (succ zero))))) nil)))]
+   [gv0 := nil; x := zero; y := (cons zero nil); z := (cons zero
+   (cons (succ (succ zero))
+      (cons (succ zero)
+         (cons (succ (succ (succ zero))) (cons zero (cons zero nil))))))]
+   [gv0 := (cons (succ (succ zero)) (cons (succ (succ zero)) nil)); x := zero; y := nil; z := (cons zero nil)]
+   [gv0 := (cons (succ zero) nil); x := zero; y := (cons (succ zero) (cons zero (cons (succ (succ zero)) nil))); z := (cons (succ (succ zero)) (cons zero nil))]
+   [gv0 := (cons (succ zero) (cons zero (cons zero (cons zero nil)))); x := (succ (succ zero)); y := (cons zero (cons (succ (succ zero)) (cons zero (cons (succ zero) nil)))); z := (cons (succ zero) (cons (succ (succ zero)) (cons zero nil)))]
+   [gv0 := nil; x := zero; y := (cons zero (cons (succ (succ zero)) nil)); z := (cons zero (cons (succ zero) nil))]
+   etc ...
+
+
+Label: 0 (1)
+Abducted Assumption: (mem x z)
+Positive Examples:
+   [gv0 := (cons zero (cons zero nil)); x := zero; y := (cons zero nil); z := (cons zero nil)]
+   [gv0 := (cons (succ zero) (cons zero nil)); x := zero; y := (cons (succ zero) nil); z := (cons zero nil)]
+   [gv0 := (cons (succ (succ zero)) (cons zero nil)); x := zero; y := nil; z := (cons (succ (succ zero)) (cons zero nil))]
+   [gv0 := (cons zero (cons zero nil)); x := zero; y := nil; z := (cons zero (cons zero nil))]
+   [gv0 := (cons (succ zero) nil); x := (succ zero); y := nil; z := (cons (succ zero) nil)]
+   [gv0 := (cons zero nil); x := zero; y := nil; z := (cons zero nil)]
+
+Negative Examples:
+   [gv0 := (cons (succ (succ zero)) nil); x := zero; y := (cons (succ (succ zero)) nil); z := nil]
+   [gv0 := (cons (succ (succ (succ zero))) nil); x := (succ zero); y := nil; z := (cons (succ (succ (succ zero))) nil)]
+   [gv0 := (cons (succ (succ (succ zero))) nil); x := (succ (succ zero)); y := nil; z := (cons (succ (succ (succ zero))) nil)]
+   [gv0 := (cons zero (cons zero nil)); x := (succ (succ zero)); y := nil; z := (cons zero (cons zero nil))]
+   [gv0 := (cons zero (cons zero nil)); x := (succ (succ zero)); y := (cons zero nil); z := (cons zero nil)]
+   [gv0 := (cons zero nil); x := (succ (succ (succ zero))); y := nil; z := (cons zero nil)]
+   [gv0 := (cons (succ (succ zero)) (cons zero nil)); x := (succ zero); y := nil; z := (cons (succ (succ zero)) (cons zero nil))]
+   [gv0 := (cons (succ (succ (succ zero))) nil); x := (succ (succ zero)); y := (cons (succ (succ (succ zero))) nil); z := nil]
+   [gv0 := (cons (succ zero) nil); x := (succ (succ (succ zero))); y := nil; z := (cons (succ zero) nil)]
+   [gv0 := (cons zero nil); x := (succ (succ (succ (succ zero)))); y := (cons zero nil); z := nil]
+   etc ...
+
+
+Label: 1 (2)
+Abducted Assumption: (mem x z)
+Positive Examples:
+   [x := zero; y := nil; z := (cons (succ (succ zero))
+   (cons zero (cons (succ zero) (cons (succ zero) nil))))]
+   [x := (succ (succ (succ (succ zero)))); y := (cons zero (cons zero (cons (succ (succ zero)) nil))); z := (cons (succ (succ (succ (succ zero))))
+   (cons (succ (succ (succ (succ zero))))
+      (cons (succ (succ zero)) (cons zero nil))))]
+   [x := (succ (succ zero)); y := nil; z := (cons (succ (succ zero)) (cons (succ (succ zero)) nil))]
+   [x := zero; y := nil; z := (cons (succ (succ zero)) (cons zero (cons (succ zero) nil)))]
+   [x := zero; y := nil; z := (cons (succ (succ (succ zero))) (cons (succ zero) (cons zero nil)))]
+   [x := (succ (succ (succ (succ zero)))); y := nil; z := (cons (succ (succ (succ (succ zero))))
+   (cons (succ (succ (succ zero)))
+      (cons (succ (succ (succ (succ zero)))) (cons zero nil))))]
+   [x := zero; y := (cons (succ zero) (cons zero nil)); z := (cons (succ (succ (succ (succ zero))))
+   (cons (succ zero) (cons zero (cons (succ (succ zero)) nil))))]
+   [x := zero; y := (cons zero (cons (succ zero) nil)); z := (cons zero (cons (succ zero) nil))]
+   [x := (succ zero); y := nil; z := (cons (succ (succ (succ (succ zero)))) (cons (succ zero) nil))]
+   [x := (succ zero); y := (cons (succ (succ (succ (succ zero)))) nil); z := (cons zero (cons (succ zero) (cons zero (cons (succ zero) (cons zero nil)))))]
+   etc ...
+
+Negative Examples:
+   [x := zero; y := (cons (succ (succ zero)) (cons (succ zero) nil)); z := (cons (succ zero) nil)]
+   [x := zero; y := (cons (succ zero) (cons (succ zero) (cons (succ zero) nil))); z := nil]
+   [x := (succ (succ (succ (succ zero)))); y := (cons zero (cons zero (cons (succ (succ zero)) nil))); z := (cons (succ zero) nil)]
+   [x := zero; y := nil; z := (cons (succ (succ (succ zero)))
+   (cons (succ zero) (cons (succ (succ (succ (succ zero)))) nil)))]
+   [x := zero; y := nil; z := (cons (succ (succ zero))
+   (cons (succ (succ (succ zero))) (cons (succ zero) nil)))]
+   [x := (succ (succ (succ zero))); y := nil; z := (cons (succ (succ zero)) (cons (succ zero) (cons zero nil)))]
+   [x := (succ (succ zero)); y := nil; z := (cons zero (cons zero (cons zero (cons (succ zero) nil))))]
+   [x := zero; y := (cons (succ zero) (cons (succ (succ (succ (succ zero)))) nil)); z := nil]
+   [x := zero; y := (cons (succ (succ zero)) nil); z := (cons (succ (succ (succ zero))) nil)]
+   [x := zero; y := nil; z := (cons (succ (succ (succ zero))) (cons (succ zero) (cons (succ zero) nil)))]
+   etc ...
+
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 18.27 seconds
+
+
+Label: 0 (0)
+(mem x y), (mem x z), (mem x gv0), (y = y), (y = z), (y = gv0), (z = y), (z = z), (z = gv0), (gv0 = y)
+(gv0 = z), (gv0 = gv0), (x = x), (mem x (append y y)), (mem x (append y z)), (mem x (append y gv0)), (mem x (append z y)), (mem x (append z z)), (mem x (append z gv0)), (mem x (append gv0 y))
+(mem x (append gv0 z)), (mem x (append gv0 gv0)), (~ mem x y), (~ mem x z), (~ mem x gv0), (y <> y), (y <> z), (y <> gv0), (z <> y), (z <> z)
+(z <> gv0), (gv0 <> y), (gv0 <> z), (gv0 <> gv0), (x <> x), (None = Some y), (None = Some z), (None = Some gv0), (append y y = y), (append y y = z)
+(append y y = gv0), (append y z = y), (append y z = z), (append y z = gv0), (append y gv0 = y), (append y gv0 = z), (append y gv0 = gv0), (append z y = y), (append z y = z), (append z y = gv0)
+(append z z = y), (append z z = z), (append z z = gv0), (append z gv0 = y), (append z gv0 = z), (append z gv0 = gv0), (append gv0 y = y), (append gv0 y = z), (append gv0 y = gv0), (append gv0 z = y)
+(append gv0 z = z), (append gv0 z = gv0), (append gv0 gv0 = y), (append gv0 gv0 = z), (append gv0 gv0 = gv0), (None = Some x)
+
+Label: 0 (1)
+(mem x y), (mem x z), (mem x gv0), (y = y), (y = z), (y = gv0), (z = y), (z = z), (z = gv0), (gv0 = y)
+(gv0 = z), (gv0 = gv0), (x = x), (mem x (append y y)), (mem x (append y z)), (mem x (append y gv0)), (mem x (append z y)), (mem x (append z z)), (mem x (append z gv0)), (mem x (append gv0 y))
+(mem x (append gv0 z)), (mem x (append gv0 gv0)), (~ mem x y), (~ mem x z), (~ mem x gv0), (y <> y), (y <> z), (y <> gv0), (z <> y), (z <> z)
+(z <> gv0), (gv0 <> y), (gv0 <> z), (gv0 <> gv0), (x <> x), (None = Some y), (None = Some z), (None = Some gv0), (append y y = y), (append y y = z)
+(append y y = gv0), (append y z = y), (append y z = z), (append y z = gv0), (append y gv0 = y), (append y gv0 = z), (append y gv0 = gv0), (append z y = y), (append z y = z), (append z y = gv0)
+(append z z = y), (append z z = z), (append z z = gv0), (append z gv0 = y), (append z gv0 = z), (append z gv0 = gv0), (append gv0 y = y), (append gv0 y = z), (append gv0 y = gv0), (append gv0 z = y)
+(append gv0 z = z), (append gv0 z = gv0), (append gv0 gv0 = y), (append gv0 gv0 = z), (append gv0 gv0 = gv0), (None = Some x)
+
+Label: 1 (2)
+(mem x z), (mem x y), (z = z), (z = y), (y = z), (y = y), (x = x), (mem x (append z z)), (mem x (append z y)), (mem x (append y z))
+(mem x (append y y)), (~ mem x z), (~ mem x y), (z <> z), (z <> y), (y <> z), (y <> y), (x <> x), (None = Some z), (None = Some y)
+(append z z = z), (append z z = y), (append z y = z), (append z y = y), (append y z = z), (append y z = y), (append y y = z), (append y y = y), (None = Some x)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 90.259 seconds
+
+
+Label: 0 (0)
+(mem x gv0), (mem x (append gv0 gv0)), (append y z = gv0)
+
+Label: 0 (1)
+(mem x z), (mem x gv0), (mem x (append y z)), (mem x (append y gv0)), (mem x (append z y)), (mem x (append z z)), (mem x (append z gv0)), (mem x (append gv0 y)), (mem x (append gv0 z)), (mem x (append gv0 gv0))
+
+Label: 1 (2)
+(mem x z), (mem x (append z z)), (mem x (append z y)), (mem x (append y z))
+
+
+------------------------------ PROCESSED SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 122.109 seconds
+
+
+(mem x z)
+ - (mem x z)
+ - (mem x (append z z))
+ - (mem x (append z y))
+ - (mem x (append y z))
+
+(append y z = gv0)
+ - (append y z = gv0)
+ - (mem x gv0)
+ - (mem x (append gv0 gv0))
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 122.109 seconds
+
+Number of Result Pairs Returned: 3
+
+(mem x z -> mem x (append y z))
+
+(mem x z -> mem x (append z z))
+(mem x (append z z) -> mem x (append y z))
+
+(mem x z -> mem x (append z y))
+(mem x (append z y) -> mem x (append y z))

@@ -1,0 +1,956 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (leq n n0 = true)
+ -- (less y n = false)
+ -- (less y n0 = true)
+ -- (match x with
+ | nil => true
+ | cons z _ => sorted x && leq n0 z
+ end = true -> sorted (cons y (cons n0 x)) = true)
+ -- (match x with
+ | nil => true
+ | cons z _ => sorted x && leq n0 z
+ end = true)
+
+----------------------------------
+Goal: (true && leq y n0 && leq n y = true)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 0. seconds
+
+gv1 : bool = (true && leq y n0)
+gv0 : bool = (true && leq y n0 && leq n y)
+gv4 : bool = (leq n y)
+gv3 : bool = (leq y n0)
+gv2 : bool = true
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 93.839 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (less y n = false)
+ -- (less y n0 = gv2)
+
+----------------------------------
+Goal: (gv2 && leq y n0 && leq n y = gv2)
+Case: 3
+
+Label: Generalization #1
+Assumptions: 
+ -- (leq y n0 = gv3)
+ -- (less y n = false)
+ -- (less y n0 = true)
+
+----------------------------------
+Goal: (true && gv3 && leq n y = true)
+Case: 3
+
+Label: Generalization #2
+Assumptions: 
+ -- (leq n y = gv4)
+ -- (less y n = false)
+ -- (less y n0 = true)
+
+----------------------------------
+Goal: (true && leq y n0 && gv4 = true)
+Case: 3
+
+Label: Generalization #3
+Assumptions: 
+ -- (true && leq y n0 && leq n y = gv0)
+ -- (less y n = false)
+ -- (less y n0 = true)
+
+----------------------------------
+Goal: (gv0 = true)
+Case: 3
+
+Label: Generalization #4
+Assumptions: 
+ -- (true && leq y n0 = gv1)
+ -- (less y n = false)
+ -- (less y n0 = true)
+
+----------------------------------
+Goal: (gv1 && leq n y = true)
+Case: 3
+
+Label: Generalization #5
+Assumptions: 
+ -- (less y n = false)
+ -- (less y n0 = true)
+
+----------------------------------
+Goal: (true && leq y n0 && leq n y = true)
+Case: 3
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 95.457 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+less : (Nat -> Nat -> bool)
+leq : (Nat -> Nat -> bool)
+insort : (Nat -> Lst -> Lst)
+sorted : (Lst -> bool)
+sort : (Lst -> Lst)
+
+Label: 0 (0)
+Abducted Assumption: (less y n = false)
+Positive Examples:
+   [gv2 := false; n := zero; n0 := (succ (succ (succ zero))); y := (succ (succ (succ (succ zero))))]
+   [gv2 := false; n := (succ (succ (succ (succ zero)))); n0 := (succ zero); y := (succ (succ (succ (succ zero))))]
+   [gv2 := true; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := zero]
+   [gv2 := true; n := (succ zero); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [gv2 := true; n := (succ (succ zero)); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ zero)))]
+   [gv2 := false; n := zero; n0 := (succ (succ zero)); y := (succ (succ (succ (succ (succ zero)))))]
+   [gv2 := true; n := zero; n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [gv2 := false; n := (succ (succ zero)); n0 := zero; y := (succ (succ (succ (succ zero))))]
+   [gv2 := true; n := (succ (succ zero)); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   [gv2 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ zero)]
+   etc ...
+
+Negative Examples:
+   [gv2 := true; n := (succ (succ (succ (succ zero)))); n0 := (succ (succ (succ (succ zero)))); y := zero]
+   [gv2 := true; n := (succ (succ (succ zero))); n0 := (succ (succ (succ (succ zero)))); y := (succ zero)]
+   [gv2 := true; n := (succ (succ (succ (succ zero)))); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   [gv2 := true; n := (succ (succ (succ (succ (succ (succ zero)))))); n0 := (succ zero); y := zero]
+   [gv2 := true; n := (succ (succ (succ zero))); n0 := (succ (succ (succ zero))); y := (succ (succ zero))]
+   [gv2 := true; n := (succ (succ (succ (succ (succ zero))))); n0 := (succ (succ (succ (succ (succ zero))))); y := zero]
+   [gv2 := true; n := (succ (succ (succ zero))); n0 := (succ (succ zero)); y := (succ zero)]
+   [gv2 := true; n := (succ (succ (succ (succ zero)))); n0 := (succ (succ (succ (succ zero)))); y := (succ zero)]
+   [gv2 := true; n := (succ (succ (succ (succ (succ zero))))); n0 := (succ (succ zero)); y := (succ zero)]
+   [gv2 := true; n := (succ (succ (succ (succ (succ zero))))); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   etc ...
+
+
+Label: 0 (1)
+Abducted Assumption: (less y n0 = gv2)
+Positive Examples:
+   [gv2 := false; n := zero; n0 := (succ (succ (succ zero))); y := (succ (succ (succ (succ zero))))]
+   [gv2 := false; n := (succ (succ (succ (succ zero)))); n0 := (succ zero); y := (succ (succ (succ (succ zero))))]
+   [gv2 := true; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := zero]
+   [gv2 := true; n := (succ zero); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [gv2 := true; n := (succ (succ zero)); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ zero)))]
+   [gv2 := false; n := zero; n0 := (succ (succ zero)); y := (succ (succ (succ (succ (succ zero)))))]
+   [gv2 := true; n := zero; n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [gv2 := false; n := (succ (succ zero)); n0 := zero; y := (succ (succ (succ (succ zero))))]
+   [gv2 := true; n := (succ (succ zero)); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   [gv2 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ zero)]
+   etc ...
+
+Negative Examples:
+   [gv2 := true; n := zero; n0 := (succ (succ (succ zero))); y := (succ (succ (succ (succ zero))))]
+   [gv2 := true; n := (succ (succ (succ (succ zero)))); n0 := (succ zero); y := (succ (succ (succ (succ zero))))]
+   [gv2 := true; n := (succ zero); n0 := (succ (succ zero)); y := (succ (succ (succ (succ (succ zero)))))]
+   [gv2 := true; n := zero; n0 := zero; y := (succ (succ (succ (succ (succ (succ zero))))))]
+   [gv2 := true; n := zero; n0 := (succ (succ (succ zero))); y := (succ (succ (succ (succ (succ zero)))))]
+   [gv2 := true; n := (succ (succ (succ zero))); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ (succ (succ zero)))))]
+   [gv2 := true; n := (succ (succ (succ (succ zero)))); n0 := zero; y := (succ (succ (succ (succ zero))))]
+   [gv2 := true; n := (succ zero); n0 := (succ (succ zero)); y := (succ (succ (succ (succ zero))))]
+   [gv2 := true; n := (succ (succ (succ zero))); n0 := (succ (succ zero)); y := (succ (succ (succ zero)))]
+   [gv2 := true; n := (succ zero); n0 := zero; y := (succ (succ (succ (succ (succ (succ zero))))))]
+   etc ...
+
+
+Label: 1 (2)
+Abducted Assumption: (leq y n0 = gv3)
+Positive Examples:
+   [gv3 := true; n := zero; n0 := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   [gv3 := true; n := zero; n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ (succ zero))))]
+   [gv3 := true; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := zero]
+   [gv3 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ zero))]
+   [gv3 := true; n := (succ (succ zero)); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   [gv3 := true; n := (succ zero); n0 := (succ (succ (succ zero))); y := (succ (succ zero))]
+   [gv3 := true; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ (succ (succ zero))))]
+   [gv3 := true; n := (succ zero); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   [gv3 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ zero)]
+   [gv3 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ zero)]
+   etc ...
+
+Negative Examples:
+   [gv3 := false; n := zero; n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ zero))]
+   [gv3 := false; n := (succ (succ zero)); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ (succ zero))))]
+   [gv3 := false; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ zero)]
+   [gv3 := false; n := (succ (succ (succ zero))); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [gv3 := false; n := zero; n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ (succ zero))))]
+   [gv3 := false; n := (succ zero); n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ zero)]
+   [gv3 := false; n := (succ (succ zero)); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [gv3 := false; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ zero)]
+   [gv3 := false; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := zero]
+   [gv3 := false; n := zero; n0 := (succ (succ (succ (succ (succ zero))))); y := (succ zero)]
+   etc ...
+
+
+Label: 1 (3)
+Abducted Assumption: (less y n = false)
+Positive Examples:
+   [gv3 := true; n := zero; n0 := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   [gv3 := true; n := zero; n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ (succ zero))))]
+   [gv3 := true; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := zero]
+   [gv3 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ zero))]
+   [gv3 := true; n := (succ (succ zero)); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   [gv3 := true; n := (succ zero); n0 := (succ (succ (succ zero))); y := (succ (succ zero))]
+   [gv3 := true; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ (succ (succ zero))))]
+   [gv3 := true; n := (succ zero); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   [gv3 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ zero)]
+   [gv3 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ zero)]
+   etc ...
+
+Negative Examples:
+   [gv3 := true; n := (succ (succ (succ (succ (succ zero))))); n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ (succ zero)))]
+   [gv3 := true; n := (succ (succ (succ zero))); n0 := (succ (succ (succ (succ (succ zero))))); y := zero]
+   [gv3 := true; n := (succ (succ (succ (succ zero)))); n0 := (succ (succ (succ zero))); y := (succ (succ zero))]
+   [gv3 := true; n := (succ (succ (succ (succ zero)))); n0 := (succ (succ (succ (succ (succ zero))))); y := zero]
+   [gv3 := true; n := (succ (succ (succ zero))); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   [gv3 := true; n := (succ (succ zero)); n0 := (succ (succ (succ (succ zero)))); y := (succ zero)]
+   [gv3 := true; n := (succ (succ (succ (succ (succ (succ zero)))))); n0 := (succ zero); y := zero]
+   [gv3 := true; n := (succ (succ zero)); n0 := (succ (succ (succ zero))); y := zero]
+   [gv3 := true; n := (succ (succ zero)); n0 := (succ (succ (succ (succ (succ zero))))); y := zero]
+   [gv3 := true; n := (succ (succ zero)); n0 := (succ (succ (succ zero))); y := (succ zero)]
+   etc ...
+
+
+Label: 1 (4)
+Abducted Assumption: (less y n0 = true)
+Positive Examples:
+   [gv3 := true; n := zero; n0 := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   [gv3 := true; n := zero; n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ (succ zero))))]
+   [gv3 := true; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := zero]
+   [gv3 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ zero))]
+   [gv3 := true; n := (succ (succ zero)); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   [gv3 := true; n := (succ zero); n0 := (succ (succ (succ zero))); y := (succ (succ zero))]
+   [gv3 := true; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ (succ (succ zero))))]
+   [gv3 := true; n := (succ zero); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   [gv3 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ zero)]
+   [gv3 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ zero)]
+   etc ...
+
+Negative Examples:
+   [gv3 := false; n := (succ (succ (succ (succ zero)))); n0 := (succ (succ (succ zero))); y := (succ (succ (succ (succ zero))))]
+   [gv3 := false; n := (succ (succ (succ (succ zero)))); n0 := zero; y := (succ (succ (succ (succ (succ zero)))))]
+   [gv3 := false; n := zero; n0 := (succ (succ zero)); y := (succ (succ (succ (succ zero))))]
+   [gv3 := false; n := (succ (succ (succ zero))); n0 := (succ zero); y := (succ (succ (succ (succ (succ (succ zero))))))]
+   [gv3 := false; n := (succ (succ (succ (succ zero)))); n0 := (succ zero); y := (succ (succ (succ (succ zero))))]
+   [gv3 := false; n := (succ (succ zero)); n0 := zero; y := (succ (succ (succ (succ (succ zero)))))]
+   [gv3 := false; n := zero; n0 := (succ (succ (succ zero))); y := (succ (succ (succ (succ zero))))]
+   [gv3 := false; n := (succ (succ (succ (succ zero)))); n0 := zero; y := (succ (succ (succ (succ zero))))]
+   [gv3 := false; n := (succ (succ (succ zero))); n0 := zero; y := (succ (succ (succ zero)))]
+   [gv3 := false; n := (succ zero); n0 := zero; y := (succ (succ (succ (succ zero))))]
+   etc ...
+
+
+Label: 2 (5)
+Abducted Assumption: (leq n y = gv4)
+Positive Examples:
+   [gv4 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ zero)))]
+   [gv4 := true; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := zero]
+   [gv4 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ zero)]
+   [gv4 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ zero))]
+   [gv4 := true; n := (succ zero); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [gv4 := true; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ zero))]
+   [gv4 := true; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ (succ (succ zero))))]
+   [gv4 := true; n := zero; n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [gv4 := true; n := zero; n0 := (succ (succ (succ (succ (succ zero))))); y := (succ zero)]
+   [gv4 := true; n := (succ zero); n0 := (succ (succ (succ (succ zero)))); y := (succ zero)]
+   etc ...
+
+Negative Examples:
+   [gv4 := false; n := (succ zero); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   [gv4 := false; n := zero; n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ zero)))]
+   [gv4 := false; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ zero)))]
+   [gv4 := false; n := (succ zero); n0 := (succ (succ (succ zero))); y := (succ (succ zero))]
+   [gv4 := false; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ zero)]
+   [gv4 := false; n := (succ (succ zero)); n0 := (succ (succ (succ zero))); y := (succ (succ zero))]
+   [gv4 := false; n := (succ (succ zero)); n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ (succ (succ zero))))]
+   [gv4 := false; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ (succ zero)))]
+   [gv4 := false; n := zero; n0 := (succ (succ (succ (succ (succ zero))))); y := (succ zero)]
+   [gv4 := false; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ zero))]
+   etc ...
+
+
+Label: 2 (6)
+Abducted Assumption: (less y n = false)
+Positive Examples:
+   [gv4 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ zero)))]
+   [gv4 := true; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := zero]
+   [gv4 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ zero)]
+   [gv4 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ zero))]
+   [gv4 := true; n := (succ zero); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [gv4 := true; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ zero))]
+   [gv4 := true; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ (succ (succ zero))))]
+   [gv4 := true; n := zero; n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [gv4 := true; n := zero; n0 := (succ (succ (succ (succ (succ zero))))); y := (succ zero)]
+   [gv4 := true; n := (succ zero); n0 := (succ (succ (succ (succ zero)))); y := (succ zero)]
+   etc ...
+
+Negative Examples:
+   [gv4 := false; n := (succ (succ (succ zero))); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ zero))]
+   [gv4 := false; n := (succ (succ zero)); n0 := (succ (succ (succ (succ zero)))); y := zero]
+   [gv4 := false; n := (succ (succ (succ (succ zero)))); n0 := (succ (succ (succ zero))); y := (succ zero)]
+   [gv4 := false; n := (succ (succ (succ zero))); n0 := (succ (succ (succ zero))); y := (succ (succ zero))]
+   [gv4 := false; n := (succ (succ (succ zero))); n0 := (succ (succ (succ (succ (succ zero))))); y := zero]
+   [gv4 := false; n := (succ (succ (succ (succ zero)))); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [gv4 := false; n := (succ (succ (succ zero))); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   [gv4 := false; n := (succ (succ (succ (succ (succ (succ zero)))))); n0 := (succ zero); y := zero]
+   [gv4 := false; n := (succ (succ (succ (succ zero)))); n0 := (succ (succ zero)); y := (succ zero)]
+   [gv4 := false; n := (succ (succ (succ zero))); n0 := (succ (succ (succ zero))); y := zero]
+   etc ...
+
+
+Label: 2 (7)
+Abducted Assumption: (less y n0 = true)
+Positive Examples:
+   [gv4 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ zero)))]
+   [gv4 := true; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := zero]
+   [gv4 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ zero)]
+   [gv4 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ zero))]
+   [gv4 := true; n := (succ zero); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [gv4 := true; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ zero))]
+   [gv4 := true; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ (succ (succ zero))))]
+   [gv4 := true; n := zero; n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [gv4 := true; n := zero; n0 := (succ (succ (succ (succ (succ zero))))); y := (succ zero)]
+   [gv4 := true; n := (succ zero); n0 := (succ (succ (succ (succ zero)))); y := (succ zero)]
+   etc ...
+
+Negative Examples:
+   [gv4 := true; n := (succ (succ (succ (succ zero)))); n0 := zero; y := (succ (succ (succ (succ (succ zero)))))]
+   [gv4 := true; n := zero; n0 := zero; y := (succ (succ (succ (succ (succ (succ zero))))))]
+   [gv4 := true; n := (succ (succ (succ zero))); n0 := (succ zero); y := (succ (succ (succ zero)))]
+   [gv4 := true; n := (succ zero); n0 := (succ zero); y := (succ (succ (succ (succ zero))))]
+   [gv4 := true; n := (succ (succ zero)); n0 := zero; y := (succ (succ (succ (succ (succ zero)))))]
+   [gv4 := true; n := (succ zero); n0 := (succ (succ zero)); y := (succ (succ (succ (succ zero))))]
+   [gv4 := true; n := zero; n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ (succ (succ zero)))))]
+   [gv4 := true; n := (succ zero); n0 := (succ zero); y := (succ (succ (succ (succ (succ zero)))))]
+   [gv4 := true; n := (succ (succ (succ zero))); n0 := (succ zero); y := (succ (succ (succ (succ zero))))]
+   [gv4 := true; n := (succ zero); n0 := (succ (succ zero)); y := (succ (succ (succ (succ (succ zero)))))]
+   etc ...
+
+
+Label: 3 (8)
+Abducted Assumption: (true && leq y n0 && leq n y = gv0)
+Positive Examples:
+   [gv0 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ zero)]
+   [gv0 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ zero))]
+   [gv0 := true; n := (succ (succ zero)); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   [gv0 := true; n := zero; n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ zero)))]
+   [gv0 := true; n := (succ (succ (succ zero))); n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ (succ (succ zero))))]
+   [gv0 := true; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := zero]
+   [gv0 := true; n := (succ zero); n0 := (succ (succ (succ zero))); y := (succ (succ zero))]
+   [gv0 := true; n := (succ zero); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   [gv0 := true; n := zero; n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [gv0 := true; n := (succ (succ zero)); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ zero))]
+   etc ...
+
+Negative Examples:
+   [gv0 := false; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := zero]
+   [gv0 := false; n := (succ zero); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   [gv0 := false; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ (succ (succ zero))))]
+   [gv0 := false; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ zero)]
+   [gv0 := false; n := (succ zero); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [gv0 := false; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ zero)]
+   [gv0 := false; n := zero; n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [gv0 := false; n := (succ (succ zero)); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ zero)))]
+   [gv0 := false; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ zero)))]
+   [gv0 := false; n := (succ (succ zero)); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   etc ...
+
+
+Label: 4 (9)
+Abducted Assumption: (true && leq y n0 = gv1)
+Positive Examples:
+   [gv1 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ zero))]
+   [gv1 := true; n := (succ (succ zero)); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [gv1 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ zero)]
+   [gv1 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ zero)))]
+   [gv1 := true; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ (succ (succ (succ zero)))))]
+   [gv1 := true; n := (succ (succ zero)); n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ zero))]
+   [gv1 := true; n := zero; n0 := (succ (succ (succ (succ (succ zero))))); y := (succ zero)]
+   [gv1 := true; n := zero; n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ zero))]
+   [gv1 := true; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ zero)]
+   [gv1 := true; n := (succ (succ zero)); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   etc ...
+
+Negative Examples:
+   [gv1 := false; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ zero)]
+   [gv1 := false; n := (succ zero); n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ zero))]
+   [gv1 := false; n := (succ (succ (succ zero))); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ (succ zero))))]
+   [gv1 := false; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ zero)]
+   [gv1 := false; n := zero; n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ zero))]
+   [gv1 := false; n := zero; n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [gv1 := false; n := zero; n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ zero)))]
+   [gv1 := false; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := zero]
+   [gv1 := false; n := (succ (succ zero)); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   [gv1 := false; n := (succ zero); n0 := (succ (succ (succ (succ zero)))); y := (succ zero)]
+   etc ...
+
+
+Label: 4 (10)
+Abducted Assumption: (less y n = false)
+Positive Examples:
+   [gv1 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ zero))]
+   [gv1 := true; n := (succ (succ zero)); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [gv1 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ zero)]
+   [gv1 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ zero)))]
+   [gv1 := true; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ (succ (succ (succ zero)))))]
+   [gv1 := true; n := (succ (succ zero)); n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ zero))]
+   [gv1 := true; n := zero; n0 := (succ (succ (succ (succ (succ zero))))); y := (succ zero)]
+   [gv1 := true; n := zero; n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ zero))]
+   [gv1 := true; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ zero)]
+   [gv1 := true; n := (succ (succ zero)); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   etc ...
+
+Negative Examples:
+   [gv1 := true; n := (succ (succ (succ (succ zero)))); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [gv1 := true; n := (succ (succ (succ (succ (succ zero))))); n0 := (succ (succ (succ (succ zero)))); y := zero]
+   [gv1 := true; n := (succ (succ (succ (succ (succ zero))))); n0 := (succ (succ (succ (succ (succ zero))))); y := zero]
+   [gv1 := true; n := (succ (succ (succ (succ zero)))); n0 := (succ (succ (succ zero))); y := (succ zero)]
+   [gv1 := true; n := (succ (succ (succ (succ zero)))); n0 := (succ (succ (succ (succ (succ zero))))); y := zero]
+   [gv1 := true; n := (succ (succ (succ zero))); n0 := (succ (succ (succ (succ (succ zero))))); y := zero]
+   [gv1 := true; n := (succ (succ (succ zero))); n0 := (succ (succ (succ zero))); y := (succ (succ zero))]
+   [gv1 := true; n := (succ (succ (succ zero))); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   [gv1 := true; n := (succ (succ zero)); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ zero)]
+   [gv1 := true; n := (succ (succ (succ (succ (succ zero))))); n0 := (succ (succ zero)); y := (succ zero)]
+   etc ...
+
+
+Label: 4 (11)
+Abducted Assumption: (less y n0 = true)
+Positive Examples:
+   [gv1 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ zero))]
+   [gv1 := true; n := (succ (succ zero)); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [gv1 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ zero)]
+   [gv1 := true; n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ zero)))]
+   [gv1 := true; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ (succ (succ (succ zero)))))]
+   [gv1 := true; n := (succ (succ zero)); n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ zero))]
+   [gv1 := true; n := zero; n0 := (succ (succ (succ (succ (succ zero))))); y := (succ zero)]
+   [gv1 := true; n := zero; n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ zero))]
+   [gv1 := true; n := zero; n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ zero)]
+   [gv1 := true; n := (succ (succ zero)); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   etc ...
+
+Negative Examples:
+   [gv1 := false; n := (succ zero); n0 := (succ (succ zero)); y := (succ (succ (succ (succ (succ zero)))))]
+   [gv1 := false; n := zero; n0 := (succ (succ (succ zero))); y := (succ (succ (succ (succ (succ zero)))))]
+   [gv1 := false; n := (succ (succ zero)); n0 := (succ (succ zero)); y := (succ (succ (succ (succ zero))))]
+   [gv1 := false; n := (succ (succ (succ (succ zero)))); n0 := zero; y := (succ (succ (succ (succ (succ (succ zero))))))]
+   [gv1 := false; n := (succ (succ (succ zero))); n0 := (succ (succ zero)); y := (succ (succ (succ (succ zero))))]
+   [gv1 := false; n := zero; n0 := (succ (succ zero)); y := (succ (succ (succ (succ (succ (succ zero))))))]
+   [gv1 := false; n := (succ (succ zero)); n0 := zero; y := (succ (succ (succ (succ zero))))]
+   [gv1 := false; n := (succ (succ zero)); n0 := (succ zero); y := (succ (succ (succ (succ zero))))]
+   [gv1 := false; n := zero; n0 := (succ zero); y := (succ (succ (succ (succ (succ zero)))))]
+   [gv1 := false; n := zero; n0 := zero; y := (succ (succ (succ (succ (succ (succ zero))))))]
+   etc ...
+
+
+Label: 5 (12)
+Abducted Assumption: (less y n = false)
+Positive Examples:
+   [n := (succ (succ (succ zero))); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [n := zero; n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ zero)))]
+   [n := (succ (succ zero)); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ zero))]
+   [n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ (succ zero))))]
+   [n := (succ (succ zero)); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ zero)))]
+   [n := (succ (succ zero)); n0 := (succ (succ (succ zero))); y := (succ (succ zero))]
+   [n := (succ zero); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [n := (succ zero); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   [n := (succ zero); n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ zero))]
+   etc ...
+
+Negative Examples:
+   [n := (succ zero); n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := zero]
+   [n := (succ (succ (succ (succ zero)))); n0 := (succ (succ (succ (succ zero)))); y := (succ zero)]
+   [n := (succ (succ (succ (succ (succ (succ zero)))))); n0 := (succ (succ (succ (succ zero)))); y := zero]
+   [n := (succ (succ zero)); n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := zero]
+   [n := (succ (succ (succ (succ (succ (succ zero)))))); n0 := (succ (succ zero)); y := zero]
+   [n := (succ (succ (succ (succ (succ zero))))); n0 := (succ (succ (succ zero))); y := zero]
+   [n := (succ (succ (succ (succ (succ zero))))); n0 := (succ (succ (succ (succ zero)))); y := zero]
+   [n := (succ (succ (succ (succ (succ zero))))); n0 := (succ (succ zero)); y := zero]
+   [n := (succ (succ (succ (succ zero)))); n0 := (succ (succ (succ (succ zero)))); y := zero]
+   [n := (succ (succ (succ zero))); n0 := (succ (succ (succ zero))); y := (succ (succ zero))]
+   etc ...
+
+
+Label: 5 (13)
+Abducted Assumption: (less y n0 = true)
+Positive Examples:
+   [n := (succ (succ (succ zero))); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [n := zero; n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ zero)))]
+   [n := (succ (succ zero)); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ zero))]
+   [n := (succ zero); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ (succ zero))))]
+   [n := (succ (succ zero)); n0 := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ zero)))]
+   [n := (succ (succ zero)); n0 := (succ (succ (succ zero))); y := (succ (succ zero))]
+   [n := (succ zero); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [n := (succ zero); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   [n := (succ zero); n0 := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ zero))]
+   etc ...
+
+Negative Examples:
+   [n := zero; n0 := (succ (succ (succ zero))); y := (succ (succ (succ (succ (succ (succ zero))))))]
+   [n := (succ (succ (succ zero))); n0 := zero; y := (succ (succ (succ (succ (succ zero)))))]
+   [n := (succ (succ zero)); n0 := (succ (succ zero)); y := (succ (succ (succ (succ (succ zero)))))]
+   [n := (succ (succ (succ zero))); n0 := zero; y := (succ (succ (succ (succ (succ (succ zero))))))]
+   [n := (succ (succ (succ (succ (succ zero))))); n0 := (succ zero); y := (succ (succ (succ (succ (succ zero)))))]
+   [n := zero; n0 := (succ (succ zero)); y := (succ (succ (succ (succ (succ zero)))))]
+   [n := (succ (succ zero)); n0 := (succ (succ zero)); y := (succ (succ (succ (succ (succ (succ zero))))))]
+   [n := (succ (succ (succ (succ zero)))); n0 := (succ (succ (succ (succ zero)))); y := (succ (succ (succ (succ (succ zero)))))]
+   [n := (succ zero); n0 := zero; y := (succ (succ (succ (succ (succ (succ zero))))))]
+   [n := (succ (succ (succ zero))); n0 := (succ (succ zero)); y := (succ (succ (succ (succ (succ (succ zero))))))]
+   etc ...
+
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 97.351 seconds
+
+
+Label: 0 (0)
+(false = gv2), (true = gv2), (n = n), (n = n0), (n = y), (n0 = n), (n0 = n0), (n0 = y), (y = n), (y = n0)
+(y = y), (gv2 = gv2), (false = leq n n), (false = leq n n0), (false = leq n y), (false = leq n0 n), (false = leq n0 n0), (false = leq n0 y), (false = leq y n), (false = leq y n0)
+(false = leq y y), (false = less n n), (false = less n n0), (false = less n y), (false = less n0 n), (false = less n0 n0), (false = less n0 y), (false = less y n), (false = less y n0), (false = less y y)
+(true = leq n n), (true = leq n n0), (true = leq n y), (true = leq n0 n), (true = leq n0 n0), (true = leq n0 y), (true = leq y n), (true = leq y n0), (true = leq y y), (true = less n n)
+(true = less n n0), (true = less n y), (true = less n0 n), (true = less n0 n0), (true = less n0 y), (true = less y n), (true = less y n0), (true = less y y), (false <> gv2), (true <> gv2)
+(n <> n), (n <> n0), (n <> y), (n0 <> n), (n0 <> n0), (n0 <> y), (y <> n), (y <> n0), (y <> y), (gv2 <> gv2)
+(leq n n = gv2), (leq n n0 = gv2), (leq n y = gv2), (leq n0 n = gv2), (leq n0 n0 = gv2), (leq n0 y = gv2), (leq y n = gv2), (leq y n0 = gv2), (leq y y = gv2), (less n n = gv2)
+(less n n = leq n n), (less n n = leq n n0), (less n n = leq n y), (less n n = leq n0 n), (less n n = leq n0 n0), (less n n = leq n0 y), (less n n = leq y n), (less n n = leq y n0), (less n n = leq y y), (less n n0 = gv2)
+(less n n0 = leq n n), (less n n0 = leq n n0), (less n n0 = leq n y), (less n n0 = leq n0 n), (less n n0 = leq n0 n0), (less n n0 = leq n0 y), (less n n0 = leq y n), (less n n0 = leq y n0), (less n n0 = leq y y), (less n y = gv2)
+(less n y = leq n n), (less n y = leq n n0), (less n y = leq n y), (less n y = leq n0 n), (less n y = leq n0 n0), (less n y = leq n0 y), (less n y = leq y n), (less n y = leq y n0), (less n y = leq y y), (less n0 n = gv2)
+(less n0 n = leq n n), (less n0 n = leq n n0), (less n0 n = leq n y), (less n0 n = leq n0 n), (less n0 n = leq n0 n0), (less n0 n = leq n0 y), (less n0 n = leq y n), (less n0 n = leq y n0), (less n0 n = leq y y), (less n0 n0 = gv2)
+(less n0 n0 = leq n n), (less n0 n0 = leq n n0), (less n0 n0 = leq n y), (less n0 n0 = leq n0 n), (less n0 n0 = leq n0 n0), (less n0 n0 = leq n0 y), (less n0 n0 = leq y n), (less n0 n0 = leq y n0), (less n0 n0 = leq y y), (less n0 y = gv2)
+(less n0 y = leq n n), (less n0 y = leq n n0), (less n0 y = leq n y), (less n0 y = leq n0 n), (less n0 y = leq n0 n0), (less n0 y = leq n0 y), (less n0 y = leq y n), (less n0 y = leq y n0), (less n0 y = leq y y), (less y n = gv2)
+(less y n = leq n n), (less y n = leq n n0), (less y n = leq n y), (less y n = leq n0 n), (less y n = leq n0 n0), (less y n = leq n0 y), (less y n = leq y n), (less y n = leq y n0), (less y n = leq y y), (less y n0 = gv2)
+(less y n0 = leq n n), (less y n0 = leq n n0), (less y n0 = leq n y), (less y n0 = leq n0 n), (less y n0 = leq n0 n0), (less y n0 = leq n0 y), (less y n0 = leq y n), (less y n0 = leq y n0), (less y n0 = leq y y), (less y y = gv2)
+(less y y = leq n n), (less y y = leq n n0), (less y y = leq n y), (less y y = leq n0 n), (less y y = leq n0 n0), (less y y = leq n0 y), (less y y = leq y n), (less y y = leq y n0), (less y y = leq y y), (None = Some gv2)
+(None = Some n), (None = Some n0), (None = Some y)
+
+Label: 0 (1)
+(false = gv2), (true = gv2), (n = n), (n = n0), (n = y), (n0 = n), (n0 = n0), (n0 = y), (y = n), (y = n0)
+(y = y), (gv2 = gv2), (false = leq n n), (false = leq n n0), (false = leq n y), (false = leq n0 n), (false = leq n0 n0), (false = leq n0 y), (false = leq y n), (false = leq y n0)
+(false = leq y y), (false = less n n), (false = less n n0), (false = less n y), (false = less n0 n), (false = less n0 n0), (false = less n0 y), (false = less y n), (false = less y n0), (false = less y y)
+(true = leq n n), (true = leq n n0), (true = leq n y), (true = leq n0 n), (true = leq n0 n0), (true = leq n0 y), (true = leq y n), (true = leq y n0), (true = leq y y), (true = less n n)
+(true = less n n0), (true = less n y), (true = less n0 n), (true = less n0 n0), (true = less n0 y), (true = less y n), (true = less y n0), (true = less y y), (false <> gv2), (true <> gv2)
+(n <> n), (n <> n0), (n <> y), (n0 <> n), (n0 <> n0), (n0 <> y), (y <> n), (y <> n0), (y <> y), (gv2 <> gv2)
+(leq n n = gv2), (leq n n0 = gv2), (leq n y = gv2), (leq n0 n = gv2), (leq n0 n0 = gv2), (leq n0 y = gv2), (leq y n = gv2), (leq y n0 = gv2), (leq y y = gv2), (less n n = gv2)
+(less n n = leq n n), (less n n = leq n n0), (less n n = leq n y), (less n n = leq n0 n), (less n n = leq n0 n0), (less n n = leq n0 y), (less n n = leq y n), (less n n = leq y n0), (less n n = leq y y), (less n n0 = gv2)
+(less n n0 = leq n n), (less n n0 = leq n n0), (less n n0 = leq n y), (less n n0 = leq n0 n), (less n n0 = leq n0 n0), (less n n0 = leq n0 y), (less n n0 = leq y n), (less n n0 = leq y n0), (less n n0 = leq y y), (less n y = gv2)
+(less n y = leq n n), (less n y = leq n n0), (less n y = leq n y), (less n y = leq n0 n), (less n y = leq n0 n0), (less n y = leq n0 y), (less n y = leq y n), (less n y = leq y n0), (less n y = leq y y), (less n0 n = gv2)
+(less n0 n = leq n n), (less n0 n = leq n n0), (less n0 n = leq n y), (less n0 n = leq n0 n), (less n0 n = leq n0 n0), (less n0 n = leq n0 y), (less n0 n = leq y n), (less n0 n = leq y n0), (less n0 n = leq y y), (less n0 n0 = gv2)
+(less n0 n0 = leq n n), (less n0 n0 = leq n n0), (less n0 n0 = leq n y), (less n0 n0 = leq n0 n), (less n0 n0 = leq n0 n0), (less n0 n0 = leq n0 y), (less n0 n0 = leq y n), (less n0 n0 = leq y n0), (less n0 n0 = leq y y), (less n0 y = gv2)
+(less n0 y = leq n n), (less n0 y = leq n n0), (less n0 y = leq n y), (less n0 y = leq n0 n), (less n0 y = leq n0 n0), (less n0 y = leq n0 y), (less n0 y = leq y n), (less n0 y = leq y n0), (less n0 y = leq y y), (less y n = gv2)
+(less y n = leq n n), (less y n = leq n n0), (less y n = leq n y), (less y n = leq n0 n), (less y n = leq n0 n0), (less y n = leq n0 y), (less y n = leq y n), (less y n = leq y n0), (less y n = leq y y), (less y n0 = gv2)
+(less y n0 = leq n n), (less y n0 = leq n n0), (less y n0 = leq n y), (less y n0 = leq n0 n), (less y n0 = leq n0 n0), (less y n0 = leq n0 y), (less y n0 = leq y n), (less y n0 = leq y n0), (less y n0 = leq y y), (less y y = gv2)
+(less y y = leq n n), (less y y = leq n n0), (less y y = leq n y), (less y y = leq n0 n), (less y y = leq n0 n0), (less y y = leq n0 y), (less y y = leq y n), (less y y = leq y n0), (less y y = leq y y), (None = Some gv2)
+(None = Some n), (None = Some n0), (None = Some y)
+
+Label: 1 (2)
+(false = gv3), (true = gv3), (n0 = n0), (n0 = y), (n0 = n), (y = n0), (y = y), (y = n), (n = n0), (n = y)
+(n = n), (gv3 = gv3), (false = leq n0 n0), (false = leq n0 y), (false = leq n0 n), (false = leq y n0), (false = leq y y), (false = leq y n), (false = leq n n0), (false = leq n y)
+(false = leq n n), (false = less n0 n0), (false = less n0 y), (false = less n0 n), (false = less y n0), (false = less y y), (false = less y n), (false = less n n0), (false = less n y), (false = less n n)
+(true = leq n0 n0), (true = leq n0 y), (true = leq n0 n), (true = leq y n0), (true = leq y y), (true = leq y n), (true = leq n n0), (true = leq n y), (true = leq n n), (true = less n0 n0)
+(true = less n0 y), (true = less n0 n), (true = less y n0), (true = less y y), (true = less y n), (true = less n n0), (true = less n y), (true = less n n), (false <> gv3), (true <> gv3)
+(n0 <> n0), (n0 <> y), (n0 <> n), (y <> n0), (y <> y), (y <> n), (n <> n0), (n <> y), (n <> n), (gv3 <> gv3)
+(leq n0 n0 = gv3), (leq n0 y = gv3), (leq n0 n = gv3), (leq y n0 = gv3), (leq y y = gv3), (leq y n = gv3), (leq n n0 = gv3), (leq n y = gv3), (leq n n = gv3), (less n0 n0 = gv3)
+(less n0 n0 = leq n0 n0), (less n0 n0 = leq n0 y), (less n0 n0 = leq n0 n), (less n0 n0 = leq y n0), (less n0 n0 = leq y y), (less n0 n0 = leq y n), (less n0 n0 = leq n n0), (less n0 n0 = leq n y), (less n0 n0 = leq n n), (less n0 y = gv3)
+(less n0 y = leq n0 n0), (less n0 y = leq n0 y), (less n0 y = leq n0 n), (less n0 y = leq y n0), (less n0 y = leq y y), (less n0 y = leq y n), (less n0 y = leq n n0), (less n0 y = leq n y), (less n0 y = leq n n), (less n0 n = gv3)
+(less n0 n = leq n0 n0), (less n0 n = leq n0 y), (less n0 n = leq n0 n), (less n0 n = leq y n0), (less n0 n = leq y y), (less n0 n = leq y n), (less n0 n = leq n n0), (less n0 n = leq n y), (less n0 n = leq n n), (less y n0 = gv3)
+(less y n0 = leq n0 n0), (less y n0 = leq n0 y), (less y n0 = leq n0 n), (less y n0 = leq y n0), (less y n0 = leq y y), (less y n0 = leq y n), (less y n0 = leq n n0), (less y n0 = leq n y), (less y n0 = leq n n), (less y y = gv3)
+(less y y = leq n0 n0), (less y y = leq n0 y), (less y y = leq n0 n), (less y y = leq y n0), (less y y = leq y y), (less y y = leq y n), (less y y = leq n n0), (less y y = leq n y), (less y y = leq n n), (less y n = gv3)
+(less y n = leq n0 n0), (less y n = leq n0 y), (less y n = leq n0 n), (less y n = leq y n0), (less y n = leq y y), (less y n = leq y n), (less y n = leq n n0), (less y n = leq n y), (less y n = leq n n), (less n n0 = gv3)
+(less n n0 = leq n0 n0), (less n n0 = leq n0 y), (less n n0 = leq n0 n), (less n n0 = leq y n0), (less n n0 = leq y y), (less n n0 = leq y n), (less n n0 = leq n n0), (less n n0 = leq n y), (less n n0 = leq n n), (less n y = gv3)
+(less n y = leq n0 n0), (less n y = leq n0 y), (less n y = leq n0 n), (less n y = leq y n0), (less n y = leq y y), (less n y = leq y n), (less n y = leq n n0), (less n y = leq n y), (less n y = leq n n), (less n n = gv3)
+(less n n = leq n0 n0), (less n n = leq n0 y), (less n n = leq n0 n), (less n n = leq y n0), (less n n = leq y y), (less n n = leq y n), (less n n = leq n n0), (less n n = leq n y), (less n n = leq n n), (None = Some gv3)
+(None = Some n0), (None = Some y), (None = Some n)
+
+Label: 1 (3)
+(false = gv3), (true = gv3), (n0 = n0), (n0 = y), (n0 = n), (y = n0), (y = y), (y = n), (n = n0), (n = y)
+(n = n), (gv3 = gv3), (false = leq n0 n0), (false = leq n0 y), (false = leq n0 n), (false = leq y n0), (false = leq y y), (false = leq y n), (false = leq n n0), (false = leq n y)
+(false = leq n n), (false = less n0 n0), (false = less n0 y), (false = less n0 n), (false = less y n0), (false = less y y), (false = less y n), (false = less n n0), (false = less n y), (false = less n n)
+(true = leq n0 n0), (true = leq n0 y), (true = leq n0 n), (true = leq y n0), (true = leq y y), (true = leq y n), (true = leq n n0), (true = leq n y), (true = leq n n), (true = less n0 n0)
+(true = less n0 y), (true = less n0 n), (true = less y n0), (true = less y y), (true = less y n), (true = less n n0), (true = less n y), (true = less n n), (false <> gv3), (true <> gv3)
+(n0 <> n0), (n0 <> y), (n0 <> n), (y <> n0), (y <> y), (y <> n), (n <> n0), (n <> y), (n <> n), (gv3 <> gv3)
+(leq n0 n0 = gv3), (leq n0 y = gv3), (leq n0 n = gv3), (leq y n0 = gv3), (leq y y = gv3), (leq y n = gv3), (leq n n0 = gv3), (leq n y = gv3), (leq n n = gv3), (less n0 n0 = gv3)
+(less n0 n0 = leq n0 n0), (less n0 n0 = leq n0 y), (less n0 n0 = leq n0 n), (less n0 n0 = leq y n0), (less n0 n0 = leq y y), (less n0 n0 = leq y n), (less n0 n0 = leq n n0), (less n0 n0 = leq n y), (less n0 n0 = leq n n), (less n0 y = gv3)
+(less n0 y = leq n0 n0), (less n0 y = leq n0 y), (less n0 y = leq n0 n), (less n0 y = leq y n0), (less n0 y = leq y y), (less n0 y = leq y n), (less n0 y = leq n n0), (less n0 y = leq n y), (less n0 y = leq n n), (less n0 n = gv3)
+(less n0 n = leq n0 n0), (less n0 n = leq n0 y), (less n0 n = leq n0 n), (less n0 n = leq y n0), (less n0 n = leq y y), (less n0 n = leq y n), (less n0 n = leq n n0), (less n0 n = leq n y), (less n0 n = leq n n), (less y n0 = gv3)
+(less y n0 = leq n0 n0), (less y n0 = leq n0 y), (less y n0 = leq n0 n), (less y n0 = leq y n0), (less y n0 = leq y y), (less y n0 = leq y n), (less y n0 = leq n n0), (less y n0 = leq n y), (less y n0 = leq n n), (less y y = gv3)
+(less y y = leq n0 n0), (less y y = leq n0 y), (less y y = leq n0 n), (less y y = leq y n0), (less y y = leq y y), (less y y = leq y n), (less y y = leq n n0), (less y y = leq n y), (less y y = leq n n), (less y n = gv3)
+(less y n = leq n0 n0), (less y n = leq n0 y), (less y n = leq n0 n), (less y n = leq y n0), (less y n = leq y y), (less y n = leq y n), (less y n = leq n n0), (less y n = leq n y), (less y n = leq n n), (less n n0 = gv3)
+(less n n0 = leq n0 n0), (less n n0 = leq n0 y), (less n n0 = leq n0 n), (less n n0 = leq y n0), (less n n0 = leq y y), (less n n0 = leq y n), (less n n0 = leq n n0), (less n n0 = leq n y), (less n n0 = leq n n), (less n y = gv3)
+(less n y = leq n0 n0), (less n y = leq n0 y), (less n y = leq n0 n), (less n y = leq y n0), (less n y = leq y y), (less n y = leq y n), (less n y = leq n n0), (less n y = leq n y), (less n y = leq n n), (less n n = gv3)
+(less n n = leq n0 n0), (less n n = leq n0 y), (less n n = leq n0 n), (less n n = leq y n0), (less n n = leq y y), (less n n = leq y n), (less n n = leq n n0), (less n n = leq n y), (less n n = leq n n), (None = Some gv3)
+(None = Some n0), (None = Some y), (None = Some n)
+
+Label: 1 (4)
+(false = gv3), (true = gv3), (n0 = n0), (n0 = y), (n0 = n), (y = n0), (y = y), (y = n), (n = n0), (n = y)
+(n = n), (gv3 = gv3), (false = leq n0 n0), (false = leq n0 y), (false = leq n0 n), (false = leq y n0), (false = leq y y), (false = leq y n), (false = leq n n0), (false = leq n y)
+(false = leq n n), (false = less n0 n0), (false = less n0 y), (false = less n0 n), (false = less y n0), (false = less y y), (false = less y n), (false = less n n0), (false = less n y), (false = less n n)
+(true = leq n0 n0), (true = leq n0 y), (true = leq n0 n), (true = leq y n0), (true = leq y y), (true = leq y n), (true = leq n n0), (true = leq n y), (true = leq n n), (true = less n0 n0)
+(true = less n0 y), (true = less n0 n), (true = less y n0), (true = less y y), (true = less y n), (true = less n n0), (true = less n y), (true = less n n), (false <> gv3), (true <> gv3)
+(n0 <> n0), (n0 <> y), (n0 <> n), (y <> n0), (y <> y), (y <> n), (n <> n0), (n <> y), (n <> n), (gv3 <> gv3)
+(leq n0 n0 = gv3), (leq n0 y = gv3), (leq n0 n = gv3), (leq y n0 = gv3), (leq y y = gv3), (leq y n = gv3), (leq n n0 = gv3), (leq n y = gv3), (leq n n = gv3), (less n0 n0 = gv3)
+(less n0 n0 = leq n0 n0), (less n0 n0 = leq n0 y), (less n0 n0 = leq n0 n), (less n0 n0 = leq y n0), (less n0 n0 = leq y y), (less n0 n0 = leq y n), (less n0 n0 = leq n n0), (less n0 n0 = leq n y), (less n0 n0 = leq n n), (less n0 y = gv3)
+(less n0 y = leq n0 n0), (less n0 y = leq n0 y), (less n0 y = leq n0 n), (less n0 y = leq y n0), (less n0 y = leq y y), (less n0 y = leq y n), (less n0 y = leq n n0), (less n0 y = leq n y), (less n0 y = leq n n), (less n0 n = gv3)
+(less n0 n = leq n0 n0), (less n0 n = leq n0 y), (less n0 n = leq n0 n), (less n0 n = leq y n0), (less n0 n = leq y y), (less n0 n = leq y n), (less n0 n = leq n n0), (less n0 n = leq n y), (less n0 n = leq n n), (less y n0 = gv3)
+(less y n0 = leq n0 n0), (less y n0 = leq n0 y), (less y n0 = leq n0 n), (less y n0 = leq y n0), (less y n0 = leq y y), (less y n0 = leq y n), (less y n0 = leq n n0), (less y n0 = leq n y), (less y n0 = leq n n), (less y y = gv3)
+(less y y = leq n0 n0), (less y y = leq n0 y), (less y y = leq n0 n), (less y y = leq y n0), (less y y = leq y y), (less y y = leq y n), (less y y = leq n n0), (less y y = leq n y), (less y y = leq n n), (less y n = gv3)
+(less y n = leq n0 n0), (less y n = leq n0 y), (less y n = leq n0 n), (less y n = leq y n0), (less y n = leq y y), (less y n = leq y n), (less y n = leq n n0), (less y n = leq n y), (less y n = leq n n), (less n n0 = gv3)
+(less n n0 = leq n0 n0), (less n n0 = leq n0 y), (less n n0 = leq n0 n), (less n n0 = leq y n0), (less n n0 = leq y y), (less n n0 = leq y n), (less n n0 = leq n n0), (less n n0 = leq n y), (less n n0 = leq n n), (less n y = gv3)
+(less n y = leq n0 n0), (less n y = leq n0 y), (less n y = leq n0 n), (less n y = leq y n0), (less n y = leq y y), (less n y = leq y n), (less n y = leq n n0), (less n y = leq n y), (less n y = leq n n), (less n n = gv3)
+(less n n = leq n0 n0), (less n n = leq n0 y), (less n n = leq n0 n), (less n n = leq y n0), (less n n = leq y y), (less n n = leq y n), (less n n = leq n n0), (less n n = leq n y), (less n n = leq n n), (None = Some gv3)
+(None = Some n0), (None = Some y), (None = Some n)
+
+Label: 2 (5)
+(false = gv4), (true = gv4), (gv4 = gv4), (n = n), (n = n0), (n = y), (n0 = n), (n0 = n0), (n0 = y), (y = n)
+(y = n0), (y = y), (false = leq n n), (false = leq n n0), (false = leq n y), (false = leq n0 n), (false = leq n0 n0), (false = leq n0 y), (false = leq y n), (false = leq y n0)
+(false = leq y y), (false = less n n), (false = less n n0), (false = less n y), (false = less n0 n), (false = less n0 n0), (false = less n0 y), (false = less y n), (false = less y n0), (false = less y y)
+(true = leq n n), (true = leq n n0), (true = leq n y), (true = leq n0 n), (true = leq n0 n0), (true = leq n0 y), (true = leq y n), (true = leq y n0), (true = leq y y), (true = less n n)
+(true = less n n0), (true = less n y), (true = less n0 n), (true = less n0 n0), (true = less n0 y), (true = less y n), (true = less y n0), (true = less y y), (false <> gv4), (true <> gv4)
+(gv4 <> gv4), (n <> n), (n <> n0), (n <> y), (n0 <> n), (n0 <> n0), (n0 <> y), (y <> n), (y <> n0), (y <> y)
+(leq n n = gv4), (leq n n0 = gv4), (leq n y = gv4), (leq n0 n = gv4), (leq n0 n0 = gv4), (leq n0 y = gv4), (leq y n = gv4), (leq y n0 = gv4), (leq y y = gv4), (less n n = gv4)
+(less n n = leq n n), (less n n = leq n n0), (less n n = leq n y), (less n n = leq n0 n), (less n n = leq n0 n0), (less n n = leq n0 y), (less n n = leq y n), (less n n = leq y n0), (less n n = leq y y), (less n n0 = gv4)
+(less n n0 = leq n n), (less n n0 = leq n n0), (less n n0 = leq n y), (less n n0 = leq n0 n), (less n n0 = leq n0 n0), (less n n0 = leq n0 y), (less n n0 = leq y n), (less n n0 = leq y n0), (less n n0 = leq y y), (less n y = gv4)
+(less n y = leq n n), (less n y = leq n n0), (less n y = leq n y), (less n y = leq n0 n), (less n y = leq n0 n0), (less n y = leq n0 y), (less n y = leq y n), (less n y = leq y n0), (less n y = leq y y), (less n0 n = gv4)
+(less n0 n = leq n n), (less n0 n = leq n n0), (less n0 n = leq n y), (less n0 n = leq n0 n), (less n0 n = leq n0 n0), (less n0 n = leq n0 y), (less n0 n = leq y n), (less n0 n = leq y n0), (less n0 n = leq y y), (less n0 n0 = gv4)
+(less n0 n0 = leq n n), (less n0 n0 = leq n n0), (less n0 n0 = leq n y), (less n0 n0 = leq n0 n), (less n0 n0 = leq n0 n0), (less n0 n0 = leq n0 y), (less n0 n0 = leq y n), (less n0 n0 = leq y n0), (less n0 n0 = leq y y), (less n0 y = gv4)
+(less n0 y = leq n n), (less n0 y = leq n n0), (less n0 y = leq n y), (less n0 y = leq n0 n), (less n0 y = leq n0 n0), (less n0 y = leq n0 y), (less n0 y = leq y n), (less n0 y = leq y n0), (less n0 y = leq y y), (less y n = gv4)
+(less y n = leq n n), (less y n = leq n n0), (less y n = leq n y), (less y n = leq n0 n), (less y n = leq n0 n0), (less y n = leq n0 y), (less y n = leq y n), (less y n = leq y n0), (less y n = leq y y), (less y n0 = gv4)
+(less y n0 = leq n n), (less y n0 = leq n n0), (less y n0 = leq n y), (less y n0 = leq n0 n), (less y n0 = leq n0 n0), (less y n0 = leq n0 y), (less y n0 = leq y n), (less y n0 = leq y n0), (less y n0 = leq y y), (less y y = gv4)
+(less y y = leq n n), (less y y = leq n n0), (less y y = leq n y), (less y y = leq n0 n), (less y y = leq n0 n0), (less y y = leq n0 y), (less y y = leq y n), (less y y = leq y n0), (less y y = leq y y), (None = Some gv4)
+(None = Some n), (None = Some n0), (None = Some y)
+
+Label: 2 (6)
+(false = gv4), (true = gv4), (gv4 = gv4), (n = n), (n = n0), (n = y), (n0 = n), (n0 = n0), (n0 = y), (y = n)
+(y = n0), (y = y), (false = leq n n), (false = leq n n0), (false = leq n y), (false = leq n0 n), (false = leq n0 n0), (false = leq n0 y), (false = leq y n), (false = leq y n0)
+(false = leq y y), (false = less n n), (false = less n n0), (false = less n y), (false = less n0 n), (false = less n0 n0), (false = less n0 y), (false = less y n), (false = less y n0), (false = less y y)
+(true = leq n n), (true = leq n n0), (true = leq n y), (true = leq n0 n), (true = leq n0 n0), (true = leq n0 y), (true = leq y n), (true = leq y n0), (true = leq y y), (true = less n n)
+(true = less n n0), (true = less n y), (true = less n0 n), (true = less n0 n0), (true = less n0 y), (true = less y n), (true = less y n0), (true = less y y), (false <> gv4), (true <> gv4)
+(gv4 <> gv4), (n <> n), (n <> n0), (n <> y), (n0 <> n), (n0 <> n0), (n0 <> y), (y <> n), (y <> n0), (y <> y)
+(leq n n = gv4), (leq n n0 = gv4), (leq n y = gv4), (leq n0 n = gv4), (leq n0 n0 = gv4), (leq n0 y = gv4), (leq y n = gv4), (leq y n0 = gv4), (leq y y = gv4), (less n n = gv4)
+(less n n = leq n n), (less n n = leq n n0), (less n n = leq n y), (less n n = leq n0 n), (less n n = leq n0 n0), (less n n = leq n0 y), (less n n = leq y n), (less n n = leq y n0), (less n n = leq y y), (less n n0 = gv4)
+(less n n0 = leq n n), (less n n0 = leq n n0), (less n n0 = leq n y), (less n n0 = leq n0 n), (less n n0 = leq n0 n0), (less n n0 = leq n0 y), (less n n0 = leq y n), (less n n0 = leq y n0), (less n n0 = leq y y), (less n y = gv4)
+(less n y = leq n n), (less n y = leq n n0), (less n y = leq n y), (less n y = leq n0 n), (less n y = leq n0 n0), (less n y = leq n0 y), (less n y = leq y n), (less n y = leq y n0), (less n y = leq y y), (less n0 n = gv4)
+(less n0 n = leq n n), (less n0 n = leq n n0), (less n0 n = leq n y), (less n0 n = leq n0 n), (less n0 n = leq n0 n0), (less n0 n = leq n0 y), (less n0 n = leq y n), (less n0 n = leq y n0), (less n0 n = leq y y), (less n0 n0 = gv4)
+(less n0 n0 = leq n n), (less n0 n0 = leq n n0), (less n0 n0 = leq n y), (less n0 n0 = leq n0 n), (less n0 n0 = leq n0 n0), (less n0 n0 = leq n0 y), (less n0 n0 = leq y n), (less n0 n0 = leq y n0), (less n0 n0 = leq y y), (less n0 y = gv4)
+(less n0 y = leq n n), (less n0 y = leq n n0), (less n0 y = leq n y), (less n0 y = leq n0 n), (less n0 y = leq n0 n0), (less n0 y = leq n0 y), (less n0 y = leq y n), (less n0 y = leq y n0), (less n0 y = leq y y), (less y n = gv4)
+(less y n = leq n n), (less y n = leq n n0), (less y n = leq n y), (less y n = leq n0 n), (less y n = leq n0 n0), (less y n = leq n0 y), (less y n = leq y n), (less y n = leq y n0), (less y n = leq y y), (less y n0 = gv4)
+(less y n0 = leq n n), (less y n0 = leq n n0), (less y n0 = leq n y), (less y n0 = leq n0 n), (less y n0 = leq n0 n0), (less y n0 = leq n0 y), (less y n0 = leq y n), (less y n0 = leq y n0), (less y n0 = leq y y), (less y y = gv4)
+(less y y = leq n n), (less y y = leq n n0), (less y y = leq n y), (less y y = leq n0 n), (less y y = leq n0 n0), (less y y = leq n0 y), (less y y = leq y n), (less y y = leq y n0), (less y y = leq y y), (None = Some gv4)
+(None = Some n), (None = Some n0), (None = Some y)
+
+Label: 2 (7)
+(false = gv4), (true = gv4), (gv4 = gv4), (n = n), (n = n0), (n = y), (n0 = n), (n0 = n0), (n0 = y), (y = n)
+(y = n0), (y = y), (false = leq n n), (false = leq n n0), (false = leq n y), (false = leq n0 n), (false = leq n0 n0), (false = leq n0 y), (false = leq y n), (false = leq y n0)
+(false = leq y y), (false = less n n), (false = less n n0), (false = less n y), (false = less n0 n), (false = less n0 n0), (false = less n0 y), (false = less y n), (false = less y n0), (false = less y y)
+(true = leq n n), (true = leq n n0), (true = leq n y), (true = leq n0 n), (true = leq n0 n0), (true = leq n0 y), (true = leq y n), (true = leq y n0), (true = leq y y), (true = less n n)
+(true = less n n0), (true = less n y), (true = less n0 n), (true = less n0 n0), (true = less n0 y), (true = less y n), (true = less y n0), (true = less y y), (false <> gv4), (true <> gv4)
+(gv4 <> gv4), (n <> n), (n <> n0), (n <> y), (n0 <> n), (n0 <> n0), (n0 <> y), (y <> n), (y <> n0), (y <> y)
+(leq n n = gv4), (leq n n0 = gv4), (leq n y = gv4), (leq n0 n = gv4), (leq n0 n0 = gv4), (leq n0 y = gv4), (leq y n = gv4), (leq y n0 = gv4), (leq y y = gv4), (less n n = gv4)
+(less n n = leq n n), (less n n = leq n n0), (less n n = leq n y), (less n n = leq n0 n), (less n n = leq n0 n0), (less n n = leq n0 y), (less n n = leq y n), (less n n = leq y n0), (less n n = leq y y), (less n n0 = gv4)
+(less n n0 = leq n n), (less n n0 = leq n n0), (less n n0 = leq n y), (less n n0 = leq n0 n), (less n n0 = leq n0 n0), (less n n0 = leq n0 y), (less n n0 = leq y n), (less n n0 = leq y n0), (less n n0 = leq y y), (less n y = gv4)
+(less n y = leq n n), (less n y = leq n n0), (less n y = leq n y), (less n y = leq n0 n), (less n y = leq n0 n0), (less n y = leq n0 y), (less n y = leq y n), (less n y = leq y n0), (less n y = leq y y), (less n0 n = gv4)
+(less n0 n = leq n n), (less n0 n = leq n n0), (less n0 n = leq n y), (less n0 n = leq n0 n), (less n0 n = leq n0 n0), (less n0 n = leq n0 y), (less n0 n = leq y n), (less n0 n = leq y n0), (less n0 n = leq y y), (less n0 n0 = gv4)
+(less n0 n0 = leq n n), (less n0 n0 = leq n n0), (less n0 n0 = leq n y), (less n0 n0 = leq n0 n), (less n0 n0 = leq n0 n0), (less n0 n0 = leq n0 y), (less n0 n0 = leq y n), (less n0 n0 = leq y n0), (less n0 n0 = leq y y), (less n0 y = gv4)
+(less n0 y = leq n n), (less n0 y = leq n n0), (less n0 y = leq n y), (less n0 y = leq n0 n), (less n0 y = leq n0 n0), (less n0 y = leq n0 y), (less n0 y = leq y n), (less n0 y = leq y n0), (less n0 y = leq y y), (less y n = gv4)
+(less y n = leq n n), (less y n = leq n n0), (less y n = leq n y), (less y n = leq n0 n), (less y n = leq n0 n0), (less y n = leq n0 y), (less y n = leq y n), (less y n = leq y n0), (less y n = leq y y), (less y n0 = gv4)
+(less y n0 = leq n n), (less y n0 = leq n n0), (less y n0 = leq n y), (less y n0 = leq n0 n), (less y n0 = leq n0 n0), (less y n0 = leq n0 y), (less y n0 = leq y n), (less y n0 = leq y n0), (less y n0 = leq y y), (less y y = gv4)
+(less y y = leq n n), (less y y = leq n n0), (less y y = leq n y), (less y y = leq n0 n), (less y y = leq n0 n0), (less y y = leq n0 y), (less y y = leq y n), (less y y = leq y n0), (less y y = leq y y), (None = Some gv4)
+(None = Some n), (None = Some n0), (None = Some y)
+
+Label: 3 (8)
+(false = gv0), (true = gv0), (n = n), (n = n0), (n = y), (n0 = n), (n0 = n0), (n0 = y), (y = n), (y = n0)
+(y = y), (gv0 = gv0), (false = leq n n), (false = leq n n0), (false = leq n y), (false = leq n0 n), (false = leq n0 n0), (false = leq n0 y), (false = leq y n), (false = leq y n0)
+(false = leq y y), (false = less n n), (false = less n n0), (false = less n y), (false = less n0 n), (false = less n0 n0), (false = less n0 y), (false = less y n), (false = less y n0), (false = less y y)
+(true = leq n n), (true = leq n n0), (true = leq n y), (true = leq n0 n), (true = leq n0 n0), (true = leq n0 y), (true = leq y n), (true = leq y n0), (true = leq y y), (true = less n n)
+(true = less n n0), (true = less n y), (true = less n0 n), (true = less n0 n0), (true = less n0 y), (true = less y n), (true = less y n0), (true = less y y), (false <> gv0), (true <> gv0)
+(n <> n), (n <> n0), (n <> y), (n0 <> n), (n0 <> n0), (n0 <> y), (y <> n), (y <> n0), (y <> y), (gv0 <> gv0)
+(leq n n = gv0), (leq n n0 = gv0), (leq n y = gv0), (leq n0 n = gv0), (leq n0 n0 = gv0), (leq n0 y = gv0), (leq y n = gv0), (leq y n0 = gv0), (leq y y = gv0), (less n n = gv0)
+(less n n = leq n n), (less n n = leq n n0), (less n n = leq n y), (less n n = leq n0 n), (less n n = leq n0 n0), (less n n = leq n0 y), (less n n = leq y n), (less n n = leq y n0), (less n n = leq y y), (less n n0 = gv0)
+(less n n0 = leq n n), (less n n0 = leq n n0), (less n n0 = leq n y), (less n n0 = leq n0 n), (less n n0 = leq n0 n0), (less n n0 = leq n0 y), (less n n0 = leq y n), (less n n0 = leq y n0), (less n n0 = leq y y), (less n y = gv0)
+(less n y = leq n n), (less n y = leq n n0), (less n y = leq n y), (less n y = leq n0 n), (less n y = leq n0 n0), (less n y = leq n0 y), (less n y = leq y n), (less n y = leq y n0), (less n y = leq y y), (less n0 n = gv0)
+(less n0 n = leq n n), (less n0 n = leq n n0), (less n0 n = leq n y), (less n0 n = leq n0 n), (less n0 n = leq n0 n0), (less n0 n = leq n0 y), (less n0 n = leq y n), (less n0 n = leq y n0), (less n0 n = leq y y), (less n0 n0 = gv0)
+(less n0 n0 = leq n n), (less n0 n0 = leq n n0), (less n0 n0 = leq n y), (less n0 n0 = leq n0 n), (less n0 n0 = leq n0 n0), (less n0 n0 = leq n0 y), (less n0 n0 = leq y n), (less n0 n0 = leq y n0), (less n0 n0 = leq y y), (less n0 y = gv0)
+(less n0 y = leq n n), (less n0 y = leq n n0), (less n0 y = leq n y), (less n0 y = leq n0 n), (less n0 y = leq n0 n0), (less n0 y = leq n0 y), (less n0 y = leq y n), (less n0 y = leq y n0), (less n0 y = leq y y), (less y n = gv0)
+(less y n = leq n n), (less y n = leq n n0), (less y n = leq n y), (less y n = leq n0 n), (less y n = leq n0 n0), (less y n = leq n0 y), (less y n = leq y n), (less y n = leq y n0), (less y n = leq y y), (less y n0 = gv0)
+(less y n0 = leq n n), (less y n0 = leq n n0), (less y n0 = leq n y), (less y n0 = leq n0 n), (less y n0 = leq n0 n0), (less y n0 = leq n0 y), (less y n0 = leq y n), (less y n0 = leq y n0), (less y n0 = leq y y), (less y y = gv0)
+(less y y = leq n n), (less y y = leq n n0), (less y y = leq n y), (less y y = leq n0 n), (less y y = leq n0 n0), (less y y = leq n0 y), (less y y = leq y n), (less y y = leq y n0), (less y y = leq y y), (None = Some gv0)
+(None = Some n), (None = Some n0), (None = Some y)
+
+Label: 4 (9)
+(false = gv1), (true = gv1), (n0 = n0), (n0 = y), (n0 = n), (y = n0), (y = y), (y = n), (n = n0), (n = y)
+(n = n), (gv1 = gv1), (false = leq n0 n0), (false = leq n0 y), (false = leq n0 n), (false = leq y n0), (false = leq y y), (false = leq y n), (false = leq n n0), (false = leq n y)
+(false = leq n n), (false = less n0 n0), (false = less n0 y), (false = less n0 n), (false = less y n0), (false = less y y), (false = less y n), (false = less n n0), (false = less n y), (false = less n n)
+(true = leq n0 n0), (true = leq n0 y), (true = leq n0 n), (true = leq y n0), (true = leq y y), (true = leq y n), (true = leq n n0), (true = leq n y), (true = leq n n), (true = less n0 n0)
+(true = less n0 y), (true = less n0 n), (true = less y n0), (true = less y y), (true = less y n), (true = less n n0), (true = less n y), (true = less n n), (false <> gv1), (true <> gv1)
+(n0 <> n0), (n0 <> y), (n0 <> n), (y <> n0), (y <> y), (y <> n), (n <> n0), (n <> y), (n <> n), (gv1 <> gv1)
+(leq n0 n0 = gv1), (leq n0 y = gv1), (leq n0 n = gv1), (leq y n0 = gv1), (leq y y = gv1), (leq y n = gv1), (leq n n0 = gv1), (leq n y = gv1), (leq n n = gv1), (less n0 n0 = gv1)
+(less n0 n0 = leq n0 n0), (less n0 n0 = leq n0 y), (less n0 n0 = leq n0 n), (less n0 n0 = leq y n0), (less n0 n0 = leq y y), (less n0 n0 = leq y n), (less n0 n0 = leq n n0), (less n0 n0 = leq n y), (less n0 n0 = leq n n), (less n0 y = gv1)
+(less n0 y = leq n0 n0), (less n0 y = leq n0 y), (less n0 y = leq n0 n), (less n0 y = leq y n0), (less n0 y = leq y y), (less n0 y = leq y n), (less n0 y = leq n n0), (less n0 y = leq n y), (less n0 y = leq n n), (less n0 n = gv1)
+(less n0 n = leq n0 n0), (less n0 n = leq n0 y), (less n0 n = leq n0 n), (less n0 n = leq y n0), (less n0 n = leq y y), (less n0 n = leq y n), (less n0 n = leq n n0), (less n0 n = leq n y), (less n0 n = leq n n), (less y n0 = gv1)
+(less y n0 = leq n0 n0), (less y n0 = leq n0 y), (less y n0 = leq n0 n), (less y n0 = leq y n0), (less y n0 = leq y y), (less y n0 = leq y n), (less y n0 = leq n n0), (less y n0 = leq n y), (less y n0 = leq n n), (less y y = gv1)
+(less y y = leq n0 n0), (less y y = leq n0 y), (less y y = leq n0 n), (less y y = leq y n0), (less y y = leq y y), (less y y = leq y n), (less y y = leq n n0), (less y y = leq n y), (less y y = leq n n), (less y n = gv1)
+(less y n = leq n0 n0), (less y n = leq n0 y), (less y n = leq n0 n), (less y n = leq y n0), (less y n = leq y y), (less y n = leq y n), (less y n = leq n n0), (less y n = leq n y), (less y n = leq n n), (less n n0 = gv1)
+(less n n0 = leq n0 n0), (less n n0 = leq n0 y), (less n n0 = leq n0 n), (less n n0 = leq y n0), (less n n0 = leq y y), (less n n0 = leq y n), (less n n0 = leq n n0), (less n n0 = leq n y), (less n n0 = leq n n), (less n y = gv1)
+(less n y = leq n0 n0), (less n y = leq n0 y), (less n y = leq n0 n), (less n y = leq y n0), (less n y = leq y y), (less n y = leq y n), (less n y = leq n n0), (less n y = leq n y), (less n y = leq n n), (less n n = gv1)
+(less n n = leq n0 n0), (less n n = leq n0 y), (less n n = leq n0 n), (less n n = leq y n0), (less n n = leq y y), (less n n = leq y n), (less n n = leq n n0), (less n n = leq n y), (less n n = leq n n), (None = Some gv1)
+(None = Some n0), (None = Some y), (None = Some n)
+
+Label: 4 (10)
+(false = gv1), (true = gv1), (n0 = n0), (n0 = y), (n0 = n), (y = n0), (y = y), (y = n), (n = n0), (n = y)
+(n = n), (gv1 = gv1), (false = leq n0 n0), (false = leq n0 y), (false = leq n0 n), (false = leq y n0), (false = leq y y), (false = leq y n), (false = leq n n0), (false = leq n y)
+(false = leq n n), (false = less n0 n0), (false = less n0 y), (false = less n0 n), (false = less y n0), (false = less y y), (false = less y n), (false = less n n0), (false = less n y), (false = less n n)
+(true = leq n0 n0), (true = leq n0 y), (true = leq n0 n), (true = leq y n0), (true = leq y y), (true = leq y n), (true = leq n n0), (true = leq n y), (true = leq n n), (true = less n0 n0)
+(true = less n0 y), (true = less n0 n), (true = less y n0), (true = less y y), (true = less y n), (true = less n n0), (true = less n y), (true = less n n), (false <> gv1), (true <> gv1)
+(n0 <> n0), (n0 <> y), (n0 <> n), (y <> n0), (y <> y), (y <> n), (n <> n0), (n <> y), (n <> n), (gv1 <> gv1)
+(leq n0 n0 = gv1), (leq n0 y = gv1), (leq n0 n = gv1), (leq y n0 = gv1), (leq y y = gv1), (leq y n = gv1), (leq n n0 = gv1), (leq n y = gv1), (leq n n = gv1), (less n0 n0 = gv1)
+(less n0 n0 = leq n0 n0), (less n0 n0 = leq n0 y), (less n0 n0 = leq n0 n), (less n0 n0 = leq y n0), (less n0 n0 = leq y y), (less n0 n0 = leq y n), (less n0 n0 = leq n n0), (less n0 n0 = leq n y), (less n0 n0 = leq n n), (less n0 y = gv1)
+(less n0 y = leq n0 n0), (less n0 y = leq n0 y), (less n0 y = leq n0 n), (less n0 y = leq y n0), (less n0 y = leq y y), (less n0 y = leq y n), (less n0 y = leq n n0), (less n0 y = leq n y), (less n0 y = leq n n), (less n0 n = gv1)
+(less n0 n = leq n0 n0), (less n0 n = leq n0 y), (less n0 n = leq n0 n), (less n0 n = leq y n0), (less n0 n = leq y y), (less n0 n = leq y n), (less n0 n = leq n n0), (less n0 n = leq n y), (less n0 n = leq n n), (less y n0 = gv1)
+(less y n0 = leq n0 n0), (less y n0 = leq n0 y), (less y n0 = leq n0 n), (less y n0 = leq y n0), (less y n0 = leq y y), (less y n0 = leq y n), (less y n0 = leq n n0), (less y n0 = leq n y), (less y n0 = leq n n), (less y y = gv1)
+(less y y = leq n0 n0), (less y y = leq n0 y), (less y y = leq n0 n), (less y y = leq y n0), (less y y = leq y y), (less y y = leq y n), (less y y = leq n n0), (less y y = leq n y), (less y y = leq n n), (less y n = gv1)
+(less y n = leq n0 n0), (less y n = leq n0 y), (less y n = leq n0 n), (less y n = leq y n0), (less y n = leq y y), (less y n = leq y n), (less y n = leq n n0), (less y n = leq n y), (less y n = leq n n), (less n n0 = gv1)
+(less n n0 = leq n0 n0), (less n n0 = leq n0 y), (less n n0 = leq n0 n), (less n n0 = leq y n0), (less n n0 = leq y y), (less n n0 = leq y n), (less n n0 = leq n n0), (less n n0 = leq n y), (less n n0 = leq n n), (less n y = gv1)
+(less n y = leq n0 n0), (less n y = leq n0 y), (less n y = leq n0 n), (less n y = leq y n0), (less n y = leq y y), (less n y = leq y n), (less n y = leq n n0), (less n y = leq n y), (less n y = leq n n), (less n n = gv1)
+(less n n = leq n0 n0), (less n n = leq n0 y), (less n n = leq n0 n), (less n n = leq y n0), (less n n = leq y y), (less n n = leq y n), (less n n = leq n n0), (less n n = leq n y), (less n n = leq n n), (None = Some gv1)
+(None = Some n0), (None = Some y), (None = Some n)
+
+Label: 4 (11)
+(false = gv1), (true = gv1), (n0 = n0), (n0 = y), (n0 = n), (y = n0), (y = y), (y = n), (n = n0), (n = y)
+(n = n), (gv1 = gv1), (false = leq n0 n0), (false = leq n0 y), (false = leq n0 n), (false = leq y n0), (false = leq y y), (false = leq y n), (false = leq n n0), (false = leq n y)
+(false = leq n n), (false = less n0 n0), (false = less n0 y), (false = less n0 n), (false = less y n0), (false = less y y), (false = less y n), (false = less n n0), (false = less n y), (false = less n n)
+(true = leq n0 n0), (true = leq n0 y), (true = leq n0 n), (true = leq y n0), (true = leq y y), (true = leq y n), (true = leq n n0), (true = leq n y), (true = leq n n), (true = less n0 n0)
+(true = less n0 y), (true = less n0 n), (true = less y n0), (true = less y y), (true = less y n), (true = less n n0), (true = less n y), (true = less n n), (false <> gv1), (true <> gv1)
+(n0 <> n0), (n0 <> y), (n0 <> n), (y <> n0), (y <> y), (y <> n), (n <> n0), (n <> y), (n <> n), (gv1 <> gv1)
+(leq n0 n0 = gv1), (leq n0 y = gv1), (leq n0 n = gv1), (leq y n0 = gv1), (leq y y = gv1), (leq y n = gv1), (leq n n0 = gv1), (leq n y = gv1), (leq n n = gv1), (less n0 n0 = gv1)
+(less n0 n0 = leq n0 n0), (less n0 n0 = leq n0 y), (less n0 n0 = leq n0 n), (less n0 n0 = leq y n0), (less n0 n0 = leq y y), (less n0 n0 = leq y n), (less n0 n0 = leq n n0), (less n0 n0 = leq n y), (less n0 n0 = leq n n), (less n0 y = gv1)
+(less n0 y = leq n0 n0), (less n0 y = leq n0 y), (less n0 y = leq n0 n), (less n0 y = leq y n0), (less n0 y = leq y y), (less n0 y = leq y n), (less n0 y = leq n n0), (less n0 y = leq n y), (less n0 y = leq n n), (less n0 n = gv1)
+(less n0 n = leq n0 n0), (less n0 n = leq n0 y), (less n0 n = leq n0 n), (less n0 n = leq y n0), (less n0 n = leq y y), (less n0 n = leq y n), (less n0 n = leq n n0), (less n0 n = leq n y), (less n0 n = leq n n), (less y n0 = gv1)
+(less y n0 = leq n0 n0), (less y n0 = leq n0 y), (less y n0 = leq n0 n), (less y n0 = leq y n0), (less y n0 = leq y y), (less y n0 = leq y n), (less y n0 = leq n n0), (less y n0 = leq n y), (less y n0 = leq n n), (less y y = gv1)
+(less y y = leq n0 n0), (less y y = leq n0 y), (less y y = leq n0 n), (less y y = leq y n0), (less y y = leq y y), (less y y = leq y n), (less y y = leq n n0), (less y y = leq n y), (less y y = leq n n), (less y n = gv1)
+(less y n = leq n0 n0), (less y n = leq n0 y), (less y n = leq n0 n), (less y n = leq y n0), (less y n = leq y y), (less y n = leq y n), (less y n = leq n n0), (less y n = leq n y), (less y n = leq n n), (less n n0 = gv1)
+(less n n0 = leq n0 n0), (less n n0 = leq n0 y), (less n n0 = leq n0 n), (less n n0 = leq y n0), (less n n0 = leq y y), (less n n0 = leq y n), (less n n0 = leq n n0), (less n n0 = leq n y), (less n n0 = leq n n), (less n y = gv1)
+(less n y = leq n0 n0), (less n y = leq n0 y), (less n y = leq n0 n), (less n y = leq y n0), (less n y = leq y y), (less n y = leq y n), (less n y = leq n n0), (less n y = leq n y), (less n y = leq n n), (less n n = gv1)
+(less n n = leq n0 n0), (less n n = leq n0 y), (less n n = leq n0 n), (less n n = leq y n0), (less n n = leq y y), (less n n = leq y n), (less n n = leq n n0), (less n n = leq n y), (less n n = leq n n), (None = Some gv1)
+(None = Some n0), (None = Some y), (None = Some n)
+
+Label: 5 (12)
+(n = n), (n = n0), (n = y), (n0 = n), (n0 = n0), (n0 = y), (y = n), (y = n0), (y = y), (false = leq n n)
+(false = leq n n0), (false = leq n y), (false = leq n0 n), (false = leq n0 n0), (false = leq n0 y), (false = leq y n), (false = leq y n0), (false = leq y y), (false = less n n), (false = less n n0)
+(false = less n y), (false = less n0 n), (false = less n0 n0), (false = less n0 y), (false = less y n), (false = less y n0), (false = less y y), (true = leq n n), (true = leq n n0), (true = leq n y)
+(true = leq n0 n), (true = leq n0 n0), (true = leq n0 y), (true = leq y n), (true = leq y n0), (true = leq y y), (true = less n n), (true = less n n0), (true = less n y), (true = less n0 n)
+(true = less n0 n0), (true = less n0 y), (true = less y n), (true = less y n0), (true = less y y), (n <> n), (n <> n0), (n <> y), (n0 <> n), (n0 <> n0)
+(n0 <> y), (y <> n), (y <> n0), (y <> y), (less n n = leq n n), (less n n = leq n n0), (less n n = leq n y), (less n n = leq n0 n), (less n n = leq n0 n0), (less n n = leq n0 y)
+(less n n = leq y n), (less n n = leq y n0), (less n n = leq y y), (less n n0 = leq n n), (less n n0 = leq n n0), (less n n0 = leq n y), (less n n0 = leq n0 n), (less n n0 = leq n0 n0), (less n n0 = leq n0 y), (less n n0 = leq y n)
+(less n n0 = leq y n0), (less n n0 = leq y y), (less n y = leq n n), (less n y = leq n n0), (less n y = leq n y), (less n y = leq n0 n), (less n y = leq n0 n0), (less n y = leq n0 y), (less n y = leq y n), (less n y = leq y n0)
+(less n y = leq y y), (less n0 n = leq n n), (less n0 n = leq n n0), (less n0 n = leq n y), (less n0 n = leq n0 n), (less n0 n = leq n0 n0), (less n0 n = leq n0 y), (less n0 n = leq y n), (less n0 n = leq y n0), (less n0 n = leq y y)
+(less n0 n0 = leq n n), (less n0 n0 = leq n n0), (less n0 n0 = leq n y), (less n0 n0 = leq n0 n), (less n0 n0 = leq n0 n0), (less n0 n0 = leq n0 y), (less n0 n0 = leq y n), (less n0 n0 = leq y n0), (less n0 n0 = leq y y), (less n0 y = leq n n)
+(less n0 y = leq n n0), (less n0 y = leq n y), (less n0 y = leq n0 n), (less n0 y = leq n0 n0), (less n0 y = leq n0 y), (less n0 y = leq y n), (less n0 y = leq y n0), (less n0 y = leq y y), (less y n = leq n n), (less y n = leq n n0)
+(less y n = leq n y), (less y n = leq n0 n), (less y n = leq n0 n0), (less y n = leq n0 y), (less y n = leq y n), (less y n = leq y n0), (less y n = leq y y), (less y n0 = leq n n), (less y n0 = leq n n0), (less y n0 = leq n y)
+(less y n0 = leq n0 n), (less y n0 = leq n0 n0), (less y n0 = leq n0 y), (less y n0 = leq y n), (less y n0 = leq y n0), (less y n0 = leq y y), (less y y = leq n n), (less y y = leq n n0), (less y y = leq n y), (less y y = leq n0 n)
+(less y y = leq n0 n0), (less y y = leq n0 y), (less y y = leq y n), (less y y = leq y n0), (less y y = leq y y), (None = Some n), (None = Some n0), (None = Some y)
+
+Label: 5 (13)
+(n = n), (n = n0), (n = y), (n0 = n), (n0 = n0), (n0 = y), (y = n), (y = n0), (y = y), (false = leq n n)
+(false = leq n n0), (false = leq n y), (false = leq n0 n), (false = leq n0 n0), (false = leq n0 y), (false = leq y n), (false = leq y n0), (false = leq y y), (false = less n n), (false = less n n0)
+(false = less n y), (false = less n0 n), (false = less n0 n0), (false = less n0 y), (false = less y n), (false = less y n0), (false = less y y), (true = leq n n), (true = leq n n0), (true = leq n y)
+(true = leq n0 n), (true = leq n0 n0), (true = leq n0 y), (true = leq y n), (true = leq y n0), (true = leq y y), (true = less n n), (true = less n n0), (true = less n y), (true = less n0 n)
+(true = less n0 n0), (true = less n0 y), (true = less y n), (true = less y n0), (true = less y y), (n <> n), (n <> n0), (n <> y), (n0 <> n), (n0 <> n0)
+(n0 <> y), (y <> n), (y <> n0), (y <> y), (less n n = leq n n), (less n n = leq n n0), (less n n = leq n y), (less n n = leq n0 n), (less n n = leq n0 n0), (less n n = leq n0 y)
+(less n n = leq y n), (less n n = leq y n0), (less n n = leq y y), (less n n0 = leq n n), (less n n0 = leq n n0), (less n n0 = leq n y), (less n n0 = leq n0 n), (less n n0 = leq n0 n0), (less n n0 = leq n0 y), (less n n0 = leq y n)
+(less n n0 = leq y n0), (less n n0 = leq y y), (less n y = leq n n), (less n y = leq n n0), (less n y = leq n y), (less n y = leq n0 n), (less n y = leq n0 n0), (less n y = leq n0 y), (less n y = leq y n), (less n y = leq y n0)
+(less n y = leq y y), (less n0 n = leq n n), (less n0 n = leq n n0), (less n0 n = leq n y), (less n0 n = leq n0 n), (less n0 n = leq n0 n0), (less n0 n = leq n0 y), (less n0 n = leq y n), (less n0 n = leq y n0), (less n0 n = leq y y)
+(less n0 n0 = leq n n), (less n0 n0 = leq n n0), (less n0 n0 = leq n y), (less n0 n0 = leq n0 n), (less n0 n0 = leq n0 n0), (less n0 n0 = leq n0 y), (less n0 n0 = leq y n), (less n0 n0 = leq y n0), (less n0 n0 = leq y y), (less n0 y = leq n n)
+(less n0 y = leq n n0), (less n0 y = leq n y), (less n0 y = leq n0 n), (less n0 y = leq n0 n0), (less n0 y = leq n0 y), (less n0 y = leq y n), (less n0 y = leq y n0), (less n0 y = leq y y), (less y n = leq n n), (less y n = leq n n0)
+(less y n = leq n y), (less y n = leq n0 n), (less y n = leq n0 n0), (less y n = leq n0 y), (less y n = leq y n), (less y n = leq y n0), (less y n = leq y y), (less y n0 = leq n n), (less y n0 = leq n n0), (less y n0 = leq n y)
+(less y n0 = leq n0 n), (less y n0 = leq n0 n0), (less y n0 = leq n0 y), (less y n0 = leq y n), (less y n0 = leq y n0), (less y n0 = leq y y), (less y y = leq n n), (less y y = leq n n0), (less y y = leq n y), (less y y = leq n0 n)
+(less y y = leq n0 n0), (less y y = leq n0 y), (less y y = leq y n), (less y y = leq y n0), (less y y = leq y y), (None = Some n), (None = Some n0), (None = Some y)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 838.591 seconds
+
+
+Label: 0 (0)
+(false = less y n), (true = leq n y)
+
+Label: 0 (1)
+(less y n0 = gv2)
+
+Label: 1 (2)
+(true = gv3), (false <> gv3), (leq n0 n0 = gv3), (leq y n0 = gv3), (leq y y = gv3), (leq n n0 = gv3), (leq n y = gv3), (leq n n = gv3), (less y n0 = gv3), (less n n0 = gv3)
+
+Label: 1 (3)
+(false = less y n), (true = leq n y), (leq n y = gv3), (less y n0 = leq n y), (less y n = leq n0 y)
+
+Label: 1 (4)
+(true = gv3), (false = leq n0 y), (false = less n0 y), (true = leq y n0), (true = less y n0), (false <> gv3), (leq n0 n0 = gv3), (leq y y = gv3), (leq n y = gv3), (leq n n = gv3)
+(less n0 n0 = leq n0 y), (less y n0 = leq n0 n0), (less y n0 = leq y y), (less y n0 = leq n y), (less y n0 = leq n n), (less y y = leq n0 y), (less y n = leq n0 y), (less n n = leq n0 y)
+
+Label: 2 (5)
+(true = gv4), (false <> gv4), (leq n n = gv4), (leq n n0 = gv4), (leq n y = gv4), (leq n0 n0 = gv4), (leq y n0 = gv4), (leq y y = gv4), (less n n0 = gv4), (less y n0 = gv4)
+
+Label: 2 (6)
+(true = gv4), (false = less y n), (true = leq n y), (false <> gv4), (leq n n = gv4), (leq n0 n0 = gv4), (leq y n0 = gv4), (leq y y = gv4), (less y n = leq n0 y), (less y n0 = gv4)
+(less y n0 = leq n y)
+
+Label: 2 (7)
+(false = leq n0 y), (false = less n0 y), (true = leq y n0), (true = less y n0), (leq y n0 = gv4), (less n n = leq n0 y), (less n0 n0 = leq n0 y), (less y n = leq n0 y), (less y n0 = gv4), (less y n0 = leq n n)
+(less y n0 = leq n y), (less y n0 = leq n0 n0), (less y n0 = leq y y), (less y y = leq n0 y)
+
+Label: 3 (8)
+(true = gv0), (false <> gv0), (leq n n = gv0), (leq n n0 = gv0), (leq n y = gv0), (leq n0 n0 = gv0), (leq y n0 = gv0), (leq y y = gv0), (less n n0 = gv0), (less y n0 = gv0)
+
+Label: 4 (9)
+(true = gv1), (false <> gv1), (leq n0 n0 = gv1), (leq y n0 = gv1), (leq y y = gv1), (leq n n0 = gv1), (leq n y = gv1), (leq n n = gv1), (less y n0 = gv1), (less n n0 = gv1)
+
+Label: 4 (10)
+(false = less y n), (true = leq n y), (leq n y = gv1), (less y n0 = leq n y), (less y n = leq n0 y)
+
+Label: 4 (11)
+(true = gv1), (false = leq n0 y), (false = less n0 y), (true = leq y n0), (true = less y n0), (false <> gv1), (leq n0 n0 = gv1), (leq y y = gv1), (leq n y = gv1), (leq n n = gv1)
+(less n0 n0 = leq n0 y), (less y n0 = leq n0 n0), (less y n0 = leq y y), (less y n0 = leq n y), (less y n0 = leq n n), (less y y = leq n0 y), (less y n = leq n0 y), (less n n = leq n0 y)
+
+Label: 5 (12)
+(false = less y n), (true = leq n y), (less y n = leq n0 y), (less y n0 = leq n y)
+
+Label: 5 (13)
+(false = leq n0 y), (false = less n0 y), (true = leq y n0), (true = less y n0), (less n n = leq n0 y), (less n0 n0 = leq n0 y), (less y n = leq n0 y), (less y n0 = leq n n), (less y n0 = leq n y), (less y n0 = leq n0 n0)
+(less y n0 = leq y y), (less y y = leq n0 y)
+
+
+------------------------------ PROCESSED SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 1144.866 seconds
+
+
+(less y n0 = true)
+ - (less y n0 = true)
+ - (false = leq n0 y)
+ - (false = less n0 y)
+ - (true = leq y n0)
+ - (less n n = leq n0 y)
+ - (less n0 n0 = leq n0 y)
+ - (less y n = leq n0 y)
+ - (less y n0 = leq n n)
+ - (less y n0 = leq n y)
+ - (less y n0 = leq n0 n0)
+ - (less y n0 = leq y y)
+ - (less y y = leq n0 y)
+
+(true && leq y n0 && leq n y = gv0)
+ - (true && leq y n0 && leq n y = gv0)
+ - (true = gv0)
+ - (false <> gv0)
+ - (leq n n = gv0)
+ - (leq n n0 = gv0)
+ - (leq n y = gv0)
+ - (leq n0 n0 = gv0)
+ - (leq y n0 = gv0)
+ - (leq y y = gv0)
+ - (less n n0 = gv0)
+ - (less y n0 = gv0)
+
+(leq n y = gv4)
+ - (leq n y = gv4)
+ - (true = gv4)
+ - (false <> gv4)
+ - (leq n n = gv4)
+ - (leq n n0 = gv4)
+ - (leq n0 n0 = gv4)
+ - (leq y n0 = gv4)
+ - (leq y y = gv4)
+ - (less n n0 = gv4)
+ - (less y n0 = gv4)
+
+(less y n0 = gv2)
+ - (less y n0 = gv2)
+
+(less y n = false)
+ - (less y n = false)
+ - (true = leq n y)
+ - (less y n = leq n0 y)
+ - (less y n0 = leq n y)
+
+(leq y n0 = gv3)
+ - (leq y n0 = gv3)
+ - (true = gv3)
+ - (false <> gv3)
+ - (leq n0 n0 = gv3)
+ - (leq y y = gv3)
+ - (leq n n0 = gv3)
+ - (leq n y = gv3)
+ - (leq n n = gv3)
+ - (less y n0 = gv3)
+ - (less n n0 = gv3)
+
+(true && leq y n0 = gv1)
+ - (true && leq y n0 = gv1)
+ - (true = gv1)
+ - (false <> gv1)
+ - (leq n0 n0 = gv1)
+ - (leq y y = gv1)
+ - (leq n n0 = gv1)
+ - (leq n y = gv1)
+ - (leq n n = gv1)
+ - (less y n0 = gv1)
+ - (less n n0 = gv1)
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 1144.868 seconds
+
+Number of Result Pairs Returned: 13
+
+(less y n = false -> less y n0 = gv2 -> gv2 && leq y n0 && leq n y = gv2)
+
+(less y n = false -> true = leq n y)
+(true = leq n y -> less y n0 = gv2 -> gv2 && leq y n0 && leq n y = gv2)
+
+(less y n = false -> less y n0 = true -> true && leq y n0 && leq n y = true)
+
+(less y n = false -> true = leq n y)
+(true = leq n y -> less y n0 = true -> true && leq y n0 && leq n y = true)
+
+(less y n0 = true -> false = leq n0 y)
+(false = leq n0 y -> less y n = false -> true && leq y n0 && leq n y = true)
+
+(less y n0 = true -> false = less n0 y)
+(false = less n0 y -> less y n = false -> true && leq y n0 && leq n y = true)
+
+(less y n0 = true -> true = leq y n0)
+(true = leq y n0 -> less y n = false -> true && leq y n0 && leq n y = true)
+
+(less y n0 = true -> less n n = leq n0 y)
+(less n n = leq n0 y ->  less y n = false -> true && leq y n0 && leq n y = true)
+
+(less y n0 = true -> less n0 n0 = leq n0 y)
+(less n0 n0 = leq n0 y ->  less y n = false -> true && leq y n0 && leq n y = true)
+
+(less y n0 = true -> less y n0 = leq n n)
+(less y n0 = leq n n ->  less y n = false -> true && leq y n0 && leq n y = true)
+
+(less y n0 = true -> less y n0 = leq n0 n0)
+(less y n0 = leq n0 n0 ->  less y n = false -> true && leq y n0 && leq n y = true)
+
+(less y n0 = true -> less y n0 = leq y y)
+(less y n0 = leq y y ->  less y n = false -> true && leq y n0 && leq n y = true)
+
+(less y n0 = true -> less y y = leq n0 y)
+(less y y = leq n0 y ->  less y n = false -> true && leq y n0 && leq n y = true)

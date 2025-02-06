@@ -1,3 +1,6 @@
+From LFindToo Require Import LFindToo.
+From QuickChick Require Import QuickChick.
+
 Require Import Nat Arith Bool.
 
 Inductive Nat : Type := zero : Nat | succ : Nat -> Nat.
@@ -6,10 +9,16 @@ Scheme Equality for Nat.
 
 Inductive Lst : Type := nil : Lst | cons : Nat -> Lst -> Lst.
 
-Inductive Tree : Type := node : Nat -> Tree -> Tree -> Tree |  leaf : Tree.
+(* ************************** [ QuickChick Stuff ] *************************** *)
+Derive Show for Nat.
+Derive Arbitrary for Nat.
+Instance Dec_Eq_Nat : Dec_Eq (Nat).
+Proof. dec_eq. Qed.
 
-Inductive Pair : Type := mkpair : Nat -> Nat -> Pair
-with ZLst : Type := zcons : Pair -> ZLst -> ZLst |  znil : ZLst.
+Derive Show for Lst.
+Derive Arbitrary for Lst.
+Instance Dec_Eq_lst : Dec_Eq (Lst).
+Proof. dec_eq. Qed.
 
 Fixpoint append (append_arg0 : Lst) (append_arg1 : Lst) : Lst
            := match append_arg0, append_arg1 with
@@ -19,7 +28,7 @@ Fixpoint append (append_arg0 : Lst) (append_arg1 : Lst) : Lst
 
 Fixpoint mem (mem_arg0 : Nat) (mem_arg1 : Lst) : bool
 := match mem_arg0, mem_arg1 with
-    | x, nil => false
+    | _, nil => false
     | x, cons y z => orb (Nat_beq x y) (mem x z)
     end.
 
@@ -44,6 +53,25 @@ Fixpoint lst_intersection (lst_intersection_arg0 : Lst) (lst_intersection_arg1 :
               | nil, x => nil
               | cons n x, y => if lst_mem n y then cons n (lst_intersection x y) else lst_intersection x y
               end.
+
+Instance lst_subset_dec (m : Lst) (n : Lst) : (Dec (lst_subset m n)).
+Proof. 
+  dec_eq. induction m.
+  - simpl. auto.
+  - destruct IHm. simpl. destruct (lst_mem n0 n).
+  -- auto.
+  -- right. unfold not. intros. inversion H. auto.
+  -- right. unfold not. simpl. intros. destruct H. contradiction.
+Qed.
+
+
+Instance lst_eq_dec (m : Lst) (n : Lst) : (Dec (lst_eq m n)).
+Proof. 
+  dec_eq. unfold lst_eq. destruct (lst_subset_dec m n). destruct dec.
+  destruct (lst_subset_dec n m). destruct dec. auto.
+  right. unfold not. intros. destruct H. contradiction.
+  right. unfold not. intros. destruct H. contradiction.
+Qed.
 
 Lemma Nat_beq_refl : forall (n : Nat), Nat_beq n n = true.
 Proof.
@@ -84,9 +112,12 @@ Proof.
   - simpl. unfold lst_eq. tauto.
   - simpl. simpl in H. destruct H. rewrite H0. apply IHx in H. unfold lst_eq in H. destruct H. unfold lst_eq. split.
     + simpl. split.
-      * rewrite append_single. apply subset_append_general. assumption.
+      * rewrite append_single. 
+      findlemma. Admitted.
+      
+      (* apply subset_append_general. assumption.
       * rewrite Nat_beq_refl. reflexivity.
     + simpl. split.
       * rewrite append_single. apply subset_append_general. assumption.
       * rewrite Nat_beq_refl. reflexivity.
-Qed.
+Qed. *)

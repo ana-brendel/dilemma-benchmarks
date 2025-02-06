@@ -1,0 +1,203 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (x <> y)
+ -- (Nat_beq x y = true)
+
+----------------------------------
+Goal: (mem x nil = true)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 0. seconds
+
+gv0 : bool = (mem x nil)
+gv1 : Lst = nil
+gv2 : bool = true
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 19.248 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (x <> y)
+ -- (Nat_beq x y = gv2)
+
+----------------------------------
+Goal: (mem x nil = gv2)
+Case: 3
+
+Label: Generalization #1
+Assumptions: 
+ -- (x <> y)
+ -- (Nat_beq x y = true)
+
+----------------------------------
+Goal: (mem x gv1 = true)
+Case: 4
+
+Label: Generalization #2
+Assumptions: 
+ -- (x <> y)
+ -- (Nat_beq x y = true)
+
+----------------------------------
+Goal: (gv0 = true)
+Case: 4
+
+Label: Generalization #3
+Assumptions: 
+ -- (x <> y)
+ -- (Nat_beq x y = true)
+
+----------------------------------
+Goal: (mem x nil = true)
+Case: 4
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 19.895 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+less : (Nat -> Nat -> bool)
+mem : (Nat -> Lst -> bool)
+insort : (Nat -> Lst -> Lst)
+sort : (Lst -> Lst)
+
+Label: 0 (0)
+Abducted Assumption: (x <> y)
+Positive Examples:
+   [gv2 := false; x := (succ (succ (succ (succ zero)))); y := (succ (succ (succ (succ (succ (succ zero))))))]
+   [gv2 := false; x := (succ (succ (succ (succ zero)))); y := (succ (succ (succ (succ (succ zero)))))]
+   [gv2 := false; x := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ zero))]
+   [gv2 := false; x := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ (succ zero))))]
+   [gv2 := false; x := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ (succ zero)))]
+   [gv2 := false; x := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ (succ (succ (succ zero)))))]
+   [gv2 := false; x := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ (succ (succ zero))))]
+   [gv2 := false; x := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   [gv2 := false; x := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [gv2 := false; x := (succ (succ (succ (succ (succ zero))))); y := zero]
+   etc ...
+
+Negative Examples:
+   [gv2 := true; x := (succ (succ (succ zero))); y := (succ (succ (succ zero)))]
+   [gv2 := true; x := (succ (succ zero)); y := (succ (succ zero))]
+   [gv2 := true; x := (succ (succ (succ (succ zero)))); y := (succ (succ (succ (succ zero))))]
+   [gv2 := true; x := zero; y := zero]
+   [gv2 := true; x := (succ zero); y := (succ zero)]
+
+
+Label: 0 (1)
+Abducted Assumption: (Nat_beq x y = gv2)
+Positive Examples:
+   [gv2 := false; x := (succ (succ (succ (succ zero)))); y := (succ (succ (succ (succ (succ (succ zero))))))]
+   [gv2 := false; x := (succ (succ (succ (succ zero)))); y := (succ (succ (succ (succ (succ zero)))))]
+   [gv2 := false; x := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ zero))]
+   [gv2 := false; x := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ (succ zero))))]
+   [gv2 := false; x := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ (succ zero)))]
+   [gv2 := false; x := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ (succ (succ (succ zero)))))]
+   [gv2 := false; x := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ (succ (succ (succ zero))))]
+   [gv2 := false; x := (succ (succ (succ (succ zero)))); y := (succ (succ zero))]
+   [gv2 := false; x := (succ (succ (succ (succ zero)))); y := (succ (succ (succ zero)))]
+   [gv2 := false; x := (succ (succ (succ (succ (succ zero))))); y := zero]
+   etc ...
+
+Negative Examples:
+   [gv2 := true; x := (succ (succ (succ zero))); y := (succ (succ (succ (succ (succ zero)))))]
+   [gv2 := true; x := (succ (succ (succ (succ zero)))); y := (succ (succ (succ (succ (succ (succ zero))))))]
+   [gv2 := true; x := (succ (succ (succ (succ (succ (succ zero)))))); y := (succ zero)]
+   [gv2 := true; x := (succ zero); y := (succ (succ (succ (succ (succ (succ zero))))))]
+   [gv2 := true; x := (succ (succ (succ (succ zero)))); y := (succ (succ (succ (succ (succ zero)))))]
+   [gv2 := true; x := (succ (succ (succ (succ (succ zero))))); y := (succ zero)]
+   [gv2 := true; x := (succ (succ (succ zero))); y := (succ (succ (succ (succ zero))))]
+   [gv2 := true; x := (succ (succ (succ (succ (succ zero))))); y := (succ (succ zero))]
+   [gv2 := true; x := (succ (succ (succ (succ zero)))); y := (succ zero)]
+   [gv2 := true; x := (succ (succ (succ (succ (succ zero))))); y := (succ (succ (succ zero)))]
+   etc ...
+
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 20.646 seconds
+
+
+Label: 0 (0)
+(false = gv2), (true = gv2), (gv2 = gv2), (y = y), (y = x), (x = y), (x = x), (false = less y y), (false = less y x), (false = less x y)
+(false = less x x), (true = less y y), (true = less y x), (true = less x y), (true = less x x), (false <> gv2), (true <> gv2), (gv2 <> gv2), (y <> y), (y <> x)
+(x <> y), (x <> x), (None = Some y), (None = Some x), (less y y = gv2), (less y x = gv2), (less x y = gv2), (less x x = gv2), (None = Some gv2)
+
+Label: 0 (1)
+(false = gv2), (true = gv2), (gv2 = gv2), (y = y), (y = x), (x = y), (x = x), (false = less y y), (false = less y x), (false = less x y)
+(false = less x x), (true = less y y), (true = less y x), (true = less x y), (true = less x x), (false <> gv2), (true <> gv2), (gv2 <> gv2), (y <> y), (y <> x)
+(x <> y), (x <> x), (None = Some y), (None = Some x), (less y y = gv2), (less y x = gv2), (less x y = gv2), (less x x = gv2), (None = Some gv2)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 47.106 seconds
+
+
+Label: 0 (0)
+(false = gv2), (true <> gv2), (y <> x), (x <> y), (less y y = gv2), (less x x = gv2)
+
+Label: 0 (1)
+(false = gv2), (true <> gv2), (less y y = gv2), (less x x = gv2)
+
+
+------------------------------ PROCESSED SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 100.465 seconds
+
+
+(x <> y)
+ - (x <> y)
+ - (false = gv2)
+ - (true <> gv2)
+ - (y <> x)
+ - (less y y = gv2)
+ - (less x x = gv2)
+
+(Nat_beq x y = gv2)
+ - (Nat_beq x y = gv2)
+ - (false = gv2)
+ - (true <> gv2)
+ - (less y y = gv2)
+ - (less x x = gv2)
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 100.466 seconds
+
+Number of Result Pairs Returned: 8
+
+(x <> y -> Nat_beq x y = gv2 -> mem x nil = gv2)
+
+(x <> y -> y <> x)
+(y <> x -> Nat_beq x y = gv2 -> mem x nil = gv2)
+
+(x <> y -> Nat_beq x y = true -> mem x gv1 = true)
+
+(x <> y -> y <> x)
+(y <> x -> Nat_beq x y = true -> mem x gv1 = true)
+
+(x <> y -> Nat_beq x y = true -> gv0 = true)
+
+(x <> y -> y <> x)
+(y <> x -> Nat_beq x y = true -> gv0 = true)
+
+(x <> y -> Nat_beq x y = true -> mem x nil = true)
+
+(x <> y -> y <> x)
+(y <> x -> Nat_beq x y = true -> mem x nil = true)
