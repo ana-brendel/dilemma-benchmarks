@@ -64,7 +64,7 @@ Proof.
     + simpl in H. apply IHx in H. unfold leq in H. simpl. assumption.
 Qed.
 
-Theorem theorem0 : forall (x : Lst) (y : Nat), sorted x = true -> sorted (insort y x) = true.
+Theorem goal62_1 : forall (x : Lst) (y : Nat), sorted x = true -> sorted (insort y x) = true.
 Proof.
   intros.
   induction x.

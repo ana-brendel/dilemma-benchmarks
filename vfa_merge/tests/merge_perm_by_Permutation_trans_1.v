@@ -7,7 +7,7 @@ From Coq Require Import micromega.Lia.
 From LFindToo Require Import LFindToo.
 
 Require Import vfa_merge_benchmarks.Definitions.
-Require Import vfa_merge_benchmarks.Decide.
+From vfa_merge_benchmarks Require Import Decide.
 
 
 Lemma split_len': list_ind2_principle -> forall {X} (l:list X) (l1 l2: list X),
@@ -28,14 +28,8 @@ Lemma split_len: forall {X} (l:list X) (l1 l2: list X),
     length l2 <= length l.
 Proof.
     apply (@split_len' list_ind2).
-    (* intros. generalize dependent l1; generalize dependent l2. induction l using list_ind2.
-    - intros. inversion H. simpl. auto.
-    - intros. inversion H. simpl. split. reflexivity. auto.
-    - intros. simpl. inversion H. destruct (split l). inversion H1. 
-        simpl. destruct (IHl l3 l0). reflexivity. lia. *)
 Qed.
 
- 
 Lemma split_perm : forall {X:Type} (l l1 l2: list X),
     split l = (l1,l2) -> Permutation l (l1 ++ l2).
 Proof.
@@ -44,7 +38,6 @@ Proof.
   - intros. inversion H. auto.
   - intros. inversion H. destruct (split l). inversion H1.
   simpl. apply perm_skip. 
-  (* HELPER LEMMA *)
   apply Permutation_cons_app. apply IHl. reflexivity.
 Qed.
 
@@ -65,12 +58,6 @@ Qed.
 Lemma merge_nil_l : forall l, merge [] l = l. 
 Proof. intros. destruct l. reflexivity. reflexivity. Qed.
 
-Lemma merge_nil_r : forall l, merge l [] = l. 
-Proof. intros. destruct l. reflexivity. reflexivity. Qed.
-
-(* ================================================================= *)
-(** ** Defining Mergesort *)
-
 Function mergesort (l: list nat) {measure length l} : list nat :=
   match l with
   | [] => []
@@ -81,12 +68,10 @@ Function mergesort (l: list nat) {measure length l} : list nat :=
 Proof.
   - intros.
     simpl in *.  destruct (split l1) as [l1' l2'] eqn:E. inversion teq1. 
-    (* HELPER LEMMA *)
     destruct (split_len _ _ _ E).
     simpl. lia.
   - intros.
     simpl in *. destruct (split l1) as [l1' l2'] eqn:E. inversion teq1. 
-    (* HELPER LEMMA *)
     destruct (split_len _ _ _ E).
     simpl. lia.
 Defined.
@@ -103,222 +88,44 @@ Proof.
     - apply sorted_cons. assumption. assumption.
 Qed.
 
-Lemma destruct_sorted : forall x l, sorted (x :: l) -> sorted l.
-Proof. 
-  intros. induction l.
-  - apply sorted_nil.
-  - inversion H. assumption.
-Qed.
-
-Lemma sorted_skip: forall a b l, sorted (b :: a :: l) -> sorted (b :: l).
-Proof. 
-  intros. generalize dependent a. generalize dependent b. induction l.
-  - intros. apply sorted_1.
-  - intros. inversion H. inversion H4. apply sorted_cons. lia. assumption.
-Qed.
-
-Lemma sorted_cons_leq: forall b l, sorted (b :: l) -> b <=* l.
-Proof. 
-  intros. generalize dependent b. induction l.
-  - intros. apply Forall_nil.
-  - intros. apply Forall_cons. 
-    * inversion H. assumption.
-    *  apply IHl. eapply sorted_skip. eassumption.
-Qed. 
-
-Lemma sorted_all_cons: forall b l, b <=* l -> sorted l -> sorted (b :: l).
-Proof. 
-  intros. generalize dependent b. induction l.
-  - intros. apply sorted_1.
-  - intros. apply sorted_cons.
-    * inversion H. assumption.
-    * assumption.
-Qed.   
-
-Lemma leq_all_merge: forall b l m, b <=* l -> b <=* m -> b <=* merge l m.
-Proof. 
-  intros. generalize dependent l. induction m.
-  - intros. rewrite merge_nil_r. assumption.
-  - intros. induction l. 
-    * rewrite merge_nil_l. assumption.
-    * simpl. bdestruct (Nat.leb a0 a).
-    ** apply Forall_cons. eapply Forall_inv. apply H. apply IHl. eapply Forall_inv_tail. eassumption.
-    ** apply Forall_cons. eapply Forall_inv. apply H0.  
-    assert (Q: merge (a0 :: l) m = ((fix merge_aux (l2 : list nat) : list nat :=
-      match l2 with | [] => a0 :: l | a2 :: l2' =>
-        if a0 <=? a2 then a0 :: merge l l2 else a2 :: merge_aux l2' end) m)). simpl. reflexivity.
-    rewrite <- Q. clear Q. apply IHm. eapply Forall_inv_tail. eassumption. assumption.
-Qed.
-
-Lemma merge_inv: forall l1 l2, merge l1 l2 = [] -> l1 = [] /\ l2 = [].
-Proof.
-  intros. generalize dependent l2. induction l1. 
-  - intros. rewrite merge_nil_l in H. split. reflexivity. assumption.
-  - intros. induction l2.
-  -- rewrite merge_nil_r in H. rewrite H. auto.
-  -- inversion H. destruct (Nat.leb a a0). 
-    symmetry in H1. apply nil_cons in H1. contradiction.
-    symmetry in H1. apply nil_cons in H1. contradiction.
-Qed.
-
-Lemma single_merge_l: forall x l, sorted l -> sorted (merge [x] l).
-Proof. 
-  intros. induction l.
-  - rewrite merge_nil_r. apply sorted_1.
-  - simpl. bdestruct (Nat.leb x a).
-  + apply sorted_cons. assumption. assumption.
-  + assert (Q: merge [x] l = (fix merge_aux (l0 : list nat) : list nat :=
-        match l0 with | [] => [x] | a2 :: l2' => if x <=? a2
-          then x :: (fix merge_aux0 (l1 : list nat) : list nat := l1) l0 
-          else a2 :: merge_aux l2' end) l). simpl. reflexivity.
-    rewrite <- Q. clear Q. apply sorted_all_cons.
-    * apply leq_all_merge. apply Forall_cons. lia. apply Forall_nil. apply sorted_cons_leq. assumption.
-    * apply IHl. eapply destruct_sorted. eassumption.
-Qed.
-
-Lemma single_merge_r: forall x l, sorted l -> sorted (merge l [x]).
-Proof. 
-  intros. induction l.
-  - rewrite merge_nil_l. apply sorted_1.
-  - simpl. bdestruct (Nat.leb a x).
-  + apply sorted_all_cons. 
-  * apply leq_all_merge. apply sorted_cons_leq. assumption. apply Forall_cons. assumption. apply Forall_nil.
-  * apply IHl. eapply destruct_sorted. eassumption. 
-  + apply sorted_cons. lia. assumption.
-Qed.
-
-Lemma Forall_trans: forall a b l, b <= a -> a <=* l -> b <=* l.
-Proof.
-  intros. induction l.
-  - apply Forall_nil.
-  - apply Forall_cons. 
-  -- apply Forall_inv in H0. lia.
-  -- apply IHl. eapply Forall_inv_tail. eassumption.
-Qed. 
-
-Lemma destruct_merge: forall l1 l2 b, sorted (merge l1 l2) -> b <=* l1 -> sorted l2 -> sorted (merge (b :: l1) l2).
-Proof.
-  intros. generalize dependent l2. generalize dependent b. induction l1.
-  - intros. induction l2.
-  -- rewrite merge_nil_r. apply sorted_1. 
-  -- apply single_merge_l. rewrite merge_nil_l in H. assumption.
-  - intros. generalize dependent b. induction l2.
-  -- intros. rewrite merge_nil_r. apply sorted_cons. eapply Forall_inv. eassumption. rewrite <- merge_nil_r. assumption.
-  -- intros. simpl. bdestruct (Nat.leb b a0).
-  * assert (Q: merge (a :: l1) (a0 :: l2) = (if a <=? a0 then a :: merge l1 (a0 :: l2)
-  else a0 :: (fix merge_aux (l0 : list nat) : list nat := match l0 with
-  | [] => a :: l1 | a2 :: l2' => if a <=? a2 then a :: merge l1 l0 else a2 :: merge_aux l2'
-  end) l2)). simpl. reflexivity. rewrite <- Q. clear Q.
-  apply sorted_all_cons.
-  + apply leq_all_merge. assumption. apply Forall_cons. assumption. eapply Forall_trans. eassumption. apply sorted_cons_leq. assumption.
-  + assumption.
-  * assert (Q: merge (b :: a :: l1) l2 = (fix merge_aux (l2 : list nat) : list nat :=
-    match l2 with | [] => b :: a :: l1 | a2 :: l2' => if b <=? a2
-    then b :: (fix merge_aux0 (l0 : list nat) : list nat := match l0 with
-    | [] => a :: l1 | a3 :: l2'0 => if a <=? a3 then a :: merge l1 l0 else a3 :: merge_aux0 l2'0 end) l2 else a2 :: merge_aux l2'
-    end) l2). simpl. reflexivity. rewrite <- Q. clear Q.
-    apply sorted_all_cons.
-    + apply leq_all_merge. apply Forall_cons. lia. eapply Forall_trans with (a := b). lia. assumption. apply sorted_cons_leq. assumption.
-    + apply IHl2. simpl in H. bdestruct (Nat.leb a a0).
-    ++ assert (C: b <= a). eapply Forall_inv. eassumption. lia.
-    ++ eapply destruct_sorted. eassumption.
-    ++ eapply destruct_sorted. eassumption.
-    ++ assumption.
-Qed.
-  
 Lemma sorted_merge : forall l1, sorted l1 -> forall l2, sorted l2 -> sorted (merge l1 l2).
 Proof.
-  intros. generalize dependent l2. induction l1 using list_ind2.
-  - intros. rewrite merge_nil_l. assumption.
-  - intros. induction l2. rewrite merge_nil_r. assumption. apply single_merge_l. assumption.
-  - intros. induction l2 using list_ind2. 
-    + rewrite merge_nil_r. assumption.
-    + simpl. bdestruct (Nat.leb a a0). 
-    ++ bdestruct (Nat.leb b a0). apply sorted_cons.
-    +++ inversion H. assumption.
-    +++ apply sorted_all_cons.
-    -- apply leq_all_merge. apply sorted_cons_leq. inversion H. assumption. unfold le_all. auto.
-    -- apply IHl1. inversion H. inversion H. eapply destruct_sorted. eassumption. assumption.
-    +++ apply sorted_cons. assumption. apply sorted_cons. lia. inversion H. eapply destruct_sorted. eassumption.
-    ++ apply sorted_cons. lia. assumption.
-    + simpl. 
-
-      assert (R: merge (b :: l1) l2 = (fix merge_aux (l0 : list nat) : list nat := match l0 with 
-          | [] => b :: l1
-          | a2 :: l2' => if b <=? a2 then b :: merge l1 l0 else a2 :: merge_aux l2' end) l2). simpl. reflexivity.
-
-      bdestruct (Nat.leb a a0).
-      ++ bdestruct (Nat.leb b a0). apply sorted_cons.
-        +++ inversion H. assumption.
-        +++ apply sorted_all_cons.
-          -- apply leq_all_merge. apply sorted_cons_leq. inversion H. assumption.
-          apply sorted_cons_leq. apply sorted_cons. assumption. assumption.
-          -- apply IHl1. inversion H. eapply destruct_sorted. eassumption. assumption.
-        +++ apply sorted_cons. assumption. bdestruct (Nat.leb b b0).
-          -- apply sorted_cons. lia. apply sorted_all_cons. 
-            * apply leq_all_merge. inversion H. apply sorted_cons_leq. assumption.
-            inversion H0. apply sorted_cons_leq. apply sorted_cons. assumption. assumption.
-            * apply IHl1. inversion H. eapply destruct_sorted. eassumption. inversion H0. assumption.
-          -- apply sorted_cons. inversion H0. assumption.
-          rewrite <- R. apply sorted_all_cons. 
-            * apply leq_all_merge. apply sorted_cons_leq. apply sorted_cons. lia. inversion H. assumption.
-            apply sorted_cons_leq. inversion H0. assumption.
-            * apply destruct_merge. apply IHl1. inversion H. eapply destruct_sorted. eassumption.
-            inversion H0. eapply destruct_sorted. eassumption.
-            inversion H0. apply sorted_cons_leq. inversion H. assumption.
-            inversion H0. eapply destruct_sorted. eassumption.
-      ++ rewrite <- R. clear R. bdestruct (Nat.leb a b0).
-        +++ apply sorted_cons. lia. bdestruct (Nat.leb b b0).
-          * apply sorted_cons. inversion H. assumption. apply sorted_all_cons.
-            ** apply leq_all_merge. inversion H. apply sorted_cons_leq. assumption. 
-            apply sorted_cons_leq. apply sorted_cons. assumption. inversion H0. assumption.
-            ** apply IHl1. inversion H. eapply destruct_sorted. eassumption. inversion H0. assumption.
-          * apply sorted_cons. inversion H. assumption. apply sorted_all_cons.
-            ** apply leq_all_merge. inversion H. apply sorted_cons_leq. 
-            apply sorted_cons. lia. assumption. inversion H0. apply sorted_cons_leq. assumption.
-            ** apply destruct_merge. apply IHl1. inversion H. eapply destruct_sorted. eassumption.
-            inversion H0. eapply destruct_sorted. eassumption.
-            apply sorted_cons_leq. inversion H. assumption.
-            inversion H0. eapply destruct_sorted. eassumption.
-        +++ apply sorted_cons. inversion H0. assumption. 
-
-        assert (Q: merge (a :: b :: l1) l2 = (fix merge_aux (l2 : list nat) : list nat :=
-            match l2 with | [] => a :: b :: l1 | a2 :: l2' =>
-              if a <=? a2 then a :: (fix merge_aux0 (l0 : list nat) : list nat :=
-                      match l0 with
-                      | [] => b :: l1
-                      | a3 :: l2'0 =>
-                          if b <=? a3
-                          then b :: merge l1 l0
-                          else a3 :: merge_aux0 l2'0 end) l2 else a2 :: merge_aux l2' end) l2). simpl. reflexivity.
-
-        rewrite <- Q. clear Q. apply sorted_all_cons.
-        ** apply leq_all_merge. apply sorted_cons_leq. apply sorted_cons. lia. assumption. apply sorted_cons_leq. inversion H0. assumption.
-        ** apply IHl2. inversion H0. eapply destruct_sorted. eassumption.
-Qed. 
+    induction l1. destruct l2.
+    - intros. simpl. assumption.
+    - intros. simpl. assumption. 
+    - intro. induction l2.
+    + simpl. intros. assumption.
+    + intro. simpl. bdestruct (a <=? a0).
+    ++ destruct l1. simpl. apply sorted_cons. assumption. assumption. 
+    apply sorted_merge1. inversion H. assumption. assumption. apply IHl1. inversion H. assumption. assumption.
+    ++ destruct l2. apply sorted_cons. lia. assumption.
+    apply sorted_merge1. lia. inversion H0. assumption. apply IHl2. inversion H0. assumption.
+Qed.
 
 Lemma mergesort_sorts: forall l, sorted (mergesort l).
 Proof. 
   intros. apply mergesort_ind; intros.
   - apply sorted_nil.
   - apply sorted_1.
-  - apply sorted_merge. assumption. assumption.
+  - 
+  apply sorted_merge. assumption. assumption.
 Qed.
 
-Lemma merge_perm: forall (l1 l2: list nat),
-    Permutation (l1 ++ l2) (merge l1 l2). 
+Lemma merge_perm: forall (l1 l2: list nat), Permutation (l1 ++ l2) (merge l1 l2). 
 Proof. 
   intros. generalize dependent l2. induction l1.
-  - intros. rewrite merge_nil_l. simpl. apply Permutation_refl.
+  - intros. 
+  rewrite merge_nil_l. simpl. reflexivity.
   - induction l2.
-  + simpl. rewrite app_nil_r. apply Permutation_refl.
-  + simpl. destruct (Nat.leb a a0).
+  + simpl. 
+  rewrite app_nil_r. reflexivity.
+  + unfold merge. fold merge. destruct (Nat.leb a a0).
   ++ apply perm_skip. apply IHl1.
   ++ findlemma. Admitted.
-  
   (* apply Permutation_trans with (l' := (a0 :: l2) ++ (a :: l1)).
-    * simpl. apply Permutation_app_comm with (l := (a :: l1)).
-    * simpl. apply perm_skip. apply Permutation_trans with (l' := (a :: l1) ++ l2).
+    * apply Permutation_app_comm.
+    * simpl. apply perm_skip. 
+    apply Permutation_trans with (l' := (a :: l1) ++ l2).
     ** apply Permutation_app_comm.
     ** assumption.
 Qed.  *)

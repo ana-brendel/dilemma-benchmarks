@@ -26,8 +26,7 @@ Inductive sorted: list nat -> Prop :=
 | sorted_cons: forall x y l,
    x <= y -> sorted (y::l) -> sorted (x::y::l).
 
-Definition sorted' (al: list nat) :=
- forall i j, i < j < length al -> nth i al 0 <= nth j al 0.
+Definition sortedd (al: list nat) := forall i j, i < j < length al -> nth i al 0 <= nth j al 0.
     
 Definition is_a_sorting_algorithm (f: list nat -> list nat) :=
   forall al, Permutation al (f al) /\ sorted (f al).

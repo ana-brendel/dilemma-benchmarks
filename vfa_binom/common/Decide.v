@@ -1,7 +1,8 @@
 From QuickChick Require Import QuickChick.
 From vfa_binom_benchmarks Require Import Definitions.
+Require Import Lia.
 
-Require Import String. Open Scope string.
+Open Scope string.
 
 (* ************************** [ NAT ] *************************** *)
 Derive Show for nat.
@@ -418,6 +419,161 @@ Qed.
 (* ****************************** [ TREE ] ****************************** *)
 (* ********************************************************************** *)
 
-(* There are more missing for the binom file *)
+Instance show_tree : Show (tree) := 
+{| show := 
+    let fix aux l :=
+      match l with
+      | Leaf => "Leaf"
+      | Node v l r => "Node (" ++ show v ++ ") (" ++ aux l ++ ") (" ++ aux r ++ ")"
+      end
+    in aux
+|}.
+Derive Arbitrary for tree.
+Instance Dec_Eq_tree : Dec_Eq (tree).
+Proof. dec_eq. Qed.
 
 Close Scope string.
+
+(* There are more missing for the binom file *)
+
+(* **************************************************************************** *)
+(* ****************************** [ BINOM PRIQ ] ****************************** *)
+(* **************************************************************************** *)
+
+Instance Dec_pow2heapp (n: nat) (m: nat) (t: tree) : Dec (pow2heapp n m t).
+Proof.
+  dec_eq. generalize dependent n. generalize dependent m. induction t.
+  - intros. destruct n0. + simpl. auto.
+  + intros. simpl. 
+  bdestruct (leb n m).
+  * destruct (IHt1 n n0). 
+  ** destruct (IHt2 m n0).
+  left. auto. right. unfold not. intros. destruct H0. destruct H1. contradiction.
+  ** right. unfold not. intros. destruct H0. destruct H1. contradiction.
+  * right. unfold not. intros. destruct H0. lia.
+  - intros. simpl. destruct n. + simpl. auto. + simpl. auto.
+Qed.
+
+Instance Dec_pow2heap (n: nat) (t: tree) : Dec (pow2heap n t).
+Proof.
+  dec_eq. destruct t. 
+  + unfold pow2heap. destruct t2. ++ auto. ++ apply Dec_pow2heapp.
+  + simpl. auto.
+Qed.
+
+Instance Dec_priqq (i: nat) (l: list tree) : Dec (priqq i l).
+Proof.
+  dec_eq. generalize dependent i. induction l.
+  - simpl. auto.
+  - intros. simpl. destruct (IHl (S i)).
+  + destruct (Dec_pow2heap i a). unfold ssrbool.decidable in dec. destruct dec.
+  ++ left. split. auto. auto.
+  ++ destruct a. right. unfold not. intros. destruct H. destruct H.
+  inversion H. contradiction. left. auto.
+  + right. unfold not. intros. destruct H. contradiction.
+Qed.
+
+Instance Dec_priq (q: list tree) : Dec (priq q).
+Proof. dec_eq. unfold priq. apply Dec_priqq. Qed.
+
+Fixpoint tree_elems_func (t: tree) : list nat :=
+  match t  with 
+  | Leaf => []
+  | Node v tl tr => v :: ((tree_elems_func tl) ++ (tree_elems_func tr))
+end.
+
+Definition tree_elems_b (t: tree) (k : list nat) : bool := isPerm (tree_elems_func t) k.
+
+Lemma construct_bool (b br bl : list nat) (v : nat) (tl tr : tree) : 
+  tree_elems_b tl bl = true -> tree_elems_b tr br = true -> isPerm (v :: bl ++ br) b = true -> tree_elems_b (Node v tl tr) b = true.
+Proof.
+  intros. unfold tree_elems_b. unfold tree_elems_func. fold tree_elems_func. 
+  unfold tree_elems_b in H. unfold tree_elems_b in H0. 
+  apply if_isPerm_Permutation_eq in H. apply if_isPerm_Permutation_eq in H0.
+  apply if_isPerm_Permutation_eq in H1. apply if_Permutation_isPerm_eq.
+  rewrite H. rewrite H0. assumption.
+Qed.
+
+Lemma if_tree_elems_bool_eq (t: tree) (k : list nat) : tree_elems t k -> tree_elems_b t k = true.
+Proof.
+  intros. induction H.
+  - unfold tree_elems_b. reflexivity.
+  - eapply construct_bool. eassumption. eassumption. apply if_Permutation_isPerm_eq.
+  rewrite H1. reflexivity.
+Qed.
+
+Lemma destruct_bool (b : list nat) (v : nat) (tl tr : tree) : 
+  tree_elems_b (Node v tl tr) b = true -> exists bl br, tree_elems_b tl bl = true /\ tree_elems_b tr br = true /\ isPerm (v :: bl ++ br) b = true.
+Proof. 
+  intros. unfold tree_elems_b in H. unfold tree_elems_func in H.
+  fold tree_elems_func in H. remember (tree_elems_func tl) as bl. remember (tree_elems_func tr) as br.
+  exists bl. exists br. split.
+  - unfold tree_elems_b. rewrite <- Heqbl. apply if_Permutation_isPerm_eq. reflexivity.
+  - split.
+  -- unfold tree_elems_b. rewrite <- Heqbr. apply if_Permutation_isPerm_eq. reflexivity.
+  -- assumption.
+Qed.
+
+Lemma fi_tree_elems_bool_eq (t: tree) (k : list nat) : tree_elems_b t k = true -> tree_elems t k.
+Proof.
+  intros. generalize dependent k. induction t.
+  - intros. eapply destruct_bool in H. inversion H. inversion H0. clear H. clear H0. destruct H1. destruct H0.
+  eapply tree_elems_node. eapply IHt1. eassumption. eapply IHt2. eassumption. 
+  symmetry. apply if_isPerm_Permutation_eq. assumption.
+  - intros. unfold tree_elems_b in H. unfold tree_elems_func in H. 
+  apply if_isPerm_Permutation_eq in H. apply Permutation_nil in H. rewrite H. apply tree_elems_leaf.
+Qed.
+
+Theorem tree_elems_bool_eq (t: tree) (k : list nat)  : tree_elems_b t k = true <-> tree_elems t k.
+Proof. split. apply fi_tree_elems_bool_eq. apply if_tree_elems_bool_eq. Qed.
+
+Instance tree_elems_dec (t: tree) (k : list nat) : Dec (tree_elems t k).
+Proof.
+  dec_eq. destruct (tree_elems_b t k) eqn:B.
+  left. apply tree_elems_bool_eq. assumption.
+  right. unfold not. intros. apply tree_elems_bool_eq in H. rewrite H in B. inversion B.
+Qed.
+
+Fixpoint priqueue_elems_func (t: list tree) : list nat :=
+  match t with 
+  | [] => []
+  | ct :: rt => tree_elems_func ct ++ (priqueue_elems_func rt)
+end.
+
+Definition priqueue_elems_b (t: list tree) (k : list nat) : bool := isPerm (priqueue_elems_func t) k.
+
+Lemma if_priqueue_elems_bool_eq (t: list tree) (k : list nat) : priqueue_elems t k -> priqueue_elems_b t k = true.
+Proof.
+  intros. induction H.
+  - reflexivity.
+  - unfold priqueue_elems_b. unfold priqueue_elems_func. fold priqueue_elems_func.
+  apply if_Permutation_isPerm_eq. unfold priqueue_elems_b in IHpriqueue_elems.
+  apply if_isPerm_Permutation_eq in IHpriqueue_elems. eapply Permutation_trans.
+  eapply Permutation_app. apply tree_elems_bool_eq in H. unfold tree_elems_b in H.
+  apply if_isPerm_Permutation_eq in H. eassumption. eassumption. symmetry. assumption.
+Qed.
+
+Lemma fi_priqueue_elems_bool_eq (t: list tree) (k : list nat) : priqueue_elems_b t k = true -> priqueue_elems t k.
+Proof.
+  intros. generalize dependent k. induction t.
+  - intros. unfold priqueue_elems_b in H. simpl in H. destruct k. apply priqueue_elems_nil. inversion H.
+  -  intros. unfold priqueue_elems_b in H. unfold priqueue_elems_func in H. fold priqueue_elems_func in H.
+  apply if_isPerm_Permutation_eq in H. 
+  apply priqueue_elems_cons with (cons_elems := tree_elems_func a) (rest_elems := priqueue_elems_func t). 
+  apply fi_tree_elems_bool_eq. unfold tree_elems_b. apply if_Permutation_isPerm_eq. reflexivity.
+  apply IHt. unfold priqueue_elems_b. apply if_Permutation_isPerm_eq. reflexivity.
+  symmetry. assumption.
+Qed.
+
+Lemma priqueue_elems_bool_eq (t: list tree) (k : list nat) : priqueue_elems_b t k = true <-> priqueue_elems t k.
+Proof. intros. split. apply fi_priqueue_elems_bool_eq. apply if_priqueue_elems_bool_eq. Qed.
+
+Instance priqueue_elems_dec (t: list tree) (k : list nat) : Dec (priqueue_elems t k).
+Proof.
+  dec_eq. destruct (priqueue_elems_b t k) eqn:P.
+  left. apply priqueue_elems_bool_eq. assumption.
+  right. unfold not. intros. apply priqueue_elems_bool_eq in H. rewrite H in P. inversion P.
+Qed.
+
+Instance Abs_dec (t: list tree) (k : list nat) : Dec (Abs t k).
+Proof. dec_eq. unfold Abs. apply priqueue_elems_dec. Qed.

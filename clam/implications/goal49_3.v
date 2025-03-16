@@ -137,7 +137,7 @@ Proof.
       destruct H.
 Qed.
 
-Theorem theorem0 : forall (x : Nat) (y : Lst), eq (mem x (sort y)) true -> eq (mem x y) true.
+Theorem goal49_3 : forall (x : Nat) (y : Lst), eq (mem x (sort y)) true -> eq (mem x y) true.
 Proof.
   intros.
   induction y.

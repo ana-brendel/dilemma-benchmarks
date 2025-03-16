@@ -94,7 +94,7 @@ Proof.
   - simpl. rewrite IHy. apply orb_true_r.
 Qed.
 
-Lemma subset_append_general : forall (x y z : Lst), lst_subset x y -> lst_subset x (append z y).
+Lemma goal41_1 : forall (x y z : Lst), lst_subset x y -> lst_subset x (append z y).
 Proof.
   intros.
   induction x.

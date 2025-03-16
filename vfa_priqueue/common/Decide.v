@@ -1,7 +1,7 @@
 From QuickChick Require Import QuickChick.
 From vfa_priqueue_benchmarks Require Import Definitions.
 
-Require Import String. Open Scope string.
+Open Scope string.
 
 (* ************************** [ NAT ] *************************** *)
 Derive Show for nat.
@@ -402,7 +402,7 @@ Qed.
 (* ************************** [ FORALL ] ************************** *)
 (* **************************************************************** *)
 (* Forall definitions and lemmas at: https://coq.inria.fr/doc/master/stdlib/Coq.Lists.List.html *)
-Instance forall_dec {T} `{_ : Dec T} (f : T -> Prop) `{forall (x : T), Dec (f x)} (ls : list T) : (Dec (Forall f ls)).
+Instance Forall_dec {T} `{_ : Dec T} (f : T -> Prop) `{forall (x : T), Dec (f x)} (ls : list T) : (Dec (Forall f ls)).
 Proof.
   dec_eq. induction ls.
   - left. apply Forall_nil.
@@ -413,16 +413,21 @@ Proof.
   + right. unfold not; intros. unfold not in n. apply n. apply Forall_inv_tail in H1. auto.
 Qed.
 
+Instance Forall_ge_dec (n : nat) (l : list nat) : Dec (Coq.Lists.List.Forall (fun x : Coq.Init.Datatypes.nat => n >= x) l).
+Proof. 
+dec_eq. induction l.
+- left. apply Forall_nil.
+- destruct IHl.
++ assert (P: {(fun x : nat => n >= x) a} + {~ (fun x : nat => n >= x) a}). apply ge_dec. destruct P.
+++ left. apply Forall_cons. auto. auto.
+++ right. unfold not. intros. unfold not in n0. apply n0. apply Forall_inv in H. auto.
++ right. unfold not; intros. unfold not in n0. apply n0. apply Forall_inv_tail in H. auto.
+Qed.
+
 Close Scope string.
 
-(* **************************************************************** *)
-(* ************************** [ first_le_second ] ************************** *)
-(* **************************************************************** *)
-Instance first_le_second_dec (l : list nat) : Dec (first_le_second l).
-Proof. 
-  dec_eq. destruct l.
-  - simpl. auto.
-  - destruct l.
-  -- left. unfold first_le_second. auto.
-  -- unfold first_le_second. bdestruct (n <=? n0). auto. right. lia.
-Qed.
+Instance Abs_dec (p : list nat) (kl : list nat): Dec (Abs p kl).
+Proof. dec_eq. unfold Abs. apply Permutation_dec. Qed.
+
+Instance priq_dec (p : list nat) : Dec (priq p).
+Proof. dec_eq. unfold priq. auto. Qed.

@@ -42,7 +42,7 @@ Ltac bdestruct X :=
     | destruct H as [H|H];
        [ | try first [apply not_lt in H | apply not_le in H]]].
 
-Module Type PRIQUEUE.
+(* Module Type PRIQUEUE.
   Parameter priqueue: Type.
   Definition key := nat.
   Parameter empty: priqueue.
@@ -75,17 +75,17 @@ Module Type PRIQUEUE.
        priq p -> priq q ->
        Abs p pl -> Abs q ql -> Abs (merge p q) al ->
        Permutation al (pl++ql).
-End PRIQUEUE.
+End PRIQUEUE. *)
 
-Definition key := nat.
+(* Definition key := nat. *)
 
 Inductive tree : Type :=
-|  Node: key -> tree -> tree -> tree
+|  Node: nat -> tree -> tree -> tree
 |  Leaf : tree.
 
-Definition priqueue := list tree.
+(* Definition priqueue := list tree. *)
 
-Definition empty : priqueue := nil.
+(* Definition empty : priqueue := nil. *)
 
 Definition smash (t u:  tree) : tree :=
   match t , u with
@@ -104,10 +104,10 @@ Fixpoint carry (q: list tree) (t: tree) : list tree :=
   | u :: q', _       => Leaf :: carry q' (smash t u)
  end.
 
-Definition insert (x: key) (q: priqueue) : priqueue :=
+Definition insert (x: nat) (q: list tree) : list tree :=
      carry q (Node x Leaf Leaf).
 
-Fixpoint join (p q: priqueue) (c: tree) : priqueue :=
+Fixpoint join (p q: list tree) (c: tree) : list tree :=
   match p, q, c with
     [], _ , _            => carry q c
   | _, [], _             => carry p c
@@ -119,32 +119,32 @@ Fixpoint join (p q: priqueue) (c: tree) : priqueue :=
   | p1::p', q1::q', _                   => c :: join p' q' (smash p1 q1)
  end.
 
-Fixpoint unzip (t: tree) (cont: priqueue -> priqueue) : priqueue :=
+Fixpoint unzip (t: tree) (cont: list tree -> list tree) : list tree :=
   match t with
   |  Node x t1 t2   => unzip t2 (fun q => Node x t1 Leaf  :: cont q)
   | Leaf => cont nil
   end.
 
-Definition heap_delete_max (t: tree) : priqueue :=
+Definition heap_delete_max (t: tree) : list tree :=
   match t with
     Node x t1 Leaf  => unzip t1 (fun u => u)
   | _ => nil end.
 
-Fixpoint find_max' (current: key) (q: priqueue) : key :=
+Fixpoint find_max' (current: nat) (q: list tree) : nat :=
   match q with
   |  []         => current
   | Leaf::q' => find_max' current q'
   | Node x _ _ :: q' => find_max' (if (x >? current) then x else current) q'
   end.
 
-Fixpoint find_max (q: priqueue) : option key :=
+Fixpoint find_max (q: list tree) : option nat :=
   match q with
   | [] => None
   | Leaf::q' => find_max q'
   | Node x _ _ :: q' => Some (find_max' x q')
  end.
 
-Fixpoint delete_max_aux (m: key) (p: priqueue) : priqueue * priqueue :=
+Fixpoint delete_max_aux (m: nat) (p: list tree) : list tree * list tree :=
   match p with
   | Leaf :: p'   => let (j,k) := delete_max_aux m p'  in (Leaf::j, k)
   | Node x t1 Leaf :: p' =>
@@ -155,42 +155,42 @@ Fixpoint delete_max_aux (m: key) (p: priqueue) : priqueue * priqueue :=
   | _ => (nil, nil) 
   end.
 
-Definition delete_max (q: priqueue) : option (key * priqueue) :=
+Definition delete_max (q: list tree) : option (nat * list tree) :=
   match find_max q with
   | None => None
   | Some  m => let (p',q') := delete_max_aux m q
                             in Some (m, join p' q' Leaf)
   end.
 
-Definition merge (p q: priqueue) := join p q Leaf.
+Definition merge (p q: list tree) := join p q Leaf.
 
 (* ################################################################# *)
 (** * Characterization Predicates *)
 
-Fixpoint pow2heap' (n: nat) (m: key) (t: tree) :=
+Fixpoint pow2heapp (n: nat) (m: nat) (t: tree) :=
  match n, m, t with
     0, m, Leaf       => True
   | 0, m, Node _ _ _  => False
   | S _, m,Leaf    => False
   | S n', m, Node k l r  =>
-       m >= k /\ pow2heap' n' k l /\ pow2heap' n' m r
+       m >= k /\ pow2heapp n' k l /\ pow2heapp n' m r
  end.
 
 Definition pow2heap (n: nat) (t: tree) :=
   match t with
-    Node m t1 Leaf => pow2heap' n m t1
+    Node m t1 Leaf => pow2heapp n m t1
   | _ => False
   end.
 
-Fixpoint priq'  (i: nat) (l: list tree) : Prop :=
+Fixpoint priqq  (i: nat) (l: list tree) : Prop :=
    match l with
-  | t :: l' => (t=Leaf \/ pow2heap i t) /\ priq' (S i) l'
+  | t :: l' => (t=Leaf \/ pow2heap i t) /\ priqq (S i) l'
   | nil => True
  end.
 
-Definition priq (q: priqueue) : Prop := priq' 0 q.
+Definition priq (q: list tree) : Prop := priqq 0 q.
 
-Inductive tree_elems: tree -> list key -> Prop :=
+Inductive tree_elems: tree -> list nat -> Prop :=
 | tree_elems_leaf: tree_elems Leaf nil
 | tree_elems_node:  forall bl br v tl tr b,
            tree_elems tl bl ->
@@ -198,7 +198,7 @@ Inductive tree_elems: tree -> list key -> Prop :=
            Permutation b (v::bl++br) ->
            tree_elems (Node v tl tr) b.
 
-Inductive priqueue_elems: list tree -> list key -> Prop :=
+Inductive priqueue_elems: list tree -> list nat -> Prop :=
 | priqueue_elems_nil: priqueue_elems [] []
 | priqueue_elems_cons: forall cons_tree rest_trees cons_elems rest_elems new_elems,
     tree_elems cons_tree cons_elems ->
@@ -206,4 +206,4 @@ Inductive priqueue_elems: list tree -> list key -> Prop :=
     Permutation new_elems (cons_elems ++ rest_elems) ->
     priqueue_elems (cons_tree :: rest_trees) new_elems.
 
-Definition Abs (p: priqueue) (al: list key) := priqueue_elems p al.
+Definition Abs (p: list tree) (al: list nat) := priqueue_elems p al.

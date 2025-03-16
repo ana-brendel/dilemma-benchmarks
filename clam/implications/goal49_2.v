@@ -111,7 +111,7 @@ Proof.
   }
 Qed.
 
-Theorem mem_insort: forall (x n: Nat) (l: Lst), mem x (insort n l) = true -> x = n \/ mem x l = true.
+Theorem goal49_2: forall (x n: Nat) (l: Lst), mem x (insort n l) = true -> x = n \/ mem x l = true.
 Proof.
   intros.
   induction l.
@@ -138,18 +138,3 @@ Proof.
       left. apply eqb_elim. assumption.
       destruct H.
 Qed. *)
-
-Theorem theorem0 : forall (x : Nat) (y : Lst), eq (mem x (sort y)) true -> eq (mem x y) true.
-Proof.
-  intros.
-  induction y.
-    simpl in *.
-    apply mem_insort in H.
-    destruct H.
-      subst. rewrite eqb_refl. simpl. reflexivity.
-      apply IHy in H.
-      rewrite H.
-      apply Bool.orb_true_r.
-  simpl in H.
-  inversion H.
-Qed.

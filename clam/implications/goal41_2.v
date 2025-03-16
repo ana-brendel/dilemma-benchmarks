@@ -105,7 +105,7 @@ Proof.
       * assumption.
 Qed.
 
-Theorem theorem0 : forall (x : Lst) (y : Lst), lst_subset x y -> lst_eq (lst_intersection x y) x.
+Theorem goal41_2 : forall (x : Lst) (y : Lst), lst_subset x y -> lst_eq (lst_intersection x y) x.
 Proof.
   intros.
   induction x.

@@ -446,60 +446,6 @@ Proof.
   right. unfold not. intros. apply P in H. discriminate H.
 Qed.
 
-(* Lemma if_sortedd_sorted_eq (l : list nat) : sortedd l -> sorted l.
-Proof.
-  induction l.
-  * constructor.
-  * unfold sortedd in *. intro H. 
-    destruct l; constructor.
-    + apply (H 0 1). simpl. auto. reflexivity. reflexivity.
-    + apply IHl.
-      intros. apply (H (S i) (S j)).
-      simpl in *. apply lt_n_S in H0. auto. simpl. auto. simpl. auto.
-Qed. *)
-
-(* Lemma if_sorted_sortedd_eq (l : list nat) : sorted l -> sortedd l.
-Proof.
-  intros. unfold sortedd. 
-  induction l. destruct i. simpl. intros. discriminate H1. simpl. intros. discriminate H1.
-  induction H; intros.
-  * simpl in H. destruct i. 
-    simpl in H0; discriminate H0.
-    simpl in H0; discriminate H0.
-  * simpl in H0. destruct i. destruct j.
-    inversion H. simpl in H1. destruct j.
-    simpl in H1; discriminate H1.
-    simpl in H1; discriminate H1.
-    simpl in H0. destruct i.
-    simpl in H0; discriminate H0.
-    simpl in H0; discriminate H0.
-  * destruct i,j.
-  + inversion H1.
-  + apply le_trans with y. simpl in H2. inversion H2. rewrite <- H5. auto.
-    destruct j. simpl in H3. inversion H3. rewrite <- H5. auto.
-    specialize (IHsorted 0 (S j)). apply IHsorted. apply lt_0_Sn. reflexivity. simpl.
-    simpl in H3. auto.
-  + inversion H1.
-  + simpl in H2. simpl in H3. apply lt_S_n in H1. apply IHsorted with (i:=i) (j:=j).
-    auto. auto. auto.
-Qed. *)
-
-(* Theorem sorted_eq_sortedd (l : list nat) : sorted l <-> sortedd l.
-Proof. split. apply if_sorted_sortedd_eq. apply if_sortedd_sorted_eq. Qed. *)
-
-(* Theorem sortedd_eq_bool (l : list nat) : sortedd l <-> sorted_bool l = true.
-Proof. split. 
-  intros. apply sorted_bool_eq. apply sorted_eq_sortedd. auto.
-  intros. apply sorted_eq_sortedd. apply sorted_bool_eq. auto.
-Qed. *)
-
-(* Instance sortedd_dec (l : list nat) : Dec (sortedd l).
-Proof.
-  dec_eq. assert (P: sortedd l <-> sorted_bool l = true). apply sortedd_eq_bool.
-  destruct (sorted_bool l). left. apply P. auto. 
-  right. unfold not. intros. apply P in H. discriminate H.
-Qed. *)
-
 (* **************************************************************** *)
 (* ************************** [ FORALL ] ************************** *)
 (* **************************************************************** *)
@@ -529,7 +475,12 @@ Proof.
 Qed.
 
 (* ************************** [ TREE ] *************************** *)
-Instance show_tree {V} `{_ : Show V} : Show (tree V) := 
+Derive Show for value.
+Derive Arbitrary for value.
+Instance Dec_Eq_value : Dec_Eq value.
+Proof. dec_eq. Qed.
+
+Instance show_tree : Show (tree) := 
 {| show := 
     let fix aux l :=
       match l with
@@ -539,51 +490,51 @@ Instance show_tree {V} `{_ : Show V} : Show (tree V) :=
     in aux
 |}.
 Derive Arbitrary for tree.
-Instance Dec_Eq_tree {T} `{_ : Dec_Eq T}  : Dec_Eq (tree T).
+Instance Dec_Eq_tree : Dec_Eq (tree).
 Proof. dec_eq. Qed.
 
 (* **************************************************************** *)
 (* ************************** [ FORALLT ] ************************** *)
 (* **************************************************************** *)
-Instance ForallT_dec {V} `{_ : Dec_Eq V} (P: key -> V -> Prop) `{forall (k : key) (x : V), Dec (P k x)} (t: tree V) : (Dec (ForallT P t)).
-Proof.
+Instance ForallT_dec (P: nat -> value -> Prop) `{forall (k : nat) (x : value), Dec (P k x)} (t: tree) : (Dec (ForallT P t)).
+Proof. 
   dec_eq. induction t.
   - left. simpl. auto.
   - simpl.
-  + assert (Q: {P k v} + {~ P k v}). apply H0. destruct Q.
+  + assert (Q: {P k v} + {~ P k v}). apply H. destruct Q.
   destruct IHt1. destruct IHt2. 
   left. auto. 
-  right. unfold not. intros. destruct H1. destruct H2. contradiction. 
-  right. unfold not. intros. destruct H1. destruct H2. contradiction.
-  right. unfold not. intros. destruct H1. contradiction.
+  right. unfold not. intros. destruct H0. destruct H1. contradiction. 
+  right. unfold not. intros. destruct H0. destruct H1. contradiction. 
+  right. unfold not. intros. destruct H0. contradiction.
 Qed.
 
 (* **************************************************************** *)
 (* *************************** [ BST ] **************************** *)
 (* **************************************************************** *)
 
-Instance BST_dec {V} `{_ : Dec_Eq V} (t: tree V) : (Dec (BST t)).
+Instance BST_dec (t: tree) : (Dec (BST t)).
 Proof.
   dec_eq. induction t.
   - left. apply BST_E.
-  - assert (Q1: {ForallT (fun (y : key) (_ : V) => y < k) t1} + {~ ForallT (fun (y : key) (_ : V) => y < k) t1}).
+  - assert (Q1: {ForallT (fun (y : nat) (_ : value) => y < k) t1} + {~ ForallT (fun (y : nat) (_ : value) => y < k) t1}).
   apply ForallT_dec. intros. dec_eq. apply lt_dec. 
-  assert (Q2: {ForallT (fun (y : key) (_ : V) => k < y) t2} + {~ ForallT (fun (y : key) (_ : V) => k < y) t2}).
+  assert (Q2: {ForallT (fun (y : nat) (_ : value) => k < y) t2} + {~ ForallT (fun (y : nat) (_ : value) => k < y) t2}).
   apply ForallT_dec. intros. dec_eq. apply lt_dec.
   destruct IHt1. 
   + destruct IHt2. destruct Q1. destruct Q2.
   ++ left. apply BST_T. auto. auto. auto. auto.
-  ++ right. unfold not. intros. inversion H0. contradiction.
-  ++ right. unfold not. intros. inversion H0. contradiction.
-  ++ right. unfold not. intros. inversion H0. contradiction.
-  + right. unfold not. intros. inversion H0. contradiction.
+  ++ right. unfold not. intros. inversion H. contradiction.
+  ++ right. unfold not. intros. inversion H. contradiction.
+  ++ right. unfold not. intros. inversion H. contradiction.
+  + right. unfold not. intros. inversion H. contradiction.
 Qed.
 
 (* **************************************************************** *)
 (* ************************ [ Disjoint ] ************************** *)
 (* **************************************************************** *)
 
-Lemma disjoint_cons  {V} `{_ : Dec_Eq V} (a : V) (l1 l2: list V) : ~ In a l2 /\ disjoint l1 l2 <-> disjoint (a :: l1) l2.
+Lemma disjoint_cons {V} `{_ : Dec_Eq V} (a : V) (l1 l2: list V) : ~ In a l2 /\ disjoint l1 l2 <-> disjoint (a :: l1) l2.
 Proof. 
   split.
   + intros. unfold disjoint. intros. simpl in H1. destruct H1.
@@ -610,4 +561,57 @@ Proof.
   + right. rewrite <- disjoint_cons. unfold not. intros. destruct H0. contradiction.
 Qed.
 
+Instance In_my_dec {V} `{_ : Dec_Eq V} (a : V) (l: list V) : Dec (In a l).
+Proof. dec_eq. apply In_dec. apply H. Qed.
+
+Instance NoDup_dec {V} `{_ : Dec_Eq V} (l: list V) : Dec (NoDup l).
+Proof. 
+  dec_eq. induction l.
+  - simpl. left. apply NoDup_nil.
+  - destruct IHl.
+  -- assert (Q: {In a l} + {~ In a l}). apply In_dec. apply H. destruct Q.
+  + right. unfold not. intros. apply NoDup_cons_iff in H0. destruct H0. contradiction.
+  + left. apply NoDup_cons. assumption. assumption.
+  -- right. unfold not. intros. apply NoDup_cons_iff in H0. destruct H0. contradiction.
+Qed.  
+
 Close Scope string.
+
+Instance uncurry_dec {X Y : Type} (f : X -> Y -> Prop) `{forall (k : X) (x : Y), Dec (f k x)} (p : X * Y) : Dec (uncurry f p).
+Proof.
+  dec_eq. destruct p. assert (P: {f x y} + {~ f x y}). apply H. destruct P.
+  left. unfold uncurry. assumption. right. unfold not. unfold uncurry. intros. contradiction.
+Qed.
+
+Instance forall_prod_dec {X Y : Type} (f : X * Y -> Prop) `{forall (x : (X * Y)), Dec (f x)} (ls : list (X * Y)) : (Dec (Forall f ls)).
+Proof.
+  dec_eq. induction ls.
+  - left. apply Forall_nil.
+  - destruct IHls.
+  + assert (P: {f a} + {~ f a}). apply H. destruct P.
+  ++ left. apply Forall_cons. auto. auto.
+  ++ right. unfold not. intros. unfold not in n. apply n. apply Forall_inv in H0. auto.
+  + right. unfold not; intros. unfold not in n. apply n. apply Forall_inv_tail in H0. auto.
+Qed.
+
+Instance forall_tree_dec {F: Type} (P : nat -> Prop) `{forall (x : nat), Dec (P x)} (ls : list (nat * F))  : Dec (Forall P (list_keys ls)).
+Proof.
+  dec_eq. remember (list_keys ls) as l. generalize dependent l. induction ls.
+  intros. inversion Heql. simpl. auto.
+  intros. simpl in Heql. rewrite Heql. remember (list_keys ls) as k.
+  specialize (IHls k). destruct IHls. reflexivity.
+  + assert (Q: {P (fst a)} + {~ P (fst a)}). apply H. destruct Q.
+  ++ left. apply Forall_cons. auto. auto.
+  ++ right. unfold not. intros. unfold not in n. apply n. apply Forall_inv in H0. auto.
+  + right. unfold not; intros. unfold not in n. apply n. apply Forall_inv_tail in H0. auto.
+Qed.
+
+Instance forall_tree_again_dec {F: Type} (P : nat -> Prop) `{forall (x : nat), Dec (P x)} (t : tree)  : Dec (Forall P (list_keys (elements t))).
+Proof. dec_eq. remember (elements t) as e. apply forall_tree_dec. apply H. Qed.
+
+Instance Not_dec (P : Prop) `{ _ : Dec P} : Dec (P -> False).
+Proof.
+    dec_eq. assert (Q: {P} + {~ P}). apply H. destruct Q.
+    right. unfold not. intros. apply H0. auto.
+    left. auto.
+Qed.

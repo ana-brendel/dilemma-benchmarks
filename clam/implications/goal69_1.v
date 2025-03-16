@@ -58,7 +58,7 @@ Proof.
     + simpl in H. apply IHx in H. rewrite H. reflexivity.
 Qed.
 
-Theorem theorem0 : forall (x : Nat) (y : Nat) (z : Lst), not (eq x y) -> eq (mem x (insort y z)) true -> eq (mem x z) true.
+Theorem goal69_1 : forall (x : Nat) (y : Nat) (z : Lst), not (eq x y) -> eq (mem x (insort y z)) true -> eq (mem x z) true.
 Proof.
   intros.
   induction z.

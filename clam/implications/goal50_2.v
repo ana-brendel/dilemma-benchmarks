@@ -181,7 +181,7 @@ Proof.
     reflexivity.
 Qed.
 
-Theorem theorem0 : forall (x : Nat) (y : Lst), eq (count x (sort y)) (count x y).
+Theorem goal50_2 : forall (x : Nat) (y : Lst), eq (count x (sort y)) (count x y).
 Proof.
   intros.
   induction y.

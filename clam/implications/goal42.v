@@ -57,7 +57,7 @@ Proof.
     + simpl. rewrite IHz. apply orb_true_r.
 Qed.
 
-Theorem theorem0 : forall (x : Nat) (y : Lst) (z : Lst), eq (lst_mem x y) true -> eq (lst_mem x (lst_union y z)) true.
+Theorem goal42 : forall (x : Nat) (y : Lst) (z : Lst), eq (lst_mem x y) true -> eq (lst_mem x (lst_union y z)) true.
 Proof.
   intros.
   induction y.

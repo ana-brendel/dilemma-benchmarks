@@ -65,7 +65,7 @@ Proof.
   exfalso. apply H. reflexivity.
 Qed.
 
-Theorem theorem0 : forall (x : Nat) (y : Nat) (z : Lst), not (eq x y) -> eq (mem x (insort y z)) (mem x z).
+Theorem goal47_1 : forall (x : Nat) (y : Nat) (z : Lst), not (eq x y) -> eq (mem x (insort y z)) (mem x z).
 Proof.
   intros.
   induction z.

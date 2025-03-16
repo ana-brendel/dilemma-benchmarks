@@ -69,7 +69,7 @@ Qed.
 Lemma lem: forall n l, sorted l = true -> sorted (insort n l) = true.
 Proof. Admitted.
 
-Theorem theorem0 : forall (x : Lst), eq (sorted (sort x)) true.
+Theorem goal14 : forall (x : Lst), eq (sorted (sort x)) true.
 Proof.
 induction x.
   - simpl. 

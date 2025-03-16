@@ -154,7 +154,7 @@ Proof.
   reflexivity.
 Qed.
 
-Theorem count_insort_diff: forall (x y: Nat) (l: Lst), x <> y -> count x (insort y l) = count x l.
+Theorem goal50_1: forall (x y: Nat) (l: Lst), x <> y -> count x (insort y l) = count x l.
 Proof.
   intros.
   induction l.

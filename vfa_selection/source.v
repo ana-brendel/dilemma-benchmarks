@@ -108,114 +108,91 @@ Proof.
 Qed.
 
 Lemma select_fst_leq: forall al bl x y, select x al = (y, bl) -> y <= x.
-Proof.
-  intros. 
-  unfold select in H.
-  generalize dependent x; generalize dependent y; generalize dependent bl. induction al.
-  - intros. inversion H. auto.
-  - intros. fold select in IHal. fold select in H.  
-    bdestruct (x <=? a).
-  -- pose (select_exists al x).
-    inversion e. inversion H1. rewrite H2 in H. apply IHal with (bl := x1). inversion H. 
-    rewrite <- H4. auto.
-  -- pose (select_exists al a).
-    inversion e. inversion H1. rewrite H2 in H. inversion H. rewrite <- H4.
-    apply IHal in H2. inversion H2. unfold gt in H0.
-    (* HELPER LEMMA - case 3 (non-generalized) *)
-    apply Nat.lt_succ_r.
-    (* HELPER LEMMA - case 3 (non-generalized) *)
-    apply Nat.lt_lt_succ_r. auto. 
-    unfold gt in H0.
-    (* HELPER LEMMA - case 3 (non-generalized) *)
-    apply Nat.lt_succ_r. 
-    (* HELPER LEMMA - case 3 (non-generalized) *)
-    apply Nat.lt_lt_succ_r.
-    (* HELPER LEMMA - case 3 (non-generalized) *)
-    apply Nat.le_lt_trans with (m := a). auto. auto.
-Qed. 
+Proof. 
+    induction al.
+    - intros. inversion H. reflexivity.
+    - intros. inversion H. bdestruct (x <=? a).
+    -- destruct (select x al) eqn:Q. 
+    eapply IHal. rewrite Q. 
+    inversion H1. exists.
+    -- destruct (select a al) eqn:Q. 
+    apply IHal in Q. inversion H1. lia.
+Qed.
 
 Lemma le_all__le_one : forall lst y n, y <=* lst -> In n lst -> y <= n.
 Proof. 
-  intros. unfold le_all in H. destruct H.
-  - contradiction.
-  - (* HELPER LEMMA - case 3 (non-generalized (in assumption)) *)
-  apply in_inv in H0. destruct H0.
-  -- rewrite <- H0. auto.
-  -- (* HELPER LEMMA - case 3 (non-generalized) --> maybe consider generalizing propositions *)
-  eapply Forall_forall. eassumption. assumption.
+    intros. unfold le_all in H. destruct H.
+    - contradiction.
+    - inversion H0. 
+    -- lia.
+    -- (* HELPER LEMMA $ le_all__le_one_by_Forall_forall $ *)
+    eapply Forall_forall. eassumption. eassumption.
 Qed.
 
-(* I think this is a good example of where forward reasoning makes targeting lemmas easier *)
 Lemma select_smallest: forall al bl x y, select x al = (y, bl) -> y <=* bl.
-Proof.
-  intros. unfold le_all. 
-  generalize dependent bl; generalize dependent x; generalize dependent y. induction al.
-  - intros. inversion H. auto.
-  - intros. unfold select in H. bdestruct (x <=? a).
-  * fold select in H. pose (select_exists al x). inversion e. inversion H1.
-  rewrite H2 in H. inversion H2. apply IHal in H2. inversion H. 
-  (* HELPER LEMMA - case 2 (? - if we could generalize a function) *)
-  apply Forall_cons.
-  ** (* HELPER LEMMA - case 3 (non-generalized) *)
-  apply Nat.le_trans with (m:=x). rewrite <- H5.
-  (* HELPER LEMMA - case 3 (non-generalized) *)
-  eapply select_fst_leq. eauto. auto.
-  ** rewrite <- H5. auto.
-  * fold select in H. pose (select_exists al a). inversion e. inversion H1. rewrite H2 in H.
-  inversion H2.  apply IHal in H2. inversion H. 
-  (* HELPER LEMMA - case 2 (? - if we could generalize a function) *)
-  apply Forall_cons.
-  ** rewrite <- H5. 
-  (* HELPER LEMMA - case 3 (non-generalized) *)
-  apply PeanoNat.lt_n_Sm_le.
-  (* HELPER LEMMA - case 3 (non-generalized) *)
-  apply Nat.lt_lt_succ_r.
-  (* HELPER LEMMA - case 3 (non-generalized) *) 
-  apply Nat.le_lt_trans with (m:=a).
-  (* HELPER LEMMA - case 3 (non-generalized) *) 
-  eapply select_fst_leq. eauto. auto.
-  ** rewrite <- H5. auto.
-Qed. 
+Proof. 
+    intros al. induction al.
+    - intros. inversion H. unfold le_all. apply Forall_nil.
+    - intros. unfold select in H. bdestruct (x <=? a).
+    -- fold select in H. destruct (select x al) eqn:Q. inversion Q. apply IHal in Q.
+    (* HELPER LEMMA $ select_smallest_by_select_fst_leq_1 $ *)
+    (* inversion H. apply Forall_cons. apply select_fst_leq in H2. lia. subst. assumption. *)
+    apply select_fst_leq in H2. inversion H. rewrite <- H3. apply Forall_cons. lia. assumption.
+    -- fold select in H. destruct (select a al) eqn:Q. inversion Q. apply IHal in Q.
+    (* inversion H. apply Forall_cons. apply select_fst_leq in H2. lia. subst. assumption. *)
+    (* HELPER LEMMA $ select_smallest_by_select_fst_leq_2 $ *)
+    apply select_fst_leq in H2. inversion H. rewrite <- H3. apply Forall_cons. lia. assumption.
+Qed.
    
 Lemma select_in : forall al bl x y, select x al = (y, bl) -> In y (x :: al).
-Proof. intros.
-  generalize dependent bl; generalize dependent x; generalize dependent y. induction al.
-  - intros. inversion H. simpl. left. reflexivity.
-  - intros. 
-  * inversion H. bdestruct (x <=? a). 
-  ** simpl. apply or_comm. apply or_assoc. 
-  right. apply or_comm.
-  (* HELPER LEMMA - case 3 (non-generalized) *)
-  apply in_inv.
-  pose (select_exists al x). inversion e. inversion H2. rewrite H3 in H1. 
-  inversion H1. eapply IHal. rewrite <- H5. eauto.
-  ** (* HELPER LEMMA - case 2 *)
-  eapply Permutation_in. 
-  (* HELPER LEMMA - case 2 *)
-  apply Permutation_sym. 
-  (* HELPER LEMMA - case 3 (generalized) *)
-  eapply select_perm. eassumption.
-  simpl. left. auto.
+Proof.
+    intros.
+    (* HELPER LEMMA $ select_in_by_select_perm $ *)
+    apply select_perm in H.
+    (* HELPER LEMMA $ select_in_by_Permutation_in $ *)
+    eapply Permutation_in.
+    symmetry in H.
+    eassumption.
+    simpl. left. reflexivity.
 Qed.
 
 Lemma cons_of_small_maintains_sort: forall bl y n,
   n = length bl -> y <=* bl -> sorted (selsort bl n) -> sorted (y :: selsort bl n).
 Proof.
-  intros. 
-  (* symmetry in H. apply selsort_perm in H.  *)
-  induction (selsort bl n) eqn:K.
-  - apply sorted_1.
-  - apply sorted_cons.
-  (* HELPER LEMMA - case 3 (non-generalized) *)
-  eapply le_all__le_one. eauto. 
-  (* HELPER LEMMA - case 3 (non-generalized) *)
-  eapply Permutation_in.
-  (* HELPER LEMMA - case 3 (non-generalized) *)
-  apply Permutation_sym.
-  (* HELPER LEMMA - case 3 (non-generalized) *) 
-  apply selsort_perm. eauto.
-  rewrite <- H. rewrite K. simpl. auto. 
-  auto.
+    intros. induction (selsort bl n) eqn:K.
+    - apply sorted_1.
+    - apply sorted_cons.
+    -- (* HELPER LEMMA $ cons_of_small_maintains_sort_ind_list_by_le_all__le_one $ *)
+    eapply le_all__le_one. eauto.
+    (* HELPER LEMMA $ cons_of_small_maintains_sort_ind_list_by_Permutation_in $ *) 
+    apply Permutation_in with (l := selsort bl n).
+    symmetry.
+    (* HELPER LEMMA $ cons_of_small_maintains_sort_ind_list_by_selsort_perm $ *)
+    apply selsort_perm. eauto.
+    rewrite K. simpl. auto. 
+    -- assumption.
+Qed.
+
+Lemma cons_of_small_maintains_sort_ind_length: forall bl y n,
+  n = length bl -> y <=* bl -> sorted (selsort bl n) -> sorted (y :: selsort bl n).
+Proof.
+    intros bl y n. revert bl; revert y. induction n.
+    - intros. destruct bl. apply sorted_1. simpl in H. lia.
+    - intros. simpl. destruct bl.
+    -- apply sorted_1.
+    -- simpl in H. inversion H. destruct (select n0 bl) eqn:Q. inversion Q.
+    (* HELPER LEMMA $ cons_of_small_maintains_sort_ind_length_by_select_in $ *)
+    apply select_in in Q. 
+    apply sorted_cons. 
+    (* HELPER LEMMA $ cons_of_small_maintains_sort_ind_length_by_le_all__le_one $ *)
+    eapply le_all__le_one. eassumption. eassumption.
+    rewrite <- H3. apply IHn.
+    --- rewrite H3. 
+    (* HELPER LEMMA $ cons_of_small_maintains_sort_ind_length_by_select_rest_length $ *)
+    eapply select_rest_length. eassumption.
+    --- (* HELPER LEMMA $ cons_of_small_maintains_sort_ind_length_by_select_smallest $ *)
+    eapply select_smallest. eassumption.
+    --- simpl in H1. rewrite H4 in H1. inversion H1. apply sorted_nil. assumption.
 Qed.
 
 Lemma selsort_sorted : forall n al, length al = n -> sorted (selsort al n).
@@ -227,21 +204,21 @@ Proof.
   simpl in H. inversion H. simpl. pose (select_exists al n0).
   inversion e. inversion H0.
   rewrite H2. 
-  (* HELPER LEMMA - case 2 *)
+  (* HELPER LEMMA $ selsort_sorted_by_cons_of_small_maintains_sort $ *)
   apply cons_of_small_maintains_sort.
-  + (* HELPER LEMMA - case 3 (non-generalized) *) 
+  + (* HELPER LEMMA $ selsort_sorted_by_select_rest_length_1 $ *)
     eapply select_rest_length. eauto.
-  + (* HELPER LEMMA - case 3 (non-generalized) *) 
+  + (* HELPER LEMMA $ selsort_sorted_by_select_smallest $ *)
     eapply select_smallest. eauto.
   + rewrite H1. apply IHn. rewrite <- H1. symmetry.
-  (* HELPER LEMMA - case 3 (non-generalized) *) 
+  (* HELPER LEMMA $ selsort_sorted_by_select_rest_length_2 $ *)
     eapply select_rest_length. eauto.
 Qed. 
 
 Lemma selection_sort_sorted : forall al, sorted (selection_sort al).
 Proof.
     unfold selection_sort. intros.
-    (* HELPER LEMMA - case 2 *)
+    (* HELPER LEMMA $ selection_sort_sorted_by_selsort_sorted $ *)
     apply selsort_sorted. reflexivity.
 Qed.
 
@@ -249,7 +226,10 @@ Qed.
 Theorem selection_sort_is_correct : is_a_sorting_algorithm selection_sort.
 Proof.
   unfold is_a_sorting_algorithm. intros. split.
-  apply selection_sort_perm. apply selection_sort_sorted.
+  (* HELPER LEMMA $ selection_sort_is_correct_by_selection_sort_perm $ *)
+  apply selection_sort_perm. 
+  (* HELPER LEMMA $ selection_sort_is_correct_by_selection_sort_sorted $ *)
+  apply selection_sort_sorted.
 Qed.
 
 (* ################################################################# *)

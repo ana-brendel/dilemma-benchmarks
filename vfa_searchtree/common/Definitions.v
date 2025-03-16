@@ -5,6 +5,7 @@ From Coq Require Export Arith.Arith.
 From Coq Require Export Arith.EqNat.
 From Coq Require Export Permutation.
 Export ListNotations.
+From Coq Require Import micromega.Lia.
 
 Inductive sorted: list nat -> Prop :=
  | sorted_nil: sorted []
@@ -67,57 +68,95 @@ Ltac bdestruct X :=
        [ | try first [apply not_lt in H | apply not_le in H]]].
 
 (* ################################################################# *)
-(** SearchTree Definitions *)
 
-Definition key := nat.
+(* Definition key := nat.
+
 Inductive tree (V : Type) : Type := | E | T (l : tree V) (k : key) (v : V) (r : tree V).
+
 Arguments E {V}.
-Arguments T {V}.
+Arguments T {V}. *)
 
-Definition empty_tree {V : Type} : tree V := E.
+Inductive value := Red | Green | Blue.
 
-Fixpoint bound {V : Type} (x : key) (t : tree V) :=
+Inductive tree : Type := | E | T (l : tree) (k : nat) (v : value) (r : tree).
+
+(* Definition empty_tree {V : Type} : tree V := E. *)
+
+Definition empty_tree : tree := E.
+
+(* Fixpoint bound {V : Type} (x : key) (t : tree V) :=
 match t with
 | E => false
-| T l y v r => if x <? y then bound x l
-                else if y <? x then bound x r
-                    else true
-end.
+| T l y v r => if x <? y then bound x l else if y <? x then bound x r else true
+end. *)
 
-Fixpoint lookup {V : Type} (d : V) (x : key) (t : tree V) : V :=
+Fixpoint bound (x : nat) (t : tree) :=
+match t with
+| E => false
+| T l y v r => if x <? y then bound x l else if y <? x then bound x r else true
+end. 
+
+(* Fixpoint lookup {V : Type} (d : V) (x : key) (t : tree V) : V :=
 match t with
 | E => d
-| T l y v r => if x <? y then lookup d x l
-                else if y <? x then lookup d x r
-                    else v
+| T l y v r => if x <? y then lookup d x l else if y <? x then lookup d x r else v
+end. *)
+
+Fixpoint lookup (d : value) (x : nat) (t : tree) : value :=
+match t with
+| E => d
+| T l y v r => if x <? y then lookup d x l else if y <? x then lookup d x r else v
 end.
 
-Fixpoint insert {V : Type} (x : key) (v : V) (t : tree V) : tree V :=
+(* Fixpoint insert {V : Type} (x : key) (v : V) (t : tree V) : tree V :=
 match t with
 | E => T E x v E
-| T l y v' r => if x <? y then T (insert x v l) y v' r
-                else if y <? x then T l y v' (insert x v r)
-                    else T l x v r
+| T l y v' r => if x <? y then T (insert x v l) y v' r else if y <? x then T l y v' (insert x v r) else T l x v r
+end. *)
+
+Fixpoint insert (x : nat) (v : value) (t : tree) : tree :=
+match t with
+| E => T E x v E
+| T l y v' r => if x <? y then T (insert x v l) y v' r else if y <? x then T l y v' (insert x v r) else T l x v r
 end.
 
-Fixpoint ForallT {V : Type} (P: key -> V -> Prop) (t: tree V) : Prop :=
+(* Fixpoint ForallT {V : Type} (P: key -> V -> Prop) (t: tree V) : Prop :=
+match t with
+| E => True
+| T l k v r => P k v /\ ForallT P l /\ ForallT P r
+end. *)
+
+Fixpoint ForallT (P: nat -> value -> Prop) (t: tree) : Prop :=
 match t with
 | E => True
 | T l k v r => P k v /\ ForallT P l /\ ForallT P r
 end.
 
-Inductive BST {V : Type} : tree V -> Prop :=
+(* Inductive BST {V : Type} : tree V -> Prop :=
 | BST_E : BST E
 | BST_T : forall l x v r,
     ForallT (fun y _ => y < x) l ->
     ForallT (fun y _ => y > x) r ->
     BST l ->
     BST r ->
-    BST (T l x v r).
+    BST (T l x v r). *)
+
+  Inductive BST : tree -> Prop :=
+  | BST_E : BST E
+  | BST_T : forall l x v r,
+      ForallT (fun y _ => y < x) l ->
+      ForallT (fun y _ => y > x) r ->
+      BST l -> BST r -> BST (T l x v r).
 
 (** * Converting a BST to a List *)
 
-Fixpoint elements {V : Type} (t : tree V) : list (key * V) :=
+(* Fixpoint elements {V : Type} (t : tree V) : list (key * V) :=
+match t with
+| E => []
+| T l k v r => elements l ++ [(k, v)] ++ elements r
+end. *)
+
+Fixpoint elements (t : tree) : list (nat * value) :=
 match t with
 | E => []
 | T l k v r => elements l ++ [(k, v)] ++ elements r
@@ -132,11 +171,11 @@ forall (V : Type) (k : key) (v d : V) (t : tree V),
 
 Definition uncurry {X Y Z : Type} (f : X -> Y -> Z) '(a, b) := f a b.
 
-Definition list_keys {V : Type} (lst : list (key * V)) := map fst lst.
+Definition list_keys {V : Type} (lst : list (nat * V)) := map fst lst.
 
 Definition disjoint {X:Type} (l1 l2: list X) := forall (x : X),  In x l1 -> ~ In x l2.
 
-Fixpoint fast_elements_tr {V : Type} (t : tree V) (acc : list (key * V)) : list (key * V) :=
+(* Fixpoint fast_elements_tr {V : Type} (t : tree V) (acc : list (key * V)) : list (key * V) :=
 match t with
 | E => acc
 | T l k v r => fast_elements_tr l ((k, v) :: fast_elements_tr r acc)
@@ -147,8 +186,30 @@ Definition fast_elements {V : Type} (t : tree V) : list (key * V) := fast_elemen
 Fixpoint kvs_insert {V : Type} (k : key) (v : V) (kvs : list (key * V)) :=
 match kvs with
 | [] => [(k, v)]
-| (k', v') :: kvs' =>
-    if Nat.ltb k k' then (k, v) :: kvs
-    else if Nat.ltb k' k then (k', v') :: kvs_insert k v kvs'
-        else (k, v) :: kvs'
+| (k', v') :: kvs' => if Nat.ltb k k' then (k, v) :: kvs
+    else if Nat.ltb k' k then (k', v') :: kvs_insert k v kvs' else (k, v) :: kvs'
+end. *)
+
+Fixpoint fast_elements_tr (t : tree) (acc : list (nat * value)) : list (nat * value) :=
+match t with
+| E => acc
+| T l k v r => fast_elements_tr l ((k, v) :: fast_elements_tr r acc)
 end.
+
+Definition fast_elements (t : tree) : list (nat * value) := fast_elements_tr t [].
+
+Fixpoint kvs_insert (k : nat) (v : value) (kvs : list (nat * value)) :=
+match kvs with
+| [] => [(k, v)]
+| (k', v') :: kvs' => if Nat.ltb k k' then (k, v) :: kvs
+    else if Nat.ltb k' k then (k', v') :: kvs_insert k v kvs' else (k, v) :: kvs'
+end.
+
+Ltac bdestruct_guard :=
+match goal with
+| |- context [ if Nat.eqb ?X ?Y then _ else _ ] => bdestruct (Nat.eqb X Y)
+| |- context [ if ?X <=? ?Y then _ else _ ] => bdestruct (X <=? Y)
+| |- context [ if Nat.ltb ?X ?Y then _ else _ ] => bdestruct (Nat.ltb X Y)
+end.
+
+Ltac bdall := repeat (simpl; bdestruct_guard; try lia; auto).

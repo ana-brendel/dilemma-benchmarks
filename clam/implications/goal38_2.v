@@ -58,7 +58,7 @@ Proof.
   - simpl. auto.
 Qed.
 
-Theorem theorem0 : forall (x : Nat) (y : Lst) (z : Lst), mem x y \/ mem x z -> mem x (append y z).
+Theorem goal38_2 : forall (x : Nat) (y : Lst) (z : Lst), mem x y \/ mem x z -> mem x (append y z).
 Proof.
   intros.
   destruct H.

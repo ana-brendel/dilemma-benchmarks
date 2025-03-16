@@ -476,4 +476,11 @@ Proof.
   + right. unfold not. intros. apply Forall_inv in H. contradiction.
 Qed.
 
+Instance help (l : list nat) : (Dec (match l with
+  | _ :: _ :: _ => True
+  | _ => False end)). 
+Proof.
+  dec_eq. destruct l. auto. destruct l. auto. auto.
+Qed.
+
 Close Scope string.

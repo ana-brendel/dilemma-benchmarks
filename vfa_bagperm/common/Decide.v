@@ -398,114 +398,7 @@ dec_eq. assert (P: Permutation n m <-> isPerm n m = true). apply Permutation_isP
 - right. unfold not. intro. apply P in H0. discriminate H0.
 Qed.
 
-
-(* ************************************************************** *)
-(* ************************** [ SORT ] ************************** *)
-(* ************************************************************** *)
-
-(* Fixpoint sorted_bool (l : list nat) : bool :=
-  match l with 
-  | [] => true
-  | a :: l' => 
-    match l' with
-    | [] => true
-    | b :: _ => andb (Nat.leb a b) (sorted_bool l')
-  end
-end.
-
-Lemma if_sorted_bool_eq (l : list nat) : sorted l -> sorted_bool l = true.
-Proof.
-  intros. induction l. auto. destruct l. auto.
-  unfold sorted_bool. fold sorted_bool. simpl in IHl.
-  assert (Q : Nat.leb a n = false -> ~ (le a n)). intros. unfold not. intros. 
-    apply leb_correct in H1. rewrite H0 in H1. discriminate H1.
-  destruct (Nat.leb a n).
-  * rewrite andb_true_l. apply IHl. inversion H. auto.
-  * inversion H. assert (Q' : false = false). auto. apply Q in Q'. contradiction.
-Qed.
-
-Lemma fi_sorted_bool_eq (l : list nat) : sorted_bool l = true -> sorted l.
-Proof.
-  intros. induction l.
-  - apply sorted_nil.
-  - destruct l.
-  -- apply sorted_1.
-  -- apply sorted_cons. inversion H. 
-  assert (Q : Nat.leb a n = true -> (le a n)). apply leb_complete.
-  apply Q. destruct (Nat.leb a n). auto. rewrite andb_false_l in H1. discriminate H1.
-  apply IHl. inversion H. rewrite H1. symmetry in H1. apply andb_true_eq in H1. destruct H1.
-  simpl. auto.
-Qed.
-
-Theorem sorted_bool_eq (l : list nat) : sorted_bool l = true <-> sorted l.
-Proof. split. apply fi_sorted_bool_eq. apply if_sorted_bool_eq. Qed.
-
-Instance sorted_dec (l : list nat) : Dec (sorted l).
-Proof.
-  dec_eq. assert (P: sorted_bool l = true <-> sorted l). apply sorted_bool_eq.
-  destruct (sorted_bool l). left. apply P. auto. 
-  right. unfold not. intros. apply P in H. discriminate H.
-Qed. *)
-
-(* Lemma if_sortedd_sorted_eq (l : list nat) : sortedd l -> sorted l.
-Proof.
-  induction l.
-  * constructor.
-  * unfold sortedd in *. intro H. 
-    destruct l; constructor.
-    + apply (H 0 1). simpl. auto. reflexivity. reflexivity.
-    + apply IHl.
-      intros. apply (H (S i) (S j)).
-      simpl in *. apply lt_n_S in H0. auto. simpl. auto. simpl. auto.
-Qed. *)
-
-(* Lemma if_sorted_sortedd_eq (l : list nat) : sorted l -> sortedd l.
-Proof.
-  intros. unfold sortedd. 
-  induction l. destruct i. simpl. intros. discriminate H1. simpl. intros. discriminate H1.
-  induction H; intros.
-  * simpl in H. destruct i. 
-    simpl in H0; discriminate H0.
-    simpl in H0; discriminate H0.
-  * simpl in H0. destruct i. destruct j.
-    inversion H. simpl in H1. destruct j.
-    simpl in H1; discriminate H1.
-    simpl in H1; discriminate H1.
-    simpl in H0. destruct i.
-    simpl in H0; discriminate H0.
-    simpl in H0; discriminate H0.
-  * destruct i,j.
-  + inversion H1.
-  + apply le_trans with y. simpl in H2. inversion H2. rewrite <- H5. auto.
-    destruct j. simpl in H3. inversion H3. rewrite <- H5. auto.
-    specialize (IHsorted 0 (S j)). apply IHsorted. apply lt_0_Sn. reflexivity. simpl.
-    simpl in H3. auto.
-  + inversion H1.
-  + simpl in H2. simpl in H3. apply lt_S_n in H1. apply IHsorted with (i:=i) (j:=j).
-    auto. auto. auto.
-Qed. *)
-
-(* Theorem sorted_eq_sortedd (l : list nat) : sorted l <-> sortedd l.
-Proof. split. apply if_sorted_sortedd_eq. apply if_sortedd_sorted_eq. Qed. *)
-
-(* Theorem sortedd_eq_bool (l : list nat) : sortedd l <-> sorted_bool l = true.
-Proof. split. 
-  intros. apply sorted_bool_eq. apply sorted_eq_sortedd. auto.
-  intros. apply sorted_eq_sortedd. apply sorted_bool_eq. auto.
-Qed. *)
-
-(* Instance sortedd_dec (l : list nat) : Dec (sortedd l).
-Proof.
-  dec_eq. assert (P: sortedd l <-> sorted_bool l = true). apply sortedd_eq_bool.
-  destruct (sorted_bool l). left. apply P. auto. 
-  right. unfold not. intros. apply P in H. discriminate H.
-Qed. *)
-
-(* **************************************************************** *)
-(* ************************** [ FORALL ] ************************** *)
-(* **************************************************************** *)
-(* Forall definitions and lemmas at: https://coq.inria.fr/doc/master/stdlib/Coq.Lists.List.html *)
-(* Instance forall_dec {T} `{_ : Dec T} (f : T -> Prop) `{forall (x : T), Dec (f x)} (ls : list T) : (Dec (Forall f ls)).
+Instance forall_dec {T} `{_ : Dec T} (f : T -> Prop) `{forall (x : T), Dec (f x)} (ls : list T) : (Dec (Forall f ls)).
 Proof.
   dec_eq. induction ls.
   - left. apply Forall_nil.
@@ -514,19 +407,70 @@ Proof.
   ++ left. apply Forall_cons. auto. auto.
   ++ right. unfold not. intros. unfold not in n. apply n. apply Forall_inv in H1. auto.
   + right. unfold not; intros. unfold not in n. apply n. apply Forall_inv_tail in H1. auto.
-Qed. *)
-
-(* ************************************************************* *)
-(* ************************** [ <=* ] ************************** *)
-(* ************************************************************* *)
-(* Instance leall_dec (x : nat) (ls : list nat) : (Dec (x <=* ls)).
-Proof.
-  dec_eq. unfold le_all. induction ls.
-  - left. apply Forall_nil.
-  - pose le_dec. assert (P: {x <= a} + {~ x <= a}). apply s. destruct P.
-  + destruct IHls. left. apply Forall_cons. auto. auto. right. 
-    unfold not; intros.  apply Forall_inv_tail in H. contradiction.
-  + right. unfold not. intros. apply Forall_inv in H. contradiction.
-Qed. *)
+Qed.
 
 Close Scope string.
+
+Definition my_bag_eqv (b1 b2: bag) : Prop := 
+  Forall (fun (n : nat) => count n b1 = count n b2) b1 /\ Forall (fun (n : nat) => count n b1 = count n b2) b2.
+
+Require Import Lia.
+From Coq Require Import FunctionalExtensionality.
+
+Lemma count_zero_iff (x : nat) (b : bag) : ~ In x b -> count x b = 0.
+Proof.
+  intros. generalize dependent x. induction b.
+  - intros. reflexivity.
+  - intros. simpl. apply not_in_cons in H. destruct H. bdestruct (a =? x).
+  lia.
+  simpl. apply IHb. assumption.
+Qed. 
+
+Lemma Forall_In : forall (A: Type) (P : A -> Prop) (a : A) (l : list A), Forall P l -> In a l -> P a.
+Proof. intros. apply Forall_forall with (x:=a) in H. assumption. assumption. Qed.
+
+Lemma if_bag_eqv_equal (b1 b2: bag) : my_bag_eqv b1 b2 -> bag_eqv b1 b2.
+Proof.
+  intros. unfold my_bag_eqv in H. destruct H. unfold bag_eqv. intros. 
+  assert (A : {In n b1} + {~ In n b1}). apply In_dec. apply Dec_Eq_nat.
+  assert (B : {In n b2} + {~ In n b2}). apply In_dec. apply Dec_Eq_nat.
+  destruct A. 
+  - apply Forall_In with (a := n) in H. assumption. assumption.
+  - destruct B.
+  --  apply Forall_In with (a := n) in H0. assumption. assumption.
+  -- rewrite (count_zero_iff n b2). apply count_zero_iff. assumption. assumption.
+Qed.
+
+Lemma fi_bag_eqv_equal (b1 b2: bag) : bag_eqv b1 b2 -> my_bag_eqv b1 b2.
+Proof.
+  intros. unfold my_bag_eqv. unfold bag_eqv in H. split.
+  + generalize dependent b1. induction b2. 
+  ++ intros. destruct b1. apply Forall_nil. apply Forall_cons. pose (H n). lia.
+  simpl in H. pose (H n). rewrite Nat.eqb_refl in e. lia.
+  ++ intros. apply Forall_forall. intros. apply (H x).
+  + generalize dependent b2. induction b1. 
+  ++ intros. destruct b2. apply Forall_nil. apply Forall_cons. pose (H n). lia.
+  simpl in H. pose (H n). rewrite Nat.eqb_refl in e. lia.
+  ++ intros. apply Forall_forall. intros. apply (H x).
+Qed.
+
+Instance my_bag_eqv_dec (b1 b2: bag) : Dec (my_bag_eqv b1 b2).
+Proof. 
+  dec_eq. unfold my_bag_eqv.
+  assert (D1: {Forall (fun n : nat => count n b1 = count n b2) b1} + {~ Forall (fun n : nat => count n b1 = count n b2) b1}). 
+  apply Forall_dec. intros. apply Dec_Eq_nat.
+  assert (D2: {Forall (fun n : nat => count n b1 = count n b2) b2} + {~ Forall (fun n : nat => count n b1 = count n b2) b2}). 
+  apply Forall_dec. intros. apply Dec_Eq_nat.
+  destruct D1. destruct D2. auto. right. unfold not. intros. destruct H. contradiction.
+  right. unfold not. intros. destruct H. contradiction.
+Qed.
+
+Lemma bag_eqv_equal (b1 b2: bag) : bag_eqv b1 b2 <-> my_bag_eqv b1 b2.
+Proof. split. apply fi_bag_eqv_equal. apply if_bag_eqv_equal. Qed.
+  
+Instance bag_eqv_dec (b1 b2: bag) : Dec (bag_eqv b1 b2).
+Proof. 
+  dec_eq. pose (my_bag_eqv_dec b1 b2). destruct d. destruct dec.
+  left. apply bag_eqv_equal. assumption. 
+  right. unfold not. intros. apply n. apply bag_eqv_equal. assumption.
+Qed.

@@ -1,5 +1,5 @@
 From QuickChick Require Import QuickChick.
-From vfa_perm_benchmarks Require Import Definitions.
+From vfa_trie_benchmarks Require Import Definitions.
 
 Require Import String. Open Scope string.
 
@@ -27,6 +27,46 @@ Instance show_list {T} `{_ : Show T} : Show (list T) :=
 |}.
 Derive Arbitrary for list.
 Instance Dec_Eq_list {T} `{_ : Dec_Eq T}  : Dec_Eq (list T).
+Proof. dec_eq. Qed.
+
+(* ******************************************************************** *)
+(* ************************** [ TRIE TYPES ] ************************** *)
+(* ******************************************************************** *)
+Derive Show for LFType.
+Derive Arbitrary for LFType.
+Instance Dec_Eq_LFType : Dec_Eq LFType.
+Proof. dec_eq. Qed.
+
+Derive Show for comparison.
+Derive Arbitrary for comparison.
+Instance Dec_Eq_comparison : Dec_Eq comparison.
+Proof. dec_eq. Qed.
+
+Instance show_positive : Show (positive) := 
+{| show := 
+    let fix aux l :=
+      match l with
+      | xH => "xH"
+      | xI x => "xI (" ++ aux x ++ ")"
+      | xO x => "xO (" ++ aux x ++ ")"
+      end
+    in aux
+|}.
+Derive Arbitrary for positive.
+Instance Dec_Eq_positive : Dec_Eq positive.
+Proof. dec_eq. Qed.
+
+Instance show_trie : Show (trie) := 
+{| show := 
+    let fix aux l :=
+      match l with
+      | Leaf => "Leaf"
+      | Node l v r => "Node (" ++ aux l ++ ") (" ++ show v ++ ") (" ++ aux r ++ ")"
+      end
+    in aux
+|}.
+Derive Arbitrary for trie.
+Instance Dec_Eq_trie  : Dec_Eq (trie).
 Proof. dec_eq. Qed.
 
 
@@ -415,9 +455,9 @@ Qed.
 
 Close Scope string.
 
-(* **************************************************************** *)
+(* ************************************************************************* *)
 (* ************************** [ first_le_second ] ************************** *)
-(* **************************************************************** *)
+(* ************************************************************************* *)
 Instance first_le_second_dec (l : list nat) : Dec (first_le_second l).
 Proof. 
   dec_eq. destruct l.

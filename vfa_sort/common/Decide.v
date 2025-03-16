@@ -447,59 +447,52 @@ Proof.
   right. unfold not. intros. apply P in H. discriminate H.
 Qed.
 
-(* Lemma if_sortedd_sorted_eq (l : list nat) : sortedd l -> sorted l.
+Require Import Lia.
+
+Lemma if_sortedd_sorted_eq (l : list nat) : sortedd l -> sorted l.
 Proof.
   induction l.
   * constructor.
   * unfold sortedd in *. intro H. 
     destruct l; constructor.
-    + apply (H 0 1). simpl. auto. reflexivity. reflexivity.
+    + apply (H 0 1). simpl. lia.
     + apply IHl.
       intros. apply (H (S i) (S j)).
-      simpl in *. apply lt_n_S in H0. auto. simpl. auto. simpl. auto.
-Qed. *)
+      simpl in *. lia.
+Qed.
 
-(* Lemma if_sorted_sortedd_eq (l : list nat) : sorted l -> sortedd l.
+Lemma if_sorted_sortedd_eq (l : list nat) : sorted l -> sortedd l.
 Proof.
-  intros. unfold sortedd. 
-  induction l. destruct i. simpl. intros. discriminate H1. simpl. intros. discriminate H1.
-  induction H; intros.
-  * simpl in H. destruct i. 
-    simpl in H0; discriminate H0.
-    simpl in H0; discriminate H0.
-  * simpl in H0. destruct i. destruct j.
-    inversion H. simpl in H1. destruct j.
-    simpl in H1; discriminate H1.
-    simpl in H1; discriminate H1.
-    simpl in H0. destruct i.
-    simpl in H0; discriminate H0.
-    simpl in H0; discriminate H0.
-  * destruct i,j.
-  + inversion H1.
-  + apply le_trans with y. simpl in H2. inversion H2. rewrite <- H5. auto.
-    destruct j. simpl in H3. inversion H3. rewrite <- H5. auto.
-    specialize (IHsorted 0 (S j)). apply IHsorted. apply lt_0_Sn. reflexivity. simpl.
-    simpl in H3. auto.
-  + inversion H1.
-  + simpl in H2. simpl in H3. apply lt_S_n in H1. apply IHsorted with (i:=i) (j:=j).
-    auto. auto. auto.
-Qed. *)
+  (* intros. unfold sortedd. 
+  induction l. destruct i. simpl. intros. lia. *)
+  intros. induction H; intros.
+  * unfold sortedd. intros. simpl in H. lia.
+  * unfold sortedd. intros. simpl in H. lia.
+  * unfold sortedd. intros.
+  destruct i,j. + lia. 
+  + simpl in H1. simpl. destruct j. assumption. apply Nat.le_trans with y. 
+  assumption. unfold sortedd in IHsorted. specialize (IHsorted 0 (S j)).
+  simpl in IHsorted. apply IHsorted. lia.
+  + lia.
+  + simpl. apply IHsorted. simpl in H1. simpl. lia.
+Qed.
 
-(* Theorem sorted_eq_sortedd (l : list nat) : sorted l <-> sortedd l.
-Proof. split. apply if_sorted_sortedd_eq. apply if_sortedd_sorted_eq. Qed. *)
+Theorem sorted_eq_sortedd (l : list nat) : sorted l <-> sortedd l.
+Proof. split. apply if_sorted_sortedd_eq. apply if_sortedd_sorted_eq. Qed.
 
-(* Theorem sortedd_eq_bool (l : list nat) : sortedd l <-> sorted_bool l = true.
+Theorem sortedd_eq_bool (l : list nat) : sortedd l <-> sorted_bool l = true.
 Proof. split. 
   intros. apply sorted_bool_eq. apply sorted_eq_sortedd. auto.
   intros. apply sorted_eq_sortedd. apply sorted_bool_eq. auto.
-Qed. *)
+Qed.
 
-(* Instance sortedd_dec (l : list nat) : Dec (sortedd l).
+Instance sortedd_dec (l : list nat) : Dec (sortedd l).
 Proof.
-  dec_eq. assert (P: sortedd l <-> sorted_bool l = true). apply sortedd_eq_bool.
-  destruct (sorted_bool l). left. apply P. auto. 
-  right. unfold not. intros. apply P in H. discriminate H.
-Qed. *)
+  dec_eq. 
+  destruct (sorted_bool l) eqn:B. 
+  left. rewrite sortedd_eq_bool. assumption.
+  right. unfold not. intros. rewrite sortedd_eq_bool in H. rewrite H in B. discriminate B. 
+Qed.
 
 (* **************************************************************** *)
 (* ************************** [ FORALL ] ************************** *)
