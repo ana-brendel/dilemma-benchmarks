@@ -38,15 +38,12 @@ Fixpoint len (len_arg0 : Lst) : Nat
 
 
 Lemma even_odd_append_len : forall l1 l2 n, even (len (append l1 l2)) = negb (even (len (append l1 (cons n l2)))).
-Proof.
-induction l1.
-  - intros. simpl. rewrite (IHl1 l2 n0). reflexivity.
-  - intros. simpl. unfold negb. destruct (even (len l2)). reflexivity. reflexivity.
-Qed.
+Proof. Admitted.
 
 Theorem goal20_by_even_odd_append_len : forall (x : Lst), eq (even (len (append x x))) true.
 Proof.
 induction x.
+  - reflexivity.
   - simpl. 
   findlemma. Admitted.
 

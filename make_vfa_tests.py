@@ -42,3 +42,5 @@ def make_tests(vfa_test):
     src = f"{benchmarks_folder}/vfa_{vfa_test}/source.v"
     test_folder = f"{benchmarks_folder}/vfa_{vfa_test}/tests"
     create_tests(test_folder,read(src))
+
+# make_tests("")

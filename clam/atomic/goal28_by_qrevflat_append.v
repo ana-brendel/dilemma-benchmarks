@@ -73,7 +73,8 @@ Qed.
 Theorem goal28_by_qrevflat_append : forall (x : Tree), eq (revflat x) (qrevaflat x nil).
 Proof.
   intro.
+  findlemma. Admitted.
   (* rewrite <- qrevflat_append.
   rewrite append_nil.
-  reflexivity. *)
-Qed.
+  reflexivity.
+Qed. *)

@@ -53,8 +53,8 @@ Theorem goal35_by_mult_assoc_1 : forall (x y z a : Nat), mult (qexp x y z) a = q
 Proof.
   intros x y.
   induction y.
-  - reflexivity.
   - intros. simpl. rewrite IHy. 
   findlemma. Admitted.
   (* rewrite mult_assoc. rewrite (mult_commut x a). rewrite <- mult_assoc. reflexivity.
+  - reflexivity.
 Qed. *)

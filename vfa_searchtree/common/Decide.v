@@ -594,6 +594,17 @@ Proof.
   + right. unfold not; intros. unfold not in n. apply n. apply Forall_inv_tail in H0. auto.
 Qed.
 
+Instance forall_uncurry_dec (f : nat -> value -> Prop) `{forall (x : nat) (y : value), Dec (f x y)} (t : tree) : (Dec (Forall (uncurry f) (elements t))).
+Proof.
+  dec_eq. induction (elements t).
+  - left. apply Forall_nil.
+  - destruct IHl.
+  + assert (P: {uncurry f a} + {~ uncurry f a}). apply uncurry_dec. apply H. destruct P.
+  ++ left. apply Forall_cons. auto. auto.
+  ++ right. unfold not. intros. unfold not in n. apply n. apply Forall_inv in H0. auto.
+  + right. unfold not; intros. unfold not in n. apply n. apply Forall_inv_tail in H0. auto.
+Qed.
+
 Instance forall_tree_dec {F: Type} (P : nat -> Prop) `{forall (x : nat), Dec (P x)} (ls : list (nat * F))  : Dec (Forall P (list_keys ls)).
 Proof.
   dec_eq. remember (list_keys ls) as l. generalize dependent l. induction ls.
@@ -614,4 +625,14 @@ Proof.
     dec_eq. assert (Q: {P} + {~ P}). apply H. destruct Q.
     right. unfold not. intros. apply H0. auto.
     left. auto.
+Qed.
+
+Instance forall_nat_dec (n : nat) (ls : list nat) : (Dec (Forall (fun m : Coq.Init.Datatypes.nat => m < n) ls)).
+Proof.
+  dec_eq. induction ls.
+  - left. apply Forall_nil.
+  - assert (P: {a < n} + {~ a < n}). apply le_dec. destruct P.
+  ++ destruct IHls. left. apply Forall_cons. auto. auto.
+  right. unfold not; intros. apply n0. apply Forall_inv_tail in H. auto.
+  ++ right. unfold not. intros. apply n0. apply Forall_inv in H. auto.
 Qed.

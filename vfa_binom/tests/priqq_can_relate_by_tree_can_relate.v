@@ -67,11 +67,11 @@ Theorem insert_priq: forall x q, priq q -> priq (insert x q).
   + unfold priq. unfold insert. simpl. auto.
   + intros. induction a.
   ++ unfold priq, insert in *.
-    simpl in H.
-    inversion H.
     (* HELPER LEMMA $ insert_priq_by_carry_valid_1 $ *)
     apply carry_valid.
     simpl.
+    simpl in H.
+    inversion H.
     split; auto.
     right. simpl. auto.
   ++ unfold priq, insert in *.

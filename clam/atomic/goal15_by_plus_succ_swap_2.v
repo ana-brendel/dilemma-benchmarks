@@ -31,10 +31,10 @@ Theorem goal15_by_plus_succ_swap_2 : forall (x : Nat), eq (plus x (succ x)) (suc
 Proof.
 induction x.
   - simpl. rewrite IHx. f_equal. 
-  rewrite plus_succ_swap. 
+  rewrite <- plus_succ_swap. 
   findlemma. Admitted.
 
-  (* rewrite plus_succ_swap. reflexivity.
+  (* rewrite <- plus_succ_swap. simpl. f_equal. 
   - reflexivity.
 Qed. *)
 

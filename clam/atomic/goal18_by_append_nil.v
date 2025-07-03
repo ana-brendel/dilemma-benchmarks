@@ -39,9 +39,9 @@ Proof. Admitted.
 Theorem goal18_by_append_nil : forall (x : Lst) (y : Lst), eq (rev (append (rev x) y)) (append (rev y) x).
 Proof.
 induction x.
-  - intros. simpl. rewrite <- append_assoc. rewrite IHx. simpl. rewrite <- append_assoc. simpl. reflexivity.
   - intros. simpl. 
   findlemma. Admitted.
-  
   (* rewrite append_nil. reflexivity.
+  - intros. simpl. rewrite <- append_assoc. 
+  rewrite IHx. simpl. rewrite <- append_assoc. simpl. reflexivity.
 Qed. *)

@@ -239,16 +239,10 @@ Proof.
     rewrite map_app.
     rewrite map_cons.
     apply sorted_app.
-    -   assumption. 
-    -   apply forall_fst. 
-    -   assumption.
-        (* HELPER LEMMA $ sorted_elements_alt_by_elements_preserves_forall_1 $ *)
-        apply elements_preserves_forall.
-        assumption.
-    -   apply forall_fst. 
-        (* HELPER LEMMA $ sorted_elements_alt_by_elements_preserves_forall_1 $ *)
-        apply elements_preserves_forall.
-        assumption.
+    - assumption. 
+    - assumption.
+    - apply forall_fst. apply elements_preserves_forall. assumption.
+    - apply forall_fst. apply elements_preserves_forall. assumption.
 Qed.
 
 Theorem sorted_elements : forall (t : tree), BST t -> sorted (list_keys (elements t)).

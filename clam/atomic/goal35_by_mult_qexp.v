@@ -50,8 +50,8 @@ Theorem goal35_by_mult_qexp : forall (x : Nat) (y : Nat), eq (exp x y) (qexp x y
 Proof.
   intros.
   induction y.
-  - reflexivity.
   - simpl. rewrite IHy. 
   findlemma. Admitted.
   (* rewrite mult_qexp. reflexivity.
+  - reflexivity.
 Qed. *)

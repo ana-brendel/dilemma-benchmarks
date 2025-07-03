@@ -270,6 +270,7 @@ Proof.
   rewrite (qreva_nil x (cons n nil)). reflexivity.
 Qed.
 
+(* lfind motivating example *)
 Lemma rev_rev : forall l, rev (rev l) = l.
 Proof.
 induction l.
