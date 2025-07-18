@@ -1,0 +1,1280 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (execIs (compile e2) Natnil = Natcons (evalExp e2) Natnil)
+ -- (execIs (compile e1) Natnil = Natcons (evalExp e1) Natnil)
+
+----------------------------------
+Goal: (execIs
+   (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))
+   Natnil = Natcons (add (evalExp e1) (evalExp e2)) Natnil)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 2.864 seconds
+
+gv8 : listnat = Natnil
+gv9 : listnat = (Natcons (add (evalExp e1) (evalExp e2)) Natnil)
+gv2 : listinstr = (compile e2)
+gv6 : instr = Add
+gv1 : listinstr = (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))
+gv7 : listinstr = Instrnil
+gv12 : nat = (evalExp e2)
+gv5 : listinstr = (Instrcons Add Instrnil)
+gv11 : nat = (evalExp e1)
+gv10 : nat = (add (evalExp e1) (evalExp e2))
+gv4 : listinstr = (compile e1)
+gv0 : listnat = (execIs
+   (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))
+   Natnil)
+gv3 : listinstr = (instrapp (compile e1) (Instrcons Add Instrnil))
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 547.745 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (execIs
+   (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))
+   Natnil = Natcons (add (evalExp e1) (evalExp e2)) Natnil)
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (instrapp (compile e1) (Instrcons Add Instrnil) = gv3)
+
+----------------------------------
+Goal: (execIs (instrapp (compile e2) gv3) Natnil =
+ Natcons (add (evalExp e1) (evalExp e2)) Natnil)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (execIs (compile e1) Natnil = Natcons gv11 Natnil)
+
+----------------------------------
+Goal: (execIs
+   (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))
+   Natnil = Natcons (add gv11 (evalExp e2)) Natnil)
+Case: Valid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (instrapp (compile e1) (Instrcons Add Instrnil) = gv3)
+ -- (evalExp e1 = gv11)
+
+----------------------------------
+Goal: (execIs (instrapp (compile e2) gv3) Natnil =
+ Natcons (add gv11 (evalExp e2)) Natnil)
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (add gv11 (evalExp e2) = gv10)
+
+----------------------------------
+Goal: (execIs
+   (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))
+   Natnil = Natcons gv10 Natnil)
+Case: Not Stable
+
+Label: Generalization #5
+Assumptions: 
+ -- (compile e1 = gv4)
+ -- (evalExp e1 = gv11)
+
+----------------------------------
+Goal: (execIs (instrapp (compile e2) (instrapp gv4 (Instrcons Add Instrnil)))
+   Natnil = Natcons (add gv11 (evalExp e2)) Natnil)
+Case: Invalid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (execIs
+   (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))
+   Natnil = gv0)
+ -- (evalExp e1 = gv11)
+
+----------------------------------
+Goal: (gv0 = Natcons (add gv11 (evalExp e2)) Natnil)
+Case: Invalid and Generalized
+
+Label: Generalization #7
+Assumptions: 
+ -- (Instrcons Add Instrnil = gv5)
+ -- (evalExp e1 = gv11)
+
+----------------------------------
+Goal: (execIs (instrapp (compile e2) (instrapp (compile e1) gv5)) Natnil =
+ Natcons (add gv11 (evalExp e2)) Natnil)
+Case: Invalid and Generalized
+
+Label: Generalization #8
+Assumptions: 
+ -- (execIs (compile e2) Natnil = Natcons gv12 Natnil)
+ -- (execIs (compile e1) Natnil = Natcons gv11 Natnil)
+
+----------------------------------
+Goal: (execIs
+   (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))
+   Natnil = Natcons (add gv11 gv12) Natnil)
+Case: Valid and Generalized
+
+Label: Generalization #17
+Assumptions: 
+ -- (execIs gv2 Natnil = Natcons gv12 Natnil)
+ -- (execIs (compile e1) Natnil = Natcons gv11 Natnil)
+
+----------------------------------
+Goal: (execIs (instrapp gv2 (instrapp (compile e1) (Instrcons Add Instrnil)))
+   Natnil = Natcons (add gv11 gv12) Natnil)
+Case: Valid and Generalized
+
+Label: Generalization #19
+Assumptions: 
+ -- (execIs (compile e2) gv8 = Natcons gv12 gv8)
+ -- (execIs (compile e1) gv8 = Natcons gv11 gv8)
+
+----------------------------------
+Goal: (execIs
+   (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))
+   gv8 = Natcons (add gv11 gv12) gv8)
+Case: Valid and Generalized
+
+Label: Generalization #20
+Assumptions: 
+ -- (Instrnil = gv7)
+ -- (evalExp e1 = gv11)
+
+----------------------------------
+Goal: (execIs (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add gv7)))
+   Natnil = Natcons (add gv11 (evalExp e2)) Natnil)
+Case: Invalid and Generalized
+
+Label: Generalization #21
+Assumptions: 
+ -- (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)) = gv1)
+ -- (evalExp e1 = gv11)
+
+----------------------------------
+Goal: (execIs gv1 Natnil = Natcons (add gv11 (evalExp e2)) Natnil)
+Case: Invalid and Generalized
+
+Label: Generalization #22
+Assumptions: 
+ -- (Add = gv6)
+ -- (evalExp e1 = gv11)
+
+----------------------------------
+Goal: (execIs
+   (instrapp (compile e2) (instrapp (compile e1) (Instrcons gv6 Instrnil)))
+   Natnil = Natcons (add gv11 (evalExp e2)) Natnil)
+Case: Invalid and Generalized
+
+Label: Generalization #23
+Assumptions: 
+ -- (execIs gv2 Natnil = Natcons (evalExp e2) Natnil)
+ -- (execIs (compile e1) Natnil = Natcons gv11 Natnil)
+
+----------------------------------
+Goal: (execIs (instrapp gv2 (instrapp (compile e1) (Instrcons Add Instrnil)))
+   Natnil = Natcons (add gv11 (evalExp e2)) Natnil)
+Case: Valid and Generalized
+
+Label: Generalization #33
+Assumptions: 
+ -- (execIs gv2 gv8 = Natcons (evalExp e2) gv8)
+ -- (execIs (compile e1) gv8 = Natcons gv11 gv8)
+
+----------------------------------
+Goal: (execIs (instrapp gv2 (instrapp (compile e1) (Instrcons Add Instrnil))) gv8 =
+ Natcons (add gv11 (evalExp e2)) gv8)
+Case: Valid and Generalized
+
+Label: Generalization #34
+Assumptions: 
+ -- (Natcons (add gv11 (evalExp e2)) Natnil = gv9)
+
+----------------------------------
+Goal: (execIs
+   (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))
+   Natnil = gv9)
+Case: Not Stable
+
+Label: Generalization #35
+Assumptions: 
+ -- (execIs (compile e1) gv8 = Natcons gv11 gv8)
+
+----------------------------------
+Goal: (execIs
+   (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))
+   gv8 = Natcons (add gv11 (evalExp e2)) gv8)
+Case: Valid and Generalized
+
+Label: Generalization #45
+Assumptions: 
+ -- (add (evalExp e1) (evalExp e2) = gv10)
+
+----------------------------------
+Goal: (execIs
+   (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))
+   Natnil = Natcons gv10 Natnil)
+Case: Invalid and Generalized
+
+Label: Generalization #46
+Assumptions: 
+ -- (compile e1 = gv4)
+
+----------------------------------
+Goal: (execIs (instrapp (compile e2) (instrapp gv4 (Instrcons Add Instrnil)))
+   Natnil = Natcons (add (evalExp e1) (evalExp e2)) Natnil)
+Case: Invalid and Generalized
+
+Label: Generalization #47
+Assumptions: 
+ -- (execIs
+   (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))
+   Natnil = gv0)
+
+----------------------------------
+Goal: (gv0 = Natcons (add (evalExp e1) (evalExp e2)) Natnil)
+Case: Invalid and Generalized
+
+Label: Generalization #48
+Assumptions: 
+ -- (Instrcons Add Instrnil = gv5)
+
+----------------------------------
+Goal: (execIs (instrapp (compile e2) (instrapp (compile e1) gv5)) Natnil =
+ Natcons (add (evalExp e1) (evalExp e2)) Natnil)
+Case: Valid and Generalized
+
+Label: Generalization #49
+Assumptions: 
+ -- (execIs (compile e2) Natnil = Natcons gv12 Natnil)
+
+----------------------------------
+Goal: (execIs
+   (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))
+   Natnil = Natcons (add (evalExp e1) gv12) Natnil)
+Case: Valid and Generalized
+
+Label: Generalization #50
+Assumptions: 
+ -- (instrapp (compile e1) (Instrcons Add Instrnil) = gv3)
+ -- (evalExp e2 = gv12)
+
+----------------------------------
+Goal: (execIs (instrapp (compile e2) gv3) Natnil =
+ Natcons (add (evalExp e1) gv12) Natnil)
+Case: Invalid and Generalized
+
+Label: Generalization #51
+Assumptions: 
+ -- (add (evalExp e1) gv12 = gv10)
+
+----------------------------------
+Goal: (execIs
+   (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))
+   Natnil = Natcons gv10 Natnil)
+Case: Not Stable
+
+Label: Generalization #52
+Assumptions: 
+ -- (compile e1 = gv4)
+ -- (evalExp e2 = gv12)
+
+----------------------------------
+Goal: (execIs (instrapp (compile e2) (instrapp gv4 (Instrcons Add Instrnil)))
+   Natnil = Natcons (add (evalExp e1) gv12) Natnil)
+Case: Invalid and Generalized
+
+Label: Generalization #53
+Assumptions: 
+ -- (execIs
+   (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))
+   Natnil = gv0)
+ -- (evalExp e2 = gv12)
+
+----------------------------------
+Goal: (gv0 = Natcons (add (evalExp e1) gv12) Natnil)
+Case: Invalid and Generalized
+
+Label: Generalization #54
+Assumptions: 
+ -- (Instrcons Add Instrnil = gv5)
+ -- (evalExp e2 = gv12)
+
+----------------------------------
+Goal: (execIs (instrapp (compile e2) (instrapp (compile e1) gv5)) Natnil =
+ Natcons (add (evalExp e1) gv12) Natnil)
+Case: Invalid and Generalized
+
+Label: Generalization #55
+Assumptions: 
+ -- (evalExp e2 = gv12)
+ -- (Instrnil = gv7)
+
+----------------------------------
+Goal: (execIs (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add gv7)))
+   Natnil = Natcons (add (evalExp e1) gv12) Natnil)
+Case: Invalid and Generalized
+
+Label: Generalization #56
+Assumptions: 
+ -- (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)) = gv1)
+ -- (evalExp e2 = gv12)
+
+----------------------------------
+Goal: (execIs gv1 Natnil = Natcons (add (evalExp e1) gv12) Natnil)
+Case: Invalid and Generalized
+
+Label: Generalization #57
+Assumptions: 
+ -- (evalExp e2 = gv12)
+ -- (Add = gv6)
+
+----------------------------------
+Goal: (execIs
+   (instrapp (compile e2) (instrapp (compile e1) (Instrcons gv6 Instrnil)))
+   Natnil = Natcons (add (evalExp e1) gv12) Natnil)
+Case: Invalid and Generalized
+
+Label: Generalization #58
+Assumptions: 
+ -- (execIs gv2 Natnil = Natcons gv12 Natnil)
+
+----------------------------------
+Goal: (execIs (instrapp gv2 (instrapp (compile e1) (Instrcons Add Instrnil)))
+   Natnil = Natcons (add (evalExp e1) gv12) Natnil)
+Case: Valid and Generalized
+
+Label: Generalization #68
+Assumptions: 
+ -- (execIs gv2 gv8 = Natcons gv12 gv8)
+
+----------------------------------
+Goal: (execIs (instrapp gv2 (instrapp (compile e1) (Instrcons Add Instrnil))) gv8 =
+ Natcons (add (evalExp e1) gv12) gv8)
+Case: Valid and Generalized
+
+Label: Generalization #69
+Assumptions: 
+ -- (Natcons (add (evalExp e1) gv12) Natnil = gv9)
+
+----------------------------------
+Goal: (execIs
+   (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))
+   Natnil = gv9)
+Case: Not Stable
+
+Label: Generalization #70
+Assumptions: 
+ -- (execIs (compile e2) gv8 = Natcons gv12 gv8)
+
+----------------------------------
+Goal: (execIs
+   (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))
+   gv8 = Natcons (add (evalExp e1) gv12) gv8)
+Case: Valid and Generalized
+
+Label: Generalization #80
+Assumptions: 
+ -- (Instrnil = gv7)
+
+----------------------------------
+Goal: (execIs (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add gv7)))
+   Natnil = Natcons (add (evalExp e1) (evalExp e2)) Natnil)
+Case: Valid and Generalized
+
+Label: Generalization #81
+Assumptions: 
+ -- (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)) = gv1)
+
+----------------------------------
+Goal: (execIs gv1 Natnil = Natcons (add (evalExp e1) (evalExp e2)) Natnil)
+Case: Invalid and Generalized
+
+Label: Generalization #82
+Assumptions: 
+ -- (Add = gv6)
+
+----------------------------------
+Goal: (execIs
+   (instrapp (compile e2) (instrapp (compile e1) (Instrcons gv6 Instrnil)))
+   Natnil = Natcons (add (evalExp e1) (evalExp e2)) Natnil)
+Case: Valid and Generalized
+
+Label: Generalization #83
+Assumptions: 
+ -- (execIs gv2 Natnil = Natcons (evalExp e2) Natnil)
+
+----------------------------------
+Goal: (execIs (instrapp gv2 (instrapp (compile e1) (Instrcons Add Instrnil)))
+   Natnil = Natcons (add (evalExp e1) (evalExp e2)) Natnil)
+Case: Valid and Generalized
+
+Label: Generalization #84
+Assumptions: 
+ -- (instrapp (compile e1) (Instrcons Add Instrnil) = gv3)
+ -- (compile e2 = gv2)
+
+----------------------------------
+Goal: (execIs (instrapp gv2 gv3) Natnil =
+ Natcons (add (evalExp e1) (evalExp e2)) Natnil)
+Case: Invalid and Generalized
+
+Label: Generalization #85
+Assumptions: 
+ -- (add (evalExp e1) (evalExp e2) = gv10)
+ -- (compile e2 = gv2)
+
+----------------------------------
+Goal: (execIs (instrapp gv2 (instrapp (compile e1) (Instrcons Add Instrnil)))
+   Natnil = Natcons gv10 Natnil)
+Case: Invalid and Generalized
+
+Label: Generalization #86
+Assumptions: 
+ -- (compile e1 = gv4)
+ -- (compile e2 = gv2)
+
+----------------------------------
+Goal: (execIs (instrapp gv2 (instrapp gv4 (Instrcons Add Instrnil))) Natnil =
+ Natcons (add (evalExp e1) (evalExp e2)) Natnil)
+Case: Invalid and Generalized
+
+Label: Generalization #87
+Assumptions: 
+ -- (execIs (instrapp gv2 (instrapp (compile e1) (Instrcons Add Instrnil)))
+   Natnil = gv0)
+
+----------------------------------
+Goal: (gv0 = Natcons (add (evalExp e1) (evalExp e2)) Natnil)
+Case: Not Stable
+
+Label: Generalization #88
+Assumptions: 
+ -- (Instrcons Add Instrnil = gv5)
+ -- (compile e2 = gv2)
+
+----------------------------------
+Goal: (execIs (instrapp gv2 (instrapp (compile e1) gv5)) Natnil =
+ Natcons (add (evalExp e1) (evalExp e2)) Natnil)
+Case: Invalid and Generalized
+
+Label: Generalization #89
+Assumptions: 
+ -- (Instrnil = gv7)
+ -- (compile e2 = gv2)
+
+----------------------------------
+Goal: (execIs (instrapp gv2 (instrapp (compile e1) (Instrcons Add gv7))) Natnil =
+ Natcons (add (evalExp e1) (evalExp e2)) Natnil)
+Case: Invalid and Generalized
+
+Label: Generalization #90
+Assumptions: 
+ -- (instrapp gv2 (instrapp (compile e1) (Instrcons Add Instrnil)) = gv1)
+
+----------------------------------
+Goal: (execIs gv1 Natnil = Natcons (add (evalExp e1) (evalExp e2)) Natnil)
+Case: Not Stable
+
+Label: Generalization #91
+Assumptions: 
+ -- (compile e2 = gv2)
+ -- (Add = gv6)
+
+----------------------------------
+Goal: (execIs (instrapp gv2 (instrapp (compile e1) (Instrcons gv6 Instrnil)))
+   Natnil = Natcons (add (evalExp e1) (evalExp e2)) Natnil)
+Case: Invalid and Generalized
+
+Label: Generalization #92
+Assumptions: 
+ -- (Natcons (add (evalExp e1) (evalExp e2)) Natnil = gv9)
+ -- (compile e2 = gv2)
+
+----------------------------------
+Goal: (execIs (instrapp gv2 (instrapp (compile e1) (Instrcons Add Instrnil)))
+   Natnil = gv9)
+Case: Invalid and Generalized
+
+Label: Generalization #93
+Assumptions: 
+ -- (execIs gv2 gv8 = Natcons (evalExp e2) gv8)
+
+----------------------------------
+Goal: (execIs (instrapp gv2 (instrapp (compile e1) (Instrcons Add Instrnil))) gv8 =
+ Natcons (add (evalExp e1) (evalExp e2)) gv8)
+Case: Valid and Generalized
+
+Label: Generalization #103
+Assumptions: 
+ -- (Natcons (add (evalExp e1) (evalExp e2)) Natnil = gv9)
+
+----------------------------------
+Goal: (execIs
+   (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))
+   Natnil = gv9)
+Case: Invalid and Generalized
+
+Label: Generalization #104
+Assumptions: 
+
+----------------------------------
+Goal: (execIs
+   (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))
+   gv8 = Natcons (add (evalExp e1) (evalExp e2)) gv8)
+Case: Valid and Generalized
+
+Label: Generalization #105
+Assumptions: 
+ -- (instrapp (compile e1) (Instrcons Add Instrnil) = gv3)
+ -- (Natnil = gv8)
+
+----------------------------------
+Goal: (execIs (instrapp (compile e2) gv3) gv8 =
+ Natcons (add (evalExp e1) (evalExp e2)) gv8)
+Case: Invalid and Generalized
+
+Label: Generalization #106
+Assumptions: 
+ -- (add (evalExp e1) (evalExp e2) = gv10)
+ -- (Natnil = gv8)
+
+----------------------------------
+Goal: (execIs
+   (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))
+   gv8 = Natcons gv10 gv8)
+Case: Invalid and Generalized
+
+Label: Generalization #107
+Assumptions: 
+ -- (compile e1 = gv4)
+ -- (Natnil = gv8)
+
+----------------------------------
+Goal: (execIs (instrapp (compile e2) (instrapp gv4 (Instrcons Add Instrnil))) gv8 =
+ Natcons (add (evalExp e1) (evalExp e2)) gv8)
+Case: Invalid and Generalized
+
+Label: Generalization #108
+Assumptions: 
+ -- (Natnil = gv8)
+ -- (execIs
+   (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))
+   gv8 = gv0)
+
+----------------------------------
+Goal: (gv0 = Natcons (add (evalExp e1) (evalExp e2)) gv8)
+Case: Invalid and Generalized
+
+Label: Generalization #109
+Assumptions: 
+ -- (Instrcons Add Instrnil = gv5)
+ -- (Natnil = gv8)
+
+----------------------------------
+Goal: (execIs (instrapp (compile e2) (instrapp (compile e1) gv5)) gv8 =
+ Natcons (add (evalExp e1) (evalExp e2)) gv8)
+Case: Invalid and Generalized
+
+Label: Generalization #110
+Assumptions: 
+ -- (Natnil = gv8)
+ -- (Instrnil = gv7)
+
+----------------------------------
+Goal: (execIs (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add gv7)))
+   gv8 = Natcons (add (evalExp e1) (evalExp e2)) gv8)
+Case: Invalid and Generalized
+
+Label: Generalization #111
+Assumptions: 
+ -- (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)) = gv1)
+ -- (Natnil = gv8)
+
+----------------------------------
+Goal: (execIs gv1 gv8 = Natcons (add (evalExp e1) (evalExp e2)) gv8)
+Case: Invalid and Generalized
+
+Label: Generalization #112
+Assumptions: 
+ -- (Natnil = gv8)
+ -- (Add = gv6)
+
+----------------------------------
+Goal: (execIs
+   (instrapp (compile e2) (instrapp (compile e1) (Instrcons gv6 Instrnil)))
+   gv8 = Natcons (add (evalExp e1) (evalExp e2)) gv8)
+Case: Invalid and Generalized
+
+Label: Generalization #113
+Assumptions: 
+ -- (Natnil = gv8)
+ -- (Natcons (add (evalExp e1) (evalExp e2)) gv8 = gv9)
+
+----------------------------------
+Goal: (execIs
+   (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))
+   gv8 = gv9)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 548.013 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+add : (nat -> nat -> nat)
+exp : Set
+listnat : Set
+evalExp : (exp -> nat)
+instr : Set
+listinstr : Set
+instrapp : (listinstr -> listinstr -> listinstr)
+execI : (instr -> listnat -> listnat)
+execIs : (listinstr -> listnat -> listnat)
+compile : (exp -> listinstr)
+Num : (nat -> exp)
+Plus : (exp -> exp -> exp)
+Natnil : listnat
+Natcons : (nat -> listnat -> listnat)
+Push : (nat -> instr)
+Add : instr
+Instrnil : listinstr
+Instrcons : (instr -> listinstr -> listinstr)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 6 (6)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 7 (7)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 8 (8)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 9 (9)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 10 (10)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 11 (11)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 12 (12)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 13 (13)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 14 (14)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 15 (15)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 16 (16)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 17 (17)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 18 (18)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 19 (19)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 20 (20)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 21 (21)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 22 (22)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 23 (23)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 24 (24)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 25 (25)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 26 (26)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 27 (27)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 28 (28)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 29 (29)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 30 (30)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 31 (31)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 32 (32)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 33 (33)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 34 (34)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 35 (35)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 548.212 seconds
+
+
+Label: 0 (0)
+(gv3 = gv3), (e1 = e1), (e1 = e2), (e2 = e1), (e2 = e2), (evalExp e1 < evalExp e2), (evalExp e2 < evalExp e1), (evalExp e1 <= evalExp e2), (evalExp e2 <= evalExp e1), (gv3 <> gv3)
+(e1 <> e1), (e1 <> e2), (e2 <> e1), (e2 <> e2), (None = Some e1), (None = Some e2), (Plus e1 e1 = e1), (Plus e1 e1 = e2), (Plus e1 e2 = e1), (Plus e1 e2 = e2)
+(Plus e2 e1 = e1), (Plus e2 e1 = e2), (Plus e2 e2 = e1), (Plus e2 e2 = e2), (None = Some gv3), (compile e1 = gv3), (compile e2 = gv3), (instrapp gv3 gv3 = gv3), (instrapp gv3 gv3 = compile e1), (instrapp gv3 gv3 = compile e2)
+(Instrnil = compile e1), (Instrnil = compile e2), (Instrnil = instrapp gv3 gv3)
+
+Label: 1 (1)
+(gv11 < gv11), (gv11 <= gv11), (gv11 = gv11), (gv3 = gv3), (e1 = e1), (e1 = e2), (e2 = e1), (e2 = e2), (gv11 < evalExp e1), (gv11 < evalExp e2)
+(gv11 < add gv11 gv11), (evalExp e1 < gv11), (evalExp e1 < evalExp e2), (evalExp e1 < add gv11 gv11), (evalExp e2 < gv11), (evalExp e2 < evalExp e1), (evalExp e2 < add gv11 gv11), (add gv11 gv11 < gv11), (add gv11 gv11 < evalExp e1), (add gv11 gv11 < evalExp e2)
+(gv11 <= evalExp e1), (gv11 <= evalExp e2), (gv11 <= add gv11 gv11), (evalExp e1 <= gv11), (evalExp e1 <= evalExp e2), (evalExp e1 <= add gv11 gv11), (evalExp e2 <= gv11), (evalExp e2 <= evalExp e1), (evalExp e2 <= add gv11 gv11), (add gv11 gv11 <= gv11)
+(add gv11 gv11 <= evalExp e1), (add gv11 gv11 <= evalExp e2), (~ gv11 < gv11), (~ gv11 <= gv11), (gv11 <> gv11), (gv3 <> gv3), (e1 <> e1), (e1 <> e2), (e2 <> e1), (e2 <> e2)
+(None = Some e1), (None = Some e2), (Plus e1 e1 = e1), (Plus e1 e1 = e2), (Plus e1 e1 = Num gv11), (Plus e1 e2 = e1), (Plus e1 e2 = e2), (Plus e1 e2 = Num gv11), (Plus e2 e1 = e1), (Plus e2 e1 = e2)
+(Plus e2 e1 = Num gv11), (Plus e2 e2 = e1), (Plus e2 e2 = e2), (Plus e2 e2 = Num gv11), (Num gv11 = e1), (Num gv11 = e2), (evalExp e1 = gv11), (evalExp e1 = add gv11 gv11), (evalExp e2 = gv11), (evalExp e2 = add gv11 gv11)
+(add gv11 gv11 = gv11), (None = Some gv3), (compile e1 = gv3), (compile e2 = gv3), (instrapp gv3 gv3 = gv3), (instrapp gv3 gv3 = compile e1), (instrapp gv3 gv3 = compile e2), (Instrnil = compile e1), (Instrnil = compile e2), (Instrnil = instrapp gv3 gv3)
+(None = Some gv11), (Add = Push gv11)
+
+Label: 2 (2)
+(gv11 < gv11), (gv11 <= gv11), (gv11 = gv11), (gv4 = gv4), (e1 = e1), (e1 = e2), (e2 = e1), (e2 = e2), (gv11 < evalExp e1), (gv11 < evalExp e2)
+(gv11 < add gv11 gv11), (evalExp e1 < gv11), (evalExp e1 < evalExp e2), (evalExp e1 < add gv11 gv11), (evalExp e2 < gv11), (evalExp e2 < evalExp e1), (evalExp e2 < add gv11 gv11), (add gv11 gv11 < gv11), (add gv11 gv11 < evalExp e1), (add gv11 gv11 < evalExp e2)
+(gv11 <= evalExp e1), (gv11 <= evalExp e2), (gv11 <= add gv11 gv11), (evalExp e1 <= gv11), (evalExp e1 <= evalExp e2), (evalExp e1 <= add gv11 gv11), (evalExp e2 <= gv11), (evalExp e2 <= evalExp e1), (evalExp e2 <= add gv11 gv11), (add gv11 gv11 <= gv11)
+(add gv11 gv11 <= evalExp e1), (add gv11 gv11 <= evalExp e2), (~ gv11 < gv11), (~ gv11 <= gv11), (gv11 <> gv11), (gv4 <> gv4), (e1 <> e1), (e1 <> e2), (e2 <> e1), (e2 <> e2)
+(None = Some e1), (None = Some e2), (Plus e1 e1 = e1), (Plus e1 e1 = e2), (Plus e1 e1 = Num gv11), (Plus e1 e2 = e1), (Plus e1 e2 = e2), (Plus e1 e2 = Num gv11), (Plus e2 e1 = e1), (Plus e2 e1 = e2)
+(Plus e2 e1 = Num gv11), (Plus e2 e2 = e1), (Plus e2 e2 = e2), (Plus e2 e2 = Num gv11), (Num gv11 = e1), (Num gv11 = e2), (evalExp e1 = gv11), (evalExp e1 = add gv11 gv11), (evalExp e2 = gv11), (evalExp e2 = add gv11 gv11)
+(add gv11 gv11 = gv11), (None = Some gv4), (compile e1 = gv4), (compile e2 = gv4), (instrapp gv4 gv4 = gv4), (instrapp gv4 gv4 = compile e1), (instrapp gv4 gv4 = compile e2), (Instrnil = compile e1), (Instrnil = compile e2), (Instrnil = instrapp gv4 gv4)
+(None = Some gv11), (Add = Push gv11)
+
+Label: 3 (3)
+(gv11 < gv11), (gv11 <= gv11), (e1 = e1), (e1 = e2), (e2 = e1), (e2 = e2), (gv11 = gv11), (gv0 = gv0), (gv11 < evalExp e1), (gv11 < evalExp e2)
+(gv11 < add gv11 gv11), (evalExp e1 < gv11), (evalExp e1 < evalExp e2), (evalExp e1 < add gv11 gv11), (evalExp e2 < gv11), (evalExp e2 < evalExp e1), (evalExp e2 < add gv11 gv11), (add gv11 gv11 < gv11), (add gv11 gv11 < evalExp e1), (add gv11 gv11 < evalExp e2)
+(gv11 <= evalExp e1), (gv11 <= evalExp e2), (gv11 <= add gv11 gv11), (evalExp e1 <= gv11), (evalExp e1 <= evalExp e2), (evalExp e1 <= add gv11 gv11), (evalExp e2 <= gv11), (evalExp e2 <= evalExp e1), (evalExp e2 <= add gv11 gv11), (add gv11 gv11 <= gv11)
+(add gv11 gv11 <= evalExp e1), (add gv11 gv11 <= evalExp e2), (~ gv11 < gv11), (~ gv11 <= gv11), (e1 <> e1), (e1 <> e2), (e2 <> e1), (e2 <> e2), (gv11 <> gv11), (gv0 <> gv0)
+(None = Some e1), (None = Some e2), (Plus e1 e1 = e1), (Plus e1 e1 = e2), (Plus e1 e1 = Num gv11), (Plus e1 e2 = e1), (Plus e1 e2 = e2), (Plus e1 e2 = Num gv11), (Plus e2 e1 = e1), (Plus e2 e1 = e2)
+(Plus e2 e1 = Num gv11), (Plus e2 e2 = e1), (Plus e2 e2 = e2), (Plus e2 e2 = Num gv11), (Num gv11 = e1), (Num gv11 = e2), (Natcons gv11 gv0 = gv0), (Natnil = Natcons gv11 gv0), (evalExp e1 = gv11), (evalExp e1 = add gv11 gv11)
+(evalExp e2 = gv11), (evalExp e2 = add gv11 gv11), (add gv11 gv11 = gv11), (Instrnil = compile e1), (Instrnil = compile e2), (None = Some gv11), (None = Some gv0), (Add = Push gv11)
+
+Label: 4 (4)
+(gv11 < gv11), (gv11 <= gv11), (gv11 = gv11), (gv5 = gv5), (e1 = e1), (e1 = e2), (e2 = e1), (e2 = e2), (gv11 < evalExp e1), (gv11 < evalExp e2)
+(gv11 < add gv11 gv11), (evalExp e1 < gv11), (evalExp e1 < evalExp e2), (evalExp e1 < add gv11 gv11), (evalExp e2 < gv11), (evalExp e2 < evalExp e1), (evalExp e2 < add gv11 gv11), (add gv11 gv11 < gv11), (add gv11 gv11 < evalExp e1), (add gv11 gv11 < evalExp e2)
+(gv11 <= evalExp e1), (gv11 <= evalExp e2), (gv11 <= add gv11 gv11), (evalExp e1 <= gv11), (evalExp e1 <= evalExp e2), (evalExp e1 <= add gv11 gv11), (evalExp e2 <= gv11), (evalExp e2 <= evalExp e1), (evalExp e2 <= add gv11 gv11), (add gv11 gv11 <= gv11)
+(add gv11 gv11 <= evalExp e1), (add gv11 gv11 <= evalExp e2), (~ gv11 < gv11), (~ gv11 <= gv11), (gv11 <> gv11), (gv5 <> gv5), (e1 <> e1), (e1 <> e2), (e2 <> e1), (e2 <> e2)
+(None = Some e1), (None = Some e2), (Plus e1 e1 = e1), (Plus e1 e1 = e2), (Plus e1 e1 = Num gv11), (Plus e1 e2 = e1), (Plus e1 e2 = e2), (Plus e1 e2 = Num gv11), (Plus e2 e1 = e1), (Plus e2 e1 = e2)
+(Plus e2 e1 = Num gv11), (Plus e2 e2 = e1), (Plus e2 e2 = e2), (Plus e2 e2 = Num gv11), (Num gv11 = e1), (Num gv11 = e2), (evalExp e1 = gv11), (evalExp e1 = add gv11 gv11), (evalExp e2 = gv11), (evalExp e2 = add gv11 gv11)
+(add gv11 gv11 = gv11), (None = Some gv5), (compile e1 = gv5), (compile e2 = gv5), (instrapp gv5 gv5 = gv5), (instrapp gv5 gv5 = compile e1), (instrapp gv5 gv5 = compile e2), (Instrnil = compile e1), (Instrnil = compile e2), (Instrnil = instrapp gv5 gv5)
+(None = Some gv11), (Add = Push gv11)
+
+Label: 5 (5)
+(gv11 < gv11), (gv11 <= gv11), (gv11 = gv11), (gv7 = gv7), (e1 = e1), (e1 = e2), (e2 = e1), (e2 = e2), (gv11 < evalExp e1), (gv11 < evalExp e2)
+(gv11 < add gv11 gv11), (evalExp e1 < gv11), (evalExp e1 < evalExp e2), (evalExp e1 < add gv11 gv11), (evalExp e2 < gv11), (evalExp e2 < evalExp e1), (evalExp e2 < add gv11 gv11), (add gv11 gv11 < gv11), (add gv11 gv11 < evalExp e1), (add gv11 gv11 < evalExp e2)
+(gv11 <= evalExp e1), (gv11 <= evalExp e2), (gv11 <= add gv11 gv11), (evalExp e1 <= gv11), (evalExp e1 <= evalExp e2), (evalExp e1 <= add gv11 gv11), (evalExp e2 <= gv11), (evalExp e2 <= evalExp e1), (evalExp e2 <= add gv11 gv11), (add gv11 gv11 <= gv11)
+(add gv11 gv11 <= evalExp e1), (add gv11 gv11 <= evalExp e2), (~ gv11 < gv11), (~ gv11 <= gv11), (gv11 <> gv11), (gv7 <> gv7), (e1 <> e1), (e1 <> e2), (e2 <> e1), (e2 <> e2)
+(None = Some e1), (None = Some e2), (Plus e1 e1 = e1), (Plus e1 e1 = e2), (Plus e1 e1 = Num gv11), (Plus e1 e2 = e1), (Plus e1 e2 = e2), (Plus e1 e2 = Num gv11), (Plus e2 e1 = e1), (Plus e2 e1 = e2)
+(Plus e2 e1 = Num gv11), (Plus e2 e2 = e1), (Plus e2 e2 = e2), (Plus e2 e2 = Num gv11), (Num gv11 = e1), (Num gv11 = e2), (evalExp e1 = gv11), (evalExp e1 = add gv11 gv11), (evalExp e2 = gv11), (evalExp e2 = add gv11 gv11)
+(add gv11 gv11 = gv11), (None = Some gv7), (compile e1 = gv7), (compile e2 = gv7), (instrapp gv7 gv7 = gv7), (instrapp gv7 gv7 = compile e1), (instrapp gv7 gv7 = compile e2), (Instrnil = compile e1), (Instrnil = compile e2), (Instrnil = instrapp gv7 gv7)
+(None = Some gv11), (Add = Push gv11)
+
+Label: 6 (6)
+(gv11 < gv11), (gv11 <= gv11), (e1 = e1), (e1 = e2), (e2 = e1), (e2 = e2), (gv11 = gv11), (gv1 = gv1), (gv11 < evalExp e1), (gv11 < evalExp e2)
+(gv11 < add gv11 gv11), (evalExp e1 < gv11), (evalExp e1 < evalExp e2), (evalExp e1 < add gv11 gv11), (evalExp e2 < gv11), (evalExp e2 < evalExp e1), (evalExp e2 < add gv11 gv11), (add gv11 gv11 < gv11), (add gv11 gv11 < evalExp e1), (add gv11 gv11 < evalExp e2)
+(gv11 <= evalExp e1), (gv11 <= evalExp e2), (gv11 <= add gv11 gv11), (evalExp e1 <= gv11), (evalExp e1 <= evalExp e2), (evalExp e1 <= add gv11 gv11), (evalExp e2 <= gv11), (evalExp e2 <= evalExp e1), (evalExp e2 <= add gv11 gv11), (add gv11 gv11 <= gv11)
+(add gv11 gv11 <= evalExp e1), (add gv11 gv11 <= evalExp e2), (~ gv11 < gv11), (~ gv11 <= gv11), (e1 <> e1), (e1 <> e2), (e2 <> e1), (e2 <> e2), (gv11 <> gv11), (gv1 <> gv1)
+(None = Some e1), (None = Some e2), (Plus e1 e1 = e1), (Plus e1 e1 = e2), (Plus e1 e1 = Num gv11), (Plus e1 e2 = e1), (Plus e1 e2 = e2), (Plus e1 e2 = Num gv11), (Plus e2 e1 = e1), (Plus e2 e1 = e2)
+(Plus e2 e1 = Num gv11), (Plus e2 e2 = e1), (Plus e2 e2 = e2), (Plus e2 e2 = Num gv11), (Num gv11 = e1), (Num gv11 = e2), (evalExp e1 = gv11), (evalExp e1 = add gv11 gv11), (evalExp e2 = gv11), (evalExp e2 = add gv11 gv11)
+(add gv11 gv11 = gv11), (None = Some gv1), (compile e1 = gv1), (compile e2 = gv1), (instrapp gv1 gv1 = gv1), (instrapp gv1 gv1 = compile e1), (instrapp gv1 gv1 = compile e2), (Instrnil = compile e1), (Instrnil = compile e2), (Instrnil = instrapp gv1 gv1)
+(None = Some gv11), (Add = Push gv11)
+
+Label: 7 (7)
+(gv11 < gv11), (gv11 <= gv11), (gv11 = gv11), (gv6 = gv6), (e1 = e1), (e1 = e2), (e2 = e1), (e2 = e2), (gv11 < evalExp e1), (gv11 < evalExp e2)
+(gv11 < add gv11 gv11), (evalExp e1 < gv11), (evalExp e1 < evalExp e2), (evalExp e1 < add gv11 gv11), (evalExp e2 < gv11), (evalExp e2 < evalExp e1), (evalExp e2 < add gv11 gv11), (add gv11 gv11 < gv11), (add gv11 gv11 < evalExp e1), (add gv11 gv11 < evalExp e2)
+(gv11 <= evalExp e1), (gv11 <= evalExp e2), (gv11 <= add gv11 gv11), (evalExp e1 <= gv11), (evalExp e1 <= evalExp e2), (evalExp e1 <= add gv11 gv11), (evalExp e2 <= gv11), (evalExp e2 <= evalExp e1), (evalExp e2 <= add gv11 gv11), (add gv11 gv11 <= gv11)
+(add gv11 gv11 <= evalExp e1), (add gv11 gv11 <= evalExp e2), (~ gv11 < gv11), (~ gv11 <= gv11), (gv11 <> gv11), (gv6 <> gv6), (e1 <> e1), (e1 <> e2), (e2 <> e1), (e2 <> e2)
+(None = Some e1), (None = Some e2), (Plus e1 e1 = e1), (Plus e1 e1 = e2), (Plus e1 e1 = Num gv11), (Plus e1 e2 = e1), (Plus e1 e2 = e2), (Plus e1 e2 = Num gv11), (Plus e2 e1 = e1), (Plus e2 e1 = e2)
+(Plus e2 e1 = Num gv11), (Plus e2 e2 = e1), (Plus e2 e2 = e2), (Plus e2 e2 = Num gv11), (Num gv11 = e1), (Num gv11 = e2), (evalExp e1 = gv11), (evalExp e1 = add gv11 gv11), (evalExp e2 = gv11), (evalExp e2 = add gv11 gv11)
+(add gv11 gv11 = gv11), (Instrnil = compile e1), (Instrnil = compile e2), (None = Some gv11), (Push gv11 = gv6), (Add = Push gv11), (None = Some gv6)
+
+Label: 8 (8)
+(gv10 < gv10), (gv10 <= gv10), (gv10 = gv10), (e1 = e1), (e1 = e2), (e2 = e1), (e2 = e2), (gv10 < evalExp e1), (gv10 < evalExp e2), (gv10 < add gv10 gv10)
+(evalExp e1 < gv10), (evalExp e1 < evalExp e2), (evalExp e1 < add gv10 gv10), (evalExp e2 < gv10), (evalExp e2 < evalExp e1), (evalExp e2 < add gv10 gv10), (add gv10 gv10 < gv10), (add gv10 gv10 < evalExp e1), (add gv10 gv10 < evalExp e2), (gv10 <= evalExp e1)
+(gv10 <= evalExp e2), (gv10 <= add gv10 gv10), (evalExp e1 <= gv10), (evalExp e1 <= evalExp e2), (evalExp e1 <= add gv10 gv10), (evalExp e2 <= gv10), (evalExp e2 <= evalExp e1), (evalExp e2 <= add gv10 gv10), (add gv10 gv10 <= gv10), (add gv10 gv10 <= evalExp e1)
+(add gv10 gv10 <= evalExp e2), (~ gv10 < gv10), (~ gv10 <= gv10), (gv10 <> gv10), (e1 <> e1), (e1 <> e2), (e2 <> e1), (e2 <> e2), (None = Some e1), (None = Some e2)
+(None = Some gv10), (Plus e1 e1 = e1), (Plus e1 e1 = e2), (Plus e1 e1 = Num gv10), (Plus e1 e2 = e1), (Plus e1 e2 = e2), (Plus e1 e2 = Num gv10), (Plus e2 e1 = e1), (Plus e2 e1 = e2), (Plus e2 e1 = Num gv10)
+(Plus e2 e2 = e1), (Plus e2 e2 = e2), (Plus e2 e2 = Num gv10), (Num gv10 = e1), (Num gv10 = e2), (Add = Push gv10), (evalExp e1 = gv10), (evalExp e1 = add gv10 gv10), (evalExp e2 = gv10), (evalExp e2 = add gv10 gv10)
+(add gv10 gv10 = gv10), (Instrnil = compile e1), (Instrnil = compile e2)
+
+Label: 9 (9)
+(gv4 = gv4), (e1 = e1), (e1 = e2), (e2 = e1), (e2 = e2), (evalExp e1 < evalExp e2), (evalExp e2 < evalExp e1), (evalExp e1 <= evalExp e2), (evalExp e2 <= evalExp e1), (gv4 <> gv4)
+(e1 <> e1), (e1 <> e2), (e2 <> e1), (e2 <> e2), (None = Some e1), (None = Some e2), (Plus e1 e1 = e1), (Plus e1 e1 = e2), (Plus e1 e2 = e1), (Plus e1 e2 = e2)
+(Plus e2 e1 = e1), (Plus e2 e1 = e2), (Plus e2 e2 = e1), (Plus e2 e2 = e2), (None = Some gv4), (compile e1 = gv4), (compile e2 = gv4), (instrapp gv4 gv4 = gv4), (instrapp gv4 gv4 = compile e1), (instrapp gv4 gv4 = compile e2)
+(Instrnil = compile e1), (Instrnil = compile e2), (Instrnil = instrapp gv4 gv4)
+
+Label: 10 (10)
+(e2 = e2), (e2 = e1), (e1 = e2), (e1 = e1), (gv0 = gv0), (evalExp e2 < evalExp e1), (evalExp e1 < evalExp e2), (evalExp e2 <= evalExp e1), (evalExp e1 <= evalExp e2), (e2 <> e2)
+(e2 <> e1), (e1 <> e2), (e1 <> e1), (gv0 <> gv0), (None = Some e2), (None = Some e1), (Plus e2 e2 = e2), (Plus e2 e2 = e1), (Plus e2 e1 = e2), (Plus e2 e1 = e1)
+(Plus e1 e2 = e2), (Plus e1 e2 = e1), (Plus e1 e1 = e2), (Plus e1 e1 = e1), (None = Some gv0), (Instrnil = compile e2), (Instrnil = compile e1)
+
+Label: 11 (11)
+(gv12 < gv12), (gv12 <= gv12), (gv12 = gv12), (gv3 = gv3), (e1 = e1), (e1 = e2), (e2 = e1), (e2 = e2), (gv12 < evalExp e1), (gv12 < evalExp e2)
+(gv12 < add gv12 gv12), (evalExp e1 < gv12), (evalExp e1 < evalExp e2), (evalExp e1 < add gv12 gv12), (evalExp e2 < gv12), (evalExp e2 < evalExp e1), (evalExp e2 < add gv12 gv12), (add gv12 gv12 < gv12), (add gv12 gv12 < evalExp e1), (add gv12 gv12 < evalExp e2)
+(gv12 <= evalExp e1), (gv12 <= evalExp e2), (gv12 <= add gv12 gv12), (evalExp e1 <= gv12), (evalExp e1 <= evalExp e2), (evalExp e1 <= add gv12 gv12), (evalExp e2 <= gv12), (evalExp e2 <= evalExp e1), (evalExp e2 <= add gv12 gv12), (add gv12 gv12 <= gv12)
+(add gv12 gv12 <= evalExp e1), (add gv12 gv12 <= evalExp e2), (~ gv12 < gv12), (~ gv12 <= gv12), (gv12 <> gv12), (gv3 <> gv3), (e1 <> e1), (e1 <> e2), (e2 <> e1), (e2 <> e2)
+(None = Some e1), (None = Some e2), (Plus e1 e1 = e1), (Plus e1 e1 = e2), (Plus e1 e1 = Num gv12), (Plus e1 e2 = e1), (Plus e1 e2 = e2), (Plus e1 e2 = Num gv12), (Plus e2 e1 = e1), (Plus e2 e1 = e2)
+(Plus e2 e1 = Num gv12), (Plus e2 e2 = e1), (Plus e2 e2 = e2), (Plus e2 e2 = Num gv12), (Num gv12 = e1), (Num gv12 = e2), (evalExp e1 = gv12), (evalExp e1 = add gv12 gv12), (evalExp e2 = gv12), (evalExp e2 = add gv12 gv12)
+(add gv12 gv12 = gv12), (None = Some gv3), (compile e1 = gv3), (compile e2 = gv3), (instrapp gv3 gv3 = gv3), (instrapp gv3 gv3 = compile e1), (instrapp gv3 gv3 = compile e2), (Instrnil = compile e1), (Instrnil = compile e2), (Instrnil = instrapp gv3 gv3)
+(None = Some gv12), (Add = Push gv12)
+
+Label: 12 (12)
+(gv12 < gv12), (gv12 <= gv12), (gv12 = gv12), (gv4 = gv4), (e1 = e1), (e1 = e2), (e2 = e1), (e2 = e2), (gv12 < evalExp e1), (gv12 < evalExp e2)
+(gv12 < add gv12 gv12), (evalExp e1 < gv12), (evalExp e1 < evalExp e2), (evalExp e1 < add gv12 gv12), (evalExp e2 < gv12), (evalExp e2 < evalExp e1), (evalExp e2 < add gv12 gv12), (add gv12 gv12 < gv12), (add gv12 gv12 < evalExp e1), (add gv12 gv12 < evalExp e2)
+(gv12 <= evalExp e1), (gv12 <= evalExp e2), (gv12 <= add gv12 gv12), (evalExp e1 <= gv12), (evalExp e1 <= evalExp e2), (evalExp e1 <= add gv12 gv12), (evalExp e2 <= gv12), (evalExp e2 <= evalExp e1), (evalExp e2 <= add gv12 gv12), (add gv12 gv12 <= gv12)
+(add gv12 gv12 <= evalExp e1), (add gv12 gv12 <= evalExp e2), (~ gv12 < gv12), (~ gv12 <= gv12), (gv12 <> gv12), (gv4 <> gv4), (e1 <> e1), (e1 <> e2), (e2 <> e1), (e2 <> e2)
+(None = Some e1), (None = Some e2), (Plus e1 e1 = e1), (Plus e1 e1 = e2), (Plus e1 e1 = Num gv12), (Plus e1 e2 = e1), (Plus e1 e2 = e2), (Plus e1 e2 = Num gv12), (Plus e2 e1 = e1), (Plus e2 e1 = e2)
+(Plus e2 e1 = Num gv12), (Plus e2 e2 = e1), (Plus e2 e2 = e2), (Plus e2 e2 = Num gv12), (Num gv12 = e1), (Num gv12 = e2), (evalExp e1 = gv12), (evalExp e1 = add gv12 gv12), (evalExp e2 = gv12), (evalExp e2 = add gv12 gv12)
+(add gv12 gv12 = gv12), (None = Some gv4), (compile e1 = gv4), (compile e2 = gv4), (instrapp gv4 gv4 = gv4), (instrapp gv4 gv4 = compile e1), (instrapp gv4 gv4 = compile e2), (Instrnil = compile e1), (Instrnil = compile e2), (Instrnil = instrapp gv4 gv4)
+(None = Some gv12), (Add = Push gv12)
+
+Label: 13 (13)
+(gv12 < gv12), (gv12 <= gv12), (gv12 = gv12), (e2 = e2), (e2 = e1), (e1 = e2), (e1 = e1), (gv0 = gv0), (gv12 < evalExp e2), (gv12 < evalExp e1)
+(gv12 < add gv12 gv12), (evalExp e2 < gv12), (evalExp e2 < evalExp e1), (evalExp e2 < add gv12 gv12), (evalExp e1 < gv12), (evalExp e1 < evalExp e2), (evalExp e1 < add gv12 gv12), (add gv12 gv12 < gv12), (add gv12 gv12 < evalExp e2), (add gv12 gv12 < evalExp e1)
+(gv12 <= evalExp e2), (gv12 <= evalExp e1), (gv12 <= add gv12 gv12), (evalExp e2 <= gv12), (evalExp e2 <= evalExp e1), (evalExp e2 <= add gv12 gv12), (evalExp e1 <= gv12), (evalExp e1 <= evalExp e2), (evalExp e1 <= add gv12 gv12), (add gv12 gv12 <= gv12)
+(add gv12 gv12 <= evalExp e2), (add gv12 gv12 <= evalExp e1), (~ gv12 < gv12), (~ gv12 <= gv12), (gv12 <> gv12), (e2 <> e2), (e2 <> e1), (e1 <> e2), (e1 <> e1), (gv0 <> gv0)
+(None = Some e2), (None = Some e1), (Plus e2 e2 = e2), (Plus e2 e2 = e1), (Plus e2 e2 = Num gv12), (Plus e2 e1 = e2), (Plus e2 e1 = e1), (Plus e2 e1 = Num gv12), (Plus e1 e2 = e2), (Plus e1 e2 = e1)
+(Plus e1 e2 = Num gv12), (Plus e1 e1 = e2), (Plus e1 e1 = e1), (Plus e1 e1 = Num gv12), (Num gv12 = e2), (Num gv12 = e1), (Natcons gv12 gv0 = gv0), (Natnil = Natcons gv12 gv0), (evalExp e2 = gv12), (evalExp e2 = add gv12 gv12)
+(evalExp e1 = gv12), (evalExp e1 = add gv12 gv12), (add gv12 gv12 = gv12), (Instrnil = compile e2), (Instrnil = compile e1), (None = Some gv12), (None = Some gv0), (Add = Push gv12)
+
+Label: 14 (14)
+(gv12 < gv12), (gv12 <= gv12), (gv12 = gv12), (gv5 = gv5), (e1 = e1), (e1 = e2), (e2 = e1), (e2 = e2), (gv12 < evalExp e1), (gv12 < evalExp e2)
+(gv12 < add gv12 gv12), (evalExp e1 < gv12), (evalExp e1 < evalExp e2), (evalExp e1 < add gv12 gv12), (evalExp e2 < gv12), (evalExp e2 < evalExp e1), (evalExp e2 < add gv12 gv12), (add gv12 gv12 < gv12), (add gv12 gv12 < evalExp e1), (add gv12 gv12 < evalExp e2)
+(gv12 <= evalExp e1), (gv12 <= evalExp e2), (gv12 <= add gv12 gv12), (evalExp e1 <= gv12), (evalExp e1 <= evalExp e2), (evalExp e1 <= add gv12 gv12), (evalExp e2 <= gv12), (evalExp e2 <= evalExp e1), (evalExp e2 <= add gv12 gv12), (add gv12 gv12 <= gv12)
+(add gv12 gv12 <= evalExp e1), (add gv12 gv12 <= evalExp e2), (~ gv12 < gv12), (~ gv12 <= gv12), (gv12 <> gv12), (gv5 <> gv5), (e1 <> e1), (e1 <> e2), (e2 <> e1), (e2 <> e2)
+(None = Some e1), (None = Some e2), (Plus e1 e1 = e1), (Plus e1 e1 = e2), (Plus e1 e1 = Num gv12), (Plus e1 e2 = e1), (Plus e1 e2 = e2), (Plus e1 e2 = Num gv12), (Plus e2 e1 = e1), (Plus e2 e1 = e2)
+(Plus e2 e1 = Num gv12), (Plus e2 e2 = e1), (Plus e2 e2 = e2), (Plus e2 e2 = Num gv12), (Num gv12 = e1), (Num gv12 = e2), (evalExp e1 = gv12), (evalExp e1 = add gv12 gv12), (evalExp e2 = gv12), (evalExp e2 = add gv12 gv12)
+(add gv12 gv12 = gv12), (None = Some gv5), (compile e1 = gv5), (compile e2 = gv5), (instrapp gv5 gv5 = gv5), (instrapp gv5 gv5 = compile e1), (instrapp gv5 gv5 = compile e2), (Instrnil = compile e1), (Instrnil = compile e2), (Instrnil = instrapp gv5 gv5)
+(None = Some gv12), (Add = Push gv12)
+
+Label: 15 (15)
+(gv12 < gv12), (gv12 <= gv12), (gv12 = gv12), (gv7 = gv7), (e1 = e1), (e1 = e2), (e2 = e1), (e2 = e2), (gv12 < evalExp e1), (gv12 < evalExp e2)
+(gv12 < add gv12 gv12), (evalExp e1 < gv12), (evalExp e1 < evalExp e2), (evalExp e1 < add gv12 gv12), (evalExp e2 < gv12), (evalExp e2 < evalExp e1), (evalExp e2 < add gv12 gv12), (add gv12 gv12 < gv12), (add gv12 gv12 < evalExp e1), (add gv12 gv12 < evalExp e2)
+(gv12 <= evalExp e1), (gv12 <= evalExp e2), (gv12 <= add gv12 gv12), (evalExp e1 <= gv12), (evalExp e1 <= evalExp e2), (evalExp e1 <= add gv12 gv12), (evalExp e2 <= gv12), (evalExp e2 <= evalExp e1), (evalExp e2 <= add gv12 gv12), (add gv12 gv12 <= gv12)
+(add gv12 gv12 <= evalExp e1), (add gv12 gv12 <= evalExp e2), (~ gv12 < gv12), (~ gv12 <= gv12), (gv12 <> gv12), (gv7 <> gv7), (e1 <> e1), (e1 <> e2), (e2 <> e1), (e2 <> e2)
+(None = Some e1), (None = Some e2), (Plus e1 e1 = e1), (Plus e1 e1 = e2), (Plus e1 e1 = Num gv12), (Plus e1 e2 = e1), (Plus e1 e2 = e2), (Plus e1 e2 = Num gv12), (Plus e2 e1 = e1), (Plus e2 e1 = e2)
+(Plus e2 e1 = Num gv12), (Plus e2 e2 = e1), (Plus e2 e2 = e2), (Plus e2 e2 = Num gv12), (Num gv12 = e1), (Num gv12 = e2), (evalExp e1 = gv12), (evalExp e1 = add gv12 gv12), (evalExp e2 = gv12), (evalExp e2 = add gv12 gv12)
+(add gv12 gv12 = gv12), (None = Some gv7), (compile e1 = gv7), (compile e2 = gv7), (instrapp gv7 gv7 = gv7), (instrapp gv7 gv7 = compile e1), (instrapp gv7 gv7 = compile e2), (Instrnil = compile e1), (Instrnil = compile e2), (Instrnil = instrapp gv7 gv7)
+(None = Some gv12), (Add = Push gv12)
+
+Label: 16 (16)
+(gv12 < gv12), (gv12 <= gv12), (gv12 = gv12), (e2 = e2), (e2 = e1), (e1 = e2), (e1 = e1), (gv1 = gv1), (gv12 < evalExp e2), (gv12 < evalExp e1)
+(gv12 < add gv12 gv12), (evalExp e2 < gv12), (evalExp e2 < evalExp e1), (evalExp e2 < add gv12 gv12), (evalExp e1 < gv12), (evalExp e1 < evalExp e2), (evalExp e1 < add gv12 gv12), (add gv12 gv12 < gv12), (add gv12 gv12 < evalExp e2), (add gv12 gv12 < evalExp e1)
+(gv12 <= evalExp e2), (gv12 <= evalExp e1), (gv12 <= add gv12 gv12), (evalExp e2 <= gv12), (evalExp e2 <= evalExp e1), (evalExp e2 <= add gv12 gv12), (evalExp e1 <= gv12), (evalExp e1 <= evalExp e2), (evalExp e1 <= add gv12 gv12), (add gv12 gv12 <= gv12)
+(add gv12 gv12 <= evalExp e2), (add gv12 gv12 <= evalExp e1), (~ gv12 < gv12), (~ gv12 <= gv12), (gv12 <> gv12), (e2 <> e2), (e2 <> e1), (e1 <> e2), (e1 <> e1), (gv1 <> gv1)
+(None = Some e2), (None = Some e1), (Plus e2 e2 = e2), (Plus e2 e2 = e1), (Plus e2 e2 = Num gv12), (Plus e2 e1 = e2), (Plus e2 e1 = e1), (Plus e2 e1 = Num gv12), (Plus e1 e2 = e2), (Plus e1 e2 = e1)
+(Plus e1 e2 = Num gv12), (Plus e1 e1 = e2), (Plus e1 e1 = e1), (Plus e1 e1 = Num gv12), (Num gv12 = e2), (Num gv12 = e1), (evalExp e2 = gv12), (evalExp e2 = add gv12 gv12), (evalExp e1 = gv12), (evalExp e1 = add gv12 gv12)
+(add gv12 gv12 = gv12), (None = Some gv1), (compile e2 = gv1), (compile e1 = gv1), (instrapp gv1 gv1 = gv1), (instrapp gv1 gv1 = compile e2), (instrapp gv1 gv1 = compile e1), (Instrnil = compile e2), (Instrnil = compile e1), (Instrnil = instrapp gv1 gv1)
+(None = Some gv12), (Add = Push gv12)
+
+Label: 17 (17)
+(gv12 < gv12), (gv12 <= gv12), (gv12 = gv12), (gv6 = gv6), (e1 = e1), (e1 = e2), (e2 = e1), (e2 = e2), (gv12 < evalExp e1), (gv12 < evalExp e2)
+(gv12 < add gv12 gv12), (evalExp e1 < gv12), (evalExp e1 < evalExp e2), (evalExp e1 < add gv12 gv12), (evalExp e2 < gv12), (evalExp e2 < evalExp e1), (evalExp e2 < add gv12 gv12), (add gv12 gv12 < gv12), (add gv12 gv12 < evalExp e1), (add gv12 gv12 < evalExp e2)
+(gv12 <= evalExp e1), (gv12 <= evalExp e2), (gv12 <= add gv12 gv12), (evalExp e1 <= gv12), (evalExp e1 <= evalExp e2), (evalExp e1 <= add gv12 gv12), (evalExp e2 <= gv12), (evalExp e2 <= evalExp e1), (evalExp e2 <= add gv12 gv12), (add gv12 gv12 <= gv12)
+(add gv12 gv12 <= evalExp e1), (add gv12 gv12 <= evalExp e2), (~ gv12 < gv12), (~ gv12 <= gv12), (gv12 <> gv12), (gv6 <> gv6), (e1 <> e1), (e1 <> e2), (e2 <> e1), (e2 <> e2)
+(None = Some e1), (None = Some e2), (Plus e1 e1 = e1), (Plus e1 e1 = e2), (Plus e1 e1 = Num gv12), (Plus e1 e2 = e1), (Plus e1 e2 = e2), (Plus e1 e2 = Num gv12), (Plus e2 e1 = e1), (Plus e2 e1 = e2)
+(Plus e2 e1 = Num gv12), (Plus e2 e2 = e1), (Plus e2 e2 = e2), (Plus e2 e2 = Num gv12), (Num gv12 = e1), (Num gv12 = e2), (evalExp e1 = gv12), (evalExp e1 = add gv12 gv12), (evalExp e2 = gv12), (evalExp e2 = add gv12 gv12)
+(add gv12 gv12 = gv12), (Instrnil = compile e1), (Instrnil = compile e2), (None = Some gv12), (Push gv12 = gv6), (Add = Push gv12), (None = Some gv6)
+
+Label: 18 (18)
+(e2 = e2), (e2 = e1), (e1 = e2), (e1 = e1), (gv1 = gv1), (evalExp e2 < evalExp e1), (evalExp e1 < evalExp e2), (evalExp e2 <= evalExp e1), (evalExp e1 <= evalExp e2), (e2 <> e2)
+(e2 <> e1), (e1 <> e2), (e1 <> e1), (gv1 <> gv1), (None = Some e2), (None = Some e1), (Plus e2 e2 = e2), (Plus e2 e2 = e1), (Plus e2 e1 = e2), (Plus e2 e1 = e1)
+(Plus e1 e2 = e2), (Plus e1 e2 = e1), (Plus e1 e1 = e2), (Plus e1 e1 = e1), (None = Some gv1), (compile e2 = gv1), (compile e1 = gv1), (instrapp gv1 gv1 = gv1), (instrapp gv1 gv1 = compile e2), (instrapp gv1 gv1 = compile e1)
+(Instrnil = compile e2), (Instrnil = compile e1), (Instrnil = instrapp gv1 gv1)
+
+Label: 19 (19)
+(e2 = e2), (e2 = e1), (e1 = e2), (e1 = e1), (gv3 = gv3), (gv3 = gv2), (gv2 = gv3), (gv2 = gv2), (evalExp e2 < evalExp e1), (evalExp e1 < evalExp e2)
+(evalExp e2 <= evalExp e1), (evalExp e1 <= evalExp e2), (e2 <> e2), (e2 <> e1), (e1 <> e2), (e1 <> e1), (gv3 <> gv3), (gv3 <> gv2), (gv2 <> gv3), (gv2 <> gv2)
+(None = Some e2), (None = Some e1), (Plus e2 e2 = e2), (Plus e2 e2 = e1), (Plus e2 e1 = e2), (Plus e2 e1 = e1), (Plus e1 e2 = e2), (Plus e1 e2 = e1), (Plus e1 e1 = e2), (Plus e1 e1 = e1)
+(None = Some gv3), (None = Some gv2), (compile e2 = gv3), (compile e2 = gv2), (compile e1 = gv3), (compile e1 = gv2), (instrapp gv3 gv3 = gv3), (instrapp gv3 gv3 = gv2), (instrapp gv3 gv3 = compile e2), (instrapp gv3 gv3 = compile e1)
+(instrapp gv3 gv2 = gv3), (instrapp gv3 gv2 = gv2), (instrapp gv3 gv2 = compile e2), (instrapp gv3 gv2 = compile e1), (instrapp gv2 gv3 = gv3), (instrapp gv2 gv3 = gv2), (instrapp gv2 gv3 = compile e2), (instrapp gv2 gv3 = compile e1), (instrapp gv2 gv2 = gv3), (instrapp gv2 gv2 = gv2)
+(instrapp gv2 gv2 = compile e2), (instrapp gv2 gv2 = compile e1), (Instrnil = compile e2), (Instrnil = compile e1), (Instrnil = instrapp gv3 gv3), (Instrnil = instrapp gv3 gv2), (Instrnil = instrapp gv2 gv3), (Instrnil = instrapp gv2 gv2)
+
+Label: 20 (20)
+(gv10 < gv10), (gv10 <= gv10), (gv10 = gv10), (e2 = e2), (e2 = e1), (e1 = e2), (e1 = e1), (gv2 = gv2), (gv10 < evalExp e2), (gv10 < evalExp e1)
+(gv10 < add gv10 gv10), (evalExp e2 < gv10), (evalExp e2 < evalExp e1), (evalExp e2 < add gv10 gv10), (evalExp e1 < gv10), (evalExp e1 < evalExp e2), (evalExp e1 < add gv10 gv10), (add gv10 gv10 < gv10), (add gv10 gv10 < evalExp e2), (add gv10 gv10 < evalExp e1)
+(gv10 <= evalExp e2), (gv10 <= evalExp e1), (gv10 <= add gv10 gv10), (evalExp e2 <= gv10), (evalExp e2 <= evalExp e1), (evalExp e2 <= add gv10 gv10), (evalExp e1 <= gv10), (evalExp e1 <= evalExp e2), (evalExp e1 <= add gv10 gv10), (add gv10 gv10 <= gv10)
+(add gv10 gv10 <= evalExp e2), (add gv10 gv10 <= evalExp e1), (~ gv10 < gv10), (~ gv10 <= gv10), (gv10 <> gv10), (e2 <> e2), (e2 <> e1), (e1 <> e2), (e1 <> e1), (gv2 <> gv2)
+(None = Some e2), (None = Some e1), (Plus e2 e2 = e2), (Plus e2 e2 = e1), (Plus e2 e2 = Num gv10), (Plus e2 e1 = e2), (Plus e2 e1 = e1), (Plus e2 e1 = Num gv10), (Plus e1 e2 = e2), (Plus e1 e2 = e1)
+(Plus e1 e2 = Num gv10), (Plus e1 e1 = e2), (Plus e1 e1 = e1), (Plus e1 e1 = Num gv10), (Num gv10 = e2), (Num gv10 = e1), (evalExp e2 = gv10), (evalExp e2 = add gv10 gv10), (evalExp e1 = gv10), (evalExp e1 = add gv10 gv10)
+(add gv10 gv10 = gv10), (None = Some gv2), (compile e2 = gv2), (compile e1 = gv2), (instrapp gv2 gv2 = gv2), (instrapp gv2 gv2 = compile e2), (instrapp gv2 gv2 = compile e1), (Instrnil = compile e2), (Instrnil = compile e1), (Instrnil = instrapp gv2 gv2)
+(None = Some gv10), (Add = Push gv10)
+
+Label: 21 (21)
+(e2 = e2), (e2 = e1), (e1 = e2), (e1 = e1), (gv4 = gv4), (gv4 = gv2), (gv2 = gv4), (gv2 = gv2), (evalExp e2 < evalExp e1), (evalExp e1 < evalExp e2)
+(evalExp e2 <= evalExp e1), (evalExp e1 <= evalExp e2), (e2 <> e2), (e2 <> e1), (e1 <> e2), (e1 <> e1), (gv4 <> gv4), (gv4 <> gv2), (gv2 <> gv4), (gv2 <> gv2)
+(None = Some e2), (None = Some e1), (Plus e2 e2 = e2), (Plus e2 e2 = e1), (Plus e2 e1 = e2), (Plus e2 e1 = e1), (Plus e1 e2 = e2), (Plus e1 e2 = e1), (Plus e1 e1 = e2), (Plus e1 e1 = e1)
+(None = Some gv4), (None = Some gv2), (compile e2 = gv4), (compile e2 = gv2), (compile e1 = gv4), (compile e1 = gv2), (instrapp gv4 gv4 = gv4), (instrapp gv4 gv4 = gv2), (instrapp gv4 gv4 = compile e2), (instrapp gv4 gv4 = compile e1)
+(instrapp gv4 gv2 = gv4), (instrapp gv4 gv2 = gv2), (instrapp gv4 gv2 = compile e2), (instrapp gv4 gv2 = compile e1), (instrapp gv2 gv4 = gv4), (instrapp gv2 gv4 = gv2), (instrapp gv2 gv4 = compile e2), (instrapp gv2 gv4 = compile e1), (instrapp gv2 gv2 = gv4), (instrapp gv2 gv2 = gv2)
+(instrapp gv2 gv2 = compile e2), (instrapp gv2 gv2 = compile e1), (Instrnil = compile e2), (Instrnil = compile e1), (Instrnil = instrapp gv4 gv4), (Instrnil = instrapp gv4 gv2), (Instrnil = instrapp gv2 gv4), (Instrnil = instrapp gv2 gv2)
+
+Label: 22 (22)
+(e2 = e2), (e2 = e1), (e1 = e2), (e1 = e1), (gv5 = gv5), (gv5 = gv2), (gv2 = gv5), (gv2 = gv2), (evalExp e2 < evalExp e1), (evalExp e1 < evalExp e2)
+(evalExp e2 <= evalExp e1), (evalExp e1 <= evalExp e2), (e2 <> e2), (e2 <> e1), (e1 <> e2), (e1 <> e1), (gv5 <> gv5), (gv5 <> gv2), (gv2 <> gv5), (gv2 <> gv2)
+(None = Some e2), (None = Some e1), (Plus e2 e2 = e2), (Plus e2 e2 = e1), (Plus e2 e1 = e2), (Plus e2 e1 = e1), (Plus e1 e2 = e2), (Plus e1 e2 = e1), (Plus e1 e1 = e2), (Plus e1 e1 = e1)
+(None = Some gv5), (None = Some gv2), (compile e2 = gv5), (compile e2 = gv2), (compile e1 = gv5), (compile e1 = gv2), (instrapp gv5 gv5 = gv5), (instrapp gv5 gv5 = gv2), (instrapp gv5 gv5 = compile e2), (instrapp gv5 gv5 = compile e1)
+(instrapp gv5 gv2 = gv5), (instrapp gv5 gv2 = gv2), (instrapp gv5 gv2 = compile e2), (instrapp gv5 gv2 = compile e1), (instrapp gv2 gv5 = gv5), (instrapp gv2 gv5 = gv2), (instrapp gv2 gv5 = compile e2), (instrapp gv2 gv5 = compile e1), (instrapp gv2 gv2 = gv5), (instrapp gv2 gv2 = gv2)
+(instrapp gv2 gv2 = compile e2), (instrapp gv2 gv2 = compile e1), (Instrnil = compile e2), (Instrnil = compile e1), (Instrnil = instrapp gv5 gv5), (Instrnil = instrapp gv5 gv2), (Instrnil = instrapp gv2 gv5), (Instrnil = instrapp gv2 gv2)
+
+Label: 23 (23)
+(e2 = e2), (e2 = e1), (e1 = e2), (e1 = e1), (gv7 = gv7), (gv7 = gv2), (gv2 = gv7), (gv2 = gv2), (evalExp e2 < evalExp e1), (evalExp e1 < evalExp e2)
+(evalExp e2 <= evalExp e1), (evalExp e1 <= evalExp e2), (e2 <> e2), (e2 <> e1), (e1 <> e2), (e1 <> e1), (gv7 <> gv7), (gv7 <> gv2), (gv2 <> gv7), (gv2 <> gv2)
+(None = Some e2), (None = Some e1), (Plus e2 e2 = e2), (Plus e2 e2 = e1), (Plus e2 e1 = e2), (Plus e2 e1 = e1), (Plus e1 e2 = e2), (Plus e1 e2 = e1), (Plus e1 e1 = e2), (Plus e1 e1 = e1)
+(None = Some gv7), (None = Some gv2), (compile e2 = gv7), (compile e2 = gv2), (compile e1 = gv7), (compile e1 = gv2), (instrapp gv7 gv7 = gv7), (instrapp gv7 gv7 = gv2), (instrapp gv7 gv7 = compile e2), (instrapp gv7 gv7 = compile e1)
+(instrapp gv7 gv2 = gv7), (instrapp gv7 gv2 = gv2), (instrapp gv7 gv2 = compile e2), (instrapp gv7 gv2 = compile e1), (instrapp gv2 gv7 = gv7), (instrapp gv2 gv7 = gv2), (instrapp gv2 gv7 = compile e2), (instrapp gv2 gv7 = compile e1), (instrapp gv2 gv2 = gv7), (instrapp gv2 gv2 = gv2)
+(instrapp gv2 gv2 = compile e2), (instrapp gv2 gv2 = compile e1), (Instrnil = compile e2), (Instrnil = compile e1), (Instrnil = instrapp gv7 gv7), (Instrnil = instrapp gv7 gv2), (Instrnil = instrapp gv2 gv7), (Instrnil = instrapp gv2 gv2)
+
+Label: 24 (24)
+(gv6 = gv6), (e2 = e2), (e2 = e1), (e1 = e2), (e1 = e1), (gv2 = gv2), (evalExp e2 < evalExp e1), (evalExp e1 < evalExp e2), (evalExp e2 <= evalExp e1), (evalExp e1 <= evalExp e2)
+(gv6 <> gv6), (e2 <> e2), (e2 <> e1), (e1 <> e2), (e1 <> e1), (gv2 <> gv2), (None = Some e2), (None = Some e1), (Plus e2 e2 = e2), (Plus e2 e2 = e1)
+(Plus e2 e1 = e2), (Plus e2 e1 = e1), (Plus e1 e2 = e2), (Plus e1 e2 = e1), (Plus e1 e1 = e2), (Plus e1 e1 = e1), (None = Some gv2), (Instrcons gv6 gv2 = gv2), (Instrcons gv6 gv2 = compile e2), (Instrcons gv6 gv2 = compile e1)
+(Instrcons gv6 gv2 = instrapp gv2 gv2), (compile e2 = gv2), (compile e1 = gv2), (instrapp gv2 gv2 = gv2), (instrapp gv2 gv2 = compile e2), (instrapp gv2 gv2 = compile e1), (Instrnil = Instrcons gv6 gv2), (Instrnil = compile e2), (Instrnil = compile e1), (Instrnil = instrapp gv2 gv2)
+(None = Some gv6)
+
+Label: 25 (25)
+(gv9 = gv9), (e2 = e2), (e2 = e1), (e1 = e2), (e1 = e1), (gv2 = gv2), (evalExp e2 < evalExp e1), (evalExp e1 < evalExp e2), (evalExp e2 <= evalExp e1), (evalExp e1 <= evalExp e2)
+(gv9 <> gv9), (e2 <> e2), (e2 <> e1), (e1 <> e2), (e1 <> e1), (gv2 <> gv2), (None = Some e2), (None = Some e1), (Plus e2 e2 = e2), (Plus e2 e2 = e1)
+(Plus e2 e1 = e2), (Plus e2 e1 = e1), (Plus e1 e2 = e2), (Plus e1 e2 = e1), (Plus e1 e1 = e2), (Plus e1 e1 = e1), (execIs gv2 gv9 = gv9), (Natnil = execIs gv2 gv9), (None = Some gv2), (compile e2 = gv2)
+(compile e1 = gv2), (instrapp gv2 gv2 = gv2), (instrapp gv2 gv2 = compile e2), (instrapp gv2 gv2 = compile e1), (Instrnil = compile e2), (Instrnil = compile e1), (Instrnil = instrapp gv2 gv2), (None = Some gv9)
+
+Label: 26 (26)
+(gv9 = gv9), (e1 = e1), (e1 = e2), (e2 = e1), (e2 = e2), (evalExp e1 < evalExp e2), (evalExp e2 < evalExp e1), (evalExp e1 <= evalExp e2), (evalExp e2 <= evalExp e1), (gv9 <> gv9)
+(e1 <> e1), (e1 <> e2), (e2 <> e1), (e2 <> e2), (None = Some e1), (None = Some e2), (Plus e1 e1 = e1), (Plus e1 e1 = e2), (Plus e1 e2 = e1), (Plus e1 e2 = e2)
+(Plus e2 e1 = e1), (Plus e2 e1 = e2), (Plus e2 e2 = e1), (Plus e2 e2 = e2), (None = Some gv9), (Instrnil = compile e1), (Instrnil = compile e2)
+
+Label: 27 (27)
+(gv8 = gv8), (gv3 = gv3), (e1 = e1), (e1 = e2), (e2 = e1), (e2 = e2), (evalExp e1 < evalExp e2), (evalExp e2 < evalExp e1), (evalExp e1 <= evalExp e2), (evalExp e2 <= evalExp e1)
+(gv8 <> gv8), (gv3 <> gv3), (e1 <> e1), (e1 <> e2), (e2 <> e1), (e2 <> e2), (None = Some e1), (None = Some e2), (Plus e1 e1 = e1), (Plus e1 e1 = e2)
+(Plus e1 e2 = e1), (Plus e1 e2 = e2), (Plus e2 e1 = e1), (Plus e2 e1 = e2), (Plus e2 e2 = e1), (Plus e2 e2 = e2), (execIs gv3 gv8 = gv8), (Natnil = execIs gv3 gv8), (None = Some gv3), (compile e1 = gv3)
+(compile e2 = gv3), (instrapp gv3 gv3 = gv3), (instrapp gv3 gv3 = compile e1), (instrapp gv3 gv3 = compile e2), (Instrnil = compile e1), (Instrnil = compile e2), (Instrnil = instrapp gv3 gv3), (None = Some gv8)
+
+Label: 28 (28)
+(gv10 < gv10), (gv10 <= gv10), (gv10 = gv10), (gv8 = gv8), (e1 = e1), (e1 = e2), (e2 = e1), (e2 = e2), (gv10 < evalExp e1), (gv10 < evalExp e2)
+(gv10 < add gv10 gv10), (evalExp e1 < gv10), (evalExp e1 < evalExp e2), (evalExp e1 < add gv10 gv10), (evalExp e2 < gv10), (evalExp e2 < evalExp e1), (evalExp e2 < add gv10 gv10), (add gv10 gv10 < gv10), (add gv10 gv10 < evalExp e1), (add gv10 gv10 < evalExp e2)
+(gv10 <= evalExp e1), (gv10 <= evalExp e2), (gv10 <= add gv10 gv10), (evalExp e1 <= gv10), (evalExp e1 <= evalExp e2), (evalExp e1 <= add gv10 gv10), (evalExp e2 <= gv10), (evalExp e2 <= evalExp e1), (evalExp e2 <= add gv10 gv10), (add gv10 gv10 <= gv10)
+(add gv10 gv10 <= evalExp e1), (add gv10 gv10 <= evalExp e2), (~ gv10 < gv10), (~ gv10 <= gv10), (gv10 <> gv10), (gv8 <> gv8), (e1 <> e1), (e1 <> e2), (e2 <> e1), (e2 <> e2)
+(None = Some e1), (None = Some e2), (Plus e1 e1 = e1), (Plus e1 e1 = e2), (Plus e1 e1 = Num gv10), (Plus e1 e2 = e1), (Plus e1 e2 = e2), (Plus e1 e2 = Num gv10), (Plus e2 e1 = e1), (Plus e2 e1 = e2)
+(Plus e2 e1 = Num gv10), (Plus e2 e2 = e1), (Plus e2 e2 = e2), (Plus e2 e2 = Num gv10), (Num gv10 = e1), (Num gv10 = e2), (Natcons gv10 gv8 = gv8), (Natnil = Natcons gv10 gv8), (evalExp e1 = gv10), (evalExp e1 = add gv10 gv10)
+(evalExp e2 = gv10), (evalExp e2 = add gv10 gv10), (add gv10 gv10 = gv10), (Instrnil = compile e1), (Instrnil = compile e2), (None = Some gv10), (None = Some gv8), (Add = Push gv10)
+
+Label: 29 (29)
+(gv8 = gv8), (gv4 = gv4), (e1 = e1), (e1 = e2), (e2 = e1), (e2 = e2), (evalExp e1 < evalExp e2), (evalExp e2 < evalExp e1), (evalExp e1 <= evalExp e2), (evalExp e2 <= evalExp e1)
+(gv8 <> gv8), (gv4 <> gv4), (e1 <> e1), (e1 <> e2), (e2 <> e1), (e2 <> e2), (None = Some e1), (None = Some e2), (Plus e1 e1 = e1), (Plus e1 e1 = e2)
+(Plus e1 e2 = e1), (Plus e1 e2 = e2), (Plus e2 e1 = e1), (Plus e2 e1 = e2), (Plus e2 e2 = e1), (Plus e2 e2 = e2), (execIs gv4 gv8 = gv8), (Natnil = execIs gv4 gv8), (None = Some gv4), (compile e1 = gv4)
+(compile e2 = gv4), (instrapp gv4 gv4 = gv4), (instrapp gv4 gv4 = compile e1), (instrapp gv4 gv4 = compile e2), (Instrnil = compile e1), (Instrnil = compile e2), (Instrnil = instrapp gv4 gv4), (None = Some gv8)
+
+Label: 30 (30)
+(e2 = e2), (e2 = e1), (e1 = e2), (e1 = e1), (gv8 = gv8), (gv8 = gv0), (gv0 = gv8), (gv0 = gv0), (evalExp e2 < evalExp e1), (evalExp e1 < evalExp e2)
+(evalExp e2 <= evalExp e1), (evalExp e1 <= evalExp e2), (e2 <> e2), (e2 <> e1), (e1 <> e2), (e1 <> e1), (gv8 <> gv8), (gv8 <> gv0), (gv0 <> gv8), (gv0 <> gv0)
+(None = Some e2), (None = Some e1), (Plus e2 e2 = e2), (Plus e2 e2 = e1), (Plus e2 e1 = e2), (Plus e2 e1 = e1), (Plus e1 e2 = e2), (Plus e1 e2 = e1), (Plus e1 e1 = e2), (Plus e1 e1 = e1)
+(None = Some gv8), (None = Some gv0), (Instrnil = compile e2), (Instrnil = compile e1)
+
+Label: 31 (31)
+(gv8 = gv8), (gv5 = gv5), (e1 = e1), (e1 = e2), (e2 = e1), (e2 = e2), (evalExp e1 < evalExp e2), (evalExp e2 < evalExp e1), (evalExp e1 <= evalExp e2), (evalExp e2 <= evalExp e1)
+(gv8 <> gv8), (gv5 <> gv5), (e1 <> e1), (e1 <> e2), (e2 <> e1), (e2 <> e2), (None = Some e1), (None = Some e2), (Plus e1 e1 = e1), (Plus e1 e1 = e2)
+(Plus e1 e2 = e1), (Plus e1 e2 = e2), (Plus e2 e1 = e1), (Plus e2 e1 = e2), (Plus e2 e2 = e1), (Plus e2 e2 = e2), (execIs gv5 gv8 = gv8), (Natnil = execIs gv5 gv8), (None = Some gv5), (compile e1 = gv5)
+(compile e2 = gv5), (instrapp gv5 gv5 = gv5), (instrapp gv5 gv5 = compile e1), (instrapp gv5 gv5 = compile e2), (Instrnil = compile e1), (Instrnil = compile e2), (Instrnil = instrapp gv5 gv5), (None = Some gv8)
+
+Label: 32 (32)
+(gv8 = gv8), (gv7 = gv7), (e1 = e1), (e1 = e2), (e2 = e1), (e2 = e2), (evalExp e1 < evalExp e2), (evalExp e2 < evalExp e1), (evalExp e1 <= evalExp e2), (evalExp e2 <= evalExp e1)
+(gv8 <> gv8), (gv7 <> gv7), (e1 <> e1), (e1 <> e2), (e2 <> e1), (e2 <> e2), (None = Some e1), (None = Some e2), (Plus e1 e1 = e1), (Plus e1 e1 = e2)
+(Plus e1 e2 = e1), (Plus e1 e2 = e2), (Plus e2 e1 = e1), (Plus e2 e1 = e2), (Plus e2 e2 = e1), (Plus e2 e2 = e2), (execIs gv7 gv8 = gv8), (Natnil = execIs gv7 gv8), (None = Some gv7), (compile e1 = gv7)
+(compile e2 = gv7), (instrapp gv7 gv7 = gv7), (instrapp gv7 gv7 = compile e1), (instrapp gv7 gv7 = compile e2), (Instrnil = compile e1), (Instrnil = compile e2), (Instrnil = instrapp gv7 gv7), (None = Some gv8)
+
+Label: 33 (33)
+(e2 = e2), (e2 = e1), (e1 = e2), (e1 = e1), (gv8 = gv8), (gv1 = gv1), (evalExp e2 < evalExp e1), (evalExp e1 < evalExp e2), (evalExp e2 <= evalExp e1), (evalExp e1 <= evalExp e2)
+(e2 <> e2), (e2 <> e1), (e1 <> e2), (e1 <> e1), (gv8 <> gv8), (gv1 <> gv1), (None = Some e2), (None = Some e1), (Plus e2 e2 = e2), (Plus e2 e2 = e1)
+(Plus e2 e1 = e2), (Plus e2 e1 = e1), (Plus e1 e2 = e2), (Plus e1 e2 = e1), (Plus e1 e1 = e2), (Plus e1 e1 = e1), (execIs gv1 gv8 = gv8), (Natnil = execIs gv1 gv8), (None = Some gv1), (compile e2 = gv1)
+(compile e1 = gv1), (instrapp gv1 gv1 = gv1), (instrapp gv1 gv1 = compile e2), (instrapp gv1 gv1 = compile e1), (Instrnil = compile e2), (Instrnil = compile e1), (Instrnil = instrapp gv1 gv1), (None = Some gv8)
+
+Label: 34 (34)
+(gv8 = gv8), (gv6 = gv6), (e1 = e1), (e1 = e2), (e2 = e1), (e2 = e2), (evalExp e1 < evalExp e2), (evalExp e2 < evalExp e1), (evalExp e1 <= evalExp e2), (evalExp e2 <= evalExp e1)
+(gv8 <> gv8), (gv6 <> gv6), (e1 <> e1), (e1 <> e2), (e2 <> e1), (e2 <> e2), (None = Some e1), (None = Some e2), (Plus e1 e1 = e1), (Plus e1 e1 = e2)
+(Plus e1 e2 = e1), (Plus e1 e2 = e2), (Plus e2 e1 = e1), (Plus e2 e1 = e2), (Plus e2 e2 = e1), (Plus e2 e2 = e2), (execI gv6 gv8 = gv8), (Natnil = execI gv6 gv8), (Instrnil = compile e1), (Instrnil = compile e2)
+(None = Some gv8), (None = Some gv6)
+
+Label: 35 (35)
+(gv9 = gv9), (gv9 = gv8), (gv8 = gv9), (gv8 = gv8), (e1 = e1), (e1 = e2), (e2 = e1), (e2 = e2), (evalExp e1 < evalExp e2), (evalExp e2 < evalExp e1)
+(evalExp e1 <= evalExp e2), (evalExp e2 <= evalExp e1), (gv9 <> gv9), (gv9 <> gv8), (gv8 <> gv9), (gv8 <> gv8), (e1 <> e1), (e1 <> e2), (e2 <> e1), (e2 <> e2)
+(None = Some e1), (None = Some e2), (Plus e1 e1 = e1), (Plus e1 e1 = e2), (Plus e1 e2 = e1), (Plus e1 e2 = e2), (Plus e2 e1 = e1), (Plus e2 e1 = e2), (Plus e2 e2 = e1), (Plus e2 e2 = e2)
+(None = Some gv9), (None = Some gv8), (Instrnil = compile e1), (Instrnil = compile e2)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 723.282 seconds
+
+
+Label: 0 (0)
+
+Label: 1 (1)
+
+Label: 2 (2)
+
+Label: 3 (3)
+
+Label: 4 (4)
+
+Label: 5 (5)
+
+Label: 6 (6)
+
+Label: 7 (7)
+
+Label: 8 (8)
+
+Label: 9 (9)
+(compile e1 = gv4)
+
+Label: 10 (10)
+
+Label: 11 (11)
+
+Label: 12 (12)
+
+Label: 13 (13)
+
+Label: 14 (14)
+
+Label: 15 (15)
+(evalExp e2 = gv12)
+
+Label: 16 (16)
+
+Label: 17 (17)
+(evalExp e2 = gv12)
+
+Label: 18 (18)
+
+Label: 19 (19)
+
+Label: 20 (20)
+
+Label: 21 (21)
+
+Label: 22 (22)
+
+Label: 23 (23)
+
+Label: 24 (24)
+(compile e2 = gv2)
+
+Label: 25 (25)
+
+Label: 26 (26)
+
+Label: 27 (27)
+
+Label: 28 (28)
+
+Label: 29 (29)
+(compile e1 = gv4)
+
+Label: 30 (30)
+
+Label: 31 (31)
+
+Label: 32 (32)
+(instrapp gv7 gv7 = gv7), (Instrnil = instrapp gv7 gv7)
+
+Label: 33 (33)
+
+Label: 34 (34)
+(execI gv6 gv8 = gv8), (Natnil = execI gv6 gv8)
+
+Label: 35 (35)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (execIs    (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))    gv8 = Natcons (add (evalExp e1) (evalExp e2)) gv8)
+
+2. (Instrnil = gv7 ->  execIs (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add gv7)))    Natnil = Natcons (add (evalExp e1) (evalExp e2)) Natnil)
+
+3. (Add = gv6 ->  execIs    (instrapp (compile e2) (instrapp (compile e1) (Instrcons gv6 Instrnil)))    Natnil = Natcons (add (evalExp e1) (evalExp e2)) Natnil)
+
+4. (Instrcons Add Instrnil = gv5 ->  execIs (instrapp (compile e2) (instrapp (compile e1) gv5)) Natnil =  Natcons (add (evalExp e1) (evalExp e2)) Natnil)
+
+5. (execIs gv2 Natnil = Natcons gv12 Natnil ->  execIs (instrapp gv2 (instrapp (compile e1) (Instrcons Add Instrnil)))    Natnil = Natcons (add (evalExp e1) gv12) Natnil)
+
+6. (execIs gv2 gv8 = Natcons gv12 gv8 ->  execIs (instrapp gv2 (instrapp (compile e1) (Instrcons Add Instrnil))) gv8 =  Natcons (add (evalExp e1) gv12) gv8)
+
+7. (execIs (compile e1) Natnil = Natcons gv11 Natnil ->  execIs    (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))    Natnil = Natcons (add gv11 (evalExp e2)) Natnil)
+
+8. (execIs (compile e1) gv8 = Natcons gv11 gv8 ->  execIs    (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))    gv8 = Natcons (add gv11 (evalExp e2)) gv8)
+
+9. (execIs (compile e2) Natnil = Natcons gv12 Natnil ->  execIs    (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))    Natnil = Natcons (add (evalExp e1) gv12) Natnil)
+
+10. (execIs (compile e2) gv8 = Natcons gv12 gv8 ->  execIs    (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))    gv8 = Natcons (add (evalExp e1) gv12) gv8)
+
+11. (execIs gv2 Natnil = Natcons (evalExp e2) Natnil ->  execIs (instrapp gv2 (instrapp (compile e1) (Instrcons Add Instrnil)))    Natnil = Natcons (add (evalExp e1) (evalExp e2)) Natnil)
+
+12. (execIs gv2 gv8 = Natcons (evalExp e2) gv8 ->  execIs (instrapp gv2 (instrapp (compile e1) (Instrcons Add Instrnil))) gv8 =  Natcons (add (evalExp e1) (evalExp e2)) gv8)
+
+13. (execIs (compile e1) Natnil = Natcons gv11 Natnil ->  execIs gv2 Natnil = Natcons gv12 Natnil ->  execIs (instrapp gv2 (instrapp (compile e1) (Instrcons Add Instrnil)))    Natnil = Natcons (add gv11 gv12) Natnil)
+
+14. (execIs (compile e1) Natnil = Natcons gv11 Natnil ->  execIs (compile e2) Natnil = Natcons gv12 Natnil ->  execIs    (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))    Natnil = Natcons (add gv11 gv12) Natnil)
+
+15. (execIs (compile e1) gv8 = Natcons gv11 gv8 ->  execIs (compile e2) gv8 = Natcons gv12 gv8 ->  execIs    (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))    gv8 = Natcons (add gv11 gv12) gv8)
+
+16. (execIs (compile e1) Natnil = Natcons gv11 Natnil ->  execIs gv2 Natnil = Natcons (evalExp e2) Natnil ->  execIs (instrapp gv2 (instrapp (compile e1) (Instrcons Add Instrnil)))    Natnil = Natcons (add gv11 (evalExp e2)) Natnil)
+
+17. (execIs (compile e1) gv8 = Natcons gv11 gv8 ->  execIs gv2 gv8 = Natcons (evalExp e2) gv8 ->  execIs (instrapp gv2 (instrapp (compile e1) (Instrcons Add Instrnil))) gv8 =  Natcons (add gv11 (evalExp e2)) gv8)
+
+18. (execIs    (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))    Natnil = Natcons (add (evalExp e1) (evalExp e2)) Natnil)
+
+19. (instrapp Instrnil Instrnil = Instrnil)
+
+20. (instrapp gv7 gv7 = gv7 ->  execIs (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add gv7)))    gv8 = Natcons (add (evalExp e1) (evalExp e2)) gv8)
+
+21. (Instrnil = instrapp gv7 gv7 ->  execIs (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add gv7)))    gv8 = Natcons (add (evalExp e1) (evalExp e2)) gv8)
+
+22. (execI gv6 gv8 = gv8 ->  execIs    (instrapp (compile e2) (instrapp (compile e1) (Instrcons gv6 Instrnil)))    gv8 = Natcons (add (evalExp e1) (evalExp e2)) gv8)
+
+23. (Natnil = execI gv6 gv8 ->  execIs    (instrapp (compile e2) (instrapp (compile e1) (Instrcons gv6 Instrnil)))    gv8 = Natcons (add (evalExp e1) (evalExp e2)) gv8)
+
+
+TARGET: execIs (instrapp (compile e) l) s = execIs l (Natcons (evalExp e) s)
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 780.614 seconds
+
+Number of Result Pairs Returned: 23
+
+1. (execIs    (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add Instrnil)))    gv8 = Natcons (add (evalExp e1) (evalExp e2)) gv8)
+
+2. (Instrnil = gv7 ->  execIs (instrapp (compile e2) (instrapp (compile e1) (Instrcons Add gv7)))    Natnil = Natcons (add (evalExp e1) (evalExp e2)) Natnil)
+
+3. (Add = gv6 ->  execIs    (instrapp (compile e2) (instrapp (compile e1) (Instrcons gv6 Instrnil)))    Natnil = Natcons (add (evalExp e1) (evalExp e2)) Natnil)
+
+4. (Instrcons Add Instrnil = gv5 ->  execIs (instrapp (compile e2) (instrapp (compile e1) gv5)) Natnil =  Natcons (add (evalExp e1) (evalExp e2)) Natnil)
+
+5. (execIs gv2 Natnil = Natcons gv12 Natnil ->  execIs (instrapp gv2 (instrapp (compile e1) (Instrcons Add Instrnil)))    Natnil = Natcons (add (evalExp e1) gv12) Natnil)
