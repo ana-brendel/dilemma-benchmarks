@@ -3,7 +3,7 @@
 This repo contains a variety of benchmarks that were used to evaluate the `dilemma` lemma synthesis tactic. The benchmarks either came from the [Verified Function Algorithms textbook](https://softwarefoundations.cis.upenn.edu/vfa-current/index.html) or were used to evaluate [prior tools](https://github.com/AishwaryaSivaraman/lemmafinder).
 
 ## Instructions to Run
-First, install `dilemma` tactic. Installation instructions and source can be found [here]().
+First, install `dilemma` tactic. Installation instructions and source can be found [here](https://github.com/ana-brendel/dilemma).
 
 Then, to run each benchmark:
 1. Run `cd ../benchmarks/{test}/common && coq_makefile -f _CoqProject -o Makefile`
@@ -11,7 +11,7 @@ Then, to run each benchmark:
 3. To run individual test/file: `cd ../benchmarks/{test} && coqc {file}`
 
 ## Results Cited in Paper
-The folder `paper_results` contains the logs of all the results that were listed in the [paper](). The folder `paper_results/processed_results` stores logs that are summaries of each benchmark. 
+The folder `paper_results` contains the logs of all the results that were listed in the **TBD link**. The folder `paper_results/processed_results` stores logs that are summaries of each benchmark. 
 
 Note that there is only one compiler result, so there is no processed log for that test. 
 
