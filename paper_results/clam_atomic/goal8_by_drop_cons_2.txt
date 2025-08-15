@@ -1,0 +1,511 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (forall (x2 x3 : Nat) (l : Lst),
+ drop x1 (drop x2 (cons x3 l)) = drop x2 (drop x1 (cons x3 l)))
+ -- (drop (succ x1) (drop (succ x2) (cons x3 l)) =
+ drop (succ x2) (drop (succ x1) (cons x3 l)))
+ -- (forall (x3 : Nat) (l : Lst),
+ drop (succ x1) (drop x2 (cons x3 l)) = drop x2 (drop (succ x1) (cons x3 l)))
+
+----------------------------------
+Goal: (drop x2 (drop (succ x1) (cons n l)) = drop x1 (drop (succ x2) (cons n l)))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3.12 seconds
+
+gv6 : Nat = (succ x2)
+gv5 : Lst = (drop (succ x2) (cons n l))
+gv2 : Nat = (succ x1)
+gv1 : Lst = (drop (succ x1) (cons n l))
+gv0 : Lst = (drop x2 (drop (succ x1) (cons n l)))
+gv3 : Lst = (cons n l)
+gv4 : Lst = (drop x1 (drop (succ x2) (cons n l)))
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 101.676 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (drop x2 (drop (succ x1) (cons n l)) = drop x1 (drop (succ x2) (cons n l)))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (drop x1 (drop (succ x2) (cons n l)) = gv4)
+
+----------------------------------
+Goal: (drop x2 (drop (succ x1) (cons n l)) = gv4)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+
+----------------------------------
+Goal: (drop x2 (drop (succ x1) gv3) = drop x1 (drop (succ x2) gv3))
+Case: Valid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (drop x1 (drop (succ x2) gv3) = gv4)
+ -- (cons n l = gv3)
+
+----------------------------------
+Goal: (drop x2 (drop (succ x1) gv3) = gv4)
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (drop (succ x1) gv3 = gv1)
+ -- (cons n l = gv3)
+
+----------------------------------
+Goal: (drop x2 gv1 = drop x1 (drop (succ x2) gv3))
+Case: Invalid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (cons n l = gv3)
+ -- (drop x2 (drop (succ x1) gv3) = gv0)
+
+----------------------------------
+Goal: (gv0 = drop x1 (drop (succ x2) gv3))
+Case: Invalid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (drop (succ x2) gv3 = gv5)
+ -- (cons n l = gv3)
+
+----------------------------------
+Goal: (drop x2 (drop (succ x1) gv3) = drop x1 gv5)
+Case: Invalid and Generalized
+
+Label: Generalization #7
+Assumptions: 
+ -- (cons n l = gv3)
+ -- (succ x1 = gv2)
+
+----------------------------------
+Goal: (drop x2 (drop gv2 gv3) = drop x1 (drop (succ x2) gv3))
+Case: Invalid and Generalized
+
+Label: Generalization #8
+Assumptions: 
+ -- (cons n l = gv3)
+ -- (succ x2 = gv6)
+
+----------------------------------
+Goal: (drop x2 (drop (succ x1) gv3) = drop x1 (drop gv6 gv3))
+Case: Invalid and Generalized
+
+Label: Generalization #9
+Assumptions: 
+ -- (drop (succ x1) (cons n l) = gv1)
+
+----------------------------------
+Goal: (drop x2 gv1 = drop x1 (drop (succ x2) (cons n l)))
+Case: Invalid and Generalized
+
+Label: Generalization #10
+Assumptions: 
+ -- (drop x2 (drop (succ x1) (cons n l)) = gv0)
+
+----------------------------------
+Goal: (gv0 = drop x1 (drop (succ x2) (cons n l)))
+Case: Invalid and Generalized
+
+Label: Generalization #11
+Assumptions: 
+ -- (drop (succ x2) (cons n l) = gv5)
+
+----------------------------------
+Goal: (drop x2 (drop (succ x1) (cons n l)) = drop x1 gv5)
+Case: Invalid and Generalized
+
+Label: Generalization #12
+Assumptions: 
+ -- (succ x1 = gv2)
+
+----------------------------------
+Goal: (drop x2 (drop gv2 (cons n l)) = drop x1 (drop (succ x2) (cons n l)))
+Case: Invalid and Generalized
+
+Label: Generalization #13
+Assumptions: 
+ -- (succ x2 = gv6)
+
+----------------------------------
+Goal: (drop x2 (drop (succ x1) (cons n l)) = drop x1 (drop gv6 (cons n l)))
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 101.853 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+drop : (Nat -> Lst -> Lst)
+succ : (Nat -> Nat)
+zero : Nat
+nil : Lst
+cons : (Nat -> Lst -> Lst)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 6 (6)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 7 (7)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 8 (8)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 9 (9)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 10 (10)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 11 (11)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 102.027 seconds
+
+
+Label: 0 (0)
+(gv4 = gv4), (gv4 = l), (l = gv4), (l = l), (n = n), (n = x1), (n = x2), (x1 = n), (x1 = x1), (x1 = x2)
+(x2 = n), (x2 = x1), (x2 = x2), (gv4 <> gv4), (gv4 <> l), (l <> gv4), (l <> l), (n <> n), (n <> x1), (n <> x2)
+(x1 <> n), (x1 <> x1), (x1 <> x2), (x2 <> n), (x2 <> x1), (x2 <> x2), (cons n gv4 = gv4), (cons n gv4 = l), (cons n gv4 = drop n gv4), (cons n gv4 = drop n l)
+(cons n gv4 = drop x1 gv4), (cons n gv4 = drop x1 l), (cons n gv4 = drop x2 gv4), (cons n gv4 = drop x2 l), (cons n l = gv4), (cons n l = l), (cons n l = drop n gv4), (cons n l = drop n l), (cons n l = drop x1 gv4), (cons n l = drop x1 l)
+(cons n l = drop x2 gv4), (cons n l = drop x2 l), (cons x1 gv4 = gv4), (cons x1 gv4 = l), (cons x1 gv4 = drop n gv4), (cons x1 gv4 = drop n l), (cons x1 gv4 = drop x1 gv4), (cons x1 gv4 = drop x1 l), (cons x1 gv4 = drop x2 gv4), (cons x1 gv4 = drop x2 l)
+(cons x1 l = gv4), (cons x1 l = l), (cons x1 l = drop n gv4), (cons x1 l = drop n l), (cons x1 l = drop x1 gv4), (cons x1 l = drop x1 l), (cons x1 l = drop x2 gv4), (cons x1 l = drop x2 l), (cons x2 gv4 = gv4), (cons x2 gv4 = l)
+(cons x2 gv4 = drop n gv4), (cons x2 gv4 = drop n l), (cons x2 gv4 = drop x1 gv4), (cons x2 gv4 = drop x1 l), (cons x2 gv4 = drop x2 gv4), (cons x2 gv4 = drop x2 l), (cons x2 l = gv4), (cons x2 l = l), (cons x2 l = drop n gv4), (cons x2 l = drop n l)
+(cons x2 l = drop x1 gv4), (cons x2 l = drop x1 l), (cons x2 l = drop x2 gv4), (cons x2 l = drop x2 l), (drop n gv4 = gv4), (drop n gv4 = l), (drop n l = gv4), (drop n l = l), (drop x1 gv4 = gv4), (drop x1 gv4 = l)
+(drop x1 l = gv4), (drop x1 l = l), (drop x2 gv4 = gv4), (drop x2 gv4 = l), (drop x2 l = gv4), (drop x2 l = l), (nil = cons n gv4), (nil = cons n l), (nil = cons x1 gv4), (nil = cons x1 l)
+(nil = cons x2 gv4), (nil = cons x2 l), (nil = drop n gv4), (nil = drop n l), (nil = drop x1 gv4), (nil = drop x1 l), (nil = drop x2 gv4), (nil = drop x2 l), (None = Some n), (None = Some x1)
+(None = Some x2), (None = Some gv4), (None = Some l), (succ n = n), (succ n = x1), (succ n = x2), (succ x1 = n), (succ x1 = x1), (succ x1 = x2), (succ x2 = n)
+(succ x2 = x1), (succ x2 = x2), (zero = succ n), (zero = succ x1), (zero = succ x2)
+
+Label: 1 (1)
+(l = l), (l = gv4), (l = gv3), (gv4 = l), (gv4 = gv4), (gv4 = gv3), (gv3 = l), (gv3 = gv4), (gv3 = gv3), (n = n)
+(n = x1), (n = x2), (x1 = n), (x1 = x1), (x1 = x2), (x2 = n), (x2 = x1), (x2 = x2), (l <> l), (l <> gv4)
+(l <> gv3), (gv4 <> l), (gv4 <> gv4), (gv4 <> gv3), (gv3 <> l), (gv3 <> gv4), (gv3 <> gv3), (n <> n), (n <> x1), (n <> x2)
+(x1 <> n), (x1 <> x1), (x1 <> x2), (x2 <> n), (x2 <> x1), (x2 <> x2), (cons n l = l), (cons n l = gv4), (cons n l = gv3), (cons n l = drop n l)
+(cons n l = drop n gv4), (cons n l = drop n gv3), (cons n l = drop x1 l), (cons n l = drop x1 gv4), (cons n l = drop x1 gv3), (cons n l = drop x2 l), (cons n l = drop x2 gv4), (cons n l = drop x2 gv3), (cons n gv4 = l), (cons n gv4 = gv4)
+(cons n gv4 = gv3), (cons n gv4 = drop n l), (cons n gv4 = drop n gv4), (cons n gv4 = drop n gv3), (cons n gv4 = drop x1 l), (cons n gv4 = drop x1 gv4), (cons n gv4 = drop x1 gv3), (cons n gv4 = drop x2 l), (cons n gv4 = drop x2 gv4), (cons n gv4 = drop x2 gv3)
+(cons n gv3 = l), (cons n gv3 = gv4), (cons n gv3 = gv3), (cons n gv3 = drop n l), (cons n gv3 = drop n gv4), (cons n gv3 = drop n gv3), (cons n gv3 = drop x1 l), (cons n gv3 = drop x1 gv4), (cons n gv3 = drop x1 gv3), (cons n gv3 = drop x2 l)
+(cons n gv3 = drop x2 gv4), (cons n gv3 = drop x2 gv3), (cons x1 l = l), (cons x1 l = gv4), (cons x1 l = gv3), (cons x1 l = drop n l), (cons x1 l = drop n gv4), (cons x1 l = drop n gv3), (cons x1 l = drop x1 l), (cons x1 l = drop x1 gv4)
+(cons x1 l = drop x1 gv3), (cons x1 l = drop x2 l), (cons x1 l = drop x2 gv4), (cons x1 l = drop x2 gv3), (cons x1 gv4 = l), (cons x1 gv4 = gv4), (cons x1 gv4 = gv3), (cons x1 gv4 = drop n l), (cons x1 gv4 = drop n gv4), (cons x1 gv4 = drop n gv3)
+(cons x1 gv4 = drop x1 l), (cons x1 gv4 = drop x1 gv4), (cons x1 gv4 = drop x1 gv3), (cons x1 gv4 = drop x2 l), (cons x1 gv4 = drop x2 gv4), (cons x1 gv4 = drop x2 gv3), (cons x1 gv3 = l), (cons x1 gv3 = gv4), (cons x1 gv3 = gv3), (cons x1 gv3 = drop n l)
+(cons x1 gv3 = drop n gv4), (cons x1 gv3 = drop n gv3), (cons x1 gv3 = drop x1 l), (cons x1 gv3 = drop x1 gv4), (cons x1 gv3 = drop x1 gv3), (cons x1 gv3 = drop x2 l), (cons x1 gv3 = drop x2 gv4), (cons x1 gv3 = drop x2 gv3), (cons x2 l = l), (cons x2 l = gv4)
+(cons x2 l = gv3), (cons x2 l = drop n l), (cons x2 l = drop n gv4), (cons x2 l = drop n gv3), (cons x2 l = drop x1 l), (cons x2 l = drop x1 gv4), (cons x2 l = drop x1 gv3), (cons x2 l = drop x2 l), (cons x2 l = drop x2 gv4), (cons x2 l = drop x2 gv3)
+(cons x2 gv4 = l), (cons x2 gv4 = gv4), (cons x2 gv4 = gv3), (cons x2 gv4 = drop n l), (cons x2 gv4 = drop n gv4), (cons x2 gv4 = drop n gv3), (cons x2 gv4 = drop x1 l), (cons x2 gv4 = drop x1 gv4), (cons x2 gv4 = drop x1 gv3), (cons x2 gv4 = drop x2 l)
+(cons x2 gv4 = drop x2 gv4), (cons x2 gv4 = drop x2 gv3), (cons x2 gv3 = l), (cons x2 gv3 = gv4), (cons x2 gv3 = gv3), (cons x2 gv3 = drop n l), (cons x2 gv3 = drop n gv4), (cons x2 gv3 = drop n gv3), (cons x2 gv3 = drop x1 l), (cons x2 gv3 = drop x1 gv4)
+(cons x2 gv3 = drop x1 gv3), (cons x2 gv3 = drop x2 l), (cons x2 gv3 = drop x2 gv4), (cons x2 gv3 = drop x2 gv3), (drop n l = l), (drop n l = gv4), (drop n l = gv3), (drop n gv4 = l), (drop n gv4 = gv4), (drop n gv4 = gv3)
+(drop n gv3 = l), (drop n gv3 = gv4), (drop n gv3 = gv3), (drop x1 l = l), (drop x1 l = gv4), (drop x1 l = gv3), (drop x1 gv4 = l), (drop x1 gv4 = gv4), (drop x1 gv4 = gv3), (drop x1 gv3 = l)
+(drop x1 gv3 = gv4), (drop x1 gv3 = gv3), (drop x2 l = l), (drop x2 l = gv4), (drop x2 l = gv3), (drop x2 gv4 = l), (drop x2 gv4 = gv4), (drop x2 gv4 = gv3), (drop x2 gv3 = l), (drop x2 gv3 = gv4)
+(drop x2 gv3 = gv3), (nil = cons n l), (nil = cons n gv4), (nil = cons n gv3), (nil = cons x1 l), (nil = cons x1 gv4), (nil = cons x1 gv3), (nil = cons x2 l), (nil = cons x2 gv4), (nil = cons x2 gv3)
+(nil = drop n l), (nil = drop n gv4), (nil = drop n gv3), (nil = drop x1 l), (nil = drop x1 gv4), (nil = drop x1 gv3), (nil = drop x2 l), (nil = drop x2 gv4), (nil = drop x2 gv3), (None = Some n)
+(None = Some x1), (None = Some x2), (None = Some l), (None = Some gv4), (None = Some gv3), (succ n = n), (succ n = x1), (succ n = x2), (succ x1 = n), (succ x1 = x1)
+(succ x1 = x2), (succ x2 = n), (succ x2 = x1), (succ x2 = x2), (zero = succ n), (zero = succ x1), (zero = succ x2)
+
+Label: 2 (2)
+(l = l), (l = gv3), (l = gv1), (gv3 = l), (gv3 = gv3), (gv3 = gv1), (gv1 = l), (gv1 = gv3), (gv1 = gv1), (n = n)
+(n = x1), (n = x2), (x1 = n), (x1 = x1), (x1 = x2), (x2 = n), (x2 = x1), (x2 = x2), (l <> l), (l <> gv3)
+(l <> gv1), (gv3 <> l), (gv3 <> gv3), (gv3 <> gv1), (gv1 <> l), (gv1 <> gv3), (gv1 <> gv1), (n <> n), (n <> x1), (n <> x2)
+(x1 <> n), (x1 <> x1), (x1 <> x2), (x2 <> n), (x2 <> x1), (x2 <> x2), (cons n l = l), (cons n l = gv3), (cons n l = gv1), (cons n l = drop n l)
+(cons n l = drop n gv3), (cons n l = drop n gv1), (cons n l = drop x1 l), (cons n l = drop x1 gv3), (cons n l = drop x1 gv1), (cons n l = drop x2 l), (cons n l = drop x2 gv3), (cons n l = drop x2 gv1), (cons n gv3 = l), (cons n gv3 = gv3)
+(cons n gv3 = gv1), (cons n gv3 = drop n l), (cons n gv3 = drop n gv3), (cons n gv3 = drop n gv1), (cons n gv3 = drop x1 l), (cons n gv3 = drop x1 gv3), (cons n gv3 = drop x1 gv1), (cons n gv3 = drop x2 l), (cons n gv3 = drop x2 gv3), (cons n gv3 = drop x2 gv1)
+(cons n gv1 = l), (cons n gv1 = gv3), (cons n gv1 = gv1), (cons n gv1 = drop n l), (cons n gv1 = drop n gv3), (cons n gv1 = drop n gv1), (cons n gv1 = drop x1 l), (cons n gv1 = drop x1 gv3), (cons n gv1 = drop x1 gv1), (cons n gv1 = drop x2 l)
+(cons n gv1 = drop x2 gv3), (cons n gv1 = drop x2 gv1), (cons x1 l = l), (cons x1 l = gv3), (cons x1 l = gv1), (cons x1 l = drop n l), (cons x1 l = drop n gv3), (cons x1 l = drop n gv1), (cons x1 l = drop x1 l), (cons x1 l = drop x1 gv3)
+(cons x1 l = drop x1 gv1), (cons x1 l = drop x2 l), (cons x1 l = drop x2 gv3), (cons x1 l = drop x2 gv1), (cons x1 gv3 = l), (cons x1 gv3 = gv3), (cons x1 gv3 = gv1), (cons x1 gv3 = drop n l), (cons x1 gv3 = drop n gv3), (cons x1 gv3 = drop n gv1)
+(cons x1 gv3 = drop x1 l), (cons x1 gv3 = drop x1 gv3), (cons x1 gv3 = drop x1 gv1), (cons x1 gv3 = drop x2 l), (cons x1 gv3 = drop x2 gv3), (cons x1 gv3 = drop x2 gv1), (cons x1 gv1 = l), (cons x1 gv1 = gv3), (cons x1 gv1 = gv1), (cons x1 gv1 = drop n l)
+(cons x1 gv1 = drop n gv3), (cons x1 gv1 = drop n gv1), (cons x1 gv1 = drop x1 l), (cons x1 gv1 = drop x1 gv3), (cons x1 gv1 = drop x1 gv1), (cons x1 gv1 = drop x2 l), (cons x1 gv1 = drop x2 gv3), (cons x1 gv1 = drop x2 gv1), (cons x2 l = l), (cons x2 l = gv3)
+(cons x2 l = gv1), (cons x2 l = drop n l), (cons x2 l = drop n gv3), (cons x2 l = drop n gv1), (cons x2 l = drop x1 l), (cons x2 l = drop x1 gv3), (cons x2 l = drop x1 gv1), (cons x2 l = drop x2 l), (cons x2 l = drop x2 gv3), (cons x2 l = drop x2 gv1)
+(cons x2 gv3 = l), (cons x2 gv3 = gv3), (cons x2 gv3 = gv1), (cons x2 gv3 = drop n l), (cons x2 gv3 = drop n gv3), (cons x2 gv3 = drop n gv1), (cons x2 gv3 = drop x1 l), (cons x2 gv3 = drop x1 gv3), (cons x2 gv3 = drop x1 gv1), (cons x2 gv3 = drop x2 l)
+(cons x2 gv3 = drop x2 gv3), (cons x2 gv3 = drop x2 gv1), (cons x2 gv1 = l), (cons x2 gv1 = gv3), (cons x2 gv1 = gv1), (cons x2 gv1 = drop n l), (cons x2 gv1 = drop n gv3), (cons x2 gv1 = drop n gv1), (cons x2 gv1 = drop x1 l), (cons x2 gv1 = drop x1 gv3)
+(cons x2 gv1 = drop x1 gv1), (cons x2 gv1 = drop x2 l), (cons x2 gv1 = drop x2 gv3), (cons x2 gv1 = drop x2 gv1), (drop n l = l), (drop n l = gv3), (drop n l = gv1), (drop n gv3 = l), (drop n gv3 = gv3), (drop n gv3 = gv1)
+(drop n gv1 = l), (drop n gv1 = gv3), (drop n gv1 = gv1), (drop x1 l = l), (drop x1 l = gv3), (drop x1 l = gv1), (drop x1 gv3 = l), (drop x1 gv3 = gv3), (drop x1 gv3 = gv1), (drop x1 gv1 = l)
+(drop x1 gv1 = gv3), (drop x1 gv1 = gv1), (drop x2 l = l), (drop x2 l = gv3), (drop x2 l = gv1), (drop x2 gv3 = l), (drop x2 gv3 = gv3), (drop x2 gv3 = gv1), (drop x2 gv1 = l), (drop x2 gv1 = gv3)
+(drop x2 gv1 = gv1), (nil = cons n l), (nil = cons n gv3), (nil = cons n gv1), (nil = cons x1 l), (nil = cons x1 gv3), (nil = cons x1 gv1), (nil = cons x2 l), (nil = cons x2 gv3), (nil = cons x2 gv1)
+(nil = drop n l), (nil = drop n gv3), (nil = drop n gv1), (nil = drop x1 l), (nil = drop x1 gv3), (nil = drop x1 gv1), (nil = drop x2 l), (nil = drop x2 gv3), (nil = drop x2 gv1), (None = Some n)
+(None = Some x1), (None = Some x2), (None = Some l), (None = Some gv3), (None = Some gv1), (succ n = n), (succ n = x1), (succ n = x2), (succ x1 = n), (succ x1 = x1)
+(succ x1 = x2), (succ x2 = n), (succ x2 = x1), (succ x2 = x2), (zero = succ n), (zero = succ x1), (zero = succ x2)
+
+Label: 3 (3)
+(n = n), (n = x2), (n = x1), (x2 = n), (x2 = x2), (x2 = x1), (x1 = n), (x1 = x2), (x1 = x1), (l = l)
+(l = gv3), (l = gv0), (gv3 = l), (gv3 = gv3), (gv3 = gv0), (gv0 = l), (gv0 = gv3), (gv0 = gv0), (n <> n), (n <> x2)
+(n <> x1), (x2 <> n), (x2 <> x2), (x2 <> x1), (x1 <> n), (x1 <> x2), (x1 <> x1), (l <> l), (l <> gv3), (l <> gv0)
+(gv3 <> l), (gv3 <> gv3), (gv3 <> gv0), (gv0 <> l), (gv0 <> gv3), (gv0 <> gv0), (cons n l = l), (cons n l = gv3), (cons n l = gv0), (cons n l = drop n l)
+(cons n l = drop n gv3), (cons n l = drop n gv0), (cons n l = drop x2 l), (cons n l = drop x2 gv3), (cons n l = drop x2 gv0), (cons n l = drop x1 l), (cons n l = drop x1 gv3), (cons n l = drop x1 gv0), (cons n gv3 = l), (cons n gv3 = gv3)
+(cons n gv3 = gv0), (cons n gv3 = drop n l), (cons n gv3 = drop n gv3), (cons n gv3 = drop n gv0), (cons n gv3 = drop x2 l), (cons n gv3 = drop x2 gv3), (cons n gv3 = drop x2 gv0), (cons n gv3 = drop x1 l), (cons n gv3 = drop x1 gv3), (cons n gv3 = drop x1 gv0)
+(cons n gv0 = l), (cons n gv0 = gv3), (cons n gv0 = gv0), (cons n gv0 = drop n l), (cons n gv0 = drop n gv3), (cons n gv0 = drop n gv0), (cons n gv0 = drop x2 l), (cons n gv0 = drop x2 gv3), (cons n gv0 = drop x2 gv0), (cons n gv0 = drop x1 l)
+(cons n gv0 = drop x1 gv3), (cons n gv0 = drop x1 gv0), (cons x2 l = l), (cons x2 l = gv3), (cons x2 l = gv0), (cons x2 l = drop n l), (cons x2 l = drop n gv3), (cons x2 l = drop n gv0), (cons x2 l = drop x2 l), (cons x2 l = drop x2 gv3)
+(cons x2 l = drop x2 gv0), (cons x2 l = drop x1 l), (cons x2 l = drop x1 gv3), (cons x2 l = drop x1 gv0), (cons x2 gv3 = l), (cons x2 gv3 = gv3), (cons x2 gv3 = gv0), (cons x2 gv3 = drop n l), (cons x2 gv3 = drop n gv3), (cons x2 gv3 = drop n gv0)
+(cons x2 gv3 = drop x2 l), (cons x2 gv3 = drop x2 gv3), (cons x2 gv3 = drop x2 gv0), (cons x2 gv3 = drop x1 l), (cons x2 gv3 = drop x1 gv3), (cons x2 gv3 = drop x1 gv0), (cons x2 gv0 = l), (cons x2 gv0 = gv3), (cons x2 gv0 = gv0), (cons x2 gv0 = drop n l)
+(cons x2 gv0 = drop n gv3), (cons x2 gv0 = drop n gv0), (cons x2 gv0 = drop x2 l), (cons x2 gv0 = drop x2 gv3), (cons x2 gv0 = drop x2 gv0), (cons x2 gv0 = drop x1 l), (cons x2 gv0 = drop x1 gv3), (cons x2 gv0 = drop x1 gv0), (cons x1 l = l), (cons x1 l = gv3)
+(cons x1 l = gv0), (cons x1 l = drop n l), (cons x1 l = drop n gv3), (cons x1 l = drop n gv0), (cons x1 l = drop x2 l), (cons x1 l = drop x2 gv3), (cons x1 l = drop x2 gv0), (cons x1 l = drop x1 l), (cons x1 l = drop x1 gv3), (cons x1 l = drop x1 gv0)
+(cons x1 gv3 = l), (cons x1 gv3 = gv3), (cons x1 gv3 = gv0), (cons x1 gv3 = drop n l), (cons x1 gv3 = drop n gv3), (cons x1 gv3 = drop n gv0), (cons x1 gv3 = drop x2 l), (cons x1 gv3 = drop x2 gv3), (cons x1 gv3 = drop x2 gv0), (cons x1 gv3 = drop x1 l)
+(cons x1 gv3 = drop x1 gv3), (cons x1 gv3 = drop x1 gv0), (cons x1 gv0 = l), (cons x1 gv0 = gv3), (cons x1 gv0 = gv0), (cons x1 gv0 = drop n l), (cons x1 gv0 = drop n gv3), (cons x1 gv0 = drop n gv0), (cons x1 gv0 = drop x2 l), (cons x1 gv0 = drop x2 gv3)
+(cons x1 gv0 = drop x2 gv0), (cons x1 gv0 = drop x1 l), (cons x1 gv0 = drop x1 gv3), (cons x1 gv0 = drop x1 gv0), (drop n l = l), (drop n l = gv3), (drop n l = gv0), (drop n gv3 = l), (drop n gv3 = gv3), (drop n gv3 = gv0)
+(drop n gv0 = l), (drop n gv0 = gv3), (drop n gv0 = gv0), (drop x2 l = l), (drop x2 l = gv3), (drop x2 l = gv0), (drop x2 gv3 = l), (drop x2 gv3 = gv3), (drop x2 gv3 = gv0), (drop x2 gv0 = l)
+(drop x2 gv0 = gv3), (drop x2 gv0 = gv0), (drop x1 l = l), (drop x1 l = gv3), (drop x1 l = gv0), (drop x1 gv3 = l), (drop x1 gv3 = gv3), (drop x1 gv3 = gv0), (drop x1 gv0 = l), (drop x1 gv0 = gv3)
+(drop x1 gv0 = gv0), (nil = cons n l), (nil = cons n gv3), (nil = cons n gv0), (nil = cons x2 l), (nil = cons x2 gv3), (nil = cons x2 gv0), (nil = cons x1 l), (nil = cons x1 gv3), (nil = cons x1 gv0)
+(nil = drop n l), (nil = drop n gv3), (nil = drop n gv0), (nil = drop x2 l), (nil = drop x2 gv3), (nil = drop x2 gv0), (nil = drop x1 l), (nil = drop x1 gv3), (nil = drop x1 gv0), (None = Some l)
+(None = Some gv3), (None = Some gv0), (None = Some n), (None = Some x2), (None = Some x1), (succ n = n), (succ n = x2), (succ n = x1), (succ x2 = n), (succ x2 = x2)
+(succ x2 = x1), (succ x1 = n), (succ x1 = x2), (succ x1 = x1), (zero = succ n), (zero = succ x2), (zero = succ x1)
+
+Label: 4 (4)
+(l = l), (l = gv5), (l = gv3), (gv5 = l), (gv5 = gv5), (gv5 = gv3), (gv3 = l), (gv3 = gv5), (gv3 = gv3), (n = n)
+(n = x1), (n = x2), (x1 = n), (x1 = x1), (x1 = x2), (x2 = n), (x2 = x1), (x2 = x2), (l <> l), (l <> gv5)
+(l <> gv3), (gv5 <> l), (gv5 <> gv5), (gv5 <> gv3), (gv3 <> l), (gv3 <> gv5), (gv3 <> gv3), (n <> n), (n <> x1), (n <> x2)
+(x1 <> n), (x1 <> x1), (x1 <> x2), (x2 <> n), (x2 <> x1), (x2 <> x2), (cons n l = l), (cons n l = gv5), (cons n l = gv3), (cons n l = drop n l)
+(cons n l = drop n gv5), (cons n l = drop n gv3), (cons n l = drop x1 l), (cons n l = drop x1 gv5), (cons n l = drop x1 gv3), (cons n l = drop x2 l), (cons n l = drop x2 gv5), (cons n l = drop x2 gv3), (cons n gv5 = l), (cons n gv5 = gv5)
+(cons n gv5 = gv3), (cons n gv5 = drop n l), (cons n gv5 = drop n gv5), (cons n gv5 = drop n gv3), (cons n gv5 = drop x1 l), (cons n gv5 = drop x1 gv5), (cons n gv5 = drop x1 gv3), (cons n gv5 = drop x2 l), (cons n gv5 = drop x2 gv5), (cons n gv5 = drop x2 gv3)
+(cons n gv3 = l), (cons n gv3 = gv5), (cons n gv3 = gv3), (cons n gv3 = drop n l), (cons n gv3 = drop n gv5), (cons n gv3 = drop n gv3), (cons n gv3 = drop x1 l), (cons n gv3 = drop x1 gv5), (cons n gv3 = drop x1 gv3), (cons n gv3 = drop x2 l)
+(cons n gv3 = drop x2 gv5), (cons n gv3 = drop x2 gv3), (cons x1 l = l), (cons x1 l = gv5), (cons x1 l = gv3), (cons x1 l = drop n l), (cons x1 l = drop n gv5), (cons x1 l = drop n gv3), (cons x1 l = drop x1 l), (cons x1 l = drop x1 gv5)
+(cons x1 l = drop x1 gv3), (cons x1 l = drop x2 l), (cons x1 l = drop x2 gv5), (cons x1 l = drop x2 gv3), (cons x1 gv5 = l), (cons x1 gv5 = gv5), (cons x1 gv5 = gv3), (cons x1 gv5 = drop n l), (cons x1 gv5 = drop n gv5), (cons x1 gv5 = drop n gv3)
+(cons x1 gv5 = drop x1 l), (cons x1 gv5 = drop x1 gv5), (cons x1 gv5 = drop x1 gv3), (cons x1 gv5 = drop x2 l), (cons x1 gv5 = drop x2 gv5), (cons x1 gv5 = drop x2 gv3), (cons x1 gv3 = l), (cons x1 gv3 = gv5), (cons x1 gv3 = gv3), (cons x1 gv3 = drop n l)
+(cons x1 gv3 = drop n gv5), (cons x1 gv3 = drop n gv3), (cons x1 gv3 = drop x1 l), (cons x1 gv3 = drop x1 gv5), (cons x1 gv3 = drop x1 gv3), (cons x1 gv3 = drop x2 l), (cons x1 gv3 = drop x2 gv5), (cons x1 gv3 = drop x2 gv3), (cons x2 l = l), (cons x2 l = gv5)
+(cons x2 l = gv3), (cons x2 l = drop n l), (cons x2 l = drop n gv5), (cons x2 l = drop n gv3), (cons x2 l = drop x1 l), (cons x2 l = drop x1 gv5), (cons x2 l = drop x1 gv3), (cons x2 l = drop x2 l), (cons x2 l = drop x2 gv5), (cons x2 l = drop x2 gv3)
+(cons x2 gv5 = l), (cons x2 gv5 = gv5), (cons x2 gv5 = gv3), (cons x2 gv5 = drop n l), (cons x2 gv5 = drop n gv5), (cons x2 gv5 = drop n gv3), (cons x2 gv5 = drop x1 l), (cons x2 gv5 = drop x1 gv5), (cons x2 gv5 = drop x1 gv3), (cons x2 gv5 = drop x2 l)
+(cons x2 gv5 = drop x2 gv5), (cons x2 gv5 = drop x2 gv3), (cons x2 gv3 = l), (cons x2 gv3 = gv5), (cons x2 gv3 = gv3), (cons x2 gv3 = drop n l), (cons x2 gv3 = drop n gv5), (cons x2 gv3 = drop n gv3), (cons x2 gv3 = drop x1 l), (cons x2 gv3 = drop x1 gv5)
+(cons x2 gv3 = drop x1 gv3), (cons x2 gv3 = drop x2 l), (cons x2 gv3 = drop x2 gv5), (cons x2 gv3 = drop x2 gv3), (drop n l = l), (drop n l = gv5), (drop n l = gv3), (drop n gv5 = l), (drop n gv5 = gv5), (drop n gv5 = gv3)
+(drop n gv3 = l), (drop n gv3 = gv5), (drop n gv3 = gv3), (drop x1 l = l), (drop x1 l = gv5), (drop x1 l = gv3), (drop x1 gv5 = l), (drop x1 gv5 = gv5), (drop x1 gv5 = gv3), (drop x1 gv3 = l)
+(drop x1 gv3 = gv5), (drop x1 gv3 = gv3), (drop x2 l = l), (drop x2 l = gv5), (drop x2 l = gv3), (drop x2 gv5 = l), (drop x2 gv5 = gv5), (drop x2 gv5 = gv3), (drop x2 gv3 = l), (drop x2 gv3 = gv5)
+(drop x2 gv3 = gv3), (nil = cons n l), (nil = cons n gv5), (nil = cons n gv3), (nil = cons x1 l), (nil = cons x1 gv5), (nil = cons x1 gv3), (nil = cons x2 l), (nil = cons x2 gv5), (nil = cons x2 gv3)
+(nil = drop n l), (nil = drop n gv5), (nil = drop n gv3), (nil = drop x1 l), (nil = drop x1 gv5), (nil = drop x1 gv3), (nil = drop x2 l), (nil = drop x2 gv5), (nil = drop x2 gv3), (None = Some n)
+(None = Some x1), (None = Some x2), (None = Some l), (None = Some gv5), (None = Some gv3), (succ n = n), (succ n = x1), (succ n = x2), (succ x1 = n), (succ x1 = x1)
+(succ x1 = x2), (succ x2 = n), (succ x2 = x1), (succ x2 = x2), (zero = succ n), (zero = succ x1), (zero = succ x2)
+
+Label: 5 (5)
+(l = l), (l = gv3), (gv3 = l), (gv3 = gv3), (n = n), (n = x1), (n = gv2), (n = x2), (x1 = n), (x1 = x1)
+(x1 = gv2), (x1 = x2), (gv2 = n), (gv2 = x1), (gv2 = gv2), (gv2 = x2), (x2 = n), (x2 = x1), (x2 = gv2), (x2 = x2)
+(l <> l), (l <> gv3), (gv3 <> l), (gv3 <> gv3), (n <> n), (n <> x1), (n <> gv2), (n <> x2), (x1 <> n), (x1 <> x1)
+(x1 <> gv2), (x1 <> x2), (gv2 <> n), (gv2 <> x1), (gv2 <> gv2), (gv2 <> x2), (x2 <> n), (x2 <> x1), (x2 <> gv2), (x2 <> x2)
+(cons n l = l), (cons n l = gv3), (cons n l = drop n l), (cons n l = drop n gv3), (cons n l = drop x1 l), (cons n l = drop x1 gv3), (cons n l = drop gv2 l), (cons n l = drop gv2 gv3), (cons n l = drop x2 l), (cons n l = drop x2 gv3)
+(cons n gv3 = l), (cons n gv3 = gv3), (cons n gv3 = drop n l), (cons n gv3 = drop n gv3), (cons n gv3 = drop x1 l), (cons n gv3 = drop x1 gv3), (cons n gv3 = drop gv2 l), (cons n gv3 = drop gv2 gv3), (cons n gv3 = drop x2 l), (cons n gv3 = drop x2 gv3)
+(cons x1 l = l), (cons x1 l = gv3), (cons x1 l = drop n l), (cons x1 l = drop n gv3), (cons x1 l = drop x1 l), (cons x1 l = drop x1 gv3), (cons x1 l = drop gv2 l), (cons x1 l = drop gv2 gv3), (cons x1 l = drop x2 l), (cons x1 l = drop x2 gv3)
+(cons x1 gv3 = l), (cons x1 gv3 = gv3), (cons x1 gv3 = drop n l), (cons x1 gv3 = drop n gv3), (cons x1 gv3 = drop x1 l), (cons x1 gv3 = drop x1 gv3), (cons x1 gv3 = drop gv2 l), (cons x1 gv3 = drop gv2 gv3), (cons x1 gv3 = drop x2 l), (cons x1 gv3 = drop x2 gv3)
+(cons gv2 l = l), (cons gv2 l = gv3), (cons gv2 l = drop n l), (cons gv2 l = drop n gv3), (cons gv2 l = drop x1 l), (cons gv2 l = drop x1 gv3), (cons gv2 l = drop gv2 l), (cons gv2 l = drop gv2 gv3), (cons gv2 l = drop x2 l), (cons gv2 l = drop x2 gv3)
+(cons gv2 gv3 = l), (cons gv2 gv3 = gv3), (cons gv2 gv3 = drop n l), (cons gv2 gv3 = drop n gv3), (cons gv2 gv3 = drop x1 l), (cons gv2 gv3 = drop x1 gv3), (cons gv2 gv3 = drop gv2 l), (cons gv2 gv3 = drop gv2 gv3), (cons gv2 gv3 = drop x2 l), (cons gv2 gv3 = drop x2 gv3)
+(cons x2 l = l), (cons x2 l = gv3), (cons x2 l = drop n l), (cons x2 l = drop n gv3), (cons x2 l = drop x1 l), (cons x2 l = drop x1 gv3), (cons x2 l = drop gv2 l), (cons x2 l = drop gv2 gv3), (cons x2 l = drop x2 l), (cons x2 l = drop x2 gv3)
+(cons x2 gv3 = l), (cons x2 gv3 = gv3), (cons x2 gv3 = drop n l), (cons x2 gv3 = drop n gv3), (cons x2 gv3 = drop x1 l), (cons x2 gv3 = drop x1 gv3), (cons x2 gv3 = drop gv2 l), (cons x2 gv3 = drop gv2 gv3), (cons x2 gv3 = drop x2 l), (cons x2 gv3 = drop x2 gv3)
+(drop n l = l), (drop n l = gv3), (drop n gv3 = l), (drop n gv3 = gv3), (drop x1 l = l), (drop x1 l = gv3), (drop x1 gv3 = l), (drop x1 gv3 = gv3), (drop gv2 l = l), (drop gv2 l = gv3)
+(drop gv2 gv3 = l), (drop gv2 gv3 = gv3), (drop x2 l = l), (drop x2 l = gv3), (drop x2 gv3 = l), (drop x2 gv3 = gv3), (nil = cons n l), (nil = cons n gv3), (nil = cons x1 l), (nil = cons x1 gv3)
+(nil = cons gv2 l), (nil = cons gv2 gv3), (nil = cons x2 l), (nil = cons x2 gv3), (nil = drop n l), (nil = drop n gv3), (nil = drop x1 l), (nil = drop x1 gv3), (nil = drop gv2 l), (nil = drop gv2 gv3)
+(nil = drop x2 l), (nil = drop x2 gv3), (None = Some n), (None = Some x1), (None = Some gv2), (None = Some x2), (None = Some l), (None = Some gv3), (succ n = n), (succ n = x1)
+(succ n = gv2), (succ n = x2), (succ x1 = n), (succ x1 = x1), (succ x1 = gv2), (succ x1 = x2), (succ gv2 = n), (succ gv2 = x1), (succ gv2 = gv2), (succ gv2 = x2)
+(succ x2 = n), (succ x2 = x1), (succ x2 = gv2), (succ x2 = x2), (zero = succ n), (zero = succ x1), (zero = succ gv2), (zero = succ x2)
+
+Label: 6 (6)
+(l = l), (l = gv3), (gv3 = l), (gv3 = gv3), (n = n), (n = gv6), (n = x1), (n = x2), (gv6 = n), (gv6 = gv6)
+(gv6 = x1), (gv6 = x2), (x1 = n), (x1 = gv6), (x1 = x1), (x1 = x2), (x2 = n), (x2 = gv6), (x2 = x1), (x2 = x2)
+(l <> l), (l <> gv3), (gv3 <> l), (gv3 <> gv3), (n <> n), (n <> gv6), (n <> x1), (n <> x2), (gv6 <> n), (gv6 <> gv6)
+(gv6 <> x1), (gv6 <> x2), (x1 <> n), (x1 <> gv6), (x1 <> x1), (x1 <> x2), (x2 <> n), (x2 <> gv6), (x2 <> x1), (x2 <> x2)
+(cons n l = l), (cons n l = gv3), (cons n l = drop n l), (cons n l = drop n gv3), (cons n l = drop gv6 l), (cons n l = drop gv6 gv3), (cons n l = drop x1 l), (cons n l = drop x1 gv3), (cons n l = drop x2 l), (cons n l = drop x2 gv3)
+(cons n gv3 = l), (cons n gv3 = gv3), (cons n gv3 = drop n l), (cons n gv3 = drop n gv3), (cons n gv3 = drop gv6 l), (cons n gv3 = drop gv6 gv3), (cons n gv3 = drop x1 l), (cons n gv3 = drop x1 gv3), (cons n gv3 = drop x2 l), (cons n gv3 = drop x2 gv3)
+(cons gv6 l = l), (cons gv6 l = gv3), (cons gv6 l = drop n l), (cons gv6 l = drop n gv3), (cons gv6 l = drop gv6 l), (cons gv6 l = drop gv6 gv3), (cons gv6 l = drop x1 l), (cons gv6 l = drop x1 gv3), (cons gv6 l = drop x2 l), (cons gv6 l = drop x2 gv3)
+(cons gv6 gv3 = l), (cons gv6 gv3 = gv3), (cons gv6 gv3 = drop n l), (cons gv6 gv3 = drop n gv3), (cons gv6 gv3 = drop gv6 l), (cons gv6 gv3 = drop gv6 gv3), (cons gv6 gv3 = drop x1 l), (cons gv6 gv3 = drop x1 gv3), (cons gv6 gv3 = drop x2 l), (cons gv6 gv3 = drop x2 gv3)
+(cons x1 l = l), (cons x1 l = gv3), (cons x1 l = drop n l), (cons x1 l = drop n gv3), (cons x1 l = drop gv6 l), (cons x1 l = drop gv6 gv3), (cons x1 l = drop x1 l), (cons x1 l = drop x1 gv3), (cons x1 l = drop x2 l), (cons x1 l = drop x2 gv3)
+(cons x1 gv3 = l), (cons x1 gv3 = gv3), (cons x1 gv3 = drop n l), (cons x1 gv3 = drop n gv3), (cons x1 gv3 = drop gv6 l), (cons x1 gv3 = drop gv6 gv3), (cons x1 gv3 = drop x1 l), (cons x1 gv3 = drop x1 gv3), (cons x1 gv3 = drop x2 l), (cons x1 gv3 = drop x2 gv3)
+(cons x2 l = l), (cons x2 l = gv3), (cons x2 l = drop n l), (cons x2 l = drop n gv3), (cons x2 l = drop gv6 l), (cons x2 l = drop gv6 gv3), (cons x2 l = drop x1 l), (cons x2 l = drop x1 gv3), (cons x2 l = drop x2 l), (cons x2 l = drop x2 gv3)
+(cons x2 gv3 = l), (cons x2 gv3 = gv3), (cons x2 gv3 = drop n l), (cons x2 gv3 = drop n gv3), (cons x2 gv3 = drop gv6 l), (cons x2 gv3 = drop gv6 gv3), (cons x2 gv3 = drop x1 l), (cons x2 gv3 = drop x1 gv3), (cons x2 gv3 = drop x2 l), (cons x2 gv3 = drop x2 gv3)
+(drop n l = l), (drop n l = gv3), (drop n gv3 = l), (drop n gv3 = gv3), (drop gv6 l = l), (drop gv6 l = gv3), (drop gv6 gv3 = l), (drop gv6 gv3 = gv3), (drop x1 l = l), (drop x1 l = gv3)
+(drop x1 gv3 = l), (drop x1 gv3 = gv3), (drop x2 l = l), (drop x2 l = gv3), (drop x2 gv3 = l), (drop x2 gv3 = gv3), (nil = cons n l), (nil = cons n gv3), (nil = cons gv6 l), (nil = cons gv6 gv3)
+(nil = cons x1 l), (nil = cons x1 gv3), (nil = cons x2 l), (nil = cons x2 gv3), (nil = drop n l), (nil = drop n gv3), (nil = drop gv6 l), (nil = drop gv6 gv3), (nil = drop x1 l), (nil = drop x1 gv3)
+(nil = drop x2 l), (nil = drop x2 gv3), (None = Some n), (None = Some gv6), (None = Some x1), (None = Some x2), (None = Some l), (None = Some gv3), (succ n = n), (succ n = gv6)
+(succ n = x1), (succ n = x2), (succ gv6 = n), (succ gv6 = gv6), (succ gv6 = x1), (succ gv6 = x2), (succ x1 = n), (succ x1 = gv6), (succ x1 = x1), (succ x1 = x2)
+(succ x2 = n), (succ x2 = gv6), (succ x2 = x1), (succ x2 = x2), (zero = succ n), (zero = succ gv6), (zero = succ x1), (zero = succ x2)
+
+Label: 7 (7)
+(l = l), (l = gv1), (gv1 = l), (gv1 = gv1), (n = n), (n = x1), (n = x2), (x1 = n), (x1 = x1), (x1 = x2)
+(x2 = n), (x2 = x1), (x2 = x2), (l <> l), (l <> gv1), (gv1 <> l), (gv1 <> gv1), (n <> n), (n <> x1), (n <> x2)
+(x1 <> n), (x1 <> x1), (x1 <> x2), (x2 <> n), (x2 <> x1), (x2 <> x2), (cons n l = l), (cons n l = gv1), (cons n l = drop n l), (cons n l = drop n gv1)
+(cons n l = drop x1 l), (cons n l = drop x1 gv1), (cons n l = drop x2 l), (cons n l = drop x2 gv1), (cons n gv1 = l), (cons n gv1 = gv1), (cons n gv1 = drop n l), (cons n gv1 = drop n gv1), (cons n gv1 = drop x1 l), (cons n gv1 = drop x1 gv1)
+(cons n gv1 = drop x2 l), (cons n gv1 = drop x2 gv1), (cons x1 l = l), (cons x1 l = gv1), (cons x1 l = drop n l), (cons x1 l = drop n gv1), (cons x1 l = drop x1 l), (cons x1 l = drop x1 gv1), (cons x1 l = drop x2 l), (cons x1 l = drop x2 gv1)
+(cons x1 gv1 = l), (cons x1 gv1 = gv1), (cons x1 gv1 = drop n l), (cons x1 gv1 = drop n gv1), (cons x1 gv1 = drop x1 l), (cons x1 gv1 = drop x1 gv1), (cons x1 gv1 = drop x2 l), (cons x1 gv1 = drop x2 gv1), (cons x2 l = l), (cons x2 l = gv1)
+(cons x2 l = drop n l), (cons x2 l = drop n gv1), (cons x2 l = drop x1 l), (cons x2 l = drop x1 gv1), (cons x2 l = drop x2 l), (cons x2 l = drop x2 gv1), (cons x2 gv1 = l), (cons x2 gv1 = gv1), (cons x2 gv1 = drop n l), (cons x2 gv1 = drop n gv1)
+(cons x2 gv1 = drop x1 l), (cons x2 gv1 = drop x1 gv1), (cons x2 gv1 = drop x2 l), (cons x2 gv1 = drop x2 gv1), (drop n l = l), (drop n l = gv1), (drop n gv1 = l), (drop n gv1 = gv1), (drop x1 l = l), (drop x1 l = gv1)
+(drop x1 gv1 = l), (drop x1 gv1 = gv1), (drop x2 l = l), (drop x2 l = gv1), (drop x2 gv1 = l), (drop x2 gv1 = gv1), (nil = cons n l), (nil = cons n gv1), (nil = cons x1 l), (nil = cons x1 gv1)
+(nil = cons x2 l), (nil = cons x2 gv1), (nil = drop n l), (nil = drop n gv1), (nil = drop x1 l), (nil = drop x1 gv1), (nil = drop x2 l), (nil = drop x2 gv1), (None = Some n), (None = Some x1)
+(None = Some x2), (None = Some l), (None = Some gv1), (succ n = n), (succ n = x1), (succ n = x2), (succ x1 = n), (succ x1 = x1), (succ x1 = x2), (succ x2 = n)
+(succ x2 = x1), (succ x2 = x2), (zero = succ n), (zero = succ x1), (zero = succ x2)
+
+Label: 8 (8)
+(n = n), (n = x2), (n = x1), (x2 = n), (x2 = x2), (x2 = x1), (x1 = n), (x1 = x2), (x1 = x1), (l = l)
+(l = gv0), (gv0 = l), (gv0 = gv0), (n <> n), (n <> x2), (n <> x1), (x2 <> n), (x2 <> x2), (x2 <> x1), (x1 <> n)
+(x1 <> x2), (x1 <> x1), (l <> l), (l <> gv0), (gv0 <> l), (gv0 <> gv0), (cons n l = l), (cons n l = gv0), (cons n l = drop n l), (cons n l = drop n gv0)
+(cons n l = drop x2 l), (cons n l = drop x2 gv0), (cons n l = drop x1 l), (cons n l = drop x1 gv0), (cons n gv0 = l), (cons n gv0 = gv0), (cons n gv0 = drop n l), (cons n gv0 = drop n gv0), (cons n gv0 = drop x2 l), (cons n gv0 = drop x2 gv0)
+(cons n gv0 = drop x1 l), (cons n gv0 = drop x1 gv0), (cons x2 l = l), (cons x2 l = gv0), (cons x2 l = drop n l), (cons x2 l = drop n gv0), (cons x2 l = drop x2 l), (cons x2 l = drop x2 gv0), (cons x2 l = drop x1 l), (cons x2 l = drop x1 gv0)
+(cons x2 gv0 = l), (cons x2 gv0 = gv0), (cons x2 gv0 = drop n l), (cons x2 gv0 = drop n gv0), (cons x2 gv0 = drop x2 l), (cons x2 gv0 = drop x2 gv0), (cons x2 gv0 = drop x1 l), (cons x2 gv0 = drop x1 gv0), (cons x1 l = l), (cons x1 l = gv0)
+(cons x1 l = drop n l), (cons x1 l = drop n gv0), (cons x1 l = drop x2 l), (cons x1 l = drop x2 gv0), (cons x1 l = drop x1 l), (cons x1 l = drop x1 gv0), (cons x1 gv0 = l), (cons x1 gv0 = gv0), (cons x1 gv0 = drop n l), (cons x1 gv0 = drop n gv0)
+(cons x1 gv0 = drop x2 l), (cons x1 gv0 = drop x2 gv0), (cons x1 gv0 = drop x1 l), (cons x1 gv0 = drop x1 gv0), (drop n l = l), (drop n l = gv0), (drop n gv0 = l), (drop n gv0 = gv0), (drop x2 l = l), (drop x2 l = gv0)
+(drop x2 gv0 = l), (drop x2 gv0 = gv0), (drop x1 l = l), (drop x1 l = gv0), (drop x1 gv0 = l), (drop x1 gv0 = gv0), (nil = cons n l), (nil = cons n gv0), (nil = cons x2 l), (nil = cons x2 gv0)
+(nil = cons x1 l), (nil = cons x1 gv0), (nil = drop n l), (nil = drop n gv0), (nil = drop x2 l), (nil = drop x2 gv0), (nil = drop x1 l), (nil = drop x1 gv0), (None = Some l), (None = Some gv0)
+(None = Some n), (None = Some x2), (None = Some x1), (succ n = n), (succ n = x2), (succ n = x1), (succ x2 = n), (succ x2 = x2), (succ x2 = x1), (succ x1 = n)
+(succ x1 = x2), (succ x1 = x1), (zero = succ n), (zero = succ x2), (zero = succ x1)
+
+Label: 9 (9)
+(gv5 = gv5), (gv5 = l), (l = gv5), (l = l), (n = n), (n = x1), (n = x2), (x1 = n), (x1 = x1), (x1 = x2)
+(x2 = n), (x2 = x1), (x2 = x2), (gv5 <> gv5), (gv5 <> l), (l <> gv5), (l <> l), (n <> n), (n <> x1), (n <> x2)
+(x1 <> n), (x1 <> x1), (x1 <> x2), (x2 <> n), (x2 <> x1), (x2 <> x2), (cons n gv5 = gv5), (cons n gv5 = l), (cons n gv5 = drop n gv5), (cons n gv5 = drop n l)
+(cons n gv5 = drop x1 gv5), (cons n gv5 = drop x1 l), (cons n gv5 = drop x2 gv5), (cons n gv5 = drop x2 l), (cons n l = gv5), (cons n l = l), (cons n l = drop n gv5), (cons n l = drop n l), (cons n l = drop x1 gv5), (cons n l = drop x1 l)
+(cons n l = drop x2 gv5), (cons n l = drop x2 l), (cons x1 gv5 = gv5), (cons x1 gv5 = l), (cons x1 gv5 = drop n gv5), (cons x1 gv5 = drop n l), (cons x1 gv5 = drop x1 gv5), (cons x1 gv5 = drop x1 l), (cons x1 gv5 = drop x2 gv5), (cons x1 gv5 = drop x2 l)
+(cons x1 l = gv5), (cons x1 l = l), (cons x1 l = drop n gv5), (cons x1 l = drop n l), (cons x1 l = drop x1 gv5), (cons x1 l = drop x1 l), (cons x1 l = drop x2 gv5), (cons x1 l = drop x2 l), (cons x2 gv5 = gv5), (cons x2 gv5 = l)
+(cons x2 gv5 = drop n gv5), (cons x2 gv5 = drop n l), (cons x2 gv5 = drop x1 gv5), (cons x2 gv5 = drop x1 l), (cons x2 gv5 = drop x2 gv5), (cons x2 gv5 = drop x2 l), (cons x2 l = gv5), (cons x2 l = l), (cons x2 l = drop n gv5), (cons x2 l = drop n l)
+(cons x2 l = drop x1 gv5), (cons x2 l = drop x1 l), (cons x2 l = drop x2 gv5), (cons x2 l = drop x2 l), (drop n gv5 = gv5), (drop n gv5 = l), (drop n l = gv5), (drop n l = l), (drop x1 gv5 = gv5), (drop x1 gv5 = l)
+(drop x1 l = gv5), (drop x1 l = l), (drop x2 gv5 = gv5), (drop x2 gv5 = l), (drop x2 l = gv5), (drop x2 l = l), (nil = cons n gv5), (nil = cons n l), (nil = cons x1 gv5), (nil = cons x1 l)
+(nil = cons x2 gv5), (nil = cons x2 l), (nil = drop n gv5), (nil = drop n l), (nil = drop x1 gv5), (nil = drop x1 l), (nil = drop x2 gv5), (nil = drop x2 l), (None = Some n), (None = Some x1)
+(None = Some x2), (None = Some gv5), (None = Some l), (succ n = n), (succ n = x1), (succ n = x2), (succ x1 = n), (succ x1 = x1), (succ x1 = x2), (succ x2 = n)
+(succ x2 = x1), (succ x2 = x2), (zero = succ n), (zero = succ x1), (zero = succ x2)
+
+Label: 10 (10)
+(l = l), (x1 = x1), (x1 = n), (x1 = gv2), (x1 = x2), (n = x1), (n = n), (n = gv2), (n = x2), (gv2 = x1)
+(gv2 = n), (gv2 = gv2), (gv2 = x2), (x2 = x1), (x2 = n), (x2 = gv2), (x2 = x2), (l <> l), (x1 <> x1), (x1 <> n)
+(x1 <> gv2), (x1 <> x2), (n <> x1), (n <> n), (n <> gv2), (n <> x2), (gv2 <> x1), (gv2 <> n), (gv2 <> gv2), (gv2 <> x2)
+(x2 <> x1), (x2 <> n), (x2 <> gv2), (x2 <> x2), (cons x1 l = l), (cons x1 l = drop x1 l), (cons x1 l = drop n l), (cons x1 l = drop gv2 l), (cons x1 l = drop x2 l), (cons n l = l)
+(cons n l = drop x1 l), (cons n l = drop n l), (cons n l = drop gv2 l), (cons n l = drop x2 l), (cons gv2 l = l), (cons gv2 l = drop x1 l), (cons gv2 l = drop n l), (cons gv2 l = drop gv2 l), (cons gv2 l = drop x2 l), (cons x2 l = l)
+(cons x2 l = drop x1 l), (cons x2 l = drop n l), (cons x2 l = drop gv2 l), (cons x2 l = drop x2 l), (drop x1 l = l), (drop n l = l), (drop gv2 l = l), (drop x2 l = l), (nil = cons x1 l), (nil = cons n l)
+(nil = cons gv2 l), (nil = cons x2 l), (nil = drop x1 l), (nil = drop n l), (nil = drop gv2 l), (nil = drop x2 l), (None = Some x1), (None = Some n), (None = Some gv2), (None = Some x2)
+(None = Some l), (succ x1 = x1), (succ x1 = n), (succ x1 = gv2), (succ x1 = x2), (succ n = x1), (succ n = n), (succ n = gv2), (succ n = x2), (succ gv2 = x1)
+(succ gv2 = n), (succ gv2 = gv2), (succ gv2 = x2), (succ x2 = x1), (succ x2 = n), (succ x2 = gv2), (succ x2 = x2), (zero = succ x1), (zero = succ n), (zero = succ gv2)
+(zero = succ x2)
+
+Label: 11 (11)
+(l = l), (gv6 = gv6), (gv6 = n), (gv6 = x1), (gv6 = x2), (n = gv6), (n = n), (n = x1), (n = x2), (x1 = gv6)
+(x1 = n), (x1 = x1), (x1 = x2), (x2 = gv6), (x2 = n), (x2 = x1), (x2 = x2), (l <> l), (gv6 <> gv6), (gv6 <> n)
+(gv6 <> x1), (gv6 <> x2), (n <> gv6), (n <> n), (n <> x1), (n <> x2), (x1 <> gv6), (x1 <> n), (x1 <> x1), (x1 <> x2)
+(x2 <> gv6), (x2 <> n), (x2 <> x1), (x2 <> x2), (cons gv6 l = l), (cons gv6 l = drop gv6 l), (cons gv6 l = drop n l), (cons gv6 l = drop x1 l), (cons gv6 l = drop x2 l), (cons n l = l)
+(cons n l = drop gv6 l), (cons n l = drop n l), (cons n l = drop x1 l), (cons n l = drop x2 l), (cons x1 l = l), (cons x1 l = drop gv6 l), (cons x1 l = drop n l), (cons x1 l = drop x1 l), (cons x1 l = drop x2 l), (cons x2 l = l)
+(cons x2 l = drop gv6 l), (cons x2 l = drop n l), (cons x2 l = drop x1 l), (cons x2 l = drop x2 l), (drop gv6 l = l), (drop n l = l), (drop x1 l = l), (drop x2 l = l), (nil = cons gv6 l), (nil = cons n l)
+(nil = cons x1 l), (nil = cons x2 l), (nil = drop gv6 l), (nil = drop n l), (nil = drop x1 l), (nil = drop x2 l), (None = Some gv6), (None = Some n), (None = Some x1), (None = Some x2)
+(None = Some l), (succ gv6 = gv6), (succ gv6 = n), (succ gv6 = x1), (succ gv6 = x2), (succ n = gv6), (succ n = n), (succ n = x1), (succ n = x2), (succ x1 = gv6)
+(succ x1 = n), (succ x1 = x1), (succ x1 = x2), (succ x2 = gv6), (succ x2 = n), (succ x2 = x1), (succ x2 = x2), (zero = succ gv6), (zero = succ n), (zero = succ x1)
+(zero = succ x2)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 119.893 seconds
+
+
+Label: 0 (0)
+
+Label: 1 (1)
+
+Label: 2 (2)
+
+Label: 3 (3)
+
+Label: 4 (4)
+
+Label: 5 (5)
+(succ x1 = gv2)
+
+Label: 6 (6)
+(succ x2 = gv6)
+
+Label: 7 (7)
+(drop x1 l = gv1)
+
+Label: 8 (8)
+
+Label: 9 (9)
+(drop x2 l = gv5)
+
+Label: 10 (10)
+(succ x1 = gv2)
+
+Label: 11 (11)
+(succ x2 = gv6)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (drop x2 (drop (succ x1) gv3) = drop x1 (drop (succ x2) gv3))
+
+2. (drop x2 (drop (succ x1) (cons n l)) = drop x1 (drop (succ x2) (cons n l)))
+
+3. (drop x1 l = drop (succ x1) (cons n l))
+
+4. (drop x2 l = drop (succ x2) (cons n l))
+
+5. (drop x1 l = gv1 -> drop x2 gv1 = drop x1 (drop (succ x2) (cons n l)))
+
+6. (drop x2 l = gv5 -> drop x2 (drop (succ x1) (cons n l)) = drop x1 gv5)
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 142.271 seconds
+
+Number of Result Pairs Returned: 6
+
+1. (drop x2 (drop (succ x1) gv3) = drop x1 (drop (succ x2) gv3))
+
+2. (drop x2 (drop (succ x1) (cons n l)) = drop x1 (drop (succ x2) (cons n l)))
+
+3. (drop x1 l = drop (succ x1) (cons n l))
+
+4. (drop x2 l = drop (succ x2) (cons n l))
+
+5. (drop x1 l = gv1 -> drop x2 gv1 = drop x1 (drop (succ x2) (cons n l)))

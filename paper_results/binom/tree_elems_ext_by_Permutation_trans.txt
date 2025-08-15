@@ -1,0 +1,440 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (Permutation e1 e2)
+ -- (forall e1 e2 : list nat,
+ Permutation e1 e2 -> tree_elems t2 e1 -> tree_elems t2 e2)
+ -- (Permutation e1 (n :: bl ++ br))
+ -- (tree_elems t2 br)
+ -- (tree_elems t1 bl)
+ -- (forall e1 e2 : list nat,
+ Permutation e1 e2 -> tree_elems t1 e1 -> tree_elems t1 e2)
+ -- (tree_elems (Node n t1 t2) e1)
+
+----------------------------------
+Goal: (Permutation e2 (n :: bl ++ br))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3.636 seconds
+
+gv1 : (list nat) = (bl ++ br)
+gv0 : (list nat) = (n :: bl ++ br)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 64.995 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (Permutation e1 e2)
+ -- (Permutation e1 (n :: bl ++ br))
+
+----------------------------------
+Goal: (Permutation e2 (n :: bl ++ br))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (Permutation e1 e2)
+ -- (Permutation e1 gv0)
+
+----------------------------------
+Goal: (Permutation e2 gv0)
+Case: Valid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (Permutation e1 e2)
+ -- (Permutation e1 (n :: gv1))
+
+----------------------------------
+Goal: (Permutation e2 (n :: gv1))
+Case: Valid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (Permutation e1 e2)
+ -- (Permutation e1 gv0)
+
+----------------------------------
+Goal: (Permutation e2 gv0)
+Case: Valid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 65.133 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+In : (forall A : Type, A -> list A -> Prop)
+existsb : (forall A : Type, (A -> bool) -> list A -> bool)
+forallb : (forall A : Type, (A -> bool) -> list A -> bool)
+Forall : (forall A : Type, (A -> Prop) -> list A -> Prop)
+nodup : (forall A : Type, (forall x y : A, {x = y} + {x <> y}) -> list A -> list A)
+map : (forall A B : Type, (A -> B) -> list A -> list B)
+Permutation : (forall A : Type, list A -> list A -> Prop)
+geb : (nat -> nat -> bool)
+gtb : (nat -> nat -> bool)
+tree : Set
+tree_rect : (forall P : tree -> Type,
+ (forall (n : nat) (t : tree),
+  P t -> forall t0 : tree, P t0 -> P (Node n t t0)) ->
+ P Leaf -> forall t : tree, P t)
+tree_rec : (forall P : tree -> Set,
+ (forall (n : nat) (t : tree),
+  P t -> forall t0 : tree, P t0 -> P (Node n t t0)) ->
+ P Leaf -> forall t : tree, P t)
+smash : (tree -> tree -> tree)
+carry : (list tree -> tree -> list tree)
+insert : (nat -> list tree -> list tree)
+join : (list tree -> list tree -> tree -> list tree)
+unzip : (tree -> (list tree -> list tree) -> list tree)
+heap_delete_max : (tree -> list tree)
+find_max' : (nat -> list tree -> nat)
+find_max : (list tree -> option nat)
+delete_max_aux : (nat -> list tree -> list tree * list tree)
+delete_max : (list tree -> option (nat * list tree))
+merge : (list tree -> list tree -> list tree)
+pow2heapp : (nat -> nat -> tree -> Prop)
+pow2heap : (nat -> tree -> Prop)
+priqq : (nat -> list tree -> Prop)
+priq : (list tree -> Prop)
+tree_elems : (tree -> list nat -> Prop)
+priqueue_elems : (list tree -> list nat -> Prop)
+Abs : (list tree -> list nat -> Prop)
+Node : (nat -> tree -> tree -> tree)
+Leaf : tree
+
+Label: 0 (0)
+Abducted Assumption: (Permutation e1 e2)
+Positive Examples: 439
+Negative Examples: 40
+
+Label: 1 (1)
+Abducted Assumption: (Permutation e1 (n :: bl ++ br))
+Positive Examples: 47
+Negative Examples: 432
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 65.404 seconds
+
+
+Label: 0 (0)
+(Permutation e1 e1), (Permutation e1 br), (Permutation e1 bl), (Permutation e1 e2), (Permutation br e1), (Permutation br br), (Permutation br bl), (Permutation br e2), (Permutation bl e1), (Permutation bl br)
+(Permutation bl bl), (Permutation bl e2), (Permutation e2 e1), (Permutation e2 br), (Permutation e2 bl), (Permutation e2 e2), (In n e1), (In n br), (In n bl), (In n e2)
+(n < n), (n <= n), (n = n), (e1 = e1), (e1 = br), (e1 = bl), (e1 = e2), (br = e1), (br = br), (br = bl)
+(br = e2), (bl = e1), (bl = br), (bl = bl), (bl = e2), (e2 = e1), (e2 = br), (e2 = bl), (e2 = e2), (false = (n >? n))
+(false = (n >=? n)), (true = (n >? n)), (true = (n >=? n)), (tree_elems Leaf e1), (tree_elems Leaf br), (tree_elems Leaf bl), (tree_elems Leaf e2), (tree_elems Leaf (n :: e1)), (tree_elems Leaf (n :: br)), (tree_elems Leaf (n :: bl))
+(tree_elems Leaf (n :: e2)), (tree_elems Leaf (e1 ++ e1)), (tree_elems Leaf (e1 ++ br)), (tree_elems Leaf (e1 ++ bl)), (tree_elems Leaf (e1 ++ e2)), (tree_elems Leaf (br ++ e1)), (tree_elems Leaf (br ++ br)), (tree_elems Leaf (br ++ bl)), (tree_elems Leaf (br ++ e2)), (tree_elems Leaf (bl ++ e1))
+(tree_elems Leaf (bl ++ br)), (tree_elems Leaf (bl ++ bl)), (tree_elems Leaf (bl ++ e2)), (tree_elems Leaf (e2 ++ e1)), (tree_elems Leaf (e2 ++ br)), (tree_elems Leaf (e2 ++ bl)), (tree_elems Leaf (e2 ++ e2)), (tree_elems Leaf []), (pow2heapp n n Leaf), (pow2heapp n (length e1) Leaf)
+(pow2heapp n (length br) Leaf), (pow2heapp n (length bl) Leaf), (pow2heapp n (length e2) Leaf), (pow2heapp (length e1) n Leaf), (pow2heapp (length e1) (length e1) Leaf), (pow2heapp (length e1) (length br) Leaf), (pow2heapp (length e1) (length bl) Leaf), (pow2heapp (length e1) (length e2) Leaf), (pow2heapp (length br) n Leaf), (pow2heapp (length br) (length e1) Leaf)
+(pow2heapp (length br) (length br) Leaf), (pow2heapp (length br) (length bl) Leaf), (pow2heapp (length br) (length e2) Leaf), (pow2heapp (length bl) n Leaf), (pow2heapp (length bl) (length e1) Leaf), (pow2heapp (length bl) (length br) Leaf), (pow2heapp (length bl) (length bl) Leaf), (pow2heapp (length bl) (length e2) Leaf), (pow2heapp (length e2) n Leaf), (pow2heapp (length e2) (length e1) Leaf)
+(pow2heapp (length e2) (length br) Leaf), (pow2heapp (length e2) (length bl) Leaf), (pow2heapp (length e2) (length e2) Leaf), (Permutation e1 (n :: e1)), (Permutation e1 (n :: br)), (Permutation e1 (n :: bl)), (Permutation e1 (n :: e2)), (Permutation e1 (e1 ++ e1)), (Permutation e1 (e1 ++ br)), (Permutation e1 (e1 ++ bl))
+(Permutation e1 (e1 ++ e2)), (Permutation e1 (br ++ e1)), (Permutation e1 (br ++ br)), (Permutation e1 (br ++ bl)), (Permutation e1 (br ++ e2)), (Permutation e1 (bl ++ e1)), (Permutation e1 (bl ++ br)), (Permutation e1 (bl ++ bl)), (Permutation e1 (bl ++ e2)), (Permutation e1 (e2 ++ e1))
+(Permutation e1 (e2 ++ br)), (Permutation e1 (e2 ++ bl)), (Permutation e1 (e2 ++ e2)), (Permutation e1 []), (Permutation br (n :: e1)), (Permutation br (n :: br)), (Permutation br (n :: bl)), (Permutation br (n :: e2)), (Permutation br (e1 ++ e1)), (Permutation br (e1 ++ br))
+(Permutation br (e1 ++ bl)), (Permutation br (e1 ++ e2)), (Permutation br (br ++ e1)), (Permutation br (br ++ br)), (Permutation br (br ++ bl)), (Permutation br (br ++ e2)), (Permutation br (bl ++ e1)), (Permutation br (bl ++ br)), (Permutation br (bl ++ bl)), (Permutation br (bl ++ e2))
+(Permutation br (e2 ++ e1)), (Permutation br (e2 ++ br)), (Permutation br (e2 ++ bl)), (Permutation br (e2 ++ e2)), (Permutation br []), (Permutation bl (n :: e1)), (Permutation bl (n :: br)), (Permutation bl (n :: bl)), (Permutation bl (n :: e2)), (Permutation bl (e1 ++ e1))
+(Permutation bl (e1 ++ br)), (Permutation bl (e1 ++ bl)), (Permutation bl (e1 ++ e2)), (Permutation bl (br ++ e1)), (Permutation bl (br ++ br)), (Permutation bl (br ++ bl)), (Permutation bl (br ++ e2)), (Permutation bl (bl ++ e1)), (Permutation bl (bl ++ br)), (Permutation bl (bl ++ bl))
+(Permutation bl (bl ++ e2)), (Permutation bl (e2 ++ e1)), (Permutation bl (e2 ++ br)), (Permutation bl (e2 ++ bl)), (Permutation bl (e2 ++ e2)), (Permutation bl []), (Permutation e2 (n :: e1)), (Permutation e2 (n :: br)), (Permutation e2 (n :: bl)), (Permutation e2 (n :: e2))
+(Permutation e2 (e1 ++ e1)), (Permutation e2 (e1 ++ br)), (Permutation e2 (e1 ++ bl)), (Permutation e2 (e1 ++ e2)), (Permutation e2 (br ++ e1)), (Permutation e2 (br ++ br)), (Permutation e2 (br ++ bl)), (Permutation e2 (br ++ e2)), (Permutation e2 (bl ++ e1)), (Permutation e2 (bl ++ br))
+(Permutation e2 (bl ++ bl)), (Permutation e2 (bl ++ e2)), (Permutation e2 (e2 ++ e1)), (Permutation e2 (e2 ++ br)), (Permutation e2 (e2 ++ bl)), (Permutation e2 (e2 ++ e2)), (Permutation e2 []), (Permutation (n :: e1) e1), (Permutation (n :: e1) br), (Permutation (n :: e1) bl)
+(Permutation (n :: e1) e2), (Permutation (n :: e1) (n :: br)), (Permutation (n :: e1) (n :: bl)), (Permutation (n :: e1) (n :: e2)), (Permutation (n :: e1) (e1 ++ e1)), (Permutation (n :: e1) (e1 ++ br)), (Permutation (n :: e1) (e1 ++ bl)), (Permutation (n :: e1) (e1 ++ e2)), (Permutation (n :: e1) (br ++ e1)), (Permutation (n :: e1) (br ++ br))
+(Permutation (n :: e1) (br ++ bl)), (Permutation (n :: e1) (br ++ e2)), (Permutation (n :: e1) (bl ++ e1)), (Permutation (n :: e1) (bl ++ br)), (Permutation (n :: e1) (bl ++ bl)), (Permutation (n :: e1) (bl ++ e2)), (Permutation (n :: e1) (e2 ++ e1)), (Permutation (n :: e1) (e2 ++ br)), (Permutation (n :: e1) (e2 ++ bl)), (Permutation (n :: e1) (e2 ++ e2))
+(Permutation (n :: e1) []), (Permutation (n :: br) e1), (Permutation (n :: br) br), (Permutation (n :: br) bl), (Permutation (n :: br) e2), (Permutation (n :: br) (n :: e1)), (Permutation (n :: br) (n :: bl)), (Permutation (n :: br) (n :: e2)), (Permutation (n :: br) (e1 ++ e1)), (Permutation (n :: br) (e1 ++ br))
+(Permutation (n :: br) (e1 ++ bl)), (Permutation (n :: br) (e1 ++ e2)), (Permutation (n :: br) (br ++ e1)), (Permutation (n :: br) (br ++ br)), (Permutation (n :: br) (br ++ bl)), (Permutation (n :: br) (br ++ e2)), (Permutation (n :: br) (bl ++ e1)), (Permutation (n :: br) (bl ++ br)), (Permutation (n :: br) (bl ++ bl)), (Permutation (n :: br) (bl ++ e2))
+(Permutation (n :: br) (e2 ++ e1)), (Permutation (n :: br) (e2 ++ br)), (Permutation (n :: br) (e2 ++ bl)), (Permutation (n :: br) (e2 ++ e2)), (Permutation (n :: br) []), (Permutation (n :: bl) e1), (Permutation (n :: bl) br), (Permutation (n :: bl) bl), (Permutation (n :: bl) e2), (Permutation (n :: bl) (n :: e1))
+(Permutation (n :: bl) (n :: br)), (Permutation (n :: bl) (n :: e2)), (Permutation (n :: bl) (e1 ++ e1)), (Permutation (n :: bl) (e1 ++ br)), (Permutation (n :: bl) (e1 ++ bl)), (Permutation (n :: bl) (e1 ++ e2)), (Permutation (n :: bl) (br ++ e1)), (Permutation (n :: bl) (br ++ br)), (Permutation (n :: bl) (br ++ bl)), (Permutation (n :: bl) (br ++ e2))
+(Permutation (n :: bl) (bl ++ e1)), (Permutation (n :: bl) (bl ++ br)), (Permutation (n :: bl) (bl ++ bl)), (Permutation (n :: bl) (bl ++ e2)), (Permutation (n :: bl) (e2 ++ e1)), (Permutation (n :: bl) (e2 ++ br)), (Permutation (n :: bl) (e2 ++ bl)), (Permutation (n :: bl) (e2 ++ e2)), (Permutation (n :: bl) []), (Permutation (n :: e2) e1)
+(Permutation (n :: e2) br), (Permutation (n :: e2) bl), (Permutation (n :: e2) e2), (Permutation (n :: e2) (n :: e1)), (Permutation (n :: e2) (n :: br)), (Permutation (n :: e2) (n :: bl)), (Permutation (n :: e2) (e1 ++ e1)), (Permutation (n :: e2) (e1 ++ br)), (Permutation (n :: e2) (e1 ++ bl)), (Permutation (n :: e2) (e1 ++ e2))
+(Permutation (n :: e2) (br ++ e1)), (Permutation (n :: e2) (br ++ br)), (Permutation (n :: e2) (br ++ bl)), (Permutation (n :: e2) (br ++ e2)), (Permutation (n :: e2) (bl ++ e1)), (Permutation (n :: e2) (bl ++ br)), (Permutation (n :: e2) (bl ++ bl)), (Permutation (n :: e2) (bl ++ e2)), (Permutation (n :: e2) (e2 ++ e1)), (Permutation (n :: e2) (e2 ++ br))
+(Permutation (n :: e2) (e2 ++ bl)), (Permutation (n :: e2) (e2 ++ e2)), (Permutation (n :: e2) []), (Permutation (e1 ++ e1) e1), (Permutation (e1 ++ e1) br), (Permutation (e1 ++ e1) bl), (Permutation (e1 ++ e1) e2), (Permutation (e1 ++ e1) (n :: e1)), (Permutation (e1 ++ e1) (n :: br)), (Permutation (e1 ++ e1) (n :: bl))
+(Permutation (e1 ++ e1) (n :: e2)), (Permutation (e1 ++ e1) (e1 ++ br)), (Permutation (e1 ++ e1) (e1 ++ bl)), (Permutation (e1 ++ e1) (e1 ++ e2)), (Permutation (e1 ++ e1) (br ++ e1)), (Permutation (e1 ++ e1) (br ++ br)), (Permutation (e1 ++ e1) (br ++ bl)), (Permutation (e1 ++ e1) (br ++ e2)), (Permutation (e1 ++ e1) (bl ++ e1)), (Permutation (e1 ++ e1) (bl ++ br))
+(Permutation (e1 ++ e1) (bl ++ bl)), (Permutation (e1 ++ e1) (bl ++ e2)), (Permutation (e1 ++ e1) (e2 ++ e1)), (Permutation (e1 ++ e1) (e2 ++ br)), (Permutation (e1 ++ e1) (e2 ++ bl)), (Permutation (e1 ++ e1) (e2 ++ e2)), (Permutation (e1 ++ e1) []), (Permutation (e1 ++ br) e1), (Permutation (e1 ++ br) br), (Permutation (e1 ++ br) bl)
+(Permutation (e1 ++ br) e2), (Permutation (e1 ++ br) (n :: e1)), (Permutation (e1 ++ br) (n :: br)), (Permutation (e1 ++ br) (n :: bl)), (Permutation (e1 ++ br) (n :: e2)), (Permutation (e1 ++ br) (e1 ++ e1)), (Permutation (e1 ++ br) (e1 ++ bl)), (Permutation (e1 ++ br) (e1 ++ e2)), (Permutation (e1 ++ br) (br ++ e1)), (Permutation (e1 ++ br) (br ++ br))
+(Permutation (e1 ++ br) (br ++ bl)), (Permutation (e1 ++ br) (br ++ e2)), (Permutation (e1 ++ br) (bl ++ e1)), (Permutation (e1 ++ br) (bl ++ br)), (Permutation (e1 ++ br) (bl ++ bl)), (Permutation (e1 ++ br) (bl ++ e2)), (Permutation (e1 ++ br) (e2 ++ e1)), (Permutation (e1 ++ br) (e2 ++ br)), (Permutation (e1 ++ br) (e2 ++ bl)), (Permutation (e1 ++ br) (e2 ++ e2))
+(Permutation (e1 ++ br) []), (Permutation (e1 ++ bl) e1), (Permutation (e1 ++ bl) br), (Permutation (e1 ++ bl) bl), (Permutation (e1 ++ bl) e2), (Permutation (e1 ++ bl) (n :: e1)), (Permutation (e1 ++ bl) (n :: br)), (Permutation (e1 ++ bl) (n :: bl)), (Permutation (e1 ++ bl) (n :: e2)), (Permutation (e1 ++ bl) (e1 ++ e1))
+(Permutation (e1 ++ bl) (e1 ++ br)), (Permutation (e1 ++ bl) (e1 ++ e2)), (Permutation (e1 ++ bl) (br ++ e1)), (Permutation (e1 ++ bl) (br ++ br)), (Permutation (e1 ++ bl) (br ++ bl)), (Permutation (e1 ++ bl) (br ++ e2)), (Permutation (e1 ++ bl) (bl ++ e1)), (Permutation (e1 ++ bl) (bl ++ br)), (Permutation (e1 ++ bl) (bl ++ bl)), (Permutation (e1 ++ bl) (bl ++ e2))
+(Permutation (e1 ++ bl) (e2 ++ e1)), (Permutation (e1 ++ bl) (e2 ++ br)), (Permutation (e1 ++ bl) (e2 ++ bl)), (Permutation (e1 ++ bl) (e2 ++ e2)), (Permutation (e1 ++ bl) []), (Permutation (e1 ++ e2) e1), (Permutation (e1 ++ e2) br), (Permutation (e1 ++ e2) bl), (Permutation (e1 ++ e2) e2), (Permutation (e1 ++ e2) (n :: e1))
+(Permutation (e1 ++ e2) (n :: br)), (Permutation (e1 ++ e2) (n :: bl)), (Permutation (e1 ++ e2) (n :: e2)), (Permutation (e1 ++ e2) (e1 ++ e1)), (Permutation (e1 ++ e2) (e1 ++ br)), (Permutation (e1 ++ e2) (e1 ++ bl)), (Permutation (e1 ++ e2) (br ++ e1)), (Permutation (e1 ++ e2) (br ++ br)), (Permutation (e1 ++ e2) (br ++ bl)), (Permutation (e1 ++ e2) (br ++ e2))
+(Permutation (e1 ++ e2) (bl ++ e1)), (Permutation (e1 ++ e2) (bl ++ br)), (Permutation (e1 ++ e2) (bl ++ bl)), (Permutation (e1 ++ e2) (bl ++ e2)), (Permutation (e1 ++ e2) (e2 ++ e1)), (Permutation (e1 ++ e2) (e2 ++ br)), (Permutation (e1 ++ e2) (e2 ++ bl)), (Permutation (e1 ++ e2) (e2 ++ e2)), (Permutation (e1 ++ e2) []), (Permutation (br ++ e1) e1)
+(Permutation (br ++ e1) br), (Permutation (br ++ e1) bl), (Permutation (br ++ e1) e2), (Permutation (br ++ e1) (n :: e1)), (Permutation (br ++ e1) (n :: br)), (Permutation (br ++ e1) (n :: bl)), (Permutation (br ++ e1) (n :: e2)), (Permutation (br ++ e1) (e1 ++ e1)), (Permutation (br ++ e1) (e1 ++ br)), (Permutation (br ++ e1) (e1 ++ bl))
+(Permutation (br ++ e1) (e1 ++ e2)), (Permutation (br ++ e1) (br ++ br)), (Permutation (br ++ e1) (br ++ bl)), (Permutation (br ++ e1) (br ++ e2)), (Permutation (br ++ e1) (bl ++ e1)), (Permutation (br ++ e1) (bl ++ br)), (Permutation (br ++ e1) (bl ++ bl)), (Permutation (br ++ e1) (bl ++ e2)), (Permutation (br ++ e1) (e2 ++ e1)), (Permutation (br ++ e1) (e2 ++ br))
+(Permutation (br ++ e1) (e2 ++ bl)), (Permutation (br ++ e1) (e2 ++ e2)), (Permutation (br ++ e1) []), (Permutation (br ++ br) e1), (Permutation (br ++ br) br), (Permutation (br ++ br) bl), (Permutation (br ++ br) e2), (Permutation (br ++ br) (n :: e1)), (Permutation (br ++ br) (n :: br)), (Permutation (br ++ br) (n :: bl))
+(Permutation (br ++ br) (n :: e2)), (Permutation (br ++ br) (e1 ++ e1)), (Permutation (br ++ br) (e1 ++ br)), (Permutation (br ++ br) (e1 ++ bl)), (Permutation (br ++ br) (e1 ++ e2)), (Permutation (br ++ br) (br ++ e1)), (Permutation (br ++ br) (br ++ bl)), (Permutation (br ++ br) (br ++ e2)), (Permutation (br ++ br) (bl ++ e1)), (Permutation (br ++ br) (bl ++ br))
+(Permutation (br ++ br) (bl ++ bl)), (Permutation (br ++ br) (bl ++ e2)), (Permutation (br ++ br) (e2 ++ e1)), (Permutation (br ++ br) (e2 ++ br)), (Permutation (br ++ br) (e2 ++ bl)), (Permutation (br ++ br) (e2 ++ e2)), (Permutation (br ++ br) []), (Permutation (br ++ bl) e1), (Permutation (br ++ bl) br), (Permutation (br ++ bl) bl)
+(Permutation (br ++ bl) e2), (Permutation (br ++ bl) (n :: e1)), (Permutation (br ++ bl) (n :: br)), (Permutation (br ++ bl) (n :: bl)), (Permutation (br ++ bl) (n :: e2)), (Permutation (br ++ bl) (e1 ++ e1)), (Permutation (br ++ bl) (e1 ++ br)), (Permutation (br ++ bl) (e1 ++ bl)), (Permutation (br ++ bl) (e1 ++ e2)), (Permutation (br ++ bl) (br ++ e1))
+(Permutation (br ++ bl) (br ++ br)), (Permutation (br ++ bl) (br ++ e2)), (Permutation (br ++ bl) (bl ++ e1)), (Permutation (br ++ bl) (bl ++ br)), (Permutation (br ++ bl) (bl ++ bl)), (Permutation (br ++ bl) (bl ++ e2)), (Permutation (br ++ bl) (e2 ++ e1)), (Permutation (br ++ bl) (e2 ++ br)), (Permutation (br ++ bl) (e2 ++ bl)), (Permutation (br ++ bl) (e2 ++ e2))
+(Permutation (br ++ bl) []), (Permutation (br ++ e2) e1), (Permutation (br ++ e2) br), (Permutation (br ++ e2) bl), (Permutation (br ++ e2) e2), (Permutation (br ++ e2) (n :: e1)), (Permutation (br ++ e2) (n :: br)), (Permutation (br ++ e2) (n :: bl)), (Permutation (br ++ e2) (n :: e2)), (Permutation (br ++ e2) (e1 ++ e1))
+(Permutation (br ++ e2) (e1 ++ br)), (Permutation (br ++ e2) (e1 ++ bl)), (Permutation (br ++ e2) (e1 ++ e2)), (Permutation (br ++ e2) (br ++ e1)), (Permutation (br ++ e2) (br ++ br)), (Permutation (br ++ e2) (br ++ bl)), (Permutation (br ++ e2) (bl ++ e1)), (Permutation (br ++ e2) (bl ++ br)), (Permutation (br ++ e2) (bl ++ bl)), (Permutation (br ++ e2) (bl ++ e2))
+(Permutation (br ++ e2) (e2 ++ e1)), (Permutation (br ++ e2) (e2 ++ br)), (Permutation (br ++ e2) (e2 ++ bl)), (Permutation (br ++ e2) (e2 ++ e2)), (Permutation (br ++ e2) []), (Permutation (bl ++ e1) e1), (Permutation (bl ++ e1) br), (Permutation (bl ++ e1) bl), (Permutation (bl ++ e1) e2), (Permutation (bl ++ e1) (n :: e1))
+(Permutation (bl ++ e1) (n :: br)), (Permutation (bl ++ e1) (n :: bl)), (Permutation (bl ++ e1) (n :: e2)), (Permutation (bl ++ e1) (e1 ++ e1)), (Permutation (bl ++ e1) (e1 ++ br)), (Permutation (bl ++ e1) (e1 ++ bl)), (Permutation (bl ++ e1) (e1 ++ e2)), (Permutation (bl ++ e1) (br ++ e1)), (Permutation (bl ++ e1) (br ++ br)), (Permutation (bl ++ e1) (br ++ bl))
+(Permutation (bl ++ e1) (br ++ e2)), (Permutation (bl ++ e1) (bl ++ br)), (Permutation (bl ++ e1) (bl ++ bl)), (Permutation (bl ++ e1) (bl ++ e2)), (Permutation (bl ++ e1) (e2 ++ e1)), (Permutation (bl ++ e1) (e2 ++ br)), (Permutation (bl ++ e1) (e2 ++ bl)), (Permutation (bl ++ e1) (e2 ++ e2)), (Permutation (bl ++ e1) []), (Permutation (bl ++ br) e1)
+(Permutation (bl ++ br) br), (Permutation (bl ++ br) bl), (Permutation (bl ++ br) e2), (Permutation (bl ++ br) (n :: e1)), (Permutation (bl ++ br) (n :: br)), (Permutation (bl ++ br) (n :: bl)), (Permutation (bl ++ br) (n :: e2)), (Permutation (bl ++ br) (e1 ++ e1)), (Permutation (bl ++ br) (e1 ++ br)), (Permutation (bl ++ br) (e1 ++ bl))
+(Permutation (bl ++ br) (e1 ++ e2)), (Permutation (bl ++ br) (br ++ e1)), (Permutation (bl ++ br) (br ++ br)), (Permutation (bl ++ br) (br ++ bl)), (Permutation (bl ++ br) (br ++ e2)), (Permutation (bl ++ br) (bl ++ e1)), (Permutation (bl ++ br) (bl ++ bl)), (Permutation (bl ++ br) (bl ++ e2)), (Permutation (bl ++ br) (e2 ++ e1)), (Permutation (bl ++ br) (e2 ++ br))
+(Permutation (bl ++ br) (e2 ++ bl)), (Permutation (bl ++ br) (e2 ++ e2)), (Permutation (bl ++ br) []), (Permutation (bl ++ bl) e1), (Permutation (bl ++ bl) br), (Permutation (bl ++ bl) bl), (Permutation (bl ++ bl) e2), (Permutation (bl ++ bl) (n :: e1)), (Permutation (bl ++ bl) (n :: br)), (Permutation (bl ++ bl) (n :: bl))
+(Permutation (bl ++ bl) (n :: e2)), (Permutation (bl ++ bl) (e1 ++ e1)), (Permutation (bl ++ bl) (e1 ++ br)), (Permutation (bl ++ bl) (e1 ++ bl)), (Permutation (bl ++ bl) (e1 ++ e2)), (Permutation (bl ++ bl) (br ++ e1)), (Permutation (bl ++ bl) (br ++ br)), (Permutation (bl ++ bl) (br ++ bl)), (Permutation (bl ++ bl) (br ++ e2)), (Permutation (bl ++ bl) (bl ++ e1))
+(Permutation (bl ++ bl) (bl ++ br)), (Permutation (bl ++ bl) (bl ++ e2)), (Permutation (bl ++ bl) (e2 ++ e1)), (Permutation (bl ++ bl) (e2 ++ br)), (Permutation (bl ++ bl) (e2 ++ bl)), (Permutation (bl ++ bl) (e2 ++ e2)), (Permutation (bl ++ bl) []), (Permutation (bl ++ e2) e1), (Permutation (bl ++ e2) br), (Permutation (bl ++ e2) bl)
+(Permutation (bl ++ e2) e2), (Permutation (bl ++ e2) (n :: e1)), (Permutation (bl ++ e2) (n :: br)), (Permutation (bl ++ e2) (n :: bl)), (Permutation (bl ++ e2) (n :: e2)), (Permutation (bl ++ e2) (e1 ++ e1)), (Permutation (bl ++ e2) (e1 ++ br)), (Permutation (bl ++ e2) (e1 ++ bl)), (Permutation (bl ++ e2) (e1 ++ e2)), (Permutation (bl ++ e2) (br ++ e1))
+(Permutation (bl ++ e2) (br ++ br)), (Permutation (bl ++ e2) (br ++ bl)), (Permutation (bl ++ e2) (br ++ e2)), (Permutation (bl ++ e2) (bl ++ e1)), (Permutation (bl ++ e2) (bl ++ br)), (Permutation (bl ++ e2) (bl ++ bl)), (Permutation (bl ++ e2) (e2 ++ e1)), (Permutation (bl ++ e2) (e2 ++ br)), (Permutation (bl ++ e2) (e2 ++ bl)), (Permutation (bl ++ e2) (e2 ++ e2))
+(Permutation (bl ++ e2) []), (Permutation (e2 ++ e1) e1), (Permutation (e2 ++ e1) br), (Permutation (e2 ++ e1) bl), (Permutation (e2 ++ e1) e2), (Permutation (e2 ++ e1) (n :: e1)), (Permutation (e2 ++ e1) (n :: br)), (Permutation (e2 ++ e1) (n :: bl)), (Permutation (e2 ++ e1) (n :: e2)), (Permutation (e2 ++ e1) (e1 ++ e1))
+(Permutation (e2 ++ e1) (e1 ++ br)), (Permutation (e2 ++ e1) (e1 ++ bl)), (Permutation (e2 ++ e1) (e1 ++ e2)), (Permutation (e2 ++ e1) (br ++ e1)), (Permutation (e2 ++ e1) (br ++ br)), (Permutation (e2 ++ e1) (br ++ bl)), (Permutation (e2 ++ e1) (br ++ e2)), (Permutation (e2 ++ e1) (bl ++ e1)), (Permutation (e2 ++ e1) (bl ++ br)), (Permutation (e2 ++ e1) (bl ++ bl))
+(Permutation (e2 ++ e1) (bl ++ e2)), (Permutation (e2 ++ e1) (e2 ++ br)), (Permutation (e2 ++ e1) (e2 ++ bl)), (Permutation (e2 ++ e1) (e2 ++ e2)), (Permutation (e2 ++ e1) []), (Permutation (e2 ++ br) e1), (Permutation (e2 ++ br) br), (Permutation (e2 ++ br) bl), (Permutation (e2 ++ br) e2), (Permutation (e2 ++ br) (n :: e1))
+(Permutation (e2 ++ br) (n :: br)), (Permutation (e2 ++ br) (n :: bl)), (Permutation (e2 ++ br) (n :: e2)), (Permutation (e2 ++ br) (e1 ++ e1)), (Permutation (e2 ++ br) (e1 ++ br)), (Permutation (e2 ++ br) (e1 ++ bl)), (Permutation (e2 ++ br) (e1 ++ e2)), (Permutation (e2 ++ br) (br ++ e1)), (Permutation (e2 ++ br) (br ++ br)), (Permutation (e2 ++ br) (br ++ bl))
+(Permutation (e2 ++ br) (br ++ e2)), (Permutation (e2 ++ br) (bl ++ e1)), (Permutation (e2 ++ br) (bl ++ br)), (Permutation (e2 ++ br) (bl ++ bl)), (Permutation (e2 ++ br) (bl ++ e2)), (Permutation (e2 ++ br) (e2 ++ e1)), (Permutation (e2 ++ br) (e2 ++ bl)), (Permutation (e2 ++ br) (e2 ++ e2)), (Permutation (e2 ++ br) []), (Permutation (e2 ++ bl) e1)
+(Permutation (e2 ++ bl) br), (Permutation (e2 ++ bl) bl), (Permutation (e2 ++ bl) e2), (Permutation (e2 ++ bl) (n :: e1)), (Permutation (e2 ++ bl) (n :: br)), (Permutation (e2 ++ bl) (n :: bl)), (Permutation (e2 ++ bl) (n :: e2)), (Permutation (e2 ++ bl) (e1 ++ e1)), (Permutation (e2 ++ bl) (e1 ++ br)), (Permutation (e2 ++ bl) (e1 ++ bl))
+(Permutation (e2 ++ bl) (e1 ++ e2)), (Permutation (e2 ++ bl) (br ++ e1)), (Permutation (e2 ++ bl) (br ++ br)), (Permutation (e2 ++ bl) (br ++ bl)), (Permutation (e2 ++ bl) (br ++ e2)), (Permutation (e2 ++ bl) (bl ++ e1)), (Permutation (e2 ++ bl) (bl ++ br)), (Permutation (e2 ++ bl) (bl ++ bl)), (Permutation (e2 ++ bl) (bl ++ e2)), (Permutation (e2 ++ bl) (e2 ++ e1))
+(Permutation (e2 ++ bl) (e2 ++ br)), (Permutation (e2 ++ bl) (e2 ++ e2)), (Permutation (e2 ++ bl) []), (Permutation (e2 ++ e2) e1), (Permutation (e2 ++ e2) br), (Permutation (e2 ++ e2) bl), (Permutation (e2 ++ e2) e2), (Permutation (e2 ++ e2) (n :: e1)), (Permutation (e2 ++ e2) (n :: br)), (Permutation (e2 ++ e2) (n :: bl))
+(Permutation (e2 ++ e2) (n :: e2)), (Permutation (e2 ++ e2) (e1 ++ e1)), (Permutation (e2 ++ e2) (e1 ++ br)), (Permutation (e2 ++ e2) (e1 ++ bl)), (Permutation (e2 ++ e2) (e1 ++ e2)), (Permutation (e2 ++ e2) (br ++ e1)), (Permutation (e2 ++ e2) (br ++ br)), (Permutation (e2 ++ e2) (br ++ bl)), (Permutation (e2 ++ e2) (br ++ e2)), (Permutation (e2 ++ e2) (bl ++ e1))
+(Permutation (e2 ++ e2) (bl ++ br)), (Permutation (e2 ++ e2) (bl ++ bl)), (Permutation (e2 ++ e2) (bl ++ e2)), (Permutation (e2 ++ e2) (e2 ++ e1)), (Permutation (e2 ++ e2) (e2 ++ br)), (Permutation (e2 ++ e2) (e2 ++ bl)), (Permutation (e2 ++ e2) []), (Permutation [] e1), (Permutation [] br), (Permutation [] bl)
+(Permutation [] e2), (Permutation [] (n :: e1)), (Permutation [] (n :: br)), (Permutation [] (n :: bl)), (Permutation [] (n :: e2)), (Permutation [] (e1 ++ e1)), (Permutation [] (e1 ++ br)), (Permutation [] (e1 ++ bl)), (Permutation [] (e1 ++ e2)), (Permutation [] (br ++ e1))
+(Permutation [] (br ++ br)), (Permutation [] (br ++ bl)), (Permutation [] (br ++ e2)), (Permutation [] (bl ++ e1)), (Permutation [] (bl ++ br)), (Permutation [] (bl ++ bl)), (Permutation [] (bl ++ e2)), (Permutation [] (e2 ++ e1)), (Permutation [] (e2 ++ br)), (Permutation [] (e2 ++ bl))
+(Permutation [] (e2 ++ e2)), (In n (n :: e1)), (In n (n :: br)), (In n (n :: bl)), (In n (n :: e2)), (In n (e1 ++ e1)), (In n (e1 ++ br)), (In n (e1 ++ bl)), (In n (e1 ++ e2)), (In n (br ++ e1))
+(In n (br ++ br)), (In n (br ++ bl)), (In n (br ++ e2)), (In n (bl ++ e1)), (In n (bl ++ br)), (In n (bl ++ bl)), (In n (bl ++ e2)), (In n (e2 ++ e1)), (In n (e2 ++ br)), (In n (e2 ++ bl))
+(In n (e2 ++ e2)), (In (length e1) e1), (In (length e1) br), (In (length e1) bl), (In (length e1) e2), (In (length e1) (n :: e1)), (In (length e1) (n :: br)), (In (length e1) (n :: bl)), (In (length e1) (n :: e2)), (In (length e1) (e1 ++ e1))
+(In (length e1) (e1 ++ br)), (In (length e1) (e1 ++ bl)), (In (length e1) (e1 ++ e2)), (In (length e1) (br ++ e1)), (In (length e1) (br ++ br)), (In (length e1) (br ++ bl)), (In (length e1) (br ++ e2)), (In (length e1) (bl ++ e1)), (In (length e1) (bl ++ br)), (In (length e1) (bl ++ bl))
+(In (length e1) (bl ++ e2)), (In (length e1) (e2 ++ e1)), (In (length e1) (e2 ++ br)), (In (length e1) (e2 ++ bl)), (In (length e1) (e2 ++ e2)), (In (length br) e1), (In (length br) br), (In (length br) bl), (In (length br) e2), (In (length br) (n :: e1))
+(In (length br) (n :: br)), (In (length br) (n :: bl)), (In (length br) (n :: e2)), (In (length br) (e1 ++ e1)), (In (length br) (e1 ++ br)), (In (length br) (e1 ++ bl)), (In (length br) (e1 ++ e2)), (In (length br) (br ++ e1)), (In (length br) (br ++ br)), (In (length br) (br ++ bl))
+(In (length br) (br ++ e2)), (In (length br) (bl ++ e1)), (In (length br) (bl ++ br)), (In (length br) (bl ++ bl)), (In (length br) (bl ++ e2)), (In (length br) (e2 ++ e1)), (In (length br) (e2 ++ br)), (In (length br) (e2 ++ bl)), (In (length br) (e2 ++ e2)), (In (length bl) e1)
+(In (length bl) br), (In (length bl) bl), (In (length bl) e2), (In (length bl) (n :: e1)), (In (length bl) (n :: br)), (In (length bl) (n :: bl)), (In (length bl) (n :: e2)), (In (length bl) (e1 ++ e1)), (In (length bl) (e1 ++ br)), (In (length bl) (e1 ++ bl))
+(In (length bl) (e1 ++ e2)), (In (length bl) (br ++ e1)), (In (length bl) (br ++ br)), (In (length bl) (br ++ bl)), (In (length bl) (br ++ e2)), (In (length bl) (bl ++ e1)), (In (length bl) (bl ++ br)), (In (length bl) (bl ++ bl)), (In (length bl) (bl ++ e2)), (In (length bl) (e2 ++ e1))
+(In (length bl) (e2 ++ br)), (In (length bl) (e2 ++ bl)), (In (length bl) (e2 ++ e2)), (In (length e2) e1), (In (length e2) br), (In (length e2) bl), (In (length e2) e2), (In (length e2) (n :: e1)), (In (length e2) (n :: br)), (In (length e2) (n :: bl))
+(In (length e2) (n :: e2)), (In (length e2) (e1 ++ e1)), (In (length e2) (e1 ++ br)), (In (length e2) (e1 ++ bl)), (In (length e2) (e1 ++ e2)), (In (length e2) (br ++ e1)), (In (length e2) (br ++ br)), (In (length e2) (br ++ bl)), (In (length e2) (br ++ e2)), (In (length e2) (bl ++ e1))
+(In (length e2) (bl ++ br)), (In (length e2) (bl ++ bl)), (In (length e2) (bl ++ e2)), (In (length e2) (e2 ++ e1)), (In (length e2) (e2 ++ br)), (In (length e2) (e2 ++ bl)), (In (length e2) (e2 ++ e2)), (n < length e1), (n < length br), (n < length bl)
+(n < length e2), (length e1 < n), (length e1 < length br), (length e1 < length bl), (length e1 < length e2), (length br < n), (length br < length e1), (length br < length bl), (length br < length e2), (length bl < n)
+(length bl < length e1), (length bl < length br), (length bl < length e2), (length e2 < n), (length e2 < length e1), (length e2 < length br), (length e2 < length bl), (n <= length e1), (n <= length br), (n <= length bl)
+(n <= length e2), (length e1 <= n), (length e1 <= length br), (length e1 <= length bl), (length e1 <= length e2), (length br <= n), (length br <= length e1), (length br <= length bl), (length br <= length e2), (length bl <= n)
+(length bl <= length e1), (length bl <= length br), (length bl <= length e2), (length e2 <= n), (length e2 <= length e1), (length e2 <= length br), (length e2 <= length bl), (~ Permutation e1 e1), (~ Permutation e1 br), (~ Permutation e1 bl)
+(~ Permutation e1 e2), (~ Permutation br e1), (~ Permutation br br), (~ Permutation br bl), (~ Permutation br e2), (~ Permutation bl e1), (~ Permutation bl br), (~ Permutation bl bl), (~ Permutation bl e2), (~ Permutation e2 e1)
+(~ Permutation e2 br), (~ Permutation e2 bl), (~ Permutation e2 e2), (~ In n e1), (~ In n br), (~ In n bl), (~ In n e2), (~ n < n), (~ n <= n), (n <> n)
+(e1 <> e1), (e1 <> br), (e1 <> bl), (e1 <> e2), (br <> e1), (br <> br), (br <> bl), (br <> e2), (bl <> e1), (bl <> br)
+(bl <> bl), (bl <> e2), (e2 <> e1), (e2 <> br), (e2 <> bl), (e2 <> e2), (None = Some e1), (None = Some br), (None = Some bl), (None = Some e2)
+(length e1 = n), (length br = n), (length bl = n), (length e2 = n), (n :: e1 = e1), (n :: e1 = br), (n :: e1 = bl), (n :: e1 = e2), (n :: e1 = e1 ++ e1), (n :: e1 = e1 ++ br)
+(n :: e1 = e1 ++ bl), (n :: e1 = e1 ++ e2), (n :: e1 = br ++ e1), (n :: e1 = br ++ br), (n :: e1 = br ++ bl), (n :: e1 = br ++ e2), (n :: e1 = bl ++ e1), (n :: e1 = bl ++ br), (n :: e1 = bl ++ bl), (n :: e1 = bl ++ e2)
+(n :: e1 = e2 ++ e1), (n :: e1 = e2 ++ br), (n :: e1 = e2 ++ bl), (n :: e1 = e2 ++ e2), (n :: e1 = []), (n :: br = e1), (n :: br = br), (n :: br = bl), (n :: br = e2), (n :: br = e1 ++ e1)
+(n :: br = e1 ++ br), (n :: br = e1 ++ bl), (n :: br = e1 ++ e2), (n :: br = br ++ e1), (n :: br = br ++ br), (n :: br = br ++ bl), (n :: br = br ++ e2), (n :: br = bl ++ e1), (n :: br = bl ++ br), (n :: br = bl ++ bl)
+(n :: br = bl ++ e2), (n :: br = e2 ++ e1), (n :: br = e2 ++ br), (n :: br = e2 ++ bl), (n :: br = e2 ++ e2), (n :: br = []), (n :: bl = e1), (n :: bl = br), (n :: bl = bl), (n :: bl = e2)
+(n :: bl = e1 ++ e1), (n :: bl = e1 ++ br), (n :: bl = e1 ++ bl), (n :: bl = e1 ++ e2), (n :: bl = br ++ e1), (n :: bl = br ++ br), (n :: bl = br ++ bl), (n :: bl = br ++ e2), (n :: bl = bl ++ e1), (n :: bl = bl ++ br)
+(n :: bl = bl ++ bl), (n :: bl = bl ++ e2), (n :: bl = e2 ++ e1), (n :: bl = e2 ++ br), (n :: bl = e2 ++ bl), (n :: bl = e2 ++ e2), (n :: bl = []), (n :: e2 = e1), (n :: e2 = br), (n :: e2 = bl)
+(n :: e2 = e2), (n :: e2 = e1 ++ e1), (n :: e2 = e1 ++ br), (n :: e2 = e1 ++ bl), (n :: e2 = e1 ++ e2), (n :: e2 = br ++ e1), (n :: e2 = br ++ br), (n :: e2 = br ++ bl), (n :: e2 = br ++ e2), (n :: e2 = bl ++ e1)
+(n :: e2 = bl ++ br), (n :: e2 = bl ++ bl), (n :: e2 = bl ++ e2), (n :: e2 = e2 ++ e1), (n :: e2 = e2 ++ br), (n :: e2 = e2 ++ bl), (n :: e2 = e2 ++ e2), (n :: e2 = []), (e1 ++ e1 = e1), (e1 ++ e1 = br)
+(e1 ++ e1 = bl), (e1 ++ e1 = e2), (e1 ++ br = e1), (e1 ++ br = br), (e1 ++ br = bl), (e1 ++ br = e2), (e1 ++ bl = e1), (e1 ++ bl = br), (e1 ++ bl = bl), (e1 ++ bl = e2)
+(e1 ++ e2 = e1), (e1 ++ e2 = br), (e1 ++ e2 = bl), (e1 ++ e2 = e2), (br ++ e1 = e1), (br ++ e1 = br), (br ++ e1 = bl), (br ++ e1 = e2), (br ++ br = e1), (br ++ br = br)
+(br ++ br = bl), (br ++ br = e2), (br ++ bl = e1), (br ++ bl = br), (br ++ bl = bl), (br ++ bl = e2), (br ++ e2 = e1), (br ++ e2 = br), (br ++ e2 = bl), (br ++ e2 = e2)
+(bl ++ e1 = e1), (bl ++ e1 = br), (bl ++ e1 = bl), (bl ++ e1 = e2), (bl ++ br = e1), (bl ++ br = br), (bl ++ br = bl), (bl ++ br = e2), (bl ++ bl = e1), (bl ++ bl = br)
+(bl ++ bl = bl), (bl ++ bl = e2), (bl ++ e2 = e1), (bl ++ e2 = br), (bl ++ e2 = bl), (bl ++ e2 = e2), (e2 ++ e1 = e1), (e2 ++ e1 = br), (e2 ++ e1 = bl), (e2 ++ e1 = e2)
+(e2 ++ br = e1), (e2 ++ br = br), (e2 ++ br = bl), (e2 ++ br = e2), (e2 ++ bl = e1), (e2 ++ bl = br), (e2 ++ bl = bl), (e2 ++ bl = e2), (e2 ++ e2 = e1), (e2 ++ e2 = br)
+(e2 ++ e2 = bl), (e2 ++ e2 = e2), ([] = e1), ([] = br), ([] = bl), ([] = e2), ([] = e1 ++ e1), ([] = e1 ++ br), ([] = e1 ++ bl), ([] = e1 ++ e2)
+([] = br ++ e1), ([] = br ++ br), ([] = br ++ bl), ([] = br ++ e2), ([] = bl ++ e1), ([] = bl ++ br), ([] = bl ++ bl), ([] = bl ++ e2), ([] = e2 ++ e1), ([] = e2 ++ br)
+([] = e2 ++ bl), ([] = e2 ++ e2), (None = Some n), ((n >? n) = (n >=? n))
+
+Label: 1 (1)
+(Permutation e1 e1), (Permutation e1 br), (Permutation e1 bl), (Permutation e1 e2), (Permutation br e1), (Permutation br br), (Permutation br bl), (Permutation br e2), (Permutation bl e1), (Permutation bl br)
+(Permutation bl bl), (Permutation bl e2), (Permutation e2 e1), (Permutation e2 br), (Permutation e2 bl), (Permutation e2 e2), (In n e1), (In n br), (In n bl), (In n e2)
+(n < n), (n <= n), (n = n), (e1 = e1), (e1 = br), (e1 = bl), (e1 = e2), (br = e1), (br = br), (br = bl)
+(br = e2), (bl = e1), (bl = br), (bl = bl), (bl = e2), (e2 = e1), (e2 = br), (e2 = bl), (e2 = e2), (false = (n >? n))
+(false = (n >=? n)), (true = (n >? n)), (true = (n >=? n)), (tree_elems Leaf e1), (tree_elems Leaf br), (tree_elems Leaf bl), (tree_elems Leaf e2), (tree_elems Leaf (n :: e1)), (tree_elems Leaf (n :: br)), (tree_elems Leaf (n :: bl))
+(tree_elems Leaf (n :: e2)), (tree_elems Leaf (e1 ++ e1)), (tree_elems Leaf (e1 ++ br)), (tree_elems Leaf (e1 ++ bl)), (tree_elems Leaf (e1 ++ e2)), (tree_elems Leaf (br ++ e1)), (tree_elems Leaf (br ++ br)), (tree_elems Leaf (br ++ bl)), (tree_elems Leaf (br ++ e2)), (tree_elems Leaf (bl ++ e1))
+(tree_elems Leaf (bl ++ br)), (tree_elems Leaf (bl ++ bl)), (tree_elems Leaf (bl ++ e2)), (tree_elems Leaf (e2 ++ e1)), (tree_elems Leaf (e2 ++ br)), (tree_elems Leaf (e2 ++ bl)), (tree_elems Leaf (e2 ++ e2)), (tree_elems Leaf []), (pow2heapp n n Leaf), (pow2heapp n (length e1) Leaf)
+(pow2heapp n (length br) Leaf), (pow2heapp n (length bl) Leaf), (pow2heapp n (length e2) Leaf), (pow2heapp (length e1) n Leaf), (pow2heapp (length e1) (length e1) Leaf), (pow2heapp (length e1) (length br) Leaf), (pow2heapp (length e1) (length bl) Leaf), (pow2heapp (length e1) (length e2) Leaf), (pow2heapp (length br) n Leaf), (pow2heapp (length br) (length e1) Leaf)
+(pow2heapp (length br) (length br) Leaf), (pow2heapp (length br) (length bl) Leaf), (pow2heapp (length br) (length e2) Leaf), (pow2heapp (length bl) n Leaf), (pow2heapp (length bl) (length e1) Leaf), (pow2heapp (length bl) (length br) Leaf), (pow2heapp (length bl) (length bl) Leaf), (pow2heapp (length bl) (length e2) Leaf), (pow2heapp (length e2) n Leaf), (pow2heapp (length e2) (length e1) Leaf)
+(pow2heapp (length e2) (length br) Leaf), (pow2heapp (length e2) (length bl) Leaf), (pow2heapp (length e2) (length e2) Leaf), (Permutation e1 (n :: e1)), (Permutation e1 (n :: br)), (Permutation e1 (n :: bl)), (Permutation e1 (n :: e2)), (Permutation e1 (e1 ++ e1)), (Permutation e1 (e1 ++ br)), (Permutation e1 (e1 ++ bl))
+(Permutation e1 (e1 ++ e2)), (Permutation e1 (br ++ e1)), (Permutation e1 (br ++ br)), (Permutation e1 (br ++ bl)), (Permutation e1 (br ++ e2)), (Permutation e1 (bl ++ e1)), (Permutation e1 (bl ++ br)), (Permutation e1 (bl ++ bl)), (Permutation e1 (bl ++ e2)), (Permutation e1 (e2 ++ e1))
+(Permutation e1 (e2 ++ br)), (Permutation e1 (e2 ++ bl)), (Permutation e1 (e2 ++ e2)), (Permutation e1 []), (Permutation br (n :: e1)), (Permutation br (n :: br)), (Permutation br (n :: bl)), (Permutation br (n :: e2)), (Permutation br (e1 ++ e1)), (Permutation br (e1 ++ br))
+(Permutation br (e1 ++ bl)), (Permutation br (e1 ++ e2)), (Permutation br (br ++ e1)), (Permutation br (br ++ br)), (Permutation br (br ++ bl)), (Permutation br (br ++ e2)), (Permutation br (bl ++ e1)), (Permutation br (bl ++ br)), (Permutation br (bl ++ bl)), (Permutation br (bl ++ e2))
+(Permutation br (e2 ++ e1)), (Permutation br (e2 ++ br)), (Permutation br (e2 ++ bl)), (Permutation br (e2 ++ e2)), (Permutation br []), (Permutation bl (n :: e1)), (Permutation bl (n :: br)), (Permutation bl (n :: bl)), (Permutation bl (n :: e2)), (Permutation bl (e1 ++ e1))
+(Permutation bl (e1 ++ br)), (Permutation bl (e1 ++ bl)), (Permutation bl (e1 ++ e2)), (Permutation bl (br ++ e1)), (Permutation bl (br ++ br)), (Permutation bl (br ++ bl)), (Permutation bl (br ++ e2)), (Permutation bl (bl ++ e1)), (Permutation bl (bl ++ br)), (Permutation bl (bl ++ bl))
+(Permutation bl (bl ++ e2)), (Permutation bl (e2 ++ e1)), (Permutation bl (e2 ++ br)), (Permutation bl (e2 ++ bl)), (Permutation bl (e2 ++ e2)), (Permutation bl []), (Permutation e2 (n :: e1)), (Permutation e2 (n :: br)), (Permutation e2 (n :: bl)), (Permutation e2 (n :: e2))
+(Permutation e2 (e1 ++ e1)), (Permutation e2 (e1 ++ br)), (Permutation e2 (e1 ++ bl)), (Permutation e2 (e1 ++ e2)), (Permutation e2 (br ++ e1)), (Permutation e2 (br ++ br)), (Permutation e2 (br ++ bl)), (Permutation e2 (br ++ e2)), (Permutation e2 (bl ++ e1)), (Permutation e2 (bl ++ br))
+(Permutation e2 (bl ++ bl)), (Permutation e2 (bl ++ e2)), (Permutation e2 (e2 ++ e1)), (Permutation e2 (e2 ++ br)), (Permutation e2 (e2 ++ bl)), (Permutation e2 (e2 ++ e2)), (Permutation e2 []), (Permutation (n :: e1) e1), (Permutation (n :: e1) br), (Permutation (n :: e1) bl)
+(Permutation (n :: e1) e2), (Permutation (n :: e1) (n :: br)), (Permutation (n :: e1) (n :: bl)), (Permutation (n :: e1) (n :: e2)), (Permutation (n :: e1) (e1 ++ e1)), (Permutation (n :: e1) (e1 ++ br)), (Permutation (n :: e1) (e1 ++ bl)), (Permutation (n :: e1) (e1 ++ e2)), (Permutation (n :: e1) (br ++ e1)), (Permutation (n :: e1) (br ++ br))
+(Permutation (n :: e1) (br ++ bl)), (Permutation (n :: e1) (br ++ e2)), (Permutation (n :: e1) (bl ++ e1)), (Permutation (n :: e1) (bl ++ br)), (Permutation (n :: e1) (bl ++ bl)), (Permutation (n :: e1) (bl ++ e2)), (Permutation (n :: e1) (e2 ++ e1)), (Permutation (n :: e1) (e2 ++ br)), (Permutation (n :: e1) (e2 ++ bl)), (Permutation (n :: e1) (e2 ++ e2))
+(Permutation (n :: e1) []), (Permutation (n :: br) e1), (Permutation (n :: br) br), (Permutation (n :: br) bl), (Permutation (n :: br) e2), (Permutation (n :: br) (n :: e1)), (Permutation (n :: br) (n :: bl)), (Permutation (n :: br) (n :: e2)), (Permutation (n :: br) (e1 ++ e1)), (Permutation (n :: br) (e1 ++ br))
+(Permutation (n :: br) (e1 ++ bl)), (Permutation (n :: br) (e1 ++ e2)), (Permutation (n :: br) (br ++ e1)), (Permutation (n :: br) (br ++ br)), (Permutation (n :: br) (br ++ bl)), (Permutation (n :: br) (br ++ e2)), (Permutation (n :: br) (bl ++ e1)), (Permutation (n :: br) (bl ++ br)), (Permutation (n :: br) (bl ++ bl)), (Permutation (n :: br) (bl ++ e2))
+(Permutation (n :: br) (e2 ++ e1)), (Permutation (n :: br) (e2 ++ br)), (Permutation (n :: br) (e2 ++ bl)), (Permutation (n :: br) (e2 ++ e2)), (Permutation (n :: br) []), (Permutation (n :: bl) e1), (Permutation (n :: bl) br), (Permutation (n :: bl) bl), (Permutation (n :: bl) e2), (Permutation (n :: bl) (n :: e1))
+(Permutation (n :: bl) (n :: br)), (Permutation (n :: bl) (n :: e2)), (Permutation (n :: bl) (e1 ++ e1)), (Permutation (n :: bl) (e1 ++ br)), (Permutation (n :: bl) (e1 ++ bl)), (Permutation (n :: bl) (e1 ++ e2)), (Permutation (n :: bl) (br ++ e1)), (Permutation (n :: bl) (br ++ br)), (Permutation (n :: bl) (br ++ bl)), (Permutation (n :: bl) (br ++ e2))
+(Permutation (n :: bl) (bl ++ e1)), (Permutation (n :: bl) (bl ++ br)), (Permutation (n :: bl) (bl ++ bl)), (Permutation (n :: bl) (bl ++ e2)), (Permutation (n :: bl) (e2 ++ e1)), (Permutation (n :: bl) (e2 ++ br)), (Permutation (n :: bl) (e2 ++ bl)), (Permutation (n :: bl) (e2 ++ e2)), (Permutation (n :: bl) []), (Permutation (n :: e2) e1)
+(Permutation (n :: e2) br), (Permutation (n :: e2) bl), (Permutation (n :: e2) e2), (Permutation (n :: e2) (n :: e1)), (Permutation (n :: e2) (n :: br)), (Permutation (n :: e2) (n :: bl)), (Permutation (n :: e2) (e1 ++ e1)), (Permutation (n :: e2) (e1 ++ br)), (Permutation (n :: e2) (e1 ++ bl)), (Permutation (n :: e2) (e1 ++ e2))
+(Permutation (n :: e2) (br ++ e1)), (Permutation (n :: e2) (br ++ br)), (Permutation (n :: e2) (br ++ bl)), (Permutation (n :: e2) (br ++ e2)), (Permutation (n :: e2) (bl ++ e1)), (Permutation (n :: e2) (bl ++ br)), (Permutation (n :: e2) (bl ++ bl)), (Permutation (n :: e2) (bl ++ e2)), (Permutation (n :: e2) (e2 ++ e1)), (Permutation (n :: e2) (e2 ++ br))
+(Permutation (n :: e2) (e2 ++ bl)), (Permutation (n :: e2) (e2 ++ e2)), (Permutation (n :: e2) []), (Permutation (e1 ++ e1) e1), (Permutation (e1 ++ e1) br), (Permutation (e1 ++ e1) bl), (Permutation (e1 ++ e1) e2), (Permutation (e1 ++ e1) (n :: e1)), (Permutation (e1 ++ e1) (n :: br)), (Permutation (e1 ++ e1) (n :: bl))
+(Permutation (e1 ++ e1) (n :: e2)), (Permutation (e1 ++ e1) (e1 ++ br)), (Permutation (e1 ++ e1) (e1 ++ bl)), (Permutation (e1 ++ e1) (e1 ++ e2)), (Permutation (e1 ++ e1) (br ++ e1)), (Permutation (e1 ++ e1) (br ++ br)), (Permutation (e1 ++ e1) (br ++ bl)), (Permutation (e1 ++ e1) (br ++ e2)), (Permutation (e1 ++ e1) (bl ++ e1)), (Permutation (e1 ++ e1) (bl ++ br))
+(Permutation (e1 ++ e1) (bl ++ bl)), (Permutation (e1 ++ e1) (bl ++ e2)), (Permutation (e1 ++ e1) (e2 ++ e1)), (Permutation (e1 ++ e1) (e2 ++ br)), (Permutation (e1 ++ e1) (e2 ++ bl)), (Permutation (e1 ++ e1) (e2 ++ e2)), (Permutation (e1 ++ e1) []), (Permutation (e1 ++ br) e1), (Permutation (e1 ++ br) br), (Permutation (e1 ++ br) bl)
+(Permutation (e1 ++ br) e2), (Permutation (e1 ++ br) (n :: e1)), (Permutation (e1 ++ br) (n :: br)), (Permutation (e1 ++ br) (n :: bl)), (Permutation (e1 ++ br) (n :: e2)), (Permutation (e1 ++ br) (e1 ++ e1)), (Permutation (e1 ++ br) (e1 ++ bl)), (Permutation (e1 ++ br) (e1 ++ e2)), (Permutation (e1 ++ br) (br ++ e1)), (Permutation (e1 ++ br) (br ++ br))
+(Permutation (e1 ++ br) (br ++ bl)), (Permutation (e1 ++ br) (br ++ e2)), (Permutation (e1 ++ br) (bl ++ e1)), (Permutation (e1 ++ br) (bl ++ br)), (Permutation (e1 ++ br) (bl ++ bl)), (Permutation (e1 ++ br) (bl ++ e2)), (Permutation (e1 ++ br) (e2 ++ e1)), (Permutation (e1 ++ br) (e2 ++ br)), (Permutation (e1 ++ br) (e2 ++ bl)), (Permutation (e1 ++ br) (e2 ++ e2))
+(Permutation (e1 ++ br) []), (Permutation (e1 ++ bl) e1), (Permutation (e1 ++ bl) br), (Permutation (e1 ++ bl) bl), (Permutation (e1 ++ bl) e2), (Permutation (e1 ++ bl) (n :: e1)), (Permutation (e1 ++ bl) (n :: br)), (Permutation (e1 ++ bl) (n :: bl)), (Permutation (e1 ++ bl) (n :: e2)), (Permutation (e1 ++ bl) (e1 ++ e1))
+(Permutation (e1 ++ bl) (e1 ++ br)), (Permutation (e1 ++ bl) (e1 ++ e2)), (Permutation (e1 ++ bl) (br ++ e1)), (Permutation (e1 ++ bl) (br ++ br)), (Permutation (e1 ++ bl) (br ++ bl)), (Permutation (e1 ++ bl) (br ++ e2)), (Permutation (e1 ++ bl) (bl ++ e1)), (Permutation (e1 ++ bl) (bl ++ br)), (Permutation (e1 ++ bl) (bl ++ bl)), (Permutation (e1 ++ bl) (bl ++ e2))
+(Permutation (e1 ++ bl) (e2 ++ e1)), (Permutation (e1 ++ bl) (e2 ++ br)), (Permutation (e1 ++ bl) (e2 ++ bl)), (Permutation (e1 ++ bl) (e2 ++ e2)), (Permutation (e1 ++ bl) []), (Permutation (e1 ++ e2) e1), (Permutation (e1 ++ e2) br), (Permutation (e1 ++ e2) bl), (Permutation (e1 ++ e2) e2), (Permutation (e1 ++ e2) (n :: e1))
+(Permutation (e1 ++ e2) (n :: br)), (Permutation (e1 ++ e2) (n :: bl)), (Permutation (e1 ++ e2) (n :: e2)), (Permutation (e1 ++ e2) (e1 ++ e1)), (Permutation (e1 ++ e2) (e1 ++ br)), (Permutation (e1 ++ e2) (e1 ++ bl)), (Permutation (e1 ++ e2) (br ++ e1)), (Permutation (e1 ++ e2) (br ++ br)), (Permutation (e1 ++ e2) (br ++ bl)), (Permutation (e1 ++ e2) (br ++ e2))
+(Permutation (e1 ++ e2) (bl ++ e1)), (Permutation (e1 ++ e2) (bl ++ br)), (Permutation (e1 ++ e2) (bl ++ bl)), (Permutation (e1 ++ e2) (bl ++ e2)), (Permutation (e1 ++ e2) (e2 ++ e1)), (Permutation (e1 ++ e2) (e2 ++ br)), (Permutation (e1 ++ e2) (e2 ++ bl)), (Permutation (e1 ++ e2) (e2 ++ e2)), (Permutation (e1 ++ e2) []), (Permutation (br ++ e1) e1)
+(Permutation (br ++ e1) br), (Permutation (br ++ e1) bl), (Permutation (br ++ e1) e2), (Permutation (br ++ e1) (n :: e1)), (Permutation (br ++ e1) (n :: br)), (Permutation (br ++ e1) (n :: bl)), (Permutation (br ++ e1) (n :: e2)), (Permutation (br ++ e1) (e1 ++ e1)), (Permutation (br ++ e1) (e1 ++ br)), (Permutation (br ++ e1) (e1 ++ bl))
+(Permutation (br ++ e1) (e1 ++ e2)), (Permutation (br ++ e1) (br ++ br)), (Permutation (br ++ e1) (br ++ bl)), (Permutation (br ++ e1) (br ++ e2)), (Permutation (br ++ e1) (bl ++ e1)), (Permutation (br ++ e1) (bl ++ br)), (Permutation (br ++ e1) (bl ++ bl)), (Permutation (br ++ e1) (bl ++ e2)), (Permutation (br ++ e1) (e2 ++ e1)), (Permutation (br ++ e1) (e2 ++ br))
+(Permutation (br ++ e1) (e2 ++ bl)), (Permutation (br ++ e1) (e2 ++ e2)), (Permutation (br ++ e1) []), (Permutation (br ++ br) e1), (Permutation (br ++ br) br), (Permutation (br ++ br) bl), (Permutation (br ++ br) e2), (Permutation (br ++ br) (n :: e1)), (Permutation (br ++ br) (n :: br)), (Permutation (br ++ br) (n :: bl))
+(Permutation (br ++ br) (n :: e2)), (Permutation (br ++ br) (e1 ++ e1)), (Permutation (br ++ br) (e1 ++ br)), (Permutation (br ++ br) (e1 ++ bl)), (Permutation (br ++ br) (e1 ++ e2)), (Permutation (br ++ br) (br ++ e1)), (Permutation (br ++ br) (br ++ bl)), (Permutation (br ++ br) (br ++ e2)), (Permutation (br ++ br) (bl ++ e1)), (Permutation (br ++ br) (bl ++ br))
+(Permutation (br ++ br) (bl ++ bl)), (Permutation (br ++ br) (bl ++ e2)), (Permutation (br ++ br) (e2 ++ e1)), (Permutation (br ++ br) (e2 ++ br)), (Permutation (br ++ br) (e2 ++ bl)), (Permutation (br ++ br) (e2 ++ e2)), (Permutation (br ++ br) []), (Permutation (br ++ bl) e1), (Permutation (br ++ bl) br), (Permutation (br ++ bl) bl)
+(Permutation (br ++ bl) e2), (Permutation (br ++ bl) (n :: e1)), (Permutation (br ++ bl) (n :: br)), (Permutation (br ++ bl) (n :: bl)), (Permutation (br ++ bl) (n :: e2)), (Permutation (br ++ bl) (e1 ++ e1)), (Permutation (br ++ bl) (e1 ++ br)), (Permutation (br ++ bl) (e1 ++ bl)), (Permutation (br ++ bl) (e1 ++ e2)), (Permutation (br ++ bl) (br ++ e1))
+(Permutation (br ++ bl) (br ++ br)), (Permutation (br ++ bl) (br ++ e2)), (Permutation (br ++ bl) (bl ++ e1)), (Permutation (br ++ bl) (bl ++ br)), (Permutation (br ++ bl) (bl ++ bl)), (Permutation (br ++ bl) (bl ++ e2)), (Permutation (br ++ bl) (e2 ++ e1)), (Permutation (br ++ bl) (e2 ++ br)), (Permutation (br ++ bl) (e2 ++ bl)), (Permutation (br ++ bl) (e2 ++ e2))
+(Permutation (br ++ bl) []), (Permutation (br ++ e2) e1), (Permutation (br ++ e2) br), (Permutation (br ++ e2) bl), (Permutation (br ++ e2) e2), (Permutation (br ++ e2) (n :: e1)), (Permutation (br ++ e2) (n :: br)), (Permutation (br ++ e2) (n :: bl)), (Permutation (br ++ e2) (n :: e2)), (Permutation (br ++ e2) (e1 ++ e1))
+(Permutation (br ++ e2) (e1 ++ br)), (Permutation (br ++ e2) (e1 ++ bl)), (Permutation (br ++ e2) (e1 ++ e2)), (Permutation (br ++ e2) (br ++ e1)), (Permutation (br ++ e2) (br ++ br)), (Permutation (br ++ e2) (br ++ bl)), (Permutation (br ++ e2) (bl ++ e1)), (Permutation (br ++ e2) (bl ++ br)), (Permutation (br ++ e2) (bl ++ bl)), (Permutation (br ++ e2) (bl ++ e2))
+(Permutation (br ++ e2) (e2 ++ e1)), (Permutation (br ++ e2) (e2 ++ br)), (Permutation (br ++ e2) (e2 ++ bl)), (Permutation (br ++ e2) (e2 ++ e2)), (Permutation (br ++ e2) []), (Permutation (bl ++ e1) e1), (Permutation (bl ++ e1) br), (Permutation (bl ++ e1) bl), (Permutation (bl ++ e1) e2), (Permutation (bl ++ e1) (n :: e1))
+(Permutation (bl ++ e1) (n :: br)), (Permutation (bl ++ e1) (n :: bl)), (Permutation (bl ++ e1) (n :: e2)), (Permutation (bl ++ e1) (e1 ++ e1)), (Permutation (bl ++ e1) (e1 ++ br)), (Permutation (bl ++ e1) (e1 ++ bl)), (Permutation (bl ++ e1) (e1 ++ e2)), (Permutation (bl ++ e1) (br ++ e1)), (Permutation (bl ++ e1) (br ++ br)), (Permutation (bl ++ e1) (br ++ bl))
+(Permutation (bl ++ e1) (br ++ e2)), (Permutation (bl ++ e1) (bl ++ br)), (Permutation (bl ++ e1) (bl ++ bl)), (Permutation (bl ++ e1) (bl ++ e2)), (Permutation (bl ++ e1) (e2 ++ e1)), (Permutation (bl ++ e1) (e2 ++ br)), (Permutation (bl ++ e1) (e2 ++ bl)), (Permutation (bl ++ e1) (e2 ++ e2)), (Permutation (bl ++ e1) []), (Permutation (bl ++ br) e1)
+(Permutation (bl ++ br) br), (Permutation (bl ++ br) bl), (Permutation (bl ++ br) e2), (Permutation (bl ++ br) (n :: e1)), (Permutation (bl ++ br) (n :: br)), (Permutation (bl ++ br) (n :: bl)), (Permutation (bl ++ br) (n :: e2)), (Permutation (bl ++ br) (e1 ++ e1)), (Permutation (bl ++ br) (e1 ++ br)), (Permutation (bl ++ br) (e1 ++ bl))
+(Permutation (bl ++ br) (e1 ++ e2)), (Permutation (bl ++ br) (br ++ e1)), (Permutation (bl ++ br) (br ++ br)), (Permutation (bl ++ br) (br ++ bl)), (Permutation (bl ++ br) (br ++ e2)), (Permutation (bl ++ br) (bl ++ e1)), (Permutation (bl ++ br) (bl ++ bl)), (Permutation (bl ++ br) (bl ++ e2)), (Permutation (bl ++ br) (e2 ++ e1)), (Permutation (bl ++ br) (e2 ++ br))
+(Permutation (bl ++ br) (e2 ++ bl)), (Permutation (bl ++ br) (e2 ++ e2)), (Permutation (bl ++ br) []), (Permutation (bl ++ bl) e1), (Permutation (bl ++ bl) br), (Permutation (bl ++ bl) bl), (Permutation (bl ++ bl) e2), (Permutation (bl ++ bl) (n :: e1)), (Permutation (bl ++ bl) (n :: br)), (Permutation (bl ++ bl) (n :: bl))
+(Permutation (bl ++ bl) (n :: e2)), (Permutation (bl ++ bl) (e1 ++ e1)), (Permutation (bl ++ bl) (e1 ++ br)), (Permutation (bl ++ bl) (e1 ++ bl)), (Permutation (bl ++ bl) (e1 ++ e2)), (Permutation (bl ++ bl) (br ++ e1)), (Permutation (bl ++ bl) (br ++ br)), (Permutation (bl ++ bl) (br ++ bl)), (Permutation (bl ++ bl) (br ++ e2)), (Permutation (bl ++ bl) (bl ++ e1))
+(Permutation (bl ++ bl) (bl ++ br)), (Permutation (bl ++ bl) (bl ++ e2)), (Permutation (bl ++ bl) (e2 ++ e1)), (Permutation (bl ++ bl) (e2 ++ br)), (Permutation (bl ++ bl) (e2 ++ bl)), (Permutation (bl ++ bl) (e2 ++ e2)), (Permutation (bl ++ bl) []), (Permutation (bl ++ e2) e1), (Permutation (bl ++ e2) br), (Permutation (bl ++ e2) bl)
+(Permutation (bl ++ e2) e2), (Permutation (bl ++ e2) (n :: e1)), (Permutation (bl ++ e2) (n :: br)), (Permutation (bl ++ e2) (n :: bl)), (Permutation (bl ++ e2) (n :: e2)), (Permutation (bl ++ e2) (e1 ++ e1)), (Permutation (bl ++ e2) (e1 ++ br)), (Permutation (bl ++ e2) (e1 ++ bl)), (Permutation (bl ++ e2) (e1 ++ e2)), (Permutation (bl ++ e2) (br ++ e1))
+(Permutation (bl ++ e2) (br ++ br)), (Permutation (bl ++ e2) (br ++ bl)), (Permutation (bl ++ e2) (br ++ e2)), (Permutation (bl ++ e2) (bl ++ e1)), (Permutation (bl ++ e2) (bl ++ br)), (Permutation (bl ++ e2) (bl ++ bl)), (Permutation (bl ++ e2) (e2 ++ e1)), (Permutation (bl ++ e2) (e2 ++ br)), (Permutation (bl ++ e2) (e2 ++ bl)), (Permutation (bl ++ e2) (e2 ++ e2))
+(Permutation (bl ++ e2) []), (Permutation (e2 ++ e1) e1), (Permutation (e2 ++ e1) br), (Permutation (e2 ++ e1) bl), (Permutation (e2 ++ e1) e2), (Permutation (e2 ++ e1) (n :: e1)), (Permutation (e2 ++ e1) (n :: br)), (Permutation (e2 ++ e1) (n :: bl)), (Permutation (e2 ++ e1) (n :: e2)), (Permutation (e2 ++ e1) (e1 ++ e1))
+(Permutation (e2 ++ e1) (e1 ++ br)), (Permutation (e2 ++ e1) (e1 ++ bl)), (Permutation (e2 ++ e1) (e1 ++ e2)), (Permutation (e2 ++ e1) (br ++ e1)), (Permutation (e2 ++ e1) (br ++ br)), (Permutation (e2 ++ e1) (br ++ bl)), (Permutation (e2 ++ e1) (br ++ e2)), (Permutation (e2 ++ e1) (bl ++ e1)), (Permutation (e2 ++ e1) (bl ++ br)), (Permutation (e2 ++ e1) (bl ++ bl))
+(Permutation (e2 ++ e1) (bl ++ e2)), (Permutation (e2 ++ e1) (e2 ++ br)), (Permutation (e2 ++ e1) (e2 ++ bl)), (Permutation (e2 ++ e1) (e2 ++ e2)), (Permutation (e2 ++ e1) []), (Permutation (e2 ++ br) e1), (Permutation (e2 ++ br) br), (Permutation (e2 ++ br) bl), (Permutation (e2 ++ br) e2), (Permutation (e2 ++ br) (n :: e1))
+(Permutation (e2 ++ br) (n :: br)), (Permutation (e2 ++ br) (n :: bl)), (Permutation (e2 ++ br) (n :: e2)), (Permutation (e2 ++ br) (e1 ++ e1)), (Permutation (e2 ++ br) (e1 ++ br)), (Permutation (e2 ++ br) (e1 ++ bl)), (Permutation (e2 ++ br) (e1 ++ e2)), (Permutation (e2 ++ br) (br ++ e1)), (Permutation (e2 ++ br) (br ++ br)), (Permutation (e2 ++ br) (br ++ bl))
+(Permutation (e2 ++ br) (br ++ e2)), (Permutation (e2 ++ br) (bl ++ e1)), (Permutation (e2 ++ br) (bl ++ br)), (Permutation (e2 ++ br) (bl ++ bl)), (Permutation (e2 ++ br) (bl ++ e2)), (Permutation (e2 ++ br) (e2 ++ e1)), (Permutation (e2 ++ br) (e2 ++ bl)), (Permutation (e2 ++ br) (e2 ++ e2)), (Permutation (e2 ++ br) []), (Permutation (e2 ++ bl) e1)
+(Permutation (e2 ++ bl) br), (Permutation (e2 ++ bl) bl), (Permutation (e2 ++ bl) e2), (Permutation (e2 ++ bl) (n :: e1)), (Permutation (e2 ++ bl) (n :: br)), (Permutation (e2 ++ bl) (n :: bl)), (Permutation (e2 ++ bl) (n :: e2)), (Permutation (e2 ++ bl) (e1 ++ e1)), (Permutation (e2 ++ bl) (e1 ++ br)), (Permutation (e2 ++ bl) (e1 ++ bl))
+(Permutation (e2 ++ bl) (e1 ++ e2)), (Permutation (e2 ++ bl) (br ++ e1)), (Permutation (e2 ++ bl) (br ++ br)), (Permutation (e2 ++ bl) (br ++ bl)), (Permutation (e2 ++ bl) (br ++ e2)), (Permutation (e2 ++ bl) (bl ++ e1)), (Permutation (e2 ++ bl) (bl ++ br)), (Permutation (e2 ++ bl) (bl ++ bl)), (Permutation (e2 ++ bl) (bl ++ e2)), (Permutation (e2 ++ bl) (e2 ++ e1))
+(Permutation (e2 ++ bl) (e2 ++ br)), (Permutation (e2 ++ bl) (e2 ++ e2)), (Permutation (e2 ++ bl) []), (Permutation (e2 ++ e2) e1), (Permutation (e2 ++ e2) br), (Permutation (e2 ++ e2) bl), (Permutation (e2 ++ e2) e2), (Permutation (e2 ++ e2) (n :: e1)), (Permutation (e2 ++ e2) (n :: br)), (Permutation (e2 ++ e2) (n :: bl))
+(Permutation (e2 ++ e2) (n :: e2)), (Permutation (e2 ++ e2) (e1 ++ e1)), (Permutation (e2 ++ e2) (e1 ++ br)), (Permutation (e2 ++ e2) (e1 ++ bl)), (Permutation (e2 ++ e2) (e1 ++ e2)), (Permutation (e2 ++ e2) (br ++ e1)), (Permutation (e2 ++ e2) (br ++ br)), (Permutation (e2 ++ e2) (br ++ bl)), (Permutation (e2 ++ e2) (br ++ e2)), (Permutation (e2 ++ e2) (bl ++ e1))
+(Permutation (e2 ++ e2) (bl ++ br)), (Permutation (e2 ++ e2) (bl ++ bl)), (Permutation (e2 ++ e2) (bl ++ e2)), (Permutation (e2 ++ e2) (e2 ++ e1)), (Permutation (e2 ++ e2) (e2 ++ br)), (Permutation (e2 ++ e2) (e2 ++ bl)), (Permutation (e2 ++ e2) []), (Permutation [] e1), (Permutation [] br), (Permutation [] bl)
+(Permutation [] e2), (Permutation [] (n :: e1)), (Permutation [] (n :: br)), (Permutation [] (n :: bl)), (Permutation [] (n :: e2)), (Permutation [] (e1 ++ e1)), (Permutation [] (e1 ++ br)), (Permutation [] (e1 ++ bl)), (Permutation [] (e1 ++ e2)), (Permutation [] (br ++ e1))
+(Permutation [] (br ++ br)), (Permutation [] (br ++ bl)), (Permutation [] (br ++ e2)), (Permutation [] (bl ++ e1)), (Permutation [] (bl ++ br)), (Permutation [] (bl ++ bl)), (Permutation [] (bl ++ e2)), (Permutation [] (e2 ++ e1)), (Permutation [] (e2 ++ br)), (Permutation [] (e2 ++ bl))
+(Permutation [] (e2 ++ e2)), (In n (n :: e1)), (In n (n :: br)), (In n (n :: bl)), (In n (n :: e2)), (In n (e1 ++ e1)), (In n (e1 ++ br)), (In n (e1 ++ bl)), (In n (e1 ++ e2)), (In n (br ++ e1))
+(In n (br ++ br)), (In n (br ++ bl)), (In n (br ++ e2)), (In n (bl ++ e1)), (In n (bl ++ br)), (In n (bl ++ bl)), (In n (bl ++ e2)), (In n (e2 ++ e1)), (In n (e2 ++ br)), (In n (e2 ++ bl))
+(In n (e2 ++ e2)), (In (length e1) e1), (In (length e1) br), (In (length e1) bl), (In (length e1) e2), (In (length e1) (n :: e1)), (In (length e1) (n :: br)), (In (length e1) (n :: bl)), (In (length e1) (n :: e2)), (In (length e1) (e1 ++ e1))
+(In (length e1) (e1 ++ br)), (In (length e1) (e1 ++ bl)), (In (length e1) (e1 ++ e2)), (In (length e1) (br ++ e1)), (In (length e1) (br ++ br)), (In (length e1) (br ++ bl)), (In (length e1) (br ++ e2)), (In (length e1) (bl ++ e1)), (In (length e1) (bl ++ br)), (In (length e1) (bl ++ bl))
+(In (length e1) (bl ++ e2)), (In (length e1) (e2 ++ e1)), (In (length e1) (e2 ++ br)), (In (length e1) (e2 ++ bl)), (In (length e1) (e2 ++ e2)), (In (length br) e1), (In (length br) br), (In (length br) bl), (In (length br) e2), (In (length br) (n :: e1))
+(In (length br) (n :: br)), (In (length br) (n :: bl)), (In (length br) (n :: e2)), (In (length br) (e1 ++ e1)), (In (length br) (e1 ++ br)), (In (length br) (e1 ++ bl)), (In (length br) (e1 ++ e2)), (In (length br) (br ++ e1)), (In (length br) (br ++ br)), (In (length br) (br ++ bl))
+(In (length br) (br ++ e2)), (In (length br) (bl ++ e1)), (In (length br) (bl ++ br)), (In (length br) (bl ++ bl)), (In (length br) (bl ++ e2)), (In (length br) (e2 ++ e1)), (In (length br) (e2 ++ br)), (In (length br) (e2 ++ bl)), (In (length br) (e2 ++ e2)), (In (length bl) e1)
+(In (length bl) br), (In (length bl) bl), (In (length bl) e2), (In (length bl) (n :: e1)), (In (length bl) (n :: br)), (In (length bl) (n :: bl)), (In (length bl) (n :: e2)), (In (length bl) (e1 ++ e1)), (In (length bl) (e1 ++ br)), (In (length bl) (e1 ++ bl))
+(In (length bl) (e1 ++ e2)), (In (length bl) (br ++ e1)), (In (length bl) (br ++ br)), (In (length bl) (br ++ bl)), (In (length bl) (br ++ e2)), (In (length bl) (bl ++ e1)), (In (length bl) (bl ++ br)), (In (length bl) (bl ++ bl)), (In (length bl) (bl ++ e2)), (In (length bl) (e2 ++ e1))
+(In (length bl) (e2 ++ br)), (In (length bl) (e2 ++ bl)), (In (length bl) (e2 ++ e2)), (In (length e2) e1), (In (length e2) br), (In (length e2) bl), (In (length e2) e2), (In (length e2) (n :: e1)), (In (length e2) (n :: br)), (In (length e2) (n :: bl))
+(In (length e2) (n :: e2)), (In (length e2) (e1 ++ e1)), (In (length e2) (e1 ++ br)), (In (length e2) (e1 ++ bl)), (In (length e2) (e1 ++ e2)), (In (length e2) (br ++ e1)), (In (length e2) (br ++ br)), (In (length e2) (br ++ bl)), (In (length e2) (br ++ e2)), (In (length e2) (bl ++ e1))
+(In (length e2) (bl ++ br)), (In (length e2) (bl ++ bl)), (In (length e2) (bl ++ e2)), (In (length e2) (e2 ++ e1)), (In (length e2) (e2 ++ br)), (In (length e2) (e2 ++ bl)), (In (length e2) (e2 ++ e2)), (n < length e1), (n < length br), (n < length bl)
+(n < length e2), (length e1 < n), (length e1 < length br), (length e1 < length bl), (length e1 < length e2), (length br < n), (length br < length e1), (length br < length bl), (length br < length e2), (length bl < n)
+(length bl < length e1), (length bl < length br), (length bl < length e2), (length e2 < n), (length e2 < length e1), (length e2 < length br), (length e2 < length bl), (n <= length e1), (n <= length br), (n <= length bl)
+(n <= length e2), (length e1 <= n), (length e1 <= length br), (length e1 <= length bl), (length e1 <= length e2), (length br <= n), (length br <= length e1), (length br <= length bl), (length br <= length e2), (length bl <= n)
+(length bl <= length e1), (length bl <= length br), (length bl <= length e2), (length e2 <= n), (length e2 <= length e1), (length e2 <= length br), (length e2 <= length bl), (~ Permutation e1 e1), (~ Permutation e1 br), (~ Permutation e1 bl)
+(~ Permutation e1 e2), (~ Permutation br e1), (~ Permutation br br), (~ Permutation br bl), (~ Permutation br e2), (~ Permutation bl e1), (~ Permutation bl br), (~ Permutation bl bl), (~ Permutation bl e2), (~ Permutation e2 e1)
+(~ Permutation e2 br), (~ Permutation e2 bl), (~ Permutation e2 e2), (~ In n e1), (~ In n br), (~ In n bl), (~ In n e2), (~ n < n), (~ n <= n), (n <> n)
+(e1 <> e1), (e1 <> br), (e1 <> bl), (e1 <> e2), (br <> e1), (br <> br), (br <> bl), (br <> e2), (bl <> e1), (bl <> br)
+(bl <> bl), (bl <> e2), (e2 <> e1), (e2 <> br), (e2 <> bl), (e2 <> e2), (None = Some e1), (None = Some br), (None = Some bl), (None = Some e2)
+(length e1 = n), (length br = n), (length bl = n), (length e2 = n), (n :: e1 = e1), (n :: e1 = br), (n :: e1 = bl), (n :: e1 = e2), (n :: e1 = e1 ++ e1), (n :: e1 = e1 ++ br)
+(n :: e1 = e1 ++ bl), (n :: e1 = e1 ++ e2), (n :: e1 = br ++ e1), (n :: e1 = br ++ br), (n :: e1 = br ++ bl), (n :: e1 = br ++ e2), (n :: e1 = bl ++ e1), (n :: e1 = bl ++ br), (n :: e1 = bl ++ bl), (n :: e1 = bl ++ e2)
+(n :: e1 = e2 ++ e1), (n :: e1 = e2 ++ br), (n :: e1 = e2 ++ bl), (n :: e1 = e2 ++ e2), (n :: e1 = []), (n :: br = e1), (n :: br = br), (n :: br = bl), (n :: br = e2), (n :: br = e1 ++ e1)
+(n :: br = e1 ++ br), (n :: br = e1 ++ bl), (n :: br = e1 ++ e2), (n :: br = br ++ e1), (n :: br = br ++ br), (n :: br = br ++ bl), (n :: br = br ++ e2), (n :: br = bl ++ e1), (n :: br = bl ++ br), (n :: br = bl ++ bl)
+(n :: br = bl ++ e2), (n :: br = e2 ++ e1), (n :: br = e2 ++ br), (n :: br = e2 ++ bl), (n :: br = e2 ++ e2), (n :: br = []), (n :: bl = e1), (n :: bl = br), (n :: bl = bl), (n :: bl = e2)
+(n :: bl = e1 ++ e1), (n :: bl = e1 ++ br), (n :: bl = e1 ++ bl), (n :: bl = e1 ++ e2), (n :: bl = br ++ e1), (n :: bl = br ++ br), (n :: bl = br ++ bl), (n :: bl = br ++ e2), (n :: bl = bl ++ e1), (n :: bl = bl ++ br)
+(n :: bl = bl ++ bl), (n :: bl = bl ++ e2), (n :: bl = e2 ++ e1), (n :: bl = e2 ++ br), (n :: bl = e2 ++ bl), (n :: bl = e2 ++ e2), (n :: bl = []), (n :: e2 = e1), (n :: e2 = br), (n :: e2 = bl)
+(n :: e2 = e2), (n :: e2 = e1 ++ e1), (n :: e2 = e1 ++ br), (n :: e2 = e1 ++ bl), (n :: e2 = e1 ++ e2), (n :: e2 = br ++ e1), (n :: e2 = br ++ br), (n :: e2 = br ++ bl), (n :: e2 = br ++ e2), (n :: e2 = bl ++ e1)
+(n :: e2 = bl ++ br), (n :: e2 = bl ++ bl), (n :: e2 = bl ++ e2), (n :: e2 = e2 ++ e1), (n :: e2 = e2 ++ br), (n :: e2 = e2 ++ bl), (n :: e2 = e2 ++ e2), (n :: e2 = []), (e1 ++ e1 = e1), (e1 ++ e1 = br)
+(e1 ++ e1 = bl), (e1 ++ e1 = e2), (e1 ++ br = e1), (e1 ++ br = br), (e1 ++ br = bl), (e1 ++ br = e2), (e1 ++ bl = e1), (e1 ++ bl = br), (e1 ++ bl = bl), (e1 ++ bl = e2)
+(e1 ++ e2 = e1), (e1 ++ e2 = br), (e1 ++ e2 = bl), (e1 ++ e2 = e2), (br ++ e1 = e1), (br ++ e1 = br), (br ++ e1 = bl), (br ++ e1 = e2), (br ++ br = e1), (br ++ br = br)
+(br ++ br = bl), (br ++ br = e2), (br ++ bl = e1), (br ++ bl = br), (br ++ bl = bl), (br ++ bl = e2), (br ++ e2 = e1), (br ++ e2 = br), (br ++ e2 = bl), (br ++ e2 = e2)
+(bl ++ e1 = e1), (bl ++ e1 = br), (bl ++ e1 = bl), (bl ++ e1 = e2), (bl ++ br = e1), (bl ++ br = br), (bl ++ br = bl), (bl ++ br = e2), (bl ++ bl = e1), (bl ++ bl = br)
+(bl ++ bl = bl), (bl ++ bl = e2), (bl ++ e2 = e1), (bl ++ e2 = br), (bl ++ e2 = bl), (bl ++ e2 = e2), (e2 ++ e1 = e1), (e2 ++ e1 = br), (e2 ++ e1 = bl), (e2 ++ e1 = e2)
+(e2 ++ br = e1), (e2 ++ br = br), (e2 ++ br = bl), (e2 ++ br = e2), (e2 ++ bl = e1), (e2 ++ bl = br), (e2 ++ bl = bl), (e2 ++ bl = e2), (e2 ++ e2 = e1), (e2 ++ e2 = br)
+(e2 ++ e2 = bl), (e2 ++ e2 = e2), ([] = e1), ([] = br), ([] = bl), ([] = e2), ([] = e1 ++ e1), ([] = e1 ++ br), ([] = e1 ++ bl), ([] = e1 ++ e2)
+([] = br ++ e1), ([] = br ++ br), ([] = br ++ bl), ([] = br ++ e2), ([] = bl ++ e1), ([] = bl ++ br), ([] = bl ++ bl), ([] = bl ++ e2), ([] = e2 ++ e1), ([] = e2 ++ br)
+([] = e2 ++ bl), ([] = e2 ++ e2), (None = Some n), ((n >? n) = (n >=? n))
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 74.701 seconds
+
+
+Label: 0 (0)
+(Permutation e1 e2), (Permutation e2 e1), (Permutation (n :: e1) (n :: e2)), (Permutation (n :: e2) (n :: e1)), (Permutation (e1 ++ e1) (e1 ++ e2)), (Permutation (e1 ++ e1) (e2 ++ e1)), (Permutation (e1 ++ e1) (e2 ++ e2)), (Permutation (e1 ++ br) (br ++ e2)), (Permutation (e1 ++ br) (e2 ++ br)), (Permutation (e1 ++ bl) (bl ++ e2))
+(Permutation (e1 ++ bl) (e2 ++ bl)), (Permutation (e1 ++ e2) (e1 ++ e1)), (Permutation (e1 ++ e2) (e2 ++ e2)), (Permutation (br ++ e1) (br ++ e2)), (Permutation (br ++ e1) (e2 ++ br)), (Permutation (br ++ e2) (e1 ++ br)), (Permutation (br ++ e2) (br ++ e1)), (Permutation (bl ++ e1) (bl ++ e2)), (Permutation (bl ++ e1) (e2 ++ bl)), (Permutation (bl ++ e2) (e1 ++ bl))
+
+Label: 1 (1)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (Permutation e1 gv0 -> Permutation e1 e2 -> Permutation e2 gv0)
+
+2. (Permutation e1 (n :: gv1) -> Permutation e1 e2 -> Permutation e2 (n :: gv1))
+
+3. (Permutation e1 e2 ->  Permutation e1 (n :: bl ++ br) -> Permutation e2 (n :: bl ++ br))
+
+4. (Permutation e1 e2 -> Permutation (bl ++ e2) (e1 ++ bl))
+(Permutation (bl ++ e2) (e1 ++ bl) ->  Permutation e1 (n :: bl ++ br) -> Permutation e2 (n :: bl ++ br))
+
+5. (Permutation e1 e2 -> Permutation (e1 ++ bl) (e2 ++ bl))
+(Permutation (e1 ++ bl) (e2 ++ bl) ->  Permutation e1 (n :: bl ++ br) -> Permutation e2 (n :: bl ++ br))
+
+6. (Permutation e1 e2 -> Permutation (bl ++ e1) (e2 ++ bl))
+(Permutation (bl ++ e1) (e2 ++ bl) ->  Permutation e1 (n :: bl ++ br) -> Permutation e2 (n :: bl ++ br))
+
+7. (Permutation e1 e2 -> Permutation (br ++ e2) (e1 ++ br))
+(Permutation (br ++ e2) (e1 ++ br) ->  Permutation e1 (n :: bl ++ br) -> Permutation e2 (n :: bl ++ br))
+
+8. (Permutation e1 e2 -> Permutation (e1 ++ br) (e2 ++ br))
+(Permutation (e1 ++ br) (e2 ++ br) ->  Permutation e1 (n :: bl ++ br) -> Permutation e2 (n :: bl ++ br))
+
+9. (Permutation e1 e2 -> Permutation (br ++ e1) (e2 ++ br))
+(Permutation (br ++ e1) (e2 ++ br) ->  Permutation e1 (n :: bl ++ br) -> Permutation e2 (n :: bl ++ br))
+
+10. (Permutation e1 e2 -> Permutation (br ++ e2) (br ++ e1))
+(Permutation (br ++ e2) (br ++ e1) ->  Permutation e1 (n :: bl ++ br) -> Permutation e2 (n :: bl ++ br))
+
+11. (Permutation e1 e2 -> Permutation (e1 ++ e2) (e1 ++ e1))
+(Permutation (e1 ++ e2) (e1 ++ e1) ->  Permutation e1 (n :: bl ++ br) -> Permutation e2 (n :: bl ++ br))
+
+12. (Permutation e1 e2 -> Permutation (e1 ++ e1) (e2 ++ e1))
+(Permutation (e1 ++ e1) (e2 ++ e1) ->  Permutation e1 (n :: bl ++ br) -> Permutation e2 (n :: bl ++ br))
+
+13. (Permutation e1 e2 -> Permutation (e1 ++ bl) (bl ++ e2))
+(Permutation (e1 ++ bl) (bl ++ e2) ->  Permutation e1 (n :: bl ++ br) -> Permutation e2 (n :: bl ++ br))
+
+14. (Permutation e1 e2 -> Permutation (bl ++ e1) (bl ++ e2))
+(Permutation (bl ++ e1) (bl ++ e2) ->  Permutation e1 (n :: bl ++ br) -> Permutation e2 (n :: bl ++ br))
+
+15. (Permutation e1 e2 -> Permutation (e1 ++ br) (br ++ e2))
+(Permutation (e1 ++ br) (br ++ e2) ->  Permutation e1 (n :: bl ++ br) -> Permutation e2 (n :: bl ++ br))
+
+16. (Permutation e1 e2 -> Permutation (br ++ e1) (br ++ e2))
+(Permutation (br ++ e1) (br ++ e2) ->  Permutation e1 (n :: bl ++ br) -> Permutation e2 (n :: bl ++ br))
+
+17. (Permutation e1 e2 -> Permutation (e1 ++ e1) (e1 ++ e2))
+(Permutation (e1 ++ e1) (e1 ++ e2) ->  Permutation e1 (n :: bl ++ br) -> Permutation e2 (n :: bl ++ br))
+
+18. (Permutation e1 e2 -> Permutation (e1 ++ e1) (e2 ++ e2))
+(Permutation (e1 ++ e1) (e2 ++ e2) ->  Permutation e1 (n :: bl ++ br) -> Permutation e2 (n :: bl ++ br))
+
+19. (Permutation e1 e2 -> Permutation (e1 ++ e2) (e2 ++ e2))
+(Permutation (e1 ++ e2) (e2 ++ e2) ->  Permutation e1 (n :: bl ++ br) -> Permutation e2 (n :: bl ++ br))
+
+20. (Permutation e1 e2 -> Permutation (n :: e2) (n :: e1))
+(Permutation (n :: e2) (n :: e1) ->  Permutation e1 (n :: bl ++ br) -> Permutation e2 (n :: bl ++ br))
+
+21. (Permutation e1 e2 -> Permutation (n :: e1) (n :: e2))
+(Permutation (n :: e1) (n :: e2) ->  Permutation e1 (n :: bl ++ br) -> Permutation e2 (n :: bl ++ br))
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 124.668 seconds
+
+Number of Result Pairs Returned: 21
+
+1. (Permutation e1 gv0 -> Permutation e1 e2 -> Permutation e2 gv0)
+
+2. (Permutation e1 (n :: gv1) -> Permutation e1 e2 -> Permutation e2 (n :: gv1))
+
+3. (Permutation e1 e2 ->  Permutation e1 (n :: bl ++ br) -> Permutation e2 (n :: bl ++ br))
+
+4. (Permutation e1 e2 -> Permutation (bl ++ e2) (e1 ++ bl))
+(Permutation (bl ++ e2) (e1 ++ bl) ->  Permutation e1 (n :: bl ++ br) -> Permutation e2 (n :: bl ++ br))
+
+5. (Permutation e1 e2 -> Permutation (e1 ++ bl) (e2 ++ bl))
+(Permutation (e1 ++ bl) (e2 ++ bl) ->  Permutation e1 (n :: bl ++ br) -> Permutation e2 (n :: bl ++ br))

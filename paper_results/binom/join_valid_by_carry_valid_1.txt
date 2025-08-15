@@ -1,0 +1,321 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (priqq n [])
+ -- (priqq n q)
+ -- (c = Leaf \/ pow2heap n c)
+
+----------------------------------
+Goal: (priqq n (carry q c))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3.505 seconds
+
+gv0 : (list tree) = (carry q c)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 81.704 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (priqq n q)
+ -- (c = Leaf \/ pow2heap n c)
+
+----------------------------------
+Goal: (priqq n (carry q c))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (priqq n q)
+ -- (carry q c = gv0)
+ -- (c = Leaf \/ pow2heap n c)
+
+----------------------------------
+Goal: (priqq n gv0)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 81.851 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+In : (forall A : Type, A -> list A -> Prop)
+existsb : (forall A : Type, (A -> bool) -> list A -> bool)
+forallb : (forall A : Type, (A -> bool) -> list A -> bool)
+Forall : (forall A : Type, (A -> Prop) -> list A -> Prop)
+nodup : (forall A : Type, (forall x y : A, {x = y} + {x <> y}) -> list A -> list A)
+map : (forall A B : Type, (A -> B) -> list A -> list B)
+Permutation : (forall A : Type, list A -> list A -> Prop)
+geb : (nat -> nat -> bool)
+gtb : (nat -> nat -> bool)
+tree : Set
+tree_rect : (forall P : tree -> Type,
+ (forall (n : nat) (t : tree),
+  P t -> forall t0 : tree, P t0 -> P (Node n t t0)) ->
+ P Leaf -> forall t : tree, P t)
+tree_rec : (forall P : tree -> Set,
+ (forall (n : nat) (t : tree),
+  P t -> forall t0 : tree, P t0 -> P (Node n t t0)) ->
+ P Leaf -> forall t : tree, P t)
+smash : (tree -> tree -> tree)
+carry : (list tree -> tree -> list tree)
+insert : (nat -> list tree -> list tree)
+join : (list tree -> list tree -> tree -> list tree)
+unzip : (tree -> (list tree -> list tree) -> list tree)
+heap_delete_max : (tree -> list tree)
+find_max' : (nat -> list tree -> nat)
+find_max : (list tree -> option nat)
+delete_max_aux : (nat -> list tree -> list tree * list tree)
+delete_max : (list tree -> option (nat * list tree))
+merge : (list tree -> list tree -> list tree)
+pow2heapp : (nat -> nat -> tree -> Prop)
+pow2heap : (nat -> tree -> Prop)
+priqq : (nat -> list tree -> Prop)
+priq : (list tree -> Prop)
+tree_elems : (tree -> list nat -> Prop)
+priqueue_elems : (list tree -> list nat -> Prop)
+Abs : (list tree -> list nat -> Prop)
+Node : (nat -> tree -> tree -> tree)
+Leaf : tree
+
+Label: 0 (0)
+Abducted Assumption: (priqq n q)
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Abducted Assumption: (c = Leaf \/ pow2heap n c)
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 125
+Negative Examples: 353
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 82.111 seconds
+
+
+Label: 0 (0)
+(priq q), (priqq n q), (pow2heap n c), (pow2heapp n n c), (Permutation q q), (In c q), (n < n), (n <= n), (c = c), (q = q)
+(n = n), (false = (n >? n)), (false = (n >=? n)), (true = (n >? n)), (true = (n >=? n)), (Abs q []), (Abs (c :: q) []), (Abs (merge q q) []), (Abs (heap_delete_max c) []), (Abs (join q q c) [])
+(Abs (insert n q) []), (Abs (carry q c) []), (Abs (q ++ q) []), (Abs [] []), (priqueue_elems q []), (priqueue_elems (c :: q) []), (priqueue_elems (merge q q) []), (priqueue_elems (heap_delete_max c) []), (priqueue_elems (join q q c) []), (priqueue_elems (insert n q) [])
+(priqueue_elems (carry q c) []), (priqueue_elems (q ++ q) []), (priqueue_elems [] []), (tree_elems c []), (tree_elems (Node n c c) []), (tree_elems (smash c c) []), (tree_elems Leaf []), (priq (c :: q)), (priq (merge q q)), (priq (heap_delete_max c))
+(priq (join q q c)), (priq (insert n q)), (priq (carry q c)), (priq (q ++ q)), (priqq n (c :: q)), (priqq n (merge q q)), (priqq n (heap_delete_max c)), (priqq n (join q q c)), (priqq n (insert n q)), (priqq n (carry q c))
+(priqq n (q ++ q)), (priqq (find_max' n q) q), (priqq (find_max' n q) (c :: q)), (priqq (find_max' n q) (merge q q)), (priqq (find_max' n q) (heap_delete_max c)), (priqq (find_max' n q) (join q q c)), (priqq (find_max' n q) (insert n q)), (priqq (find_max' n q) (carry q c)), (priqq (find_max' n q) (q ++ q)), (priqq (length q) q)
+(priqq (length q) (c :: q)), (priqq (length q) (merge q q)), (priqq (length q) (heap_delete_max c)), (priqq (length q) (join q q c)), (priqq (length q) (insert n q)), (priqq (length q) (carry q c)), (priqq (length q) (q ++ q)), (pow2heap n (Node n c c)), (pow2heap n (smash c c)), (pow2heap (find_max' n q) c)
+(pow2heap (find_max' n q) (Node n c c)), (pow2heap (find_max' n q) (smash c c)), (pow2heap (length q) c), (pow2heap (length q) (Node n c c)), (pow2heap (length q) (smash c c)), (pow2heapp n n (Node n c c)), (pow2heapp n n (smash c c)), (pow2heapp n n Leaf), (pow2heapp n (find_max' n q) c), (pow2heapp n (find_max' n q) (Node n c c))
+(pow2heapp n (find_max' n q) (smash c c)), (pow2heapp n (find_max' n q) Leaf), (pow2heapp n (length q) c), (pow2heapp n (length q) (Node n c c)), (pow2heapp n (length q) (smash c c)), (pow2heapp n (length q) Leaf), (pow2heapp (find_max' n q) n c), (pow2heapp (find_max' n q) n (Node n c c)), (pow2heapp (find_max' n q) n (smash c c)), (pow2heapp (find_max' n q) n Leaf)
+(pow2heapp (find_max' n q) (find_max' n q) c), (pow2heapp (find_max' n q) (find_max' n q) (Node n c c)), (pow2heapp (find_max' n q) (find_max' n q) (smash c c)), (pow2heapp (find_max' n q) (find_max' n q) Leaf), (pow2heapp (find_max' n q) (length q) c), (pow2heapp (find_max' n q) (length q) (Node n c c)), (pow2heapp (find_max' n q) (length q) (smash c c)), (pow2heapp (find_max' n q) (length q) Leaf), (pow2heapp (length q) n c), (pow2heapp (length q) n (Node n c c))
+(pow2heapp (length q) n (smash c c)), (pow2heapp (length q) n Leaf), (pow2heapp (length q) (find_max' n q) c), (pow2heapp (length q) (find_max' n q) (Node n c c)), (pow2heapp (length q) (find_max' n q) (smash c c)), (pow2heapp (length q) (find_max' n q) Leaf), (pow2heapp (length q) (length q) c), (pow2heapp (length q) (length q) (Node n c c)), (pow2heapp (length q) (length q) (smash c c)), (pow2heapp (length q) (length q) Leaf)
+(Permutation q (c :: q)), (Permutation q (merge q q)), (Permutation q (heap_delete_max c)), (Permutation q (join q q c)), (Permutation q (insert n q)), (Permutation q (carry q c)), (Permutation q (q ++ q)), (Permutation q []), (Permutation (c :: q) q), (Permutation (c :: q) (merge q q))
+(Permutation (c :: q) (heap_delete_max c)), (Permutation (c :: q) (join q q c)), (Permutation (c :: q) (insert n q)), (Permutation (c :: q) (carry q c)), (Permutation (c :: q) (q ++ q)), (Permutation (c :: q) []), (Permutation (merge q q) q), (Permutation (merge q q) (c :: q)), (Permutation (merge q q) (heap_delete_max c)), (Permutation (merge q q) (join q q c))
+(Permutation (merge q q) (insert n q)), (Permutation (merge q q) (carry q c)), (Permutation (merge q q) (q ++ q)), (Permutation (merge q q) []), (Permutation (heap_delete_max c) q), (Permutation (heap_delete_max c) (c :: q)), (Permutation (heap_delete_max c) (merge q q)), (Permutation (heap_delete_max c) (join q q c)), (Permutation (heap_delete_max c) (insert n q)), (Permutation (heap_delete_max c) (carry q c))
+(Permutation (heap_delete_max c) (q ++ q)), (Permutation (heap_delete_max c) []), (Permutation (join q q c) q), (Permutation (join q q c) (c :: q)), (Permutation (join q q c) (merge q q)), (Permutation (join q q c) (heap_delete_max c)), (Permutation (join q q c) (insert n q)), (Permutation (join q q c) (carry q c)), (Permutation (join q q c) (q ++ q)), (Permutation (join q q c) [])
+(Permutation (insert n q) q), (Permutation (insert n q) (c :: q)), (Permutation (insert n q) (merge q q)), (Permutation (insert n q) (heap_delete_max c)), (Permutation (insert n q) (join q q c)), (Permutation (insert n q) (carry q c)), (Permutation (insert n q) (q ++ q)), (Permutation (insert n q) []), (Permutation (carry q c) q), (Permutation (carry q c) (c :: q))
+(Permutation (carry q c) (merge q q)), (Permutation (carry q c) (heap_delete_max c)), (Permutation (carry q c) (join q q c)), (Permutation (carry q c) (insert n q)), (Permutation (carry q c) (q ++ q)), (Permutation (carry q c) []), (Permutation (q ++ q) q), (Permutation (q ++ q) (c :: q)), (Permutation (q ++ q) (merge q q)), (Permutation (q ++ q) (heap_delete_max c))
+(Permutation (q ++ q) (join q q c)), (Permutation (q ++ q) (insert n q)), (Permutation (q ++ q) (carry q c)), (Permutation (q ++ q) []), (Permutation [] q), (Permutation [] (c :: q)), (Permutation [] (merge q q)), (Permutation [] (heap_delete_max c)), (Permutation [] (join q q c)), (Permutation [] (insert n q))
+(Permutation [] (carry q c)), (Permutation [] (q ++ q)), (In c (c :: q)), (In c (merge q q)), (In c (heap_delete_max c)), (In c (join q q c)), (In c (insert n q)), (In c (carry q c)), (In c (q ++ q)), (In (Node n c c) q)
+(In (Node n c c) (c :: q)), (In (Node n c c) (merge q q)), (In (Node n c c) (heap_delete_max c)), (In (Node n c c) (join q q c)), (In (Node n c c) (insert n q)), (In (Node n c c) (carry q c)), (In (Node n c c) (q ++ q)), (In (smash c c) q), (In (smash c c) (c :: q)), (In (smash c c) (merge q q))
+(In (smash c c) (heap_delete_max c)), (In (smash c c) (join q q c)), (In (smash c c) (insert n q)), (In (smash c c) (carry q c)), (In (smash c c) (q ++ q)), (In Leaf q), (In Leaf (c :: q)), (In Leaf (merge q q)), (In Leaf (heap_delete_max c)), (In Leaf (join q q c))
+(In Leaf (insert n q)), (In Leaf (carry q c)), (In Leaf (q ++ q)), (n < find_max' n q), (n < length q), (find_max' n q < n), (find_max' n q < length q), (length q < n), (length q < find_max' n q), (n <= find_max' n q)
+(n <= length q), (find_max' n q <= n), (find_max' n q <= length q), (length q <= n), (length q <= find_max' n q), (~ priq q), (~ priqq n q), (~ pow2heap n c), (~ pow2heapp n n c), (~ Permutation q q)
+(~ In c q), (~ n < n), (~ n <= n), (c <> c), (q <> q), (n <> n), (None = Some q), (c :: q = q), (c :: q = merge q q), (c :: q = heap_delete_max c)
+(c :: q = join q q c), (c :: q = insert n q), (c :: q = carry q c), (c :: q = q ++ q), (c :: q = []), (merge q q = q), (merge q q = heap_delete_max c), (merge q q = join q q c), (merge q q = insert n q), (merge q q = carry q c)
+(merge q q = q ++ q), (heap_delete_max c = q), (heap_delete_max c = carry q c), (heap_delete_max c = q ++ q), (join q q c = q), (join q q c = heap_delete_max c), (join q q c = insert n q), (join q q c = carry q c), (join q q c = q ++ q), (insert n q = q)
+(insert n q = heap_delete_max c), (insert n q = carry q c), (insert n q = q ++ q), (carry q c = q), (carry q c = q ++ q), (q ++ q = q), ([] = q), ([] = merge q q), ([] = heap_delete_max c), ([] = join q q c)
+([] = insert n q), ([] = carry q c), ([] = q ++ q), ((q, q) = delete_max_aux n q), (Node n c c = c), (Node n c c = smash c c), (smash c c = c), (Leaf = Node n c c), (Leaf = smash c c), (find_max' n q = n)
+(length q = n), (length q = find_max' n q), (Some n = find_max q), (None = Some n), (None = find_max q), (None = Some c), ((n >? n) = (n >=? n))
+
+Label: 1 (1)
+(priq q), (priqq n q), (pow2heap n c), (pow2heapp n n c), (Permutation q q), (In c q), (n < n), (n <= n), (c = c), (q = q)
+(n = n), (false = (n >? n)), (false = (n >=? n)), (true = (n >? n)), (true = (n >=? n)), (Abs q []), (Abs (c :: q) []), (Abs (merge q q) []), (Abs (heap_delete_max c) []), (Abs (join q q c) [])
+(Abs (insert n q) []), (Abs (carry q c) []), (Abs (q ++ q) []), (Abs [] []), (priqueue_elems q []), (priqueue_elems (c :: q) []), (priqueue_elems (merge q q) []), (priqueue_elems (heap_delete_max c) []), (priqueue_elems (join q q c) []), (priqueue_elems (insert n q) [])
+(priqueue_elems (carry q c) []), (priqueue_elems (q ++ q) []), (priqueue_elems [] []), (tree_elems c []), (tree_elems (Node n c c) []), (tree_elems (smash c c) []), (tree_elems Leaf []), (priq (c :: q)), (priq (merge q q)), (priq (heap_delete_max c))
+(priq (join q q c)), (priq (insert n q)), (priq (carry q c)), (priq (q ++ q)), (priqq n (c :: q)), (priqq n (merge q q)), (priqq n (heap_delete_max c)), (priqq n (join q q c)), (priqq n (insert n q)), (priqq n (carry q c))
+(priqq n (q ++ q)), (priqq (find_max' n q) q), (priqq (find_max' n q) (c :: q)), (priqq (find_max' n q) (merge q q)), (priqq (find_max' n q) (heap_delete_max c)), (priqq (find_max' n q) (join q q c)), (priqq (find_max' n q) (insert n q)), (priqq (find_max' n q) (carry q c)), (priqq (find_max' n q) (q ++ q)), (priqq (length q) q)
+(priqq (length q) (c :: q)), (priqq (length q) (merge q q)), (priqq (length q) (heap_delete_max c)), (priqq (length q) (join q q c)), (priqq (length q) (insert n q)), (priqq (length q) (carry q c)), (priqq (length q) (q ++ q)), (pow2heap n (Node n c c)), (pow2heap n (smash c c)), (pow2heap (find_max' n q) c)
+(pow2heap (find_max' n q) (Node n c c)), (pow2heap (find_max' n q) (smash c c)), (pow2heap (length q) c), (pow2heap (length q) (Node n c c)), (pow2heap (length q) (smash c c)), (pow2heapp n n (Node n c c)), (pow2heapp n n (smash c c)), (pow2heapp n n Leaf), (pow2heapp n (find_max' n q) c), (pow2heapp n (find_max' n q) (Node n c c))
+(pow2heapp n (find_max' n q) (smash c c)), (pow2heapp n (find_max' n q) Leaf), (pow2heapp n (length q) c), (pow2heapp n (length q) (Node n c c)), (pow2heapp n (length q) (smash c c)), (pow2heapp n (length q) Leaf), (pow2heapp (find_max' n q) n c), (pow2heapp (find_max' n q) n (Node n c c)), (pow2heapp (find_max' n q) n (smash c c)), (pow2heapp (find_max' n q) n Leaf)
+(pow2heapp (find_max' n q) (find_max' n q) c), (pow2heapp (find_max' n q) (find_max' n q) (Node n c c)), (pow2heapp (find_max' n q) (find_max' n q) (smash c c)), (pow2heapp (find_max' n q) (find_max' n q) Leaf), (pow2heapp (find_max' n q) (length q) c), (pow2heapp (find_max' n q) (length q) (Node n c c)), (pow2heapp (find_max' n q) (length q) (smash c c)), (pow2heapp (find_max' n q) (length q) Leaf), (pow2heapp (length q) n c), (pow2heapp (length q) n (Node n c c))
+(pow2heapp (length q) n (smash c c)), (pow2heapp (length q) n Leaf), (pow2heapp (length q) (find_max' n q) c), (pow2heapp (length q) (find_max' n q) (Node n c c)), (pow2heapp (length q) (find_max' n q) (smash c c)), (pow2heapp (length q) (find_max' n q) Leaf), (pow2heapp (length q) (length q) c), (pow2heapp (length q) (length q) (Node n c c)), (pow2heapp (length q) (length q) (smash c c)), (pow2heapp (length q) (length q) Leaf)
+(Permutation q (c :: q)), (Permutation q (merge q q)), (Permutation q (heap_delete_max c)), (Permutation q (join q q c)), (Permutation q (insert n q)), (Permutation q (carry q c)), (Permutation q (q ++ q)), (Permutation q []), (Permutation (c :: q) q), (Permutation (c :: q) (merge q q))
+(Permutation (c :: q) (heap_delete_max c)), (Permutation (c :: q) (join q q c)), (Permutation (c :: q) (insert n q)), (Permutation (c :: q) (carry q c)), (Permutation (c :: q) (q ++ q)), (Permutation (c :: q) []), (Permutation (merge q q) q), (Permutation (merge q q) (c :: q)), (Permutation (merge q q) (heap_delete_max c)), (Permutation (merge q q) (join q q c))
+(Permutation (merge q q) (insert n q)), (Permutation (merge q q) (carry q c)), (Permutation (merge q q) (q ++ q)), (Permutation (merge q q) []), (Permutation (heap_delete_max c) q), (Permutation (heap_delete_max c) (c :: q)), (Permutation (heap_delete_max c) (merge q q)), (Permutation (heap_delete_max c) (join q q c)), (Permutation (heap_delete_max c) (insert n q)), (Permutation (heap_delete_max c) (carry q c))
+(Permutation (heap_delete_max c) (q ++ q)), (Permutation (heap_delete_max c) []), (Permutation (join q q c) q), (Permutation (join q q c) (c :: q)), (Permutation (join q q c) (merge q q)), (Permutation (join q q c) (heap_delete_max c)), (Permutation (join q q c) (insert n q)), (Permutation (join q q c) (carry q c)), (Permutation (join q q c) (q ++ q)), (Permutation (join q q c) [])
+(Permutation (insert n q) q), (Permutation (insert n q) (c :: q)), (Permutation (insert n q) (merge q q)), (Permutation (insert n q) (heap_delete_max c)), (Permutation (insert n q) (join q q c)), (Permutation (insert n q) (carry q c)), (Permutation (insert n q) (q ++ q)), (Permutation (insert n q) []), (Permutation (carry q c) q), (Permutation (carry q c) (c :: q))
+(Permutation (carry q c) (merge q q)), (Permutation (carry q c) (heap_delete_max c)), (Permutation (carry q c) (join q q c)), (Permutation (carry q c) (insert n q)), (Permutation (carry q c) (q ++ q)), (Permutation (carry q c) []), (Permutation (q ++ q) q), (Permutation (q ++ q) (c :: q)), (Permutation (q ++ q) (merge q q)), (Permutation (q ++ q) (heap_delete_max c))
+(Permutation (q ++ q) (join q q c)), (Permutation (q ++ q) (insert n q)), (Permutation (q ++ q) (carry q c)), (Permutation (q ++ q) []), (Permutation [] q), (Permutation [] (c :: q)), (Permutation [] (merge q q)), (Permutation [] (heap_delete_max c)), (Permutation [] (join q q c)), (Permutation [] (insert n q))
+(Permutation [] (carry q c)), (Permutation [] (q ++ q)), (In c (c :: q)), (In c (merge q q)), (In c (heap_delete_max c)), (In c (join q q c)), (In c (insert n q)), (In c (carry q c)), (In c (q ++ q)), (In (Node n c c) q)
+(In (Node n c c) (c :: q)), (In (Node n c c) (merge q q)), (In (Node n c c) (heap_delete_max c)), (In (Node n c c) (join q q c)), (In (Node n c c) (insert n q)), (In (Node n c c) (carry q c)), (In (Node n c c) (q ++ q)), (In (smash c c) q), (In (smash c c) (c :: q)), (In (smash c c) (merge q q))
+(In (smash c c) (heap_delete_max c)), (In (smash c c) (join q q c)), (In (smash c c) (insert n q)), (In (smash c c) (carry q c)), (In (smash c c) (q ++ q)), (In Leaf q), (In Leaf (c :: q)), (In Leaf (merge q q)), (In Leaf (heap_delete_max c)), (In Leaf (join q q c))
+(In Leaf (insert n q)), (In Leaf (carry q c)), (In Leaf (q ++ q)), (n < find_max' n q), (n < length q), (find_max' n q < n), (find_max' n q < length q), (length q < n), (length q < find_max' n q), (n <= find_max' n q)
+(n <= length q), (find_max' n q <= n), (find_max' n q <= length q), (length q <= n), (length q <= find_max' n q), (~ priq q), (~ priqq n q), (~ pow2heap n c), (~ pow2heapp n n c), (~ Permutation q q)
+(~ In c q), (~ n < n), (~ n <= n), (c <> c), (q <> q), (n <> n), (None = Some q), (c :: q = q), (c :: q = merge q q), (c :: q = heap_delete_max c)
+(c :: q = join q q c), (c :: q = insert n q), (c :: q = carry q c), (c :: q = q ++ q), (c :: q = []), (merge q q = q), (merge q q = heap_delete_max c), (merge q q = join q q c), (merge q q = insert n q), (merge q q = carry q c)
+(merge q q = q ++ q), (heap_delete_max c = q), (heap_delete_max c = carry q c), (heap_delete_max c = q ++ q), (join q q c = q), (join q q c = heap_delete_max c), (join q q c = insert n q), (join q q c = carry q c), (join q q c = q ++ q), (insert n q = q)
+(insert n q = heap_delete_max c), (insert n q = carry q c), (insert n q = q ++ q), (carry q c = q), (carry q c = q ++ q), (q ++ q = q), ([] = q), ([] = merge q q), ([] = heap_delete_max c), ([] = join q q c)
+([] = insert n q), ([] = carry q c), ([] = q ++ q), ((q, q) = delete_max_aux n q), (Node n c c = c), (Node n c c = smash c c), (smash c c = c), (Leaf = Node n c c), (Leaf = smash c c), (find_max' n q = n)
+(length q = n), (length q = find_max' n q), (Some n = find_max q), (None = Some n), (None = find_max q), (None = Some c), ((n >? n) = (n >=? n))
+
+Label: 2 (2)
+(priq q), (priq gv0), (priqq n q), (priqq n gv0), (pow2heap n c), (pow2heapp n n c), (Permutation q q), (Permutation q gv0), (Permutation gv0 q), (Permutation gv0 gv0)
+(In c q), (In c gv0), (n < n), (n <= n), (c = c), (q = q), (q = gv0), (gv0 = q), (gv0 = gv0), (n = n)
+(false = (n >? n)), (false = (n >=? n)), (true = (n >? n)), (true = (n >=? n)), (Abs q []), (Abs gv0 []), (Abs (c :: q) []), (Abs (c :: gv0) []), (Abs (merge q q) []), (Abs (merge q gv0) [])
+(Abs (merge gv0 q) []), (Abs (merge gv0 gv0) []), (Abs (heap_delete_max c) []), (Abs (join q q c) []), (Abs (join q gv0 c) []), (Abs (join gv0 q c) []), (Abs (join gv0 gv0 c) []), (Abs (insert n q) []), (Abs (insert n gv0) []), (Abs (carry q c) [])
+(Abs (carry gv0 c) []), (Abs (q ++ q) []), (Abs (q ++ gv0) []), (Abs (gv0 ++ q) []), (Abs (gv0 ++ gv0) []), (Abs [] []), (priqueue_elems q []), (priqueue_elems gv0 []), (priqueue_elems (c :: q) []), (priqueue_elems (c :: gv0) [])
+(priqueue_elems (merge q q) []), (priqueue_elems (merge q gv0) []), (priqueue_elems (merge gv0 q) []), (priqueue_elems (merge gv0 gv0) []), (priqueue_elems (heap_delete_max c) []), (priqueue_elems (join q q c) []), (priqueue_elems (join q gv0 c) []), (priqueue_elems (join gv0 q c) []), (priqueue_elems (join gv0 gv0 c) []), (priqueue_elems (insert n q) [])
+(priqueue_elems (insert n gv0) []), (priqueue_elems (carry q c) []), (priqueue_elems (carry gv0 c) []), (priqueue_elems (q ++ q) []), (priqueue_elems (q ++ gv0) []), (priqueue_elems (gv0 ++ q) []), (priqueue_elems (gv0 ++ gv0) []), (priqueue_elems [] []), (tree_elems c []), (tree_elems (Node n c c) [])
+(tree_elems (smash c c) []), (tree_elems Leaf []), (priq (c :: q)), (priq (c :: gv0)), (priq (merge q q)), (priq (merge q gv0)), (priq (merge gv0 q)), (priq (merge gv0 gv0)), (priq (heap_delete_max c)), (priq (join q q c))
+(priq (join q gv0 c)), (priq (join gv0 q c)), (priq (join gv0 gv0 c)), (priq (insert n q)), (priq (insert n gv0)), (priq (carry q c)), (priq (carry gv0 c)), (priq (q ++ q)), (priq (q ++ gv0)), (priq (gv0 ++ q))
+(priq (gv0 ++ gv0)), (priqq n (c :: q)), (priqq n (c :: gv0)), (priqq n (merge q q)), (priqq n (merge q gv0)), (priqq n (merge gv0 q)), (priqq n (merge gv0 gv0)), (priqq n (heap_delete_max c)), (priqq n (join q q c)), (priqq n (join q gv0 c))
+(priqq n (join gv0 q c)), (priqq n (join gv0 gv0 c)), (priqq n (insert n q)), (priqq n (insert n gv0)), (priqq n (carry q c)), (priqq n (carry gv0 c)), (priqq n (q ++ q)), (priqq n (q ++ gv0)), (priqq n (gv0 ++ q)), (priqq n (gv0 ++ gv0))
+(priqq (find_max' n q) q), (priqq (find_max' n q) gv0), (priqq (find_max' n q) (c :: q)), (priqq (find_max' n q) (c :: gv0)), (priqq (find_max' n q) (merge q q)), (priqq (find_max' n q) (merge q gv0)), (priqq (find_max' n q) (merge gv0 q)), (priqq (find_max' n q) (merge gv0 gv0)), (priqq (find_max' n q) (heap_delete_max c)), (priqq (find_max' n q) (join q q c))
+(priqq (find_max' n q) (join q gv0 c)), (priqq (find_max' n q) (join gv0 q c)), (priqq (find_max' n q) (join gv0 gv0 c)), (priqq (find_max' n q) (insert n q)), (priqq (find_max' n q) (insert n gv0)), (priqq (find_max' n q) (carry q c)), (priqq (find_max' n q) (carry gv0 c)), (priqq (find_max' n q) (q ++ q)), (priqq (find_max' n q) (q ++ gv0)), (priqq (find_max' n q) (gv0 ++ q))
+(priqq (find_max' n q) (gv0 ++ gv0)), (priqq (find_max' n gv0) q), (priqq (find_max' n gv0) gv0), (priqq (find_max' n gv0) (c :: q)), (priqq (find_max' n gv0) (c :: gv0)), (priqq (find_max' n gv0) (merge q q)), (priqq (find_max' n gv0) (merge q gv0)), (priqq (find_max' n gv0) (merge gv0 q)), (priqq (find_max' n gv0) (merge gv0 gv0)), (priqq (find_max' n gv0) (heap_delete_max c))
+(priqq (find_max' n gv0) (join q q c)), (priqq (find_max' n gv0) (join q gv0 c)), (priqq (find_max' n gv0) (join gv0 q c)), (priqq (find_max' n gv0) (join gv0 gv0 c)), (priqq (find_max' n gv0) (insert n q)), (priqq (find_max' n gv0) (insert n gv0)), (priqq (find_max' n gv0) (carry q c)), (priqq (find_max' n gv0) (carry gv0 c)), (priqq (find_max' n gv0) (q ++ q)), (priqq (find_max' n gv0) (q ++ gv0))
+(priqq (find_max' n gv0) (gv0 ++ q)), (priqq (find_max' n gv0) (gv0 ++ gv0)), (priqq (length q) q), (priqq (length q) gv0), (priqq (length q) (c :: q)), (priqq (length q) (c :: gv0)), (priqq (length q) (merge q q)), (priqq (length q) (merge q gv0)), (priqq (length q) (merge gv0 q)), (priqq (length q) (merge gv0 gv0))
+(priqq (length q) (heap_delete_max c)), (priqq (length q) (join q q c)), (priqq (length q) (join q gv0 c)), (priqq (length q) (join gv0 q c)), (priqq (length q) (join gv0 gv0 c)), (priqq (length q) (insert n q)), (priqq (length q) (insert n gv0)), (priqq (length q) (carry q c)), (priqq (length q) (carry gv0 c)), (priqq (length q) (q ++ q))
+(priqq (length q) (q ++ gv0)), (priqq (length q) (gv0 ++ q)), (priqq (length q) (gv0 ++ gv0)), (priqq (length gv0) q), (priqq (length gv0) gv0), (priqq (length gv0) (c :: q)), (priqq (length gv0) (c :: gv0)), (priqq (length gv0) (merge q q)), (priqq (length gv0) (merge q gv0)), (priqq (length gv0) (merge gv0 q))
+(priqq (length gv0) (merge gv0 gv0)), (priqq (length gv0) (heap_delete_max c)), (priqq (length gv0) (join q q c)), (priqq (length gv0) (join q gv0 c)), (priqq (length gv0) (join gv0 q c)), (priqq (length gv0) (join gv0 gv0 c)), (priqq (length gv0) (insert n q)), (priqq (length gv0) (insert n gv0)), (priqq (length gv0) (carry q c)), (priqq (length gv0) (carry gv0 c))
+(priqq (length gv0) (q ++ q)), (priqq (length gv0) (q ++ gv0)), (priqq (length gv0) (gv0 ++ q)), (priqq (length gv0) (gv0 ++ gv0)), (pow2heap n (Node n c c)), (pow2heap n (smash c c)), (pow2heap (find_max' n q) c), (pow2heap (find_max' n q) (Node n c c)), (pow2heap (find_max' n q) (smash c c)), (pow2heap (find_max' n gv0) c)
+(pow2heap (find_max' n gv0) (Node n c c)), (pow2heap (find_max' n gv0) (smash c c)), (pow2heap (length q) c), (pow2heap (length q) (Node n c c)), (pow2heap (length q) (smash c c)), (pow2heap (length gv0) c), (pow2heap (length gv0) (Node n c c)), (pow2heap (length gv0) (smash c c)), (pow2heapp n n (Node n c c)), (pow2heapp n n (smash c c))
+(pow2heapp n n Leaf), (pow2heapp n (find_max' n q) c), (pow2heapp n (find_max' n q) (Node n c c)), (pow2heapp n (find_max' n q) (smash c c)), (pow2heapp n (find_max' n q) Leaf), (pow2heapp n (find_max' n gv0) c), (pow2heapp n (find_max' n gv0) (Node n c c)), (pow2heapp n (find_max' n gv0) (smash c c)), (pow2heapp n (find_max' n gv0) Leaf), (pow2heapp n (length q) c)
+(pow2heapp n (length q) (Node n c c)), (pow2heapp n (length q) (smash c c)), (pow2heapp n (length q) Leaf), (pow2heapp n (length gv0) c), (pow2heapp n (length gv0) (Node n c c)), (pow2heapp n (length gv0) (smash c c)), (pow2heapp n (length gv0) Leaf), (pow2heapp (find_max' n q) n c), (pow2heapp (find_max' n q) n (Node n c c)), (pow2heapp (find_max' n q) n (smash c c))
+(pow2heapp (find_max' n q) n Leaf), (pow2heapp (find_max' n q) (find_max' n q) c), (pow2heapp (find_max' n q) (find_max' n q) (Node n c c)), (pow2heapp (find_max' n q) (find_max' n q) (smash c c)), (pow2heapp (find_max' n q) (find_max' n q) Leaf), (pow2heapp (find_max' n q) (find_max' n gv0) c), (pow2heapp (find_max' n q) (find_max' n gv0) (Node n c c)), (pow2heapp (find_max' n q) (find_max' n gv0) (smash c c)), (pow2heapp (find_max' n q) (find_max' n gv0) Leaf), (pow2heapp (find_max' n q) (length q) c)
+(pow2heapp (find_max' n q) (length q) (Node n c c)), (pow2heapp (find_max' n q) (length q) (smash c c)), (pow2heapp (find_max' n q) (length q) Leaf), (pow2heapp (find_max' n q) (length gv0) c), (pow2heapp (find_max' n q) (length gv0) (Node n c c)), (pow2heapp (find_max' n q) (length gv0) (smash c c)), (pow2heapp (find_max' n q) (length gv0) Leaf), (pow2heapp (find_max' n gv0) n c), (pow2heapp (find_max' n gv0) n (Node n c c)), (pow2heapp (find_max' n gv0) n (smash c c))
+(pow2heapp (find_max' n gv0) n Leaf), (pow2heapp (find_max' n gv0) (find_max' n q) c), (pow2heapp (find_max' n gv0) (find_max' n q) (Node n c c)), (pow2heapp (find_max' n gv0) (find_max' n q) (smash c c)), (pow2heapp (find_max' n gv0) (find_max' n q) Leaf), (pow2heapp (find_max' n gv0) (find_max' n gv0) c), (pow2heapp (find_max' n gv0) (find_max' n gv0) (Node n c c)), (pow2heapp (find_max' n gv0) (find_max' n gv0) (smash c c)), (pow2heapp (find_max' n gv0) (find_max' n gv0) Leaf), (pow2heapp (find_max' n gv0) (length q) c)
+(pow2heapp (find_max' n gv0) (length q) (Node n c c)), (pow2heapp (find_max' n gv0) (length q) (smash c c)), (pow2heapp (find_max' n gv0) (length q) Leaf), (pow2heapp (find_max' n gv0) (length gv0) c), (pow2heapp (find_max' n gv0) (length gv0) (Node n c c)), (pow2heapp (find_max' n gv0) (length gv0) (smash c c)), (pow2heapp (find_max' n gv0) (length gv0) Leaf), (pow2heapp (length q) n c), (pow2heapp (length q) n (Node n c c)), (pow2heapp (length q) n (smash c c))
+(pow2heapp (length q) n Leaf), (pow2heapp (length q) (find_max' n q) c), (pow2heapp (length q) (find_max' n q) (Node n c c)), (pow2heapp (length q) (find_max' n q) (smash c c)), (pow2heapp (length q) (find_max' n q) Leaf), (pow2heapp (length q) (find_max' n gv0) c), (pow2heapp (length q) (find_max' n gv0) (Node n c c)), (pow2heapp (length q) (find_max' n gv0) (smash c c)), (pow2heapp (length q) (find_max' n gv0) Leaf), (pow2heapp (length q) (length q) c)
+(pow2heapp (length q) (length q) (Node n c c)), (pow2heapp (length q) (length q) (smash c c)), (pow2heapp (length q) (length q) Leaf), (pow2heapp (length q) (length gv0) c), (pow2heapp (length q) (length gv0) (Node n c c)), (pow2heapp (length q) (length gv0) (smash c c)), (pow2heapp (length q) (length gv0) Leaf), (pow2heapp (length gv0) n c), (pow2heapp (length gv0) n (Node n c c)), (pow2heapp (length gv0) n (smash c c))
+(pow2heapp (length gv0) n Leaf), (pow2heapp (length gv0) (find_max' n q) c), (pow2heapp (length gv0) (find_max' n q) (Node n c c)), (pow2heapp (length gv0) (find_max' n q) (smash c c)), (pow2heapp (length gv0) (find_max' n q) Leaf), (pow2heapp (length gv0) (find_max' n gv0) c), (pow2heapp (length gv0) (find_max' n gv0) (Node n c c)), (pow2heapp (length gv0) (find_max' n gv0) (smash c c)), (pow2heapp (length gv0) (find_max' n gv0) Leaf), (pow2heapp (length gv0) (length q) c)
+(pow2heapp (length gv0) (length q) (Node n c c)), (pow2heapp (length gv0) (length q) (smash c c)), (pow2heapp (length gv0) (length q) Leaf), (pow2heapp (length gv0) (length gv0) c), (pow2heapp (length gv0) (length gv0) (Node n c c)), (pow2heapp (length gv0) (length gv0) (smash c c)), (pow2heapp (length gv0) (length gv0) Leaf), (Permutation q (c :: q)), (Permutation q (c :: gv0)), (Permutation q (merge q q))
+(Permutation q (merge q gv0)), (Permutation q (merge gv0 q)), (Permutation q (merge gv0 gv0)), (Permutation q (heap_delete_max c)), (Permutation q (join q q c)), (Permutation q (join q gv0 c)), (Permutation q (join gv0 q c)), (Permutation q (join gv0 gv0 c)), (Permutation q (insert n q)), (Permutation q (insert n gv0))
+(Permutation q (carry q c)), (Permutation q (carry gv0 c)), (Permutation q (q ++ q)), (Permutation q (q ++ gv0)), (Permutation q (gv0 ++ q)), (Permutation q (gv0 ++ gv0)), (Permutation q []), (Permutation gv0 (c :: q)), (Permutation gv0 (c :: gv0)), (Permutation gv0 (merge q q))
+(Permutation gv0 (merge q gv0)), (Permutation gv0 (merge gv0 q)), (Permutation gv0 (merge gv0 gv0)), (Permutation gv0 (heap_delete_max c)), (Permutation gv0 (join q q c)), (Permutation gv0 (join q gv0 c)), (Permutation gv0 (join gv0 q c)), (Permutation gv0 (join gv0 gv0 c)), (Permutation gv0 (insert n q)), (Permutation gv0 (insert n gv0))
+(Permutation gv0 (carry q c)), (Permutation gv0 (carry gv0 c)), (Permutation gv0 (q ++ q)), (Permutation gv0 (q ++ gv0)), (Permutation gv0 (gv0 ++ q)), (Permutation gv0 (gv0 ++ gv0)), (Permutation gv0 []), (Permutation (c :: q) q), (Permutation (c :: q) gv0), (Permutation (c :: q) (c :: gv0))
+(Permutation (c :: q) (merge q q)), (Permutation (c :: q) (merge q gv0)), (Permutation (c :: q) (merge gv0 q)), (Permutation (c :: q) (merge gv0 gv0)), (Permutation (c :: q) (heap_delete_max c)), (Permutation (c :: q) (join q q c)), (Permutation (c :: q) (join q gv0 c)), (Permutation (c :: q) (join gv0 q c)), (Permutation (c :: q) (join gv0 gv0 c)), (Permutation (c :: q) (insert n q))
+(Permutation (c :: q) (insert n gv0)), (Permutation (c :: q) (carry q c)), (Permutation (c :: q) (carry gv0 c)), (Permutation (c :: q) (q ++ q)), (Permutation (c :: q) (q ++ gv0)), (Permutation (c :: q) (gv0 ++ q)), (Permutation (c :: q) (gv0 ++ gv0)), (Permutation (c :: q) []), (Permutation (c :: gv0) q), (Permutation (c :: gv0) gv0)
+(Permutation (c :: gv0) (c :: q)), (Permutation (c :: gv0) (merge q q)), (Permutation (c :: gv0) (merge q gv0)), (Permutation (c :: gv0) (merge gv0 q)), (Permutation (c :: gv0) (merge gv0 gv0)), (Permutation (c :: gv0) (heap_delete_max c)), (Permutation (c :: gv0) (join q q c)), (Permutation (c :: gv0) (join q gv0 c)), (Permutation (c :: gv0) (join gv0 q c)), (Permutation (c :: gv0) (join gv0 gv0 c))
+(Permutation (c :: gv0) (insert n q)), (Permutation (c :: gv0) (insert n gv0)), (Permutation (c :: gv0) (carry q c)), (Permutation (c :: gv0) (carry gv0 c)), (Permutation (c :: gv0) (q ++ q)), (Permutation (c :: gv0) (q ++ gv0)), (Permutation (c :: gv0) (gv0 ++ q)), (Permutation (c :: gv0) (gv0 ++ gv0)), (Permutation (c :: gv0) []), (Permutation (merge q q) q)
+(Permutation (merge q q) gv0), (Permutation (merge q q) (c :: q)), (Permutation (merge q q) (c :: gv0)), (Permutation (merge q q) (merge q gv0)), (Permutation (merge q q) (merge gv0 q)), (Permutation (merge q q) (merge gv0 gv0)), (Permutation (merge q q) (heap_delete_max c)), (Permutation (merge q q) (join q q c)), (Permutation (merge q q) (join q gv0 c)), (Permutation (merge q q) (join gv0 q c))
+(Permutation (merge q q) (join gv0 gv0 c)), (Permutation (merge q q) (insert n q)), (Permutation (merge q q) (insert n gv0)), (Permutation (merge q q) (carry q c)), (Permutation (merge q q) (carry gv0 c)), (Permutation (merge q q) (q ++ q)), (Permutation (merge q q) (q ++ gv0)), (Permutation (merge q q) (gv0 ++ q)), (Permutation (merge q q) (gv0 ++ gv0)), (Permutation (merge q q) [])
+(Permutation (merge q gv0) q), (Permutation (merge q gv0) gv0), (Permutation (merge q gv0) (c :: q)), (Permutation (merge q gv0) (c :: gv0)), (Permutation (merge q gv0) (merge q q)), (Permutation (merge q gv0) (merge gv0 q)), (Permutation (merge q gv0) (merge gv0 gv0)), (Permutation (merge q gv0) (heap_delete_max c)), (Permutation (merge q gv0) (join q q c)), (Permutation (merge q gv0) (join q gv0 c))
+(Permutation (merge q gv0) (join gv0 q c)), (Permutation (merge q gv0) (join gv0 gv0 c)), (Permutation (merge q gv0) (insert n q)), (Permutation (merge q gv0) (insert n gv0)), (Permutation (merge q gv0) (carry q c)), (Permutation (merge q gv0) (carry gv0 c)), (Permutation (merge q gv0) (q ++ q)), (Permutation (merge q gv0) (q ++ gv0)), (Permutation (merge q gv0) (gv0 ++ q)), (Permutation (merge q gv0) (gv0 ++ gv0))
+(Permutation (merge q gv0) []), (Permutation (merge gv0 q) q), (Permutation (merge gv0 q) gv0), (Permutation (merge gv0 q) (c :: q)), (Permutation (merge gv0 q) (c :: gv0)), (Permutation (merge gv0 q) (merge q q)), (Permutation (merge gv0 q) (merge q gv0)), (Permutation (merge gv0 q) (merge gv0 gv0)), (Permutation (merge gv0 q) (heap_delete_max c)), (Permutation (merge gv0 q) (join q q c))
+(Permutation (merge gv0 q) (join q gv0 c)), (Permutation (merge gv0 q) (join gv0 q c)), (Permutation (merge gv0 q) (join gv0 gv0 c)), (Permutation (merge gv0 q) (insert n q)), (Permutation (merge gv0 q) (insert n gv0)), (Permutation (merge gv0 q) (carry q c)), (Permutation (merge gv0 q) (carry gv0 c)), (Permutation (merge gv0 q) (q ++ q)), (Permutation (merge gv0 q) (q ++ gv0)), (Permutation (merge gv0 q) (gv0 ++ q))
+(Permutation (merge gv0 q) (gv0 ++ gv0)), (Permutation (merge gv0 q) []), (Permutation (merge gv0 gv0) q), (Permutation (merge gv0 gv0) gv0), (Permutation (merge gv0 gv0) (c :: q)), (Permutation (merge gv0 gv0) (c :: gv0)), (Permutation (merge gv0 gv0) (merge q q)), (Permutation (merge gv0 gv0) (merge q gv0)), (Permutation (merge gv0 gv0) (merge gv0 q)), (Permutation (merge gv0 gv0) (heap_delete_max c))
+(Permutation (merge gv0 gv0) (join q q c)), (Permutation (merge gv0 gv0) (join q gv0 c)), (Permutation (merge gv0 gv0) (join gv0 q c)), (Permutation (merge gv0 gv0) (join gv0 gv0 c)), (Permutation (merge gv0 gv0) (insert n q)), (Permutation (merge gv0 gv0) (insert n gv0)), (Permutation (merge gv0 gv0) (carry q c)), (Permutation (merge gv0 gv0) (carry gv0 c)), (Permutation (merge gv0 gv0) (q ++ q)), (Permutation (merge gv0 gv0) (q ++ gv0))
+(Permutation (merge gv0 gv0) (gv0 ++ q)), (Permutation (merge gv0 gv0) (gv0 ++ gv0)), (Permutation (merge gv0 gv0) []), (Permutation (heap_delete_max c) q), (Permutation (heap_delete_max c) gv0), (Permutation (heap_delete_max c) (c :: q)), (Permutation (heap_delete_max c) (c :: gv0)), (Permutation (heap_delete_max c) (merge q q)), (Permutation (heap_delete_max c) (merge q gv0)), (Permutation (heap_delete_max c) (merge gv0 q))
+(Permutation (heap_delete_max c) (merge gv0 gv0)), (Permutation (heap_delete_max c) (join q q c)), (Permutation (heap_delete_max c) (join q gv0 c)), (Permutation (heap_delete_max c) (join gv0 q c)), (Permutation (heap_delete_max c) (join gv0 gv0 c)), (Permutation (heap_delete_max c) (insert n q)), (Permutation (heap_delete_max c) (insert n gv0)), (Permutation (heap_delete_max c) (carry q c)), (Permutation (heap_delete_max c) (carry gv0 c)), (Permutation (heap_delete_max c) (q ++ q))
+(Permutation (heap_delete_max c) (q ++ gv0)), (Permutation (heap_delete_max c) (gv0 ++ q)), (Permutation (heap_delete_max c) (gv0 ++ gv0)), (Permutation (heap_delete_max c) []), (Permutation (join q q c) q), (Permutation (join q q c) gv0), (Permutation (join q q c) (c :: q)), (Permutation (join q q c) (c :: gv0)), (Permutation (join q q c) (merge q q)), (Permutation (join q q c) (merge q gv0))
+(Permutation (join q q c) (merge gv0 q)), (Permutation (join q q c) (merge gv0 gv0)), (Permutation (join q q c) (heap_delete_max c)), (Permutation (join q q c) (join q gv0 c)), (Permutation (join q q c) (join gv0 q c)), (Permutation (join q q c) (join gv0 gv0 c)), (Permutation (join q q c) (insert n q)), (Permutation (join q q c) (insert n gv0)), (Permutation (join q q c) (carry q c)), (Permutation (join q q c) (carry gv0 c))
+(Permutation (join q q c) (q ++ q)), (Permutation (join q q c) (q ++ gv0)), (Permutation (join q q c) (gv0 ++ q)), (Permutation (join q q c) (gv0 ++ gv0)), (Permutation (join q q c) []), (Permutation (join q gv0 c) q), (Permutation (join q gv0 c) gv0), (Permutation (join q gv0 c) (c :: q)), (Permutation (join q gv0 c) (c :: gv0)), (Permutation (join q gv0 c) (merge q q))
+(Permutation (join q gv0 c) (merge q gv0)), (Permutation (join q gv0 c) (merge gv0 q)), (Permutation (join q gv0 c) (merge gv0 gv0)), (Permutation (join q gv0 c) (heap_delete_max c)), (Permutation (join q gv0 c) (join q q c)), (Permutation (join q gv0 c) (join gv0 q c)), (Permutation (join q gv0 c) (join gv0 gv0 c)), (Permutation (join q gv0 c) (insert n q)), (Permutation (join q gv0 c) (insert n gv0)), (Permutation (join q gv0 c) (carry q c))
+(Permutation (join q gv0 c) (carry gv0 c)), (Permutation (join q gv0 c) (q ++ q)), (Permutation (join q gv0 c) (q ++ gv0)), (Permutation (join q gv0 c) (gv0 ++ q)), (Permutation (join q gv0 c) (gv0 ++ gv0)), (Permutation (join q gv0 c) []), (Permutation (join gv0 q c) q), (Permutation (join gv0 q c) gv0), (Permutation (join gv0 q c) (c :: q)), (Permutation (join gv0 q c) (c :: gv0))
+(Permutation (join gv0 q c) (merge q q)), (Permutation (join gv0 q c) (merge q gv0)), (Permutation (join gv0 q c) (merge gv0 q)), (Permutation (join gv0 q c) (merge gv0 gv0)), (Permutation (join gv0 q c) (heap_delete_max c)), (Permutation (join gv0 q c) (join q q c)), (Permutation (join gv0 q c) (join q gv0 c)), (Permutation (join gv0 q c) (join gv0 gv0 c)), (Permutation (join gv0 q c) (insert n q)), (Permutation (join gv0 q c) (insert n gv0))
+(Permutation (join gv0 q c) (carry q c)), (Permutation (join gv0 q c) (carry gv0 c)), (Permutation (join gv0 q c) (q ++ q)), (Permutation (join gv0 q c) (q ++ gv0)), (Permutation (join gv0 q c) (gv0 ++ q)), (Permutation (join gv0 q c) (gv0 ++ gv0)), (Permutation (join gv0 q c) []), (Permutation (join gv0 gv0 c) q), (Permutation (join gv0 gv0 c) gv0), (Permutation (join gv0 gv0 c) (c :: q))
+(Permutation (join gv0 gv0 c) (c :: gv0)), (Permutation (join gv0 gv0 c) (merge q q)), (Permutation (join gv0 gv0 c) (merge q gv0)), (Permutation (join gv0 gv0 c) (merge gv0 q)), (Permutation (join gv0 gv0 c) (merge gv0 gv0)), (Permutation (join gv0 gv0 c) (heap_delete_max c)), (Permutation (join gv0 gv0 c) (join q q c)), (Permutation (join gv0 gv0 c) (join q gv0 c)), (Permutation (join gv0 gv0 c) (join gv0 q c)), (Permutation (join gv0 gv0 c) (insert n q))
+(Permutation (join gv0 gv0 c) (insert n gv0)), (Permutation (join gv0 gv0 c) (carry q c)), (Permutation (join gv0 gv0 c) (carry gv0 c)), (Permutation (join gv0 gv0 c) (q ++ q)), (Permutation (join gv0 gv0 c) (q ++ gv0)), (Permutation (join gv0 gv0 c) (gv0 ++ q)), (Permutation (join gv0 gv0 c) (gv0 ++ gv0)), (Permutation (join gv0 gv0 c) []), (Permutation (insert n q) q), (Permutation (insert n q) gv0)
+(Permutation (insert n q) (c :: q)), (Permutation (insert n q) (c :: gv0)), (Permutation (insert n q) (merge q q)), (Permutation (insert n q) (merge q gv0)), (Permutation (insert n q) (merge gv0 q)), (Permutation (insert n q) (merge gv0 gv0)), (Permutation (insert n q) (heap_delete_max c)), (Permutation (insert n q) (join q q c)), (Permutation (insert n q) (join q gv0 c)), (Permutation (insert n q) (join gv0 q c))
+(Permutation (insert n q) (join gv0 gv0 c)), (Permutation (insert n q) (insert n gv0)), (Permutation (insert n q) (carry q c)), (Permutation (insert n q) (carry gv0 c)), (Permutation (insert n q) (q ++ q)), (Permutation (insert n q) (q ++ gv0)), (Permutation (insert n q) (gv0 ++ q)), (Permutation (insert n q) (gv0 ++ gv0)), (Permutation (insert n q) []), (Permutation (insert n gv0) q)
+(Permutation (insert n gv0) gv0), (Permutation (insert n gv0) (c :: q)), (Permutation (insert n gv0) (c :: gv0)), (Permutation (insert n gv0) (merge q q)), (Permutation (insert n gv0) (merge q gv0)), (Permutation (insert n gv0) (merge gv0 q)), (Permutation (insert n gv0) (merge gv0 gv0)), (Permutation (insert n gv0) (heap_delete_max c)), (Permutation (insert n gv0) (join q q c)), (Permutation (insert n gv0) (join q gv0 c))
+(Permutation (insert n gv0) (join gv0 q c)), (Permutation (insert n gv0) (join gv0 gv0 c)), (Permutation (insert n gv0) (insert n q)), (Permutation (insert n gv0) (carry q c)), (Permutation (insert n gv0) (carry gv0 c)), (Permutation (insert n gv0) (q ++ q)), (Permutation (insert n gv0) (q ++ gv0)), (Permutation (insert n gv0) (gv0 ++ q)), (Permutation (insert n gv0) (gv0 ++ gv0)), (Permutation (insert n gv0) [])
+(Permutation (carry q c) q), (Permutation (carry q c) gv0), (Permutation (carry q c) (c :: q)), (Permutation (carry q c) (c :: gv0)), (Permutation (carry q c) (merge q q)), (Permutation (carry q c) (merge q gv0)), (Permutation (carry q c) (merge gv0 q)), (Permutation (carry q c) (merge gv0 gv0)), (Permutation (carry q c) (heap_delete_max c)), (Permutation (carry q c) (join q q c))
+(Permutation (carry q c) (join q gv0 c)), (Permutation (carry q c) (join gv0 q c)), (Permutation (carry q c) (join gv0 gv0 c)), (Permutation (carry q c) (insert n q)), (Permutation (carry q c) (insert n gv0)), (Permutation (carry q c) (carry gv0 c)), (Permutation (carry q c) (q ++ q)), (Permutation (carry q c) (q ++ gv0)), (Permutation (carry q c) (gv0 ++ q)), (Permutation (carry q c) (gv0 ++ gv0))
+(Permutation (carry q c) []), (Permutation (carry gv0 c) q), (Permutation (carry gv0 c) gv0), (Permutation (carry gv0 c) (c :: q)), (Permutation (carry gv0 c) (c :: gv0)), (Permutation (carry gv0 c) (merge q q)), (Permutation (carry gv0 c) (merge q gv0)), (Permutation (carry gv0 c) (merge gv0 q)), (Permutation (carry gv0 c) (merge gv0 gv0)), (Permutation (carry gv0 c) (heap_delete_max c))
+(Permutation (carry gv0 c) (join q q c)), (Permutation (carry gv0 c) (join q gv0 c)), (Permutation (carry gv0 c) (join gv0 q c)), (Permutation (carry gv0 c) (join gv0 gv0 c)), (Permutation (carry gv0 c) (insert n q)), (Permutation (carry gv0 c) (insert n gv0)), (Permutation (carry gv0 c) (carry q c)), (Permutation (carry gv0 c) (q ++ q)), (Permutation (carry gv0 c) (q ++ gv0)), (Permutation (carry gv0 c) (gv0 ++ q))
+(Permutation (carry gv0 c) (gv0 ++ gv0)), (Permutation (carry gv0 c) []), (Permutation (q ++ q) q), (Permutation (q ++ q) gv0), (Permutation (q ++ q) (c :: q)), (Permutation (q ++ q) (c :: gv0)), (Permutation (q ++ q) (merge q q)), (Permutation (q ++ q) (merge q gv0)), (Permutation (q ++ q) (merge gv0 q)), (Permutation (q ++ q) (merge gv0 gv0))
+(Permutation (q ++ q) (heap_delete_max c)), (Permutation (q ++ q) (join q q c)), (Permutation (q ++ q) (join q gv0 c)), (Permutation (q ++ q) (join gv0 q c)), (Permutation (q ++ q) (join gv0 gv0 c)), (Permutation (q ++ q) (insert n q)), (Permutation (q ++ q) (insert n gv0)), (Permutation (q ++ q) (carry q c)), (Permutation (q ++ q) (carry gv0 c)), (Permutation (q ++ q) (q ++ gv0))
+(Permutation (q ++ q) (gv0 ++ q)), (Permutation (q ++ q) (gv0 ++ gv0)), (Permutation (q ++ q) []), (Permutation (q ++ gv0) q), (Permutation (q ++ gv0) gv0), (Permutation (q ++ gv0) (c :: q)), (Permutation (q ++ gv0) (c :: gv0)), (Permutation (q ++ gv0) (merge q q)), (Permutation (q ++ gv0) (merge q gv0)), (Permutation (q ++ gv0) (merge gv0 q))
+(Permutation (q ++ gv0) (merge gv0 gv0)), (Permutation (q ++ gv0) (heap_delete_max c)), (Permutation (q ++ gv0) (join q q c)), (Permutation (q ++ gv0) (join q gv0 c)), (Permutation (q ++ gv0) (join gv0 q c)), (Permutation (q ++ gv0) (join gv0 gv0 c)), (Permutation (q ++ gv0) (insert n q)), (Permutation (q ++ gv0) (insert n gv0)), (Permutation (q ++ gv0) (carry q c)), (Permutation (q ++ gv0) (carry gv0 c))
+(Permutation (q ++ gv0) (q ++ q)), (Permutation (q ++ gv0) (gv0 ++ q)), (Permutation (q ++ gv0) (gv0 ++ gv0)), (Permutation (q ++ gv0) []), (Permutation (gv0 ++ q) q), (Permutation (gv0 ++ q) gv0), (Permutation (gv0 ++ q) (c :: q)), (Permutation (gv0 ++ q) (c :: gv0)), (Permutation (gv0 ++ q) (merge q q)), (Permutation (gv0 ++ q) (merge q gv0))
+(Permutation (gv0 ++ q) (merge gv0 q)), (Permutation (gv0 ++ q) (merge gv0 gv0)), (Permutation (gv0 ++ q) (heap_delete_max c)), (Permutation (gv0 ++ q) (join q q c)), (Permutation (gv0 ++ q) (join q gv0 c)), (Permutation (gv0 ++ q) (join gv0 q c)), (Permutation (gv0 ++ q) (join gv0 gv0 c)), (Permutation (gv0 ++ q) (insert n q)), (Permutation (gv0 ++ q) (insert n gv0)), (Permutation (gv0 ++ q) (carry q c))
+(Permutation (gv0 ++ q) (carry gv0 c)), (Permutation (gv0 ++ q) (q ++ q)), (Permutation (gv0 ++ q) (q ++ gv0)), (Permutation (gv0 ++ q) (gv0 ++ gv0)), (Permutation (gv0 ++ q) []), (Permutation (gv0 ++ gv0) q), (Permutation (gv0 ++ gv0) gv0), (Permutation (gv0 ++ gv0) (c :: q)), (Permutation (gv0 ++ gv0) (c :: gv0)), (Permutation (gv0 ++ gv0) (merge q q))
+(Permutation (gv0 ++ gv0) (merge q gv0)), (Permutation (gv0 ++ gv0) (merge gv0 q)), (Permutation (gv0 ++ gv0) (merge gv0 gv0)), (Permutation (gv0 ++ gv0) (heap_delete_max c)), (Permutation (gv0 ++ gv0) (join q q c)), (Permutation (gv0 ++ gv0) (join q gv0 c)), (Permutation (gv0 ++ gv0) (join gv0 q c)), (Permutation (gv0 ++ gv0) (join gv0 gv0 c)), (Permutation (gv0 ++ gv0) (insert n q)), (Permutation (gv0 ++ gv0) (insert n gv0))
+(Permutation (gv0 ++ gv0) (carry q c)), (Permutation (gv0 ++ gv0) (carry gv0 c)), (Permutation (gv0 ++ gv0) (q ++ q)), (Permutation (gv0 ++ gv0) (q ++ gv0)), (Permutation (gv0 ++ gv0) (gv0 ++ q)), (Permutation (gv0 ++ gv0) []), (Permutation [] q), (Permutation [] gv0), (Permutation [] (c :: q)), (Permutation [] (c :: gv0))
+(Permutation [] (merge q q)), (Permutation [] (merge q gv0)), (Permutation [] (merge gv0 q)), (Permutation [] (merge gv0 gv0)), (Permutation [] (heap_delete_max c)), (Permutation [] (join q q c)), (Permutation [] (join q gv0 c)), (Permutation [] (join gv0 q c)), (Permutation [] (join gv0 gv0 c)), (Permutation [] (insert n q))
+(Permutation [] (insert n gv0)), (Permutation [] (carry q c)), (Permutation [] (carry gv0 c)), (Permutation [] (q ++ q)), (Permutation [] (q ++ gv0)), (Permutation [] (gv0 ++ q)), (Permutation [] (gv0 ++ gv0)), (In c (c :: q)), (In c (c :: gv0)), (In c (merge q q))
+(In c (merge q gv0)), (In c (merge gv0 q)), (In c (merge gv0 gv0)), (In c (heap_delete_max c)), (In c (join q q c)), (In c (join q gv0 c)), (In c (join gv0 q c)), (In c (join gv0 gv0 c)), (In c (insert n q)), (In c (insert n gv0))
+(In c (carry q c)), (In c (carry gv0 c)), (In c (q ++ q)), (In c (q ++ gv0)), (In c (gv0 ++ q)), (In c (gv0 ++ gv0)), (In (Node n c c) q), (In (Node n c c) gv0), (In (Node n c c) (c :: q)), (In (Node n c c) (c :: gv0))
+(In (Node n c c) (merge q q)), (In (Node n c c) (merge q gv0)), (In (Node n c c) (merge gv0 q)), (In (Node n c c) (merge gv0 gv0)), (In (Node n c c) (heap_delete_max c)), (In (Node n c c) (join q q c)), (In (Node n c c) (join q gv0 c)), (In (Node n c c) (join gv0 q c)), (In (Node n c c) (join gv0 gv0 c)), (In (Node n c c) (insert n q))
+(In (Node n c c) (insert n gv0)), (In (Node n c c) (carry q c)), (In (Node n c c) (carry gv0 c)), (In (Node n c c) (q ++ q)), (In (Node n c c) (q ++ gv0)), (In (Node n c c) (gv0 ++ q)), (In (Node n c c) (gv0 ++ gv0)), (In (smash c c) q), (In (smash c c) gv0), (In (smash c c) (c :: q))
+(In (smash c c) (c :: gv0)), (In (smash c c) (merge q q)), (In (smash c c) (merge q gv0)), (In (smash c c) (merge gv0 q)), (In (smash c c) (merge gv0 gv0)), (In (smash c c) (heap_delete_max c)), (In (smash c c) (join q q c)), (In (smash c c) (join q gv0 c)), (In (smash c c) (join gv0 q c)), (In (smash c c) (join gv0 gv0 c))
+(In (smash c c) (insert n q)), (In (smash c c) (insert n gv0)), (In (smash c c) (carry q c)), (In (smash c c) (carry gv0 c)), (In (smash c c) (q ++ q)), (In (smash c c) (q ++ gv0)), (In (smash c c) (gv0 ++ q)), (In (smash c c) (gv0 ++ gv0)), (In Leaf q), (In Leaf gv0)
+(In Leaf (c :: q)), (In Leaf (c :: gv0)), (In Leaf (merge q q)), (In Leaf (merge q gv0)), (In Leaf (merge gv0 q)), (In Leaf (merge gv0 gv0)), (In Leaf (heap_delete_max c)), (In Leaf (join q q c)), (In Leaf (join q gv0 c)), (In Leaf (join gv0 q c))
+(In Leaf (join gv0 gv0 c)), (In Leaf (insert n q)), (In Leaf (insert n gv0)), (In Leaf (carry q c)), (In Leaf (carry gv0 c)), (In Leaf (q ++ q)), (In Leaf (q ++ gv0)), (In Leaf (gv0 ++ q)), (In Leaf (gv0 ++ gv0)), (n < find_max' n q)
+(n < find_max' n gv0), (n < length q), (n < length gv0), (find_max' n q < n), (find_max' n q < find_max' n gv0), (find_max' n q < length q), (find_max' n q < length gv0), (find_max' n gv0 < n), (find_max' n gv0 < find_max' n q), (find_max' n gv0 < length q)
+(find_max' n gv0 < length gv0), (length q < n), (length q < find_max' n q), (length q < find_max' n gv0), (length q < length gv0), (length gv0 < n), (length gv0 < find_max' n q), (length gv0 < find_max' n gv0), (length gv0 < length q), (n <= find_max' n q)
+(n <= find_max' n gv0), (n <= length q), (n <= length gv0), (find_max' n q <= n), (find_max' n q <= find_max' n gv0), (find_max' n q <= length q), (find_max' n q <= length gv0), (find_max' n gv0 <= n), (find_max' n gv0 <= find_max' n q), (find_max' n gv0 <= length q)
+(find_max' n gv0 <= length gv0), (length q <= n), (length q <= find_max' n q), (length q <= find_max' n gv0), (length q <= length gv0), (length gv0 <= n), (length gv0 <= find_max' n q), (length gv0 <= find_max' n gv0), (length gv0 <= length q), (~ priq q)
+(~ priq gv0), (~ priqq n q), (~ priqq n gv0), (~ pow2heap n c), (~ pow2heapp n n c), (~ Permutation q q), (~ Permutation q gv0), (~ Permutation gv0 q), (~ Permutation gv0 gv0), (~ In c q)
+(~ In c gv0), (~ n < n), (~ n <= n), (c <> c), (q <> q), (q <> gv0), (gv0 <> q), (gv0 <> gv0), (n <> n), (None = Some q)
+(None = Some gv0), (c :: q = q), (c :: q = gv0), (c :: q = merge q q), (c :: q = merge q gv0), (c :: q = merge gv0 q), (c :: q = merge gv0 gv0), (c :: q = heap_delete_max c), (c :: q = join q q c), (c :: q = join q gv0 c)
+(c :: q = join gv0 q c), (c :: q = join gv0 gv0 c), (c :: q = insert n q), (c :: q = insert n gv0), (c :: q = carry q c), (c :: q = carry gv0 c), (c :: q = q ++ q), (c :: q = q ++ gv0), (c :: q = gv0 ++ q), (c :: q = gv0 ++ gv0)
+(c :: q = []), (c :: gv0 = q), (c :: gv0 = gv0), (c :: gv0 = merge q q), (c :: gv0 = merge q gv0), (c :: gv0 = merge gv0 q), (c :: gv0 = merge gv0 gv0), (c :: gv0 = heap_delete_max c), (c :: gv0 = join q q c), (c :: gv0 = join q gv0 c)
+(c :: gv0 = join gv0 q c), (c :: gv0 = join gv0 gv0 c), (c :: gv0 = insert n q), (c :: gv0 = insert n gv0), (c :: gv0 = carry q c), (c :: gv0 = carry gv0 c), (c :: gv0 = q ++ q), (c :: gv0 = q ++ gv0), (c :: gv0 = gv0 ++ q), (c :: gv0 = gv0 ++ gv0)
+(c :: gv0 = []), (merge q q = q), (merge q q = gv0), (merge q q = heap_delete_max c), (merge q q = join q q c), (merge q q = join q gv0 c), (merge q q = join gv0 q c), (merge q q = join gv0 gv0 c), (merge q q = insert n q), (merge q q = insert n gv0)
+(merge q q = carry q c), (merge q q = carry gv0 c), (merge q q = q ++ q), (merge q q = q ++ gv0), (merge q q = gv0 ++ q), (merge q q = gv0 ++ gv0), (merge q gv0 = q), (merge q gv0 = gv0), (merge q gv0 = heap_delete_max c), (merge q gv0 = join q q c)
+(merge q gv0 = join q gv0 c), (merge q gv0 = join gv0 q c), (merge q gv0 = join gv0 gv0 c), (merge q gv0 = insert n q), (merge q gv0 = insert n gv0), (merge q gv0 = carry q c), (merge q gv0 = carry gv0 c), (merge q gv0 = q ++ q), (merge q gv0 = q ++ gv0), (merge q gv0 = gv0 ++ q)
+(merge q gv0 = gv0 ++ gv0), (merge gv0 q = q), (merge gv0 q = gv0), (merge gv0 q = heap_delete_max c), (merge gv0 q = join q q c), (merge gv0 q = join q gv0 c), (merge gv0 q = join gv0 q c), (merge gv0 q = join gv0 gv0 c), (merge gv0 q = insert n q), (merge gv0 q = insert n gv0)
+(merge gv0 q = carry q c), (merge gv0 q = carry gv0 c), (merge gv0 q = q ++ q), (merge gv0 q = q ++ gv0), (merge gv0 q = gv0 ++ q), (merge gv0 q = gv0 ++ gv0), (merge gv0 gv0 = q), (merge gv0 gv0 = gv0), (merge gv0 gv0 = heap_delete_max c), (merge gv0 gv0 = join q q c)
+(merge gv0 gv0 = join q gv0 c), (merge gv0 gv0 = join gv0 q c), (merge gv0 gv0 = join gv0 gv0 c), (merge gv0 gv0 = insert n q), (merge gv0 gv0 = insert n gv0), (merge gv0 gv0 = carry q c), (merge gv0 gv0 = carry gv0 c), (merge gv0 gv0 = q ++ q), (merge gv0 gv0 = q ++ gv0), (merge gv0 gv0 = gv0 ++ q)
+(merge gv0 gv0 = gv0 ++ gv0), (heap_delete_max c = q), (heap_delete_max c = gv0), (heap_delete_max c = carry q c), (heap_delete_max c = carry gv0 c), (heap_delete_max c = q ++ q), (heap_delete_max c = q ++ gv0), (heap_delete_max c = gv0 ++ q), (heap_delete_max c = gv0 ++ gv0), (join q q c = q)
+(join q q c = gv0), (join q q c = heap_delete_max c), (join q q c = insert n q), (join q q c = insert n gv0), (join q q c = carry q c), (join q q c = carry gv0 c), (join q q c = q ++ q), (join q q c = q ++ gv0), (join q q c = gv0 ++ q), (join q q c = gv0 ++ gv0)
+(join q gv0 c = q), (join q gv0 c = gv0), (join q gv0 c = heap_delete_max c), (join q gv0 c = insert n q), (join q gv0 c = insert n gv0), (join q gv0 c = carry q c), (join q gv0 c = carry gv0 c), (join q gv0 c = q ++ q), (join q gv0 c = q ++ gv0), (join q gv0 c = gv0 ++ q)
+(join q gv0 c = gv0 ++ gv0), (join gv0 q c = q), (join gv0 q c = gv0), (join gv0 q c = heap_delete_max c), (join gv0 q c = insert n q), (join gv0 q c = insert n gv0), (join gv0 q c = carry q c), (join gv0 q c = carry gv0 c), (join gv0 q c = q ++ q), (join gv0 q c = q ++ gv0)
+(join gv0 q c = gv0 ++ q), (join gv0 q c = gv0 ++ gv0), (join gv0 gv0 c = q), (join gv0 gv0 c = gv0), (join gv0 gv0 c = heap_delete_max c), (join gv0 gv0 c = insert n q), (join gv0 gv0 c = insert n gv0), (join gv0 gv0 c = carry q c), (join gv0 gv0 c = carry gv0 c), (join gv0 gv0 c = q ++ q)
+(join gv0 gv0 c = q ++ gv0), (join gv0 gv0 c = gv0 ++ q), (join gv0 gv0 c = gv0 ++ gv0), (insert n q = q), (insert n q = gv0), (insert n q = heap_delete_max c), (insert n q = carry q c), (insert n q = carry gv0 c), (insert n q = q ++ q), (insert n q = q ++ gv0)
+(insert n q = gv0 ++ q), (insert n q = gv0 ++ gv0), (insert n gv0 = q), (insert n gv0 = gv0), (insert n gv0 = heap_delete_max c), (insert n gv0 = carry q c), (insert n gv0 = carry gv0 c), (insert n gv0 = q ++ q), (insert n gv0 = q ++ gv0), (insert n gv0 = gv0 ++ q)
+(insert n gv0 = gv0 ++ gv0), (carry q c = q), (carry q c = gv0), (carry q c = q ++ q), (carry q c = q ++ gv0), (carry q c = gv0 ++ q), (carry q c = gv0 ++ gv0), (carry gv0 c = q), (carry gv0 c = gv0), (carry gv0 c = q ++ q)
+(carry gv0 c = q ++ gv0), (carry gv0 c = gv0 ++ q), (carry gv0 c = gv0 ++ gv0), (q ++ q = q), (q ++ q = gv0), (q ++ gv0 = q), (q ++ gv0 = gv0), (gv0 ++ q = q), (gv0 ++ q = gv0), (gv0 ++ gv0 = q)
+(gv0 ++ gv0 = gv0), ([] = q), ([] = gv0), ([] = merge q q), ([] = merge q gv0), ([] = merge gv0 q), ([] = merge gv0 gv0), ([] = heap_delete_max c), ([] = join q q c), ([] = join q gv0 c)
+([] = join gv0 q c), ([] = join gv0 gv0 c), ([] = insert n q), ([] = insert n gv0), ([] = carry q c), ([] = carry gv0 c), ([] = q ++ q), ([] = q ++ gv0), ([] = gv0 ++ q), ([] = gv0 ++ gv0)
+((q, q) = delete_max_aux n q), ((q, q) = delete_max_aux n gv0), ((q, gv0) = delete_max_aux n q), ((q, gv0) = delete_max_aux n gv0), ((gv0, q) = delete_max_aux n q), ((gv0, q) = delete_max_aux n gv0), ((gv0, gv0) = delete_max_aux n q), ((gv0, gv0) = delete_max_aux n gv0), (Node n c c = c), (Node n c c = smash c c)
+(smash c c = c), (Leaf = Node n c c), (Leaf = smash c c), (find_max' n q = n), (find_max' n gv0 = n), (length q = n), (length q = find_max' n q), (length q = find_max' n gv0), (length gv0 = n), (length gv0 = find_max' n q)
+(length gv0 = find_max' n gv0), (Some n = find_max q), (Some n = find_max gv0), (None = Some n), (None = find_max q), (None = find_max gv0), (None = Some c), ((n >? n) = (n >=? n))
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 110.821 seconds
+
+
+Label: 0 (0)
+(priqq n q)
+
+Label: 1 (1)
+
+Label: 2 (2)
+(priqq n gv0), (Permutation gv0 (carry q c)), (Permutation (carry q c) gv0), (carry q c = gv0)
+
+
+
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 145.241 seconds
+
+Number of Result Pairs Returned: 3
+
+1. (priqq n q -> c = Leaf \/ pow2heap n c -> priqq n (carry q c))
+
+2. (priqq n q ->  Permutation gv0 (carry q c) -> c = Leaf \/ pow2heap n c -> priqq n gv0)
+
+3. (priqq n q ->  Permutation (carry q c) gv0 -> c = Leaf \/ pow2heap n c -> priqq n gv0)

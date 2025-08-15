@@ -1,0 +1,410 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (priq p)
+ -- (priq q)
+
+----------------------------------
+Goal: (priq (join p q Leaf))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3.575 seconds
+
+gv1 : tree = Leaf
+gv0 : (list tree) = (join p q Leaf)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 98.541 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (priq p)
+ -- (priq q)
+
+----------------------------------
+Goal: (priq (join p q Leaf))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (priq p)
+ -- (priq q)
+ -- (join p q Leaf = gv0)
+
+----------------------------------
+Goal: (priq gv0)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (priq p)
+ -- (Leaf = gv1)
+ -- (priq q)
+
+----------------------------------
+Goal: (priq (join p q gv1))
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 98.703 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+In : (forall A : Type, A -> list A -> Prop)
+existsb : (forall A : Type, (A -> bool) -> list A -> bool)
+forallb : (forall A : Type, (A -> bool) -> list A -> bool)
+Forall : (forall A : Type, (A -> Prop) -> list A -> Prop)
+nodup : (forall A : Type, (forall x y : A, {x = y} + {x <> y}) -> list A -> list A)
+map : (forall A B : Type, (A -> B) -> list A -> list B)
+Permutation : (forall A : Type, list A -> list A -> Prop)
+geb : (nat -> nat -> bool)
+gtb : (nat -> nat -> bool)
+tree : Set
+tree_rect : (forall P : tree -> Type,
+ (forall (n : nat) (t : tree),
+  P t -> forall t0 : tree, P t0 -> P (Node n t t0)) ->
+ P Leaf -> forall t : tree, P t)
+tree_rec : (forall P : tree -> Set,
+ (forall (n : nat) (t : tree),
+  P t -> forall t0 : tree, P t0 -> P (Node n t t0)) ->
+ P Leaf -> forall t : tree, P t)
+smash : (tree -> tree -> tree)
+carry : (list tree -> tree -> list tree)
+insert : (nat -> list tree -> list tree)
+join : (list tree -> list tree -> tree -> list tree)
+unzip : (tree -> (list tree -> list tree) -> list tree)
+heap_delete_max : (tree -> list tree)
+find_max' : (nat -> list tree -> nat)
+find_max : (list tree -> option nat)
+delete_max_aux : (nat -> list tree -> list tree * list tree)
+delete_max : (list tree -> option (nat * list tree))
+merge : (list tree -> list tree -> list tree)
+pow2heapp : (nat -> nat -> tree -> Prop)
+pow2heap : (nat -> tree -> Prop)
+priqq : (nat -> list tree -> Prop)
+priq : (list tree -> Prop)
+tree_elems : (tree -> list nat -> Prop)
+priqueue_elems : (list tree -> list nat -> Prop)
+Abs : (list tree -> list nat -> Prop)
+Node : (nat -> tree -> tree -> tree)
+Leaf : tree
+
+Label: 0 (0)
+Abducted Assumption: (priq p)
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Abducted Assumption: (priq q)
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 153
+Negative Examples: 394
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 170
+Negative Examples: 362
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 98.939 seconds
+
+
+Label: 0 (0)
+(priq q), (priq p), (Permutation q q), (Permutation q p), (Permutation p q), (Permutation p p), (q = q), (q = p), (p = q), (p = p)
+(priq (merge q q)), (priq (merge q p)), (priq (merge p q)), (priq (merge p p)), (priq (q ++ q)), (priq (q ++ p)), (priq (p ++ q)), (priq (p ++ p)), (priqq (length q) q), (priqq (length q) p)
+(priqq (length q) (merge q q)), (priqq (length q) (merge q p)), (priqq (length q) (merge p q)), (priqq (length q) (merge p p)), (priqq (length q) (q ++ q)), (priqq (length q) (q ++ p)), (priqq (length q) (p ++ q)), (priqq (length q) (p ++ p)), (priqq (length p) q), (priqq (length p) p)
+(priqq (length p) (merge q q)), (priqq (length p) (merge q p)), (priqq (length p) (merge p q)), (priqq (length p) (merge p p)), (priqq (length p) (q ++ q)), (priqq (length p) (q ++ p)), (priqq (length p) (p ++ q)), (priqq (length p) (p ++ p)), (pow2heapp (length q) (length q) Leaf), (pow2heapp (length q) (length p) Leaf)
+(pow2heapp (length p) (length q) Leaf), (pow2heapp (length p) (length p) Leaf), (Permutation q (merge q q)), (Permutation q (merge q p)), (Permutation q (merge p q)), (Permutation q (merge p p)), (Permutation q (q ++ q)), (Permutation q (q ++ p)), (Permutation q (p ++ q)), (Permutation q (p ++ p))
+(Permutation q []), (Permutation p (merge q q)), (Permutation p (merge q p)), (Permutation p (merge p q)), (Permutation p (merge p p)), (Permutation p (q ++ q)), (Permutation p (q ++ p)), (Permutation p (p ++ q)), (Permutation p (p ++ p)), (Permutation p [])
+(Permutation (merge q q) q), (Permutation (merge q q) p), (Permutation (merge q q) (merge q p)), (Permutation (merge q q) (merge p q)), (Permutation (merge q q) (merge p p)), (Permutation (merge q q) (q ++ q)), (Permutation (merge q q) (q ++ p)), (Permutation (merge q q) (p ++ q)), (Permutation (merge q q) (p ++ p)), (Permutation (merge q q) [])
+(Permutation (merge q p) q), (Permutation (merge q p) p), (Permutation (merge q p) (merge q q)), (Permutation (merge q p) (merge p q)), (Permutation (merge q p) (merge p p)), (Permutation (merge q p) (q ++ q)), (Permutation (merge q p) (q ++ p)), (Permutation (merge q p) (p ++ q)), (Permutation (merge q p) (p ++ p)), (Permutation (merge q p) [])
+(Permutation (merge p q) q), (Permutation (merge p q) p), (Permutation (merge p q) (merge q q)), (Permutation (merge p q) (merge q p)), (Permutation (merge p q) (merge p p)), (Permutation (merge p q) (q ++ q)), (Permutation (merge p q) (q ++ p)), (Permutation (merge p q) (p ++ q)), (Permutation (merge p q) (p ++ p)), (Permutation (merge p q) [])
+(Permutation (merge p p) q), (Permutation (merge p p) p), (Permutation (merge p p) (merge q q)), (Permutation (merge p p) (merge q p)), (Permutation (merge p p) (merge p q)), (Permutation (merge p p) (q ++ q)), (Permutation (merge p p) (q ++ p)), (Permutation (merge p p) (p ++ q)), (Permutation (merge p p) (p ++ p)), (Permutation (merge p p) [])
+(Permutation (q ++ q) q), (Permutation (q ++ q) p), (Permutation (q ++ q) (merge q q)), (Permutation (q ++ q) (merge q p)), (Permutation (q ++ q) (merge p q)), (Permutation (q ++ q) (merge p p)), (Permutation (q ++ q) (q ++ p)), (Permutation (q ++ q) (p ++ q)), (Permutation (q ++ q) (p ++ p)), (Permutation (q ++ q) [])
+(Permutation (q ++ p) q), (Permutation (q ++ p) p), (Permutation (q ++ p) (merge q q)), (Permutation (q ++ p) (merge q p)), (Permutation (q ++ p) (merge p q)), (Permutation (q ++ p) (merge p p)), (Permutation (q ++ p) (q ++ q)), (Permutation (q ++ p) (p ++ q)), (Permutation (q ++ p) (p ++ p)), (Permutation (q ++ p) [])
+(Permutation (p ++ q) q), (Permutation (p ++ q) p), (Permutation (p ++ q) (merge q q)), (Permutation (p ++ q) (merge q p)), (Permutation (p ++ q) (merge p q)), (Permutation (p ++ q) (merge p p)), (Permutation (p ++ q) (q ++ q)), (Permutation (p ++ q) (q ++ p)), (Permutation (p ++ q) (p ++ p)), (Permutation (p ++ q) [])
+(Permutation (p ++ p) q), (Permutation (p ++ p) p), (Permutation (p ++ p) (merge q q)), (Permutation (p ++ p) (merge q p)), (Permutation (p ++ p) (merge p q)), (Permutation (p ++ p) (merge p p)), (Permutation (p ++ p) (q ++ q)), (Permutation (p ++ p) (q ++ p)), (Permutation (p ++ p) (p ++ q)), (Permutation (p ++ p) [])
+(Permutation [] q), (Permutation [] p), (Permutation [] (merge q q)), (Permutation [] (merge q p)), (Permutation [] (merge p q)), (Permutation [] (merge p p)), (Permutation [] (q ++ q)), (Permutation [] (q ++ p)), (Permutation [] (p ++ q)), (Permutation [] (p ++ p))
+(In Leaf q), (In Leaf p), (In Leaf (merge q q)), (In Leaf (merge q p)), (In Leaf (merge p q)), (In Leaf (merge p p)), (In Leaf (q ++ q)), (In Leaf (q ++ p)), (In Leaf (p ++ q)), (In Leaf (p ++ p))
+(length q < length p), (length p < length q), (length q <= length p), (length p <= length q), (~ priq q), (~ priq p), (~ Permutation q q), (~ Permutation q p), (~ Permutation p q), (~ Permutation p p)
+(q <> q), (q <> p), (p <> q), (p <> p), (None = Some q), (None = Some p), (merge q q = q), (merge q q = p), (merge q q = q ++ q), (merge q q = q ++ p)
+(merge q q = p ++ q), (merge q q = p ++ p), (merge q p = q), (merge q p = p), (merge q p = q ++ q), (merge q p = q ++ p), (merge q p = p ++ q), (merge q p = p ++ p), (merge p q = q), (merge p q = p)
+(merge p q = q ++ q), (merge p q = q ++ p), (merge p q = p ++ q), (merge p q = p ++ p), (merge p p = q), (merge p p = p), (merge p p = q ++ q), (merge p p = q ++ p), (merge p p = p ++ q), (merge p p = p ++ p)
+(q ++ q = q), (q ++ q = p), (q ++ p = q), (q ++ p = p), (p ++ q = q), (p ++ q = p), (p ++ p = q), (p ++ p = p), ([] = q), ([] = p)
+([] = merge q q), ([] = merge q p), ([] = merge p q), ([] = merge p p), ([] = q ++ q), ([] = q ++ p), ([] = p ++ q), ([] = p ++ p)
+
+Label: 1 (1)
+(priq q), (priq p), (Permutation q q), (Permutation q p), (Permutation p q), (Permutation p p), (q = q), (q = p), (p = q), (p = p)
+(priq (merge q q)), (priq (merge q p)), (priq (merge p q)), (priq (merge p p)), (priq (q ++ q)), (priq (q ++ p)), (priq (p ++ q)), (priq (p ++ p)), (priqq (length q) q), (priqq (length q) p)
+(priqq (length q) (merge q q)), (priqq (length q) (merge q p)), (priqq (length q) (merge p q)), (priqq (length q) (merge p p)), (priqq (length q) (q ++ q)), (priqq (length q) (q ++ p)), (priqq (length q) (p ++ q)), (priqq (length q) (p ++ p)), (priqq (length p) q), (priqq (length p) p)
+(priqq (length p) (merge q q)), (priqq (length p) (merge q p)), (priqq (length p) (merge p q)), (priqq (length p) (merge p p)), (priqq (length p) (q ++ q)), (priqq (length p) (q ++ p)), (priqq (length p) (p ++ q)), (priqq (length p) (p ++ p)), (pow2heapp (length q) (length q) Leaf), (pow2heapp (length q) (length p) Leaf)
+(pow2heapp (length p) (length q) Leaf), (pow2heapp (length p) (length p) Leaf), (Permutation q (merge q q)), (Permutation q (merge q p)), (Permutation q (merge p q)), (Permutation q (merge p p)), (Permutation q (q ++ q)), (Permutation q (q ++ p)), (Permutation q (p ++ q)), (Permutation q (p ++ p))
+(Permutation q []), (Permutation p (merge q q)), (Permutation p (merge q p)), (Permutation p (merge p q)), (Permutation p (merge p p)), (Permutation p (q ++ q)), (Permutation p (q ++ p)), (Permutation p (p ++ q)), (Permutation p (p ++ p)), (Permutation p [])
+(Permutation (merge q q) q), (Permutation (merge q q) p), (Permutation (merge q q) (merge q p)), (Permutation (merge q q) (merge p q)), (Permutation (merge q q) (merge p p)), (Permutation (merge q q) (q ++ q)), (Permutation (merge q q) (q ++ p)), (Permutation (merge q q) (p ++ q)), (Permutation (merge q q) (p ++ p)), (Permutation (merge q q) [])
+(Permutation (merge q p) q), (Permutation (merge q p) p), (Permutation (merge q p) (merge q q)), (Permutation (merge q p) (merge p q)), (Permutation (merge q p) (merge p p)), (Permutation (merge q p) (q ++ q)), (Permutation (merge q p) (q ++ p)), (Permutation (merge q p) (p ++ q)), (Permutation (merge q p) (p ++ p)), (Permutation (merge q p) [])
+(Permutation (merge p q) q), (Permutation (merge p q) p), (Permutation (merge p q) (merge q q)), (Permutation (merge p q) (merge q p)), (Permutation (merge p q) (merge p p)), (Permutation (merge p q) (q ++ q)), (Permutation (merge p q) (q ++ p)), (Permutation (merge p q) (p ++ q)), (Permutation (merge p q) (p ++ p)), (Permutation (merge p q) [])
+(Permutation (merge p p) q), (Permutation (merge p p) p), (Permutation (merge p p) (merge q q)), (Permutation (merge p p) (merge q p)), (Permutation (merge p p) (merge p q)), (Permutation (merge p p) (q ++ q)), (Permutation (merge p p) (q ++ p)), (Permutation (merge p p) (p ++ q)), (Permutation (merge p p) (p ++ p)), (Permutation (merge p p) [])
+(Permutation (q ++ q) q), (Permutation (q ++ q) p), (Permutation (q ++ q) (merge q q)), (Permutation (q ++ q) (merge q p)), (Permutation (q ++ q) (merge p q)), (Permutation (q ++ q) (merge p p)), (Permutation (q ++ q) (q ++ p)), (Permutation (q ++ q) (p ++ q)), (Permutation (q ++ q) (p ++ p)), (Permutation (q ++ q) [])
+(Permutation (q ++ p) q), (Permutation (q ++ p) p), (Permutation (q ++ p) (merge q q)), (Permutation (q ++ p) (merge q p)), (Permutation (q ++ p) (merge p q)), (Permutation (q ++ p) (merge p p)), (Permutation (q ++ p) (q ++ q)), (Permutation (q ++ p) (p ++ q)), (Permutation (q ++ p) (p ++ p)), (Permutation (q ++ p) [])
+(Permutation (p ++ q) q), (Permutation (p ++ q) p), (Permutation (p ++ q) (merge q q)), (Permutation (p ++ q) (merge q p)), (Permutation (p ++ q) (merge p q)), (Permutation (p ++ q) (merge p p)), (Permutation (p ++ q) (q ++ q)), (Permutation (p ++ q) (q ++ p)), (Permutation (p ++ q) (p ++ p)), (Permutation (p ++ q) [])
+(Permutation (p ++ p) q), (Permutation (p ++ p) p), (Permutation (p ++ p) (merge q q)), (Permutation (p ++ p) (merge q p)), (Permutation (p ++ p) (merge p q)), (Permutation (p ++ p) (merge p p)), (Permutation (p ++ p) (q ++ q)), (Permutation (p ++ p) (q ++ p)), (Permutation (p ++ p) (p ++ q)), (Permutation (p ++ p) [])
+(Permutation [] q), (Permutation [] p), (Permutation [] (merge q q)), (Permutation [] (merge q p)), (Permutation [] (merge p q)), (Permutation [] (merge p p)), (Permutation [] (q ++ q)), (Permutation [] (q ++ p)), (Permutation [] (p ++ q)), (Permutation [] (p ++ p))
+(In Leaf q), (In Leaf p), (In Leaf (merge q q)), (In Leaf (merge q p)), (In Leaf (merge p q)), (In Leaf (merge p p)), (In Leaf (q ++ q)), (In Leaf (q ++ p)), (In Leaf (p ++ q)), (In Leaf (p ++ p))
+(length q < length p), (length p < length q), (length q <= length p), (length p <= length q), (~ priq q), (~ priq p), (~ Permutation q q), (~ Permutation q p), (~ Permutation p q), (~ Permutation p p)
+(q <> q), (q <> p), (p <> q), (p <> p), (None = Some q), (None = Some p), (merge q q = q), (merge q q = p), (merge q q = q ++ q), (merge q q = q ++ p)
+(merge q q = p ++ q), (merge q q = p ++ p), (merge q p = q), (merge q p = p), (merge q p = q ++ q), (merge q p = q ++ p), (merge q p = p ++ q), (merge q p = p ++ p), (merge p q = q), (merge p q = p)
+(merge p q = q ++ q), (merge p q = q ++ p), (merge p q = p ++ q), (merge p q = p ++ p), (merge p p = q), (merge p p = p), (merge p p = q ++ q), (merge p p = q ++ p), (merge p p = p ++ q), (merge p p = p ++ p)
+(q ++ q = q), (q ++ q = p), (q ++ p = q), (q ++ p = p), (p ++ q = q), (p ++ q = p), (p ++ p = q), (p ++ p = p), ([] = q), ([] = p)
+([] = merge q q), ([] = merge q p), ([] = merge p q), ([] = merge p p), ([] = q ++ q), ([] = q ++ p), ([] = p ++ q), ([] = p ++ p)
+
+Label: 2 (2)
+(priq q), (priq p), (priq gv0), (Permutation q q), (Permutation q p), (Permutation q gv0), (Permutation p q), (Permutation p p), (Permutation p gv0), (Permutation gv0 q)
+(Permutation gv0 p), (Permutation gv0 gv0), (q = q), (q = p), (q = gv0), (p = q), (p = p), (p = gv0), (gv0 = q), (gv0 = p)
+(gv0 = gv0), (priq (merge q q)), (priq (merge q p)), (priq (merge q gv0)), (priq (merge p q)), (priq (merge p p)), (priq (merge p gv0)), (priq (merge gv0 q)), (priq (merge gv0 p)), (priq (merge gv0 gv0))
+(priq (q ++ q)), (priq (q ++ p)), (priq (q ++ gv0)), (priq (p ++ q)), (priq (p ++ p)), (priq (p ++ gv0)), (priq (gv0 ++ q)), (priq (gv0 ++ p)), (priq (gv0 ++ gv0)), (priqq (length q) q)
+(priqq (length q) p), (priqq (length q) gv0), (priqq (length q) (merge q q)), (priqq (length q) (merge q p)), (priqq (length q) (merge q gv0)), (priqq (length q) (merge p q)), (priqq (length q) (merge p p)), (priqq (length q) (merge p gv0)), (priqq (length q) (merge gv0 q)), (priqq (length q) (merge gv0 p))
+(priqq (length q) (merge gv0 gv0)), (priqq (length q) (q ++ q)), (priqq (length q) (q ++ p)), (priqq (length q) (q ++ gv0)), (priqq (length q) (p ++ q)), (priqq (length q) (p ++ p)), (priqq (length q) (p ++ gv0)), (priqq (length q) (gv0 ++ q)), (priqq (length q) (gv0 ++ p)), (priqq (length q) (gv0 ++ gv0))
+(priqq (length p) q), (priqq (length p) p), (priqq (length p) gv0), (priqq (length p) (merge q q)), (priqq (length p) (merge q p)), (priqq (length p) (merge q gv0)), (priqq (length p) (merge p q)), (priqq (length p) (merge p p)), (priqq (length p) (merge p gv0)), (priqq (length p) (merge gv0 q))
+(priqq (length p) (merge gv0 p)), (priqq (length p) (merge gv0 gv0)), (priqq (length p) (q ++ q)), (priqq (length p) (q ++ p)), (priqq (length p) (q ++ gv0)), (priqq (length p) (p ++ q)), (priqq (length p) (p ++ p)), (priqq (length p) (p ++ gv0)), (priqq (length p) (gv0 ++ q)), (priqq (length p) (gv0 ++ p))
+(priqq (length p) (gv0 ++ gv0)), (priqq (length gv0) q), (priqq (length gv0) p), (priqq (length gv0) gv0), (priqq (length gv0) (merge q q)), (priqq (length gv0) (merge q p)), (priqq (length gv0) (merge q gv0)), (priqq (length gv0) (merge p q)), (priqq (length gv0) (merge p p)), (priqq (length gv0) (merge p gv0))
+(priqq (length gv0) (merge gv0 q)), (priqq (length gv0) (merge gv0 p)), (priqq (length gv0) (merge gv0 gv0)), (priqq (length gv0) (q ++ q)), (priqq (length gv0) (q ++ p)), (priqq (length gv0) (q ++ gv0)), (priqq (length gv0) (p ++ q)), (priqq (length gv0) (p ++ p)), (priqq (length gv0) (p ++ gv0)), (priqq (length gv0) (gv0 ++ q))
+(priqq (length gv0) (gv0 ++ p)), (priqq (length gv0) (gv0 ++ gv0)), (pow2heapp (length q) (length q) Leaf), (pow2heapp (length q) (length p) Leaf), (pow2heapp (length q) (length gv0) Leaf), (pow2heapp (length p) (length q) Leaf), (pow2heapp (length p) (length p) Leaf), (pow2heapp (length p) (length gv0) Leaf), (pow2heapp (length gv0) (length q) Leaf), (pow2heapp (length gv0) (length p) Leaf)
+(pow2heapp (length gv0) (length gv0) Leaf), (Permutation q (merge q q)), (Permutation q (merge q p)), (Permutation q (merge q gv0)), (Permutation q (merge p q)), (Permutation q (merge p p)), (Permutation q (merge p gv0)), (Permutation q (merge gv0 q)), (Permutation q (merge gv0 p)), (Permutation q (merge gv0 gv0))
+(Permutation q (q ++ q)), (Permutation q (q ++ p)), (Permutation q (q ++ gv0)), (Permutation q (p ++ q)), (Permutation q (p ++ p)), (Permutation q (p ++ gv0)), (Permutation q (gv0 ++ q)), (Permutation q (gv0 ++ p)), (Permutation q (gv0 ++ gv0)), (Permutation q [])
+(Permutation p (merge q q)), (Permutation p (merge q p)), (Permutation p (merge q gv0)), (Permutation p (merge p q)), (Permutation p (merge p p)), (Permutation p (merge p gv0)), (Permutation p (merge gv0 q)), (Permutation p (merge gv0 p)), (Permutation p (merge gv0 gv0)), (Permutation p (q ++ q))
+(Permutation p (q ++ p)), (Permutation p (q ++ gv0)), (Permutation p (p ++ q)), (Permutation p (p ++ p)), (Permutation p (p ++ gv0)), (Permutation p (gv0 ++ q)), (Permutation p (gv0 ++ p)), (Permutation p (gv0 ++ gv0)), (Permutation p []), (Permutation gv0 (merge q q))
+(Permutation gv0 (merge q p)), (Permutation gv0 (merge q gv0)), (Permutation gv0 (merge p q)), (Permutation gv0 (merge p p)), (Permutation gv0 (merge p gv0)), (Permutation gv0 (merge gv0 q)), (Permutation gv0 (merge gv0 p)), (Permutation gv0 (merge gv0 gv0)), (Permutation gv0 (q ++ q)), (Permutation gv0 (q ++ p))
+(Permutation gv0 (q ++ gv0)), (Permutation gv0 (p ++ q)), (Permutation gv0 (p ++ p)), (Permutation gv0 (p ++ gv0)), (Permutation gv0 (gv0 ++ q)), (Permutation gv0 (gv0 ++ p)), (Permutation gv0 (gv0 ++ gv0)), (Permutation gv0 []), (Permutation (merge q q) q), (Permutation (merge q q) p)
+(Permutation (merge q q) gv0), (Permutation (merge q q) (merge q p)), (Permutation (merge q q) (merge q gv0)), (Permutation (merge q q) (merge p q)), (Permutation (merge q q) (merge p p)), (Permutation (merge q q) (merge p gv0)), (Permutation (merge q q) (merge gv0 q)), (Permutation (merge q q) (merge gv0 p)), (Permutation (merge q q) (merge gv0 gv0)), (Permutation (merge q q) (q ++ q))
+(Permutation (merge q q) (q ++ p)), (Permutation (merge q q) (q ++ gv0)), (Permutation (merge q q) (p ++ q)), (Permutation (merge q q) (p ++ p)), (Permutation (merge q q) (p ++ gv0)), (Permutation (merge q q) (gv0 ++ q)), (Permutation (merge q q) (gv0 ++ p)), (Permutation (merge q q) (gv0 ++ gv0)), (Permutation (merge q q) []), (Permutation (merge q p) q)
+(Permutation (merge q p) p), (Permutation (merge q p) gv0), (Permutation (merge q p) (merge q q)), (Permutation (merge q p) (merge q gv0)), (Permutation (merge q p) (merge p q)), (Permutation (merge q p) (merge p p)), (Permutation (merge q p) (merge p gv0)), (Permutation (merge q p) (merge gv0 q)), (Permutation (merge q p) (merge gv0 p)), (Permutation (merge q p) (merge gv0 gv0))
+(Permutation (merge q p) (q ++ q)), (Permutation (merge q p) (q ++ p)), (Permutation (merge q p) (q ++ gv0)), (Permutation (merge q p) (p ++ q)), (Permutation (merge q p) (p ++ p)), (Permutation (merge q p) (p ++ gv0)), (Permutation (merge q p) (gv0 ++ q)), (Permutation (merge q p) (gv0 ++ p)), (Permutation (merge q p) (gv0 ++ gv0)), (Permutation (merge q p) [])
+(Permutation (merge q gv0) q), (Permutation (merge q gv0) p), (Permutation (merge q gv0) gv0), (Permutation (merge q gv0) (merge q q)), (Permutation (merge q gv0) (merge q p)), (Permutation (merge q gv0) (merge p q)), (Permutation (merge q gv0) (merge p p)), (Permutation (merge q gv0) (merge p gv0)), (Permutation (merge q gv0) (merge gv0 q)), (Permutation (merge q gv0) (merge gv0 p))
+(Permutation (merge q gv0) (merge gv0 gv0)), (Permutation (merge q gv0) (q ++ q)), (Permutation (merge q gv0) (q ++ p)), (Permutation (merge q gv0) (q ++ gv0)), (Permutation (merge q gv0) (p ++ q)), (Permutation (merge q gv0) (p ++ p)), (Permutation (merge q gv0) (p ++ gv0)), (Permutation (merge q gv0) (gv0 ++ q)), (Permutation (merge q gv0) (gv0 ++ p)), (Permutation (merge q gv0) (gv0 ++ gv0))
+(Permutation (merge q gv0) []), (Permutation (merge p q) q), (Permutation (merge p q) p), (Permutation (merge p q) gv0), (Permutation (merge p q) (merge q q)), (Permutation (merge p q) (merge q p)), (Permutation (merge p q) (merge q gv0)), (Permutation (merge p q) (merge p p)), (Permutation (merge p q) (merge p gv0)), (Permutation (merge p q) (merge gv0 q))
+(Permutation (merge p q) (merge gv0 p)), (Permutation (merge p q) (merge gv0 gv0)), (Permutation (merge p q) (q ++ q)), (Permutation (merge p q) (q ++ p)), (Permutation (merge p q) (q ++ gv0)), (Permutation (merge p q) (p ++ q)), (Permutation (merge p q) (p ++ p)), (Permutation (merge p q) (p ++ gv0)), (Permutation (merge p q) (gv0 ++ q)), (Permutation (merge p q) (gv0 ++ p))
+(Permutation (merge p q) (gv0 ++ gv0)), (Permutation (merge p q) []), (Permutation (merge p p) q), (Permutation (merge p p) p), (Permutation (merge p p) gv0), (Permutation (merge p p) (merge q q)), (Permutation (merge p p) (merge q p)), (Permutation (merge p p) (merge q gv0)), (Permutation (merge p p) (merge p q)), (Permutation (merge p p) (merge p gv0))
+(Permutation (merge p p) (merge gv0 q)), (Permutation (merge p p) (merge gv0 p)), (Permutation (merge p p) (merge gv0 gv0)), (Permutation (merge p p) (q ++ q)), (Permutation (merge p p) (q ++ p)), (Permutation (merge p p) (q ++ gv0)), (Permutation (merge p p) (p ++ q)), (Permutation (merge p p) (p ++ p)), (Permutation (merge p p) (p ++ gv0)), (Permutation (merge p p) (gv0 ++ q))
+(Permutation (merge p p) (gv0 ++ p)), (Permutation (merge p p) (gv0 ++ gv0)), (Permutation (merge p p) []), (Permutation (merge p gv0) q), (Permutation (merge p gv0) p), (Permutation (merge p gv0) gv0), (Permutation (merge p gv0) (merge q q)), (Permutation (merge p gv0) (merge q p)), (Permutation (merge p gv0) (merge q gv0)), (Permutation (merge p gv0) (merge p q))
+(Permutation (merge p gv0) (merge p p)), (Permutation (merge p gv0) (merge gv0 q)), (Permutation (merge p gv0) (merge gv0 p)), (Permutation (merge p gv0) (merge gv0 gv0)), (Permutation (merge p gv0) (q ++ q)), (Permutation (merge p gv0) (q ++ p)), (Permutation (merge p gv0) (q ++ gv0)), (Permutation (merge p gv0) (p ++ q)), (Permutation (merge p gv0) (p ++ p)), (Permutation (merge p gv0) (p ++ gv0))
+(Permutation (merge p gv0) (gv0 ++ q)), (Permutation (merge p gv0) (gv0 ++ p)), (Permutation (merge p gv0) (gv0 ++ gv0)), (Permutation (merge p gv0) []), (Permutation (merge gv0 q) q), (Permutation (merge gv0 q) p), (Permutation (merge gv0 q) gv0), (Permutation (merge gv0 q) (merge q q)), (Permutation (merge gv0 q) (merge q p)), (Permutation (merge gv0 q) (merge q gv0))
+(Permutation (merge gv0 q) (merge p q)), (Permutation (merge gv0 q) (merge p p)), (Permutation (merge gv0 q) (merge p gv0)), (Permutation (merge gv0 q) (merge gv0 p)), (Permutation (merge gv0 q) (merge gv0 gv0)), (Permutation (merge gv0 q) (q ++ q)), (Permutation (merge gv0 q) (q ++ p)), (Permutation (merge gv0 q) (q ++ gv0)), (Permutation (merge gv0 q) (p ++ q)), (Permutation (merge gv0 q) (p ++ p))
+(Permutation (merge gv0 q) (p ++ gv0)), (Permutation (merge gv0 q) (gv0 ++ q)), (Permutation (merge gv0 q) (gv0 ++ p)), (Permutation (merge gv0 q) (gv0 ++ gv0)), (Permutation (merge gv0 q) []), (Permutation (merge gv0 p) q), (Permutation (merge gv0 p) p), (Permutation (merge gv0 p) gv0), (Permutation (merge gv0 p) (merge q q)), (Permutation (merge gv0 p) (merge q p))
+(Permutation (merge gv0 p) (merge q gv0)), (Permutation (merge gv0 p) (merge p q)), (Permutation (merge gv0 p) (merge p p)), (Permutation (merge gv0 p) (merge p gv0)), (Permutation (merge gv0 p) (merge gv0 q)), (Permutation (merge gv0 p) (merge gv0 gv0)), (Permutation (merge gv0 p) (q ++ q)), (Permutation (merge gv0 p) (q ++ p)), (Permutation (merge gv0 p) (q ++ gv0)), (Permutation (merge gv0 p) (p ++ q))
+(Permutation (merge gv0 p) (p ++ p)), (Permutation (merge gv0 p) (p ++ gv0)), (Permutation (merge gv0 p) (gv0 ++ q)), (Permutation (merge gv0 p) (gv0 ++ p)), (Permutation (merge gv0 p) (gv0 ++ gv0)), (Permutation (merge gv0 p) []), (Permutation (merge gv0 gv0) q), (Permutation (merge gv0 gv0) p), (Permutation (merge gv0 gv0) gv0), (Permutation (merge gv0 gv0) (merge q q))
+(Permutation (merge gv0 gv0) (merge q p)), (Permutation (merge gv0 gv0) (merge q gv0)), (Permutation (merge gv0 gv0) (merge p q)), (Permutation (merge gv0 gv0) (merge p p)), (Permutation (merge gv0 gv0) (merge p gv0)), (Permutation (merge gv0 gv0) (merge gv0 q)), (Permutation (merge gv0 gv0) (merge gv0 p)), (Permutation (merge gv0 gv0) (q ++ q)), (Permutation (merge gv0 gv0) (q ++ p)), (Permutation (merge gv0 gv0) (q ++ gv0))
+(Permutation (merge gv0 gv0) (p ++ q)), (Permutation (merge gv0 gv0) (p ++ p)), (Permutation (merge gv0 gv0) (p ++ gv0)), (Permutation (merge gv0 gv0) (gv0 ++ q)), (Permutation (merge gv0 gv0) (gv0 ++ p)), (Permutation (merge gv0 gv0) (gv0 ++ gv0)), (Permutation (merge gv0 gv0) []), (Permutation (q ++ q) q), (Permutation (q ++ q) p), (Permutation (q ++ q) gv0)
+(Permutation (q ++ q) (merge q q)), (Permutation (q ++ q) (merge q p)), (Permutation (q ++ q) (merge q gv0)), (Permutation (q ++ q) (merge p q)), (Permutation (q ++ q) (merge p p)), (Permutation (q ++ q) (merge p gv0)), (Permutation (q ++ q) (merge gv0 q)), (Permutation (q ++ q) (merge gv0 p)), (Permutation (q ++ q) (merge gv0 gv0)), (Permutation (q ++ q) (q ++ p))
+(Permutation (q ++ q) (q ++ gv0)), (Permutation (q ++ q) (p ++ q)), (Permutation (q ++ q) (p ++ p)), (Permutation (q ++ q) (p ++ gv0)), (Permutation (q ++ q) (gv0 ++ q)), (Permutation (q ++ q) (gv0 ++ p)), (Permutation (q ++ q) (gv0 ++ gv0)), (Permutation (q ++ q) []), (Permutation (q ++ p) q), (Permutation (q ++ p) p)
+(Permutation (q ++ p) gv0), (Permutation (q ++ p) (merge q q)), (Permutation (q ++ p) (merge q p)), (Permutation (q ++ p) (merge q gv0)), (Permutation (q ++ p) (merge p q)), (Permutation (q ++ p) (merge p p)), (Permutation (q ++ p) (merge p gv0)), (Permutation (q ++ p) (merge gv0 q)), (Permutation (q ++ p) (merge gv0 p)), (Permutation (q ++ p) (merge gv0 gv0))
+(Permutation (q ++ p) (q ++ q)), (Permutation (q ++ p) (q ++ gv0)), (Permutation (q ++ p) (p ++ q)), (Permutation (q ++ p) (p ++ p)), (Permutation (q ++ p) (p ++ gv0)), (Permutation (q ++ p) (gv0 ++ q)), (Permutation (q ++ p) (gv0 ++ p)), (Permutation (q ++ p) (gv0 ++ gv0)), (Permutation (q ++ p) []), (Permutation (q ++ gv0) q)
+(Permutation (q ++ gv0) p), (Permutation (q ++ gv0) gv0), (Permutation (q ++ gv0) (merge q q)), (Permutation (q ++ gv0) (merge q p)), (Permutation (q ++ gv0) (merge q gv0)), (Permutation (q ++ gv0) (merge p q)), (Permutation (q ++ gv0) (merge p p)), (Permutation (q ++ gv0) (merge p gv0)), (Permutation (q ++ gv0) (merge gv0 q)), (Permutation (q ++ gv0) (merge gv0 p))
+(Permutation (q ++ gv0) (merge gv0 gv0)), (Permutation (q ++ gv0) (q ++ q)), (Permutation (q ++ gv0) (q ++ p)), (Permutation (q ++ gv0) (p ++ q)), (Permutation (q ++ gv0) (p ++ p)), (Permutation (q ++ gv0) (p ++ gv0)), (Permutation (q ++ gv0) (gv0 ++ q)), (Permutation (q ++ gv0) (gv0 ++ p)), (Permutation (q ++ gv0) (gv0 ++ gv0)), (Permutation (q ++ gv0) [])
+(Permutation (p ++ q) q), (Permutation (p ++ q) p), (Permutation (p ++ q) gv0), (Permutation (p ++ q) (merge q q)), (Permutation (p ++ q) (merge q p)), (Permutation (p ++ q) (merge q gv0)), (Permutation (p ++ q) (merge p q)), (Permutation (p ++ q) (merge p p)), (Permutation (p ++ q) (merge p gv0)), (Permutation (p ++ q) (merge gv0 q))
+(Permutation (p ++ q) (merge gv0 p)), (Permutation (p ++ q) (merge gv0 gv0)), (Permutation (p ++ q) (q ++ q)), (Permutation (p ++ q) (q ++ p)), (Permutation (p ++ q) (q ++ gv0)), (Permutation (p ++ q) (p ++ p)), (Permutation (p ++ q) (p ++ gv0)), (Permutation (p ++ q) (gv0 ++ q)), (Permutation (p ++ q) (gv0 ++ p)), (Permutation (p ++ q) (gv0 ++ gv0))
+(Permutation (p ++ q) []), (Permutation (p ++ p) q), (Permutation (p ++ p) p), (Permutation (p ++ p) gv0), (Permutation (p ++ p) (merge q q)), (Permutation (p ++ p) (merge q p)), (Permutation (p ++ p) (merge q gv0)), (Permutation (p ++ p) (merge p q)), (Permutation (p ++ p) (merge p p)), (Permutation (p ++ p) (merge p gv0))
+(Permutation (p ++ p) (merge gv0 q)), (Permutation (p ++ p) (merge gv0 p)), (Permutation (p ++ p) (merge gv0 gv0)), (Permutation (p ++ p) (q ++ q)), (Permutation (p ++ p) (q ++ p)), (Permutation (p ++ p) (q ++ gv0)), (Permutation (p ++ p) (p ++ q)), (Permutation (p ++ p) (p ++ gv0)), (Permutation (p ++ p) (gv0 ++ q)), (Permutation (p ++ p) (gv0 ++ p))
+(Permutation (p ++ p) (gv0 ++ gv0)), (Permutation (p ++ p) []), (Permutation (p ++ gv0) q), (Permutation (p ++ gv0) p), (Permutation (p ++ gv0) gv0), (Permutation (p ++ gv0) (merge q q)), (Permutation (p ++ gv0) (merge q p)), (Permutation (p ++ gv0) (merge q gv0)), (Permutation (p ++ gv0) (merge p q)), (Permutation (p ++ gv0) (merge p p))
+(Permutation (p ++ gv0) (merge p gv0)), (Permutation (p ++ gv0) (merge gv0 q)), (Permutation (p ++ gv0) (merge gv0 p)), (Permutation (p ++ gv0) (merge gv0 gv0)), (Permutation (p ++ gv0) (q ++ q)), (Permutation (p ++ gv0) (q ++ p)), (Permutation (p ++ gv0) (q ++ gv0)), (Permutation (p ++ gv0) (p ++ q)), (Permutation (p ++ gv0) (p ++ p)), (Permutation (p ++ gv0) (gv0 ++ q))
+(Permutation (p ++ gv0) (gv0 ++ p)), (Permutation (p ++ gv0) (gv0 ++ gv0)), (Permutation (p ++ gv0) []), (Permutation (gv0 ++ q) q), (Permutation (gv0 ++ q) p), (Permutation (gv0 ++ q) gv0), (Permutation (gv0 ++ q) (merge q q)), (Permutation (gv0 ++ q) (merge q p)), (Permutation (gv0 ++ q) (merge q gv0)), (Permutation (gv0 ++ q) (merge p q))
+(Permutation (gv0 ++ q) (merge p p)), (Permutation (gv0 ++ q) (merge p gv0)), (Permutation (gv0 ++ q) (merge gv0 q)), (Permutation (gv0 ++ q) (merge gv0 p)), (Permutation (gv0 ++ q) (merge gv0 gv0)), (Permutation (gv0 ++ q) (q ++ q)), (Permutation (gv0 ++ q) (q ++ p)), (Permutation (gv0 ++ q) (q ++ gv0)), (Permutation (gv0 ++ q) (p ++ q)), (Permutation (gv0 ++ q) (p ++ p))
+(Permutation (gv0 ++ q) (p ++ gv0)), (Permutation (gv0 ++ q) (gv0 ++ p)), (Permutation (gv0 ++ q) (gv0 ++ gv0)), (Permutation (gv0 ++ q) []), (Permutation (gv0 ++ p) q), (Permutation (gv0 ++ p) p), (Permutation (gv0 ++ p) gv0), (Permutation (gv0 ++ p) (merge q q)), (Permutation (gv0 ++ p) (merge q p)), (Permutation (gv0 ++ p) (merge q gv0))
+(Permutation (gv0 ++ p) (merge p q)), (Permutation (gv0 ++ p) (merge p p)), (Permutation (gv0 ++ p) (merge p gv0)), (Permutation (gv0 ++ p) (merge gv0 q)), (Permutation (gv0 ++ p) (merge gv0 p)), (Permutation (gv0 ++ p) (merge gv0 gv0)), (Permutation (gv0 ++ p) (q ++ q)), (Permutation (gv0 ++ p) (q ++ p)), (Permutation (gv0 ++ p) (q ++ gv0)), (Permutation (gv0 ++ p) (p ++ q))
+(Permutation (gv0 ++ p) (p ++ p)), (Permutation (gv0 ++ p) (p ++ gv0)), (Permutation (gv0 ++ p) (gv0 ++ q)), (Permutation (gv0 ++ p) (gv0 ++ gv0)), (Permutation (gv0 ++ p) []), (Permutation (gv0 ++ gv0) q), (Permutation (gv0 ++ gv0) p), (Permutation (gv0 ++ gv0) gv0), (Permutation (gv0 ++ gv0) (merge q q)), (Permutation (gv0 ++ gv0) (merge q p))
+(Permutation (gv0 ++ gv0) (merge q gv0)), (Permutation (gv0 ++ gv0) (merge p q)), (Permutation (gv0 ++ gv0) (merge p p)), (Permutation (gv0 ++ gv0) (merge p gv0)), (Permutation (gv0 ++ gv0) (merge gv0 q)), (Permutation (gv0 ++ gv0) (merge gv0 p)), (Permutation (gv0 ++ gv0) (merge gv0 gv0)), (Permutation (gv0 ++ gv0) (q ++ q)), (Permutation (gv0 ++ gv0) (q ++ p)), (Permutation (gv0 ++ gv0) (q ++ gv0))
+(Permutation (gv0 ++ gv0) (p ++ q)), (Permutation (gv0 ++ gv0) (p ++ p)), (Permutation (gv0 ++ gv0) (p ++ gv0)), (Permutation (gv0 ++ gv0) (gv0 ++ q)), (Permutation (gv0 ++ gv0) (gv0 ++ p)), (Permutation (gv0 ++ gv0) []), (Permutation [] q), (Permutation [] p), (Permutation [] gv0), (Permutation [] (merge q q))
+(Permutation [] (merge q p)), (Permutation [] (merge q gv0)), (Permutation [] (merge p q)), (Permutation [] (merge p p)), (Permutation [] (merge p gv0)), (Permutation [] (merge gv0 q)), (Permutation [] (merge gv0 p)), (Permutation [] (merge gv0 gv0)), (Permutation [] (q ++ q)), (Permutation [] (q ++ p))
+(Permutation [] (q ++ gv0)), (Permutation [] (p ++ q)), (Permutation [] (p ++ p)), (Permutation [] (p ++ gv0)), (Permutation [] (gv0 ++ q)), (Permutation [] (gv0 ++ p)), (Permutation [] (gv0 ++ gv0)), (In Leaf q), (In Leaf p), (In Leaf gv0)
+(In Leaf (merge q q)), (In Leaf (merge q p)), (In Leaf (merge q gv0)), (In Leaf (merge p q)), (In Leaf (merge p p)), (In Leaf (merge p gv0)), (In Leaf (merge gv0 q)), (In Leaf (merge gv0 p)), (In Leaf (merge gv0 gv0)), (In Leaf (q ++ q))
+(In Leaf (q ++ p)), (In Leaf (q ++ gv0)), (In Leaf (p ++ q)), (In Leaf (p ++ p)), (In Leaf (p ++ gv0)), (In Leaf (gv0 ++ q)), (In Leaf (gv0 ++ p)), (In Leaf (gv0 ++ gv0)), (length q < length p), (length q < length gv0)
+(length p < length q), (length p < length gv0), (length gv0 < length q), (length gv0 < length p), (length q <= length p), (length q <= length gv0), (length p <= length q), (length p <= length gv0), (length gv0 <= length q), (length gv0 <= length p)
+(~ priq q), (~ priq p), (~ priq gv0), (~ Permutation q q), (~ Permutation q p), (~ Permutation q gv0), (~ Permutation p q), (~ Permutation p p), (~ Permutation p gv0), (~ Permutation gv0 q)
+(~ Permutation gv0 p), (~ Permutation gv0 gv0), (q <> q), (q <> p), (q <> gv0), (p <> q), (p <> p), (p <> gv0), (gv0 <> q), (gv0 <> p)
+(gv0 <> gv0), (None = Some q), (None = Some p), (None = Some gv0), (merge q q = q), (merge q q = p), (merge q q = gv0), (merge q q = q ++ q), (merge q q = q ++ p), (merge q q = q ++ gv0)
+(merge q q = p ++ q), (merge q q = p ++ p), (merge q q = p ++ gv0), (merge q q = gv0 ++ q), (merge q q = gv0 ++ p), (merge q q = gv0 ++ gv0), (merge q p = q), (merge q p = p), (merge q p = gv0), (merge q p = q ++ q)
+(merge q p = q ++ p), (merge q p = q ++ gv0), (merge q p = p ++ q), (merge q p = p ++ p), (merge q p = p ++ gv0), (merge q p = gv0 ++ q), (merge q p = gv0 ++ p), (merge q p = gv0 ++ gv0), (merge q gv0 = q), (merge q gv0 = p)
+(merge q gv0 = gv0), (merge q gv0 = q ++ q), (merge q gv0 = q ++ p), (merge q gv0 = q ++ gv0), (merge q gv0 = p ++ q), (merge q gv0 = p ++ p), (merge q gv0 = p ++ gv0), (merge q gv0 = gv0 ++ q), (merge q gv0 = gv0 ++ p), (merge q gv0 = gv0 ++ gv0)
+(merge p q = q), (merge p q = p), (merge p q = gv0), (merge p q = q ++ q), (merge p q = q ++ p), (merge p q = q ++ gv0), (merge p q = p ++ q), (merge p q = p ++ p), (merge p q = p ++ gv0), (merge p q = gv0 ++ q)
+(merge p q = gv0 ++ p), (merge p q = gv0 ++ gv0), (merge p p = q), (merge p p = p), (merge p p = gv0), (merge p p = q ++ q), (merge p p = q ++ p), (merge p p = q ++ gv0), (merge p p = p ++ q), (merge p p = p ++ p)
+(merge p p = p ++ gv0), (merge p p = gv0 ++ q), (merge p p = gv0 ++ p), (merge p p = gv0 ++ gv0), (merge p gv0 = q), (merge p gv0 = p), (merge p gv0 = gv0), (merge p gv0 = q ++ q), (merge p gv0 = q ++ p), (merge p gv0 = q ++ gv0)
+(merge p gv0 = p ++ q), (merge p gv0 = p ++ p), (merge p gv0 = p ++ gv0), (merge p gv0 = gv0 ++ q), (merge p gv0 = gv0 ++ p), (merge p gv0 = gv0 ++ gv0), (merge gv0 q = q), (merge gv0 q = p), (merge gv0 q = gv0), (merge gv0 q = q ++ q)
+(merge gv0 q = q ++ p), (merge gv0 q = q ++ gv0), (merge gv0 q = p ++ q), (merge gv0 q = p ++ p), (merge gv0 q = p ++ gv0), (merge gv0 q = gv0 ++ q), (merge gv0 q = gv0 ++ p), (merge gv0 q = gv0 ++ gv0), (merge gv0 p = q), (merge gv0 p = p)
+(merge gv0 p = gv0), (merge gv0 p = q ++ q), (merge gv0 p = q ++ p), (merge gv0 p = q ++ gv0), (merge gv0 p = p ++ q), (merge gv0 p = p ++ p), (merge gv0 p = p ++ gv0), (merge gv0 p = gv0 ++ q), (merge gv0 p = gv0 ++ p), (merge gv0 p = gv0 ++ gv0)
+(merge gv0 gv0 = q), (merge gv0 gv0 = p), (merge gv0 gv0 = gv0), (merge gv0 gv0 = q ++ q), (merge gv0 gv0 = q ++ p), (merge gv0 gv0 = q ++ gv0), (merge gv0 gv0 = p ++ q), (merge gv0 gv0 = p ++ p), (merge gv0 gv0 = p ++ gv0), (merge gv0 gv0 = gv0 ++ q)
+(merge gv0 gv0 = gv0 ++ p), (merge gv0 gv0 = gv0 ++ gv0), (q ++ q = q), (q ++ q = p), (q ++ q = gv0), (q ++ p = q), (q ++ p = p), (q ++ p = gv0), (q ++ gv0 = q), (q ++ gv0 = p)
+(q ++ gv0 = gv0), (p ++ q = q), (p ++ q = p), (p ++ q = gv0), (p ++ p = q), (p ++ p = p), (p ++ p = gv0), (p ++ gv0 = q), (p ++ gv0 = p), (p ++ gv0 = gv0)
+(gv0 ++ q = q), (gv0 ++ q = p), (gv0 ++ q = gv0), (gv0 ++ p = q), (gv0 ++ p = p), (gv0 ++ p = gv0), (gv0 ++ gv0 = q), (gv0 ++ gv0 = p), (gv0 ++ gv0 = gv0), ([] = q)
+([] = p), ([] = gv0), ([] = merge q q), ([] = merge q p), ([] = merge q gv0), ([] = merge p q), ([] = merge p p), ([] = merge p gv0), ([] = merge gv0 q), ([] = merge gv0 p)
+([] = merge gv0 gv0), ([] = q ++ q), ([] = q ++ p), ([] = q ++ gv0), ([] = p ++ q), ([] = p ++ p), ([] = p ++ gv0), ([] = gv0 ++ q), ([] = gv0 ++ p), ([] = gv0 ++ gv0)
+
+Label: 3 (3)
+(priq q), (priq p), (Permutation q q), (Permutation q p), (Permutation p q), (Permutation p p), (In gv1 q), (In gv1 p), (gv1 = gv1), (q = q)
+(q = p), (p = q), (p = p), (priq (gv1 :: q)), (priq (gv1 :: p)), (priq (merge q q)), (priq (merge q p)), (priq (merge p q)), (priq (merge p p)), (priq (heap_delete_max gv1))
+(priq (join q q gv1)), (priq (join q p gv1)), (priq (join p q gv1)), (priq (join p p gv1)), (priq (carry q gv1)), (priq (carry p gv1)), (priq (q ++ q)), (priq (q ++ p)), (priq (p ++ q)), (priq (p ++ p))
+(priqq (length q) q), (priqq (length q) p), (priqq (length q) (gv1 :: q)), (priqq (length q) (gv1 :: p)), (priqq (length q) (merge q q)), (priqq (length q) (merge q p)), (priqq (length q) (merge p q)), (priqq (length q) (merge p p)), (priqq (length q) (heap_delete_max gv1)), (priqq (length q) (join q q gv1))
+(priqq (length q) (join q p gv1)), (priqq (length q) (join p q gv1)), (priqq (length q) (join p p gv1)), (priqq (length q) (carry q gv1)), (priqq (length q) (carry p gv1)), (priqq (length q) (q ++ q)), (priqq (length q) (q ++ p)), (priqq (length q) (p ++ q)), (priqq (length q) (p ++ p)), (priqq (length p) q)
+(priqq (length p) p), (priqq (length p) (gv1 :: q)), (priqq (length p) (gv1 :: p)), (priqq (length p) (merge q q)), (priqq (length p) (merge q p)), (priqq (length p) (merge p q)), (priqq (length p) (merge p p)), (priqq (length p) (heap_delete_max gv1)), (priqq (length p) (join q q gv1)), (priqq (length p) (join q p gv1))
+(priqq (length p) (join p q gv1)), (priqq (length p) (join p p gv1)), (priqq (length p) (carry q gv1)), (priqq (length p) (carry p gv1)), (priqq (length p) (q ++ q)), (priqq (length p) (q ++ p)), (priqq (length p) (p ++ q)), (priqq (length p) (p ++ p)), (pow2heap (length q) gv1), (pow2heap (length q) (smash gv1 gv1))
+(pow2heap (length p) gv1), (pow2heap (length p) (smash gv1 gv1)), (pow2heapp (length q) (length q) gv1), (pow2heapp (length q) (length q) (smash gv1 gv1)), (pow2heapp (length q) (length q) Leaf), (pow2heapp (length q) (length p) gv1), (pow2heapp (length q) (length p) (smash gv1 gv1)), (pow2heapp (length q) (length p) Leaf), (pow2heapp (length p) (length q) gv1), (pow2heapp (length p) (length q) (smash gv1 gv1))
+(pow2heapp (length p) (length q) Leaf), (pow2heapp (length p) (length p) gv1), (pow2heapp (length p) (length p) (smash gv1 gv1)), (pow2heapp (length p) (length p) Leaf), (Permutation q (gv1 :: q)), (Permutation q (gv1 :: p)), (Permutation q (merge q q)), (Permutation q (merge q p)), (Permutation q (merge p q)), (Permutation q (merge p p))
+(Permutation q (heap_delete_max gv1)), (Permutation q (join q q gv1)), (Permutation q (join q p gv1)), (Permutation q (join p q gv1)), (Permutation q (join p p gv1)), (Permutation q (carry q gv1)), (Permutation q (carry p gv1)), (Permutation q (q ++ q)), (Permutation q (q ++ p)), (Permutation q (p ++ q))
+(Permutation q (p ++ p)), (Permutation q []), (Permutation p (gv1 :: q)), (Permutation p (gv1 :: p)), (Permutation p (merge q q)), (Permutation p (merge q p)), (Permutation p (merge p q)), (Permutation p (merge p p)), (Permutation p (heap_delete_max gv1)), (Permutation p (join q q gv1))
+(Permutation p (join q p gv1)), (Permutation p (join p q gv1)), (Permutation p (join p p gv1)), (Permutation p (carry q gv1)), (Permutation p (carry p gv1)), (Permutation p (q ++ q)), (Permutation p (q ++ p)), (Permutation p (p ++ q)), (Permutation p (p ++ p)), (Permutation p [])
+(Permutation (gv1 :: q) q), (Permutation (gv1 :: q) p), (Permutation (gv1 :: q) (gv1 :: p)), (Permutation (gv1 :: q) (merge q q)), (Permutation (gv1 :: q) (merge q p)), (Permutation (gv1 :: q) (merge p q)), (Permutation (gv1 :: q) (merge p p)), (Permutation (gv1 :: q) (heap_delete_max gv1)), (Permutation (gv1 :: q) (join q q gv1)), (Permutation (gv1 :: q) (join q p gv1))
+(Permutation (gv1 :: q) (join p q gv1)), (Permutation (gv1 :: q) (join p p gv1)), (Permutation (gv1 :: q) (carry q gv1)), (Permutation (gv1 :: q) (carry p gv1)), (Permutation (gv1 :: q) (q ++ q)), (Permutation (gv1 :: q) (q ++ p)), (Permutation (gv1 :: q) (p ++ q)), (Permutation (gv1 :: q) (p ++ p)), (Permutation (gv1 :: q) []), (Permutation (gv1 :: p) q)
+(Permutation (gv1 :: p) p), (Permutation (gv1 :: p) (gv1 :: q)), (Permutation (gv1 :: p) (merge q q)), (Permutation (gv1 :: p) (merge q p)), (Permutation (gv1 :: p) (merge p q)), (Permutation (gv1 :: p) (merge p p)), (Permutation (gv1 :: p) (heap_delete_max gv1)), (Permutation (gv1 :: p) (join q q gv1)), (Permutation (gv1 :: p) (join q p gv1)), (Permutation (gv1 :: p) (join p q gv1))
+(Permutation (gv1 :: p) (join p p gv1)), (Permutation (gv1 :: p) (carry q gv1)), (Permutation (gv1 :: p) (carry p gv1)), (Permutation (gv1 :: p) (q ++ q)), (Permutation (gv1 :: p) (q ++ p)), (Permutation (gv1 :: p) (p ++ q)), (Permutation (gv1 :: p) (p ++ p)), (Permutation (gv1 :: p) []), (Permutation (merge q q) q), (Permutation (merge q q) p)
+(Permutation (merge q q) (gv1 :: q)), (Permutation (merge q q) (gv1 :: p)), (Permutation (merge q q) (merge q p)), (Permutation (merge q q) (merge p q)), (Permutation (merge q q) (merge p p)), (Permutation (merge q q) (heap_delete_max gv1)), (Permutation (merge q q) (join q q gv1)), (Permutation (merge q q) (join q p gv1)), (Permutation (merge q q) (join p q gv1)), (Permutation (merge q q) (join p p gv1))
+(Permutation (merge q q) (carry q gv1)), (Permutation (merge q q) (carry p gv1)), (Permutation (merge q q) (q ++ q)), (Permutation (merge q q) (q ++ p)), (Permutation (merge q q) (p ++ q)), (Permutation (merge q q) (p ++ p)), (Permutation (merge q q) []), (Permutation (merge q p) q), (Permutation (merge q p) p), (Permutation (merge q p) (gv1 :: q))
+(Permutation (merge q p) (gv1 :: p)), (Permutation (merge q p) (merge q q)), (Permutation (merge q p) (merge p q)), (Permutation (merge q p) (merge p p)), (Permutation (merge q p) (heap_delete_max gv1)), (Permutation (merge q p) (join q q gv1)), (Permutation (merge q p) (join q p gv1)), (Permutation (merge q p) (join p q gv1)), (Permutation (merge q p) (join p p gv1)), (Permutation (merge q p) (carry q gv1))
+(Permutation (merge q p) (carry p gv1)), (Permutation (merge q p) (q ++ q)), (Permutation (merge q p) (q ++ p)), (Permutation (merge q p) (p ++ q)), (Permutation (merge q p) (p ++ p)), (Permutation (merge q p) []), (Permutation (merge p q) q), (Permutation (merge p q) p), (Permutation (merge p q) (gv1 :: q)), (Permutation (merge p q) (gv1 :: p))
+(Permutation (merge p q) (merge q q)), (Permutation (merge p q) (merge q p)), (Permutation (merge p q) (merge p p)), (Permutation (merge p q) (heap_delete_max gv1)), (Permutation (merge p q) (join q q gv1)), (Permutation (merge p q) (join q p gv1)), (Permutation (merge p q) (join p q gv1)), (Permutation (merge p q) (join p p gv1)), (Permutation (merge p q) (carry q gv1)), (Permutation (merge p q) (carry p gv1))
+(Permutation (merge p q) (q ++ q)), (Permutation (merge p q) (q ++ p)), (Permutation (merge p q) (p ++ q)), (Permutation (merge p q) (p ++ p)), (Permutation (merge p q) []), (Permutation (merge p p) q), (Permutation (merge p p) p), (Permutation (merge p p) (gv1 :: q)), (Permutation (merge p p) (gv1 :: p)), (Permutation (merge p p) (merge q q))
+(Permutation (merge p p) (merge q p)), (Permutation (merge p p) (merge p q)), (Permutation (merge p p) (heap_delete_max gv1)), (Permutation (merge p p) (join q q gv1)), (Permutation (merge p p) (join q p gv1)), (Permutation (merge p p) (join p q gv1)), (Permutation (merge p p) (join p p gv1)), (Permutation (merge p p) (carry q gv1)), (Permutation (merge p p) (carry p gv1)), (Permutation (merge p p) (q ++ q))
+(Permutation (merge p p) (q ++ p)), (Permutation (merge p p) (p ++ q)), (Permutation (merge p p) (p ++ p)), (Permutation (merge p p) []), (Permutation (heap_delete_max gv1) q), (Permutation (heap_delete_max gv1) p), (Permutation (heap_delete_max gv1) (gv1 :: q)), (Permutation (heap_delete_max gv1) (gv1 :: p)), (Permutation (heap_delete_max gv1) (merge q q)), (Permutation (heap_delete_max gv1) (merge q p))
+(Permutation (heap_delete_max gv1) (merge p q)), (Permutation (heap_delete_max gv1) (merge p p)), (Permutation (heap_delete_max gv1) (join q q gv1)), (Permutation (heap_delete_max gv1) (join q p gv1)), (Permutation (heap_delete_max gv1) (join p q gv1)), (Permutation (heap_delete_max gv1) (join p p gv1)), (Permutation (heap_delete_max gv1) (carry q gv1)), (Permutation (heap_delete_max gv1) (carry p gv1)), (Permutation (heap_delete_max gv1) (q ++ q)), (Permutation (heap_delete_max gv1) (q ++ p))
+(Permutation (heap_delete_max gv1) (p ++ q)), (Permutation (heap_delete_max gv1) (p ++ p)), (Permutation (heap_delete_max gv1) []), (Permutation (join q q gv1) q), (Permutation (join q q gv1) p), (Permutation (join q q gv1) (gv1 :: q)), (Permutation (join q q gv1) (gv1 :: p)), (Permutation (join q q gv1) (merge q q)), (Permutation (join q q gv1) (merge q p)), (Permutation (join q q gv1) (merge p q))
+(Permutation (join q q gv1) (merge p p)), (Permutation (join q q gv1) (heap_delete_max gv1)), (Permutation (join q q gv1) (join q p gv1)), (Permutation (join q q gv1) (join p q gv1)), (Permutation (join q q gv1) (join p p gv1)), (Permutation (join q q gv1) (carry q gv1)), (Permutation (join q q gv1) (carry p gv1)), (Permutation (join q q gv1) (q ++ q)), (Permutation (join q q gv1) (q ++ p)), (Permutation (join q q gv1) (p ++ q))
+(Permutation (join q q gv1) (p ++ p)), (Permutation (join q q gv1) []), (Permutation (join q p gv1) q), (Permutation (join q p gv1) p), (Permutation (join q p gv1) (gv1 :: q)), (Permutation (join q p gv1) (gv1 :: p)), (Permutation (join q p gv1) (merge q q)), (Permutation (join q p gv1) (merge q p)), (Permutation (join q p gv1) (merge p q)), (Permutation (join q p gv1) (merge p p))
+(Permutation (join q p gv1) (heap_delete_max gv1)), (Permutation (join q p gv1) (join q q gv1)), (Permutation (join q p gv1) (join p q gv1)), (Permutation (join q p gv1) (join p p gv1)), (Permutation (join q p gv1) (carry q gv1)), (Permutation (join q p gv1) (carry p gv1)), (Permutation (join q p gv1) (q ++ q)), (Permutation (join q p gv1) (q ++ p)), (Permutation (join q p gv1) (p ++ q)), (Permutation (join q p gv1) (p ++ p))
+(Permutation (join q p gv1) []), (Permutation (join p q gv1) q), (Permutation (join p q gv1) p), (Permutation (join p q gv1) (gv1 :: q)), (Permutation (join p q gv1) (gv1 :: p)), (Permutation (join p q gv1) (merge q q)), (Permutation (join p q gv1) (merge q p)), (Permutation (join p q gv1) (merge p q)), (Permutation (join p q gv1) (merge p p)), (Permutation (join p q gv1) (heap_delete_max gv1))
+(Permutation (join p q gv1) (join q q gv1)), (Permutation (join p q gv1) (join q p gv1)), (Permutation (join p q gv1) (join p p gv1)), (Permutation (join p q gv1) (carry q gv1)), (Permutation (join p q gv1) (carry p gv1)), (Permutation (join p q gv1) (q ++ q)), (Permutation (join p q gv1) (q ++ p)), (Permutation (join p q gv1) (p ++ q)), (Permutation (join p q gv1) (p ++ p)), (Permutation (join p q gv1) [])
+(Permutation (join p p gv1) q), (Permutation (join p p gv1) p), (Permutation (join p p gv1) (gv1 :: q)), (Permutation (join p p gv1) (gv1 :: p)), (Permutation (join p p gv1) (merge q q)), (Permutation (join p p gv1) (merge q p)), (Permutation (join p p gv1) (merge p q)), (Permutation (join p p gv1) (merge p p)), (Permutation (join p p gv1) (heap_delete_max gv1)), (Permutation (join p p gv1) (join q q gv1))
+(Permutation (join p p gv1) (join q p gv1)), (Permutation (join p p gv1) (join p q gv1)), (Permutation (join p p gv1) (carry q gv1)), (Permutation (join p p gv1) (carry p gv1)), (Permutation (join p p gv1) (q ++ q)), (Permutation (join p p gv1) (q ++ p)), (Permutation (join p p gv1) (p ++ q)), (Permutation (join p p gv1) (p ++ p)), (Permutation (join p p gv1) []), (Permutation (carry q gv1) q)
+(Permutation (carry q gv1) p), (Permutation (carry q gv1) (gv1 :: q)), (Permutation (carry q gv1) (gv1 :: p)), (Permutation (carry q gv1) (merge q q)), (Permutation (carry q gv1) (merge q p)), (Permutation (carry q gv1) (merge p q)), (Permutation (carry q gv1) (merge p p)), (Permutation (carry q gv1) (heap_delete_max gv1)), (Permutation (carry q gv1) (join q q gv1)), (Permutation (carry q gv1) (join q p gv1))
+(Permutation (carry q gv1) (join p q gv1)), (Permutation (carry q gv1) (join p p gv1)), (Permutation (carry q gv1) (carry p gv1)), (Permutation (carry q gv1) (q ++ q)), (Permutation (carry q gv1) (q ++ p)), (Permutation (carry q gv1) (p ++ q)), (Permutation (carry q gv1) (p ++ p)), (Permutation (carry q gv1) []), (Permutation (carry p gv1) q), (Permutation (carry p gv1) p)
+(Permutation (carry p gv1) (gv1 :: q)), (Permutation (carry p gv1) (gv1 :: p)), (Permutation (carry p gv1) (merge q q)), (Permutation (carry p gv1) (merge q p)), (Permutation (carry p gv1) (merge p q)), (Permutation (carry p gv1) (merge p p)), (Permutation (carry p gv1) (heap_delete_max gv1)), (Permutation (carry p gv1) (join q q gv1)), (Permutation (carry p gv1) (join q p gv1)), (Permutation (carry p gv1) (join p q gv1))
+(Permutation (carry p gv1) (join p p gv1)), (Permutation (carry p gv1) (carry q gv1)), (Permutation (carry p gv1) (q ++ q)), (Permutation (carry p gv1) (q ++ p)), (Permutation (carry p gv1) (p ++ q)), (Permutation (carry p gv1) (p ++ p)), (Permutation (carry p gv1) []), (Permutation (q ++ q) q), (Permutation (q ++ q) p), (Permutation (q ++ q) (gv1 :: q))
+(Permutation (q ++ q) (gv1 :: p)), (Permutation (q ++ q) (merge q q)), (Permutation (q ++ q) (merge q p)), (Permutation (q ++ q) (merge p q)), (Permutation (q ++ q) (merge p p)), (Permutation (q ++ q) (heap_delete_max gv1)), (Permutation (q ++ q) (join q q gv1)), (Permutation (q ++ q) (join q p gv1)), (Permutation (q ++ q) (join p q gv1)), (Permutation (q ++ q) (join p p gv1))
+(Permutation (q ++ q) (carry q gv1)), (Permutation (q ++ q) (carry p gv1)), (Permutation (q ++ q) (q ++ p)), (Permutation (q ++ q) (p ++ q)), (Permutation (q ++ q) (p ++ p)), (Permutation (q ++ q) []), (Permutation (q ++ p) q), (Permutation (q ++ p) p), (Permutation (q ++ p) (gv1 :: q)), (Permutation (q ++ p) (gv1 :: p))
+(Permutation (q ++ p) (merge q q)), (Permutation (q ++ p) (merge q p)), (Permutation (q ++ p) (merge p q)), (Permutation (q ++ p) (merge p p)), (Permutation (q ++ p) (heap_delete_max gv1)), (Permutation (q ++ p) (join q q gv1)), (Permutation (q ++ p) (join q p gv1)), (Permutation (q ++ p) (join p q gv1)), (Permutation (q ++ p) (join p p gv1)), (Permutation (q ++ p) (carry q gv1))
+(Permutation (q ++ p) (carry p gv1)), (Permutation (q ++ p) (q ++ q)), (Permutation (q ++ p) (p ++ q)), (Permutation (q ++ p) (p ++ p)), (Permutation (q ++ p) []), (Permutation (p ++ q) q), (Permutation (p ++ q) p), (Permutation (p ++ q) (gv1 :: q)), (Permutation (p ++ q) (gv1 :: p)), (Permutation (p ++ q) (merge q q))
+(Permutation (p ++ q) (merge q p)), (Permutation (p ++ q) (merge p q)), (Permutation (p ++ q) (merge p p)), (Permutation (p ++ q) (heap_delete_max gv1)), (Permutation (p ++ q) (join q q gv1)), (Permutation (p ++ q) (join q p gv1)), (Permutation (p ++ q) (join p q gv1)), (Permutation (p ++ q) (join p p gv1)), (Permutation (p ++ q) (carry q gv1)), (Permutation (p ++ q) (carry p gv1))
+(Permutation (p ++ q) (q ++ q)), (Permutation (p ++ q) (q ++ p)), (Permutation (p ++ q) (p ++ p)), (Permutation (p ++ q) []), (Permutation (p ++ p) q), (Permutation (p ++ p) p), (Permutation (p ++ p) (gv1 :: q)), (Permutation (p ++ p) (gv1 :: p)), (Permutation (p ++ p) (merge q q)), (Permutation (p ++ p) (merge q p))
+(Permutation (p ++ p) (merge p q)), (Permutation (p ++ p) (merge p p)), (Permutation (p ++ p) (heap_delete_max gv1)), (Permutation (p ++ p) (join q q gv1)), (Permutation (p ++ p) (join q p gv1)), (Permutation (p ++ p) (join p q gv1)), (Permutation (p ++ p) (join p p gv1)), (Permutation (p ++ p) (carry q gv1)), (Permutation (p ++ p) (carry p gv1)), (Permutation (p ++ p) (q ++ q))
+(Permutation (p ++ p) (q ++ p)), (Permutation (p ++ p) (p ++ q)), (Permutation (p ++ p) []), (Permutation [] q), (Permutation [] p), (Permutation [] (gv1 :: q)), (Permutation [] (gv1 :: p)), (Permutation [] (merge q q)), (Permutation [] (merge q p)), (Permutation [] (merge p q))
+(Permutation [] (merge p p)), (Permutation [] (heap_delete_max gv1)), (Permutation [] (join q q gv1)), (Permutation [] (join q p gv1)), (Permutation [] (join p q gv1)), (Permutation [] (join p p gv1)), (Permutation [] (carry q gv1)), (Permutation [] (carry p gv1)), (Permutation [] (q ++ q)), (Permutation [] (q ++ p))
+(Permutation [] (p ++ q)), (Permutation [] (p ++ p)), (In gv1 (gv1 :: q)), (In gv1 (gv1 :: p)), (In gv1 (merge q q)), (In gv1 (merge q p)), (In gv1 (merge p q)), (In gv1 (merge p p)), (In gv1 (heap_delete_max gv1)), (In gv1 (join q q gv1))
+(In gv1 (join q p gv1)), (In gv1 (join p q gv1)), (In gv1 (join p p gv1)), (In gv1 (carry q gv1)), (In gv1 (carry p gv1)), (In gv1 (q ++ q)), (In gv1 (q ++ p)), (In gv1 (p ++ q)), (In gv1 (p ++ p)), (In (smash gv1 gv1) q)
+(In (smash gv1 gv1) p), (In (smash gv1 gv1) (gv1 :: q)), (In (smash gv1 gv1) (gv1 :: p)), (In (smash gv1 gv1) (merge q q)), (In (smash gv1 gv1) (merge q p)), (In (smash gv1 gv1) (merge p q)), (In (smash gv1 gv1) (merge p p)), (In (smash gv1 gv1) (heap_delete_max gv1)), (In (smash gv1 gv1) (join q q gv1)), (In (smash gv1 gv1) (join q p gv1))
+(In (smash gv1 gv1) (join p q gv1)), (In (smash gv1 gv1) (join p p gv1)), (In (smash gv1 gv1) (carry q gv1)), (In (smash gv1 gv1) (carry p gv1)), (In (smash gv1 gv1) (q ++ q)), (In (smash gv1 gv1) (q ++ p)), (In (smash gv1 gv1) (p ++ q)), (In (smash gv1 gv1) (p ++ p)), (In Leaf q), (In Leaf p)
+(In Leaf (gv1 :: q)), (In Leaf (gv1 :: p)), (In Leaf (merge q q)), (In Leaf (merge q p)), (In Leaf (merge p q)), (In Leaf (merge p p)), (In Leaf (heap_delete_max gv1)), (In Leaf (join q q gv1)), (In Leaf (join q p gv1)), (In Leaf (join p q gv1))
+(In Leaf (join p p gv1)), (In Leaf (carry q gv1)), (In Leaf (carry p gv1)), (In Leaf (q ++ q)), (In Leaf (q ++ p)), (In Leaf (p ++ q)), (In Leaf (p ++ p)), (length q < length p), (length p < length q), (length q <= length p)
+(length p <= length q), (~ priq q), (~ priq p), (~ Permutation q q), (~ Permutation q p), (~ Permutation p q), (~ Permutation p p), (~ In gv1 q), (~ In gv1 p), (gv1 <> gv1)
+(q <> q), (q <> p), (p <> q), (p <> p), (None = Some q), (None = Some p), (gv1 :: q = q), (gv1 :: q = p), (gv1 :: q = merge q q), (gv1 :: q = merge q p)
+(gv1 :: q = merge p q), (gv1 :: q = merge p p), (gv1 :: q = heap_delete_max gv1), (gv1 :: q = join q q gv1), (gv1 :: q = join q p gv1), (gv1 :: q = join p q gv1), (gv1 :: q = join p p gv1), (gv1 :: q = carry q gv1), (gv1 :: q = carry p gv1), (gv1 :: q = q ++ q)
+(gv1 :: q = q ++ p), (gv1 :: q = p ++ q), (gv1 :: q = p ++ p), (gv1 :: q = []), (gv1 :: p = q), (gv1 :: p = p), (gv1 :: p = merge q q), (gv1 :: p = merge q p), (gv1 :: p = merge p q), (gv1 :: p = merge p p)
+(gv1 :: p = heap_delete_max gv1), (gv1 :: p = join q q gv1), (gv1 :: p = join q p gv1), (gv1 :: p = join p q gv1), (gv1 :: p = join p p gv1), (gv1 :: p = carry q gv1), (gv1 :: p = carry p gv1), (gv1 :: p = q ++ q), (gv1 :: p = q ++ p), (gv1 :: p = p ++ q)
+(gv1 :: p = p ++ p), (gv1 :: p = []), (merge q q = q), (merge q q = p), (merge q q = heap_delete_max gv1), (merge q q = join q q gv1), (merge q q = join q p gv1), (merge q q = join p q gv1), (merge q q = join p p gv1), (merge q q = carry q gv1)
+(merge q q = carry p gv1), (merge q q = q ++ q), (merge q q = q ++ p), (merge q q = p ++ q), (merge q q = p ++ p), (merge q p = q), (merge q p = p), (merge q p = heap_delete_max gv1), (merge q p = join q q gv1), (merge q p = join q p gv1)
+(merge q p = join p q gv1), (merge q p = join p p gv1), (merge q p = carry q gv1), (merge q p = carry p gv1), (merge q p = q ++ q), (merge q p = q ++ p), (merge q p = p ++ q), (merge q p = p ++ p), (merge p q = q), (merge p q = p)
+(merge p q = heap_delete_max gv1), (merge p q = join q q gv1), (merge p q = join q p gv1), (merge p q = join p q gv1), (merge p q = join p p gv1), (merge p q = carry q gv1), (merge p q = carry p gv1), (merge p q = q ++ q), (merge p q = q ++ p), (merge p q = p ++ q)
+(merge p q = p ++ p), (merge p p = q), (merge p p = p), (merge p p = heap_delete_max gv1), (merge p p = join q q gv1), (merge p p = join q p gv1), (merge p p = join p q gv1), (merge p p = join p p gv1), (merge p p = carry q gv1), (merge p p = carry p gv1)
+(merge p p = q ++ q), (merge p p = q ++ p), (merge p p = p ++ q), (merge p p = p ++ p), (heap_delete_max gv1 = q), (heap_delete_max gv1 = p), (heap_delete_max gv1 = carry q gv1), (heap_delete_max gv1 = carry p gv1), (heap_delete_max gv1 = q ++ q), (heap_delete_max gv1 = q ++ p)
+(heap_delete_max gv1 = p ++ q), (heap_delete_max gv1 = p ++ p), (join q q gv1 = q), (join q q gv1 = p), (join q q gv1 = heap_delete_max gv1), (join q q gv1 = carry q gv1), (join q q gv1 = carry p gv1), (join q q gv1 = q ++ q), (join q q gv1 = q ++ p), (join q q gv1 = p ++ q)
+(join q q gv1 = p ++ p), (join q p gv1 = q), (join q p gv1 = p), (join q p gv1 = heap_delete_max gv1), (join q p gv1 = carry q gv1), (join q p gv1 = carry p gv1), (join q p gv1 = q ++ q), (join q p gv1 = q ++ p), (join q p gv1 = p ++ q), (join q p gv1 = p ++ p)
+(join p q gv1 = q), (join p q gv1 = p), (join p q gv1 = heap_delete_max gv1), (join p q gv1 = carry q gv1), (join p q gv1 = carry p gv1), (join p q gv1 = q ++ q), (join p q gv1 = q ++ p), (join p q gv1 = p ++ q), (join p q gv1 = p ++ p), (join p p gv1 = q)
+(join p p gv1 = p), (join p p gv1 = heap_delete_max gv1), (join p p gv1 = carry q gv1), (join p p gv1 = carry p gv1), (join p p gv1 = q ++ q), (join p p gv1 = q ++ p), (join p p gv1 = p ++ q), (join p p gv1 = p ++ p), (carry q gv1 = q), (carry q gv1 = p)
+(carry q gv1 = q ++ q), (carry q gv1 = q ++ p), (carry q gv1 = p ++ q), (carry q gv1 = p ++ p), (carry p gv1 = q), (carry p gv1 = p), (carry p gv1 = q ++ q), (carry p gv1 = q ++ p), (carry p gv1 = p ++ q), (carry p gv1 = p ++ p)
+(q ++ q = q), (q ++ q = p), (q ++ p = q), (q ++ p = p), (p ++ q = q), (p ++ q = p), (p ++ p = q), (p ++ p = p), ([] = q), ([] = p)
+([] = merge q q), ([] = merge q p), ([] = merge p q), ([] = merge p p), ([] = heap_delete_max gv1), ([] = join q q gv1), ([] = join q p gv1), ([] = join p q gv1), ([] = join p p gv1), ([] = carry q gv1)
+([] = carry p gv1), ([] = q ++ q), ([] = q ++ p), ([] = p ++ q), ([] = p ++ p), (None = Some gv1), (smash gv1 gv1 = gv1), (Leaf = smash gv1 gv1)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 134.152 seconds
+
+
+Label: 0 (0)
+(priq p)
+
+Label: 1 (1)
+(priq q)
+
+Label: 2 (2)
+(priq gv0), (merge q p = gv0), (merge p q = gv0)
+
+Label: 3 (3)
+(priq (join q q gv1)), (priq (join q p gv1)), (priq (join p q gv1)), (priq (join p p gv1)), (smash gv1 gv1 = gv1), (Permutation q (carry q gv1)), (Permutation p (carry p gv1)), (Permutation (carry q gv1) q), (Permutation (carry p gv1) p), (carry q gv1 = q)
+(carry p gv1 = p), (Permutation (merge q q) (join q q gv1)), (Permutation (merge q p) (join q p gv1)), (Permutation (merge q p) (join p q gv1)), (Permutation (merge p q) (join q p gv1)), (Permutation (merge p q) (join p q gv1)), (Permutation (merge p p) (join p p gv1)), (Permutation (join q q gv1) (merge q q)), (Permutation (join q p gv1) (merge q p)), (Permutation (join q p gv1) (merge p q))
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (priq p -> priq q -> priq (join p q Leaf))
+
+2. (merge p q = join p q Leaf)
+
+3. (smash Leaf Leaf = Leaf)
+
+4. (priq p -> priq q -> priq (join q q gv1) -> priq (join p q gv1))
+
+5. (priq p -> priq q -> priq (join q p gv1) -> priq (join p q gv1))
+
+6. (priq p -> priq q -> priq (join p p gv1) -> priq (join p q gv1))
+
+7. (priq p -> priq q -> smash gv1 gv1 = gv1 -> priq (join p q gv1))
+
+8. (priq p -> priq q -> Permutation q (carry q gv1) -> priq (join p q gv1))
+
+9. (priq p -> priq q -> Permutation p (carry p gv1) -> priq (join p q gv1))
+
+10. (priq p -> priq q -> Permutation (carry q gv1) q -> priq (join p q gv1))
+
+11. (priq p -> priq q -> Permutation (carry p gv1) p -> priq (join p q gv1))
+
+12. (priq p -> priq q -> carry q gv1 = q -> priq (join p q gv1))
+
+13. (priq p -> priq q -> carry p gv1 = p -> priq (join p q gv1))
+
+14. (priq p ->  priq q -> Permutation (merge q q) (join q q gv1) -> priq (join p q gv1))
+
+15. (priq p ->  priq q -> Permutation (merge q p) (join q p gv1) -> priq (join p q gv1))
+
+16. (priq p ->  priq q -> Permutation (merge q p) (join p q gv1) -> priq (join p q gv1))
+
+17. (priq p ->  priq q -> Permutation (merge p q) (join q p gv1) -> priq (join p q gv1))
+
+18. (priq p ->  priq q -> Permutation (merge p q) (join p q gv1) -> priq (join p q gv1))
+
+19. (priq p ->  priq q -> Permutation (merge p p) (join p p gv1) -> priq (join p q gv1))
+
+20. (priq p ->  priq q -> Permutation (join q q gv1) (merge q q) -> priq (join p q gv1))
+
+21. (priq p ->  priq q -> Permutation (join q p gv1) (merge q p) -> priq (join p q gv1))
+
+22. (priq p ->  priq q -> Permutation (join q p gv1) (merge p q) -> priq (join p q gv1))
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 207.472 seconds
+
+Number of Result Pairs Returned: 22
+
+1. (priq p -> priq q -> priq (join p q Leaf))
+
+2. (merge p q = join p q Leaf)
+
+3. (priq p -> priq q -> priq (join q q gv1) -> priq (join p q gv1))
+
+4. (priq p -> priq q -> priq (join q p gv1) -> priq (join p q gv1))
+
+5. (priq p -> priq q -> priq (join p p gv1) -> priq (join p q gv1))

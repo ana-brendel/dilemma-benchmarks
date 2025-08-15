@@ -1,0 +1,326 @@
+[TOTAL] 20
+
+[SUCCESS] 11
+    [SUCCESS][1][INFER] 1
+    [SUCCESS][1][AS IS] 3
+    [SUCCESS][3][AS IS] 1
+    [SUCCESS][3][GENERALIZE] 3
+    [SUCCESS][5][GENERALIZE] 1
+    [SUCCESS][5][WEAKEN] 2
+
+[FAIL] 9
+    [FAIL][RESOURCE] 1
+    [FAIL][IMPLEMENTATION] 1
+    [FAIL][INCOMPLETE] 4
+    [FAIL][FORWARD] 3
+
+-----------------------------------------------
+
+[SUCCESS][1][AS IS]
+Test = goal38_1
+[TIME] 51.509
+[COUNTS] 4
+[TARGET] mem x y -> mem x (append y z)
+
+1. (mem x y -> mem x (append y z))
+
+2. (mem x y -> mem x (append y y))
+(mem x (append y y) -> mem x (append y z))
+
+3. (mem x y -> mem x (append z y))
+(mem x (append z y) -> mem x (append y z))
+
+4. (mem x y -> mem x (append gv0 gv0) -> mem x gv0)
+
+
+
+[SUCCESS][1][INFER]
+Test = goal50_3
+[TIME] 89.02
+[COUNTS] 11
+[TARGET] x <> y -> count x (insort y l) = count x l
+
+1. (count x gv2 = gv3 -> eqb x n = false -> count x (insort n gv2) = gv3)
+
+2. (count x (sort y) = gv3 ->  eqb x n = false -> count x (insort n (sort y)) = gv3)
+
+3. (count x gv2 = count x y ->  eqb x n = false -> count x (insort n gv2) = count x y)
+
+4. (eqb x n = false -> count x (insort n (sort y)) = count x y)
+
+5. (eqb x n = false -> x <> n)
+(x <> n -> count x (insort n (sort y)) = count x y)
+
+
+
+[SUCCESS][3][GENERALIZE]
+Test = goal41_3
+[TIME] 206.541
+[COUNTS] 54
+[TARGET] lst_subset x y -> lst_subset x (append z y)
+
+1. (lst_subset x gv3 -> lst_subset x (append (cons n nil) gv3))
+
+2. (lst_subset x gv3 -> lst_subset x (append gv1 gv3))
+
+3. (lst_subset x gv3 -> lst_subset x (append (cons n gv2) gv3))
+
+4. (lst_subset x (lst_intersection x y) ->  lst_subset x (append gv1 (lst_intersection x y)))
+
+5. (lst_subset x (lst_intersection x y) ->  lst_subset x (append (cons n gv2) (lst_intersection x y)))
+
+
+
+[FAIL][RESOURCE]
+Test = goal49_2
+[TIME] 54.184
+[COUNTS] 2
+[TARGET] mem x (cons n l) = true -> x = n \/ mem x l = true
+
+1. (mem x (cons n0 (insort n l)) = gv2 -> x = n \/ mem x (cons n0 l) = gv2)
+
+2. (mem x (cons n0 (insort n l)) = true -> x = n \/ mem x (cons n0 l) = true)
+
+
+
+[FAIL][INCOMPLETE]
+Test = goal62_2
+[TIME] -1
+[COUNTS] 0
+[TARGET] < NEED TO FILL IN >
+
+RESULTS NOT FOUND
+
+
+
+[SUCCESS][1][AS IS]
+Test = goal38_2
+[TIME] 51.186
+[COUNTS] 4
+[TARGET] mem x z -> mem x (append y z)
+
+1. (mem x z -> mem x (append y z))
+
+2. (mem x z -> mem x (append z y))
+(mem x (append z y) -> mem x (append y z))
+
+3. (mem x z -> mem x (append z z))
+(mem x (append z z) -> mem x (append y z))
+
+4. (mem x z -> mem x (append gv0 gv0) -> mem x gv0)
+
+
+
+[SUCCESS][5][WEAKEN]
+Test = goal42
+[TIME] 111.62
+[COUNTS] 29
+[TARGET] lst_mem x y = true -> lst_mem x (lst_union z y) = true
+
+1. (Nat_beq x n = true -> lst_mem n z = true -> lst_mem x (lst_union y z) = true)
+
+2. (lst_union z (lst_union y z) = lst_union y z)
+
+3. (lst_union (lst_union y z) z = lst_union y z)
+
+4. (Nat_beq x n = true -> x = n)
+(x = n -> lst_mem n z = true -> lst_mem x (lst_union y z) = true)
+
+5. (Nat_beq x n = true -> n = x)
+(n = x -> lst_mem n z = true -> lst_mem x (lst_union y z) = true)
+
+
+
+[SUCCESS][3][GENERALIZE]
+Test = goal49_1
+[TIME] 60.463
+[COUNTS] 4
+[TARGET] mem x (cons n l) = true -> x = n \/ mem x l = true
+
+1. (mem x (cons n gv1) = gv2 -> x = n \/ mem x gv1 = gv2)
+
+2. (mem x (cons n gv1) = true -> x = n \/ mem x gv1 = true)
+
+3. (mem x (cons n (cons n0 l)) = gv2 -> x = n \/ mem x (cons n0 l) = gv2)
+
+4. (mem x (cons n (cons n0 l)) = true -> x = n \/ mem x (cons n0 l) = true)
+
+
+
+[SUCCESS][3][AS IS]
+Test = goal62_1
+[TIME] 43.348
+[COUNTS] 5
+[TARGET] less x y = false -> leq y x = true
+
+1. (sorted (cons n nil) = gv1 -> less y n = false -> leq n y = gv1)
+
+2. (less y n = false -> leq n y = true)
+
+3. (false <> gv0 -> gv0 = true)
+
+4. (leq y y = gv0 -> gv0 = true)
+
+5. (leq n n = gv0 -> gv0 = true)
+
+
+
+[FAIL][INCOMPLETE]
+Test = goal47_1
+[TIME] -1
+[COUNTS] 0
+[TARGET] < NEED TO FILL IN >
+
+RESULTS NOT FOUND
+
+
+
+[FAIL][IMPLEMENTATION][RANK]
+Test = goal50_1
+[TIME] 133.719
+[COUNTS] 21
+[TARGET] x <> y -> count x (cons y l) = count x l
+
+1. (eqb x n = false ->  count x (insort y l) = gv3 -> count x (cons y (cons n l)) = gv3)
+
+2. (x <> y -> eqb x n = false -> count x (cons y (cons n l)) = count x l)
+
+3. (eqb x n = false -> x <> n)
+(x <> n -> x <> y -> count x (cons y (cons n l)) = count x l)
+
+4. (eqb x n = false -> n <> x)
+(n <> x -> x <> y -> count x (cons y (cons n l)) = count x l)
+
+5. (eqb x n = false -> false = eqb n x)
+(x <> y -> false = eqb n x -> count x (cons y (cons n l)) = count x l)
+
+
+
+[FAIL][FORWARD]
+Test = goal69_1
+[TIME] -1
+[COUNTS] 0
+[TARGET] < NEED TO FILL IN >
+
+CONTRADICTION
+
+
+
+[SUCCESS][1][AS IS]
+Test = goal41_1
+[TIME] 119.503
+[COUNTS] 47
+[TARGET] lst_mem n x = true -> lst_mem n (append y x) = true
+
+1. (lst_mem n y = true -> lst_mem n (append z y) = true)
+
+2. (lst_mem n y = true -> lst_eq (cons n y) y)
+(lst_eq (cons n y) y -> lst_mem n (append z y) = true)
+
+3. (lst_mem n y = true -> lst_eq y (cons n y))
+(lst_eq y (cons n y) -> lst_mem n (append z y) = true)
+
+4. (lst_mem n y = true -> lst_subset (cons n y) y)
+(lst_subset (cons n y) y -> lst_mem n (append z y) = true)
+
+5. (lst_mem n y = true -> lst_eq (cons n y) (append y y))
+(lst_eq (cons n y) (append y y) -> lst_mem n (append z y) = true)
+
+
+
+[FAIL][FORWARD]
+Test = goal44
+[TIME] -1
+[COUNTS] 0
+[TARGET] < NEED TO FILL IN >
+
+CONTRADICTION
+
+
+
+[FAIL][INCOMPLETE]
+Test = goal47_2
+[TIME] -1
+[COUNTS] 0
+[TARGET] < NEED TO FILL IN >
+
+RESULTS NOT FOUND
+
+
+
+[SUCCESS][5][WEAKEN]
+Test = goal50_2
+[TIME] 123.657
+[COUNTS] 8
+[TARGET] Bool.Is_true (eqb x y) -> x = y
+
+1. (Bool.Is_true (eqb x n) ->  count x gv2 = gv4 -> count x (insort n gv2) = succ gv4)
+
+2. (Bool.Is_true (eqb x n) ->  count x (sort y) = gv4 -> count x (insort n (sort y)) = succ gv4)
+
+3. (Bool.Is_true (eqb x n) ->  count x gv2 = count x y -> count x (insort n gv2) = succ (count x y))
+
+4. (Bool.Is_true (eqb x n) -> count x (insort n (sort y)) = succ (count x y))
+
+5. (Bool.Is_true (eqb x n) -> x = n)
+(x = n -> count x (insort n (sort y)) = succ (count x y))
+
+
+
+[SUCCESS][3][GENERALIZE]
+Test = goal14
+[TIME] 77.524
+[COUNTS] 13
+[TARGET] sorted l = true -> sorted (insort n l) = true
+
+1. (sorted gv2 = gv3 -> sorted (insort n gv2) = gv3)
+
+2. (sorted gv2 = true -> sorted (insort n gv2) = true)
+
+3. (sorted (sort x) = gv3 -> sorted (insort n (sort x)) = gv3)
+
+4. (sorted (insort n (sort x)) = true)
+
+5. (leq n n = sorted (insort n (sort x)))
+
+
+
+[SUCCESS][5][GENERALIZE]
+Test = goal41_2
+[TIME] 196.178
+[COUNTS] 52
+[TARGET] lst_subset x y -> lst_subset x (append z y)
+
+1. (lst_subset (lst_intersection x y) (append gv2 x))
+
+2. (lst_subset (lst_intersection x y) (append (cons n gv3) x))
+
+3. (lst_subset gv0 x -> lst_subset gv0 (append (cons n nil) x))
+
+4. (lst_subset gv0 x -> lst_subset gv0 (append gv2 x))
+
+5. (lst_subset gv0 x -> lst_subset gv0 (append (cons n gv3) x))
+
+
+
+[FAIL][FORWARD]
+Test = goal69_2
+[TIME] -1
+[COUNTS] 0
+[TARGET] < NEED TO FILL IN >
+
+CONTRADICTION
+
+
+
+[FAIL][INCOMPLETE]
+Test = goal49_3
+[TIME] -1
+[COUNTS] 0
+[TARGET] < NEED TO FILL IN >
+
+RESULTS NOT FOUND
+
+
+
+

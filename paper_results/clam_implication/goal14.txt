@@ -1,0 +1,226 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (sorted (sort x) = true)
+
+----------------------------------
+Goal: (sorted (insort n (sort x)) = true)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 4.185 seconds
+
+gv2 : Lst = (sort x)
+gv1 : Lst = (insort n (sort x))
+gv0 : bool = (sorted (insort n (sort x)))
+gv3 : bool = true
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 48.006 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (sorted (insort n (sort x)) = true)
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (sorted (sort x) = gv3)
+
+----------------------------------
+Goal: (sorted (insort n (sort x)) = gv3)
+Case: Valid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (insort n (sort x) = gv1)
+ -- (true = gv3)
+
+----------------------------------
+Goal: (sorted gv1 = gv3)
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (sorted gv2 = gv3)
+
+----------------------------------
+Goal: (sorted (insort n gv2) = gv3)
+Case: Valid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (sorted (insort n (sort x)) = gv0)
+
+----------------------------------
+Goal: (gv0 = true)
+Case: Invalid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (insort n (sort x) = gv1)
+
+----------------------------------
+Goal: (sorted gv1 = true)
+Case: Invalid and Generalized
+
+Label: Generalization #7
+Assumptions: 
+ -- (sorted gv2 = true)
+
+----------------------------------
+Goal: (sorted (insort n gv2) = true)
+Case: Valid and Generalized
+
+Label: Generalization #8
+Assumptions: 
+ -- (sorted (insort n gv2) = gv0)
+
+----------------------------------
+Goal: (gv0 = true)
+Case: Not Stable
+
+Label: Generalization #9
+Assumptions: 
+ -- (insort n gv2 = gv1)
+
+----------------------------------
+Goal: (sorted gv1 = true)
+Case: Not Stable
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 48.146 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+less : (Nat -> Nat -> bool)
+eqn : (Nat -> Nat -> bool)
+leq : (Nat -> Nat -> bool)
+insort : (Nat -> Lst -> Lst)
+sorted : (Lst -> bool)
+sort : (Lst -> Lst)
+succ : (Nat -> Nat)
+zero : Nat
+cons : (Nat -> Lst -> Lst)
+nil : Lst
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 48.284 seconds
+
+
+Label: 0 (0)
+(false = gv3), (true = gv3), (n = n), (gv3 = gv3), (x = x), (x = gv1), (gv1 = x), (gv1 = gv1), (false = sorted x), (false = sorted gv1)
+(false = leq n n), (false = eqn n n), (false = less n n), (true = sorted x), (true = sorted gv1), (true = leq n n), (true = eqn n n), (true = less n n), (false <> gv3), (true <> gv3)
+(n <> n), (gv3 <> gv3), (x <> x), (x <> gv1), (gv1 <> x), (gv1 <> gv1), (None = Some x), (None = Some gv1), (succ n = n), (zero = succ n)
+(cons n x = x), (cons n x = gv1), (cons n x = sort x), (cons n x = sort gv1), (cons n x = insort n x), (cons n x = insort n gv1), (cons n gv1 = x), (cons n gv1 = gv1), (cons n gv1 = sort x), (cons n gv1 = sort gv1)
+(cons n gv1 = insort n x), (cons n gv1 = insort n gv1), (sort x = x), (sort x = gv1), (sort x = insort n x), (sort x = insort n gv1), (sort gv1 = x), (sort gv1 = gv1), (sort gv1 = insort n x), (sort gv1 = insort n gv1)
+(insort n x = x), (insort n x = gv1), (insort n gv1 = x), (insort n gv1 = gv1), (nil = cons n x), (nil = cons n gv1), (nil = sort x), (nil = sort gv1), (nil = insort n x), (nil = insort n gv1)
+(None = Some gv3), (None = Some n), (sorted x = gv3), (sorted x = leq n n), (sorted x = eqn n n), (sorted x = less n n), (sorted gv1 = gv3), (sorted gv1 = leq n n), (sorted gv1 = eqn n n), (sorted gv1 = less n n)
+(leq n n = gv3), (leq n n = eqn n n), (eqn n n = gv3), (less n n = gv3), (less n n = leq n n), (less n n = eqn n n)
+
+Label: 1 (1)
+(false = gv0), (true = gv0), (x = x), (n = n), (gv0 = gv0), (false = sorted x), (false = leq n n), (false = eqn n n), (false = less n n), (true = sorted x)
+(true = leq n n), (true = eqn n n), (true = less n n), (false <> gv0), (true <> gv0), (x <> x), (n <> n), (gv0 <> gv0), (None = Some x), (succ n = n)
+(zero = succ n), (cons n x = x), (cons n x = sort x), (cons n x = insort n x), (sort x = x), (sort x = insort n x), (insort n x = x), (nil = cons n x), (nil = sort x), (nil = insort n x)
+(None = Some gv0), (None = Some n), (sorted x = gv0), (sorted x = leq n n), (sorted x = eqn n n), (sorted x = less n n), (leq n n = gv0), (leq n n = eqn n n), (eqn n n = gv0), (less n n = gv0)
+(less n n = leq n n), (less n n = eqn n n)
+
+Label: 2 (2)
+(n = n), (x = x), (x = gv1), (gv1 = x), (gv1 = gv1), (false = sorted x), (false = sorted gv1), (false = leq n n), (false = eqn n n), (false = less n n)
+(true = sorted x), (true = sorted gv1), (true = leq n n), (true = eqn n n), (true = less n n), (n <> n), (x <> x), (x <> gv1), (gv1 <> x), (gv1 <> gv1)
+(None = Some x), (None = Some gv1), (succ n = n), (zero = succ n), (None = Some n), (cons n x = x), (cons n x = gv1), (cons n x = sort x), (cons n x = sort gv1), (cons n x = insort n x)
+(cons n x = insort n gv1), (cons n gv1 = x), (cons n gv1 = gv1), (cons n gv1 = sort x), (cons n gv1 = sort gv1), (cons n gv1 = insort n x), (cons n gv1 = insort n gv1), (sort x = x), (sort x = gv1), (sort x = insort n x)
+(sort x = insort n gv1), (sort gv1 = x), (sort gv1 = gv1), (sort gv1 = insort n x), (sort gv1 = insort n gv1), (insort n x = x), (insort n x = gv1), (insort n gv1 = x), (insort n gv1 = gv1), (nil = cons n x)
+(nil = cons n gv1), (nil = sort x), (nil = sort gv1), (nil = insort n x), (nil = insort n gv1), (sorted x = leq n n), (sorted x = eqn n n), (sorted x = less n n), (sorted gv1 = leq n n), (sorted gv1 = eqn n n)
+(sorted gv1 = less n n), (leq n n = eqn n n), (less n n = leq n n), (less n n = eqn n n)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 53.438 seconds
+
+
+Label: 0 (0)
+(sorted gv1 = gv3)
+
+Label: 1 (1)
+(true = gv0), (false <> gv0), (leq n n = gv0), (eqn n n = gv0)
+
+Label: 2 (2)
+(sort gv1 = gv1), (true = sorted gv1), (sorted gv1 = leq n n), (sorted gv1 = eqn n n)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (sorted gv2 = gv3 -> sorted (insort n gv2) = gv3)
+
+2. (sorted gv2 = true -> sorted (insort n gv2) = true)
+
+3. (sorted (sort x) = gv3 -> sorted (insort n (sort x)) = gv3)
+
+4. (sorted (insort n (sort x)) = true)
+
+5. (leq n n = sorted (insort n (sort x)))
+
+6. (eqn n n = sorted (insort n (sort x)))
+
+7. (sort (insort n (sort x)) = insort n (sort x))
+
+8. (false <> gv0 -> gv0 = true)
+
+9. (sort gv1 = gv1 -> sorted gv1 = true)
+
+10. (leq n n = gv0 -> gv0 = true)
+
+11. (eqn n n = gv0 -> gv0 = true)
+
+12. (sorted gv1 = leq n n -> sorted gv1 = true)
+
+13. (sorted gv1 = eqn n n -> sorted gv1 = true)
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 77.524 seconds
+
+Number of Result Pairs Returned: 13
+
+1. (sorted gv2 = gv3 -> sorted (insort n gv2) = gv3)
+
+2. (sorted gv2 = true -> sorted (insort n gv2) = true)
+
+3. (sorted (sort x) = gv3 -> sorted (insort n (sort x)) = gv3)
+
+4. (sorted (insort n (sort x)) = true)
+
+5. (leq n n = sorted (insort n (sort x)))

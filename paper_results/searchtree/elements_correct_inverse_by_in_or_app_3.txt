@@ -1,0 +1,758 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (x >= x)
+ -- (BST r)
+ -- (forall v0 : value, ~ In (x, v0) (elements l ++ (x, v) :: elements r))
+ -- ((forall v : value, ~ In (x, v) (elements l)) -> bound x l = false)
+ -- (ForallT (fun (y : nat) (_ : value) => y > x) r)
+ -- (BST l)
+ -- ((forall v : value, ~ In (x, v) (elements r)) -> bound x r = false)
+ -- (ForallT (fun (y : nat) (_ : value) => y < x) l)
+
+----------------------------------
+Goal: (In (x, v) (elements l ++ (x, v) :: elements r))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 4.913 seconds
+
+gv3 : (list (nat * value)) = ((x, v) :: elements r)
+gv2 : (list (nat * value)) = (elements l)
+gv4 : (list (nat * value)) = (elements r)
+gv0 : (nat * value)%type = (x, v)
+gv1 : (list (nat * value)) = (elements l ++ (x, v) :: elements r)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 195.657 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (In (x, v) (elements l ++ (x, v) :: elements r))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (elements l ++ (x, v) :: elements r = gv1)
+
+----------------------------------
+Goal: (In (x, v) gv1)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+
+----------------------------------
+Goal: (In gv0 (elements l ++ gv0 :: elements r))
+Case: Valid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (elements l ++ gv0 :: elements r = gv1)
+ -- ((x, v) = gv0)
+
+----------------------------------
+Goal: (In gv0 gv1)
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+
+----------------------------------
+Goal: (In gv0 (elements l ++ gv0 :: gv4))
+Case: Valid and Generalized
+
+Label: Generalization #7
+Assumptions: 
+
+----------------------------------
+Goal: (In gv0 (gv2 ++ gv0 :: gv4))
+Case: Valid and Generalized
+
+Label: Generalization #8
+Assumptions: 
+ -- (gv0 :: elements r = gv3)
+ -- ((x, v) = gv0)
+
+----------------------------------
+Goal: (In gv0 (elements l ++ gv3))
+Case: Invalid and Generalized
+
+Label: Generalization #9
+Assumptions: 
+
+----------------------------------
+Goal: (In gv0 (gv2 ++ gv0 :: elements r))
+Case: Valid and Generalized
+
+Label: Generalization #12
+Assumptions: 
+
+----------------------------------
+Goal: (In (x, v) (elements l ++ (x, v) :: gv4))
+Case: Valid and Generalized
+
+Label: Generalization #13
+Assumptions: 
+ -- (elements l ++ (x, v) :: gv4 = gv1)
+
+----------------------------------
+Goal: (In (x, v) gv1)
+Case: Invalid and Generalized
+
+Label: Generalization #14
+Assumptions: 
+ -- ((x, v) :: gv4 = gv3)
+
+----------------------------------
+Goal: (In (x, v) (elements l ++ gv3))
+Case: Invalid and Generalized
+
+Label: Generalization #15
+Assumptions: 
+
+----------------------------------
+Goal: (In (x, v) (gv2 ++ (x, v) :: gv4))
+Case: Valid and Generalized
+
+Label: Generalization #18
+Assumptions: 
+ -- ((x, v) :: elements r = gv3)
+
+----------------------------------
+Goal: (In (x, v) (elements l ++ gv3))
+Case: Invalid and Generalized
+
+Label: Generalization #19
+Assumptions: 
+
+----------------------------------
+Goal: (In (x, v) (gv2 ++ (x, v) :: elements r))
+Case: Valid and Generalized
+
+Label: Generalization #20
+Assumptions: 
+ -- (gv2 ++ (x, v) :: elements r = gv1)
+
+----------------------------------
+Goal: (In (x, v) gv1)
+Case: Invalid and Generalized
+
+Label: Generalization #21
+Assumptions: 
+ -- ((x, v) :: elements r = gv3)
+ -- (elements l = gv2)
+
+----------------------------------
+Goal: (In (x, v) (gv2 ++ gv3))
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 195.813 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+In : (forall A : Type, A -> list A -> Prop)
+existsb : (forall A : Type, (A -> bool) -> list A -> bool)
+forallb : (forall A : Type, (A -> bool) -> list A -> bool)
+Forall : (forall A : Type, (A -> Prop) -> list A -> Prop)
+nodup : (forall A : Type, (forall x y : A, {x = y} + {x <> y}) -> list A -> list A)
+map : (forall A B : Type, (A -> B) -> list A -> list B)
+Permutation : (forall A : Type, list A -> list A -> Prop)
+sorted : (list nat -> Prop)
+is_a_sorting_algorithm : ((list nat -> list nat) -> Prop)
+select : (nat -> list nat -> nat * list nat)
+selsort : (list nat -> nat -> list nat)
+selection_sort : (list nat -> list nat)
+le_all : (nat -> list nat -> Prop)
+value : Set
+value_rect : (forall P : value -> Type,
+ P Red -> P Green -> P Blue -> forall v : value, P v)
+value_rec : (forall P : value -> Set, P Red -> P Green -> P Blue -> forall v : value, P v)
+tree : Set
+tree_rect : (forall P : tree -> Type,
+ P E ->
+ (forall l : tree,
+  P l -> forall (k : nat) (v : value) (r : tree), P r -> P (T l k v r)) ->
+ forall t : tree, P t)
+tree_rec : (forall P : tree -> Set,
+ P E ->
+ (forall l : tree,
+  P l -> forall (k : nat) (v : value) (r : tree), P r -> P (T l k v r)) ->
+ forall t : tree, P t)
+empty_tree : tree
+bound : (nat -> tree -> bool)
+lookup : (value -> nat -> tree -> value)
+insert : (nat -> value -> tree -> tree)
+ForallT : ((nat -> value -> Prop) -> tree -> Prop)
+BST : (tree -> Prop)
+elements : (tree -> list (nat * value))
+@uncurry : (forall X Y Z : Type, (X -> Y -> Z) -> X * Y -> Z)
+@list_keys : (forall V : Type, list (nat * V) -> list nat)
+@disjoint : (forall X : Type, list X -> list X -> Prop)
+fast_elements_tr : (tree -> list (nat * value) -> list (nat * value))
+fast_elements : (tree -> list (nat * value))
+kvs_insert : (nat -> value -> list (nat * value) -> list (nat * value))
+Red : value
+Green : value
+Blue : value
+E : tree
+T : (tree -> nat -> value -> tree -> tree)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 94
+Negative Examples: 500
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 6 (6)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 7 (7)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 196.089 seconds
+
+
+Label: 0 (0)
+(disjoint gv1 gv1), (BST r), (BST l), (Permutation gv1 gv1), (x < x), (x <= x), (r = r), (r = l), (l = r), (l = l)
+(gv1 = gv1), (v = v), (x = x), (false = bound x r), (false = bound x l), (true = bound x r), (true = bound x l), (disjoint (list_keys gv1) []), (disjoint [] (list_keys gv1)), (disjoint gv1 (kvs_insert x v gv1))
+(disjoint gv1 (fast_elements r)), (disjoint gv1 (fast_elements l)), (disjoint gv1 (fast_elements_tr r gv1)), (disjoint gv1 (fast_elements_tr l gv1)), (disjoint gv1 (elements r)), (disjoint gv1 (elements l)), (disjoint gv1 (gv1 ++ gv1)), (disjoint gv1 []), (disjoint (kvs_insert x v gv1) gv1), (disjoint (kvs_insert x v gv1) (fast_elements r))
+(disjoint (kvs_insert x v gv1) (fast_elements l)), (disjoint (kvs_insert x v gv1) (fast_elements_tr r gv1)), (disjoint (kvs_insert x v gv1) (fast_elements_tr l gv1)), (disjoint (kvs_insert x v gv1) (elements r)), (disjoint (kvs_insert x v gv1) (elements l)), (disjoint (kvs_insert x v gv1) (gv1 ++ gv1)), (disjoint (kvs_insert x v gv1) []), (disjoint (fast_elements r) gv1), (disjoint (fast_elements r) (kvs_insert x v gv1)), (disjoint (fast_elements r) (fast_elements l))
+(disjoint (fast_elements r) (fast_elements_tr r gv1)), (disjoint (fast_elements r) (fast_elements_tr l gv1)), (disjoint (fast_elements r) (elements r)), (disjoint (fast_elements r) (elements l)), (disjoint (fast_elements r) (gv1 ++ gv1)), (disjoint (fast_elements r) []), (disjoint (fast_elements l) gv1), (disjoint (fast_elements l) (kvs_insert x v gv1)), (disjoint (fast_elements l) (fast_elements r)), (disjoint (fast_elements l) (fast_elements_tr r gv1))
+(disjoint (fast_elements l) (fast_elements_tr l gv1)), (disjoint (fast_elements l) (elements r)), (disjoint (fast_elements l) (elements l)), (disjoint (fast_elements l) (gv1 ++ gv1)), (disjoint (fast_elements l) []), (disjoint (fast_elements_tr r gv1) gv1), (disjoint (fast_elements_tr r gv1) (kvs_insert x v gv1)), (disjoint (fast_elements_tr r gv1) (fast_elements r)), (disjoint (fast_elements_tr r gv1) (fast_elements l)), (disjoint (fast_elements_tr r gv1) (fast_elements_tr l gv1))
+(disjoint (fast_elements_tr r gv1) (elements r)), (disjoint (fast_elements_tr r gv1) (elements l)), (disjoint (fast_elements_tr r gv1) (gv1 ++ gv1)), (disjoint (fast_elements_tr r gv1) []), (disjoint (fast_elements_tr l gv1) gv1), (disjoint (fast_elements_tr l gv1) (kvs_insert x v gv1)), (disjoint (fast_elements_tr l gv1) (fast_elements r)), (disjoint (fast_elements_tr l gv1) (fast_elements l)), (disjoint (fast_elements_tr l gv1) (fast_elements_tr r gv1)), (disjoint (fast_elements_tr l gv1) (elements r))
+(disjoint (fast_elements_tr l gv1) (elements l)), (disjoint (fast_elements_tr l gv1) (gv1 ++ gv1)), (disjoint (fast_elements_tr l gv1) []), (disjoint (elements r) gv1), (disjoint (elements r) (kvs_insert x v gv1)), (disjoint (elements r) (fast_elements r)), (disjoint (elements r) (fast_elements l)), (disjoint (elements r) (fast_elements_tr r gv1)), (disjoint (elements r) (fast_elements_tr l gv1)), (disjoint (elements r) (elements l))
+(disjoint (elements r) (gv1 ++ gv1)), (disjoint (elements r) []), (disjoint (elements l) gv1), (disjoint (elements l) (kvs_insert x v gv1)), (disjoint (elements l) (fast_elements r)), (disjoint (elements l) (fast_elements l)), (disjoint (elements l) (fast_elements_tr r gv1)), (disjoint (elements l) (fast_elements_tr l gv1)), (disjoint (elements l) (elements r)), (disjoint (elements l) (gv1 ++ gv1))
+(disjoint (elements l) []), (disjoint (gv1 ++ gv1) gv1), (disjoint (gv1 ++ gv1) (kvs_insert x v gv1)), (disjoint (gv1 ++ gv1) (fast_elements r)), (disjoint (gv1 ++ gv1) (fast_elements l)), (disjoint (gv1 ++ gv1) (fast_elements_tr r gv1)), (disjoint (gv1 ++ gv1) (fast_elements_tr l gv1)), (disjoint (gv1 ++ gv1) (elements r)), (disjoint (gv1 ++ gv1) (elements l)), (disjoint (gv1 ++ gv1) [])
+(disjoint [] gv1), (disjoint [] (kvs_insert x v gv1)), (disjoint [] (fast_elements r)), (disjoint [] (fast_elements l)), (disjoint [] (fast_elements_tr r gv1)), (disjoint [] (fast_elements_tr l gv1)), (disjoint [] (elements r)), (disjoint [] (elements l)), (disjoint [] (gv1 ++ gv1)), (BST (T r x v r))
+(BST (T r x v l)), (BST (T l x v r)), (BST (T l x v l)), (BST (insert x v r)), (BST (insert x v l)), (BST empty_tree), (BST E), (x <=* list_keys gv1), (x <=* []), (Datatypes.length gv1 <=* list_keys gv1)
+(Datatypes.length gv1 <=* []), (sorted (list_keys gv1)), (sorted []), (Permutation (list_keys gv1) []), (Permutation [] (list_keys gv1)), (Permutation gv1 (kvs_insert x v gv1)), (Permutation gv1 (fast_elements r)), (Permutation gv1 (fast_elements l)), (Permutation gv1 (fast_elements_tr r gv1)), (Permutation gv1 (fast_elements_tr l gv1))
+(Permutation gv1 (elements r)), (Permutation gv1 (elements l)), (Permutation gv1 (gv1 ++ gv1)), (Permutation gv1 []), (Permutation (kvs_insert x v gv1) gv1), (Permutation (kvs_insert x v gv1) (fast_elements r)), (Permutation (kvs_insert x v gv1) (fast_elements l)), (Permutation (kvs_insert x v gv1) (fast_elements_tr r gv1)), (Permutation (kvs_insert x v gv1) (fast_elements_tr l gv1)), (Permutation (kvs_insert x v gv1) (elements r))
+(Permutation (kvs_insert x v gv1) (elements l)), (Permutation (kvs_insert x v gv1) (gv1 ++ gv1)), (Permutation (kvs_insert x v gv1) []), (Permutation (fast_elements r) gv1), (Permutation (fast_elements r) (kvs_insert x v gv1)), (Permutation (fast_elements r) (fast_elements l)), (Permutation (fast_elements r) (fast_elements_tr r gv1)), (Permutation (fast_elements r) (fast_elements_tr l gv1)), (Permutation (fast_elements r) (elements r)), (Permutation (fast_elements r) (elements l))
+(Permutation (fast_elements r) (gv1 ++ gv1)), (Permutation (fast_elements r) []), (Permutation (fast_elements l) gv1), (Permutation (fast_elements l) (kvs_insert x v gv1)), (Permutation (fast_elements l) (fast_elements r)), (Permutation (fast_elements l) (fast_elements_tr r gv1)), (Permutation (fast_elements l) (fast_elements_tr l gv1)), (Permutation (fast_elements l) (elements r)), (Permutation (fast_elements l) (elements l)), (Permutation (fast_elements l) (gv1 ++ gv1))
+(Permutation (fast_elements l) []), (Permutation (fast_elements_tr r gv1) gv1), (Permutation (fast_elements_tr r gv1) (kvs_insert x v gv1)), (Permutation (fast_elements_tr r gv1) (fast_elements r)), (Permutation (fast_elements_tr r gv1) (fast_elements l)), (Permutation (fast_elements_tr r gv1) (fast_elements_tr l gv1)), (Permutation (fast_elements_tr r gv1) (elements r)), (Permutation (fast_elements_tr r gv1) (elements l)), (Permutation (fast_elements_tr r gv1) (gv1 ++ gv1)), (Permutation (fast_elements_tr r gv1) [])
+(Permutation (fast_elements_tr l gv1) gv1), (Permutation (fast_elements_tr l gv1) (kvs_insert x v gv1)), (Permutation (fast_elements_tr l gv1) (fast_elements r)), (Permutation (fast_elements_tr l gv1) (fast_elements l)), (Permutation (fast_elements_tr l gv1) (fast_elements_tr r gv1)), (Permutation (fast_elements_tr l gv1) (elements r)), (Permutation (fast_elements_tr l gv1) (elements l)), (Permutation (fast_elements_tr l gv1) (gv1 ++ gv1)), (Permutation (fast_elements_tr l gv1) []), (Permutation (elements r) gv1)
+(Permutation (elements r) (kvs_insert x v gv1)), (Permutation (elements r) (fast_elements r)), (Permutation (elements r) (fast_elements l)), (Permutation (elements r) (fast_elements_tr r gv1)), (Permutation (elements r) (fast_elements_tr l gv1)), (Permutation (elements r) (elements l)), (Permutation (elements r) (gv1 ++ gv1)), (Permutation (elements r) []), (Permutation (elements l) gv1), (Permutation (elements l) (kvs_insert x v gv1))
+(Permutation (elements l) (fast_elements r)), (Permutation (elements l) (fast_elements l)), (Permutation (elements l) (fast_elements_tr r gv1)), (Permutation (elements l) (fast_elements_tr l gv1)), (Permutation (elements l) (elements r)), (Permutation (elements l) (gv1 ++ gv1)), (Permutation (elements l) []), (Permutation (gv1 ++ gv1) gv1), (Permutation (gv1 ++ gv1) (kvs_insert x v gv1)), (Permutation (gv1 ++ gv1) (fast_elements r))
+(Permutation (gv1 ++ gv1) (fast_elements l)), (Permutation (gv1 ++ gv1) (fast_elements_tr r gv1)), (Permutation (gv1 ++ gv1) (fast_elements_tr l gv1)), (Permutation (gv1 ++ gv1) (elements r)), (Permutation (gv1 ++ gv1) (elements l)), (Permutation (gv1 ++ gv1) []), (Permutation [] gv1), (Permutation [] (kvs_insert x v gv1)), (Permutation [] (fast_elements r)), (Permutation [] (fast_elements l))
+(Permutation [] (fast_elements_tr r gv1)), (Permutation [] (fast_elements_tr l gv1)), (Permutation [] (elements r)), (Permutation [] (elements l)), (Permutation [] (gv1 ++ gv1)), (In x (list_keys gv1)), (In (Datatypes.length gv1) (list_keys gv1)), (In (x, v) gv1), (In (x, v) (kvs_insert x v gv1)), (In (x, v) (fast_elements r))
+(In (x, v) (fast_elements l)), (In (x, v) (fast_elements_tr r gv1)), (In (x, v) (fast_elements_tr l gv1)), (In (x, v) (elements r)), (In (x, v) (elements l)), (In (x, v) (gv1 ++ gv1)), (x < Datatypes.length gv1), (Datatypes.length gv1 < x), (x <= Datatypes.length gv1), (Datatypes.length gv1 <= x)
+(~ disjoint gv1 gv1), (~ BST r), (~ BST l), (~ Permutation gv1 gv1), (~ x < x), (~ x <= x), (r <> r), (r <> l), (l <> r), (l <> l)
+(gv1 <> gv1), (v <> v), (x <> x), (kvs_insert x v gv1 = gv1), (kvs_insert x v gv1 = fast_elements r), (kvs_insert x v gv1 = fast_elements l), (kvs_insert x v gv1 = fast_elements_tr r gv1), (kvs_insert x v gv1 = fast_elements_tr l gv1), (kvs_insert x v gv1 = elements r), (kvs_insert x v gv1 = elements l)
+(kvs_insert x v gv1 = gv1 ++ gv1), (fast_elements r = gv1), (fast_elements r = elements r), (fast_elements r = elements l), (fast_elements r = gv1 ++ gv1), (fast_elements l = gv1), (fast_elements l = elements r), (fast_elements l = elements l), (fast_elements l = gv1 ++ gv1), (fast_elements_tr r gv1 = gv1)
+(fast_elements_tr r gv1 = fast_elements r), (fast_elements_tr r gv1 = fast_elements l), (fast_elements_tr r gv1 = elements r), (fast_elements_tr r gv1 = elements l), (fast_elements_tr r gv1 = gv1 ++ gv1), (fast_elements_tr l gv1 = gv1), (fast_elements_tr l gv1 = fast_elements r), (fast_elements_tr l gv1 = fast_elements l), (fast_elements_tr l gv1 = elements r), (fast_elements_tr l gv1 = elements l)
+(fast_elements_tr l gv1 = gv1 ++ gv1), (elements r = gv1), (elements r = gv1 ++ gv1), (elements l = gv1), (elements l = gv1 ++ gv1), (gv1 ++ gv1 = gv1), ([] = gv1), ([] = kvs_insert x v gv1), ([] = fast_elements r), ([] = fast_elements l)
+([] = fast_elements_tr r gv1), ([] = fast_elements_tr l gv1), ([] = elements r), ([] = elements l), ([] = gv1 ++ gv1), ([] = list_keys gv1), (None = Some x), (None = Some gv1), (lookup v x r = v), (lookup v x l = v)
+(Red = lookup v x r), (Red = lookup v x l), (Green = lookup v x r), (Green = lookup v x l), (Blue = lookup v x r), (Blue = lookup v x l), (Datatypes.length gv1 = x), (None = Some r), (None = Some l), (T r x v r = r)
+(T r x v r = l), (T r x v r = insert x v r), (T r x v r = insert x v l), (T r x v l = r), (T r x v l = l), (T r x v l = insert x v r), (T r x v l = insert x v l), (T l x v r = r), (T l x v r = l), (T l x v r = insert x v r)
+(T l x v r = insert x v l), (T l x v l = r), (T l x v l = l), (T l x v l = insert x v r), (T l x v l = insert x v l), (insert x v r = r), (insert x v r = l), (insert x v l = r), (insert x v l = l), (empty_tree = T r x v r)
+(empty_tree = T r x v l), (empty_tree = T l x v r), (empty_tree = T l x v l), (empty_tree = insert x v r), (empty_tree = insert x v l), (E = T r x v r), (E = T r x v l), (E = T l x v r), (E = T l x v l), (E = insert x v r)
+(E = insert x v l), (None = Some v)
+
+Label: 1 (1)
+(disjoint gv1 gv1), (BST r), (BST l), (Permutation gv1 gv1), (In gv0 gv1), (x < x), (x <= x), (r = r), (r = l), (l = r)
+(l = l), (v = v), (x = x), (gv1 = gv1), (gv0 = gv0), (false = bound x r), (false = bound x l), (true = bound x r), (true = bound x l), (disjoint (list_keys gv1) [])
+(disjoint [] (list_keys gv1)), (disjoint gv1 (gv0 :: gv1)), (disjoint gv1 (kvs_insert x v gv1)), (disjoint gv1 (fast_elements r)), (disjoint gv1 (fast_elements l)), (disjoint gv1 (fast_elements_tr r gv1)), (disjoint gv1 (fast_elements_tr l gv1)), (disjoint gv1 (elements r)), (disjoint gv1 (elements l)), (disjoint gv1 (gv1 ++ gv1))
+(disjoint gv1 []), (disjoint (gv0 :: gv1) gv1), (disjoint (gv0 :: gv1) (kvs_insert x v gv1)), (disjoint (gv0 :: gv1) (fast_elements r)), (disjoint (gv0 :: gv1) (fast_elements l)), (disjoint (gv0 :: gv1) (fast_elements_tr r gv1)), (disjoint (gv0 :: gv1) (fast_elements_tr l gv1)), (disjoint (gv0 :: gv1) (elements r)), (disjoint (gv0 :: gv1) (elements l)), (disjoint (gv0 :: gv1) (gv1 ++ gv1))
+(disjoint (gv0 :: gv1) []), (disjoint (kvs_insert x v gv1) gv1), (disjoint (kvs_insert x v gv1) (gv0 :: gv1)), (disjoint (kvs_insert x v gv1) (fast_elements r)), (disjoint (kvs_insert x v gv1) (fast_elements l)), (disjoint (kvs_insert x v gv1) (fast_elements_tr r gv1)), (disjoint (kvs_insert x v gv1) (fast_elements_tr l gv1)), (disjoint (kvs_insert x v gv1) (elements r)), (disjoint (kvs_insert x v gv1) (elements l)), (disjoint (kvs_insert x v gv1) (gv1 ++ gv1))
+(disjoint (kvs_insert x v gv1) []), (disjoint (fast_elements r) gv1), (disjoint (fast_elements r) (gv0 :: gv1)), (disjoint (fast_elements r) (kvs_insert x v gv1)), (disjoint (fast_elements r) (fast_elements l)), (disjoint (fast_elements r) (fast_elements_tr r gv1)), (disjoint (fast_elements r) (fast_elements_tr l gv1)), (disjoint (fast_elements r) (elements r)), (disjoint (fast_elements r) (elements l)), (disjoint (fast_elements r) (gv1 ++ gv1))
+(disjoint (fast_elements r) []), (disjoint (fast_elements l) gv1), (disjoint (fast_elements l) (gv0 :: gv1)), (disjoint (fast_elements l) (kvs_insert x v gv1)), (disjoint (fast_elements l) (fast_elements r)), (disjoint (fast_elements l) (fast_elements_tr r gv1)), (disjoint (fast_elements l) (fast_elements_tr l gv1)), (disjoint (fast_elements l) (elements r)), (disjoint (fast_elements l) (elements l)), (disjoint (fast_elements l) (gv1 ++ gv1))
+(disjoint (fast_elements l) []), (disjoint (fast_elements_tr r gv1) gv1), (disjoint (fast_elements_tr r gv1) (gv0 :: gv1)), (disjoint (fast_elements_tr r gv1) (kvs_insert x v gv1)), (disjoint (fast_elements_tr r gv1) (fast_elements r)), (disjoint (fast_elements_tr r gv1) (fast_elements l)), (disjoint (fast_elements_tr r gv1) (fast_elements_tr l gv1)), (disjoint (fast_elements_tr r gv1) (elements r)), (disjoint (fast_elements_tr r gv1) (elements l)), (disjoint (fast_elements_tr r gv1) (gv1 ++ gv1))
+(disjoint (fast_elements_tr r gv1) []), (disjoint (fast_elements_tr l gv1) gv1), (disjoint (fast_elements_tr l gv1) (gv0 :: gv1)), (disjoint (fast_elements_tr l gv1) (kvs_insert x v gv1)), (disjoint (fast_elements_tr l gv1) (fast_elements r)), (disjoint (fast_elements_tr l gv1) (fast_elements l)), (disjoint (fast_elements_tr l gv1) (fast_elements_tr r gv1)), (disjoint (fast_elements_tr l gv1) (elements r)), (disjoint (fast_elements_tr l gv1) (elements l)), (disjoint (fast_elements_tr l gv1) (gv1 ++ gv1))
+(disjoint (fast_elements_tr l gv1) []), (disjoint (elements r) gv1), (disjoint (elements r) (gv0 :: gv1)), (disjoint (elements r) (kvs_insert x v gv1)), (disjoint (elements r) (fast_elements r)), (disjoint (elements r) (fast_elements l)), (disjoint (elements r) (fast_elements_tr r gv1)), (disjoint (elements r) (fast_elements_tr l gv1)), (disjoint (elements r) (elements l)), (disjoint (elements r) (gv1 ++ gv1))
+(disjoint (elements r) []), (disjoint (elements l) gv1), (disjoint (elements l) (gv0 :: gv1)), (disjoint (elements l) (kvs_insert x v gv1)), (disjoint (elements l) (fast_elements r)), (disjoint (elements l) (fast_elements l)), (disjoint (elements l) (fast_elements_tr r gv1)), (disjoint (elements l) (fast_elements_tr l gv1)), (disjoint (elements l) (elements r)), (disjoint (elements l) (gv1 ++ gv1))
+(disjoint (elements l) []), (disjoint (gv1 ++ gv1) gv1), (disjoint (gv1 ++ gv1) (gv0 :: gv1)), (disjoint (gv1 ++ gv1) (kvs_insert x v gv1)), (disjoint (gv1 ++ gv1) (fast_elements r)), (disjoint (gv1 ++ gv1) (fast_elements l)), (disjoint (gv1 ++ gv1) (fast_elements_tr r gv1)), (disjoint (gv1 ++ gv1) (fast_elements_tr l gv1)), (disjoint (gv1 ++ gv1) (elements r)), (disjoint (gv1 ++ gv1) (elements l))
+(disjoint (gv1 ++ gv1) []), (disjoint [] gv1), (disjoint [] (gv0 :: gv1)), (disjoint [] (kvs_insert x v gv1)), (disjoint [] (fast_elements r)), (disjoint [] (fast_elements l)), (disjoint [] (fast_elements_tr r gv1)), (disjoint [] (fast_elements_tr l gv1)), (disjoint [] (elements r)), (disjoint [] (elements l))
+(disjoint [] (gv1 ++ gv1)), (BST (T r x v r)), (BST (T r x v l)), (BST (T l x v r)), (BST (T l x v l)), (BST (insert x v r)), (BST (insert x v l)), (BST empty_tree), (BST E), (x <=* list_keys gv1)
+(x <=* []), (Datatypes.length gv1 <=* list_keys gv1), (Datatypes.length gv1 <=* []), (sorted (list_keys gv1)), (sorted []), (Permutation (list_keys gv1) []), (Permutation [] (list_keys gv1)), (Permutation gv1 (gv0 :: gv1)), (Permutation gv1 (kvs_insert x v gv1)), (Permutation gv1 (fast_elements r))
+(Permutation gv1 (fast_elements l)), (Permutation gv1 (fast_elements_tr r gv1)), (Permutation gv1 (fast_elements_tr l gv1)), (Permutation gv1 (elements r)), (Permutation gv1 (elements l)), (Permutation gv1 (gv1 ++ gv1)), (Permutation gv1 []), (Permutation (gv0 :: gv1) gv1), (Permutation (gv0 :: gv1) (kvs_insert x v gv1)), (Permutation (gv0 :: gv1) (fast_elements r))
+(Permutation (gv0 :: gv1) (fast_elements l)), (Permutation (gv0 :: gv1) (fast_elements_tr r gv1)), (Permutation (gv0 :: gv1) (fast_elements_tr l gv1)), (Permutation (gv0 :: gv1) (elements r)), (Permutation (gv0 :: gv1) (elements l)), (Permutation (gv0 :: gv1) (gv1 ++ gv1)), (Permutation (gv0 :: gv1) []), (Permutation (kvs_insert x v gv1) gv1), (Permutation (kvs_insert x v gv1) (gv0 :: gv1)), (Permutation (kvs_insert x v gv1) (fast_elements r))
+(Permutation (kvs_insert x v gv1) (fast_elements l)), (Permutation (kvs_insert x v gv1) (fast_elements_tr r gv1)), (Permutation (kvs_insert x v gv1) (fast_elements_tr l gv1)), (Permutation (kvs_insert x v gv1) (elements r)), (Permutation (kvs_insert x v gv1) (elements l)), (Permutation (kvs_insert x v gv1) (gv1 ++ gv1)), (Permutation (kvs_insert x v gv1) []), (Permutation (fast_elements r) gv1), (Permutation (fast_elements r) (gv0 :: gv1)), (Permutation (fast_elements r) (kvs_insert x v gv1))
+(Permutation (fast_elements r) (fast_elements l)), (Permutation (fast_elements r) (fast_elements_tr r gv1)), (Permutation (fast_elements r) (fast_elements_tr l gv1)), (Permutation (fast_elements r) (elements r)), (Permutation (fast_elements r) (elements l)), (Permutation (fast_elements r) (gv1 ++ gv1)), (Permutation (fast_elements r) []), (Permutation (fast_elements l) gv1), (Permutation (fast_elements l) (gv0 :: gv1)), (Permutation (fast_elements l) (kvs_insert x v gv1))
+(Permutation (fast_elements l) (fast_elements r)), (Permutation (fast_elements l) (fast_elements_tr r gv1)), (Permutation (fast_elements l) (fast_elements_tr l gv1)), (Permutation (fast_elements l) (elements r)), (Permutation (fast_elements l) (elements l)), (Permutation (fast_elements l) (gv1 ++ gv1)), (Permutation (fast_elements l) []), (Permutation (fast_elements_tr r gv1) gv1), (Permutation (fast_elements_tr r gv1) (gv0 :: gv1)), (Permutation (fast_elements_tr r gv1) (kvs_insert x v gv1))
+(Permutation (fast_elements_tr r gv1) (fast_elements r)), (Permutation (fast_elements_tr r gv1) (fast_elements l)), (Permutation (fast_elements_tr r gv1) (fast_elements_tr l gv1)), (Permutation (fast_elements_tr r gv1) (elements r)), (Permutation (fast_elements_tr r gv1) (elements l)), (Permutation (fast_elements_tr r gv1) (gv1 ++ gv1)), (Permutation (fast_elements_tr r gv1) []), (Permutation (fast_elements_tr l gv1) gv1), (Permutation (fast_elements_tr l gv1) (gv0 :: gv1)), (Permutation (fast_elements_tr l gv1) (kvs_insert x v gv1))
+(Permutation (fast_elements_tr l gv1) (fast_elements r)), (Permutation (fast_elements_tr l gv1) (fast_elements l)), (Permutation (fast_elements_tr l gv1) (fast_elements_tr r gv1)), (Permutation (fast_elements_tr l gv1) (elements r)), (Permutation (fast_elements_tr l gv1) (elements l)), (Permutation (fast_elements_tr l gv1) (gv1 ++ gv1)), (Permutation (fast_elements_tr l gv1) []), (Permutation (elements r) gv1), (Permutation (elements r) (gv0 :: gv1)), (Permutation (elements r) (kvs_insert x v gv1))
+(Permutation (elements r) (fast_elements r)), (Permutation (elements r) (fast_elements l)), (Permutation (elements r) (fast_elements_tr r gv1)), (Permutation (elements r) (fast_elements_tr l gv1)), (Permutation (elements r) (elements l)), (Permutation (elements r) (gv1 ++ gv1)), (Permutation (elements r) []), (Permutation (elements l) gv1), (Permutation (elements l) (gv0 :: gv1)), (Permutation (elements l) (kvs_insert x v gv1))
+(Permutation (elements l) (fast_elements r)), (Permutation (elements l) (fast_elements l)), (Permutation (elements l) (fast_elements_tr r gv1)), (Permutation (elements l) (fast_elements_tr l gv1)), (Permutation (elements l) (elements r)), (Permutation (elements l) (gv1 ++ gv1)), (Permutation (elements l) []), (Permutation (gv1 ++ gv1) gv1), (Permutation (gv1 ++ gv1) (gv0 :: gv1)), (Permutation (gv1 ++ gv1) (kvs_insert x v gv1))
+(Permutation (gv1 ++ gv1) (fast_elements r)), (Permutation (gv1 ++ gv1) (fast_elements l)), (Permutation (gv1 ++ gv1) (fast_elements_tr r gv1)), (Permutation (gv1 ++ gv1) (fast_elements_tr l gv1)), (Permutation (gv1 ++ gv1) (elements r)), (Permutation (gv1 ++ gv1) (elements l)), (Permutation (gv1 ++ gv1) []), (Permutation [] gv1), (Permutation [] (gv0 :: gv1)), (Permutation [] (kvs_insert x v gv1))
+(Permutation [] (fast_elements r)), (Permutation [] (fast_elements l)), (Permutation [] (fast_elements_tr r gv1)), (Permutation [] (fast_elements_tr l gv1)), (Permutation [] (elements r)), (Permutation [] (elements l)), (Permutation [] (gv1 ++ gv1)), (In x (list_keys gv1)), (In (Datatypes.length gv1) (list_keys gv1)), (In gv0 (gv0 :: gv1))
+(In gv0 (kvs_insert x v gv1)), (In gv0 (fast_elements r)), (In gv0 (fast_elements l)), (In gv0 (fast_elements_tr r gv1)), (In gv0 (fast_elements_tr l gv1)), (In gv0 (elements r)), (In gv0 (elements l)), (In gv0 (gv1 ++ gv1)), (In (x, v) gv1), (In (x, v) (gv0 :: gv1))
+(In (x, v) (kvs_insert x v gv1)), (In (x, v) (fast_elements r)), (In (x, v) (fast_elements l)), (In (x, v) (fast_elements_tr r gv1)), (In (x, v) (fast_elements_tr l gv1)), (In (x, v) (elements r)), (In (x, v) (elements l)), (In (x, v) (gv1 ++ gv1)), (x < Datatypes.length gv1), (Datatypes.length gv1 < x)
+(x <= Datatypes.length gv1), (Datatypes.length gv1 <= x), (~ disjoint gv1 gv1), (~ BST r), (~ BST l), (~ Permutation gv1 gv1), (~ In gv0 gv1), (~ x < x), (~ x <= x), (r <> r)
+(r <> l), (l <> r), (l <> l), (v <> v), (x <> x), (gv1 <> gv1), (gv0 <> gv0), (gv0 :: gv1 = gv1), (gv0 :: gv1 = kvs_insert x v gv1), (gv0 :: gv1 = fast_elements r)
+(gv0 :: gv1 = fast_elements l), (gv0 :: gv1 = fast_elements_tr r gv1), (gv0 :: gv1 = fast_elements_tr l gv1), (gv0 :: gv1 = elements r), (gv0 :: gv1 = elements l), (gv0 :: gv1 = gv1 ++ gv1), (gv0 :: gv1 = []), (kvs_insert x v gv1 = gv1), (kvs_insert x v gv1 = fast_elements r), (kvs_insert x v gv1 = fast_elements l)
+(kvs_insert x v gv1 = fast_elements_tr r gv1), (kvs_insert x v gv1 = fast_elements_tr l gv1), (kvs_insert x v gv1 = elements r), (kvs_insert x v gv1 = elements l), (kvs_insert x v gv1 = gv1 ++ gv1), (fast_elements r = gv1), (fast_elements r = elements r), (fast_elements r = elements l), (fast_elements r = gv1 ++ gv1), (fast_elements l = gv1)
+(fast_elements l = elements r), (fast_elements l = elements l), (fast_elements l = gv1 ++ gv1), (fast_elements_tr r gv1 = gv1), (fast_elements_tr r gv1 = fast_elements r), (fast_elements_tr r gv1 = fast_elements l), (fast_elements_tr r gv1 = elements r), (fast_elements_tr r gv1 = elements l), (fast_elements_tr r gv1 = gv1 ++ gv1), (fast_elements_tr l gv1 = gv1)
+(fast_elements_tr l gv1 = fast_elements r), (fast_elements_tr l gv1 = fast_elements l), (fast_elements_tr l gv1 = elements r), (fast_elements_tr l gv1 = elements l), (fast_elements_tr l gv1 = gv1 ++ gv1), (elements r = gv1), (elements r = gv1 ++ gv1), (elements l = gv1), (elements l = gv1 ++ gv1), (gv1 ++ gv1 = gv1)
+([] = gv1), ([] = kvs_insert x v gv1), ([] = fast_elements r), ([] = fast_elements l), ([] = fast_elements_tr r gv1), ([] = fast_elements_tr l gv1), ([] = elements r), ([] = elements l), ([] = gv1 ++ gv1), ([] = list_keys gv1)
+(None = Some x), (None = Some gv1), (None = Some gv0), (lookup v x r = v), (lookup v x l = v), (Red = lookup v x r), (Red = lookup v x l), (Green = lookup v x r), (Green = lookup v x l), (Blue = lookup v x r)
+(Blue = lookup v x l), (Datatypes.length gv1 = x), (None = Some r), (None = Some l), (T r x v r = r), (T r x v r = l), (T r x v r = insert x v r), (T r x v r = insert x v l), (T r x v l = r), (T r x v l = l)
+(T r x v l = insert x v r), (T r x v l = insert x v l), (T l x v r = r), (T l x v r = l), (T l x v r = insert x v r), (T l x v r = insert x v l), (T l x v l = r), (T l x v l = l), (T l x v l = insert x v r), (T l x v l = insert x v l)
+(insert x v r = r), (insert x v r = l), (insert x v l = r), (insert x v l = l), (empty_tree = T r x v r), (empty_tree = T r x v l), (empty_tree = T l x v r), (empty_tree = T l x v l), (empty_tree = insert x v r), (empty_tree = insert x v l)
+(E = T r x v r), (E = T r x v l), (E = T l x v r), (E = T l x v l), (E = insert x v r), (E = insert x v l), (None = Some v), ((x, v) = gv0)
+
+Label: 2 (2)
+(disjoint gv3 gv3), (BST r), (BST l), (Permutation gv3 gv3), (In gv0 gv3), (x < x), (x <= x), (v = v), (x = x), (gv3 = gv3)
+(r = r), (r = l), (l = r), (l = l), (gv0 = gv0), (false = bound x r), (false = bound x l), (true = bound x r), (true = bound x l), (disjoint (list_keys gv3) [])
+(disjoint [] (list_keys gv3)), (disjoint gv3 (gv0 :: gv3)), (disjoint gv3 (kvs_insert x v gv3)), (disjoint gv3 (fast_elements r)), (disjoint gv3 (fast_elements l)), (disjoint gv3 (fast_elements_tr r gv3)), (disjoint gv3 (fast_elements_tr l gv3)), (disjoint gv3 (elements r)), (disjoint gv3 (elements l)), (disjoint gv3 (gv3 ++ gv3))
+(disjoint gv3 []), (disjoint (gv0 :: gv3) gv3), (disjoint (gv0 :: gv3) (kvs_insert x v gv3)), (disjoint (gv0 :: gv3) (fast_elements r)), (disjoint (gv0 :: gv3) (fast_elements l)), (disjoint (gv0 :: gv3) (fast_elements_tr r gv3)), (disjoint (gv0 :: gv3) (fast_elements_tr l gv3)), (disjoint (gv0 :: gv3) (elements r)), (disjoint (gv0 :: gv3) (elements l)), (disjoint (gv0 :: gv3) (gv3 ++ gv3))
+(disjoint (gv0 :: gv3) []), (disjoint (kvs_insert x v gv3) gv3), (disjoint (kvs_insert x v gv3) (gv0 :: gv3)), (disjoint (kvs_insert x v gv3) (fast_elements r)), (disjoint (kvs_insert x v gv3) (fast_elements l)), (disjoint (kvs_insert x v gv3) (fast_elements_tr r gv3)), (disjoint (kvs_insert x v gv3) (fast_elements_tr l gv3)), (disjoint (kvs_insert x v gv3) (elements r)), (disjoint (kvs_insert x v gv3) (elements l)), (disjoint (kvs_insert x v gv3) (gv3 ++ gv3))
+(disjoint (kvs_insert x v gv3) []), (disjoint (fast_elements r) gv3), (disjoint (fast_elements r) (gv0 :: gv3)), (disjoint (fast_elements r) (kvs_insert x v gv3)), (disjoint (fast_elements r) (fast_elements l)), (disjoint (fast_elements r) (fast_elements_tr r gv3)), (disjoint (fast_elements r) (fast_elements_tr l gv3)), (disjoint (fast_elements r) (elements r)), (disjoint (fast_elements r) (elements l)), (disjoint (fast_elements r) (gv3 ++ gv3))
+(disjoint (fast_elements r) []), (disjoint (fast_elements l) gv3), (disjoint (fast_elements l) (gv0 :: gv3)), (disjoint (fast_elements l) (kvs_insert x v gv3)), (disjoint (fast_elements l) (fast_elements r)), (disjoint (fast_elements l) (fast_elements_tr r gv3)), (disjoint (fast_elements l) (fast_elements_tr l gv3)), (disjoint (fast_elements l) (elements r)), (disjoint (fast_elements l) (elements l)), (disjoint (fast_elements l) (gv3 ++ gv3))
+(disjoint (fast_elements l) []), (disjoint (fast_elements_tr r gv3) gv3), (disjoint (fast_elements_tr r gv3) (gv0 :: gv3)), (disjoint (fast_elements_tr r gv3) (kvs_insert x v gv3)), (disjoint (fast_elements_tr r gv3) (fast_elements r)), (disjoint (fast_elements_tr r gv3) (fast_elements l)), (disjoint (fast_elements_tr r gv3) (fast_elements_tr l gv3)), (disjoint (fast_elements_tr r gv3) (elements r)), (disjoint (fast_elements_tr r gv3) (elements l)), (disjoint (fast_elements_tr r gv3) (gv3 ++ gv3))
+(disjoint (fast_elements_tr r gv3) []), (disjoint (fast_elements_tr l gv3) gv3), (disjoint (fast_elements_tr l gv3) (gv0 :: gv3)), (disjoint (fast_elements_tr l gv3) (kvs_insert x v gv3)), (disjoint (fast_elements_tr l gv3) (fast_elements r)), (disjoint (fast_elements_tr l gv3) (fast_elements l)), (disjoint (fast_elements_tr l gv3) (fast_elements_tr r gv3)), (disjoint (fast_elements_tr l gv3) (elements r)), (disjoint (fast_elements_tr l gv3) (elements l)), (disjoint (fast_elements_tr l gv3) (gv3 ++ gv3))
+(disjoint (fast_elements_tr l gv3) []), (disjoint (elements r) gv3), (disjoint (elements r) (gv0 :: gv3)), (disjoint (elements r) (kvs_insert x v gv3)), (disjoint (elements r) (fast_elements r)), (disjoint (elements r) (fast_elements l)), (disjoint (elements r) (fast_elements_tr r gv3)), (disjoint (elements r) (fast_elements_tr l gv3)), (disjoint (elements r) (elements l)), (disjoint (elements r) (gv3 ++ gv3))
+(disjoint (elements r) []), (disjoint (elements l) gv3), (disjoint (elements l) (gv0 :: gv3)), (disjoint (elements l) (kvs_insert x v gv3)), (disjoint (elements l) (fast_elements r)), (disjoint (elements l) (fast_elements l)), (disjoint (elements l) (fast_elements_tr r gv3)), (disjoint (elements l) (fast_elements_tr l gv3)), (disjoint (elements l) (elements r)), (disjoint (elements l) (gv3 ++ gv3))
+(disjoint (elements l) []), (disjoint (gv3 ++ gv3) gv3), (disjoint (gv3 ++ gv3) (gv0 :: gv3)), (disjoint (gv3 ++ gv3) (kvs_insert x v gv3)), (disjoint (gv3 ++ gv3) (fast_elements r)), (disjoint (gv3 ++ gv3) (fast_elements l)), (disjoint (gv3 ++ gv3) (fast_elements_tr r gv3)), (disjoint (gv3 ++ gv3) (fast_elements_tr l gv3)), (disjoint (gv3 ++ gv3) (elements r)), (disjoint (gv3 ++ gv3) (elements l))
+(disjoint (gv3 ++ gv3) []), (disjoint [] gv3), (disjoint [] (gv0 :: gv3)), (disjoint [] (kvs_insert x v gv3)), (disjoint [] (fast_elements r)), (disjoint [] (fast_elements l)), (disjoint [] (fast_elements_tr r gv3)), (disjoint [] (fast_elements_tr l gv3)), (disjoint [] (elements r)), (disjoint [] (elements l))
+(disjoint [] (gv3 ++ gv3)), (BST (T r x v r)), (BST (T r x v l)), (BST (T l x v r)), (BST (T l x v l)), (BST (insert x v r)), (BST (insert x v l)), (BST empty_tree), (BST E), (x <=* list_keys gv3)
+(x <=* []), (Datatypes.length gv3 <=* list_keys gv3), (Datatypes.length gv3 <=* []), (sorted (list_keys gv3)), (sorted []), (Permutation (list_keys gv3) []), (Permutation [] (list_keys gv3)), (Permutation gv3 (gv0 :: gv3)), (Permutation gv3 (kvs_insert x v gv3)), (Permutation gv3 (fast_elements r))
+(Permutation gv3 (fast_elements l)), (Permutation gv3 (fast_elements_tr r gv3)), (Permutation gv3 (fast_elements_tr l gv3)), (Permutation gv3 (elements r)), (Permutation gv3 (elements l)), (Permutation gv3 (gv3 ++ gv3)), (Permutation gv3 []), (Permutation (gv0 :: gv3) gv3), (Permutation (gv0 :: gv3) (kvs_insert x v gv3)), (Permutation (gv0 :: gv3) (fast_elements r))
+(Permutation (gv0 :: gv3) (fast_elements l)), (Permutation (gv0 :: gv3) (fast_elements_tr r gv3)), (Permutation (gv0 :: gv3) (fast_elements_tr l gv3)), (Permutation (gv0 :: gv3) (elements r)), (Permutation (gv0 :: gv3) (elements l)), (Permutation (gv0 :: gv3) (gv3 ++ gv3)), (Permutation (gv0 :: gv3) []), (Permutation (kvs_insert x v gv3) gv3), (Permutation (kvs_insert x v gv3) (gv0 :: gv3)), (Permutation (kvs_insert x v gv3) (fast_elements r))
+(Permutation (kvs_insert x v gv3) (fast_elements l)), (Permutation (kvs_insert x v gv3) (fast_elements_tr r gv3)), (Permutation (kvs_insert x v gv3) (fast_elements_tr l gv3)), (Permutation (kvs_insert x v gv3) (elements r)), (Permutation (kvs_insert x v gv3) (elements l)), (Permutation (kvs_insert x v gv3) (gv3 ++ gv3)), (Permutation (kvs_insert x v gv3) []), (Permutation (fast_elements r) gv3), (Permutation (fast_elements r) (gv0 :: gv3)), (Permutation (fast_elements r) (kvs_insert x v gv3))
+(Permutation (fast_elements r) (fast_elements l)), (Permutation (fast_elements r) (fast_elements_tr r gv3)), (Permutation (fast_elements r) (fast_elements_tr l gv3)), (Permutation (fast_elements r) (elements r)), (Permutation (fast_elements r) (elements l)), (Permutation (fast_elements r) (gv3 ++ gv3)), (Permutation (fast_elements r) []), (Permutation (fast_elements l) gv3), (Permutation (fast_elements l) (gv0 :: gv3)), (Permutation (fast_elements l) (kvs_insert x v gv3))
+(Permutation (fast_elements l) (fast_elements r)), (Permutation (fast_elements l) (fast_elements_tr r gv3)), (Permutation (fast_elements l) (fast_elements_tr l gv3)), (Permutation (fast_elements l) (elements r)), (Permutation (fast_elements l) (elements l)), (Permutation (fast_elements l) (gv3 ++ gv3)), (Permutation (fast_elements l) []), (Permutation (fast_elements_tr r gv3) gv3), (Permutation (fast_elements_tr r gv3) (gv0 :: gv3)), (Permutation (fast_elements_tr r gv3) (kvs_insert x v gv3))
+(Permutation (fast_elements_tr r gv3) (fast_elements r)), (Permutation (fast_elements_tr r gv3) (fast_elements l)), (Permutation (fast_elements_tr r gv3) (fast_elements_tr l gv3)), (Permutation (fast_elements_tr r gv3) (elements r)), (Permutation (fast_elements_tr r gv3) (elements l)), (Permutation (fast_elements_tr r gv3) (gv3 ++ gv3)), (Permutation (fast_elements_tr r gv3) []), (Permutation (fast_elements_tr l gv3) gv3), (Permutation (fast_elements_tr l gv3) (gv0 :: gv3)), (Permutation (fast_elements_tr l gv3) (kvs_insert x v gv3))
+(Permutation (fast_elements_tr l gv3) (fast_elements r)), (Permutation (fast_elements_tr l gv3) (fast_elements l)), (Permutation (fast_elements_tr l gv3) (fast_elements_tr r gv3)), (Permutation (fast_elements_tr l gv3) (elements r)), (Permutation (fast_elements_tr l gv3) (elements l)), (Permutation (fast_elements_tr l gv3) (gv3 ++ gv3)), (Permutation (fast_elements_tr l gv3) []), (Permutation (elements r) gv3), (Permutation (elements r) (gv0 :: gv3)), (Permutation (elements r) (kvs_insert x v gv3))
+(Permutation (elements r) (fast_elements r)), (Permutation (elements r) (fast_elements l)), (Permutation (elements r) (fast_elements_tr r gv3)), (Permutation (elements r) (fast_elements_tr l gv3)), (Permutation (elements r) (elements l)), (Permutation (elements r) (gv3 ++ gv3)), (Permutation (elements r) []), (Permutation (elements l) gv3), (Permutation (elements l) (gv0 :: gv3)), (Permutation (elements l) (kvs_insert x v gv3))
+(Permutation (elements l) (fast_elements r)), (Permutation (elements l) (fast_elements l)), (Permutation (elements l) (fast_elements_tr r gv3)), (Permutation (elements l) (fast_elements_tr l gv3)), (Permutation (elements l) (elements r)), (Permutation (elements l) (gv3 ++ gv3)), (Permutation (elements l) []), (Permutation (gv3 ++ gv3) gv3), (Permutation (gv3 ++ gv3) (gv0 :: gv3)), (Permutation (gv3 ++ gv3) (kvs_insert x v gv3))
+(Permutation (gv3 ++ gv3) (fast_elements r)), (Permutation (gv3 ++ gv3) (fast_elements l)), (Permutation (gv3 ++ gv3) (fast_elements_tr r gv3)), (Permutation (gv3 ++ gv3) (fast_elements_tr l gv3)), (Permutation (gv3 ++ gv3) (elements r)), (Permutation (gv3 ++ gv3) (elements l)), (Permutation (gv3 ++ gv3) []), (Permutation [] gv3), (Permutation [] (gv0 :: gv3)), (Permutation [] (kvs_insert x v gv3))
+(Permutation [] (fast_elements r)), (Permutation [] (fast_elements l)), (Permutation [] (fast_elements_tr r gv3)), (Permutation [] (fast_elements_tr l gv3)), (Permutation [] (elements r)), (Permutation [] (elements l)), (Permutation [] (gv3 ++ gv3)), (In x (list_keys gv3)), (In (Datatypes.length gv3) (list_keys gv3)), (In gv0 (gv0 :: gv3))
+(In gv0 (kvs_insert x v gv3)), (In gv0 (fast_elements r)), (In gv0 (fast_elements l)), (In gv0 (fast_elements_tr r gv3)), (In gv0 (fast_elements_tr l gv3)), (In gv0 (elements r)), (In gv0 (elements l)), (In gv0 (gv3 ++ gv3)), (In (x, v) gv3), (In (x, v) (gv0 :: gv3))
+(In (x, v) (kvs_insert x v gv3)), (In (x, v) (fast_elements r)), (In (x, v) (fast_elements l)), (In (x, v) (fast_elements_tr r gv3)), (In (x, v) (fast_elements_tr l gv3)), (In (x, v) (elements r)), (In (x, v) (elements l)), (In (x, v) (gv3 ++ gv3)), (x < Datatypes.length gv3), (Datatypes.length gv3 < x)
+(x <= Datatypes.length gv3), (Datatypes.length gv3 <= x), (~ disjoint gv3 gv3), (~ BST r), (~ BST l), (~ Permutation gv3 gv3), (~ In gv0 gv3), (~ x < x), (~ x <= x), (v <> v)
+(x <> x), (gv3 <> gv3), (r <> r), (r <> l), (l <> r), (l <> l), (gv0 <> gv0), (gv0 :: gv3 = gv3), (gv0 :: gv3 = kvs_insert x v gv3), (gv0 :: gv3 = fast_elements r)
+(gv0 :: gv3 = fast_elements l), (gv0 :: gv3 = fast_elements_tr r gv3), (gv0 :: gv3 = fast_elements_tr l gv3), (gv0 :: gv3 = elements r), (gv0 :: gv3 = elements l), (gv0 :: gv3 = gv3 ++ gv3), (gv0 :: gv3 = []), (kvs_insert x v gv3 = gv3), (kvs_insert x v gv3 = fast_elements r), (kvs_insert x v gv3 = fast_elements l)
+(kvs_insert x v gv3 = fast_elements_tr r gv3), (kvs_insert x v gv3 = fast_elements_tr l gv3), (kvs_insert x v gv3 = elements r), (kvs_insert x v gv3 = elements l), (kvs_insert x v gv3 = gv3 ++ gv3), (fast_elements r = gv3), (fast_elements r = elements r), (fast_elements r = elements l), (fast_elements r = gv3 ++ gv3), (fast_elements l = gv3)
+(fast_elements l = elements r), (fast_elements l = elements l), (fast_elements l = gv3 ++ gv3), (fast_elements_tr r gv3 = gv3), (fast_elements_tr r gv3 = fast_elements r), (fast_elements_tr r gv3 = fast_elements l), (fast_elements_tr r gv3 = elements r), (fast_elements_tr r gv3 = elements l), (fast_elements_tr r gv3 = gv3 ++ gv3), (fast_elements_tr l gv3 = gv3)
+(fast_elements_tr l gv3 = fast_elements r), (fast_elements_tr l gv3 = fast_elements l), (fast_elements_tr l gv3 = elements r), (fast_elements_tr l gv3 = elements l), (fast_elements_tr l gv3 = gv3 ++ gv3), (elements r = gv3), (elements r = gv3 ++ gv3), (elements l = gv3), (elements l = gv3 ++ gv3), (gv3 ++ gv3 = gv3)
+([] = gv3), ([] = kvs_insert x v gv3), ([] = fast_elements r), ([] = fast_elements l), ([] = fast_elements_tr r gv3), ([] = fast_elements_tr l gv3), ([] = elements r), ([] = elements l), ([] = gv3 ++ gv3), ([] = list_keys gv3)
+(None = Some x), (None = Some gv3), (None = Some gv0), (lookup v x r = v), (lookup v x l = v), (Red = lookup v x r), (Red = lookup v x l), (Green = lookup v x r), (Green = lookup v x l), (Blue = lookup v x r)
+(Blue = lookup v x l), (Datatypes.length gv3 = x), (None = Some r), (None = Some l), (T r x v r = r), (T r x v r = l), (T r x v r = insert x v r), (T r x v r = insert x v l), (T r x v l = r), (T r x v l = l)
+(T r x v l = insert x v r), (T r x v l = insert x v l), (T l x v r = r), (T l x v r = l), (T l x v r = insert x v r), (T l x v r = insert x v l), (T l x v l = r), (T l x v l = l), (T l x v l = insert x v r), (T l x v l = insert x v l)
+(insert x v r = r), (insert x v r = l), (insert x v l = r), (insert x v l = l), (empty_tree = T r x v r), (empty_tree = T r x v l), (empty_tree = T l x v r), (empty_tree = T l x v l), (empty_tree = insert x v r), (empty_tree = insert x v l)
+(E = T r x v r), (E = T r x v l), (E = T l x v r), (E = T l x v l), (E = insert x v r), (E = insert x v l), (None = Some v), ((x, v) = gv0)
+
+Label: 3 (3)
+(disjoint gv4 gv4), (disjoint gv4 gv1), (disjoint gv1 gv4), (disjoint gv1 gv1), (BST l), (Permutation gv4 gv4), (Permutation gv4 gv1), (Permutation gv1 gv4), (Permutation gv1 gv1), (x < x)
+(x <= x), (l = l), (gv4 = gv4), (gv4 = gv1), (gv1 = gv4), (gv1 = gv1), (v = v), (x = x), (false = bound x l), (true = bound x l)
+(disjoint (list_keys gv4) (list_keys gv1)), (disjoint (list_keys gv4) []), (disjoint (list_keys gv1) (list_keys gv4)), (disjoint (list_keys gv1) []), (disjoint [] (list_keys gv4)), (disjoint [] (list_keys gv1)), (disjoint gv4 (kvs_insert x v gv4)), (disjoint gv4 (kvs_insert x v gv1)), (disjoint gv4 (fast_elements l)), (disjoint gv4 (fast_elements_tr l gv4))
+(disjoint gv4 (fast_elements_tr l gv1)), (disjoint gv4 (elements l)), (disjoint gv4 (gv4 ++ gv4)), (disjoint gv4 (gv4 ++ gv1)), (disjoint gv4 (gv1 ++ gv4)), (disjoint gv4 (gv1 ++ gv1)), (disjoint gv4 []), (disjoint gv1 (kvs_insert x v gv4)), (disjoint gv1 (kvs_insert x v gv1)), (disjoint gv1 (fast_elements l))
+(disjoint gv1 (fast_elements_tr l gv4)), (disjoint gv1 (fast_elements_tr l gv1)), (disjoint gv1 (elements l)), (disjoint gv1 (gv4 ++ gv4)), (disjoint gv1 (gv4 ++ gv1)), (disjoint gv1 (gv1 ++ gv4)), (disjoint gv1 (gv1 ++ gv1)), (disjoint gv1 []), (disjoint (kvs_insert x v gv4) gv4), (disjoint (kvs_insert x v gv4) gv1)
+(disjoint (kvs_insert x v gv4) (kvs_insert x v gv1)), (disjoint (kvs_insert x v gv4) (fast_elements l)), (disjoint (kvs_insert x v gv4) (fast_elements_tr l gv4)), (disjoint (kvs_insert x v gv4) (fast_elements_tr l gv1)), (disjoint (kvs_insert x v gv4) (elements l)), (disjoint (kvs_insert x v gv4) (gv4 ++ gv4)), (disjoint (kvs_insert x v gv4) (gv4 ++ gv1)), (disjoint (kvs_insert x v gv4) (gv1 ++ gv4)), (disjoint (kvs_insert x v gv4) (gv1 ++ gv1)), (disjoint (kvs_insert x v gv4) [])
+(disjoint (kvs_insert x v gv1) gv4), (disjoint (kvs_insert x v gv1) gv1), (disjoint (kvs_insert x v gv1) (kvs_insert x v gv4)), (disjoint (kvs_insert x v gv1) (fast_elements l)), (disjoint (kvs_insert x v gv1) (fast_elements_tr l gv4)), (disjoint (kvs_insert x v gv1) (fast_elements_tr l gv1)), (disjoint (kvs_insert x v gv1) (elements l)), (disjoint (kvs_insert x v gv1) (gv4 ++ gv4)), (disjoint (kvs_insert x v gv1) (gv4 ++ gv1)), (disjoint (kvs_insert x v gv1) (gv1 ++ gv4))
+(disjoint (kvs_insert x v gv1) (gv1 ++ gv1)), (disjoint (kvs_insert x v gv1) []), (disjoint (fast_elements l) gv4), (disjoint (fast_elements l) gv1), (disjoint (fast_elements l) (kvs_insert x v gv4)), (disjoint (fast_elements l) (kvs_insert x v gv1)), (disjoint (fast_elements l) (fast_elements_tr l gv4)), (disjoint (fast_elements l) (fast_elements_tr l gv1)), (disjoint (fast_elements l) (elements l)), (disjoint (fast_elements l) (gv4 ++ gv4))
+(disjoint (fast_elements l) (gv4 ++ gv1)), (disjoint (fast_elements l) (gv1 ++ gv4)), (disjoint (fast_elements l) (gv1 ++ gv1)), (disjoint (fast_elements l) []), (disjoint (fast_elements_tr l gv4) gv4), (disjoint (fast_elements_tr l gv4) gv1), (disjoint (fast_elements_tr l gv4) (kvs_insert x v gv4)), (disjoint (fast_elements_tr l gv4) (kvs_insert x v gv1)), (disjoint (fast_elements_tr l gv4) (fast_elements l)), (disjoint (fast_elements_tr l gv4) (fast_elements_tr l gv1))
+(disjoint (fast_elements_tr l gv4) (elements l)), (disjoint (fast_elements_tr l gv4) (gv4 ++ gv4)), (disjoint (fast_elements_tr l gv4) (gv4 ++ gv1)), (disjoint (fast_elements_tr l gv4) (gv1 ++ gv4)), (disjoint (fast_elements_tr l gv4) (gv1 ++ gv1)), (disjoint (fast_elements_tr l gv4) []), (disjoint (fast_elements_tr l gv1) gv4), (disjoint (fast_elements_tr l gv1) gv1), (disjoint (fast_elements_tr l gv1) (kvs_insert x v gv4)), (disjoint (fast_elements_tr l gv1) (kvs_insert x v gv1))
+(disjoint (fast_elements_tr l gv1) (fast_elements l)), (disjoint (fast_elements_tr l gv1) (fast_elements_tr l gv4)), (disjoint (fast_elements_tr l gv1) (elements l)), (disjoint (fast_elements_tr l gv1) (gv4 ++ gv4)), (disjoint (fast_elements_tr l gv1) (gv4 ++ gv1)), (disjoint (fast_elements_tr l gv1) (gv1 ++ gv4)), (disjoint (fast_elements_tr l gv1) (gv1 ++ gv1)), (disjoint (fast_elements_tr l gv1) []), (disjoint (elements l) gv4), (disjoint (elements l) gv1)
+(disjoint (elements l) (kvs_insert x v gv4)), (disjoint (elements l) (kvs_insert x v gv1)), (disjoint (elements l) (fast_elements l)), (disjoint (elements l) (fast_elements_tr l gv4)), (disjoint (elements l) (fast_elements_tr l gv1)), (disjoint (elements l) (gv4 ++ gv4)), (disjoint (elements l) (gv4 ++ gv1)), (disjoint (elements l) (gv1 ++ gv4)), (disjoint (elements l) (gv1 ++ gv1)), (disjoint (elements l) [])
+(disjoint (gv4 ++ gv4) gv4), (disjoint (gv4 ++ gv4) gv1), (disjoint (gv4 ++ gv4) (kvs_insert x v gv4)), (disjoint (gv4 ++ gv4) (kvs_insert x v gv1)), (disjoint (gv4 ++ gv4) (fast_elements l)), (disjoint (gv4 ++ gv4) (fast_elements_tr l gv4)), (disjoint (gv4 ++ gv4) (fast_elements_tr l gv1)), (disjoint (gv4 ++ gv4) (elements l)), (disjoint (gv4 ++ gv4) (gv4 ++ gv1)), (disjoint (gv4 ++ gv4) (gv1 ++ gv4))
+(disjoint (gv4 ++ gv4) (gv1 ++ gv1)), (disjoint (gv4 ++ gv4) []), (disjoint (gv4 ++ gv1) gv4), (disjoint (gv4 ++ gv1) gv1), (disjoint (gv4 ++ gv1) (kvs_insert x v gv4)), (disjoint (gv4 ++ gv1) (kvs_insert x v gv1)), (disjoint (gv4 ++ gv1) (fast_elements l)), (disjoint (gv4 ++ gv1) (fast_elements_tr l gv4)), (disjoint (gv4 ++ gv1) (fast_elements_tr l gv1)), (disjoint (gv4 ++ gv1) (elements l))
+(disjoint (gv4 ++ gv1) (gv4 ++ gv4)), (disjoint (gv4 ++ gv1) (gv1 ++ gv4)), (disjoint (gv4 ++ gv1) (gv1 ++ gv1)), (disjoint (gv4 ++ gv1) []), (disjoint (gv1 ++ gv4) gv4), (disjoint (gv1 ++ gv4) gv1), (disjoint (gv1 ++ gv4) (kvs_insert x v gv4)), (disjoint (gv1 ++ gv4) (kvs_insert x v gv1)), (disjoint (gv1 ++ gv4) (fast_elements l)), (disjoint (gv1 ++ gv4) (fast_elements_tr l gv4))
+(disjoint (gv1 ++ gv4) (fast_elements_tr l gv1)), (disjoint (gv1 ++ gv4) (elements l)), (disjoint (gv1 ++ gv4) (gv4 ++ gv4)), (disjoint (gv1 ++ gv4) (gv4 ++ gv1)), (disjoint (gv1 ++ gv4) (gv1 ++ gv1)), (disjoint (gv1 ++ gv4) []), (disjoint (gv1 ++ gv1) gv4), (disjoint (gv1 ++ gv1) gv1), (disjoint (gv1 ++ gv1) (kvs_insert x v gv4)), (disjoint (gv1 ++ gv1) (kvs_insert x v gv1))
+(disjoint (gv1 ++ gv1) (fast_elements l)), (disjoint (gv1 ++ gv1) (fast_elements_tr l gv4)), (disjoint (gv1 ++ gv1) (fast_elements_tr l gv1)), (disjoint (gv1 ++ gv1) (elements l)), (disjoint (gv1 ++ gv1) (gv4 ++ gv4)), (disjoint (gv1 ++ gv1) (gv4 ++ gv1)), (disjoint (gv1 ++ gv1) (gv1 ++ gv4)), (disjoint (gv1 ++ gv1) []), (disjoint [] gv4), (disjoint [] gv1)
+(disjoint [] (kvs_insert x v gv4)), (disjoint [] (kvs_insert x v gv1)), (disjoint [] (fast_elements l)), (disjoint [] (fast_elements_tr l gv4)), (disjoint [] (fast_elements_tr l gv1)), (disjoint [] (elements l)), (disjoint [] (gv4 ++ gv4)), (disjoint [] (gv4 ++ gv1)), (disjoint [] (gv1 ++ gv4)), (disjoint [] (gv1 ++ gv1))
+(BST (T l x v l)), (BST (insert x v l)), (BST empty_tree), (BST E), (x <=* list_keys gv4), (x <=* list_keys gv1), (x <=* []), (Datatypes.length gv4 <=* list_keys gv4), (Datatypes.length gv4 <=* list_keys gv1), (Datatypes.length gv4 <=* [])
+(Datatypes.length gv1 <=* list_keys gv4), (Datatypes.length gv1 <=* list_keys gv1), (Datatypes.length gv1 <=* []), (sorted (list_keys gv4)), (sorted (list_keys gv1)), (sorted []), (Permutation (list_keys gv4) (list_keys gv1)), (Permutation (list_keys gv4) []), (Permutation (list_keys gv1) (list_keys gv4)), (Permutation (list_keys gv1) [])
+(Permutation [] (list_keys gv4)), (Permutation [] (list_keys gv1)), (Permutation gv4 (kvs_insert x v gv4)), (Permutation gv4 (kvs_insert x v gv1)), (Permutation gv4 (fast_elements l)), (Permutation gv4 (fast_elements_tr l gv4)), (Permutation gv4 (fast_elements_tr l gv1)), (Permutation gv4 (elements l)), (Permutation gv4 (gv4 ++ gv4)), (Permutation gv4 (gv4 ++ gv1))
+(Permutation gv4 (gv1 ++ gv4)), (Permutation gv4 (gv1 ++ gv1)), (Permutation gv4 []), (Permutation gv1 (kvs_insert x v gv4)), (Permutation gv1 (kvs_insert x v gv1)), (Permutation gv1 (fast_elements l)), (Permutation gv1 (fast_elements_tr l gv4)), (Permutation gv1 (fast_elements_tr l gv1)), (Permutation gv1 (elements l)), (Permutation gv1 (gv4 ++ gv4))
+(Permutation gv1 (gv4 ++ gv1)), (Permutation gv1 (gv1 ++ gv4)), (Permutation gv1 (gv1 ++ gv1)), (Permutation gv1 []), (Permutation (kvs_insert x v gv4) gv4), (Permutation (kvs_insert x v gv4) gv1), (Permutation (kvs_insert x v gv4) (kvs_insert x v gv1)), (Permutation (kvs_insert x v gv4) (fast_elements l)), (Permutation (kvs_insert x v gv4) (fast_elements_tr l gv4)), (Permutation (kvs_insert x v gv4) (fast_elements_tr l gv1))
+(Permutation (kvs_insert x v gv4) (elements l)), (Permutation (kvs_insert x v gv4) (gv4 ++ gv4)), (Permutation (kvs_insert x v gv4) (gv4 ++ gv1)), (Permutation (kvs_insert x v gv4) (gv1 ++ gv4)), (Permutation (kvs_insert x v gv4) (gv1 ++ gv1)), (Permutation (kvs_insert x v gv4) []), (Permutation (kvs_insert x v gv1) gv4), (Permutation (kvs_insert x v gv1) gv1), (Permutation (kvs_insert x v gv1) (kvs_insert x v gv4)), (Permutation (kvs_insert x v gv1) (fast_elements l))
+(Permutation (kvs_insert x v gv1) (fast_elements_tr l gv4)), (Permutation (kvs_insert x v gv1) (fast_elements_tr l gv1)), (Permutation (kvs_insert x v gv1) (elements l)), (Permutation (kvs_insert x v gv1) (gv4 ++ gv4)), (Permutation (kvs_insert x v gv1) (gv4 ++ gv1)), (Permutation (kvs_insert x v gv1) (gv1 ++ gv4)), (Permutation (kvs_insert x v gv1) (gv1 ++ gv1)), (Permutation (kvs_insert x v gv1) []), (Permutation (fast_elements l) gv4), (Permutation (fast_elements l) gv1)
+(Permutation (fast_elements l) (kvs_insert x v gv4)), (Permutation (fast_elements l) (kvs_insert x v gv1)), (Permutation (fast_elements l) (fast_elements_tr l gv4)), (Permutation (fast_elements l) (fast_elements_tr l gv1)), (Permutation (fast_elements l) (elements l)), (Permutation (fast_elements l) (gv4 ++ gv4)), (Permutation (fast_elements l) (gv4 ++ gv1)), (Permutation (fast_elements l) (gv1 ++ gv4)), (Permutation (fast_elements l) (gv1 ++ gv1)), (Permutation (fast_elements l) [])
+(Permutation (fast_elements_tr l gv4) gv4), (Permutation (fast_elements_tr l gv4) gv1), (Permutation (fast_elements_tr l gv4) (kvs_insert x v gv4)), (Permutation (fast_elements_tr l gv4) (kvs_insert x v gv1)), (Permutation (fast_elements_tr l gv4) (fast_elements l)), (Permutation (fast_elements_tr l gv4) (fast_elements_tr l gv1)), (Permutation (fast_elements_tr l gv4) (elements l)), (Permutation (fast_elements_tr l gv4) (gv4 ++ gv4)), (Permutation (fast_elements_tr l gv4) (gv4 ++ gv1)), (Permutation (fast_elements_tr l gv4) (gv1 ++ gv4))
+(Permutation (fast_elements_tr l gv4) (gv1 ++ gv1)), (Permutation (fast_elements_tr l gv4) []), (Permutation (fast_elements_tr l gv1) gv4), (Permutation (fast_elements_tr l gv1) gv1), (Permutation (fast_elements_tr l gv1) (kvs_insert x v gv4)), (Permutation (fast_elements_tr l gv1) (kvs_insert x v gv1)), (Permutation (fast_elements_tr l gv1) (fast_elements l)), (Permutation (fast_elements_tr l gv1) (fast_elements_tr l gv4)), (Permutation (fast_elements_tr l gv1) (elements l)), (Permutation (fast_elements_tr l gv1) (gv4 ++ gv4))
+(Permutation (fast_elements_tr l gv1) (gv4 ++ gv1)), (Permutation (fast_elements_tr l gv1) (gv1 ++ gv4)), (Permutation (fast_elements_tr l gv1) (gv1 ++ gv1)), (Permutation (fast_elements_tr l gv1) []), (Permutation (elements l) gv4), (Permutation (elements l) gv1), (Permutation (elements l) (kvs_insert x v gv4)), (Permutation (elements l) (kvs_insert x v gv1)), (Permutation (elements l) (fast_elements l)), (Permutation (elements l) (fast_elements_tr l gv4))
+(Permutation (elements l) (fast_elements_tr l gv1)), (Permutation (elements l) (gv4 ++ gv4)), (Permutation (elements l) (gv4 ++ gv1)), (Permutation (elements l) (gv1 ++ gv4)), (Permutation (elements l) (gv1 ++ gv1)), (Permutation (elements l) []), (Permutation (gv4 ++ gv4) gv4), (Permutation (gv4 ++ gv4) gv1), (Permutation (gv4 ++ gv4) (kvs_insert x v gv4)), (Permutation (gv4 ++ gv4) (kvs_insert x v gv1))
+(Permutation (gv4 ++ gv4) (fast_elements l)), (Permutation (gv4 ++ gv4) (fast_elements_tr l gv4)), (Permutation (gv4 ++ gv4) (fast_elements_tr l gv1)), (Permutation (gv4 ++ gv4) (elements l)), (Permutation (gv4 ++ gv4) (gv4 ++ gv1)), (Permutation (gv4 ++ gv4) (gv1 ++ gv4)), (Permutation (gv4 ++ gv4) (gv1 ++ gv1)), (Permutation (gv4 ++ gv4) []), (Permutation (gv4 ++ gv1) gv4), (Permutation (gv4 ++ gv1) gv1)
+(Permutation (gv4 ++ gv1) (kvs_insert x v gv4)), (Permutation (gv4 ++ gv1) (kvs_insert x v gv1)), (Permutation (gv4 ++ gv1) (fast_elements l)), (Permutation (gv4 ++ gv1) (fast_elements_tr l gv4)), (Permutation (gv4 ++ gv1) (fast_elements_tr l gv1)), (Permutation (gv4 ++ gv1) (elements l)), (Permutation (gv4 ++ gv1) (gv4 ++ gv4)), (Permutation (gv4 ++ gv1) (gv1 ++ gv4)), (Permutation (gv4 ++ gv1) (gv1 ++ gv1)), (Permutation (gv4 ++ gv1) [])
+(Permutation (gv1 ++ gv4) gv4), (Permutation (gv1 ++ gv4) gv1), (Permutation (gv1 ++ gv4) (kvs_insert x v gv4)), (Permutation (gv1 ++ gv4) (kvs_insert x v gv1)), (Permutation (gv1 ++ gv4) (fast_elements l)), (Permutation (gv1 ++ gv4) (fast_elements_tr l gv4)), (Permutation (gv1 ++ gv4) (fast_elements_tr l gv1)), (Permutation (gv1 ++ gv4) (elements l)), (Permutation (gv1 ++ gv4) (gv4 ++ gv4)), (Permutation (gv1 ++ gv4) (gv4 ++ gv1))
+(Permutation (gv1 ++ gv4) (gv1 ++ gv1)), (Permutation (gv1 ++ gv4) []), (Permutation (gv1 ++ gv1) gv4), (Permutation (gv1 ++ gv1) gv1), (Permutation (gv1 ++ gv1) (kvs_insert x v gv4)), (Permutation (gv1 ++ gv1) (kvs_insert x v gv1)), (Permutation (gv1 ++ gv1) (fast_elements l)), (Permutation (gv1 ++ gv1) (fast_elements_tr l gv4)), (Permutation (gv1 ++ gv1) (fast_elements_tr l gv1)), (Permutation (gv1 ++ gv1) (elements l))
+(Permutation (gv1 ++ gv1) (gv4 ++ gv4)), (Permutation (gv1 ++ gv1) (gv4 ++ gv1)), (Permutation (gv1 ++ gv1) (gv1 ++ gv4)), (Permutation (gv1 ++ gv1) []), (Permutation [] gv4), (Permutation [] gv1), (Permutation [] (kvs_insert x v gv4)), (Permutation [] (kvs_insert x v gv1)), (Permutation [] (fast_elements l)), (Permutation [] (fast_elements_tr l gv4))
+(Permutation [] (fast_elements_tr l gv1)), (Permutation [] (elements l)), (Permutation [] (gv4 ++ gv4)), (Permutation [] (gv4 ++ gv1)), (Permutation [] (gv1 ++ gv4)), (Permutation [] (gv1 ++ gv1)), (In x (list_keys gv4)), (In x (list_keys gv1)), (In (Datatypes.length gv4) (list_keys gv4)), (In (Datatypes.length gv4) (list_keys gv1))
+(In (Datatypes.length gv1) (list_keys gv4)), (In (Datatypes.length gv1) (list_keys gv1)), (In (x, v) gv4), (In (x, v) gv1), (In (x, v) (kvs_insert x v gv4)), (In (x, v) (kvs_insert x v gv1)), (In (x, v) (fast_elements l)), (In (x, v) (fast_elements_tr l gv4)), (In (x, v) (fast_elements_tr l gv1)), (In (x, v) (elements l))
+(In (x, v) (gv4 ++ gv4)), (In (x, v) (gv4 ++ gv1)), (In (x, v) (gv1 ++ gv4)), (In (x, v) (gv1 ++ gv1)), (x < Datatypes.length gv4), (x < Datatypes.length gv1), (Datatypes.length gv4 < x), (Datatypes.length gv4 < Datatypes.length gv1), (Datatypes.length gv1 < x), (Datatypes.length gv1 < Datatypes.length gv4)
+(x <= Datatypes.length gv4), (x <= Datatypes.length gv1), (Datatypes.length gv4 <= x), (Datatypes.length gv4 <= Datatypes.length gv1), (Datatypes.length gv1 <= x), (Datatypes.length gv1 <= Datatypes.length gv4), (~ disjoint gv4 gv4), (~ disjoint gv4 gv1), (~ disjoint gv1 gv4), (~ disjoint gv1 gv1)
+(~ BST l), (~ Permutation gv4 gv4), (~ Permutation gv4 gv1), (~ Permutation gv1 gv4), (~ Permutation gv1 gv1), (~ x < x), (~ x <= x), (l <> l), (gv4 <> gv4), (gv4 <> gv1)
+(gv1 <> gv4), (gv1 <> gv1), (v <> v), (x <> x), (kvs_insert x v gv4 = gv4), (kvs_insert x v gv4 = gv1), (kvs_insert x v gv4 = fast_elements l), (kvs_insert x v gv4 = fast_elements_tr l gv4), (kvs_insert x v gv4 = fast_elements_tr l gv1), (kvs_insert x v gv4 = elements l)
+(kvs_insert x v gv4 = gv4 ++ gv4), (kvs_insert x v gv4 = gv4 ++ gv1), (kvs_insert x v gv4 = gv1 ++ gv4), (kvs_insert x v gv4 = gv1 ++ gv1), (kvs_insert x v gv1 = gv4), (kvs_insert x v gv1 = gv1), (kvs_insert x v gv1 = fast_elements l), (kvs_insert x v gv1 = fast_elements_tr l gv4), (kvs_insert x v gv1 = fast_elements_tr l gv1), (kvs_insert x v gv1 = elements l)
+(kvs_insert x v gv1 = gv4 ++ gv4), (kvs_insert x v gv1 = gv4 ++ gv1), (kvs_insert x v gv1 = gv1 ++ gv4), (kvs_insert x v gv1 = gv1 ++ gv1), (fast_elements l = gv4), (fast_elements l = gv1), (fast_elements l = elements l), (fast_elements l = gv4 ++ gv4), (fast_elements l = gv4 ++ gv1), (fast_elements l = gv1 ++ gv4)
+(fast_elements l = gv1 ++ gv1), (fast_elements_tr l gv4 = gv4), (fast_elements_tr l gv4 = gv1), (fast_elements_tr l gv4 = fast_elements l), (fast_elements_tr l gv4 = elements l), (fast_elements_tr l gv4 = gv4 ++ gv4), (fast_elements_tr l gv4 = gv4 ++ gv1), (fast_elements_tr l gv4 = gv1 ++ gv4), (fast_elements_tr l gv4 = gv1 ++ gv1), (fast_elements_tr l gv1 = gv4)
+(fast_elements_tr l gv1 = gv1), (fast_elements_tr l gv1 = fast_elements l), (fast_elements_tr l gv1 = elements l), (fast_elements_tr l gv1 = gv4 ++ gv4), (fast_elements_tr l gv1 = gv4 ++ gv1), (fast_elements_tr l gv1 = gv1 ++ gv4), (fast_elements_tr l gv1 = gv1 ++ gv1), (elements l = gv4), (elements l = gv1), (elements l = gv4 ++ gv4)
+(elements l = gv4 ++ gv1), (elements l = gv1 ++ gv4), (elements l = gv1 ++ gv1), (gv4 ++ gv4 = gv4), (gv4 ++ gv4 = gv1), (gv4 ++ gv1 = gv4), (gv4 ++ gv1 = gv1), (gv1 ++ gv4 = gv4), (gv1 ++ gv4 = gv1), (gv1 ++ gv1 = gv4)
+(gv1 ++ gv1 = gv1), ([] = gv4), ([] = gv1), ([] = kvs_insert x v gv4), ([] = kvs_insert x v gv1), ([] = fast_elements l), ([] = fast_elements_tr l gv4), ([] = fast_elements_tr l gv1), ([] = elements l), ([] = gv4 ++ gv4)
+([] = gv4 ++ gv1), ([] = gv1 ++ gv4), ([] = gv1 ++ gv1), ([] = list_keys gv4), ([] = list_keys gv1), (None = Some x), (None = Some gv4), (None = Some gv1), (lookup v x l = v), (Red = lookup v x l)
+(Green = lookup v x l), (Blue = lookup v x l), (Datatypes.length gv4 = x), (Datatypes.length gv1 = x), (None = Some l), (T l x v l = l), (T l x v l = insert x v l), (insert x v l = l), (empty_tree = T l x v l), (empty_tree = insert x v l)
+(E = T l x v l), (E = insert x v l), (None = Some v)
+
+Label: 4 (4)
+(disjoint gv4 gv4), (disjoint gv4 gv3), (disjoint gv3 gv4), (disjoint gv3 gv3), (BST l), (Permutation gv4 gv4), (Permutation gv4 gv3), (Permutation gv3 gv4), (Permutation gv3 gv3), (x < x)
+(x <= x), (gv4 = gv4), (gv4 = gv3), (gv3 = gv4), (gv3 = gv3), (l = l), (v = v), (x = x), (false = bound x l), (true = bound x l)
+(disjoint (list_keys gv4) (list_keys gv3)), (disjoint (list_keys gv4) []), (disjoint (list_keys gv3) (list_keys gv4)), (disjoint (list_keys gv3) []), (disjoint [] (list_keys gv4)), (disjoint [] (list_keys gv3)), (disjoint gv4 (kvs_insert x v gv4)), (disjoint gv4 (kvs_insert x v gv3)), (disjoint gv4 (fast_elements l)), (disjoint gv4 (fast_elements_tr l gv4))
+(disjoint gv4 (fast_elements_tr l gv3)), (disjoint gv4 (elements l)), (disjoint gv4 (gv4 ++ gv4)), (disjoint gv4 (gv4 ++ gv3)), (disjoint gv4 (gv3 ++ gv4)), (disjoint gv4 (gv3 ++ gv3)), (disjoint gv4 []), (disjoint gv3 (kvs_insert x v gv4)), (disjoint gv3 (kvs_insert x v gv3)), (disjoint gv3 (fast_elements l))
+(disjoint gv3 (fast_elements_tr l gv4)), (disjoint gv3 (fast_elements_tr l gv3)), (disjoint gv3 (elements l)), (disjoint gv3 (gv4 ++ gv4)), (disjoint gv3 (gv4 ++ gv3)), (disjoint gv3 (gv3 ++ gv4)), (disjoint gv3 (gv3 ++ gv3)), (disjoint gv3 []), (disjoint (kvs_insert x v gv4) gv4), (disjoint (kvs_insert x v gv4) gv3)
+(disjoint (kvs_insert x v gv4) (kvs_insert x v gv3)), (disjoint (kvs_insert x v gv4) (fast_elements l)), (disjoint (kvs_insert x v gv4) (fast_elements_tr l gv4)), (disjoint (kvs_insert x v gv4) (fast_elements_tr l gv3)), (disjoint (kvs_insert x v gv4) (elements l)), (disjoint (kvs_insert x v gv4) (gv4 ++ gv4)), (disjoint (kvs_insert x v gv4) (gv4 ++ gv3)), (disjoint (kvs_insert x v gv4) (gv3 ++ gv4)), (disjoint (kvs_insert x v gv4) (gv3 ++ gv3)), (disjoint (kvs_insert x v gv4) [])
+(disjoint (kvs_insert x v gv3) gv4), (disjoint (kvs_insert x v gv3) gv3), (disjoint (kvs_insert x v gv3) (kvs_insert x v gv4)), (disjoint (kvs_insert x v gv3) (fast_elements l)), (disjoint (kvs_insert x v gv3) (fast_elements_tr l gv4)), (disjoint (kvs_insert x v gv3) (fast_elements_tr l gv3)), (disjoint (kvs_insert x v gv3) (elements l)), (disjoint (kvs_insert x v gv3) (gv4 ++ gv4)), (disjoint (kvs_insert x v gv3) (gv4 ++ gv3)), (disjoint (kvs_insert x v gv3) (gv3 ++ gv4))
+(disjoint (kvs_insert x v gv3) (gv3 ++ gv3)), (disjoint (kvs_insert x v gv3) []), (disjoint (fast_elements l) gv4), (disjoint (fast_elements l) gv3), (disjoint (fast_elements l) (kvs_insert x v gv4)), (disjoint (fast_elements l) (kvs_insert x v gv3)), (disjoint (fast_elements l) (fast_elements_tr l gv4)), (disjoint (fast_elements l) (fast_elements_tr l gv3)), (disjoint (fast_elements l) (elements l)), (disjoint (fast_elements l) (gv4 ++ gv4))
+(disjoint (fast_elements l) (gv4 ++ gv3)), (disjoint (fast_elements l) (gv3 ++ gv4)), (disjoint (fast_elements l) (gv3 ++ gv3)), (disjoint (fast_elements l) []), (disjoint (fast_elements_tr l gv4) gv4), (disjoint (fast_elements_tr l gv4) gv3), (disjoint (fast_elements_tr l gv4) (kvs_insert x v gv4)), (disjoint (fast_elements_tr l gv4) (kvs_insert x v gv3)), (disjoint (fast_elements_tr l gv4) (fast_elements l)), (disjoint (fast_elements_tr l gv4) (fast_elements_tr l gv3))
+(disjoint (fast_elements_tr l gv4) (elements l)), (disjoint (fast_elements_tr l gv4) (gv4 ++ gv4)), (disjoint (fast_elements_tr l gv4) (gv4 ++ gv3)), (disjoint (fast_elements_tr l gv4) (gv3 ++ gv4)), (disjoint (fast_elements_tr l gv4) (gv3 ++ gv3)), (disjoint (fast_elements_tr l gv4) []), (disjoint (fast_elements_tr l gv3) gv4), (disjoint (fast_elements_tr l gv3) gv3), (disjoint (fast_elements_tr l gv3) (kvs_insert x v gv4)), (disjoint (fast_elements_tr l gv3) (kvs_insert x v gv3))
+(disjoint (fast_elements_tr l gv3) (fast_elements l)), (disjoint (fast_elements_tr l gv3) (fast_elements_tr l gv4)), (disjoint (fast_elements_tr l gv3) (elements l)), (disjoint (fast_elements_tr l gv3) (gv4 ++ gv4)), (disjoint (fast_elements_tr l gv3) (gv4 ++ gv3)), (disjoint (fast_elements_tr l gv3) (gv3 ++ gv4)), (disjoint (fast_elements_tr l gv3) (gv3 ++ gv3)), (disjoint (fast_elements_tr l gv3) []), (disjoint (elements l) gv4), (disjoint (elements l) gv3)
+(disjoint (elements l) (kvs_insert x v gv4)), (disjoint (elements l) (kvs_insert x v gv3)), (disjoint (elements l) (fast_elements l)), (disjoint (elements l) (fast_elements_tr l gv4)), (disjoint (elements l) (fast_elements_tr l gv3)), (disjoint (elements l) (gv4 ++ gv4)), (disjoint (elements l) (gv4 ++ gv3)), (disjoint (elements l) (gv3 ++ gv4)), (disjoint (elements l) (gv3 ++ gv3)), (disjoint (elements l) [])
+(disjoint (gv4 ++ gv4) gv4), (disjoint (gv4 ++ gv4) gv3), (disjoint (gv4 ++ gv4) (kvs_insert x v gv4)), (disjoint (gv4 ++ gv4) (kvs_insert x v gv3)), (disjoint (gv4 ++ gv4) (fast_elements l)), (disjoint (gv4 ++ gv4) (fast_elements_tr l gv4)), (disjoint (gv4 ++ gv4) (fast_elements_tr l gv3)), (disjoint (gv4 ++ gv4) (elements l)), (disjoint (gv4 ++ gv4) (gv4 ++ gv3)), (disjoint (gv4 ++ gv4) (gv3 ++ gv4))
+(disjoint (gv4 ++ gv4) (gv3 ++ gv3)), (disjoint (gv4 ++ gv4) []), (disjoint (gv4 ++ gv3) gv4), (disjoint (gv4 ++ gv3) gv3), (disjoint (gv4 ++ gv3) (kvs_insert x v gv4)), (disjoint (gv4 ++ gv3) (kvs_insert x v gv3)), (disjoint (gv4 ++ gv3) (fast_elements l)), (disjoint (gv4 ++ gv3) (fast_elements_tr l gv4)), (disjoint (gv4 ++ gv3) (fast_elements_tr l gv3)), (disjoint (gv4 ++ gv3) (elements l))
+(disjoint (gv4 ++ gv3) (gv4 ++ gv4)), (disjoint (gv4 ++ gv3) (gv3 ++ gv4)), (disjoint (gv4 ++ gv3) (gv3 ++ gv3)), (disjoint (gv4 ++ gv3) []), (disjoint (gv3 ++ gv4) gv4), (disjoint (gv3 ++ gv4) gv3), (disjoint (gv3 ++ gv4) (kvs_insert x v gv4)), (disjoint (gv3 ++ gv4) (kvs_insert x v gv3)), (disjoint (gv3 ++ gv4) (fast_elements l)), (disjoint (gv3 ++ gv4) (fast_elements_tr l gv4))
+(disjoint (gv3 ++ gv4) (fast_elements_tr l gv3)), (disjoint (gv3 ++ gv4) (elements l)), (disjoint (gv3 ++ gv4) (gv4 ++ gv4)), (disjoint (gv3 ++ gv4) (gv4 ++ gv3)), (disjoint (gv3 ++ gv4) (gv3 ++ gv3)), (disjoint (gv3 ++ gv4) []), (disjoint (gv3 ++ gv3) gv4), (disjoint (gv3 ++ gv3) gv3), (disjoint (gv3 ++ gv3) (kvs_insert x v gv4)), (disjoint (gv3 ++ gv3) (kvs_insert x v gv3))
+(disjoint (gv3 ++ gv3) (fast_elements l)), (disjoint (gv3 ++ gv3) (fast_elements_tr l gv4)), (disjoint (gv3 ++ gv3) (fast_elements_tr l gv3)), (disjoint (gv3 ++ gv3) (elements l)), (disjoint (gv3 ++ gv3) (gv4 ++ gv4)), (disjoint (gv3 ++ gv3) (gv4 ++ gv3)), (disjoint (gv3 ++ gv3) (gv3 ++ gv4)), (disjoint (gv3 ++ gv3) []), (disjoint [] gv4), (disjoint [] gv3)
+(disjoint [] (kvs_insert x v gv4)), (disjoint [] (kvs_insert x v gv3)), (disjoint [] (fast_elements l)), (disjoint [] (fast_elements_tr l gv4)), (disjoint [] (fast_elements_tr l gv3)), (disjoint [] (elements l)), (disjoint [] (gv4 ++ gv4)), (disjoint [] (gv4 ++ gv3)), (disjoint [] (gv3 ++ gv4)), (disjoint [] (gv3 ++ gv3))
+(BST (T l x v l)), (BST (insert x v l)), (BST empty_tree), (BST E), (x <=* list_keys gv4), (x <=* list_keys gv3), (x <=* []), (Datatypes.length gv4 <=* list_keys gv4), (Datatypes.length gv4 <=* list_keys gv3), (Datatypes.length gv4 <=* [])
+(Datatypes.length gv3 <=* list_keys gv4), (Datatypes.length gv3 <=* list_keys gv3), (Datatypes.length gv3 <=* []), (sorted (list_keys gv4)), (sorted (list_keys gv3)), (sorted []), (Permutation (list_keys gv4) (list_keys gv3)), (Permutation (list_keys gv4) []), (Permutation (list_keys gv3) (list_keys gv4)), (Permutation (list_keys gv3) [])
+(Permutation [] (list_keys gv4)), (Permutation [] (list_keys gv3)), (Permutation gv4 (kvs_insert x v gv4)), (Permutation gv4 (kvs_insert x v gv3)), (Permutation gv4 (fast_elements l)), (Permutation gv4 (fast_elements_tr l gv4)), (Permutation gv4 (fast_elements_tr l gv3)), (Permutation gv4 (elements l)), (Permutation gv4 (gv4 ++ gv4)), (Permutation gv4 (gv4 ++ gv3))
+(Permutation gv4 (gv3 ++ gv4)), (Permutation gv4 (gv3 ++ gv3)), (Permutation gv4 []), (Permutation gv3 (kvs_insert x v gv4)), (Permutation gv3 (kvs_insert x v gv3)), (Permutation gv3 (fast_elements l)), (Permutation gv3 (fast_elements_tr l gv4)), (Permutation gv3 (fast_elements_tr l gv3)), (Permutation gv3 (elements l)), (Permutation gv3 (gv4 ++ gv4))
+(Permutation gv3 (gv4 ++ gv3)), (Permutation gv3 (gv3 ++ gv4)), (Permutation gv3 (gv3 ++ gv3)), (Permutation gv3 []), (Permutation (kvs_insert x v gv4) gv4), (Permutation (kvs_insert x v gv4) gv3), (Permutation (kvs_insert x v gv4) (kvs_insert x v gv3)), (Permutation (kvs_insert x v gv4) (fast_elements l)), (Permutation (kvs_insert x v gv4) (fast_elements_tr l gv4)), (Permutation (kvs_insert x v gv4) (fast_elements_tr l gv3))
+(Permutation (kvs_insert x v gv4) (elements l)), (Permutation (kvs_insert x v gv4) (gv4 ++ gv4)), (Permutation (kvs_insert x v gv4) (gv4 ++ gv3)), (Permutation (kvs_insert x v gv4) (gv3 ++ gv4)), (Permutation (kvs_insert x v gv4) (gv3 ++ gv3)), (Permutation (kvs_insert x v gv4) []), (Permutation (kvs_insert x v gv3) gv4), (Permutation (kvs_insert x v gv3) gv3), (Permutation (kvs_insert x v gv3) (kvs_insert x v gv4)), (Permutation (kvs_insert x v gv3) (fast_elements l))
+(Permutation (kvs_insert x v gv3) (fast_elements_tr l gv4)), (Permutation (kvs_insert x v gv3) (fast_elements_tr l gv3)), (Permutation (kvs_insert x v gv3) (elements l)), (Permutation (kvs_insert x v gv3) (gv4 ++ gv4)), (Permutation (kvs_insert x v gv3) (gv4 ++ gv3)), (Permutation (kvs_insert x v gv3) (gv3 ++ gv4)), (Permutation (kvs_insert x v gv3) (gv3 ++ gv3)), (Permutation (kvs_insert x v gv3) []), (Permutation (fast_elements l) gv4), (Permutation (fast_elements l) gv3)
+(Permutation (fast_elements l) (kvs_insert x v gv4)), (Permutation (fast_elements l) (kvs_insert x v gv3)), (Permutation (fast_elements l) (fast_elements_tr l gv4)), (Permutation (fast_elements l) (fast_elements_tr l gv3)), (Permutation (fast_elements l) (elements l)), (Permutation (fast_elements l) (gv4 ++ gv4)), (Permutation (fast_elements l) (gv4 ++ gv3)), (Permutation (fast_elements l) (gv3 ++ gv4)), (Permutation (fast_elements l) (gv3 ++ gv3)), (Permutation (fast_elements l) [])
+(Permutation (fast_elements_tr l gv4) gv4), (Permutation (fast_elements_tr l gv4) gv3), (Permutation (fast_elements_tr l gv4) (kvs_insert x v gv4)), (Permutation (fast_elements_tr l gv4) (kvs_insert x v gv3)), (Permutation (fast_elements_tr l gv4) (fast_elements l)), (Permutation (fast_elements_tr l gv4) (fast_elements_tr l gv3)), (Permutation (fast_elements_tr l gv4) (elements l)), (Permutation (fast_elements_tr l gv4) (gv4 ++ gv4)), (Permutation (fast_elements_tr l gv4) (gv4 ++ gv3)), (Permutation (fast_elements_tr l gv4) (gv3 ++ gv4))
+(Permutation (fast_elements_tr l gv4) (gv3 ++ gv3)), (Permutation (fast_elements_tr l gv4) []), (Permutation (fast_elements_tr l gv3) gv4), (Permutation (fast_elements_tr l gv3) gv3), (Permutation (fast_elements_tr l gv3) (kvs_insert x v gv4)), (Permutation (fast_elements_tr l gv3) (kvs_insert x v gv3)), (Permutation (fast_elements_tr l gv3) (fast_elements l)), (Permutation (fast_elements_tr l gv3) (fast_elements_tr l gv4)), (Permutation (fast_elements_tr l gv3) (elements l)), (Permutation (fast_elements_tr l gv3) (gv4 ++ gv4))
+(Permutation (fast_elements_tr l gv3) (gv4 ++ gv3)), (Permutation (fast_elements_tr l gv3) (gv3 ++ gv4)), (Permutation (fast_elements_tr l gv3) (gv3 ++ gv3)), (Permutation (fast_elements_tr l gv3) []), (Permutation (elements l) gv4), (Permutation (elements l) gv3), (Permutation (elements l) (kvs_insert x v gv4)), (Permutation (elements l) (kvs_insert x v gv3)), (Permutation (elements l) (fast_elements l)), (Permutation (elements l) (fast_elements_tr l gv4))
+(Permutation (elements l) (fast_elements_tr l gv3)), (Permutation (elements l) (gv4 ++ gv4)), (Permutation (elements l) (gv4 ++ gv3)), (Permutation (elements l) (gv3 ++ gv4)), (Permutation (elements l) (gv3 ++ gv3)), (Permutation (elements l) []), (Permutation (gv4 ++ gv4) gv4), (Permutation (gv4 ++ gv4) gv3), (Permutation (gv4 ++ gv4) (kvs_insert x v gv4)), (Permutation (gv4 ++ gv4) (kvs_insert x v gv3))
+(Permutation (gv4 ++ gv4) (fast_elements l)), (Permutation (gv4 ++ gv4) (fast_elements_tr l gv4)), (Permutation (gv4 ++ gv4) (fast_elements_tr l gv3)), (Permutation (gv4 ++ gv4) (elements l)), (Permutation (gv4 ++ gv4) (gv4 ++ gv3)), (Permutation (gv4 ++ gv4) (gv3 ++ gv4)), (Permutation (gv4 ++ gv4) (gv3 ++ gv3)), (Permutation (gv4 ++ gv4) []), (Permutation (gv4 ++ gv3) gv4), (Permutation (gv4 ++ gv3) gv3)
+(Permutation (gv4 ++ gv3) (kvs_insert x v gv4)), (Permutation (gv4 ++ gv3) (kvs_insert x v gv3)), (Permutation (gv4 ++ gv3) (fast_elements l)), (Permutation (gv4 ++ gv3) (fast_elements_tr l gv4)), (Permutation (gv4 ++ gv3) (fast_elements_tr l gv3)), (Permutation (gv4 ++ gv3) (elements l)), (Permutation (gv4 ++ gv3) (gv4 ++ gv4)), (Permutation (gv4 ++ gv3) (gv3 ++ gv4)), (Permutation (gv4 ++ gv3) (gv3 ++ gv3)), (Permutation (gv4 ++ gv3) [])
+(Permutation (gv3 ++ gv4) gv4), (Permutation (gv3 ++ gv4) gv3), (Permutation (gv3 ++ gv4) (kvs_insert x v gv4)), (Permutation (gv3 ++ gv4) (kvs_insert x v gv3)), (Permutation (gv3 ++ gv4) (fast_elements l)), (Permutation (gv3 ++ gv4) (fast_elements_tr l gv4)), (Permutation (gv3 ++ gv4) (fast_elements_tr l gv3)), (Permutation (gv3 ++ gv4) (elements l)), (Permutation (gv3 ++ gv4) (gv4 ++ gv4)), (Permutation (gv3 ++ gv4) (gv4 ++ gv3))
+(Permutation (gv3 ++ gv4) (gv3 ++ gv3)), (Permutation (gv3 ++ gv4) []), (Permutation (gv3 ++ gv3) gv4), (Permutation (gv3 ++ gv3) gv3), (Permutation (gv3 ++ gv3) (kvs_insert x v gv4)), (Permutation (gv3 ++ gv3) (kvs_insert x v gv3)), (Permutation (gv3 ++ gv3) (fast_elements l)), (Permutation (gv3 ++ gv3) (fast_elements_tr l gv4)), (Permutation (gv3 ++ gv3) (fast_elements_tr l gv3)), (Permutation (gv3 ++ gv3) (elements l))
+(Permutation (gv3 ++ gv3) (gv4 ++ gv4)), (Permutation (gv3 ++ gv3) (gv4 ++ gv3)), (Permutation (gv3 ++ gv3) (gv3 ++ gv4)), (Permutation (gv3 ++ gv3) []), (Permutation [] gv4), (Permutation [] gv3), (Permutation [] (kvs_insert x v gv4)), (Permutation [] (kvs_insert x v gv3)), (Permutation [] (fast_elements l)), (Permutation [] (fast_elements_tr l gv4))
+(Permutation [] (fast_elements_tr l gv3)), (Permutation [] (elements l)), (Permutation [] (gv4 ++ gv4)), (Permutation [] (gv4 ++ gv3)), (Permutation [] (gv3 ++ gv4)), (Permutation [] (gv3 ++ gv3)), (In x (list_keys gv4)), (In x (list_keys gv3)), (In (Datatypes.length gv4) (list_keys gv4)), (In (Datatypes.length gv4) (list_keys gv3))
+(In (Datatypes.length gv3) (list_keys gv4)), (In (Datatypes.length gv3) (list_keys gv3)), (In (x, v) gv4), (In (x, v) gv3), (In (x, v) (kvs_insert x v gv4)), (In (x, v) (kvs_insert x v gv3)), (In (x, v) (fast_elements l)), (In (x, v) (fast_elements_tr l gv4)), (In (x, v) (fast_elements_tr l gv3)), (In (x, v) (elements l))
+(In (x, v) (gv4 ++ gv4)), (In (x, v) (gv4 ++ gv3)), (In (x, v) (gv3 ++ gv4)), (In (x, v) (gv3 ++ gv3)), (x < Datatypes.length gv4), (x < Datatypes.length gv3), (Datatypes.length gv4 < x), (Datatypes.length gv4 < Datatypes.length gv3), (Datatypes.length gv3 < x), (Datatypes.length gv3 < Datatypes.length gv4)
+(x <= Datatypes.length gv4), (x <= Datatypes.length gv3), (Datatypes.length gv4 <= x), (Datatypes.length gv4 <= Datatypes.length gv3), (Datatypes.length gv3 <= x), (Datatypes.length gv3 <= Datatypes.length gv4), (~ disjoint gv4 gv4), (~ disjoint gv4 gv3), (~ disjoint gv3 gv4), (~ disjoint gv3 gv3)
+(~ BST l), (~ Permutation gv4 gv4), (~ Permutation gv4 gv3), (~ Permutation gv3 gv4), (~ Permutation gv3 gv3), (~ x < x), (~ x <= x), (gv4 <> gv4), (gv4 <> gv3), (gv3 <> gv4)
+(gv3 <> gv3), (l <> l), (v <> v), (x <> x), (kvs_insert x v gv4 = gv4), (kvs_insert x v gv4 = gv3), (kvs_insert x v gv4 = fast_elements l), (kvs_insert x v gv4 = fast_elements_tr l gv4), (kvs_insert x v gv4 = fast_elements_tr l gv3), (kvs_insert x v gv4 = elements l)
+(kvs_insert x v gv4 = gv4 ++ gv4), (kvs_insert x v gv4 = gv4 ++ gv3), (kvs_insert x v gv4 = gv3 ++ gv4), (kvs_insert x v gv4 = gv3 ++ gv3), (kvs_insert x v gv3 = gv4), (kvs_insert x v gv3 = gv3), (kvs_insert x v gv3 = fast_elements l), (kvs_insert x v gv3 = fast_elements_tr l gv4), (kvs_insert x v gv3 = fast_elements_tr l gv3), (kvs_insert x v gv3 = elements l)
+(kvs_insert x v gv3 = gv4 ++ gv4), (kvs_insert x v gv3 = gv4 ++ gv3), (kvs_insert x v gv3 = gv3 ++ gv4), (kvs_insert x v gv3 = gv3 ++ gv3), (fast_elements l = gv4), (fast_elements l = gv3), (fast_elements l = elements l), (fast_elements l = gv4 ++ gv4), (fast_elements l = gv4 ++ gv3), (fast_elements l = gv3 ++ gv4)
+(fast_elements l = gv3 ++ gv3), (fast_elements_tr l gv4 = gv4), (fast_elements_tr l gv4 = gv3), (fast_elements_tr l gv4 = fast_elements l), (fast_elements_tr l gv4 = elements l), (fast_elements_tr l gv4 = gv4 ++ gv4), (fast_elements_tr l gv4 = gv4 ++ gv3), (fast_elements_tr l gv4 = gv3 ++ gv4), (fast_elements_tr l gv4 = gv3 ++ gv3), (fast_elements_tr l gv3 = gv4)
+(fast_elements_tr l gv3 = gv3), (fast_elements_tr l gv3 = fast_elements l), (fast_elements_tr l gv3 = elements l), (fast_elements_tr l gv3 = gv4 ++ gv4), (fast_elements_tr l gv3 = gv4 ++ gv3), (fast_elements_tr l gv3 = gv3 ++ gv4), (fast_elements_tr l gv3 = gv3 ++ gv3), (elements l = gv4), (elements l = gv3), (elements l = gv4 ++ gv4)
+(elements l = gv4 ++ gv3), (elements l = gv3 ++ gv4), (elements l = gv3 ++ gv3), (gv4 ++ gv4 = gv4), (gv4 ++ gv4 = gv3), (gv4 ++ gv3 = gv4), (gv4 ++ gv3 = gv3), (gv3 ++ gv4 = gv4), (gv3 ++ gv4 = gv3), (gv3 ++ gv3 = gv4)
+(gv3 ++ gv3 = gv3), ([] = gv4), ([] = gv3), ([] = kvs_insert x v gv4), ([] = kvs_insert x v gv3), ([] = fast_elements l), ([] = fast_elements_tr l gv4), ([] = fast_elements_tr l gv3), ([] = elements l), ([] = gv4 ++ gv4)
+([] = gv4 ++ gv3), ([] = gv3 ++ gv4), ([] = gv3 ++ gv3), ([] = list_keys gv4), ([] = list_keys gv3), (None = Some x), (None = Some gv4), (None = Some gv3), (lookup v x l = v), (Red = lookup v x l)
+(Green = lookup v x l), (Blue = lookup v x l), (Datatypes.length gv4 = x), (Datatypes.length gv3 = x), (None = Some l), (T l x v l = l), (T l x v l = insert x v l), (insert x v l = l), (empty_tree = T l x v l), (empty_tree = insert x v l)
+(E = T l x v l), (E = insert x v l), (None = Some v)
+
+Label: 5 (5)
+(disjoint gv3 gv3), (BST r), (BST l), (Permutation gv3 gv3), (x < x), (x <= x), (gv3 = gv3), (r = r), (r = l), (l = r)
+(l = l), (v = v), (x = x), (false = bound x r), (false = bound x l), (true = bound x r), (true = bound x l), (disjoint (list_keys gv3) []), (disjoint [] (list_keys gv3)), (disjoint gv3 (kvs_insert x v gv3))
+(disjoint gv3 (fast_elements r)), (disjoint gv3 (fast_elements l)), (disjoint gv3 (fast_elements_tr r gv3)), (disjoint gv3 (fast_elements_tr l gv3)), (disjoint gv3 (elements r)), (disjoint gv3 (elements l)), (disjoint gv3 (gv3 ++ gv3)), (disjoint gv3 []), (disjoint (kvs_insert x v gv3) gv3), (disjoint (kvs_insert x v gv3) (fast_elements r))
+(disjoint (kvs_insert x v gv3) (fast_elements l)), (disjoint (kvs_insert x v gv3) (fast_elements_tr r gv3)), (disjoint (kvs_insert x v gv3) (fast_elements_tr l gv3)), (disjoint (kvs_insert x v gv3) (elements r)), (disjoint (kvs_insert x v gv3) (elements l)), (disjoint (kvs_insert x v gv3) (gv3 ++ gv3)), (disjoint (kvs_insert x v gv3) []), (disjoint (fast_elements r) gv3), (disjoint (fast_elements r) (kvs_insert x v gv3)), (disjoint (fast_elements r) (fast_elements l))
+(disjoint (fast_elements r) (fast_elements_tr r gv3)), (disjoint (fast_elements r) (fast_elements_tr l gv3)), (disjoint (fast_elements r) (elements r)), (disjoint (fast_elements r) (elements l)), (disjoint (fast_elements r) (gv3 ++ gv3)), (disjoint (fast_elements r) []), (disjoint (fast_elements l) gv3), (disjoint (fast_elements l) (kvs_insert x v gv3)), (disjoint (fast_elements l) (fast_elements r)), (disjoint (fast_elements l) (fast_elements_tr r gv3))
+(disjoint (fast_elements l) (fast_elements_tr l gv3)), (disjoint (fast_elements l) (elements r)), (disjoint (fast_elements l) (elements l)), (disjoint (fast_elements l) (gv3 ++ gv3)), (disjoint (fast_elements l) []), (disjoint (fast_elements_tr r gv3) gv3), (disjoint (fast_elements_tr r gv3) (kvs_insert x v gv3)), (disjoint (fast_elements_tr r gv3) (fast_elements r)), (disjoint (fast_elements_tr r gv3) (fast_elements l)), (disjoint (fast_elements_tr r gv3) (fast_elements_tr l gv3))
+(disjoint (fast_elements_tr r gv3) (elements r)), (disjoint (fast_elements_tr r gv3) (elements l)), (disjoint (fast_elements_tr r gv3) (gv3 ++ gv3)), (disjoint (fast_elements_tr r gv3) []), (disjoint (fast_elements_tr l gv3) gv3), (disjoint (fast_elements_tr l gv3) (kvs_insert x v gv3)), (disjoint (fast_elements_tr l gv3) (fast_elements r)), (disjoint (fast_elements_tr l gv3) (fast_elements l)), (disjoint (fast_elements_tr l gv3) (fast_elements_tr r gv3)), (disjoint (fast_elements_tr l gv3) (elements r))
+(disjoint (fast_elements_tr l gv3) (elements l)), (disjoint (fast_elements_tr l gv3) (gv3 ++ gv3)), (disjoint (fast_elements_tr l gv3) []), (disjoint (elements r) gv3), (disjoint (elements r) (kvs_insert x v gv3)), (disjoint (elements r) (fast_elements r)), (disjoint (elements r) (fast_elements l)), (disjoint (elements r) (fast_elements_tr r gv3)), (disjoint (elements r) (fast_elements_tr l gv3)), (disjoint (elements r) (elements l))
+(disjoint (elements r) (gv3 ++ gv3)), (disjoint (elements r) []), (disjoint (elements l) gv3), (disjoint (elements l) (kvs_insert x v gv3)), (disjoint (elements l) (fast_elements r)), (disjoint (elements l) (fast_elements l)), (disjoint (elements l) (fast_elements_tr r gv3)), (disjoint (elements l) (fast_elements_tr l gv3)), (disjoint (elements l) (elements r)), (disjoint (elements l) (gv3 ++ gv3))
+(disjoint (elements l) []), (disjoint (gv3 ++ gv3) gv3), (disjoint (gv3 ++ gv3) (kvs_insert x v gv3)), (disjoint (gv3 ++ gv3) (fast_elements r)), (disjoint (gv3 ++ gv3) (fast_elements l)), (disjoint (gv3 ++ gv3) (fast_elements_tr r gv3)), (disjoint (gv3 ++ gv3) (fast_elements_tr l gv3)), (disjoint (gv3 ++ gv3) (elements r)), (disjoint (gv3 ++ gv3) (elements l)), (disjoint (gv3 ++ gv3) [])
+(disjoint [] gv3), (disjoint [] (kvs_insert x v gv3)), (disjoint [] (fast_elements r)), (disjoint [] (fast_elements l)), (disjoint [] (fast_elements_tr r gv3)), (disjoint [] (fast_elements_tr l gv3)), (disjoint [] (elements r)), (disjoint [] (elements l)), (disjoint [] (gv3 ++ gv3)), (BST (T r x v r))
+(BST (T r x v l)), (BST (T l x v r)), (BST (T l x v l)), (BST (insert x v r)), (BST (insert x v l)), (BST empty_tree), (BST E), (x <=* list_keys gv3), (x <=* []), (Datatypes.length gv3 <=* list_keys gv3)
+(Datatypes.length gv3 <=* []), (sorted (list_keys gv3)), (sorted []), (Permutation (list_keys gv3) []), (Permutation [] (list_keys gv3)), (Permutation gv3 (kvs_insert x v gv3)), (Permutation gv3 (fast_elements r)), (Permutation gv3 (fast_elements l)), (Permutation gv3 (fast_elements_tr r gv3)), (Permutation gv3 (fast_elements_tr l gv3))
+(Permutation gv3 (elements r)), (Permutation gv3 (elements l)), (Permutation gv3 (gv3 ++ gv3)), (Permutation gv3 []), (Permutation (kvs_insert x v gv3) gv3), (Permutation (kvs_insert x v gv3) (fast_elements r)), (Permutation (kvs_insert x v gv3) (fast_elements l)), (Permutation (kvs_insert x v gv3) (fast_elements_tr r gv3)), (Permutation (kvs_insert x v gv3) (fast_elements_tr l gv3)), (Permutation (kvs_insert x v gv3) (elements r))
+(Permutation (kvs_insert x v gv3) (elements l)), (Permutation (kvs_insert x v gv3) (gv3 ++ gv3)), (Permutation (kvs_insert x v gv3) []), (Permutation (fast_elements r) gv3), (Permutation (fast_elements r) (kvs_insert x v gv3)), (Permutation (fast_elements r) (fast_elements l)), (Permutation (fast_elements r) (fast_elements_tr r gv3)), (Permutation (fast_elements r) (fast_elements_tr l gv3)), (Permutation (fast_elements r) (elements r)), (Permutation (fast_elements r) (elements l))
+(Permutation (fast_elements r) (gv3 ++ gv3)), (Permutation (fast_elements r) []), (Permutation (fast_elements l) gv3), (Permutation (fast_elements l) (kvs_insert x v gv3)), (Permutation (fast_elements l) (fast_elements r)), (Permutation (fast_elements l) (fast_elements_tr r gv3)), (Permutation (fast_elements l) (fast_elements_tr l gv3)), (Permutation (fast_elements l) (elements r)), (Permutation (fast_elements l) (elements l)), (Permutation (fast_elements l) (gv3 ++ gv3))
+(Permutation (fast_elements l) []), (Permutation (fast_elements_tr r gv3) gv3), (Permutation (fast_elements_tr r gv3) (kvs_insert x v gv3)), (Permutation (fast_elements_tr r gv3) (fast_elements r)), (Permutation (fast_elements_tr r gv3) (fast_elements l)), (Permutation (fast_elements_tr r gv3) (fast_elements_tr l gv3)), (Permutation (fast_elements_tr r gv3) (elements r)), (Permutation (fast_elements_tr r gv3) (elements l)), (Permutation (fast_elements_tr r gv3) (gv3 ++ gv3)), (Permutation (fast_elements_tr r gv3) [])
+(Permutation (fast_elements_tr l gv3) gv3), (Permutation (fast_elements_tr l gv3) (kvs_insert x v gv3)), (Permutation (fast_elements_tr l gv3) (fast_elements r)), (Permutation (fast_elements_tr l gv3) (fast_elements l)), (Permutation (fast_elements_tr l gv3) (fast_elements_tr r gv3)), (Permutation (fast_elements_tr l gv3) (elements r)), (Permutation (fast_elements_tr l gv3) (elements l)), (Permutation (fast_elements_tr l gv3) (gv3 ++ gv3)), (Permutation (fast_elements_tr l gv3) []), (Permutation (elements r) gv3)
+(Permutation (elements r) (kvs_insert x v gv3)), (Permutation (elements r) (fast_elements r)), (Permutation (elements r) (fast_elements l)), (Permutation (elements r) (fast_elements_tr r gv3)), (Permutation (elements r) (fast_elements_tr l gv3)), (Permutation (elements r) (elements l)), (Permutation (elements r) (gv3 ++ gv3)), (Permutation (elements r) []), (Permutation (elements l) gv3), (Permutation (elements l) (kvs_insert x v gv3))
+(Permutation (elements l) (fast_elements r)), (Permutation (elements l) (fast_elements l)), (Permutation (elements l) (fast_elements_tr r gv3)), (Permutation (elements l) (fast_elements_tr l gv3)), (Permutation (elements l) (elements r)), (Permutation (elements l) (gv3 ++ gv3)), (Permutation (elements l) []), (Permutation (gv3 ++ gv3) gv3), (Permutation (gv3 ++ gv3) (kvs_insert x v gv3)), (Permutation (gv3 ++ gv3) (fast_elements r))
+(Permutation (gv3 ++ gv3) (fast_elements l)), (Permutation (gv3 ++ gv3) (fast_elements_tr r gv3)), (Permutation (gv3 ++ gv3) (fast_elements_tr l gv3)), (Permutation (gv3 ++ gv3) (elements r)), (Permutation (gv3 ++ gv3) (elements l)), (Permutation (gv3 ++ gv3) []), (Permutation [] gv3), (Permutation [] (kvs_insert x v gv3)), (Permutation [] (fast_elements r)), (Permutation [] (fast_elements l))
+(Permutation [] (fast_elements_tr r gv3)), (Permutation [] (fast_elements_tr l gv3)), (Permutation [] (elements r)), (Permutation [] (elements l)), (Permutation [] (gv3 ++ gv3)), (In x (list_keys gv3)), (In (Datatypes.length gv3) (list_keys gv3)), (In (x, v) gv3), (In (x, v) (kvs_insert x v gv3)), (In (x, v) (fast_elements r))
+(In (x, v) (fast_elements l)), (In (x, v) (fast_elements_tr r gv3)), (In (x, v) (fast_elements_tr l gv3)), (In (x, v) (elements r)), (In (x, v) (elements l)), (In (x, v) (gv3 ++ gv3)), (x < Datatypes.length gv3), (Datatypes.length gv3 < x), (x <= Datatypes.length gv3), (Datatypes.length gv3 <= x)
+(~ disjoint gv3 gv3), (~ BST r), (~ BST l), (~ Permutation gv3 gv3), (~ x < x), (~ x <= x), (gv3 <> gv3), (r <> r), (r <> l), (l <> r)
+(l <> l), (v <> v), (x <> x), (kvs_insert x v gv3 = gv3), (kvs_insert x v gv3 = fast_elements r), (kvs_insert x v gv3 = fast_elements l), (kvs_insert x v gv3 = fast_elements_tr r gv3), (kvs_insert x v gv3 = fast_elements_tr l gv3), (kvs_insert x v gv3 = elements r), (kvs_insert x v gv3 = elements l)
+(kvs_insert x v gv3 = gv3 ++ gv3), (fast_elements r = gv3), (fast_elements r = elements r), (fast_elements r = elements l), (fast_elements r = gv3 ++ gv3), (fast_elements l = gv3), (fast_elements l = elements r), (fast_elements l = elements l), (fast_elements l = gv3 ++ gv3), (fast_elements_tr r gv3 = gv3)
+(fast_elements_tr r gv3 = fast_elements r), (fast_elements_tr r gv3 = fast_elements l), (fast_elements_tr r gv3 = elements r), (fast_elements_tr r gv3 = elements l), (fast_elements_tr r gv3 = gv3 ++ gv3), (fast_elements_tr l gv3 = gv3), (fast_elements_tr l gv3 = fast_elements r), (fast_elements_tr l gv3 = fast_elements l), (fast_elements_tr l gv3 = elements r), (fast_elements_tr l gv3 = elements l)
+(fast_elements_tr l gv3 = gv3 ++ gv3), (elements r = gv3), (elements r = gv3 ++ gv3), (elements l = gv3), (elements l = gv3 ++ gv3), (gv3 ++ gv3 = gv3), ([] = gv3), ([] = kvs_insert x v gv3), ([] = fast_elements r), ([] = fast_elements l)
+([] = fast_elements_tr r gv3), ([] = fast_elements_tr l gv3), ([] = elements r), ([] = elements l), ([] = gv3 ++ gv3), ([] = list_keys gv3), (None = Some x), (None = Some gv3), (lookup v x r = v), (lookup v x l = v)
+(Red = lookup v x r), (Red = lookup v x l), (Green = lookup v x r), (Green = lookup v x l), (Blue = lookup v x r), (Blue = lookup v x l), (Datatypes.length gv3 = x), (None = Some r), (None = Some l), (T r x v r = r)
+(T r x v r = l), (T r x v r = insert x v r), (T r x v r = insert x v l), (T r x v l = r), (T r x v l = l), (T r x v l = insert x v r), (T r x v l = insert x v l), (T l x v r = r), (T l x v r = l), (T l x v r = insert x v r)
+(T l x v r = insert x v l), (T l x v l = r), (T l x v l = l), (T l x v l = insert x v r), (T l x v l = insert x v l), (insert x v r = r), (insert x v r = l), (insert x v l = r), (insert x v l = l), (empty_tree = T r x v r)
+(empty_tree = T r x v l), (empty_tree = T l x v r), (empty_tree = T l x v l), (empty_tree = insert x v r), (empty_tree = insert x v l), (E = T r x v r), (E = T r x v l), (E = T l x v r), (E = T l x v l), (E = insert x v r)
+(E = insert x v l), (None = Some v)
+
+Label: 6 (6)
+(disjoint gv2 gv2), (disjoint gv2 gv1), (disjoint gv1 gv2), (disjoint gv1 gv1), (BST r), (Permutation gv2 gv2), (Permutation gv2 gv1), (Permutation gv1 gv2), (Permutation gv1 gv1), (x < x)
+(x <= x), (r = r), (gv2 = gv2), (gv2 = gv1), (gv1 = gv2), (gv1 = gv1), (v = v), (x = x), (false = bound x r), (true = bound x r)
+(disjoint (list_keys gv2) (list_keys gv1)), (disjoint (list_keys gv2) []), (disjoint (list_keys gv1) (list_keys gv2)), (disjoint (list_keys gv1) []), (disjoint [] (list_keys gv2)), (disjoint [] (list_keys gv1)), (disjoint gv2 (kvs_insert x v gv2)), (disjoint gv2 (kvs_insert x v gv1)), (disjoint gv2 (fast_elements r)), (disjoint gv2 (fast_elements_tr r gv2))
+(disjoint gv2 (fast_elements_tr r gv1)), (disjoint gv2 (elements r)), (disjoint gv2 (gv2 ++ gv2)), (disjoint gv2 (gv2 ++ gv1)), (disjoint gv2 (gv1 ++ gv2)), (disjoint gv2 (gv1 ++ gv1)), (disjoint gv2 []), (disjoint gv1 (kvs_insert x v gv2)), (disjoint gv1 (kvs_insert x v gv1)), (disjoint gv1 (fast_elements r))
+(disjoint gv1 (fast_elements_tr r gv2)), (disjoint gv1 (fast_elements_tr r gv1)), (disjoint gv1 (elements r)), (disjoint gv1 (gv2 ++ gv2)), (disjoint gv1 (gv2 ++ gv1)), (disjoint gv1 (gv1 ++ gv2)), (disjoint gv1 (gv1 ++ gv1)), (disjoint gv1 []), (disjoint (kvs_insert x v gv2) gv2), (disjoint (kvs_insert x v gv2) gv1)
+(disjoint (kvs_insert x v gv2) (kvs_insert x v gv1)), (disjoint (kvs_insert x v gv2) (fast_elements r)), (disjoint (kvs_insert x v gv2) (fast_elements_tr r gv2)), (disjoint (kvs_insert x v gv2) (fast_elements_tr r gv1)), (disjoint (kvs_insert x v gv2) (elements r)), (disjoint (kvs_insert x v gv2) (gv2 ++ gv2)), (disjoint (kvs_insert x v gv2) (gv2 ++ gv1)), (disjoint (kvs_insert x v gv2) (gv1 ++ gv2)), (disjoint (kvs_insert x v gv2) (gv1 ++ gv1)), (disjoint (kvs_insert x v gv2) [])
+(disjoint (kvs_insert x v gv1) gv2), (disjoint (kvs_insert x v gv1) gv1), (disjoint (kvs_insert x v gv1) (kvs_insert x v gv2)), (disjoint (kvs_insert x v gv1) (fast_elements r)), (disjoint (kvs_insert x v gv1) (fast_elements_tr r gv2)), (disjoint (kvs_insert x v gv1) (fast_elements_tr r gv1)), (disjoint (kvs_insert x v gv1) (elements r)), (disjoint (kvs_insert x v gv1) (gv2 ++ gv2)), (disjoint (kvs_insert x v gv1) (gv2 ++ gv1)), (disjoint (kvs_insert x v gv1) (gv1 ++ gv2))
+(disjoint (kvs_insert x v gv1) (gv1 ++ gv1)), (disjoint (kvs_insert x v gv1) []), (disjoint (fast_elements r) gv2), (disjoint (fast_elements r) gv1), (disjoint (fast_elements r) (kvs_insert x v gv2)), (disjoint (fast_elements r) (kvs_insert x v gv1)), (disjoint (fast_elements r) (fast_elements_tr r gv2)), (disjoint (fast_elements r) (fast_elements_tr r gv1)), (disjoint (fast_elements r) (elements r)), (disjoint (fast_elements r) (gv2 ++ gv2))
+(disjoint (fast_elements r) (gv2 ++ gv1)), (disjoint (fast_elements r) (gv1 ++ gv2)), (disjoint (fast_elements r) (gv1 ++ gv1)), (disjoint (fast_elements r) []), (disjoint (fast_elements_tr r gv2) gv2), (disjoint (fast_elements_tr r gv2) gv1), (disjoint (fast_elements_tr r gv2) (kvs_insert x v gv2)), (disjoint (fast_elements_tr r gv2) (kvs_insert x v gv1)), (disjoint (fast_elements_tr r gv2) (fast_elements r)), (disjoint (fast_elements_tr r gv2) (fast_elements_tr r gv1))
+(disjoint (fast_elements_tr r gv2) (elements r)), (disjoint (fast_elements_tr r gv2) (gv2 ++ gv2)), (disjoint (fast_elements_tr r gv2) (gv2 ++ gv1)), (disjoint (fast_elements_tr r gv2) (gv1 ++ gv2)), (disjoint (fast_elements_tr r gv2) (gv1 ++ gv1)), (disjoint (fast_elements_tr r gv2) []), (disjoint (fast_elements_tr r gv1) gv2), (disjoint (fast_elements_tr r gv1) gv1), (disjoint (fast_elements_tr r gv1) (kvs_insert x v gv2)), (disjoint (fast_elements_tr r gv1) (kvs_insert x v gv1))
+(disjoint (fast_elements_tr r gv1) (fast_elements r)), (disjoint (fast_elements_tr r gv1) (fast_elements_tr r gv2)), (disjoint (fast_elements_tr r gv1) (elements r)), (disjoint (fast_elements_tr r gv1) (gv2 ++ gv2)), (disjoint (fast_elements_tr r gv1) (gv2 ++ gv1)), (disjoint (fast_elements_tr r gv1) (gv1 ++ gv2)), (disjoint (fast_elements_tr r gv1) (gv1 ++ gv1)), (disjoint (fast_elements_tr r gv1) []), (disjoint (elements r) gv2), (disjoint (elements r) gv1)
+(disjoint (elements r) (kvs_insert x v gv2)), (disjoint (elements r) (kvs_insert x v gv1)), (disjoint (elements r) (fast_elements r)), (disjoint (elements r) (fast_elements_tr r gv2)), (disjoint (elements r) (fast_elements_tr r gv1)), (disjoint (elements r) (gv2 ++ gv2)), (disjoint (elements r) (gv2 ++ gv1)), (disjoint (elements r) (gv1 ++ gv2)), (disjoint (elements r) (gv1 ++ gv1)), (disjoint (elements r) [])
+(disjoint (gv2 ++ gv2) gv2), (disjoint (gv2 ++ gv2) gv1), (disjoint (gv2 ++ gv2) (kvs_insert x v gv2)), (disjoint (gv2 ++ gv2) (kvs_insert x v gv1)), (disjoint (gv2 ++ gv2) (fast_elements r)), (disjoint (gv2 ++ gv2) (fast_elements_tr r gv2)), (disjoint (gv2 ++ gv2) (fast_elements_tr r gv1)), (disjoint (gv2 ++ gv2) (elements r)), (disjoint (gv2 ++ gv2) (gv2 ++ gv1)), (disjoint (gv2 ++ gv2) (gv1 ++ gv2))
+(disjoint (gv2 ++ gv2) (gv1 ++ gv1)), (disjoint (gv2 ++ gv2) []), (disjoint (gv2 ++ gv1) gv2), (disjoint (gv2 ++ gv1) gv1), (disjoint (gv2 ++ gv1) (kvs_insert x v gv2)), (disjoint (gv2 ++ gv1) (kvs_insert x v gv1)), (disjoint (gv2 ++ gv1) (fast_elements r)), (disjoint (gv2 ++ gv1) (fast_elements_tr r gv2)), (disjoint (gv2 ++ gv1) (fast_elements_tr r gv1)), (disjoint (gv2 ++ gv1) (elements r))
+(disjoint (gv2 ++ gv1) (gv2 ++ gv2)), (disjoint (gv2 ++ gv1) (gv1 ++ gv2)), (disjoint (gv2 ++ gv1) (gv1 ++ gv1)), (disjoint (gv2 ++ gv1) []), (disjoint (gv1 ++ gv2) gv2), (disjoint (gv1 ++ gv2) gv1), (disjoint (gv1 ++ gv2) (kvs_insert x v gv2)), (disjoint (gv1 ++ gv2) (kvs_insert x v gv1)), (disjoint (gv1 ++ gv2) (fast_elements r)), (disjoint (gv1 ++ gv2) (fast_elements_tr r gv2))
+(disjoint (gv1 ++ gv2) (fast_elements_tr r gv1)), (disjoint (gv1 ++ gv2) (elements r)), (disjoint (gv1 ++ gv2) (gv2 ++ gv2)), (disjoint (gv1 ++ gv2) (gv2 ++ gv1)), (disjoint (gv1 ++ gv2) (gv1 ++ gv1)), (disjoint (gv1 ++ gv2) []), (disjoint (gv1 ++ gv1) gv2), (disjoint (gv1 ++ gv1) gv1), (disjoint (gv1 ++ gv1) (kvs_insert x v gv2)), (disjoint (gv1 ++ gv1) (kvs_insert x v gv1))
+(disjoint (gv1 ++ gv1) (fast_elements r)), (disjoint (gv1 ++ gv1) (fast_elements_tr r gv2)), (disjoint (gv1 ++ gv1) (fast_elements_tr r gv1)), (disjoint (gv1 ++ gv1) (elements r)), (disjoint (gv1 ++ gv1) (gv2 ++ gv2)), (disjoint (gv1 ++ gv1) (gv2 ++ gv1)), (disjoint (gv1 ++ gv1) (gv1 ++ gv2)), (disjoint (gv1 ++ gv1) []), (disjoint [] gv2), (disjoint [] gv1)
+(disjoint [] (kvs_insert x v gv2)), (disjoint [] (kvs_insert x v gv1)), (disjoint [] (fast_elements r)), (disjoint [] (fast_elements_tr r gv2)), (disjoint [] (fast_elements_tr r gv1)), (disjoint [] (elements r)), (disjoint [] (gv2 ++ gv2)), (disjoint [] (gv2 ++ gv1)), (disjoint [] (gv1 ++ gv2)), (disjoint [] (gv1 ++ gv1))
+(BST (T r x v r)), (BST (insert x v r)), (BST empty_tree), (BST E), (x <=* list_keys gv2), (x <=* list_keys gv1), (x <=* []), (Datatypes.length gv2 <=* list_keys gv2), (Datatypes.length gv2 <=* list_keys gv1), (Datatypes.length gv2 <=* [])
+(Datatypes.length gv1 <=* list_keys gv2), (Datatypes.length gv1 <=* list_keys gv1), (Datatypes.length gv1 <=* []), (sorted (list_keys gv2)), (sorted (list_keys gv1)), (sorted []), (Permutation (list_keys gv2) (list_keys gv1)), (Permutation (list_keys gv2) []), (Permutation (list_keys gv1) (list_keys gv2)), (Permutation (list_keys gv1) [])
+(Permutation [] (list_keys gv2)), (Permutation [] (list_keys gv1)), (Permutation gv2 (kvs_insert x v gv2)), (Permutation gv2 (kvs_insert x v gv1)), (Permutation gv2 (fast_elements r)), (Permutation gv2 (fast_elements_tr r gv2)), (Permutation gv2 (fast_elements_tr r gv1)), (Permutation gv2 (elements r)), (Permutation gv2 (gv2 ++ gv2)), (Permutation gv2 (gv2 ++ gv1))
+(Permutation gv2 (gv1 ++ gv2)), (Permutation gv2 (gv1 ++ gv1)), (Permutation gv2 []), (Permutation gv1 (kvs_insert x v gv2)), (Permutation gv1 (kvs_insert x v gv1)), (Permutation gv1 (fast_elements r)), (Permutation gv1 (fast_elements_tr r gv2)), (Permutation gv1 (fast_elements_tr r gv1)), (Permutation gv1 (elements r)), (Permutation gv1 (gv2 ++ gv2))
+(Permutation gv1 (gv2 ++ gv1)), (Permutation gv1 (gv1 ++ gv2)), (Permutation gv1 (gv1 ++ gv1)), (Permutation gv1 []), (Permutation (kvs_insert x v gv2) gv2), (Permutation (kvs_insert x v gv2) gv1), (Permutation (kvs_insert x v gv2) (kvs_insert x v gv1)), (Permutation (kvs_insert x v gv2) (fast_elements r)), (Permutation (kvs_insert x v gv2) (fast_elements_tr r gv2)), (Permutation (kvs_insert x v gv2) (fast_elements_tr r gv1))
+(Permutation (kvs_insert x v gv2) (elements r)), (Permutation (kvs_insert x v gv2) (gv2 ++ gv2)), (Permutation (kvs_insert x v gv2) (gv2 ++ gv1)), (Permutation (kvs_insert x v gv2) (gv1 ++ gv2)), (Permutation (kvs_insert x v gv2) (gv1 ++ gv1)), (Permutation (kvs_insert x v gv2) []), (Permutation (kvs_insert x v gv1) gv2), (Permutation (kvs_insert x v gv1) gv1), (Permutation (kvs_insert x v gv1) (kvs_insert x v gv2)), (Permutation (kvs_insert x v gv1) (fast_elements r))
+(Permutation (kvs_insert x v gv1) (fast_elements_tr r gv2)), (Permutation (kvs_insert x v gv1) (fast_elements_tr r gv1)), (Permutation (kvs_insert x v gv1) (elements r)), (Permutation (kvs_insert x v gv1) (gv2 ++ gv2)), (Permutation (kvs_insert x v gv1) (gv2 ++ gv1)), (Permutation (kvs_insert x v gv1) (gv1 ++ gv2)), (Permutation (kvs_insert x v gv1) (gv1 ++ gv1)), (Permutation (kvs_insert x v gv1) []), (Permutation (fast_elements r) gv2), (Permutation (fast_elements r) gv1)
+(Permutation (fast_elements r) (kvs_insert x v gv2)), (Permutation (fast_elements r) (kvs_insert x v gv1)), (Permutation (fast_elements r) (fast_elements_tr r gv2)), (Permutation (fast_elements r) (fast_elements_tr r gv1)), (Permutation (fast_elements r) (elements r)), (Permutation (fast_elements r) (gv2 ++ gv2)), (Permutation (fast_elements r) (gv2 ++ gv1)), (Permutation (fast_elements r) (gv1 ++ gv2)), (Permutation (fast_elements r) (gv1 ++ gv1)), (Permutation (fast_elements r) [])
+(Permutation (fast_elements_tr r gv2) gv2), (Permutation (fast_elements_tr r gv2) gv1), (Permutation (fast_elements_tr r gv2) (kvs_insert x v gv2)), (Permutation (fast_elements_tr r gv2) (kvs_insert x v gv1)), (Permutation (fast_elements_tr r gv2) (fast_elements r)), (Permutation (fast_elements_tr r gv2) (fast_elements_tr r gv1)), (Permutation (fast_elements_tr r gv2) (elements r)), (Permutation (fast_elements_tr r gv2) (gv2 ++ gv2)), (Permutation (fast_elements_tr r gv2) (gv2 ++ gv1)), (Permutation (fast_elements_tr r gv2) (gv1 ++ gv2))
+(Permutation (fast_elements_tr r gv2) (gv1 ++ gv1)), (Permutation (fast_elements_tr r gv2) []), (Permutation (fast_elements_tr r gv1) gv2), (Permutation (fast_elements_tr r gv1) gv1), (Permutation (fast_elements_tr r gv1) (kvs_insert x v gv2)), (Permutation (fast_elements_tr r gv1) (kvs_insert x v gv1)), (Permutation (fast_elements_tr r gv1) (fast_elements r)), (Permutation (fast_elements_tr r gv1) (fast_elements_tr r gv2)), (Permutation (fast_elements_tr r gv1) (elements r)), (Permutation (fast_elements_tr r gv1) (gv2 ++ gv2))
+(Permutation (fast_elements_tr r gv1) (gv2 ++ gv1)), (Permutation (fast_elements_tr r gv1) (gv1 ++ gv2)), (Permutation (fast_elements_tr r gv1) (gv1 ++ gv1)), (Permutation (fast_elements_tr r gv1) []), (Permutation (elements r) gv2), (Permutation (elements r) gv1), (Permutation (elements r) (kvs_insert x v gv2)), (Permutation (elements r) (kvs_insert x v gv1)), (Permutation (elements r) (fast_elements r)), (Permutation (elements r) (fast_elements_tr r gv2))
+(Permutation (elements r) (fast_elements_tr r gv1)), (Permutation (elements r) (gv2 ++ gv2)), (Permutation (elements r) (gv2 ++ gv1)), (Permutation (elements r) (gv1 ++ gv2)), (Permutation (elements r) (gv1 ++ gv1)), (Permutation (elements r) []), (Permutation (gv2 ++ gv2) gv2), (Permutation (gv2 ++ gv2) gv1), (Permutation (gv2 ++ gv2) (kvs_insert x v gv2)), (Permutation (gv2 ++ gv2) (kvs_insert x v gv1))
+(Permutation (gv2 ++ gv2) (fast_elements r)), (Permutation (gv2 ++ gv2) (fast_elements_tr r gv2)), (Permutation (gv2 ++ gv2) (fast_elements_tr r gv1)), (Permutation (gv2 ++ gv2) (elements r)), (Permutation (gv2 ++ gv2) (gv2 ++ gv1)), (Permutation (gv2 ++ gv2) (gv1 ++ gv2)), (Permutation (gv2 ++ gv2) (gv1 ++ gv1)), (Permutation (gv2 ++ gv2) []), (Permutation (gv2 ++ gv1) gv2), (Permutation (gv2 ++ gv1) gv1)
+(Permutation (gv2 ++ gv1) (kvs_insert x v gv2)), (Permutation (gv2 ++ gv1) (kvs_insert x v gv1)), (Permutation (gv2 ++ gv1) (fast_elements r)), (Permutation (gv2 ++ gv1) (fast_elements_tr r gv2)), (Permutation (gv2 ++ gv1) (fast_elements_tr r gv1)), (Permutation (gv2 ++ gv1) (elements r)), (Permutation (gv2 ++ gv1) (gv2 ++ gv2)), (Permutation (gv2 ++ gv1) (gv1 ++ gv2)), (Permutation (gv2 ++ gv1) (gv1 ++ gv1)), (Permutation (gv2 ++ gv1) [])
+(Permutation (gv1 ++ gv2) gv2), (Permutation (gv1 ++ gv2) gv1), (Permutation (gv1 ++ gv2) (kvs_insert x v gv2)), (Permutation (gv1 ++ gv2) (kvs_insert x v gv1)), (Permutation (gv1 ++ gv2) (fast_elements r)), (Permutation (gv1 ++ gv2) (fast_elements_tr r gv2)), (Permutation (gv1 ++ gv2) (fast_elements_tr r gv1)), (Permutation (gv1 ++ gv2) (elements r)), (Permutation (gv1 ++ gv2) (gv2 ++ gv2)), (Permutation (gv1 ++ gv2) (gv2 ++ gv1))
+(Permutation (gv1 ++ gv2) (gv1 ++ gv1)), (Permutation (gv1 ++ gv2) []), (Permutation (gv1 ++ gv1) gv2), (Permutation (gv1 ++ gv1) gv1), (Permutation (gv1 ++ gv1) (kvs_insert x v gv2)), (Permutation (gv1 ++ gv1) (kvs_insert x v gv1)), (Permutation (gv1 ++ gv1) (fast_elements r)), (Permutation (gv1 ++ gv1) (fast_elements_tr r gv2)), (Permutation (gv1 ++ gv1) (fast_elements_tr r gv1)), (Permutation (gv1 ++ gv1) (elements r))
+(Permutation (gv1 ++ gv1) (gv2 ++ gv2)), (Permutation (gv1 ++ gv1) (gv2 ++ gv1)), (Permutation (gv1 ++ gv1) (gv1 ++ gv2)), (Permutation (gv1 ++ gv1) []), (Permutation [] gv2), (Permutation [] gv1), (Permutation [] (kvs_insert x v gv2)), (Permutation [] (kvs_insert x v gv1)), (Permutation [] (fast_elements r)), (Permutation [] (fast_elements_tr r gv2))
+(Permutation [] (fast_elements_tr r gv1)), (Permutation [] (elements r)), (Permutation [] (gv2 ++ gv2)), (Permutation [] (gv2 ++ gv1)), (Permutation [] (gv1 ++ gv2)), (Permutation [] (gv1 ++ gv1)), (In x (list_keys gv2)), (In x (list_keys gv1)), (In (Datatypes.length gv2) (list_keys gv2)), (In (Datatypes.length gv2) (list_keys gv1))
+(In (Datatypes.length gv1) (list_keys gv2)), (In (Datatypes.length gv1) (list_keys gv1)), (In (x, v) gv2), (In (x, v) gv1), (In (x, v) (kvs_insert x v gv2)), (In (x, v) (kvs_insert x v gv1)), (In (x, v) (fast_elements r)), (In (x, v) (fast_elements_tr r gv2)), (In (x, v) (fast_elements_tr r gv1)), (In (x, v) (elements r))
+(In (x, v) (gv2 ++ gv2)), (In (x, v) (gv2 ++ gv1)), (In (x, v) (gv1 ++ gv2)), (In (x, v) (gv1 ++ gv1)), (x < Datatypes.length gv2), (x < Datatypes.length gv1), (Datatypes.length gv2 < x), (Datatypes.length gv2 < Datatypes.length gv1), (Datatypes.length gv1 < x), (Datatypes.length gv1 < Datatypes.length gv2)
+(x <= Datatypes.length gv2), (x <= Datatypes.length gv1), (Datatypes.length gv2 <= x), (Datatypes.length gv2 <= Datatypes.length gv1), (Datatypes.length gv1 <= x), (Datatypes.length gv1 <= Datatypes.length gv2), (~ disjoint gv2 gv2), (~ disjoint gv2 gv1), (~ disjoint gv1 gv2), (~ disjoint gv1 gv1)
+(~ BST r), (~ Permutation gv2 gv2), (~ Permutation gv2 gv1), (~ Permutation gv1 gv2), (~ Permutation gv1 gv1), (~ x < x), (~ x <= x), (r <> r), (gv2 <> gv2), (gv2 <> gv1)
+(gv1 <> gv2), (gv1 <> gv1), (v <> v), (x <> x), (kvs_insert x v gv2 = gv2), (kvs_insert x v gv2 = gv1), (kvs_insert x v gv2 = fast_elements r), (kvs_insert x v gv2 = fast_elements_tr r gv2), (kvs_insert x v gv2 = fast_elements_tr r gv1), (kvs_insert x v gv2 = elements r)
+(kvs_insert x v gv2 = gv2 ++ gv2), (kvs_insert x v gv2 = gv2 ++ gv1), (kvs_insert x v gv2 = gv1 ++ gv2), (kvs_insert x v gv2 = gv1 ++ gv1), (kvs_insert x v gv1 = gv2), (kvs_insert x v gv1 = gv1), (kvs_insert x v gv1 = fast_elements r), (kvs_insert x v gv1 = fast_elements_tr r gv2), (kvs_insert x v gv1 = fast_elements_tr r gv1), (kvs_insert x v gv1 = elements r)
+(kvs_insert x v gv1 = gv2 ++ gv2), (kvs_insert x v gv1 = gv2 ++ gv1), (kvs_insert x v gv1 = gv1 ++ gv2), (kvs_insert x v gv1 = gv1 ++ gv1), (fast_elements r = gv2), (fast_elements r = gv1), (fast_elements r = elements r), (fast_elements r = gv2 ++ gv2), (fast_elements r = gv2 ++ gv1), (fast_elements r = gv1 ++ gv2)
+(fast_elements r = gv1 ++ gv1), (fast_elements_tr r gv2 = gv2), (fast_elements_tr r gv2 = gv1), (fast_elements_tr r gv2 = fast_elements r), (fast_elements_tr r gv2 = elements r), (fast_elements_tr r gv2 = gv2 ++ gv2), (fast_elements_tr r gv2 = gv2 ++ gv1), (fast_elements_tr r gv2 = gv1 ++ gv2), (fast_elements_tr r gv2 = gv1 ++ gv1), (fast_elements_tr r gv1 = gv2)
+(fast_elements_tr r gv1 = gv1), (fast_elements_tr r gv1 = fast_elements r), (fast_elements_tr r gv1 = elements r), (fast_elements_tr r gv1 = gv2 ++ gv2), (fast_elements_tr r gv1 = gv2 ++ gv1), (fast_elements_tr r gv1 = gv1 ++ gv2), (fast_elements_tr r gv1 = gv1 ++ gv1), (elements r = gv2), (elements r = gv1), (elements r = gv2 ++ gv2)
+(elements r = gv2 ++ gv1), (elements r = gv1 ++ gv2), (elements r = gv1 ++ gv1), (gv2 ++ gv2 = gv2), (gv2 ++ gv2 = gv1), (gv2 ++ gv1 = gv2), (gv2 ++ gv1 = gv1), (gv1 ++ gv2 = gv2), (gv1 ++ gv2 = gv1), (gv1 ++ gv1 = gv2)
+(gv1 ++ gv1 = gv1), ([] = gv2), ([] = gv1), ([] = kvs_insert x v gv2), ([] = kvs_insert x v gv1), ([] = fast_elements r), ([] = fast_elements_tr r gv2), ([] = fast_elements_tr r gv1), ([] = elements r), ([] = gv2 ++ gv2)
+([] = gv2 ++ gv1), ([] = gv1 ++ gv2), ([] = gv1 ++ gv1), ([] = list_keys gv2), ([] = list_keys gv1), (None = Some x), (None = Some gv2), (None = Some gv1), (lookup v x r = v), (Red = lookup v x r)
+(Green = lookup v x r), (Blue = lookup v x r), (Datatypes.length gv2 = x), (Datatypes.length gv1 = x), (None = Some r), (T r x v r = r), (T r x v r = insert x v r), (insert x v r = r), (empty_tree = T r x v r), (empty_tree = insert x v r)
+(E = T r x v r), (E = insert x v r), (None = Some v)
+
+Label: 7 (7)
+(disjoint gv3 gv3), (disjoint gv3 gv2), (disjoint gv2 gv3), (disjoint gv2 gv2), (BST r), (BST l), (Permutation gv3 gv3), (Permutation gv3 gv2), (Permutation gv2 gv3), (Permutation gv2 gv2)
+(x < x), (x <= x), (r = r), (r = l), (l = r), (l = l), (gv3 = gv3), (gv3 = gv2), (gv2 = gv3), (gv2 = gv2)
+(v = v), (x = x), (false = bound x r), (false = bound x l), (true = bound x r), (true = bound x l), (disjoint (list_keys gv3) (list_keys gv2)), (disjoint (list_keys gv3) []), (disjoint (list_keys gv2) (list_keys gv3)), (disjoint (list_keys gv2) [])
+(disjoint [] (list_keys gv3)), (disjoint [] (list_keys gv2)), (disjoint gv3 (kvs_insert x v gv3)), (disjoint gv3 (kvs_insert x v gv2)), (disjoint gv3 (fast_elements r)), (disjoint gv3 (fast_elements l)), (disjoint gv3 (fast_elements_tr r gv3)), (disjoint gv3 (fast_elements_tr r gv2)), (disjoint gv3 (fast_elements_tr l gv3)), (disjoint gv3 (fast_elements_tr l gv2))
+(disjoint gv3 (elements r)), (disjoint gv3 (elements l)), (disjoint gv3 (gv3 ++ gv3)), (disjoint gv3 (gv3 ++ gv2)), (disjoint gv3 (gv2 ++ gv3)), (disjoint gv3 (gv2 ++ gv2)), (disjoint gv3 []), (disjoint gv2 (kvs_insert x v gv3)), (disjoint gv2 (kvs_insert x v gv2)), (disjoint gv2 (fast_elements r))
+(disjoint gv2 (fast_elements l)), (disjoint gv2 (fast_elements_tr r gv3)), (disjoint gv2 (fast_elements_tr r gv2)), (disjoint gv2 (fast_elements_tr l gv3)), (disjoint gv2 (fast_elements_tr l gv2)), (disjoint gv2 (elements r)), (disjoint gv2 (elements l)), (disjoint gv2 (gv3 ++ gv3)), (disjoint gv2 (gv3 ++ gv2)), (disjoint gv2 (gv2 ++ gv3))
+(disjoint gv2 (gv2 ++ gv2)), (disjoint gv2 []), (disjoint (kvs_insert x v gv3) gv3), (disjoint (kvs_insert x v gv3) gv2), (disjoint (kvs_insert x v gv3) (kvs_insert x v gv2)), (disjoint (kvs_insert x v gv3) (fast_elements r)), (disjoint (kvs_insert x v gv3) (fast_elements l)), (disjoint (kvs_insert x v gv3) (fast_elements_tr r gv3)), (disjoint (kvs_insert x v gv3) (fast_elements_tr r gv2)), (disjoint (kvs_insert x v gv3) (fast_elements_tr l gv3))
+(disjoint (kvs_insert x v gv3) (fast_elements_tr l gv2)), (disjoint (kvs_insert x v gv3) (elements r)), (disjoint (kvs_insert x v gv3) (elements l)), (disjoint (kvs_insert x v gv3) (gv3 ++ gv3)), (disjoint (kvs_insert x v gv3) (gv3 ++ gv2)), (disjoint (kvs_insert x v gv3) (gv2 ++ gv3)), (disjoint (kvs_insert x v gv3) (gv2 ++ gv2)), (disjoint (kvs_insert x v gv3) []), (disjoint (kvs_insert x v gv2) gv3), (disjoint (kvs_insert x v gv2) gv2)
+(disjoint (kvs_insert x v gv2) (kvs_insert x v gv3)), (disjoint (kvs_insert x v gv2) (fast_elements r)), (disjoint (kvs_insert x v gv2) (fast_elements l)), (disjoint (kvs_insert x v gv2) (fast_elements_tr r gv3)), (disjoint (kvs_insert x v gv2) (fast_elements_tr r gv2)), (disjoint (kvs_insert x v gv2) (fast_elements_tr l gv3)), (disjoint (kvs_insert x v gv2) (fast_elements_tr l gv2)), (disjoint (kvs_insert x v gv2) (elements r)), (disjoint (kvs_insert x v gv2) (elements l)), (disjoint (kvs_insert x v gv2) (gv3 ++ gv3))
+(disjoint (kvs_insert x v gv2) (gv3 ++ gv2)), (disjoint (kvs_insert x v gv2) (gv2 ++ gv3)), (disjoint (kvs_insert x v gv2) (gv2 ++ gv2)), (disjoint (kvs_insert x v gv2) []), (disjoint (fast_elements r) gv3), (disjoint (fast_elements r) gv2), (disjoint (fast_elements r) (kvs_insert x v gv3)), (disjoint (fast_elements r) (kvs_insert x v gv2)), (disjoint (fast_elements r) (fast_elements l)), (disjoint (fast_elements r) (fast_elements_tr r gv3))
+(disjoint (fast_elements r) (fast_elements_tr r gv2)), (disjoint (fast_elements r) (fast_elements_tr l gv3)), (disjoint (fast_elements r) (fast_elements_tr l gv2)), (disjoint (fast_elements r) (elements r)), (disjoint (fast_elements r) (elements l)), (disjoint (fast_elements r) (gv3 ++ gv3)), (disjoint (fast_elements r) (gv3 ++ gv2)), (disjoint (fast_elements r) (gv2 ++ gv3)), (disjoint (fast_elements r) (gv2 ++ gv2)), (disjoint (fast_elements r) [])
+(disjoint (fast_elements l) gv3), (disjoint (fast_elements l) gv2), (disjoint (fast_elements l) (kvs_insert x v gv3)), (disjoint (fast_elements l) (kvs_insert x v gv2)), (disjoint (fast_elements l) (fast_elements r)), (disjoint (fast_elements l) (fast_elements_tr r gv3)), (disjoint (fast_elements l) (fast_elements_tr r gv2)), (disjoint (fast_elements l) (fast_elements_tr l gv3)), (disjoint (fast_elements l) (fast_elements_tr l gv2)), (disjoint (fast_elements l) (elements r))
+(disjoint (fast_elements l) (elements l)), (disjoint (fast_elements l) (gv3 ++ gv3)), (disjoint (fast_elements l) (gv3 ++ gv2)), (disjoint (fast_elements l) (gv2 ++ gv3)), (disjoint (fast_elements l) (gv2 ++ gv2)), (disjoint (fast_elements l) []), (disjoint (fast_elements_tr r gv3) gv3), (disjoint (fast_elements_tr r gv3) gv2), (disjoint (fast_elements_tr r gv3) (kvs_insert x v gv3)), (disjoint (fast_elements_tr r gv3) (kvs_insert x v gv2))
+(disjoint (fast_elements_tr r gv3) (fast_elements r)), (disjoint (fast_elements_tr r gv3) (fast_elements l)), (disjoint (fast_elements_tr r gv3) (fast_elements_tr r gv2)), (disjoint (fast_elements_tr r gv3) (fast_elements_tr l gv3)), (disjoint (fast_elements_tr r gv3) (fast_elements_tr l gv2)), (disjoint (fast_elements_tr r gv3) (elements r)), (disjoint (fast_elements_tr r gv3) (elements l)), (disjoint (fast_elements_tr r gv3) (gv3 ++ gv3)), (disjoint (fast_elements_tr r gv3) (gv3 ++ gv2)), (disjoint (fast_elements_tr r gv3) (gv2 ++ gv3))
+(disjoint (fast_elements_tr r gv3) (gv2 ++ gv2)), (disjoint (fast_elements_tr r gv3) []), (disjoint (fast_elements_tr r gv2) gv3), (disjoint (fast_elements_tr r gv2) gv2), (disjoint (fast_elements_tr r gv2) (kvs_insert x v gv3)), (disjoint (fast_elements_tr r gv2) (kvs_insert x v gv2)), (disjoint (fast_elements_tr r gv2) (fast_elements r)), (disjoint (fast_elements_tr r gv2) (fast_elements l)), (disjoint (fast_elements_tr r gv2) (fast_elements_tr r gv3)), (disjoint (fast_elements_tr r gv2) (fast_elements_tr l gv3))
+(disjoint (fast_elements_tr r gv2) (fast_elements_tr l gv2)), (disjoint (fast_elements_tr r gv2) (elements r)), (disjoint (fast_elements_tr r gv2) (elements l)), (disjoint (fast_elements_tr r gv2) (gv3 ++ gv3)), (disjoint (fast_elements_tr r gv2) (gv3 ++ gv2)), (disjoint (fast_elements_tr r gv2) (gv2 ++ gv3)), (disjoint (fast_elements_tr r gv2) (gv2 ++ gv2)), (disjoint (fast_elements_tr r gv2) []), (disjoint (fast_elements_tr l gv3) gv3), (disjoint (fast_elements_tr l gv3) gv2)
+(disjoint (fast_elements_tr l gv3) (kvs_insert x v gv3)), (disjoint (fast_elements_tr l gv3) (kvs_insert x v gv2)), (disjoint (fast_elements_tr l gv3) (fast_elements r)), (disjoint (fast_elements_tr l gv3) (fast_elements l)), (disjoint (fast_elements_tr l gv3) (fast_elements_tr r gv3)), (disjoint (fast_elements_tr l gv3) (fast_elements_tr r gv2)), (disjoint (fast_elements_tr l gv3) (fast_elements_tr l gv2)), (disjoint (fast_elements_tr l gv3) (elements r)), (disjoint (fast_elements_tr l gv3) (elements l)), (disjoint (fast_elements_tr l gv3) (gv3 ++ gv3))
+(disjoint (fast_elements_tr l gv3) (gv3 ++ gv2)), (disjoint (fast_elements_tr l gv3) (gv2 ++ gv3)), (disjoint (fast_elements_tr l gv3) (gv2 ++ gv2)), (disjoint (fast_elements_tr l gv3) []), (disjoint (fast_elements_tr l gv2) gv3), (disjoint (fast_elements_tr l gv2) gv2), (disjoint (fast_elements_tr l gv2) (kvs_insert x v gv3)), (disjoint (fast_elements_tr l gv2) (kvs_insert x v gv2)), (disjoint (fast_elements_tr l gv2) (fast_elements r)), (disjoint (fast_elements_tr l gv2) (fast_elements l))
+(disjoint (fast_elements_tr l gv2) (fast_elements_tr r gv3)), (disjoint (fast_elements_tr l gv2) (fast_elements_tr r gv2)), (disjoint (fast_elements_tr l gv2) (fast_elements_tr l gv3)), (disjoint (fast_elements_tr l gv2) (elements r)), (disjoint (fast_elements_tr l gv2) (elements l)), (disjoint (fast_elements_tr l gv2) (gv3 ++ gv3)), (disjoint (fast_elements_tr l gv2) (gv3 ++ gv2)), (disjoint (fast_elements_tr l gv2) (gv2 ++ gv3)), (disjoint (fast_elements_tr l gv2) (gv2 ++ gv2)), (disjoint (fast_elements_tr l gv2) [])
+(disjoint (elements r) gv3), (disjoint (elements r) gv2), (disjoint (elements r) (kvs_insert x v gv3)), (disjoint (elements r) (kvs_insert x v gv2)), (disjoint (elements r) (fast_elements r)), (disjoint (elements r) (fast_elements l)), (disjoint (elements r) (fast_elements_tr r gv3)), (disjoint (elements r) (fast_elements_tr r gv2)), (disjoint (elements r) (fast_elements_tr l gv3)), (disjoint (elements r) (fast_elements_tr l gv2))
+(disjoint (elements r) (elements l)), (disjoint (elements r) (gv3 ++ gv3)), (disjoint (elements r) (gv3 ++ gv2)), (disjoint (elements r) (gv2 ++ gv3)), (disjoint (elements r) (gv2 ++ gv2)), (disjoint (elements r) []), (disjoint (elements l) gv3), (disjoint (elements l) gv2), (disjoint (elements l) (kvs_insert x v gv3)), (disjoint (elements l) (kvs_insert x v gv2))
+(disjoint (elements l) (fast_elements r)), (disjoint (elements l) (fast_elements l)), (disjoint (elements l) (fast_elements_tr r gv3)), (disjoint (elements l) (fast_elements_tr r gv2)), (disjoint (elements l) (fast_elements_tr l gv3)), (disjoint (elements l) (fast_elements_tr l gv2)), (disjoint (elements l) (elements r)), (disjoint (elements l) (gv3 ++ gv3)), (disjoint (elements l) (gv3 ++ gv2)), (disjoint (elements l) (gv2 ++ gv3))
+(disjoint (elements l) (gv2 ++ gv2)), (disjoint (elements l) []), (disjoint (gv3 ++ gv3) gv3), (disjoint (gv3 ++ gv3) gv2), (disjoint (gv3 ++ gv3) (kvs_insert x v gv3)), (disjoint (gv3 ++ gv3) (kvs_insert x v gv2)), (disjoint (gv3 ++ gv3) (fast_elements r)), (disjoint (gv3 ++ gv3) (fast_elements l)), (disjoint (gv3 ++ gv3) (fast_elements_tr r gv3)), (disjoint (gv3 ++ gv3) (fast_elements_tr r gv2))
+(disjoint (gv3 ++ gv3) (fast_elements_tr l gv3)), (disjoint (gv3 ++ gv3) (fast_elements_tr l gv2)), (disjoint (gv3 ++ gv3) (elements r)), (disjoint (gv3 ++ gv3) (elements l)), (disjoint (gv3 ++ gv3) (gv3 ++ gv2)), (disjoint (gv3 ++ gv3) (gv2 ++ gv3)), (disjoint (gv3 ++ gv3) (gv2 ++ gv2)), (disjoint (gv3 ++ gv3) []), (disjoint (gv3 ++ gv2) gv3), (disjoint (gv3 ++ gv2) gv2)
+(disjoint (gv3 ++ gv2) (kvs_insert x v gv3)), (disjoint (gv3 ++ gv2) (kvs_insert x v gv2)), (disjoint (gv3 ++ gv2) (fast_elements r)), (disjoint (gv3 ++ gv2) (fast_elements l)), (disjoint (gv3 ++ gv2) (fast_elements_tr r gv3)), (disjoint (gv3 ++ gv2) (fast_elements_tr r gv2)), (disjoint (gv3 ++ gv2) (fast_elements_tr l gv3)), (disjoint (gv3 ++ gv2) (fast_elements_tr l gv2)), (disjoint (gv3 ++ gv2) (elements r)), (disjoint (gv3 ++ gv2) (elements l))
+(disjoint (gv3 ++ gv2) (gv3 ++ gv3)), (disjoint (gv3 ++ gv2) (gv2 ++ gv3)), (disjoint (gv3 ++ gv2) (gv2 ++ gv2)), (disjoint (gv3 ++ gv2) []), (disjoint (gv2 ++ gv3) gv3), (disjoint (gv2 ++ gv3) gv2), (disjoint (gv2 ++ gv3) (kvs_insert x v gv3)), (disjoint (gv2 ++ gv3) (kvs_insert x v gv2)), (disjoint (gv2 ++ gv3) (fast_elements r)), (disjoint (gv2 ++ gv3) (fast_elements l))
+(disjoint (gv2 ++ gv3) (fast_elements_tr r gv3)), (disjoint (gv2 ++ gv3) (fast_elements_tr r gv2)), (disjoint (gv2 ++ gv3) (fast_elements_tr l gv3)), (disjoint (gv2 ++ gv3) (fast_elements_tr l gv2)), (disjoint (gv2 ++ gv3) (elements r)), (disjoint (gv2 ++ gv3) (elements l)), (disjoint (gv2 ++ gv3) (gv3 ++ gv3)), (disjoint (gv2 ++ gv3) (gv3 ++ gv2)), (disjoint (gv2 ++ gv3) (gv2 ++ gv2)), (disjoint (gv2 ++ gv3) [])
+(disjoint (gv2 ++ gv2) gv3), (disjoint (gv2 ++ gv2) gv2), (disjoint (gv2 ++ gv2) (kvs_insert x v gv3)), (disjoint (gv2 ++ gv2) (kvs_insert x v gv2)), (disjoint (gv2 ++ gv2) (fast_elements r)), (disjoint (gv2 ++ gv2) (fast_elements l)), (disjoint (gv2 ++ gv2) (fast_elements_tr r gv3)), (disjoint (gv2 ++ gv2) (fast_elements_tr r gv2)), (disjoint (gv2 ++ gv2) (fast_elements_tr l gv3)), (disjoint (gv2 ++ gv2) (fast_elements_tr l gv2))
+(disjoint (gv2 ++ gv2) (elements r)), (disjoint (gv2 ++ gv2) (elements l)), (disjoint (gv2 ++ gv2) (gv3 ++ gv3)), (disjoint (gv2 ++ gv2) (gv3 ++ gv2)), (disjoint (gv2 ++ gv2) (gv2 ++ gv3)), (disjoint (gv2 ++ gv2) []), (disjoint [] gv3), (disjoint [] gv2), (disjoint [] (kvs_insert x v gv3)), (disjoint [] (kvs_insert x v gv2))
+(disjoint [] (fast_elements r)), (disjoint [] (fast_elements l)), (disjoint [] (fast_elements_tr r gv3)), (disjoint [] (fast_elements_tr r gv2)), (disjoint [] (fast_elements_tr l gv3)), (disjoint [] (fast_elements_tr l gv2)), (disjoint [] (elements r)), (disjoint [] (elements l)), (disjoint [] (gv3 ++ gv3)), (disjoint [] (gv3 ++ gv2))
+(disjoint [] (gv2 ++ gv3)), (disjoint [] (gv2 ++ gv2)), (BST (T r x v r)), (BST (T r x v l)), (BST (T l x v r)), (BST (T l x v l)), (BST (insert x v r)), (BST (insert x v l)), (BST empty_tree), (BST E)
+(x <=* list_keys gv3), (x <=* list_keys gv2), (x <=* []), (Datatypes.length gv3 <=* list_keys gv3), (Datatypes.length gv3 <=* list_keys gv2), (Datatypes.length gv3 <=* []), (Datatypes.length gv2 <=* list_keys gv3), (Datatypes.length gv2 <=* list_keys gv2), (Datatypes.length gv2 <=* []), (sorted (list_keys gv3))
+(sorted (list_keys gv2)), (sorted []), (Permutation (list_keys gv3) (list_keys gv2)), (Permutation (list_keys gv3) []), (Permutation (list_keys gv2) (list_keys gv3)), (Permutation (list_keys gv2) []), (Permutation [] (list_keys gv3)), (Permutation [] (list_keys gv2)), (Permutation gv3 (kvs_insert x v gv3)), (Permutation gv3 (kvs_insert x v gv2))
+(Permutation gv3 (fast_elements r)), (Permutation gv3 (fast_elements l)), (Permutation gv3 (fast_elements_tr r gv3)), (Permutation gv3 (fast_elements_tr r gv2)), (Permutation gv3 (fast_elements_tr l gv3)), (Permutation gv3 (fast_elements_tr l gv2)), (Permutation gv3 (elements r)), (Permutation gv3 (elements l)), (Permutation gv3 (gv3 ++ gv3)), (Permutation gv3 (gv3 ++ gv2))
+(Permutation gv3 (gv2 ++ gv3)), (Permutation gv3 (gv2 ++ gv2)), (Permutation gv3 []), (Permutation gv2 (kvs_insert x v gv3)), (Permutation gv2 (kvs_insert x v gv2)), (Permutation gv2 (fast_elements r)), (Permutation gv2 (fast_elements l)), (Permutation gv2 (fast_elements_tr r gv3)), (Permutation gv2 (fast_elements_tr r gv2)), (Permutation gv2 (fast_elements_tr l gv3))
+(Permutation gv2 (fast_elements_tr l gv2)), (Permutation gv2 (elements r)), (Permutation gv2 (elements l)), (Permutation gv2 (gv3 ++ gv3)), (Permutation gv2 (gv3 ++ gv2)), (Permutation gv2 (gv2 ++ gv3)), (Permutation gv2 (gv2 ++ gv2)), (Permutation gv2 []), (Permutation (kvs_insert x v gv3) gv3), (Permutation (kvs_insert x v gv3) gv2)
+(Permutation (kvs_insert x v gv3) (kvs_insert x v gv2)), (Permutation (kvs_insert x v gv3) (fast_elements r)), (Permutation (kvs_insert x v gv3) (fast_elements l)), (Permutation (kvs_insert x v gv3) (fast_elements_tr r gv3)), (Permutation (kvs_insert x v gv3) (fast_elements_tr r gv2)), (Permutation (kvs_insert x v gv3) (fast_elements_tr l gv3)), (Permutation (kvs_insert x v gv3) (fast_elements_tr l gv2)), (Permutation (kvs_insert x v gv3) (elements r)), (Permutation (kvs_insert x v gv3) (elements l)), (Permutation (kvs_insert x v gv3) (gv3 ++ gv3))
+(Permutation (kvs_insert x v gv3) (gv3 ++ gv2)), (Permutation (kvs_insert x v gv3) (gv2 ++ gv3)), (Permutation (kvs_insert x v gv3) (gv2 ++ gv2)), (Permutation (kvs_insert x v gv3) []), (Permutation (kvs_insert x v gv2) gv3), (Permutation (kvs_insert x v gv2) gv2), (Permutation (kvs_insert x v gv2) (kvs_insert x v gv3)), (Permutation (kvs_insert x v gv2) (fast_elements r)), (Permutation (kvs_insert x v gv2) (fast_elements l)), (Permutation (kvs_insert x v gv2) (fast_elements_tr r gv3))
+(Permutation (kvs_insert x v gv2) (fast_elements_tr r gv2)), (Permutation (kvs_insert x v gv2) (fast_elements_tr l gv3)), (Permutation (kvs_insert x v gv2) (fast_elements_tr l gv2)), (Permutation (kvs_insert x v gv2) (elements r)), (Permutation (kvs_insert x v gv2) (elements l)), (Permutation (kvs_insert x v gv2) (gv3 ++ gv3)), (Permutation (kvs_insert x v gv2) (gv3 ++ gv2)), (Permutation (kvs_insert x v gv2) (gv2 ++ gv3)), (Permutation (kvs_insert x v gv2) (gv2 ++ gv2)), (Permutation (kvs_insert x v gv2) [])
+(Permutation (fast_elements r) gv3), (Permutation (fast_elements r) gv2), (Permutation (fast_elements r) (kvs_insert x v gv3)), (Permutation (fast_elements r) (kvs_insert x v gv2)), (Permutation (fast_elements r) (fast_elements l)), (Permutation (fast_elements r) (fast_elements_tr r gv3)), (Permutation (fast_elements r) (fast_elements_tr r gv2)), (Permutation (fast_elements r) (fast_elements_tr l gv3)), (Permutation (fast_elements r) (fast_elements_tr l gv2)), (Permutation (fast_elements r) (elements r))
+(Permutation (fast_elements r) (elements l)), (Permutation (fast_elements r) (gv3 ++ gv3)), (Permutation (fast_elements r) (gv3 ++ gv2)), (Permutation (fast_elements r) (gv2 ++ gv3)), (Permutation (fast_elements r) (gv2 ++ gv2)), (Permutation (fast_elements r) []), (Permutation (fast_elements l) gv3), (Permutation (fast_elements l) gv2), (Permutation (fast_elements l) (kvs_insert x v gv3)), (Permutation (fast_elements l) (kvs_insert x v gv2))
+(Permutation (fast_elements l) (fast_elements r)), (Permutation (fast_elements l) (fast_elements_tr r gv3)), (Permutation (fast_elements l) (fast_elements_tr r gv2)), (Permutation (fast_elements l) (fast_elements_tr l gv3)), (Permutation (fast_elements l) (fast_elements_tr l gv2)), (Permutation (fast_elements l) (elements r)), (Permutation (fast_elements l) (elements l)), (Permutation (fast_elements l) (gv3 ++ gv3)), (Permutation (fast_elements l) (gv3 ++ gv2)), (Permutation (fast_elements l) (gv2 ++ gv3))
+(Permutation (fast_elements l) (gv2 ++ gv2)), (Permutation (fast_elements l) []), (Permutation (fast_elements_tr r gv3) gv3), (Permutation (fast_elements_tr r gv3) gv2), (Permutation (fast_elements_tr r gv3) (kvs_insert x v gv3)), (Permutation (fast_elements_tr r gv3) (kvs_insert x v gv2)), (Permutation (fast_elements_tr r gv3) (fast_elements r)), (Permutation (fast_elements_tr r gv3) (fast_elements l)), (Permutation (fast_elements_tr r gv3) (fast_elements_tr r gv2)), (Permutation (fast_elements_tr r gv3) (fast_elements_tr l gv3))
+(Permutation (fast_elements_tr r gv3) (fast_elements_tr l gv2)), (Permutation (fast_elements_tr r gv3) (elements r)), (Permutation (fast_elements_tr r gv3) (elements l)), (Permutation (fast_elements_tr r gv3) (gv3 ++ gv3)), (Permutation (fast_elements_tr r gv3) (gv3 ++ gv2)), (Permutation (fast_elements_tr r gv3) (gv2 ++ gv3)), (Permutation (fast_elements_tr r gv3) (gv2 ++ gv2)), (Permutation (fast_elements_tr r gv3) []), (Permutation (fast_elements_tr r gv2) gv3), (Permutation (fast_elements_tr r gv2) gv2)
+(Permutation (fast_elements_tr r gv2) (kvs_insert x v gv3)), (Permutation (fast_elements_tr r gv2) (kvs_insert x v gv2)), (Permutation (fast_elements_tr r gv2) (fast_elements r)), (Permutation (fast_elements_tr r gv2) (fast_elements l)), (Permutation (fast_elements_tr r gv2) (fast_elements_tr r gv3)), (Permutation (fast_elements_tr r gv2) (fast_elements_tr l gv3)), (Permutation (fast_elements_tr r gv2) (fast_elements_tr l gv2)), (Permutation (fast_elements_tr r gv2) (elements r)), (Permutation (fast_elements_tr r gv2) (elements l)), (Permutation (fast_elements_tr r gv2) (gv3 ++ gv3))
+(Permutation (fast_elements_tr r gv2) (gv3 ++ gv2)), (Permutation (fast_elements_tr r gv2) (gv2 ++ gv3)), (Permutation (fast_elements_tr r gv2) (gv2 ++ gv2)), (Permutation (fast_elements_tr r gv2) []), (Permutation (fast_elements_tr l gv3) gv3), (Permutation (fast_elements_tr l gv3) gv2), (Permutation (fast_elements_tr l gv3) (kvs_insert x v gv3)), (Permutation (fast_elements_tr l gv3) (kvs_insert x v gv2)), (Permutation (fast_elements_tr l gv3) (fast_elements r)), (Permutation (fast_elements_tr l gv3) (fast_elements l))
+(Permutation (fast_elements_tr l gv3) (fast_elements_tr r gv3)), (Permutation (fast_elements_tr l gv3) (fast_elements_tr r gv2)), (Permutation (fast_elements_tr l gv3) (fast_elements_tr l gv2)), (Permutation (fast_elements_tr l gv3) (elements r)), (Permutation (fast_elements_tr l gv3) (elements l)), (Permutation (fast_elements_tr l gv3) (gv3 ++ gv3)), (Permutation (fast_elements_tr l gv3) (gv3 ++ gv2)), (Permutation (fast_elements_tr l gv3) (gv2 ++ gv3)), (Permutation (fast_elements_tr l gv3) (gv2 ++ gv2)), (Permutation (fast_elements_tr l gv3) [])
+(Permutation (fast_elements_tr l gv2) gv3), (Permutation (fast_elements_tr l gv2) gv2), (Permutation (fast_elements_tr l gv2) (kvs_insert x v gv3)), (Permutation (fast_elements_tr l gv2) (kvs_insert x v gv2)), (Permutation (fast_elements_tr l gv2) (fast_elements r)), (Permutation (fast_elements_tr l gv2) (fast_elements l)), (Permutation (fast_elements_tr l gv2) (fast_elements_tr r gv3)), (Permutation (fast_elements_tr l gv2) (fast_elements_tr r gv2)), (Permutation (fast_elements_tr l gv2) (fast_elements_tr l gv3)), (Permutation (fast_elements_tr l gv2) (elements r))
+(Permutation (fast_elements_tr l gv2) (elements l)), (Permutation (fast_elements_tr l gv2) (gv3 ++ gv3)), (Permutation (fast_elements_tr l gv2) (gv3 ++ gv2)), (Permutation (fast_elements_tr l gv2) (gv2 ++ gv3)), (Permutation (fast_elements_tr l gv2) (gv2 ++ gv2)), (Permutation (fast_elements_tr l gv2) []), (Permutation (elements r) gv3), (Permutation (elements r) gv2), (Permutation (elements r) (kvs_insert x v gv3)), (Permutation (elements r) (kvs_insert x v gv2))
+(Permutation (elements r) (fast_elements r)), (Permutation (elements r) (fast_elements l)), (Permutation (elements r) (fast_elements_tr r gv3)), (Permutation (elements r) (fast_elements_tr r gv2)), (Permutation (elements r) (fast_elements_tr l gv3)), (Permutation (elements r) (fast_elements_tr l gv2)), (Permutation (elements r) (elements l)), (Permutation (elements r) (gv3 ++ gv3)), (Permutation (elements r) (gv3 ++ gv2)), (Permutation (elements r) (gv2 ++ gv3))
+(Permutation (elements r) (gv2 ++ gv2)), (Permutation (elements r) []), (Permutation (elements l) gv3), (Permutation (elements l) gv2), (Permutation (elements l) (kvs_insert x v gv3)), (Permutation (elements l) (kvs_insert x v gv2)), (Permutation (elements l) (fast_elements r)), (Permutation (elements l) (fast_elements l)), (Permutation (elements l) (fast_elements_tr r gv3)), (Permutation (elements l) (fast_elements_tr r gv2))
+(Permutation (elements l) (fast_elements_tr l gv3)), (Permutation (elements l) (fast_elements_tr l gv2)), (Permutation (elements l) (elements r)), (Permutation (elements l) (gv3 ++ gv3)), (Permutation (elements l) (gv3 ++ gv2)), (Permutation (elements l) (gv2 ++ gv3)), (Permutation (elements l) (gv2 ++ gv2)), (Permutation (elements l) []), (Permutation (gv3 ++ gv3) gv3), (Permutation (gv3 ++ gv3) gv2)
+(Permutation (gv3 ++ gv3) (kvs_insert x v gv3)), (Permutation (gv3 ++ gv3) (kvs_insert x v gv2)), (Permutation (gv3 ++ gv3) (fast_elements r)), (Permutation (gv3 ++ gv3) (fast_elements l)), (Permutation (gv3 ++ gv3) (fast_elements_tr r gv3)), (Permutation (gv3 ++ gv3) (fast_elements_tr r gv2)), (Permutation (gv3 ++ gv3) (fast_elements_tr l gv3)), (Permutation (gv3 ++ gv3) (fast_elements_tr l gv2)), (Permutation (gv3 ++ gv3) (elements r)), (Permutation (gv3 ++ gv3) (elements l))
+(Permutation (gv3 ++ gv3) (gv3 ++ gv2)), (Permutation (gv3 ++ gv3) (gv2 ++ gv3)), (Permutation (gv3 ++ gv3) (gv2 ++ gv2)), (Permutation (gv3 ++ gv3) []), (Permutation (gv3 ++ gv2) gv3), (Permutation (gv3 ++ gv2) gv2), (Permutation (gv3 ++ gv2) (kvs_insert x v gv3)), (Permutation (gv3 ++ gv2) (kvs_insert x v gv2)), (Permutation (gv3 ++ gv2) (fast_elements r)), (Permutation (gv3 ++ gv2) (fast_elements l))
+(Permutation (gv3 ++ gv2) (fast_elements_tr r gv3)), (Permutation (gv3 ++ gv2) (fast_elements_tr r gv2)), (Permutation (gv3 ++ gv2) (fast_elements_tr l gv3)), (Permutation (gv3 ++ gv2) (fast_elements_tr l gv2)), (Permutation (gv3 ++ gv2) (elements r)), (Permutation (gv3 ++ gv2) (elements l)), (Permutation (gv3 ++ gv2) (gv3 ++ gv3)), (Permutation (gv3 ++ gv2) (gv2 ++ gv3)), (Permutation (gv3 ++ gv2) (gv2 ++ gv2)), (Permutation (gv3 ++ gv2) [])
+(Permutation (gv2 ++ gv3) gv3), (Permutation (gv2 ++ gv3) gv2), (Permutation (gv2 ++ gv3) (kvs_insert x v gv3)), (Permutation (gv2 ++ gv3) (kvs_insert x v gv2)), (Permutation (gv2 ++ gv3) (fast_elements r)), (Permutation (gv2 ++ gv3) (fast_elements l)), (Permutation (gv2 ++ gv3) (fast_elements_tr r gv3)), (Permutation (gv2 ++ gv3) (fast_elements_tr r gv2)), (Permutation (gv2 ++ gv3) (fast_elements_tr l gv3)), (Permutation (gv2 ++ gv3) (fast_elements_tr l gv2))
+(Permutation (gv2 ++ gv3) (elements r)), (Permutation (gv2 ++ gv3) (elements l)), (Permutation (gv2 ++ gv3) (gv3 ++ gv3)), (Permutation (gv2 ++ gv3) (gv3 ++ gv2)), (Permutation (gv2 ++ gv3) (gv2 ++ gv2)), (Permutation (gv2 ++ gv3) []), (Permutation (gv2 ++ gv2) gv3), (Permutation (gv2 ++ gv2) gv2), (Permutation (gv2 ++ gv2) (kvs_insert x v gv3)), (Permutation (gv2 ++ gv2) (kvs_insert x v gv2))
+(Permutation (gv2 ++ gv2) (fast_elements r)), (Permutation (gv2 ++ gv2) (fast_elements l)), (Permutation (gv2 ++ gv2) (fast_elements_tr r gv3)), (Permutation (gv2 ++ gv2) (fast_elements_tr r gv2)), (Permutation (gv2 ++ gv2) (fast_elements_tr l gv3)), (Permutation (gv2 ++ gv2) (fast_elements_tr l gv2)), (Permutation (gv2 ++ gv2) (elements r)), (Permutation (gv2 ++ gv2) (elements l)), (Permutation (gv2 ++ gv2) (gv3 ++ gv3)), (Permutation (gv2 ++ gv2) (gv3 ++ gv2))
+(Permutation (gv2 ++ gv2) (gv2 ++ gv3)), (Permutation (gv2 ++ gv2) []), (Permutation [] gv3), (Permutation [] gv2), (Permutation [] (kvs_insert x v gv3)), (Permutation [] (kvs_insert x v gv2)), (Permutation [] (fast_elements r)), (Permutation [] (fast_elements l)), (Permutation [] (fast_elements_tr r gv3)), (Permutation [] (fast_elements_tr r gv2))
+(Permutation [] (fast_elements_tr l gv3)), (Permutation [] (fast_elements_tr l gv2)), (Permutation [] (elements r)), (Permutation [] (elements l)), (Permutation [] (gv3 ++ gv3)), (Permutation [] (gv3 ++ gv2)), (Permutation [] (gv2 ++ gv3)), (Permutation [] (gv2 ++ gv2)), (In x (list_keys gv3)), (In x (list_keys gv2))
+(In (Datatypes.length gv3) (list_keys gv3)), (In (Datatypes.length gv3) (list_keys gv2)), (In (Datatypes.length gv2) (list_keys gv3)), (In (Datatypes.length gv2) (list_keys gv2)), (In (x, v) gv3), (In (x, v) gv2), (In (x, v) (kvs_insert x v gv3)), (In (x, v) (kvs_insert x v gv2)), (In (x, v) (fast_elements r)), (In (x, v) (fast_elements l))
+(In (x, v) (fast_elements_tr r gv3)), (In (x, v) (fast_elements_tr r gv2)), (In (x, v) (fast_elements_tr l gv3)), (In (x, v) (fast_elements_tr l gv2)), (In (x, v) (elements r)), (In (x, v) (elements l)), (In (x, v) (gv3 ++ gv3)), (In (x, v) (gv3 ++ gv2)), (In (x, v) (gv2 ++ gv3)), (In (x, v) (gv2 ++ gv2))
+(x < Datatypes.length gv3), (x < Datatypes.length gv2), (Datatypes.length gv3 < x), (Datatypes.length gv3 < Datatypes.length gv2), (Datatypes.length gv2 < x), (Datatypes.length gv2 < Datatypes.length gv3), (x <= Datatypes.length gv3), (x <= Datatypes.length gv2), (Datatypes.length gv3 <= x), (Datatypes.length gv3 <= Datatypes.length gv2)
+(Datatypes.length gv2 <= x), (Datatypes.length gv2 <= Datatypes.length gv3), (~ disjoint gv3 gv3), (~ disjoint gv3 gv2), (~ disjoint gv2 gv3), (~ disjoint gv2 gv2), (~ BST r), (~ BST l), (~ Permutation gv3 gv3), (~ Permutation gv3 gv2)
+(~ Permutation gv2 gv3), (~ Permutation gv2 gv2), (~ x < x), (~ x <= x), (r <> r), (r <> l), (l <> r), (l <> l), (gv3 <> gv3), (gv3 <> gv2)
+(gv2 <> gv3), (gv2 <> gv2), (v <> v), (x <> x), (kvs_insert x v gv3 = gv3), (kvs_insert x v gv3 = gv2), (kvs_insert x v gv3 = fast_elements r), (kvs_insert x v gv3 = fast_elements l), (kvs_insert x v gv3 = fast_elements_tr r gv3), (kvs_insert x v gv3 = fast_elements_tr r gv2)
+(kvs_insert x v gv3 = fast_elements_tr l gv3), (kvs_insert x v gv3 = fast_elements_tr l gv2), (kvs_insert x v gv3 = elements r), (kvs_insert x v gv3 = elements l), (kvs_insert x v gv3 = gv3 ++ gv3), (kvs_insert x v gv3 = gv3 ++ gv2), (kvs_insert x v gv3 = gv2 ++ gv3), (kvs_insert x v gv3 = gv2 ++ gv2), (kvs_insert x v gv2 = gv3), (kvs_insert x v gv2 = gv2)
+(kvs_insert x v gv2 = fast_elements r), (kvs_insert x v gv2 = fast_elements l), (kvs_insert x v gv2 = fast_elements_tr r gv3), (kvs_insert x v gv2 = fast_elements_tr r gv2), (kvs_insert x v gv2 = fast_elements_tr l gv3), (kvs_insert x v gv2 = fast_elements_tr l gv2), (kvs_insert x v gv2 = elements r), (kvs_insert x v gv2 = elements l), (kvs_insert x v gv2 = gv3 ++ gv3), (kvs_insert x v gv2 = gv3 ++ gv2)
+(kvs_insert x v gv2 = gv2 ++ gv3), (kvs_insert x v gv2 = gv2 ++ gv2), (fast_elements r = gv3), (fast_elements r = gv2), (fast_elements r = elements r), (fast_elements r = elements l), (fast_elements r = gv3 ++ gv3), (fast_elements r = gv3 ++ gv2), (fast_elements r = gv2 ++ gv3), (fast_elements r = gv2 ++ gv2)
+(fast_elements l = gv3), (fast_elements l = gv2), (fast_elements l = elements r), (fast_elements l = elements l), (fast_elements l = gv3 ++ gv3), (fast_elements l = gv3 ++ gv2), (fast_elements l = gv2 ++ gv3), (fast_elements l = gv2 ++ gv2), (fast_elements_tr r gv3 = gv3), (fast_elements_tr r gv3 = gv2)
+(fast_elements_tr r gv3 = fast_elements r), (fast_elements_tr r gv3 = fast_elements l), (fast_elements_tr r gv3 = elements r), (fast_elements_tr r gv3 = elements l), (fast_elements_tr r gv3 = gv3 ++ gv3), (fast_elements_tr r gv3 = gv3 ++ gv2), (fast_elements_tr r gv3 = gv2 ++ gv3), (fast_elements_tr r gv3 = gv2 ++ gv2), (fast_elements_tr r gv2 = gv3), (fast_elements_tr r gv2 = gv2)
+(fast_elements_tr r gv2 = fast_elements r), (fast_elements_tr r gv2 = fast_elements l), (fast_elements_tr r gv2 = elements r), (fast_elements_tr r gv2 = elements l), (fast_elements_tr r gv2 = gv3 ++ gv3), (fast_elements_tr r gv2 = gv3 ++ gv2), (fast_elements_tr r gv2 = gv2 ++ gv3), (fast_elements_tr r gv2 = gv2 ++ gv2), (fast_elements_tr l gv3 = gv3), (fast_elements_tr l gv3 = gv2)
+(fast_elements_tr l gv3 = fast_elements r), (fast_elements_tr l gv3 = fast_elements l), (fast_elements_tr l gv3 = elements r), (fast_elements_tr l gv3 = elements l), (fast_elements_tr l gv3 = gv3 ++ gv3), (fast_elements_tr l gv3 = gv3 ++ gv2), (fast_elements_tr l gv3 = gv2 ++ gv3), (fast_elements_tr l gv3 = gv2 ++ gv2), (fast_elements_tr l gv2 = gv3), (fast_elements_tr l gv2 = gv2)
+(fast_elements_tr l gv2 = fast_elements r), (fast_elements_tr l gv2 = fast_elements l), (fast_elements_tr l gv2 = elements r), (fast_elements_tr l gv2 = elements l), (fast_elements_tr l gv2 = gv3 ++ gv3), (fast_elements_tr l gv2 = gv3 ++ gv2), (fast_elements_tr l gv2 = gv2 ++ gv3), (fast_elements_tr l gv2 = gv2 ++ gv2), (elements r = gv3), (elements r = gv2)
+(elements r = gv3 ++ gv3), (elements r = gv3 ++ gv2), (elements r = gv2 ++ gv3), (elements r = gv2 ++ gv2), (elements l = gv3), (elements l = gv2), (elements l = gv3 ++ gv3), (elements l = gv3 ++ gv2), (elements l = gv2 ++ gv3), (elements l = gv2 ++ gv2)
+(gv3 ++ gv3 = gv3), (gv3 ++ gv3 = gv2), (gv3 ++ gv2 = gv3), (gv3 ++ gv2 = gv2), (gv2 ++ gv3 = gv3), (gv2 ++ gv3 = gv2), (gv2 ++ gv2 = gv3), (gv2 ++ gv2 = gv2), ([] = gv3), ([] = gv2)
+([] = kvs_insert x v gv3), ([] = kvs_insert x v gv2), ([] = fast_elements r), ([] = fast_elements l), ([] = fast_elements_tr r gv3), ([] = fast_elements_tr r gv2), ([] = fast_elements_tr l gv3), ([] = fast_elements_tr l gv2), ([] = elements r), ([] = elements l)
+([] = gv3 ++ gv3), ([] = gv3 ++ gv2), ([] = gv2 ++ gv3), ([] = gv2 ++ gv2), ([] = list_keys gv3), ([] = list_keys gv2), (None = Some x), (None = Some gv3), (None = Some gv2), (lookup v x r = v)
+(lookup v x l = v), (Red = lookup v x r), (Red = lookup v x l), (Green = lookup v x r), (Green = lookup v x l), (Blue = lookup v x r), (Blue = lookup v x l), (Datatypes.length gv3 = x), (Datatypes.length gv2 = x), (None = Some r)
+(None = Some l), (T r x v r = r), (T r x v r = l), (T r x v r = insert x v r), (T r x v r = insert x v l), (T r x v l = r), (T r x v l = l), (T r x v l = insert x v r), (T r x v l = insert x v l), (T l x v r = r)
+(T l x v r = l), (T l x v r = insert x v r), (T l x v r = insert x v l), (T l x v l = r), (T l x v l = l), (T l x v l = insert x v r), (T l x v l = insert x v l), (insert x v r = r), (insert x v r = l), (insert x v l = r)
+(insert x v l = l), (empty_tree = T r x v r), (empty_tree = T r x v l), (empty_tree = T l x v r), (empty_tree = T l x v l), (empty_tree = insert x v r), (empty_tree = insert x v l), (E = T r x v r), (E = T r x v l), (E = T l x v r)
+(E = T l x v l), (E = insert x v r), (E = insert x v l), (None = Some v)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 218.945 seconds
+
+
+Label: 0 (0)
+(In (x, v) gv1), (In (x, v) (gv1 ++ gv1))
+
+Label: 1 (1)
+(In gv0 gv1), (In gv0 (gv1 ++ gv1))
+
+Label: 2 (2)
+(In gv0 gv3), (In gv0 (fast_elements_tr l gv3)), (Permutation gv3 (kvs_insert x v gv3)), (Permutation (kvs_insert x v gv3) gv3), (In (x, v) gv3), (kvs_insert x v gv3 = gv3), (In gv0 (gv3 ++ gv3)), (In (x, v) (gv3 ++ gv3))
+
+Label: 3 (3)
+(In (x, v) gv1), (In (x, v) (gv1 ++ gv1))
+
+Label: 4 (4)
+(Permutation gv3 (kvs_insert x v gv3)), (Permutation (kvs_insert x v gv3) gv3), (In (x, v) gv3), (kvs_insert x v gv3 = gv3), (In (x, v) (fast_elements_tr l gv3)), (In (x, v) (gv3 ++ gv3))
+
+Label: 5 (5)
+(Permutation gv3 (kvs_insert x v gv3)), (Permutation (kvs_insert x v gv3) gv3), (In (x, v) gv3), (kvs_insert x v gv3 = gv3), (In (x, v) (fast_elements_tr l gv3)), (In (x, v) (gv3 ++ gv3))
+
+Label: 6 (6)
+(In (x, v) gv1), (In (x, v) (gv1 ++ gv1))
+
+Label: 7 (7)
+(Permutation gv3 (kvs_insert x v gv3)), (Permutation (kvs_insert x v gv3) gv3), (In (x, v) gv3), (kvs_insert x v gv3 = gv3), (In (x, v) (gv3 ++ gv3)), (In (x, v) (gv3 ++ gv2)), (In (x, v) (gv2 ++ gv3))
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (In gv0 (elements l ++ gv0 :: elements r))
+
+2. (In gv0 (elements l ++ gv0 :: gv4))
+
+3. (In gv0 (gv2 ++ gv0 :: gv4))
+
+4. (In gv0 (gv2 ++ gv0 :: elements r))
+
+5. (In (x, v) (elements l ++ (x, v) :: gv4))
+
+6. (In (x, v) (gv2 ++ (x, v) :: gv4))
+
+7. (In (x, v) (gv2 ++ (x, v) :: elements r))
+
+8. (In (x, v) (elements l ++ (x, v) :: elements r))
+
+9. (kvs_insert x v ((x, v) :: gv4) = (x, v) :: gv4)
+
+10. (kvs_insert x v ((x, v) :: elements r) = (x, v) :: elements r)
+
+11. (In gv0 gv3 -> In gv0 (elements l ++ gv3))
+
+12. (In gv0 (fast_elements_tr l gv3) -> In gv0 (elements l ++ gv3))
+
+13. (Permutation gv3 (kvs_insert x v gv3) -> In (x, v) (elements l ++ gv3))
+
+14. (Permutation (kvs_insert x v gv3) gv3 -> In (x, v) (elements l ++ gv3))
+
+15. (Permutation gv3 (kvs_insert x v gv3) -> In (x, v) (gv2 ++ gv3))
+
+16. (Permutation (kvs_insert x v gv3) gv3 -> In (x, v) (gv2 ++ gv3))
+
+17. (In (x, v) gv3 -> In (x, v) (elements l ++ gv3))
+
+18. (kvs_insert x v gv3 = gv3 -> In (x, v) (elements l ++ gv3))
+
+19. (In (x, v) gv3 -> In (x, v) (gv2 ++ gv3))
+
+20. (kvs_insert x v gv3 = gv3 -> In (x, v) (gv2 ++ gv3))
+
+21. (In gv0 (gv1 ++ gv1) -> In gv0 gv1)
+
+22. (In gv0 (gv3 ++ gv3) -> In gv0 (elements l ++ gv3))
+
+23. (In (x, v) (fast_elements_tr l gv3) -> In (x, v) (elements l ++ gv3))
+
+24. (In (x, v) (gv1 ++ gv1) -> In (x, v) gv1)
+
+25. (In (x, v) (gv3 ++ gv3) -> In (x, v) (elements l ++ gv3))
+
+26. (In (x, v) (gv3 ++ gv3) -> In (x, v) (gv2 ++ gv3))
+
+27. (In (x, v) (gv3 ++ gv2) -> In (x, v) (gv2 ++ gv3))
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 314.276 seconds
+
+Number of Result Pairs Returned: 27
+
+1. (In gv0 (elements l ++ gv0 :: elements r))
+
+2. (In gv0 (elements l ++ gv0 :: gv4))
+
+3. (In gv0 (gv2 ++ gv0 :: gv4))
+
+4. (In gv0 (gv2 ++ gv0 :: elements r))
+
+5. (In (x, v) (elements l ++ (x, v) :: gv4))

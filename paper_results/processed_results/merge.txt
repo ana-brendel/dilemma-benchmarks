@@ -1,0 +1,322 @@
+[TOTAL] 17
+
+[SUCCESS] 10
+    [SUCCESS][1][AS IS] 3 ([ATOMIC] 2)
+    [ATOMIC][SUCCESS][1][GENERALIZE] 1
+    [SUCCESS][3][GENERALIZE] 4 ([ATOMIC] 2)
+    [SUCCESS][3][INFER ATOMIC] 2
+
+[FAIL] 7
+    [FAIL][FORWARD] 3
+    [FAIL][BEYOND SCOPE][EXTRA VAR] 4
+
+[ATOMIC - EQUAL] 2
+[ATOMIC - OTHER] 5
+-----------------------------------------------
+
+[FAIL][FORWARD]
+Test = sorted_merge_by_sorted_merge1_2
+[TIME] 180.855
+[COUNTS] 53
+[TARGET] x <= x1 -> x <= x2 -> sorted (merge (x1::l1) (x2::l2)) -> sorted (x :: merge (x1::l1) (x2::l2))
+
+1. (a > a0 ->  sorted (a :: l1) -> sorted (a0 :: gv3) -> sorted (a0 :: merge (a :: l1) gv3))
+
+2. (sorted (a0 :: n :: l2) ->  sorted (a :: l1) -> a > a0 -> sorted (a0 :: merge (a :: l1) (n :: l2)))
+
+3. (a > a0 -> a0 <= a)
+(a0 <= a ->  sorted (a :: l1) ->  sorted (a0 :: n :: l2) -> sorted (a0 :: merge (a :: l1) (n :: l2)))
+
+4. (a > a0 -> ~ a < a0)
+(~ a < a0 ->  sorted (a :: l1) ->  sorted (a0 :: n :: l2) -> sorted (a0 :: merge (a :: l1) (n :: l2)))
+
+5. (a > a0 -> ~ a <= a0)
+(~ a <= a0 ->  sorted (a :: l1) ->  sorted (a0 :: n :: l2) -> sorted (a0 :: merge (a :: l1) (n :: l2)))
+
+
+
+[SUCCESS][3][GENERALIZE]
+Test = mergesort_perm_by_Permutation_app
+[TIME] 160.222
+[COUNTS] 34
+[TARGET] Permutation l l' -> Permutation m m' -> Permutation (l++m) (l'++m')
+
+1. (Permutation l1 gv2 -> Permutation (l1 ++ l2) (gv2 ++ mergesort l2))
+
+2. (Permutation l2 gv3 -> Permutation (l1 ++ l2) (mergesort l1 ++ gv3))
+
+3. (Permutation l2 gv3 ->  Permutation l1 gv2 -> Permutation (l1 ++ l2) (gv2 ++ gv3))
+
+4. (Permutation (l1 ++ l2) (mergesort l1 ++ mergesort l2))
+
+5. (Permutation gv0 (merge l2 gv2) -> Permutation gv0 (gv2 ++ mergesort l2))
+
+
+
+[SUCCESS][3][GENERALIZE]
+Test = mergesort_sorts_by_sorted_merge
+[TIME] 78.429
+[COUNTS] 5
+[TARGET] sorted l1 -> sorted l2 -> sorted (merge l1 l2)
+
+1. (sorted gv2 -> sorted (merge (mergesort l1) gv2))
+
+2. (sorted gv1 -> sorted (merge gv1 (mergesort l2)))
+
+3. (sorted gv2 -> sorted gv1 -> sorted (merge gv1 gv2))
+
+4. (sorted (merge (mergesort l1) (mergesort l2)))
+
+5. (sorted (merge gv0 gv0) -> sorted gv0)
+
+
+
+[FAIL][BEYOND SCOPE][EXTRA VAR]
+Test = mergesort_perm_by_Permutation_trans_1
+[TIME] 151.435
+[COUNTS] 33
+[TARGET] Permutation l m -> Permutation m n-> Permutation l n
+
+1. (split l = (l1, l2) ->  Permutation l2 gv2 -> Permutation l (merge (mergesort l1) gv2))
+
+2. (split l = (l1, l2) ->  Permutation l1 gv1 -> Permutation l (merge gv1 (mergesort l2)))
+
+3. (split l = (l1, l2) ->  Permutation l2 gv2 -> Permutation l1 gv1 -> Permutation l (merge gv1 gv2))
+
+4. (split l = (l1, l2) -> Permutation l (merge (mergesort l1) (mergesort l2)))
+
+5. (split l = (l1, l2) -> Permutation (merge l2 l1) l)
+(Permutation (merge l2 l1) l ->  Permutation l (merge (mergesort l1) (mergesort l2)))
+
+
+
+[FAIL][FORWARD]
+Test = sorted_merge_by_sorted_merge1_1
+[TIME] 184.028
+[COUNTS] 51
+[TARGET] x <= x1 -> x <= x2 -> sorted (merge (x1::l1) (x2::l2)) -> sorted (x :: merge (x1::l1) (x2::l2))
+
+1. (sorted (a :: gv2) ->  a <= a0 -> sorted (a0 :: l2) -> sorted (a :: merge gv2 (a0 :: l2)))
+
+2. (sorted (a0 :: l2) ->  a <= a0 -> sorted (a :: n :: l1) -> sorted (a :: merge (n :: l1) (a0 :: l2)))
+
+3. (a <= a0 -> ~ a0 < a)
+(~ a0 < a ->  sorted (a0 :: l2) ->  sorted (a :: n :: l1) -> sorted (a :: merge (n :: l1) (a0 :: l2)))
+
+4. (sorted (merge l2 gv0) -> sorted gv0)
+
+5. (sorted (merge gv0 l2) -> sorted gv0)
+
+
+
+[FAIL][BEYOND SCOPE][EXTRA VAR]
+Test = mergesort_perm_by_Permutation_trans_2
+[TIME] 145.059
+[COUNTS] 31
+[TARGET] Permutation l m -> Permutation m n-> Permutation l n
+
+1. (split l = (l1, l2) ->  Permutation l2 gv2 -> Permutation l (mergesort l1 ++ gv2))
+
+2. (split l = (l1, l2) ->  Permutation l1 gv1 -> Permutation l (gv1 ++ mergesort l2))
+
+3. (split l = (l1, l2) ->  Permutation l2 gv2 -> Permutation l1 gv1 -> Permutation l (gv1 ++ gv2))
+
+4. (split l = (l1, l2) -> Permutation l (mergesort l1 ++ mergesort l2))
+
+5. (split l = (l1, l2) -> Permutation (merge l2 l1) l)
+(Permutation (merge l2 l1) l -> Permutation l (mergesort l1 ++ mergesort l2))
+
+
+
+[FAIL][FORWARD]
+Test = split_perm_by_Permutation_cons_app
+[TIME] 540.634
+[COUNTS] 45
+[TARGET] Permutation l (l1 ++ l2) -> Permutation (a :: l) (l1 ++ a :: l2)
+
+1. (a :: l0 = l1 ->  gv2 = l2 -> split (a :: gv0) = (l1, l2) -> Permutation gv0 (l0 ++ gv2))
+
+2. (a :: l0 = l1 ->  gv2 = l2 ->  split (a :: b :: l) = (l1, l2) -> Permutation (b :: l) (l0 ++ gv2))
+
+3. (a :: l0 = l1 ->  b :: l3 = l2 ->  split (a :: gv0) = (l1, l2) -> Permutation gv0 (l0 ++ b :: l3))
+
+4. (b :: l3 = l2 ->  split (a :: b :: l) = (l1, l2) ->  a :: l0 = l1 -> Permutation (b :: l) (l0 ++ b :: l3))
+
+5. (b :: l3 = l2 -> length l3 < length l2)
+(length l3 < length l2 ->  a :: l0 = l1 ->  split (a :: b :: l) = (l1, l2) -> Permutation (b :: l) (l0 ++ b :: l3))
+
+
+[***]
+[ATOMIC][SUCCESS][1][AS IS]
+Test = mergesort_correct_by_mergesort_perm
+[TIME] 66.673
+[COUNTS] 19
+[TARGET] Permutation l (mergesort l)
+
+1. (Permutation al (mergesort al))
+
+2. (Permutation (merge gv0 al) (merge al al) -> Permutation al gv0)
+
+3. (Permutation (merge al gv0) (merge al al) -> Permutation al gv0)
+
+4. (Permutation (merge al al) (merge gv0 al) -> Permutation al gv0)
+
+5. (Permutation (merge al al) (merge al gv0) -> Permutation al gv0)
+
+
+
+[SUCCESS][1][AS IS]
+Test = mergesort_perm_by_split_perm
+[TIME] 118.913
+[COUNTS] 27
+[TARGET] split l = (l1,l2) -> Permutation l (l1 ++ l2)
+
+1. (split l = (l1, l2) -> Permutation l (l1 ++ l2))
+
+2. (split l = (l1, l2) -> Permutation (merge l2 l1) l)
+(Permutation (merge l2 l1) l -> Permutation l (l1 ++ l2))
+
+3. (split l = (l1, l2) -> Permutation (merge l1 l2) l)
+(Permutation (merge l1 l2) l -> Permutation l (l1 ++ l2))
+
+4. (split l = (l1, l2) -> Permutation l (merge l2 l1))
+(Permutation l (merge l2 l1) -> Permutation l (l1 ++ l2))
+
+5. (split l = (l1, l2) -> Permutation l (merge l1 l2))
+(Permutation l (merge l1 l2) -> Permutation l (l1 ++ l2))
+
+
+[**]
+[ATOMIC][SUCCESS][3][INFER ATOMIC]
+Test = merge_perm_by_app_nil_r
+[TIME] 89.034
+[COUNTS] 46
+[TARGET] [ ] ++ l = l
+
+1. (Permutation (a :: l1 ++ []) (a :: l1))
+
+2. (a :: l1 = a :: l1 ++ [])
+
+3. (l1 ++ [] = l1)
+
+4. (Permutation l1 gv1 -> Permutation (a :: gv1) (a :: l1))
+
+5. (Permutation gv1 l1 -> Permutation (a :: gv1) (a :: l1))
+
+
+
+[FAIL][BEYOND SCOPE][EXTRA VAR]
+Test = merge_perm_by_Permutation_trans_2
+[TIME] 57.09
+[COUNTS] 3
+[TARGET] Permutation l m -> Permutation m n-> Permutation l n
+
+1. (Permutation (l2 ++ a :: l1)    ((fix merge_aux (l2 : list nat) : list nat :=        match l2 with        | [] => a :: l1        | a2 :: l2' =>            if a <=? a2 then a :: merge l1 l2 else a2 :: merge_aux l2'        end) l2))
+
+2. (Permutation gv1 (a :: l1) ->  Permutation (l2 ++ gv1)    ((fix merge_aux (l2 : list nat) : list nat :=        match l2 with        | [] => a :: l1        | a2 :: l2' =>            if a <=? a2 then a :: merge l1 l2 else a2 :: merge_aux l2'        end) l2))
+
+3. (Permutation (a :: l1) gv1 ->  Permutation (l2 ++ gv1)    ((fix merge_aux (l2 : list nat) : list nat :=        match l2 with        | [] => a :: l1        | a2 :: l2' =>            if a <=? a2 then a :: merge l1 l2 else a2 :: merge_aux l2'        end) l2))
+
+
+[***]
+[ATOMIC][SUCCESS][3][GENERALIZE]
+Test = merge_perm_by_Permutation_app_comm_1
+[TIME] 99.64
+[COUNTS] 4
+[TARGET] Permutation (m ++ n) (n ++ m)
+
+1. (Permutation ((a :: l1) ++ gv2) (gv2 ++ a :: l1))
+
+2. (Permutation (gv1 ++ gv2) (gv2 ++ gv1))
+
+3. (Permutation (gv1 ++ a0 :: l2) ((a0 :: l2) ++ gv1))
+
+4. (Permutation ((a :: l1) ++ a0 :: l2) ((a0 :: l2) ++ a :: l1))
+
+
+[**]
+[ATOMIC][SUCCESS][3][INFER ATOMIC]
+Test = merge_perm_by_merge_nil_l
+[TIME] 103.044
+[COUNTS] 60
+[TARGET] merge [] l = l
+
+1. (Permutation (gv1 ++ l2) (merge gv1 l2))
+
+2. (Permutation ([] ++ l2) (merge [] l2))
+
+3. (merge [] l2 = l2)
+
+4. ([] ++ l2 = l2)
+
+5. (Permutation l2 gv0 -> Permutation gv0 (merge [] l2))
+
+
+
+[FAIL][BEYOND SCOPE][EXTRA VAR]
+Test = merge_perm_by_Permutation_trans_1
+[TIME] 71.104
+[COUNTS] 5
+[TARGET] Permutation l m -> Permutation m n-> Permutation l n
+
+1. (Permutation ((a :: l1) ++ a0 :: l2)    (a0     :: (fix merge_aux (l2 : list nat) : list nat :=           match l2 with           | [] => a :: l1           | a2 :: l2' =>               if a <=? a2 then a :: merge l1 l2 else a2 :: merge_aux l2'           end) l2))
+
+2. (Permutation gv2 (a0 :: l2) ->  Permutation ((a :: l1) ++ gv2)    (a0     :: (fix merge_aux (l2 : list nat) : list nat :=           match l2 with           | [] => a :: l1           | a2 :: l2' =>               if a <=? a2 then a :: merge l1 l2 else a2 :: merge_aux l2'           end) l2))
+
+3. (Permutation (a0 :: l2) gv2 ->  Permutation ((a :: l1) ++ gv2)    (a0     :: (fix merge_aux (l2 : list nat) : list nat :=           match l2 with           | [] => a :: l1           | a2 :: l2' =>               if a <=? a2 then a :: merge l1 l2 else a2 :: merge_aux l2'           end) l2))
+
+4. (Permutation gv1 (a :: l1) ->  Permutation (gv1 ++ a0 :: l2)    (a0     :: (fix merge_aux (l2 : list nat) : list nat :=           match l2 with           | [] => a :: l1           | a2 :: l2' =>               if a <=? a2 then a :: merge l1 l2 else a2 :: merge_aux l2'           end) l2))
+
+5. (Permutation (a :: l1) gv1 ->  Permutation (gv1 ++ a0 :: l2)    (a0     :: (fix merge_aux (l2 : list nat) : list nat :=           match l2 with           | [] => a :: l1           | a2 :: l2' =>               if a <=? a2 then a :: merge l1 l2 else a2 :: merge_aux l2'           end) l2))
+
+
+[***]
+[ATOMIC][SUCCESS][1][GENERALIZE]
+Test = merge_perm_by_Permutation_app_comm_2
+[TIME] 127.913
+[COUNTS] 28
+[TARGET] Permutation (m ++ n) (n ++ m)
+
+1. (Permutation (l2 ++ gv1) (gv1 ++ l2))
+
+2. (Permutation gv2 (merge gv1 l2) -> Permutation (l2 ++ gv1) gv2)
+
+3. (Permutation gv2 (merge (a :: l1) l2) -> Permutation (l2 ++ a :: l1) gv2)
+
+4. (Permutation (l2 ++ a :: l1) ((a :: l1) ++ l2))
+
+5. (Permutation gv0 (merge l2 gv1) -> Permutation gv0 (gv1 ++ l2))
+
+
+[***]
+[ATOMIC][SUCCESS][1][AS IS]
+Test = mergesort_correct_by_mergesort_sorts
+[TIME] 32.284
+[COUNTS] 2
+[TARGET] sorted (mergesort l)
+
+1. (sorted (mergesort al))
+
+2. (sorted (merge gv0 gv0) -> sorted gv0)
+
+
+[***]
+[ATOMIC][SUCCESS][3][GENERALIZE]
+Test = mergesort_perm_by_merge_perm
+[TIME] 155.635
+[COUNTS] 52
+[TARGET] Permutation (l1 ++ l2) (merge l1 l2)
+
+1. (Permutation (mergesort l1 ++ gv2) (merge (mergesort l1) gv2))
+
+2. (Permutation (gv1 ++ gv2) (merge gv1 gv2))
+
+3. (Permutation (gv1 ++ mergesort l2) (merge gv1 (mergesort l2)))
+
+4. (Permutation (mergesort l1 ++ mergesort l2)    (merge (mergesort l1) (mergesort l2)))
+
+5. (Permutation gv0 (merge gv2 l1) -> Permutation gv0 (merge (mergesort l1) gv2))
+
+
+
+

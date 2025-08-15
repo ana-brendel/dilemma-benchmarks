@@ -1,0 +1,192 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (ForallT (fun (y : nat) (_ : value) => y > x) r)
+ -- (sorted (list_keys (elements r)))
+ -- (BST r)
+ -- (ForallT (fun (y : nat) (_ : value) => y < x) l)
+ -- (BST l)
+ -- (sorted (list_keys (elements l)))
+
+----------------------------------
+Goal: (Forall (uncurry (fun (n : nat) (_ : value) => n < fst (x, v))) (elements l))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 4.951 seconds
+
+gv0 : (list (nat * value)) = (elements l)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 60.007 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (ForallT (fun (y : nat) (_ : value) => y < x) l)
+
+----------------------------------
+Goal: (Forall (uncurry (fun (n : nat) (_ : value) => n < fst (x, v))) (elements l))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (ForallT (fun (y : nat) (_ : value) => y < x) l)
+ -- (elements l = gv0)
+
+----------------------------------
+Goal: (Forall (uncurry (fun (n : nat) (_ : value) => n < fst (x, v))) gv0)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 60.159 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+In : (forall A : Type, A -> list A -> Prop)
+existsb : (forall A : Type, (A -> bool) -> list A -> bool)
+forallb : (forall A : Type, (A -> bool) -> list A -> bool)
+Forall : (forall A : Type, (A -> Prop) -> list A -> Prop)
+nodup : (forall A : Type, (forall x y : A, {x = y} + {x <> y}) -> list A -> list A)
+map : (forall A B : Type, (A -> B) -> list A -> list B)
+Permutation : (forall A : Type, list A -> list A -> Prop)
+sorted : (list nat -> Prop)
+is_a_sorting_algorithm : ((list nat -> list nat) -> Prop)
+select : (nat -> list nat -> nat * list nat)
+selsort : (list nat -> nat -> list nat)
+selection_sort : (list nat -> list nat)
+le_all : (nat -> list nat -> Prop)
+value : Set
+value_rect : (forall P : value -> Type,
+ P Red -> P Green -> P Blue -> forall v : value, P v)
+value_rec : (forall P : value -> Set, P Red -> P Green -> P Blue -> forall v : value, P v)
+tree : Set
+tree_rect : (forall P : tree -> Type,
+ P E ->
+ (forall l : tree,
+  P l -> forall (k : nat) (v : value) (r : tree), P r -> P (T l k v r)) ->
+ forall t : tree, P t)
+tree_rec : (forall P : tree -> Set,
+ P E ->
+ (forall l : tree,
+  P l -> forall (k : nat) (v : value) (r : tree), P r -> P (T l k v r)) ->
+ forall t : tree, P t)
+empty_tree : tree
+bound : (nat -> tree -> bool)
+lookup : (value -> nat -> tree -> value)
+insert : (nat -> value -> tree -> tree)
+ForallT : ((nat -> value -> Prop) -> tree -> Prop)
+BST : (tree -> Prop)
+elements : (tree -> list (nat * value))
+@uncurry : (forall X Y Z : Type, (X -> Y -> Z) -> X * Y -> Z)
+@list_keys : (forall V : Type, list (nat * V) -> list nat)
+@disjoint : (forall X : Type, list X -> list X -> Prop)
+fast_elements_tr : (tree -> list (nat * value) -> list (nat * value))
+fast_elements : (tree -> list (nat * value))
+kvs_insert : (nat -> value -> list (nat * value) -> list (nat * value))
+Red : value
+Green : value
+Blue : value
+E : tree
+T : (tree -> nat -> value -> tree -> tree)
+
+Label: 0 (0)
+Abducted Assumption: (ForallT (fun (y : nat) (_ : value) => y < x) l)
+Positive Examples: 404
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 299
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 60.309 seconds
+
+
+Label: 0 (0)
+(BST l), (x < x), (x <= x), (l = l), (v = v), (x = x), (false = bound x l), (true = bound x l), (disjoint (fast_elements l) (elements l)), (disjoint (elements l) (fast_elements l))
+(BST (T l x v l)), (BST (insert x v l)), (BST empty_tree), (BST E), (x <=* []), (sorted []), (Permutation (fast_elements l) (elements l)), (Permutation (elements l) (fast_elements l)), (In (x, v) (fast_elements l)), (In (x, v) (elements l))
+(~ BST l), (~ x < x), (~ x <= x), (l <> l), (v <> v), (x <> x), (lookup v x l = v), (Red = lookup v x l), (Green = lookup v x l), (Blue = lookup v x l)
+(fast_elements l = elements l), (None = Some x), (None = Some l), (T l x v l = l), (T l x v l = insert x v l), (insert x v l = l), (empty_tree = T l x v l), (empty_tree = insert x v l), (E = T l x v l), (E = insert x v l)
+(None = Some v)
+
+Label: 1 (1)
+(disjoint gv0 gv0), (BST l), (Permutation gv0 gv0), (x < x), (x <= x), (l = l), (gv0 = gv0), (v = v), (x = x), (false = bound x l)
+(true = bound x l), (disjoint (list_keys gv0) []), (disjoint [] (list_keys gv0)), (disjoint gv0 (kvs_insert x v gv0)), (disjoint gv0 (fast_elements l)), (disjoint gv0 (fast_elements_tr l gv0)), (disjoint gv0 (elements l)), (disjoint gv0 (gv0 ++ gv0)), (disjoint gv0 []), (disjoint (kvs_insert x v gv0) gv0)
+(disjoint (kvs_insert x v gv0) (fast_elements l)), (disjoint (kvs_insert x v gv0) (fast_elements_tr l gv0)), (disjoint (kvs_insert x v gv0) (elements l)), (disjoint (kvs_insert x v gv0) (gv0 ++ gv0)), (disjoint (kvs_insert x v gv0) []), (disjoint (fast_elements l) gv0), (disjoint (fast_elements l) (kvs_insert x v gv0)), (disjoint (fast_elements l) (fast_elements_tr l gv0)), (disjoint (fast_elements l) (elements l)), (disjoint (fast_elements l) (gv0 ++ gv0))
+(disjoint (fast_elements l) []), (disjoint (fast_elements_tr l gv0) gv0), (disjoint (fast_elements_tr l gv0) (kvs_insert x v gv0)), (disjoint (fast_elements_tr l gv0) (fast_elements l)), (disjoint (fast_elements_tr l gv0) (elements l)), (disjoint (fast_elements_tr l gv0) (gv0 ++ gv0)), (disjoint (fast_elements_tr l gv0) []), (disjoint (elements l) gv0), (disjoint (elements l) (kvs_insert x v gv0)), (disjoint (elements l) (fast_elements l))
+(disjoint (elements l) (fast_elements_tr l gv0)), (disjoint (elements l) (gv0 ++ gv0)), (disjoint (elements l) []), (disjoint (gv0 ++ gv0) gv0), (disjoint (gv0 ++ gv0) (kvs_insert x v gv0)), (disjoint (gv0 ++ gv0) (fast_elements l)), (disjoint (gv0 ++ gv0) (fast_elements_tr l gv0)), (disjoint (gv0 ++ gv0) (elements l)), (disjoint (gv0 ++ gv0) []), (disjoint [] gv0)
+(disjoint [] (kvs_insert x v gv0)), (disjoint [] (fast_elements l)), (disjoint [] (fast_elements_tr l gv0)), (disjoint [] (elements l)), (disjoint [] (gv0 ++ gv0)), (BST (T l x v l)), (BST (insert x v l)), (BST empty_tree), (BST E), (x <=* list_keys gv0)
+(x <=* []), (Datatypes.length gv0 <=* list_keys gv0), (Datatypes.length gv0 <=* []), (sorted (list_keys gv0)), (sorted []), (Permutation (list_keys gv0) []), (Permutation [] (list_keys gv0)), (Permutation gv0 (kvs_insert x v gv0)), (Permutation gv0 (fast_elements l)), (Permutation gv0 (fast_elements_tr l gv0))
+(Permutation gv0 (elements l)), (Permutation gv0 (gv0 ++ gv0)), (Permutation gv0 []), (Permutation (kvs_insert x v gv0) gv0), (Permutation (kvs_insert x v gv0) (fast_elements l)), (Permutation (kvs_insert x v gv0) (fast_elements_tr l gv0)), (Permutation (kvs_insert x v gv0) (elements l)), (Permutation (kvs_insert x v gv0) (gv0 ++ gv0)), (Permutation (kvs_insert x v gv0) []), (Permutation (fast_elements l) gv0)
+(Permutation (fast_elements l) (kvs_insert x v gv0)), (Permutation (fast_elements l) (fast_elements_tr l gv0)), (Permutation (fast_elements l) (elements l)), (Permutation (fast_elements l) (gv0 ++ gv0)), (Permutation (fast_elements l) []), (Permutation (fast_elements_tr l gv0) gv0), (Permutation (fast_elements_tr l gv0) (kvs_insert x v gv0)), (Permutation (fast_elements_tr l gv0) (fast_elements l)), (Permutation (fast_elements_tr l gv0) (elements l)), (Permutation (fast_elements_tr l gv0) (gv0 ++ gv0))
+(Permutation (fast_elements_tr l gv0) []), (Permutation (elements l) gv0), (Permutation (elements l) (kvs_insert x v gv0)), (Permutation (elements l) (fast_elements l)), (Permutation (elements l) (fast_elements_tr l gv0)), (Permutation (elements l) (gv0 ++ gv0)), (Permutation (elements l) []), (Permutation (gv0 ++ gv0) gv0), (Permutation (gv0 ++ gv0) (kvs_insert x v gv0)), (Permutation (gv0 ++ gv0) (fast_elements l))
+(Permutation (gv0 ++ gv0) (fast_elements_tr l gv0)), (Permutation (gv0 ++ gv0) (elements l)), (Permutation (gv0 ++ gv0) []), (Permutation [] gv0), (Permutation [] (kvs_insert x v gv0)), (Permutation [] (fast_elements l)), (Permutation [] (fast_elements_tr l gv0)), (Permutation [] (elements l)), (Permutation [] (gv0 ++ gv0)), (In x (list_keys gv0))
+(In (Datatypes.length gv0) (list_keys gv0)), (In (x, v) gv0), (In (x, v) (kvs_insert x v gv0)), (In (x, v) (fast_elements l)), (In (x, v) (fast_elements_tr l gv0)), (In (x, v) (elements l)), (In (x, v) (gv0 ++ gv0)), (x < Datatypes.length gv0), (Datatypes.length gv0 < x), (x <= Datatypes.length gv0)
+(Datatypes.length gv0 <= x), (~ disjoint gv0 gv0), (~ BST l), (~ Permutation gv0 gv0), (~ x < x), (~ x <= x), (l <> l), (gv0 <> gv0), (v <> v), (x <> x)
+(kvs_insert x v gv0 = gv0), (kvs_insert x v gv0 = fast_elements l), (kvs_insert x v gv0 = fast_elements_tr l gv0), (kvs_insert x v gv0 = elements l), (kvs_insert x v gv0 = gv0 ++ gv0), (fast_elements l = gv0), (fast_elements l = elements l), (fast_elements l = gv0 ++ gv0), (fast_elements_tr l gv0 = gv0), (fast_elements_tr l gv0 = fast_elements l)
+(fast_elements_tr l gv0 = elements l), (fast_elements_tr l gv0 = gv0 ++ gv0), (elements l = gv0), (elements l = gv0 ++ gv0), (gv0 ++ gv0 = gv0), ([] = gv0), ([] = kvs_insert x v gv0), ([] = fast_elements l), ([] = fast_elements_tr l gv0), ([] = elements l)
+([] = gv0 ++ gv0), ([] = list_keys gv0), (None = Some x), (None = Some gv0), (lookup v x l = v), (Red = lookup v x l), (Green = lookup v x l), (Blue = lookup v x l), (Datatypes.length gv0 = x), (None = Some l)
+(T l x v l = l), (T l x v l = insert x v l), (insert x v l = l), (empty_tree = T l x v l), (empty_tree = insert x v l), (E = T l x v l), (E = insert x v l), (None = Some v)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 70.827 seconds
+
+
+Label: 0 (0)
+
+Label: 1 (1)
+(Permutation gv0 (elements l)), (Permutation (elements l) gv0), (Permutation gv0 (fast_elements l)), (Permutation (fast_elements l) gv0), (elements l = gv0), (fast_elements l = gv0), (Permutation (fast_elements_tr l gv0) (gv0 ++ gv0)), (Permutation (gv0 ++ gv0) (fast_elements_tr l gv0)), (fast_elements_tr l gv0 = gv0 ++ gv0)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  Forall (uncurry (fun (n : nat) (_ : value) => n < fst (x, v))) (elements l))
+
+2. (fast_elements l = elements l)
+
+3. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  Permutation gv0 (elements l) ->  Forall (uncurry (fun (n : nat) (_ : value) => n < fst (x, v))) gv0)
+
+4. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  Permutation (elements l) gv0 ->  Forall (uncurry (fun (n : nat) (_ : value) => n < fst (x, v))) gv0)
+
+5. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  Permutation gv0 (fast_elements l) ->  Forall (uncurry (fun (n : nat) (_ : value) => n < fst (x, v))) gv0)
+
+6. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  Permutation (fast_elements l) gv0 ->  Forall (uncurry (fun (n : nat) (_ : value) => n < fst (x, v))) gv0)
+
+7. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  fast_elements l = gv0 ->  Forall (uncurry (fun (n : nat) (_ : value) => n < fst (x, v))) gv0)
+
+8. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  Permutation (fast_elements_tr l gv0) (gv0 ++ gv0) ->  Forall (uncurry (fun (n : nat) (_ : value) => n < fst (x, v))) gv0)
+
+9. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  Permutation (gv0 ++ gv0) (fast_elements_tr l gv0) ->  Forall (uncurry (fun (n : nat) (_ : value) => n < fst (x, v))) gv0)
+
+10. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  fast_elements_tr l gv0 = gv0 ++ gv0 ->  Forall (uncurry (fun (n : nat) (_ : value) => n < fst (x, v))) gv0)
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 97.967 seconds
+
+Number of Result Pairs Returned: 10
+
+1. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  Forall (uncurry (fun (n : nat) (_ : value) => n < fst (x, v))) (elements l))
+
+2. (fast_elements l = elements l)
+
+3. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  Permutation gv0 (elements l) ->  Forall (uncurry (fun (n : nat) (_ : value) => n < fst (x, v))) gv0)
+
+4. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  Permutation (elements l) gv0 ->  Forall (uncurry (fun (n : nat) (_ : value) => n < fst (x, v))) gv0)
+
+5. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  Permutation gv0 (fast_elements l) ->  Forall (uncurry (fun (n : nat) (_ : value) => n < fst (x, v))) gv0)

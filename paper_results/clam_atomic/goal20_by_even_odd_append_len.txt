@@ -1,0 +1,313 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (even (len (append x x)) = true)
+
+----------------------------------
+Goal: (negb (even (len (append x (cons n x)))) = true)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 2.982 seconds
+
+gv1 : bool = (even (len (append x (cons n x))))
+gv5 : bool = true
+gv4 : Lst = (cons n x)
+gv2 : Nat = (len (append x (cons n x)))
+gv0 : bool = (negb (even (len (append x (cons n x)))))
+gv3 : Lst = (append x (cons n x))
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 50.675 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (negb (even (len (append x (cons n x)))) = true)
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (append x (cons n x) = gv3)
+
+----------------------------------
+Goal: (negb (even (len gv3)) = true)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (len (append x (cons n x)) = gv2)
+
+----------------------------------
+Goal: (negb (even gv2) = true)
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (negb (even (len (append x (cons n x)))) = gv0)
+
+----------------------------------
+Goal: (gv0 = true)
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (even (len (append x x)) = gv5)
+
+----------------------------------
+Goal: (negb (even (len (append x (cons n x)))) = gv5)
+Case: Valid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (true = gv5)
+ -- (append x (cons n x) = gv3)
+
+----------------------------------
+Goal: (negb (even (len gv3)) = gv5)
+Case: Invalid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (true = gv5)
+ -- (len (append x (cons n x)) = gv2)
+
+----------------------------------
+Goal: (negb (even gv2) = gv5)
+Case: Invalid and Generalized
+
+Label: Generalization #7
+Assumptions: 
+ -- (cons n x = gv4)
+ -- (true = gv5)
+
+----------------------------------
+Goal: (negb (even (len (append x gv4))) = gv5)
+Case: Invalid and Generalized
+
+Label: Generalization #8
+Assumptions: 
+ -- (even (len (append x (cons n x))) = gv1)
+ -- (true = gv5)
+
+----------------------------------
+Goal: (negb gv1 = gv5)
+Case: Invalid and Generalized
+
+Label: Generalization #9
+Assumptions: 
+ -- (cons n x = gv4)
+
+----------------------------------
+Goal: (negb (even (len (append x gv4))) = true)
+Case: Invalid and Generalized
+
+Label: Generalization #10
+Assumptions: 
+ -- (even (len (append x (cons n x))) = gv1)
+
+----------------------------------
+Goal: (negb gv1 = true)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 50.826 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+even : (Nat -> bool)
+append : (Lst -> Lst -> Lst)
+len : (Lst -> Nat)
+succ : (Nat -> Nat)
+zero : Nat
+nil : Lst
+cons : (Nat -> Lst -> Lst)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 6 (6)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 7 (7)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 8 (8)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 50.967 seconds
+
+
+Label: 0 (0)
+(n = n), (x = x), (x = gv3), (gv3 = x), (gv3 = gv3), (false = even n), (true = even n), (n <> n), (x <> x), (x <> gv3)
+(gv3 <> x), (gv3 <> gv3), (None = Some x), (None = Some gv3), (None = Some n), (succ n = n), (succ n = len x), (succ n = len gv3), (len x = n), (len gv3 = n)
+(zero = succ n), (zero = len x), (zero = len gv3), (cons n x = x), (cons n x = gv3), (cons n x = append x x), (cons n x = append x gv3), (cons n x = append gv3 x), (cons n x = append gv3 gv3), (cons n gv3 = x)
+(cons n gv3 = gv3), (cons n gv3 = append x x), (cons n gv3 = append x gv3), (cons n gv3 = append gv3 x), (cons n gv3 = append gv3 gv3), (append x x = x), (append x x = gv3), (append x gv3 = x), (append x gv3 = gv3), (append gv3 x = x)
+(append gv3 x = gv3), (append gv3 gv3 = x), (append gv3 gv3 = gv3), (nil = cons n x), (nil = cons n gv3), (nil = append x x), (nil = append x gv3), (nil = append gv3 x), (nil = append gv3 gv3)
+
+Label: 1 (1)
+(x = x), (n = n), (n = gv2), (gv2 = n), (gv2 = gv2), (false = even n), (false = even gv2), (true = even n), (true = even gv2), (x <> x)
+(n <> n), (n <> gv2), (gv2 <> n), (gv2 <> gv2), (None = Some n), (None = Some gv2), (None = Some x), (succ n = n), (succ n = gv2), (succ n = len x)
+(succ gv2 = n), (succ gv2 = gv2), (succ gv2 = len x), (len x = n), (len x = gv2), (zero = succ n), (zero = succ gv2), (zero = len x), (cons n x = x), (cons n x = append x x)
+(cons gv2 x = x), (cons gv2 x = append x x), (append x x = x), (nil = cons n x), (nil = cons gv2 x), (nil = append x x)
+
+Label: 2 (2)
+(false = gv0), (true = gv0), (n = n), (x = x), (gv0 = gv0), (false = even n), (true = even n), (false <> gv0), (true <> gv0), (n <> n)
+(x <> x), (gv0 <> gv0), (None = Some x), (None = Some gv0), (None = Some n), (succ n = n), (succ n = len x), (len x = n), (zero = succ n), (zero = len x)
+(even n = gv0), (cons n x = x), (cons n x = append x x), (append x x = x), (nil = cons n x), (nil = append x x)
+
+Label: 3 (3)
+(false = gv5), (true = gv5), (n = n), (gv5 = gv5), (x = x), (x = gv3), (gv3 = x), (gv3 = gv3), (false = even n), (true = even n)
+(false <> gv5), (true <> gv5), (n <> n), (gv5 <> gv5), (x <> x), (x <> gv3), (gv3 <> x), (gv3 <> gv3), (None = Some x), (None = Some gv3)
+(None = Some gv5), (None = Some n), (succ n = n), (succ n = len x), (succ n = len gv3), (len x = n), (len gv3 = n), (zero = succ n), (zero = len x), (zero = len gv3)
+(even n = gv5), (cons n x = x), (cons n x = gv3), (cons n x = append x x), (cons n x = append x gv3), (cons n x = append gv3 x), (cons n x = append gv3 gv3), (cons n gv3 = x), (cons n gv3 = gv3), (cons n gv3 = append x x)
+(cons n gv3 = append x gv3), (cons n gv3 = append gv3 x), (cons n gv3 = append gv3 gv3), (append x x = x), (append x x = gv3), (append x gv3 = x), (append x gv3 = gv3), (append gv3 x = x), (append gv3 x = gv3), (append gv3 gv3 = x)
+(append gv3 gv3 = gv3), (nil = cons n x), (nil = cons n gv3), (nil = append x x), (nil = append x gv3), (nil = append gv3 x), (nil = append gv3 gv3)
+
+Label: 4 (4)
+(false = gv5), (true = gv5), (x = x), (gv5 = gv5), (n = n), (n = gv2), (gv2 = n), (gv2 = gv2), (false = even n), (false = even gv2)
+(true = even n), (true = even gv2), (false <> gv5), (true <> gv5), (x <> x), (gv5 <> gv5), (n <> n), (n <> gv2), (gv2 <> n), (gv2 <> gv2)
+(None = Some x), (None = Some gv5), (None = Some n), (None = Some gv2), (succ n = n), (succ n = gv2), (succ n = len x), (succ gv2 = n), (succ gv2 = gv2), (succ gv2 = len x)
+(len x = n), (len x = gv2), (zero = succ n), (zero = succ gv2), (zero = len x), (even n = gv5), (even gv2 = gv5), (cons n x = x), (cons n x = append x x), (cons gv2 x = x)
+(cons gv2 x = append x x), (append x x = x), (nil = cons n x), (nil = cons gv2 x), (nil = append x x)
+
+Label: 5 (5)
+(false = gv5), (true = gv5), (n = n), (gv5 = gv5), (gv4 = gv4), (gv4 = x), (x = gv4), (x = x), (false = even n), (true = even n)
+(false <> gv5), (true <> gv5), (n <> n), (gv5 <> gv5), (gv4 <> gv4), (gv4 <> x), (x <> gv4), (x <> x), (None = Some gv4), (None = Some x)
+(None = Some gv5), (None = Some n), (succ n = n), (succ n = len gv4), (succ n = len x), (len gv4 = n), (len x = n), (zero = succ n), (zero = len gv4), (zero = len x)
+(even n = gv5), (cons n gv4 = gv4), (cons n gv4 = x), (cons n gv4 = append gv4 gv4), (cons n gv4 = append gv4 x), (cons n gv4 = append x gv4), (cons n gv4 = append x x), (cons n x = gv4), (cons n x = x), (cons n x = append gv4 gv4)
+(cons n x = append gv4 x), (cons n x = append x gv4), (cons n x = append x x), (append gv4 gv4 = gv4), (append gv4 gv4 = x), (append gv4 x = gv4), (append gv4 x = x), (append x gv4 = gv4), (append x gv4 = x), (append x x = gv4)
+(append x x = x), (nil = cons n gv4), (nil = cons n x), (nil = append gv4 gv4), (nil = append gv4 x), (nil = append x gv4), (nil = append x x)
+
+Label: 6 (6)
+(false = gv5), (false = gv1), (true = gv5), (true = gv1), (n = n), (x = x), (gv5 = gv5), (gv5 = gv1), (gv1 = gv5), (gv1 = gv1)
+(false = even n), (true = even n), (false <> gv5), (false <> gv1), (true <> gv5), (true <> gv1), (n <> n), (x <> x), (gv5 <> gv5), (gv5 <> gv1)
+(gv1 <> gv5), (gv1 <> gv1), (None = Some x), (None = Some gv5), (None = Some gv1), (None = Some n), (succ n = n), (succ n = len x), (len x = n), (zero = succ n)
+(zero = len x), (even n = gv5), (even n = gv1), (cons n x = x), (cons n x = append x x), (append x x = x), (nil = cons n x), (nil = append x x)
+
+Label: 7 (7)
+(n = n), (gv4 = gv4), (gv4 = x), (x = gv4), (x = x), (false = even n), (true = even n), (n <> n), (gv4 <> gv4), (gv4 <> x)
+(x <> gv4), (x <> x), (None = Some gv4), (None = Some x), (None = Some n), (succ n = n), (succ n = len gv4), (succ n = len x), (len gv4 = n), (len x = n)
+(zero = succ n), (zero = len gv4), (zero = len x), (cons n gv4 = gv4), (cons n gv4 = x), (cons n gv4 = append gv4 gv4), (cons n gv4 = append gv4 x), (cons n gv4 = append x gv4), (cons n gv4 = append x x), (cons n x = gv4)
+(cons n x = x), (cons n x = append gv4 gv4), (cons n x = append gv4 x), (cons n x = append x gv4), (cons n x = append x x), (append gv4 gv4 = gv4), (append gv4 gv4 = x), (append gv4 x = gv4), (append gv4 x = x), (append x gv4 = gv4)
+(append x gv4 = x), (append x x = gv4), (append x x = x), (nil = cons n gv4), (nil = cons n x), (nil = append gv4 gv4), (nil = append gv4 x), (nil = append x gv4), (nil = append x x)
+
+Label: 8 (8)
+(false = gv1), (true = gv1), (n = n), (x = x), (gv1 = gv1), (false = even n), (true = even n), (false <> gv1), (true <> gv1), (n <> n)
+(x <> x), (gv1 <> gv1), (None = Some x), (None = Some gv1), (None = Some n), (succ n = n), (succ n = len x), (len x = n), (zero = succ n), (zero = len x)
+(even n = gv1), (cons n x = x), (cons n x = append x x), (append x x = x), (nil = cons n x), (nil = append x x)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 57.938 seconds
+
+
+Label: 0 (0)
+
+Label: 1 (1)
+(false = even gv2)
+
+Label: 2 (2)
+(true = gv0), (false <> gv0)
+
+Label: 3 (3)
+
+Label: 4 (4)
+
+Label: 5 (5)
+
+Label: 6 (6)
+(gv5 <> gv1), (gv1 <> gv5)
+
+Label: 7 (7)
+(cons n x = gv4)
+
+Label: 8 (8)
+(false = gv1), (true <> gv1)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (even (len (append x x)) = gv5 ->  negb (even (len (append x (cons n x)))) = gv5)
+
+2. (negb (even (len (append x (cons n x)))) = true)
+
+3. (false = even (len (append x (cons n x))))
+
+4. (false = gv1 -> negb gv1 = true)
+
+5. (false = even gv2 -> negb (even gv2) = true)
+
+6. (false <> gv0 -> gv0 = true)
+
+7. (gv5 <> gv1 -> negb gv1 = gv5)
+
+8. (gv1 <> gv5 -> negb gv1 = gv5)
+
+9. (true <> gv1 -> negb gv1 = true)
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 81.722 seconds
+
+Number of Result Pairs Returned: 9
+
+1. (even (len (append x x)) = gv5 ->  negb (even (len (append x (cons n x)))) = gv5)
+
+2. (negb (even (len (append x (cons n x)))) = true)
+
+3. (false = even (len (append x (cons n x))))
+
+4. (false = gv1 -> negb gv1 = true)
+
+5. (false = even gv2 -> negb (even gv2) = true)

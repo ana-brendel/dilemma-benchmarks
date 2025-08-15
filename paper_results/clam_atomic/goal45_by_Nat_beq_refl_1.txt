@@ -1,0 +1,238 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+
+----------------------------------
+Goal: (Nat_beq x x || false = true)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 1.503 seconds
+
+gv1 : bool = (Nat_beq x x)
+gv0 : bool = (Nat_beq x x || false)
+gv3 : bool = true
+gv2 : bool = false
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 21.043 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (Nat_beq x x || false = true)
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+
+----------------------------------
+Goal: (Nat_beq x x || gv2 = true)
+Case: Valid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (true = gv3)
+ -- (false = gv2)
+
+----------------------------------
+Goal: (Nat_beq x x || gv2 = gv3)
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (Nat_beq x x || gv2 = gv0)
+
+----------------------------------
+Goal: (gv0 = true)
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (Nat_beq x x = gv1)
+ -- (false = gv2)
+
+----------------------------------
+Goal: (gv1 || gv2 = true)
+Case: Invalid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (true = gv3)
+
+----------------------------------
+Goal: (Nat_beq x x || false = gv3)
+Case: Invalid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (Nat_beq x x || false = gv0)
+
+----------------------------------
+Goal: (gv0 = true)
+Case: Invalid and Generalized
+
+Label: Generalization #7
+Assumptions: 
+ -- (Nat_beq x x = gv1)
+
+----------------------------------
+Goal: (gv1 || false = true)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 21.196 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+less : (Nat -> Nat -> bool)
+mem : (Nat -> Lst -> bool)
+insort : (Nat -> Lst -> Lst)
+sort : (Lst -> Lst)
+succ : (Nat -> Nat)
+zero : Nat
+nil : Lst
+cons : (Nat -> Lst -> Lst)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 35
+Negative Examples: 14
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 42
+Negative Examples: 14
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 35
+Negative Examples: 7
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 21
+Negative Examples: 7
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 21
+Negative Examples: 7
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 21
+Negative Examples: 7
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 21.328 seconds
+
+
+Label: 0 (0)
+(false = gv3), (false = gv2), (true = gv3), (true = gv2), (gv3 = gv3), (gv3 = gv2), (gv2 = gv3), (gv2 = gv2), (x = x), (false = less x x)
+(true = less x x), (false <> gv3), (false <> gv2), (true <> gv3), (true <> gv2), (gv3 <> gv3), (gv3 <> gv2), (gv2 <> gv3), (gv2 <> gv2), (x <> x)
+(succ x = x), (zero = succ x), (less x x = gv3), (less x x = gv2), (None = Some gv3), (None = Some gv2), (None = Some x)
+
+Label: 1 (1)
+(false = gv2), (false = gv0), (true = gv2), (true = gv0), (x = x), (gv2 = gv2), (gv2 = gv0), (gv0 = gv2), (gv0 = gv0), (false = less x x)
+(true = less x x), (false <> gv2), (false <> gv0), (true <> gv2), (true <> gv0), (x <> x), (gv2 <> gv2), (gv2 <> gv0), (gv0 <> gv2), (gv0 <> gv0)
+(succ x = x), (zero = succ x), (less x x = gv2), (less x x = gv0), (None = Some gv2), (None = Some gv0), (None = Some x)
+
+Label: 2 (2)
+(false = gv2), (false = gv1), (true = gv2), (true = gv1), (x = x), (gv2 = gv2), (gv2 = gv1), (gv1 = gv2), (gv1 = gv1), (false = less x x)
+(true = less x x), (false <> gv2), (false <> gv1), (true <> gv2), (true <> gv1), (x <> x), (gv2 <> gv2), (gv2 <> gv1), (gv1 <> gv2), (gv1 <> gv1)
+(succ x = x), (zero = succ x), (less x x = gv2), (less x x = gv1), (None = Some gv2), (None = Some gv1), (None = Some x)
+
+Label: 3 (3)
+(false = gv3), (true = gv3), (gv3 = gv3), (x = x), (false = less x x), (true = less x x), (false <> gv3), (true <> gv3), (gv3 <> gv3), (x <> x)
+(succ x = x), (zero = succ x), (less x x = gv3), (None = Some gv3), (None = Some x)
+
+Label: 4 (4)
+(false = gv0), (true = gv0), (x = x), (gv0 = gv0), (false = less x x), (true = less x x), (false <> gv0), (true <> gv0), (x <> x), (gv0 <> gv0)
+(succ x = x), (zero = succ x), (less x x = gv0), (None = Some gv0), (None = Some x)
+
+Label: 5 (5)
+(false = gv1), (true = gv1), (x = x), (gv1 = gv1), (false = less x x), (true = less x x), (false <> gv1), (true <> gv1), (x <> x), (gv1 <> gv1)
+(succ x = x), (zero = succ x), (less x x = gv1), (None = Some gv1), (None = Some x)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 23.729 seconds
+
+
+Label: 0 (0)
+(true = gv3), (false <> gv3)
+
+Label: 1 (1)
+(true = gv0), (false <> gv0)
+
+Label: 2 (2)
+(true = gv1), (gv2 <> gv1), (gv1 <> gv2), (false <> gv1)
+
+Label: 3 (3)
+(true = gv3), (false <> gv3)
+
+Label: 4 (4)
+(true = gv0), (false <> gv0)
+
+Label: 5 (5)
+(true = gv1), (false <> gv1)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (Nat_beq x x || gv2 = true)
+
+2. (Nat_beq x x || false = true)
+
+3. (true = Nat_beq x x)
+
+4. (true = gv1 -> gv1 || gv2 = true)
+
+5. (true = gv1 -> gv1 || false = true)
+
+6. (false <> gv3 -> Nat_beq x x || gv2 = gv3)
+
+7. (false <> gv0 -> gv0 = true)
+
+8. (gv2 <> gv1 -> gv1 || gv2 = true)
+
+9. (gv1 <> gv2 -> gv1 || gv2 = true)
+
+10. (false <> gv1 -> gv1 || gv2 = true)
+
+11. (false <> gv3 -> Nat_beq x x || false = gv3)
+
+12. (false <> gv1 -> gv1 || false = true)
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 51.85 seconds
+
+Number of Result Pairs Returned: 12
+
+1. (Nat_beq x x || gv2 = true)
+
+2. (Nat_beq x x || false = true)
+
+3. (true = Nat_beq x x)
+
+4. (true = gv1 -> gv1 || gv2 = true)
+
+5. (true = gv1 -> gv1 || false = true)

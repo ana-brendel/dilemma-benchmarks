@@ -1,0 +1,228 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (Permutation elems2 (cons_elems0 ++ rest_elems0))
+ -- (priqueue_elems p rest_elems)
+ -- (Permutation elems1 (cons_elems ++ rest_elems))
+ -- (priqueue_elems p rest_elems0)
+ -- (forall elems1 elems2 : list nat,
+ priqueue_elems p elems1 ->
+ priqueue_elems p elems2 -> Permutation elems1 elems2)
+ -- (tree_elems a cons_elems0)
+ -- (tree_elems a cons_elems)
+ -- (priqueue_elems (a :: p) elems1)
+ -- (priqueue_elems (a :: p) elems2)
+
+----------------------------------
+Goal: (Permutation elems1 elems2)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3.692 seconds
+
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 91.937 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (priqueue_elems (a :: p) elems1)
+ -- (priqueue_elems (a :: p) elems2)
+
+----------------------------------
+Goal: (Permutation elems1 elems2)
+Case: Valid and Un-Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 92.07 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+In : (forall A : Type, A -> list A -> Prop)
+existsb : (forall A : Type, (A -> bool) -> list A -> bool)
+forallb : (forall A : Type, (A -> bool) -> list A -> bool)
+Forall : (forall A : Type, (A -> Prop) -> list A -> Prop)
+nodup : (forall A : Type, (forall x y : A, {x = y} + {x <> y}) -> list A -> list A)
+map : (forall A B : Type, (A -> B) -> list A -> list B)
+Permutation : (forall A : Type, list A -> list A -> Prop)
+geb : (nat -> nat -> bool)
+gtb : (nat -> nat -> bool)
+tree : Set
+tree_rect : (forall P : tree -> Type,
+ (forall (n : nat) (t : tree),
+  P t -> forall t0 : tree, P t0 -> P (Node n t t0)) ->
+ P Leaf -> forall t : tree, P t)
+tree_rec : (forall P : tree -> Set,
+ (forall (n : nat) (t : tree),
+  P t -> forall t0 : tree, P t0 -> P (Node n t t0)) ->
+ P Leaf -> forall t : tree, P t)
+smash : (tree -> tree -> tree)
+carry : (list tree -> tree -> list tree)
+insert : (nat -> list tree -> list tree)
+join : (list tree -> list tree -> tree -> list tree)
+unzip : (tree -> (list tree -> list tree) -> list tree)
+heap_delete_max : (tree -> list tree)
+find_max' : (nat -> list tree -> nat)
+find_max : (list tree -> option nat)
+delete_max_aux : (nat -> list tree -> list tree * list tree)
+delete_max : (list tree -> option (nat * list tree))
+merge : (list tree -> list tree -> list tree)
+pow2heapp : (nat -> nat -> tree -> Prop)
+pow2heap : (nat -> tree -> Prop)
+priqq : (nat -> list tree -> Prop)
+priq : (list tree -> Prop)
+tree_elems : (tree -> list nat -> Prop)
+priqueue_elems : (list tree -> list nat -> Prop)
+Abs : (list tree -> list nat -> Prop)
+Node : (nat -> tree -> tree -> tree)
+Leaf : tree
+
+Label: 0 (0)
+Abducted Assumption: (priqueue_elems (a :: p) elems1)
+Positive Examples: 101
+Negative Examples: 101
+
+Label: 1 (1)
+Abducted Assumption: (priqueue_elems (a :: p) elems2)
+Positive Examples: 114
+Negative Examples: 88
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 92.242 seconds
+
+
+Label: 0 (0)
+(Abs p elems2), (Abs p elems1), (priqueue_elems p elems2), (priqueue_elems p elems1), (tree_elems a elems2), (tree_elems a elems1), (priq p), (Permutation elems2 elems2), (Permutation elems2 elems1), (Permutation elems1 elems2)
+(Permutation elems1 elems1), (Permutation p p), (In a p), (p = p), (a = a), (elems2 = elems2), (elems2 = elems1), (elems1 = elems2), (elems1 = elems1), (Abs p (elems2 ++ elems2))
+(Abs p (elems2 ++ elems1)), (Abs p (elems1 ++ elems2)), (Abs p (elems1 ++ elems1)), (Abs p []), (Abs (a :: p) elems2), (Abs (a :: p) elems1), (Abs (a :: p) (elems2 ++ elems2)), (Abs (a :: p) (elems2 ++ elems1)), (Abs (a :: p) (elems1 ++ elems2)), (Abs (a :: p) (elems1 ++ elems1))
+(Abs (a :: p) []), (Abs (merge p p) elems2), (Abs (merge p p) elems1), (Abs (merge p p) (elems2 ++ elems2)), (Abs (merge p p) (elems2 ++ elems1)), (Abs (merge p p) (elems1 ++ elems2)), (Abs (merge p p) (elems1 ++ elems1)), (Abs (merge p p) []), (Abs (heap_delete_max a) elems2), (Abs (heap_delete_max a) elems1)
+(Abs (heap_delete_max a) (elems2 ++ elems2)), (Abs (heap_delete_max a) (elems2 ++ elems1)), (Abs (heap_delete_max a) (elems1 ++ elems2)), (Abs (heap_delete_max a) (elems1 ++ elems1)), (Abs (heap_delete_max a) []), (Abs (join p p a) elems2), (Abs (join p p a) elems1), (Abs (join p p a) (elems2 ++ elems2)), (Abs (join p p a) (elems2 ++ elems1)), (Abs (join p p a) (elems1 ++ elems2))
+(Abs (join p p a) (elems1 ++ elems1)), (Abs (join p p a) []), (Abs (carry p a) elems2), (Abs (carry p a) elems1), (Abs (carry p a) (elems2 ++ elems2)), (Abs (carry p a) (elems2 ++ elems1)), (Abs (carry p a) (elems1 ++ elems2)), (Abs (carry p a) (elems1 ++ elems1)), (Abs (carry p a) []), (Abs (p ++ p) elems2)
+(Abs (p ++ p) elems1), (Abs (p ++ p) (elems2 ++ elems2)), (Abs (p ++ p) (elems2 ++ elems1)), (Abs (p ++ p) (elems1 ++ elems2)), (Abs (p ++ p) (elems1 ++ elems1)), (Abs (p ++ p) []), (Abs [] elems2), (Abs [] elems1), (Abs [] (elems2 ++ elems2)), (Abs [] (elems2 ++ elems1))
+(Abs [] (elems1 ++ elems2)), (Abs [] (elems1 ++ elems1)), (Abs [] []), (priqueue_elems p (elems2 ++ elems2)), (priqueue_elems p (elems2 ++ elems1)), (priqueue_elems p (elems1 ++ elems2)), (priqueue_elems p (elems1 ++ elems1)), (priqueue_elems p []), (priqueue_elems (a :: p) elems2), (priqueue_elems (a :: p) elems1)
+(priqueue_elems (a :: p) (elems2 ++ elems2)), (priqueue_elems (a :: p) (elems2 ++ elems1)), (priqueue_elems (a :: p) (elems1 ++ elems2)), (priqueue_elems (a :: p) (elems1 ++ elems1)), (priqueue_elems (a :: p) []), (priqueue_elems (merge p p) elems2), (priqueue_elems (merge p p) elems1), (priqueue_elems (merge p p) (elems2 ++ elems2)), (priqueue_elems (merge p p) (elems2 ++ elems1)), (priqueue_elems (merge p p) (elems1 ++ elems2))
+(priqueue_elems (merge p p) (elems1 ++ elems1)), (priqueue_elems (merge p p) []), (priqueue_elems (heap_delete_max a) elems2), (priqueue_elems (heap_delete_max a) elems1), (priqueue_elems (heap_delete_max a) (elems2 ++ elems2)), (priqueue_elems (heap_delete_max a) (elems2 ++ elems1)), (priqueue_elems (heap_delete_max a) (elems1 ++ elems2)), (priqueue_elems (heap_delete_max a) (elems1 ++ elems1)), (priqueue_elems (heap_delete_max a) []), (priqueue_elems (join p p a) elems2)
+(priqueue_elems (join p p a) elems1), (priqueue_elems (join p p a) (elems2 ++ elems2)), (priqueue_elems (join p p a) (elems2 ++ elems1)), (priqueue_elems (join p p a) (elems1 ++ elems2)), (priqueue_elems (join p p a) (elems1 ++ elems1)), (priqueue_elems (join p p a) []), (priqueue_elems (carry p a) elems2), (priqueue_elems (carry p a) elems1), (priqueue_elems (carry p a) (elems2 ++ elems2)), (priqueue_elems (carry p a) (elems2 ++ elems1))
+(priqueue_elems (carry p a) (elems1 ++ elems2)), (priqueue_elems (carry p a) (elems1 ++ elems1)), (priqueue_elems (carry p a) []), (priqueue_elems (p ++ p) elems2), (priqueue_elems (p ++ p) elems1), (priqueue_elems (p ++ p) (elems2 ++ elems2)), (priqueue_elems (p ++ p) (elems2 ++ elems1)), (priqueue_elems (p ++ p) (elems1 ++ elems2)), (priqueue_elems (p ++ p) (elems1 ++ elems1)), (priqueue_elems (p ++ p) [])
+(priqueue_elems [] elems2), (priqueue_elems [] elems1), (priqueue_elems [] (elems2 ++ elems2)), (priqueue_elems [] (elems2 ++ elems1)), (priqueue_elems [] (elems1 ++ elems2)), (priqueue_elems [] (elems1 ++ elems1)), (priqueue_elems [] []), (tree_elems a (elems2 ++ elems2)), (tree_elems a (elems2 ++ elems1)), (tree_elems a (elems1 ++ elems2))
+(tree_elems a (elems1 ++ elems1)), (tree_elems a []), (tree_elems (smash a a) elems2), (tree_elems (smash a a) elems1), (tree_elems (smash a a) (elems2 ++ elems2)), (tree_elems (smash a a) (elems2 ++ elems1)), (tree_elems (smash a a) (elems1 ++ elems2)), (tree_elems (smash a a) (elems1 ++ elems1)), (tree_elems (smash a a) []), (tree_elems Leaf elems2)
+(tree_elems Leaf elems1), (tree_elems Leaf (elems2 ++ elems2)), (tree_elems Leaf (elems2 ++ elems1)), (tree_elems Leaf (elems1 ++ elems2)), (tree_elems Leaf (elems1 ++ elems1)), (tree_elems Leaf []), (priq (a :: p)), (priq (merge p p)), (priq (heap_delete_max a)), (priq (join p p a))
+(priq (carry p a)), (priq (p ++ p)), (priqq (length elems2) p), (priqq (length elems2) (a :: p)), (priqq (length elems2) (merge p p)), (priqq (length elems2) (heap_delete_max a)), (priqq (length elems2) (join p p a)), (priqq (length elems2) (carry p a)), (priqq (length elems2) (p ++ p)), (priqq (length elems1) p)
+(priqq (length elems1) (a :: p)), (priqq (length elems1) (merge p p)), (priqq (length elems1) (heap_delete_max a)), (priqq (length elems1) (join p p a)), (priqq (length elems1) (carry p a)), (priqq (length elems1) (p ++ p)), (priqq (length p) p), (priqq (length p) (a :: p)), (priqq (length p) (merge p p)), (priqq (length p) (heap_delete_max a))
+(priqq (length p) (join p p a)), (priqq (length p) (carry p a)), (priqq (length p) (p ++ p)), (pow2heap (length elems2) a), (pow2heap (length elems2) (smash a a)), (pow2heap (length elems1) a), (pow2heap (length elems1) (smash a a)), (pow2heap (length p) a), (pow2heap (length p) (smash a a)), (pow2heapp (length elems2) (length elems2) a)
+(pow2heapp (length elems2) (length elems2) (smash a a)), (pow2heapp (length elems2) (length elems2) Leaf), (pow2heapp (length elems2) (length elems1) a), (pow2heapp (length elems2) (length elems1) (smash a a)), (pow2heapp (length elems2) (length elems1) Leaf), (pow2heapp (length elems2) (length p) a), (pow2heapp (length elems2) (length p) (smash a a)), (pow2heapp (length elems2) (length p) Leaf), (pow2heapp (length elems1) (length elems2) a), (pow2heapp (length elems1) (length elems2) (smash a a))
+(pow2heapp (length elems1) (length elems2) Leaf), (pow2heapp (length elems1) (length elems1) a), (pow2heapp (length elems1) (length elems1) (smash a a)), (pow2heapp (length elems1) (length elems1) Leaf), (pow2heapp (length elems1) (length p) a), (pow2heapp (length elems1) (length p) (smash a a)), (pow2heapp (length elems1) (length p) Leaf), (pow2heapp (length p) (length elems2) a), (pow2heapp (length p) (length elems2) (smash a a)), (pow2heapp (length p) (length elems2) Leaf)
+(pow2heapp (length p) (length elems1) a), (pow2heapp (length p) (length elems1) (smash a a)), (pow2heapp (length p) (length elems1) Leaf), (pow2heapp (length p) (length p) a), (pow2heapp (length p) (length p) (smash a a)), (pow2heapp (length p) (length p) Leaf), (Permutation p (a :: p)), (Permutation p (merge p p)), (Permutation p (heap_delete_max a)), (Permutation p (join p p a))
+(Permutation p (carry p a)), (Permutation p (p ++ p)), (Permutation p []), (Permutation (a :: p) p), (Permutation (a :: p) (merge p p)), (Permutation (a :: p) (heap_delete_max a)), (Permutation (a :: p) (join p p a)), (Permutation (a :: p) (carry p a)), (Permutation (a :: p) (p ++ p)), (Permutation (a :: p) [])
+(Permutation (merge p p) p), (Permutation (merge p p) (a :: p)), (Permutation (merge p p) (heap_delete_max a)), (Permutation (merge p p) (join p p a)), (Permutation (merge p p) (carry p a)), (Permutation (merge p p) (p ++ p)), (Permutation (merge p p) []), (Permutation (heap_delete_max a) p), (Permutation (heap_delete_max a) (a :: p)), (Permutation (heap_delete_max a) (merge p p))
+(Permutation (heap_delete_max a) (join p p a)), (Permutation (heap_delete_max a) (carry p a)), (Permutation (heap_delete_max a) (p ++ p)), (Permutation (heap_delete_max a) []), (Permutation (join p p a) p), (Permutation (join p p a) (a :: p)), (Permutation (join p p a) (merge p p)), (Permutation (join p p a) (heap_delete_max a)), (Permutation (join p p a) (carry p a)), (Permutation (join p p a) (p ++ p))
+(Permutation (join p p a) []), (Permutation (carry p a) p), (Permutation (carry p a) (a :: p)), (Permutation (carry p a) (merge p p)), (Permutation (carry p a) (heap_delete_max a)), (Permutation (carry p a) (join p p a)), (Permutation (carry p a) (p ++ p)), (Permutation (carry p a) []), (Permutation (p ++ p) p), (Permutation (p ++ p) (a :: p))
+(Permutation (p ++ p) (merge p p)), (Permutation (p ++ p) (heap_delete_max a)), (Permutation (p ++ p) (join p p a)), (Permutation (p ++ p) (carry p a)), (Permutation (p ++ p) []), (Permutation [] p), (Permutation [] (a :: p)), (Permutation [] (merge p p)), (Permutation [] (heap_delete_max a)), (Permutation [] (join p p a))
+(Permutation [] (carry p a)), (Permutation [] (p ++ p)), (Permutation elems2 (elems2 ++ elems2)), (Permutation elems2 (elems2 ++ elems1)), (Permutation elems2 (elems1 ++ elems2)), (Permutation elems2 (elems1 ++ elems1)), (Permutation elems2 []), (Permutation elems1 (elems2 ++ elems2)), (Permutation elems1 (elems2 ++ elems1)), (Permutation elems1 (elems1 ++ elems2))
+(Permutation elems1 (elems1 ++ elems1)), (Permutation elems1 []), (Permutation (elems2 ++ elems2) elems2), (Permutation (elems2 ++ elems2) elems1), (Permutation (elems2 ++ elems2) (elems2 ++ elems1)), (Permutation (elems2 ++ elems2) (elems1 ++ elems2)), (Permutation (elems2 ++ elems2) (elems1 ++ elems1)), (Permutation (elems2 ++ elems2) []), (Permutation (elems2 ++ elems1) elems2), (Permutation (elems2 ++ elems1) elems1)
+(Permutation (elems2 ++ elems1) (elems2 ++ elems2)), (Permutation (elems2 ++ elems1) (elems1 ++ elems2)), (Permutation (elems2 ++ elems1) (elems1 ++ elems1)), (Permutation (elems2 ++ elems1) []), (Permutation (elems1 ++ elems2) elems2), (Permutation (elems1 ++ elems2) elems1), (Permutation (elems1 ++ elems2) (elems2 ++ elems2)), (Permutation (elems1 ++ elems2) (elems2 ++ elems1)), (Permutation (elems1 ++ elems2) (elems1 ++ elems1)), (Permutation (elems1 ++ elems2) [])
+(Permutation (elems1 ++ elems1) elems2), (Permutation (elems1 ++ elems1) elems1), (Permutation (elems1 ++ elems1) (elems2 ++ elems2)), (Permutation (elems1 ++ elems1) (elems2 ++ elems1)), (Permutation (elems1 ++ elems1) (elems1 ++ elems2)), (Permutation (elems1 ++ elems1) []), (Permutation [] elems2), (Permutation [] elems1), (Permutation [] (elems2 ++ elems2)), (Permutation [] (elems2 ++ elems1))
+(Permutation [] (elems1 ++ elems2)), (Permutation [] (elems1 ++ elems1)), (In a (a :: p)), (In a (merge p p)), (In a (heap_delete_max a)), (In a (join p p a)), (In a (carry p a)), (In a (p ++ p)), (In (smash a a) p), (In (smash a a) (a :: p))
+(In (smash a a) (merge p p)), (In (smash a a) (heap_delete_max a)), (In (smash a a) (join p p a)), (In (smash a a) (carry p a)), (In (smash a a) (p ++ p)), (In Leaf p), (In Leaf (a :: p)), (In Leaf (merge p p)), (In Leaf (heap_delete_max a)), (In Leaf (join p p a))
+(In Leaf (carry p a)), (In Leaf (p ++ p)), (In (length elems2) elems2), (In (length elems2) elems1), (In (length elems2) (elems2 ++ elems2)), (In (length elems2) (elems2 ++ elems1)), (In (length elems2) (elems1 ++ elems2)), (In (length elems2) (elems1 ++ elems1)), (In (length elems1) elems2), (In (length elems1) elems1)
+(In (length elems1) (elems2 ++ elems2)), (In (length elems1) (elems2 ++ elems1)), (In (length elems1) (elems1 ++ elems2)), (In (length elems1) (elems1 ++ elems1)), (In (length p) elems2), (In (length p) elems1), (In (length p) (elems2 ++ elems2)), (In (length p) (elems2 ++ elems1)), (In (length p) (elems1 ++ elems2)), (In (length p) (elems1 ++ elems1))
+(length elems2 < length elems1), (length elems2 < length p), (length elems1 < length elems2), (length elems1 < length p), (length p < length elems2), (length p < length elems1), (length elems2 <= length elems1), (length elems2 <= length p), (length elems1 <= length elems2), (length elems1 <= length p)
+(length p <= length elems2), (length p <= length elems1), (~ Abs p elems2), (~ Abs p elems1), (~ priqueue_elems p elems2), (~ priqueue_elems p elems1), (~ tree_elems a elems2), (~ tree_elems a elems1), (~ priq p), (~ Permutation elems2 elems2)
+(~ Permutation elems2 elems1), (~ Permutation elems1 elems2), (~ Permutation elems1 elems1), (~ Permutation p p), (~ In a p), (p <> p), (a <> a), (elems2 <> elems2), (elems2 <> elems1), (elems1 <> elems2)
+(elems1 <> elems1), (None = Some elems2), (None = Some elems1), (None = Some p), (a :: p = p), (a :: p = merge p p), (a :: p = heap_delete_max a), (a :: p = join p p a), (a :: p = carry p a), (a :: p = p ++ p)
+(a :: p = []), (merge p p = p), (merge p p = heap_delete_max a), (merge p p = join p p a), (merge p p = carry p a), (merge p p = p ++ p), (heap_delete_max a = p), (heap_delete_max a = carry p a), (heap_delete_max a = p ++ p), (join p p a = p)
+(join p p a = heap_delete_max a), (join p p a = carry p a), (join p p a = p ++ p), (carry p a = p), (carry p a = p ++ p), (p ++ p = p), ([] = p), ([] = merge p p), ([] = heap_delete_max a), ([] = join p p a)
+([] = carry p a), ([] = p ++ p), (smash a a = a), (Leaf = smash a a), (elems2 ++ elems2 = elems2), (elems2 ++ elems2 = elems1), (elems2 ++ elems1 = elems2), (elems2 ++ elems1 = elems1), (elems1 ++ elems2 = elems2), (elems1 ++ elems2 = elems1)
+(elems1 ++ elems1 = elems2), (elems1 ++ elems1 = elems1), ([] = elems2), ([] = elems1), ([] = elems2 ++ elems2), ([] = elems2 ++ elems1), ([] = elems1 ++ elems2), ([] = elems1 ++ elems1), (None = find_max p), (None = Some a)
+
+Label: 1 (1)
+(Abs p elems2), (Abs p elems1), (priqueue_elems p elems2), (priqueue_elems p elems1), (tree_elems a elems2), (tree_elems a elems1), (priq p), (Permutation elems2 elems2), (Permutation elems2 elems1), (Permutation elems1 elems2)
+(Permutation elems1 elems1), (Permutation p p), (In a p), (p = p), (a = a), (elems2 = elems2), (elems2 = elems1), (elems1 = elems2), (elems1 = elems1), (Abs p (elems2 ++ elems2))
+(Abs p (elems2 ++ elems1)), (Abs p (elems1 ++ elems2)), (Abs p (elems1 ++ elems1)), (Abs p []), (Abs (a :: p) elems2), (Abs (a :: p) elems1), (Abs (a :: p) (elems2 ++ elems2)), (Abs (a :: p) (elems2 ++ elems1)), (Abs (a :: p) (elems1 ++ elems2)), (Abs (a :: p) (elems1 ++ elems1))
+(Abs (a :: p) []), (Abs (merge p p) elems2), (Abs (merge p p) elems1), (Abs (merge p p) (elems2 ++ elems2)), (Abs (merge p p) (elems2 ++ elems1)), (Abs (merge p p) (elems1 ++ elems2)), (Abs (merge p p) (elems1 ++ elems1)), (Abs (merge p p) []), (Abs (heap_delete_max a) elems2), (Abs (heap_delete_max a) elems1)
+(Abs (heap_delete_max a) (elems2 ++ elems2)), (Abs (heap_delete_max a) (elems2 ++ elems1)), (Abs (heap_delete_max a) (elems1 ++ elems2)), (Abs (heap_delete_max a) (elems1 ++ elems1)), (Abs (heap_delete_max a) []), (Abs (join p p a) elems2), (Abs (join p p a) elems1), (Abs (join p p a) (elems2 ++ elems2)), (Abs (join p p a) (elems2 ++ elems1)), (Abs (join p p a) (elems1 ++ elems2))
+(Abs (join p p a) (elems1 ++ elems1)), (Abs (join p p a) []), (Abs (carry p a) elems2), (Abs (carry p a) elems1), (Abs (carry p a) (elems2 ++ elems2)), (Abs (carry p a) (elems2 ++ elems1)), (Abs (carry p a) (elems1 ++ elems2)), (Abs (carry p a) (elems1 ++ elems1)), (Abs (carry p a) []), (Abs (p ++ p) elems2)
+(Abs (p ++ p) elems1), (Abs (p ++ p) (elems2 ++ elems2)), (Abs (p ++ p) (elems2 ++ elems1)), (Abs (p ++ p) (elems1 ++ elems2)), (Abs (p ++ p) (elems1 ++ elems1)), (Abs (p ++ p) []), (Abs [] elems2), (Abs [] elems1), (Abs [] (elems2 ++ elems2)), (Abs [] (elems2 ++ elems1))
+(Abs [] (elems1 ++ elems2)), (Abs [] (elems1 ++ elems1)), (Abs [] []), (priqueue_elems p (elems2 ++ elems2)), (priqueue_elems p (elems2 ++ elems1)), (priqueue_elems p (elems1 ++ elems2)), (priqueue_elems p (elems1 ++ elems1)), (priqueue_elems p []), (priqueue_elems (a :: p) elems2), (priqueue_elems (a :: p) elems1)
+(priqueue_elems (a :: p) (elems2 ++ elems2)), (priqueue_elems (a :: p) (elems2 ++ elems1)), (priqueue_elems (a :: p) (elems1 ++ elems2)), (priqueue_elems (a :: p) (elems1 ++ elems1)), (priqueue_elems (a :: p) []), (priqueue_elems (merge p p) elems2), (priqueue_elems (merge p p) elems1), (priqueue_elems (merge p p) (elems2 ++ elems2)), (priqueue_elems (merge p p) (elems2 ++ elems1)), (priqueue_elems (merge p p) (elems1 ++ elems2))
+(priqueue_elems (merge p p) (elems1 ++ elems1)), (priqueue_elems (merge p p) []), (priqueue_elems (heap_delete_max a) elems2), (priqueue_elems (heap_delete_max a) elems1), (priqueue_elems (heap_delete_max a) (elems2 ++ elems2)), (priqueue_elems (heap_delete_max a) (elems2 ++ elems1)), (priqueue_elems (heap_delete_max a) (elems1 ++ elems2)), (priqueue_elems (heap_delete_max a) (elems1 ++ elems1)), (priqueue_elems (heap_delete_max a) []), (priqueue_elems (join p p a) elems2)
+(priqueue_elems (join p p a) elems1), (priqueue_elems (join p p a) (elems2 ++ elems2)), (priqueue_elems (join p p a) (elems2 ++ elems1)), (priqueue_elems (join p p a) (elems1 ++ elems2)), (priqueue_elems (join p p a) (elems1 ++ elems1)), (priqueue_elems (join p p a) []), (priqueue_elems (carry p a) elems2), (priqueue_elems (carry p a) elems1), (priqueue_elems (carry p a) (elems2 ++ elems2)), (priqueue_elems (carry p a) (elems2 ++ elems1))
+(priqueue_elems (carry p a) (elems1 ++ elems2)), (priqueue_elems (carry p a) (elems1 ++ elems1)), (priqueue_elems (carry p a) []), (priqueue_elems (p ++ p) elems2), (priqueue_elems (p ++ p) elems1), (priqueue_elems (p ++ p) (elems2 ++ elems2)), (priqueue_elems (p ++ p) (elems2 ++ elems1)), (priqueue_elems (p ++ p) (elems1 ++ elems2)), (priqueue_elems (p ++ p) (elems1 ++ elems1)), (priqueue_elems (p ++ p) [])
+(priqueue_elems [] elems2), (priqueue_elems [] elems1), (priqueue_elems [] (elems2 ++ elems2)), (priqueue_elems [] (elems2 ++ elems1)), (priqueue_elems [] (elems1 ++ elems2)), (priqueue_elems [] (elems1 ++ elems1)), (priqueue_elems [] []), (tree_elems a (elems2 ++ elems2)), (tree_elems a (elems2 ++ elems1)), (tree_elems a (elems1 ++ elems2))
+(tree_elems a (elems1 ++ elems1)), (tree_elems a []), (tree_elems (smash a a) elems2), (tree_elems (smash a a) elems1), (tree_elems (smash a a) (elems2 ++ elems2)), (tree_elems (smash a a) (elems2 ++ elems1)), (tree_elems (smash a a) (elems1 ++ elems2)), (tree_elems (smash a a) (elems1 ++ elems1)), (tree_elems (smash a a) []), (tree_elems Leaf elems2)
+(tree_elems Leaf elems1), (tree_elems Leaf (elems2 ++ elems2)), (tree_elems Leaf (elems2 ++ elems1)), (tree_elems Leaf (elems1 ++ elems2)), (tree_elems Leaf (elems1 ++ elems1)), (tree_elems Leaf []), (priq (a :: p)), (priq (merge p p)), (priq (heap_delete_max a)), (priq (join p p a))
+(priq (carry p a)), (priq (p ++ p)), (priqq (length elems2) p), (priqq (length elems2) (a :: p)), (priqq (length elems2) (merge p p)), (priqq (length elems2) (heap_delete_max a)), (priqq (length elems2) (join p p a)), (priqq (length elems2) (carry p a)), (priqq (length elems2) (p ++ p)), (priqq (length elems1) p)
+(priqq (length elems1) (a :: p)), (priqq (length elems1) (merge p p)), (priqq (length elems1) (heap_delete_max a)), (priqq (length elems1) (join p p a)), (priqq (length elems1) (carry p a)), (priqq (length elems1) (p ++ p)), (priqq (length p) p), (priqq (length p) (a :: p)), (priqq (length p) (merge p p)), (priqq (length p) (heap_delete_max a))
+(priqq (length p) (join p p a)), (priqq (length p) (carry p a)), (priqq (length p) (p ++ p)), (pow2heap (length elems2) a), (pow2heap (length elems2) (smash a a)), (pow2heap (length elems1) a), (pow2heap (length elems1) (smash a a)), (pow2heap (length p) a), (pow2heap (length p) (smash a a)), (pow2heapp (length elems2) (length elems2) a)
+(pow2heapp (length elems2) (length elems2) (smash a a)), (pow2heapp (length elems2) (length elems2) Leaf), (pow2heapp (length elems2) (length elems1) a), (pow2heapp (length elems2) (length elems1) (smash a a)), (pow2heapp (length elems2) (length elems1) Leaf), (pow2heapp (length elems2) (length p) a), (pow2heapp (length elems2) (length p) (smash a a)), (pow2heapp (length elems2) (length p) Leaf), (pow2heapp (length elems1) (length elems2) a), (pow2heapp (length elems1) (length elems2) (smash a a))
+(pow2heapp (length elems1) (length elems2) Leaf), (pow2heapp (length elems1) (length elems1) a), (pow2heapp (length elems1) (length elems1) (smash a a)), (pow2heapp (length elems1) (length elems1) Leaf), (pow2heapp (length elems1) (length p) a), (pow2heapp (length elems1) (length p) (smash a a)), (pow2heapp (length elems1) (length p) Leaf), (pow2heapp (length p) (length elems2) a), (pow2heapp (length p) (length elems2) (smash a a)), (pow2heapp (length p) (length elems2) Leaf)
+(pow2heapp (length p) (length elems1) a), (pow2heapp (length p) (length elems1) (smash a a)), (pow2heapp (length p) (length elems1) Leaf), (pow2heapp (length p) (length p) a), (pow2heapp (length p) (length p) (smash a a)), (pow2heapp (length p) (length p) Leaf), (Permutation p (a :: p)), (Permutation p (merge p p)), (Permutation p (heap_delete_max a)), (Permutation p (join p p a))
+(Permutation p (carry p a)), (Permutation p (p ++ p)), (Permutation p []), (Permutation (a :: p) p), (Permutation (a :: p) (merge p p)), (Permutation (a :: p) (heap_delete_max a)), (Permutation (a :: p) (join p p a)), (Permutation (a :: p) (carry p a)), (Permutation (a :: p) (p ++ p)), (Permutation (a :: p) [])
+(Permutation (merge p p) p), (Permutation (merge p p) (a :: p)), (Permutation (merge p p) (heap_delete_max a)), (Permutation (merge p p) (join p p a)), (Permutation (merge p p) (carry p a)), (Permutation (merge p p) (p ++ p)), (Permutation (merge p p) []), (Permutation (heap_delete_max a) p), (Permutation (heap_delete_max a) (a :: p)), (Permutation (heap_delete_max a) (merge p p))
+(Permutation (heap_delete_max a) (join p p a)), (Permutation (heap_delete_max a) (carry p a)), (Permutation (heap_delete_max a) (p ++ p)), (Permutation (heap_delete_max a) []), (Permutation (join p p a) p), (Permutation (join p p a) (a :: p)), (Permutation (join p p a) (merge p p)), (Permutation (join p p a) (heap_delete_max a)), (Permutation (join p p a) (carry p a)), (Permutation (join p p a) (p ++ p))
+(Permutation (join p p a) []), (Permutation (carry p a) p), (Permutation (carry p a) (a :: p)), (Permutation (carry p a) (merge p p)), (Permutation (carry p a) (heap_delete_max a)), (Permutation (carry p a) (join p p a)), (Permutation (carry p a) (p ++ p)), (Permutation (carry p a) []), (Permutation (p ++ p) p), (Permutation (p ++ p) (a :: p))
+(Permutation (p ++ p) (merge p p)), (Permutation (p ++ p) (heap_delete_max a)), (Permutation (p ++ p) (join p p a)), (Permutation (p ++ p) (carry p a)), (Permutation (p ++ p) []), (Permutation [] p), (Permutation [] (a :: p)), (Permutation [] (merge p p)), (Permutation [] (heap_delete_max a)), (Permutation [] (join p p a))
+(Permutation [] (carry p a)), (Permutation [] (p ++ p)), (Permutation elems2 (elems2 ++ elems2)), (Permutation elems2 (elems2 ++ elems1)), (Permutation elems2 (elems1 ++ elems2)), (Permutation elems2 (elems1 ++ elems1)), (Permutation elems2 []), (Permutation elems1 (elems2 ++ elems2)), (Permutation elems1 (elems2 ++ elems1)), (Permutation elems1 (elems1 ++ elems2))
+(Permutation elems1 (elems1 ++ elems1)), (Permutation elems1 []), (Permutation (elems2 ++ elems2) elems2), (Permutation (elems2 ++ elems2) elems1), (Permutation (elems2 ++ elems2) (elems2 ++ elems1)), (Permutation (elems2 ++ elems2) (elems1 ++ elems2)), (Permutation (elems2 ++ elems2) (elems1 ++ elems1)), (Permutation (elems2 ++ elems2) []), (Permutation (elems2 ++ elems1) elems2), (Permutation (elems2 ++ elems1) elems1)
+(Permutation (elems2 ++ elems1) (elems2 ++ elems2)), (Permutation (elems2 ++ elems1) (elems1 ++ elems2)), (Permutation (elems2 ++ elems1) (elems1 ++ elems1)), (Permutation (elems2 ++ elems1) []), (Permutation (elems1 ++ elems2) elems2), (Permutation (elems1 ++ elems2) elems1), (Permutation (elems1 ++ elems2) (elems2 ++ elems2)), (Permutation (elems1 ++ elems2) (elems2 ++ elems1)), (Permutation (elems1 ++ elems2) (elems1 ++ elems1)), (Permutation (elems1 ++ elems2) [])
+(Permutation (elems1 ++ elems1) elems2), (Permutation (elems1 ++ elems1) elems1), (Permutation (elems1 ++ elems1) (elems2 ++ elems2)), (Permutation (elems1 ++ elems1) (elems2 ++ elems1)), (Permutation (elems1 ++ elems1) (elems1 ++ elems2)), (Permutation (elems1 ++ elems1) []), (Permutation [] elems2), (Permutation [] elems1), (Permutation [] (elems2 ++ elems2)), (Permutation [] (elems2 ++ elems1))
+(Permutation [] (elems1 ++ elems2)), (Permutation [] (elems1 ++ elems1)), (In a (a :: p)), (In a (merge p p)), (In a (heap_delete_max a)), (In a (join p p a)), (In a (carry p a)), (In a (p ++ p)), (In (smash a a) p), (In (smash a a) (a :: p))
+(In (smash a a) (merge p p)), (In (smash a a) (heap_delete_max a)), (In (smash a a) (join p p a)), (In (smash a a) (carry p a)), (In (smash a a) (p ++ p)), (In Leaf p), (In Leaf (a :: p)), (In Leaf (merge p p)), (In Leaf (heap_delete_max a)), (In Leaf (join p p a))
+(In Leaf (carry p a)), (In Leaf (p ++ p)), (In (length elems2) elems2), (In (length elems2) elems1), (In (length elems2) (elems2 ++ elems2)), (In (length elems2) (elems2 ++ elems1)), (In (length elems2) (elems1 ++ elems2)), (In (length elems2) (elems1 ++ elems1)), (In (length elems1) elems2), (In (length elems1) elems1)
+(In (length elems1) (elems2 ++ elems2)), (In (length elems1) (elems2 ++ elems1)), (In (length elems1) (elems1 ++ elems2)), (In (length elems1) (elems1 ++ elems1)), (In (length p) elems2), (In (length p) elems1), (In (length p) (elems2 ++ elems2)), (In (length p) (elems2 ++ elems1)), (In (length p) (elems1 ++ elems2)), (In (length p) (elems1 ++ elems1))
+(length elems2 < length elems1), (length elems2 < length p), (length elems1 < length elems2), (length elems1 < length p), (length p < length elems2), (length p < length elems1), (length elems2 <= length elems1), (length elems2 <= length p), (length elems1 <= length elems2), (length elems1 <= length p)
+(length p <= length elems2), (length p <= length elems1), (~ Abs p elems2), (~ Abs p elems1), (~ priqueue_elems p elems2), (~ priqueue_elems p elems1), (~ tree_elems a elems2), (~ tree_elems a elems1), (~ priq p), (~ Permutation elems2 elems2)
+(~ Permutation elems2 elems1), (~ Permutation elems1 elems2), (~ Permutation elems1 elems1), (~ Permutation p p), (~ In a p), (p <> p), (a <> a), (elems2 <> elems2), (elems2 <> elems1), (elems1 <> elems2)
+(elems1 <> elems1), (None = Some elems2), (None = Some elems1), (None = Some p), (a :: p = p), (a :: p = merge p p), (a :: p = heap_delete_max a), (a :: p = join p p a), (a :: p = carry p a), (a :: p = p ++ p)
+(a :: p = []), (merge p p = p), (merge p p = heap_delete_max a), (merge p p = join p p a), (merge p p = carry p a), (merge p p = p ++ p), (heap_delete_max a = p), (heap_delete_max a = carry p a), (heap_delete_max a = p ++ p), (join p p a = p)
+(join p p a = heap_delete_max a), (join p p a = carry p a), (join p p a = p ++ p), (carry p a = p), (carry p a = p ++ p), (p ++ p = p), ([] = p), ([] = merge p p), ([] = heap_delete_max a), ([] = join p p a)
+([] = carry p a), ([] = p ++ p), (smash a a = a), (Leaf = smash a a), (elems2 ++ elems2 = elems2), (elems2 ++ elems2 = elems1), (elems2 ++ elems1 = elems2), (elems2 ++ elems1 = elems1), (elems1 ++ elems2 = elems2), (elems1 ++ elems2 = elems1)
+(elems1 ++ elems1 = elems2), (elems1 ++ elems1 = elems1), ([] = elems2), ([] = elems1), ([] = elems2 ++ elems2), ([] = elems2 ++ elems1), ([] = elems1 ++ elems2), ([] = elems1 ++ elems1), (None = find_max p), (None = Some a)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 109.197 seconds
+
+
+Label: 0 (0)
+(Abs (carry p a) elems1), (priqueue_elems (carry p a) elems1), (Abs (a :: p) elems1), (priqueue_elems (a :: p) elems1)
+
+Label: 1 (1)
+(Abs (carry p a) elems2), (priqueue_elems (carry p a) elems2), (Abs (a :: p) elems2), (priqueue_elems (a :: p) elems2)
+
+
+
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 135.956 seconds
+
+Number of Result Pairs Returned: 5
+
+1. (priqueue_elems (a :: p) elems1 ->  priqueue_elems (a :: p) elems2 -> Permutation elems1 elems2)
+
+2. (priqueue_elems (a :: p) elems2 -> Abs (carry p a) elems2)
+(Abs (carry p a) elems2 ->  priqueue_elems (a :: p) elems1 -> Permutation elems1 elems2)
+
+3. (priqueue_elems (a :: p) elems2 -> priqueue_elems (carry p a) elems2)
+(priqueue_elems (a :: p) elems1 ->  priqueue_elems (carry p a) elems2 -> Permutation elems1 elems2)
+
+4. (priqueue_elems (a :: p) elems1 -> Abs (carry p a) elems1)
+(Abs (carry p a) elems1 ->  priqueue_elems (a :: p) elems2 -> Permutation elems1 elems2)
+
+5. (priqueue_elems (a :: p) elems1 -> priqueue_elems (carry p a) elems1)
+(priqueue_elems (carry p a) elems1 ->  priqueue_elems (a :: p) elems2 -> Permutation elems1 elems2)

@@ -1,0 +1,229 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (forall y : natural, even (plus x y) = even (plus y x))
+
+----------------------------------
+Goal: (negb (even (plus y x)) = even (plus y (Succ x)))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 1.38 seconds
+
+gv4 : natural = (plus y (Succ x))
+gv2 : natural = (plus y x)
+gv1 : bool = (even (plus y x))
+gv0 : bool = (negb (even (plus y x)))
+gv5 : natural = (Succ x)
+gv3 : bool = (even (plus y (Succ x)))
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 15.151 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (negb (even (plus y x)) = even (plus y (Succ x)))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (even (plus y (Succ x)) = gv3)
+
+----------------------------------
+Goal: (negb (even (plus y x)) = gv3)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (Succ x = gv5)
+
+----------------------------------
+Goal: (negb (even (plus y x)) = even (plus y gv5))
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (negb (even (plus y x)) = gv0)
+
+----------------------------------
+Goal: (gv0 = even (plus y (Succ x)))
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (even (plus y x) = gv1)
+
+----------------------------------
+Goal: (negb gv1 = even (plus y (Succ x)))
+Case: Invalid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (plus y x = gv2)
+
+----------------------------------
+Goal: (negb (even gv2) = even (plus y (Succ x)))
+Case: Invalid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (plus y (Succ x) = gv4)
+
+----------------------------------
+Goal: (negb (even (plus y x)) = even gv4)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 15.292 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+natural : Set
+plus : (natural -> natural -> natural)
+even : (natural -> bool)
+Succ : (natural -> natural)
+Zero : natural
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 147
+Negative Examples: 49
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 380
+Negative Examples: 173
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 147
+Negative Examples: 49
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 147
+Negative Examples: 49
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 369
+Negative Examples: 170
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 362
+Negative Examples: 170
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 15.428 seconds
+
+
+Label: 0 (0)
+(false = gv3), (true = gv3), (gv3 = gv3), (x = x), (x = y), (y = x), (y = y), (false = even x), (false = even y), (true = even x)
+(true = even y), (false <> gv3), (true <> gv3), (gv3 <> gv3), (x <> x), (x <> y), (y <> x), (y <> y), (None = Some x), (None = Some y)
+(even x = gv3), (even y = gv3), (Succ x = x), (Succ x = y), (Succ x = plus x x), (Succ x = plus x y), (Succ x = plus y x), (Succ x = plus y y), (Succ y = x), (Succ y = y)
+(Succ y = plus x x), (Succ y = plus x y), (Succ y = plus y x), (Succ y = plus y y), (plus x x = x), (plus x x = y), (plus x y = x), (plus x y = y), (plus y x = x), (plus y x = y)
+(plus y y = x), (plus y y = y), (Zero = Succ x), (Zero = Succ y), (Zero = plus x x), (Zero = plus x y), (Zero = plus y x), (Zero = plus y y), (None = Some gv3)
+
+Label: 1 (1)
+(gv5 = gv5), (gv5 = x), (gv5 = y), (x = gv5), (x = x), (x = y), (y = gv5), (y = x), (y = y), (false = even gv5)
+(false = even x), (false = even y), (true = even gv5), (true = even x), (true = even y), (gv5 <> gv5), (gv5 <> x), (gv5 <> y), (x <> gv5), (x <> x)
+(x <> y), (y <> gv5), (y <> x), (y <> y), (None = Some gv5), (None = Some x), (None = Some y), (Succ gv5 = gv5), (Succ gv5 = x), (Succ gv5 = y)
+(Succ gv5 = plus gv5 gv5), (Succ gv5 = plus gv5 x), (Succ gv5 = plus gv5 y), (Succ gv5 = plus x gv5), (Succ gv5 = plus x x), (Succ gv5 = plus x y), (Succ gv5 = plus y gv5), (Succ gv5 = plus y x), (Succ gv5 = plus y y), (Succ x = gv5)
+(Succ x = x), (Succ x = y), (Succ x = plus gv5 gv5), (Succ x = plus gv5 x), (Succ x = plus gv5 y), (Succ x = plus x gv5), (Succ x = plus x x), (Succ x = plus x y), (Succ x = plus y gv5), (Succ x = plus y x)
+(Succ x = plus y y), (Succ y = gv5), (Succ y = x), (Succ y = y), (Succ y = plus gv5 gv5), (Succ y = plus gv5 x), (Succ y = plus gv5 y), (Succ y = plus x gv5), (Succ y = plus x x), (Succ y = plus x y)
+(Succ y = plus y gv5), (Succ y = plus y x), (Succ y = plus y y), (plus gv5 gv5 = gv5), (plus gv5 gv5 = x), (plus gv5 gv5 = y), (plus gv5 x = gv5), (plus gv5 x = x), (plus gv5 x = y), (plus gv5 y = gv5)
+(plus gv5 y = x), (plus gv5 y = y), (plus x gv5 = gv5), (plus x gv5 = x), (plus x gv5 = y), (plus x x = gv5), (plus x x = x), (plus x x = y), (plus x y = gv5), (plus x y = x)
+(plus x y = y), (plus y gv5 = gv5), (plus y gv5 = x), (plus y gv5 = y), (plus y x = gv5), (plus y x = x), (plus y x = y), (plus y y = gv5), (plus y y = x), (plus y y = y)
+(Zero = Succ gv5), (Zero = Succ x), (Zero = Succ y), (Zero = plus gv5 gv5), (Zero = plus gv5 x), (Zero = plus gv5 y), (Zero = plus x gv5), (Zero = plus x x), (Zero = plus x y), (Zero = plus y gv5)
+(Zero = plus y x), (Zero = plus y y)
+
+Label: 2 (2)
+(false = gv0), (true = gv0), (x = x), (x = y), (y = x), (y = y), (gv0 = gv0), (false = even x), (false = even y), (true = even x)
+(true = even y), (false <> gv0), (true <> gv0), (x <> x), (x <> y), (y <> x), (y <> y), (gv0 <> gv0), (None = Some x), (None = Some y)
+(even x = gv0), (even y = gv0), (Succ x = x), (Succ x = y), (Succ x = plus x x), (Succ x = plus x y), (Succ x = plus y x), (Succ x = plus y y), (Succ y = x), (Succ y = y)
+(Succ y = plus x x), (Succ y = plus x y), (Succ y = plus y x), (Succ y = plus y y), (plus x x = x), (plus x x = y), (plus x y = x), (plus x y = y), (plus y x = x), (plus y x = y)
+(plus y y = x), (plus y y = y), (Zero = Succ x), (Zero = Succ y), (Zero = plus x x), (Zero = plus x y), (Zero = plus y x), (Zero = plus y y), (None = Some gv0)
+
+Label: 3 (3)
+(false = gv1), (true = gv1), (x = x), (x = y), (y = x), (y = y), (gv1 = gv1), (false = even x), (false = even y), (true = even x)
+(true = even y), (false <> gv1), (true <> gv1), (x <> x), (x <> y), (y <> x), (y <> y), (gv1 <> gv1), (None = Some x), (None = Some y)
+(even x = gv1), (even y = gv1), (Succ x = x), (Succ x = y), (Succ x = plus x x), (Succ x = plus x y), (Succ x = plus y x), (Succ x = plus y y), (Succ y = x), (Succ y = y)
+(Succ y = plus x x), (Succ y = plus x y), (Succ y = plus y x), (Succ y = plus y y), (plus x x = x), (plus x x = y), (plus x y = x), (plus x y = y), (plus y x = x), (plus y x = y)
+(plus y y = x), (plus y y = y), (Zero = Succ x), (Zero = Succ y), (Zero = plus x x), (Zero = plus x y), (Zero = plus y x), (Zero = plus y y), (None = Some gv1)
+
+Label: 4 (4)
+(x = x), (x = y), (x = gv2), (y = x), (y = y), (y = gv2), (gv2 = x), (gv2 = y), (gv2 = gv2), (false = even x)
+(false = even y), (false = even gv2), (true = even x), (true = even y), (true = even gv2), (x <> x), (x <> y), (x <> gv2), (y <> x), (y <> y)
+(y <> gv2), (gv2 <> x), (gv2 <> y), (gv2 <> gv2), (None = Some x), (None = Some y), (None = Some gv2), (Succ x = x), (Succ x = y), (Succ x = gv2)
+(Succ x = plus x x), (Succ x = plus x y), (Succ x = plus x gv2), (Succ x = plus y x), (Succ x = plus y y), (Succ x = plus y gv2), (Succ x = plus gv2 x), (Succ x = plus gv2 y), (Succ x = plus gv2 gv2), (Succ y = x)
+(Succ y = y), (Succ y = gv2), (Succ y = plus x x), (Succ y = plus x y), (Succ y = plus x gv2), (Succ y = plus y x), (Succ y = plus y y), (Succ y = plus y gv2), (Succ y = plus gv2 x), (Succ y = plus gv2 y)
+(Succ y = plus gv2 gv2), (Succ gv2 = x), (Succ gv2 = y), (Succ gv2 = gv2), (Succ gv2 = plus x x), (Succ gv2 = plus x y), (Succ gv2 = plus x gv2), (Succ gv2 = plus y x), (Succ gv2 = plus y y), (Succ gv2 = plus y gv2)
+(Succ gv2 = plus gv2 x), (Succ gv2 = plus gv2 y), (Succ gv2 = plus gv2 gv2), (plus x x = x), (plus x x = y), (plus x x = gv2), (plus x y = x), (plus x y = y), (plus x y = gv2), (plus x gv2 = x)
+(plus x gv2 = y), (plus x gv2 = gv2), (plus y x = x), (plus y x = y), (plus y x = gv2), (plus y y = x), (plus y y = y), (plus y y = gv2), (plus y gv2 = x), (plus y gv2 = y)
+(plus y gv2 = gv2), (plus gv2 x = x), (plus gv2 x = y), (plus gv2 x = gv2), (plus gv2 y = x), (plus gv2 y = y), (plus gv2 y = gv2), (plus gv2 gv2 = x), (plus gv2 gv2 = y), (plus gv2 gv2 = gv2)
+(Zero = Succ x), (Zero = Succ y), (Zero = Succ gv2), (Zero = plus x x), (Zero = plus x y), (Zero = plus x gv2), (Zero = plus y x), (Zero = plus y y), (Zero = plus y gv2), (Zero = plus gv2 x)
+(Zero = plus gv2 y), (Zero = plus gv2 gv2)
+
+Label: 5 (5)
+(gv4 = gv4), (gv4 = x), (gv4 = y), (x = gv4), (x = x), (x = y), (y = gv4), (y = x), (y = y), (false = even gv4)
+(false = even x), (false = even y), (true = even gv4), (true = even x), (true = even y), (gv4 <> gv4), (gv4 <> x), (gv4 <> y), (x <> gv4), (x <> x)
+(x <> y), (y <> gv4), (y <> x), (y <> y), (None = Some gv4), (None = Some x), (None = Some y), (Succ gv4 = gv4), (Succ gv4 = x), (Succ gv4 = y)
+(Succ gv4 = plus gv4 gv4), (Succ gv4 = plus gv4 x), (Succ gv4 = plus gv4 y), (Succ gv4 = plus x gv4), (Succ gv4 = plus x x), (Succ gv4 = plus x y), (Succ gv4 = plus y gv4), (Succ gv4 = plus y x), (Succ gv4 = plus y y), (Succ x = gv4)
+(Succ x = x), (Succ x = y), (Succ x = plus gv4 gv4), (Succ x = plus gv4 x), (Succ x = plus gv4 y), (Succ x = plus x gv4), (Succ x = plus x x), (Succ x = plus x y), (Succ x = plus y gv4), (Succ x = plus y x)
+(Succ x = plus y y), (Succ y = gv4), (Succ y = x), (Succ y = y), (Succ y = plus gv4 gv4), (Succ y = plus gv4 x), (Succ y = plus gv4 y), (Succ y = plus x gv4), (Succ y = plus x x), (Succ y = plus x y)
+(Succ y = plus y gv4), (Succ y = plus y x), (Succ y = plus y y), (plus gv4 gv4 = gv4), (plus gv4 gv4 = x), (plus gv4 gv4 = y), (plus gv4 x = gv4), (plus gv4 x = x), (plus gv4 x = y), (plus gv4 y = gv4)
+(plus gv4 y = x), (plus gv4 y = y), (plus x gv4 = gv4), (plus x gv4 = x), (plus x gv4 = y), (plus x x = gv4), (plus x x = x), (plus x x = y), (plus x y = gv4), (plus x y = x)
+(plus x y = y), (plus y gv4 = gv4), (plus y gv4 = x), (plus y gv4 = y), (plus y x = gv4), (plus y x = x), (plus y x = y), (plus y y = gv4), (plus y y = x), (plus y y = y)
+(Zero = Succ gv4), (Zero = Succ x), (Zero = Succ y), (Zero = plus gv4 gv4), (Zero = plus gv4 x), (Zero = plus gv4 y), (Zero = plus x gv4), (Zero = plus x x), (Zero = plus x y), (Zero = plus y gv4)
+(Zero = plus y x), (Zero = plus y y)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 18.033 seconds
+
+
+Label: 0 (0)
+
+Label: 1 (1)
+(Succ x = gv5)
+
+Label: 2 (2)
+
+Label: 3 (3)
+
+Label: 4 (4)
+(plus x y = gv2), (plus y x = gv2)
+
+Label: 5 (5)
+
+
+
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 24.65 seconds
+
+Number of Result Pairs Returned: 3
+
+1. (negb (even (plus y x)) = even (plus y (Succ x)))
+
+2. (plus x y = plus y x)
+
+3. (plus x y = gv2 -> negb (even gv2) = even (plus y (Succ x)))

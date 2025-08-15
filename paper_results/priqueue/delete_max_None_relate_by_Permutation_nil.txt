@@ -1,0 +1,215 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (Abs [] p)
+ -- (priq p)
+
+----------------------------------
+Goal: (delete_max p = None)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3.766 seconds
+
+gv1 : (option (nat * list nat)) = None
+gv0 : (option (nat * list nat)) = (delete_max p)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 29.815 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (Abs [] p)
+
+----------------------------------
+Goal: (delete_max p = None)
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (Abs [] p)
+ -- (delete_max p = gv0)
+
+----------------------------------
+Goal: (gv0 = None)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (Abs [] p)
+ -- (None = gv1)
+
+----------------------------------
+Goal: (delete_max p = gv1)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 29.955 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+In : (forall A : Type, A -> list A -> Prop)
+existsb : (forall A : Type, (A -> bool) -> list A -> bool)
+forallb : (forall A : Type, (A -> bool) -> list A -> bool)
+Forall : (forall A : Type, (A -> Prop) -> list A -> Prop)
+nodup : (forall A : Type, (forall x y : A, {x = y} + {x <> y}) -> list A -> list A)
+map : (forall A B : Type, (A -> B) -> list A -> list B)
+Permutation : (forall A : Type, list A -> list A -> Prop)
+geb : (nat -> nat -> bool)
+gtb : (nat -> nat -> bool)
+maybe_swap : (list nat -> list nat)
+select : (nat -> list nat -> nat * list nat)
+insert : (nat -> list nat -> list nat)
+delete_max : (list nat -> option (nat * list nat))
+merge : (list nat -> list nat -> list nat)
+priq : (list nat -> Prop)
+Abs : (list nat -> list nat -> Prop)
+
+Label: 0 (0)
+Abducted Assumption: (Abs [] p)
+Positive Examples: 1
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 137
+Negative Examples: 459
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 158
+Negative Examples: 496
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 30.091 seconds
+
+
+Label: 0 (0)
+(Abs p p), (priq p), (Permutation p p), (p = p), (Abs p (merge p p)), (Abs p (maybe_swap p)), (Abs p (p ++ p)), (Abs p []), (Abs (merge p p) p), (Abs (merge p p) (maybe_swap p))
+(Abs (merge p p) (p ++ p)), (Abs (merge p p) []), (Abs (maybe_swap p) p), (Abs (maybe_swap p) (merge p p)), (Abs (maybe_swap p) (p ++ p)), (Abs (maybe_swap p) []), (Abs (p ++ p) p), (Abs (p ++ p) (merge p p)), (Abs (p ++ p) (maybe_swap p)), (Abs (p ++ p) [])
+(Abs [] p), (Abs [] (merge p p)), (Abs [] (maybe_swap p)), (Abs [] (p ++ p)), (priq (merge p p)), (priq (maybe_swap p)), (priq (p ++ p)), (priq []), (Permutation p (merge p p)), (Permutation p (maybe_swap p))
+(Permutation p (p ++ p)), (Permutation p []), (Permutation (merge p p) p), (Permutation (merge p p) (maybe_swap p)), (Permutation (merge p p) (p ++ p)), (Permutation (merge p p) []), (Permutation (maybe_swap p) p), (Permutation (maybe_swap p) (merge p p)), (Permutation (maybe_swap p) (p ++ p)), (Permutation (maybe_swap p) [])
+(Permutation (p ++ p) p), (Permutation (p ++ p) (merge p p)), (Permutation (p ++ p) (maybe_swap p)), (Permutation (p ++ p) []), (Permutation [] p), (Permutation [] (merge p p)), (Permutation [] (maybe_swap p)), (Permutation [] (p ++ p)), (In (length p) p), (In (length p) (merge p p))
+(In (length p) (maybe_swap p)), (In (length p) (p ++ p)), (~ Abs p p), (~ priq p), (~ Permutation p p), (p <> p), (None = Some p), (merge p p = p), (merge p p = maybe_swap p), (merge p p = p ++ p)
+(maybe_swap p = p), (maybe_swap p = p ++ p), (p ++ p = p), ([] = p), ([] = merge p p), ([] = maybe_swap p), ([] = p ++ p)
+
+Label: 1 (1)
+(Abs p p), (priq p), (Permutation p p), (p = p), (gv0 = gv0), (Abs p (merge p p)), (Abs p (maybe_swap p)), (Abs p (p ++ p)), (Abs p []), (Abs (merge p p) p)
+(Abs (merge p p) (maybe_swap p)), (Abs (merge p p) (p ++ p)), (Abs (merge p p) []), (Abs (maybe_swap p) p), (Abs (maybe_swap p) (merge p p)), (Abs (maybe_swap p) (p ++ p)), (Abs (maybe_swap p) []), (Abs (p ++ p) p), (Abs (p ++ p) (merge p p)), (Abs (p ++ p) (maybe_swap p))
+(Abs (p ++ p) []), (Abs [] p), (Abs [] (merge p p)), (Abs [] (maybe_swap p)), (Abs [] (p ++ p)), (priq (merge p p)), (priq (maybe_swap p)), (priq (p ++ p)), (priq []), (Permutation p (merge p p))
+(Permutation p (maybe_swap p)), (Permutation p (p ++ p)), (Permutation p []), (Permutation (merge p p) p), (Permutation (merge p p) (maybe_swap p)), (Permutation (merge p p) (p ++ p)), (Permutation (merge p p) []), (Permutation (maybe_swap p) p), (Permutation (maybe_swap p) (merge p p)), (Permutation (maybe_swap p) (p ++ p))
+(Permutation (maybe_swap p) []), (Permutation (p ++ p) p), (Permutation (p ++ p) (merge p p)), (Permutation (p ++ p) (maybe_swap p)), (Permutation (p ++ p) []), (Permutation [] p), (Permutation [] (merge p p)), (Permutation [] (maybe_swap p)), (Permutation [] (p ++ p)), (In (length p) p)
+(In (length p) (merge p p)), (In (length p) (maybe_swap p)), (In (length p) (p ++ p)), (~ Abs p p), (~ priq p), (~ Permutation p p), (p <> p), (gv0 <> gv0), (None = Some p), (delete_max p = gv0)
+(None = gv0), (None = delete_max p), (None = Some gv0), (merge p p = p), (merge p p = maybe_swap p), (merge p p = p ++ p), (maybe_swap p = p), (maybe_swap p = p ++ p), (p ++ p = p), ([] = p)
+([] = merge p p), ([] = maybe_swap p), ([] = p ++ p)
+
+Label: 2 (2)
+(Abs p p), (priq p), (Permutation p p), (gv1 = gv1), (p = p), (Abs p (merge p p)), (Abs p (maybe_swap p)), (Abs p (p ++ p)), (Abs p []), (Abs (merge p p) p)
+(Abs (merge p p) (maybe_swap p)), (Abs (merge p p) (p ++ p)), (Abs (merge p p) []), (Abs (maybe_swap p) p), (Abs (maybe_swap p) (merge p p)), (Abs (maybe_swap p) (p ++ p)), (Abs (maybe_swap p) []), (Abs (p ++ p) p), (Abs (p ++ p) (merge p p)), (Abs (p ++ p) (maybe_swap p))
+(Abs (p ++ p) []), (Abs [] p), (Abs [] (merge p p)), (Abs [] (maybe_swap p)), (Abs [] (p ++ p)), (priq (merge p p)), (priq (maybe_swap p)), (priq (p ++ p)), (priq []), (Permutation p (merge p p))
+(Permutation p (maybe_swap p)), (Permutation p (p ++ p)), (Permutation p []), (Permutation (merge p p) p), (Permutation (merge p p) (maybe_swap p)), (Permutation (merge p p) (p ++ p)), (Permutation (merge p p) []), (Permutation (maybe_swap p) p), (Permutation (maybe_swap p) (merge p p)), (Permutation (maybe_swap p) (p ++ p))
+(Permutation (maybe_swap p) []), (Permutation (p ++ p) p), (Permutation (p ++ p) (merge p p)), (Permutation (p ++ p) (maybe_swap p)), (Permutation (p ++ p) []), (Permutation [] p), (Permutation [] (merge p p)), (Permutation [] (maybe_swap p)), (Permutation [] (p ++ p)), (In (length p) p)
+(In (length p) (merge p p)), (In (length p) (maybe_swap p)), (In (length p) (p ++ p)), (~ Abs p p), (~ priq p), (~ Permutation p p), (gv1 <> gv1), (p <> p), (None = Some p), (delete_max p = gv1)
+(None = gv1), (None = delete_max p), (None = Some gv1), (merge p p = p), (merge p p = maybe_swap p), (merge p p = p ++ p), (maybe_swap p = p), (maybe_swap p = p ++ p), (p ++ p = p), ([] = p)
+([] = merge p p), ([] = maybe_swap p), ([] = p ++ p)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 35.336 seconds
+
+
+Label: 0 (0)
+(Abs p []), (Abs [] p), (Permutation p []), (Permutation [] p), (Abs p (merge p p)), (Abs (merge p p) p), (Abs (maybe_swap p) []), (Abs [] (maybe_swap p)), ([] = p), (Abs p (p ++ p))
+(Abs (p ++ p) p), (Abs (merge p p) []), (Abs [] (merge p p)), (Permutation p (merge p p)), (Permutation (merge p p) p), (Permutation (maybe_swap p) []), (Permutation [] (maybe_swap p)), (Abs (merge p p) (maybe_swap p)), (Abs (maybe_swap p) (merge p p)), (merge p p = p)
+
+Label: 1 (1)
+(delete_max p = gv0), (None = gv0)
+
+Label: 2 (2)
+(delete_max p = gv1), (None = gv1)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (Abs [] p -> delete_max p = None)
+
+2. (Abs [] p -> Abs (merge p p) p)
+(Abs (merge p p) p -> delete_max p = None)
+
+3. (Abs [] p -> Abs [] (maybe_swap p))
+(Abs [] (maybe_swap p) -> delete_max p = None)
+
+4. (Abs [] p -> Abs p (merge p p))
+(Abs p (merge p p) -> delete_max p = None)
+
+5. (Abs [] p -> Abs (maybe_swap p) [])
+(Abs (maybe_swap p) [] -> delete_max p = None)
+
+6. (Abs [] p -> Abs (p ++ p) p)
+(Abs (p ++ p) p -> delete_max p = None)
+
+7. (Abs [] p -> Abs p (p ++ p))
+(Abs p (p ++ p) -> delete_max p = None)
+
+8. (Abs [] p -> Abs (merge p p) (maybe_swap p))
+(Abs (merge p p) (maybe_swap p) -> delete_max p = None)
+
+9. (Abs [] p -> Abs (maybe_swap p) (merge p p))
+(Abs (maybe_swap p) (merge p p) -> delete_max p = None)
+
+10. (Abs [] p -> Abs [] (merge p p))
+(Abs [] (merge p p) -> delete_max p = None)
+
+11. (Abs [] p -> Abs (merge p p) [])
+(Abs (merge p p) [] -> delete_max p = None)
+
+12. (Abs [] p -> Permutation (merge p p) p)
+(Permutation (merge p p) p -> delete_max p = None)
+
+13. (Abs [] p -> Permutation [] (maybe_swap p))
+(Permutation [] (maybe_swap p) -> delete_max p = None)
+
+14. (Abs [] p -> Permutation p (merge p p))
+(Permutation p (merge p p) -> delete_max p = None)
+
+15. (Abs [] p -> Permutation (maybe_swap p) [])
+(Permutation (maybe_swap p) [] -> delete_max p = None)
+
+16. (Abs [] p -> [] = p)
+([] = p -> delete_max p = None)
+
+17. (Abs [] p -> merge p p = p)
+(merge p p = p -> delete_max p = None)
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 78.952 seconds
+
+Number of Result Pairs Returned: 17
+
+1. (Abs [] p -> delete_max p = None)
+
+2. (Abs [] p -> Abs (merge p p) p)
+(Abs (merge p p) p -> delete_max p = None)
+
+3. (Abs [] p -> Abs [] (maybe_swap p))
+(Abs [] (maybe_swap p) -> delete_max p = None)
+
+4. (Abs [] p -> Abs p (merge p p))
+(Abs p (merge p p) -> delete_max p = None)
+
+5. (Abs [] p -> Abs (maybe_swap p) [])
+(Abs (maybe_swap p) [] -> delete_max p = None)

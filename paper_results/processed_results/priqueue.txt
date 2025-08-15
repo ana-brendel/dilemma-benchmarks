@@ -1,0 +1,181 @@
+[TOTAL] 8
+
+[SUCCESS] 2
+    [SUCCESS][1][AS IS] 2
+
+[USEFUL] 2
+    [USEFUL][STEP IN RIGHT DIRECTION][WEAKEN] 2
+
+[FAIL] 4
+    [FAIL][FORWARD] 2
+    [FAIL][IMPLEMENTATION] 1
+    [FAIL][IMPLEMENTATION][RANK] 1
+
+[ATOMIC - EQUAL] 0
+[ATOMIC - OTHER] 0
+-----------------------------------------------
+
+[SUCCESS][1][AS IS]
+Test = delete_max_Some_relate_by_select_biggest
+[TIME] 46.177
+[COUNTS] 2
+[TARGET] select i al = (j,bl) -> Forall (fun x => j >= x) bl
+
+1. (select a p = (k, q) -> Forall (ge k) q)
+
+2. (select a p = (k, q) -> (k, q) = select k q)
+((k, q) = select k q -> Forall (ge k) q)
+
+
+
+[SUCCESS][1][AS IS]
+Test = delete_max_Some_relate_by_select_perm
+[TIME] 132.694
+[COUNTS] 29
+[TARGET] select x l = (y, r) -> Permutation (x :: l) (y :: r)
+
+1. (select a p = (k, q) -> Permutation (a :: p) (k :: q))
+
+2. (insert a p = a :: p)
+
+3. (insert k q = k :: q)
+
+4. (Abs gv0 (insert a p) -> select a p = (k, q) -> Permutation gv0 (k :: q))
+
+5. (Abs (insert a p) gv0 -> select a p = (k, q) -> Permutation gv0 (k :: q))
+
+
+
+[FAIL][IMPLEMENTATION][RANK]
+Test = delete_max_None_relate_by_Permutation_nil
+[TIME] 78.952
+[COUNTS] 17
+[TARGET] Permutation [] l -> l = []
+
+1. (Abs [] p -> delete_max p = None)
+
+2. (Abs [] p -> Abs (merge p p) p)
+(Abs (merge p p) p -> delete_max p = None)
+
+3. (Abs [] p -> Abs [] (maybe_swap p))
+(Abs [] (maybe_swap p) -> delete_max p = None)
+
+4. (Abs [] p -> Abs p (merge p p))
+(Abs p (merge p p) -> delete_max p = None)
+
+5. (Abs [] p -> Abs (maybe_swap p) [])
+(Abs (maybe_swap p) [] -> delete_max p = None)
+
+
+
+[FAIL][FORWARD]
+Test = delete_max_Some_relate_by_Permutation_trans_2
+[TIME] 184.258
+[COUNTS] 61
+[TARGET] Permutation l m -> Permutation m n-> Permutation l n
+
+1. (Abs q ql -> select a p = (k, q) -> Permutation (a :: p) (k :: ql))
+
+2. (select a p = (k, q) -> Abs (insert k q) (insert a p))
+(Abs q ql -> Abs (insert k q) (insert a p) -> Permutation (a :: p) (k :: ql))
+
+3. (select a p = (k, q) -> Abs (insert a p) (insert k q))
+(Abs q ql -> Abs (insert a p) (insert k q) -> Permutation (a :: p) (k :: ql))
+
+4. (select a p = (k, q) -> Abs (k :: q) (insert a p))
+(Abs q ql -> Abs (k :: q) (insert a p) -> Permutation (a :: p) (k :: ql))
+
+5. (select a p = (k, q) -> Abs (a :: p) (insert k q))
+(Abs q ql -> Abs (a :: p) (insert k q) -> Permutation (a :: p) (k :: ql))
+
+
+
+[USEFUL][STEP IN RIGHT DIRECTION][WEAKEN]
+Test = select_biggest_by_select_biggest_aux_2
+[TIME] 95.265
+[COUNTS] 18
+[TARGET] Forall (fun x => j >= x) bl -> select i al = (j,bl) -> j >= i
+
+1. (a > i -> select a al = (j, l) -> j >= i)
+
+2. (select a al = (j, l) -> a <= j)
+(a > i -> a <= j -> j >= i)
+
+3. (select a al = (j, l) -> ~ j < a)
+(a > i -> ~ j < a -> j >= i)
+
+4. (select a al = (j, l) -> true = (j >=? a))
+(a > i -> true = (j >=? a) -> j >= i)
+
+5. (select a al = (j, l) -> false = (a >? j))
+(a > i -> false = (a >? j) -> j >= i)
+
+
+
+[FAIL][FORWARD]
+Test = delete_max_Some_relate_by_Permutation_trans_1
+[TIME] 322.776
+[COUNTS] 57
+[TARGET] Permutation l m -> Permutation m n-> Permutation l n
+
+1. (Abs q ql ->  Abs (a :: p) pl -> select a p = (k, q) -> Permutation pl (k :: ql))
+
+2. (select a p = (k, q) -> Abs (insert k q) (insert a p))
+(Abs (a :: p) pl ->  Abs q ql -> Abs (insert k q) (insert a p) -> Permutation pl (k :: ql))
+
+3. (select a p = (k, q) -> Abs (insert a p) (insert k q))
+(Abs (a :: p) pl ->  Abs q ql -> Abs (insert a p) (insert k q) -> Permutation pl (k :: ql))
+
+4. (select a p = (k, q) -> Abs (k :: q) (insert a p))
+(Abs (a :: p) pl ->  Abs q ql -> Abs (k :: q) (insert a p) -> Permutation pl (k :: ql))
+
+5. (select a p = (k, q) -> Abs (a :: p) (insert k q))
+(Abs (a :: p) pl ->  Abs q ql -> Abs (a :: p) (insert k q) -> Permutation pl (k :: ql))
+
+
+
+[USEFUL][STEP IN RIGHT DIRECTION][WEAKEN]
+Test = select_biggest_by_select_biggest_aux_1
+[TIME] 65.064
+[COUNTS] 8
+[TARGET] Forall (fun x => j >= x) bl -> select i al = (j,bl) -> j >= i
+
+1. (i >= a -> select i al = (j, l) -> j >= a)
+
+2. (select i al = (j, l) -> i <= j)
+(i >= a -> i <= j -> j >= a)
+
+3. (select i al = (j, l) -> ~ j < i)
+(i >= a -> ~ j < i -> j >= a)
+
+4. (select i al = (j, l) -> true = (j >=? i))
+(i >= a -> true = (j >=? i) -> j >= a)
+
+5. (select i al = (j, l) -> false = (i >? j))
+(i >= a -> false = (i >? j) -> j >= a)
+
+
+
+[FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = delete_max_Some_relate_by_forall_permutation
+[TIME] 99.272
+[COUNTS] 18
+[TARGET] Permutation l l' -> Forall P l -> Forall P l'
+
+1. (Abs q ql -> select a p = (k, q) -> Forall (ge k) ql)
+
+2. (select a p = (k, q) -> (k, q) = select k q)
+(Abs q ql -> (k, q) = select k q -> Forall (ge k) ql)
+
+3. (Abs q ql -> Abs (maybe_swap ql) q)
+(Abs (maybe_swap ql) q -> select a p = (k, q) -> Forall (ge k) ql)
+
+4. (Abs q ql -> Abs (maybe_swap q) ql)
+(Abs (maybe_swap q) ql -> select a p = (k, q) -> Forall (ge k) ql)
+
+5. (Abs q ql -> Abs ql (maybe_swap q))
+(Abs ql (maybe_swap q) -> select a p = (k, q) -> Forall (ge k) ql)
+
+
+
+

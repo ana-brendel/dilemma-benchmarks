@@ -1,0 +1,466 @@
+[TOTAL] 24
+
+[SUCCESS] 15
+    [ATOMIC][SUCCESS][1][AS IS] 2
+    [SUCCESS][1][AS IS] 8
+    [SUCCESS][3][WEAKEN] 4
+    [SUCCESS][5][WEAKEN] 1
+
+[USEFUL] 2
+    [USEFUL][STEP IN RIGHT DIRECTION][WEAKEN] 1
+    [USEFUL][STEP IN RIGHT DIRECTION][GENERALIZE] 1
+
+[FAIL] 7
+    [FAIL][FORWARD] 3
+    [FAIL][IMPLEMENTATION] 1
+    [FAIL][RESOURCE] 3
+
+[ATOMIC - EQUAL] 0
+[ATOMIC - OTHER] 2
+-----------------------------------------------
+[***]
+[ATOMIC][SUCCESS][1][AS IS]
+Test = selection_sort_is_correct_by_selection_sort_sorted
+[TIME] 33.52
+[COUNTS] 3
+[TARGET] sorted (selection_sort al)
+
+1. (sorted (selection_sort al))
+
+2. (selection_sort (selection_sort al) = selection_sort al)
+
+3. (selection_sort gv0 = gv0 -> sorted gv0)
+
+
+[***]
+[ATOMIC][SUCCESS][1][AS IS]
+Test = selection_sort_is_correct_by_selection_sort_perm
+[TIME] 58.851
+[COUNTS] 17
+[TARGET] Permutation l (selection_sort l)
+
+1. (Permutation al (selection_sort al))
+
+2. (Permutation gv0 (selection_sort al) -> Permutation al gv0)
+
+3. (Permutation al (selection_sort gv0) -> Permutation al gv0)
+
+4. (Permutation (selection_sort gv0) al -> Permutation al gv0)
+
+5. (Permutation (selection_sort al) gv0 -> Permutation al gv0)
+
+
+
+[FAIL][FORWARD]
+Test = cons_of_small_maintains_sort_ind_list_by_Permutation_in
+[TIME] 52.904
+[COUNTS] 6
+[TARGET] Permutation l m -> In x l -> In x m
+
+1. (selsort bl n = a :: l -> In a bl)
+
+2. (selsort bl n = a :: l -> In a (selection_sort bl))
+(In a (selection_sort bl) -> In a bl)
+
+3. (selsort bl n = a :: l -> In a (selsort bl n))
+(In a (selsort bl n) -> In a bl)
+
+4. (selsort bl n = a :: l -> In a (bl ++ bl))
+(In a (bl ++ bl) -> In a bl)
+
+5. (selsort bl n = a :: l -> Permutation (a :: l) (selsort bl n))
+(Permutation (a :: l) (selsort bl n) -> In a bl)
+
+
+
+[FAIL][RESOURCE]
+Test = select_smallest_by_select_fst_leq_1
+[TIME] 90.268
+[COUNTS] 12
+[TARGET] select x al = (y, bl) -> y <= x
+
+1. (select x al = (y, l) -> a :: l = bl -> x <= a -> y <=* bl)
+
+2. (select x al = (y, l) -> y <=* x :: al)
+(y <=* x :: al -> a :: l = bl -> x <= a -> y <=* bl)
+
+3. (select x al = (y, l) -> y <=* x :: l)
+(y <=* x :: l -> a :: l = bl -> x <= a -> y <=* bl)
+
+4. (select x al = (y, l) -> Permutation (y :: l) (x :: al))
+(Permutation (y :: l) (x :: al) -> a :: l = bl -> x <= a -> y <=* bl)
+
+5. (select x al = (y, l) -> Permutation (x :: al) (y :: l))
+(Permutation (x :: al) (y :: l) -> a :: l = bl -> x <= a -> y <=* bl)
+
+
+
+[USEFUL][STEP IN RIGHT DIRECTION][GENERALIZE]
+Test = select_in_by_Permutation_in
+[TIME] 45.654
+[COUNTS] 2
+[TARGET] Permutation l m -> In x l -> In x m
+
+1. (Permutation gv0 (y :: bl) -> In y gv0)
+
+2. (Permutation (x :: al) (y :: bl) -> In y (x :: al))
+
+
+
+[USEFUL][STEP IN RIGHT DIRECTION][WEAKEN]
+Test = selsort_sorted_by_cons_of_small_maintains_sort
+[TIME] 89.296
+[COUNTS] 14
+[TARGET] n = length bl -> y <=* bl -> sorted (selsort bl n) -> sorted (y :: selsort bl n)
+
+1. (select n0 al = (n1, l) -> sorted (n1 :: selsort l n))
+
+2. (select n0 al = (n1, l) -> n1 <=* l)
+(n1 <=* l -> sorted (n1 :: selsort l n))
+
+3. (select n0 al = (n1, l) -> n1 <=* selection_sort l)
+(n1 <=* selection_sort l -> sorted (n1 :: selsort l n))
+
+4. (select n0 al = (n1, l) -> n1 <=* selsort l n)
+(n1 <=* selsort l n -> sorted (n1 :: selsort l n))
+
+5. (select n0 al = (n1, l) -> n1 <=* selsort l n1)
+(n1 <=* selsort l n1 -> sorted (n1 :: selsort l n))
+
+
+
+[SUCCESS][1][AS IS]
+Test = cons_of_small_maintains_sort_ind_list_by_selsort_perm
+[TIME] 80.964
+[COUNTS] 17
+[TARGET] length l = n -> Permutation l (selsort l n)
+
+1. (n = length bl -> Permutation bl (selsort bl n))
+
+2. (n = length bl -> length bl <= n)
+(length bl <= n -> Permutation bl (selsort bl n))
+
+3. (n = length bl -> Permutation (selsort bl n) (selection_sort bl))
+(Permutation (selsort bl n) (selection_sort bl) ->  Permutation bl (selsort bl n))
+
+4. (n = length bl -> Permutation (selection_sort bl) (selsort bl n))
+(Permutation (selection_sort bl) (selsort bl n) ->  Permutation bl (selsort bl n))
+
+5. (n = length bl -> selsort bl n = selection_sort bl)
+(selsort bl n = selection_sort bl -> Permutation bl (selsort bl n))
+
+
+
+[SUCCESS][3][WEAKEN]
+Test = select_in_by_select_perm
+[TIME] 72.731
+[COUNTS] 14
+[TARGET] select x l = (y, r) -> Permutation (x :: l) (y :: r)
+
+1. (select x al = (y, bl) -> In y (x :: al))
+
+2. (select x al = (y, bl) -> Permutation (y :: bl) (x :: al))
+(Permutation (y :: bl) (x :: al) -> In y (x :: al))
+
+3. (select x al = (y, bl) -> Permutation (x :: al) (y :: bl))
+(Permutation (x :: al) (y :: bl) -> In y (x :: al))
+
+4. (In y (selection_sort gv0) -> select x al = (y, bl) -> In y gv0)
+
+5. (In y (gv0 ++ gv0) -> select x al = (y, bl) -> In y gv0)
+
+
+
+[FAIL][RESOURCE]
+Test = cons_of_small_maintains_sort_ind_length_by_select_in
+[TIME] 165.479
+[COUNTS] 41
+[TARGET] select x al = (y, bl) -> In y (x :: al)
+
+1. (select n0 bl = (n1, l) ->  y <=* n0 :: bl -> sorted (y :: n1 :: selsort l gv3))
+
+2. (y <=* n0 :: bl ->  select n0 bl = (n1, l) -> sorted (y :: n1 :: selsort l (length bl)))
+
+3. (y <=* n0 :: bl ->  Permutation l gv2 -> select n0 bl = (n1, l) -> sorted (y :: n1 :: gv2))
+
+4. (y <=* n0 :: bl ->  select n0 bl = (n1, l) -> sorted (n0 :: gv2) -> sorted (y :: n1 :: gv2))
+
+5. (y <=* n0 :: bl ->  select n0 bl = (n1, l) -> sorted (n1 :: gv2) -> sorted (y :: n1 :: gv2))
+
+
+
+[FAIL][RESOURCE]
+Test = select_smallest_by_select_fst_leq_2
+[TIME] 86.041
+[COUNTS] 11
+[TARGET] select x al = (y, bl) -> y <= x
+
+1. (x :: l = bl -> select a al = (y, l) -> x > a -> y <=* bl)
+
+2. (select a al = (y, l) -> y <=* a :: l)
+(x > a -> y <=* a :: l -> x :: l = bl -> y <=* bl)
+
+3. (select a al = (y, l) -> Permutation (a :: al) (y :: l))
+(x > a -> Permutation (a :: al) (y :: l) -> x :: l = bl -> y <=* bl)
+
+4. (x :: l = bl -> Permutation (x :: l) bl)
+(x > a -> Permutation (x :: l) bl -> select a al = (y, l) -> y <=* bl)
+
+5. (x :: l = bl -> Permutation bl (x :: l))
+(x > a -> Permutation bl (x :: l) -> select a al = (y, l) -> y <=* bl)
+
+
+
+[SUCCESS][1][AS IS]
+Test = selsort_perm_by_select_rest_length
+[TIME] 70.949
+[COUNTS] 3
+[TARGET] select x l = (y, r) -> length l = length r
+
+1. (select n0 l = (n1, l0) -> length l = length l0)
+
+2. (select n0 l = (n1, l0) -> Permutation (n1 :: l0) (n0 :: l))
+(Permutation (n1 :: l0) (n0 :: l) -> length l = length l0)
+
+3. (select n0 l = (n1, l0) -> Permutation (n0 :: l) (n1 :: l0))
+(Permutation (n0 :: l) (n1 :: l0) -> length l = length l0)
+
+
+
+[SUCCESS][1][AS IS]
+Test = cons_of_small_maintains_sort_ind_length_by_select_rest_length
+[TIME] 74.31
+[COUNTS] 3
+[TARGET] select x l = (y, r) -> length l = length r
+
+1. (select n0 bl = (n1, l) -> length bl = length l)
+
+2. (select n0 bl = (n1, l) -> Permutation (n1 :: l) (n0 :: bl))
+(Permutation (n1 :: l) (n0 :: bl) -> length bl = length l)
+
+3. (select n0 bl = (n1, l) -> Permutation (n0 :: bl) (n1 :: l))
+(Permutation (n0 :: bl) (n1 :: l) -> length bl = length l)
+
+
+
+[SUCCESS][5][WEAKEN]
+Test = selsort_sorted_by_select_rest_length_1
+[TIME] 73.36
+[COUNTS] 9
+[TARGET] select x l = (y, r) -> length l = length r
+
+1. (S (length al) = S n -> select n0 al = (n1, l) -> n = length l)
+
+2. (select n0 al = (n1, l) -> Permutation (n1 :: l) (n0 :: al))
+(Permutation (n1 :: l) (n0 :: al) -> S (length al) = S n -> n = length l)
+
+3. (select n0 al = (n1, l) -> Permutation (n0 :: al) (n1 :: l))
+(Permutation (n0 :: al) (n1 :: l) -> S (length al) = S n -> n = length l)
+
+4. (S (length al) = S n -> length al = n)
+(length al = n -> select n0 al = (n1, l) -> n = length l)
+
+5. (length al = gv0 -> select n0 al = (n1, l) -> S (length al) = S n -> n = gv0)
+
+
+
+[SUCCESS][3][WEAKEN]
+Test = cons_of_small_maintains_sort_ind_list_by_le_all__le_one
+[TIME] 90.216
+[COUNTS] 14
+[TARGET] y <=* lst -> In n lst -> y <= n
+
+1. (selsort bl n = a :: l -> y <=* bl -> y <= a)
+
+2. (selsort bl n = a :: l -> In a bl)
+(In a bl -> y <=* bl -> y <= a)
+
+3. (selsort bl n = a :: l -> In a (selection_sort bl))
+(In a (selection_sort bl) -> y <=* bl -> y <= a)
+
+4. (selsort bl n = a :: l -> In a (selsort bl n))
+(In a (selsort bl n) -> y <=* bl -> y <= a)
+
+5. (selsort bl n = a :: l -> In a (bl ++ bl))
+(In a (bl ++ bl) -> y <=* bl -> y <= a)
+
+
+
+[FAIL][FORWARD]
+Test = cons_of_small_maintains_sort_ind_length_by_le_all__le_one
+[TIME] 52.861
+[COUNTS] 1
+[TARGET] y <=* lst -> In n lst -> y <= n
+
+1. (In n1 (n0 :: bl) -> y <=* n0 :: bl -> y <= n1)
+
+
+
+[SUCCESS][1][AS IS]
+Test = selsort_sorted_by_select_smallest
+[TIME] 51.266
+[COUNTS] 9
+[TARGET] select x al = (y, bl) -> y <=* bl
+
+1. (select n0 al = (n1, l) -> n1 <=* l)
+
+2. (select n0 al = (n1, l) -> n1 <=* selection_sort l)
+(n1 <=* selection_sort l -> n1 <=* l)
+
+3. (select n0 al = (n1, l) -> n1 <=* selsort l n1)
+(n1 <=* selsort l n1 -> n1 <=* l)
+
+4. (select n0 al = (n1, l) -> n1 <=* l ++ al)
+(n1 <=* l ++ al -> n1 <=* l)
+
+5. (select n0 al = (n1, l) -> n1 <=* al ++ l)
+(n1 <=* al ++ l -> n1 <=* l)
+
+
+
+[SUCCESS][3][WEAKEN]
+Test = selsort_sorted_by_select_rest_length_2
+[TIME] 73.419
+[COUNTS] 9
+[TARGET] select x l = (y, r) -> length l = length r
+
+1. (select n0 al = (n1, l) -> length (n0 :: al) = S n -> length l = n)
+
+2. (length (n0 :: al) = S n -> length al = n)
+(length al = n -> select n0 al = (n1, l) -> length l = n)
+
+3. (select n0 al = (n1, l) -> Permutation (n1 :: l) (n0 :: al))
+(Permutation (n1 :: l) (n0 :: al) -> length (n0 :: al) = S n -> length l = n)
+
+4. (select n0 al = (n1, l) -> Permutation (n0 :: al) (n1 :: l))
+(Permutation (n0 :: al) (n1 :: l) -> length (n0 :: al) = S n -> length l = n)
+
+5. (length al = gv0 ->  select n0 al = (n1, l) -> length (n0 :: al) = S n -> gv0 = n)
+
+
+
+[FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = le_all__le_one_by_Forall_forall
+[TIME] 51.753
+[COUNTS] 9
+[TARGET] Forall P l <-> (forall x, In x l -> P x)
+
+1. (Forall (fun y0 : nat => y <= y0) l -> In n l -> y <= n)
+
+2. (Forall (fun y0 : nat => y <= y0) l -> y <=* selection_sort l)
+(In n l -> y <=* selection_sort l -> y <= n)
+
+3. (Forall (fun y0 : nat => y <= y0) l -> y <=* selsort l y)
+(In n l -> y <=* selsort l y -> y <= n)
+
+4. (Forall (fun y0 : nat => y <= y0) l -> y <=* l ++ l)
+(In n l -> y <=* l ++ l -> y <= n)
+
+5. (Forall (fun y0 : nat => y <= y0) l -> y <=* y :: l)
+(In n l -> y <=* y :: l -> y <= n)
+
+
+
+[SUCCESS][1][AS IS]
+Test = cons_of_small_maintains_sort_ind_length_by_select_smallest
+[TIME] 57.383
+[COUNTS] 9
+[TARGET] select x al = (y, bl) -> y <=* bl
+
+1. (select n0 bl = (n1, l) -> n1 <=* l)
+
+2. (select n0 bl = (n1, l) -> n1 <=* selection_sort l)
+(n1 <=* selection_sort l -> n1 <=* l)
+
+3. (select n0 bl = (n1, l) -> n1 <=* selsort l n1)
+(n1 <=* selsort l n1 -> n1 <=* l)
+
+4. (select n0 bl = (n1, l) -> n1 <=* l ++ bl)
+(n1 <=* l ++ bl -> n1 <=* l)
+
+5. (select n0 bl = (n1, l) -> n1 <=* bl ++ l)
+(n1 <=* bl ++ l -> n1 <=* l)
+
+
+
+[SUCCESS][1][AS IS]
+Test = selection_sort_perm_by_selsort_perm
+[TIME] 70.087
+[COUNTS] 23
+[TARGET] length l = n -> Permutation l (selsort l n)
+
+1. (Permutation l (selsort l (length l)))
+
+2. (selection_sort l = selsort l (length l))
+
+3. (Permutation gv0 (selection_sort l) -> Permutation l gv0)
+
+4. (Permutation l (selection_sort gv0) -> Permutation l gv0)
+
+5. (Permutation (selection_sort gv0) l -> Permutation l gv0)
+
+
+
+[SUCCESS][1][AS IS]
+Test = selsort_perm_by_select_perm
+[TIME] 81.364
+[COUNTS] 14
+[TARGET] select x l = (y, r) -> Permutation (x :: l) (y :: r)
+
+1. (select n0 l = (n1, l0) -> Permutation (n0 :: l) (n1 :: l0))
+
+2. (Permutation gv0 (n0 :: l) ->  select n0 l = (n1, l0) -> Permutation gv0 (n1 :: l0))
+
+3. (Permutation (n0 :: l) gv0 ->  select n0 l = (n1, l0) -> Permutation gv0 (n1 :: l0))
+
+4. (Permutation gv1 (n1 :: l0) ->  select n0 l = (n1, l0) -> Permutation (n0 :: l) gv1)
+
+5. (Permutation (n1 :: l0) gv1 ->  select n0 l = (n1, l0) -> Permutation (n0 :: l) gv1)
+
+
+
+[SUCCESS][1][AS IS]
+Test = selection_sort_sorted_by_selsort_sorted
+[TIME] 52.285
+[COUNTS] 9
+[TARGET] length al = n -> sorted (selsort al n)
+
+1. (sorted (selsort al gv1))
+
+2. (sorted (selsort al (length al)))
+
+3. (selection_sort al = selsort al (length al))
+
+4. (selection_sort (selsort al (length al)) = selsort al (length al))
+
+5. (selection_sort (selsort al gv1) = selsort al gv1)
+
+
+
+[SUCCESS][3][WEAKEN]
+Test = select_rest_length_by_select_perm
+[TIME] 57.776
+[COUNTS] 3
+[TARGET] select x l = (y, r) -> Permutation (x :: l) (y :: r)
+
+1. (select x l = (y, r) -> length l = length r)
+
+2. (select x l = (y, r) -> Permutation (y :: r) (x :: l))
+(Permutation (y :: r) (x :: l) -> length l = length r)
+
+3. (select x l = (y, r) -> Permutation (x :: l) (y :: r))
+(Permutation (x :: l) (y :: r) -> length l = length r)
+
+
+
+[FAIL][FORWARD]
+Test = select_rest_length_by_Permutation_length
+[TIME] 55.107
+[COUNTS] 1
+[TARGET] Permutation x y -> length x = length y
+
+1. (Permutation (x :: l) (y :: r) -> length l = length r)
+
+
+
+

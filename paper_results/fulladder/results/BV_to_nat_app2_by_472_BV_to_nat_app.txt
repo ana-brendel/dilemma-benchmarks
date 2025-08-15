@@ -1,0 +1,279 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+
+----------------------------------
+Goal: (bV_to_nat (app l n) = bV_to_nat l + power2 (length l) * bV_to_nat n)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 1.647 seconds
+
+gv4 : nat = (power2 (length l) * bV_to_nat n)
+gv6 : nat = (length l)
+gv7 : nat = (bV_to_nat n)
+gv0 : nat = (bV_to_nat (app l n))
+gv3 : nat = (bV_to_nat l)
+gv2 : nat = (bV_to_nat l + power2 (length l) * bV_to_nat n)
+gv5 : nat = (power2 (length l))
+gv1 : boolList = (app l n)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 24.507 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (bV_to_nat (app l n) = bV_to_nat l + power2 (length l) * bV_to_nat n)
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (power2 (length l) = gv5)
+
+----------------------------------
+Goal: (bV_to_nat (app l n) = bV_to_nat l + gv5 * bV_to_nat n)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (app l n = gv1)
+
+----------------------------------
+Goal: (bV_to_nat gv1 = bV_to_nat l + power2 (length l) * bV_to_nat n)
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (bV_to_nat l = gv3)
+
+----------------------------------
+Goal: (bV_to_nat (app l n) = gv3 + power2 (length l) * bV_to_nat n)
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (bV_to_nat l + power2 (length l) * bV_to_nat n = gv2)
+
+----------------------------------
+Goal: (bV_to_nat (app l n) = gv2)
+Case: Invalid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (bV_to_nat (app l n) = gv0)
+
+----------------------------------
+Goal: (gv0 = bV_to_nat l + power2 (length l) * bV_to_nat n)
+Case: Invalid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (bV_to_nat n = gv7)
+
+----------------------------------
+Goal: (bV_to_nat (app l n) = bV_to_nat l + power2 (length l) * gv7)
+Case: Invalid and Generalized
+
+Label: Generalization #7
+Assumptions: 
+ -- (length l = gv6)
+
+----------------------------------
+Goal: (bV_to_nat (app l n) = bV_to_nat l + power2 gv6 * bV_to_nat n)
+Case: Invalid and Generalized
+
+Label: Generalization #8
+Assumptions: 
+ -- (power2 (length l) * bV_to_nat n = gv4)
+
+----------------------------------
+Goal: (bV_to_nat (app l n) = bV_to_nat l + gv4)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 24.646 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+Datatypes.app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+half_adder_sum : (bool -> bool -> bool)
+half_adder_carry : (bool -> bool -> bool)
+bool_to_nat : (bool -> nat)
+full_adder_sum : (bool -> bool -> bool -> bool)
+full_adder_carry : (bool -> bool -> bool -> bool)
+boolList : Set
+length : (boolList -> nat)
+app : (boolList -> boolList -> boolList)
+bV_full_adder_sum_nil : (boolList -> bool -> boolList)
+bV_full_adder_sum : (boolList -> boolList -> bool -> boolList)
+bV_full_adder_carry_nil : (boolList -> bool -> bool)
+bV_full_adder_carry : (boolList -> boolList -> bool -> bool)
+bV_full_adder : (boolList -> boolList -> bool -> boolList)
+bV_to_nat : (boolList -> nat)
+power2 : (nat -> nat)
+Nil : boolList
+Cons : (bool -> boolList -> boolList)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 6 (6)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 7 (7)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 24.792 seconds
+
+
+Label: 0 (0)
+(gv5 < gv5), (gv5 <= gv5), (gv5 = gv5), (n = n), (n = l), (l = n), (l = l), (gv5 < power2 gv5), (gv5 < bV_to_nat n), (gv5 < bV_to_nat l)
+(gv5 < length n), (gv5 < length l), (power2 gv5 < gv5), (power2 gv5 < bV_to_nat n), (power2 gv5 < bV_to_nat l), (power2 gv5 < length n), (power2 gv5 < length l), (bV_to_nat n < gv5), (bV_to_nat n < power2 gv5), (bV_to_nat n < bV_to_nat l)
+(bV_to_nat n < length n), (bV_to_nat n < length l), (bV_to_nat l < gv5), (bV_to_nat l < power2 gv5), (bV_to_nat l < bV_to_nat n), (bV_to_nat l < length n), (bV_to_nat l < length l), (length n < gv5), (length n < power2 gv5), (length n < bV_to_nat n)
+(length n < bV_to_nat l), (length n < length l), (length l < gv5), (length l < power2 gv5), (length l < bV_to_nat n), (length l < bV_to_nat l), (length l < length n), (gv5 <= power2 gv5), (gv5 <= bV_to_nat n), (gv5 <= bV_to_nat l)
+(gv5 <= length n), (gv5 <= length l), (power2 gv5 <= gv5), (power2 gv5 <= bV_to_nat n), (power2 gv5 <= bV_to_nat l), (power2 gv5 <= length n), (power2 gv5 <= length l), (bV_to_nat n <= gv5), (bV_to_nat n <= power2 gv5), (bV_to_nat n <= bV_to_nat l)
+(bV_to_nat n <= length n), (bV_to_nat n <= length l), (bV_to_nat l <= gv5), (bV_to_nat l <= power2 gv5), (bV_to_nat l <= bV_to_nat n), (bV_to_nat l <= length n), (bV_to_nat l <= length l), (length n <= gv5), (length n <= power2 gv5), (length n <= bV_to_nat n)
+(length n <= bV_to_nat l), (length n <= length l), (length l <= gv5), (length l <= power2 gv5), (length l <= bV_to_nat n), (length l <= bV_to_nat l), (length l <= length n), (~ gv5 < gv5), (~ gv5 <= gv5), (gv5 <> gv5)
+(n <> n), (n <> l), (l <> n), (l <> l), (app n n = n), (app n n = l), (app n l = n), (app n l = l), (app l n = n), (app l n = l)
+(app l l = n), (app l l = l), (Nil = app n n), (Nil = app n l), (Nil = app l n), (Nil = app l l), (None = Some gv5), (None = Some n), (None = Some l), (power2 gv5 = gv5)
+(power2 gv5 = bV_to_nat n), (power2 gv5 = bV_to_nat l), (power2 gv5 = length n), (power2 gv5 = length l), (bV_to_nat n = gv5), (bV_to_nat l = gv5), (length n = gv5), (length n = bV_to_nat n), (length n = bV_to_nat l), (length l = gv5)
+(length l = bV_to_nat n), (length l = bV_to_nat l)
+
+Label: 1 (1)
+(n = n), (n = l), (n = gv1), (l = n), (l = l), (l = gv1), (gv1 = n), (gv1 = l), (gv1 = gv1), (bV_to_nat n < bV_to_nat l)
+(bV_to_nat n < bV_to_nat gv1), (bV_to_nat n < length n), (bV_to_nat n < length l), (bV_to_nat n < length gv1), (bV_to_nat l < bV_to_nat n), (bV_to_nat l < bV_to_nat gv1), (bV_to_nat l < length n), (bV_to_nat l < length l), (bV_to_nat l < length gv1), (bV_to_nat gv1 < bV_to_nat n)
+(bV_to_nat gv1 < bV_to_nat l), (bV_to_nat gv1 < length n), (bV_to_nat gv1 < length l), (bV_to_nat gv1 < length gv1), (length n < bV_to_nat n), (length n < bV_to_nat l), (length n < bV_to_nat gv1), (length n < length l), (length n < length gv1), (length l < bV_to_nat n)
+(length l < bV_to_nat l), (length l < bV_to_nat gv1), (length l < length n), (length l < length gv1), (length gv1 < bV_to_nat n), (length gv1 < bV_to_nat l), (length gv1 < bV_to_nat gv1), (length gv1 < length n), (length gv1 < length l), (bV_to_nat n <= bV_to_nat l)
+(bV_to_nat n <= bV_to_nat gv1), (bV_to_nat n <= length n), (bV_to_nat n <= length l), (bV_to_nat n <= length gv1), (bV_to_nat l <= bV_to_nat n), (bV_to_nat l <= bV_to_nat gv1), (bV_to_nat l <= length n), (bV_to_nat l <= length l), (bV_to_nat l <= length gv1), (bV_to_nat gv1 <= bV_to_nat n)
+(bV_to_nat gv1 <= bV_to_nat l), (bV_to_nat gv1 <= length n), (bV_to_nat gv1 <= length l), (bV_to_nat gv1 <= length gv1), (length n <= bV_to_nat n), (length n <= bV_to_nat l), (length n <= bV_to_nat gv1), (length n <= length l), (length n <= length gv1), (length l <= bV_to_nat n)
+(length l <= bV_to_nat l), (length l <= bV_to_nat gv1), (length l <= length n), (length l <= length gv1), (length gv1 <= bV_to_nat n), (length gv1 <= bV_to_nat l), (length gv1 <= bV_to_nat gv1), (length gv1 <= length n), (length gv1 <= length l), (n <> n)
+(n <> l), (n <> gv1), (l <> n), (l <> l), (l <> gv1), (gv1 <> n), (gv1 <> l), (gv1 <> gv1), (app n n = n), (app n n = l)
+(app n n = gv1), (app n l = n), (app n l = l), (app n l = gv1), (app n gv1 = n), (app n gv1 = l), (app n gv1 = gv1), (app l n = n), (app l n = l), (app l n = gv1)
+(app l l = n), (app l l = l), (app l l = gv1), (app l gv1 = n), (app l gv1 = l), (app l gv1 = gv1), (app gv1 n = n), (app gv1 n = l), (app gv1 n = gv1), (app gv1 l = n)
+(app gv1 l = l), (app gv1 l = gv1), (app gv1 gv1 = n), (app gv1 gv1 = l), (app gv1 gv1 = gv1), (Nil = app n n), (Nil = app n l), (Nil = app n gv1), (Nil = app l n), (Nil = app l l)
+(Nil = app l gv1), (Nil = app gv1 n), (Nil = app gv1 l), (Nil = app gv1 gv1), (None = Some n), (None = Some l), (None = Some gv1), (length n = bV_to_nat n), (length n = bV_to_nat l), (length n = bV_to_nat gv1)
+(length l = bV_to_nat n), (length l = bV_to_nat l), (length l = bV_to_nat gv1), (length gv1 = bV_to_nat n), (length gv1 = bV_to_nat l), (length gv1 = bV_to_nat gv1)
+
+Label: 2 (2)
+(gv3 < gv3), (gv3 <= gv3), (gv3 = gv3), (n = n), (n = l), (l = n), (l = l), (gv3 < power2 gv3), (gv3 < bV_to_nat n), (gv3 < bV_to_nat l)
+(gv3 < length n), (gv3 < length l), (power2 gv3 < gv3), (power2 gv3 < bV_to_nat n), (power2 gv3 < bV_to_nat l), (power2 gv3 < length n), (power2 gv3 < length l), (bV_to_nat n < gv3), (bV_to_nat n < power2 gv3), (bV_to_nat n < bV_to_nat l)
+(bV_to_nat n < length n), (bV_to_nat n < length l), (bV_to_nat l < gv3), (bV_to_nat l < power2 gv3), (bV_to_nat l < bV_to_nat n), (bV_to_nat l < length n), (bV_to_nat l < length l), (length n < gv3), (length n < power2 gv3), (length n < bV_to_nat n)
+(length n < bV_to_nat l), (length n < length l), (length l < gv3), (length l < power2 gv3), (length l < bV_to_nat n), (length l < bV_to_nat l), (length l < length n), (gv3 <= power2 gv3), (gv3 <= bV_to_nat n), (gv3 <= bV_to_nat l)
+(gv3 <= length n), (gv3 <= length l), (power2 gv3 <= gv3), (power2 gv3 <= bV_to_nat n), (power2 gv3 <= bV_to_nat l), (power2 gv3 <= length n), (power2 gv3 <= length l), (bV_to_nat n <= gv3), (bV_to_nat n <= power2 gv3), (bV_to_nat n <= bV_to_nat l)
+(bV_to_nat n <= length n), (bV_to_nat n <= length l), (bV_to_nat l <= gv3), (bV_to_nat l <= power2 gv3), (bV_to_nat l <= bV_to_nat n), (bV_to_nat l <= length n), (bV_to_nat l <= length l), (length n <= gv3), (length n <= power2 gv3), (length n <= bV_to_nat n)
+(length n <= bV_to_nat l), (length n <= length l), (length l <= gv3), (length l <= power2 gv3), (length l <= bV_to_nat n), (length l <= bV_to_nat l), (length l <= length n), (~ gv3 < gv3), (~ gv3 <= gv3), (gv3 <> gv3)
+(n <> n), (n <> l), (l <> n), (l <> l), (app n n = n), (app n n = l), (app n l = n), (app n l = l), (app l n = n), (app l n = l)
+(app l l = n), (app l l = l), (Nil = app n n), (Nil = app n l), (Nil = app l n), (Nil = app l l), (None = Some gv3), (None = Some n), (None = Some l), (power2 gv3 = gv3)
+(power2 gv3 = bV_to_nat n), (power2 gv3 = bV_to_nat l), (power2 gv3 = length n), (power2 gv3 = length l), (bV_to_nat n = gv3), (bV_to_nat l = gv3), (length n = gv3), (length n = bV_to_nat n), (length n = bV_to_nat l), (length l = gv3)
+(length l = bV_to_nat n), (length l = bV_to_nat l)
+
+Label: 3 (3)
+(gv2 < gv2), (gv2 <= gv2), (gv2 = gv2), (n = n), (n = l), (l = n), (l = l), (gv2 < power2 gv2), (gv2 < bV_to_nat n), (gv2 < bV_to_nat l)
+(gv2 < length n), (gv2 < length l), (power2 gv2 < gv2), (power2 gv2 < bV_to_nat n), (power2 gv2 < bV_to_nat l), (power2 gv2 < length n), (power2 gv2 < length l), (bV_to_nat n < gv2), (bV_to_nat n < power2 gv2), (bV_to_nat n < bV_to_nat l)
+(bV_to_nat n < length n), (bV_to_nat n < length l), (bV_to_nat l < gv2), (bV_to_nat l < power2 gv2), (bV_to_nat l < bV_to_nat n), (bV_to_nat l < length n), (bV_to_nat l < length l), (length n < gv2), (length n < power2 gv2), (length n < bV_to_nat n)
+(length n < bV_to_nat l), (length n < length l), (length l < gv2), (length l < power2 gv2), (length l < bV_to_nat n), (length l < bV_to_nat l), (length l < length n), (gv2 <= power2 gv2), (gv2 <= bV_to_nat n), (gv2 <= bV_to_nat l)
+(gv2 <= length n), (gv2 <= length l), (power2 gv2 <= gv2), (power2 gv2 <= bV_to_nat n), (power2 gv2 <= bV_to_nat l), (power2 gv2 <= length n), (power2 gv2 <= length l), (bV_to_nat n <= gv2), (bV_to_nat n <= power2 gv2), (bV_to_nat n <= bV_to_nat l)
+(bV_to_nat n <= length n), (bV_to_nat n <= length l), (bV_to_nat l <= gv2), (bV_to_nat l <= power2 gv2), (bV_to_nat l <= bV_to_nat n), (bV_to_nat l <= length n), (bV_to_nat l <= length l), (length n <= gv2), (length n <= power2 gv2), (length n <= bV_to_nat n)
+(length n <= bV_to_nat l), (length n <= length l), (length l <= gv2), (length l <= power2 gv2), (length l <= bV_to_nat n), (length l <= bV_to_nat l), (length l <= length n), (~ gv2 < gv2), (~ gv2 <= gv2), (gv2 <> gv2)
+(n <> n), (n <> l), (l <> n), (l <> l), (app n n = n), (app n n = l), (app n l = n), (app n l = l), (app l n = n), (app l n = l)
+(app l l = n), (app l l = l), (Nil = app n n), (Nil = app n l), (Nil = app l n), (Nil = app l l), (None = Some gv2), (None = Some n), (None = Some l), (power2 gv2 = gv2)
+(power2 gv2 = bV_to_nat n), (power2 gv2 = bV_to_nat l), (power2 gv2 = length n), (power2 gv2 = length l), (bV_to_nat n = gv2), (bV_to_nat l = gv2), (length n = gv2), (length n = bV_to_nat n), (length n = bV_to_nat l), (length l = gv2)
+(length l = bV_to_nat n), (length l = bV_to_nat l)
+
+Label: 4 (4)
+(gv0 < gv0), (gv0 <= gv0), (n = n), (n = l), (l = n), (l = l), (gv0 = gv0), (gv0 < power2 gv0), (gv0 < bV_to_nat n), (gv0 < bV_to_nat l)
+(gv0 < length n), (gv0 < length l), (power2 gv0 < gv0), (power2 gv0 < bV_to_nat n), (power2 gv0 < bV_to_nat l), (power2 gv0 < length n), (power2 gv0 < length l), (bV_to_nat n < gv0), (bV_to_nat n < power2 gv0), (bV_to_nat n < bV_to_nat l)
+(bV_to_nat n < length n), (bV_to_nat n < length l), (bV_to_nat l < gv0), (bV_to_nat l < power2 gv0), (bV_to_nat l < bV_to_nat n), (bV_to_nat l < length n), (bV_to_nat l < length l), (length n < gv0), (length n < power2 gv0), (length n < bV_to_nat n)
+(length n < bV_to_nat l), (length n < length l), (length l < gv0), (length l < power2 gv0), (length l < bV_to_nat n), (length l < bV_to_nat l), (length l < length n), (gv0 <= power2 gv0), (gv0 <= bV_to_nat n), (gv0 <= bV_to_nat l)
+(gv0 <= length n), (gv0 <= length l), (power2 gv0 <= gv0), (power2 gv0 <= bV_to_nat n), (power2 gv0 <= bV_to_nat l), (power2 gv0 <= length n), (power2 gv0 <= length l), (bV_to_nat n <= gv0), (bV_to_nat n <= power2 gv0), (bV_to_nat n <= bV_to_nat l)
+(bV_to_nat n <= length n), (bV_to_nat n <= length l), (bV_to_nat l <= gv0), (bV_to_nat l <= power2 gv0), (bV_to_nat l <= bV_to_nat n), (bV_to_nat l <= length n), (bV_to_nat l <= length l), (length n <= gv0), (length n <= power2 gv0), (length n <= bV_to_nat n)
+(length n <= bV_to_nat l), (length n <= length l), (length l <= gv0), (length l <= power2 gv0), (length l <= bV_to_nat n), (length l <= bV_to_nat l), (length l <= length n), (~ gv0 < gv0), (~ gv0 <= gv0), (n <> n)
+(n <> l), (l <> n), (l <> l), (gv0 <> gv0), (app n n = n), (app n n = l), (app n l = n), (app n l = l), (app l n = n), (app l n = l)
+(app l l = n), (app l l = l), (Nil = app n n), (Nil = app n l), (Nil = app l n), (Nil = app l l), (None = Some gv0), (None = Some n), (None = Some l), (power2 gv0 = gv0)
+(power2 gv0 = bV_to_nat n), (power2 gv0 = bV_to_nat l), (power2 gv0 = length n), (power2 gv0 = length l), (bV_to_nat n = gv0), (bV_to_nat l = gv0), (length n = gv0), (length n = bV_to_nat n), (length n = bV_to_nat l), (length l = gv0)
+(length l = bV_to_nat n), (length l = bV_to_nat l)
+
+Label: 5 (5)
+(gv7 < gv7), (gv7 <= gv7), (gv7 = gv7), (n = n), (n = l), (l = n), (l = l), (gv7 < power2 gv7), (gv7 < bV_to_nat n), (gv7 < bV_to_nat l)
+(gv7 < length n), (gv7 < length l), (power2 gv7 < gv7), (power2 gv7 < bV_to_nat n), (power2 gv7 < bV_to_nat l), (power2 gv7 < length n), (power2 gv7 < length l), (bV_to_nat n < gv7), (bV_to_nat n < power2 gv7), (bV_to_nat n < bV_to_nat l)
+(bV_to_nat n < length n), (bV_to_nat n < length l), (bV_to_nat l < gv7), (bV_to_nat l < power2 gv7), (bV_to_nat l < bV_to_nat n), (bV_to_nat l < length n), (bV_to_nat l < length l), (length n < gv7), (length n < power2 gv7), (length n < bV_to_nat n)
+(length n < bV_to_nat l), (length n < length l), (length l < gv7), (length l < power2 gv7), (length l < bV_to_nat n), (length l < bV_to_nat l), (length l < length n), (gv7 <= power2 gv7), (gv7 <= bV_to_nat n), (gv7 <= bV_to_nat l)
+(gv7 <= length n), (gv7 <= length l), (power2 gv7 <= gv7), (power2 gv7 <= bV_to_nat n), (power2 gv7 <= bV_to_nat l), (power2 gv7 <= length n), (power2 gv7 <= length l), (bV_to_nat n <= gv7), (bV_to_nat n <= power2 gv7), (bV_to_nat n <= bV_to_nat l)
+(bV_to_nat n <= length n), (bV_to_nat n <= length l), (bV_to_nat l <= gv7), (bV_to_nat l <= power2 gv7), (bV_to_nat l <= bV_to_nat n), (bV_to_nat l <= length n), (bV_to_nat l <= length l), (length n <= gv7), (length n <= power2 gv7), (length n <= bV_to_nat n)
+(length n <= bV_to_nat l), (length n <= length l), (length l <= gv7), (length l <= power2 gv7), (length l <= bV_to_nat n), (length l <= bV_to_nat l), (length l <= length n), (~ gv7 < gv7), (~ gv7 <= gv7), (gv7 <> gv7)
+(n <> n), (n <> l), (l <> n), (l <> l), (app n n = n), (app n n = l), (app n l = n), (app n l = l), (app l n = n), (app l n = l)
+(app l l = n), (app l l = l), (Nil = app n n), (Nil = app n l), (Nil = app l n), (Nil = app l l), (None = Some gv7), (None = Some n), (None = Some l), (power2 gv7 = gv7)
+(power2 gv7 = bV_to_nat n), (power2 gv7 = bV_to_nat l), (power2 gv7 = length n), (power2 gv7 = length l), (bV_to_nat n = gv7), (bV_to_nat l = gv7), (length n = gv7), (length n = bV_to_nat n), (length n = bV_to_nat l), (length l = gv7)
+(length l = bV_to_nat n), (length l = bV_to_nat l)
+
+Label: 6 (6)
+(gv6 < gv6), (gv6 <= gv6), (gv6 = gv6), (n = n), (n = l), (l = n), (l = l), (gv6 < power2 gv6), (gv6 < bV_to_nat n), (gv6 < bV_to_nat l)
+(gv6 < length n), (gv6 < length l), (power2 gv6 < gv6), (power2 gv6 < bV_to_nat n), (power2 gv6 < bV_to_nat l), (power2 gv6 < length n), (power2 gv6 < length l), (bV_to_nat n < gv6), (bV_to_nat n < power2 gv6), (bV_to_nat n < bV_to_nat l)
+(bV_to_nat n < length n), (bV_to_nat n < length l), (bV_to_nat l < gv6), (bV_to_nat l < power2 gv6), (bV_to_nat l < bV_to_nat n), (bV_to_nat l < length n), (bV_to_nat l < length l), (length n < gv6), (length n < power2 gv6), (length n < bV_to_nat n)
+(length n < bV_to_nat l), (length n < length l), (length l < gv6), (length l < power2 gv6), (length l < bV_to_nat n), (length l < bV_to_nat l), (length l < length n), (gv6 <= power2 gv6), (gv6 <= bV_to_nat n), (gv6 <= bV_to_nat l)
+(gv6 <= length n), (gv6 <= length l), (power2 gv6 <= gv6), (power2 gv6 <= bV_to_nat n), (power2 gv6 <= bV_to_nat l), (power2 gv6 <= length n), (power2 gv6 <= length l), (bV_to_nat n <= gv6), (bV_to_nat n <= power2 gv6), (bV_to_nat n <= bV_to_nat l)
+(bV_to_nat n <= length n), (bV_to_nat n <= length l), (bV_to_nat l <= gv6), (bV_to_nat l <= power2 gv6), (bV_to_nat l <= bV_to_nat n), (bV_to_nat l <= length n), (bV_to_nat l <= length l), (length n <= gv6), (length n <= power2 gv6), (length n <= bV_to_nat n)
+(length n <= bV_to_nat l), (length n <= length l), (length l <= gv6), (length l <= power2 gv6), (length l <= bV_to_nat n), (length l <= bV_to_nat l), (length l <= length n), (~ gv6 < gv6), (~ gv6 <= gv6), (gv6 <> gv6)
+(n <> n), (n <> l), (l <> n), (l <> l), (app n n = n), (app n n = l), (app n l = n), (app n l = l), (app l n = n), (app l n = l)
+(app l l = n), (app l l = l), (Nil = app n n), (Nil = app n l), (Nil = app l n), (Nil = app l l), (None = Some gv6), (None = Some n), (None = Some l), (power2 gv6 = gv6)
+(power2 gv6 = bV_to_nat n), (power2 gv6 = bV_to_nat l), (power2 gv6 = length n), (power2 gv6 = length l), (bV_to_nat n = gv6), (bV_to_nat l = gv6), (length n = gv6), (length n = bV_to_nat n), (length n = bV_to_nat l), (length l = gv6)
+(length l = bV_to_nat n), (length l = bV_to_nat l)
+
+Label: 7 (7)
+(gv4 < gv4), (gv4 <= gv4), (gv4 = gv4), (n = n), (n = l), (l = n), (l = l), (gv4 < power2 gv4), (gv4 < bV_to_nat n), (gv4 < bV_to_nat l)
+(gv4 < length n), (gv4 < length l), (power2 gv4 < gv4), (power2 gv4 < bV_to_nat n), (power2 gv4 < bV_to_nat l), (power2 gv4 < length n), (power2 gv4 < length l), (bV_to_nat n < gv4), (bV_to_nat n < power2 gv4), (bV_to_nat n < bV_to_nat l)
+(bV_to_nat n < length n), (bV_to_nat n < length l), (bV_to_nat l < gv4), (bV_to_nat l < power2 gv4), (bV_to_nat l < bV_to_nat n), (bV_to_nat l < length n), (bV_to_nat l < length l), (length n < gv4), (length n < power2 gv4), (length n < bV_to_nat n)
+(length n < bV_to_nat l), (length n < length l), (length l < gv4), (length l < power2 gv4), (length l < bV_to_nat n), (length l < bV_to_nat l), (length l < length n), (gv4 <= power2 gv4), (gv4 <= bV_to_nat n), (gv4 <= bV_to_nat l)
+(gv4 <= length n), (gv4 <= length l), (power2 gv4 <= gv4), (power2 gv4 <= bV_to_nat n), (power2 gv4 <= bV_to_nat l), (power2 gv4 <= length n), (power2 gv4 <= length l), (bV_to_nat n <= gv4), (bV_to_nat n <= power2 gv4), (bV_to_nat n <= bV_to_nat l)
+(bV_to_nat n <= length n), (bV_to_nat n <= length l), (bV_to_nat l <= gv4), (bV_to_nat l <= power2 gv4), (bV_to_nat l <= bV_to_nat n), (bV_to_nat l <= length n), (bV_to_nat l <= length l), (length n <= gv4), (length n <= power2 gv4), (length n <= bV_to_nat n)
+(length n <= bV_to_nat l), (length n <= length l), (length l <= gv4), (length l <= power2 gv4), (length l <= bV_to_nat n), (length l <= bV_to_nat l), (length l <= length n), (~ gv4 < gv4), (~ gv4 <= gv4), (gv4 <> gv4)
+(n <> n), (n <> l), (l <> n), (l <> l), (app n n = n), (app n n = l), (app n l = n), (app n l = l), (app l n = n), (app l n = l)
+(app l l = n), (app l l = l), (Nil = app n n), (Nil = app n l), (Nil = app l n), (Nil = app l l), (None = Some gv4), (None = Some n), (None = Some l), (power2 gv4 = gv4)
+(power2 gv4 = bV_to_nat n), (power2 gv4 = bV_to_nat l), (power2 gv4 = length n), (power2 gv4 = length l), (bV_to_nat n = gv4), (bV_to_nat l = gv4), (length n = gv4), (length n = bV_to_nat n), (length n = bV_to_nat l), (length l = gv4)
+(length l = bV_to_nat n), (length l = bV_to_nat l)

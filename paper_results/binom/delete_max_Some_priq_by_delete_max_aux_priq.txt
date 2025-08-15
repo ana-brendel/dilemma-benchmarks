@@ -1,0 +1,283 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (Some (k, join l l0 Leaf) = Some (k, q))
+ -- (priq p)
+ -- (find_max p = Some k)
+ -- (join l l0 Leaf = q)
+ -- (delete_max_aux k p = (l, l0))
+
+----------------------------------
+Goal: (priq (join l l0 Leaf))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3.905 seconds
+
+gv1 : tree = Leaf
+gv0 : (list tree) = (join l l0 Leaf)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 141.244 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (delete_max_aux k p = (l, l0))
+
+----------------------------------
+Goal: (priq (join l l0 Leaf))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (Some (k, gv0) = Some (k, q))
+
+----------------------------------
+Goal: (priq gv0)
+Case: Not Stable
+
+Label: Generalization #2
+Assumptions: 
+ -- (join l l0 gv1 = q)
+ -- (delete_max_aux k p = (l, l0))
+
+----------------------------------
+Goal: (priq (join l l0 gv1))
+Case: Valid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (gv0 = q)
+ -- (delete_max_aux k p = (l, l0))
+
+----------------------------------
+Goal: (priq gv0)
+Case: Valid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 141.377 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+In : (forall A : Type, A -> list A -> Prop)
+existsb : (forall A : Type, (A -> bool) -> list A -> bool)
+forallb : (forall A : Type, (A -> bool) -> list A -> bool)
+Forall : (forall A : Type, (A -> Prop) -> list A -> Prop)
+nodup : (forall A : Type, (forall x y : A, {x = y} + {x <> y}) -> list A -> list A)
+map : (forall A B : Type, (A -> B) -> list A -> list B)
+Permutation : (forall A : Type, list A -> list A -> Prop)
+geb : (nat -> nat -> bool)
+gtb : (nat -> nat -> bool)
+tree : Set
+tree_rect : (forall P : tree -> Type,
+ (forall (n : nat) (t : tree),
+  P t -> forall t0 : tree, P t0 -> P (Node n t t0)) ->
+ P Leaf -> forall t : tree, P t)
+tree_rec : (forall P : tree -> Set,
+ (forall (n : nat) (t : tree),
+  P t -> forall t0 : tree, P t0 -> P (Node n t t0)) ->
+ P Leaf -> forall t : tree, P t)
+smash : (tree -> tree -> tree)
+carry : (list tree -> tree -> list tree)
+insert : (nat -> list tree -> list tree)
+join : (list tree -> list tree -> tree -> list tree)
+unzip : (tree -> (list tree -> list tree) -> list tree)
+heap_delete_max : (tree -> list tree)
+find_max' : (nat -> list tree -> nat)
+find_max : (list tree -> option nat)
+delete_max_aux : (nat -> list tree -> list tree * list tree)
+delete_max : (list tree -> option (nat * list tree))
+merge : (list tree -> list tree -> list tree)
+pow2heapp : (nat -> nat -> tree -> Prop)
+pow2heap : (nat -> tree -> Prop)
+priqq : (nat -> list tree -> Prop)
+priq : (list tree -> Prop)
+tree_elems : (tree -> list nat -> Prop)
+priqueue_elems : (list tree -> list nat -> Prop)
+Abs : (list tree -> list nat -> Prop)
+Node : (nat -> tree -> tree -> tree)
+Leaf : tree
+
+Label: 0 (0)
+Abducted Assumption: (delete_max_aux k p = (l, l0))
+Positive Examples: 138
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 141.659 seconds
+
+
+Label: 0 (0)
+(priq p), (priq l0), (priq l), (priqq k p), (priqq k l0), (priqq k l), (Permutation p p), (Permutation p l0), (Permutation p l), (Permutation l0 p)
+(Permutation l0 l0), (Permutation l0 l), (Permutation l p), (Permutation l l0), (Permutation l l), (k < k), (k <= k), (k = k), (p = p), (p = l0)
+(p = l), (l0 = p), (l0 = l0), (l0 = l), (l = p), (l = l0), (l = l), (false = (k >? k)), (false = (k >=? k)), (true = (k >? k))
+(true = (k >=? k)), (Abs p []), (Abs l0 []), (Abs l []), (Abs (merge p p) []), (Abs (merge p l0) []), (Abs (merge p l) []), (Abs (merge l0 p) []), (Abs (merge l0 l0) []), (Abs (merge l0 l) [])
+(Abs (merge l p) []), (Abs (merge l l0) []), (Abs (merge l l) []), (Abs (insert k p) []), (Abs (insert k l0) []), (Abs (insert k l) []), (Abs (p ++ p) []), (Abs (p ++ l0) []), (Abs (p ++ l) []), (Abs (l0 ++ p) [])
+(Abs (l0 ++ l0) []), (Abs (l0 ++ l) []), (Abs (l ++ p) []), (Abs (l ++ l0) []), (Abs (l ++ l) []), (Abs [] []), (priqueue_elems p []), (priqueue_elems l0 []), (priqueue_elems l []), (priqueue_elems (merge p p) [])
+(priqueue_elems (merge p l0) []), (priqueue_elems (merge p l) []), (priqueue_elems (merge l0 p) []), (priqueue_elems (merge l0 l0) []), (priqueue_elems (merge l0 l) []), (priqueue_elems (merge l p) []), (priqueue_elems (merge l l0) []), (priqueue_elems (merge l l) []), (priqueue_elems (insert k p) []), (priqueue_elems (insert k l0) [])
+(priqueue_elems (insert k l) []), (priqueue_elems (p ++ p) []), (priqueue_elems (p ++ l0) []), (priqueue_elems (p ++ l) []), (priqueue_elems (l0 ++ p) []), (priqueue_elems (l0 ++ l0) []), (priqueue_elems (l0 ++ l) []), (priqueue_elems (l ++ p) []), (priqueue_elems (l ++ l0) []), (priqueue_elems (l ++ l) [])
+(priqueue_elems [] []), (tree_elems Leaf []), (priq (merge p p)), (priq (merge p l0)), (priq (merge p l)), (priq (merge l0 p)), (priq (merge l0 l0)), (priq (merge l0 l)), (priq (merge l p)), (priq (merge l l0))
+(priq (merge l l)), (priq (insert k p)), (priq (insert k l0)), (priq (insert k l)), (priq (p ++ p)), (priq (p ++ l0)), (priq (p ++ l)), (priq (l0 ++ p)), (priq (l0 ++ l0)), (priq (l0 ++ l))
+(priq (l ++ p)), (priq (l ++ l0)), (priq (l ++ l)), (priqq k (merge p p)), (priqq k (merge p l0)), (priqq k (merge p l)), (priqq k (merge l0 p)), (priqq k (merge l0 l0)), (priqq k (merge l0 l)), (priqq k (merge l p))
+(priqq k (merge l l0)), (priqq k (merge l l)), (priqq k (insert k p)), (priqq k (insert k l0)), (priqq k (insert k l)), (priqq k (p ++ p)), (priqq k (p ++ l0)), (priqq k (p ++ l)), (priqq k (l0 ++ p)), (priqq k (l0 ++ l0))
+(priqq k (l0 ++ l)), (priqq k (l ++ p)), (priqq k (l ++ l0)), (priqq k (l ++ l)), (priqq (find_max' k p) p), (priqq (find_max' k p) l0), (priqq (find_max' k p) l), (priqq (find_max' k p) (merge p p)), (priqq (find_max' k p) (merge p l0)), (priqq (find_max' k p) (merge p l))
+(priqq (find_max' k p) (merge l0 p)), (priqq (find_max' k p) (merge l0 l0)), (priqq (find_max' k p) (merge l0 l)), (priqq (find_max' k p) (merge l p)), (priqq (find_max' k p) (merge l l0)), (priqq (find_max' k p) (merge l l)), (priqq (find_max' k p) (insert k p)), (priqq (find_max' k p) (insert k l0)), (priqq (find_max' k p) (insert k l)), (priqq (find_max' k p) (p ++ p))
+(priqq (find_max' k p) (p ++ l0)), (priqq (find_max' k p) (p ++ l)), (priqq (find_max' k p) (l0 ++ p)), (priqq (find_max' k p) (l0 ++ l0)), (priqq (find_max' k p) (l0 ++ l)), (priqq (find_max' k p) (l ++ p)), (priqq (find_max' k p) (l ++ l0)), (priqq (find_max' k p) (l ++ l)), (priqq (find_max' k l0) p), (priqq (find_max' k l0) l0)
+(priqq (find_max' k l0) l), (priqq (find_max' k l0) (merge p p)), (priqq (find_max' k l0) (merge p l0)), (priqq (find_max' k l0) (merge p l)), (priqq (find_max' k l0) (merge l0 p)), (priqq (find_max' k l0) (merge l0 l0)), (priqq (find_max' k l0) (merge l0 l)), (priqq (find_max' k l0) (merge l p)), (priqq (find_max' k l0) (merge l l0)), (priqq (find_max' k l0) (merge l l))
+(priqq (find_max' k l0) (insert k p)), (priqq (find_max' k l0) (insert k l0)), (priqq (find_max' k l0) (insert k l)), (priqq (find_max' k l0) (p ++ p)), (priqq (find_max' k l0) (p ++ l0)), (priqq (find_max' k l0) (p ++ l)), (priqq (find_max' k l0) (l0 ++ p)), (priqq (find_max' k l0) (l0 ++ l0)), (priqq (find_max' k l0) (l0 ++ l)), (priqq (find_max' k l0) (l ++ p))
+(priqq (find_max' k l0) (l ++ l0)), (priqq (find_max' k l0) (l ++ l)), (priqq (find_max' k l) p), (priqq (find_max' k l) l0), (priqq (find_max' k l) l), (priqq (find_max' k l) (merge p p)), (priqq (find_max' k l) (merge p l0)), (priqq (find_max' k l) (merge p l)), (priqq (find_max' k l) (merge l0 p)), (priqq (find_max' k l) (merge l0 l0))
+(priqq (find_max' k l) (merge l0 l)), (priqq (find_max' k l) (merge l p)), (priqq (find_max' k l) (merge l l0)), (priqq (find_max' k l) (merge l l)), (priqq (find_max' k l) (insert k p)), (priqq (find_max' k l) (insert k l0)), (priqq (find_max' k l) (insert k l)), (priqq (find_max' k l) (p ++ p)), (priqq (find_max' k l) (p ++ l0)), (priqq (find_max' k l) (p ++ l))
+(priqq (find_max' k l) (l0 ++ p)), (priqq (find_max' k l) (l0 ++ l0)), (priqq (find_max' k l) (l0 ++ l)), (priqq (find_max' k l) (l ++ p)), (priqq (find_max' k l) (l ++ l0)), (priqq (find_max' k l) (l ++ l)), (priqq (length p) p), (priqq (length p) l0), (priqq (length p) l), (priqq (length p) (merge p p))
+(priqq (length p) (merge p l0)), (priqq (length p) (merge p l)), (priqq (length p) (merge l0 p)), (priqq (length p) (merge l0 l0)), (priqq (length p) (merge l0 l)), (priqq (length p) (merge l p)), (priqq (length p) (merge l l0)), (priqq (length p) (merge l l)), (priqq (length p) (insert k p)), (priqq (length p) (insert k l0))
+(priqq (length p) (insert k l)), (priqq (length p) (p ++ p)), (priqq (length p) (p ++ l0)), (priqq (length p) (p ++ l)), (priqq (length p) (l0 ++ p)), (priqq (length p) (l0 ++ l0)), (priqq (length p) (l0 ++ l)), (priqq (length p) (l ++ p)), (priqq (length p) (l ++ l0)), (priqq (length p) (l ++ l))
+(priqq (length l0) p), (priqq (length l0) l0), (priqq (length l0) l), (priqq (length l0) (merge p p)), (priqq (length l0) (merge p l0)), (priqq (length l0) (merge p l)), (priqq (length l0) (merge l0 p)), (priqq (length l0) (merge l0 l0)), (priqq (length l0) (merge l0 l)), (priqq (length l0) (merge l p))
+(priqq (length l0) (merge l l0)), (priqq (length l0) (merge l l)), (priqq (length l0) (insert k p)), (priqq (length l0) (insert k l0)), (priqq (length l0) (insert k l)), (priqq (length l0) (p ++ p)), (priqq (length l0) (p ++ l0)), (priqq (length l0) (p ++ l)), (priqq (length l0) (l0 ++ p)), (priqq (length l0) (l0 ++ l0))
+(priqq (length l0) (l0 ++ l)), (priqq (length l0) (l ++ p)), (priqq (length l0) (l ++ l0)), (priqq (length l0) (l ++ l)), (priqq (length l) p), (priqq (length l) l0), (priqq (length l) l), (priqq (length l) (merge p p)), (priqq (length l) (merge p l0)), (priqq (length l) (merge p l))
+(priqq (length l) (merge l0 p)), (priqq (length l) (merge l0 l0)), (priqq (length l) (merge l0 l)), (priqq (length l) (merge l p)), (priqq (length l) (merge l l0)), (priqq (length l) (merge l l)), (priqq (length l) (insert k p)), (priqq (length l) (insert k l0)), (priqq (length l) (insert k l)), (priqq (length l) (p ++ p))
+(priqq (length l) (p ++ l0)), (priqq (length l) (p ++ l)), (priqq (length l) (l0 ++ p)), (priqq (length l) (l0 ++ l0)), (priqq (length l) (l0 ++ l)), (priqq (length l) (l ++ p)), (priqq (length l) (l ++ l0)), (priqq (length l) (l ++ l)), (pow2heapp k k Leaf), (pow2heapp k (find_max' k p) Leaf)
+(pow2heapp k (find_max' k l0) Leaf), (pow2heapp k (find_max' k l) Leaf), (pow2heapp k (length p) Leaf), (pow2heapp k (length l0) Leaf), (pow2heapp k (length l) Leaf), (pow2heapp (find_max' k p) k Leaf), (pow2heapp (find_max' k p) (find_max' k p) Leaf), (pow2heapp (find_max' k p) (find_max' k l0) Leaf), (pow2heapp (find_max' k p) (find_max' k l) Leaf), (pow2heapp (find_max' k p) (length p) Leaf)
+(pow2heapp (find_max' k p) (length l0) Leaf), (pow2heapp (find_max' k p) (length l) Leaf), (pow2heapp (find_max' k l0) k Leaf), (pow2heapp (find_max' k l0) (find_max' k p) Leaf), (pow2heapp (find_max' k l0) (find_max' k l0) Leaf), (pow2heapp (find_max' k l0) (find_max' k l) Leaf), (pow2heapp (find_max' k l0) (length p) Leaf), (pow2heapp (find_max' k l0) (length l0) Leaf), (pow2heapp (find_max' k l0) (length l) Leaf), (pow2heapp (find_max' k l) k Leaf)
+(pow2heapp (find_max' k l) (find_max' k p) Leaf), (pow2heapp (find_max' k l) (find_max' k l0) Leaf), (pow2heapp (find_max' k l) (find_max' k l) Leaf), (pow2heapp (find_max' k l) (length p) Leaf), (pow2heapp (find_max' k l) (length l0) Leaf), (pow2heapp (find_max' k l) (length l) Leaf), (pow2heapp (length p) k Leaf), (pow2heapp (length p) (find_max' k p) Leaf), (pow2heapp (length p) (find_max' k l0) Leaf), (pow2heapp (length p) (find_max' k l) Leaf)
+(pow2heapp (length p) (length p) Leaf), (pow2heapp (length p) (length l0) Leaf), (pow2heapp (length p) (length l) Leaf), (pow2heapp (length l0) k Leaf), (pow2heapp (length l0) (find_max' k p) Leaf), (pow2heapp (length l0) (find_max' k l0) Leaf), (pow2heapp (length l0) (find_max' k l) Leaf), (pow2heapp (length l0) (length p) Leaf), (pow2heapp (length l0) (length l0) Leaf), (pow2heapp (length l0) (length l) Leaf)
+(pow2heapp (length l) k Leaf), (pow2heapp (length l) (find_max' k p) Leaf), (pow2heapp (length l) (find_max' k l0) Leaf), (pow2heapp (length l) (find_max' k l) Leaf), (pow2heapp (length l) (length p) Leaf), (pow2heapp (length l) (length l0) Leaf), (pow2heapp (length l) (length l) Leaf), (Permutation p (merge p p)), (Permutation p (merge p l0)), (Permutation p (merge p l))
+(Permutation p (merge l0 p)), (Permutation p (merge l0 l0)), (Permutation p (merge l0 l)), (Permutation p (merge l p)), (Permutation p (merge l l0)), (Permutation p (merge l l)), (Permutation p (insert k p)), (Permutation p (insert k l0)), (Permutation p (insert k l)), (Permutation p (p ++ p))
+(Permutation p (p ++ l0)), (Permutation p (p ++ l)), (Permutation p (l0 ++ p)), (Permutation p (l0 ++ l0)), (Permutation p (l0 ++ l)), (Permutation p (l ++ p)), (Permutation p (l ++ l0)), (Permutation p (l ++ l)), (Permutation p []), (Permutation l0 (merge p p))
+(Permutation l0 (merge p l0)), (Permutation l0 (merge p l)), (Permutation l0 (merge l0 p)), (Permutation l0 (merge l0 l0)), (Permutation l0 (merge l0 l)), (Permutation l0 (merge l p)), (Permutation l0 (merge l l0)), (Permutation l0 (merge l l)), (Permutation l0 (insert k p)), (Permutation l0 (insert k l0))
+(Permutation l0 (insert k l)), (Permutation l0 (p ++ p)), (Permutation l0 (p ++ l0)), (Permutation l0 (p ++ l)), (Permutation l0 (l0 ++ p)), (Permutation l0 (l0 ++ l0)), (Permutation l0 (l0 ++ l)), (Permutation l0 (l ++ p)), (Permutation l0 (l ++ l0)), (Permutation l0 (l ++ l))
+(Permutation l0 []), (Permutation l (merge p p)), (Permutation l (merge p l0)), (Permutation l (merge p l)), (Permutation l (merge l0 p)), (Permutation l (merge l0 l0)), (Permutation l (merge l0 l)), (Permutation l (merge l p)), (Permutation l (merge l l0)), (Permutation l (merge l l))
+(Permutation l (insert k p)), (Permutation l (insert k l0)), (Permutation l (insert k l)), (Permutation l (p ++ p)), (Permutation l (p ++ l0)), (Permutation l (p ++ l)), (Permutation l (l0 ++ p)), (Permutation l (l0 ++ l0)), (Permutation l (l0 ++ l)), (Permutation l (l ++ p))
+(Permutation l (l ++ l0)), (Permutation l (l ++ l)), (Permutation l []), (Permutation (merge p p) p), (Permutation (merge p p) l0), (Permutation (merge p p) l), (Permutation (merge p p) (merge p l0)), (Permutation (merge p p) (merge p l)), (Permutation (merge p p) (merge l0 p)), (Permutation (merge p p) (merge l0 l0))
+(Permutation (merge p p) (merge l0 l)), (Permutation (merge p p) (merge l p)), (Permutation (merge p p) (merge l l0)), (Permutation (merge p p) (merge l l)), (Permutation (merge p p) (insert k p)), (Permutation (merge p p) (insert k l0)), (Permutation (merge p p) (insert k l)), (Permutation (merge p p) (p ++ p)), (Permutation (merge p p) (p ++ l0)), (Permutation (merge p p) (p ++ l))
+(Permutation (merge p p) (l0 ++ p)), (Permutation (merge p p) (l0 ++ l0)), (Permutation (merge p p) (l0 ++ l)), (Permutation (merge p p) (l ++ p)), (Permutation (merge p p) (l ++ l0)), (Permutation (merge p p) (l ++ l)), (Permutation (merge p p) []), (Permutation (merge p l0) p), (Permutation (merge p l0) l0), (Permutation (merge p l0) l)
+(Permutation (merge p l0) (merge p p)), (Permutation (merge p l0) (merge p l)), (Permutation (merge p l0) (merge l0 p)), (Permutation (merge p l0) (merge l0 l0)), (Permutation (merge p l0) (merge l0 l)), (Permutation (merge p l0) (merge l p)), (Permutation (merge p l0) (merge l l0)), (Permutation (merge p l0) (merge l l)), (Permutation (merge p l0) (insert k p)), (Permutation (merge p l0) (insert k l0))
+(Permutation (merge p l0) (insert k l)), (Permutation (merge p l0) (p ++ p)), (Permutation (merge p l0) (p ++ l0)), (Permutation (merge p l0) (p ++ l)), (Permutation (merge p l0) (l0 ++ p)), (Permutation (merge p l0) (l0 ++ l0)), (Permutation (merge p l0) (l0 ++ l)), (Permutation (merge p l0) (l ++ p)), (Permutation (merge p l0) (l ++ l0)), (Permutation (merge p l0) (l ++ l))
+(Permutation (merge p l0) []), (Permutation (merge p l) p), (Permutation (merge p l) l0), (Permutation (merge p l) l), (Permutation (merge p l) (merge p p)), (Permutation (merge p l) (merge p l0)), (Permutation (merge p l) (merge l0 p)), (Permutation (merge p l) (merge l0 l0)), (Permutation (merge p l) (merge l0 l)), (Permutation (merge p l) (merge l p))
+(Permutation (merge p l) (merge l l0)), (Permutation (merge p l) (merge l l)), (Permutation (merge p l) (insert k p)), (Permutation (merge p l) (insert k l0)), (Permutation (merge p l) (insert k l)), (Permutation (merge p l) (p ++ p)), (Permutation (merge p l) (p ++ l0)), (Permutation (merge p l) (p ++ l)), (Permutation (merge p l) (l0 ++ p)), (Permutation (merge p l) (l0 ++ l0))
+(Permutation (merge p l) (l0 ++ l)), (Permutation (merge p l) (l ++ p)), (Permutation (merge p l) (l ++ l0)), (Permutation (merge p l) (l ++ l)), (Permutation (merge p l) []), (Permutation (merge l0 p) p), (Permutation (merge l0 p) l0), (Permutation (merge l0 p) l), (Permutation (merge l0 p) (merge p p)), (Permutation (merge l0 p) (merge p l0))
+(Permutation (merge l0 p) (merge p l)), (Permutation (merge l0 p) (merge l0 l0)), (Permutation (merge l0 p) (merge l0 l)), (Permutation (merge l0 p) (merge l p)), (Permutation (merge l0 p) (merge l l0)), (Permutation (merge l0 p) (merge l l)), (Permutation (merge l0 p) (insert k p)), (Permutation (merge l0 p) (insert k l0)), (Permutation (merge l0 p) (insert k l)), (Permutation (merge l0 p) (p ++ p))
+(Permutation (merge l0 p) (p ++ l0)), (Permutation (merge l0 p) (p ++ l)), (Permutation (merge l0 p) (l0 ++ p)), (Permutation (merge l0 p) (l0 ++ l0)), (Permutation (merge l0 p) (l0 ++ l)), (Permutation (merge l0 p) (l ++ p)), (Permutation (merge l0 p) (l ++ l0)), (Permutation (merge l0 p) (l ++ l)), (Permutation (merge l0 p) []), (Permutation (merge l0 l0) p)
+(Permutation (merge l0 l0) l0), (Permutation (merge l0 l0) l), (Permutation (merge l0 l0) (merge p p)), (Permutation (merge l0 l0) (merge p l0)), (Permutation (merge l0 l0) (merge p l)), (Permutation (merge l0 l0) (merge l0 p)), (Permutation (merge l0 l0) (merge l0 l)), (Permutation (merge l0 l0) (merge l p)), (Permutation (merge l0 l0) (merge l l0)), (Permutation (merge l0 l0) (merge l l))
+(Permutation (merge l0 l0) (insert k p)), (Permutation (merge l0 l0) (insert k l0)), (Permutation (merge l0 l0) (insert k l)), (Permutation (merge l0 l0) (p ++ p)), (Permutation (merge l0 l0) (p ++ l0)), (Permutation (merge l0 l0) (p ++ l)), (Permutation (merge l0 l0) (l0 ++ p)), (Permutation (merge l0 l0) (l0 ++ l0)), (Permutation (merge l0 l0) (l0 ++ l)), (Permutation (merge l0 l0) (l ++ p))
+(Permutation (merge l0 l0) (l ++ l0)), (Permutation (merge l0 l0) (l ++ l)), (Permutation (merge l0 l0) []), (Permutation (merge l0 l) p), (Permutation (merge l0 l) l0), (Permutation (merge l0 l) l), (Permutation (merge l0 l) (merge p p)), (Permutation (merge l0 l) (merge p l0)), (Permutation (merge l0 l) (merge p l)), (Permutation (merge l0 l) (merge l0 p))
+(Permutation (merge l0 l) (merge l0 l0)), (Permutation (merge l0 l) (merge l p)), (Permutation (merge l0 l) (merge l l0)), (Permutation (merge l0 l) (merge l l)), (Permutation (merge l0 l) (insert k p)), (Permutation (merge l0 l) (insert k l0)), (Permutation (merge l0 l) (insert k l)), (Permutation (merge l0 l) (p ++ p)), (Permutation (merge l0 l) (p ++ l0)), (Permutation (merge l0 l) (p ++ l))
+(Permutation (merge l0 l) (l0 ++ p)), (Permutation (merge l0 l) (l0 ++ l0)), (Permutation (merge l0 l) (l0 ++ l)), (Permutation (merge l0 l) (l ++ p)), (Permutation (merge l0 l) (l ++ l0)), (Permutation (merge l0 l) (l ++ l)), (Permutation (merge l0 l) []), (Permutation (merge l p) p), (Permutation (merge l p) l0), (Permutation (merge l p) l)
+(Permutation (merge l p) (merge p p)), (Permutation (merge l p) (merge p l0)), (Permutation (merge l p) (merge p l)), (Permutation (merge l p) (merge l0 p)), (Permutation (merge l p) (merge l0 l0)), (Permutation (merge l p) (merge l0 l)), (Permutation (merge l p) (merge l l0)), (Permutation (merge l p) (merge l l)), (Permutation (merge l p) (insert k p)), (Permutation (merge l p) (insert k l0))
+(Permutation (merge l p) (insert k l)), (Permutation (merge l p) (p ++ p)), (Permutation (merge l p) (p ++ l0)), (Permutation (merge l p) (p ++ l)), (Permutation (merge l p) (l0 ++ p)), (Permutation (merge l p) (l0 ++ l0)), (Permutation (merge l p) (l0 ++ l)), (Permutation (merge l p) (l ++ p)), (Permutation (merge l p) (l ++ l0)), (Permutation (merge l p) (l ++ l))
+(Permutation (merge l p) []), (Permutation (merge l l0) p), (Permutation (merge l l0) l0), (Permutation (merge l l0) l), (Permutation (merge l l0) (merge p p)), (Permutation (merge l l0) (merge p l0)), (Permutation (merge l l0) (merge p l)), (Permutation (merge l l0) (merge l0 p)), (Permutation (merge l l0) (merge l0 l0)), (Permutation (merge l l0) (merge l0 l))
+(Permutation (merge l l0) (merge l p)), (Permutation (merge l l0) (merge l l)), (Permutation (merge l l0) (insert k p)), (Permutation (merge l l0) (insert k l0)), (Permutation (merge l l0) (insert k l)), (Permutation (merge l l0) (p ++ p)), (Permutation (merge l l0) (p ++ l0)), (Permutation (merge l l0) (p ++ l)), (Permutation (merge l l0) (l0 ++ p)), (Permutation (merge l l0) (l0 ++ l0))
+(Permutation (merge l l0) (l0 ++ l)), (Permutation (merge l l0) (l ++ p)), (Permutation (merge l l0) (l ++ l0)), (Permutation (merge l l0) (l ++ l)), (Permutation (merge l l0) []), (Permutation (merge l l) p), (Permutation (merge l l) l0), (Permutation (merge l l) l), (Permutation (merge l l) (merge p p)), (Permutation (merge l l) (merge p l0))
+(Permutation (merge l l) (merge p l)), (Permutation (merge l l) (merge l0 p)), (Permutation (merge l l) (merge l0 l0)), (Permutation (merge l l) (merge l0 l)), (Permutation (merge l l) (merge l p)), (Permutation (merge l l) (merge l l0)), (Permutation (merge l l) (insert k p)), (Permutation (merge l l) (insert k l0)), (Permutation (merge l l) (insert k l)), (Permutation (merge l l) (p ++ p))
+(Permutation (merge l l) (p ++ l0)), (Permutation (merge l l) (p ++ l)), (Permutation (merge l l) (l0 ++ p)), (Permutation (merge l l) (l0 ++ l0)), (Permutation (merge l l) (l0 ++ l)), (Permutation (merge l l) (l ++ p)), (Permutation (merge l l) (l ++ l0)), (Permutation (merge l l) (l ++ l)), (Permutation (merge l l) []), (Permutation (insert k p) p)
+(Permutation (insert k p) l0), (Permutation (insert k p) l), (Permutation (insert k p) (merge p p)), (Permutation (insert k p) (merge p l0)), (Permutation (insert k p) (merge p l)), (Permutation (insert k p) (merge l0 p)), (Permutation (insert k p) (merge l0 l0)), (Permutation (insert k p) (merge l0 l)), (Permutation (insert k p) (merge l p)), (Permutation (insert k p) (merge l l0))
+(Permutation (insert k p) (merge l l)), (Permutation (insert k p) (insert k l0)), (Permutation (insert k p) (insert k l)), (Permutation (insert k p) (p ++ p)), (Permutation (insert k p) (p ++ l0)), (Permutation (insert k p) (p ++ l)), (Permutation (insert k p) (l0 ++ p)), (Permutation (insert k p) (l0 ++ l0)), (Permutation (insert k p) (l0 ++ l)), (Permutation (insert k p) (l ++ p))
+(Permutation (insert k p) (l ++ l0)), (Permutation (insert k p) (l ++ l)), (Permutation (insert k p) []), (Permutation (insert k l0) p), (Permutation (insert k l0) l0), (Permutation (insert k l0) l), (Permutation (insert k l0) (merge p p)), (Permutation (insert k l0) (merge p l0)), (Permutation (insert k l0) (merge p l)), (Permutation (insert k l0) (merge l0 p))
+(Permutation (insert k l0) (merge l0 l0)), (Permutation (insert k l0) (merge l0 l)), (Permutation (insert k l0) (merge l p)), (Permutation (insert k l0) (merge l l0)), (Permutation (insert k l0) (merge l l)), (Permutation (insert k l0) (insert k p)), (Permutation (insert k l0) (insert k l)), (Permutation (insert k l0) (p ++ p)), (Permutation (insert k l0) (p ++ l0)), (Permutation (insert k l0) (p ++ l))
+(Permutation (insert k l0) (l0 ++ p)), (Permutation (insert k l0) (l0 ++ l0)), (Permutation (insert k l0) (l0 ++ l)), (Permutation (insert k l0) (l ++ p)), (Permutation (insert k l0) (l ++ l0)), (Permutation (insert k l0) (l ++ l)), (Permutation (insert k l0) []), (Permutation (insert k l) p), (Permutation (insert k l) l0), (Permutation (insert k l) l)
+(Permutation (insert k l) (merge p p)), (Permutation (insert k l) (merge p l0)), (Permutation (insert k l) (merge p l)), (Permutation (insert k l) (merge l0 p)), (Permutation (insert k l) (merge l0 l0)), (Permutation (insert k l) (merge l0 l)), (Permutation (insert k l) (merge l p)), (Permutation (insert k l) (merge l l0)), (Permutation (insert k l) (merge l l)), (Permutation (insert k l) (insert k p))
+(Permutation (insert k l) (insert k l0)), (Permutation (insert k l) (p ++ p)), (Permutation (insert k l) (p ++ l0)), (Permutation (insert k l) (p ++ l)), (Permutation (insert k l) (l0 ++ p)), (Permutation (insert k l) (l0 ++ l0)), (Permutation (insert k l) (l0 ++ l)), (Permutation (insert k l) (l ++ p)), (Permutation (insert k l) (l ++ l0)), (Permutation (insert k l) (l ++ l))
+(Permutation (insert k l) []), (Permutation (p ++ p) p), (Permutation (p ++ p) l0), (Permutation (p ++ p) l), (Permutation (p ++ p) (merge p p)), (Permutation (p ++ p) (merge p l0)), (Permutation (p ++ p) (merge p l)), (Permutation (p ++ p) (merge l0 p)), (Permutation (p ++ p) (merge l0 l0)), (Permutation (p ++ p) (merge l0 l))
+(Permutation (p ++ p) (merge l p)), (Permutation (p ++ p) (merge l l0)), (Permutation (p ++ p) (merge l l)), (Permutation (p ++ p) (insert k p)), (Permutation (p ++ p) (insert k l0)), (Permutation (p ++ p) (insert k l)), (Permutation (p ++ p) (p ++ l0)), (Permutation (p ++ p) (p ++ l)), (Permutation (p ++ p) (l0 ++ p)), (Permutation (p ++ p) (l0 ++ l0))
+(Permutation (p ++ p) (l0 ++ l)), (Permutation (p ++ p) (l ++ p)), (Permutation (p ++ p) (l ++ l0)), (Permutation (p ++ p) (l ++ l)), (Permutation (p ++ p) []), (Permutation (p ++ l0) p), (Permutation (p ++ l0) l0), (Permutation (p ++ l0) l), (Permutation (p ++ l0) (merge p p)), (Permutation (p ++ l0) (merge p l0))
+(Permutation (p ++ l0) (merge p l)), (Permutation (p ++ l0) (merge l0 p)), (Permutation (p ++ l0) (merge l0 l0)), (Permutation (p ++ l0) (merge l0 l)), (Permutation (p ++ l0) (merge l p)), (Permutation (p ++ l0) (merge l l0)), (Permutation (p ++ l0) (merge l l)), (Permutation (p ++ l0) (insert k p)), (Permutation (p ++ l0) (insert k l0)), (Permutation (p ++ l0) (insert k l))
+(Permutation (p ++ l0) (p ++ p)), (Permutation (p ++ l0) (p ++ l)), (Permutation (p ++ l0) (l0 ++ p)), (Permutation (p ++ l0) (l0 ++ l0)), (Permutation (p ++ l0) (l0 ++ l)), (Permutation (p ++ l0) (l ++ p)), (Permutation (p ++ l0) (l ++ l0)), (Permutation (p ++ l0) (l ++ l)), (Permutation (p ++ l0) []), (Permutation (p ++ l) p)
+(Permutation (p ++ l) l0), (Permutation (p ++ l) l), (Permutation (p ++ l) (merge p p)), (Permutation (p ++ l) (merge p l0)), (Permutation (p ++ l) (merge p l)), (Permutation (p ++ l) (merge l0 p)), (Permutation (p ++ l) (merge l0 l0)), (Permutation (p ++ l) (merge l0 l)), (Permutation (p ++ l) (merge l p)), (Permutation (p ++ l) (merge l l0))
+(Permutation (p ++ l) (merge l l)), (Permutation (p ++ l) (insert k p)), (Permutation (p ++ l) (insert k l0)), (Permutation (p ++ l) (insert k l)), (Permutation (p ++ l) (p ++ p)), (Permutation (p ++ l) (p ++ l0)), (Permutation (p ++ l) (l0 ++ p)), (Permutation (p ++ l) (l0 ++ l0)), (Permutation (p ++ l) (l0 ++ l)), (Permutation (p ++ l) (l ++ p))
+(Permutation (p ++ l) (l ++ l0)), (Permutation (p ++ l) (l ++ l)), (Permutation (p ++ l) []), (Permutation (l0 ++ p) p), (Permutation (l0 ++ p) l0), (Permutation (l0 ++ p) l), (Permutation (l0 ++ p) (merge p p)), (Permutation (l0 ++ p) (merge p l0)), (Permutation (l0 ++ p) (merge p l)), (Permutation (l0 ++ p) (merge l0 p))
+(Permutation (l0 ++ p) (merge l0 l0)), (Permutation (l0 ++ p) (merge l0 l)), (Permutation (l0 ++ p) (merge l p)), (Permutation (l0 ++ p) (merge l l0)), (Permutation (l0 ++ p) (merge l l)), (Permutation (l0 ++ p) (insert k p)), (Permutation (l0 ++ p) (insert k l0)), (Permutation (l0 ++ p) (insert k l)), (Permutation (l0 ++ p) (p ++ p)), (Permutation (l0 ++ p) (p ++ l0))
+(Permutation (l0 ++ p) (p ++ l)), (Permutation (l0 ++ p) (l0 ++ l0)), (Permutation (l0 ++ p) (l0 ++ l)), (Permutation (l0 ++ p) (l ++ p)), (Permutation (l0 ++ p) (l ++ l0)), (Permutation (l0 ++ p) (l ++ l)), (Permutation (l0 ++ p) []), (Permutation (l0 ++ l0) p), (Permutation (l0 ++ l0) l0), (Permutation (l0 ++ l0) l)
+(Permutation (l0 ++ l0) (merge p p)), (Permutation (l0 ++ l0) (merge p l0)), (Permutation (l0 ++ l0) (merge p l)), (Permutation (l0 ++ l0) (merge l0 p)), (Permutation (l0 ++ l0) (merge l0 l0)), (Permutation (l0 ++ l0) (merge l0 l)), (Permutation (l0 ++ l0) (merge l p)), (Permutation (l0 ++ l0) (merge l l0)), (Permutation (l0 ++ l0) (merge l l)), (Permutation (l0 ++ l0) (insert k p))
+(Permutation (l0 ++ l0) (insert k l0)), (Permutation (l0 ++ l0) (insert k l)), (Permutation (l0 ++ l0) (p ++ p)), (Permutation (l0 ++ l0) (p ++ l0)), (Permutation (l0 ++ l0) (p ++ l)), (Permutation (l0 ++ l0) (l0 ++ p)), (Permutation (l0 ++ l0) (l0 ++ l)), (Permutation (l0 ++ l0) (l ++ p)), (Permutation (l0 ++ l0) (l ++ l0)), (Permutation (l0 ++ l0) (l ++ l))
+(Permutation (l0 ++ l0) []), (Permutation (l0 ++ l) p), (Permutation (l0 ++ l) l0), (Permutation (l0 ++ l) l), (Permutation (l0 ++ l) (merge p p)), (Permutation (l0 ++ l) (merge p l0)), (Permutation (l0 ++ l) (merge p l)), (Permutation (l0 ++ l) (merge l0 p)), (Permutation (l0 ++ l) (merge l0 l0)), (Permutation (l0 ++ l) (merge l0 l))
+(Permutation (l0 ++ l) (merge l p)), (Permutation (l0 ++ l) (merge l l0)), (Permutation (l0 ++ l) (merge l l)), (Permutation (l0 ++ l) (insert k p)), (Permutation (l0 ++ l) (insert k l0)), (Permutation (l0 ++ l) (insert k l)), (Permutation (l0 ++ l) (p ++ p)), (Permutation (l0 ++ l) (p ++ l0)), (Permutation (l0 ++ l) (p ++ l)), (Permutation (l0 ++ l) (l0 ++ p))
+(Permutation (l0 ++ l) (l0 ++ l0)), (Permutation (l0 ++ l) (l ++ p)), (Permutation (l0 ++ l) (l ++ l0)), (Permutation (l0 ++ l) (l ++ l)), (Permutation (l0 ++ l) []), (Permutation (l ++ p) p), (Permutation (l ++ p) l0), (Permutation (l ++ p) l), (Permutation (l ++ p) (merge p p)), (Permutation (l ++ p) (merge p l0))
+(Permutation (l ++ p) (merge p l)), (Permutation (l ++ p) (merge l0 p)), (Permutation (l ++ p) (merge l0 l0)), (Permutation (l ++ p) (merge l0 l)), (Permutation (l ++ p) (merge l p)), (Permutation (l ++ p) (merge l l0)), (Permutation (l ++ p) (merge l l)), (Permutation (l ++ p) (insert k p)), (Permutation (l ++ p) (insert k l0)), (Permutation (l ++ p) (insert k l))
+(Permutation (l ++ p) (p ++ p)), (Permutation (l ++ p) (p ++ l0)), (Permutation (l ++ p) (p ++ l)), (Permutation (l ++ p) (l0 ++ p)), (Permutation (l ++ p) (l0 ++ l0)), (Permutation (l ++ p) (l0 ++ l)), (Permutation (l ++ p) (l ++ l0)), (Permutation (l ++ p) (l ++ l)), (Permutation (l ++ p) []), (Permutation (l ++ l0) p)
+(Permutation (l ++ l0) l0), (Permutation (l ++ l0) l), (Permutation (l ++ l0) (merge p p)), (Permutation (l ++ l0) (merge p l0)), (Permutation (l ++ l0) (merge p l)), (Permutation (l ++ l0) (merge l0 p)), (Permutation (l ++ l0) (merge l0 l0)), (Permutation (l ++ l0) (merge l0 l)), (Permutation (l ++ l0) (merge l p)), (Permutation (l ++ l0) (merge l l0))
+(Permutation (l ++ l0) (merge l l)), (Permutation (l ++ l0) (insert k p)), (Permutation (l ++ l0) (insert k l0)), (Permutation (l ++ l0) (insert k l)), (Permutation (l ++ l0) (p ++ p)), (Permutation (l ++ l0) (p ++ l0)), (Permutation (l ++ l0) (p ++ l)), (Permutation (l ++ l0) (l0 ++ p)), (Permutation (l ++ l0) (l0 ++ l0)), (Permutation (l ++ l0) (l0 ++ l))
+(Permutation (l ++ l0) (l ++ p)), (Permutation (l ++ l0) (l ++ l)), (Permutation (l ++ l0) []), (Permutation (l ++ l) p), (Permutation (l ++ l) l0), (Permutation (l ++ l) l), (Permutation (l ++ l) (merge p p)), (Permutation (l ++ l) (merge p l0)), (Permutation (l ++ l) (merge p l)), (Permutation (l ++ l) (merge l0 p))
+(Permutation (l ++ l) (merge l0 l0)), (Permutation (l ++ l) (merge l0 l)), (Permutation (l ++ l) (merge l p)), (Permutation (l ++ l) (merge l l0)), (Permutation (l ++ l) (merge l l)), (Permutation (l ++ l) (insert k p)), (Permutation (l ++ l) (insert k l0)), (Permutation (l ++ l) (insert k l)), (Permutation (l ++ l) (p ++ p)), (Permutation (l ++ l) (p ++ l0))
+(Permutation (l ++ l) (p ++ l)), (Permutation (l ++ l) (l0 ++ p)), (Permutation (l ++ l) (l0 ++ l0)), (Permutation (l ++ l) (l0 ++ l)), (Permutation (l ++ l) (l ++ p)), (Permutation (l ++ l) (l ++ l0)), (Permutation (l ++ l) []), (Permutation [] p), (Permutation [] l0), (Permutation [] l)
+(Permutation [] (merge p p)), (Permutation [] (merge p l0)), (Permutation [] (merge p l)), (Permutation [] (merge l0 p)), (Permutation [] (merge l0 l0)), (Permutation [] (merge l0 l)), (Permutation [] (merge l p)), (Permutation [] (merge l l0)), (Permutation [] (merge l l)), (Permutation [] (insert k p))
+(Permutation [] (insert k l0)), (Permutation [] (insert k l)), (Permutation [] (p ++ p)), (Permutation [] (p ++ l0)), (Permutation [] (p ++ l)), (Permutation [] (l0 ++ p)), (Permutation [] (l0 ++ l0)), (Permutation [] (l0 ++ l)), (Permutation [] (l ++ p)), (Permutation [] (l ++ l0))
+(Permutation [] (l ++ l)), (In Leaf p), (In Leaf l0), (In Leaf l), (In Leaf (merge p p)), (In Leaf (merge p l0)), (In Leaf (merge p l)), (In Leaf (merge l0 p)), (In Leaf (merge l0 l0)), (In Leaf (merge l0 l))
+(In Leaf (merge l p)), (In Leaf (merge l l0)), (In Leaf (merge l l)), (In Leaf (insert k p)), (In Leaf (insert k l0)), (In Leaf (insert k l)), (In Leaf (p ++ p)), (In Leaf (p ++ l0)), (In Leaf (p ++ l)), (In Leaf (l0 ++ p))
+(In Leaf (l0 ++ l0)), (In Leaf (l0 ++ l)), (In Leaf (l ++ p)), (In Leaf (l ++ l0)), (In Leaf (l ++ l)), (k < find_max' k p), (k < find_max' k l0), (k < find_max' k l), (k < length p), (k < length l0)
+(k < length l), (find_max' k p < k), (find_max' k p < find_max' k l0), (find_max' k p < find_max' k l), (find_max' k p < length p), (find_max' k p < length l0), (find_max' k p < length l), (find_max' k l0 < k), (find_max' k l0 < find_max' k p), (find_max' k l0 < find_max' k l)
+(find_max' k l0 < length p), (find_max' k l0 < length l0), (find_max' k l0 < length l), (find_max' k l < k), (find_max' k l < find_max' k p), (find_max' k l < find_max' k l0), (find_max' k l < length p), (find_max' k l < length l0), (find_max' k l < length l), (length p < k)
+(length p < find_max' k p), (length p < find_max' k l0), (length p < find_max' k l), (length p < length l0), (length p < length l), (length l0 < k), (length l0 < find_max' k p), (length l0 < find_max' k l0), (length l0 < find_max' k l), (length l0 < length p)
+(length l0 < length l), (length l < k), (length l < find_max' k p), (length l < find_max' k l0), (length l < find_max' k l), (length l < length p), (length l < length l0), (k <= find_max' k p), (k <= find_max' k l0), (k <= find_max' k l)
+(k <= length p), (k <= length l0), (k <= length l), (find_max' k p <= k), (find_max' k p <= find_max' k l0), (find_max' k p <= find_max' k l), (find_max' k p <= length p), (find_max' k p <= length l0), (find_max' k p <= length l), (find_max' k l0 <= k)
+(find_max' k l0 <= find_max' k p), (find_max' k l0 <= find_max' k l), (find_max' k l0 <= length p), (find_max' k l0 <= length l0), (find_max' k l0 <= length l), (find_max' k l <= k), (find_max' k l <= find_max' k p), (find_max' k l <= find_max' k l0), (find_max' k l <= length p), (find_max' k l <= length l0)
+(find_max' k l <= length l), (length p <= k), (length p <= find_max' k p), (length p <= find_max' k l0), (length p <= find_max' k l), (length p <= length l0), (length p <= length l), (length l0 <= k), (length l0 <= find_max' k p), (length l0 <= find_max' k l0)
+(length l0 <= find_max' k l), (length l0 <= length p), (length l0 <= length l), (length l <= k), (length l <= find_max' k p), (length l <= find_max' k l0), (length l <= find_max' k l), (length l <= length p), (length l <= length l0), (~ priq p)
+(~ priq l0), (~ priq l), (~ priqq k p), (~ priqq k l0), (~ priqq k l), (~ Permutation p p), (~ Permutation p l0), (~ Permutation p l), (~ Permutation l0 p), (~ Permutation l0 l0)
+(~ Permutation l0 l), (~ Permutation l p), (~ Permutation l l0), (~ Permutation l l), (~ k < k), (~ k <= k), (k <> k), (p <> p), (p <> l0), (p <> l)
+(l0 <> p), (l0 <> l0), (l0 <> l), (l <> p), (l <> l0), (l <> l), (None = Some p), (None = Some l0), (None = Some l), (merge p p = p)
+(merge p p = l0), (merge p p = l), (merge p p = insert k p), (merge p p = insert k l0), (merge p p = insert k l), (merge p p = p ++ p), (merge p p = p ++ l0), (merge p p = p ++ l), (merge p p = l0 ++ p), (merge p p = l0 ++ l0)
+(merge p p = l0 ++ l), (merge p p = l ++ p), (merge p p = l ++ l0), (merge p p = l ++ l), (merge p l0 = p), (merge p l0 = l0), (merge p l0 = l), (merge p l0 = insert k p), (merge p l0 = insert k l0), (merge p l0 = insert k l)
+(merge p l0 = p ++ p), (merge p l0 = p ++ l0), (merge p l0 = p ++ l), (merge p l0 = l0 ++ p), (merge p l0 = l0 ++ l0), (merge p l0 = l0 ++ l), (merge p l0 = l ++ p), (merge p l0 = l ++ l0), (merge p l0 = l ++ l), (merge p l = p)
+(merge p l = l0), (merge p l = l), (merge p l = insert k p), (merge p l = insert k l0), (merge p l = insert k l), (merge p l = p ++ p), (merge p l = p ++ l0), (merge p l = p ++ l), (merge p l = l0 ++ p), (merge p l = l0 ++ l0)
+(merge p l = l0 ++ l), (merge p l = l ++ p), (merge p l = l ++ l0), (merge p l = l ++ l), (merge l0 p = p), (merge l0 p = l0), (merge l0 p = l), (merge l0 p = insert k p), (merge l0 p = insert k l0), (merge l0 p = insert k l)
+(merge l0 p = p ++ p), (merge l0 p = p ++ l0), (merge l0 p = p ++ l), (merge l0 p = l0 ++ p), (merge l0 p = l0 ++ l0), (merge l0 p = l0 ++ l), (merge l0 p = l ++ p), (merge l0 p = l ++ l0), (merge l0 p = l ++ l), (merge l0 l0 = p)
+(merge l0 l0 = l0), (merge l0 l0 = l), (merge l0 l0 = insert k p), (merge l0 l0 = insert k l0), (merge l0 l0 = insert k l), (merge l0 l0 = p ++ p), (merge l0 l0 = p ++ l0), (merge l0 l0 = p ++ l), (merge l0 l0 = l0 ++ p), (merge l0 l0 = l0 ++ l0)
+(merge l0 l0 = l0 ++ l), (merge l0 l0 = l ++ p), (merge l0 l0 = l ++ l0), (merge l0 l0 = l ++ l), (merge l0 l = p), (merge l0 l = l0), (merge l0 l = l), (merge l0 l = insert k p), (merge l0 l = insert k l0), (merge l0 l = insert k l)
+(merge l0 l = p ++ p), (merge l0 l = p ++ l0), (merge l0 l = p ++ l), (merge l0 l = l0 ++ p), (merge l0 l = l0 ++ l0), (merge l0 l = l0 ++ l), (merge l0 l = l ++ p), (merge l0 l = l ++ l0), (merge l0 l = l ++ l), (merge l p = p)
+(merge l p = l0), (merge l p = l), (merge l p = insert k p), (merge l p = insert k l0), (merge l p = insert k l), (merge l p = p ++ p), (merge l p = p ++ l0), (merge l p = p ++ l), (merge l p = l0 ++ p), (merge l p = l0 ++ l0)
+(merge l p = l0 ++ l), (merge l p = l ++ p), (merge l p = l ++ l0), (merge l p = l ++ l), (merge l l0 = p), (merge l l0 = l0), (merge l l0 = l), (merge l l0 = insert k p), (merge l l0 = insert k l0), (merge l l0 = insert k l)
+(merge l l0 = p ++ p), (merge l l0 = p ++ l0), (merge l l0 = p ++ l), (merge l l0 = l0 ++ p), (merge l l0 = l0 ++ l0), (merge l l0 = l0 ++ l), (merge l l0 = l ++ p), (merge l l0 = l ++ l0), (merge l l0 = l ++ l), (merge l l = p)
+(merge l l = l0), (merge l l = l), (merge l l = insert k p), (merge l l = insert k l0), (merge l l = insert k l), (merge l l = p ++ p), (merge l l = p ++ l0), (merge l l = p ++ l), (merge l l = l0 ++ p), (merge l l = l0 ++ l0)
+(merge l l = l0 ++ l), (merge l l = l ++ p), (merge l l = l ++ l0), (merge l l = l ++ l), (insert k p = p), (insert k p = l0), (insert k p = l), (insert k p = p ++ p), (insert k p = p ++ l0), (insert k p = p ++ l)
+(insert k p = l0 ++ p), (insert k p = l0 ++ l0), (insert k p = l0 ++ l), (insert k p = l ++ p), (insert k p = l ++ l0), (insert k p = l ++ l), (insert k l0 = p), (insert k l0 = l0), (insert k l0 = l), (insert k l0 = p ++ p)
+(insert k l0 = p ++ l0), (insert k l0 = p ++ l), (insert k l0 = l0 ++ p), (insert k l0 = l0 ++ l0), (insert k l0 = l0 ++ l), (insert k l0 = l ++ p), (insert k l0 = l ++ l0), (insert k l0 = l ++ l), (insert k l = p), (insert k l = l0)
+(insert k l = l), (insert k l = p ++ p), (insert k l = p ++ l0), (insert k l = p ++ l), (insert k l = l0 ++ p), (insert k l = l0 ++ l0), (insert k l = l0 ++ l), (insert k l = l ++ p), (insert k l = l ++ l0), (insert k l = l ++ l)
+(p ++ p = p), (p ++ p = l0), (p ++ p = l), (p ++ l0 = p), (p ++ l0 = l0), (p ++ l0 = l), (p ++ l = p), (p ++ l = l0), (p ++ l = l), (l0 ++ p = p)
+(l0 ++ p = l0), (l0 ++ p = l), (l0 ++ l0 = p), (l0 ++ l0 = l0), (l0 ++ l0 = l), (l0 ++ l = p), (l0 ++ l = l0), (l0 ++ l = l), (l ++ p = p), (l ++ p = l0)
+(l ++ p = l), (l ++ l0 = p), (l ++ l0 = l0), (l ++ l0 = l), (l ++ l = p), (l ++ l = l0), (l ++ l = l), ([] = p), ([] = l0), ([] = l)
+([] = merge p p), ([] = merge p l0), ([] = merge p l), ([] = merge l0 p), ([] = merge l0 l0), ([] = merge l0 l), ([] = merge l p), ([] = merge l l0), ([] = merge l l), ([] = insert k p)
+([] = insert k l0), ([] = insert k l), ([] = p ++ p), ([] = p ++ l0), ([] = p ++ l), ([] = l0 ++ p), ([] = l0 ++ l0), ([] = l0 ++ l), ([] = l ++ p), ([] = l ++ l0)
+([] = l ++ l), ((p, p) = delete_max_aux k p), ((p, p) = delete_max_aux k l0), ((p, p) = delete_max_aux k l), ((p, l0) = delete_max_aux k p), ((p, l0) = delete_max_aux k l0), ((p, l0) = delete_max_aux k l), ((p, l) = delete_max_aux k p), ((p, l) = delete_max_aux k l0), ((p, l) = delete_max_aux k l)
+((l0, p) = delete_max_aux k p), ((l0, p) = delete_max_aux k l0), ((l0, p) = delete_max_aux k l), ((l0, l0) = delete_max_aux k p), ((l0, l0) = delete_max_aux k l0), ((l0, l0) = delete_max_aux k l), ((l0, l) = delete_max_aux k p), ((l0, l) = delete_max_aux k l0), ((l0, l) = delete_max_aux k l), ((l, p) = delete_max_aux k p)
+((l, p) = delete_max_aux k l0), ((l, p) = delete_max_aux k l), ((l, l0) = delete_max_aux k p), ((l, l0) = delete_max_aux k l0), ((l, l0) = delete_max_aux k l), ((l, l) = delete_max_aux k p), ((l, l) = delete_max_aux k l0), ((l, l) = delete_max_aux k l), (find_max' k p = k), (find_max' k l0 = k)
+(find_max' k l = k), (length p = k), (length p = find_max' k p), (length p = find_max' k l0), (length p = find_max' k l), (length l0 = k), (length l0 = find_max' k p), (length l0 = find_max' k l0), (length l0 = find_max' k l), (length l = k)
+(length l = find_max' k p), (length l = find_max' k l0), (length l = find_max' k l), (Some k = find_max p), (Some k = find_max l0), (Some k = find_max l), (None = Some k), (None = find_max p), (None = find_max l0), (None = find_max l)
+((k >? k) = (k >=? k))
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 171.242 seconds
+
+
+Label: 0 (0)
+(priq (merge l0 l)), (priq (merge l l0)), ((l, l0) = delete_max_aux k p)
+
+
+
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 210.081 seconds
+
+Number of Result Pairs Returned: 4
+
+1. (delete_max_aux k p = (l, l0) -> gv0 = q -> priq gv0)
+
+2. (join l l0 gv1 = q -> delete_max_aux k p = (l, l0) -> priq (join l l0 gv1))
+
+3. (delete_max_aux k p = (l, l0) -> priq (join l l0 Leaf))
+
+4. (delete_max_aux k p = (l, l0) -> priq (merge l0 l))
+(priq (merge l0 l) -> priq (join l l0 Leaf))

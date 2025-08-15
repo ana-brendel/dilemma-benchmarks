@@ -1,0 +1,267 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (lst_subset x x)
+
+----------------------------------
+Goal: (Nat_beq n n || lst_mem n x = true)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3.075 seconds
+
+gv1 : bool = (Nat_beq n n)
+gv0 : bool = (Nat_beq n n || lst_mem n x)
+gv3 : bool = true
+gv2 : bool = (lst_mem n x)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 34.186 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (Nat_beq n n || lst_mem n x = true)
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+
+----------------------------------
+Goal: (Nat_beq n n || gv2 = true)
+Case: Valid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (true = gv3)
+ -- (lst_mem n x = gv2)
+
+----------------------------------
+Goal: (Nat_beq n n || gv2 = gv3)
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (Nat_beq n n || gv2 = gv0)
+
+----------------------------------
+Goal: (gv0 = true)
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (Nat_beq n n = gv1)
+ -- (lst_mem n x = gv2)
+
+----------------------------------
+Goal: (gv1 || gv2 = true)
+Case: Invalid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (true = gv3)
+
+----------------------------------
+Goal: (Nat_beq n n || lst_mem n x = gv3)
+Case: Invalid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (Nat_beq n n || lst_mem n x = gv0)
+
+----------------------------------
+Goal: (gv0 = true)
+Case: Invalid and Generalized
+
+Label: Generalization #7
+Assumptions: 
+ -- (Nat_beq n n = gv1)
+
+----------------------------------
+Goal: (gv1 || lst_mem n x = true)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 34.336 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+append : (Lst -> Lst -> Lst)
+mem : (Nat -> Lst -> bool)
+lst_mem : (Nat -> Lst -> bool)
+lst_subset : (Lst -> Lst -> Prop)
+lst_eq : (Lst -> Lst -> Prop)
+lst_union : (Lst -> Lst -> Lst)
+succ : (Nat -> Nat)
+zero : Nat
+nil : Lst
+cons : (Nat -> Lst -> Lst)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 42
+Negative Examples: 14
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 34.481 seconds
+
+
+Label: 0 (0)
+(false = gv3), (false = gv2), (true = gv3), (true = gv2), (lst_eq x x), (lst_subset x x), (x = x), (gv3 = gv3), (gv3 = gv2), (gv2 = gv3)
+(gv2 = gv2), (n = n), (false = lst_mem n x), (false = mem n x), (true = lst_mem n x), (true = mem n x), (lst_eq x (cons n x)), (lst_eq x (lst_union x x)), (lst_eq x (append x x)), (lst_eq x nil)
+(lst_eq (cons n x) x), (lst_eq (cons n x) (lst_union x x)), (lst_eq (cons n x) (append x x)), (lst_eq (cons n x) nil), (lst_eq (lst_union x x) x), (lst_eq (lst_union x x) (cons n x)), (lst_eq (lst_union x x) (append x x)), (lst_eq (lst_union x x) nil), (lst_eq (append x x) x), (lst_eq (append x x) (cons n x))
+(lst_eq (append x x) (lst_union x x)), (lst_eq (append x x) nil), (lst_eq nil x), (lst_eq nil (cons n x)), (lst_eq nil (lst_union x x)), (lst_eq nil (append x x)), (lst_subset x (cons n x)), (lst_subset x (lst_union x x)), (lst_subset x (append x x)), (lst_subset x nil)
+(lst_subset (cons n x) x), (lst_subset (cons n x) (lst_union x x)), (lst_subset (cons n x) (append x x)), (lst_subset (cons n x) nil), (lst_subset (lst_union x x) x), (lst_subset (lst_union x x) (cons n x)), (lst_subset (lst_union x x) (append x x)), (lst_subset (lst_union x x) nil), (lst_subset (append x x) x), (lst_subset (append x x) (cons n x))
+(lst_subset (append x x) (lst_union x x)), (lst_subset (append x x) nil), (false <> gv3), (false <> gv2), (true <> gv3), (true <> gv2), (~ lst_eq x x), (~ lst_subset x x), (x <> x), (gv3 <> gv3)
+(gv3 <> gv2), (gv2 <> gv3), (gv2 <> gv2), (n <> n), (cons n x = x), (cons n x = lst_union x x), (cons n x = append x x), (lst_union x x = x), (lst_union x x = append x x), (append x x = x)
+(nil = cons n x), (nil = lst_union x x), (nil = append x x), (None = Some x), (None = Some gv3), (None = Some gv2), (lst_mem n x = gv3), (lst_mem n x = gv2), (mem n x = gv3), (mem n x = gv2)
+(mem n x = lst_mem n x), (None = Some n), (succ n = n), (zero = succ n)
+
+Label: 1 (1)
+(false = gv2), (false = gv0), (true = gv2), (true = gv0), (n = n), (gv2 = gv2), (gv2 = gv0), (gv0 = gv2), (gv0 = gv0), (false <> gv2)
+(false <> gv0), (true <> gv2), (true <> gv0), (n <> n), (gv2 <> gv2), (gv2 <> gv0), (gv0 <> gv2), (gv0 <> gv0), (None = Some n), (None = Some gv2)
+(None = Some gv0), (succ n = n), (zero = succ n)
+
+Label: 2 (2)
+(false = gv2), (false = gv1), (true = gv2), (true = gv1), (lst_eq x x), (lst_subset x x), (x = x), (n = n), (gv2 = gv2), (gv2 = gv1)
+(gv1 = gv2), (gv1 = gv1), (false = lst_mem n x), (false = mem n x), (true = lst_mem n x), (true = mem n x), (lst_eq x (cons n x)), (lst_eq x (lst_union x x)), (lst_eq x (append x x)), (lst_eq x nil)
+(lst_eq (cons n x) x), (lst_eq (cons n x) (lst_union x x)), (lst_eq (cons n x) (append x x)), (lst_eq (cons n x) nil), (lst_eq (lst_union x x) x), (lst_eq (lst_union x x) (cons n x)), (lst_eq (lst_union x x) (append x x)), (lst_eq (lst_union x x) nil), (lst_eq (append x x) x), (lst_eq (append x x) (cons n x))
+(lst_eq (append x x) (lst_union x x)), (lst_eq (append x x) nil), (lst_eq nil x), (lst_eq nil (cons n x)), (lst_eq nil (lst_union x x)), (lst_eq nil (append x x)), (lst_subset x (cons n x)), (lst_subset x (lst_union x x)), (lst_subset x (append x x)), (lst_subset x nil)
+(lst_subset (cons n x) x), (lst_subset (cons n x) (lst_union x x)), (lst_subset (cons n x) (append x x)), (lst_subset (cons n x) nil), (lst_subset (lst_union x x) x), (lst_subset (lst_union x x) (cons n x)), (lst_subset (lst_union x x) (append x x)), (lst_subset (lst_union x x) nil), (lst_subset (append x x) x), (lst_subset (append x x) (cons n x))
+(lst_subset (append x x) (lst_union x x)), (lst_subset (append x x) nil), (false <> gv2), (false <> gv1), (true <> gv2), (true <> gv1), (~ lst_eq x x), (~ lst_subset x x), (x <> x), (n <> n)
+(gv2 <> gv2), (gv2 <> gv1), (gv1 <> gv2), (gv1 <> gv1), (cons n x = x), (cons n x = lst_union x x), (cons n x = append x x), (lst_union x x = x), (lst_union x x = append x x), (append x x = x)
+(nil = cons n x), (nil = lst_union x x), (nil = append x x), (None = Some x), (None = Some gv2), (None = Some gv1), (lst_mem n x = gv2), (lst_mem n x = gv1), (mem n x = gv2), (mem n x = gv1)
+(mem n x = lst_mem n x), (None = Some n), (succ n = n), (zero = succ n)
+
+Label: 3 (3)
+(false = gv3), (true = gv3), (lst_eq x x), (lst_subset x x), (gv3 = gv3), (x = x), (n = n), (false = lst_mem n x), (false = mem n x), (true = lst_mem n x)
+(true = mem n x), (lst_eq x (cons n x)), (lst_eq x (lst_union x x)), (lst_eq x (append x x)), (lst_eq x nil), (lst_eq (cons n x) x), (lst_eq (cons n x) (lst_union x x)), (lst_eq (cons n x) (append x x)), (lst_eq (cons n x) nil), (lst_eq (lst_union x x) x)
+(lst_eq (lst_union x x) (cons n x)), (lst_eq (lst_union x x) (append x x)), (lst_eq (lst_union x x) nil), (lst_eq (append x x) x), (lst_eq (append x x) (cons n x)), (lst_eq (append x x) (lst_union x x)), (lst_eq (append x x) nil), (lst_eq nil x), (lst_eq nil (cons n x)), (lst_eq nil (lst_union x x))
+(lst_eq nil (append x x)), (lst_subset x (cons n x)), (lst_subset x (lst_union x x)), (lst_subset x (append x x)), (lst_subset x nil), (lst_subset (cons n x) x), (lst_subset (cons n x) (lst_union x x)), (lst_subset (cons n x) (append x x)), (lst_subset (cons n x) nil), (lst_subset (lst_union x x) x)
+(lst_subset (lst_union x x) (cons n x)), (lst_subset (lst_union x x) (append x x)), (lst_subset (lst_union x x) nil), (lst_subset (append x x) x), (lst_subset (append x x) (cons n x)), (lst_subset (append x x) (lst_union x x)), (lst_subset (append x x) nil), (false <> gv3), (true <> gv3), (~ lst_eq x x)
+(~ lst_subset x x), (gv3 <> gv3), (x <> x), (n <> n), (cons n x = x), (cons n x = lst_union x x), (cons n x = append x x), (lst_union x x = x), (lst_union x x = append x x), (append x x = x)
+(nil = cons n x), (nil = lst_union x x), (nil = append x x), (None = Some x), (None = Some gv3), (lst_mem n x = gv3), (mem n x = gv3), (mem n x = lst_mem n x), (None = Some n), (succ n = n)
+(zero = succ n)
+
+Label: 4 (4)
+(false = gv0), (true = gv0), (lst_eq x x), (lst_subset x x), (x = x), (n = n), (gv0 = gv0), (false = lst_mem n x), (false = mem n x), (true = lst_mem n x)
+(true = mem n x), (lst_eq x (cons n x)), (lst_eq x (lst_union x x)), (lst_eq x (append x x)), (lst_eq x nil), (lst_eq (cons n x) x), (lst_eq (cons n x) (lst_union x x)), (lst_eq (cons n x) (append x x)), (lst_eq (cons n x) nil), (lst_eq (lst_union x x) x)
+(lst_eq (lst_union x x) (cons n x)), (lst_eq (lst_union x x) (append x x)), (lst_eq (lst_union x x) nil), (lst_eq (append x x) x), (lst_eq (append x x) (cons n x)), (lst_eq (append x x) (lst_union x x)), (lst_eq (append x x) nil), (lst_eq nil x), (lst_eq nil (cons n x)), (lst_eq nil (lst_union x x))
+(lst_eq nil (append x x)), (lst_subset x (cons n x)), (lst_subset x (lst_union x x)), (lst_subset x (append x x)), (lst_subset x nil), (lst_subset (cons n x) x), (lst_subset (cons n x) (lst_union x x)), (lst_subset (cons n x) (append x x)), (lst_subset (cons n x) nil), (lst_subset (lst_union x x) x)
+(lst_subset (lst_union x x) (cons n x)), (lst_subset (lst_union x x) (append x x)), (lst_subset (lst_union x x) nil), (lst_subset (append x x) x), (lst_subset (append x x) (cons n x)), (lst_subset (append x x) (lst_union x x)), (lst_subset (append x x) nil), (false <> gv0), (true <> gv0), (~ lst_eq x x)
+(~ lst_subset x x), (x <> x), (n <> n), (gv0 <> gv0), (cons n x = x), (cons n x = lst_union x x), (cons n x = append x x), (lst_union x x = x), (lst_union x x = append x x), (append x x = x)
+(nil = cons n x), (nil = lst_union x x), (nil = append x x), (None = Some x), (None = Some gv0), (lst_mem n x = gv0), (mem n x = gv0), (mem n x = lst_mem n x), (None = Some n), (succ n = n)
+(zero = succ n)
+
+Label: 5 (5)
+(false = gv1), (true = gv1), (lst_eq x x), (lst_subset x x), (x = x), (n = n), (gv1 = gv1), (false = lst_mem n x), (false = mem n x), (true = lst_mem n x)
+(true = mem n x), (lst_eq x (cons n x)), (lst_eq x (lst_union x x)), (lst_eq x (append x x)), (lst_eq x nil), (lst_eq (cons n x) x), (lst_eq (cons n x) (lst_union x x)), (lst_eq (cons n x) (append x x)), (lst_eq (cons n x) nil), (lst_eq (lst_union x x) x)
+(lst_eq (lst_union x x) (cons n x)), (lst_eq (lst_union x x) (append x x)), (lst_eq (lst_union x x) nil), (lst_eq (append x x) x), (lst_eq (append x x) (cons n x)), (lst_eq (append x x) (lst_union x x)), (lst_eq (append x x) nil), (lst_eq nil x), (lst_eq nil (cons n x)), (lst_eq nil (lst_union x x))
+(lst_eq nil (append x x)), (lst_subset x (cons n x)), (lst_subset x (lst_union x x)), (lst_subset x (append x x)), (lst_subset x nil), (lst_subset (cons n x) x), (lst_subset (cons n x) (lst_union x x)), (lst_subset (cons n x) (append x x)), (lst_subset (cons n x) nil), (lst_subset (lst_union x x) x)
+(lst_subset (lst_union x x) (cons n x)), (lst_subset (lst_union x x) (append x x)), (lst_subset (lst_union x x) nil), (lst_subset (append x x) x), (lst_subset (append x x) (cons n x)), (lst_subset (append x x) (lst_union x x)), (lst_subset (append x x) nil), (false <> gv1), (true <> gv1), (~ lst_eq x x)
+(~ lst_subset x x), (x <> x), (n <> n), (gv1 <> gv1), (cons n x = x), (cons n x = lst_union x x), (cons n x = append x x), (lst_union x x = x), (lst_union x x = append x x), (append x x = x)
+(nil = cons n x), (nil = lst_union x x), (nil = append x x), (None = Some x), (None = Some gv1), (lst_mem n x = gv1), (mem n x = gv1), (mem n x = lst_mem n x), (None = Some n), (succ n = n)
+(zero = succ n)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 39.011 seconds
+
+
+Label: 0 (0)
+(true = gv3), (false <> gv3)
+
+Label: 1 (1)
+(true = gv0), (false <> gv0)
+
+Label: 2 (2)
+(true = gv1), (false <> gv1)
+
+Label: 3 (3)
+(true = gv3), (false <> gv3)
+
+Label: 4 (4)
+(true = gv0), (false <> gv0)
+
+Label: 5 (5)
+(true = gv1), (false <> gv1)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (Nat_beq n n || gv2 = true)
+
+2. (Nat_beq n n || lst_mem n x = true)
+
+3. (true = Nat_beq n n)
+
+4. (true = gv1 -> gv1 || gv2 = true)
+
+5. (true = gv1 -> gv1 || lst_mem n x = true)
+
+6. (false <> gv3 -> Nat_beq n n || gv2 = gv3)
+
+7. (false <> gv0 -> gv0 = true)
+
+8. (false <> gv1 -> gv1 || gv2 = true)
+
+9. (false <> gv3 -> Nat_beq n n || lst_mem n x = gv3)
+
+10. (false <> gv1 -> gv1 || lst_mem n x = true)
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 67.736 seconds
+
+Number of Result Pairs Returned: 10
+
+1. (Nat_beq n n || gv2 = true)
+
+2. (Nat_beq n n || lst_mem n x = true)
+
+3. (true = Nat_beq n n)
+
+4. (true = gv1 -> gv1 || gv2 = true)
+
+5. (true = gv1 -> gv1 || lst_mem n x = true)

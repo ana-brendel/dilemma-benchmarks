@@ -1,0 +1,331 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (sortedd (y :: l))
+ -- (sorted (y :: l))
+ -- (x <= y)
+
+----------------------------------
+Goal: (sortedd (x :: y :: l))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3.502 seconds
+
+gv1 : (list nat) = (y :: l)
+gv0 : (list nat) = (x :: y :: l)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 40.632 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (sortedd (y :: l))
+ -- (x <= y)
+
+----------------------------------
+Goal: (sortedd (x :: y :: l))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (sortedd (y :: l))
+ -- (x :: y :: l = gv0)
+ -- (x <= y)
+
+----------------------------------
+Goal: (sortedd gv0)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (sortedd gv1)
+ -- (y :: l = gv1)
+ -- (x <= y)
+
+----------------------------------
+Goal: (sortedd (x :: gv1))
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 40.82 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+In : (forall A : Type, A -> list A -> Prop)
+existsb : (forall A : Type, (A -> bool) -> list A -> bool)
+forallb : (forall A : Type, (A -> bool) -> list A -> bool)
+Forall : (forall A : Type, (A -> Prop) -> list A -> Prop)
+nodup : (forall A : Type, (forall x y : A, {x = y} + {x <> y}) -> list A -> list A)
+map : (forall A B : Type, (A -> B) -> list A -> list B)
+Permutation : (forall A : Type, list A -> list A -> Prop)
+insert : (nat -> list nat -> list nat)
+sort : (list nat -> list nat)
+sorted : (list nat -> Prop)
+sortedd : (list nat -> Prop)
+is_a_sorting_algorithm : ((list nat -> list nat) -> Prop)
+
+Label: 0 (0)
+Abducted Assumption: (sortedd (y :: l))
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Abducted Assumption: (x <= y)
+Positive Examples: 500
+Negative Examples: 298
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 246
+Negative Examples: 434
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 246
+Negative Examples: 414
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 41.029 seconds
+
+
+Label: 0 (0)
+(sortedd l), (sorted l), (Permutation l l), (In y l), (In x l), (y < y), (y < x), (x < y), (x < x), (y <= y)
+(y <= x), (x <= y), (x <= x), (l = l), (y = y), (y = x), (x = y), (x = x), (sortedd (y :: l)), (sortedd (x :: l))
+(sortedd (sort l)), (sortedd (insert y l)), (sortedd (insert x l)), (sortedd (l ++ l)), (sortedd []), (sorted (y :: l)), (sorted (x :: l)), (sorted (sort l)), (sorted (insert y l)), (sorted (insert x l))
+(sorted (l ++ l)), (sorted []), (Permutation l (y :: l)), (Permutation l (x :: l)), (Permutation l (sort l)), (Permutation l (insert y l)), (Permutation l (insert x l)), (Permutation l (l ++ l)), (Permutation l []), (Permutation (y :: l) l)
+(Permutation (y :: l) (x :: l)), (Permutation (y :: l) (sort l)), (Permutation (y :: l) (insert y l)), (Permutation (y :: l) (insert x l)), (Permutation (y :: l) (l ++ l)), (Permutation (y :: l) []), (Permutation (x :: l) l), (Permutation (x :: l) (y :: l)), (Permutation (x :: l) (sort l)), (Permutation (x :: l) (insert y l))
+(Permutation (x :: l) (insert x l)), (Permutation (x :: l) (l ++ l)), (Permutation (x :: l) []), (Permutation (sort l) l), (Permutation (sort l) (y :: l)), (Permutation (sort l) (x :: l)), (Permutation (sort l) (insert y l)), (Permutation (sort l) (insert x l)), (Permutation (sort l) (l ++ l)), (Permutation (sort l) [])
+(Permutation (insert y l) l), (Permutation (insert y l) (y :: l)), (Permutation (insert y l) (x :: l)), (Permutation (insert y l) (sort l)), (Permutation (insert y l) (insert x l)), (Permutation (insert y l) (l ++ l)), (Permutation (insert y l) []), (Permutation (insert x l) l), (Permutation (insert x l) (y :: l)), (Permutation (insert x l) (x :: l))
+(Permutation (insert x l) (sort l)), (Permutation (insert x l) (insert y l)), (Permutation (insert x l) (l ++ l)), (Permutation (insert x l) []), (Permutation (l ++ l) l), (Permutation (l ++ l) (y :: l)), (Permutation (l ++ l) (x :: l)), (Permutation (l ++ l) (sort l)), (Permutation (l ++ l) (insert y l)), (Permutation (l ++ l) (insert x l))
+(Permutation (l ++ l) []), (Permutation [] l), (Permutation [] (y :: l)), (Permutation [] (x :: l)), (Permutation [] (sort l)), (Permutation [] (insert y l)), (Permutation [] (insert x l)), (Permutation [] (l ++ l)), (In y (y :: l)), (In y (x :: l))
+(In y (sort l)), (In y (insert y l)), (In y (insert x l)), (In y (l ++ l)), (In x (y :: l)), (In x (x :: l)), (In x (sort l)), (In x (insert y l)), (In x (insert x l)), (In x (l ++ l))
+(In (length l) l), (In (length l) (y :: l)), (In (length l) (x :: l)), (In (length l) (sort l)), (In (length l) (insert y l)), (In (length l) (insert x l)), (In (length l) (l ++ l)), (y < length l), (x < length l), (length l < y)
+(length l < x), (y <= length l), (x <= length l), (length l <= y), (length l <= x), (~ sortedd l), (~ sorted l), (~ Permutation l l), (~ In y l), (~ In x l)
+(~ y < y), (~ y < x), (~ x < y), (~ x < x), (~ y <= y), (~ y <= x), (~ x <= y), (~ x <= x), (l <> l), (y <> y)
+(y <> x), (x <> y), (x <> x), (None = Some l), (y :: l = l), (y :: l = sort l), (y :: l = insert y l), (y :: l = insert x l), (y :: l = l ++ l), (y :: l = [])
+(x :: l = l), (x :: l = sort l), (x :: l = insert y l), (x :: l = insert x l), (x :: l = l ++ l), (x :: l = []), (sort l = l), (sort l = insert y l), (sort l = insert x l), (sort l = l ++ l)
+(insert y l = l), (insert y l = l ++ l), (insert x l = l), (insert x l = l ++ l), (l ++ l = l), ([] = l), ([] = sort l), ([] = insert y l), ([] = insert x l), ([] = l ++ l)
+(None = Some y), (None = Some x), (length l = y), (length l = x)
+
+Label: 1 (1)
+(sortedd l), (sorted l), (Permutation l l), (In y l), (In x l), (y < y), (y < x), (x < y), (x < x), (y <= y)
+(y <= x), (x <= y), (x <= x), (l = l), (y = y), (y = x), (x = y), (x = x), (sortedd (y :: l)), (sortedd (x :: l))
+(sortedd (sort l)), (sortedd (insert y l)), (sortedd (insert x l)), (sortedd (l ++ l)), (sortedd []), (sorted (y :: l)), (sorted (x :: l)), (sorted (sort l)), (sorted (insert y l)), (sorted (insert x l))
+(sorted (l ++ l)), (sorted []), (Permutation l (y :: l)), (Permutation l (x :: l)), (Permutation l (sort l)), (Permutation l (insert y l)), (Permutation l (insert x l)), (Permutation l (l ++ l)), (Permutation l []), (Permutation (y :: l) l)
+(Permutation (y :: l) (x :: l)), (Permutation (y :: l) (sort l)), (Permutation (y :: l) (insert y l)), (Permutation (y :: l) (insert x l)), (Permutation (y :: l) (l ++ l)), (Permutation (y :: l) []), (Permutation (x :: l) l), (Permutation (x :: l) (y :: l)), (Permutation (x :: l) (sort l)), (Permutation (x :: l) (insert y l))
+(Permutation (x :: l) (insert x l)), (Permutation (x :: l) (l ++ l)), (Permutation (x :: l) []), (Permutation (sort l) l), (Permutation (sort l) (y :: l)), (Permutation (sort l) (x :: l)), (Permutation (sort l) (insert y l)), (Permutation (sort l) (insert x l)), (Permutation (sort l) (l ++ l)), (Permutation (sort l) [])
+(Permutation (insert y l) l), (Permutation (insert y l) (y :: l)), (Permutation (insert y l) (x :: l)), (Permutation (insert y l) (sort l)), (Permutation (insert y l) (insert x l)), (Permutation (insert y l) (l ++ l)), (Permutation (insert y l) []), (Permutation (insert x l) l), (Permutation (insert x l) (y :: l)), (Permutation (insert x l) (x :: l))
+(Permutation (insert x l) (sort l)), (Permutation (insert x l) (insert y l)), (Permutation (insert x l) (l ++ l)), (Permutation (insert x l) []), (Permutation (l ++ l) l), (Permutation (l ++ l) (y :: l)), (Permutation (l ++ l) (x :: l)), (Permutation (l ++ l) (sort l)), (Permutation (l ++ l) (insert y l)), (Permutation (l ++ l) (insert x l))
+(Permutation (l ++ l) []), (Permutation [] l), (Permutation [] (y :: l)), (Permutation [] (x :: l)), (Permutation [] (sort l)), (Permutation [] (insert y l)), (Permutation [] (insert x l)), (Permutation [] (l ++ l)), (In y (y :: l)), (In y (x :: l))
+(In y (sort l)), (In y (insert y l)), (In y (insert x l)), (In y (l ++ l)), (In x (y :: l)), (In x (x :: l)), (In x (sort l)), (In x (insert y l)), (In x (insert x l)), (In x (l ++ l))
+(In (length l) l), (In (length l) (y :: l)), (In (length l) (x :: l)), (In (length l) (sort l)), (In (length l) (insert y l)), (In (length l) (insert x l)), (In (length l) (l ++ l)), (y < length l), (x < length l), (length l < y)
+(length l < x), (y <= length l), (x <= length l), (length l <= y), (length l <= x), (~ sortedd l), (~ sorted l), (~ Permutation l l), (~ In y l), (~ In x l)
+(~ y < y), (~ y < x), (~ x < y), (~ x < x), (~ y <= y), (~ y <= x), (~ x <= y), (~ x <= x), (l <> l), (y <> y)
+(y <> x), (x <> y), (x <> x), (None = Some l), (y :: l = l), (y :: l = sort l), (y :: l = insert y l), (y :: l = insert x l), (y :: l = l ++ l), (y :: l = [])
+(x :: l = l), (x :: l = sort l), (x :: l = insert y l), (x :: l = insert x l), (x :: l = l ++ l), (x :: l = []), (sort l = l), (sort l = insert y l), (sort l = insert x l), (sort l = l ++ l)
+(insert y l = l), (insert y l = l ++ l), (insert x l = l), (insert x l = l ++ l), (l ++ l = l), ([] = l), ([] = sort l), ([] = insert y l), ([] = insert x l), ([] = l ++ l)
+(None = Some y), (None = Some x), (length l = y), (length l = x)
+
+Label: 2 (2)
+(sortedd l), (sortedd gv0), (sorted l), (sorted gv0), (Permutation l l), (Permutation l gv0), (Permutation gv0 l), (Permutation gv0 gv0), (In y l), (In y gv0)
+(In x l), (In x gv0), (y < y), (y < x), (x < y), (x < x), (y <= y), (y <= x), (x <= y), (x <= x)
+(y = y), (y = x), (x = y), (x = x), (l = l), (l = gv0), (gv0 = l), (gv0 = gv0), (sortedd (y :: l)), (sortedd (y :: gv0))
+(sortedd (x :: l)), (sortedd (x :: gv0)), (sortedd (sort l)), (sortedd (sort gv0)), (sortedd (insert y l)), (sortedd (insert y gv0)), (sortedd (insert x l)), (sortedd (insert x gv0)), (sortedd (l ++ l)), (sortedd (l ++ gv0))
+(sortedd (gv0 ++ l)), (sortedd (gv0 ++ gv0)), (sortedd []), (sorted (y :: l)), (sorted (y :: gv0)), (sorted (x :: l)), (sorted (x :: gv0)), (sorted (sort l)), (sorted (sort gv0)), (sorted (insert y l))
+(sorted (insert y gv0)), (sorted (insert x l)), (sorted (insert x gv0)), (sorted (l ++ l)), (sorted (l ++ gv0)), (sorted (gv0 ++ l)), (sorted (gv0 ++ gv0)), (sorted []), (Permutation l (y :: l)), (Permutation l (y :: gv0))
+(Permutation l (x :: l)), (Permutation l (x :: gv0)), (Permutation l (sort l)), (Permutation l (sort gv0)), (Permutation l (insert y l)), (Permutation l (insert y gv0)), (Permutation l (insert x l)), (Permutation l (insert x gv0)), (Permutation l (l ++ l)), (Permutation l (l ++ gv0))
+(Permutation l (gv0 ++ l)), (Permutation l (gv0 ++ gv0)), (Permutation l []), (Permutation gv0 (y :: l)), (Permutation gv0 (y :: gv0)), (Permutation gv0 (x :: l)), (Permutation gv0 (x :: gv0)), (Permutation gv0 (sort l)), (Permutation gv0 (sort gv0)), (Permutation gv0 (insert y l))
+(Permutation gv0 (insert y gv0)), (Permutation gv0 (insert x l)), (Permutation gv0 (insert x gv0)), (Permutation gv0 (l ++ l)), (Permutation gv0 (l ++ gv0)), (Permutation gv0 (gv0 ++ l)), (Permutation gv0 (gv0 ++ gv0)), (Permutation gv0 []), (Permutation (y :: l) l), (Permutation (y :: l) gv0)
+(Permutation (y :: l) (y :: gv0)), (Permutation (y :: l) (x :: l)), (Permutation (y :: l) (x :: gv0)), (Permutation (y :: l) (sort l)), (Permutation (y :: l) (sort gv0)), (Permutation (y :: l) (insert y l)), (Permutation (y :: l) (insert y gv0)), (Permutation (y :: l) (insert x l)), (Permutation (y :: l) (insert x gv0)), (Permutation (y :: l) (l ++ l))
+(Permutation (y :: l) (l ++ gv0)), (Permutation (y :: l) (gv0 ++ l)), (Permutation (y :: l) (gv0 ++ gv0)), (Permutation (y :: l) []), (Permutation (y :: gv0) l), (Permutation (y :: gv0) gv0), (Permutation (y :: gv0) (y :: l)), (Permutation (y :: gv0) (x :: l)), (Permutation (y :: gv0) (x :: gv0)), (Permutation (y :: gv0) (sort l))
+(Permutation (y :: gv0) (sort gv0)), (Permutation (y :: gv0) (insert y l)), (Permutation (y :: gv0) (insert y gv0)), (Permutation (y :: gv0) (insert x l)), (Permutation (y :: gv0) (insert x gv0)), (Permutation (y :: gv0) (l ++ l)), (Permutation (y :: gv0) (l ++ gv0)), (Permutation (y :: gv0) (gv0 ++ l)), (Permutation (y :: gv0) (gv0 ++ gv0)), (Permutation (y :: gv0) [])
+(Permutation (x :: l) l), (Permutation (x :: l) gv0), (Permutation (x :: l) (y :: l)), (Permutation (x :: l) (y :: gv0)), (Permutation (x :: l) (x :: gv0)), (Permutation (x :: l) (sort l)), (Permutation (x :: l) (sort gv0)), (Permutation (x :: l) (insert y l)), (Permutation (x :: l) (insert y gv0)), (Permutation (x :: l) (insert x l))
+(Permutation (x :: l) (insert x gv0)), (Permutation (x :: l) (l ++ l)), (Permutation (x :: l) (l ++ gv0)), (Permutation (x :: l) (gv0 ++ l)), (Permutation (x :: l) (gv0 ++ gv0)), (Permutation (x :: l) []), (Permutation (x :: gv0) l), (Permutation (x :: gv0) gv0), (Permutation (x :: gv0) (y :: l)), (Permutation (x :: gv0) (y :: gv0))
+(Permutation (x :: gv0) (x :: l)), (Permutation (x :: gv0) (sort l)), (Permutation (x :: gv0) (sort gv0)), (Permutation (x :: gv0) (insert y l)), (Permutation (x :: gv0) (insert y gv0)), (Permutation (x :: gv0) (insert x l)), (Permutation (x :: gv0) (insert x gv0)), (Permutation (x :: gv0) (l ++ l)), (Permutation (x :: gv0) (l ++ gv0)), (Permutation (x :: gv0) (gv0 ++ l))
+(Permutation (x :: gv0) (gv0 ++ gv0)), (Permutation (x :: gv0) []), (Permutation (sort l) l), (Permutation (sort l) gv0), (Permutation (sort l) (y :: l)), (Permutation (sort l) (y :: gv0)), (Permutation (sort l) (x :: l)), (Permutation (sort l) (x :: gv0)), (Permutation (sort l) (sort gv0)), (Permutation (sort l) (insert y l))
+(Permutation (sort l) (insert y gv0)), (Permutation (sort l) (insert x l)), (Permutation (sort l) (insert x gv0)), (Permutation (sort l) (l ++ l)), (Permutation (sort l) (l ++ gv0)), (Permutation (sort l) (gv0 ++ l)), (Permutation (sort l) (gv0 ++ gv0)), (Permutation (sort l) []), (Permutation (sort gv0) l), (Permutation (sort gv0) gv0)
+(Permutation (sort gv0) (y :: l)), (Permutation (sort gv0) (y :: gv0)), (Permutation (sort gv0) (x :: l)), (Permutation (sort gv0) (x :: gv0)), (Permutation (sort gv0) (sort l)), (Permutation (sort gv0) (insert y l)), (Permutation (sort gv0) (insert y gv0)), (Permutation (sort gv0) (insert x l)), (Permutation (sort gv0) (insert x gv0)), (Permutation (sort gv0) (l ++ l))
+(Permutation (sort gv0) (l ++ gv0)), (Permutation (sort gv0) (gv0 ++ l)), (Permutation (sort gv0) (gv0 ++ gv0)), (Permutation (sort gv0) []), (Permutation (insert y l) l), (Permutation (insert y l) gv0), (Permutation (insert y l) (y :: l)), (Permutation (insert y l) (y :: gv0)), (Permutation (insert y l) (x :: l)), (Permutation (insert y l) (x :: gv0))
+(Permutation (insert y l) (sort l)), (Permutation (insert y l) (sort gv0)), (Permutation (insert y l) (insert y gv0)), (Permutation (insert y l) (insert x l)), (Permutation (insert y l) (insert x gv0)), (Permutation (insert y l) (l ++ l)), (Permutation (insert y l) (l ++ gv0)), (Permutation (insert y l) (gv0 ++ l)), (Permutation (insert y l) (gv0 ++ gv0)), (Permutation (insert y l) [])
+(Permutation (insert y gv0) l), (Permutation (insert y gv0) gv0), (Permutation (insert y gv0) (y :: l)), (Permutation (insert y gv0) (y :: gv0)), (Permutation (insert y gv0) (x :: l)), (Permutation (insert y gv0) (x :: gv0)), (Permutation (insert y gv0) (sort l)), (Permutation (insert y gv0) (sort gv0)), (Permutation (insert y gv0) (insert y l)), (Permutation (insert y gv0) (insert x l))
+(Permutation (insert y gv0) (insert x gv0)), (Permutation (insert y gv0) (l ++ l)), (Permutation (insert y gv0) (l ++ gv0)), (Permutation (insert y gv0) (gv0 ++ l)), (Permutation (insert y gv0) (gv0 ++ gv0)), (Permutation (insert y gv0) []), (Permutation (insert x l) l), (Permutation (insert x l) gv0), (Permutation (insert x l) (y :: l)), (Permutation (insert x l) (y :: gv0))
+(Permutation (insert x l) (x :: l)), (Permutation (insert x l) (x :: gv0)), (Permutation (insert x l) (sort l)), (Permutation (insert x l) (sort gv0)), (Permutation (insert x l) (insert y l)), (Permutation (insert x l) (insert y gv0)), (Permutation (insert x l) (insert x gv0)), (Permutation (insert x l) (l ++ l)), (Permutation (insert x l) (l ++ gv0)), (Permutation (insert x l) (gv0 ++ l))
+(Permutation (insert x l) (gv0 ++ gv0)), (Permutation (insert x l) []), (Permutation (insert x gv0) l), (Permutation (insert x gv0) gv0), (Permutation (insert x gv0) (y :: l)), (Permutation (insert x gv0) (y :: gv0)), (Permutation (insert x gv0) (x :: l)), (Permutation (insert x gv0) (x :: gv0)), (Permutation (insert x gv0) (sort l)), (Permutation (insert x gv0) (sort gv0))
+(Permutation (insert x gv0) (insert y l)), (Permutation (insert x gv0) (insert y gv0)), (Permutation (insert x gv0) (insert x l)), (Permutation (insert x gv0) (l ++ l)), (Permutation (insert x gv0) (l ++ gv0)), (Permutation (insert x gv0) (gv0 ++ l)), (Permutation (insert x gv0) (gv0 ++ gv0)), (Permutation (insert x gv0) []), (Permutation (l ++ l) l), (Permutation (l ++ l) gv0)
+(Permutation (l ++ l) (y :: l)), (Permutation (l ++ l) (y :: gv0)), (Permutation (l ++ l) (x :: l)), (Permutation (l ++ l) (x :: gv0)), (Permutation (l ++ l) (sort l)), (Permutation (l ++ l) (sort gv0)), (Permutation (l ++ l) (insert y l)), (Permutation (l ++ l) (insert y gv0)), (Permutation (l ++ l) (insert x l)), (Permutation (l ++ l) (insert x gv0))
+(Permutation (l ++ l) (l ++ gv0)), (Permutation (l ++ l) (gv0 ++ l)), (Permutation (l ++ l) (gv0 ++ gv0)), (Permutation (l ++ l) []), (Permutation (l ++ gv0) l), (Permutation (l ++ gv0) gv0), (Permutation (l ++ gv0) (y :: l)), (Permutation (l ++ gv0) (y :: gv0)), (Permutation (l ++ gv0) (x :: l)), (Permutation (l ++ gv0) (x :: gv0))
+(Permutation (l ++ gv0) (sort l)), (Permutation (l ++ gv0) (sort gv0)), (Permutation (l ++ gv0) (insert y l)), (Permutation (l ++ gv0) (insert y gv0)), (Permutation (l ++ gv0) (insert x l)), (Permutation (l ++ gv0) (insert x gv0)), (Permutation (l ++ gv0) (l ++ l)), (Permutation (l ++ gv0) (gv0 ++ l)), (Permutation (l ++ gv0) (gv0 ++ gv0)), (Permutation (l ++ gv0) [])
+(Permutation (gv0 ++ l) l), (Permutation (gv0 ++ l) gv0), (Permutation (gv0 ++ l) (y :: l)), (Permutation (gv0 ++ l) (y :: gv0)), (Permutation (gv0 ++ l) (x :: l)), (Permutation (gv0 ++ l) (x :: gv0)), (Permutation (gv0 ++ l) (sort l)), (Permutation (gv0 ++ l) (sort gv0)), (Permutation (gv0 ++ l) (insert y l)), (Permutation (gv0 ++ l) (insert y gv0))
+(Permutation (gv0 ++ l) (insert x l)), (Permutation (gv0 ++ l) (insert x gv0)), (Permutation (gv0 ++ l) (l ++ l)), (Permutation (gv0 ++ l) (l ++ gv0)), (Permutation (gv0 ++ l) (gv0 ++ gv0)), (Permutation (gv0 ++ l) []), (Permutation (gv0 ++ gv0) l), (Permutation (gv0 ++ gv0) gv0), (Permutation (gv0 ++ gv0) (y :: l)), (Permutation (gv0 ++ gv0) (y :: gv0))
+(Permutation (gv0 ++ gv0) (x :: l)), (Permutation (gv0 ++ gv0) (x :: gv0)), (Permutation (gv0 ++ gv0) (sort l)), (Permutation (gv0 ++ gv0) (sort gv0)), (Permutation (gv0 ++ gv0) (insert y l)), (Permutation (gv0 ++ gv0) (insert y gv0)), (Permutation (gv0 ++ gv0) (insert x l)), (Permutation (gv0 ++ gv0) (insert x gv0)), (Permutation (gv0 ++ gv0) (l ++ l)), (Permutation (gv0 ++ gv0) (l ++ gv0))
+(Permutation (gv0 ++ gv0) (gv0 ++ l)), (Permutation (gv0 ++ gv0) []), (Permutation [] l), (Permutation [] gv0), (Permutation [] (y :: l)), (Permutation [] (y :: gv0)), (Permutation [] (x :: l)), (Permutation [] (x :: gv0)), (Permutation [] (sort l)), (Permutation [] (sort gv0))
+(Permutation [] (insert y l)), (Permutation [] (insert y gv0)), (Permutation [] (insert x l)), (Permutation [] (insert x gv0)), (Permutation [] (l ++ l)), (Permutation [] (l ++ gv0)), (Permutation [] (gv0 ++ l)), (Permutation [] (gv0 ++ gv0)), (In y (y :: l)), (In y (y :: gv0))
+(In y (x :: l)), (In y (x :: gv0)), (In y (sort l)), (In y (sort gv0)), (In y (insert y l)), (In y (insert y gv0)), (In y (insert x l)), (In y (insert x gv0)), (In y (l ++ l)), (In y (l ++ gv0))
+(In y (gv0 ++ l)), (In y (gv0 ++ gv0)), (In x (y :: l)), (In x (y :: gv0)), (In x (x :: l)), (In x (x :: gv0)), (In x (sort l)), (In x (sort gv0)), (In x (insert y l)), (In x (insert y gv0))
+(In x (insert x l)), (In x (insert x gv0)), (In x (l ++ l)), (In x (l ++ gv0)), (In x (gv0 ++ l)), (In x (gv0 ++ gv0)), (In (length l) l), (In (length l) gv0), (In (length l) (y :: l)), (In (length l) (y :: gv0))
+(In (length l) (x :: l)), (In (length l) (x :: gv0)), (In (length l) (sort l)), (In (length l) (sort gv0)), (In (length l) (insert y l)), (In (length l) (insert y gv0)), (In (length l) (insert x l)), (In (length l) (insert x gv0)), (In (length l) (l ++ l)), (In (length l) (l ++ gv0))
+(In (length l) (gv0 ++ l)), (In (length l) (gv0 ++ gv0)), (In (length gv0) l), (In (length gv0) gv0), (In (length gv0) (y :: l)), (In (length gv0) (y :: gv0)), (In (length gv0) (x :: l)), (In (length gv0) (x :: gv0)), (In (length gv0) (sort l)), (In (length gv0) (sort gv0))
+(In (length gv0) (insert y l)), (In (length gv0) (insert y gv0)), (In (length gv0) (insert x l)), (In (length gv0) (insert x gv0)), (In (length gv0) (l ++ l)), (In (length gv0) (l ++ gv0)), (In (length gv0) (gv0 ++ l)), (In (length gv0) (gv0 ++ gv0)), (y < length l), (y < length gv0)
+(x < length l), (x < length gv0), (length l < y), (length l < x), (length l < length gv0), (length gv0 < y), (length gv0 < x), (length gv0 < length l), (y <= length l), (y <= length gv0)
+(x <= length l), (x <= length gv0), (length l <= y), (length l <= x), (length l <= length gv0), (length gv0 <= y), (length gv0 <= x), (length gv0 <= length l), (~ sortedd l), (~ sortedd gv0)
+(~ sorted l), (~ sorted gv0), (~ Permutation l l), (~ Permutation l gv0), (~ Permutation gv0 l), (~ Permutation gv0 gv0), (~ In y l), (~ In y gv0), (~ In x l), (~ In x gv0)
+(~ y < y), (~ y < x), (~ x < y), (~ x < x), (~ y <= y), (~ y <= x), (~ x <= y), (~ x <= x), (y <> y), (y <> x)
+(x <> y), (x <> x), (l <> l), (l <> gv0), (gv0 <> l), (gv0 <> gv0), (None = Some l), (None = Some gv0), (y :: l = l), (y :: l = gv0)
+(y :: l = sort l), (y :: l = sort gv0), (y :: l = insert y l), (y :: l = insert y gv0), (y :: l = insert x l), (y :: l = insert x gv0), (y :: l = l ++ l), (y :: l = l ++ gv0), (y :: l = gv0 ++ l), (y :: l = gv0 ++ gv0)
+(y :: l = []), (y :: gv0 = l), (y :: gv0 = gv0), (y :: gv0 = sort l), (y :: gv0 = sort gv0), (y :: gv0 = insert y l), (y :: gv0 = insert y gv0), (y :: gv0 = insert x l), (y :: gv0 = insert x gv0), (y :: gv0 = l ++ l)
+(y :: gv0 = l ++ gv0), (y :: gv0 = gv0 ++ l), (y :: gv0 = gv0 ++ gv0), (y :: gv0 = []), (x :: l = l), (x :: l = gv0), (x :: l = sort l), (x :: l = sort gv0), (x :: l = insert y l), (x :: l = insert y gv0)
+(x :: l = insert x l), (x :: l = insert x gv0), (x :: l = l ++ l), (x :: l = l ++ gv0), (x :: l = gv0 ++ l), (x :: l = gv0 ++ gv0), (x :: l = []), (x :: gv0 = l), (x :: gv0 = gv0), (x :: gv0 = sort l)
+(x :: gv0 = sort gv0), (x :: gv0 = insert y l), (x :: gv0 = insert y gv0), (x :: gv0 = insert x l), (x :: gv0 = insert x gv0), (x :: gv0 = l ++ l), (x :: gv0 = l ++ gv0), (x :: gv0 = gv0 ++ l), (x :: gv0 = gv0 ++ gv0), (x :: gv0 = [])
+(sort l = l), (sort l = gv0), (sort l = insert y l), (sort l = insert y gv0), (sort l = insert x l), (sort l = insert x gv0), (sort l = l ++ l), (sort l = l ++ gv0), (sort l = gv0 ++ l), (sort l = gv0 ++ gv0)
+(sort gv0 = l), (sort gv0 = gv0), (sort gv0 = insert y l), (sort gv0 = insert y gv0), (sort gv0 = insert x l), (sort gv0 = insert x gv0), (sort gv0 = l ++ l), (sort gv0 = l ++ gv0), (sort gv0 = gv0 ++ l), (sort gv0 = gv0 ++ gv0)
+(insert y l = l), (insert y l = gv0), (insert y l = l ++ l), (insert y l = l ++ gv0), (insert y l = gv0 ++ l), (insert y l = gv0 ++ gv0), (insert y gv0 = l), (insert y gv0 = gv0), (insert y gv0 = l ++ l), (insert y gv0 = l ++ gv0)
+(insert y gv0 = gv0 ++ l), (insert y gv0 = gv0 ++ gv0), (insert x l = l), (insert x l = gv0), (insert x l = l ++ l), (insert x l = l ++ gv0), (insert x l = gv0 ++ l), (insert x l = gv0 ++ gv0), (insert x gv0 = l), (insert x gv0 = gv0)
+(insert x gv0 = l ++ l), (insert x gv0 = l ++ gv0), (insert x gv0 = gv0 ++ l), (insert x gv0 = gv0 ++ gv0), (l ++ l = l), (l ++ l = gv0), (l ++ gv0 = l), (l ++ gv0 = gv0), (gv0 ++ l = l), (gv0 ++ l = gv0)
+(gv0 ++ gv0 = l), (gv0 ++ gv0 = gv0), ([] = l), ([] = gv0), ([] = sort l), ([] = sort gv0), ([] = insert y l), ([] = insert y gv0), ([] = insert x l), ([] = insert x gv0)
+([] = l ++ l), ([] = l ++ gv0), ([] = gv0 ++ l), ([] = gv0 ++ gv0), (None = Some y), (None = Some x), (length l = y), (length l = x), (length gv0 = y), (length gv0 = x)
+
+Label: 3 (3)
+(sortedd l), (sortedd gv1), (sorted l), (sorted gv1), (Permutation l l), (Permutation l gv1), (Permutation gv1 l), (Permutation gv1 gv1), (In y l), (In y gv1)
+(In x l), (In x gv1), (y < y), (y < x), (x < y), (x < x), (y <= y), (y <= x), (x <= y), (x <= x)
+(l = l), (l = gv1), (gv1 = l), (gv1 = gv1), (y = y), (y = x), (x = y), (x = x), (sortedd (y :: l)), (sortedd (y :: gv1))
+(sortedd (x :: l)), (sortedd (x :: gv1)), (sortedd (sort l)), (sortedd (sort gv1)), (sortedd (insert y l)), (sortedd (insert y gv1)), (sortedd (insert x l)), (sortedd (insert x gv1)), (sortedd (l ++ l)), (sortedd (l ++ gv1))
+(sortedd (gv1 ++ l)), (sortedd (gv1 ++ gv1)), (sortedd []), (sorted (y :: l)), (sorted (y :: gv1)), (sorted (x :: l)), (sorted (x :: gv1)), (sorted (sort l)), (sorted (sort gv1)), (sorted (insert y l))
+(sorted (insert y gv1)), (sorted (insert x l)), (sorted (insert x gv1)), (sorted (l ++ l)), (sorted (l ++ gv1)), (sorted (gv1 ++ l)), (sorted (gv1 ++ gv1)), (sorted []), (Permutation l (y :: l)), (Permutation l (y :: gv1))
+(Permutation l (x :: l)), (Permutation l (x :: gv1)), (Permutation l (sort l)), (Permutation l (sort gv1)), (Permutation l (insert y l)), (Permutation l (insert y gv1)), (Permutation l (insert x l)), (Permutation l (insert x gv1)), (Permutation l (l ++ l)), (Permutation l (l ++ gv1))
+(Permutation l (gv1 ++ l)), (Permutation l (gv1 ++ gv1)), (Permutation l []), (Permutation gv1 (y :: l)), (Permutation gv1 (y :: gv1)), (Permutation gv1 (x :: l)), (Permutation gv1 (x :: gv1)), (Permutation gv1 (sort l)), (Permutation gv1 (sort gv1)), (Permutation gv1 (insert y l))
+(Permutation gv1 (insert y gv1)), (Permutation gv1 (insert x l)), (Permutation gv1 (insert x gv1)), (Permutation gv1 (l ++ l)), (Permutation gv1 (l ++ gv1)), (Permutation gv1 (gv1 ++ l)), (Permutation gv1 (gv1 ++ gv1)), (Permutation gv1 []), (Permutation (y :: l) l), (Permutation (y :: l) gv1)
+(Permutation (y :: l) (y :: gv1)), (Permutation (y :: l) (x :: l)), (Permutation (y :: l) (x :: gv1)), (Permutation (y :: l) (sort l)), (Permutation (y :: l) (sort gv1)), (Permutation (y :: l) (insert y l)), (Permutation (y :: l) (insert y gv1)), (Permutation (y :: l) (insert x l)), (Permutation (y :: l) (insert x gv1)), (Permutation (y :: l) (l ++ l))
+(Permutation (y :: l) (l ++ gv1)), (Permutation (y :: l) (gv1 ++ l)), (Permutation (y :: l) (gv1 ++ gv1)), (Permutation (y :: l) []), (Permutation (y :: gv1) l), (Permutation (y :: gv1) gv1), (Permutation (y :: gv1) (y :: l)), (Permutation (y :: gv1) (x :: l)), (Permutation (y :: gv1) (x :: gv1)), (Permutation (y :: gv1) (sort l))
+(Permutation (y :: gv1) (sort gv1)), (Permutation (y :: gv1) (insert y l)), (Permutation (y :: gv1) (insert y gv1)), (Permutation (y :: gv1) (insert x l)), (Permutation (y :: gv1) (insert x gv1)), (Permutation (y :: gv1) (l ++ l)), (Permutation (y :: gv1) (l ++ gv1)), (Permutation (y :: gv1) (gv1 ++ l)), (Permutation (y :: gv1) (gv1 ++ gv1)), (Permutation (y :: gv1) [])
+(Permutation (x :: l) l), (Permutation (x :: l) gv1), (Permutation (x :: l) (y :: l)), (Permutation (x :: l) (y :: gv1)), (Permutation (x :: l) (x :: gv1)), (Permutation (x :: l) (sort l)), (Permutation (x :: l) (sort gv1)), (Permutation (x :: l) (insert y l)), (Permutation (x :: l) (insert y gv1)), (Permutation (x :: l) (insert x l))
+(Permutation (x :: l) (insert x gv1)), (Permutation (x :: l) (l ++ l)), (Permutation (x :: l) (l ++ gv1)), (Permutation (x :: l) (gv1 ++ l)), (Permutation (x :: l) (gv1 ++ gv1)), (Permutation (x :: l) []), (Permutation (x :: gv1) l), (Permutation (x :: gv1) gv1), (Permutation (x :: gv1) (y :: l)), (Permutation (x :: gv1) (y :: gv1))
+(Permutation (x :: gv1) (x :: l)), (Permutation (x :: gv1) (sort l)), (Permutation (x :: gv1) (sort gv1)), (Permutation (x :: gv1) (insert y l)), (Permutation (x :: gv1) (insert y gv1)), (Permutation (x :: gv1) (insert x l)), (Permutation (x :: gv1) (insert x gv1)), (Permutation (x :: gv1) (l ++ l)), (Permutation (x :: gv1) (l ++ gv1)), (Permutation (x :: gv1) (gv1 ++ l))
+(Permutation (x :: gv1) (gv1 ++ gv1)), (Permutation (x :: gv1) []), (Permutation (sort l) l), (Permutation (sort l) gv1), (Permutation (sort l) (y :: l)), (Permutation (sort l) (y :: gv1)), (Permutation (sort l) (x :: l)), (Permutation (sort l) (x :: gv1)), (Permutation (sort l) (sort gv1)), (Permutation (sort l) (insert y l))
+(Permutation (sort l) (insert y gv1)), (Permutation (sort l) (insert x l)), (Permutation (sort l) (insert x gv1)), (Permutation (sort l) (l ++ l)), (Permutation (sort l) (l ++ gv1)), (Permutation (sort l) (gv1 ++ l)), (Permutation (sort l) (gv1 ++ gv1)), (Permutation (sort l) []), (Permutation (sort gv1) l), (Permutation (sort gv1) gv1)
+(Permutation (sort gv1) (y :: l)), (Permutation (sort gv1) (y :: gv1)), (Permutation (sort gv1) (x :: l)), (Permutation (sort gv1) (x :: gv1)), (Permutation (sort gv1) (sort l)), (Permutation (sort gv1) (insert y l)), (Permutation (sort gv1) (insert y gv1)), (Permutation (sort gv1) (insert x l)), (Permutation (sort gv1) (insert x gv1)), (Permutation (sort gv1) (l ++ l))
+(Permutation (sort gv1) (l ++ gv1)), (Permutation (sort gv1) (gv1 ++ l)), (Permutation (sort gv1) (gv1 ++ gv1)), (Permutation (sort gv1) []), (Permutation (insert y l) l), (Permutation (insert y l) gv1), (Permutation (insert y l) (y :: l)), (Permutation (insert y l) (y :: gv1)), (Permutation (insert y l) (x :: l)), (Permutation (insert y l) (x :: gv1))
+(Permutation (insert y l) (sort l)), (Permutation (insert y l) (sort gv1)), (Permutation (insert y l) (insert y gv1)), (Permutation (insert y l) (insert x l)), (Permutation (insert y l) (insert x gv1)), (Permutation (insert y l) (l ++ l)), (Permutation (insert y l) (l ++ gv1)), (Permutation (insert y l) (gv1 ++ l)), (Permutation (insert y l) (gv1 ++ gv1)), (Permutation (insert y l) [])
+(Permutation (insert y gv1) l), (Permutation (insert y gv1) gv1), (Permutation (insert y gv1) (y :: l)), (Permutation (insert y gv1) (y :: gv1)), (Permutation (insert y gv1) (x :: l)), (Permutation (insert y gv1) (x :: gv1)), (Permutation (insert y gv1) (sort l)), (Permutation (insert y gv1) (sort gv1)), (Permutation (insert y gv1) (insert y l)), (Permutation (insert y gv1) (insert x l))
+(Permutation (insert y gv1) (insert x gv1)), (Permutation (insert y gv1) (l ++ l)), (Permutation (insert y gv1) (l ++ gv1)), (Permutation (insert y gv1) (gv1 ++ l)), (Permutation (insert y gv1) (gv1 ++ gv1)), (Permutation (insert y gv1) []), (Permutation (insert x l) l), (Permutation (insert x l) gv1), (Permutation (insert x l) (y :: l)), (Permutation (insert x l) (y :: gv1))
+(Permutation (insert x l) (x :: l)), (Permutation (insert x l) (x :: gv1)), (Permutation (insert x l) (sort l)), (Permutation (insert x l) (sort gv1)), (Permutation (insert x l) (insert y l)), (Permutation (insert x l) (insert y gv1)), (Permutation (insert x l) (insert x gv1)), (Permutation (insert x l) (l ++ l)), (Permutation (insert x l) (l ++ gv1)), (Permutation (insert x l) (gv1 ++ l))
+(Permutation (insert x l) (gv1 ++ gv1)), (Permutation (insert x l) []), (Permutation (insert x gv1) l), (Permutation (insert x gv1) gv1), (Permutation (insert x gv1) (y :: l)), (Permutation (insert x gv1) (y :: gv1)), (Permutation (insert x gv1) (x :: l)), (Permutation (insert x gv1) (x :: gv1)), (Permutation (insert x gv1) (sort l)), (Permutation (insert x gv1) (sort gv1))
+(Permutation (insert x gv1) (insert y l)), (Permutation (insert x gv1) (insert y gv1)), (Permutation (insert x gv1) (insert x l)), (Permutation (insert x gv1) (l ++ l)), (Permutation (insert x gv1) (l ++ gv1)), (Permutation (insert x gv1) (gv1 ++ l)), (Permutation (insert x gv1) (gv1 ++ gv1)), (Permutation (insert x gv1) []), (Permutation (l ++ l) l), (Permutation (l ++ l) gv1)
+(Permutation (l ++ l) (y :: l)), (Permutation (l ++ l) (y :: gv1)), (Permutation (l ++ l) (x :: l)), (Permutation (l ++ l) (x :: gv1)), (Permutation (l ++ l) (sort l)), (Permutation (l ++ l) (sort gv1)), (Permutation (l ++ l) (insert y l)), (Permutation (l ++ l) (insert y gv1)), (Permutation (l ++ l) (insert x l)), (Permutation (l ++ l) (insert x gv1))
+(Permutation (l ++ l) (l ++ gv1)), (Permutation (l ++ l) (gv1 ++ l)), (Permutation (l ++ l) (gv1 ++ gv1)), (Permutation (l ++ l) []), (Permutation (l ++ gv1) l), (Permutation (l ++ gv1) gv1), (Permutation (l ++ gv1) (y :: l)), (Permutation (l ++ gv1) (y :: gv1)), (Permutation (l ++ gv1) (x :: l)), (Permutation (l ++ gv1) (x :: gv1))
+(Permutation (l ++ gv1) (sort l)), (Permutation (l ++ gv1) (sort gv1)), (Permutation (l ++ gv1) (insert y l)), (Permutation (l ++ gv1) (insert y gv1)), (Permutation (l ++ gv1) (insert x l)), (Permutation (l ++ gv1) (insert x gv1)), (Permutation (l ++ gv1) (l ++ l)), (Permutation (l ++ gv1) (gv1 ++ l)), (Permutation (l ++ gv1) (gv1 ++ gv1)), (Permutation (l ++ gv1) [])
+(Permutation (gv1 ++ l) l), (Permutation (gv1 ++ l) gv1), (Permutation (gv1 ++ l) (y :: l)), (Permutation (gv1 ++ l) (y :: gv1)), (Permutation (gv1 ++ l) (x :: l)), (Permutation (gv1 ++ l) (x :: gv1)), (Permutation (gv1 ++ l) (sort l)), (Permutation (gv1 ++ l) (sort gv1)), (Permutation (gv1 ++ l) (insert y l)), (Permutation (gv1 ++ l) (insert y gv1))
+(Permutation (gv1 ++ l) (insert x l)), (Permutation (gv1 ++ l) (insert x gv1)), (Permutation (gv1 ++ l) (l ++ l)), (Permutation (gv1 ++ l) (l ++ gv1)), (Permutation (gv1 ++ l) (gv1 ++ gv1)), (Permutation (gv1 ++ l) []), (Permutation (gv1 ++ gv1) l), (Permutation (gv1 ++ gv1) gv1), (Permutation (gv1 ++ gv1) (y :: l)), (Permutation (gv1 ++ gv1) (y :: gv1))
+(Permutation (gv1 ++ gv1) (x :: l)), (Permutation (gv1 ++ gv1) (x :: gv1)), (Permutation (gv1 ++ gv1) (sort l)), (Permutation (gv1 ++ gv1) (sort gv1)), (Permutation (gv1 ++ gv1) (insert y l)), (Permutation (gv1 ++ gv1) (insert y gv1)), (Permutation (gv1 ++ gv1) (insert x l)), (Permutation (gv1 ++ gv1) (insert x gv1)), (Permutation (gv1 ++ gv1) (l ++ l)), (Permutation (gv1 ++ gv1) (l ++ gv1))
+(Permutation (gv1 ++ gv1) (gv1 ++ l)), (Permutation (gv1 ++ gv1) []), (Permutation [] l), (Permutation [] gv1), (Permutation [] (y :: l)), (Permutation [] (y :: gv1)), (Permutation [] (x :: l)), (Permutation [] (x :: gv1)), (Permutation [] (sort l)), (Permutation [] (sort gv1))
+(Permutation [] (insert y l)), (Permutation [] (insert y gv1)), (Permutation [] (insert x l)), (Permutation [] (insert x gv1)), (Permutation [] (l ++ l)), (Permutation [] (l ++ gv1)), (Permutation [] (gv1 ++ l)), (Permutation [] (gv1 ++ gv1)), (In y (y :: l)), (In y (y :: gv1))
+(In y (x :: l)), (In y (x :: gv1)), (In y (sort l)), (In y (sort gv1)), (In y (insert y l)), (In y (insert y gv1)), (In y (insert x l)), (In y (insert x gv1)), (In y (l ++ l)), (In y (l ++ gv1))
+(In y (gv1 ++ l)), (In y (gv1 ++ gv1)), (In x (y :: l)), (In x (y :: gv1)), (In x (x :: l)), (In x (x :: gv1)), (In x (sort l)), (In x (sort gv1)), (In x (insert y l)), (In x (insert y gv1))
+(In x (insert x l)), (In x (insert x gv1)), (In x (l ++ l)), (In x (l ++ gv1)), (In x (gv1 ++ l)), (In x (gv1 ++ gv1)), (In (length l) l), (In (length l) gv1), (In (length l) (y :: l)), (In (length l) (y :: gv1))
+(In (length l) (x :: l)), (In (length l) (x :: gv1)), (In (length l) (sort l)), (In (length l) (sort gv1)), (In (length l) (insert y l)), (In (length l) (insert y gv1)), (In (length l) (insert x l)), (In (length l) (insert x gv1)), (In (length l) (l ++ l)), (In (length l) (l ++ gv1))
+(In (length l) (gv1 ++ l)), (In (length l) (gv1 ++ gv1)), (In (length gv1) l), (In (length gv1) gv1), (In (length gv1) (y :: l)), (In (length gv1) (y :: gv1)), (In (length gv1) (x :: l)), (In (length gv1) (x :: gv1)), (In (length gv1) (sort l)), (In (length gv1) (sort gv1))
+(In (length gv1) (insert y l)), (In (length gv1) (insert y gv1)), (In (length gv1) (insert x l)), (In (length gv1) (insert x gv1)), (In (length gv1) (l ++ l)), (In (length gv1) (l ++ gv1)), (In (length gv1) (gv1 ++ l)), (In (length gv1) (gv1 ++ gv1)), (y < length l), (y < length gv1)
+(x < length l), (x < length gv1), (length l < y), (length l < x), (length l < length gv1), (length gv1 < y), (length gv1 < x), (length gv1 < length l), (y <= length l), (y <= length gv1)
+(x <= length l), (x <= length gv1), (length l <= y), (length l <= x), (length l <= length gv1), (length gv1 <= y), (length gv1 <= x), (length gv1 <= length l), (~ sortedd l), (~ sortedd gv1)
+(~ sorted l), (~ sorted gv1), (~ Permutation l l), (~ Permutation l gv1), (~ Permutation gv1 l), (~ Permutation gv1 gv1), (~ In y l), (~ In y gv1), (~ In x l), (~ In x gv1)
+(~ y < y), (~ y < x), (~ x < y), (~ x < x), (~ y <= y), (~ y <= x), (~ x <= y), (~ x <= x), (l <> l), (l <> gv1)
+(gv1 <> l), (gv1 <> gv1), (y <> y), (y <> x), (x <> y), (x <> x), (None = Some l), (None = Some gv1), (y :: l = l), (y :: l = gv1)
+(y :: l = sort l), (y :: l = sort gv1), (y :: l = insert y l), (y :: l = insert y gv1), (y :: l = insert x l), (y :: l = insert x gv1), (y :: l = l ++ l), (y :: l = l ++ gv1), (y :: l = gv1 ++ l), (y :: l = gv1 ++ gv1)
+(y :: l = []), (y :: gv1 = l), (y :: gv1 = gv1), (y :: gv1 = sort l), (y :: gv1 = sort gv1), (y :: gv1 = insert y l), (y :: gv1 = insert y gv1), (y :: gv1 = insert x l), (y :: gv1 = insert x gv1), (y :: gv1 = l ++ l)
+(y :: gv1 = l ++ gv1), (y :: gv1 = gv1 ++ l), (y :: gv1 = gv1 ++ gv1), (y :: gv1 = []), (x :: l = l), (x :: l = gv1), (x :: l = sort l), (x :: l = sort gv1), (x :: l = insert y l), (x :: l = insert y gv1)
+(x :: l = insert x l), (x :: l = insert x gv1), (x :: l = l ++ l), (x :: l = l ++ gv1), (x :: l = gv1 ++ l), (x :: l = gv1 ++ gv1), (x :: l = []), (x :: gv1 = l), (x :: gv1 = gv1), (x :: gv1 = sort l)
+(x :: gv1 = sort gv1), (x :: gv1 = insert y l), (x :: gv1 = insert y gv1), (x :: gv1 = insert x l), (x :: gv1 = insert x gv1), (x :: gv1 = l ++ l), (x :: gv1 = l ++ gv1), (x :: gv1 = gv1 ++ l), (x :: gv1 = gv1 ++ gv1), (x :: gv1 = [])
+(sort l = l), (sort l = gv1), (sort l = insert y l), (sort l = insert y gv1), (sort l = insert x l), (sort l = insert x gv1), (sort l = l ++ l), (sort l = l ++ gv1), (sort l = gv1 ++ l), (sort l = gv1 ++ gv1)
+(sort gv1 = l), (sort gv1 = gv1), (sort gv1 = insert y l), (sort gv1 = insert y gv1), (sort gv1 = insert x l), (sort gv1 = insert x gv1), (sort gv1 = l ++ l), (sort gv1 = l ++ gv1), (sort gv1 = gv1 ++ l), (sort gv1 = gv1 ++ gv1)
+(insert y l = l), (insert y l = gv1), (insert y l = l ++ l), (insert y l = l ++ gv1), (insert y l = gv1 ++ l), (insert y l = gv1 ++ gv1), (insert y gv1 = l), (insert y gv1 = gv1), (insert y gv1 = l ++ l), (insert y gv1 = l ++ gv1)
+(insert y gv1 = gv1 ++ l), (insert y gv1 = gv1 ++ gv1), (insert x l = l), (insert x l = gv1), (insert x l = l ++ l), (insert x l = l ++ gv1), (insert x l = gv1 ++ l), (insert x l = gv1 ++ gv1), (insert x gv1 = l), (insert x gv1 = gv1)
+(insert x gv1 = l ++ l), (insert x gv1 = l ++ gv1), (insert x gv1 = gv1 ++ l), (insert x gv1 = gv1 ++ gv1), (l ++ l = l), (l ++ l = gv1), (l ++ gv1 = l), (l ++ gv1 = gv1), (gv1 ++ l = l), (gv1 ++ l = gv1)
+(gv1 ++ gv1 = l), (gv1 ++ gv1 = gv1), ([] = l), ([] = gv1), ([] = sort l), ([] = sort gv1), ([] = insert y l), ([] = insert y gv1), ([] = insert x l), ([] = insert x gv1)
+([] = l ++ l), ([] = l ++ gv1), ([] = gv1 ++ l), ([] = gv1 ++ gv1), (None = Some y), (None = Some x), (length l = y), (length l = x), (length gv1 = y), (length gv1 = x)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 47.952 seconds
+
+
+Label: 0 (0)
+(sorted (y :: l)), (sortedd (y :: l))
+
+Label: 1 (1)
+(x <= y), (~ y < x)
+
+Label: 2 (2)
+(sorted gv0), (sortedd gv0), (sorted (insert y gv0)), (sorted (insert x gv0)), (sortedd (insert y gv0)), (sortedd (insert x gv0)), (sorted (x :: gv0)), (sortedd (x :: gv0)), (sort gv0 = gv0)
+
+Label: 3 (3)
+(sorted (y :: gv1)), (sorted (x :: gv1)), (sortedd (y :: gv1)), (sortedd (x :: gv1)), (y :: l = gv1), (y :: l = sort gv1), (y :: gv1 = insert y gv1), (x :: gv1 = insert x gv1)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (sortedd (y :: l) -> x <= y -> sortedd (x :: y :: l))
+
+2. (sortedd (y :: l) -> sorted (y :: l))
+(x <= y -> sorted (y :: l) -> sortedd (x :: y :: l))
+
+3. (x <= y -> ~ y < x)
+(~ y < x -> sortedd (y :: l) -> sortedd (x :: y :: l))
+
+4. (sorted gv0 -> sortedd gv0)
+
+5. (sorted (insert y gv0) -> sortedd gv0)
+
+6. (sorted (insert x gv0) -> sortedd gv0)
+
+7. (sortedd (insert y gv0) -> sortedd gv0)
+
+8. (sortedd (insert x gv0) -> sortedd gv0)
+
+9. (sorted (x :: gv0) -> sortedd gv0)
+
+10. (sortedd (x :: gv0) -> sortedd gv0)
+
+11. (sort gv0 = gv0 -> sortedd gv0)
+
+12. (sortedd gv1 -> x <= y -> sorted (y :: gv1) -> sortedd (x :: gv1))
+
+13. (sortedd gv1 -> x <= y -> sorted (x :: gv1) -> sortedd (x :: gv1))
+
+14. (sortedd gv1 -> sortedd (y :: gv1) -> x <= y -> sortedd (x :: gv1))
+
+15. (sortedd gv1 -> y :: l = sort gv1 -> x <= y -> sortedd (x :: gv1))
+
+16. (sortedd gv1 -> y :: gv1 = insert y gv1 -> x <= y -> sortedd (x :: gv1))
+
+17. (sortedd gv1 -> x :: gv1 = insert x gv1 -> x <= y -> sortedd (x :: gv1))
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 79.279 seconds
+
+Number of Result Pairs Returned: 17
+
+1. (sortedd (y :: l) -> x <= y -> sortedd (x :: y :: l))
+
+2. (sortedd (y :: l) -> sorted (y :: l))
+(x <= y -> sorted (y :: l) -> sortedd (x :: y :: l))
+
+3. (x <= y -> ~ y < x)
+(~ y < x -> sortedd (y :: l) -> sortedd (x :: y :: l))
+
+4. (sorted gv0 -> sortedd gv0)
+
+5. (sorted (insert y gv0) -> sortedd gv0)

@@ -1,0 +1,459 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (count n l = count n (sort l))
+
+----------------------------------
+Goal: ((if a =? n then 1 else 0) + count n l = count n (insert a (sort l)))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3.43 seconds
+
+gv5 : (list nat) = (sort l)
+gv4 : (list nat) = (insert a (sort l))
+gv0 : nat = ((if a =? n then 1 else 0) + count n l)
+gv3 : nat = (count n (insert a (sort l)))
+gv2 : nat = (count n l)
+gv1 : nat = (if a =? n then 1 else 0)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 103.524 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: ((if a =? n then 1 else 0) + count n l = count n (insert a (sort l)))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- ((if a =? n then 1 else 0) = gv1)
+
+----------------------------------
+Goal: (gv1 + count n l = count n (insert a (sort l)))
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (count n (insert a (sort l)) = gv3)
+
+----------------------------------
+Goal: ((if a =? n then 1 else 0) + count n l = gv3)
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (gv2 = count n (sort l))
+
+----------------------------------
+Goal: ((if a =? n then 1 else 0) + gv2 = count n (insert a (sort l)))
+Case: Valid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- ((if a =? n then 1 else 0) = gv1)
+ -- (count n l = gv2)
+
+----------------------------------
+Goal: (gv1 + gv2 = count n (insert a (sort l)))
+Case: Invalid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (count n (insert a (sort l)) = gv3)
+ -- (count n l = gv2)
+
+----------------------------------
+Goal: ((if a =? n then 1 else 0) + gv2 = gv3)
+Case: Invalid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- ((if a =? n then 1 else 0) + gv2 = gv0)
+
+----------------------------------
+Goal: (gv0 = count n (insert a (sort l)))
+Case: Not Stable
+
+Label: Generalization #7
+Assumptions: 
+ -- (insert a (sort l) = gv4)
+ -- (count n l = gv2)
+
+----------------------------------
+Goal: ((if a =? n then 1 else 0) + gv2 = count n gv4)
+Case: Invalid and Generalized
+
+Label: Generalization #8
+Assumptions: 
+ -- (gv2 = count n gv5)
+
+----------------------------------
+Goal: ((if a =? n then 1 else 0) + gv2 = count n (insert a gv5))
+Case: Valid and Generalized
+
+Label: Generalization #13
+Assumptions: 
+ -- ((if a =? n then 1 else 0) + count n l = gv0)
+
+----------------------------------
+Goal: (gv0 = count n (insert a (sort l)))
+Case: Invalid and Generalized
+
+Label: Generalization #14
+Assumptions: 
+ -- (insert a (sort l) = gv4)
+
+----------------------------------
+Goal: ((if a =? n then 1 else 0) + count n l = count n gv4)
+Case: Invalid and Generalized
+
+Label: Generalization #15
+Assumptions: 
+ -- (count n l = count n gv5)
+
+----------------------------------
+Goal: ((if a =? n then 1 else 0) + count n l = count n (insert a gv5))
+Case: Valid and Generalized
+
+Label: Generalization #16
+Assumptions: 
+ -- ((if a =? n then 1 else 0) = gv1)
+ -- (sort l = gv5)
+
+----------------------------------
+Goal: (gv1 + count n l = count n (insert a gv5))
+Case: Invalid and Generalized
+
+Label: Generalization #17
+Assumptions: 
+ -- (count n (insert a gv5) = gv3)
+
+----------------------------------
+Goal: ((if a =? n then 1 else 0) + count n l = gv3)
+Case: Not Stable
+
+Label: Generalization #18
+Assumptions: 
+ -- (sort l = gv5)
+ -- ((if a =? n then 1 else 0) + count n l = gv0)
+
+----------------------------------
+Goal: (gv0 = count n (insert a gv5))
+Case: Invalid and Generalized
+
+Label: Generalization #19
+Assumptions: 
+ -- (insert a gv5 = gv4)
+
+----------------------------------
+Goal: ((if a =? n then 1 else 0) + count n l = count n gv4)
+Case: Not Stable
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 103.679 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+insert : (nat -> list nat -> list nat)
+sort : (list nat -> list nat)
+bag : Set
+count : (nat -> bag -> nat)
+bag_eqv : (bag -> bag -> Prop)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 6 (6)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 7 (7)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 8 (8)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 103.849 seconds
+
+
+Label: 0 (0)
+(a < a), (a < n), (a < gv1), (n < a), (n < n), (n < gv1), (gv1 < a), (gv1 < n), (gv1 < gv1), (a <= a)
+(a <= n), (a <= gv1), (n <= a), (n <= n), (n <= gv1), (gv1 <= a), (gv1 <= n), (gv1 <= gv1), (l = l), (a = a)
+(a = n), (a = gv1), (n = a), (n = n), (n = gv1), (gv1 = a), (gv1 = n), (gv1 = gv1), (a < length l), (n < length l)
+(gv1 < length l), (length l < a), (length l < n), (length l < gv1), (a <= length l), (n <= length l), (gv1 <= length l), (length l <= a), (length l <= n), (length l <= gv1)
+(~ a < a), (~ a < n), (~ a < gv1), (~ n < a), (~ n < n), (~ n < gv1), (~ gv1 < a), (~ gv1 < n), (~ gv1 < gv1), (~ a <= a)
+(~ a <= n), (~ a <= gv1), (~ n <= a), (~ n <= n), (~ n <= gv1), (~ gv1 <= a), (~ gv1 <= n), (~ gv1 <= gv1), (l <> l), (a <> a)
+(a <> n), (a <> gv1), (n <> a), (n <> n), (n <> gv1), (gv1 <> a), (gv1 <> n), (gv1 <> gv1), (None = Some l), (a :: l = l)
+(a :: l = sort l), (a :: l = insert a l), (a :: l = insert n l), (a :: l = insert gv1 l), (a :: l = l ++ l), (a :: l = []), (n :: l = l), (n :: l = sort l), (n :: l = insert a l), (n :: l = insert n l)
+(n :: l = insert gv1 l), (n :: l = l ++ l), (n :: l = []), (gv1 :: l = l), (gv1 :: l = sort l), (gv1 :: l = insert a l), (gv1 :: l = insert n l), (gv1 :: l = insert gv1 l), (gv1 :: l = l ++ l), (gv1 :: l = [])
+(sort l = l), (sort l = insert a l), (sort l = insert n l), (sort l = insert gv1 l), (sort l = l ++ l), (insert a l = l), (insert a l = l ++ l), (insert n l = l), (insert n l = l ++ l), (insert gv1 l = l)
+(insert gv1 l = l ++ l), (l ++ l = l), ([] = l), ([] = sort l), ([] = insert a l), ([] = insert n l), ([] = insert gv1 l), ([] = l ++ l), (None = Some a), (None = Some n)
+(None = Some gv1), (length l = a), (length l = n), (length l = gv1)
+
+Label: 1 (1)
+(gv3 < gv3), (gv3 < n), (gv3 < a), (n < gv3), (n < n), (n < a), (a < gv3), (a < n), (a < a), (gv3 <= gv3)
+(gv3 <= n), (gv3 <= a), (n <= gv3), (n <= n), (n <= a), (a <= gv3), (a <= n), (a <= a), (l = l), (gv3 = gv3)
+(gv3 = n), (gv3 = a), (n = gv3), (n = n), (n = a), (a = gv3), (a = n), (a = a), (gv3 < length l), (n < length l)
+(a < length l), (length l < gv3), (length l < n), (length l < a), (gv3 <= length l), (n <= length l), (a <= length l), (length l <= gv3), (length l <= n), (length l <= a)
+(~ gv3 < gv3), (~ gv3 < n), (~ gv3 < a), (~ n < gv3), (~ n < n), (~ n < a), (~ a < gv3), (~ a < n), (~ a < a), (~ gv3 <= gv3)
+(~ gv3 <= n), (~ gv3 <= a), (~ n <= gv3), (~ n <= n), (~ n <= a), (~ a <= gv3), (~ a <= n), (~ a <= a), (l <> l), (gv3 <> gv3)
+(gv3 <> n), (gv3 <> a), (n <> gv3), (n <> n), (n <> a), (a <> gv3), (a <> n), (a <> a), (None = Some l), (gv3 :: l = l)
+(gv3 :: l = sort l), (gv3 :: l = insert gv3 l), (gv3 :: l = insert n l), (gv3 :: l = insert a l), (gv3 :: l = l ++ l), (gv3 :: l = []), (n :: l = l), (n :: l = sort l), (n :: l = insert gv3 l), (n :: l = insert n l)
+(n :: l = insert a l), (n :: l = l ++ l), (n :: l = []), (a :: l = l), (a :: l = sort l), (a :: l = insert gv3 l), (a :: l = insert n l), (a :: l = insert a l), (a :: l = l ++ l), (a :: l = [])
+(sort l = l), (sort l = insert gv3 l), (sort l = insert n l), (sort l = insert a l), (sort l = l ++ l), (insert gv3 l = l), (insert gv3 l = l ++ l), (insert n l = l), (insert n l = l ++ l), (insert a l = l)
+(insert a l = l ++ l), (l ++ l = l), ([] = l), ([] = sort l), ([] = insert gv3 l), ([] = insert n l), ([] = insert a l), ([] = l ++ l), (None = Some gv3), (None = Some n)
+(None = Some a), (length l = gv3), (length l = n), (length l = a)
+
+Label: 2 (2)
+(a < a), (a < n), (a < gv2), (a < gv1), (n < a), (n < n), (n < gv2), (n < gv1), (gv2 < a), (gv2 < n)
+(gv2 < gv2), (gv2 < gv1), (gv1 < a), (gv1 < n), (gv1 < gv2), (gv1 < gv1), (a <= a), (a <= n), (a <= gv2), (a <= gv1)
+(n <= a), (n <= n), (n <= gv2), (n <= gv1), (gv2 <= a), (gv2 <= n), (gv2 <= gv2), (gv2 <= gv1), (gv1 <= a), (gv1 <= n)
+(gv1 <= gv2), (gv1 <= gv1), (l = l), (a = a), (a = n), (a = gv2), (a = gv1), (n = a), (n = n), (n = gv2)
+(n = gv1), (gv2 = a), (gv2 = n), (gv2 = gv2), (gv2 = gv1), (gv1 = a), (gv1 = n), (gv1 = gv2), (gv1 = gv1), (a < length l)
+(n < length l), (gv2 < length l), (gv1 < length l), (length l < a), (length l < n), (length l < gv2), (length l < gv1), (a <= length l), (n <= length l), (gv2 <= length l)
+(gv1 <= length l), (length l <= a), (length l <= n), (length l <= gv2), (length l <= gv1), (~ a < a), (~ a < n), (~ a < gv2), (~ a < gv1), (~ n < a)
+(~ n < n), (~ n < gv2), (~ n < gv1), (~ gv2 < a), (~ gv2 < n), (~ gv2 < gv2), (~ gv2 < gv1), (~ gv1 < a), (~ gv1 < n), (~ gv1 < gv2)
+(~ gv1 < gv1), (~ a <= a), (~ a <= n), (~ a <= gv2), (~ a <= gv1), (~ n <= a), (~ n <= n), (~ n <= gv2), (~ n <= gv1), (~ gv2 <= a)
+(~ gv2 <= n), (~ gv2 <= gv2), (~ gv2 <= gv1), (~ gv1 <= a), (~ gv1 <= n), (~ gv1 <= gv2), (~ gv1 <= gv1), (l <> l), (a <> a), (a <> n)
+(a <> gv2), (a <> gv1), (n <> a), (n <> n), (n <> gv2), (n <> gv1), (gv2 <> a), (gv2 <> n), (gv2 <> gv2), (gv2 <> gv1)
+(gv1 <> a), (gv1 <> n), (gv1 <> gv2), (gv1 <> gv1), (None = Some l), (a :: l = l), (a :: l = sort l), (a :: l = insert a l), (a :: l = insert n l), (a :: l = insert gv2 l)
+(a :: l = insert gv1 l), (a :: l = l ++ l), (a :: l = []), (n :: l = l), (n :: l = sort l), (n :: l = insert a l), (n :: l = insert n l), (n :: l = insert gv2 l), (n :: l = insert gv1 l), (n :: l = l ++ l)
+(n :: l = []), (gv2 :: l = l), (gv2 :: l = sort l), (gv2 :: l = insert a l), (gv2 :: l = insert n l), (gv2 :: l = insert gv2 l), (gv2 :: l = insert gv1 l), (gv2 :: l = l ++ l), (gv2 :: l = []), (gv1 :: l = l)
+(gv1 :: l = sort l), (gv1 :: l = insert a l), (gv1 :: l = insert n l), (gv1 :: l = insert gv2 l), (gv1 :: l = insert gv1 l), (gv1 :: l = l ++ l), (gv1 :: l = []), (sort l = l), (sort l = insert a l), (sort l = insert n l)
+(sort l = insert gv2 l), (sort l = insert gv1 l), (sort l = l ++ l), (insert a l = l), (insert a l = l ++ l), (insert n l = l), (insert n l = l ++ l), (insert gv2 l = l), (insert gv2 l = l ++ l), (insert gv1 l = l)
+(insert gv1 l = l ++ l), (l ++ l = l), ([] = l), ([] = sort l), ([] = insert a l), ([] = insert n l), ([] = insert gv2 l), ([] = insert gv1 l), ([] = l ++ l), (None = Some a)
+(None = Some n), (None = Some gv2), (None = Some gv1), (length l = a), (length l = n), (length l = gv2), (length l = gv1)
+
+Label: 3 (3)
+(gv3 < gv3), (gv3 < gv2), (gv3 < n), (gv3 < a), (gv2 < gv3), (gv2 < gv2), (gv2 < n), (gv2 < a), (n < gv3), (n < gv2)
+(n < n), (n < a), (a < gv3), (a < gv2), (a < n), (a < a), (gv3 <= gv3), (gv3 <= gv2), (gv3 <= n), (gv3 <= a)
+(gv2 <= gv3), (gv2 <= gv2), (gv2 <= n), (gv2 <= a), (n <= gv3), (n <= gv2), (n <= n), (n <= a), (a <= gv3), (a <= gv2)
+(a <= n), (a <= a), (l = l), (gv3 = gv3), (gv3 = gv2), (gv3 = n), (gv3 = a), (gv2 = gv3), (gv2 = gv2), (gv2 = n)
+(gv2 = a), (n = gv3), (n = gv2), (n = n), (n = a), (a = gv3), (a = gv2), (a = n), (a = a), (gv3 < length l)
+(gv2 < length l), (n < length l), (a < length l), (length l < gv3), (length l < gv2), (length l < n), (length l < a), (gv3 <= length l), (gv2 <= length l), (n <= length l)
+(a <= length l), (length l <= gv3), (length l <= gv2), (length l <= n), (length l <= a), (~ gv3 < gv3), (~ gv3 < gv2), (~ gv3 < n), (~ gv3 < a), (~ gv2 < gv3)
+(~ gv2 < gv2), (~ gv2 < n), (~ gv2 < a), (~ n < gv3), (~ n < gv2), (~ n < n), (~ n < a), (~ a < gv3), (~ a < gv2), (~ a < n)
+(~ a < a), (~ gv3 <= gv3), (~ gv3 <= gv2), (~ gv3 <= n), (~ gv3 <= a), (~ gv2 <= gv3), (~ gv2 <= gv2), (~ gv2 <= n), (~ gv2 <= a), (~ n <= gv3)
+(~ n <= gv2), (~ n <= n), (~ n <= a), (~ a <= gv3), (~ a <= gv2), (~ a <= n), (~ a <= a), (l <> l), (gv3 <> gv3), (gv3 <> gv2)
+(gv3 <> n), (gv3 <> a), (gv2 <> gv3), (gv2 <> gv2), (gv2 <> n), (gv2 <> a), (n <> gv3), (n <> gv2), (n <> n), (n <> a)
+(a <> gv3), (a <> gv2), (a <> n), (a <> a), (None = Some l), (gv3 :: l = l), (gv3 :: l = sort l), (gv3 :: l = insert gv3 l), (gv3 :: l = insert gv2 l), (gv3 :: l = insert n l)
+(gv3 :: l = insert a l), (gv3 :: l = l ++ l), (gv3 :: l = []), (gv2 :: l = l), (gv2 :: l = sort l), (gv2 :: l = insert gv3 l), (gv2 :: l = insert gv2 l), (gv2 :: l = insert n l), (gv2 :: l = insert a l), (gv2 :: l = l ++ l)
+(gv2 :: l = []), (n :: l = l), (n :: l = sort l), (n :: l = insert gv3 l), (n :: l = insert gv2 l), (n :: l = insert n l), (n :: l = insert a l), (n :: l = l ++ l), (n :: l = []), (a :: l = l)
+(a :: l = sort l), (a :: l = insert gv3 l), (a :: l = insert gv2 l), (a :: l = insert n l), (a :: l = insert a l), (a :: l = l ++ l), (a :: l = []), (sort l = l), (sort l = insert gv3 l), (sort l = insert gv2 l)
+(sort l = insert n l), (sort l = insert a l), (sort l = l ++ l), (insert gv3 l = l), (insert gv3 l = l ++ l), (insert gv2 l = l), (insert gv2 l = l ++ l), (insert n l = l), (insert n l = l ++ l), (insert a l = l)
+(insert a l = l ++ l), (l ++ l = l), ([] = l), ([] = sort l), ([] = insert gv3 l), ([] = insert gv2 l), ([] = insert n l), ([] = insert a l), ([] = l ++ l), (None = Some gv3)
+(None = Some gv2), (None = Some n), (None = Some a), (length l = gv3), (length l = gv2), (length l = n), (length l = a)
+
+Label: 4 (4)
+(gv2 < gv2), (gv2 < n), (gv2 < a), (n < gv2), (n < n), (n < a), (a < gv2), (a < n), (a < a), (gv2 <= gv2)
+(gv2 <= n), (gv2 <= a), (n <= gv2), (n <= n), (n <= a), (a <= gv2), (a <= n), (a <= a), (l = l), (l = gv4)
+(gv4 = l), (gv4 = gv4), (gv2 = gv2), (gv2 = n), (gv2 = a), (n = gv2), (n = n), (n = a), (a = gv2), (a = n)
+(a = a), (gv2 < length l), (gv2 < length gv4), (n < length l), (n < length gv4), (a < length l), (a < length gv4), (length l < gv2), (length l < n), (length l < a)
+(length l < length gv4), (length gv4 < gv2), (length gv4 < n), (length gv4 < a), (length gv4 < length l), (gv2 <= length l), (gv2 <= length gv4), (n <= length l), (n <= length gv4), (a <= length l)
+(a <= length gv4), (length l <= gv2), (length l <= n), (length l <= a), (length l <= length gv4), (length gv4 <= gv2), (length gv4 <= n), (length gv4 <= a), (length gv4 <= length l), (~ gv2 < gv2)
+(~ gv2 < n), (~ gv2 < a), (~ n < gv2), (~ n < n), (~ n < a), (~ a < gv2), (~ a < n), (~ a < a), (~ gv2 <= gv2), (~ gv2 <= n)
+(~ gv2 <= a), (~ n <= gv2), (~ n <= n), (~ n <= a), (~ a <= gv2), (~ a <= n), (~ a <= a), (l <> l), (l <> gv4), (gv4 <> l)
+(gv4 <> gv4), (gv2 <> gv2), (gv2 <> n), (gv2 <> a), (n <> gv2), (n <> n), (n <> a), (a <> gv2), (a <> n), (a <> a)
+(None = Some l), (None = Some gv4), (gv2 :: l = l), (gv2 :: l = gv4), (gv2 :: l = sort l), (gv2 :: l = sort gv4), (gv2 :: l = insert gv2 l), (gv2 :: l = insert gv2 gv4), (gv2 :: l = insert n l), (gv2 :: l = insert n gv4)
+(gv2 :: l = insert a l), (gv2 :: l = insert a gv4), (gv2 :: l = l ++ l), (gv2 :: l = l ++ gv4), (gv2 :: l = gv4 ++ l), (gv2 :: l = gv4 ++ gv4), (gv2 :: l = []), (gv2 :: gv4 = l), (gv2 :: gv4 = gv4), (gv2 :: gv4 = sort l)
+(gv2 :: gv4 = sort gv4), (gv2 :: gv4 = insert gv2 l), (gv2 :: gv4 = insert gv2 gv4), (gv2 :: gv4 = insert n l), (gv2 :: gv4 = insert n gv4), (gv2 :: gv4 = insert a l), (gv2 :: gv4 = insert a gv4), (gv2 :: gv4 = l ++ l), (gv2 :: gv4 = l ++ gv4), (gv2 :: gv4 = gv4 ++ l)
+(gv2 :: gv4 = gv4 ++ gv4), (gv2 :: gv4 = []), (n :: l = l), (n :: l = gv4), (n :: l = sort l), (n :: l = sort gv4), (n :: l = insert gv2 l), (n :: l = insert gv2 gv4), (n :: l = insert n l), (n :: l = insert n gv4)
+(n :: l = insert a l), (n :: l = insert a gv4), (n :: l = l ++ l), (n :: l = l ++ gv4), (n :: l = gv4 ++ l), (n :: l = gv4 ++ gv4), (n :: l = []), (n :: gv4 = l), (n :: gv4 = gv4), (n :: gv4 = sort l)
+(n :: gv4 = sort gv4), (n :: gv4 = insert gv2 l), (n :: gv4 = insert gv2 gv4), (n :: gv4 = insert n l), (n :: gv4 = insert n gv4), (n :: gv4 = insert a l), (n :: gv4 = insert a gv4), (n :: gv4 = l ++ l), (n :: gv4 = l ++ gv4), (n :: gv4 = gv4 ++ l)
+(n :: gv4 = gv4 ++ gv4), (n :: gv4 = []), (a :: l = l), (a :: l = gv4), (a :: l = sort l), (a :: l = sort gv4), (a :: l = insert gv2 l), (a :: l = insert gv2 gv4), (a :: l = insert n l), (a :: l = insert n gv4)
+(a :: l = insert a l), (a :: l = insert a gv4), (a :: l = l ++ l), (a :: l = l ++ gv4), (a :: l = gv4 ++ l), (a :: l = gv4 ++ gv4), (a :: l = []), (a :: gv4 = l), (a :: gv4 = gv4), (a :: gv4 = sort l)
+(a :: gv4 = sort gv4), (a :: gv4 = insert gv2 l), (a :: gv4 = insert gv2 gv4), (a :: gv4 = insert n l), (a :: gv4 = insert n gv4), (a :: gv4 = insert a l), (a :: gv4 = insert a gv4), (a :: gv4 = l ++ l), (a :: gv4 = l ++ gv4), (a :: gv4 = gv4 ++ l)
+(a :: gv4 = gv4 ++ gv4), (a :: gv4 = []), (sort l = l), (sort l = gv4), (sort l = insert gv2 l), (sort l = insert gv2 gv4), (sort l = insert n l), (sort l = insert n gv4), (sort l = insert a l), (sort l = insert a gv4)
+(sort l = l ++ l), (sort l = l ++ gv4), (sort l = gv4 ++ l), (sort l = gv4 ++ gv4), (sort gv4 = l), (sort gv4 = gv4), (sort gv4 = insert gv2 l), (sort gv4 = insert gv2 gv4), (sort gv4 = insert n l), (sort gv4 = insert n gv4)
+(sort gv4 = insert a l), (sort gv4 = insert a gv4), (sort gv4 = l ++ l), (sort gv4 = l ++ gv4), (sort gv4 = gv4 ++ l), (sort gv4 = gv4 ++ gv4), (insert gv2 l = l), (insert gv2 l = gv4), (insert gv2 l = l ++ l), (insert gv2 l = l ++ gv4)
+(insert gv2 l = gv4 ++ l), (insert gv2 l = gv4 ++ gv4), (insert gv2 gv4 = l), (insert gv2 gv4 = gv4), (insert gv2 gv4 = l ++ l), (insert gv2 gv4 = l ++ gv4), (insert gv2 gv4 = gv4 ++ l), (insert gv2 gv4 = gv4 ++ gv4), (insert n l = l), (insert n l = gv4)
+(insert n l = l ++ l), (insert n l = l ++ gv4), (insert n l = gv4 ++ l), (insert n l = gv4 ++ gv4), (insert n gv4 = l), (insert n gv4 = gv4), (insert n gv4 = l ++ l), (insert n gv4 = l ++ gv4), (insert n gv4 = gv4 ++ l), (insert n gv4 = gv4 ++ gv4)
+(insert a l = l), (insert a l = gv4), (insert a l = l ++ l), (insert a l = l ++ gv4), (insert a l = gv4 ++ l), (insert a l = gv4 ++ gv4), (insert a gv4 = l), (insert a gv4 = gv4), (insert a gv4 = l ++ l), (insert a gv4 = l ++ gv4)
+(insert a gv4 = gv4 ++ l), (insert a gv4 = gv4 ++ gv4), (l ++ l = l), (l ++ l = gv4), (l ++ gv4 = l), (l ++ gv4 = gv4), (gv4 ++ l = l), (gv4 ++ l = gv4), (gv4 ++ gv4 = l), (gv4 ++ gv4 = gv4)
+([] = l), ([] = gv4), ([] = sort l), ([] = sort gv4), ([] = insert gv2 l), ([] = insert gv2 gv4), ([] = insert n l), ([] = insert n gv4), ([] = insert a l), ([] = insert a gv4)
+([] = l ++ l), ([] = l ++ gv4), ([] = gv4 ++ l), ([] = gv4 ++ gv4), (None = Some gv2), (None = Some n), (None = Some a), (length l = gv2), (length l = n), (length l = a)
+(length gv4 = gv2), (length gv4 = n), (length gv4 = a)
+
+Label: 5 (5)
+(a < a), (a < n), (a < gv0), (n < a), (n < n), (n < gv0), (gv0 < a), (gv0 < n), (gv0 < gv0), (a <= a)
+(a <= n), (a <= gv0), (n <= a), (n <= n), (n <= gv0), (gv0 <= a), (gv0 <= n), (gv0 <= gv0), (l = l), (a = a)
+(a = n), (a = gv0), (n = a), (n = n), (n = gv0), (gv0 = a), (gv0 = n), (gv0 = gv0), (a < length l), (n < length l)
+(gv0 < length l), (length l < a), (length l < n), (length l < gv0), (a <= length l), (n <= length l), (gv0 <= length l), (length l <= a), (length l <= n), (length l <= gv0)
+(~ a < a), (~ a < n), (~ a < gv0), (~ n < a), (~ n < n), (~ n < gv0), (~ gv0 < a), (~ gv0 < n), (~ gv0 < gv0), (~ a <= a)
+(~ a <= n), (~ a <= gv0), (~ n <= a), (~ n <= n), (~ n <= gv0), (~ gv0 <= a), (~ gv0 <= n), (~ gv0 <= gv0), (l <> l), (a <> a)
+(a <> n), (a <> gv0), (n <> a), (n <> n), (n <> gv0), (gv0 <> a), (gv0 <> n), (gv0 <> gv0), (None = Some l), (a :: l = l)
+(a :: l = sort l), (a :: l = insert a l), (a :: l = insert n l), (a :: l = insert gv0 l), (a :: l = l ++ l), (a :: l = []), (n :: l = l), (n :: l = sort l), (n :: l = insert a l), (n :: l = insert n l)
+(n :: l = insert gv0 l), (n :: l = l ++ l), (n :: l = []), (gv0 :: l = l), (gv0 :: l = sort l), (gv0 :: l = insert a l), (gv0 :: l = insert n l), (gv0 :: l = insert gv0 l), (gv0 :: l = l ++ l), (gv0 :: l = [])
+(sort l = l), (sort l = insert a l), (sort l = insert n l), (sort l = insert gv0 l), (sort l = l ++ l), (insert a l = l), (insert a l = l ++ l), (insert n l = l), (insert n l = l ++ l), (insert gv0 l = l)
+(insert gv0 l = l ++ l), (l ++ l = l), ([] = l), ([] = sort l), ([] = insert a l), ([] = insert n l), ([] = insert gv0 l), ([] = l ++ l), (None = Some a), (None = Some n)
+(None = Some gv0), (length l = a), (length l = n), (length l = gv0)
+
+Label: 6 (6)
+(n < n), (n < a), (a < n), (a < a), (n <= n), (n <= a), (a <= n), (a <= a), (gv4 = gv4), (gv4 = l)
+(l = gv4), (l = l), (n = n), (n = a), (a = n), (a = a), (n < length gv4), (n < length l), (a < length gv4), (a < length l)
+(length gv4 < n), (length gv4 < a), (length gv4 < length l), (length l < n), (length l < a), (length l < length gv4), (n <= length gv4), (n <= length l), (a <= length gv4), (a <= length l)
+(length gv4 <= n), (length gv4 <= a), (length gv4 <= length l), (length l <= n), (length l <= a), (length l <= length gv4), (~ n < n), (~ n < a), (~ a < n), (~ a < a)
+(~ n <= n), (~ n <= a), (~ a <= n), (~ a <= a), (gv4 <> gv4), (gv4 <> l), (l <> gv4), (l <> l), (n <> n), (n <> a)
+(a <> n), (a <> a), (None = Some gv4), (None = Some l), (n :: gv4 = gv4), (n :: gv4 = l), (n :: gv4 = sort gv4), (n :: gv4 = sort l), (n :: gv4 = insert n gv4), (n :: gv4 = insert n l)
+(n :: gv4 = insert a gv4), (n :: gv4 = insert a l), (n :: gv4 = gv4 ++ gv4), (n :: gv4 = gv4 ++ l), (n :: gv4 = l ++ gv4), (n :: gv4 = l ++ l), (n :: gv4 = []), (n :: l = gv4), (n :: l = l), (n :: l = sort gv4)
+(n :: l = sort l), (n :: l = insert n gv4), (n :: l = insert n l), (n :: l = insert a gv4), (n :: l = insert a l), (n :: l = gv4 ++ gv4), (n :: l = gv4 ++ l), (n :: l = l ++ gv4), (n :: l = l ++ l), (n :: l = [])
+(a :: gv4 = gv4), (a :: gv4 = l), (a :: gv4 = sort gv4), (a :: gv4 = sort l), (a :: gv4 = insert n gv4), (a :: gv4 = insert n l), (a :: gv4 = insert a gv4), (a :: gv4 = insert a l), (a :: gv4 = gv4 ++ gv4), (a :: gv4 = gv4 ++ l)
+(a :: gv4 = l ++ gv4), (a :: gv4 = l ++ l), (a :: gv4 = []), (a :: l = gv4), (a :: l = l), (a :: l = sort gv4), (a :: l = sort l), (a :: l = insert n gv4), (a :: l = insert n l), (a :: l = insert a gv4)
+(a :: l = insert a l), (a :: l = gv4 ++ gv4), (a :: l = gv4 ++ l), (a :: l = l ++ gv4), (a :: l = l ++ l), (a :: l = []), (sort gv4 = gv4), (sort gv4 = l), (sort gv4 = insert n gv4), (sort gv4 = insert n l)
+(sort gv4 = insert a gv4), (sort gv4 = insert a l), (sort gv4 = gv4 ++ gv4), (sort gv4 = gv4 ++ l), (sort gv4 = l ++ gv4), (sort gv4 = l ++ l), (sort l = gv4), (sort l = l), (sort l = insert n gv4), (sort l = insert n l)
+(sort l = insert a gv4), (sort l = insert a l), (sort l = gv4 ++ gv4), (sort l = gv4 ++ l), (sort l = l ++ gv4), (sort l = l ++ l), (insert n gv4 = gv4), (insert n gv4 = l), (insert n gv4 = gv4 ++ gv4), (insert n gv4 = gv4 ++ l)
+(insert n gv4 = l ++ gv4), (insert n gv4 = l ++ l), (insert n l = gv4), (insert n l = l), (insert n l = gv4 ++ gv4), (insert n l = gv4 ++ l), (insert n l = l ++ gv4), (insert n l = l ++ l), (insert a gv4 = gv4), (insert a gv4 = l)
+(insert a gv4 = gv4 ++ gv4), (insert a gv4 = gv4 ++ l), (insert a gv4 = l ++ gv4), (insert a gv4 = l ++ l), (insert a l = gv4), (insert a l = l), (insert a l = gv4 ++ gv4), (insert a l = gv4 ++ l), (insert a l = l ++ gv4), (insert a l = l ++ l)
+(gv4 ++ gv4 = gv4), (gv4 ++ gv4 = l), (gv4 ++ l = gv4), (gv4 ++ l = l), (l ++ gv4 = gv4), (l ++ gv4 = l), (l ++ l = gv4), (l ++ l = l), ([] = gv4), ([] = l)
+([] = sort gv4), ([] = sort l), ([] = insert n gv4), ([] = insert n l), ([] = insert a gv4), ([] = insert a l), ([] = gv4 ++ gv4), ([] = gv4 ++ l), ([] = l ++ gv4), ([] = l ++ l)
+(None = Some n), (None = Some a), (length gv4 = n), (length gv4 = a), (length l = n), (length l = a)
+
+Label: 7 (7)
+(a < a), (a < n), (a < gv1), (n < a), (n < n), (n < gv1), (gv1 < a), (gv1 < n), (gv1 < gv1), (a <= a)
+(a <= n), (a <= gv1), (n <= a), (n <= n), (n <= gv1), (gv1 <= a), (gv1 <= n), (gv1 <= gv1), (gv5 = gv5), (gv5 = l)
+(l = gv5), (l = l), (a = a), (a = n), (a = gv1), (n = a), (n = n), (n = gv1), (gv1 = a), (gv1 = n)
+(gv1 = gv1), (a < length gv5), (a < length l), (n < length gv5), (n < length l), (gv1 < length gv5), (gv1 < length l), (length gv5 < a), (length gv5 < n), (length gv5 < gv1)
+(length gv5 < length l), (length l < a), (length l < n), (length l < gv1), (length l < length gv5), (a <= length gv5), (a <= length l), (n <= length gv5), (n <= length l), (gv1 <= length gv5)
+(gv1 <= length l), (length gv5 <= a), (length gv5 <= n), (length gv5 <= gv1), (length gv5 <= length l), (length l <= a), (length l <= n), (length l <= gv1), (length l <= length gv5), (~ a < a)
+(~ a < n), (~ a < gv1), (~ n < a), (~ n < n), (~ n < gv1), (~ gv1 < a), (~ gv1 < n), (~ gv1 < gv1), (~ a <= a), (~ a <= n)
+(~ a <= gv1), (~ n <= a), (~ n <= n), (~ n <= gv1), (~ gv1 <= a), (~ gv1 <= n), (~ gv1 <= gv1), (gv5 <> gv5), (gv5 <> l), (l <> gv5)
+(l <> l), (a <> a), (a <> n), (a <> gv1), (n <> a), (n <> n), (n <> gv1), (gv1 <> a), (gv1 <> n), (gv1 <> gv1)
+(None = Some gv5), (None = Some l), (a :: gv5 = gv5), (a :: gv5 = l), (a :: gv5 = sort gv5), (a :: gv5 = sort l), (a :: gv5 = insert a gv5), (a :: gv5 = insert a l), (a :: gv5 = insert n gv5), (a :: gv5 = insert n l)
+(a :: gv5 = insert gv1 gv5), (a :: gv5 = insert gv1 l), (a :: gv5 = gv5 ++ gv5), (a :: gv5 = gv5 ++ l), (a :: gv5 = l ++ gv5), (a :: gv5 = l ++ l), (a :: gv5 = []), (a :: l = gv5), (a :: l = l), (a :: l = sort gv5)
+(a :: l = sort l), (a :: l = insert a gv5), (a :: l = insert a l), (a :: l = insert n gv5), (a :: l = insert n l), (a :: l = insert gv1 gv5), (a :: l = insert gv1 l), (a :: l = gv5 ++ gv5), (a :: l = gv5 ++ l), (a :: l = l ++ gv5)
+(a :: l = l ++ l), (a :: l = []), (n :: gv5 = gv5), (n :: gv5 = l), (n :: gv5 = sort gv5), (n :: gv5 = sort l), (n :: gv5 = insert a gv5), (n :: gv5 = insert a l), (n :: gv5 = insert n gv5), (n :: gv5 = insert n l)
+(n :: gv5 = insert gv1 gv5), (n :: gv5 = insert gv1 l), (n :: gv5 = gv5 ++ gv5), (n :: gv5 = gv5 ++ l), (n :: gv5 = l ++ gv5), (n :: gv5 = l ++ l), (n :: gv5 = []), (n :: l = gv5), (n :: l = l), (n :: l = sort gv5)
+(n :: l = sort l), (n :: l = insert a gv5), (n :: l = insert a l), (n :: l = insert n gv5), (n :: l = insert n l), (n :: l = insert gv1 gv5), (n :: l = insert gv1 l), (n :: l = gv5 ++ gv5), (n :: l = gv5 ++ l), (n :: l = l ++ gv5)
+(n :: l = l ++ l), (n :: l = []), (gv1 :: gv5 = gv5), (gv1 :: gv5 = l), (gv1 :: gv5 = sort gv5), (gv1 :: gv5 = sort l), (gv1 :: gv5 = insert a gv5), (gv1 :: gv5 = insert a l), (gv1 :: gv5 = insert n gv5), (gv1 :: gv5 = insert n l)
+(gv1 :: gv5 = insert gv1 gv5), (gv1 :: gv5 = insert gv1 l), (gv1 :: gv5 = gv5 ++ gv5), (gv1 :: gv5 = gv5 ++ l), (gv1 :: gv5 = l ++ gv5), (gv1 :: gv5 = l ++ l), (gv1 :: gv5 = []), (gv1 :: l = gv5), (gv1 :: l = l), (gv1 :: l = sort gv5)
+(gv1 :: l = sort l), (gv1 :: l = insert a gv5), (gv1 :: l = insert a l), (gv1 :: l = insert n gv5), (gv1 :: l = insert n l), (gv1 :: l = insert gv1 gv5), (gv1 :: l = insert gv1 l), (gv1 :: l = gv5 ++ gv5), (gv1 :: l = gv5 ++ l), (gv1 :: l = l ++ gv5)
+(gv1 :: l = l ++ l), (gv1 :: l = []), (sort gv5 = gv5), (sort gv5 = l), (sort gv5 = insert a gv5), (sort gv5 = insert a l), (sort gv5 = insert n gv5), (sort gv5 = insert n l), (sort gv5 = insert gv1 gv5), (sort gv5 = insert gv1 l)
+(sort gv5 = gv5 ++ gv5), (sort gv5 = gv5 ++ l), (sort gv5 = l ++ gv5), (sort gv5 = l ++ l), (sort l = gv5), (sort l = l), (sort l = insert a gv5), (sort l = insert a l), (sort l = insert n gv5), (sort l = insert n l)
+(sort l = insert gv1 gv5), (sort l = insert gv1 l), (sort l = gv5 ++ gv5), (sort l = gv5 ++ l), (sort l = l ++ gv5), (sort l = l ++ l), (insert a gv5 = gv5), (insert a gv5 = l), (insert a gv5 = gv5 ++ gv5), (insert a gv5 = gv5 ++ l)
+(insert a gv5 = l ++ gv5), (insert a gv5 = l ++ l), (insert a l = gv5), (insert a l = l), (insert a l = gv5 ++ gv5), (insert a l = gv5 ++ l), (insert a l = l ++ gv5), (insert a l = l ++ l), (insert n gv5 = gv5), (insert n gv5 = l)
+(insert n gv5 = gv5 ++ gv5), (insert n gv5 = gv5 ++ l), (insert n gv5 = l ++ gv5), (insert n gv5 = l ++ l), (insert n l = gv5), (insert n l = l), (insert n l = gv5 ++ gv5), (insert n l = gv5 ++ l), (insert n l = l ++ gv5), (insert n l = l ++ l)
+(insert gv1 gv5 = gv5), (insert gv1 gv5 = l), (insert gv1 gv5 = gv5 ++ gv5), (insert gv1 gv5 = gv5 ++ l), (insert gv1 gv5 = l ++ gv5), (insert gv1 gv5 = l ++ l), (insert gv1 l = gv5), (insert gv1 l = l), (insert gv1 l = gv5 ++ gv5), (insert gv1 l = gv5 ++ l)
+(insert gv1 l = l ++ gv5), (insert gv1 l = l ++ l), (gv5 ++ gv5 = gv5), (gv5 ++ gv5 = l), (gv5 ++ l = gv5), (gv5 ++ l = l), (l ++ gv5 = gv5), (l ++ gv5 = l), (l ++ l = gv5), (l ++ l = l)
+([] = gv5), ([] = l), ([] = sort gv5), ([] = sort l), ([] = insert a gv5), ([] = insert a l), ([] = insert n gv5), ([] = insert n l), ([] = insert gv1 gv5), ([] = insert gv1 l)
+([] = gv5 ++ gv5), ([] = gv5 ++ l), ([] = l ++ gv5), ([] = l ++ l), (None = Some a), (None = Some n), (None = Some gv1), (length gv5 = a), (length gv5 = n), (length gv5 = gv1)
+(length l = a), (length l = n), (length l = gv1)
+
+Label: 8 (8)
+(a < a), (a < n), (a < gv0), (n < a), (n < n), (n < gv0), (gv0 < a), (gv0 < n), (gv0 < gv0), (a <= a)
+(a <= n), (a <= gv0), (n <= a), (n <= n), (n <= gv0), (gv0 <= a), (gv0 <= n), (gv0 <= gv0), (l = l), (l = gv5)
+(gv5 = l), (gv5 = gv5), (a = a), (a = n), (a = gv0), (n = a), (n = n), (n = gv0), (gv0 = a), (gv0 = n)
+(gv0 = gv0), (a < length l), (a < length gv5), (n < length l), (n < length gv5), (gv0 < length l), (gv0 < length gv5), (length l < a), (length l < n), (length l < gv0)
+(length l < length gv5), (length gv5 < a), (length gv5 < n), (length gv5 < gv0), (length gv5 < length l), (a <= length l), (a <= length gv5), (n <= length l), (n <= length gv5), (gv0 <= length l)
+(gv0 <= length gv5), (length l <= a), (length l <= n), (length l <= gv0), (length l <= length gv5), (length gv5 <= a), (length gv5 <= n), (length gv5 <= gv0), (length gv5 <= length l), (~ a < a)
+(~ a < n), (~ a < gv0), (~ n < a), (~ n < n), (~ n < gv0), (~ gv0 < a), (~ gv0 < n), (~ gv0 < gv0), (~ a <= a), (~ a <= n)
+(~ a <= gv0), (~ n <= a), (~ n <= n), (~ n <= gv0), (~ gv0 <= a), (~ gv0 <= n), (~ gv0 <= gv0), (l <> l), (l <> gv5), (gv5 <> l)
+(gv5 <> gv5), (a <> a), (a <> n), (a <> gv0), (n <> a), (n <> n), (n <> gv0), (gv0 <> a), (gv0 <> n), (gv0 <> gv0)
+(None = Some l), (None = Some gv5), (a :: l = l), (a :: l = gv5), (a :: l = sort l), (a :: l = sort gv5), (a :: l = insert a l), (a :: l = insert a gv5), (a :: l = insert n l), (a :: l = insert n gv5)
+(a :: l = insert gv0 l), (a :: l = insert gv0 gv5), (a :: l = l ++ l), (a :: l = l ++ gv5), (a :: l = gv5 ++ l), (a :: l = gv5 ++ gv5), (a :: l = []), (a :: gv5 = l), (a :: gv5 = gv5), (a :: gv5 = sort l)
+(a :: gv5 = sort gv5), (a :: gv5 = insert a l), (a :: gv5 = insert a gv5), (a :: gv5 = insert n l), (a :: gv5 = insert n gv5), (a :: gv5 = insert gv0 l), (a :: gv5 = insert gv0 gv5), (a :: gv5 = l ++ l), (a :: gv5 = l ++ gv5), (a :: gv5 = gv5 ++ l)
+(a :: gv5 = gv5 ++ gv5), (a :: gv5 = []), (n :: l = l), (n :: l = gv5), (n :: l = sort l), (n :: l = sort gv5), (n :: l = insert a l), (n :: l = insert a gv5), (n :: l = insert n l), (n :: l = insert n gv5)
+(n :: l = insert gv0 l), (n :: l = insert gv0 gv5), (n :: l = l ++ l), (n :: l = l ++ gv5), (n :: l = gv5 ++ l), (n :: l = gv5 ++ gv5), (n :: l = []), (n :: gv5 = l), (n :: gv5 = gv5), (n :: gv5 = sort l)
+(n :: gv5 = sort gv5), (n :: gv5 = insert a l), (n :: gv5 = insert a gv5), (n :: gv5 = insert n l), (n :: gv5 = insert n gv5), (n :: gv5 = insert gv0 l), (n :: gv5 = insert gv0 gv5), (n :: gv5 = l ++ l), (n :: gv5 = l ++ gv5), (n :: gv5 = gv5 ++ l)
+(n :: gv5 = gv5 ++ gv5), (n :: gv5 = []), (gv0 :: l = l), (gv0 :: l = gv5), (gv0 :: l = sort l), (gv0 :: l = sort gv5), (gv0 :: l = insert a l), (gv0 :: l = insert a gv5), (gv0 :: l = insert n l), (gv0 :: l = insert n gv5)
+(gv0 :: l = insert gv0 l), (gv0 :: l = insert gv0 gv5), (gv0 :: l = l ++ l), (gv0 :: l = l ++ gv5), (gv0 :: l = gv5 ++ l), (gv0 :: l = gv5 ++ gv5), (gv0 :: l = []), (gv0 :: gv5 = l), (gv0 :: gv5 = gv5), (gv0 :: gv5 = sort l)
+(gv0 :: gv5 = sort gv5), (gv0 :: gv5 = insert a l), (gv0 :: gv5 = insert a gv5), (gv0 :: gv5 = insert n l), (gv0 :: gv5 = insert n gv5), (gv0 :: gv5 = insert gv0 l), (gv0 :: gv5 = insert gv0 gv5), (gv0 :: gv5 = l ++ l), (gv0 :: gv5 = l ++ gv5), (gv0 :: gv5 = gv5 ++ l)
+(gv0 :: gv5 = gv5 ++ gv5), (gv0 :: gv5 = []), (sort l = l), (sort l = gv5), (sort l = insert a l), (sort l = insert a gv5), (sort l = insert n l), (sort l = insert n gv5), (sort l = insert gv0 l), (sort l = insert gv0 gv5)
+(sort l = l ++ l), (sort l = l ++ gv5), (sort l = gv5 ++ l), (sort l = gv5 ++ gv5), (sort gv5 = l), (sort gv5 = gv5), (sort gv5 = insert a l), (sort gv5 = insert a gv5), (sort gv5 = insert n l), (sort gv5 = insert n gv5)
+(sort gv5 = insert gv0 l), (sort gv5 = insert gv0 gv5), (sort gv5 = l ++ l), (sort gv5 = l ++ gv5), (sort gv5 = gv5 ++ l), (sort gv5 = gv5 ++ gv5), (insert a l = l), (insert a l = gv5), (insert a l = l ++ l), (insert a l = l ++ gv5)
+(insert a l = gv5 ++ l), (insert a l = gv5 ++ gv5), (insert a gv5 = l), (insert a gv5 = gv5), (insert a gv5 = l ++ l), (insert a gv5 = l ++ gv5), (insert a gv5 = gv5 ++ l), (insert a gv5 = gv5 ++ gv5), (insert n l = l), (insert n l = gv5)
+(insert n l = l ++ l), (insert n l = l ++ gv5), (insert n l = gv5 ++ l), (insert n l = gv5 ++ gv5), (insert n gv5 = l), (insert n gv5 = gv5), (insert n gv5 = l ++ l), (insert n gv5 = l ++ gv5), (insert n gv5 = gv5 ++ l), (insert n gv5 = gv5 ++ gv5)
+(insert gv0 l = l), (insert gv0 l = gv5), (insert gv0 l = l ++ l), (insert gv0 l = l ++ gv5), (insert gv0 l = gv5 ++ l), (insert gv0 l = gv5 ++ gv5), (insert gv0 gv5 = l), (insert gv0 gv5 = gv5), (insert gv0 gv5 = l ++ l), (insert gv0 gv5 = l ++ gv5)
+(insert gv0 gv5 = gv5 ++ l), (insert gv0 gv5 = gv5 ++ gv5), (l ++ l = l), (l ++ l = gv5), (l ++ gv5 = l), (l ++ gv5 = gv5), (gv5 ++ l = l), (gv5 ++ l = gv5), (gv5 ++ gv5 = l), (gv5 ++ gv5 = gv5)
+([] = l), ([] = gv5), ([] = sort l), ([] = sort gv5), ([] = insert a l), ([] = insert a gv5), ([] = insert n l), ([] = insert n gv5), ([] = insert gv0 l), ([] = insert gv0 gv5)
+([] = l ++ l), ([] = l ++ gv5), ([] = gv5 ++ l), ([] = gv5 ++ gv5), (None = Some a), (None = Some n), (None = Some gv0), (length l = a), (length l = n), (length l = gv0)
+(length gv5 = a), (length gv5 = n), (length gv5 = gv0)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 113.349 seconds
+
+
+Label: 0 (0)
+
+Label: 1 (1)
+
+Label: 2 (2)
+
+Label: 3 (3)
+
+Label: 4 (4)
+
+Label: 5 (5)
+
+Label: 6 (6)
+
+Label: 7 (7)
+
+Label: 8 (8)
+
+
+
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 118.594 seconds
+
+Number of Result Pairs Returned: 4
+
+1. (gv2 = count n gv5 ->  (if a =? n then 1 else 0) + gv2 = count n (insert a gv5))
+
+2. (gv2 = count n (sort l) ->  (if a =? n then 1 else 0) + gv2 = count n (insert a (sort l)))
+
+3. (count n l = count n gv5 ->  (if a =? n then 1 else 0) + count n l = count n (insert a gv5))
+
+4. ((if a =? n then 1 else 0) + count n l = count n (insert a (sort l)))

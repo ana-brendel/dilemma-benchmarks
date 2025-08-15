@@ -1,0 +1,274 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+
+----------------------------------
+Goal: (drop x (drop y nil) = drop y (drop x nil))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 1.492 seconds
+
+gv3 : Lst = (drop y (drop x nil))
+gv1 : Lst = (drop y nil)
+gv2 : Lst = nil
+gv4 : Lst = (drop x nil)
+gv0 : Lst = (drop x (drop y nil))
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 34.626 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (drop x (drop y nil) = drop y (drop x nil))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (drop x nil = gv4)
+
+----------------------------------
+Goal: (drop x (drop y nil) = drop y gv4)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (drop x (drop y nil) = gv0)
+
+----------------------------------
+Goal: (gv0 = drop y (drop x nil))
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+
+----------------------------------
+Goal: (drop x (drop y gv2) = drop y (drop x gv2))
+Case: Valid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (drop x gv2 = gv4)
+ -- (nil = gv2)
+
+----------------------------------
+Goal: (drop x (drop y gv2) = drop y gv4)
+Case: Invalid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (drop x (drop y gv2) = gv0)
+ -- (nil = gv2)
+
+----------------------------------
+Goal: (gv0 = drop y (drop x gv2))
+Case: Invalid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (drop y gv2 = gv1)
+ -- (nil = gv2)
+
+----------------------------------
+Goal: (drop x gv1 = drop y (drop x gv2))
+Case: Invalid and Generalized
+
+Label: Generalization #7
+Assumptions: 
+ -- (drop y (drop x gv2) = gv3)
+ -- (nil = gv2)
+
+----------------------------------
+Goal: (drop x (drop y gv2) = gv3)
+Case: Invalid and Generalized
+
+Label: Generalization #8
+Assumptions: 
+ -- (drop y nil = gv1)
+
+----------------------------------
+Goal: (drop x gv1 = drop y (drop x nil))
+Case: Invalid and Generalized
+
+Label: Generalization #9
+Assumptions: 
+ -- (drop y (drop x nil) = gv3)
+
+----------------------------------
+Goal: (drop x (drop y nil) = gv3)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 34.763 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+drop : (Nat -> Lst -> Lst)
+succ : (Nat -> Nat)
+zero : Nat
+nil : Lst
+cons : (Nat -> Lst -> Lst)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 6 (6)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 7 (7)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 34.908 seconds
+
+
+Label: 0 (0)
+(gv4 = gv4), (y = y), (y = x), (x = y), (x = x), (gv4 <> gv4), (y <> y), (y <> x), (x <> y), (x <> x)
+(None = Some y), (None = Some x), (None = Some gv4), (succ y = y), (succ y = x), (succ x = y), (succ x = x), (zero = succ y), (zero = succ x), (cons y gv4 = gv4)
+(cons y gv4 = drop y gv4), (cons y gv4 = drop x gv4), (cons x gv4 = gv4), (cons x gv4 = drop y gv4), (cons x gv4 = drop x gv4), (drop y gv4 = gv4), (drop x gv4 = gv4), (nil = cons y gv4), (nil = cons x gv4), (nil = drop y gv4)
+(nil = drop x gv4)
+
+Label: 1 (1)
+(x = x), (x = y), (y = x), (y = y), (gv0 = gv0), (x <> x), (x <> y), (y <> x), (y <> y), (gv0 <> gv0)
+(None = Some x), (None = Some y), (None = Some gv0), (succ x = x), (succ x = y), (succ y = x), (succ y = y), (zero = succ x), (zero = succ y), (cons x gv0 = gv0)
+(cons x gv0 = drop x gv0), (cons x gv0 = drop y gv0), (cons y gv0 = gv0), (cons y gv0 = drop x gv0), (cons y gv0 = drop y gv0), (drop x gv0 = gv0), (drop y gv0 = gv0), (nil = cons x gv0), (nil = cons y gv0), (nil = drop x gv0)
+(nil = drop y gv0)
+
+Label: 2 (2)
+(gv4 = gv4), (gv4 = gv2), (gv2 = gv4), (gv2 = gv2), (y = y), (y = x), (x = y), (x = x), (gv4 <> gv4), (gv4 <> gv2)
+(gv2 <> gv4), (gv2 <> gv2), (y <> y), (y <> x), (x <> y), (x <> x), (None = Some y), (None = Some x), (None = Some gv4), (None = Some gv2)
+(succ y = y), (succ y = x), (succ x = y), (succ x = x), (zero = succ y), (zero = succ x), (cons y gv4 = gv4), (cons y gv4 = gv2), (cons y gv4 = drop y gv4), (cons y gv4 = drop y gv2)
+(cons y gv4 = drop x gv4), (cons y gv4 = drop x gv2), (cons y gv2 = gv4), (cons y gv2 = gv2), (cons y gv2 = drop y gv4), (cons y gv2 = drop y gv2), (cons y gv2 = drop x gv4), (cons y gv2 = drop x gv2), (cons x gv4 = gv4), (cons x gv4 = gv2)
+(cons x gv4 = drop y gv4), (cons x gv4 = drop y gv2), (cons x gv4 = drop x gv4), (cons x gv4 = drop x gv2), (cons x gv2 = gv4), (cons x gv2 = gv2), (cons x gv2 = drop y gv4), (cons x gv2 = drop y gv2), (cons x gv2 = drop x gv4), (cons x gv2 = drop x gv2)
+(drop y gv4 = gv4), (drop y gv4 = gv2), (drop y gv2 = gv4), (drop y gv2 = gv2), (drop x gv4 = gv4), (drop x gv4 = gv2), (drop x gv2 = gv4), (drop x gv2 = gv2), (nil = cons y gv4), (nil = cons y gv2)
+(nil = cons x gv4), (nil = cons x gv2), (nil = drop y gv4), (nil = drop y gv2), (nil = drop x gv4), (nil = drop x gv2)
+
+Label: 3 (3)
+(x = x), (x = y), (y = x), (y = y), (gv2 = gv2), (gv2 = gv0), (gv0 = gv2), (gv0 = gv0), (x <> x), (x <> y)
+(y <> x), (y <> y), (gv2 <> gv2), (gv2 <> gv0), (gv0 <> gv2), (gv0 <> gv0), (None = Some x), (None = Some y), (None = Some gv2), (None = Some gv0)
+(succ x = x), (succ x = y), (succ y = x), (succ y = y), (zero = succ x), (zero = succ y), (cons x gv2 = gv2), (cons x gv2 = gv0), (cons x gv2 = drop x gv2), (cons x gv2 = drop x gv0)
+(cons x gv2 = drop y gv2), (cons x gv2 = drop y gv0), (cons x gv0 = gv2), (cons x gv0 = gv0), (cons x gv0 = drop x gv2), (cons x gv0 = drop x gv0), (cons x gv0 = drop y gv2), (cons x gv0 = drop y gv0), (cons y gv2 = gv2), (cons y gv2 = gv0)
+(cons y gv2 = drop x gv2), (cons y gv2 = drop x gv0), (cons y gv2 = drop y gv2), (cons y gv2 = drop y gv0), (cons y gv0 = gv2), (cons y gv0 = gv0), (cons y gv0 = drop x gv2), (cons y gv0 = drop x gv0), (cons y gv0 = drop y gv2), (cons y gv0 = drop y gv0)
+(drop x gv2 = gv2), (drop x gv2 = gv0), (drop x gv0 = gv2), (drop x gv0 = gv0), (drop y gv2 = gv2), (drop y gv2 = gv0), (drop y gv0 = gv2), (drop y gv0 = gv0), (nil = cons x gv2), (nil = cons x gv0)
+(nil = cons y gv2), (nil = cons y gv0), (nil = drop x gv2), (nil = drop x gv0), (nil = drop y gv2), (nil = drop y gv0)
+
+Label: 4 (4)
+(gv2 = gv2), (gv2 = gv1), (gv1 = gv2), (gv1 = gv1), (y = y), (y = x), (x = y), (x = x), (gv2 <> gv2), (gv2 <> gv1)
+(gv1 <> gv2), (gv1 <> gv1), (y <> y), (y <> x), (x <> y), (x <> x), (None = Some y), (None = Some x), (None = Some gv2), (None = Some gv1)
+(succ y = y), (succ y = x), (succ x = y), (succ x = x), (zero = succ y), (zero = succ x), (cons y gv2 = gv2), (cons y gv2 = gv1), (cons y gv2 = drop y gv2), (cons y gv2 = drop y gv1)
+(cons y gv2 = drop x gv2), (cons y gv2 = drop x gv1), (cons y gv1 = gv2), (cons y gv1 = gv1), (cons y gv1 = drop y gv2), (cons y gv1 = drop y gv1), (cons y gv1 = drop x gv2), (cons y gv1 = drop x gv1), (cons x gv2 = gv2), (cons x gv2 = gv1)
+(cons x gv2 = drop y gv2), (cons x gv2 = drop y gv1), (cons x gv2 = drop x gv2), (cons x gv2 = drop x gv1), (cons x gv1 = gv2), (cons x gv1 = gv1), (cons x gv1 = drop y gv2), (cons x gv1 = drop y gv1), (cons x gv1 = drop x gv2), (cons x gv1 = drop x gv1)
+(drop y gv2 = gv2), (drop y gv2 = gv1), (drop y gv1 = gv2), (drop y gv1 = gv1), (drop x gv2 = gv2), (drop x gv2 = gv1), (drop x gv1 = gv2), (drop x gv1 = gv1), (nil = cons y gv2), (nil = cons y gv1)
+(nil = cons x gv2), (nil = cons x gv1), (nil = drop y gv2), (nil = drop y gv1), (nil = drop x gv2), (nil = drop x gv1)
+
+Label: 5 (5)
+(gv3 = gv3), (gv3 = gv2), (gv2 = gv3), (gv2 = gv2), (y = y), (y = x), (x = y), (x = x), (gv3 <> gv3), (gv3 <> gv2)
+(gv2 <> gv3), (gv2 <> gv2), (y <> y), (y <> x), (x <> y), (x <> x), (None = Some y), (None = Some x), (None = Some gv3), (None = Some gv2)
+(succ y = y), (succ y = x), (succ x = y), (succ x = x), (zero = succ y), (zero = succ x), (cons y gv3 = gv3), (cons y gv3 = gv2), (cons y gv3 = drop y gv3), (cons y gv3 = drop y gv2)
+(cons y gv3 = drop x gv3), (cons y gv3 = drop x gv2), (cons y gv2 = gv3), (cons y gv2 = gv2), (cons y gv2 = drop y gv3), (cons y gv2 = drop y gv2), (cons y gv2 = drop x gv3), (cons y gv2 = drop x gv2), (cons x gv3 = gv3), (cons x gv3 = gv2)
+(cons x gv3 = drop y gv3), (cons x gv3 = drop y gv2), (cons x gv3 = drop x gv3), (cons x gv3 = drop x gv2), (cons x gv2 = gv3), (cons x gv2 = gv2), (cons x gv2 = drop y gv3), (cons x gv2 = drop y gv2), (cons x gv2 = drop x gv3), (cons x gv2 = drop x gv2)
+(drop y gv3 = gv3), (drop y gv3 = gv2), (drop y gv2 = gv3), (drop y gv2 = gv2), (drop x gv3 = gv3), (drop x gv3 = gv2), (drop x gv2 = gv3), (drop x gv2 = gv2), (nil = cons y gv3), (nil = cons y gv2)
+(nil = cons x gv3), (nil = cons x gv2), (nil = drop y gv3), (nil = drop y gv2), (nil = drop x gv3), (nil = drop x gv2)
+
+Label: 6 (6)
+(gv1 = gv1), (y = y), (y = x), (x = y), (x = x), (gv1 <> gv1), (y <> y), (y <> x), (x <> y), (x <> x)
+(None = Some y), (None = Some x), (None = Some gv1), (succ y = y), (succ y = x), (succ x = y), (succ x = x), (zero = succ y), (zero = succ x), (cons y gv1 = gv1)
+(cons y gv1 = drop y gv1), (cons y gv1 = drop x gv1), (cons x gv1 = gv1), (cons x gv1 = drop y gv1), (cons x gv1 = drop x gv1), (drop y gv1 = gv1), (drop x gv1 = gv1), (nil = cons y gv1), (nil = cons x gv1), (nil = drop y gv1)
+(nil = drop x gv1)
+
+Label: 7 (7)
+(gv3 = gv3), (y = y), (y = x), (x = y), (x = x), (gv3 <> gv3), (y <> y), (y <> x), (x <> y), (x <> x)
+(None = Some y), (None = Some x), (None = Some gv3), (succ y = y), (succ y = x), (succ x = y), (succ x = x), (zero = succ y), (zero = succ x), (cons y gv3 = gv3)
+(cons y gv3 = drop y gv3), (cons y gv3 = drop x gv3), (cons x gv3 = gv3), (cons x gv3 = drop y gv3), (cons x gv3 = drop x gv3), (drop y gv3 = gv3), (drop x gv3 = gv3), (nil = cons y gv3), (nil = cons x gv3), (nil = drop y gv3)
+(nil = drop x gv3)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 41.17 seconds
+
+
+Label: 0 (0)
+(nil = drop y gv4)
+
+Label: 1 (1)
+
+Label: 2 (2)
+(drop x gv2 = gv4)
+
+Label: 3 (3)
+
+Label: 4 (4)
+(drop y gv2 = gv1)
+
+Label: 5 (5)
+
+Label: 6 (6)
+(nil = drop x gv1)
+
+Label: 7 (7)
+
+
+
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 52.969 seconds
+
+Number of Result Pairs Returned: 4
+
+1. (drop x (drop y gv2) = drop y (drop x gv2))
+
+2. (drop x (drop y nil) = drop y (drop x nil))
+
+3. (nil = drop y gv4 -> drop x (drop y nil) = drop y gv4)
+
+4. (nil = drop x gv1 -> drop x gv1 = drop y (drop x nil))

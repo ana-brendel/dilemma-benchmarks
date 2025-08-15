@@ -1,0 +1,136 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (sorted nil = true -> sorted (insort y nil) = true)
+ -- (less y n = false)
+ -- (sorted (cons n nil) = true)
+
+----------------------------------
+Goal: (leq n y = true)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3.076 seconds
+
+gv1 : bool = true
+gv0 : bool = (leq n y)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 28.005 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (less y n = false)
+
+----------------------------------
+Goal: (leq n y = true)
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (less y n = false)
+ -- (leq n y = gv0)
+
+----------------------------------
+Goal: (gv0 = true)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (less y n = false)
+ -- (sorted (cons n nil) = gv1)
+
+----------------------------------
+Goal: (leq n y = gv1)
+Case: Valid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 28.146 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+less : (Nat -> Nat -> bool)
+leq : (Nat -> Nat -> bool)
+insort : (Nat -> Lst -> Lst)
+sorted : (Lst -> bool)
+sort : (Lst -> Lst)
+zero : Nat
+succ : (Nat -> Nat)
+nil : Lst
+cons : (Nat -> Lst -> Lst)
+
+Label: 0 (0)
+Abducted Assumption: (less y n = false)
+Positive Examples: 28
+Negative Examples: 21
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 84
+Negative Examples: 28
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 28.279 seconds
+
+
+Label: 0 (0)
+(y = y), (y = n), (n = y), (n = n), (false = leq y y), (false = leq y n), (false = leq n y), (false = leq n n), (false = less y y), (false = less y n)
+(false = less n y), (false = less n n), (true = leq y y), (true = leq y n), (true = leq n y), (true = leq n n), (true = less y y), (true = less y n), (true = less n y), (true = less n n)
+(y <> y), (y <> n), (n <> y), (n <> n), (succ y = y), (succ y = n), (succ n = y), (succ n = n), (zero = succ y), (zero = succ n)
+(less y y = leq y y), (less y y = leq y n), (less y y = leq n y), (less y y = leq n n), (less y n = leq y y), (less y n = leq y n), (less y n = leq n y), (less y n = leq n n), (less n y = leq y y), (less n y = leq y n)
+(less n y = leq n y), (less n y = leq n n), (less n n = leq y y), (less n n = leq y n), (less n n = leq n y), (less n n = leq n n), (None = Some y), (None = Some n)
+
+Label: 1 (1)
+(false = gv0), (true = gv0), (y = y), (y = n), (n = y), (n = n), (gv0 = gv0), (false = leq y y), (false = leq y n), (false = leq n y)
+(false = leq n n), (false = less y y), (false = less y n), (false = less n y), (false = less n n), (true = leq y y), (true = leq y n), (true = leq n y), (true = leq n n), (true = less y y)
+(true = less y n), (true = less n y), (true = less n n), (false <> gv0), (true <> gv0), (y <> y), (y <> n), (n <> y), (n <> n), (gv0 <> gv0)
+(succ y = y), (succ y = n), (succ n = y), (succ n = n), (zero = succ y), (zero = succ n), (leq y y = gv0), (leq y n = gv0), (leq n y = gv0), (leq n n = gv0)
+(less y y = gv0), (less y y = leq y y), (less y y = leq y n), (less y y = leq n y), (less y y = leq n n), (less y n = gv0), (less y n = leq y y), (less y n = leq y n), (less y n = leq n y), (less y n = leq n n)
+(less n y = gv0), (less n y = leq y y), (less n y = leq y n), (less n y = leq n y), (less n y = leq n n), (less n n = gv0), (less n n = leq y y), (less n n = leq y n), (less n n = leq n y), (less n n = leq n n)
+(None = Some gv0), (None = Some y), (None = Some n)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 29.795 seconds
+
+
+Label: 0 (0)
+(true = leq n y), (false = less y n)
+
+Label: 1 (1)
+(true = gv0), (false <> gv0), (leq y y = gv0), (leq n y = gv0), (leq n n = gv0)
+
+
+
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 43.348 seconds
+
+Number of Result Pairs Returned: 5
+
+1. (sorted (cons n nil) = gv1 -> less y n = false -> leq n y = gv1)
+
+2. (less y n = false -> leq n y = true)
+
+3. (false <> gv0 -> gv0 = true)
+
+4. (leq y y = gv0 -> gv0 = true)
+
+5. (leq n n = gv0 -> gv0 = true)

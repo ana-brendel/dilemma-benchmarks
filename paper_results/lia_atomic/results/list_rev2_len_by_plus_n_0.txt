@@ -1,0 +1,270 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (len (rev l Nil) = len l)
+
+----------------------------------
+Goal: (S (len l + 0) = S (len l))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3. seconds
+
+gv4 : nat = (S (len l))
+gv0 : nat = (S (len l + 0))
+gv3 : nat = 0
+gv2 : nat = (len l)
+gv1 : nat = (len l + 0)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 36.097 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (S (len l + 0) = S (len l))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (len l + 0 = gv1)
+
+----------------------------------
+Goal: (S gv1 = S (len l))
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (0 = gv3)
+
+----------------------------------
+Goal: (S (len l + gv3) = S (len l))
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+
+----------------------------------
+Goal: (S (gv2 + 0) = S gv2)
+Case: Valid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (gv2 + 0 = gv1)
+ -- (len l = gv2)
+
+----------------------------------
+Goal: (S gv1 = S gv2)
+Case: Invalid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (0 = gv3)
+ -- (len l = gv2)
+
+----------------------------------
+Goal: (S (gv2 + gv3) = S gv2)
+Case: Invalid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (S (gv2 + 0) = gv0)
+ -- (len l = gv2)
+
+----------------------------------
+Goal: (gv0 = S gv2)
+Case: Invalid and Generalized
+
+Label: Generalization #7
+Assumptions: 
+ -- (S gv2 = gv4)
+ -- (len l = gv2)
+
+----------------------------------
+Goal: (S (gv2 + 0) = gv4)
+Case: Invalid and Generalized
+
+Label: Generalization #8
+Assumptions: 
+ -- (S (len l + 0) = gv0)
+
+----------------------------------
+Goal: (gv0 = S (len l))
+Case: Invalid and Generalized
+
+Label: Generalization #9
+Assumptions: 
+ -- (S (len l) = gv4)
+
+----------------------------------
+Goal: (S (len l + 0) = gv4)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 36.237 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+lst : Set
+len : (lst -> nat)
+rev : (lst -> lst -> lst)
+Nil : lst
+Cons : (nat -> lst -> lst)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 250
+Negative Examples: 500
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 245
+Negative Examples: 500
+
+Label: 6 (6)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 7 (7)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 36.375 seconds
+
+
+Label: 0 (0)
+(gv1 < gv1), (gv1 <= gv1), (l = l), (gv1 = gv1), (gv1 < len l), (len l < gv1), (gv1 <= len l), (len l <= gv1), (~ gv1 < gv1), (~ gv1 <= gv1)
+(l <> l), (gv1 <> gv1), (None = Some gv1), (None = Some l), (len l = gv1), (Cons gv1 l = l), (Cons gv1 l = rev l l), (rev l l = l), (Nil = Cons gv1 l), (Nil = rev l l)
+
+Label: 1 (1)
+(gv3 < gv3), (gv3 <= gv3), (gv3 = gv3), (l = l), (gv3 < len l), (len l < gv3), (gv3 <= len l), (len l <= gv3), (~ gv3 < gv3), (~ gv3 <= gv3)
+(gv3 <> gv3), (l <> l), (None = Some gv3), (None = Some l), (len l = gv3), (Cons gv3 l = l), (Cons gv3 l = rev l l), (rev l l = l), (Nil = Cons gv3 l), (Nil = rev l l)
+
+Label: 2 (2)
+(gv2 < gv2), (gv2 < gv1), (gv1 < gv2), (gv1 < gv1), (gv2 <= gv2), (gv2 <= gv1), (gv1 <= gv2), (gv1 <= gv1), (l = l), (gv2 = gv2)
+(gv2 = gv1), (gv1 = gv2), (gv1 = gv1), (gv2 < len l), (gv1 < len l), (len l < gv2), (len l < gv1), (gv2 <= len l), (gv1 <= len l), (len l <= gv2)
+(len l <= gv1), (~ gv2 < gv2), (~ gv2 < gv1), (~ gv1 < gv2), (~ gv1 < gv1), (~ gv2 <= gv2), (~ gv2 <= gv1), (~ gv1 <= gv2), (~ gv1 <= gv1), (l <> l)
+(gv2 <> gv2), (gv2 <> gv1), (gv1 <> gv2), (gv1 <> gv1), (None = Some gv2), (None = Some gv1), (None = Some l), (len l = gv2), (len l = gv1), (Cons gv2 l = l)
+(Cons gv2 l = rev l l), (Cons gv1 l = l), (Cons gv1 l = rev l l), (rev l l = l), (Nil = Cons gv2 l), (Nil = Cons gv1 l), (Nil = rev l l)
+
+Label: 3 (3)
+(gv3 < gv3), (gv3 < gv2), (gv2 < gv3), (gv2 < gv2), (gv3 <= gv3), (gv3 <= gv2), (gv2 <= gv3), (gv2 <= gv2), (l = l), (gv3 = gv3)
+(gv3 = gv2), (gv2 = gv3), (gv2 = gv2), (gv3 < len l), (gv2 < len l), (len l < gv3), (len l < gv2), (gv3 <= len l), (gv2 <= len l), (len l <= gv3)
+(len l <= gv2), (~ gv3 < gv3), (~ gv3 < gv2), (~ gv2 < gv3), (~ gv2 < gv2), (~ gv3 <= gv3), (~ gv3 <= gv2), (~ gv2 <= gv3), (~ gv2 <= gv2), (l <> l)
+(gv3 <> gv3), (gv3 <> gv2), (gv2 <> gv3), (gv2 <> gv2), (None = Some gv3), (None = Some gv2), (None = Some l), (len l = gv3), (len l = gv2), (Cons gv3 l = l)
+(Cons gv3 l = rev l l), (Cons gv2 l = l), (Cons gv2 l = rev l l), (rev l l = l), (Nil = Cons gv3 l), (Nil = Cons gv2 l), (Nil = rev l l)
+
+Label: 4 (4)
+(gv2 < gv2), (gv2 < gv0), (gv0 < gv2), (gv0 < gv0), (gv2 <= gv2), (gv2 <= gv0), (gv0 <= gv2), (gv0 <= gv0), (l = l), (gv2 = gv2)
+(gv2 = gv0), (gv0 = gv2), (gv0 = gv0), (gv2 < len l), (gv0 < len l), (len l < gv2), (len l < gv0), (gv2 <= len l), (gv0 <= len l), (len l <= gv2)
+(len l <= gv0), (~ gv2 < gv2), (~ gv2 < gv0), (~ gv0 < gv2), (~ gv0 < gv0), (~ gv2 <= gv2), (~ gv2 <= gv0), (~ gv0 <= gv2), (~ gv0 <= gv0), (l <> l)
+(gv2 <> gv2), (gv2 <> gv0), (gv0 <> gv2), (gv0 <> gv0), (None = Some gv2), (None = Some gv0), (None = Some l), (len l = gv2), (len l = gv0), (Cons gv2 l = l)
+(Cons gv2 l = rev l l), (Cons gv0 l = l), (Cons gv0 l = rev l l), (rev l l = l), (Nil = Cons gv2 l), (Nil = Cons gv0 l), (Nil = rev l l)
+
+Label: 5 (5)
+(gv4 < gv4), (gv4 < gv2), (gv2 < gv4), (gv2 < gv2), (gv4 <= gv4), (gv4 <= gv2), (gv2 <= gv4), (gv2 <= gv2), (l = l), (gv4 = gv4)
+(gv4 = gv2), (gv2 = gv4), (gv2 = gv2), (gv4 < len l), (gv2 < len l), (len l < gv4), (len l < gv2), (gv4 <= len l), (gv2 <= len l), (len l <= gv4)
+(len l <= gv2), (~ gv4 < gv4), (~ gv4 < gv2), (~ gv2 < gv4), (~ gv2 < gv2), (~ gv4 <= gv4), (~ gv4 <= gv2), (~ gv2 <= gv4), (~ gv2 <= gv2), (l <> l)
+(gv4 <> gv4), (gv4 <> gv2), (gv2 <> gv4), (gv2 <> gv2), (None = Some gv4), (None = Some gv2), (None = Some l), (len l = gv4), (len l = gv2), (Cons gv4 l = l)
+(Cons gv4 l = rev l l), (Cons gv2 l = l), (Cons gv2 l = rev l l), (rev l l = l), (Nil = Cons gv4 l), (Nil = Cons gv2 l), (Nil = rev l l)
+
+Label: 6 (6)
+(gv0 < gv0), (gv0 <= gv0), (l = l), (gv0 = gv0), (gv0 < len l), (len l < gv0), (gv0 <= len l), (len l <= gv0), (~ gv0 < gv0), (~ gv0 <= gv0)
+(l <> l), (gv0 <> gv0), (None = Some gv0), (None = Some l), (len l = gv0), (Cons gv0 l = l), (Cons gv0 l = rev l l), (rev l l = l), (Nil = Cons gv0 l), (Nil = rev l l)
+
+Label: 7 (7)
+(gv4 < gv4), (gv4 <= gv4), (gv4 = gv4), (l = l), (gv4 < len l), (len l < gv4), (gv4 <= len l), (len l <= gv4), (~ gv4 < gv4), (~ gv4 <= gv4)
+(gv4 <> gv4), (l <> l), (None = Some gv4), (None = Some l), (len l = gv4), (Cons gv4 l = l), (Cons gv4 l = rev l l), (rev l l = l), (Nil = Cons gv4 l), (Nil = rev l l)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 41.916 seconds
+
+
+Label: 0 (0)
+(len l = gv1)
+
+Label: 1 (1)
+
+Label: 2 (2)
+(gv2 = gv1), (gv1 = gv2)
+
+Label: 3 (3)
+
+Label: 4 (4)
+
+Label: 5 (5)
+
+Label: 6 (6)
+
+Label: 7 (7)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (S (gv2 + 0) = S gv2)
+
+2. (S (len l + 0) = S (len l))
+
+3. (len l = len l + 0)
+
+4. (gv2 + 0 = gv2)
+
+5. (gv2 = gv1 -> S gv1 = S gv2)
+
+6. (gv1 = gv2 -> S gv1 = S gv2)
+
+7. (len l = gv1 -> S gv1 = S (len l))
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 58.832 seconds
+
+Number of Result Pairs Returned: 7
+
+1. (S (gv2 + 0) = S gv2)
+
+2. (S (len l + 0) = S (len l))
+
+3. (len l = len l + 0)
+
+4. (gv2 + 0 = gv2)
+
+5. (gv2 = gv1 -> S gv1 = S gv2)

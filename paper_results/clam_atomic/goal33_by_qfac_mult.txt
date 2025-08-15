@@ -1,0 +1,330 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (fac x = qfac x (succ zero))
+
+----------------------------------
+Goal: (mult (fac x) x = qfac x x)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3.071 seconds
+
+gv2 : Nat = (qfac x x)
+gv1 : Nat = (fac x)
+gv0 : Nat = (mult (fac x) x)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 29.872 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (mult (fac x) x = qfac x x)
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (mult (fac x) x = gv0)
+
+----------------------------------
+Goal: (gv0 = qfac x x)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (gv1 = qfac x (succ zero))
+
+----------------------------------
+Goal: (mult gv1 x = qfac x x)
+Case: Valid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (mult gv1 x = gv0)
+
+----------------------------------
+Goal: (gv0 = qfac x x)
+Case: Not Stable
+
+Label: Generalization #4
+Assumptions: 
+ -- (fac x = gv1)
+ -- (qfac x x = gv2)
+
+----------------------------------
+Goal: (mult gv1 x = gv2)
+Case: Invalid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (qfac x x = gv2)
+
+----------------------------------
+Goal: (mult (fac x) x = gv2)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 29.997 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+plus : (Nat -> Nat -> Nat)
+mult : (Nat -> Nat -> Nat)
+fac : (Nat -> Nat)
+qfac : (Nat -> Nat -> Nat)
+succ : (Nat -> Nat)
+zero : Nat
+nil : Lst
+cons : (Nat -> Lst -> Lst)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 56
+Negative Examples: 42
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 348
+Negative Examples: 314
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 56
+Negative Examples: 42
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 30.195 seconds
+
+
+Label: 0 (0)
+(x = x), (x = gv0), (gv0 = x), (gv0 = gv0), (x <> x), (x <> gv0), (gv0 <> x), (gv0 <> gv0), (None = Some x), (None = Some gv0)
+(succ x = x), (succ x = gv0), (succ x = qfac x x), (succ x = qfac x gv0), (succ x = qfac gv0 x), (succ x = qfac gv0 gv0), (succ x = fac x), (succ x = fac gv0), (succ x = mult x x), (succ x = mult x gv0)
+(succ x = mult gv0 x), (succ x = mult gv0 gv0), (succ x = plus x x), (succ x = plus x gv0), (succ x = plus gv0 x), (succ x = plus gv0 gv0), (succ gv0 = x), (succ gv0 = gv0), (succ gv0 = qfac x x), (succ gv0 = qfac x gv0)
+(succ gv0 = qfac gv0 x), (succ gv0 = qfac gv0 gv0), (succ gv0 = fac x), (succ gv0 = fac gv0), (succ gv0 = mult x x), (succ gv0 = mult x gv0), (succ gv0 = mult gv0 x), (succ gv0 = mult gv0 gv0), (succ gv0 = plus x x), (succ gv0 = plus x gv0)
+(succ gv0 = plus gv0 x), (succ gv0 = plus gv0 gv0), (qfac x x = x), (qfac x x = gv0), (qfac x x = fac x), (qfac x x = fac gv0), (qfac x x = mult x x), (qfac x x = mult x gv0), (qfac x x = mult gv0 x), (qfac x x = mult gv0 gv0)
+(qfac x x = plus x x), (qfac x x = plus x gv0), (qfac x x = plus gv0 x), (qfac x x = plus gv0 gv0), (qfac x gv0 = x), (qfac x gv0 = gv0), (qfac x gv0 = fac x), (qfac x gv0 = fac gv0), (qfac x gv0 = mult x x), (qfac x gv0 = mult x gv0)
+(qfac x gv0 = mult gv0 x), (qfac x gv0 = mult gv0 gv0), (qfac x gv0 = plus x x), (qfac x gv0 = plus x gv0), (qfac x gv0 = plus gv0 x), (qfac x gv0 = plus gv0 gv0), (qfac gv0 x = x), (qfac gv0 x = gv0), (qfac gv0 x = fac x), (qfac gv0 x = fac gv0)
+(qfac gv0 x = mult x x), (qfac gv0 x = mult x gv0), (qfac gv0 x = mult gv0 x), (qfac gv0 x = mult gv0 gv0), (qfac gv0 x = plus x x), (qfac gv0 x = plus x gv0), (qfac gv0 x = plus gv0 x), (qfac gv0 x = plus gv0 gv0), (qfac gv0 gv0 = x), (qfac gv0 gv0 = gv0)
+(qfac gv0 gv0 = fac x), (qfac gv0 gv0 = fac gv0), (qfac gv0 gv0 = mult x x), (qfac gv0 gv0 = mult x gv0), (qfac gv0 gv0 = mult gv0 x), (qfac gv0 gv0 = mult gv0 gv0), (qfac gv0 gv0 = plus x x), (qfac gv0 gv0 = plus x gv0), (qfac gv0 gv0 = plus gv0 x), (qfac gv0 gv0 = plus gv0 gv0)
+(fac x = x), (fac x = gv0), (fac gv0 = x), (fac gv0 = gv0), (mult x x = x), (mult x x = gv0), (mult x x = fac x), (mult x x = fac gv0), (mult x gv0 = x), (mult x gv0 = gv0)
+(mult x gv0 = fac x), (mult x gv0 = fac gv0), (mult gv0 x = x), (mult gv0 x = gv0), (mult gv0 x = fac x), (mult gv0 x = fac gv0), (mult gv0 gv0 = x), (mult gv0 gv0 = gv0), (mult gv0 gv0 = fac x), (mult gv0 gv0 = fac gv0)
+(plus x x = x), (plus x x = gv0), (plus x x = fac x), (plus x x = fac gv0), (plus x x = mult x x), (plus x x = mult x gv0), (plus x x = mult gv0 x), (plus x x = mult gv0 gv0), (plus x gv0 = x), (plus x gv0 = gv0)
+(plus x gv0 = fac x), (plus x gv0 = fac gv0), (plus x gv0 = mult x x), (plus x gv0 = mult x gv0), (plus x gv0 = mult gv0 x), (plus x gv0 = mult gv0 gv0), (plus gv0 x = x), (plus gv0 x = gv0), (plus gv0 x = fac x), (plus gv0 x = fac gv0)
+(plus gv0 x = mult x x), (plus gv0 x = mult x gv0), (plus gv0 x = mult gv0 x), (plus gv0 x = mult gv0 gv0), (plus gv0 gv0 = x), (plus gv0 gv0 = gv0), (plus gv0 gv0 = fac x), (plus gv0 gv0 = fac gv0), (plus gv0 gv0 = mult x x), (plus gv0 gv0 = mult x gv0)
+(plus gv0 gv0 = mult gv0 x), (plus gv0 gv0 = mult gv0 gv0), (zero = succ x), (zero = succ gv0), (zero = qfac x x), (zero = qfac x gv0), (zero = qfac gv0 x), (zero = qfac gv0 gv0), (zero = fac x), (zero = fac gv0)
+(zero = mult x x), (zero = mult x gv0), (zero = mult gv0 x), (zero = mult gv0 gv0), (zero = plus x x), (zero = plus x gv0), (zero = plus gv0 x), (zero = plus gv0 gv0)
+
+Label: 1 (1)
+(gv2 = gv2), (gv2 = x), (gv2 = gv1), (x = gv2), (x = x), (x = gv1), (gv1 = gv2), (gv1 = x), (gv1 = gv1), (gv2 <> gv2)
+(gv2 <> x), (gv2 <> gv1), (x <> gv2), (x <> x), (x <> gv1), (gv1 <> gv2), (gv1 <> x), (gv1 <> gv1), (None = Some gv2), (None = Some x)
+(None = Some gv1), (succ gv2 = gv2), (succ gv2 = x), (succ gv2 = gv1), (succ gv2 = qfac gv2 gv2), (succ gv2 = qfac gv2 x), (succ gv2 = qfac gv2 gv1), (succ gv2 = qfac x gv2), (succ gv2 = qfac x x), (succ gv2 = qfac x gv1)
+(succ gv2 = qfac gv1 gv2), (succ gv2 = qfac gv1 x), (succ gv2 = qfac gv1 gv1), (succ gv2 = fac gv2), (succ gv2 = fac x), (succ gv2 = fac gv1), (succ gv2 = mult gv2 gv2), (succ gv2 = mult gv2 x), (succ gv2 = mult gv2 gv1), (succ gv2 = mult x gv2)
+(succ gv2 = mult x x), (succ gv2 = mult x gv1), (succ gv2 = mult gv1 gv2), (succ gv2 = mult gv1 x), (succ gv2 = mult gv1 gv1), (succ gv2 = plus gv2 gv2), (succ gv2 = plus gv2 x), (succ gv2 = plus gv2 gv1), (succ gv2 = plus x gv2), (succ gv2 = plus x x)
+(succ gv2 = plus x gv1), (succ gv2 = plus gv1 gv2), (succ gv2 = plus gv1 x), (succ gv2 = plus gv1 gv1), (succ x = gv2), (succ x = x), (succ x = gv1), (succ x = qfac gv2 gv2), (succ x = qfac gv2 x), (succ x = qfac gv2 gv1)
+(succ x = qfac x gv2), (succ x = qfac x x), (succ x = qfac x gv1), (succ x = qfac gv1 gv2), (succ x = qfac gv1 x), (succ x = qfac gv1 gv1), (succ x = fac gv2), (succ x = fac x), (succ x = fac gv1), (succ x = mult gv2 gv2)
+(succ x = mult gv2 x), (succ x = mult gv2 gv1), (succ x = mult x gv2), (succ x = mult x x), (succ x = mult x gv1), (succ x = mult gv1 gv2), (succ x = mult gv1 x), (succ x = mult gv1 gv1), (succ x = plus gv2 gv2), (succ x = plus gv2 x)
+(succ x = plus gv2 gv1), (succ x = plus x gv2), (succ x = plus x x), (succ x = plus x gv1), (succ x = plus gv1 gv2), (succ x = plus gv1 x), (succ x = plus gv1 gv1), (succ gv1 = gv2), (succ gv1 = x), (succ gv1 = gv1)
+(succ gv1 = qfac gv2 gv2), (succ gv1 = qfac gv2 x), (succ gv1 = qfac gv2 gv1), (succ gv1 = qfac x gv2), (succ gv1 = qfac x x), (succ gv1 = qfac x gv1), (succ gv1 = qfac gv1 gv2), (succ gv1 = qfac gv1 x), (succ gv1 = qfac gv1 gv1), (succ gv1 = fac gv2)
+(succ gv1 = fac x), (succ gv1 = fac gv1), (succ gv1 = mult gv2 gv2), (succ gv1 = mult gv2 x), (succ gv1 = mult gv2 gv1), (succ gv1 = mult x gv2), (succ gv1 = mult x x), (succ gv1 = mult x gv1), (succ gv1 = mult gv1 gv2), (succ gv1 = mult gv1 x)
+(succ gv1 = mult gv1 gv1), (succ gv1 = plus gv2 gv2), (succ gv1 = plus gv2 x), (succ gv1 = plus gv2 gv1), (succ gv1 = plus x gv2), (succ gv1 = plus x x), (succ gv1 = plus x gv1), (succ gv1 = plus gv1 gv2), (succ gv1 = plus gv1 x), (succ gv1 = plus gv1 gv1)
+(qfac gv2 gv2 = gv2), (qfac gv2 gv2 = x), (qfac gv2 gv2 = gv1), (qfac gv2 gv2 = fac gv2), (qfac gv2 gv2 = fac x), (qfac gv2 gv2 = fac gv1), (qfac gv2 gv2 = mult gv2 gv2), (qfac gv2 gv2 = mult gv2 x), (qfac gv2 gv2 = mult gv2 gv1), (qfac gv2 gv2 = mult x gv2)
+(qfac gv2 gv2 = mult x x), (qfac gv2 gv2 = mult x gv1), (qfac gv2 gv2 = mult gv1 gv2), (qfac gv2 gv2 = mult gv1 x), (qfac gv2 gv2 = mult gv1 gv1), (qfac gv2 gv2 = plus gv2 gv2), (qfac gv2 gv2 = plus gv2 x), (qfac gv2 gv2 = plus gv2 gv1), (qfac gv2 gv2 = plus x gv2), (qfac gv2 gv2 = plus x x)
+(qfac gv2 gv2 = plus x gv1), (qfac gv2 gv2 = plus gv1 gv2), (qfac gv2 gv2 = plus gv1 x), (qfac gv2 gv2 = plus gv1 gv1), (qfac gv2 x = gv2), (qfac gv2 x = x), (qfac gv2 x = gv1), (qfac gv2 x = fac gv2), (qfac gv2 x = fac x), (qfac gv2 x = fac gv1)
+(qfac gv2 x = mult gv2 gv2), (qfac gv2 x = mult gv2 x), (qfac gv2 x = mult gv2 gv1), (qfac gv2 x = mult x gv2), (qfac gv2 x = mult x x), (qfac gv2 x = mult x gv1), (qfac gv2 x = mult gv1 gv2), (qfac gv2 x = mult gv1 x), (qfac gv2 x = mult gv1 gv1), (qfac gv2 x = plus gv2 gv2)
+(qfac gv2 x = plus gv2 x), (qfac gv2 x = plus gv2 gv1), (qfac gv2 x = plus x gv2), (qfac gv2 x = plus x x), (qfac gv2 x = plus x gv1), (qfac gv2 x = plus gv1 gv2), (qfac gv2 x = plus gv1 x), (qfac gv2 x = plus gv1 gv1), (qfac gv2 gv1 = gv2), (qfac gv2 gv1 = x)
+(qfac gv2 gv1 = gv1), (qfac gv2 gv1 = fac gv2), (qfac gv2 gv1 = fac x), (qfac gv2 gv1 = fac gv1), (qfac gv2 gv1 = mult gv2 gv2), (qfac gv2 gv1 = mult gv2 x), (qfac gv2 gv1 = mult gv2 gv1), (qfac gv2 gv1 = mult x gv2), (qfac gv2 gv1 = mult x x), (qfac gv2 gv1 = mult x gv1)
+(qfac gv2 gv1 = mult gv1 gv2), (qfac gv2 gv1 = mult gv1 x), (qfac gv2 gv1 = mult gv1 gv1), (qfac gv2 gv1 = plus gv2 gv2), (qfac gv2 gv1 = plus gv2 x), (qfac gv2 gv1 = plus gv2 gv1), (qfac gv2 gv1 = plus x gv2), (qfac gv2 gv1 = plus x x), (qfac gv2 gv1 = plus x gv1), (qfac gv2 gv1 = plus gv1 gv2)
+(qfac gv2 gv1 = plus gv1 x), (qfac gv2 gv1 = plus gv1 gv1), (qfac x gv2 = gv2), (qfac x gv2 = x), (qfac x gv2 = gv1), (qfac x gv2 = fac gv2), (qfac x gv2 = fac x), (qfac x gv2 = fac gv1), (qfac x gv2 = mult gv2 gv2), (qfac x gv2 = mult gv2 x)
+(qfac x gv2 = mult gv2 gv1), (qfac x gv2 = mult x gv2), (qfac x gv2 = mult x x), (qfac x gv2 = mult x gv1), (qfac x gv2 = mult gv1 gv2), (qfac x gv2 = mult gv1 x), (qfac x gv2 = mult gv1 gv1), (qfac x gv2 = plus gv2 gv2), (qfac x gv2 = plus gv2 x), (qfac x gv2 = plus gv2 gv1)
+(qfac x gv2 = plus x gv2), (qfac x gv2 = plus x x), (qfac x gv2 = plus x gv1), (qfac x gv2 = plus gv1 gv2), (qfac x gv2 = plus gv1 x), (qfac x gv2 = plus gv1 gv1), (qfac x x = gv2), (qfac x x = x), (qfac x x = gv1), (qfac x x = fac gv2)
+(qfac x x = fac x), (qfac x x = fac gv1), (qfac x x = mult gv2 gv2), (qfac x x = mult gv2 x), (qfac x x = mult gv2 gv1), (qfac x x = mult x gv2), (qfac x x = mult x x), (qfac x x = mult x gv1), (qfac x x = mult gv1 gv2), (qfac x x = mult gv1 x)
+(qfac x x = mult gv1 gv1), (qfac x x = plus gv2 gv2), (qfac x x = plus gv2 x), (qfac x x = plus gv2 gv1), (qfac x x = plus x gv2), (qfac x x = plus x x), (qfac x x = plus x gv1), (qfac x x = plus gv1 gv2), (qfac x x = plus gv1 x), (qfac x x = plus gv1 gv1)
+(qfac x gv1 = gv2), (qfac x gv1 = x), (qfac x gv1 = gv1), (qfac x gv1 = fac gv2), (qfac x gv1 = fac x), (qfac x gv1 = fac gv1), (qfac x gv1 = mult gv2 gv2), (qfac x gv1 = mult gv2 x), (qfac x gv1 = mult gv2 gv1), (qfac x gv1 = mult x gv2)
+(qfac x gv1 = mult x x), (qfac x gv1 = mult x gv1), (qfac x gv1 = mult gv1 gv2), (qfac x gv1 = mult gv1 x), (qfac x gv1 = mult gv1 gv1), (qfac x gv1 = plus gv2 gv2), (qfac x gv1 = plus gv2 x), (qfac x gv1 = plus gv2 gv1), (qfac x gv1 = plus x gv2), (qfac x gv1 = plus x x)
+(qfac x gv1 = plus x gv1), (qfac x gv1 = plus gv1 gv2), (qfac x gv1 = plus gv1 x), (qfac x gv1 = plus gv1 gv1), (qfac gv1 gv2 = gv2), (qfac gv1 gv2 = x), (qfac gv1 gv2 = gv1), (qfac gv1 gv2 = fac gv2), (qfac gv1 gv2 = fac x), (qfac gv1 gv2 = fac gv1)
+(qfac gv1 gv2 = mult gv2 gv2), (qfac gv1 gv2 = mult gv2 x), (qfac gv1 gv2 = mult gv2 gv1), (qfac gv1 gv2 = mult x gv2), (qfac gv1 gv2 = mult x x), (qfac gv1 gv2 = mult x gv1), (qfac gv1 gv2 = mult gv1 gv2), (qfac gv1 gv2 = mult gv1 x), (qfac gv1 gv2 = mult gv1 gv1), (qfac gv1 gv2 = plus gv2 gv2)
+(qfac gv1 gv2 = plus gv2 x), (qfac gv1 gv2 = plus gv2 gv1), (qfac gv1 gv2 = plus x gv2), (qfac gv1 gv2 = plus x x), (qfac gv1 gv2 = plus x gv1), (qfac gv1 gv2 = plus gv1 gv2), (qfac gv1 gv2 = plus gv1 x), (qfac gv1 gv2 = plus gv1 gv1), (qfac gv1 x = gv2), (qfac gv1 x = x)
+(qfac gv1 x = gv1), (qfac gv1 x = fac gv2), (qfac gv1 x = fac x), (qfac gv1 x = fac gv1), (qfac gv1 x = mult gv2 gv2), (qfac gv1 x = mult gv2 x), (qfac gv1 x = mult gv2 gv1), (qfac gv1 x = mult x gv2), (qfac gv1 x = mult x x), (qfac gv1 x = mult x gv1)
+(qfac gv1 x = mult gv1 gv2), (qfac gv1 x = mult gv1 x), (qfac gv1 x = mult gv1 gv1), (qfac gv1 x = plus gv2 gv2), (qfac gv1 x = plus gv2 x), (qfac gv1 x = plus gv2 gv1), (qfac gv1 x = plus x gv2), (qfac gv1 x = plus x x), (qfac gv1 x = plus x gv1), (qfac gv1 x = plus gv1 gv2)
+(qfac gv1 x = plus gv1 x), (qfac gv1 x = plus gv1 gv1), (qfac gv1 gv1 = gv2), (qfac gv1 gv1 = x), (qfac gv1 gv1 = gv1), (qfac gv1 gv1 = fac gv2), (qfac gv1 gv1 = fac x), (qfac gv1 gv1 = fac gv1), (qfac gv1 gv1 = mult gv2 gv2), (qfac gv1 gv1 = mult gv2 x)
+(qfac gv1 gv1 = mult gv2 gv1), (qfac gv1 gv1 = mult x gv2), (qfac gv1 gv1 = mult x x), (qfac gv1 gv1 = mult x gv1), (qfac gv1 gv1 = mult gv1 gv2), (qfac gv1 gv1 = mult gv1 x), (qfac gv1 gv1 = mult gv1 gv1), (qfac gv1 gv1 = plus gv2 gv2), (qfac gv1 gv1 = plus gv2 x), (qfac gv1 gv1 = plus gv2 gv1)
+(qfac gv1 gv1 = plus x gv2), (qfac gv1 gv1 = plus x x), (qfac gv1 gv1 = plus x gv1), (qfac gv1 gv1 = plus gv1 gv2), (qfac gv1 gv1 = plus gv1 x), (qfac gv1 gv1 = plus gv1 gv1), (fac gv2 = gv2), (fac gv2 = x), (fac gv2 = gv1), (fac x = gv2)
+(fac x = x), (fac x = gv1), (fac gv1 = gv2), (fac gv1 = x), (fac gv1 = gv1), (mult gv2 gv2 = gv2), (mult gv2 gv2 = x), (mult gv2 gv2 = gv1), (mult gv2 gv2 = fac gv2), (mult gv2 gv2 = fac x)
+(mult gv2 gv2 = fac gv1), (mult gv2 x = gv2), (mult gv2 x = x), (mult gv2 x = gv1), (mult gv2 x = fac gv2), (mult gv2 x = fac x), (mult gv2 x = fac gv1), (mult gv2 gv1 = gv2), (mult gv2 gv1 = x), (mult gv2 gv1 = gv1)
+(mult gv2 gv1 = fac gv2), (mult gv2 gv1 = fac x), (mult gv2 gv1 = fac gv1), (mult x gv2 = gv2), (mult x gv2 = x), (mult x gv2 = gv1), (mult x gv2 = fac gv2), (mult x gv2 = fac x), (mult x gv2 = fac gv1), (mult x x = gv2)
+(mult x x = x), (mult x x = gv1), (mult x x = fac gv2), (mult x x = fac x), (mult x x = fac gv1), (mult x gv1 = gv2), (mult x gv1 = x), (mult x gv1 = gv1), (mult x gv1 = fac gv2), (mult x gv1 = fac x)
+(mult x gv1 = fac gv1), (mult gv1 gv2 = gv2), (mult gv1 gv2 = x), (mult gv1 gv2 = gv1), (mult gv1 gv2 = fac gv2), (mult gv1 gv2 = fac x), (mult gv1 gv2 = fac gv1), (mult gv1 x = gv2), (mult gv1 x = x), (mult gv1 x = gv1)
+(mult gv1 x = fac gv2), (mult gv1 x = fac x), (mult gv1 x = fac gv1), (mult gv1 gv1 = gv2), (mult gv1 gv1 = x), (mult gv1 gv1 = gv1), (mult gv1 gv1 = fac gv2), (mult gv1 gv1 = fac x), (mult gv1 gv1 = fac gv1), (plus gv2 gv2 = gv2)
+(plus gv2 gv2 = x), (plus gv2 gv2 = gv1), (plus gv2 gv2 = fac gv2), (plus gv2 gv2 = fac x), (plus gv2 gv2 = fac gv1), (plus gv2 gv2 = mult gv2 gv2), (plus gv2 gv2 = mult gv2 x), (plus gv2 gv2 = mult gv2 gv1), (plus gv2 gv2 = mult x gv2), (plus gv2 gv2 = mult x x)
+(plus gv2 gv2 = mult x gv1), (plus gv2 gv2 = mult gv1 gv2), (plus gv2 gv2 = mult gv1 x), (plus gv2 gv2 = mult gv1 gv1), (plus gv2 x = gv2), (plus gv2 x = x), (plus gv2 x = gv1), (plus gv2 x = fac gv2), (plus gv2 x = fac x), (plus gv2 x = fac gv1)
+(plus gv2 x = mult gv2 gv2), (plus gv2 x = mult gv2 x), (plus gv2 x = mult gv2 gv1), (plus gv2 x = mult x gv2), (plus gv2 x = mult x x), (plus gv2 x = mult x gv1), (plus gv2 x = mult gv1 gv2), (plus gv2 x = mult gv1 x), (plus gv2 x = mult gv1 gv1), (plus gv2 gv1 = gv2)
+(plus gv2 gv1 = x), (plus gv2 gv1 = gv1), (plus gv2 gv1 = fac gv2), (plus gv2 gv1 = fac x), (plus gv2 gv1 = fac gv1), (plus gv2 gv1 = mult gv2 gv2), (plus gv2 gv1 = mult gv2 x), (plus gv2 gv1 = mult gv2 gv1), (plus gv2 gv1 = mult x gv2), (plus gv2 gv1 = mult x x)
+(plus gv2 gv1 = mult x gv1), (plus gv2 gv1 = mult gv1 gv2), (plus gv2 gv1 = mult gv1 x), (plus gv2 gv1 = mult gv1 gv1), (plus x gv2 = gv2), (plus x gv2 = x), (plus x gv2 = gv1), (plus x gv2 = fac gv2), (plus x gv2 = fac x), (plus x gv2 = fac gv1)
+(plus x gv2 = mult gv2 gv2), (plus x gv2 = mult gv2 x), (plus x gv2 = mult gv2 gv1), (plus x gv2 = mult x gv2), (plus x gv2 = mult x x), (plus x gv2 = mult x gv1), (plus x gv2 = mult gv1 gv2), (plus x gv2 = mult gv1 x), (plus x gv2 = mult gv1 gv1), (plus x x = gv2)
+(plus x x = x), (plus x x = gv1), (plus x x = fac gv2), (plus x x = fac x), (plus x x = fac gv1), (plus x x = mult gv2 gv2), (plus x x = mult gv2 x), (plus x x = mult gv2 gv1), (plus x x = mult x gv2), (plus x x = mult x x)
+(plus x x = mult x gv1), (plus x x = mult gv1 gv2), (plus x x = mult gv1 x), (plus x x = mult gv1 gv1), (plus x gv1 = gv2), (plus x gv1 = x), (plus x gv1 = gv1), (plus x gv1 = fac gv2), (plus x gv1 = fac x), (plus x gv1 = fac gv1)
+(plus x gv1 = mult gv2 gv2), (plus x gv1 = mult gv2 x), (plus x gv1 = mult gv2 gv1), (plus x gv1 = mult x gv2), (plus x gv1 = mult x x), (plus x gv1 = mult x gv1), (plus x gv1 = mult gv1 gv2), (plus x gv1 = mult gv1 x), (plus x gv1 = mult gv1 gv1), (plus gv1 gv2 = gv2)
+(plus gv1 gv2 = x), (plus gv1 gv2 = gv1), (plus gv1 gv2 = fac gv2), (plus gv1 gv2 = fac x), (plus gv1 gv2 = fac gv1), (plus gv1 gv2 = mult gv2 gv2), (plus gv1 gv2 = mult gv2 x), (plus gv1 gv2 = mult gv2 gv1), (plus gv1 gv2 = mult x gv2), (plus gv1 gv2 = mult x x)
+(plus gv1 gv2 = mult x gv1), (plus gv1 gv2 = mult gv1 gv2), (plus gv1 gv2 = mult gv1 x), (plus gv1 gv2 = mult gv1 gv1), (plus gv1 x = gv2), (plus gv1 x = x), (plus gv1 x = gv1), (plus gv1 x = fac gv2), (plus gv1 x = fac x), (plus gv1 x = fac gv1)
+(plus gv1 x = mult gv2 gv2), (plus gv1 x = mult gv2 x), (plus gv1 x = mult gv2 gv1), (plus gv1 x = mult x gv2), (plus gv1 x = mult x x), (plus gv1 x = mult x gv1), (plus gv1 x = mult gv1 gv2), (plus gv1 x = mult gv1 x), (plus gv1 x = mult gv1 gv1), (plus gv1 gv1 = gv2)
+(plus gv1 gv1 = x), (plus gv1 gv1 = gv1), (plus gv1 gv1 = fac gv2), (plus gv1 gv1 = fac x), (plus gv1 gv1 = fac gv1), (plus gv1 gv1 = mult gv2 gv2), (plus gv1 gv1 = mult gv2 x), (plus gv1 gv1 = mult gv2 gv1), (plus gv1 gv1 = mult x gv2), (plus gv1 gv1 = mult x x)
+(plus gv1 gv1 = mult x gv1), (plus gv1 gv1 = mult gv1 gv2), (plus gv1 gv1 = mult gv1 x), (plus gv1 gv1 = mult gv1 gv1), (zero = succ gv2), (zero = succ x), (zero = succ gv1), (zero = qfac gv2 gv2), (zero = qfac gv2 x), (zero = qfac gv2 gv1)
+(zero = qfac x gv2), (zero = qfac x x), (zero = qfac x gv1), (zero = qfac gv1 gv2), (zero = qfac gv1 x), (zero = qfac gv1 gv1), (zero = fac gv2), (zero = fac x), (zero = fac gv1), (zero = mult gv2 gv2)
+(zero = mult gv2 x), (zero = mult gv2 gv1), (zero = mult x gv2), (zero = mult x x), (zero = mult x gv1), (zero = mult gv1 gv2), (zero = mult gv1 x), (zero = mult gv1 gv1), (zero = plus gv2 gv2), (zero = plus gv2 x)
+(zero = plus gv2 gv1), (zero = plus x gv2), (zero = plus x x), (zero = plus x gv1), (zero = plus gv1 gv2), (zero = plus gv1 x), (zero = plus gv1 gv1)
+
+Label: 2 (2)
+(gv2 = gv2), (gv2 = x), (x = gv2), (x = x), (gv2 <> gv2), (gv2 <> x), (x <> gv2), (x <> x), (None = Some gv2), (None = Some x)
+(succ gv2 = gv2), (succ gv2 = x), (succ gv2 = qfac gv2 gv2), (succ gv2 = qfac gv2 x), (succ gv2 = qfac x gv2), (succ gv2 = qfac x x), (succ gv2 = fac gv2), (succ gv2 = fac x), (succ gv2 = mult gv2 gv2), (succ gv2 = mult gv2 x)
+(succ gv2 = mult x gv2), (succ gv2 = mult x x), (succ gv2 = plus gv2 gv2), (succ gv2 = plus gv2 x), (succ gv2 = plus x gv2), (succ gv2 = plus x x), (succ x = gv2), (succ x = x), (succ x = qfac gv2 gv2), (succ x = qfac gv2 x)
+(succ x = qfac x gv2), (succ x = qfac x x), (succ x = fac gv2), (succ x = fac x), (succ x = mult gv2 gv2), (succ x = mult gv2 x), (succ x = mult x gv2), (succ x = mult x x), (succ x = plus gv2 gv2), (succ x = plus gv2 x)
+(succ x = plus x gv2), (succ x = plus x x), (qfac gv2 gv2 = gv2), (qfac gv2 gv2 = x), (qfac gv2 gv2 = fac gv2), (qfac gv2 gv2 = fac x), (qfac gv2 gv2 = mult gv2 gv2), (qfac gv2 gv2 = mult gv2 x), (qfac gv2 gv2 = mult x gv2), (qfac gv2 gv2 = mult x x)
+(qfac gv2 gv2 = plus gv2 gv2), (qfac gv2 gv2 = plus gv2 x), (qfac gv2 gv2 = plus x gv2), (qfac gv2 gv2 = plus x x), (qfac gv2 x = gv2), (qfac gv2 x = x), (qfac gv2 x = fac gv2), (qfac gv2 x = fac x), (qfac gv2 x = mult gv2 gv2), (qfac gv2 x = mult gv2 x)
+(qfac gv2 x = mult x gv2), (qfac gv2 x = mult x x), (qfac gv2 x = plus gv2 gv2), (qfac gv2 x = plus gv2 x), (qfac gv2 x = plus x gv2), (qfac gv2 x = plus x x), (qfac x gv2 = gv2), (qfac x gv2 = x), (qfac x gv2 = fac gv2), (qfac x gv2 = fac x)
+(qfac x gv2 = mult gv2 gv2), (qfac x gv2 = mult gv2 x), (qfac x gv2 = mult x gv2), (qfac x gv2 = mult x x), (qfac x gv2 = plus gv2 gv2), (qfac x gv2 = plus gv2 x), (qfac x gv2 = plus x gv2), (qfac x gv2 = plus x x), (qfac x x = gv2), (qfac x x = x)
+(qfac x x = fac gv2), (qfac x x = fac x), (qfac x x = mult gv2 gv2), (qfac x x = mult gv2 x), (qfac x x = mult x gv2), (qfac x x = mult x x), (qfac x x = plus gv2 gv2), (qfac x x = plus gv2 x), (qfac x x = plus x gv2), (qfac x x = plus x x)
+(fac gv2 = gv2), (fac gv2 = x), (fac x = gv2), (fac x = x), (mult gv2 gv2 = gv2), (mult gv2 gv2 = x), (mult gv2 gv2 = fac gv2), (mult gv2 gv2 = fac x), (mult gv2 x = gv2), (mult gv2 x = x)
+(mult gv2 x = fac gv2), (mult gv2 x = fac x), (mult x gv2 = gv2), (mult x gv2 = x), (mult x gv2 = fac gv2), (mult x gv2 = fac x), (mult x x = gv2), (mult x x = x), (mult x x = fac gv2), (mult x x = fac x)
+(plus gv2 gv2 = gv2), (plus gv2 gv2 = x), (plus gv2 gv2 = fac gv2), (plus gv2 gv2 = fac x), (plus gv2 gv2 = mult gv2 gv2), (plus gv2 gv2 = mult gv2 x), (plus gv2 gv2 = mult x gv2), (plus gv2 gv2 = mult x x), (plus gv2 x = gv2), (plus gv2 x = x)
+(plus gv2 x = fac gv2), (plus gv2 x = fac x), (plus gv2 x = mult gv2 gv2), (plus gv2 x = mult gv2 x), (plus gv2 x = mult x gv2), (plus gv2 x = mult x x), (plus x gv2 = gv2), (plus x gv2 = x), (plus x gv2 = fac gv2), (plus x gv2 = fac x)
+(plus x gv2 = mult gv2 gv2), (plus x gv2 = mult gv2 x), (plus x gv2 = mult x gv2), (plus x gv2 = mult x x), (plus x x = gv2), (plus x x = x), (plus x x = fac gv2), (plus x x = fac x), (plus x x = mult gv2 gv2), (plus x x = mult gv2 x)
+(plus x x = mult x gv2), (plus x x = mult x x), (zero = succ gv2), (zero = succ x), (zero = qfac gv2 gv2), (zero = qfac gv2 x), (zero = qfac x gv2), (zero = qfac x x), (zero = fac gv2), (zero = fac x)
+(zero = mult gv2 gv2), (zero = mult gv2 x), (zero = mult x gv2), (zero = mult x x), (zero = plus gv2 gv2), (zero = plus gv2 x), (zero = plus x gv2), (zero = plus x x)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 33.655 seconds
+
+
+Label: 0 (0)
+(qfac x x = gv0), (plus x gv0 = x), (plus gv0 x = x), (succ gv0 = fac gv0), (qfac gv0 gv0 = gv0), (plus gv0 gv0 = gv0), (zero = mult gv0 gv0), (zero = plus gv0 gv0), (qfac x x = mult gv0 gv0), (qfac x x = plus gv0 gv0)
+(qfac x gv0 = mult x gv0), (qfac x gv0 = mult gv0 x), (qfac gv0 x = plus x gv0), (qfac gv0 x = plus gv0 x), (qfac x gv0 = plus gv0 gv0), (qfac gv0 gv0 = mult gv0 gv0), (qfac gv0 gv0 = plus gv0 gv0)
+
+Label: 1 (1)
+(mult x gv1 = gv2), (mult gv1 x = gv2), (qfac gv1 x = plus gv2 x), (qfac gv1 x = plus x gv2), (qfac x gv1 = plus gv2 gv1), (qfac x gv1 = plus gv1 gv2)
+
+Label: 2 (2)
+(qfac x x = gv2), (plus gv2 x = x), (plus x gv2 = x), (succ gv2 = fac gv2), (qfac gv2 gv2 = gv2), (plus gv2 gv2 = gv2), (zero = mult gv2 gv2), (zero = plus gv2 gv2), (qfac gv2 x = plus gv2 x), (qfac gv2 x = plus x gv2)
+(qfac x gv2 = mult gv2 x), (qfac x gv2 = mult x gv2), (qfac x x = mult gv2 gv2), (qfac x x = plus gv2 gv2), (qfac x gv2 = plus gv2 gv2), (qfac gv2 gv2 = mult gv2 gv2), (qfac gv2 gv2 = plus gv2 gv2)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (gv1 = qfac x (succ zero) -> mult gv1 x = qfac x x)
+
+2. (mult (fac x) x = qfac x x)
+
+3. (qfac (mult (fac x) x) (mult (fac x) x) = mult (fac x) x)
+
+4. (plus (mult (fac x) x) (mult (fac x) x) = mult (fac x) x)
+
+5. (qfac (qfac x x) (qfac x x) = qfac x x)
+
+6. (plus (qfac x x) (qfac x x) = qfac x x)
+
+7. (plus x gv0 = x -> gv0 = qfac x x)
+
+8. (plus gv0 x = x -> gv0 = qfac x x)
+
+9. (succ gv0 = fac gv0 -> gv0 = qfac x x)
+
+10. (qfac gv0 gv0 = gv0 -> gv0 = qfac x x)
+
+11. (plus gv0 gv0 = gv0 -> gv0 = qfac x x)
+
+12. (zero = mult gv0 gv0 -> gv0 = qfac x x)
+
+13. (zero = plus gv0 gv0 -> gv0 = qfac x x)
+
+14. (mult x gv1 = gv2 -> mult gv1 x = gv2)
+
+15. (plus gv2 x = x -> mult (fac x) x = gv2)
+
+16. (plus x gv2 = x -> mult (fac x) x = gv2)
+
+17. (succ gv2 = fac gv2 -> mult (fac x) x = gv2)
+
+18. (qfac gv2 gv2 = gv2 -> mult (fac x) x = gv2)
+
+19. (plus gv2 gv2 = gv2 -> mult (fac x) x = gv2)
+
+20. (zero = mult gv2 gv2 -> mult (fac x) x = gv2)
+
+21. (zero = plus gv2 gv2 -> mult (fac x) x = gv2)
+
+22. (qfac x x = mult gv0 gv0 -> gv0 = qfac x x)
+
+23. (qfac x x = plus gv0 gv0 -> gv0 = qfac x x)
+
+24. (qfac x gv0 = mult x gv0 -> gv0 = qfac x x)
+
+25. (qfac x gv0 = mult gv0 x -> gv0 = qfac x x)
+
+26. (qfac gv0 x = plus x gv0 -> gv0 = qfac x x)
+
+27. (qfac gv0 x = plus gv0 x -> gv0 = qfac x x)
+
+28. (qfac x gv0 = plus gv0 gv0 -> gv0 = qfac x x)
+
+29. (qfac gv0 gv0 = mult gv0 gv0 -> gv0 = qfac x x)
+
+30. (qfac gv0 gv0 = plus gv0 gv0 -> gv0 = qfac x x)
+
+31. (qfac gv1 x = plus gv2 x -> mult gv1 x = gv2)
+
+32. (qfac gv1 x = plus x gv2 -> mult gv1 x = gv2)
+
+33. (qfac x gv1 = plus gv2 gv1 -> mult gv1 x = gv2)
+
+34. (qfac x gv1 = plus gv1 gv2 -> mult gv1 x = gv2)
+
+35. (qfac gv2 x = plus gv2 x -> mult (fac x) x = gv2)
+
+36. (qfac gv2 x = plus x gv2 -> mult (fac x) x = gv2)
+
+37. (qfac x gv2 = mult gv2 x -> mult (fac x) x = gv2)
+
+38. (qfac x gv2 = mult x gv2 -> mult (fac x) x = gv2)
+
+39. (qfac x x = mult gv2 gv2 -> mult (fac x) x = gv2)
+
+40. (qfac x x = plus gv2 gv2 -> mult (fac x) x = gv2)
+
+41. (qfac x gv2 = plus gv2 gv2 -> mult (fac x) x = gv2)
+
+42. (qfac gv2 gv2 = mult gv2 gv2 -> mult (fac x) x = gv2)
+
+43. (qfac gv2 gv2 = plus gv2 gv2 -> mult (fac x) x = gv2)
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 115.687 seconds
+
+Number of Result Pairs Returned: 43
+
+1. (gv1 = qfac x (succ zero) -> mult gv1 x = qfac x x)
+
+2. (mult (fac x) x = qfac x x)
+
+3. (qfac (mult (fac x) x) (mult (fac x) x) = mult (fac x) x)
+
+4. (plus (mult (fac x) x) (mult (fac x) x) = mult (fac x) x)
+
+5. (qfac (qfac x x) (qfac x x) = qfac x x)

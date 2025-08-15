@@ -1,0 +1,131 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (mem x y)
+
+----------------------------------
+Goal: (mem x (append y z))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3.095 seconds
+
+gv0 : Lst = (append y z)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 29.018 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (mem x y)
+
+----------------------------------
+Goal: (mem x (append y z))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (mem x y)
+ -- (append y z = gv0)
+
+----------------------------------
+Goal: (mem x gv0)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 29.18 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+append : (Lst -> Lst -> Lst)
+mem : (Nat -> Lst -> Prop)
+succ : (Nat -> Nat)
+zero : Nat
+nil : Lst
+cons : (Nat -> Lst -> Lst)
+
+Label: 0 (0)
+Abducted Assumption: (mem x y)
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 340
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 29.321 seconds
+
+
+Label: 0 (0)
+(mem x z), (mem x y), (z = z), (z = y), (y = z), (y = y), (x = x), (mem x (cons x z)), (mem x (cons x y)), (mem x (append z z))
+(mem x (append z y)), (mem x (append y z)), (mem x (append y y)), (mem (succ x) z), (mem (succ x) y), (mem (succ x) (cons x z)), (mem (succ x) (cons x y)), (mem (succ x) (append z z)), (mem (succ x) (append z y)), (mem (succ x) (append y z))
+(mem (succ x) (append y y)), (mem zero z), (mem zero y), (mem zero (cons x z)), (mem zero (cons x y)), (mem zero (append z z)), (mem zero (append z y)), (mem zero (append y z)), (mem zero (append y y)), (~ mem x z)
+(~ mem x y), (z <> z), (z <> y), (y <> z), (y <> y), (x <> x), (succ x = x), (zero = succ x), (None = Some z), (None = Some y)
+(cons x z = z), (cons x z = y), (cons x z = append z z), (cons x z = append z y), (cons x z = append y z), (cons x z = append y y), (cons x y = z), (cons x y = y), (cons x y = append z z), (cons x y = append z y)
+(cons x y = append y z), (cons x y = append y y), (append z z = z), (append z z = y), (append z y = z), (append z y = y), (append y z = z), (append y z = y), (append y y = z), (append y y = y)
+(nil = cons x z), (nil = cons x y), (nil = append z z), (nil = append z y), (nil = append y z), (nil = append y y), (None = Some x)
+
+Label: 1 (1)
+(mem x z), (mem x y), (mem x gv0), (z = z), (z = y), (z = gv0), (y = z), (y = y), (y = gv0), (gv0 = z)
+(gv0 = y), (gv0 = gv0), (x = x), (mem x (cons x z)), (mem x (cons x y)), (mem x (cons x gv0)), (mem x (append z z)), (mem x (append z y)), (mem x (append z gv0)), (mem x (append y z))
+(mem x (append y y)), (mem x (append y gv0)), (mem x (append gv0 z)), (mem x (append gv0 y)), (mem x (append gv0 gv0)), (mem (succ x) z), (mem (succ x) y), (mem (succ x) gv0), (mem (succ x) (cons x z)), (mem (succ x) (cons x y))
+(mem (succ x) (cons x gv0)), (mem (succ x) (append z z)), (mem (succ x) (append z y)), (mem (succ x) (append z gv0)), (mem (succ x) (append y z)), (mem (succ x) (append y y)), (mem (succ x) (append y gv0)), (mem (succ x) (append gv0 z)), (mem (succ x) (append gv0 y)), (mem (succ x) (append gv0 gv0))
+(mem zero z), (mem zero y), (mem zero gv0), (mem zero (cons x z)), (mem zero (cons x y)), (mem zero (cons x gv0)), (mem zero (append z z)), (mem zero (append z y)), (mem zero (append z gv0)), (mem zero (append y z))
+(mem zero (append y y)), (mem zero (append y gv0)), (mem zero (append gv0 z)), (mem zero (append gv0 y)), (mem zero (append gv0 gv0)), (~ mem x z), (~ mem x y), (~ mem x gv0), (z <> z), (z <> y)
+(z <> gv0), (y <> z), (y <> y), (y <> gv0), (gv0 <> z), (gv0 <> y), (gv0 <> gv0), (x <> x), (succ x = x), (zero = succ x)
+(None = Some z), (None = Some y), (None = Some gv0), (cons x z = z), (cons x z = y), (cons x z = gv0), (cons x z = append z z), (cons x z = append z y), (cons x z = append z gv0), (cons x z = append y z)
+(cons x z = append y y), (cons x z = append y gv0), (cons x z = append gv0 z), (cons x z = append gv0 y), (cons x z = append gv0 gv0), (cons x y = z), (cons x y = y), (cons x y = gv0), (cons x y = append z z), (cons x y = append z y)
+(cons x y = append z gv0), (cons x y = append y z), (cons x y = append y y), (cons x y = append y gv0), (cons x y = append gv0 z), (cons x y = append gv0 y), (cons x y = append gv0 gv0), (cons x gv0 = z), (cons x gv0 = y), (cons x gv0 = gv0)
+(cons x gv0 = append z z), (cons x gv0 = append z y), (cons x gv0 = append z gv0), (cons x gv0 = append y z), (cons x gv0 = append y y), (cons x gv0 = append y gv0), (cons x gv0 = append gv0 z), (cons x gv0 = append gv0 y), (cons x gv0 = append gv0 gv0), (append z z = z)
+(append z z = y), (append z z = gv0), (append z y = z), (append z y = y), (append z y = gv0), (append z gv0 = z), (append z gv0 = y), (append z gv0 = gv0), (append y z = z), (append y z = y)
+(append y z = gv0), (append y y = z), (append y y = y), (append y y = gv0), (append y gv0 = z), (append y gv0 = y), (append y gv0 = gv0), (append gv0 z = z), (append gv0 z = y), (append gv0 z = gv0)
+(append gv0 y = z), (append gv0 y = y), (append gv0 y = gv0), (append gv0 gv0 = z), (append gv0 gv0 = y), (append gv0 gv0 = gv0), (nil = cons x z), (nil = cons x y), (nil = cons x gv0), (nil = append z z)
+(nil = append z y), (nil = append z gv0), (nil = append y z), (nil = append y y), (nil = append y gv0), (nil = append gv0 z), (nil = append gv0 y), (nil = append gv0 gv0), (None = Some x)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 35.237 seconds
+
+
+Label: 0 (0)
+(mem x y), (mem x (append z y)), (mem x (append y z)), (mem x (append y y))
+
+Label: 1 (1)
+(mem x gv0), (mem x (append gv0 gv0)), (append y z = gv0)
+
+
+
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 51.509 seconds
+
+Number of Result Pairs Returned: 4
+
+1. (mem x y -> mem x (append y z))
+
+2. (mem x y -> mem x (append y y))
+(mem x (append y y) -> mem x (append y z))
+
+3. (mem x y -> mem x (append z y))
+(mem x (append z y) -> mem x (append y z))
+
+4. (mem x y -> mem x (append gv0 gv0) -> mem x gv0)

@@ -1,0 +1,226 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (forall (q : list nat) (k : nat) (pl ql : list nat),
+ priq p ->
+ Abs p pl ->
+ delete_max p = Some (k, q) ->
+ Abs q ql -> Permutation pl (k :: ql) /\ Forall (ge k) ql)
+ -- (Abs q ql)
+ -- (priq (a :: p))
+ -- (Abs (a :: p) pl)
+ -- (select a p = (k, q))
+
+----------------------------------
+Goal: (Forall (ge k) q)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3.571 seconds
+
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 28.029 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (select a p = (k, q))
+
+----------------------------------
+Goal: (Forall (ge k) q)
+Case: Valid and Un-Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 28.168 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+In : (forall A : Type, A -> list A -> Prop)
+existsb : (forall A : Type, (A -> bool) -> list A -> bool)
+forallb : (forall A : Type, (A -> bool) -> list A -> bool)
+Forall : (forall A : Type, (A -> Prop) -> list A -> Prop)
+nodup : (forall A : Type, (forall x y : A, {x = y} + {x <> y}) -> list A -> list A)
+map : (forall A B : Type, (A -> B) -> list A -> list B)
+Permutation : (forall A : Type, list A -> list A -> Prop)
+geb : (nat -> nat -> bool)
+gtb : (nat -> nat -> bool)
+maybe_swap : (list nat -> list nat)
+select : (nat -> list nat -> nat * list nat)
+insert : (nat -> list nat -> list nat)
+delete_max : (list nat -> option (nat * list nat))
+merge : (list nat -> list nat -> list nat)
+priq : (list nat -> Prop)
+Abs : (list nat -> list nat -> Prop)
+
+Label: 0 (0)
+Abducted Assumption: (select a p = (k, q))
+Positive Examples: 27
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 28.439 seconds
+
+
+Label: 0 (0)
+(Abs p p), (Abs p q), (Abs q p), (Abs q q), (priq p), (priq q), (Permutation p p), (Permutation p q), (Permutation q p), (Permutation q q)
+(In a p), (In a q), (In k p), (In k q), (a < a), (a < k), (k < a), (k < k), (a <= a), (a <= k)
+(k <= a), (k <= k), (p = p), (p = q), (q = p), (q = q), (a = a), (a = k), (k = a), (k = k)
+(false = (a >? a)), (false = (a >? k)), (false = (k >? a)), (false = (k >? k)), (false = (a >=? a)), (false = (a >=? k)), (false = (k >=? a)), (false = (k >=? k)), (true = (a >? a)), (true = (a >? k))
+(true = (k >? a)), (true = (k >? k)), (true = (a >=? a)), (true = (a >=? k)), (true = (k >=? a)), (true = (k >=? k)), (Abs p (a :: p)), (Abs p (a :: q)), (Abs p (k :: p)), (Abs p (k :: q))
+(Abs p (merge p p)), (Abs p (merge p q)), (Abs p (merge q p)), (Abs p (merge q q)), (Abs p (insert a p)), (Abs p (insert a q)), (Abs p (insert k p)), (Abs p (insert k q)), (Abs p (maybe_swap p)), (Abs p (maybe_swap q))
+(Abs p (p ++ p)), (Abs p (p ++ q)), (Abs p (q ++ p)), (Abs p (q ++ q)), (Abs p []), (Abs q (a :: p)), (Abs q (a :: q)), (Abs q (k :: p)), (Abs q (k :: q)), (Abs q (merge p p))
+(Abs q (merge p q)), (Abs q (merge q p)), (Abs q (merge q q)), (Abs q (insert a p)), (Abs q (insert a q)), (Abs q (insert k p)), (Abs q (insert k q)), (Abs q (maybe_swap p)), (Abs q (maybe_swap q)), (Abs q (p ++ p))
+(Abs q (p ++ q)), (Abs q (q ++ p)), (Abs q (q ++ q)), (Abs q []), (Abs (a :: p) p), (Abs (a :: p) q), (Abs (a :: p) (a :: q)), (Abs (a :: p) (k :: p)), (Abs (a :: p) (k :: q)), (Abs (a :: p) (merge p p))
+(Abs (a :: p) (merge p q)), (Abs (a :: p) (merge q p)), (Abs (a :: p) (merge q q)), (Abs (a :: p) (insert a p)), (Abs (a :: p) (insert a q)), (Abs (a :: p) (insert k p)), (Abs (a :: p) (insert k q)), (Abs (a :: p) (maybe_swap p)), (Abs (a :: p) (maybe_swap q)), (Abs (a :: p) (p ++ p))
+(Abs (a :: p) (p ++ q)), (Abs (a :: p) (q ++ p)), (Abs (a :: p) (q ++ q)), (Abs (a :: p) []), (Abs (a :: q) p), (Abs (a :: q) q), (Abs (a :: q) (a :: p)), (Abs (a :: q) (k :: p)), (Abs (a :: q) (k :: q)), (Abs (a :: q) (merge p p))
+(Abs (a :: q) (merge p q)), (Abs (a :: q) (merge q p)), (Abs (a :: q) (merge q q)), (Abs (a :: q) (insert a p)), (Abs (a :: q) (insert a q)), (Abs (a :: q) (insert k p)), (Abs (a :: q) (insert k q)), (Abs (a :: q) (maybe_swap p)), (Abs (a :: q) (maybe_swap q)), (Abs (a :: q) (p ++ p))
+(Abs (a :: q) (p ++ q)), (Abs (a :: q) (q ++ p)), (Abs (a :: q) (q ++ q)), (Abs (a :: q) []), (Abs (k :: p) p), (Abs (k :: p) q), (Abs (k :: p) (a :: p)), (Abs (k :: p) (a :: q)), (Abs (k :: p) (k :: q)), (Abs (k :: p) (merge p p))
+(Abs (k :: p) (merge p q)), (Abs (k :: p) (merge q p)), (Abs (k :: p) (merge q q)), (Abs (k :: p) (insert a p)), (Abs (k :: p) (insert a q)), (Abs (k :: p) (insert k p)), (Abs (k :: p) (insert k q)), (Abs (k :: p) (maybe_swap p)), (Abs (k :: p) (maybe_swap q)), (Abs (k :: p) (p ++ p))
+(Abs (k :: p) (p ++ q)), (Abs (k :: p) (q ++ p)), (Abs (k :: p) (q ++ q)), (Abs (k :: p) []), (Abs (k :: q) p), (Abs (k :: q) q), (Abs (k :: q) (a :: p)), (Abs (k :: q) (a :: q)), (Abs (k :: q) (k :: p)), (Abs (k :: q) (merge p p))
+(Abs (k :: q) (merge p q)), (Abs (k :: q) (merge q p)), (Abs (k :: q) (merge q q)), (Abs (k :: q) (insert a p)), (Abs (k :: q) (insert a q)), (Abs (k :: q) (insert k p)), (Abs (k :: q) (insert k q)), (Abs (k :: q) (maybe_swap p)), (Abs (k :: q) (maybe_swap q)), (Abs (k :: q) (p ++ p))
+(Abs (k :: q) (p ++ q)), (Abs (k :: q) (q ++ p)), (Abs (k :: q) (q ++ q)), (Abs (k :: q) []), (Abs (merge p p) p), (Abs (merge p p) q), (Abs (merge p p) (a :: p)), (Abs (merge p p) (a :: q)), (Abs (merge p p) (k :: p)), (Abs (merge p p) (k :: q))
+(Abs (merge p p) (merge p q)), (Abs (merge p p) (merge q p)), (Abs (merge p p) (merge q q)), (Abs (merge p p) (insert a p)), (Abs (merge p p) (insert a q)), (Abs (merge p p) (insert k p)), (Abs (merge p p) (insert k q)), (Abs (merge p p) (maybe_swap p)), (Abs (merge p p) (maybe_swap q)), (Abs (merge p p) (p ++ p))
+(Abs (merge p p) (p ++ q)), (Abs (merge p p) (q ++ p)), (Abs (merge p p) (q ++ q)), (Abs (merge p p) []), (Abs (merge p q) p), (Abs (merge p q) q), (Abs (merge p q) (a :: p)), (Abs (merge p q) (a :: q)), (Abs (merge p q) (k :: p)), (Abs (merge p q) (k :: q))
+(Abs (merge p q) (merge p p)), (Abs (merge p q) (merge q p)), (Abs (merge p q) (merge q q)), (Abs (merge p q) (insert a p)), (Abs (merge p q) (insert a q)), (Abs (merge p q) (insert k p)), (Abs (merge p q) (insert k q)), (Abs (merge p q) (maybe_swap p)), (Abs (merge p q) (maybe_swap q)), (Abs (merge p q) (p ++ p))
+(Abs (merge p q) (p ++ q)), (Abs (merge p q) (q ++ p)), (Abs (merge p q) (q ++ q)), (Abs (merge p q) []), (Abs (merge q p) p), (Abs (merge q p) q), (Abs (merge q p) (a :: p)), (Abs (merge q p) (a :: q)), (Abs (merge q p) (k :: p)), (Abs (merge q p) (k :: q))
+(Abs (merge q p) (merge p p)), (Abs (merge q p) (merge p q)), (Abs (merge q p) (merge q q)), (Abs (merge q p) (insert a p)), (Abs (merge q p) (insert a q)), (Abs (merge q p) (insert k p)), (Abs (merge q p) (insert k q)), (Abs (merge q p) (maybe_swap p)), (Abs (merge q p) (maybe_swap q)), (Abs (merge q p) (p ++ p))
+(Abs (merge q p) (p ++ q)), (Abs (merge q p) (q ++ p)), (Abs (merge q p) (q ++ q)), (Abs (merge q p) []), (Abs (merge q q) p), (Abs (merge q q) q), (Abs (merge q q) (a :: p)), (Abs (merge q q) (a :: q)), (Abs (merge q q) (k :: p)), (Abs (merge q q) (k :: q))
+(Abs (merge q q) (merge p p)), (Abs (merge q q) (merge p q)), (Abs (merge q q) (merge q p)), (Abs (merge q q) (insert a p)), (Abs (merge q q) (insert a q)), (Abs (merge q q) (insert k p)), (Abs (merge q q) (insert k q)), (Abs (merge q q) (maybe_swap p)), (Abs (merge q q) (maybe_swap q)), (Abs (merge q q) (p ++ p))
+(Abs (merge q q) (p ++ q)), (Abs (merge q q) (q ++ p)), (Abs (merge q q) (q ++ q)), (Abs (merge q q) []), (Abs (insert a p) p), (Abs (insert a p) q), (Abs (insert a p) (a :: p)), (Abs (insert a p) (a :: q)), (Abs (insert a p) (k :: p)), (Abs (insert a p) (k :: q))
+(Abs (insert a p) (merge p p)), (Abs (insert a p) (merge p q)), (Abs (insert a p) (merge q p)), (Abs (insert a p) (merge q q)), (Abs (insert a p) (insert a q)), (Abs (insert a p) (insert k p)), (Abs (insert a p) (insert k q)), (Abs (insert a p) (maybe_swap p)), (Abs (insert a p) (maybe_swap q)), (Abs (insert a p) (p ++ p))
+(Abs (insert a p) (p ++ q)), (Abs (insert a p) (q ++ p)), (Abs (insert a p) (q ++ q)), (Abs (insert a p) []), (Abs (insert a q) p), (Abs (insert a q) q), (Abs (insert a q) (a :: p)), (Abs (insert a q) (a :: q)), (Abs (insert a q) (k :: p)), (Abs (insert a q) (k :: q))
+(Abs (insert a q) (merge p p)), (Abs (insert a q) (merge p q)), (Abs (insert a q) (merge q p)), (Abs (insert a q) (merge q q)), (Abs (insert a q) (insert a p)), (Abs (insert a q) (insert k p)), (Abs (insert a q) (insert k q)), (Abs (insert a q) (maybe_swap p)), (Abs (insert a q) (maybe_swap q)), (Abs (insert a q) (p ++ p))
+(Abs (insert a q) (p ++ q)), (Abs (insert a q) (q ++ p)), (Abs (insert a q) (q ++ q)), (Abs (insert a q) []), (Abs (insert k p) p), (Abs (insert k p) q), (Abs (insert k p) (a :: p)), (Abs (insert k p) (a :: q)), (Abs (insert k p) (k :: p)), (Abs (insert k p) (k :: q))
+(Abs (insert k p) (merge p p)), (Abs (insert k p) (merge p q)), (Abs (insert k p) (merge q p)), (Abs (insert k p) (merge q q)), (Abs (insert k p) (insert a p)), (Abs (insert k p) (insert a q)), (Abs (insert k p) (insert k q)), (Abs (insert k p) (maybe_swap p)), (Abs (insert k p) (maybe_swap q)), (Abs (insert k p) (p ++ p))
+(Abs (insert k p) (p ++ q)), (Abs (insert k p) (q ++ p)), (Abs (insert k p) (q ++ q)), (Abs (insert k p) []), (Abs (insert k q) p), (Abs (insert k q) q), (Abs (insert k q) (a :: p)), (Abs (insert k q) (a :: q)), (Abs (insert k q) (k :: p)), (Abs (insert k q) (k :: q))
+(Abs (insert k q) (merge p p)), (Abs (insert k q) (merge p q)), (Abs (insert k q) (merge q p)), (Abs (insert k q) (merge q q)), (Abs (insert k q) (insert a p)), (Abs (insert k q) (insert a q)), (Abs (insert k q) (insert k p)), (Abs (insert k q) (maybe_swap p)), (Abs (insert k q) (maybe_swap q)), (Abs (insert k q) (p ++ p))
+(Abs (insert k q) (p ++ q)), (Abs (insert k q) (q ++ p)), (Abs (insert k q) (q ++ q)), (Abs (insert k q) []), (Abs (maybe_swap p) p), (Abs (maybe_swap p) q), (Abs (maybe_swap p) (a :: p)), (Abs (maybe_swap p) (a :: q)), (Abs (maybe_swap p) (k :: p)), (Abs (maybe_swap p) (k :: q))
+(Abs (maybe_swap p) (merge p p)), (Abs (maybe_swap p) (merge p q)), (Abs (maybe_swap p) (merge q p)), (Abs (maybe_swap p) (merge q q)), (Abs (maybe_swap p) (insert a p)), (Abs (maybe_swap p) (insert a q)), (Abs (maybe_swap p) (insert k p)), (Abs (maybe_swap p) (insert k q)), (Abs (maybe_swap p) (maybe_swap q)), (Abs (maybe_swap p) (p ++ p))
+(Abs (maybe_swap p) (p ++ q)), (Abs (maybe_swap p) (q ++ p)), (Abs (maybe_swap p) (q ++ q)), (Abs (maybe_swap p) []), (Abs (maybe_swap q) p), (Abs (maybe_swap q) q), (Abs (maybe_swap q) (a :: p)), (Abs (maybe_swap q) (a :: q)), (Abs (maybe_swap q) (k :: p)), (Abs (maybe_swap q) (k :: q))
+(Abs (maybe_swap q) (merge p p)), (Abs (maybe_swap q) (merge p q)), (Abs (maybe_swap q) (merge q p)), (Abs (maybe_swap q) (merge q q)), (Abs (maybe_swap q) (insert a p)), (Abs (maybe_swap q) (insert a q)), (Abs (maybe_swap q) (insert k p)), (Abs (maybe_swap q) (insert k q)), (Abs (maybe_swap q) (maybe_swap p)), (Abs (maybe_swap q) (p ++ p))
+(Abs (maybe_swap q) (p ++ q)), (Abs (maybe_swap q) (q ++ p)), (Abs (maybe_swap q) (q ++ q)), (Abs (maybe_swap q) []), (Abs (p ++ p) p), (Abs (p ++ p) q), (Abs (p ++ p) (a :: p)), (Abs (p ++ p) (a :: q)), (Abs (p ++ p) (k :: p)), (Abs (p ++ p) (k :: q))
+(Abs (p ++ p) (merge p p)), (Abs (p ++ p) (merge p q)), (Abs (p ++ p) (merge q p)), (Abs (p ++ p) (merge q q)), (Abs (p ++ p) (insert a p)), (Abs (p ++ p) (insert a q)), (Abs (p ++ p) (insert k p)), (Abs (p ++ p) (insert k q)), (Abs (p ++ p) (maybe_swap p)), (Abs (p ++ p) (maybe_swap q))
+(Abs (p ++ p) (p ++ q)), (Abs (p ++ p) (q ++ p)), (Abs (p ++ p) (q ++ q)), (Abs (p ++ p) []), (Abs (p ++ q) p), (Abs (p ++ q) q), (Abs (p ++ q) (a :: p)), (Abs (p ++ q) (a :: q)), (Abs (p ++ q) (k :: p)), (Abs (p ++ q) (k :: q))
+(Abs (p ++ q) (merge p p)), (Abs (p ++ q) (merge p q)), (Abs (p ++ q) (merge q p)), (Abs (p ++ q) (merge q q)), (Abs (p ++ q) (insert a p)), (Abs (p ++ q) (insert a q)), (Abs (p ++ q) (insert k p)), (Abs (p ++ q) (insert k q)), (Abs (p ++ q) (maybe_swap p)), (Abs (p ++ q) (maybe_swap q))
+(Abs (p ++ q) (p ++ p)), (Abs (p ++ q) (q ++ p)), (Abs (p ++ q) (q ++ q)), (Abs (p ++ q) []), (Abs (q ++ p) p), (Abs (q ++ p) q), (Abs (q ++ p) (a :: p)), (Abs (q ++ p) (a :: q)), (Abs (q ++ p) (k :: p)), (Abs (q ++ p) (k :: q))
+(Abs (q ++ p) (merge p p)), (Abs (q ++ p) (merge p q)), (Abs (q ++ p) (merge q p)), (Abs (q ++ p) (merge q q)), (Abs (q ++ p) (insert a p)), (Abs (q ++ p) (insert a q)), (Abs (q ++ p) (insert k p)), (Abs (q ++ p) (insert k q)), (Abs (q ++ p) (maybe_swap p)), (Abs (q ++ p) (maybe_swap q))
+(Abs (q ++ p) (p ++ p)), (Abs (q ++ p) (p ++ q)), (Abs (q ++ p) (q ++ q)), (Abs (q ++ p) []), (Abs (q ++ q) p), (Abs (q ++ q) q), (Abs (q ++ q) (a :: p)), (Abs (q ++ q) (a :: q)), (Abs (q ++ q) (k :: p)), (Abs (q ++ q) (k :: q))
+(Abs (q ++ q) (merge p p)), (Abs (q ++ q) (merge p q)), (Abs (q ++ q) (merge q p)), (Abs (q ++ q) (merge q q)), (Abs (q ++ q) (insert a p)), (Abs (q ++ q) (insert a q)), (Abs (q ++ q) (insert k p)), (Abs (q ++ q) (insert k q)), (Abs (q ++ q) (maybe_swap p)), (Abs (q ++ q) (maybe_swap q))
+(Abs (q ++ q) (p ++ p)), (Abs (q ++ q) (p ++ q)), (Abs (q ++ q) (q ++ p)), (Abs (q ++ q) []), (Abs [] p), (Abs [] q), (Abs [] (a :: p)), (Abs [] (a :: q)), (Abs [] (k :: p)), (Abs [] (k :: q))
+(Abs [] (merge p p)), (Abs [] (merge p q)), (Abs [] (merge q p)), (Abs [] (merge q q)), (Abs [] (insert a p)), (Abs [] (insert a q)), (Abs [] (insert k p)), (Abs [] (insert k q)), (Abs [] (maybe_swap p)), (Abs [] (maybe_swap q))
+(Abs [] (p ++ p)), (Abs [] (p ++ q)), (Abs [] (q ++ p)), (Abs [] (q ++ q)), (priq (a :: p)), (priq (a :: q)), (priq (k :: p)), (priq (k :: q)), (priq (merge p p)), (priq (merge p q))
+(priq (merge q p)), (priq (merge q q)), (priq (insert a p)), (priq (insert a q)), (priq (insert k p)), (priq (insert k q)), (priq (maybe_swap p)), (priq (maybe_swap q)), (priq (p ++ p)), (priq (p ++ q))
+(priq (q ++ p)), (priq (q ++ q)), (priq []), (Permutation p (a :: p)), (Permutation p (a :: q)), (Permutation p (k :: p)), (Permutation p (k :: q)), (Permutation p (merge p p)), (Permutation p (merge p q)), (Permutation p (merge q p))
+(Permutation p (merge q q)), (Permutation p (insert a p)), (Permutation p (insert a q)), (Permutation p (insert k p)), (Permutation p (insert k q)), (Permutation p (maybe_swap p)), (Permutation p (maybe_swap q)), (Permutation p (p ++ p)), (Permutation p (p ++ q)), (Permutation p (q ++ p))
+(Permutation p (q ++ q)), (Permutation p []), (Permutation q (a :: p)), (Permutation q (a :: q)), (Permutation q (k :: p)), (Permutation q (k :: q)), (Permutation q (merge p p)), (Permutation q (merge p q)), (Permutation q (merge q p)), (Permutation q (merge q q))
+(Permutation q (insert a p)), (Permutation q (insert a q)), (Permutation q (insert k p)), (Permutation q (insert k q)), (Permutation q (maybe_swap p)), (Permutation q (maybe_swap q)), (Permutation q (p ++ p)), (Permutation q (p ++ q)), (Permutation q (q ++ p)), (Permutation q (q ++ q))
+(Permutation q []), (Permutation (a :: p) p), (Permutation (a :: p) q), (Permutation (a :: p) (a :: q)), (Permutation (a :: p) (k :: p)), (Permutation (a :: p) (k :: q)), (Permutation (a :: p) (merge p p)), (Permutation (a :: p) (merge p q)), (Permutation (a :: p) (merge q p)), (Permutation (a :: p) (merge q q))
+(Permutation (a :: p) (insert a p)), (Permutation (a :: p) (insert a q)), (Permutation (a :: p) (insert k p)), (Permutation (a :: p) (insert k q)), (Permutation (a :: p) (maybe_swap p)), (Permutation (a :: p) (maybe_swap q)), (Permutation (a :: p) (p ++ p)), (Permutation (a :: p) (p ++ q)), (Permutation (a :: p) (q ++ p)), (Permutation (a :: p) (q ++ q))
+(Permutation (a :: p) []), (Permutation (a :: q) p), (Permutation (a :: q) q), (Permutation (a :: q) (a :: p)), (Permutation (a :: q) (k :: p)), (Permutation (a :: q) (k :: q)), (Permutation (a :: q) (merge p p)), (Permutation (a :: q) (merge p q)), (Permutation (a :: q) (merge q p)), (Permutation (a :: q) (merge q q))
+(Permutation (a :: q) (insert a p)), (Permutation (a :: q) (insert a q)), (Permutation (a :: q) (insert k p)), (Permutation (a :: q) (insert k q)), (Permutation (a :: q) (maybe_swap p)), (Permutation (a :: q) (maybe_swap q)), (Permutation (a :: q) (p ++ p)), (Permutation (a :: q) (p ++ q)), (Permutation (a :: q) (q ++ p)), (Permutation (a :: q) (q ++ q))
+(Permutation (a :: q) []), (Permutation (k :: p) p), (Permutation (k :: p) q), (Permutation (k :: p) (a :: p)), (Permutation (k :: p) (a :: q)), (Permutation (k :: p) (k :: q)), (Permutation (k :: p) (merge p p)), (Permutation (k :: p) (merge p q)), (Permutation (k :: p) (merge q p)), (Permutation (k :: p) (merge q q))
+(Permutation (k :: p) (insert a p)), (Permutation (k :: p) (insert a q)), (Permutation (k :: p) (insert k p)), (Permutation (k :: p) (insert k q)), (Permutation (k :: p) (maybe_swap p)), (Permutation (k :: p) (maybe_swap q)), (Permutation (k :: p) (p ++ p)), (Permutation (k :: p) (p ++ q)), (Permutation (k :: p) (q ++ p)), (Permutation (k :: p) (q ++ q))
+(Permutation (k :: p) []), (Permutation (k :: q) p), (Permutation (k :: q) q), (Permutation (k :: q) (a :: p)), (Permutation (k :: q) (a :: q)), (Permutation (k :: q) (k :: p)), (Permutation (k :: q) (merge p p)), (Permutation (k :: q) (merge p q)), (Permutation (k :: q) (merge q p)), (Permutation (k :: q) (merge q q))
+(Permutation (k :: q) (insert a p)), (Permutation (k :: q) (insert a q)), (Permutation (k :: q) (insert k p)), (Permutation (k :: q) (insert k q)), (Permutation (k :: q) (maybe_swap p)), (Permutation (k :: q) (maybe_swap q)), (Permutation (k :: q) (p ++ p)), (Permutation (k :: q) (p ++ q)), (Permutation (k :: q) (q ++ p)), (Permutation (k :: q) (q ++ q))
+(Permutation (k :: q) []), (Permutation (merge p p) p), (Permutation (merge p p) q), (Permutation (merge p p) (a :: p)), (Permutation (merge p p) (a :: q)), (Permutation (merge p p) (k :: p)), (Permutation (merge p p) (k :: q)), (Permutation (merge p p) (merge p q)), (Permutation (merge p p) (merge q p)), (Permutation (merge p p) (merge q q))
+(Permutation (merge p p) (insert a p)), (Permutation (merge p p) (insert a q)), (Permutation (merge p p) (insert k p)), (Permutation (merge p p) (insert k q)), (Permutation (merge p p) (maybe_swap p)), (Permutation (merge p p) (maybe_swap q)), (Permutation (merge p p) (p ++ p)), (Permutation (merge p p) (p ++ q)), (Permutation (merge p p) (q ++ p)), (Permutation (merge p p) (q ++ q))
+(Permutation (merge p p) []), (Permutation (merge p q) p), (Permutation (merge p q) q), (Permutation (merge p q) (a :: p)), (Permutation (merge p q) (a :: q)), (Permutation (merge p q) (k :: p)), (Permutation (merge p q) (k :: q)), (Permutation (merge p q) (merge p p)), (Permutation (merge p q) (merge q p)), (Permutation (merge p q) (merge q q))
+(Permutation (merge p q) (insert a p)), (Permutation (merge p q) (insert a q)), (Permutation (merge p q) (insert k p)), (Permutation (merge p q) (insert k q)), (Permutation (merge p q) (maybe_swap p)), (Permutation (merge p q) (maybe_swap q)), (Permutation (merge p q) (p ++ p)), (Permutation (merge p q) (p ++ q)), (Permutation (merge p q) (q ++ p)), (Permutation (merge p q) (q ++ q))
+(Permutation (merge p q) []), (Permutation (merge q p) p), (Permutation (merge q p) q), (Permutation (merge q p) (a :: p)), (Permutation (merge q p) (a :: q)), (Permutation (merge q p) (k :: p)), (Permutation (merge q p) (k :: q)), (Permutation (merge q p) (merge p p)), (Permutation (merge q p) (merge p q)), (Permutation (merge q p) (merge q q))
+(Permutation (merge q p) (insert a p)), (Permutation (merge q p) (insert a q)), (Permutation (merge q p) (insert k p)), (Permutation (merge q p) (insert k q)), (Permutation (merge q p) (maybe_swap p)), (Permutation (merge q p) (maybe_swap q)), (Permutation (merge q p) (p ++ p)), (Permutation (merge q p) (p ++ q)), (Permutation (merge q p) (q ++ p)), (Permutation (merge q p) (q ++ q))
+(Permutation (merge q p) []), (Permutation (merge q q) p), (Permutation (merge q q) q), (Permutation (merge q q) (a :: p)), (Permutation (merge q q) (a :: q)), (Permutation (merge q q) (k :: p)), (Permutation (merge q q) (k :: q)), (Permutation (merge q q) (merge p p)), (Permutation (merge q q) (merge p q)), (Permutation (merge q q) (merge q p))
+(Permutation (merge q q) (insert a p)), (Permutation (merge q q) (insert a q)), (Permutation (merge q q) (insert k p)), (Permutation (merge q q) (insert k q)), (Permutation (merge q q) (maybe_swap p)), (Permutation (merge q q) (maybe_swap q)), (Permutation (merge q q) (p ++ p)), (Permutation (merge q q) (p ++ q)), (Permutation (merge q q) (q ++ p)), (Permutation (merge q q) (q ++ q))
+(Permutation (merge q q) []), (Permutation (insert a p) p), (Permutation (insert a p) q), (Permutation (insert a p) (a :: p)), (Permutation (insert a p) (a :: q)), (Permutation (insert a p) (k :: p)), (Permutation (insert a p) (k :: q)), (Permutation (insert a p) (merge p p)), (Permutation (insert a p) (merge p q)), (Permutation (insert a p) (merge q p))
+(Permutation (insert a p) (merge q q)), (Permutation (insert a p) (insert a q)), (Permutation (insert a p) (insert k p)), (Permutation (insert a p) (insert k q)), (Permutation (insert a p) (maybe_swap p)), (Permutation (insert a p) (maybe_swap q)), (Permutation (insert a p) (p ++ p)), (Permutation (insert a p) (p ++ q)), (Permutation (insert a p) (q ++ p)), (Permutation (insert a p) (q ++ q))
+(Permutation (insert a p) []), (Permutation (insert a q) p), (Permutation (insert a q) q), (Permutation (insert a q) (a :: p)), (Permutation (insert a q) (a :: q)), (Permutation (insert a q) (k :: p)), (Permutation (insert a q) (k :: q)), (Permutation (insert a q) (merge p p)), (Permutation (insert a q) (merge p q)), (Permutation (insert a q) (merge q p))
+(Permutation (insert a q) (merge q q)), (Permutation (insert a q) (insert a p)), (Permutation (insert a q) (insert k p)), (Permutation (insert a q) (insert k q)), (Permutation (insert a q) (maybe_swap p)), (Permutation (insert a q) (maybe_swap q)), (Permutation (insert a q) (p ++ p)), (Permutation (insert a q) (p ++ q)), (Permutation (insert a q) (q ++ p)), (Permutation (insert a q) (q ++ q))
+(Permutation (insert a q) []), (Permutation (insert k p) p), (Permutation (insert k p) q), (Permutation (insert k p) (a :: p)), (Permutation (insert k p) (a :: q)), (Permutation (insert k p) (k :: p)), (Permutation (insert k p) (k :: q)), (Permutation (insert k p) (merge p p)), (Permutation (insert k p) (merge p q)), (Permutation (insert k p) (merge q p))
+(Permutation (insert k p) (merge q q)), (Permutation (insert k p) (insert a p)), (Permutation (insert k p) (insert a q)), (Permutation (insert k p) (insert k q)), (Permutation (insert k p) (maybe_swap p)), (Permutation (insert k p) (maybe_swap q)), (Permutation (insert k p) (p ++ p)), (Permutation (insert k p) (p ++ q)), (Permutation (insert k p) (q ++ p)), (Permutation (insert k p) (q ++ q))
+(Permutation (insert k p) []), (Permutation (insert k q) p), (Permutation (insert k q) q), (Permutation (insert k q) (a :: p)), (Permutation (insert k q) (a :: q)), (Permutation (insert k q) (k :: p)), (Permutation (insert k q) (k :: q)), (Permutation (insert k q) (merge p p)), (Permutation (insert k q) (merge p q)), (Permutation (insert k q) (merge q p))
+(Permutation (insert k q) (merge q q)), (Permutation (insert k q) (insert a p)), (Permutation (insert k q) (insert a q)), (Permutation (insert k q) (insert k p)), (Permutation (insert k q) (maybe_swap p)), (Permutation (insert k q) (maybe_swap q)), (Permutation (insert k q) (p ++ p)), (Permutation (insert k q) (p ++ q)), (Permutation (insert k q) (q ++ p)), (Permutation (insert k q) (q ++ q))
+(Permutation (insert k q) []), (Permutation (maybe_swap p) p), (Permutation (maybe_swap p) q), (Permutation (maybe_swap p) (a :: p)), (Permutation (maybe_swap p) (a :: q)), (Permutation (maybe_swap p) (k :: p)), (Permutation (maybe_swap p) (k :: q)), (Permutation (maybe_swap p) (merge p p)), (Permutation (maybe_swap p) (merge p q)), (Permutation (maybe_swap p) (merge q p))
+(Permutation (maybe_swap p) (merge q q)), (Permutation (maybe_swap p) (insert a p)), (Permutation (maybe_swap p) (insert a q)), (Permutation (maybe_swap p) (insert k p)), (Permutation (maybe_swap p) (insert k q)), (Permutation (maybe_swap p) (maybe_swap q)), (Permutation (maybe_swap p) (p ++ p)), (Permutation (maybe_swap p) (p ++ q)), (Permutation (maybe_swap p) (q ++ p)), (Permutation (maybe_swap p) (q ++ q))
+(Permutation (maybe_swap p) []), (Permutation (maybe_swap q) p), (Permutation (maybe_swap q) q), (Permutation (maybe_swap q) (a :: p)), (Permutation (maybe_swap q) (a :: q)), (Permutation (maybe_swap q) (k :: p)), (Permutation (maybe_swap q) (k :: q)), (Permutation (maybe_swap q) (merge p p)), (Permutation (maybe_swap q) (merge p q)), (Permutation (maybe_swap q) (merge q p))
+(Permutation (maybe_swap q) (merge q q)), (Permutation (maybe_swap q) (insert a p)), (Permutation (maybe_swap q) (insert a q)), (Permutation (maybe_swap q) (insert k p)), (Permutation (maybe_swap q) (insert k q)), (Permutation (maybe_swap q) (maybe_swap p)), (Permutation (maybe_swap q) (p ++ p)), (Permutation (maybe_swap q) (p ++ q)), (Permutation (maybe_swap q) (q ++ p)), (Permutation (maybe_swap q) (q ++ q))
+(Permutation (maybe_swap q) []), (Permutation (p ++ p) p), (Permutation (p ++ p) q), (Permutation (p ++ p) (a :: p)), (Permutation (p ++ p) (a :: q)), (Permutation (p ++ p) (k :: p)), (Permutation (p ++ p) (k :: q)), (Permutation (p ++ p) (merge p p)), (Permutation (p ++ p) (merge p q)), (Permutation (p ++ p) (merge q p))
+(Permutation (p ++ p) (merge q q)), (Permutation (p ++ p) (insert a p)), (Permutation (p ++ p) (insert a q)), (Permutation (p ++ p) (insert k p)), (Permutation (p ++ p) (insert k q)), (Permutation (p ++ p) (maybe_swap p)), (Permutation (p ++ p) (maybe_swap q)), (Permutation (p ++ p) (p ++ q)), (Permutation (p ++ p) (q ++ p)), (Permutation (p ++ p) (q ++ q))
+(Permutation (p ++ p) []), (Permutation (p ++ q) p), (Permutation (p ++ q) q), (Permutation (p ++ q) (a :: p)), (Permutation (p ++ q) (a :: q)), (Permutation (p ++ q) (k :: p)), (Permutation (p ++ q) (k :: q)), (Permutation (p ++ q) (merge p p)), (Permutation (p ++ q) (merge p q)), (Permutation (p ++ q) (merge q p))
+(Permutation (p ++ q) (merge q q)), (Permutation (p ++ q) (insert a p)), (Permutation (p ++ q) (insert a q)), (Permutation (p ++ q) (insert k p)), (Permutation (p ++ q) (insert k q)), (Permutation (p ++ q) (maybe_swap p)), (Permutation (p ++ q) (maybe_swap q)), (Permutation (p ++ q) (p ++ p)), (Permutation (p ++ q) (q ++ p)), (Permutation (p ++ q) (q ++ q))
+(Permutation (p ++ q) []), (Permutation (q ++ p) p), (Permutation (q ++ p) q), (Permutation (q ++ p) (a :: p)), (Permutation (q ++ p) (a :: q)), (Permutation (q ++ p) (k :: p)), (Permutation (q ++ p) (k :: q)), (Permutation (q ++ p) (merge p p)), (Permutation (q ++ p) (merge p q)), (Permutation (q ++ p) (merge q p))
+(Permutation (q ++ p) (merge q q)), (Permutation (q ++ p) (insert a p)), (Permutation (q ++ p) (insert a q)), (Permutation (q ++ p) (insert k p)), (Permutation (q ++ p) (insert k q)), (Permutation (q ++ p) (maybe_swap p)), (Permutation (q ++ p) (maybe_swap q)), (Permutation (q ++ p) (p ++ p)), (Permutation (q ++ p) (p ++ q)), (Permutation (q ++ p) (q ++ q))
+(Permutation (q ++ p) []), (Permutation (q ++ q) p), (Permutation (q ++ q) q), (Permutation (q ++ q) (a :: p)), (Permutation (q ++ q) (a :: q)), (Permutation (q ++ q) (k :: p)), (Permutation (q ++ q) (k :: q)), (Permutation (q ++ q) (merge p p)), (Permutation (q ++ q) (merge p q)), (Permutation (q ++ q) (merge q p))
+(Permutation (q ++ q) (merge q q)), (Permutation (q ++ q) (insert a p)), (Permutation (q ++ q) (insert a q)), (Permutation (q ++ q) (insert k p)), (Permutation (q ++ q) (insert k q)), (Permutation (q ++ q) (maybe_swap p)), (Permutation (q ++ q) (maybe_swap q)), (Permutation (q ++ q) (p ++ p)), (Permutation (q ++ q) (p ++ q)), (Permutation (q ++ q) (q ++ p))
+(Permutation (q ++ q) []), (Permutation [] p), (Permutation [] q), (Permutation [] (a :: p)), (Permutation [] (a :: q)), (Permutation [] (k :: p)), (Permutation [] (k :: q)), (Permutation [] (merge p p)), (Permutation [] (merge p q)), (Permutation [] (merge q p))
+(Permutation [] (merge q q)), (Permutation [] (insert a p)), (Permutation [] (insert a q)), (Permutation [] (insert k p)), (Permutation [] (insert k q)), (Permutation [] (maybe_swap p)), (Permutation [] (maybe_swap q)), (Permutation [] (p ++ p)), (Permutation [] (p ++ q)), (Permutation [] (q ++ p))
+(Permutation [] (q ++ q)), (In a (a :: p)), (In a (a :: q)), (In a (k :: p)), (In a (k :: q)), (In a (merge p p)), (In a (merge p q)), (In a (merge q p)), (In a (merge q q)), (In a (insert a p))
+(In a (insert a q)), (In a (insert k p)), (In a (insert k q)), (In a (maybe_swap p)), (In a (maybe_swap q)), (In a (p ++ p)), (In a (p ++ q)), (In a (q ++ p)), (In a (q ++ q)), (In k (a :: p))
+(In k (a :: q)), (In k (k :: p)), (In k (k :: q)), (In k (merge p p)), (In k (merge p q)), (In k (merge q p)), (In k (merge q q)), (In k (insert a p)), (In k (insert a q)), (In k (insert k p))
+(In k (insert k q)), (In k (maybe_swap p)), (In k (maybe_swap q)), (In k (p ++ p)), (In k (p ++ q)), (In k (q ++ p)), (In k (q ++ q)), (In (length p) p), (In (length p) q), (In (length p) (a :: p))
+(In (length p) (a :: q)), (In (length p) (k :: p)), (In (length p) (k :: q)), (In (length p) (merge p p)), (In (length p) (merge p q)), (In (length p) (merge q p)), (In (length p) (merge q q)), (In (length p) (insert a p)), (In (length p) (insert a q)), (In (length p) (insert k p))
+(In (length p) (insert k q)), (In (length p) (maybe_swap p)), (In (length p) (maybe_swap q)), (In (length p) (p ++ p)), (In (length p) (p ++ q)), (In (length p) (q ++ p)), (In (length p) (q ++ q)), (In (length q) p), (In (length q) q), (In (length q) (a :: p))
+(In (length q) (a :: q)), (In (length q) (k :: p)), (In (length q) (k :: q)), (In (length q) (merge p p)), (In (length q) (merge p q)), (In (length q) (merge q p)), (In (length q) (merge q q)), (In (length q) (insert a p)), (In (length q) (insert a q)), (In (length q) (insert k p))
+(In (length q) (insert k q)), (In (length q) (maybe_swap p)), (In (length q) (maybe_swap q)), (In (length q) (p ++ p)), (In (length q) (p ++ q)), (In (length q) (q ++ p)), (In (length q) (q ++ q)), (a < length p), (a < length q), (k < length p)
+(k < length q), (length p < a), (length p < k), (length p < length q), (length q < a), (length q < k), (length q < length p), (a <= length p), (a <= length q), (k <= length p)
+(k <= length q), (length p <= a), (length p <= k), (length p <= length q), (length q <= a), (length q <= k), (length q <= length p), (~ Abs p p), (~ Abs p q), (~ Abs q p)
+(~ Abs q q), (~ priq p), (~ priq q), (~ Permutation p p), (~ Permutation p q), (~ Permutation q p), (~ Permutation q q), (~ In a p), (~ In a q), (~ In k p)
+(~ In k q), (~ a < a), (~ a < k), (~ k < a), (~ k < k), (~ a <= a), (~ a <= k), (~ k <= a), (~ k <= k), (p <> p)
+(p <> q), (q <> p), (q <> q), (a <> a), (a <> k), (k <> a), (k <> k), (None = Some p), (None = Some q), (a :: p = p)
+(a :: p = q), (a :: p = merge p p), (a :: p = merge p q), (a :: p = merge q p), (a :: p = merge q q), (a :: p = insert a p), (a :: p = insert a q), (a :: p = insert k p), (a :: p = insert k q), (a :: p = maybe_swap p)
+(a :: p = maybe_swap q), (a :: p = p ++ p), (a :: p = p ++ q), (a :: p = q ++ p), (a :: p = q ++ q), (a :: p = []), (a :: q = p), (a :: q = q), (a :: q = merge p p), (a :: q = merge p q)
+(a :: q = merge q p), (a :: q = merge q q), (a :: q = insert a p), (a :: q = insert a q), (a :: q = insert k p), (a :: q = insert k q), (a :: q = maybe_swap p), (a :: q = maybe_swap q), (a :: q = p ++ p), (a :: q = p ++ q)
+(a :: q = q ++ p), (a :: q = q ++ q), (a :: q = []), (k :: p = p), (k :: p = q), (k :: p = merge p p), (k :: p = merge p q), (k :: p = merge q p), (k :: p = merge q q), (k :: p = insert a p)
+(k :: p = insert a q), (k :: p = insert k p), (k :: p = insert k q), (k :: p = maybe_swap p), (k :: p = maybe_swap q), (k :: p = p ++ p), (k :: p = p ++ q), (k :: p = q ++ p), (k :: p = q ++ q), (k :: p = [])
+(k :: q = p), (k :: q = q), (k :: q = merge p p), (k :: q = merge p q), (k :: q = merge q p), (k :: q = merge q q), (k :: q = insert a p), (k :: q = insert a q), (k :: q = insert k p), (k :: q = insert k q)
+(k :: q = maybe_swap p), (k :: q = maybe_swap q), (k :: q = p ++ p), (k :: q = p ++ q), (k :: q = q ++ p), (k :: q = q ++ q), (k :: q = []), (merge p p = p), (merge p p = q), (merge p p = insert a p)
+(merge p p = insert a q), (merge p p = insert k p), (merge p p = insert k q), (merge p p = maybe_swap p), (merge p p = maybe_swap q), (merge p p = p ++ p), (merge p p = p ++ q), (merge p p = q ++ p), (merge p p = q ++ q), (merge p q = p)
+(merge p q = q), (merge p q = insert a p), (merge p q = insert a q), (merge p q = insert k p), (merge p q = insert k q), (merge p q = maybe_swap p), (merge p q = maybe_swap q), (merge p q = p ++ p), (merge p q = p ++ q), (merge p q = q ++ p)
+(merge p q = q ++ q), (merge q p = p), (merge q p = q), (merge q p = insert a p), (merge q p = insert a q), (merge q p = insert k p), (merge q p = insert k q), (merge q p = maybe_swap p), (merge q p = maybe_swap q), (merge q p = p ++ p)
+(merge q p = p ++ q), (merge q p = q ++ p), (merge q p = q ++ q), (merge q q = p), (merge q q = q), (merge q q = insert a p), (merge q q = insert a q), (merge q q = insert k p), (merge q q = insert k q), (merge q q = maybe_swap p)
+(merge q q = maybe_swap q), (merge q q = p ++ p), (merge q q = p ++ q), (merge q q = q ++ p), (merge q q = q ++ q), (insert a p = p), (insert a p = q), (insert a p = p ++ p), (insert a p = p ++ q), (insert a p = q ++ p)
+(insert a p = q ++ q), (insert a q = p), (insert a q = q), (insert a q = p ++ p), (insert a q = p ++ q), (insert a q = q ++ p), (insert a q = q ++ q), (insert k p = p), (insert k p = q), (insert k p = p ++ p)
+(insert k p = p ++ q), (insert k p = q ++ p), (insert k p = q ++ q), (insert k q = p), (insert k q = q), (insert k q = p ++ p), (insert k q = p ++ q), (insert k q = q ++ p), (insert k q = q ++ q), (maybe_swap p = p)
+(maybe_swap p = q), (maybe_swap p = insert a p), (maybe_swap p = insert a q), (maybe_swap p = insert k p), (maybe_swap p = insert k q), (maybe_swap p = p ++ p), (maybe_swap p = p ++ q), (maybe_swap p = q ++ p), (maybe_swap p = q ++ q), (maybe_swap q = p)
+(maybe_swap q = q), (maybe_swap q = insert a p), (maybe_swap q = insert a q), (maybe_swap q = insert k p), (maybe_swap q = insert k q), (maybe_swap q = p ++ p), (maybe_swap q = p ++ q), (maybe_swap q = q ++ p), (maybe_swap q = q ++ q), (p ++ p = p)
+(p ++ p = q), (p ++ q = p), (p ++ q = q), (q ++ p = p), (q ++ p = q), (q ++ q = p), (q ++ q = q), ([] = p), ([] = q), ([] = merge p p)
+([] = merge p q), ([] = merge q p), ([] = merge q q), ([] = insert a p), ([] = insert a q), ([] = insert k p), ([] = insert k q), ([] = maybe_swap p), ([] = maybe_swap q), ([] = p ++ p)
+([] = p ++ q), ([] = q ++ p), ([] = q ++ q), (None = Some a), (None = Some k), ((a, p) = select a p), ((a, p) = select a q), ((a, p) = select k p), ((a, p) = select k q), ((a, q) = select a p)
+((a, q) = select a q), ((a, q) = select k p), ((a, q) = select k q), ((k, p) = select a p), ((k, p) = select a q), ((k, p) = select k p), ((k, p) = select k q), ((k, q) = select a p), ((k, q) = select a q), ((k, q) = select k p)
+((k, q) = select k q), ((a >? a) = (a >=? a)), ((a >? a) = (a >=? k)), ((a >? a) = (k >=? a)), ((a >? a) = (k >=? k)), ((a >? k) = (a >=? a)), ((a >? k) = (a >=? k)), ((a >? k) = (k >=? a)), ((a >? k) = (k >=? k)), ((k >? a) = (a >=? a))
+((k >? a) = (a >=? k)), ((k >? a) = (k >=? a)), ((k >? a) = (k >=? k)), ((k >? k) = (a >=? a)), ((k >? k) = (a >=? k)), ((k >? k) = (k >=? a)), ((k >? k) = (k >=? k)), (length p = a), (length p = k), (length q = a)
+(length q = k)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 35.169 seconds
+
+
+Label: 0 (0)
+((k, q) = select a p), ((k, q) = select k q)
+
+
+
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 46.177 seconds
+
+Number of Result Pairs Returned: 2
+
+1. (select a p = (k, q) -> Forall (ge k) q)
+
+2. (select a p = (k, q) -> (k, q) = select k q)
+((k, q) = select k q -> Forall (ge k) q)

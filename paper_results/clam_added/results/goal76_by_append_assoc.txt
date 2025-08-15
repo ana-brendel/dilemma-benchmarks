@@ -1,0 +1,421 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (forall y : lst, append (revflat x1) y = qrevaflat x1 y)
+ -- (forall y : lst, append (revflat x2) y = qrevaflat x2 y)
+
+----------------------------------
+Goal: (append (append (revflat x1) (Cons n (revflat x2))) y =
+ qrevaflat x1 (Cons n (qrevaflat x2 y)))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 1.413 seconds
+
+gv1 : lst = (append (revflat x1) (Cons n (revflat x2)))
+gv3 : lst = (Cons n (revflat x2))
+gv6 : lst = (Cons n (qrevaflat x2 y))
+gv2 : lst = (revflat x1)
+gv0 : lst = (append (append (revflat x1) (Cons n (revflat x2))) y)
+gv4 : lst = (revflat x2)
+gv5 : lst = (qrevaflat x1 (Cons n (qrevaflat x2 y)))
+gv7 : lst = (qrevaflat x2 y)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 67.478 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (append (append (revflat x1) (Cons n (revflat x2))) y =
+ qrevaflat x1 (Cons n (qrevaflat x2 y)))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (qrevaflat x2 y = gv7)
+
+----------------------------------
+Goal: (append (append (revflat x1) (Cons n (revflat x2))) y =
+ qrevaflat x1 (Cons n gv7))
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (qrevaflat x1 (Cons n (qrevaflat x2 y)) = gv5)
+
+----------------------------------
+Goal: (append (append (revflat x1) (Cons n (revflat x2))) y = gv5)
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (revflat x2 = gv4)
+
+----------------------------------
+Goal: (append (append (revflat x1) (Cons n gv4)) y =
+ qrevaflat x1 (Cons n (qrevaflat x2 y)))
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (Cons n (qrevaflat x2 y) = gv6)
+
+----------------------------------
+Goal: (append (append (revflat x1) (Cons n (revflat x2))) y = qrevaflat x1 gv6)
+Case: Invalid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (revflat x1 = gv2)
+
+----------------------------------
+Goal: (append (append gv2 (Cons n (revflat x2))) y =
+ qrevaflat x1 (Cons n (qrevaflat x2 y)))
+Case: Invalid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (append (append (revflat x1) (Cons n (revflat x2))) y = gv0)
+
+----------------------------------
+Goal: (gv0 = qrevaflat x1 (Cons n (qrevaflat x2 y)))
+Case: Invalid and Generalized
+
+Label: Generalization #7
+Assumptions: 
+ -- (Cons n (revflat x2) = gv3)
+
+----------------------------------
+Goal: (append (append (revflat x1) gv3) y = qrevaflat x1 (Cons n (qrevaflat x2 y)))
+Case: Invalid and Generalized
+
+Label: Generalization #8
+Assumptions: 
+ -- (append (revflat x1) (Cons n (revflat x2)) = gv1)
+
+----------------------------------
+Goal: (append gv1 y = qrevaflat x1 (Cons n (qrevaflat x2 y)))
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 67.635 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+natural : Set
+lst : Set
+tree : Set
+append : (lst -> lst -> lst)
+rev : (lst -> lst)
+qreva : (lst -> lst -> lst)
+revflat : (tree -> lst)
+qrevaflat : (tree -> lst -> lst)
+Succ : (natural -> natural)
+Zero : natural
+Cons : (natural -> lst -> lst)
+Nil : lst
+Node : (natural -> tree -> tree -> tree)
+Leaf : tree
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 6 (6)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 7 (7)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 67.8 seconds
+
+
+Label: 0 (0)
+(gv7 = gv7), (gv7 = y), (y = gv7), (y = y), (n = n), (x2 = x2), (x2 = x1), (x1 = x2), (x1 = x1), (gv7 <> gv7)
+(gv7 <> y), (y <> gv7), (y <> y), (n <> n), (x2 <> x2), (x2 <> x1), (x1 <> x2), (x1 <> x1), (None = Some x2), (None = Some x1)
+(None = Some n), (None = Some gv7), (None = Some y), (Cons n gv7 = gv7), (Cons n gv7 = y), (Cons n gv7 = qrevaflat x2 gv7), (Cons n gv7 = qrevaflat x2 y), (Cons n gv7 = qrevaflat x1 gv7), (Cons n gv7 = qrevaflat x1 y), (Cons n gv7 = revflat x2)
+(Cons n gv7 = revflat x1), (Cons n gv7 = qreva gv7 gv7), (Cons n gv7 = qreva gv7 y), (Cons n gv7 = qreva y gv7), (Cons n gv7 = qreva y y), (Cons n gv7 = rev gv7), (Cons n gv7 = rev y), (Cons n gv7 = append gv7 gv7), (Cons n gv7 = append gv7 y), (Cons n gv7 = append y gv7)
+(Cons n gv7 = append y y), (Cons n y = gv7), (Cons n y = y), (Cons n y = qrevaflat x2 gv7), (Cons n y = qrevaflat x2 y), (Cons n y = qrevaflat x1 gv7), (Cons n y = qrevaflat x1 y), (Cons n y = revflat x2), (Cons n y = revflat x1), (Cons n y = qreva gv7 gv7)
+(Cons n y = qreva gv7 y), (Cons n y = qreva y gv7), (Cons n y = qreva y y), (Cons n y = rev gv7), (Cons n y = rev y), (Cons n y = append gv7 gv7), (Cons n y = append gv7 y), (Cons n y = append y gv7), (Cons n y = append y y), (qrevaflat x2 gv7 = gv7)
+(qrevaflat x2 gv7 = y), (qrevaflat x2 gv7 = qreva gv7 gv7), (qrevaflat x2 gv7 = qreva gv7 y), (qrevaflat x2 gv7 = qreva y gv7), (qrevaflat x2 gv7 = qreva y y), (qrevaflat x2 gv7 = append gv7 gv7), (qrevaflat x2 gv7 = append gv7 y), (qrevaflat x2 gv7 = append y gv7), (qrevaflat x2 gv7 = append y y), (qrevaflat x2 y = gv7)
+(qrevaflat x2 y = y), (qrevaflat x2 y = qreva gv7 gv7), (qrevaflat x2 y = qreva gv7 y), (qrevaflat x2 y = qreva y gv7), (qrevaflat x2 y = qreva y y), (qrevaflat x2 y = append gv7 gv7), (qrevaflat x2 y = append gv7 y), (qrevaflat x2 y = append y gv7), (qrevaflat x2 y = append y y), (qrevaflat x1 gv7 = gv7)
+(qrevaflat x1 gv7 = y), (qrevaflat x1 gv7 = qreva gv7 gv7), (qrevaflat x1 gv7 = qreva gv7 y), (qrevaflat x1 gv7 = qreva y gv7), (qrevaflat x1 gv7 = qreva y y), (qrevaflat x1 gv7 = append gv7 gv7), (qrevaflat x1 gv7 = append gv7 y), (qrevaflat x1 gv7 = append y gv7), (qrevaflat x1 gv7 = append y y), (qrevaflat x1 y = gv7)
+(qrevaflat x1 y = y), (qrevaflat x1 y = qreva gv7 gv7), (qrevaflat x1 y = qreva gv7 y), (qrevaflat x1 y = qreva y gv7), (qrevaflat x1 y = qreva y y), (qrevaflat x1 y = append gv7 gv7), (qrevaflat x1 y = append gv7 y), (qrevaflat x1 y = append y gv7), (qrevaflat x1 y = append y y), (revflat x2 = gv7)
+(revflat x2 = y), (revflat x2 = qrevaflat x2 gv7), (revflat x2 = qrevaflat x2 y), (revflat x2 = qrevaflat x1 gv7), (revflat x2 = qrevaflat x1 y), (revflat x2 = qreva gv7 gv7), (revflat x2 = qreva gv7 y), (revflat x2 = qreva y gv7), (revflat x2 = qreva y y), (revflat x2 = rev gv7)
+(revflat x2 = rev y), (revflat x2 = append gv7 gv7), (revflat x2 = append gv7 y), (revflat x2 = append y gv7), (revflat x2 = append y y), (revflat x1 = gv7), (revflat x1 = y), (revflat x1 = qrevaflat x2 gv7), (revflat x1 = qrevaflat x2 y), (revflat x1 = qrevaflat x1 gv7)
+(revflat x1 = qrevaflat x1 y), (revflat x1 = qreva gv7 gv7), (revflat x1 = qreva gv7 y), (revflat x1 = qreva y gv7), (revflat x1 = qreva y y), (revflat x1 = rev gv7), (revflat x1 = rev y), (revflat x1 = append gv7 gv7), (revflat x1 = append gv7 y), (revflat x1 = append y gv7)
+(revflat x1 = append y y), (qreva gv7 gv7 = gv7), (qreva gv7 gv7 = y), (qreva gv7 gv7 = append gv7 gv7), (qreva gv7 gv7 = append gv7 y), (qreva gv7 gv7 = append y gv7), (qreva gv7 gv7 = append y y), (qreva gv7 y = gv7), (qreva gv7 y = y), (qreva gv7 y = append gv7 gv7)
+(qreva gv7 y = append gv7 y), (qreva gv7 y = append y gv7), (qreva gv7 y = append y y), (qreva y gv7 = gv7), (qreva y gv7 = y), (qreva y gv7 = append gv7 gv7), (qreva y gv7 = append gv7 y), (qreva y gv7 = append y gv7), (qreva y gv7 = append y y), (qreva y y = gv7)
+(qreva y y = y), (qreva y y = append gv7 gv7), (qreva y y = append gv7 y), (qreva y y = append y gv7), (qreva y y = append y y), (rev gv7 = gv7), (rev gv7 = y), (rev gv7 = qrevaflat x2 gv7), (rev gv7 = qrevaflat x2 y), (rev gv7 = qrevaflat x1 gv7)
+(rev gv7 = qrevaflat x1 y), (rev gv7 = qreva gv7 gv7), (rev gv7 = qreva gv7 y), (rev gv7 = qreva y gv7), (rev gv7 = qreva y y), (rev gv7 = append gv7 gv7), (rev gv7 = append gv7 y), (rev gv7 = append y gv7), (rev gv7 = append y y), (rev y = gv7)
+(rev y = y), (rev y = qrevaflat x2 gv7), (rev y = qrevaflat x2 y), (rev y = qrevaflat x1 gv7), (rev y = qrevaflat x1 y), (rev y = qreva gv7 gv7), (rev y = qreva gv7 y), (rev y = qreva y gv7), (rev y = qreva y y), (rev y = append gv7 gv7)
+(rev y = append gv7 y), (rev y = append y gv7), (rev y = append y y), (append gv7 gv7 = gv7), (append gv7 gv7 = y), (append gv7 y = gv7), (append gv7 y = y), (append y gv7 = gv7), (append y gv7 = y), (append y y = gv7)
+(append y y = y), (Nil = Cons n gv7), (Nil = Cons n y), (Nil = qrevaflat x2 gv7), (Nil = qrevaflat x2 y), (Nil = qrevaflat x1 gv7), (Nil = qrevaflat x1 y), (Nil = revflat x2), (Nil = revflat x1), (Nil = qreva gv7 gv7)
+(Nil = qreva gv7 y), (Nil = qreva y gv7), (Nil = qreva y y), (Nil = rev gv7), (Nil = rev y), (Nil = append gv7 gv7), (Nil = append gv7 y), (Nil = append y gv7), (Nil = append y y), (Node n x2 x2 = x2)
+(Node n x2 x2 = x1), (Node n x2 x1 = x2), (Node n x2 x1 = x1), (Node n x1 x2 = x2), (Node n x1 x2 = x1), (Node n x1 x1 = x2), (Node n x1 x1 = x1), (Leaf = Node n x2 x2), (Leaf = Node n x2 x1), (Leaf = Node n x1 x2)
+(Leaf = Node n x1 x1), (Succ n = n), (Zero = Succ n)
+
+Label: 1 (1)
+(gv5 = gv5), (gv5 = y), (y = gv5), (y = y), (n = n), (x2 = x2), (x2 = x1), (x1 = x2), (x1 = x1), (gv5 <> gv5)
+(gv5 <> y), (y <> gv5), (y <> y), (n <> n), (x2 <> x2), (x2 <> x1), (x1 <> x2), (x1 <> x1), (None = Some x2), (None = Some x1)
+(None = Some n), (None = Some gv5), (None = Some y), (Cons n gv5 = gv5), (Cons n gv5 = y), (Cons n gv5 = qrevaflat x2 gv5), (Cons n gv5 = qrevaflat x2 y), (Cons n gv5 = qrevaflat x1 gv5), (Cons n gv5 = qrevaflat x1 y), (Cons n gv5 = revflat x2)
+(Cons n gv5 = revflat x1), (Cons n gv5 = qreva gv5 gv5), (Cons n gv5 = qreva gv5 y), (Cons n gv5 = qreva y gv5), (Cons n gv5 = qreva y y), (Cons n gv5 = rev gv5), (Cons n gv5 = rev y), (Cons n gv5 = append gv5 gv5), (Cons n gv5 = append gv5 y), (Cons n gv5 = append y gv5)
+(Cons n gv5 = append y y), (Cons n y = gv5), (Cons n y = y), (Cons n y = qrevaflat x2 gv5), (Cons n y = qrevaflat x2 y), (Cons n y = qrevaflat x1 gv5), (Cons n y = qrevaflat x1 y), (Cons n y = revflat x2), (Cons n y = revflat x1), (Cons n y = qreva gv5 gv5)
+(Cons n y = qreva gv5 y), (Cons n y = qreva y gv5), (Cons n y = qreva y y), (Cons n y = rev gv5), (Cons n y = rev y), (Cons n y = append gv5 gv5), (Cons n y = append gv5 y), (Cons n y = append y gv5), (Cons n y = append y y), (qrevaflat x2 gv5 = gv5)
+(qrevaflat x2 gv5 = y), (qrevaflat x2 gv5 = qreva gv5 gv5), (qrevaflat x2 gv5 = qreva gv5 y), (qrevaflat x2 gv5 = qreva y gv5), (qrevaflat x2 gv5 = qreva y y), (qrevaflat x2 gv5 = append gv5 gv5), (qrevaflat x2 gv5 = append gv5 y), (qrevaflat x2 gv5 = append y gv5), (qrevaflat x2 gv5 = append y y), (qrevaflat x2 y = gv5)
+(qrevaflat x2 y = y), (qrevaflat x2 y = qreva gv5 gv5), (qrevaflat x2 y = qreva gv5 y), (qrevaflat x2 y = qreva y gv5), (qrevaflat x2 y = qreva y y), (qrevaflat x2 y = append gv5 gv5), (qrevaflat x2 y = append gv5 y), (qrevaflat x2 y = append y gv5), (qrevaflat x2 y = append y y), (qrevaflat x1 gv5 = gv5)
+(qrevaflat x1 gv5 = y), (qrevaflat x1 gv5 = qreva gv5 gv5), (qrevaflat x1 gv5 = qreva gv5 y), (qrevaflat x1 gv5 = qreva y gv5), (qrevaflat x1 gv5 = qreva y y), (qrevaflat x1 gv5 = append gv5 gv5), (qrevaflat x1 gv5 = append gv5 y), (qrevaflat x1 gv5 = append y gv5), (qrevaflat x1 gv5 = append y y), (qrevaflat x1 y = gv5)
+(qrevaflat x1 y = y), (qrevaflat x1 y = qreva gv5 gv5), (qrevaflat x1 y = qreva gv5 y), (qrevaflat x1 y = qreva y gv5), (qrevaflat x1 y = qreva y y), (qrevaflat x1 y = append gv5 gv5), (qrevaflat x1 y = append gv5 y), (qrevaflat x1 y = append y gv5), (qrevaflat x1 y = append y y), (revflat x2 = gv5)
+(revflat x2 = y), (revflat x2 = qrevaflat x2 gv5), (revflat x2 = qrevaflat x2 y), (revflat x2 = qrevaflat x1 gv5), (revflat x2 = qrevaflat x1 y), (revflat x2 = qreva gv5 gv5), (revflat x2 = qreva gv5 y), (revflat x2 = qreva y gv5), (revflat x2 = qreva y y), (revflat x2 = rev gv5)
+(revflat x2 = rev y), (revflat x2 = append gv5 gv5), (revflat x2 = append gv5 y), (revflat x2 = append y gv5), (revflat x2 = append y y), (revflat x1 = gv5), (revflat x1 = y), (revflat x1 = qrevaflat x2 gv5), (revflat x1 = qrevaflat x2 y), (revflat x1 = qrevaflat x1 gv5)
+(revflat x1 = qrevaflat x1 y), (revflat x1 = qreva gv5 gv5), (revflat x1 = qreva gv5 y), (revflat x1 = qreva y gv5), (revflat x1 = qreva y y), (revflat x1 = rev gv5), (revflat x1 = rev y), (revflat x1 = append gv5 gv5), (revflat x1 = append gv5 y), (revflat x1 = append y gv5)
+(revflat x1 = append y y), (qreva gv5 gv5 = gv5), (qreva gv5 gv5 = y), (qreva gv5 gv5 = append gv5 gv5), (qreva gv5 gv5 = append gv5 y), (qreva gv5 gv5 = append y gv5), (qreva gv5 gv5 = append y y), (qreva gv5 y = gv5), (qreva gv5 y = y), (qreva gv5 y = append gv5 gv5)
+(qreva gv5 y = append gv5 y), (qreva gv5 y = append y gv5), (qreva gv5 y = append y y), (qreva y gv5 = gv5), (qreva y gv5 = y), (qreva y gv5 = append gv5 gv5), (qreva y gv5 = append gv5 y), (qreva y gv5 = append y gv5), (qreva y gv5 = append y y), (qreva y y = gv5)
+(qreva y y = y), (qreva y y = append gv5 gv5), (qreva y y = append gv5 y), (qreva y y = append y gv5), (qreva y y = append y y), (rev gv5 = gv5), (rev gv5 = y), (rev gv5 = qrevaflat x2 gv5), (rev gv5 = qrevaflat x2 y), (rev gv5 = qrevaflat x1 gv5)
+(rev gv5 = qrevaflat x1 y), (rev gv5 = qreva gv5 gv5), (rev gv5 = qreva gv5 y), (rev gv5 = qreva y gv5), (rev gv5 = qreva y y), (rev gv5 = append gv5 gv5), (rev gv5 = append gv5 y), (rev gv5 = append y gv5), (rev gv5 = append y y), (rev y = gv5)
+(rev y = y), (rev y = qrevaflat x2 gv5), (rev y = qrevaflat x2 y), (rev y = qrevaflat x1 gv5), (rev y = qrevaflat x1 y), (rev y = qreva gv5 gv5), (rev y = qreva gv5 y), (rev y = qreva y gv5), (rev y = qreva y y), (rev y = append gv5 gv5)
+(rev y = append gv5 y), (rev y = append y gv5), (rev y = append y y), (append gv5 gv5 = gv5), (append gv5 gv5 = y), (append gv5 y = gv5), (append gv5 y = y), (append y gv5 = gv5), (append y gv5 = y), (append y y = gv5)
+(append y y = y), (Nil = Cons n gv5), (Nil = Cons n y), (Nil = qrevaflat x2 gv5), (Nil = qrevaflat x2 y), (Nil = qrevaflat x1 gv5), (Nil = qrevaflat x1 y), (Nil = revflat x2), (Nil = revflat x1), (Nil = qreva gv5 gv5)
+(Nil = qreva gv5 y), (Nil = qreva y gv5), (Nil = qreva y y), (Nil = rev gv5), (Nil = rev y), (Nil = append gv5 gv5), (Nil = append gv5 y), (Nil = append y gv5), (Nil = append y y), (Node n x2 x2 = x2)
+(Node n x2 x2 = x1), (Node n x2 x1 = x2), (Node n x2 x1 = x1), (Node n x1 x2 = x2), (Node n x1 x2 = x1), (Node n x1 x1 = x2), (Node n x1 x1 = x1), (Leaf = Node n x2 x2), (Leaf = Node n x2 x1), (Leaf = Node n x1 x2)
+(Leaf = Node n x1 x1), (Succ n = n), (Zero = Succ n)
+
+Label: 2 (2)
+(y = y), (y = gv4), (gv4 = y), (gv4 = gv4), (n = n), (x2 = x2), (x2 = x1), (x1 = x2), (x1 = x1), (y <> y)
+(y <> gv4), (gv4 <> y), (gv4 <> gv4), (n <> n), (x2 <> x2), (x2 <> x1), (x1 <> x2), (x1 <> x1), (None = Some x2), (None = Some x1)
+(None = Some n), (None = Some y), (None = Some gv4), (Cons n y = y), (Cons n y = gv4), (Cons n y = qrevaflat x2 y), (Cons n y = qrevaflat x2 gv4), (Cons n y = qrevaflat x1 y), (Cons n y = qrevaflat x1 gv4), (Cons n y = revflat x2)
+(Cons n y = revflat x1), (Cons n y = qreva y y), (Cons n y = qreva y gv4), (Cons n y = qreva gv4 y), (Cons n y = qreva gv4 gv4), (Cons n y = rev y), (Cons n y = rev gv4), (Cons n y = append y y), (Cons n y = append y gv4), (Cons n y = append gv4 y)
+(Cons n y = append gv4 gv4), (Cons n gv4 = y), (Cons n gv4 = gv4), (Cons n gv4 = qrevaflat x2 y), (Cons n gv4 = qrevaflat x2 gv4), (Cons n gv4 = qrevaflat x1 y), (Cons n gv4 = qrevaflat x1 gv4), (Cons n gv4 = revflat x2), (Cons n gv4 = revflat x1), (Cons n gv4 = qreva y y)
+(Cons n gv4 = qreva y gv4), (Cons n gv4 = qreva gv4 y), (Cons n gv4 = qreva gv4 gv4), (Cons n gv4 = rev y), (Cons n gv4 = rev gv4), (Cons n gv4 = append y y), (Cons n gv4 = append y gv4), (Cons n gv4 = append gv4 y), (Cons n gv4 = append gv4 gv4), (qrevaflat x2 y = y)
+(qrevaflat x2 y = gv4), (qrevaflat x2 y = qreva y y), (qrevaflat x2 y = qreva y gv4), (qrevaflat x2 y = qreva gv4 y), (qrevaflat x2 y = qreva gv4 gv4), (qrevaflat x2 y = append y y), (qrevaflat x2 y = append y gv4), (qrevaflat x2 y = append gv4 y), (qrevaflat x2 y = append gv4 gv4), (qrevaflat x2 gv4 = y)
+(qrevaflat x2 gv4 = gv4), (qrevaflat x2 gv4 = qreva y y), (qrevaflat x2 gv4 = qreva y gv4), (qrevaflat x2 gv4 = qreva gv4 y), (qrevaflat x2 gv4 = qreva gv4 gv4), (qrevaflat x2 gv4 = append y y), (qrevaflat x2 gv4 = append y gv4), (qrevaflat x2 gv4 = append gv4 y), (qrevaflat x2 gv4 = append gv4 gv4), (qrevaflat x1 y = y)
+(qrevaflat x1 y = gv4), (qrevaflat x1 y = qreva y y), (qrevaflat x1 y = qreva y gv4), (qrevaflat x1 y = qreva gv4 y), (qrevaflat x1 y = qreva gv4 gv4), (qrevaflat x1 y = append y y), (qrevaflat x1 y = append y gv4), (qrevaflat x1 y = append gv4 y), (qrevaflat x1 y = append gv4 gv4), (qrevaflat x1 gv4 = y)
+(qrevaflat x1 gv4 = gv4), (qrevaflat x1 gv4 = qreva y y), (qrevaflat x1 gv4 = qreva y gv4), (qrevaflat x1 gv4 = qreva gv4 y), (qrevaflat x1 gv4 = qreva gv4 gv4), (qrevaflat x1 gv4 = append y y), (qrevaflat x1 gv4 = append y gv4), (qrevaflat x1 gv4 = append gv4 y), (qrevaflat x1 gv4 = append gv4 gv4), (revflat x2 = y)
+(revflat x2 = gv4), (revflat x2 = qrevaflat x2 y), (revflat x2 = qrevaflat x2 gv4), (revflat x2 = qrevaflat x1 y), (revflat x2 = qrevaflat x1 gv4), (revflat x2 = qreva y y), (revflat x2 = qreva y gv4), (revflat x2 = qreva gv4 y), (revflat x2 = qreva gv4 gv4), (revflat x2 = rev y)
+(revflat x2 = rev gv4), (revflat x2 = append y y), (revflat x2 = append y gv4), (revflat x2 = append gv4 y), (revflat x2 = append gv4 gv4), (revflat x1 = y), (revflat x1 = gv4), (revflat x1 = qrevaflat x2 y), (revflat x1 = qrevaflat x2 gv4), (revflat x1 = qrevaflat x1 y)
+(revflat x1 = qrevaflat x1 gv4), (revflat x1 = qreva y y), (revflat x1 = qreva y gv4), (revflat x1 = qreva gv4 y), (revflat x1 = qreva gv4 gv4), (revflat x1 = rev y), (revflat x1 = rev gv4), (revflat x1 = append y y), (revflat x1 = append y gv4), (revflat x1 = append gv4 y)
+(revflat x1 = append gv4 gv4), (qreva y y = y), (qreva y y = gv4), (qreva y y = append y y), (qreva y y = append y gv4), (qreva y y = append gv4 y), (qreva y y = append gv4 gv4), (qreva y gv4 = y), (qreva y gv4 = gv4), (qreva y gv4 = append y y)
+(qreva y gv4 = append y gv4), (qreva y gv4 = append gv4 y), (qreva y gv4 = append gv4 gv4), (qreva gv4 y = y), (qreva gv4 y = gv4), (qreva gv4 y = append y y), (qreva gv4 y = append y gv4), (qreva gv4 y = append gv4 y), (qreva gv4 y = append gv4 gv4), (qreva gv4 gv4 = y)
+(qreva gv4 gv4 = gv4), (qreva gv4 gv4 = append y y), (qreva gv4 gv4 = append y gv4), (qreva gv4 gv4 = append gv4 y), (qreva gv4 gv4 = append gv4 gv4), (rev y = y), (rev y = gv4), (rev y = qrevaflat x2 y), (rev y = qrevaflat x2 gv4), (rev y = qrevaflat x1 y)
+(rev y = qrevaflat x1 gv4), (rev y = qreva y y), (rev y = qreva y gv4), (rev y = qreva gv4 y), (rev y = qreva gv4 gv4), (rev y = append y y), (rev y = append y gv4), (rev y = append gv4 y), (rev y = append gv4 gv4), (rev gv4 = y)
+(rev gv4 = gv4), (rev gv4 = qrevaflat x2 y), (rev gv4 = qrevaflat x2 gv4), (rev gv4 = qrevaflat x1 y), (rev gv4 = qrevaflat x1 gv4), (rev gv4 = qreva y y), (rev gv4 = qreva y gv4), (rev gv4 = qreva gv4 y), (rev gv4 = qreva gv4 gv4), (rev gv4 = append y y)
+(rev gv4 = append y gv4), (rev gv4 = append gv4 y), (rev gv4 = append gv4 gv4), (append y y = y), (append y y = gv4), (append y gv4 = y), (append y gv4 = gv4), (append gv4 y = y), (append gv4 y = gv4), (append gv4 gv4 = y)
+(append gv4 gv4 = gv4), (Nil = Cons n y), (Nil = Cons n gv4), (Nil = qrevaflat x2 y), (Nil = qrevaflat x2 gv4), (Nil = qrevaflat x1 y), (Nil = qrevaflat x1 gv4), (Nil = revflat x2), (Nil = revflat x1), (Nil = qreva y y)
+(Nil = qreva y gv4), (Nil = qreva gv4 y), (Nil = qreva gv4 gv4), (Nil = rev y), (Nil = rev gv4), (Nil = append y y), (Nil = append y gv4), (Nil = append gv4 y), (Nil = append gv4 gv4), (Node n x2 x2 = x2)
+(Node n x2 x2 = x1), (Node n x2 x1 = x2), (Node n x2 x1 = x1), (Node n x1 x2 = x2), (Node n x1 x2 = x1), (Node n x1 x1 = x2), (Node n x1 x1 = x1), (Leaf = Node n x2 x2), (Leaf = Node n x2 x1), (Leaf = Node n x1 x2)
+(Leaf = Node n x1 x1), (Succ n = n), (Zero = Succ n)
+
+Label: 3 (3)
+(gv6 = gv6), (gv6 = y), (y = gv6), (y = y), (n = n), (x2 = x2), (x2 = x1), (x1 = x2), (x1 = x1), (gv6 <> gv6)
+(gv6 <> y), (y <> gv6), (y <> y), (n <> n), (x2 <> x2), (x2 <> x1), (x1 <> x2), (x1 <> x1), (None = Some x2), (None = Some x1)
+(None = Some n), (None = Some gv6), (None = Some y), (Cons n gv6 = gv6), (Cons n gv6 = y), (Cons n gv6 = qrevaflat x2 gv6), (Cons n gv6 = qrevaflat x2 y), (Cons n gv6 = qrevaflat x1 gv6), (Cons n gv6 = qrevaflat x1 y), (Cons n gv6 = revflat x2)
+(Cons n gv6 = revflat x1), (Cons n gv6 = qreva gv6 gv6), (Cons n gv6 = qreva gv6 y), (Cons n gv6 = qreva y gv6), (Cons n gv6 = qreva y y), (Cons n gv6 = rev gv6), (Cons n gv6 = rev y), (Cons n gv6 = append gv6 gv6), (Cons n gv6 = append gv6 y), (Cons n gv6 = append y gv6)
+(Cons n gv6 = append y y), (Cons n y = gv6), (Cons n y = y), (Cons n y = qrevaflat x2 gv6), (Cons n y = qrevaflat x2 y), (Cons n y = qrevaflat x1 gv6), (Cons n y = qrevaflat x1 y), (Cons n y = revflat x2), (Cons n y = revflat x1), (Cons n y = qreva gv6 gv6)
+(Cons n y = qreva gv6 y), (Cons n y = qreva y gv6), (Cons n y = qreva y y), (Cons n y = rev gv6), (Cons n y = rev y), (Cons n y = append gv6 gv6), (Cons n y = append gv6 y), (Cons n y = append y gv6), (Cons n y = append y y), (qrevaflat x2 gv6 = gv6)
+(qrevaflat x2 gv6 = y), (qrevaflat x2 gv6 = qreva gv6 gv6), (qrevaflat x2 gv6 = qreva gv6 y), (qrevaflat x2 gv6 = qreva y gv6), (qrevaflat x2 gv6 = qreva y y), (qrevaflat x2 gv6 = append gv6 gv6), (qrevaflat x2 gv6 = append gv6 y), (qrevaflat x2 gv6 = append y gv6), (qrevaflat x2 gv6 = append y y), (qrevaflat x2 y = gv6)
+(qrevaflat x2 y = y), (qrevaflat x2 y = qreva gv6 gv6), (qrevaflat x2 y = qreva gv6 y), (qrevaflat x2 y = qreva y gv6), (qrevaflat x2 y = qreva y y), (qrevaflat x2 y = append gv6 gv6), (qrevaflat x2 y = append gv6 y), (qrevaflat x2 y = append y gv6), (qrevaflat x2 y = append y y), (qrevaflat x1 gv6 = gv6)
+(qrevaflat x1 gv6 = y), (qrevaflat x1 gv6 = qreva gv6 gv6), (qrevaflat x1 gv6 = qreva gv6 y), (qrevaflat x1 gv6 = qreva y gv6), (qrevaflat x1 gv6 = qreva y y), (qrevaflat x1 gv6 = append gv6 gv6), (qrevaflat x1 gv6 = append gv6 y), (qrevaflat x1 gv6 = append y gv6), (qrevaflat x1 gv6 = append y y), (qrevaflat x1 y = gv6)
+(qrevaflat x1 y = y), (qrevaflat x1 y = qreva gv6 gv6), (qrevaflat x1 y = qreva gv6 y), (qrevaflat x1 y = qreva y gv6), (qrevaflat x1 y = qreva y y), (qrevaflat x1 y = append gv6 gv6), (qrevaflat x1 y = append gv6 y), (qrevaflat x1 y = append y gv6), (qrevaflat x1 y = append y y), (revflat x2 = gv6)
+(revflat x2 = y), (revflat x2 = qrevaflat x2 gv6), (revflat x2 = qrevaflat x2 y), (revflat x2 = qrevaflat x1 gv6), (revflat x2 = qrevaflat x1 y), (revflat x2 = qreva gv6 gv6), (revflat x2 = qreva gv6 y), (revflat x2 = qreva y gv6), (revflat x2 = qreva y y), (revflat x2 = rev gv6)
+(revflat x2 = rev y), (revflat x2 = append gv6 gv6), (revflat x2 = append gv6 y), (revflat x2 = append y gv6), (revflat x2 = append y y), (revflat x1 = gv6), (revflat x1 = y), (revflat x1 = qrevaflat x2 gv6), (revflat x1 = qrevaflat x2 y), (revflat x1 = qrevaflat x1 gv6)
+(revflat x1 = qrevaflat x1 y), (revflat x1 = qreva gv6 gv6), (revflat x1 = qreva gv6 y), (revflat x1 = qreva y gv6), (revflat x1 = qreva y y), (revflat x1 = rev gv6), (revflat x1 = rev y), (revflat x1 = append gv6 gv6), (revflat x1 = append gv6 y), (revflat x1 = append y gv6)
+(revflat x1 = append y y), (qreva gv6 gv6 = gv6), (qreva gv6 gv6 = y), (qreva gv6 gv6 = append gv6 gv6), (qreva gv6 gv6 = append gv6 y), (qreva gv6 gv6 = append y gv6), (qreva gv6 gv6 = append y y), (qreva gv6 y = gv6), (qreva gv6 y = y), (qreva gv6 y = append gv6 gv6)
+(qreva gv6 y = append gv6 y), (qreva gv6 y = append y gv6), (qreva gv6 y = append y y), (qreva y gv6 = gv6), (qreva y gv6 = y), (qreva y gv6 = append gv6 gv6), (qreva y gv6 = append gv6 y), (qreva y gv6 = append y gv6), (qreva y gv6 = append y y), (qreva y y = gv6)
+(qreva y y = y), (qreva y y = append gv6 gv6), (qreva y y = append gv6 y), (qreva y y = append y gv6), (qreva y y = append y y), (rev gv6 = gv6), (rev gv6 = y), (rev gv6 = qrevaflat x2 gv6), (rev gv6 = qrevaflat x2 y), (rev gv6 = qrevaflat x1 gv6)
+(rev gv6 = qrevaflat x1 y), (rev gv6 = qreva gv6 gv6), (rev gv6 = qreva gv6 y), (rev gv6 = qreva y gv6), (rev gv6 = qreva y y), (rev gv6 = append gv6 gv6), (rev gv6 = append gv6 y), (rev gv6 = append y gv6), (rev gv6 = append y y), (rev y = gv6)
+(rev y = y), (rev y = qrevaflat x2 gv6), (rev y = qrevaflat x2 y), (rev y = qrevaflat x1 gv6), (rev y = qrevaflat x1 y), (rev y = qreva gv6 gv6), (rev y = qreva gv6 y), (rev y = qreva y gv6), (rev y = qreva y y), (rev y = append gv6 gv6)
+(rev y = append gv6 y), (rev y = append y gv6), (rev y = append y y), (append gv6 gv6 = gv6), (append gv6 gv6 = y), (append gv6 y = gv6), (append gv6 y = y), (append y gv6 = gv6), (append y gv6 = y), (append y y = gv6)
+(append y y = y), (Nil = Cons n gv6), (Nil = Cons n y), (Nil = qrevaflat x2 gv6), (Nil = qrevaflat x2 y), (Nil = qrevaflat x1 gv6), (Nil = qrevaflat x1 y), (Nil = revflat x2), (Nil = revflat x1), (Nil = qreva gv6 gv6)
+(Nil = qreva gv6 y), (Nil = qreva y gv6), (Nil = qreva y y), (Nil = rev gv6), (Nil = rev y), (Nil = append gv6 gv6), (Nil = append gv6 y), (Nil = append y gv6), (Nil = append y y), (Node n x2 x2 = x2)
+(Node n x2 x2 = x1), (Node n x2 x1 = x2), (Node n x2 x1 = x1), (Node n x1 x2 = x2), (Node n x1 x2 = x1), (Node n x1 x1 = x2), (Node n x1 x1 = x1), (Leaf = Node n x2 x2), (Leaf = Node n x2 x1), (Leaf = Node n x1 x2)
+(Leaf = Node n x1 x1), (Succ n = n), (Zero = Succ n)
+
+Label: 4 (4)
+(x1 = x1), (x1 = x2), (x2 = x1), (x2 = x2), (n = n), (y = y), (y = gv2), (gv2 = y), (gv2 = gv2), (x1 <> x1)
+(x1 <> x2), (x2 <> x1), (x2 <> x2), (n <> n), (y <> y), (y <> gv2), (gv2 <> y), (gv2 <> gv2), (None = Some n), (None = Some x1)
+(None = Some x2), (None = Some y), (None = Some gv2), (Cons n y = y), (Cons n y = gv2), (Cons n y = qrevaflat x1 y), (Cons n y = qrevaflat x1 gv2), (Cons n y = qrevaflat x2 y), (Cons n y = qrevaflat x2 gv2), (Cons n y = revflat x1)
+(Cons n y = revflat x2), (Cons n y = qreva y y), (Cons n y = qreva y gv2), (Cons n y = qreva gv2 y), (Cons n y = qreva gv2 gv2), (Cons n y = rev y), (Cons n y = rev gv2), (Cons n y = append y y), (Cons n y = append y gv2), (Cons n y = append gv2 y)
+(Cons n y = append gv2 gv2), (Cons n gv2 = y), (Cons n gv2 = gv2), (Cons n gv2 = qrevaflat x1 y), (Cons n gv2 = qrevaflat x1 gv2), (Cons n gv2 = qrevaflat x2 y), (Cons n gv2 = qrevaflat x2 gv2), (Cons n gv2 = revflat x1), (Cons n gv2 = revflat x2), (Cons n gv2 = qreva y y)
+(Cons n gv2 = qreva y gv2), (Cons n gv2 = qreva gv2 y), (Cons n gv2 = qreva gv2 gv2), (Cons n gv2 = rev y), (Cons n gv2 = rev gv2), (Cons n gv2 = append y y), (Cons n gv2 = append y gv2), (Cons n gv2 = append gv2 y), (Cons n gv2 = append gv2 gv2), (qrevaflat x1 y = y)
+(qrevaflat x1 y = gv2), (qrevaflat x1 y = qreva y y), (qrevaflat x1 y = qreva y gv2), (qrevaflat x1 y = qreva gv2 y), (qrevaflat x1 y = qreva gv2 gv2), (qrevaflat x1 y = append y y), (qrevaflat x1 y = append y gv2), (qrevaflat x1 y = append gv2 y), (qrevaflat x1 y = append gv2 gv2), (qrevaflat x1 gv2 = y)
+(qrevaflat x1 gv2 = gv2), (qrevaflat x1 gv2 = qreva y y), (qrevaflat x1 gv2 = qreva y gv2), (qrevaflat x1 gv2 = qreva gv2 y), (qrevaflat x1 gv2 = qreva gv2 gv2), (qrevaflat x1 gv2 = append y y), (qrevaflat x1 gv2 = append y gv2), (qrevaflat x1 gv2 = append gv2 y), (qrevaflat x1 gv2 = append gv2 gv2), (qrevaflat x2 y = y)
+(qrevaflat x2 y = gv2), (qrevaflat x2 y = qreva y y), (qrevaflat x2 y = qreva y gv2), (qrevaflat x2 y = qreva gv2 y), (qrevaflat x2 y = qreva gv2 gv2), (qrevaflat x2 y = append y y), (qrevaflat x2 y = append y gv2), (qrevaflat x2 y = append gv2 y), (qrevaflat x2 y = append gv2 gv2), (qrevaflat x2 gv2 = y)
+(qrevaflat x2 gv2 = gv2), (qrevaflat x2 gv2 = qreva y y), (qrevaflat x2 gv2 = qreva y gv2), (qrevaflat x2 gv2 = qreva gv2 y), (qrevaflat x2 gv2 = qreva gv2 gv2), (qrevaflat x2 gv2 = append y y), (qrevaflat x2 gv2 = append y gv2), (qrevaflat x2 gv2 = append gv2 y), (qrevaflat x2 gv2 = append gv2 gv2), (revflat x1 = y)
+(revflat x1 = gv2), (revflat x1 = qrevaflat x1 y), (revflat x1 = qrevaflat x1 gv2), (revflat x1 = qrevaflat x2 y), (revflat x1 = qrevaflat x2 gv2), (revflat x1 = qreva y y), (revflat x1 = qreva y gv2), (revflat x1 = qreva gv2 y), (revflat x1 = qreva gv2 gv2), (revflat x1 = rev y)
+(revflat x1 = rev gv2), (revflat x1 = append y y), (revflat x1 = append y gv2), (revflat x1 = append gv2 y), (revflat x1 = append gv2 gv2), (revflat x2 = y), (revflat x2 = gv2), (revflat x2 = qrevaflat x1 y), (revflat x2 = qrevaflat x1 gv2), (revflat x2 = qrevaflat x2 y)
+(revflat x2 = qrevaflat x2 gv2), (revflat x2 = qreva y y), (revflat x2 = qreva y gv2), (revflat x2 = qreva gv2 y), (revflat x2 = qreva gv2 gv2), (revflat x2 = rev y), (revflat x2 = rev gv2), (revflat x2 = append y y), (revflat x2 = append y gv2), (revflat x2 = append gv2 y)
+(revflat x2 = append gv2 gv2), (qreva y y = y), (qreva y y = gv2), (qreva y y = append y y), (qreva y y = append y gv2), (qreva y y = append gv2 y), (qreva y y = append gv2 gv2), (qreva y gv2 = y), (qreva y gv2 = gv2), (qreva y gv2 = append y y)
+(qreva y gv2 = append y gv2), (qreva y gv2 = append gv2 y), (qreva y gv2 = append gv2 gv2), (qreva gv2 y = y), (qreva gv2 y = gv2), (qreva gv2 y = append y y), (qreva gv2 y = append y gv2), (qreva gv2 y = append gv2 y), (qreva gv2 y = append gv2 gv2), (qreva gv2 gv2 = y)
+(qreva gv2 gv2 = gv2), (qreva gv2 gv2 = append y y), (qreva gv2 gv2 = append y gv2), (qreva gv2 gv2 = append gv2 y), (qreva gv2 gv2 = append gv2 gv2), (rev y = y), (rev y = gv2), (rev y = qrevaflat x1 y), (rev y = qrevaflat x1 gv2), (rev y = qrevaflat x2 y)
+(rev y = qrevaflat x2 gv2), (rev y = qreva y y), (rev y = qreva y gv2), (rev y = qreva gv2 y), (rev y = qreva gv2 gv2), (rev y = append y y), (rev y = append y gv2), (rev y = append gv2 y), (rev y = append gv2 gv2), (rev gv2 = y)
+(rev gv2 = gv2), (rev gv2 = qrevaflat x1 y), (rev gv2 = qrevaflat x1 gv2), (rev gv2 = qrevaflat x2 y), (rev gv2 = qrevaflat x2 gv2), (rev gv2 = qreva y y), (rev gv2 = qreva y gv2), (rev gv2 = qreva gv2 y), (rev gv2 = qreva gv2 gv2), (rev gv2 = append y y)
+(rev gv2 = append y gv2), (rev gv2 = append gv2 y), (rev gv2 = append gv2 gv2), (append y y = y), (append y y = gv2), (append y gv2 = y), (append y gv2 = gv2), (append gv2 y = y), (append gv2 y = gv2), (append gv2 gv2 = y)
+(append gv2 gv2 = gv2), (Nil = Cons n y), (Nil = Cons n gv2), (Nil = qrevaflat x1 y), (Nil = qrevaflat x1 gv2), (Nil = qrevaflat x2 y), (Nil = qrevaflat x2 gv2), (Nil = revflat x1), (Nil = revflat x2), (Nil = qreva y y)
+(Nil = qreva y gv2), (Nil = qreva gv2 y), (Nil = qreva gv2 gv2), (Nil = rev y), (Nil = rev gv2), (Nil = append y y), (Nil = append y gv2), (Nil = append gv2 y), (Nil = append gv2 gv2), (Node n x1 x1 = x1)
+(Node n x1 x1 = x2), (Node n x1 x2 = x1), (Node n x1 x2 = x2), (Node n x2 x1 = x1), (Node n x2 x1 = x2), (Node n x2 x2 = x1), (Node n x2 x2 = x2), (Leaf = Node n x1 x1), (Leaf = Node n x1 x2), (Leaf = Node n x2 x1)
+(Leaf = Node n x2 x2), (Succ n = n), (Zero = Succ n)
+
+Label: 5 (5)
+(n = n), (x2 = x2), (x2 = x1), (x1 = x2), (x1 = x1), (y = y), (y = gv0), (gv0 = y), (gv0 = gv0), (n <> n)
+(x2 <> x2), (x2 <> x1), (x1 <> x2), (x1 <> x1), (y <> y), (y <> gv0), (gv0 <> y), (gv0 <> gv0), (None = Some x2), (None = Some x1)
+(None = Some n), (None = Some y), (None = Some gv0), (Cons n y = y), (Cons n y = gv0), (Cons n y = qrevaflat x2 y), (Cons n y = qrevaflat x2 gv0), (Cons n y = qrevaflat x1 y), (Cons n y = qrevaflat x1 gv0), (Cons n y = revflat x2)
+(Cons n y = revflat x1), (Cons n y = qreva y y), (Cons n y = qreva y gv0), (Cons n y = qreva gv0 y), (Cons n y = qreva gv0 gv0), (Cons n y = rev y), (Cons n y = rev gv0), (Cons n y = append y y), (Cons n y = append y gv0), (Cons n y = append gv0 y)
+(Cons n y = append gv0 gv0), (Cons n gv0 = y), (Cons n gv0 = gv0), (Cons n gv0 = qrevaflat x2 y), (Cons n gv0 = qrevaflat x2 gv0), (Cons n gv0 = qrevaflat x1 y), (Cons n gv0 = qrevaflat x1 gv0), (Cons n gv0 = revflat x2), (Cons n gv0 = revflat x1), (Cons n gv0 = qreva y y)
+(Cons n gv0 = qreva y gv0), (Cons n gv0 = qreva gv0 y), (Cons n gv0 = qreva gv0 gv0), (Cons n gv0 = rev y), (Cons n gv0 = rev gv0), (Cons n gv0 = append y y), (Cons n gv0 = append y gv0), (Cons n gv0 = append gv0 y), (Cons n gv0 = append gv0 gv0), (qrevaflat x2 y = y)
+(qrevaflat x2 y = gv0), (qrevaflat x2 y = qreva y y), (qrevaflat x2 y = qreva y gv0), (qrevaflat x2 y = qreva gv0 y), (qrevaflat x2 y = qreva gv0 gv0), (qrevaflat x2 y = append y y), (qrevaflat x2 y = append y gv0), (qrevaflat x2 y = append gv0 y), (qrevaflat x2 y = append gv0 gv0), (qrevaflat x2 gv0 = y)
+(qrevaflat x2 gv0 = gv0), (qrevaflat x2 gv0 = qreva y y), (qrevaflat x2 gv0 = qreva y gv0), (qrevaflat x2 gv0 = qreva gv0 y), (qrevaflat x2 gv0 = qreva gv0 gv0), (qrevaflat x2 gv0 = append y y), (qrevaflat x2 gv0 = append y gv0), (qrevaflat x2 gv0 = append gv0 y), (qrevaflat x2 gv0 = append gv0 gv0), (qrevaflat x1 y = y)
+(qrevaflat x1 y = gv0), (qrevaflat x1 y = qreva y y), (qrevaflat x1 y = qreva y gv0), (qrevaflat x1 y = qreva gv0 y), (qrevaflat x1 y = qreva gv0 gv0), (qrevaflat x1 y = append y y), (qrevaflat x1 y = append y gv0), (qrevaflat x1 y = append gv0 y), (qrevaflat x1 y = append gv0 gv0), (qrevaflat x1 gv0 = y)
+(qrevaflat x1 gv0 = gv0), (qrevaflat x1 gv0 = qreva y y), (qrevaflat x1 gv0 = qreva y gv0), (qrevaflat x1 gv0 = qreva gv0 y), (qrevaflat x1 gv0 = qreva gv0 gv0), (qrevaflat x1 gv0 = append y y), (qrevaflat x1 gv0 = append y gv0), (qrevaflat x1 gv0 = append gv0 y), (qrevaflat x1 gv0 = append gv0 gv0), (revflat x2 = y)
+(revflat x2 = gv0), (revflat x2 = qrevaflat x2 y), (revflat x2 = qrevaflat x2 gv0), (revflat x2 = qrevaflat x1 y), (revflat x2 = qrevaflat x1 gv0), (revflat x2 = qreva y y), (revflat x2 = qreva y gv0), (revflat x2 = qreva gv0 y), (revflat x2 = qreva gv0 gv0), (revflat x2 = rev y)
+(revflat x2 = rev gv0), (revflat x2 = append y y), (revflat x2 = append y gv0), (revflat x2 = append gv0 y), (revflat x2 = append gv0 gv0), (revflat x1 = y), (revflat x1 = gv0), (revflat x1 = qrevaflat x2 y), (revflat x1 = qrevaflat x2 gv0), (revflat x1 = qrevaflat x1 y)
+(revflat x1 = qrevaflat x1 gv0), (revflat x1 = qreva y y), (revflat x1 = qreva y gv0), (revflat x1 = qreva gv0 y), (revflat x1 = qreva gv0 gv0), (revflat x1 = rev y), (revflat x1 = rev gv0), (revflat x1 = append y y), (revflat x1 = append y gv0), (revflat x1 = append gv0 y)
+(revflat x1 = append gv0 gv0), (qreva y y = y), (qreva y y = gv0), (qreva y y = append y y), (qreva y y = append y gv0), (qreva y y = append gv0 y), (qreva y y = append gv0 gv0), (qreva y gv0 = y), (qreva y gv0 = gv0), (qreva y gv0 = append y y)
+(qreva y gv0 = append y gv0), (qreva y gv0 = append gv0 y), (qreva y gv0 = append gv0 gv0), (qreva gv0 y = y), (qreva gv0 y = gv0), (qreva gv0 y = append y y), (qreva gv0 y = append y gv0), (qreva gv0 y = append gv0 y), (qreva gv0 y = append gv0 gv0), (qreva gv0 gv0 = y)
+(qreva gv0 gv0 = gv0), (qreva gv0 gv0 = append y y), (qreva gv0 gv0 = append y gv0), (qreva gv0 gv0 = append gv0 y), (qreva gv0 gv0 = append gv0 gv0), (rev y = y), (rev y = gv0), (rev y = qrevaflat x2 y), (rev y = qrevaflat x2 gv0), (rev y = qrevaflat x1 y)
+(rev y = qrevaflat x1 gv0), (rev y = qreva y y), (rev y = qreva y gv0), (rev y = qreva gv0 y), (rev y = qreva gv0 gv0), (rev y = append y y), (rev y = append y gv0), (rev y = append gv0 y), (rev y = append gv0 gv0), (rev gv0 = y)
+(rev gv0 = gv0), (rev gv0 = qrevaflat x2 y), (rev gv0 = qrevaflat x2 gv0), (rev gv0 = qrevaflat x1 y), (rev gv0 = qrevaflat x1 gv0), (rev gv0 = qreva y y), (rev gv0 = qreva y gv0), (rev gv0 = qreva gv0 y), (rev gv0 = qreva gv0 gv0), (rev gv0 = append y y)
+(rev gv0 = append y gv0), (rev gv0 = append gv0 y), (rev gv0 = append gv0 gv0), (append y y = y), (append y y = gv0), (append y gv0 = y), (append y gv0 = gv0), (append gv0 y = y), (append gv0 y = gv0), (append gv0 gv0 = y)
+(append gv0 gv0 = gv0), (Nil = Cons n y), (Nil = Cons n gv0), (Nil = qrevaflat x2 y), (Nil = qrevaflat x2 gv0), (Nil = qrevaflat x1 y), (Nil = qrevaflat x1 gv0), (Nil = revflat x2), (Nil = revflat x1), (Nil = qreva y y)
+(Nil = qreva y gv0), (Nil = qreva gv0 y), (Nil = qreva gv0 gv0), (Nil = rev y), (Nil = rev gv0), (Nil = append y y), (Nil = append y gv0), (Nil = append gv0 y), (Nil = append gv0 gv0), (Node n x2 x2 = x2)
+(Node n x2 x2 = x1), (Node n x2 x1 = x2), (Node n x2 x1 = x1), (Node n x1 x2 = x2), (Node n x1 x2 = x1), (Node n x1 x1 = x2), (Node n x1 x1 = x1), (Leaf = Node n x2 x2), (Leaf = Node n x2 x1), (Leaf = Node n x1 x2)
+(Leaf = Node n x1 x1), (Succ n = n), (Zero = Succ n)
+
+Label: 6 (6)
+(n = n), (y = y), (y = gv3), (gv3 = y), (gv3 = gv3), (x2 = x2), (x2 = x1), (x1 = x2), (x1 = x1), (n <> n)
+(y <> y), (y <> gv3), (gv3 <> y), (gv3 <> gv3), (x2 <> x2), (x2 <> x1), (x1 <> x2), (x1 <> x1), (None = Some x2), (None = Some x1)
+(None = Some n), (None = Some y), (None = Some gv3), (Cons n y = y), (Cons n y = gv3), (Cons n y = qrevaflat x2 y), (Cons n y = qrevaflat x2 gv3), (Cons n y = qrevaflat x1 y), (Cons n y = qrevaflat x1 gv3), (Cons n y = revflat x2)
+(Cons n y = revflat x1), (Cons n y = qreva y y), (Cons n y = qreva y gv3), (Cons n y = qreva gv3 y), (Cons n y = qreva gv3 gv3), (Cons n y = rev y), (Cons n y = rev gv3), (Cons n y = append y y), (Cons n y = append y gv3), (Cons n y = append gv3 y)
+(Cons n y = append gv3 gv3), (Cons n gv3 = y), (Cons n gv3 = gv3), (Cons n gv3 = qrevaflat x2 y), (Cons n gv3 = qrevaflat x2 gv3), (Cons n gv3 = qrevaflat x1 y), (Cons n gv3 = qrevaflat x1 gv3), (Cons n gv3 = revflat x2), (Cons n gv3 = revflat x1), (Cons n gv3 = qreva y y)
+(Cons n gv3 = qreva y gv3), (Cons n gv3 = qreva gv3 y), (Cons n gv3 = qreva gv3 gv3), (Cons n gv3 = rev y), (Cons n gv3 = rev gv3), (Cons n gv3 = append y y), (Cons n gv3 = append y gv3), (Cons n gv3 = append gv3 y), (Cons n gv3 = append gv3 gv3), (qrevaflat x2 y = y)
+(qrevaflat x2 y = gv3), (qrevaflat x2 y = qreva y y), (qrevaflat x2 y = qreva y gv3), (qrevaflat x2 y = qreva gv3 y), (qrevaflat x2 y = qreva gv3 gv3), (qrevaflat x2 y = append y y), (qrevaflat x2 y = append y gv3), (qrevaflat x2 y = append gv3 y), (qrevaflat x2 y = append gv3 gv3), (qrevaflat x2 gv3 = y)
+(qrevaflat x2 gv3 = gv3), (qrevaflat x2 gv3 = qreva y y), (qrevaflat x2 gv3 = qreva y gv3), (qrevaflat x2 gv3 = qreva gv3 y), (qrevaflat x2 gv3 = qreva gv3 gv3), (qrevaflat x2 gv3 = append y y), (qrevaflat x2 gv3 = append y gv3), (qrevaflat x2 gv3 = append gv3 y), (qrevaflat x2 gv3 = append gv3 gv3), (qrevaflat x1 y = y)
+(qrevaflat x1 y = gv3), (qrevaflat x1 y = qreva y y), (qrevaflat x1 y = qreva y gv3), (qrevaflat x1 y = qreva gv3 y), (qrevaflat x1 y = qreva gv3 gv3), (qrevaflat x1 y = append y y), (qrevaflat x1 y = append y gv3), (qrevaflat x1 y = append gv3 y), (qrevaflat x1 y = append gv3 gv3), (qrevaflat x1 gv3 = y)
+(qrevaflat x1 gv3 = gv3), (qrevaflat x1 gv3 = qreva y y), (qrevaflat x1 gv3 = qreva y gv3), (qrevaflat x1 gv3 = qreva gv3 y), (qrevaflat x1 gv3 = qreva gv3 gv3), (qrevaflat x1 gv3 = append y y), (qrevaflat x1 gv3 = append y gv3), (qrevaflat x1 gv3 = append gv3 y), (qrevaflat x1 gv3 = append gv3 gv3), (revflat x2 = y)
+(revflat x2 = gv3), (revflat x2 = qrevaflat x2 y), (revflat x2 = qrevaflat x2 gv3), (revflat x2 = qrevaflat x1 y), (revflat x2 = qrevaflat x1 gv3), (revflat x2 = qreva y y), (revflat x2 = qreva y gv3), (revflat x2 = qreva gv3 y), (revflat x2 = qreva gv3 gv3), (revflat x2 = rev y)
+(revflat x2 = rev gv3), (revflat x2 = append y y), (revflat x2 = append y gv3), (revflat x2 = append gv3 y), (revflat x2 = append gv3 gv3), (revflat x1 = y), (revflat x1 = gv3), (revflat x1 = qrevaflat x2 y), (revflat x1 = qrevaflat x2 gv3), (revflat x1 = qrevaflat x1 y)
+(revflat x1 = qrevaflat x1 gv3), (revflat x1 = qreva y y), (revflat x1 = qreva y gv3), (revflat x1 = qreva gv3 y), (revflat x1 = qreva gv3 gv3), (revflat x1 = rev y), (revflat x1 = rev gv3), (revflat x1 = append y y), (revflat x1 = append y gv3), (revflat x1 = append gv3 y)
+(revflat x1 = append gv3 gv3), (qreva y y = y), (qreva y y = gv3), (qreva y y = append y y), (qreva y y = append y gv3), (qreva y y = append gv3 y), (qreva y y = append gv3 gv3), (qreva y gv3 = y), (qreva y gv3 = gv3), (qreva y gv3 = append y y)
+(qreva y gv3 = append y gv3), (qreva y gv3 = append gv3 y), (qreva y gv3 = append gv3 gv3), (qreva gv3 y = y), (qreva gv3 y = gv3), (qreva gv3 y = append y y), (qreva gv3 y = append y gv3), (qreva gv3 y = append gv3 y), (qreva gv3 y = append gv3 gv3), (qreva gv3 gv3 = y)
+(qreva gv3 gv3 = gv3), (qreva gv3 gv3 = append y y), (qreva gv3 gv3 = append y gv3), (qreva gv3 gv3 = append gv3 y), (qreva gv3 gv3 = append gv3 gv3), (rev y = y), (rev y = gv3), (rev y = qrevaflat x2 y), (rev y = qrevaflat x2 gv3), (rev y = qrevaflat x1 y)
+(rev y = qrevaflat x1 gv3), (rev y = qreva y y), (rev y = qreva y gv3), (rev y = qreva gv3 y), (rev y = qreva gv3 gv3), (rev y = append y y), (rev y = append y gv3), (rev y = append gv3 y), (rev y = append gv3 gv3), (rev gv3 = y)
+(rev gv3 = gv3), (rev gv3 = qrevaflat x2 y), (rev gv3 = qrevaflat x2 gv3), (rev gv3 = qrevaflat x1 y), (rev gv3 = qrevaflat x1 gv3), (rev gv3 = qreva y y), (rev gv3 = qreva y gv3), (rev gv3 = qreva gv3 y), (rev gv3 = qreva gv3 gv3), (rev gv3 = append y y)
+(rev gv3 = append y gv3), (rev gv3 = append gv3 y), (rev gv3 = append gv3 gv3), (append y y = y), (append y y = gv3), (append y gv3 = y), (append y gv3 = gv3), (append gv3 y = y), (append gv3 y = gv3), (append gv3 gv3 = y)
+(append gv3 gv3 = gv3), (Nil = Cons n y), (Nil = Cons n gv3), (Nil = qrevaflat x2 y), (Nil = qrevaflat x2 gv3), (Nil = qrevaflat x1 y), (Nil = qrevaflat x1 gv3), (Nil = revflat x2), (Nil = revflat x1), (Nil = qreva y y)
+(Nil = qreva y gv3), (Nil = qreva gv3 y), (Nil = qreva gv3 gv3), (Nil = rev y), (Nil = rev gv3), (Nil = append y y), (Nil = append y gv3), (Nil = append gv3 y), (Nil = append gv3 gv3), (Node n x2 x2 = x2)
+(Node n x2 x2 = x1), (Node n x2 x1 = x2), (Node n x2 x1 = x1), (Node n x1 x2 = x2), (Node n x1 x2 = x1), (Node n x1 x1 = x2), (Node n x1 x1 = x1), (Leaf = Node n x2 x2), (Leaf = Node n x2 x1), (Leaf = Node n x1 x2)
+(Leaf = Node n x1 x1), (Succ n = n), (Zero = Succ n)
+
+Label: 7 (7)
+(n = n), (x2 = x2), (x2 = x1), (x1 = x2), (x1 = x1), (y = y), (y = gv1), (gv1 = y), (gv1 = gv1), (n <> n)
+(x2 <> x2), (x2 <> x1), (x1 <> x2), (x1 <> x1), (y <> y), (y <> gv1), (gv1 <> y), (gv1 <> gv1), (None = Some x2), (None = Some x1)
+(None = Some n), (None = Some y), (None = Some gv1), (Cons n y = y), (Cons n y = gv1), (Cons n y = qrevaflat x2 y), (Cons n y = qrevaflat x2 gv1), (Cons n y = qrevaflat x1 y), (Cons n y = qrevaflat x1 gv1), (Cons n y = revflat x2)
+(Cons n y = revflat x1), (Cons n y = qreva y y), (Cons n y = qreva y gv1), (Cons n y = qreva gv1 y), (Cons n y = qreva gv1 gv1), (Cons n y = rev y), (Cons n y = rev gv1), (Cons n y = append y y), (Cons n y = append y gv1), (Cons n y = append gv1 y)
+(Cons n y = append gv1 gv1), (Cons n gv1 = y), (Cons n gv1 = gv1), (Cons n gv1 = qrevaflat x2 y), (Cons n gv1 = qrevaflat x2 gv1), (Cons n gv1 = qrevaflat x1 y), (Cons n gv1 = qrevaflat x1 gv1), (Cons n gv1 = revflat x2), (Cons n gv1 = revflat x1), (Cons n gv1 = qreva y y)
+(Cons n gv1 = qreva y gv1), (Cons n gv1 = qreva gv1 y), (Cons n gv1 = qreva gv1 gv1), (Cons n gv1 = rev y), (Cons n gv1 = rev gv1), (Cons n gv1 = append y y), (Cons n gv1 = append y gv1), (Cons n gv1 = append gv1 y), (Cons n gv1 = append gv1 gv1), (qrevaflat x2 y = y)
+(qrevaflat x2 y = gv1), (qrevaflat x2 y = qreva y y), (qrevaflat x2 y = qreva y gv1), (qrevaflat x2 y = qreva gv1 y), (qrevaflat x2 y = qreva gv1 gv1), (qrevaflat x2 y = append y y), (qrevaflat x2 y = append y gv1), (qrevaflat x2 y = append gv1 y), (qrevaflat x2 y = append gv1 gv1), (qrevaflat x2 gv1 = y)
+(qrevaflat x2 gv1 = gv1), (qrevaflat x2 gv1 = qreva y y), (qrevaflat x2 gv1 = qreva y gv1), (qrevaflat x2 gv1 = qreva gv1 y), (qrevaflat x2 gv1 = qreva gv1 gv1), (qrevaflat x2 gv1 = append y y), (qrevaflat x2 gv1 = append y gv1), (qrevaflat x2 gv1 = append gv1 y), (qrevaflat x2 gv1 = append gv1 gv1), (qrevaflat x1 y = y)
+(qrevaflat x1 y = gv1), (qrevaflat x1 y = qreva y y), (qrevaflat x1 y = qreva y gv1), (qrevaflat x1 y = qreva gv1 y), (qrevaflat x1 y = qreva gv1 gv1), (qrevaflat x1 y = append y y), (qrevaflat x1 y = append y gv1), (qrevaflat x1 y = append gv1 y), (qrevaflat x1 y = append gv1 gv1), (qrevaflat x1 gv1 = y)
+(qrevaflat x1 gv1 = gv1), (qrevaflat x1 gv1 = qreva y y), (qrevaflat x1 gv1 = qreva y gv1), (qrevaflat x1 gv1 = qreva gv1 y), (qrevaflat x1 gv1 = qreva gv1 gv1), (qrevaflat x1 gv1 = append y y), (qrevaflat x1 gv1 = append y gv1), (qrevaflat x1 gv1 = append gv1 y), (qrevaflat x1 gv1 = append gv1 gv1), (revflat x2 = y)
+(revflat x2 = gv1), (revflat x2 = qrevaflat x2 y), (revflat x2 = qrevaflat x2 gv1), (revflat x2 = qrevaflat x1 y), (revflat x2 = qrevaflat x1 gv1), (revflat x2 = qreva y y), (revflat x2 = qreva y gv1), (revflat x2 = qreva gv1 y), (revflat x2 = qreva gv1 gv1), (revflat x2 = rev y)
+(revflat x2 = rev gv1), (revflat x2 = append y y), (revflat x2 = append y gv1), (revflat x2 = append gv1 y), (revflat x2 = append gv1 gv1), (revflat x1 = y), (revflat x1 = gv1), (revflat x1 = qrevaflat x2 y), (revflat x1 = qrevaflat x2 gv1), (revflat x1 = qrevaflat x1 y)
+(revflat x1 = qrevaflat x1 gv1), (revflat x1 = qreva y y), (revflat x1 = qreva y gv1), (revflat x1 = qreva gv1 y), (revflat x1 = qreva gv1 gv1), (revflat x1 = rev y), (revflat x1 = rev gv1), (revflat x1 = append y y), (revflat x1 = append y gv1), (revflat x1 = append gv1 y)
+(revflat x1 = append gv1 gv1), (qreva y y = y), (qreva y y = gv1), (qreva y y = append y y), (qreva y y = append y gv1), (qreva y y = append gv1 y), (qreva y y = append gv1 gv1), (qreva y gv1 = y), (qreva y gv1 = gv1), (qreva y gv1 = append y y)
+(qreva y gv1 = append y gv1), (qreva y gv1 = append gv1 y), (qreva y gv1 = append gv1 gv1), (qreva gv1 y = y), (qreva gv1 y = gv1), (qreva gv1 y = append y y), (qreva gv1 y = append y gv1), (qreva gv1 y = append gv1 y), (qreva gv1 y = append gv1 gv1), (qreva gv1 gv1 = y)
+(qreva gv1 gv1 = gv1), (qreva gv1 gv1 = append y y), (qreva gv1 gv1 = append y gv1), (qreva gv1 gv1 = append gv1 y), (qreva gv1 gv1 = append gv1 gv1), (rev y = y), (rev y = gv1), (rev y = qrevaflat x2 y), (rev y = qrevaflat x2 gv1), (rev y = qrevaflat x1 y)
+(rev y = qrevaflat x1 gv1), (rev y = qreva y y), (rev y = qreva y gv1), (rev y = qreva gv1 y), (rev y = qreva gv1 gv1), (rev y = append y y), (rev y = append y gv1), (rev y = append gv1 y), (rev y = append gv1 gv1), (rev gv1 = y)
+(rev gv1 = gv1), (rev gv1 = qrevaflat x2 y), (rev gv1 = qrevaflat x2 gv1), (rev gv1 = qrevaflat x1 y), (rev gv1 = qrevaflat x1 gv1), (rev gv1 = qreva y y), (rev gv1 = qreva y gv1), (rev gv1 = qreva gv1 y), (rev gv1 = qreva gv1 gv1), (rev gv1 = append y y)
+(rev gv1 = append y gv1), (rev gv1 = append gv1 y), (rev gv1 = append gv1 gv1), (append y y = y), (append y y = gv1), (append y gv1 = y), (append y gv1 = gv1), (append gv1 y = y), (append gv1 y = gv1), (append gv1 gv1 = y)
+(append gv1 gv1 = gv1), (Nil = Cons n y), (Nil = Cons n gv1), (Nil = qrevaflat x2 y), (Nil = qrevaflat x2 gv1), (Nil = qrevaflat x1 y), (Nil = qrevaflat x1 gv1), (Nil = revflat x2), (Nil = revflat x1), (Nil = qreva y y)
+(Nil = qreva y gv1), (Nil = qreva gv1 y), (Nil = qreva gv1 gv1), (Nil = rev y), (Nil = rev gv1), (Nil = append y y), (Nil = append y gv1), (Nil = append gv1 y), (Nil = append gv1 gv1), (Node n x2 x2 = x2)
+(Node n x2 x2 = x1), (Node n x2 x1 = x2), (Node n x2 x1 = x1), (Node n x1 x2 = x2), (Node n x1 x2 = x1), (Node n x1 x1 = x2), (Node n x1 x1 = x1), (Leaf = Node n x2 x2), (Leaf = Node n x2 x1), (Leaf = Node n x1 x2)
+(Leaf = Node n x1 x1), (Succ n = n), (Zero = Succ n)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 85.033 seconds
+
+
+Label: 0 (0)
+(qrevaflat x2 y = gv7)
+
+Label: 1 (1)
+
+Label: 2 (2)
+(revflat x2 = gv4), (qrevaflat x2 y = append gv4 y), (qrevaflat x2 gv4 = append gv4 gv4)
+
+Label: 3 (3)
+
+Label: 4 (4)
+(revflat x1 = gv2), (qrevaflat x1 y = append gv2 y), (qrevaflat x1 gv2 = append gv2 gv2)
+
+Label: 5 (5)
+
+Label: 6 (6)
+
+Label: 7 (7)
+
+
+
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 110.334 seconds
+
+Number of Result Pairs Returned: 5
+
+1. (append (append (revflat x1) (Cons n (revflat x2))) y =  qrevaflat x1 (Cons n (qrevaflat x2 y)))
+
+2. (qrevaflat x2 y = append gv4 y ->  append (append (revflat x1) (Cons n gv4)) y =  qrevaflat x1 (Cons n (qrevaflat x2 y)))
+
+3. (qrevaflat x2 gv4 = append gv4 gv4 ->  append (append (revflat x1) (Cons n gv4)) y =  qrevaflat x1 (Cons n (qrevaflat x2 y)))
+
+4. (qrevaflat x1 y = append gv2 y ->  append (append gv2 (Cons n (revflat x2))) y =  qrevaflat x1 (Cons n (qrevaflat x2 y)))
+
+5. (qrevaflat x1 gv2 = append gv2 gv2 ->  append (append gv2 (Cons n (revflat x2))) y =  qrevaflat x1 (Cons n (qrevaflat x2 y)))

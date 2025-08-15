@@ -1,0 +1,355 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (priqueue_elems (a :: q) e1)
+ -- (tree_elems a cons_elems)
+ -- (Permutation e1 (cons_elems ++ rest_elems))
+ -- (forall e1 e2 : list nat,
+ Permutation e1 e2 -> priqueue_elems q e1 -> priqueue_elems q e2)
+ -- (priqueue_elems q rest_elems)
+ -- (Permutation e1 e2)
+
+----------------------------------
+Goal: (Permutation e2 (cons_elems ++ rest_elems))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3.699 seconds
+
+gv0 : (list nat) = (cons_elems ++ rest_elems)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 60.108 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (Permutation e1 (cons_elems ++ rest_elems))
+ -- (Permutation e1 e2)
+
+----------------------------------
+Goal: (Permutation e2 (cons_elems ++ rest_elems))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (Permutation e1 gv0)
+ -- (Permutation e1 e2)
+
+----------------------------------
+Goal: (Permutation e2 gv0)
+Case: Valid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 60.248 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+In : (forall A : Type, A -> list A -> Prop)
+existsb : (forall A : Type, (A -> bool) -> list A -> bool)
+forallb : (forall A : Type, (A -> bool) -> list A -> bool)
+Forall : (forall A : Type, (A -> Prop) -> list A -> Prop)
+nodup : (forall A : Type, (forall x y : A, {x = y} + {x <> y}) -> list A -> list A)
+map : (forall A B : Type, (A -> B) -> list A -> list B)
+Permutation : (forall A : Type, list A -> list A -> Prop)
+geb : (nat -> nat -> bool)
+gtb : (nat -> nat -> bool)
+tree : Set
+tree_rect : (forall P : tree -> Type,
+ (forall (n : nat) (t : tree),
+  P t -> forall t0 : tree, P t0 -> P (Node n t t0)) ->
+ P Leaf -> forall t : tree, P t)
+tree_rec : (forall P : tree -> Set,
+ (forall (n : nat) (t : tree),
+  P t -> forall t0 : tree, P t0 -> P (Node n t t0)) ->
+ P Leaf -> forall t : tree, P t)
+smash : (tree -> tree -> tree)
+carry : (list tree -> tree -> list tree)
+insert : (nat -> list tree -> list tree)
+join : (list tree -> list tree -> tree -> list tree)
+unzip : (tree -> (list tree -> list tree) -> list tree)
+heap_delete_max : (tree -> list tree)
+find_max' : (nat -> list tree -> nat)
+find_max : (list tree -> option nat)
+delete_max_aux : (nat -> list tree -> list tree * list tree)
+delete_max : (list tree -> option (nat * list tree))
+merge : (list tree -> list tree -> list tree)
+pow2heapp : (nat -> nat -> tree -> Prop)
+pow2heap : (nat -> tree -> Prop)
+priqq : (nat -> list tree -> Prop)
+priq : (list tree -> Prop)
+tree_elems : (tree -> list nat -> Prop)
+priqueue_elems : (list tree -> list nat -> Prop)
+Abs : (list tree -> list nat -> Prop)
+Node : (nat -> tree -> tree -> tree)
+Leaf : tree
+
+Label: 0 (0)
+Abducted Assumption: (Permutation e1 (cons_elems ++ rest_elems))
+Positive Examples: 112
+Negative Examples: 342
+
+Label: 1 (1)
+Abducted Assumption: (Permutation e1 e2)
+Positive Examples: 350
+Negative Examples: 104
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 60.469 seconds
+
+
+Label: 0 (0)
+(Permutation e1 e1), (Permutation e1 rest_elems), (Permutation e1 cons_elems), (Permutation e1 e2), (Permutation rest_elems e1), (Permutation rest_elems rest_elems), (Permutation rest_elems cons_elems), (Permutation rest_elems e2), (Permutation cons_elems e1), (Permutation cons_elems rest_elems)
+(Permutation cons_elems cons_elems), (Permutation cons_elems e2), (Permutation e2 e1), (Permutation e2 rest_elems), (Permutation e2 cons_elems), (Permutation e2 e2), (e1 = e1), (e1 = rest_elems), (e1 = cons_elems), (e1 = e2)
+(rest_elems = e1), (rest_elems = rest_elems), (rest_elems = cons_elems), (rest_elems = e2), (cons_elems = e1), (cons_elems = rest_elems), (cons_elems = cons_elems), (cons_elems = e2), (e2 = e1), (e2 = rest_elems)
+(e2 = cons_elems), (e2 = e2), (tree_elems Leaf e1), (tree_elems Leaf rest_elems), (tree_elems Leaf cons_elems), (tree_elems Leaf e2), (tree_elems Leaf (e1 ++ e1)), (tree_elems Leaf (e1 ++ rest_elems)), (tree_elems Leaf (e1 ++ cons_elems)), (tree_elems Leaf (e1 ++ e2))
+(tree_elems Leaf (rest_elems ++ e1)), (tree_elems Leaf (rest_elems ++ rest_elems)), (tree_elems Leaf (rest_elems ++ cons_elems)), (tree_elems Leaf (rest_elems ++ e2)), (tree_elems Leaf (cons_elems ++ e1)), (tree_elems Leaf (cons_elems ++ rest_elems)), (tree_elems Leaf (cons_elems ++ cons_elems)), (tree_elems Leaf (cons_elems ++ e2)), (tree_elems Leaf (e2 ++ e1)), (tree_elems Leaf (e2 ++ rest_elems))
+(tree_elems Leaf (e2 ++ cons_elems)), (tree_elems Leaf (e2 ++ e2)), (tree_elems Leaf []), (pow2heapp (length e1) (length e1) Leaf), (pow2heapp (length e1) (length rest_elems) Leaf), (pow2heapp (length e1) (length cons_elems) Leaf), (pow2heapp (length e1) (length e2) Leaf), (pow2heapp (length rest_elems) (length e1) Leaf), (pow2heapp (length rest_elems) (length rest_elems) Leaf), (pow2heapp (length rest_elems) (length cons_elems) Leaf)
+(pow2heapp (length rest_elems) (length e2) Leaf), (pow2heapp (length cons_elems) (length e1) Leaf), (pow2heapp (length cons_elems) (length rest_elems) Leaf), (pow2heapp (length cons_elems) (length cons_elems) Leaf), (pow2heapp (length cons_elems) (length e2) Leaf), (pow2heapp (length e2) (length e1) Leaf), (pow2heapp (length e2) (length rest_elems) Leaf), (pow2heapp (length e2) (length cons_elems) Leaf), (pow2heapp (length e2) (length e2) Leaf), (Permutation e1 (e1 ++ e1))
+(Permutation e1 (e1 ++ rest_elems)), (Permutation e1 (e1 ++ cons_elems)), (Permutation e1 (e1 ++ e2)), (Permutation e1 (rest_elems ++ e1)), (Permutation e1 (rest_elems ++ rest_elems)), (Permutation e1 (rest_elems ++ cons_elems)), (Permutation e1 (rest_elems ++ e2)), (Permutation e1 (cons_elems ++ e1)), (Permutation e1 (cons_elems ++ rest_elems)), (Permutation e1 (cons_elems ++ cons_elems))
+(Permutation e1 (cons_elems ++ e2)), (Permutation e1 (e2 ++ e1)), (Permutation e1 (e2 ++ rest_elems)), (Permutation e1 (e2 ++ cons_elems)), (Permutation e1 (e2 ++ e2)), (Permutation e1 []), (Permutation rest_elems (e1 ++ e1)), (Permutation rest_elems (e1 ++ rest_elems)), (Permutation rest_elems (e1 ++ cons_elems)), (Permutation rest_elems (e1 ++ e2))
+(Permutation rest_elems (rest_elems ++ e1)), (Permutation rest_elems (rest_elems ++ rest_elems)), (Permutation rest_elems (rest_elems ++ cons_elems)), (Permutation rest_elems (rest_elems ++ e2)), (Permutation rest_elems (cons_elems ++ e1)), (Permutation rest_elems (cons_elems ++ rest_elems)), (Permutation rest_elems (cons_elems ++ cons_elems)), (Permutation rest_elems (cons_elems ++ e2)), (Permutation rest_elems (e2 ++ e1)), (Permutation rest_elems (e2 ++ rest_elems))
+(Permutation rest_elems (e2 ++ cons_elems)), (Permutation rest_elems (e2 ++ e2)), (Permutation rest_elems []), (Permutation cons_elems (e1 ++ e1)), (Permutation cons_elems (e1 ++ rest_elems)), (Permutation cons_elems (e1 ++ cons_elems)), (Permutation cons_elems (e1 ++ e2)), (Permutation cons_elems (rest_elems ++ e1)), (Permutation cons_elems (rest_elems ++ rest_elems)), (Permutation cons_elems (rest_elems ++ cons_elems))
+(Permutation cons_elems (rest_elems ++ e2)), (Permutation cons_elems (cons_elems ++ e1)), (Permutation cons_elems (cons_elems ++ rest_elems)), (Permutation cons_elems (cons_elems ++ cons_elems)), (Permutation cons_elems (cons_elems ++ e2)), (Permutation cons_elems (e2 ++ e1)), (Permutation cons_elems (e2 ++ rest_elems)), (Permutation cons_elems (e2 ++ cons_elems)), (Permutation cons_elems (e2 ++ e2)), (Permutation cons_elems [])
+(Permutation e2 (e1 ++ e1)), (Permutation e2 (e1 ++ rest_elems)), (Permutation e2 (e1 ++ cons_elems)), (Permutation e2 (e1 ++ e2)), (Permutation e2 (rest_elems ++ e1)), (Permutation e2 (rest_elems ++ rest_elems)), (Permutation e2 (rest_elems ++ cons_elems)), (Permutation e2 (rest_elems ++ e2)), (Permutation e2 (cons_elems ++ e1)), (Permutation e2 (cons_elems ++ rest_elems))
+(Permutation e2 (cons_elems ++ cons_elems)), (Permutation e2 (cons_elems ++ e2)), (Permutation e2 (e2 ++ e1)), (Permutation e2 (e2 ++ rest_elems)), (Permutation e2 (e2 ++ cons_elems)), (Permutation e2 (e2 ++ e2)), (Permutation e2 []), (Permutation (e1 ++ e1) e1), (Permutation (e1 ++ e1) rest_elems), (Permutation (e1 ++ e1) cons_elems)
+(Permutation (e1 ++ e1) e2), (Permutation (e1 ++ e1) (e1 ++ rest_elems)), (Permutation (e1 ++ e1) (e1 ++ cons_elems)), (Permutation (e1 ++ e1) (e1 ++ e2)), (Permutation (e1 ++ e1) (rest_elems ++ e1)), (Permutation (e1 ++ e1) (rest_elems ++ rest_elems)), (Permutation (e1 ++ e1) (rest_elems ++ cons_elems)), (Permutation (e1 ++ e1) (rest_elems ++ e2)), (Permutation (e1 ++ e1) (cons_elems ++ e1)), (Permutation (e1 ++ e1) (cons_elems ++ rest_elems))
+(Permutation (e1 ++ e1) (cons_elems ++ cons_elems)), (Permutation (e1 ++ e1) (cons_elems ++ e2)), (Permutation (e1 ++ e1) (e2 ++ e1)), (Permutation (e1 ++ e1) (e2 ++ rest_elems)), (Permutation (e1 ++ e1) (e2 ++ cons_elems)), (Permutation (e1 ++ e1) (e2 ++ e2)), (Permutation (e1 ++ e1) []), (Permutation (e1 ++ rest_elems) e1), (Permutation (e1 ++ rest_elems) rest_elems), (Permutation (e1 ++ rest_elems) cons_elems)
+(Permutation (e1 ++ rest_elems) e2), (Permutation (e1 ++ rest_elems) (e1 ++ e1)), (Permutation (e1 ++ rest_elems) (e1 ++ cons_elems)), (Permutation (e1 ++ rest_elems) (e1 ++ e2)), (Permutation (e1 ++ rest_elems) (rest_elems ++ e1)), (Permutation (e1 ++ rest_elems) (rest_elems ++ rest_elems)), (Permutation (e1 ++ rest_elems) (rest_elems ++ cons_elems)), (Permutation (e1 ++ rest_elems) (rest_elems ++ e2)), (Permutation (e1 ++ rest_elems) (cons_elems ++ e1)), (Permutation (e1 ++ rest_elems) (cons_elems ++ rest_elems))
+(Permutation (e1 ++ rest_elems) (cons_elems ++ cons_elems)), (Permutation (e1 ++ rest_elems) (cons_elems ++ e2)), (Permutation (e1 ++ rest_elems) (e2 ++ e1)), (Permutation (e1 ++ rest_elems) (e2 ++ rest_elems)), (Permutation (e1 ++ rest_elems) (e2 ++ cons_elems)), (Permutation (e1 ++ rest_elems) (e2 ++ e2)), (Permutation (e1 ++ rest_elems) []), (Permutation (e1 ++ cons_elems) e1), (Permutation (e1 ++ cons_elems) rest_elems), (Permutation (e1 ++ cons_elems) cons_elems)
+(Permutation (e1 ++ cons_elems) e2), (Permutation (e1 ++ cons_elems) (e1 ++ e1)), (Permutation (e1 ++ cons_elems) (e1 ++ rest_elems)), (Permutation (e1 ++ cons_elems) (e1 ++ e2)), (Permutation (e1 ++ cons_elems) (rest_elems ++ e1)), (Permutation (e1 ++ cons_elems) (rest_elems ++ rest_elems)), (Permutation (e1 ++ cons_elems) (rest_elems ++ cons_elems)), (Permutation (e1 ++ cons_elems) (rest_elems ++ e2)), (Permutation (e1 ++ cons_elems) (cons_elems ++ e1)), (Permutation (e1 ++ cons_elems) (cons_elems ++ rest_elems))
+(Permutation (e1 ++ cons_elems) (cons_elems ++ cons_elems)), (Permutation (e1 ++ cons_elems) (cons_elems ++ e2)), (Permutation (e1 ++ cons_elems) (e2 ++ e1)), (Permutation (e1 ++ cons_elems) (e2 ++ rest_elems)), (Permutation (e1 ++ cons_elems) (e2 ++ cons_elems)), (Permutation (e1 ++ cons_elems) (e2 ++ e2)), (Permutation (e1 ++ cons_elems) []), (Permutation (e1 ++ e2) e1), (Permutation (e1 ++ e2) rest_elems), (Permutation (e1 ++ e2) cons_elems)
+(Permutation (e1 ++ e2) e2), (Permutation (e1 ++ e2) (e1 ++ e1)), (Permutation (e1 ++ e2) (e1 ++ rest_elems)), (Permutation (e1 ++ e2) (e1 ++ cons_elems)), (Permutation (e1 ++ e2) (rest_elems ++ e1)), (Permutation (e1 ++ e2) (rest_elems ++ rest_elems)), (Permutation (e1 ++ e2) (rest_elems ++ cons_elems)), (Permutation (e1 ++ e2) (rest_elems ++ e2)), (Permutation (e1 ++ e2) (cons_elems ++ e1)), (Permutation (e1 ++ e2) (cons_elems ++ rest_elems))
+(Permutation (e1 ++ e2) (cons_elems ++ cons_elems)), (Permutation (e1 ++ e2) (cons_elems ++ e2)), (Permutation (e1 ++ e2) (e2 ++ e1)), (Permutation (e1 ++ e2) (e2 ++ rest_elems)), (Permutation (e1 ++ e2) (e2 ++ cons_elems)), (Permutation (e1 ++ e2) (e2 ++ e2)), (Permutation (e1 ++ e2) []), (Permutation (rest_elems ++ e1) e1), (Permutation (rest_elems ++ e1) rest_elems), (Permutation (rest_elems ++ e1) cons_elems)
+(Permutation (rest_elems ++ e1) e2), (Permutation (rest_elems ++ e1) (e1 ++ e1)), (Permutation (rest_elems ++ e1) (e1 ++ rest_elems)), (Permutation (rest_elems ++ e1) (e1 ++ cons_elems)), (Permutation (rest_elems ++ e1) (e1 ++ e2)), (Permutation (rest_elems ++ e1) (rest_elems ++ rest_elems)), (Permutation (rest_elems ++ e1) (rest_elems ++ cons_elems)), (Permutation (rest_elems ++ e1) (rest_elems ++ e2)), (Permutation (rest_elems ++ e1) (cons_elems ++ e1)), (Permutation (rest_elems ++ e1) (cons_elems ++ rest_elems))
+(Permutation (rest_elems ++ e1) (cons_elems ++ cons_elems)), (Permutation (rest_elems ++ e1) (cons_elems ++ e2)), (Permutation (rest_elems ++ e1) (e2 ++ e1)), (Permutation (rest_elems ++ e1) (e2 ++ rest_elems)), (Permutation (rest_elems ++ e1) (e2 ++ cons_elems)), (Permutation (rest_elems ++ e1) (e2 ++ e2)), (Permutation (rest_elems ++ e1) []), (Permutation (rest_elems ++ rest_elems) e1), (Permutation (rest_elems ++ rest_elems) rest_elems), (Permutation (rest_elems ++ rest_elems) cons_elems)
+(Permutation (rest_elems ++ rest_elems) e2), (Permutation (rest_elems ++ rest_elems) (e1 ++ e1)), (Permutation (rest_elems ++ rest_elems) (e1 ++ rest_elems)), (Permutation (rest_elems ++ rest_elems) (e1 ++ cons_elems)), (Permutation (rest_elems ++ rest_elems) (e1 ++ e2)), (Permutation (rest_elems ++ rest_elems) (rest_elems ++ e1)), (Permutation (rest_elems ++ rest_elems) (rest_elems ++ cons_elems)), (Permutation (rest_elems ++ rest_elems) (rest_elems ++ e2)), (Permutation (rest_elems ++ rest_elems) (cons_elems ++ e1)), (Permutation (rest_elems ++ rest_elems) (cons_elems ++ rest_elems))
+(Permutation (rest_elems ++ rest_elems) (cons_elems ++ cons_elems)), (Permutation (rest_elems ++ rest_elems) (cons_elems ++ e2)), (Permutation (rest_elems ++ rest_elems) (e2 ++ e1)), (Permutation (rest_elems ++ rest_elems) (e2 ++ rest_elems)), (Permutation (rest_elems ++ rest_elems) (e2 ++ cons_elems)), (Permutation (rest_elems ++ rest_elems) (e2 ++ e2)), (Permutation (rest_elems ++ rest_elems) []), (Permutation (rest_elems ++ cons_elems) e1), (Permutation (rest_elems ++ cons_elems) rest_elems), (Permutation (rest_elems ++ cons_elems) cons_elems)
+(Permutation (rest_elems ++ cons_elems) e2), (Permutation (rest_elems ++ cons_elems) (e1 ++ e1)), (Permutation (rest_elems ++ cons_elems) (e1 ++ rest_elems)), (Permutation (rest_elems ++ cons_elems) (e1 ++ cons_elems)), (Permutation (rest_elems ++ cons_elems) (e1 ++ e2)), (Permutation (rest_elems ++ cons_elems) (rest_elems ++ e1)), (Permutation (rest_elems ++ cons_elems) (rest_elems ++ rest_elems)), (Permutation (rest_elems ++ cons_elems) (rest_elems ++ e2)), (Permutation (rest_elems ++ cons_elems) (cons_elems ++ e1)), (Permutation (rest_elems ++ cons_elems) (cons_elems ++ rest_elems))
+(Permutation (rest_elems ++ cons_elems) (cons_elems ++ cons_elems)), (Permutation (rest_elems ++ cons_elems) (cons_elems ++ e2)), (Permutation (rest_elems ++ cons_elems) (e2 ++ e1)), (Permutation (rest_elems ++ cons_elems) (e2 ++ rest_elems)), (Permutation (rest_elems ++ cons_elems) (e2 ++ cons_elems)), (Permutation (rest_elems ++ cons_elems) (e2 ++ e2)), (Permutation (rest_elems ++ cons_elems) []), (Permutation (rest_elems ++ e2) e1), (Permutation (rest_elems ++ e2) rest_elems), (Permutation (rest_elems ++ e2) cons_elems)
+(Permutation (rest_elems ++ e2) e2), (Permutation (rest_elems ++ e2) (e1 ++ e1)), (Permutation (rest_elems ++ e2) (e1 ++ rest_elems)), (Permutation (rest_elems ++ e2) (e1 ++ cons_elems)), (Permutation (rest_elems ++ e2) (e1 ++ e2)), (Permutation (rest_elems ++ e2) (rest_elems ++ e1)), (Permutation (rest_elems ++ e2) (rest_elems ++ rest_elems)), (Permutation (rest_elems ++ e2) (rest_elems ++ cons_elems)), (Permutation (rest_elems ++ e2) (cons_elems ++ e1)), (Permutation (rest_elems ++ e2) (cons_elems ++ rest_elems))
+(Permutation (rest_elems ++ e2) (cons_elems ++ cons_elems)), (Permutation (rest_elems ++ e2) (cons_elems ++ e2)), (Permutation (rest_elems ++ e2) (e2 ++ e1)), (Permutation (rest_elems ++ e2) (e2 ++ rest_elems)), (Permutation (rest_elems ++ e2) (e2 ++ cons_elems)), (Permutation (rest_elems ++ e2) (e2 ++ e2)), (Permutation (rest_elems ++ e2) []), (Permutation (cons_elems ++ e1) e1), (Permutation (cons_elems ++ e1) rest_elems), (Permutation (cons_elems ++ e1) cons_elems)
+(Permutation (cons_elems ++ e1) e2), (Permutation (cons_elems ++ e1) (e1 ++ e1)), (Permutation (cons_elems ++ e1) (e1 ++ rest_elems)), (Permutation (cons_elems ++ e1) (e1 ++ cons_elems)), (Permutation (cons_elems ++ e1) (e1 ++ e2)), (Permutation (cons_elems ++ e1) (rest_elems ++ e1)), (Permutation (cons_elems ++ e1) (rest_elems ++ rest_elems)), (Permutation (cons_elems ++ e1) (rest_elems ++ cons_elems)), (Permutation (cons_elems ++ e1) (rest_elems ++ e2)), (Permutation (cons_elems ++ e1) (cons_elems ++ rest_elems))
+(Permutation (cons_elems ++ e1) (cons_elems ++ cons_elems)), (Permutation (cons_elems ++ e1) (cons_elems ++ e2)), (Permutation (cons_elems ++ e1) (e2 ++ e1)), (Permutation (cons_elems ++ e1) (e2 ++ rest_elems)), (Permutation (cons_elems ++ e1) (e2 ++ cons_elems)), (Permutation (cons_elems ++ e1) (e2 ++ e2)), (Permutation (cons_elems ++ e1) []), (Permutation (cons_elems ++ rest_elems) e1), (Permutation (cons_elems ++ rest_elems) rest_elems), (Permutation (cons_elems ++ rest_elems) cons_elems)
+(Permutation (cons_elems ++ rest_elems) e2), (Permutation (cons_elems ++ rest_elems) (e1 ++ e1)), (Permutation (cons_elems ++ rest_elems) (e1 ++ rest_elems)), (Permutation (cons_elems ++ rest_elems) (e1 ++ cons_elems)), (Permutation (cons_elems ++ rest_elems) (e1 ++ e2)), (Permutation (cons_elems ++ rest_elems) (rest_elems ++ e1)), (Permutation (cons_elems ++ rest_elems) (rest_elems ++ rest_elems)), (Permutation (cons_elems ++ rest_elems) (rest_elems ++ cons_elems)), (Permutation (cons_elems ++ rest_elems) (rest_elems ++ e2)), (Permutation (cons_elems ++ rest_elems) (cons_elems ++ e1))
+(Permutation (cons_elems ++ rest_elems) (cons_elems ++ cons_elems)), (Permutation (cons_elems ++ rest_elems) (cons_elems ++ e2)), (Permutation (cons_elems ++ rest_elems) (e2 ++ e1)), (Permutation (cons_elems ++ rest_elems) (e2 ++ rest_elems)), (Permutation (cons_elems ++ rest_elems) (e2 ++ cons_elems)), (Permutation (cons_elems ++ rest_elems) (e2 ++ e2)), (Permutation (cons_elems ++ rest_elems) []), (Permutation (cons_elems ++ cons_elems) e1), (Permutation (cons_elems ++ cons_elems) rest_elems), (Permutation (cons_elems ++ cons_elems) cons_elems)
+(Permutation (cons_elems ++ cons_elems) e2), (Permutation (cons_elems ++ cons_elems) (e1 ++ e1)), (Permutation (cons_elems ++ cons_elems) (e1 ++ rest_elems)), (Permutation (cons_elems ++ cons_elems) (e1 ++ cons_elems)), (Permutation (cons_elems ++ cons_elems) (e1 ++ e2)), (Permutation (cons_elems ++ cons_elems) (rest_elems ++ e1)), (Permutation (cons_elems ++ cons_elems) (rest_elems ++ rest_elems)), (Permutation (cons_elems ++ cons_elems) (rest_elems ++ cons_elems)), (Permutation (cons_elems ++ cons_elems) (rest_elems ++ e2)), (Permutation (cons_elems ++ cons_elems) (cons_elems ++ e1))
+(Permutation (cons_elems ++ cons_elems) (cons_elems ++ rest_elems)), (Permutation (cons_elems ++ cons_elems) (cons_elems ++ e2)), (Permutation (cons_elems ++ cons_elems) (e2 ++ e1)), (Permutation (cons_elems ++ cons_elems) (e2 ++ rest_elems)), (Permutation (cons_elems ++ cons_elems) (e2 ++ cons_elems)), (Permutation (cons_elems ++ cons_elems) (e2 ++ e2)), (Permutation (cons_elems ++ cons_elems) []), (Permutation (cons_elems ++ e2) e1), (Permutation (cons_elems ++ e2) rest_elems), (Permutation (cons_elems ++ e2) cons_elems)
+(Permutation (cons_elems ++ e2) e2), (Permutation (cons_elems ++ e2) (e1 ++ e1)), (Permutation (cons_elems ++ e2) (e1 ++ rest_elems)), (Permutation (cons_elems ++ e2) (e1 ++ cons_elems)), (Permutation (cons_elems ++ e2) (e1 ++ e2)), (Permutation (cons_elems ++ e2) (rest_elems ++ e1)), (Permutation (cons_elems ++ e2) (rest_elems ++ rest_elems)), (Permutation (cons_elems ++ e2) (rest_elems ++ cons_elems)), (Permutation (cons_elems ++ e2) (rest_elems ++ e2)), (Permutation (cons_elems ++ e2) (cons_elems ++ e1))
+(Permutation (cons_elems ++ e2) (cons_elems ++ rest_elems)), (Permutation (cons_elems ++ e2) (cons_elems ++ cons_elems)), (Permutation (cons_elems ++ e2) (e2 ++ e1)), (Permutation (cons_elems ++ e2) (e2 ++ rest_elems)), (Permutation (cons_elems ++ e2) (e2 ++ cons_elems)), (Permutation (cons_elems ++ e2) (e2 ++ e2)), (Permutation (cons_elems ++ e2) []), (Permutation (e2 ++ e1) e1), (Permutation (e2 ++ e1) rest_elems), (Permutation (e2 ++ e1) cons_elems)
+(Permutation (e2 ++ e1) e2), (Permutation (e2 ++ e1) (e1 ++ e1)), (Permutation (e2 ++ e1) (e1 ++ rest_elems)), (Permutation (e2 ++ e1) (e1 ++ cons_elems)), (Permutation (e2 ++ e1) (e1 ++ e2)), (Permutation (e2 ++ e1) (rest_elems ++ e1)), (Permutation (e2 ++ e1) (rest_elems ++ rest_elems)), (Permutation (e2 ++ e1) (rest_elems ++ cons_elems)), (Permutation (e2 ++ e1) (rest_elems ++ e2)), (Permutation (e2 ++ e1) (cons_elems ++ e1))
+(Permutation (e2 ++ e1) (cons_elems ++ rest_elems)), (Permutation (e2 ++ e1) (cons_elems ++ cons_elems)), (Permutation (e2 ++ e1) (cons_elems ++ e2)), (Permutation (e2 ++ e1) (e2 ++ rest_elems)), (Permutation (e2 ++ e1) (e2 ++ cons_elems)), (Permutation (e2 ++ e1) (e2 ++ e2)), (Permutation (e2 ++ e1) []), (Permutation (e2 ++ rest_elems) e1), (Permutation (e2 ++ rest_elems) rest_elems), (Permutation (e2 ++ rest_elems) cons_elems)
+(Permutation (e2 ++ rest_elems) e2), (Permutation (e2 ++ rest_elems) (e1 ++ e1)), (Permutation (e2 ++ rest_elems) (e1 ++ rest_elems)), (Permutation (e2 ++ rest_elems) (e1 ++ cons_elems)), (Permutation (e2 ++ rest_elems) (e1 ++ e2)), (Permutation (e2 ++ rest_elems) (rest_elems ++ e1)), (Permutation (e2 ++ rest_elems) (rest_elems ++ rest_elems)), (Permutation (e2 ++ rest_elems) (rest_elems ++ cons_elems)), (Permutation (e2 ++ rest_elems) (rest_elems ++ e2)), (Permutation (e2 ++ rest_elems) (cons_elems ++ e1))
+(Permutation (e2 ++ rest_elems) (cons_elems ++ rest_elems)), (Permutation (e2 ++ rest_elems) (cons_elems ++ cons_elems)), (Permutation (e2 ++ rest_elems) (cons_elems ++ e2)), (Permutation (e2 ++ rest_elems) (e2 ++ e1)), (Permutation (e2 ++ rest_elems) (e2 ++ cons_elems)), (Permutation (e2 ++ rest_elems) (e2 ++ e2)), (Permutation (e2 ++ rest_elems) []), (Permutation (e2 ++ cons_elems) e1), (Permutation (e2 ++ cons_elems) rest_elems), (Permutation (e2 ++ cons_elems) cons_elems)
+(Permutation (e2 ++ cons_elems) e2), (Permutation (e2 ++ cons_elems) (e1 ++ e1)), (Permutation (e2 ++ cons_elems) (e1 ++ rest_elems)), (Permutation (e2 ++ cons_elems) (e1 ++ cons_elems)), (Permutation (e2 ++ cons_elems) (e1 ++ e2)), (Permutation (e2 ++ cons_elems) (rest_elems ++ e1)), (Permutation (e2 ++ cons_elems) (rest_elems ++ rest_elems)), (Permutation (e2 ++ cons_elems) (rest_elems ++ cons_elems)), (Permutation (e2 ++ cons_elems) (rest_elems ++ e2)), (Permutation (e2 ++ cons_elems) (cons_elems ++ e1))
+(Permutation (e2 ++ cons_elems) (cons_elems ++ rest_elems)), (Permutation (e2 ++ cons_elems) (cons_elems ++ cons_elems)), (Permutation (e2 ++ cons_elems) (cons_elems ++ e2)), (Permutation (e2 ++ cons_elems) (e2 ++ e1)), (Permutation (e2 ++ cons_elems) (e2 ++ rest_elems)), (Permutation (e2 ++ cons_elems) (e2 ++ e2)), (Permutation (e2 ++ cons_elems) []), (Permutation (e2 ++ e2) e1), (Permutation (e2 ++ e2) rest_elems), (Permutation (e2 ++ e2) cons_elems)
+(Permutation (e2 ++ e2) e2), (Permutation (e2 ++ e2) (e1 ++ e1)), (Permutation (e2 ++ e2) (e1 ++ rest_elems)), (Permutation (e2 ++ e2) (e1 ++ cons_elems)), (Permutation (e2 ++ e2) (e1 ++ e2)), (Permutation (e2 ++ e2) (rest_elems ++ e1)), (Permutation (e2 ++ e2) (rest_elems ++ rest_elems)), (Permutation (e2 ++ e2) (rest_elems ++ cons_elems)), (Permutation (e2 ++ e2) (rest_elems ++ e2)), (Permutation (e2 ++ e2) (cons_elems ++ e1))
+(Permutation (e2 ++ e2) (cons_elems ++ rest_elems)), (Permutation (e2 ++ e2) (cons_elems ++ cons_elems)), (Permutation (e2 ++ e2) (cons_elems ++ e2)), (Permutation (e2 ++ e2) (e2 ++ e1)), (Permutation (e2 ++ e2) (e2 ++ rest_elems)), (Permutation (e2 ++ e2) (e2 ++ cons_elems)), (Permutation (e2 ++ e2) []), (Permutation [] e1), (Permutation [] rest_elems), (Permutation [] cons_elems)
+(Permutation [] e2), (Permutation [] (e1 ++ e1)), (Permutation [] (e1 ++ rest_elems)), (Permutation [] (e1 ++ cons_elems)), (Permutation [] (e1 ++ e2)), (Permutation [] (rest_elems ++ e1)), (Permutation [] (rest_elems ++ rest_elems)), (Permutation [] (rest_elems ++ cons_elems)), (Permutation [] (rest_elems ++ e2)), (Permutation [] (cons_elems ++ e1))
+(Permutation [] (cons_elems ++ rest_elems)), (Permutation [] (cons_elems ++ cons_elems)), (Permutation [] (cons_elems ++ e2)), (Permutation [] (e2 ++ e1)), (Permutation [] (e2 ++ rest_elems)), (Permutation [] (e2 ++ cons_elems)), (Permutation [] (e2 ++ e2)), (In (length e1) e1), (In (length e1) rest_elems), (In (length e1) cons_elems)
+(In (length e1) e2), (In (length e1) (e1 ++ e1)), (In (length e1) (e1 ++ rest_elems)), (In (length e1) (e1 ++ cons_elems)), (In (length e1) (e1 ++ e2)), (In (length e1) (rest_elems ++ e1)), (In (length e1) (rest_elems ++ rest_elems)), (In (length e1) (rest_elems ++ cons_elems)), (In (length e1) (rest_elems ++ e2)), (In (length e1) (cons_elems ++ e1))
+(In (length e1) (cons_elems ++ rest_elems)), (In (length e1) (cons_elems ++ cons_elems)), (In (length e1) (cons_elems ++ e2)), (In (length e1) (e2 ++ e1)), (In (length e1) (e2 ++ rest_elems)), (In (length e1) (e2 ++ cons_elems)), (In (length e1) (e2 ++ e2)), (In (length rest_elems) e1), (In (length rest_elems) rest_elems), (In (length rest_elems) cons_elems)
+(In (length rest_elems) e2), (In (length rest_elems) (e1 ++ e1)), (In (length rest_elems) (e1 ++ rest_elems)), (In (length rest_elems) (e1 ++ cons_elems)), (In (length rest_elems) (e1 ++ e2)), (In (length rest_elems) (rest_elems ++ e1)), (In (length rest_elems) (rest_elems ++ rest_elems)), (In (length rest_elems) (rest_elems ++ cons_elems)), (In (length rest_elems) (rest_elems ++ e2)), (In (length rest_elems) (cons_elems ++ e1))
+(In (length rest_elems) (cons_elems ++ rest_elems)), (In (length rest_elems) (cons_elems ++ cons_elems)), (In (length rest_elems) (cons_elems ++ e2)), (In (length rest_elems) (e2 ++ e1)), (In (length rest_elems) (e2 ++ rest_elems)), (In (length rest_elems) (e2 ++ cons_elems)), (In (length rest_elems) (e2 ++ e2)), (In (length cons_elems) e1), (In (length cons_elems) rest_elems), (In (length cons_elems) cons_elems)
+(In (length cons_elems) e2), (In (length cons_elems) (e1 ++ e1)), (In (length cons_elems) (e1 ++ rest_elems)), (In (length cons_elems) (e1 ++ cons_elems)), (In (length cons_elems) (e1 ++ e2)), (In (length cons_elems) (rest_elems ++ e1)), (In (length cons_elems) (rest_elems ++ rest_elems)), (In (length cons_elems) (rest_elems ++ cons_elems)), (In (length cons_elems) (rest_elems ++ e2)), (In (length cons_elems) (cons_elems ++ e1))
+(In (length cons_elems) (cons_elems ++ rest_elems)), (In (length cons_elems) (cons_elems ++ cons_elems)), (In (length cons_elems) (cons_elems ++ e2)), (In (length cons_elems) (e2 ++ e1)), (In (length cons_elems) (e2 ++ rest_elems)), (In (length cons_elems) (e2 ++ cons_elems)), (In (length cons_elems) (e2 ++ e2)), (In (length e2) e1), (In (length e2) rest_elems), (In (length e2) cons_elems)
+(In (length e2) e2), (In (length e2) (e1 ++ e1)), (In (length e2) (e1 ++ rest_elems)), (In (length e2) (e1 ++ cons_elems)), (In (length e2) (e1 ++ e2)), (In (length e2) (rest_elems ++ e1)), (In (length e2) (rest_elems ++ rest_elems)), (In (length e2) (rest_elems ++ cons_elems)), (In (length e2) (rest_elems ++ e2)), (In (length e2) (cons_elems ++ e1))
+(In (length e2) (cons_elems ++ rest_elems)), (In (length e2) (cons_elems ++ cons_elems)), (In (length e2) (cons_elems ++ e2)), (In (length e2) (e2 ++ e1)), (In (length e2) (e2 ++ rest_elems)), (In (length e2) (e2 ++ cons_elems)), (In (length e2) (e2 ++ e2)), (length e1 < length rest_elems), (length e1 < length cons_elems), (length e1 < length e2)
+(length rest_elems < length e1), (length rest_elems < length cons_elems), (length rest_elems < length e2), (length cons_elems < length e1), (length cons_elems < length rest_elems), (length cons_elems < length e2), (length e2 < length e1), (length e2 < length rest_elems), (length e2 < length cons_elems), (length e1 <= length rest_elems)
+(length e1 <= length cons_elems), (length e1 <= length e2), (length rest_elems <= length e1), (length rest_elems <= length cons_elems), (length rest_elems <= length e2), (length cons_elems <= length e1), (length cons_elems <= length rest_elems), (length cons_elems <= length e2), (length e2 <= length e1), (length e2 <= length rest_elems)
+(length e2 <= length cons_elems), (~ Permutation e1 e1), (~ Permutation e1 rest_elems), (~ Permutation e1 cons_elems), (~ Permutation e1 e2), (~ Permutation rest_elems e1), (~ Permutation rest_elems rest_elems), (~ Permutation rest_elems cons_elems), (~ Permutation rest_elems e2), (~ Permutation cons_elems e1)
+(~ Permutation cons_elems rest_elems), (~ Permutation cons_elems cons_elems), (~ Permutation cons_elems e2), (~ Permutation e2 e1), (~ Permutation e2 rest_elems), (~ Permutation e2 cons_elems), (~ Permutation e2 e2), (e1 <> e1), (e1 <> rest_elems), (e1 <> cons_elems)
+(e1 <> e2), (rest_elems <> e1), (rest_elems <> rest_elems), (rest_elems <> cons_elems), (rest_elems <> e2), (cons_elems <> e1), (cons_elems <> rest_elems), (cons_elems <> cons_elems), (cons_elems <> e2), (e2 <> e1)
+(e2 <> rest_elems), (e2 <> cons_elems), (e2 <> e2), (None = Some e1), (None = Some rest_elems), (None = Some cons_elems), (None = Some e2), (e1 ++ e1 = e1), (e1 ++ e1 = rest_elems), (e1 ++ e1 = cons_elems)
+(e1 ++ e1 = e2), (e1 ++ rest_elems = e1), (e1 ++ rest_elems = rest_elems), (e1 ++ rest_elems = cons_elems), (e1 ++ rest_elems = e2), (e1 ++ cons_elems = e1), (e1 ++ cons_elems = rest_elems), (e1 ++ cons_elems = cons_elems), (e1 ++ cons_elems = e2), (e1 ++ e2 = e1)
+(e1 ++ e2 = rest_elems), (e1 ++ e2 = cons_elems), (e1 ++ e2 = e2), (rest_elems ++ e1 = e1), (rest_elems ++ e1 = rest_elems), (rest_elems ++ e1 = cons_elems), (rest_elems ++ e1 = e2), (rest_elems ++ rest_elems = e1), (rest_elems ++ rest_elems = rest_elems), (rest_elems ++ rest_elems = cons_elems)
+(rest_elems ++ rest_elems = e2), (rest_elems ++ cons_elems = e1), (rest_elems ++ cons_elems = rest_elems), (rest_elems ++ cons_elems = cons_elems), (rest_elems ++ cons_elems = e2), (rest_elems ++ e2 = e1), (rest_elems ++ e2 = rest_elems), (rest_elems ++ e2 = cons_elems), (rest_elems ++ e2 = e2), (cons_elems ++ e1 = e1)
+(cons_elems ++ e1 = rest_elems), (cons_elems ++ e1 = cons_elems), (cons_elems ++ e1 = e2), (cons_elems ++ rest_elems = e1), (cons_elems ++ rest_elems = rest_elems), (cons_elems ++ rest_elems = cons_elems), (cons_elems ++ rest_elems = e2), (cons_elems ++ cons_elems = e1), (cons_elems ++ cons_elems = rest_elems), (cons_elems ++ cons_elems = cons_elems)
+(cons_elems ++ cons_elems = e2), (cons_elems ++ e2 = e1), (cons_elems ++ e2 = rest_elems), (cons_elems ++ e2 = cons_elems), (cons_elems ++ e2 = e2), (e2 ++ e1 = e1), (e2 ++ e1 = rest_elems), (e2 ++ e1 = cons_elems), (e2 ++ e1 = e2), (e2 ++ rest_elems = e1)
+(e2 ++ rest_elems = rest_elems), (e2 ++ rest_elems = cons_elems), (e2 ++ rest_elems = e2), (e2 ++ cons_elems = e1), (e2 ++ cons_elems = rest_elems), (e2 ++ cons_elems = cons_elems), (e2 ++ cons_elems = e2), (e2 ++ e2 = e1), (e2 ++ e2 = rest_elems), (e2 ++ e2 = cons_elems)
+(e2 ++ e2 = e2), ([] = e1), ([] = rest_elems), ([] = cons_elems), ([] = e2), ([] = e1 ++ e1), ([] = e1 ++ rest_elems), ([] = e1 ++ cons_elems), ([] = e1 ++ e2), ([] = rest_elems ++ e1)
+([] = rest_elems ++ rest_elems), ([] = rest_elems ++ cons_elems), ([] = rest_elems ++ e2), ([] = cons_elems ++ e1), ([] = cons_elems ++ rest_elems), ([] = cons_elems ++ cons_elems), ([] = cons_elems ++ e2), ([] = e2 ++ e1), ([] = e2 ++ rest_elems), ([] = e2 ++ cons_elems)
+([] = e2 ++ e2)
+
+Label: 1 (1)
+(Permutation e1 e1), (Permutation e1 rest_elems), (Permutation e1 cons_elems), (Permutation e1 e2), (Permutation rest_elems e1), (Permutation rest_elems rest_elems), (Permutation rest_elems cons_elems), (Permutation rest_elems e2), (Permutation cons_elems e1), (Permutation cons_elems rest_elems)
+(Permutation cons_elems cons_elems), (Permutation cons_elems e2), (Permutation e2 e1), (Permutation e2 rest_elems), (Permutation e2 cons_elems), (Permutation e2 e2), (e1 = e1), (e1 = rest_elems), (e1 = cons_elems), (e1 = e2)
+(rest_elems = e1), (rest_elems = rest_elems), (rest_elems = cons_elems), (rest_elems = e2), (cons_elems = e1), (cons_elems = rest_elems), (cons_elems = cons_elems), (cons_elems = e2), (e2 = e1), (e2 = rest_elems)
+(e2 = cons_elems), (e2 = e2), (tree_elems Leaf e1), (tree_elems Leaf rest_elems), (tree_elems Leaf cons_elems), (tree_elems Leaf e2), (tree_elems Leaf (e1 ++ e1)), (tree_elems Leaf (e1 ++ rest_elems)), (tree_elems Leaf (e1 ++ cons_elems)), (tree_elems Leaf (e1 ++ e2))
+(tree_elems Leaf (rest_elems ++ e1)), (tree_elems Leaf (rest_elems ++ rest_elems)), (tree_elems Leaf (rest_elems ++ cons_elems)), (tree_elems Leaf (rest_elems ++ e2)), (tree_elems Leaf (cons_elems ++ e1)), (tree_elems Leaf (cons_elems ++ rest_elems)), (tree_elems Leaf (cons_elems ++ cons_elems)), (tree_elems Leaf (cons_elems ++ e2)), (tree_elems Leaf (e2 ++ e1)), (tree_elems Leaf (e2 ++ rest_elems))
+(tree_elems Leaf (e2 ++ cons_elems)), (tree_elems Leaf (e2 ++ e2)), (tree_elems Leaf []), (pow2heapp (length e1) (length e1) Leaf), (pow2heapp (length e1) (length rest_elems) Leaf), (pow2heapp (length e1) (length cons_elems) Leaf), (pow2heapp (length e1) (length e2) Leaf), (pow2heapp (length rest_elems) (length e1) Leaf), (pow2heapp (length rest_elems) (length rest_elems) Leaf), (pow2heapp (length rest_elems) (length cons_elems) Leaf)
+(pow2heapp (length rest_elems) (length e2) Leaf), (pow2heapp (length cons_elems) (length e1) Leaf), (pow2heapp (length cons_elems) (length rest_elems) Leaf), (pow2heapp (length cons_elems) (length cons_elems) Leaf), (pow2heapp (length cons_elems) (length e2) Leaf), (pow2heapp (length e2) (length e1) Leaf), (pow2heapp (length e2) (length rest_elems) Leaf), (pow2heapp (length e2) (length cons_elems) Leaf), (pow2heapp (length e2) (length e2) Leaf), (Permutation e1 (e1 ++ e1))
+(Permutation e1 (e1 ++ rest_elems)), (Permutation e1 (e1 ++ cons_elems)), (Permutation e1 (e1 ++ e2)), (Permutation e1 (rest_elems ++ e1)), (Permutation e1 (rest_elems ++ rest_elems)), (Permutation e1 (rest_elems ++ cons_elems)), (Permutation e1 (rest_elems ++ e2)), (Permutation e1 (cons_elems ++ e1)), (Permutation e1 (cons_elems ++ rest_elems)), (Permutation e1 (cons_elems ++ cons_elems))
+(Permutation e1 (cons_elems ++ e2)), (Permutation e1 (e2 ++ e1)), (Permutation e1 (e2 ++ rest_elems)), (Permutation e1 (e2 ++ cons_elems)), (Permutation e1 (e2 ++ e2)), (Permutation e1 []), (Permutation rest_elems (e1 ++ e1)), (Permutation rest_elems (e1 ++ rest_elems)), (Permutation rest_elems (e1 ++ cons_elems)), (Permutation rest_elems (e1 ++ e2))
+(Permutation rest_elems (rest_elems ++ e1)), (Permutation rest_elems (rest_elems ++ rest_elems)), (Permutation rest_elems (rest_elems ++ cons_elems)), (Permutation rest_elems (rest_elems ++ e2)), (Permutation rest_elems (cons_elems ++ e1)), (Permutation rest_elems (cons_elems ++ rest_elems)), (Permutation rest_elems (cons_elems ++ cons_elems)), (Permutation rest_elems (cons_elems ++ e2)), (Permutation rest_elems (e2 ++ e1)), (Permutation rest_elems (e2 ++ rest_elems))
+(Permutation rest_elems (e2 ++ cons_elems)), (Permutation rest_elems (e2 ++ e2)), (Permutation rest_elems []), (Permutation cons_elems (e1 ++ e1)), (Permutation cons_elems (e1 ++ rest_elems)), (Permutation cons_elems (e1 ++ cons_elems)), (Permutation cons_elems (e1 ++ e2)), (Permutation cons_elems (rest_elems ++ e1)), (Permutation cons_elems (rest_elems ++ rest_elems)), (Permutation cons_elems (rest_elems ++ cons_elems))
+(Permutation cons_elems (rest_elems ++ e2)), (Permutation cons_elems (cons_elems ++ e1)), (Permutation cons_elems (cons_elems ++ rest_elems)), (Permutation cons_elems (cons_elems ++ cons_elems)), (Permutation cons_elems (cons_elems ++ e2)), (Permutation cons_elems (e2 ++ e1)), (Permutation cons_elems (e2 ++ rest_elems)), (Permutation cons_elems (e2 ++ cons_elems)), (Permutation cons_elems (e2 ++ e2)), (Permutation cons_elems [])
+(Permutation e2 (e1 ++ e1)), (Permutation e2 (e1 ++ rest_elems)), (Permutation e2 (e1 ++ cons_elems)), (Permutation e2 (e1 ++ e2)), (Permutation e2 (rest_elems ++ e1)), (Permutation e2 (rest_elems ++ rest_elems)), (Permutation e2 (rest_elems ++ cons_elems)), (Permutation e2 (rest_elems ++ e2)), (Permutation e2 (cons_elems ++ e1)), (Permutation e2 (cons_elems ++ rest_elems))
+(Permutation e2 (cons_elems ++ cons_elems)), (Permutation e2 (cons_elems ++ e2)), (Permutation e2 (e2 ++ e1)), (Permutation e2 (e2 ++ rest_elems)), (Permutation e2 (e2 ++ cons_elems)), (Permutation e2 (e2 ++ e2)), (Permutation e2 []), (Permutation (e1 ++ e1) e1), (Permutation (e1 ++ e1) rest_elems), (Permutation (e1 ++ e1) cons_elems)
+(Permutation (e1 ++ e1) e2), (Permutation (e1 ++ e1) (e1 ++ rest_elems)), (Permutation (e1 ++ e1) (e1 ++ cons_elems)), (Permutation (e1 ++ e1) (e1 ++ e2)), (Permutation (e1 ++ e1) (rest_elems ++ e1)), (Permutation (e1 ++ e1) (rest_elems ++ rest_elems)), (Permutation (e1 ++ e1) (rest_elems ++ cons_elems)), (Permutation (e1 ++ e1) (rest_elems ++ e2)), (Permutation (e1 ++ e1) (cons_elems ++ e1)), (Permutation (e1 ++ e1) (cons_elems ++ rest_elems))
+(Permutation (e1 ++ e1) (cons_elems ++ cons_elems)), (Permutation (e1 ++ e1) (cons_elems ++ e2)), (Permutation (e1 ++ e1) (e2 ++ e1)), (Permutation (e1 ++ e1) (e2 ++ rest_elems)), (Permutation (e1 ++ e1) (e2 ++ cons_elems)), (Permutation (e1 ++ e1) (e2 ++ e2)), (Permutation (e1 ++ e1) []), (Permutation (e1 ++ rest_elems) e1), (Permutation (e1 ++ rest_elems) rest_elems), (Permutation (e1 ++ rest_elems) cons_elems)
+(Permutation (e1 ++ rest_elems) e2), (Permutation (e1 ++ rest_elems) (e1 ++ e1)), (Permutation (e1 ++ rest_elems) (e1 ++ cons_elems)), (Permutation (e1 ++ rest_elems) (e1 ++ e2)), (Permutation (e1 ++ rest_elems) (rest_elems ++ e1)), (Permutation (e1 ++ rest_elems) (rest_elems ++ rest_elems)), (Permutation (e1 ++ rest_elems) (rest_elems ++ cons_elems)), (Permutation (e1 ++ rest_elems) (rest_elems ++ e2)), (Permutation (e1 ++ rest_elems) (cons_elems ++ e1)), (Permutation (e1 ++ rest_elems) (cons_elems ++ rest_elems))
+(Permutation (e1 ++ rest_elems) (cons_elems ++ cons_elems)), (Permutation (e1 ++ rest_elems) (cons_elems ++ e2)), (Permutation (e1 ++ rest_elems) (e2 ++ e1)), (Permutation (e1 ++ rest_elems) (e2 ++ rest_elems)), (Permutation (e1 ++ rest_elems) (e2 ++ cons_elems)), (Permutation (e1 ++ rest_elems) (e2 ++ e2)), (Permutation (e1 ++ rest_elems) []), (Permutation (e1 ++ cons_elems) e1), (Permutation (e1 ++ cons_elems) rest_elems), (Permutation (e1 ++ cons_elems) cons_elems)
+(Permutation (e1 ++ cons_elems) e2), (Permutation (e1 ++ cons_elems) (e1 ++ e1)), (Permutation (e1 ++ cons_elems) (e1 ++ rest_elems)), (Permutation (e1 ++ cons_elems) (e1 ++ e2)), (Permutation (e1 ++ cons_elems) (rest_elems ++ e1)), (Permutation (e1 ++ cons_elems) (rest_elems ++ rest_elems)), (Permutation (e1 ++ cons_elems) (rest_elems ++ cons_elems)), (Permutation (e1 ++ cons_elems) (rest_elems ++ e2)), (Permutation (e1 ++ cons_elems) (cons_elems ++ e1)), (Permutation (e1 ++ cons_elems) (cons_elems ++ rest_elems))
+(Permutation (e1 ++ cons_elems) (cons_elems ++ cons_elems)), (Permutation (e1 ++ cons_elems) (cons_elems ++ e2)), (Permutation (e1 ++ cons_elems) (e2 ++ e1)), (Permutation (e1 ++ cons_elems) (e2 ++ rest_elems)), (Permutation (e1 ++ cons_elems) (e2 ++ cons_elems)), (Permutation (e1 ++ cons_elems) (e2 ++ e2)), (Permutation (e1 ++ cons_elems) []), (Permutation (e1 ++ e2) e1), (Permutation (e1 ++ e2) rest_elems), (Permutation (e1 ++ e2) cons_elems)
+(Permutation (e1 ++ e2) e2), (Permutation (e1 ++ e2) (e1 ++ e1)), (Permutation (e1 ++ e2) (e1 ++ rest_elems)), (Permutation (e1 ++ e2) (e1 ++ cons_elems)), (Permutation (e1 ++ e2) (rest_elems ++ e1)), (Permutation (e1 ++ e2) (rest_elems ++ rest_elems)), (Permutation (e1 ++ e2) (rest_elems ++ cons_elems)), (Permutation (e1 ++ e2) (rest_elems ++ e2)), (Permutation (e1 ++ e2) (cons_elems ++ e1)), (Permutation (e1 ++ e2) (cons_elems ++ rest_elems))
+(Permutation (e1 ++ e2) (cons_elems ++ cons_elems)), (Permutation (e1 ++ e2) (cons_elems ++ e2)), (Permutation (e1 ++ e2) (e2 ++ e1)), (Permutation (e1 ++ e2) (e2 ++ rest_elems)), (Permutation (e1 ++ e2) (e2 ++ cons_elems)), (Permutation (e1 ++ e2) (e2 ++ e2)), (Permutation (e1 ++ e2) []), (Permutation (rest_elems ++ e1) e1), (Permutation (rest_elems ++ e1) rest_elems), (Permutation (rest_elems ++ e1) cons_elems)
+(Permutation (rest_elems ++ e1) e2), (Permutation (rest_elems ++ e1) (e1 ++ e1)), (Permutation (rest_elems ++ e1) (e1 ++ rest_elems)), (Permutation (rest_elems ++ e1) (e1 ++ cons_elems)), (Permutation (rest_elems ++ e1) (e1 ++ e2)), (Permutation (rest_elems ++ e1) (rest_elems ++ rest_elems)), (Permutation (rest_elems ++ e1) (rest_elems ++ cons_elems)), (Permutation (rest_elems ++ e1) (rest_elems ++ e2)), (Permutation (rest_elems ++ e1) (cons_elems ++ e1)), (Permutation (rest_elems ++ e1) (cons_elems ++ rest_elems))
+(Permutation (rest_elems ++ e1) (cons_elems ++ cons_elems)), (Permutation (rest_elems ++ e1) (cons_elems ++ e2)), (Permutation (rest_elems ++ e1) (e2 ++ e1)), (Permutation (rest_elems ++ e1) (e2 ++ rest_elems)), (Permutation (rest_elems ++ e1) (e2 ++ cons_elems)), (Permutation (rest_elems ++ e1) (e2 ++ e2)), (Permutation (rest_elems ++ e1) []), (Permutation (rest_elems ++ rest_elems) e1), (Permutation (rest_elems ++ rest_elems) rest_elems), (Permutation (rest_elems ++ rest_elems) cons_elems)
+(Permutation (rest_elems ++ rest_elems) e2), (Permutation (rest_elems ++ rest_elems) (e1 ++ e1)), (Permutation (rest_elems ++ rest_elems) (e1 ++ rest_elems)), (Permutation (rest_elems ++ rest_elems) (e1 ++ cons_elems)), (Permutation (rest_elems ++ rest_elems) (e1 ++ e2)), (Permutation (rest_elems ++ rest_elems) (rest_elems ++ e1)), (Permutation (rest_elems ++ rest_elems) (rest_elems ++ cons_elems)), (Permutation (rest_elems ++ rest_elems) (rest_elems ++ e2)), (Permutation (rest_elems ++ rest_elems) (cons_elems ++ e1)), (Permutation (rest_elems ++ rest_elems) (cons_elems ++ rest_elems))
+(Permutation (rest_elems ++ rest_elems) (cons_elems ++ cons_elems)), (Permutation (rest_elems ++ rest_elems) (cons_elems ++ e2)), (Permutation (rest_elems ++ rest_elems) (e2 ++ e1)), (Permutation (rest_elems ++ rest_elems) (e2 ++ rest_elems)), (Permutation (rest_elems ++ rest_elems) (e2 ++ cons_elems)), (Permutation (rest_elems ++ rest_elems) (e2 ++ e2)), (Permutation (rest_elems ++ rest_elems) []), (Permutation (rest_elems ++ cons_elems) e1), (Permutation (rest_elems ++ cons_elems) rest_elems), (Permutation (rest_elems ++ cons_elems) cons_elems)
+(Permutation (rest_elems ++ cons_elems) e2), (Permutation (rest_elems ++ cons_elems) (e1 ++ e1)), (Permutation (rest_elems ++ cons_elems) (e1 ++ rest_elems)), (Permutation (rest_elems ++ cons_elems) (e1 ++ cons_elems)), (Permutation (rest_elems ++ cons_elems) (e1 ++ e2)), (Permutation (rest_elems ++ cons_elems) (rest_elems ++ e1)), (Permutation (rest_elems ++ cons_elems) (rest_elems ++ rest_elems)), (Permutation (rest_elems ++ cons_elems) (rest_elems ++ e2)), (Permutation (rest_elems ++ cons_elems) (cons_elems ++ e1)), (Permutation (rest_elems ++ cons_elems) (cons_elems ++ rest_elems))
+(Permutation (rest_elems ++ cons_elems) (cons_elems ++ cons_elems)), (Permutation (rest_elems ++ cons_elems) (cons_elems ++ e2)), (Permutation (rest_elems ++ cons_elems) (e2 ++ e1)), (Permutation (rest_elems ++ cons_elems) (e2 ++ rest_elems)), (Permutation (rest_elems ++ cons_elems) (e2 ++ cons_elems)), (Permutation (rest_elems ++ cons_elems) (e2 ++ e2)), (Permutation (rest_elems ++ cons_elems) []), (Permutation (rest_elems ++ e2) e1), (Permutation (rest_elems ++ e2) rest_elems), (Permutation (rest_elems ++ e2) cons_elems)
+(Permutation (rest_elems ++ e2) e2), (Permutation (rest_elems ++ e2) (e1 ++ e1)), (Permutation (rest_elems ++ e2) (e1 ++ rest_elems)), (Permutation (rest_elems ++ e2) (e1 ++ cons_elems)), (Permutation (rest_elems ++ e2) (e1 ++ e2)), (Permutation (rest_elems ++ e2) (rest_elems ++ e1)), (Permutation (rest_elems ++ e2) (rest_elems ++ rest_elems)), (Permutation (rest_elems ++ e2) (rest_elems ++ cons_elems)), (Permutation (rest_elems ++ e2) (cons_elems ++ e1)), (Permutation (rest_elems ++ e2) (cons_elems ++ rest_elems))
+(Permutation (rest_elems ++ e2) (cons_elems ++ cons_elems)), (Permutation (rest_elems ++ e2) (cons_elems ++ e2)), (Permutation (rest_elems ++ e2) (e2 ++ e1)), (Permutation (rest_elems ++ e2) (e2 ++ rest_elems)), (Permutation (rest_elems ++ e2) (e2 ++ cons_elems)), (Permutation (rest_elems ++ e2) (e2 ++ e2)), (Permutation (rest_elems ++ e2) []), (Permutation (cons_elems ++ e1) e1), (Permutation (cons_elems ++ e1) rest_elems), (Permutation (cons_elems ++ e1) cons_elems)
+(Permutation (cons_elems ++ e1) e2), (Permutation (cons_elems ++ e1) (e1 ++ e1)), (Permutation (cons_elems ++ e1) (e1 ++ rest_elems)), (Permutation (cons_elems ++ e1) (e1 ++ cons_elems)), (Permutation (cons_elems ++ e1) (e1 ++ e2)), (Permutation (cons_elems ++ e1) (rest_elems ++ e1)), (Permutation (cons_elems ++ e1) (rest_elems ++ rest_elems)), (Permutation (cons_elems ++ e1) (rest_elems ++ cons_elems)), (Permutation (cons_elems ++ e1) (rest_elems ++ e2)), (Permutation (cons_elems ++ e1) (cons_elems ++ rest_elems))
+(Permutation (cons_elems ++ e1) (cons_elems ++ cons_elems)), (Permutation (cons_elems ++ e1) (cons_elems ++ e2)), (Permutation (cons_elems ++ e1) (e2 ++ e1)), (Permutation (cons_elems ++ e1) (e2 ++ rest_elems)), (Permutation (cons_elems ++ e1) (e2 ++ cons_elems)), (Permutation (cons_elems ++ e1) (e2 ++ e2)), (Permutation (cons_elems ++ e1) []), (Permutation (cons_elems ++ rest_elems) e1), (Permutation (cons_elems ++ rest_elems) rest_elems), (Permutation (cons_elems ++ rest_elems) cons_elems)
+(Permutation (cons_elems ++ rest_elems) e2), (Permutation (cons_elems ++ rest_elems) (e1 ++ e1)), (Permutation (cons_elems ++ rest_elems) (e1 ++ rest_elems)), (Permutation (cons_elems ++ rest_elems) (e1 ++ cons_elems)), (Permutation (cons_elems ++ rest_elems) (e1 ++ e2)), (Permutation (cons_elems ++ rest_elems) (rest_elems ++ e1)), (Permutation (cons_elems ++ rest_elems) (rest_elems ++ rest_elems)), (Permutation (cons_elems ++ rest_elems) (rest_elems ++ cons_elems)), (Permutation (cons_elems ++ rest_elems) (rest_elems ++ e2)), (Permutation (cons_elems ++ rest_elems) (cons_elems ++ e1))
+(Permutation (cons_elems ++ rest_elems) (cons_elems ++ cons_elems)), (Permutation (cons_elems ++ rest_elems) (cons_elems ++ e2)), (Permutation (cons_elems ++ rest_elems) (e2 ++ e1)), (Permutation (cons_elems ++ rest_elems) (e2 ++ rest_elems)), (Permutation (cons_elems ++ rest_elems) (e2 ++ cons_elems)), (Permutation (cons_elems ++ rest_elems) (e2 ++ e2)), (Permutation (cons_elems ++ rest_elems) []), (Permutation (cons_elems ++ cons_elems) e1), (Permutation (cons_elems ++ cons_elems) rest_elems), (Permutation (cons_elems ++ cons_elems) cons_elems)
+(Permutation (cons_elems ++ cons_elems) e2), (Permutation (cons_elems ++ cons_elems) (e1 ++ e1)), (Permutation (cons_elems ++ cons_elems) (e1 ++ rest_elems)), (Permutation (cons_elems ++ cons_elems) (e1 ++ cons_elems)), (Permutation (cons_elems ++ cons_elems) (e1 ++ e2)), (Permutation (cons_elems ++ cons_elems) (rest_elems ++ e1)), (Permutation (cons_elems ++ cons_elems) (rest_elems ++ rest_elems)), (Permutation (cons_elems ++ cons_elems) (rest_elems ++ cons_elems)), (Permutation (cons_elems ++ cons_elems) (rest_elems ++ e2)), (Permutation (cons_elems ++ cons_elems) (cons_elems ++ e1))
+(Permutation (cons_elems ++ cons_elems) (cons_elems ++ rest_elems)), (Permutation (cons_elems ++ cons_elems) (cons_elems ++ e2)), (Permutation (cons_elems ++ cons_elems) (e2 ++ e1)), (Permutation (cons_elems ++ cons_elems) (e2 ++ rest_elems)), (Permutation (cons_elems ++ cons_elems) (e2 ++ cons_elems)), (Permutation (cons_elems ++ cons_elems) (e2 ++ e2)), (Permutation (cons_elems ++ cons_elems) []), (Permutation (cons_elems ++ e2) e1), (Permutation (cons_elems ++ e2) rest_elems), (Permutation (cons_elems ++ e2) cons_elems)
+(Permutation (cons_elems ++ e2) e2), (Permutation (cons_elems ++ e2) (e1 ++ e1)), (Permutation (cons_elems ++ e2) (e1 ++ rest_elems)), (Permutation (cons_elems ++ e2) (e1 ++ cons_elems)), (Permutation (cons_elems ++ e2) (e1 ++ e2)), (Permutation (cons_elems ++ e2) (rest_elems ++ e1)), (Permutation (cons_elems ++ e2) (rest_elems ++ rest_elems)), (Permutation (cons_elems ++ e2) (rest_elems ++ cons_elems)), (Permutation (cons_elems ++ e2) (rest_elems ++ e2)), (Permutation (cons_elems ++ e2) (cons_elems ++ e1))
+(Permutation (cons_elems ++ e2) (cons_elems ++ rest_elems)), (Permutation (cons_elems ++ e2) (cons_elems ++ cons_elems)), (Permutation (cons_elems ++ e2) (e2 ++ e1)), (Permutation (cons_elems ++ e2) (e2 ++ rest_elems)), (Permutation (cons_elems ++ e2) (e2 ++ cons_elems)), (Permutation (cons_elems ++ e2) (e2 ++ e2)), (Permutation (cons_elems ++ e2) []), (Permutation (e2 ++ e1) e1), (Permutation (e2 ++ e1) rest_elems), (Permutation (e2 ++ e1) cons_elems)
+(Permutation (e2 ++ e1) e2), (Permutation (e2 ++ e1) (e1 ++ e1)), (Permutation (e2 ++ e1) (e1 ++ rest_elems)), (Permutation (e2 ++ e1) (e1 ++ cons_elems)), (Permutation (e2 ++ e1) (e1 ++ e2)), (Permutation (e2 ++ e1) (rest_elems ++ e1)), (Permutation (e2 ++ e1) (rest_elems ++ rest_elems)), (Permutation (e2 ++ e1) (rest_elems ++ cons_elems)), (Permutation (e2 ++ e1) (rest_elems ++ e2)), (Permutation (e2 ++ e1) (cons_elems ++ e1))
+(Permutation (e2 ++ e1) (cons_elems ++ rest_elems)), (Permutation (e2 ++ e1) (cons_elems ++ cons_elems)), (Permutation (e2 ++ e1) (cons_elems ++ e2)), (Permutation (e2 ++ e1) (e2 ++ rest_elems)), (Permutation (e2 ++ e1) (e2 ++ cons_elems)), (Permutation (e2 ++ e1) (e2 ++ e2)), (Permutation (e2 ++ e1) []), (Permutation (e2 ++ rest_elems) e1), (Permutation (e2 ++ rest_elems) rest_elems), (Permutation (e2 ++ rest_elems) cons_elems)
+(Permutation (e2 ++ rest_elems) e2), (Permutation (e2 ++ rest_elems) (e1 ++ e1)), (Permutation (e2 ++ rest_elems) (e1 ++ rest_elems)), (Permutation (e2 ++ rest_elems) (e1 ++ cons_elems)), (Permutation (e2 ++ rest_elems) (e1 ++ e2)), (Permutation (e2 ++ rest_elems) (rest_elems ++ e1)), (Permutation (e2 ++ rest_elems) (rest_elems ++ rest_elems)), (Permutation (e2 ++ rest_elems) (rest_elems ++ cons_elems)), (Permutation (e2 ++ rest_elems) (rest_elems ++ e2)), (Permutation (e2 ++ rest_elems) (cons_elems ++ e1))
+(Permutation (e2 ++ rest_elems) (cons_elems ++ rest_elems)), (Permutation (e2 ++ rest_elems) (cons_elems ++ cons_elems)), (Permutation (e2 ++ rest_elems) (cons_elems ++ e2)), (Permutation (e2 ++ rest_elems) (e2 ++ e1)), (Permutation (e2 ++ rest_elems) (e2 ++ cons_elems)), (Permutation (e2 ++ rest_elems) (e2 ++ e2)), (Permutation (e2 ++ rest_elems) []), (Permutation (e2 ++ cons_elems) e1), (Permutation (e2 ++ cons_elems) rest_elems), (Permutation (e2 ++ cons_elems) cons_elems)
+(Permutation (e2 ++ cons_elems) e2), (Permutation (e2 ++ cons_elems) (e1 ++ e1)), (Permutation (e2 ++ cons_elems) (e1 ++ rest_elems)), (Permutation (e2 ++ cons_elems) (e1 ++ cons_elems)), (Permutation (e2 ++ cons_elems) (e1 ++ e2)), (Permutation (e2 ++ cons_elems) (rest_elems ++ e1)), (Permutation (e2 ++ cons_elems) (rest_elems ++ rest_elems)), (Permutation (e2 ++ cons_elems) (rest_elems ++ cons_elems)), (Permutation (e2 ++ cons_elems) (rest_elems ++ e2)), (Permutation (e2 ++ cons_elems) (cons_elems ++ e1))
+(Permutation (e2 ++ cons_elems) (cons_elems ++ rest_elems)), (Permutation (e2 ++ cons_elems) (cons_elems ++ cons_elems)), (Permutation (e2 ++ cons_elems) (cons_elems ++ e2)), (Permutation (e2 ++ cons_elems) (e2 ++ e1)), (Permutation (e2 ++ cons_elems) (e2 ++ rest_elems)), (Permutation (e2 ++ cons_elems) (e2 ++ e2)), (Permutation (e2 ++ cons_elems) []), (Permutation (e2 ++ e2) e1), (Permutation (e2 ++ e2) rest_elems), (Permutation (e2 ++ e2) cons_elems)
+(Permutation (e2 ++ e2) e2), (Permutation (e2 ++ e2) (e1 ++ e1)), (Permutation (e2 ++ e2) (e1 ++ rest_elems)), (Permutation (e2 ++ e2) (e1 ++ cons_elems)), (Permutation (e2 ++ e2) (e1 ++ e2)), (Permutation (e2 ++ e2) (rest_elems ++ e1)), (Permutation (e2 ++ e2) (rest_elems ++ rest_elems)), (Permutation (e2 ++ e2) (rest_elems ++ cons_elems)), (Permutation (e2 ++ e2) (rest_elems ++ e2)), (Permutation (e2 ++ e2) (cons_elems ++ e1))
+(Permutation (e2 ++ e2) (cons_elems ++ rest_elems)), (Permutation (e2 ++ e2) (cons_elems ++ cons_elems)), (Permutation (e2 ++ e2) (cons_elems ++ e2)), (Permutation (e2 ++ e2) (e2 ++ e1)), (Permutation (e2 ++ e2) (e2 ++ rest_elems)), (Permutation (e2 ++ e2) (e2 ++ cons_elems)), (Permutation (e2 ++ e2) []), (Permutation [] e1), (Permutation [] rest_elems), (Permutation [] cons_elems)
+(Permutation [] e2), (Permutation [] (e1 ++ e1)), (Permutation [] (e1 ++ rest_elems)), (Permutation [] (e1 ++ cons_elems)), (Permutation [] (e1 ++ e2)), (Permutation [] (rest_elems ++ e1)), (Permutation [] (rest_elems ++ rest_elems)), (Permutation [] (rest_elems ++ cons_elems)), (Permutation [] (rest_elems ++ e2)), (Permutation [] (cons_elems ++ e1))
+(Permutation [] (cons_elems ++ rest_elems)), (Permutation [] (cons_elems ++ cons_elems)), (Permutation [] (cons_elems ++ e2)), (Permutation [] (e2 ++ e1)), (Permutation [] (e2 ++ rest_elems)), (Permutation [] (e2 ++ cons_elems)), (Permutation [] (e2 ++ e2)), (In (length e1) e1), (In (length e1) rest_elems), (In (length e1) cons_elems)
+(In (length e1) e2), (In (length e1) (e1 ++ e1)), (In (length e1) (e1 ++ rest_elems)), (In (length e1) (e1 ++ cons_elems)), (In (length e1) (e1 ++ e2)), (In (length e1) (rest_elems ++ e1)), (In (length e1) (rest_elems ++ rest_elems)), (In (length e1) (rest_elems ++ cons_elems)), (In (length e1) (rest_elems ++ e2)), (In (length e1) (cons_elems ++ e1))
+(In (length e1) (cons_elems ++ rest_elems)), (In (length e1) (cons_elems ++ cons_elems)), (In (length e1) (cons_elems ++ e2)), (In (length e1) (e2 ++ e1)), (In (length e1) (e2 ++ rest_elems)), (In (length e1) (e2 ++ cons_elems)), (In (length e1) (e2 ++ e2)), (In (length rest_elems) e1), (In (length rest_elems) rest_elems), (In (length rest_elems) cons_elems)
+(In (length rest_elems) e2), (In (length rest_elems) (e1 ++ e1)), (In (length rest_elems) (e1 ++ rest_elems)), (In (length rest_elems) (e1 ++ cons_elems)), (In (length rest_elems) (e1 ++ e2)), (In (length rest_elems) (rest_elems ++ e1)), (In (length rest_elems) (rest_elems ++ rest_elems)), (In (length rest_elems) (rest_elems ++ cons_elems)), (In (length rest_elems) (rest_elems ++ e2)), (In (length rest_elems) (cons_elems ++ e1))
+(In (length rest_elems) (cons_elems ++ rest_elems)), (In (length rest_elems) (cons_elems ++ cons_elems)), (In (length rest_elems) (cons_elems ++ e2)), (In (length rest_elems) (e2 ++ e1)), (In (length rest_elems) (e2 ++ rest_elems)), (In (length rest_elems) (e2 ++ cons_elems)), (In (length rest_elems) (e2 ++ e2)), (In (length cons_elems) e1), (In (length cons_elems) rest_elems), (In (length cons_elems) cons_elems)
+(In (length cons_elems) e2), (In (length cons_elems) (e1 ++ e1)), (In (length cons_elems) (e1 ++ rest_elems)), (In (length cons_elems) (e1 ++ cons_elems)), (In (length cons_elems) (e1 ++ e2)), (In (length cons_elems) (rest_elems ++ e1)), (In (length cons_elems) (rest_elems ++ rest_elems)), (In (length cons_elems) (rest_elems ++ cons_elems)), (In (length cons_elems) (rest_elems ++ e2)), (In (length cons_elems) (cons_elems ++ e1))
+(In (length cons_elems) (cons_elems ++ rest_elems)), (In (length cons_elems) (cons_elems ++ cons_elems)), (In (length cons_elems) (cons_elems ++ e2)), (In (length cons_elems) (e2 ++ e1)), (In (length cons_elems) (e2 ++ rest_elems)), (In (length cons_elems) (e2 ++ cons_elems)), (In (length cons_elems) (e2 ++ e2)), (In (length e2) e1), (In (length e2) rest_elems), (In (length e2) cons_elems)
+(In (length e2) e2), (In (length e2) (e1 ++ e1)), (In (length e2) (e1 ++ rest_elems)), (In (length e2) (e1 ++ cons_elems)), (In (length e2) (e1 ++ e2)), (In (length e2) (rest_elems ++ e1)), (In (length e2) (rest_elems ++ rest_elems)), (In (length e2) (rest_elems ++ cons_elems)), (In (length e2) (rest_elems ++ e2)), (In (length e2) (cons_elems ++ e1))
+(In (length e2) (cons_elems ++ rest_elems)), (In (length e2) (cons_elems ++ cons_elems)), (In (length e2) (cons_elems ++ e2)), (In (length e2) (e2 ++ e1)), (In (length e2) (e2 ++ rest_elems)), (In (length e2) (e2 ++ cons_elems)), (In (length e2) (e2 ++ e2)), (length e1 < length rest_elems), (length e1 < length cons_elems), (length e1 < length e2)
+(length rest_elems < length e1), (length rest_elems < length cons_elems), (length rest_elems < length e2), (length cons_elems < length e1), (length cons_elems < length rest_elems), (length cons_elems < length e2), (length e2 < length e1), (length e2 < length rest_elems), (length e2 < length cons_elems), (length e1 <= length rest_elems)
+(length e1 <= length cons_elems), (length e1 <= length e2), (length rest_elems <= length e1), (length rest_elems <= length cons_elems), (length rest_elems <= length e2), (length cons_elems <= length e1), (length cons_elems <= length rest_elems), (length cons_elems <= length e2), (length e2 <= length e1), (length e2 <= length rest_elems)
+(length e2 <= length cons_elems), (~ Permutation e1 e1), (~ Permutation e1 rest_elems), (~ Permutation e1 cons_elems), (~ Permutation e1 e2), (~ Permutation rest_elems e1), (~ Permutation rest_elems rest_elems), (~ Permutation rest_elems cons_elems), (~ Permutation rest_elems e2), (~ Permutation cons_elems e1)
+(~ Permutation cons_elems rest_elems), (~ Permutation cons_elems cons_elems), (~ Permutation cons_elems e2), (~ Permutation e2 e1), (~ Permutation e2 rest_elems), (~ Permutation e2 cons_elems), (~ Permutation e2 e2), (e1 <> e1), (e1 <> rest_elems), (e1 <> cons_elems)
+(e1 <> e2), (rest_elems <> e1), (rest_elems <> rest_elems), (rest_elems <> cons_elems), (rest_elems <> e2), (cons_elems <> e1), (cons_elems <> rest_elems), (cons_elems <> cons_elems), (cons_elems <> e2), (e2 <> e1)
+(e2 <> rest_elems), (e2 <> cons_elems), (e2 <> e2), (None = Some e1), (None = Some rest_elems), (None = Some cons_elems), (None = Some e2), (e1 ++ e1 = e1), (e1 ++ e1 = rest_elems), (e1 ++ e1 = cons_elems)
+(e1 ++ e1 = e2), (e1 ++ rest_elems = e1), (e1 ++ rest_elems = rest_elems), (e1 ++ rest_elems = cons_elems), (e1 ++ rest_elems = e2), (e1 ++ cons_elems = e1), (e1 ++ cons_elems = rest_elems), (e1 ++ cons_elems = cons_elems), (e1 ++ cons_elems = e2), (e1 ++ e2 = e1)
+(e1 ++ e2 = rest_elems), (e1 ++ e2 = cons_elems), (e1 ++ e2 = e2), (rest_elems ++ e1 = e1), (rest_elems ++ e1 = rest_elems), (rest_elems ++ e1 = cons_elems), (rest_elems ++ e1 = e2), (rest_elems ++ rest_elems = e1), (rest_elems ++ rest_elems = rest_elems), (rest_elems ++ rest_elems = cons_elems)
+(rest_elems ++ rest_elems = e2), (rest_elems ++ cons_elems = e1), (rest_elems ++ cons_elems = rest_elems), (rest_elems ++ cons_elems = cons_elems), (rest_elems ++ cons_elems = e2), (rest_elems ++ e2 = e1), (rest_elems ++ e2 = rest_elems), (rest_elems ++ e2 = cons_elems), (rest_elems ++ e2 = e2), (cons_elems ++ e1 = e1)
+(cons_elems ++ e1 = rest_elems), (cons_elems ++ e1 = cons_elems), (cons_elems ++ e1 = e2), (cons_elems ++ rest_elems = e1), (cons_elems ++ rest_elems = rest_elems), (cons_elems ++ rest_elems = cons_elems), (cons_elems ++ rest_elems = e2), (cons_elems ++ cons_elems = e1), (cons_elems ++ cons_elems = rest_elems), (cons_elems ++ cons_elems = cons_elems)
+(cons_elems ++ cons_elems = e2), (cons_elems ++ e2 = e1), (cons_elems ++ e2 = rest_elems), (cons_elems ++ e2 = cons_elems), (cons_elems ++ e2 = e2), (e2 ++ e1 = e1), (e2 ++ e1 = rest_elems), (e2 ++ e1 = cons_elems), (e2 ++ e1 = e2), (e2 ++ rest_elems = e1)
+(e2 ++ rest_elems = rest_elems), (e2 ++ rest_elems = cons_elems), (e2 ++ rest_elems = e2), (e2 ++ cons_elems = e1), (e2 ++ cons_elems = rest_elems), (e2 ++ cons_elems = cons_elems), (e2 ++ cons_elems = e2), (e2 ++ e2 = e1), (e2 ++ e2 = rest_elems), (e2 ++ e2 = cons_elems)
+(e2 ++ e2 = e2), ([] = e1), ([] = rest_elems), ([] = cons_elems), ([] = e2), ([] = e1 ++ e1), ([] = e1 ++ rest_elems), ([] = e1 ++ cons_elems), ([] = e1 ++ e2), ([] = rest_elems ++ e1)
+([] = rest_elems ++ rest_elems), ([] = rest_elems ++ cons_elems), ([] = rest_elems ++ e2), ([] = cons_elems ++ e1), ([] = cons_elems ++ rest_elems), ([] = cons_elems ++ cons_elems), ([] = cons_elems ++ e2), ([] = e2 ++ e1), ([] = e2 ++ rest_elems), ([] = e2 ++ cons_elems)
+([] = e2 ++ e2)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 68.208 seconds
+
+
+Label: 0 (0)
+(Permutation e1 (rest_elems ++ cons_elems)), (Permutation e1 (cons_elems ++ rest_elems)), (Permutation (rest_elems ++ cons_elems) e1), (Permutation (cons_elems ++ rest_elems) e1)
+
+Label: 1 (1)
+(Permutation e1 e2), (Permutation e2 e1), (Permutation (e1 ++ e1) (e1 ++ e2)), (Permutation (e1 ++ e1) (e2 ++ e1)), (Permutation (e1 ++ e1) (e2 ++ e2)), (Permutation (e1 ++ e2) (e1 ++ e1)), (Permutation (e1 ++ e2) (e2 ++ e2)), (Permutation (e2 ++ e1) (e1 ++ e1)), (Permutation (e2 ++ e1) (e2 ++ e2)), (Permutation (e2 ++ e2) (e1 ++ e1))
+(Permutation (e2 ++ e2) (e1 ++ e2)), (Permutation (e2 ++ e2) (e2 ++ e1)), (Permutation (e1 ++ rest_elems) (rest_elems ++ e2)), (Permutation (e1 ++ rest_elems) (e2 ++ rest_elems)), (Permutation (e1 ++ cons_elems) (cons_elems ++ e2)), (Permutation (e1 ++ cons_elems) (e2 ++ cons_elems)), (Permutation (rest_elems ++ e1) (rest_elems ++ e2)), (Permutation (rest_elems ++ e1) (e2 ++ rest_elems)), (Permutation (rest_elems ++ e2) (e1 ++ rest_elems)), (Permutation (rest_elems ++ e2) (rest_elems ++ e1))
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (Permutation e1 e2 -> Permutation e1 gv0 -> Permutation e2 gv0)
+
+2. (Permutation e1 (cons_elems ++ rest_elems) ->  Permutation e1 e2 -> Permutation e2 (cons_elems ++ rest_elems))
+
+3. (Permutation e1 (cons_elems ++ rest_elems) ->  Permutation (rest_elems ++ cons_elems) e1)
+(Permutation (rest_elems ++ cons_elems) e1 ->  Permutation e1 e2 -> Permutation e2 (cons_elems ++ rest_elems))
+
+4. (Permutation e1 (cons_elems ++ rest_elems) ->  Permutation e1 (rest_elems ++ cons_elems))
+(Permutation e1 e2 ->  Permutation e1 (rest_elems ++ cons_elems) ->  Permutation e2 (cons_elems ++ rest_elems))
+
+5. (Permutation e1 e2 -> Permutation (e1 ++ cons_elems) (e2 ++ cons_elems))
+(Permutation (e1 ++ cons_elems) (e2 ++ cons_elems) ->  Permutation e1 (cons_elems ++ rest_elems) ->  Permutation e2 (cons_elems ++ rest_elems))
+
+6. (Permutation e1 e2 -> Permutation (e2 ++ e1) (e1 ++ e1))
+(Permutation (e2 ++ e1) (e1 ++ e1) ->  Permutation e1 (cons_elems ++ rest_elems) ->  Permutation e2 (cons_elems ++ rest_elems))
+
+7. (Permutation e1 e2 -> Permutation (e1 ++ e2) (e1 ++ e1))
+(Permutation (e1 ++ e2) (e1 ++ e1) ->  Permutation e1 (cons_elems ++ rest_elems) ->  Permutation e2 (cons_elems ++ rest_elems))
+
+8. (Permutation e1 e2 -> Permutation (e2 ++ e2) (e1 ++ e1))
+(Permutation (e2 ++ e2) (e1 ++ e1) ->  Permutation e1 (cons_elems ++ rest_elems) ->  Permutation e2 (cons_elems ++ rest_elems))
+
+9. (Permutation e1 e2 -> Permutation (e1 ++ e1) (e2 ++ e1))
+(Permutation (e1 ++ e1) (e2 ++ e1) ->  Permutation e1 (cons_elems ++ rest_elems) ->  Permutation e2 (cons_elems ++ rest_elems))
+
+10. (Permutation e1 e2 -> Permutation (e2 ++ e2) (e2 ++ e1))
+(Permutation (e2 ++ e2) (e2 ++ e1) ->  Permutation e1 (cons_elems ++ rest_elems) ->  Permutation e2 (cons_elems ++ rest_elems))
+
+11. (Permutation e1 e2 -> Permutation (rest_elems ++ e2) (rest_elems ++ e1))
+(Permutation (rest_elems ++ e2) (rest_elems ++ e1) ->  Permutation e1 (cons_elems ++ rest_elems) ->  Permutation e2 (cons_elems ++ rest_elems))
+
+12. (Permutation e1 e2 -> Permutation (e1 ++ cons_elems) (cons_elems ++ e2))
+(Permutation (e1 ++ cons_elems) (cons_elems ++ e2) ->  Permutation e1 (cons_elems ++ rest_elems) ->  Permutation e2 (cons_elems ++ rest_elems))
+
+13. (Permutation e1 e2 -> Permutation (e1 ++ e1) (e1 ++ e2))
+(Permutation (e1 ++ e1) (e1 ++ e2) ->  Permutation e1 (cons_elems ++ rest_elems) ->  Permutation e2 (cons_elems ++ rest_elems))
+
+14. (Permutation e1 e2 -> Permutation (e2 ++ e2) (e1 ++ e2))
+(Permutation (e2 ++ e2) (e1 ++ e2) ->  Permutation e1 (cons_elems ++ rest_elems) ->  Permutation e2 (cons_elems ++ rest_elems))
+
+15. (Permutation e1 e2 -> Permutation (e1 ++ e1) (e2 ++ e2))
+(Permutation (e1 ++ e1) (e2 ++ e2) ->  Permutation e1 (cons_elems ++ rest_elems) ->  Permutation e2 (cons_elems ++ rest_elems))
+
+16. (Permutation e1 e2 -> Permutation (e2 ++ e1) (e2 ++ e2))
+(Permutation (e2 ++ e1) (e2 ++ e2) ->  Permutation e1 (cons_elems ++ rest_elems) ->  Permutation e2 (cons_elems ++ rest_elems))
+
+17. (Permutation e1 e2 -> Permutation (e1 ++ e2) (e2 ++ e2))
+(Permutation (e1 ++ e2) (e2 ++ e2) ->  Permutation e1 (cons_elems ++ rest_elems) ->  Permutation e2 (cons_elems ++ rest_elems))
+
+18. (Permutation e1 e2 -> Permutation (rest_elems ++ e1) (rest_elems ++ e2))
+(Permutation (rest_elems ++ e1) (rest_elems ++ e2) ->  Permutation e1 (cons_elems ++ rest_elems) ->  Permutation e2 (cons_elems ++ rest_elems))
+
+19. (Permutation e1 e2 -> Permutation (e1 ++ rest_elems) (rest_elems ++ e2))
+(Permutation (e1 ++ rest_elems) (rest_elems ++ e2) ->  Permutation e1 (cons_elems ++ rest_elems) ->  Permutation e2 (cons_elems ++ rest_elems))
+
+20. (Permutation e1 e2 -> Permutation (rest_elems ++ e2) (e1 ++ rest_elems))
+(Permutation e1 (cons_elems ++ rest_elems) ->  Permutation (rest_elems ++ e2) (e1 ++ rest_elems) ->  Permutation e2 (cons_elems ++ rest_elems))
+
+21. (Permutation e1 e2 -> Permutation (rest_elems ++ e1) (e2 ++ rest_elems))
+(Permutation e1 (cons_elems ++ rest_elems) ->  Permutation (rest_elems ++ e1) (e2 ++ rest_elems) ->  Permutation e2 (cons_elems ++ rest_elems))
+
+22. (Permutation e1 e2 -> Permutation (e1 ++ rest_elems) (e2 ++ rest_elems))
+(Permutation e1 (cons_elems ++ rest_elems) ->  Permutation (e1 ++ rest_elems) (e2 ++ rest_elems) ->  Permutation e2 (cons_elems ++ rest_elems))
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 113.162 seconds
+
+Number of Result Pairs Returned: 22
+
+1. (Permutation e1 e2 -> Permutation e1 gv0 -> Permutation e2 gv0)
+
+2. (Permutation e1 (cons_elems ++ rest_elems) ->  Permutation e1 e2 -> Permutation e2 (cons_elems ++ rest_elems))
+
+3. (Permutation e1 (cons_elems ++ rest_elems) ->  Permutation (rest_elems ++ cons_elems) e1)
+(Permutation (rest_elems ++ cons_elems) e1 ->  Permutation e1 e2 -> Permutation e2 (cons_elems ++ rest_elems))
+
+4. (Permutation e1 (cons_elems ++ rest_elems) ->  Permutation e1 (rest_elems ++ cons_elems))
+(Permutation e1 e2 ->  Permutation e1 (rest_elems ++ cons_elems) ->  Permutation e2 (cons_elems ++ rest_elems))
+
+5. (Permutation e1 e2 -> Permutation (e1 ++ cons_elems) (e2 ++ cons_elems))
+(Permutation (e1 ++ cons_elems) (e2 ++ cons_elems) ->  Permutation e1 (cons_elems ++ rest_elems) ->  Permutation e2 (cons_elems ++ rest_elems))

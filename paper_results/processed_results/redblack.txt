@@ -1,0 +1,579 @@
+[TOTAL] 32
+
+[SUCCESS] 10
+    [SUCCESS][1][AS IS] 9
+    [SUCCESS][1][GENERALIZE] 1
+
+[FAIL] 22
+    [FAIL][FORWARD] 4
+    [FAIL][IMPLEMENTATION] 10
+    [FAIL][IMPLEMENTATION][RANK] 1
+    [ATOMIC][FAIL][RESOURCE] 2
+    [FAIL][RESOURCE] 4
+    [FAIL][BEYOND SCOPE] 1
+
+[ATOMIC - EQUAL] 2
+[ATOMIC - OTHER] 0
+-----------------------------------------------
+
+[SUCCESS][1][AS IS]
+Test = lookup_ins_eq_by_ins_BST_2
+[TIME] 129.583
+[COUNTS] 6
+[TARGET] BST t -> BST (ins k v t)
+
+1. (BST r -> BST (ins k v r))
+
+2. (BST r -> BST (make_black r))
+(BST (make_black r) -> BST (ins k v r))
+
+3. (BST r -> BST (insert k v r))
+(BST (insert k v r) -> BST (ins k v r))
+
+4. (BST (make_black gv0) -> BST gv0)
+
+5. (BST (ins k v gv0) -> BST gv0)
+
+
+
+[FAIL][FORWARD]
+Test = ins_BST_by_balance_BST_2
+[TIME] 496.186
+[COUNTS] 32
+[TARGET] ForallT (fun k' _ => k' < k) l -> ForallT (fun k' _ => k' > k) r -> BST l -> BST r -> BST (balance c l k v r)
+
+1. (BST l ->  BST r ->  ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  k0 < k -> BST (balance c l k0 v0 (ins k v r)))
+
+2. (k0 < k -> ~ k <= k0)
+(ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  ~ k <= k0 -> BST l -> BST r -> BST (balance c l k0 v0 (ins k v r)))
+
+3. (BST r -> BST (make_black r))
+(ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  k0 < k -> BST l -> BST (make_black r) -> BST (balance c l k0 v0 (ins k v r)))
+
+4. (BST l -> BST (make_black l))
+(ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  k0 < k -> BST r -> BST (make_black l) -> BST (balance c l k0 v0 (ins k v r)))
+
+5. (BST r -> BST (ins k v r))
+(ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  k0 < k -> BST l -> BST (ins k v r) -> BST (balance c l k0 v0 (ins k v r)))
+
+
+
+[FAIL][FORWARD]
+Test = lookup_ins_neq_by_balance_lookup_1
+[TIME] 1293.951
+[COUNTS] 40
+[TARGET] BST l -> BST r -> ForallT (fun k' _ => k' < k) l -> ForallT (fun k' _ => k' > k) r -> lookup default k' (balance c l k v r) = if k' <? k then lookup default k' l else if k <? k' then lookup default k' r else v
+
+1. (k <> k' -> k' <> k)
+(ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  k' <> k ->  BST l ->  BST r ->  lookup default k' (balance c (ins k v l) k0 v0 r) =  (if k' <? k0   then lookup default k' l   else if k0 <? k' then lookup default k' r else v0))
+
+2. (BST l -> BST (make_black l))
+(ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  k <> k' ->  BST r ->  BST (make_black l) ->  lookup default k' (balance c (ins k v l) k0 v0 r) =  (if k' <? k0   then lookup default k' l   else if k0 <? k' then lookup default k' r else v0))
+
+3. (BST r -> BST (ins k default r))
+(ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  k <> k' ->  BST l ->  BST (ins k default r) ->  lookup default k' (balance c (ins k v l) k0 v0 r) =  (if k' <? k0   then lookup default k' l   else if k0 <? k' then lookup default k' r else v0))
+
+4. (BST r -> BST (ins k' v r))
+(ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  k <> k' ->  BST l ->  BST (ins k' v r) ->  lookup default k' (balance c (ins k v l) k0 v0 r) =  (if k' <? k0   then lookup default k' l   else if k0 <? k' then lookup default k' r else v0))
+
+5. (BST r -> BST (ins k0 v0 r))
+(ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  k <> k' ->  BST l ->  BST (ins k0 v0 r) ->  lookup default k' (balance c (ins k v l) k0 v0 r) =  (if k' <? k0   then lookup default k' l   else if k0 <? k' then lookup default k' r else v0))
+
+
+
+[FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = lookup_ins_neq_by_insP_1
+[TIME] 158.543
+[COUNTS] 3
+[TARGET] ForallT P t -> P k v -> ForallT P (ins k v t)
+
+1. (k < k0 ->  ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  ForallT (fun (k' : nat) (_ : value) => k' < k0) (ins k v l))
+
+2. (k < k0 -> ~ k0 <= k)
+(ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  ~ k0 <= k -> ForallT (fun (k' : nat) (_ : value) => k' < k0) (ins k v l))
+
+3. (ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  k < k0 ->  make_black gv0 = insert k v l ->  ForallT (fun (k' : nat) (_ : value) => k' < k0) gv0)
+
+
+
+[SUCCESS][1][GENERALIZE]
+Test = insert_BST_by_ins_BST
+[TIME] 208.165
+[COUNTS] 14
+[TARGET] BST t -> BST (ins k v t)
+
+1. (BST gv1 -> BST (ins k v gv1))
+
+2. (BST (T c t1 n v0 t2) -> BST (ins k v (T c t1 n v0 t2)))
+
+3. (BST (T c t1 n v0 t2) -> BST (balance c t1 n v t2))
+(BST (balance c t1 n v t2) -> BST (ins k v (T c t1 n v0 t2)))
+
+4. (BST (T c t1 n v0 t2) -> BST (balance c t1 n v0 t2))
+(BST (balance c t1 n v0 t2) -> BST (ins k v (T c t1 n v0 t2)))
+
+5. (BST (T c t1 n v0 t2) -> BST (T c t1 n v t2))
+(BST (T c t1 n v t2) -> BST (ins k v (T c t1 n v0 t2)))
+
+
+
+[SUCCESS][1][AS IS]
+Test = lookup_ins_neq_by_ins_BST_2
+[TIME] 133.259
+[COUNTS] 6
+[TARGET] BST t -> BST (ins k v t)
+
+1. (BST r -> BST (ins k v r))
+
+2. (BST r -> BST (make_black r))
+(BST (make_black r) -> BST (ins k v r))
+
+3. (BST r -> BST (insert k v r))
+(BST (insert k v r) -> BST (ins k v r))
+
+4. (BST (make_black gv0) -> BST gv0)
+
+5. (BST (ins k v gv0) -> BST gv0)
+
+
+
+[FAIL][RESOURCE]
+Test = lookup_insert_neq_by_lookup_ins_eq
+[TIME] 136.775
+[COUNTS] 11
+[TARGET] BST t -> lookup default k (ins k v t) = v
+
+1. (k <> k' -> BST t -> lookup default k' (ins k v t) = lookup default k' t)
+
+2. (k <> k' -> k' <> k)
+(k' <> k -> BST t -> lookup default k' (ins k v t) = lookup default k' t)
+
+3. (BST t -> BST (make_black t))
+(k <> k' ->  BST (make_black t) -> lookup default k' (ins k v t) = lookup default k' t)
+
+4. (BST t -> BST (ins k default t))
+(k <> k' ->  BST (ins k default t) -> lookup default k' (ins k v t) = lookup default k' t)
+
+5. (BST t -> BST (ins k' default t))
+(k <> k' ->  BST (ins k' default t) ->  lookup default k' (ins k v t) = lookup default k' t)
+
+
+
+[SUCCESS][1][AS IS]
+Test = RB_blacken_root_by_RB_blacken_parent_2
+[TIME] 73.739
+[COUNTS] 2
+[TARGET] RB t Red n -> RB t Black n
+
+1. (RB r Red n -> RB r gv0 n)
+
+2. (RB r Red n -> RB r Black n)
+
+
+
+[FAIL][FORWARD]
+Test = ForallT_less_by_ForallT_imp
+[TIME] 63.419
+[COUNTS] 4
+[TARGET] ForallT P t -> (forall k v, P k v -> Q k v) -> ForallT Q t
+
+1. (ForallT (fun (k' : nat) (_ : value) => k' < k) t ->  k < k0 -> ForallT (fun (k' : nat) (_ : value) => k' < k0) t)
+
+2. (k < k0 -> k <= k0)
+(ForallT (fun (k' : nat) (_ : value) => k' < k) t ->  k <= k0 -> ForallT (fun (k' : nat) (_ : value) => k' < k0) t)
+
+3. (k < k0 -> ~ k0 < k)
+(ForallT (fun (k' : nat) (_ : value) => k' < k) t ->  ~ k0 < k -> ForallT (fun (k' : nat) (_ : value) => k' < k0) t)
+
+4. (k < k0 -> ~ k0 <= k)
+(ForallT (fun (k' : nat) (_ : value) => k' < k) t ->  ~ k0 <= k -> ForallT (fun (k' : nat) (_ : value) => k' < k0) t)
+
+
+
+[FAIL][IMPLEMENTATION][FUNC]
+Test = lookup_ins_neq_by_insP_2
+[TIME] 169.601
+[COUNTS] 3
+[TARGET] ForallT P t -> P k v -> ForallT P (ins k v t)
+
+1. (k0 < k ->  ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  ForallT (fun (k' : nat) (_ : value) => k' > k0) (ins k v r))
+
+2. (k0 < k -> ~ k <= k0)
+(ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  ~ k <= k0 -> ForallT (fun (k' : nat) (_ : value) => k' > k0) (ins k v r))
+
+3. (ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  k0 < k ->  make_black gv0 = insert k v r ->  ForallT (fun (k' : nat) (_ : value) => k' > k0) gv0)
+
+
+
+[FAIL][RESOURCE]
+Test = lookup_ins_neq_by_balance_lookup_2
+[TIME] 1143.743
+[COUNTS] 9
+[TARGET] BST l -> BST r -> ForallT (fun k' _ => k' < k) l -> ForallT (fun k' _ => k' > k) r -> lookup default k' (balance c l k v r) = if k' <? k then lookup default k' l else if k <? k' then lookup default k' r else v
+
+1. (ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  k0 < k ->  ins k v gv2 = gv2 ->  lookup default k' gv2 = lookup default k' r ->  lookup default k' (balance c l k0 v0 gv2) =  (if k' <? k0   then lookup default k' l   else if k0 <? k' then lookup default k' r else v0))
+
+2. (ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  k0 < k ->  lookup v0 k gv2 = v ->  lookup default k' gv2 = lookup default k' r ->  lookup default k' (balance c l k0 v0 gv2) =  (if k' <? k0   then lookup default k' l   else if k0 <? k' then lookup default k' r else v0))
+
+3. (ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  k0 < k ->  lookup default k gv2 = v ->  lookup default k' gv2 = lookup default k' r ->  lookup default k' (balance c l k0 v0 gv2) =  (if k' <? k0   then lookup default k' l   else if k0 <? k' then lookup default k' r else v0))
+
+4. (ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  k0 < k ->  make_black gv2 = insert k v r ->  lookup default k' gv2 = lookup default k' r ->  lookup default k' (balance c l k0 v0 gv2) =  (if k' <? k0   then lookup default k' l   else if k0 <? k' then lookup default k' r else v0))
+
+5. (ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  k0 < k ->  make_black gv2 = insert k v gv2 ->  lookup default k' gv2 = lookup default k' r ->  lookup default k' (balance c l k0 v0 gv2) =  (if k' <? k0   then lookup default k' l   else if k0 <? k' then lookup default k' r else v0))
+
+
+
+[FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = ins_BST_by_balance_BST_1
+[TIME] 392.738
+[COUNTS] 32
+[TARGET] ForallT (fun k' _ => k' < k) l -> ForallT (fun k' _ => k' > k) r -> BST l -> BST r -> BST (balance c l k v r)
+
+1. (k < k0 ->  ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  BST r ->  ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  BST l -> BST (balance c (ins k v l) k0 v0 r))
+
+2. (BST l -> BST (make_black l))
+(ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  k < k0 -> BST r -> BST (make_black l) -> BST (balance c (ins k v l) k0 v0 r))
+
+3. (BST r -> BST (make_black r))
+(ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  k < k0 -> BST l -> BST (make_black r) -> BST (balance c (ins k v l) k0 v0 r))
+
+4. (k < k0 -> ~ k0 <= k)
+(ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  ~ k0 <= k -> BST l -> BST r -> BST (balance c (ins k v l) k0 v0 r))
+
+5. (BST l -> BST (ins k v l))
+(ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  k < k0 -> BST r -> BST (ins k v l) -> BST (balance c (ins k v l) k0 v0 r))
+
+
+
+[SUCCESS][1][AS IS]
+Test = lookup_insert_eq_by_lookup_ins_eq
+[TIME] 119.739
+[COUNTS] 8
+[TARGET] BST t -> lookup default k (ins k v t) = v
+
+1. (BST t -> lookup default k (ins k v t) = v)
+
+2. (BST t -> BST (make_black t))
+(BST (make_black t) -> lookup default k (ins k v t) = v)
+
+3. (BST t -> BST (ins k default t))
+(BST (ins k default t) -> lookup default k (ins k v t) = v)
+
+4. (BST t -> BST (ins k v t))
+(BST (ins k v t) -> lookup default k (ins k v t) = v)
+
+5. (BST t -> BST (insert k default t))
+(BST (insert k default t) -> lookup default k (ins k v t) = v)
+
+
+
+[FAIL][BEYOND SCOPE]
+Test = insert_RB_by_RB_blacken_root
+[TIME] -1
+[COUNTS] 0
+[TARGET] RB t Black n -> exists (n' : nat), RB (make_black t) Red n'
+
+RESULTS NOT FOUND
+
+
+
+[SUCCESS][1][AS IS]
+Test = lookup_ins_eq_by_ins_BST_1
+[TIME] 126.611
+[COUNTS] 6
+[TARGET] BST t -> BST (ins k v t)
+
+1. (BST l -> BST (ins k v l))
+
+2. (BST l -> BST (make_black l))
+(BST (make_black l) -> BST (ins k v l))
+
+3. (BST l -> BST (insert k v l))
+(BST (insert k v l) -> BST (ins k v l))
+
+4. (BST (make_black gv0) -> BST gv0)
+
+5. (BST (ins k v gv0) -> BST gv0)
+
+
+
+[SUCCESS][1][AS IS]
+Test = insert_RB_by_ins_red
+[TIME] 94.09
+[COUNTS] 1
+[TARGET] RB t Red n -> RB (ins k v t) Black n
+
+1. (RB t Red n -> RB (ins k v t) Black n)
+
+
+
+[FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = elementsP_by_elements_trP
+[TIME] 89.884
+[COUNTS] 10
+[TARGET] ForallT P t -> Forall (uncurry P) l -> Forall (uncurry P) (elements_tr t l)
+
+1. (ForallT (fun (x : nat) (_ : value) => 2 < x) t ->  Forall (uncurry (fun (x : nat) (_ : value) => 2 < x)) (elements_tr t []))
+
+2. (elements t = elements_tr t [])
+
+3. (ForallT (fun (x : nat) (_ : value) => 2 < x) t ->  RB E Red (length gv1) ->  Forall (uncurry (fun (x : nat) (_ : value) => 2 < x)) (elements_tr t gv1))
+
+4. (ForallT (fun (x : nat) (_ : value) => 2 < x) t ->  RB E Black (length gv1) ->  Forall (uncurry (fun (x : nat) (_ : value) => 2 < x)) (elements_tr t gv1))
+
+5. (ForallT (fun (x : nat) (_ : value) => 2 < x) t ->  RB empty_tree Red (length gv1) ->  Forall (uncurry (fun (x : nat) (_ : value) => 2 < x)) (elements_tr t gv1))
+
+
+
+[SUCCESS][1][AS IS]
+Test = lookup_ins_neq_by_ins_BST_1
+[TIME] 130.164
+[COUNTS] 6
+[TARGET] BST t -> BST (ins k v t)
+
+1. (BST l -> BST (ins k v l))
+
+2. (BST l -> BST (make_black l))
+(BST (make_black l) -> BST (ins k v l))
+
+3. (BST l -> BST (insert k v l))
+(BST (insert k v l) -> BST (ins k v l))
+
+4. (BST (make_black gv0) -> BST gv0)
+
+5. (BST (ins k v gv0) -> BST gv0)
+
+
+
+[SUCCESS][1][AS IS]
+Test = RB_blacken_root_by_RB_blacken_parent_1
+[TIME] 74.684
+[COUNTS] 2
+[TARGET] RB t Red n -> RB t Black n
+
+1. (RB l Red n -> RB l gv0 n)
+
+2. (RB l Red n -> RB l Black n)
+
+
+
+[FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = ins_BST_by_insP_1
+[TIME] 147.045
+[COUNTS] 3
+[TARGET] ForallT P t -> P k v -> ForallT P (ins k v t)
+
+1. (k < k0 ->  ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  ForallT (fun (k' : nat) (_ : value) => k' < k0) (ins k v l))
+
+2. (k < k0 -> ~ k0 <= k)
+(ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  ~ k0 <= k -> ForallT (fun (k' : nat) (_ : value) => k' < k0) (ins k v l))
+
+3. (ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  k < k0 ->  make_black gv0 = insert k v l ->  ForallT (fun (k' : nat) (_ : value) => k' < k0) gv0)
+
+
+
+[FAIL][FORWARD]
+Test = ForallT_greater_by_ForallT_imp
+[TIME] 67.198
+[COUNTS] 4
+[TARGET] ForallT P t -> (forall k v, P k v -> Q k v) -> ForallT Q t
+
+1. (ForallT (fun (k' : nat) (_ : value) => k' > k) t ->  k > k0 -> ForallT (fun (k' : nat) (_ : value) => k' > k0) t)
+
+2. (k > k0 -> k0 <= k)
+(ForallT (fun (k' : nat) (_ : value) => k' > k) t ->  k0 <= k -> ForallT (fun (k' : nat) (_ : value) => k' > k0) t)
+
+3. (k > k0 -> ~ k < k0)
+(ForallT (fun (k' : nat) (_ : value) => k' > k) t ->  ~ k < k0 -> ForallT (fun (k' : nat) (_ : value) => k' > k0) t)
+
+4. (k > k0 -> ~ k <= k0)
+(ForallT (fun (k' : nat) (_ : value) => k' > k) t ->  ~ k <= k0 -> ForallT (fun (k' : nat) (_ : value) => k' > k0) t)
+
+
+
+[FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = lookup_ins_eq_by_insP_1
+[TIME] 148.447
+[COUNTS] 3
+[TARGET] ForallT P t -> P k v -> ForallT P (ins k v t)
+
+1. (k < k0 ->  ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  ForallT (fun (k' : nat) (_ : value) => k' < k0) (ins k v l))
+
+2. (k < k0 -> ~ k0 <= k)
+(ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  ~ k0 <= k -> ForallT (fun (k' : nat) (_ : value) => k' < k0) (ins k v l))
+
+3. (ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  k < k0 ->  make_black gv0 = insert k v l ->  ForallT (fun (k' : nat) (_ : value) => k' < k0) gv0)
+
+
+
+[FAIL][IMPLEMENTATION][RANK]
+Test = insert_BST_by_make_black_BST
+[TIME] 240.596
+[COUNTS] 24
+[TARGET] BST t -> BST (make_black t)
+
+1. (BST gv2 -> BST (make_black (ins k v gv2)))
+
+2. (BST (T c t1 n v0 t2) -> BST (make_black (ins k v (T c t1 n v0 t2))))
+
+3. (insert k v gv2 = make_black (ins k v gv2))
+
+4. (BST (T c t1 n v0 t2) -> BST (balance c t1 n v t2))
+(BST (balance c t1 n v t2) -> BST (make_black (ins k v (T c t1 n v0 t2))))
+
+5. (BST (T c t1 n v0 t2) -> BST (balance c t1 n v0 t2))
+(BST (balance c t1 n v0 t2) -> BST (make_black (ins k v (T c t1 n v0 t2))))
+
+
+
+[FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = insP_by_balanceP_1
+[TIME] 480.309
+[COUNTS] 2
+[TARGET] ForallT P l -> ForallT P r -> P k v -> ForallT P (balance c l k v r)
+
+1. ((ForallT (fun (x : nat) (_ : value) => 0 < x) t1 ->   ForallT (fun (x : nat) (_ : value) => 0 < x) gv1) ->  0 < n ->  ForallT (fun (x : nat) (_ : value) => 0 < x) t1 ->  ForallT (fun (x : nat) (_ : value) => 0 < x) t2 ->  ForallT (fun (x : nat) (_ : value) => 0 < x) (balance c gv1 n v0 t2))
+
+2. (ForallT (fun (x : nat) (_ : value) => 0 < x) t2 ->  ForallT (fun (x : nat) (_ : value) => 0 < x) t1 ->  0 < n ->  (fun (x : nat) (_ : value) => 0 < x) k v ->  ForallT (fun (x : nat) (_ : value) => 0 < x)    (balance c (ins k v t1) n v0 t2))
+
+
+
+[FAIL][RESOURCE]
+Test = lookup_ins_eq_by_balance_lookup_2
+[TIME] 474.338
+[COUNTS] 22
+[TARGET] BST l -> BST r -> ForallT (fun k' _ => k' < k) l -> ForallT (fun k' _ => k' > k) r -> lookup default k' (balance c l k v r) = if k' <? k then lookup default k' l else if k <? k' then lookup default k' r else v
+
+1. (BST r ->  ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  k0 < k -> lookup default k (balance c l k0 v0 (ins k v r)) = v)
+
+2. (k0 < k -> ~ k <= k0)
+(ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  ~ k <= k0 -> BST r -> lookup default k (balance c l k0 v0 (ins k v r)) = v)
+
+3. (BST r -> BST (make_black r))
+(ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  k0 < k ->  BST (make_black r) -> lookup default k (balance c l k0 v0 (ins k v r)) = v)
+
+4. (BST r -> BST (ins k default r))
+(ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  k0 < k ->  BST (ins k default r) ->  lookup default k (balance c l k0 v0 (ins k v r)) = v)
+
+5. (BST r -> BST (ins k0 default r))
+(ForallT (fun (k' : nat) (_ : value) => k' < k0) l ->  k0 < k ->  BST (ins k0 default r) ->  lookup default k (balance c l k0 v0 (ins k v r)) = v)
+
+
+[**]
+[ATOMIC][FAIL][RESOURCE]
+Test = lookup_insert_neq_by_lookup_make_black
+[TIME] 144.578
+[COUNTS] 12
+[TARGET] lookup default k (make_black t) = lookup default k t
+
+1. (k <> k' ->  BST t -> lookup default k' (make_black (ins k v t)) = lookup default k' t)
+
+2. (insert k v t = make_black (ins k v t))
+
+3. (k <> k' -> k' <> k)
+(k' <> k ->  BST t -> lookup default k' (make_black (ins k v t)) = lookup default k' t)
+
+4. (BST t -> BST (make_black t))
+(k <> k' ->  BST (make_black t) ->  lookup default k' (make_black (ins k v t)) = lookup default k' t)
+
+5. (BST t -> BST (ins k default t))
+(k <> k' ->  BST (ins k default t) ->  lookup default k' (make_black (ins k v t)) = lookup default k' t)
+
+
+
+[SUCCESS][1][AS IS]
+Test = ins_red_by_ins_RB
+[TIME] 108.716
+[COUNTS] 3
+[TARGET] RB t Red n -> RB (ins k v t) Black n
+
+1. (RB t Red n -> RB (ins k v t) Black n)
+
+
+
+[FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = lookup_ins_eq_by_insP_2
+[TIME] 158.126
+[COUNTS] 3
+[TARGET] ForallT P t -> P k v -> ForallT P (ins k v t)
+
+1. (ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  k0 < k -> ForallT (fun (k' : nat) (_ : value) => k' > k0) (ins k v r))
+
+2. (k0 < k -> ~ k <= k0)
+(ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  ~ k <= k0 -> ForallT (fun (k' : nat) (_ : value) => k' > k0) (ins k v r))
+
+3. (ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  k0 < k ->  make_black gv0 = insert k v r ->  ForallT (fun (k' : nat) (_ : value) => k' > k0) gv0)
+
+
+
+[FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = ins_BST_by_insP_2
+[TIME] 157.637
+[COUNTS] 3
+[TARGET] ForallT P t -> P k v -> ForallT P (ins k v t)
+
+1. (ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  k0 < k -> ForallT (fun (k' : nat) (_ : value) => k' > k0) (ins k v r))
+
+2. (k0 < k -> ~ k <= k0)
+(ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  ~ k <= k0 -> ForallT (fun (k' : nat) (_ : value) => k' > k0) (ins k v r))
+
+3. (ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  k0 < k ->  make_black gv0 = insert k v r ->  ForallT (fun (k' : nat) (_ : value) => k' > k0) gv0)
+
+
+
+[FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = insP_by_balanceP_2
+[TIME] 474.683
+[COUNTS] 2
+[TARGET] ForallT P l -> ForallT P r -> P k v -> ForallT P (balance c l k v r)
+
+1. ((ForallT (fun (x : nat) (_ : value) => 0 < x) t2 ->   ForallT (fun (x : nat) (_ : value) => 0 < x) gv1) ->  0 < n ->  ForallT (fun (x : nat) (_ : value) => 0 < x) t1 ->  ForallT (fun (x : nat) (_ : value) => 0 < x) t2 ->  ForallT (fun (x : nat) (_ : value) => 0 < x) (balance c t1 n v0 gv1))
+
+2. (ForallT (fun (x : nat) (_ : value) => 0 < x) t2 ->  ForallT (fun (x : nat) (_ : value) => 0 < x) t1 ->  0 < n ->  (fun (x : nat) (_ : value) => 0 < x) k v ->  ForallT (fun (x : nat) (_ : value) => 0 < x)    (balance c t1 n v0 (ins k v t2)))
+
+
+
+[FAIL][RESOURCE]
+Test = lookup_ins_eq_by_balance_lookup_1
+[TIME] 489.713
+[COUNTS] 23
+[TARGET] BST l -> BST r -> ForallT (fun k' _ => k' < k) l -> ForallT (fun k' _ => k' > k) r -> lookup default k' (balance c l k v r) = if k' <? k then lookup default k' l else if k <? k' then lookup default k' r else v
+
+1. (k < k0 ->  ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  BST l -> lookup default k (balance c (ins k v l) k0 v0 r) = v)
+
+2. (BST l -> BST (make_black l))
+(ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  k < k0 ->  BST (make_black l) -> lookup default k (balance c (ins k v l) k0 v0 r) = v)
+
+3. (k < k0 -> ~ k0 <= k)
+(ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  ~ k0 <= k -> BST l -> lookup default k (balance c (ins k v l) k0 v0 r) = v)
+
+4. (BST l -> BST (ins k default l))
+(ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  k < k0 ->  BST (ins k default l) ->  lookup default k (balance c (ins k v l) k0 v0 r) = v)
+
+5. (BST l -> BST (ins k0 default l))
+(ForallT (fun (k' : nat) (_ : value) => k' > k0) r ->  k < k0 ->  BST (ins k0 default l) ->  lookup default k (balance c (ins k v l) k0 v0 r) = v)
+
+
+[**]
+[ATOMIC][FAIL][RESOURCE]
+Test = lookup_insert_eq_by_lookup_make_black
+[TIME] 128.359
+[COUNTS] 10
+[TARGET] lookup default k (make_black t) = lookup default k t
+
+1. (BST t -> lookup default k (make_black (ins k v t)) = v)
+
+2. (insert k v t = make_black (ins k v t))
+
+3. (BST t -> BST (make_black t))
+(BST (make_black t) -> lookup default k (make_black (ins k v t)) = v)
+
+4. (BST t -> BST (ins k default t))
+(BST (ins k default t) -> lookup default k (make_black (ins k v t)) = v)
+
+5. (BST t -> BST (ins k v t))
+(BST (ins k v t) -> lookup default k (make_black (ins k v t)) = v)
+
+
+
+

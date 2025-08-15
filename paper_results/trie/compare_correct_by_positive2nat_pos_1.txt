@@ -1,0 +1,192 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (forall y : positive,
+ match compare x y with
+ | Eq => positive2nat x = positive2nat y
+ | Lt => positive2nat x < positive2nat y
+ | Gt => positive2nat x > positive2nat y
+ end)
+
+----------------------------------
+Goal: (positive2nat x > 0)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 2.068 seconds
+
+gv0 : nat = (positive2nat x)
+gv1 : nat = 0
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 13.829 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (positive2nat x > 0)
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (0 = gv1)
+
+----------------------------------
+Goal: (positive2nat x > gv1)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (positive2nat x = gv0)
+
+----------------------------------
+Goal: (gv0 > 0)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 13.973 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+In : (forall A : Type, A -> list A -> Prop)
+existsb : (forall A : Type, (A -> bool) -> list A -> bool)
+forallb : (forall A : Type, (A -> bool) -> list A -> bool)
+Forall : (forall A : Type, (A -> Prop) -> list A -> Prop)
+nodup : (forall A : Type, (forall x y : A, {x = y} + {x <> y}) -> list A -> list A)
+map : (forall A B : Type, (A -> B) -> list A -> list B)
+Permutation : (forall A : Type, list A -> list A -> Prop)
+geb : (nat -> nat -> bool)
+gtb : (nat -> nat -> bool)
+maybe_swap : (list nat -> list nat)
+first_le_second : (list nat -> Prop)
+positive : Set
+positive_rect : (forall P : positive -> Type,
+ (forall p : positive, P p -> P p~1) ->
+ (forall p : positive, P p -> P p~0) -> P xH -> forall p : positive, P p)
+positive_rec : (forall P : positive -> Set,
+ (forall p : positive, P p -> P p~1) ->
+ (forall p : positive, P p -> P p~0) -> P xH -> forall p : positive, P p)
+positive2nat : (positive -> nat)
+succ : (positive -> positive)
+of_succ_nat : (nat -> positive)
+nat2positive : (nat -> positive)
+print_in_binary : (positive -> list nat)
+addc : (bool -> positive -> positive -> positive)
+add : (positive -> positive -> positive)
+comparison : Set
+comparison_rect : (forall P : comparison -> Type,
+ P Eq -> P Lt -> P Gt -> forall c : comparison, P c)
+comparison_rec : (forall P : comparison -> Set,
+ P Eq -> P Lt -> P Gt -> forall c : comparison, P c)
+compare : (positive -> positive -> comparison)
+LFType : Set
+LFType_rect : (forall P : LFType -> Type,
+ P One ->
+ P Two -> P Three -> P Four -> P Five -> P Six -> forall l : LFType, P l)
+LFType_rec : (forall P : LFType -> Set,
+ P One ->
+ P Two -> P Three -> P Four -> P Five -> P Six -> forall l : LFType, P l)
+trie : Set
+trie_rect : (forall P : trie -> Type,
+ P Leaf ->
+ (forall t : trie,
+  P t -> forall (l : LFType) (t0 : trie), P t0 -> P (Node t l t0)) ->
+ forall t : trie, P t)
+trie_rec : (forall P : trie -> Set,
+ P Leaf ->
+ (forall t : trie,
+  P t -> forall (l : LFType) (t0 : trie), P t0 -> P (Node t l t0)) ->
+ forall t : trie, P t)
+trie_table : Type
+empty : (LFType -> trie_table)
+look : (LFType -> positive -> trie -> LFType)
+lookup : (positive -> trie_table -> LFType)
+ins : (LFType -> positive -> LFType -> trie -> trie)
+insert : (positive -> LFType -> trie_table -> trie_table)
+xI : (positive -> positive)
+xO : (positive -> positive)
+xH : positive
+Eq : comparison
+Lt : comparison
+Gt : comparison
+One : LFType
+Two : LFType
+Three : LFType
+Four : LFType
+Leaf : trie
+Node : (trie -> LFType -> trie -> trie)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 20
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 105
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 14.107 seconds
+
+
+Label: 0 (0)
+(gv1 < gv1), (gv1 <= gv1), (gv1 = gv1), (x = x), (false = (gv1 >? gv1)), (false = (gv1 >=? gv1)), (true = (gv1 >? gv1)), (true = (gv1 >=? gv1)), (first_le_second (print_in_binary x)), (Permutation (print_in_binary x) [])
+(Permutation [] (print_in_binary x)), (In gv1 (print_in_binary x)), (In (positive2nat x) (print_in_binary x)), (gv1 < positive2nat x), (positive2nat x < gv1), (gv1 <= positive2nat x), (positive2nat x <= gv1), (~ gv1 < gv1), (~ gv1 <= gv1), (gv1 <> gv1)
+(x <> x), (x~0 = x), (x~0 = x~1), (x~0 = add x x), (x~0 = nat2positive gv1), (x~0 = of_succ_nat gv1), (x~0 = succ x), (x~1 = x), (x~1 = add x x), (x~1 = nat2positive gv1)
+(x~1 = of_succ_nat gv1), (x~1 = succ x), (add x x = x), (nat2positive gv1 = x), (nat2positive gv1 = add x x), (of_succ_nat gv1 = x), (of_succ_nat gv1 = add x x), (of_succ_nat gv1 = nat2positive gv1), (succ x = x), (succ x = add x x)
+(succ x = nat2positive gv1), (succ x = of_succ_nat gv1), (xH = x~0), (xH = x~1), (xH = add x x), (xH = nat2positive gv1), (xH = of_succ_nat gv1), (xH = succ x), (Eq = compare x x), (Lt = compare x x)
+(Gt = compare x x), (None = Some x), (positive2nat x = gv1), ([] = print_in_binary x), (None = Some gv1), ((gv1 >? gv1) = (gv1 >=? gv1))
+
+Label: 1 (1)
+(gv0 < gv0), (gv0 <= gv0), (x = x), (gv0 = gv0), (false = (gv0 >? gv0)), (false = (gv0 >=? gv0)), (true = (gv0 >? gv0)), (true = (gv0 >=? gv0)), (first_le_second (print_in_binary x)), (Permutation (print_in_binary x) [])
+(Permutation [] (print_in_binary x)), (In gv0 (print_in_binary x)), (In (positive2nat x) (print_in_binary x)), (gv0 < positive2nat x), (positive2nat x < gv0), (gv0 <= positive2nat x), (positive2nat x <= gv0), (~ gv0 < gv0), (~ gv0 <= gv0), (x <> x)
+(gv0 <> gv0), (x~0 = x), (x~0 = x~1), (x~0 = add x x), (x~0 = nat2positive gv0), (x~0 = of_succ_nat gv0), (x~0 = succ x), (x~1 = x), (x~1 = add x x), (x~1 = nat2positive gv0)
+(x~1 = of_succ_nat gv0), (x~1 = succ x), (add x x = x), (nat2positive gv0 = x), (nat2positive gv0 = add x x), (of_succ_nat gv0 = x), (of_succ_nat gv0 = add x x), (of_succ_nat gv0 = nat2positive gv0), (succ x = x), (succ x = add x x)
+(succ x = nat2positive gv0), (succ x = of_succ_nat gv0), (xH = x~0), (xH = x~1), (xH = add x x), (xH = nat2positive gv0), (xH = of_succ_nat gv0), (xH = succ x), (Eq = compare x x), (Lt = compare x x)
+(Gt = compare x x), (None = Some x), (positive2nat x = gv0), ([] = print_in_binary x), (None = Some gv0), ((gv0 >? gv0) = (gv0 >=? gv0))
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 16.181 seconds
+
+
+Label: 0 (0)
+(gv1 < positive2nat x), (xH = of_succ_nat gv1), (of_succ_nat gv1 = nat2positive gv1)
+
+Label: 1 (1)
+(positive2nat x <= gv0), (positive2nat x = gv0), (succ x = of_succ_nat gv0)
+
+
+
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 27.545 seconds
+
+Number of Result Pairs Returned: 5
+
+1. (positive2nat x > 0)
+
+2. (positive2nat x <= gv0 -> gv0 > 0)
+
+3. (xH = of_succ_nat gv1 -> positive2nat x > gv1)
+
+4. (of_succ_nat gv1 = nat2positive gv1 -> positive2nat x > gv1)
+
+5. (succ x = of_succ_nat gv0 -> gv0 > 0)

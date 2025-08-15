@@ -1,0 +1,133 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+
+----------------------------------
+Goal: (y = append y Nil)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 1.391 seconds
+
+gv0 : lst = (append y Nil)
+gv1 : lst = Nil
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 17.359 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (y = append y Nil)
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (Nil = gv1)
+
+----------------------------------
+Goal: (y = append y gv1)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (append y Nil = gv0)
+
+----------------------------------
+Goal: (y = gv0)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 17.49 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+natural : Set
+lst : Set
+append : (lst -> lst -> lst)
+len : (lst -> natural)
+rotate : (natural -> lst -> lst)
+Succ : (natural -> natural)
+Zero : natural
+Cons : (natural -> lst -> lst)
+Nil : lst
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 17.624 seconds
+
+
+Label: 0 (0)
+(gv1 = gv1), (gv1 = y), (y = gv1), (y = y), (gv1 <> gv1), (gv1 <> y), (y <> gv1), (y <> y), (Zero = len gv1), (Zero = len y)
+(None = Some gv1), (None = Some y), (append gv1 gv1 = gv1), (append gv1 gv1 = y), (append gv1 y = gv1), (append gv1 y = y), (append y gv1 = gv1), (append y gv1 = y), (append y y = gv1), (append y y = y)
+(Nil = append gv1 gv1), (Nil = append gv1 y), (Nil = append y gv1), (Nil = append y y)
+
+Label: 1 (1)
+(gv0 = gv0), (gv0 = y), (y = gv0), (y = y), (gv0 <> gv0), (gv0 <> y), (y <> gv0), (y <> y), (Zero = len gv0), (Zero = len y)
+(None = Some gv0), (None = Some y), (append gv0 gv0 = gv0), (append gv0 gv0 = y), (append gv0 y = gv0), (append gv0 y = y), (append y gv0 = gv0), (append y gv0 = y), (append y y = gv0), (append y y = y)
+(Nil = append gv0 gv0), (Nil = append gv0 y), (Nil = append y gv0), (Nil = append y y)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 21.439 seconds
+
+
+Label: 0 (0)
+(Zero = len gv1), (append gv1 y = y), (append y gv1 = y), (append gv1 gv1 = gv1), (Nil = append gv1 gv1)
+
+Label: 1 (1)
+(gv0 = y), (y = gv0)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (y = append y Nil)
+
+2. (append Nil Nil = Nil)
+
+3. (Zero = len gv1 -> y = append y gv1)
+
+4. (append gv1 y = y -> y = append y gv1)
+
+5. (append gv1 gv1 = gv1 -> y = append y gv1)
+
+6. (Nil = append gv1 gv1 -> y = append y gv1)
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 35.986 seconds
+
+Number of Result Pairs Returned: 6
+
+1. (y = append y Nil)
+
+2. (Zero = len gv1 -> y = append y gv1)
+
+3. (append gv1 y = y -> y = append y gv1)
+
+4. (append gv1 gv1 = gv1 -> y = append y gv1)
+
+5. (Nil = append gv1 gv1 -> y = append y gv1)

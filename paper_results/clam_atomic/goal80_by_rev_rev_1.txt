@@ -1,0 +1,198 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+
+----------------------------------
+Goal: (rev (rev y) = append y nil)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 1.477 seconds
+
+gv3 : Lst = nil
+gv1 : Lst = (rev y)
+gv0 : Lst = (rev (rev y))
+gv2 : Lst = (append y nil)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 21.366 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (rev (rev y) = append y nil)
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (append y nil = gv2)
+
+----------------------------------
+Goal: (rev (rev y) = gv2)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (rev y = gv1)
+
+----------------------------------
+Goal: (rev gv1 = append y nil)
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (rev (rev y) = gv0)
+
+----------------------------------
+Goal: (gv0 = append y nil)
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (nil = gv3)
+
+----------------------------------
+Goal: (rev (rev y) = append y gv3)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 21.501 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+append : (Lst -> Lst -> Lst)
+rev : (Lst -> Lst)
+succ : (Nat -> Nat)
+zero : Nat
+nil : Lst
+cons : (Nat -> Lst -> Lst)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 21.638 seconds
+
+
+Label: 0 (0)
+(gv2 = gv2), (gv2 = y), (y = gv2), (y = y), (gv2 <> gv2), (gv2 <> y), (y <> gv2), (y <> y), (None = Some gv2), (None = Some y)
+(rev gv2 = gv2), (rev gv2 = y), (rev gv2 = append gv2 gv2), (rev gv2 = append gv2 y), (rev gv2 = append y gv2), (rev gv2 = append y y), (rev y = gv2), (rev y = y), (rev y = append gv2 gv2), (rev y = append gv2 y)
+(rev y = append y gv2), (rev y = append y y), (append gv2 gv2 = gv2), (append gv2 gv2 = y), (append gv2 y = gv2), (append gv2 y = y), (append y gv2 = gv2), (append y gv2 = y), (append y y = gv2), (append y y = y)
+(nil = rev gv2), (nil = rev y), (nil = append gv2 gv2), (nil = append gv2 y), (nil = append y gv2), (nil = append y y)
+
+Label: 1 (1)
+(y = y), (y = gv1), (gv1 = y), (gv1 = gv1), (y <> y), (y <> gv1), (gv1 <> y), (gv1 <> gv1), (None = Some y), (None = Some gv1)
+(rev y = y), (rev y = gv1), (rev y = append y y), (rev y = append y gv1), (rev y = append gv1 y), (rev y = append gv1 gv1), (rev gv1 = y), (rev gv1 = gv1), (rev gv1 = append y y), (rev gv1 = append y gv1)
+(rev gv1 = append gv1 y), (rev gv1 = append gv1 gv1), (append y y = y), (append y y = gv1), (append y gv1 = y), (append y gv1 = gv1), (append gv1 y = y), (append gv1 y = gv1), (append gv1 gv1 = y), (append gv1 gv1 = gv1)
+(nil = rev y), (nil = rev gv1), (nil = append y y), (nil = append y gv1), (nil = append gv1 y), (nil = append gv1 gv1)
+
+Label: 2 (2)
+(y = y), (y = gv0), (gv0 = y), (gv0 = gv0), (y <> y), (y <> gv0), (gv0 <> y), (gv0 <> gv0), (None = Some y), (None = Some gv0)
+(rev y = y), (rev y = gv0), (rev y = append y y), (rev y = append y gv0), (rev y = append gv0 y), (rev y = append gv0 gv0), (rev gv0 = y), (rev gv0 = gv0), (rev gv0 = append y y), (rev gv0 = append y gv0)
+(rev gv0 = append gv0 y), (rev gv0 = append gv0 gv0), (append y y = y), (append y y = gv0), (append y gv0 = y), (append y gv0 = gv0), (append gv0 y = y), (append gv0 y = gv0), (append gv0 gv0 = y), (append gv0 gv0 = gv0)
+(nil = rev y), (nil = rev gv0), (nil = append y y), (nil = append y gv0), (nil = append gv0 y), (nil = append gv0 gv0)
+
+Label: 3 (3)
+(gv3 = gv3), (gv3 = y), (y = gv3), (y = y), (gv3 <> gv3), (gv3 <> y), (y <> gv3), (y <> y), (None = Some gv3), (None = Some y)
+(rev gv3 = gv3), (rev gv3 = y), (rev gv3 = append gv3 gv3), (rev gv3 = append gv3 y), (rev gv3 = append y gv3), (rev gv3 = append y y), (rev y = gv3), (rev y = y), (rev y = append gv3 gv3), (rev y = append gv3 y)
+(rev y = append y gv3), (rev y = append y y), (append gv3 gv3 = gv3), (append gv3 gv3 = y), (append gv3 y = gv3), (append gv3 y = y), (append y gv3 = gv3), (append y gv3 = y), (append y y = gv3), (append y y = y)
+(nil = rev gv3), (nil = rev y), (nil = append gv3 gv3), (nil = append gv3 y), (nil = append y gv3), (nil = append y y)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 26.168 seconds
+
+
+Label: 0 (0)
+(gv2 = y), (y = gv2)
+
+Label: 1 (1)
+(rev y = gv1), (rev gv1 = y)
+
+Label: 2 (2)
+(y = gv0), (gv0 = y)
+
+Label: 3 (3)
+(nil = rev gv3), (append gv3 y = y), (append y gv3 = y), (append gv3 gv3 = gv3), (nil = append gv3 gv3), (rev gv3 = append gv3 gv3)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (rev (rev y) = append y nil)
+
+2. (append y nil = y)
+
+3. (rev (rev y) = y)
+
+4. (append nil nil = nil)
+
+5. (gv2 = y -> rev (rev y) = gv2)
+
+6. (y = gv2 -> rev (rev y) = gv2)
+
+7. (y = gv0 -> gv0 = append y nil)
+
+8. (gv0 = y -> gv0 = append y nil)
+
+9. (rev gv1 = y -> rev gv1 = append y nil)
+
+10. (nil = rev gv3 -> rev (rev y) = append y gv3)
+
+11. (append gv3 y = y -> rev (rev y) = append y gv3)
+
+12. (append y gv3 = y -> rev (rev y) = append y gv3)
+
+13. (append gv3 gv3 = gv3 -> rev (rev y) = append y gv3)
+
+14. (nil = append gv3 gv3 -> rev (rev y) = append y gv3)
+
+15. (rev gv3 = append gv3 gv3 -> rev (rev y) = append y gv3)
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 54.999 seconds
+
+Number of Result Pairs Returned: 15
+
+1. (rev (rev y) = append y nil)
+
+2. (append y nil = y)
+
+3. (rev (rev y) = y)
+
+4. (gv2 = y -> rev (rev y) = gv2)
+
+5. (y = gv2 -> rev (rev y) = gv2)

@@ -1,0 +1,209 @@
+[TOTAL] 11
+
+[SUCCESS] 7
+    [ATOMIC][SUCCESS][1][GENERALIZE] 1
+    [SUCCESS][1][GENERALIZE] 2
+    [ATOMIC][SUCCESS][1][AS IS] 2
+    [SUCCESS][1][AS IS] 2
+
+[FAIL] 4
+    [ATOMIC][FAIL][FORWARD] 2
+    [FAIL][FORWARD] 2
+
+[ATOMIC - EQUAL] 2
+[ATOMIC - OTHER] 3
+-----------------------------------------------
+[***]
+[ATOMIC][SUCCESS][1][GENERALIZE]
+Test = sort_perm_by_insert_perm
+[TIME] 94.342
+[COUNTS] 32
+[TARGET] Permutation (x::l) (insert x l)
+
+1. (Permutation (a :: gv1) (insert a gv1))
+
+2. (Permutation (a :: sort l) (insert a (sort l)))
+
+3. (Permutation gv2 (insert a l) -> Permutation (a :: sort l) gv2)
+
+4. (Permutation (insert a l) gv2 -> Permutation (a :: sort l) gv2)
+
+5. (Permutation gv0 (insert a l) -> Permutation gv0 (insert a (sort l)))
+
+
+[***]
+[ATOMIC][SUCCESS][1][AS IS]
+Test = insertion_sort_correct_by_sort_perm
+[TIME] 55.627
+[COUNTS] 17
+[TARGET] Permutation l (sort l)
+
+1. (Permutation al (sort al))
+
+2. (Permutation gv0 (sort al) -> Permutation al gv0)
+
+3. (Permutation al (sort gv0) -> Permutation al gv0)
+
+4. (Permutation (sort gv0) al -> Permutation al gv0)
+
+5. (Permutation (sort al) gv0 -> Permutation al gv0)
+
+
+
+[SUCCESS][1][AS IS]
+Test = insert_sortedd_by_sortedd_cons_1
+[TIME] 75.19
+[COUNTS] 17
+[TARGET] x <= y -> (sortedd (y::l)) -> sortedd (x::y::l)
+
+1. (sortedd (a0 :: l) -> a <= a0 -> sortedd (a :: a0 :: l))
+
+2. (sortedd (a0 :: l) -> sorted (a0 :: l))
+(a <= a0 -> sorted (a0 :: l) -> sortedd (a :: a0 :: l))
+
+3. (a <= a0 -> ~ a0 < a)
+(~ a0 < a -> sortedd (a0 :: l) -> sortedd (a :: a0 :: l))
+
+4. (sorted gv0 -> sortedd gv0)
+
+5. (sorted (insert a gv0) -> sortedd gv0)
+
+
+
+
+[FAIL][FORWARD]
+Test = insert_sorted_by_insert_swap
+[TIME] 106.892
+[COUNTS] 14
+[TARGET] x < y -> insert y (x::l) = x :: insert y l
+
+1. (a > y -> sorted (y :: l) -> sorted (y :: insert a l))
+
+2. (sorted (y :: l) -> sortedd (y :: l))
+(a > y -> sortedd (y :: l) -> sorted (y :: insert a l))
+
+3. (a > y -> y <= a)
+(y <= a -> sorted (y :: l) -> sorted (y :: insert a l))
+
+4. (a > y -> ~ a < y)
+(~ a < y -> sorted (y :: l) -> sorted (y :: insert a l))
+
+5. (a > y -> ~ a <= y)
+(~ a <= y -> sorted (y :: l) -> sorted (y :: insert a l))
+
+
+[**]
+[ATOMIC][FAIL][FORWARD]
+Test = sortedd_cons_by_nth_succ_2
+[TIME] -1
+[COUNTS] 0
+[TARGET] nth (S n) (x::l) 0 = nth n l 0
+
+CONTRADICTION
+
+
+
+[SUCCESS][1][GENERALIZE]
+Test = sort_sortedd_by_insert_sortedd
+[TIME] 52.175
+[COUNTS] 7
+[TARGET] sortedd l -> sortedd (insert a l)
+
+1. (sortedd gv1 -> sortedd (insert a gv1))
+
+2. (sortedd (insert a (sort l)))
+
+3. (sort (insert a (sort l)) = insert a (sort l))
+
+4. (sorted gv0 -> sortedd gv0)
+
+5. (sorted (insert a gv0) -> sortedd gv0)
+
+
+
+[SUCCESS][1][AS IS]
+Test = sorted_sortedd_by_sortedd_cons
+[TIME] 79.279
+[COUNTS] 17
+[TARGET] x <= y -> (sortedd (y::l)) -> sortedd (x::y::l)
+
+1. (sortedd (y :: l) -> x <= y -> sortedd (x :: y :: l))
+
+2. (sortedd (y :: l) -> sorted (y :: l))
+(x <= y -> sorted (y :: l) -> sortedd (x :: y :: l))
+
+3. (x <= y -> ~ y < x)
+(~ y < x -> sortedd (y :: l) -> sortedd (x :: y :: l))
+
+4. (sorted gv0 -> sortedd gv0)
+
+5. (sorted (insert y gv0) -> sortedd gv0)
+
+
+[***]
+[ATOMIC][SUCCESS][1][AS IS]
+Test = insertion_sort_correct_by_sort_sorted
+[TIME] 33.534
+[COUNTS] 4
+[TARGET] sorted (sort l)
+
+1. (sorted (sort al))
+
+2. (sort (sort al) = sort al)
+
+3. (sortedd gv0 -> sorted gv0)
+
+4. (sort gv0 = gv0 -> sorted gv0)
+
+
+
+[FAIL][FORWARD]
+Test = insert_sortedd_by_sortedd_cons_2
+[TIME] 138.414
+[COUNTS] 27
+[TARGET] x <= y -> (sortedd (y::l)) -> sortedd (x::y::l)
+
+1. (gv1 = insert a l -> sortedd (a0 :: l) -> a > a0 -> sortedd (a0 :: gv1))
+
+2. (a > a0 ->  sortedd (a0 :: l) -> n :: l0 = insert a l -> sortedd (a0 :: n :: l0))
+
+3. (sortedd (a0 :: l) -> sorted (a0 :: l))
+(a > a0 ->  n :: l0 = insert a l -> sorted (a0 :: l) -> sortedd (a0 :: n :: l0))
+
+4. (a > a0 -> a0 <= a)
+(sortedd (a0 :: l) ->  n :: l0 = insert a l -> a0 <= a -> sortedd (a0 :: n :: l0))
+
+5. (a > a0 -> ~ a < a0)
+(~ a < a0 ->  sortedd (a0 :: l) -> n :: l0 = insert a l -> sortedd (a0 :: n :: l0))
+
+
+[**]
+[ATOMIC][FAIL][FORWARD]
+Test = sortedd_cons_by_nth_succ_1
+[TIME] -1
+[COUNTS] 0
+[TARGET] nth (S n) (x::l) 0 = nth n l 0
+
+CONTRADICTION
+
+
+
+[SUCCESS][1][GENERALIZE]
+Test = sort_sorted_by_insert_sorted
+[TIME] 51.683
+[COUNTS] 7
+[TARGET] sorted l -> sorted (insert a l)
+
+1. (sorted gv1 -> sorted (insert a gv1))
+
+2. (sorted (insert a (sort l)))
+
+3. (sort (insert a (sort l)) = insert a (sort l))
+
+4. (sortedd gv0 -> sorted gv0)
+
+5. (sorted (insert a gv0) -> sorted gv0)
+
+
+
+

@@ -1,0 +1,356 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (forall y : Lst, len (qreva x y) = plus (len x) (len y))
+
+----------------------------------
+Goal: (len (qreva x (cons n nil)) = succ (plus (len x) zero))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 1.504 seconds
+
+gv3 : Lst = nil
+gv6 : Nat = (len x)
+gv4 : Nat = (succ (plus (len x) zero))
+gv0 : Nat = (len (qreva x (cons n nil)))
+gv1 : Lst = (qreva x (cons n nil))
+gv2 : Lst = (cons n nil)
+gv7 : Nat = zero
+gv5 : Nat = (plus (len x) zero)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 28.82 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (len (qreva x (cons n nil)) = succ (plus (len x) zero))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (plus (len x) zero = gv5)
+
+----------------------------------
+Goal: (len (qreva x (cons n nil)) = succ gv5)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (zero = gv7)
+
+----------------------------------
+Goal: (len (qreva x (cons n nil)) = succ (plus (len x) gv7))
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (cons n nil = gv2)
+
+----------------------------------
+Goal: (len (qreva x gv2) = succ (plus (len x) zero))
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (qreva x (cons n nil) = gv1)
+
+----------------------------------
+Goal: (len gv1 = succ (plus (len x) zero))
+Case: Invalid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (len (qreva x (cons n nil)) = gv0)
+
+----------------------------------
+Goal: (gv0 = succ (plus (len x) zero))
+Case: Invalid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (succ (plus (len x) zero) = gv4)
+
+----------------------------------
+Goal: (len (qreva x (cons n nil)) = gv4)
+Case: Invalid and Generalized
+
+Label: Generalization #7
+Assumptions: 
+ -- (len x = gv6)
+
+----------------------------------
+Goal: (len (qreva x (cons n nil)) = succ (plus gv6 zero))
+Case: Invalid and Generalized
+
+Label: Generalization #8
+Assumptions: 
+ -- (nil = gv3)
+
+----------------------------------
+Goal: (len (qreva x (cons n gv3)) = succ (plus (len x) zero))
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 28.956 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+plus : (Nat -> Nat -> Nat)
+append : (Lst -> Lst -> Lst)
+len : (Lst -> Nat)
+rev : (Lst -> Lst)
+qreva : (Lst -> Lst -> Lst)
+succ : (Nat -> Nat)
+zero : Nat
+nil : Lst
+cons : (Nat -> Lst -> Lst)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 6 (6)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 7 (7)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 29.103 seconds
+
+
+Label: 0 (0)
+(gv5 = gv5), (gv5 = n), (n = gv5), (n = n), (x = x), (gv5 <> gv5), (gv5 <> n), (n <> gv5), (n <> n), (x <> x)
+(None = Some x), (succ gv5 = gv5), (succ gv5 = n), (succ gv5 = len x), (succ gv5 = plus gv5 gv5), (succ gv5 = plus gv5 n), (succ gv5 = plus n gv5), (succ gv5 = plus n n), (succ n = gv5), (succ n = n)
+(succ n = len x), (succ n = plus gv5 gv5), (succ n = plus gv5 n), (succ n = plus n gv5), (succ n = plus n n), (len x = gv5), (len x = n), (plus gv5 gv5 = gv5), (plus gv5 gv5 = n), (plus gv5 gv5 = len x)
+(plus gv5 n = gv5), (plus gv5 n = n), (plus gv5 n = len x), (plus n gv5 = gv5), (plus n gv5 = n), (plus n gv5 = len x), (plus n n = gv5), (plus n n = n), (plus n n = len x), (zero = succ gv5)
+(zero = succ n), (zero = len x), (zero = plus gv5 gv5), (zero = plus gv5 n), (zero = plus n gv5), (zero = plus n n), (cons gv5 x = x), (cons gv5 x = qreva x x), (cons gv5 x = rev x), (cons gv5 x = append x x)
+(cons n x = x), (cons n x = qreva x x), (cons n x = rev x), (cons n x = append x x), (qreva x x = x), (qreva x x = append x x), (rev x = x), (rev x = qreva x x), (rev x = append x x), (append x x = x)
+(nil = cons gv5 x), (nil = cons n x), (nil = qreva x x), (nil = rev x), (nil = append x x), (None = Some gv5), (None = Some n)
+
+Label: 1 (1)
+(gv7 = gv7), (gv7 = n), (n = gv7), (n = n), (x = x), (gv7 <> gv7), (gv7 <> n), (n <> gv7), (n <> n), (x <> x)
+(None = Some x), (succ gv7 = gv7), (succ gv7 = n), (succ gv7 = len x), (succ gv7 = plus gv7 gv7), (succ gv7 = plus gv7 n), (succ gv7 = plus n gv7), (succ gv7 = plus n n), (succ n = gv7), (succ n = n)
+(succ n = len x), (succ n = plus gv7 gv7), (succ n = plus gv7 n), (succ n = plus n gv7), (succ n = plus n n), (len x = gv7), (len x = n), (plus gv7 gv7 = gv7), (plus gv7 gv7 = n), (plus gv7 gv7 = len x)
+(plus gv7 n = gv7), (plus gv7 n = n), (plus gv7 n = len x), (plus n gv7 = gv7), (plus n gv7 = n), (plus n gv7 = len x), (plus n n = gv7), (plus n n = n), (plus n n = len x), (zero = succ gv7)
+(zero = succ n), (zero = len x), (zero = plus gv7 gv7), (zero = plus gv7 n), (zero = plus n gv7), (zero = plus n n), (cons gv7 x = x), (cons gv7 x = qreva x x), (cons gv7 x = rev x), (cons gv7 x = append x x)
+(cons n x = x), (cons n x = qreva x x), (cons n x = rev x), (cons n x = append x x), (qreva x x = x), (qreva x x = append x x), (rev x = x), (rev x = qreva x x), (rev x = append x x), (append x x = x)
+(nil = cons gv7 x), (nil = cons n x), (nil = qreva x x), (nil = rev x), (nil = append x x), (None = Some gv7), (None = Some n)
+
+Label: 2 (2)
+(n = n), (gv2 = gv2), (gv2 = x), (x = gv2), (x = x), (n <> n), (gv2 <> gv2), (gv2 <> x), (x <> gv2), (x <> x)
+(None = Some gv2), (None = Some x), (succ n = n), (succ n = len gv2), (succ n = len x), (succ n = plus n n), (len gv2 = n), (len x = n), (plus n n = n), (plus n n = len gv2)
+(plus n n = len x), (zero = succ n), (zero = len gv2), (zero = len x), (zero = plus n n), (cons n gv2 = gv2), (cons n gv2 = x), (cons n gv2 = qreva gv2 gv2), (cons n gv2 = qreva gv2 x), (cons n gv2 = qreva x gv2)
+(cons n gv2 = qreva x x), (cons n gv2 = rev gv2), (cons n gv2 = rev x), (cons n gv2 = append gv2 gv2), (cons n gv2 = append gv2 x), (cons n gv2 = append x gv2), (cons n gv2 = append x x), (cons n x = gv2), (cons n x = x), (cons n x = qreva gv2 gv2)
+(cons n x = qreva gv2 x), (cons n x = qreva x gv2), (cons n x = qreva x x), (cons n x = rev gv2), (cons n x = rev x), (cons n x = append gv2 gv2), (cons n x = append gv2 x), (cons n x = append x gv2), (cons n x = append x x), (qreva gv2 gv2 = gv2)
+(qreva gv2 gv2 = x), (qreva gv2 gv2 = append gv2 gv2), (qreva gv2 gv2 = append gv2 x), (qreva gv2 gv2 = append x gv2), (qreva gv2 gv2 = append x x), (qreva gv2 x = gv2), (qreva gv2 x = x), (qreva gv2 x = append gv2 gv2), (qreva gv2 x = append gv2 x), (qreva gv2 x = append x gv2)
+(qreva gv2 x = append x x), (qreva x gv2 = gv2), (qreva x gv2 = x), (qreva x gv2 = append gv2 gv2), (qreva x gv2 = append gv2 x), (qreva x gv2 = append x gv2), (qreva x gv2 = append x x), (qreva x x = gv2), (qreva x x = x), (qreva x x = append gv2 gv2)
+(qreva x x = append gv2 x), (qreva x x = append x gv2), (qreva x x = append x x), (rev gv2 = gv2), (rev gv2 = x), (rev gv2 = qreva gv2 gv2), (rev gv2 = qreva gv2 x), (rev gv2 = qreva x gv2), (rev gv2 = qreva x x), (rev gv2 = append gv2 gv2)
+(rev gv2 = append gv2 x), (rev gv2 = append x gv2), (rev gv2 = append x x), (rev x = gv2), (rev x = x), (rev x = qreva gv2 gv2), (rev x = qreva gv2 x), (rev x = qreva x gv2), (rev x = qreva x x), (rev x = append gv2 gv2)
+(rev x = append gv2 x), (rev x = append x gv2), (rev x = append x x), (append gv2 gv2 = gv2), (append gv2 gv2 = x), (append gv2 x = gv2), (append gv2 x = x), (append x gv2 = gv2), (append x gv2 = x), (append x x = gv2)
+(append x x = x), (nil = cons n gv2), (nil = cons n x), (nil = qreva gv2 gv2), (nil = qreva gv2 x), (nil = qreva x gv2), (nil = qreva x x), (nil = rev gv2), (nil = rev x), (nil = append gv2 gv2)
+(nil = append gv2 x), (nil = append x gv2), (nil = append x x), (None = Some n)
+
+Label: 3 (3)
+(n = n), (x = x), (x = gv1), (gv1 = x), (gv1 = gv1), (n <> n), (x <> x), (x <> gv1), (gv1 <> x), (gv1 <> gv1)
+(None = Some x), (None = Some gv1), (succ n = n), (succ n = len x), (succ n = len gv1), (succ n = plus n n), (len x = n), (len gv1 = n), (plus n n = n), (plus n n = len x)
+(plus n n = len gv1), (zero = succ n), (zero = len x), (zero = len gv1), (zero = plus n n), (cons n x = x), (cons n x = gv1), (cons n x = qreva x x), (cons n x = qreva x gv1), (cons n x = qreva gv1 x)
+(cons n x = qreva gv1 gv1), (cons n x = rev x), (cons n x = rev gv1), (cons n x = append x x), (cons n x = append x gv1), (cons n x = append gv1 x), (cons n x = append gv1 gv1), (cons n gv1 = x), (cons n gv1 = gv1), (cons n gv1 = qreva x x)
+(cons n gv1 = qreva x gv1), (cons n gv1 = qreva gv1 x), (cons n gv1 = qreva gv1 gv1), (cons n gv1 = rev x), (cons n gv1 = rev gv1), (cons n gv1 = append x x), (cons n gv1 = append x gv1), (cons n gv1 = append gv1 x), (cons n gv1 = append gv1 gv1), (qreva x x = x)
+(qreva x x = gv1), (qreva x x = append x x), (qreva x x = append x gv1), (qreva x x = append gv1 x), (qreva x x = append gv1 gv1), (qreva x gv1 = x), (qreva x gv1 = gv1), (qreva x gv1 = append x x), (qreva x gv1 = append x gv1), (qreva x gv1 = append gv1 x)
+(qreva x gv1 = append gv1 gv1), (qreva gv1 x = x), (qreva gv1 x = gv1), (qreva gv1 x = append x x), (qreva gv1 x = append x gv1), (qreva gv1 x = append gv1 x), (qreva gv1 x = append gv1 gv1), (qreva gv1 gv1 = x), (qreva gv1 gv1 = gv1), (qreva gv1 gv1 = append x x)
+(qreva gv1 gv1 = append x gv1), (qreva gv1 gv1 = append gv1 x), (qreva gv1 gv1 = append gv1 gv1), (rev x = x), (rev x = gv1), (rev x = qreva x x), (rev x = qreva x gv1), (rev x = qreva gv1 x), (rev x = qreva gv1 gv1), (rev x = append x x)
+(rev x = append x gv1), (rev x = append gv1 x), (rev x = append gv1 gv1), (rev gv1 = x), (rev gv1 = gv1), (rev gv1 = qreva x x), (rev gv1 = qreva x gv1), (rev gv1 = qreva gv1 x), (rev gv1 = qreva gv1 gv1), (rev gv1 = append x x)
+(rev gv1 = append x gv1), (rev gv1 = append gv1 x), (rev gv1 = append gv1 gv1), (append x x = x), (append x x = gv1), (append x gv1 = x), (append x gv1 = gv1), (append gv1 x = x), (append gv1 x = gv1), (append gv1 gv1 = x)
+(append gv1 gv1 = gv1), (nil = cons n x), (nil = cons n gv1), (nil = qreva x x), (nil = qreva x gv1), (nil = qreva gv1 x), (nil = qreva gv1 gv1), (nil = rev x), (nil = rev gv1), (nil = append x x)
+(nil = append x gv1), (nil = append gv1 x), (nil = append gv1 gv1), (None = Some n)
+
+Label: 4 (4)
+(x = x), (n = n), (n = gv0), (gv0 = n), (gv0 = gv0), (x <> x), (n <> n), (n <> gv0), (gv0 <> n), (gv0 <> gv0)
+(None = Some x), (cons n x = x), (cons n x = qreva x x), (cons n x = rev x), (cons n x = append x x), (cons gv0 x = x), (cons gv0 x = qreva x x), (cons gv0 x = rev x), (cons gv0 x = append x x), (qreva x x = x)
+(qreva x x = append x x), (rev x = x), (rev x = qreva x x), (rev x = append x x), (append x x = x), (nil = cons n x), (nil = cons gv0 x), (nil = qreva x x), (nil = rev x), (nil = append x x)
+(succ n = n), (succ n = gv0), (succ n = len x), (succ n = plus n n), (succ n = plus n gv0), (succ n = plus gv0 n), (succ n = plus gv0 gv0), (succ gv0 = n), (succ gv0 = gv0), (succ gv0 = len x)
+(succ gv0 = plus n n), (succ gv0 = plus n gv0), (succ gv0 = plus gv0 n), (succ gv0 = plus gv0 gv0), (len x = n), (len x = gv0), (plus n n = n), (plus n n = gv0), (plus n n = len x), (plus n gv0 = n)
+(plus n gv0 = gv0), (plus n gv0 = len x), (plus gv0 n = n), (plus gv0 n = gv0), (plus gv0 n = len x), (plus gv0 gv0 = n), (plus gv0 gv0 = gv0), (plus gv0 gv0 = len x), (zero = succ n), (zero = succ gv0)
+(zero = len x), (zero = plus n n), (zero = plus n gv0), (zero = plus gv0 n), (zero = plus gv0 gv0), (None = Some n), (None = Some gv0)
+
+Label: 5 (5)
+(gv4 = gv4), (gv4 = n), (n = gv4), (n = n), (x = x), (gv4 <> gv4), (gv4 <> n), (n <> gv4), (n <> n), (x <> x)
+(None = Some x), (succ gv4 = gv4), (succ gv4 = n), (succ gv4 = len x), (succ gv4 = plus gv4 gv4), (succ gv4 = plus gv4 n), (succ gv4 = plus n gv4), (succ gv4 = plus n n), (succ n = gv4), (succ n = n)
+(succ n = len x), (succ n = plus gv4 gv4), (succ n = plus gv4 n), (succ n = plus n gv4), (succ n = plus n n), (len x = gv4), (len x = n), (plus gv4 gv4 = gv4), (plus gv4 gv4 = n), (plus gv4 gv4 = len x)
+(plus gv4 n = gv4), (plus gv4 n = n), (plus gv4 n = len x), (plus n gv4 = gv4), (plus n gv4 = n), (plus n gv4 = len x), (plus n n = gv4), (plus n n = n), (plus n n = len x), (zero = succ gv4)
+(zero = succ n), (zero = len x), (zero = plus gv4 gv4), (zero = plus gv4 n), (zero = plus n gv4), (zero = plus n n), (cons gv4 x = x), (cons gv4 x = qreva x x), (cons gv4 x = rev x), (cons gv4 x = append x x)
+(cons n x = x), (cons n x = qreva x x), (cons n x = rev x), (cons n x = append x x), (qreva x x = x), (qreva x x = append x x), (rev x = x), (rev x = qreva x x), (rev x = append x x), (append x x = x)
+(nil = cons gv4 x), (nil = cons n x), (nil = qreva x x), (nil = rev x), (nil = append x x), (None = Some gv4), (None = Some n)
+
+Label: 6 (6)
+(gv6 = gv6), (gv6 = n), (n = gv6), (n = n), (x = x), (gv6 <> gv6), (gv6 <> n), (n <> gv6), (n <> n), (x <> x)
+(None = Some x), (succ gv6 = gv6), (succ gv6 = n), (succ gv6 = len x), (succ gv6 = plus gv6 gv6), (succ gv6 = plus gv6 n), (succ gv6 = plus n gv6), (succ gv6 = plus n n), (succ n = gv6), (succ n = n)
+(succ n = len x), (succ n = plus gv6 gv6), (succ n = plus gv6 n), (succ n = plus n gv6), (succ n = plus n n), (len x = gv6), (len x = n), (plus gv6 gv6 = gv6), (plus gv6 gv6 = n), (plus gv6 gv6 = len x)
+(plus gv6 n = gv6), (plus gv6 n = n), (plus gv6 n = len x), (plus n gv6 = gv6), (plus n gv6 = n), (plus n gv6 = len x), (plus n n = gv6), (plus n n = n), (plus n n = len x), (zero = succ gv6)
+(zero = succ n), (zero = len x), (zero = plus gv6 gv6), (zero = plus gv6 n), (zero = plus n gv6), (zero = plus n n), (cons gv6 x = x), (cons gv6 x = qreva x x), (cons gv6 x = rev x), (cons gv6 x = append x x)
+(cons n x = x), (cons n x = qreva x x), (cons n x = rev x), (cons n x = append x x), (qreva x x = x), (qreva x x = append x x), (rev x = x), (rev x = qreva x x), (rev x = append x x), (append x x = x)
+(nil = cons gv6 x), (nil = cons n x), (nil = qreva x x), (nil = rev x), (nil = append x x), (None = Some gv6), (None = Some n)
+
+Label: 7 (7)
+(n = n), (gv3 = gv3), (gv3 = x), (x = gv3), (x = x), (n <> n), (gv3 <> gv3), (gv3 <> x), (x <> gv3), (x <> x)
+(None = Some gv3), (None = Some x), (succ n = n), (succ n = len gv3), (succ n = len x), (succ n = plus n n), (len gv3 = n), (len x = n), (plus n n = n), (plus n n = len gv3)
+(plus n n = len x), (zero = succ n), (zero = len gv3), (zero = len x), (zero = plus n n), (cons n gv3 = gv3), (cons n gv3 = x), (cons n gv3 = qreva gv3 gv3), (cons n gv3 = qreva gv3 x), (cons n gv3 = qreva x gv3)
+(cons n gv3 = qreva x x), (cons n gv3 = rev gv3), (cons n gv3 = rev x), (cons n gv3 = append gv3 gv3), (cons n gv3 = append gv3 x), (cons n gv3 = append x gv3), (cons n gv3 = append x x), (cons n x = gv3), (cons n x = x), (cons n x = qreva gv3 gv3)
+(cons n x = qreva gv3 x), (cons n x = qreva x gv3), (cons n x = qreva x x), (cons n x = rev gv3), (cons n x = rev x), (cons n x = append gv3 gv3), (cons n x = append gv3 x), (cons n x = append x gv3), (cons n x = append x x), (qreva gv3 gv3 = gv3)
+(qreva gv3 gv3 = x), (qreva gv3 gv3 = append gv3 gv3), (qreva gv3 gv3 = append gv3 x), (qreva gv3 gv3 = append x gv3), (qreva gv3 gv3 = append x x), (qreva gv3 x = gv3), (qreva gv3 x = x), (qreva gv3 x = append gv3 gv3), (qreva gv3 x = append gv3 x), (qreva gv3 x = append x gv3)
+(qreva gv3 x = append x x), (qreva x gv3 = gv3), (qreva x gv3 = x), (qreva x gv3 = append gv3 gv3), (qreva x gv3 = append gv3 x), (qreva x gv3 = append x gv3), (qreva x gv3 = append x x), (qreva x x = gv3), (qreva x x = x), (qreva x x = append gv3 gv3)
+(qreva x x = append gv3 x), (qreva x x = append x gv3), (qreva x x = append x x), (rev gv3 = gv3), (rev gv3 = x), (rev gv3 = qreva gv3 gv3), (rev gv3 = qreva gv3 x), (rev gv3 = qreva x gv3), (rev gv3 = qreva x x), (rev gv3 = append gv3 gv3)
+(rev gv3 = append gv3 x), (rev gv3 = append x gv3), (rev gv3 = append x x), (rev x = gv3), (rev x = x), (rev x = qreva gv3 gv3), (rev x = qreva gv3 x), (rev x = qreva x gv3), (rev x = qreva x x), (rev x = append gv3 gv3)
+(rev x = append gv3 x), (rev x = append x gv3), (rev x = append x x), (append gv3 gv3 = gv3), (append gv3 gv3 = x), (append gv3 x = gv3), (append gv3 x = x), (append x gv3 = gv3), (append x gv3 = x), (append x x = gv3)
+(append x x = x), (nil = cons n gv3), (nil = cons n x), (nil = qreva gv3 gv3), (nil = qreva gv3 x), (nil = qreva x gv3), (nil = qreva x x), (nil = rev gv3), (nil = rev x), (nil = append gv3 gv3)
+(nil = append gv3 x), (nil = append x gv3), (nil = append x x), (None = Some n)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 35.059 seconds
+
+
+Label: 0 (0)
+(len x = gv5)
+
+Label: 1 (1)
+(plus gv7 n = n), (plus n gv7 = n), (plus gv7 gv7 = gv7), (zero = plus gv7 gv7)
+
+Label: 2 (2)
+(cons n x = qreva gv2 x), (cons n x = append gv2 x), (cons n gv2 = qreva gv2 gv2), (cons n gv2 = append gv2 gv2)
+
+Label: 3 (3)
+(cons n x = rev gv1)
+
+Label: 4 (4)
+
+Label: 5 (5)
+
+Label: 6 (6)
+(len x = gv6)
+
+Label: 7 (7)
+(nil = rev gv3), (zero = len gv3), (qreva gv3 x = x), (append gv3 x = x), (append x gv3 = x), (qreva gv3 gv3 = gv3), (nil = qreva gv3 gv3), (append gv3 gv3 = gv3), (nil = append gv3 gv3), (rev x = qreva x gv3)
+(rev gv3 = qreva gv3 gv3), (rev gv3 = append gv3 gv3)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (len (qreva x (cons n nil)) = succ (plus (len x) zero))
+
+2. (len x = plus (len x) zero)
+
+3. (plus zero zero = zero)
+
+4. (qreva nil nil = nil)
+
+5. (append nil nil = nil)
+
+6. (len x = gv5 -> len (qreva x (cons n nil)) = succ gv5)
+
+7. (nil = rev gv3 -> len (qreva x (cons n gv3)) = succ (plus (len x) zero))
+
+8. (zero = len gv3 -> len (qreva x (cons n gv3)) = succ (plus (len x) zero))
+
+9. (plus gv7 n = n -> len (qreva x (cons n nil)) = succ (plus (len x) gv7))
+
+10. (plus n gv7 = n -> len (qreva x (cons n nil)) = succ (plus (len x) gv7))
+
+11. (plus gv7 gv7 = gv7 -> len (qreva x (cons n nil)) = succ (plus (len x) gv7))
+
+12. (zero = plus gv7 gv7 -> len (qreva x (cons n nil)) = succ (plus (len x) gv7))
+
+13. (qreva gv3 x = x -> len (qreva x (cons n gv3)) = succ (plus (len x) zero))
+
+14. (append gv3 x = x -> len (qreva x (cons n gv3)) = succ (plus (len x) zero))
+
+15. (append x gv3 = x -> len (qreva x (cons n gv3)) = succ (plus (len x) zero))
+
+16. (qreva gv3 gv3 = gv3 -> len (qreva x (cons n gv3)) = succ (plus (len x) zero))
+
+17. (nil = qreva gv3 gv3 -> len (qreva x (cons n gv3)) = succ (plus (len x) zero))
+
+18. (append gv3 gv3 = gv3 ->  len (qreva x (cons n gv3)) = succ (plus (len x) zero))
+
+19. (nil = append gv3 gv3 ->  len (qreva x (cons n gv3)) = succ (plus (len x) zero))
+
+20. (cons n x = rev gv1 -> len gv1 = succ (plus (len x) zero))
+
+21. (rev x = qreva x gv3 -> len (qreva x (cons n gv3)) = succ (plus (len x) zero))
+
+22. (rev gv3 = qreva gv3 gv3 ->  len (qreva x (cons n gv3)) = succ (plus (len x) zero))
+
+23. (rev gv3 = append gv3 gv3 ->  len (qreva x (cons n gv3)) = succ (plus (len x) zero))
+
+24. (cons n x = qreva gv2 x -> len (qreva x gv2) = succ (plus (len x) zero))
+
+25. (cons n x = append gv2 x -> len (qreva x gv2) = succ (plus (len x) zero))
+
+26. (cons n gv2 = qreva gv2 gv2 -> len (qreva x gv2) = succ (plus (len x) zero))
+
+27. (cons n gv2 = append gv2 gv2 -> len (qreva x gv2) = succ (plus (len x) zero))
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 84.191 seconds
+
+Number of Result Pairs Returned: 27
+
+1. (len (qreva x (cons n nil)) = succ (plus (len x) zero))
+
+2. (len x = plus (len x) zero)
+
+3. (len x = gv5 -> len (qreva x (cons n nil)) = succ gv5)
+
+4. (nil = rev gv3 -> len (qreva x (cons n gv3)) = succ (plus (len x) zero))
+
+5. (zero = len gv3 -> len (qreva x (cons n gv3)) = succ (plus (len x) zero))

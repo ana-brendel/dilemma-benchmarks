@@ -1,0 +1,263 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+
+----------------------------------
+Goal: (bV_to_nat (bV_full_adder w Nil cin) = bV_to_nat w + bool_to_nat cin)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 1.777 seconds
+
+gv4 : nat = (bV_to_nat w)
+gv2 : boolList = Nil
+gv0 : nat = (bV_to_nat (bV_full_adder w Nil cin))
+gv3 : nat = (bV_to_nat w + bool_to_nat cin)
+gv5 : nat = (bool_to_nat cin)
+gv1 : boolList = (bV_full_adder w Nil cin)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 19.23 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (bV_to_nat (bV_full_adder w Nil cin) = bV_to_nat w + bool_to_nat cin)
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (bool_to_nat cin = gv5)
+
+----------------------------------
+Goal: (bV_to_nat (bV_full_adder w Nil cin) = bV_to_nat w + gv5)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (bV_full_adder w Nil cin = gv1)
+
+----------------------------------
+Goal: (bV_to_nat gv1 = bV_to_nat w + bool_to_nat cin)
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (bV_to_nat w + bool_to_nat cin = gv3)
+
+----------------------------------
+Goal: (bV_to_nat (bV_full_adder w Nil cin) = gv3)
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (Nil = gv2)
+
+----------------------------------
+Goal: (bV_to_nat (bV_full_adder w gv2 cin) = bV_to_nat w + bool_to_nat cin)
+Case: Invalid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (bV_to_nat (bV_full_adder w Nil cin) = gv0)
+
+----------------------------------
+Goal: (gv0 = bV_to_nat w + bool_to_nat cin)
+Case: Invalid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (bV_to_nat w = gv4)
+
+----------------------------------
+Goal: (bV_to_nat (bV_full_adder w Nil cin) = gv4 + bool_to_nat cin)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 19.369 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+Datatypes.app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+half_adder_sum : (bool -> bool -> bool)
+half_adder_carry : (bool -> bool -> bool)
+bool_to_nat : (bool -> nat)
+full_adder_sum : (bool -> bool -> bool -> bool)
+full_adder_carry : (bool -> bool -> bool -> bool)
+boolList : Set
+length : (boolList -> nat)
+app : (boolList -> boolList -> boolList)
+bV_full_adder_sum_nil : (boolList -> bool -> boolList)
+bV_full_adder_sum : (boolList -> boolList -> bool -> boolList)
+bV_full_adder_carry_nil : (boolList -> bool -> bool)
+bV_full_adder_carry : (boolList -> boolList -> bool -> bool)
+bV_full_adder : (boolList -> boolList -> bool -> boolList)
+bV_to_nat : (boolList -> nat)
+power2 : (nat -> nat)
+Nil : boolList
+Cons : (bool -> boolList -> boolList)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 19.536 seconds
+
+
+Label: 0 (0)
+(false = cin), (true = cin), (gv5 < gv5), (gv5 <= gv5), (gv5 = gv5), (cin = cin), (w = w), (false = bV_full_adder_carry w w cin), (false = bV_full_adder_carry_nil w cin), (false = full_adder_carry cin cin cin)
+(false = full_adder_sum cin cin cin), (false = half_adder_carry cin cin), (false = half_adder_sum cin cin), (true = bV_full_adder_carry w w cin), (true = bV_full_adder_carry_nil w cin), (true = full_adder_carry cin cin cin), (true = full_adder_sum cin cin cin), (true = half_adder_carry cin cin), (true = half_adder_sum cin cin), (gv5 < power2 gv5)
+(gv5 < bV_to_nat w), (gv5 < length w), (gv5 < bool_to_nat cin), (power2 gv5 < gv5), (power2 gv5 < bV_to_nat w), (power2 gv5 < length w), (power2 gv5 < bool_to_nat cin), (bV_to_nat w < gv5), (bV_to_nat w < power2 gv5), (bV_to_nat w < length w)
+(bV_to_nat w < bool_to_nat cin), (length w < gv5), (length w < power2 gv5), (length w < bV_to_nat w), (length w < bool_to_nat cin), (bool_to_nat cin < gv5), (bool_to_nat cin < power2 gv5), (bool_to_nat cin < bV_to_nat w), (bool_to_nat cin < length w), (gv5 <= power2 gv5)
+(gv5 <= bV_to_nat w), (gv5 <= length w), (gv5 <= bool_to_nat cin), (power2 gv5 <= gv5), (power2 gv5 <= bV_to_nat w), (power2 gv5 <= length w), (power2 gv5 <= bool_to_nat cin), (bV_to_nat w <= gv5), (bV_to_nat w <= power2 gv5), (bV_to_nat w <= length w)
+(bV_to_nat w <= bool_to_nat cin), (length w <= gv5), (length w <= power2 gv5), (length w <= bV_to_nat w), (length w <= bool_to_nat cin), (bool_to_nat cin <= gv5), (bool_to_nat cin <= power2 gv5), (bool_to_nat cin <= bV_to_nat w), (bool_to_nat cin <= length w), (false <> cin)
+(true <> cin), (~ gv5 < gv5), (~ gv5 <= gv5), (gv5 <> gv5), (cin <> cin), (w <> w), (Cons cin w = w), (Cons cin w = bV_full_adder w w cin), (Cons cin w = bV_full_adder_sum w w cin), (Cons cin w = bV_full_adder_sum_nil w cin)
+(Cons cin w = app w w), (bV_full_adder w w cin = w), (bV_full_adder w w cin = app w w), (bV_full_adder_sum w w cin = w), (bV_full_adder_sum w w cin = bV_full_adder w w cin), (bV_full_adder_sum w w cin = app w w), (bV_full_adder_sum_nil w cin = w), (bV_full_adder_sum_nil w cin = bV_full_adder w w cin), (bV_full_adder_sum_nil w cin = bV_full_adder_sum w w cin), (bV_full_adder_sum_nil w cin = app w w)
+(app w w = w), (Nil = Cons cin w), (Nil = bV_full_adder w w cin), (Nil = bV_full_adder_sum w w cin), (Nil = bV_full_adder_sum_nil w cin), (Nil = app w w), (power2 gv5 = gv5), (power2 gv5 = bV_to_nat w), (power2 gv5 = length w), (power2 gv5 = bool_to_nat cin)
+(bV_to_nat w = gv5), (length w = gv5), (length w = bV_to_nat w), (length w = bool_to_nat cin), (bool_to_nat cin = gv5), (bool_to_nat cin = bV_to_nat w), (None = Some cin), (None = Some w), (None = Some gv5), (bV_full_adder_carry w w cin = cin)
+(bV_full_adder_carry_nil w cin = cin), (bV_full_adder_carry_nil w cin = bV_full_adder_carry w w cin), (full_adder_carry cin cin cin = cin), (full_adder_carry cin cin cin = bV_full_adder_carry w w cin), (full_adder_carry cin cin cin = bV_full_adder_carry_nil w cin), (full_adder_sum cin cin cin = cin), (full_adder_sum cin cin cin = bV_full_adder_carry w w cin), (full_adder_sum cin cin cin = bV_full_adder_carry_nil w cin), (full_adder_sum cin cin cin = full_adder_carry cin cin cin), (half_adder_carry cin cin = cin)
+(half_adder_carry cin cin = bV_full_adder_carry w w cin), (half_adder_carry cin cin = bV_full_adder_carry_nil w cin), (half_adder_carry cin cin = full_adder_carry cin cin cin), (half_adder_carry cin cin = full_adder_sum cin cin cin), (half_adder_sum cin cin = cin), (half_adder_sum cin cin = bV_full_adder_carry w w cin), (half_adder_sum cin cin = bV_full_adder_carry_nil w cin), (half_adder_sum cin cin = full_adder_carry cin cin cin), (half_adder_sum cin cin = full_adder_sum cin cin cin), (half_adder_sum cin cin = half_adder_carry cin cin)
+
+Label: 1 (1)
+(false = cin), (true = cin), (cin = cin), (w = w), (w = gv1), (gv1 = w), (gv1 = gv1), (false = bV_full_adder_carry w w cin), (false = bV_full_adder_carry w gv1 cin), (false = bV_full_adder_carry gv1 w cin)
+(false = bV_full_adder_carry gv1 gv1 cin), (false = bV_full_adder_carry_nil w cin), (false = bV_full_adder_carry_nil gv1 cin), (false = full_adder_carry cin cin cin), (false = full_adder_sum cin cin cin), (false = half_adder_carry cin cin), (false = half_adder_sum cin cin), (true = bV_full_adder_carry w w cin), (true = bV_full_adder_carry w gv1 cin), (true = bV_full_adder_carry gv1 w cin)
+(true = bV_full_adder_carry gv1 gv1 cin), (true = bV_full_adder_carry_nil w cin), (true = bV_full_adder_carry_nil gv1 cin), (true = full_adder_carry cin cin cin), (true = full_adder_sum cin cin cin), (true = half_adder_carry cin cin), (true = half_adder_sum cin cin), (bV_to_nat w < bV_to_nat gv1), (bV_to_nat w < length w), (bV_to_nat w < length gv1)
+(bV_to_nat w < bool_to_nat cin), (bV_to_nat gv1 < bV_to_nat w), (bV_to_nat gv1 < length w), (bV_to_nat gv1 < length gv1), (bV_to_nat gv1 < bool_to_nat cin), (length w < bV_to_nat w), (length w < bV_to_nat gv1), (length w < length gv1), (length w < bool_to_nat cin), (length gv1 < bV_to_nat w)
+(length gv1 < bV_to_nat gv1), (length gv1 < length w), (length gv1 < bool_to_nat cin), (bool_to_nat cin < bV_to_nat w), (bool_to_nat cin < bV_to_nat gv1), (bool_to_nat cin < length w), (bool_to_nat cin < length gv1), (bV_to_nat w <= bV_to_nat gv1), (bV_to_nat w <= length w), (bV_to_nat w <= length gv1)
+(bV_to_nat w <= bool_to_nat cin), (bV_to_nat gv1 <= bV_to_nat w), (bV_to_nat gv1 <= length w), (bV_to_nat gv1 <= length gv1), (bV_to_nat gv1 <= bool_to_nat cin), (length w <= bV_to_nat w), (length w <= bV_to_nat gv1), (length w <= length gv1), (length w <= bool_to_nat cin), (length gv1 <= bV_to_nat w)
+(length gv1 <= bV_to_nat gv1), (length gv1 <= length w), (length gv1 <= bool_to_nat cin), (bool_to_nat cin <= bV_to_nat w), (bool_to_nat cin <= bV_to_nat gv1), (bool_to_nat cin <= length w), (bool_to_nat cin <= length gv1), (false <> cin), (true <> cin), (cin <> cin)
+(w <> w), (w <> gv1), (gv1 <> w), (gv1 <> gv1), (Cons cin w = w), (Cons cin w = gv1), (Cons cin w = bV_full_adder w w cin), (Cons cin w = bV_full_adder w gv1 cin), (Cons cin w = bV_full_adder gv1 w cin), (Cons cin w = bV_full_adder gv1 gv1 cin)
+(Cons cin w = bV_full_adder_sum w w cin), (Cons cin w = bV_full_adder_sum w gv1 cin), (Cons cin w = bV_full_adder_sum gv1 w cin), (Cons cin w = bV_full_adder_sum gv1 gv1 cin), (Cons cin w = bV_full_adder_sum_nil w cin), (Cons cin w = bV_full_adder_sum_nil gv1 cin), (Cons cin w = app w w), (Cons cin w = app w gv1), (Cons cin w = app gv1 w), (Cons cin w = app gv1 gv1)
+(Cons cin gv1 = w), (Cons cin gv1 = gv1), (Cons cin gv1 = bV_full_adder w w cin), (Cons cin gv1 = bV_full_adder w gv1 cin), (Cons cin gv1 = bV_full_adder gv1 w cin), (Cons cin gv1 = bV_full_adder gv1 gv1 cin), (Cons cin gv1 = bV_full_adder_sum w w cin), (Cons cin gv1 = bV_full_adder_sum w gv1 cin), (Cons cin gv1 = bV_full_adder_sum gv1 w cin), (Cons cin gv1 = bV_full_adder_sum gv1 gv1 cin)
+(Cons cin gv1 = bV_full_adder_sum_nil w cin), (Cons cin gv1 = bV_full_adder_sum_nil gv1 cin), (Cons cin gv1 = app w w), (Cons cin gv1 = app w gv1), (Cons cin gv1 = app gv1 w), (Cons cin gv1 = app gv1 gv1), (bV_full_adder w w cin = w), (bV_full_adder w w cin = gv1), (bV_full_adder w w cin = app w w), (bV_full_adder w w cin = app w gv1)
+(bV_full_adder w w cin = app gv1 w), (bV_full_adder w w cin = app gv1 gv1), (bV_full_adder w gv1 cin = w), (bV_full_adder w gv1 cin = gv1), (bV_full_adder w gv1 cin = app w w), (bV_full_adder w gv1 cin = app w gv1), (bV_full_adder w gv1 cin = app gv1 w), (bV_full_adder w gv1 cin = app gv1 gv1), (bV_full_adder gv1 w cin = w), (bV_full_adder gv1 w cin = gv1)
+(bV_full_adder gv1 w cin = app w w), (bV_full_adder gv1 w cin = app w gv1), (bV_full_adder gv1 w cin = app gv1 w), (bV_full_adder gv1 w cin = app gv1 gv1), (bV_full_adder gv1 gv1 cin = w), (bV_full_adder gv1 gv1 cin = gv1), (bV_full_adder gv1 gv1 cin = app w w), (bV_full_adder gv1 gv1 cin = app w gv1), (bV_full_adder gv1 gv1 cin = app gv1 w), (bV_full_adder gv1 gv1 cin = app gv1 gv1)
+(bV_full_adder_sum w w cin = w), (bV_full_adder_sum w w cin = gv1), (bV_full_adder_sum w w cin = bV_full_adder w w cin), (bV_full_adder_sum w w cin = bV_full_adder w gv1 cin), (bV_full_adder_sum w w cin = bV_full_adder gv1 w cin), (bV_full_adder_sum w w cin = bV_full_adder gv1 gv1 cin), (bV_full_adder_sum w w cin = app w w), (bV_full_adder_sum w w cin = app w gv1), (bV_full_adder_sum w w cin = app gv1 w), (bV_full_adder_sum w w cin = app gv1 gv1)
+(bV_full_adder_sum w gv1 cin = w), (bV_full_adder_sum w gv1 cin = gv1), (bV_full_adder_sum w gv1 cin = bV_full_adder w w cin), (bV_full_adder_sum w gv1 cin = bV_full_adder w gv1 cin), (bV_full_adder_sum w gv1 cin = bV_full_adder gv1 w cin), (bV_full_adder_sum w gv1 cin = bV_full_adder gv1 gv1 cin), (bV_full_adder_sum w gv1 cin = app w w), (bV_full_adder_sum w gv1 cin = app w gv1), (bV_full_adder_sum w gv1 cin = app gv1 w), (bV_full_adder_sum w gv1 cin = app gv1 gv1)
+(bV_full_adder_sum gv1 w cin = w), (bV_full_adder_sum gv1 w cin = gv1), (bV_full_adder_sum gv1 w cin = bV_full_adder w w cin), (bV_full_adder_sum gv1 w cin = bV_full_adder w gv1 cin), (bV_full_adder_sum gv1 w cin = bV_full_adder gv1 w cin), (bV_full_adder_sum gv1 w cin = bV_full_adder gv1 gv1 cin), (bV_full_adder_sum gv1 w cin = app w w), (bV_full_adder_sum gv1 w cin = app w gv1), (bV_full_adder_sum gv1 w cin = app gv1 w), (bV_full_adder_sum gv1 w cin = app gv1 gv1)
+(bV_full_adder_sum gv1 gv1 cin = w), (bV_full_adder_sum gv1 gv1 cin = gv1), (bV_full_adder_sum gv1 gv1 cin = bV_full_adder w w cin), (bV_full_adder_sum gv1 gv1 cin = bV_full_adder w gv1 cin), (bV_full_adder_sum gv1 gv1 cin = bV_full_adder gv1 w cin), (bV_full_adder_sum gv1 gv1 cin = bV_full_adder gv1 gv1 cin), (bV_full_adder_sum gv1 gv1 cin = app w w), (bV_full_adder_sum gv1 gv1 cin = app w gv1), (bV_full_adder_sum gv1 gv1 cin = app gv1 w), (bV_full_adder_sum gv1 gv1 cin = app gv1 gv1)
+(bV_full_adder_sum_nil w cin = w), (bV_full_adder_sum_nil w cin = gv1), (bV_full_adder_sum_nil w cin = bV_full_adder w w cin), (bV_full_adder_sum_nil w cin = bV_full_adder w gv1 cin), (bV_full_adder_sum_nil w cin = bV_full_adder gv1 w cin), (bV_full_adder_sum_nil w cin = bV_full_adder gv1 gv1 cin), (bV_full_adder_sum_nil w cin = bV_full_adder_sum w w cin), (bV_full_adder_sum_nil w cin = bV_full_adder_sum w gv1 cin), (bV_full_adder_sum_nil w cin = bV_full_adder_sum gv1 w cin), (bV_full_adder_sum_nil w cin = bV_full_adder_sum gv1 gv1 cin)
+(bV_full_adder_sum_nil w cin = app w w), (bV_full_adder_sum_nil w cin = app w gv1), (bV_full_adder_sum_nil w cin = app gv1 w), (bV_full_adder_sum_nil w cin = app gv1 gv1), (bV_full_adder_sum_nil gv1 cin = w), (bV_full_adder_sum_nil gv1 cin = gv1), (bV_full_adder_sum_nil gv1 cin = bV_full_adder w w cin), (bV_full_adder_sum_nil gv1 cin = bV_full_adder w gv1 cin), (bV_full_adder_sum_nil gv1 cin = bV_full_adder gv1 w cin), (bV_full_adder_sum_nil gv1 cin = bV_full_adder gv1 gv1 cin)
+(bV_full_adder_sum_nil gv1 cin = bV_full_adder_sum w w cin), (bV_full_adder_sum_nil gv1 cin = bV_full_adder_sum w gv1 cin), (bV_full_adder_sum_nil gv1 cin = bV_full_adder_sum gv1 w cin), (bV_full_adder_sum_nil gv1 cin = bV_full_adder_sum gv1 gv1 cin), (bV_full_adder_sum_nil gv1 cin = app w w), (bV_full_adder_sum_nil gv1 cin = app w gv1), (bV_full_adder_sum_nil gv1 cin = app gv1 w), (bV_full_adder_sum_nil gv1 cin = app gv1 gv1), (app w w = w), (app w w = gv1)
+(app w gv1 = w), (app w gv1 = gv1), (app gv1 w = w), (app gv1 w = gv1), (app gv1 gv1 = w), (app gv1 gv1 = gv1), (Nil = Cons cin w), (Nil = Cons cin gv1), (Nil = bV_full_adder w w cin), (Nil = bV_full_adder w gv1 cin)
+(Nil = bV_full_adder gv1 w cin), (Nil = bV_full_adder gv1 gv1 cin), (Nil = bV_full_adder_sum w w cin), (Nil = bV_full_adder_sum w gv1 cin), (Nil = bV_full_adder_sum gv1 w cin), (Nil = bV_full_adder_sum gv1 gv1 cin), (Nil = bV_full_adder_sum_nil w cin), (Nil = bV_full_adder_sum_nil gv1 cin), (Nil = app w w), (Nil = app w gv1)
+(Nil = app gv1 w), (Nil = app gv1 gv1), (bV_full_adder_carry w w cin = cin), (bV_full_adder_carry w gv1 cin = cin), (bV_full_adder_carry gv1 w cin = cin), (bV_full_adder_carry gv1 gv1 cin = cin), (bV_full_adder_carry_nil w cin = cin), (bV_full_adder_carry_nil w cin = bV_full_adder_carry w w cin), (bV_full_adder_carry_nil w cin = bV_full_adder_carry w gv1 cin), (bV_full_adder_carry_nil w cin = bV_full_adder_carry gv1 w cin)
+(bV_full_adder_carry_nil w cin = bV_full_adder_carry gv1 gv1 cin), (bV_full_adder_carry_nil gv1 cin = cin), (bV_full_adder_carry_nil gv1 cin = bV_full_adder_carry w w cin), (bV_full_adder_carry_nil gv1 cin = bV_full_adder_carry w gv1 cin), (bV_full_adder_carry_nil gv1 cin = bV_full_adder_carry gv1 w cin), (bV_full_adder_carry_nil gv1 cin = bV_full_adder_carry gv1 gv1 cin), (full_adder_carry cin cin cin = cin), (full_adder_carry cin cin cin = bV_full_adder_carry w w cin), (full_adder_carry cin cin cin = bV_full_adder_carry w gv1 cin), (full_adder_carry cin cin cin = bV_full_adder_carry gv1 w cin)
+(full_adder_carry cin cin cin = bV_full_adder_carry gv1 gv1 cin), (full_adder_carry cin cin cin = bV_full_adder_carry_nil w cin), (full_adder_carry cin cin cin = bV_full_adder_carry_nil gv1 cin), (full_adder_sum cin cin cin = cin), (full_adder_sum cin cin cin = bV_full_adder_carry w w cin), (full_adder_sum cin cin cin = bV_full_adder_carry w gv1 cin), (full_adder_sum cin cin cin = bV_full_adder_carry gv1 w cin), (full_adder_sum cin cin cin = bV_full_adder_carry gv1 gv1 cin), (full_adder_sum cin cin cin = bV_full_adder_carry_nil w cin), (full_adder_sum cin cin cin = bV_full_adder_carry_nil gv1 cin)
+(full_adder_sum cin cin cin = full_adder_carry cin cin cin), (half_adder_carry cin cin = cin), (half_adder_carry cin cin = bV_full_adder_carry w w cin), (half_adder_carry cin cin = bV_full_adder_carry w gv1 cin), (half_adder_carry cin cin = bV_full_adder_carry gv1 w cin), (half_adder_carry cin cin = bV_full_adder_carry gv1 gv1 cin), (half_adder_carry cin cin = bV_full_adder_carry_nil w cin), (half_adder_carry cin cin = bV_full_adder_carry_nil gv1 cin), (half_adder_carry cin cin = full_adder_carry cin cin cin), (half_adder_carry cin cin = full_adder_sum cin cin cin)
+(half_adder_sum cin cin = cin), (half_adder_sum cin cin = bV_full_adder_carry w w cin), (half_adder_sum cin cin = bV_full_adder_carry w gv1 cin), (half_adder_sum cin cin = bV_full_adder_carry gv1 w cin), (half_adder_sum cin cin = bV_full_adder_carry gv1 gv1 cin), (half_adder_sum cin cin = bV_full_adder_carry_nil w cin), (half_adder_sum cin cin = bV_full_adder_carry_nil gv1 cin), (half_adder_sum cin cin = full_adder_carry cin cin cin), (half_adder_sum cin cin = full_adder_sum cin cin cin), (half_adder_sum cin cin = half_adder_carry cin cin)
+(length w = bV_to_nat w), (length w = bV_to_nat gv1), (length w = bool_to_nat cin), (length gv1 = bV_to_nat w), (length gv1 = bV_to_nat gv1), (length gv1 = bool_to_nat cin), (bool_to_nat cin = bV_to_nat w), (bool_to_nat cin = bV_to_nat gv1), (None = Some cin), (None = Some w)
+(None = Some gv1)
+
+Label: 2 (2)
+(false = cin), (true = cin), (gv3 < gv3), (gv3 <= gv3), (gv3 = gv3), (cin = cin), (w = w), (false = bV_full_adder_carry w w cin), (false = bV_full_adder_carry_nil w cin), (false = full_adder_carry cin cin cin)
+(false = full_adder_sum cin cin cin), (false = half_adder_carry cin cin), (false = half_adder_sum cin cin), (true = bV_full_adder_carry w w cin), (true = bV_full_adder_carry_nil w cin), (true = full_adder_carry cin cin cin), (true = full_adder_sum cin cin cin), (true = half_adder_carry cin cin), (true = half_adder_sum cin cin), (gv3 < power2 gv3)
+(gv3 < bV_to_nat w), (gv3 < length w), (gv3 < bool_to_nat cin), (power2 gv3 < gv3), (power2 gv3 < bV_to_nat w), (power2 gv3 < length w), (power2 gv3 < bool_to_nat cin), (bV_to_nat w < gv3), (bV_to_nat w < power2 gv3), (bV_to_nat w < length w)
+(bV_to_nat w < bool_to_nat cin), (length w < gv3), (length w < power2 gv3), (length w < bV_to_nat w), (length w < bool_to_nat cin), (bool_to_nat cin < gv3), (bool_to_nat cin < power2 gv3), (bool_to_nat cin < bV_to_nat w), (bool_to_nat cin < length w), (gv3 <= power2 gv3)
+(gv3 <= bV_to_nat w), (gv3 <= length w), (gv3 <= bool_to_nat cin), (power2 gv3 <= gv3), (power2 gv3 <= bV_to_nat w), (power2 gv3 <= length w), (power2 gv3 <= bool_to_nat cin), (bV_to_nat w <= gv3), (bV_to_nat w <= power2 gv3), (bV_to_nat w <= length w)
+(bV_to_nat w <= bool_to_nat cin), (length w <= gv3), (length w <= power2 gv3), (length w <= bV_to_nat w), (length w <= bool_to_nat cin), (bool_to_nat cin <= gv3), (bool_to_nat cin <= power2 gv3), (bool_to_nat cin <= bV_to_nat w), (bool_to_nat cin <= length w), (false <> cin)
+(true <> cin), (~ gv3 < gv3), (~ gv3 <= gv3), (gv3 <> gv3), (cin <> cin), (w <> w), (Cons cin w = w), (Cons cin w = bV_full_adder w w cin), (Cons cin w = bV_full_adder_sum w w cin), (Cons cin w = bV_full_adder_sum_nil w cin)
+(Cons cin w = app w w), (bV_full_adder w w cin = w), (bV_full_adder w w cin = app w w), (bV_full_adder_sum w w cin = w), (bV_full_adder_sum w w cin = bV_full_adder w w cin), (bV_full_adder_sum w w cin = app w w), (bV_full_adder_sum_nil w cin = w), (bV_full_adder_sum_nil w cin = bV_full_adder w w cin), (bV_full_adder_sum_nil w cin = bV_full_adder_sum w w cin), (bV_full_adder_sum_nil w cin = app w w)
+(app w w = w), (Nil = Cons cin w), (Nil = bV_full_adder w w cin), (Nil = bV_full_adder_sum w w cin), (Nil = bV_full_adder_sum_nil w cin), (Nil = app w w), (power2 gv3 = gv3), (power2 gv3 = bV_to_nat w), (power2 gv3 = length w), (power2 gv3 = bool_to_nat cin)
+(bV_to_nat w = gv3), (length w = gv3), (length w = bV_to_nat w), (length w = bool_to_nat cin), (bool_to_nat cin = gv3), (bool_to_nat cin = bV_to_nat w), (None = Some cin), (None = Some w), (None = Some gv3), (bV_full_adder_carry w w cin = cin)
+(bV_full_adder_carry_nil w cin = cin), (bV_full_adder_carry_nil w cin = bV_full_adder_carry w w cin), (full_adder_carry cin cin cin = cin), (full_adder_carry cin cin cin = bV_full_adder_carry w w cin), (full_adder_carry cin cin cin = bV_full_adder_carry_nil w cin), (full_adder_sum cin cin cin = cin), (full_adder_sum cin cin cin = bV_full_adder_carry w w cin), (full_adder_sum cin cin cin = bV_full_adder_carry_nil w cin), (full_adder_sum cin cin cin = full_adder_carry cin cin cin), (half_adder_carry cin cin = cin)
+(half_adder_carry cin cin = bV_full_adder_carry w w cin), (half_adder_carry cin cin = bV_full_adder_carry_nil w cin), (half_adder_carry cin cin = full_adder_carry cin cin cin), (half_adder_carry cin cin = full_adder_sum cin cin cin), (half_adder_sum cin cin = cin), (half_adder_sum cin cin = bV_full_adder_carry w w cin), (half_adder_sum cin cin = bV_full_adder_carry_nil w cin), (half_adder_sum cin cin = full_adder_carry cin cin cin), (half_adder_sum cin cin = full_adder_sum cin cin cin), (half_adder_sum cin cin = half_adder_carry cin cin)
+
+Label: 3 (3)
+(false = cin), (true = cin), (cin = cin), (gv2 = gv2), (gv2 = w), (w = gv2), (w = w), (false = bV_full_adder_carry gv2 gv2 cin), (false = bV_full_adder_carry gv2 w cin), (false = bV_full_adder_carry w gv2 cin)
+(false = bV_full_adder_carry w w cin), (false = bV_full_adder_carry_nil gv2 cin), (false = bV_full_adder_carry_nil w cin), (false = full_adder_carry cin cin cin), (false = full_adder_sum cin cin cin), (false = half_adder_carry cin cin), (false = half_adder_sum cin cin), (true = bV_full_adder_carry gv2 gv2 cin), (true = bV_full_adder_carry gv2 w cin), (true = bV_full_adder_carry w gv2 cin)
+(true = bV_full_adder_carry w w cin), (true = bV_full_adder_carry_nil gv2 cin), (true = bV_full_adder_carry_nil w cin), (true = full_adder_carry cin cin cin), (true = full_adder_sum cin cin cin), (true = half_adder_carry cin cin), (true = half_adder_sum cin cin), (bV_to_nat gv2 < bV_to_nat w), (bV_to_nat gv2 < length gv2), (bV_to_nat gv2 < length w)
+(bV_to_nat gv2 < bool_to_nat cin), (bV_to_nat w < bV_to_nat gv2), (bV_to_nat w < length gv2), (bV_to_nat w < length w), (bV_to_nat w < bool_to_nat cin), (length gv2 < bV_to_nat gv2), (length gv2 < bV_to_nat w), (length gv2 < length w), (length gv2 < bool_to_nat cin), (length w < bV_to_nat gv2)
+(length w < bV_to_nat w), (length w < length gv2), (length w < bool_to_nat cin), (bool_to_nat cin < bV_to_nat gv2), (bool_to_nat cin < bV_to_nat w), (bool_to_nat cin < length gv2), (bool_to_nat cin < length w), (bV_to_nat gv2 <= bV_to_nat w), (bV_to_nat gv2 <= length gv2), (bV_to_nat gv2 <= length w)
+(bV_to_nat gv2 <= bool_to_nat cin), (bV_to_nat w <= bV_to_nat gv2), (bV_to_nat w <= length gv2), (bV_to_nat w <= length w), (bV_to_nat w <= bool_to_nat cin), (length gv2 <= bV_to_nat gv2), (length gv2 <= bV_to_nat w), (length gv2 <= length w), (length gv2 <= bool_to_nat cin), (length w <= bV_to_nat gv2)
+(length w <= bV_to_nat w), (length w <= length gv2), (length w <= bool_to_nat cin), (bool_to_nat cin <= bV_to_nat gv2), (bool_to_nat cin <= bV_to_nat w), (bool_to_nat cin <= length gv2), (bool_to_nat cin <= length w), (false <> cin), (true <> cin), (cin <> cin)
+(gv2 <> gv2), (gv2 <> w), (w <> gv2), (w <> w), (Cons cin gv2 = gv2), (Cons cin gv2 = w), (Cons cin gv2 = bV_full_adder gv2 gv2 cin), (Cons cin gv2 = bV_full_adder gv2 w cin), (Cons cin gv2 = bV_full_adder w gv2 cin), (Cons cin gv2 = bV_full_adder w w cin)
+(Cons cin gv2 = bV_full_adder_sum gv2 gv2 cin), (Cons cin gv2 = bV_full_adder_sum gv2 w cin), (Cons cin gv2 = bV_full_adder_sum w gv2 cin), (Cons cin gv2 = bV_full_adder_sum w w cin), (Cons cin gv2 = bV_full_adder_sum_nil gv2 cin), (Cons cin gv2 = bV_full_adder_sum_nil w cin), (Cons cin gv2 = app gv2 gv2), (Cons cin gv2 = app gv2 w), (Cons cin gv2 = app w gv2), (Cons cin gv2 = app w w)
+(Cons cin w = gv2), (Cons cin w = w), (Cons cin w = bV_full_adder gv2 gv2 cin), (Cons cin w = bV_full_adder gv2 w cin), (Cons cin w = bV_full_adder w gv2 cin), (Cons cin w = bV_full_adder w w cin), (Cons cin w = bV_full_adder_sum gv2 gv2 cin), (Cons cin w = bV_full_adder_sum gv2 w cin), (Cons cin w = bV_full_adder_sum w gv2 cin), (Cons cin w = bV_full_adder_sum w w cin)
+(Cons cin w = bV_full_adder_sum_nil gv2 cin), (Cons cin w = bV_full_adder_sum_nil w cin), (Cons cin w = app gv2 gv2), (Cons cin w = app gv2 w), (Cons cin w = app w gv2), (Cons cin w = app w w), (bV_full_adder gv2 gv2 cin = gv2), (bV_full_adder gv2 gv2 cin = w), (bV_full_adder gv2 gv2 cin = app gv2 gv2), (bV_full_adder gv2 gv2 cin = app gv2 w)
+(bV_full_adder gv2 gv2 cin = app w gv2), (bV_full_adder gv2 gv2 cin = app w w), (bV_full_adder gv2 w cin = gv2), (bV_full_adder gv2 w cin = w), (bV_full_adder gv2 w cin = app gv2 gv2), (bV_full_adder gv2 w cin = app gv2 w), (bV_full_adder gv2 w cin = app w gv2), (bV_full_adder gv2 w cin = app w w), (bV_full_adder w gv2 cin = gv2), (bV_full_adder w gv2 cin = w)
+(bV_full_adder w gv2 cin = app gv2 gv2), (bV_full_adder w gv2 cin = app gv2 w), (bV_full_adder w gv2 cin = app w gv2), (bV_full_adder w gv2 cin = app w w), (bV_full_adder w w cin = gv2), (bV_full_adder w w cin = w), (bV_full_adder w w cin = app gv2 gv2), (bV_full_adder w w cin = app gv2 w), (bV_full_adder w w cin = app w gv2), (bV_full_adder w w cin = app w w)
+(bV_full_adder_sum gv2 gv2 cin = gv2), (bV_full_adder_sum gv2 gv2 cin = w), (bV_full_adder_sum gv2 gv2 cin = bV_full_adder gv2 gv2 cin), (bV_full_adder_sum gv2 gv2 cin = bV_full_adder gv2 w cin), (bV_full_adder_sum gv2 gv2 cin = bV_full_adder w gv2 cin), (bV_full_adder_sum gv2 gv2 cin = bV_full_adder w w cin), (bV_full_adder_sum gv2 gv2 cin = app gv2 gv2), (bV_full_adder_sum gv2 gv2 cin = app gv2 w), (bV_full_adder_sum gv2 gv2 cin = app w gv2), (bV_full_adder_sum gv2 gv2 cin = app w w)
+(bV_full_adder_sum gv2 w cin = gv2), (bV_full_adder_sum gv2 w cin = w), (bV_full_adder_sum gv2 w cin = bV_full_adder gv2 gv2 cin), (bV_full_adder_sum gv2 w cin = bV_full_adder gv2 w cin), (bV_full_adder_sum gv2 w cin = bV_full_adder w gv2 cin), (bV_full_adder_sum gv2 w cin = bV_full_adder w w cin), (bV_full_adder_sum gv2 w cin = app gv2 gv2), (bV_full_adder_sum gv2 w cin = app gv2 w), (bV_full_adder_sum gv2 w cin = app w gv2), (bV_full_adder_sum gv2 w cin = app w w)
+(bV_full_adder_sum w gv2 cin = gv2), (bV_full_adder_sum w gv2 cin = w), (bV_full_adder_sum w gv2 cin = bV_full_adder gv2 gv2 cin), (bV_full_adder_sum w gv2 cin = bV_full_adder gv2 w cin), (bV_full_adder_sum w gv2 cin = bV_full_adder w gv2 cin), (bV_full_adder_sum w gv2 cin = bV_full_adder w w cin), (bV_full_adder_sum w gv2 cin = app gv2 gv2), (bV_full_adder_sum w gv2 cin = app gv2 w), (bV_full_adder_sum w gv2 cin = app w gv2), (bV_full_adder_sum w gv2 cin = app w w)
+(bV_full_adder_sum w w cin = gv2), (bV_full_adder_sum w w cin = w), (bV_full_adder_sum w w cin = bV_full_adder gv2 gv2 cin), (bV_full_adder_sum w w cin = bV_full_adder gv2 w cin), (bV_full_adder_sum w w cin = bV_full_adder w gv2 cin), (bV_full_adder_sum w w cin = bV_full_adder w w cin), (bV_full_adder_sum w w cin = app gv2 gv2), (bV_full_adder_sum w w cin = app gv2 w), (bV_full_adder_sum w w cin = app w gv2), (bV_full_adder_sum w w cin = app w w)
+(bV_full_adder_sum_nil gv2 cin = gv2), (bV_full_adder_sum_nil gv2 cin = w), (bV_full_adder_sum_nil gv2 cin = bV_full_adder gv2 gv2 cin), (bV_full_adder_sum_nil gv2 cin = bV_full_adder gv2 w cin), (bV_full_adder_sum_nil gv2 cin = bV_full_adder w gv2 cin), (bV_full_adder_sum_nil gv2 cin = bV_full_adder w w cin), (bV_full_adder_sum_nil gv2 cin = bV_full_adder_sum gv2 gv2 cin), (bV_full_adder_sum_nil gv2 cin = bV_full_adder_sum gv2 w cin), (bV_full_adder_sum_nil gv2 cin = bV_full_adder_sum w gv2 cin), (bV_full_adder_sum_nil gv2 cin = bV_full_adder_sum w w cin)
+(bV_full_adder_sum_nil gv2 cin = app gv2 gv2), (bV_full_adder_sum_nil gv2 cin = app gv2 w), (bV_full_adder_sum_nil gv2 cin = app w gv2), (bV_full_adder_sum_nil gv2 cin = app w w), (bV_full_adder_sum_nil w cin = gv2), (bV_full_adder_sum_nil w cin = w), (bV_full_adder_sum_nil w cin = bV_full_adder gv2 gv2 cin), (bV_full_adder_sum_nil w cin = bV_full_adder gv2 w cin), (bV_full_adder_sum_nil w cin = bV_full_adder w gv2 cin), (bV_full_adder_sum_nil w cin = bV_full_adder w w cin)
+(bV_full_adder_sum_nil w cin = bV_full_adder_sum gv2 gv2 cin), (bV_full_adder_sum_nil w cin = bV_full_adder_sum gv2 w cin), (bV_full_adder_sum_nil w cin = bV_full_adder_sum w gv2 cin), (bV_full_adder_sum_nil w cin = bV_full_adder_sum w w cin), (bV_full_adder_sum_nil w cin = app gv2 gv2), (bV_full_adder_sum_nil w cin = app gv2 w), (bV_full_adder_sum_nil w cin = app w gv2), (bV_full_adder_sum_nil w cin = app w w), (app gv2 gv2 = gv2), (app gv2 gv2 = w)
+(app gv2 w = gv2), (app gv2 w = w), (app w gv2 = gv2), (app w gv2 = w), (app w w = gv2), (app w w = w), (Nil = Cons cin gv2), (Nil = Cons cin w), (Nil = bV_full_adder gv2 gv2 cin), (Nil = bV_full_adder gv2 w cin)
+(Nil = bV_full_adder w gv2 cin), (Nil = bV_full_adder w w cin), (Nil = bV_full_adder_sum gv2 gv2 cin), (Nil = bV_full_adder_sum gv2 w cin), (Nil = bV_full_adder_sum w gv2 cin), (Nil = bV_full_adder_sum w w cin), (Nil = bV_full_adder_sum_nil gv2 cin), (Nil = bV_full_adder_sum_nil w cin), (Nil = app gv2 gv2), (Nil = app gv2 w)
+(Nil = app w gv2), (Nil = app w w), (bV_full_adder_carry gv2 gv2 cin = cin), (bV_full_adder_carry gv2 w cin = cin), (bV_full_adder_carry w gv2 cin = cin), (bV_full_adder_carry w w cin = cin), (bV_full_adder_carry_nil gv2 cin = cin), (bV_full_adder_carry_nil gv2 cin = bV_full_adder_carry gv2 gv2 cin), (bV_full_adder_carry_nil gv2 cin = bV_full_adder_carry gv2 w cin), (bV_full_adder_carry_nil gv2 cin = bV_full_adder_carry w gv2 cin)
+(bV_full_adder_carry_nil gv2 cin = bV_full_adder_carry w w cin), (bV_full_adder_carry_nil w cin = cin), (bV_full_adder_carry_nil w cin = bV_full_adder_carry gv2 gv2 cin), (bV_full_adder_carry_nil w cin = bV_full_adder_carry gv2 w cin), (bV_full_adder_carry_nil w cin = bV_full_adder_carry w gv2 cin), (bV_full_adder_carry_nil w cin = bV_full_adder_carry w w cin), (full_adder_carry cin cin cin = cin), (full_adder_carry cin cin cin = bV_full_adder_carry gv2 gv2 cin), (full_adder_carry cin cin cin = bV_full_adder_carry gv2 w cin), (full_adder_carry cin cin cin = bV_full_adder_carry w gv2 cin)
+(full_adder_carry cin cin cin = bV_full_adder_carry w w cin), (full_adder_carry cin cin cin = bV_full_adder_carry_nil gv2 cin), (full_adder_carry cin cin cin = bV_full_adder_carry_nil w cin), (full_adder_sum cin cin cin = cin), (full_adder_sum cin cin cin = bV_full_adder_carry gv2 gv2 cin), (full_adder_sum cin cin cin = bV_full_adder_carry gv2 w cin), (full_adder_sum cin cin cin = bV_full_adder_carry w gv2 cin), (full_adder_sum cin cin cin = bV_full_adder_carry w w cin), (full_adder_sum cin cin cin = bV_full_adder_carry_nil gv2 cin), (full_adder_sum cin cin cin = bV_full_adder_carry_nil w cin)
+(full_adder_sum cin cin cin = full_adder_carry cin cin cin), (half_adder_carry cin cin = cin), (half_adder_carry cin cin = bV_full_adder_carry gv2 gv2 cin), (half_adder_carry cin cin = bV_full_adder_carry gv2 w cin), (half_adder_carry cin cin = bV_full_adder_carry w gv2 cin), (half_adder_carry cin cin = bV_full_adder_carry w w cin), (half_adder_carry cin cin = bV_full_adder_carry_nil gv2 cin), (half_adder_carry cin cin = bV_full_adder_carry_nil w cin), (half_adder_carry cin cin = full_adder_carry cin cin cin), (half_adder_carry cin cin = full_adder_sum cin cin cin)
+(half_adder_sum cin cin = cin), (half_adder_sum cin cin = bV_full_adder_carry gv2 gv2 cin), (half_adder_sum cin cin = bV_full_adder_carry gv2 w cin), (half_adder_sum cin cin = bV_full_adder_carry w gv2 cin), (half_adder_sum cin cin = bV_full_adder_carry w w cin), (half_adder_sum cin cin = bV_full_adder_carry_nil gv2 cin), (half_adder_sum cin cin = bV_full_adder_carry_nil w cin), (half_adder_sum cin cin = full_adder_carry cin cin cin), (half_adder_sum cin cin = full_adder_sum cin cin cin), (half_adder_sum cin cin = half_adder_carry cin cin)
+(length gv2 = bV_to_nat gv2), (length gv2 = bV_to_nat w), (length gv2 = bool_to_nat cin), (length w = bV_to_nat gv2), (length w = bV_to_nat w), (length w = bool_to_nat cin), (bool_to_nat cin = bV_to_nat gv2), (bool_to_nat cin = bV_to_nat w), (None = Some cin), (None = Some gv2)
+(None = Some w)
+
+Label: 4 (4)
+(false = cin), (true = cin), (gv0 < gv0), (gv0 <= gv0), (cin = cin), (w = w), (gv0 = gv0), (false = bV_full_adder_carry w w cin), (false = bV_full_adder_carry_nil w cin), (false = full_adder_carry cin cin cin)
+(false = full_adder_sum cin cin cin), (false = half_adder_carry cin cin), (false = half_adder_sum cin cin), (true = bV_full_adder_carry w w cin), (true = bV_full_adder_carry_nil w cin), (true = full_adder_carry cin cin cin), (true = full_adder_sum cin cin cin), (true = half_adder_carry cin cin), (true = half_adder_sum cin cin), (gv0 < power2 gv0)
+(gv0 < bV_to_nat w), (gv0 < length w), (gv0 < bool_to_nat cin), (power2 gv0 < gv0), (power2 gv0 < bV_to_nat w), (power2 gv0 < length w), (power2 gv0 < bool_to_nat cin), (bV_to_nat w < gv0), (bV_to_nat w < power2 gv0), (bV_to_nat w < length w)
+(bV_to_nat w < bool_to_nat cin), (length w < gv0), (length w < power2 gv0), (length w < bV_to_nat w), (length w < bool_to_nat cin), (bool_to_nat cin < gv0), (bool_to_nat cin < power2 gv0), (bool_to_nat cin < bV_to_nat w), (bool_to_nat cin < length w), (gv0 <= power2 gv0)
+(gv0 <= bV_to_nat w), (gv0 <= length w), (gv0 <= bool_to_nat cin), (power2 gv0 <= gv0), (power2 gv0 <= bV_to_nat w), (power2 gv0 <= length w), (power2 gv0 <= bool_to_nat cin), (bV_to_nat w <= gv0), (bV_to_nat w <= power2 gv0), (bV_to_nat w <= length w)
+(bV_to_nat w <= bool_to_nat cin), (length w <= gv0), (length w <= power2 gv0), (length w <= bV_to_nat w), (length w <= bool_to_nat cin), (bool_to_nat cin <= gv0), (bool_to_nat cin <= power2 gv0), (bool_to_nat cin <= bV_to_nat w), (bool_to_nat cin <= length w), (false <> cin)
+(true <> cin), (~ gv0 < gv0), (~ gv0 <= gv0), (cin <> cin), (w <> w), (gv0 <> gv0), (Cons cin w = w), (Cons cin w = bV_full_adder w w cin), (Cons cin w = bV_full_adder_sum w w cin), (Cons cin w = bV_full_adder_sum_nil w cin)
+(Cons cin w = app w w), (bV_full_adder w w cin = w), (bV_full_adder w w cin = app w w), (bV_full_adder_sum w w cin = w), (bV_full_adder_sum w w cin = bV_full_adder w w cin), (bV_full_adder_sum w w cin = app w w), (bV_full_adder_sum_nil w cin = w), (bV_full_adder_sum_nil w cin = bV_full_adder w w cin), (bV_full_adder_sum_nil w cin = bV_full_adder_sum w w cin), (bV_full_adder_sum_nil w cin = app w w)
+(app w w = w), (Nil = Cons cin w), (Nil = bV_full_adder w w cin), (Nil = bV_full_adder_sum w w cin), (Nil = bV_full_adder_sum_nil w cin), (Nil = app w w), (power2 gv0 = gv0), (power2 gv0 = bV_to_nat w), (power2 gv0 = length w), (power2 gv0 = bool_to_nat cin)
+(bV_to_nat w = gv0), (length w = gv0), (length w = bV_to_nat w), (length w = bool_to_nat cin), (bool_to_nat cin = gv0), (bool_to_nat cin = bV_to_nat w), (None = Some cin), (None = Some w), (None = Some gv0), (bV_full_adder_carry w w cin = cin)
+(bV_full_adder_carry_nil w cin = cin), (bV_full_adder_carry_nil w cin = bV_full_adder_carry w w cin), (full_adder_carry cin cin cin = cin), (full_adder_carry cin cin cin = bV_full_adder_carry w w cin), (full_adder_carry cin cin cin = bV_full_adder_carry_nil w cin), (full_adder_sum cin cin cin = cin), (full_adder_sum cin cin cin = bV_full_adder_carry w w cin), (full_adder_sum cin cin cin = bV_full_adder_carry_nil w cin), (full_adder_sum cin cin cin = full_adder_carry cin cin cin), (half_adder_carry cin cin = cin)
+(half_adder_carry cin cin = bV_full_adder_carry w w cin), (half_adder_carry cin cin = bV_full_adder_carry_nil w cin), (half_adder_carry cin cin = full_adder_carry cin cin cin), (half_adder_carry cin cin = full_adder_sum cin cin cin), (half_adder_sum cin cin = cin), (half_adder_sum cin cin = bV_full_adder_carry w w cin), (half_adder_sum cin cin = bV_full_adder_carry_nil w cin), (half_adder_sum cin cin = full_adder_carry cin cin cin), (half_adder_sum cin cin = full_adder_sum cin cin cin), (half_adder_sum cin cin = half_adder_carry cin cin)
+
+Label: 5 (5)
+(false = cin), (true = cin), (gv4 < gv4), (gv4 <= gv4), (gv4 = gv4), (cin = cin), (w = w), (false = bV_full_adder_carry w w cin), (false = bV_full_adder_carry_nil w cin), (false = full_adder_carry cin cin cin)
+(false = full_adder_sum cin cin cin), (false = half_adder_carry cin cin), (false = half_adder_sum cin cin), (true = bV_full_adder_carry w w cin), (true = bV_full_adder_carry_nil w cin), (true = full_adder_carry cin cin cin), (true = full_adder_sum cin cin cin), (true = half_adder_carry cin cin), (true = half_adder_sum cin cin), (gv4 < power2 gv4)
+(gv4 < bV_to_nat w), (gv4 < length w), (gv4 < bool_to_nat cin), (power2 gv4 < gv4), (power2 gv4 < bV_to_nat w), (power2 gv4 < length w), (power2 gv4 < bool_to_nat cin), (bV_to_nat w < gv4), (bV_to_nat w < power2 gv4), (bV_to_nat w < length w)
+(bV_to_nat w < bool_to_nat cin), (length w < gv4), (length w < power2 gv4), (length w < bV_to_nat w), (length w < bool_to_nat cin), (bool_to_nat cin < gv4), (bool_to_nat cin < power2 gv4), (bool_to_nat cin < bV_to_nat w), (bool_to_nat cin < length w), (gv4 <= power2 gv4)
+(gv4 <= bV_to_nat w), (gv4 <= length w), (gv4 <= bool_to_nat cin), (power2 gv4 <= gv4), (power2 gv4 <= bV_to_nat w), (power2 gv4 <= length w), (power2 gv4 <= bool_to_nat cin), (bV_to_nat w <= gv4), (bV_to_nat w <= power2 gv4), (bV_to_nat w <= length w)
+(bV_to_nat w <= bool_to_nat cin), (length w <= gv4), (length w <= power2 gv4), (length w <= bV_to_nat w), (length w <= bool_to_nat cin), (bool_to_nat cin <= gv4), (bool_to_nat cin <= power2 gv4), (bool_to_nat cin <= bV_to_nat w), (bool_to_nat cin <= length w), (false <> cin)
+(true <> cin), (~ gv4 < gv4), (~ gv4 <= gv4), (gv4 <> gv4), (cin <> cin), (w <> w), (Cons cin w = w), (Cons cin w = bV_full_adder w w cin), (Cons cin w = bV_full_adder_sum w w cin), (Cons cin w = bV_full_adder_sum_nil w cin)
+(Cons cin w = app w w), (bV_full_adder w w cin = w), (bV_full_adder w w cin = app w w), (bV_full_adder_sum w w cin = w), (bV_full_adder_sum w w cin = bV_full_adder w w cin), (bV_full_adder_sum w w cin = app w w), (bV_full_adder_sum_nil w cin = w), (bV_full_adder_sum_nil w cin = bV_full_adder w w cin), (bV_full_adder_sum_nil w cin = bV_full_adder_sum w w cin), (bV_full_adder_sum_nil w cin = app w w)
+(app w w = w), (Nil = Cons cin w), (Nil = bV_full_adder w w cin), (Nil = bV_full_adder_sum w w cin), (Nil = bV_full_adder_sum_nil w cin), (Nil = app w w), (power2 gv4 = gv4), (power2 gv4 = bV_to_nat w), (power2 gv4 = length w), (power2 gv4 = bool_to_nat cin)
+(bV_to_nat w = gv4), (length w = gv4), (length w = bV_to_nat w), (length w = bool_to_nat cin), (bool_to_nat cin = gv4), (bool_to_nat cin = bV_to_nat w), (None = Some cin), (None = Some w), (None = Some gv4), (bV_full_adder_carry w w cin = cin)
+(bV_full_adder_carry_nil w cin = cin), (bV_full_adder_carry_nil w cin = bV_full_adder_carry w w cin), (full_adder_carry cin cin cin = cin), (full_adder_carry cin cin cin = bV_full_adder_carry w w cin), (full_adder_carry cin cin cin = bV_full_adder_carry_nil w cin), (full_adder_sum cin cin cin = cin), (full_adder_sum cin cin cin = bV_full_adder_carry w w cin), (full_adder_sum cin cin cin = bV_full_adder_carry_nil w cin), (full_adder_sum cin cin cin = full_adder_carry cin cin cin), (half_adder_carry cin cin = cin)
+(half_adder_carry cin cin = bV_full_adder_carry w w cin), (half_adder_carry cin cin = bV_full_adder_carry_nil w cin), (half_adder_carry cin cin = full_adder_carry cin cin cin), (half_adder_carry cin cin = full_adder_sum cin cin cin), (half_adder_sum cin cin = cin), (half_adder_sum cin cin = bV_full_adder_carry w w cin), (half_adder_sum cin cin = bV_full_adder_carry_nil w cin), (half_adder_sum cin cin = full_adder_carry cin cin cin), (half_adder_sum cin cin = full_adder_sum cin cin cin), (half_adder_sum cin cin = half_adder_carry cin cin)

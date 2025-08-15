@@ -1,0 +1,262 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (BST t)
+ -- (In (k, v) (elements t))
+
+----------------------------------
+Goal: (bound k t = true /\ lookup d k t = v)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 5.054 seconds
+
+gv1 : bool = true
+gv2 : value = (lookup d k t)
+gv0 : bool = (bound k t)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 49.648 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (BST t)
+ -- (In (k, v) (elements t))
+
+----------------------------------
+Goal: (bound k t = true /\ lookup d k t = v)
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (BST t)
+ -- (In (k, v) (elements t))
+ -- (lookup d k t = gv2)
+
+----------------------------------
+Goal: (bound k t = true /\ gv2 = v)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (BST t)
+ -- (In (k, v) (elements t))
+ -- (bound k t = gv0)
+
+----------------------------------
+Goal: (gv0 = true /\ lookup d k t = v)
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (BST t)
+ -- (true = gv1)
+ -- (In (k, v) (elements t))
+
+----------------------------------
+Goal: (bound k t = gv1 /\ lookup d k t = v)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 49.821 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+In : (forall A : Type, A -> list A -> Prop)
+existsb : (forall A : Type, (A -> bool) -> list A -> bool)
+forallb : (forall A : Type, (A -> bool) -> list A -> bool)
+Forall : (forall A : Type, (A -> Prop) -> list A -> Prop)
+nodup : (forall A : Type, (forall x y : A, {x = y} + {x <> y}) -> list A -> list A)
+map : (forall A B : Type, (A -> B) -> list A -> list B)
+Permutation : (forall A : Type, list A -> list A -> Prop)
+sorted : (list nat -> Prop)
+is_a_sorting_algorithm : ((list nat -> list nat) -> Prop)
+select : (nat -> list nat -> nat * list nat)
+selsort : (list nat -> nat -> list nat)
+selection_sort : (list nat -> list nat)
+le_all : (nat -> list nat -> Prop)
+value : Set
+value_rect : (forall P : value -> Type,
+ P Red -> P Green -> P Blue -> forall v : value, P v)
+value_rec : (forall P : value -> Set, P Red -> P Green -> P Blue -> forall v : value, P v)
+tree : Set
+tree_rect : (forall P : tree -> Type,
+ P E ->
+ (forall l : tree,
+  P l -> forall (k : nat) (v : value) (r : tree), P r -> P (T l k v r)) ->
+ forall t : tree, P t)
+tree_rec : (forall P : tree -> Set,
+ P E ->
+ (forall l : tree,
+  P l -> forall (k : nat) (v : value) (r : tree), P r -> P (T l k v r)) ->
+ forall t : tree, P t)
+empty_tree : tree
+bound : (nat -> tree -> bool)
+lookup : (value -> nat -> tree -> value)
+insert : (nat -> value -> tree -> tree)
+ForallT : ((nat -> value -> Prop) -> tree -> Prop)
+BST : (tree -> Prop)
+elements : (tree -> list (nat * value))
+@uncurry : (forall X Y Z : Type, (X -> Y -> Z) -> X * Y -> Z)
+@list_keys : (forall V : Type, list (nat * V) -> list nat)
+@disjoint : (forall X : Type, list X -> list X -> Prop)
+fast_elements_tr : (tree -> list (nat * value) -> list (nat * value))
+fast_elements : (tree -> list (nat * value))
+kvs_insert : (nat -> value -> list (nat * value) -> list (nat * value))
+Red : value
+Green : value
+Blue : value
+E : tree
+T : (tree -> nat -> value -> tree -> tree)
+
+Label: 0 (0)
+Abducted Assumption: (BST t)
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Abducted Assumption: (In (k, v) (elements t))
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 87
+Negative Examples: 83
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 68
+Negative Examples: 50
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 67
+Negative Examples: 43
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 49.98 seconds
+
+
+Label: 0 (0)
+(BST t), (k < k), (k <= k), (v = v), (v = d), (d = v), (d = d), (t = t), (k = k), (false = bound k t)
+(true = bound k t), (disjoint (fast_elements t) (elements t)), (disjoint (elements t) (fast_elements t)), (BST (T t k v t)), (BST (T t k d t)), (BST (insert k v t)), (BST (insert k d t)), (BST empty_tree), (BST E), (k <=* [])
+(sorted []), (Permutation (fast_elements t) (elements t)), (Permutation (elements t) (fast_elements t)), (In (k, v) (fast_elements t)), (In (k, v) (elements t)), (In (k, d) (fast_elements t)), (In (k, d) (elements t)), (~ BST t), (~ k < k), (~ k <= k)
+(v <> v), (v <> d), (d <> v), (d <> d), (t <> t), (k <> k), (lookup v k t = v), (lookup v k t = d), (lookup d k t = v), (lookup d k t = d)
+(Red = lookup v k t), (Red = lookup d k t), (Green = lookup v k t), (Green = lookup d k t), (Blue = lookup v k t), (Blue = lookup d k t), (fast_elements t = elements t), (None = Some k), (None = Some t), (T t k v t = t)
+(T t k v t = insert k v t), (T t k v t = insert k d t), (T t k d t = t), (T t k d t = insert k v t), (T t k d t = insert k d t), (insert k v t = t), (insert k d t = t), (empty_tree = T t k v t), (empty_tree = T t k d t), (empty_tree = insert k v t)
+(empty_tree = insert k d t), (E = T t k v t), (E = T t k d t), (E = insert k v t), (E = insert k d t), (None = Some v), (None = Some d)
+
+Label: 1 (1)
+(BST t), (k < k), (k <= k), (v = v), (v = d), (d = v), (d = d), (t = t), (k = k), (false = bound k t)
+(true = bound k t), (disjoint (fast_elements t) (elements t)), (disjoint (elements t) (fast_elements t)), (BST (T t k v t)), (BST (T t k d t)), (BST (insert k v t)), (BST (insert k d t)), (BST empty_tree), (BST E), (k <=* [])
+(sorted []), (Permutation (fast_elements t) (elements t)), (Permutation (elements t) (fast_elements t)), (In (k, v) (fast_elements t)), (In (k, v) (elements t)), (In (k, d) (fast_elements t)), (In (k, d) (elements t)), (~ BST t), (~ k < k), (~ k <= k)
+(v <> v), (v <> d), (d <> v), (d <> d), (t <> t), (k <> k), (lookup v k t = v), (lookup v k t = d), (lookup d k t = v), (lookup d k t = d)
+(Red = lookup v k t), (Red = lookup d k t), (Green = lookup v k t), (Green = lookup d k t), (Blue = lookup v k t), (Blue = lookup d k t), (fast_elements t = elements t), (None = Some k), (None = Some t), (T t k v t = t)
+(T t k v t = insert k v t), (T t k v t = insert k d t), (T t k d t = t), (T t k d t = insert k v t), (T t k d t = insert k d t), (insert k v t = t), (insert k d t = t), (empty_tree = T t k v t), (empty_tree = T t k d t), (empty_tree = insert k v t)
+(empty_tree = insert k d t), (E = T t k v t), (E = T t k d t), (E = insert k v t), (E = insert k d t), (None = Some v), (None = Some d)
+
+Label: 2 (2)
+(BST t), (k < k), (k <= k), (d = d), (d = v), (d = gv2), (v = d), (v = v), (v = gv2), (gv2 = d)
+(gv2 = v), (gv2 = gv2), (t = t), (k = k), (false = bound k t), (true = bound k t), (disjoint (fast_elements t) (elements t)), (disjoint (elements t) (fast_elements t)), (BST (T t k d t)), (BST (T t k v t))
+(BST (T t k gv2 t)), (BST (insert k d t)), (BST (insert k v t)), (BST (insert k gv2 t)), (BST empty_tree), (BST E), (k <=* []), (sorted []), (Permutation (fast_elements t) (elements t)), (Permutation (elements t) (fast_elements t))
+(In (k, d) (fast_elements t)), (In (k, d) (elements t)), (In (k, v) (fast_elements t)), (In (k, v) (elements t)), (In (k, gv2) (fast_elements t)), (In (k, gv2) (elements t)), (~ BST t), (~ k < k), (~ k <= k), (d <> d)
+(d <> v), (d <> gv2), (v <> d), (v <> v), (v <> gv2), (gv2 <> d), (gv2 <> v), (gv2 <> gv2), (t <> t), (k <> k)
+(lookup d k t = d), (lookup d k t = v), (lookup d k t = gv2), (lookup v k t = d), (lookup v k t = v), (lookup v k t = gv2), (lookup gv2 k t = d), (lookup gv2 k t = v), (lookup gv2 k t = gv2), (Red = lookup d k t)
+(Red = lookup v k t), (Red = lookup gv2 k t), (Green = lookup d k t), (Green = lookup v k t), (Green = lookup gv2 k t), (Blue = lookup d k t), (Blue = lookup v k t), (Blue = lookup gv2 k t), (fast_elements t = elements t), (None = Some k)
+(None = Some t), (T t k d t = t), (T t k d t = insert k d t), (T t k d t = insert k v t), (T t k d t = insert k gv2 t), (T t k v t = t), (T t k v t = insert k d t), (T t k v t = insert k v t), (T t k v t = insert k gv2 t), (T t k gv2 t = t)
+(T t k gv2 t = insert k d t), (T t k gv2 t = insert k v t), (T t k gv2 t = insert k gv2 t), (insert k d t = t), (insert k v t = t), (insert k gv2 t = t), (empty_tree = T t k d t), (empty_tree = T t k v t), (empty_tree = T t k gv2 t), (empty_tree = insert k d t)
+(empty_tree = insert k v t), (empty_tree = insert k gv2 t), (E = T t k d t), (E = T t k v t), (E = T t k gv2 t), (E = insert k d t), (E = insert k v t), (E = insert k gv2 t), (None = Some d), (None = Some v)
+(None = Some gv2)
+
+Label: 3 (3)
+(false = gv0), (true = gv0), (BST t), (k < k), (k <= k), (t = t), (k = k), (v = v), (v = d), (d = v)
+(d = d), (gv0 = gv0), (false = bound k t), (true = bound k t), (disjoint (fast_elements t) (elements t)), (disjoint (elements t) (fast_elements t)), (BST (T t k v t)), (BST (T t k d t)), (BST (insert k v t)), (BST (insert k d t))
+(BST empty_tree), (BST E), (k <=* []), (sorted []), (Permutation (fast_elements t) (elements t)), (Permutation (elements t) (fast_elements t)), (In (k, v) (fast_elements t)), (In (k, v) (elements t)), (In (k, d) (fast_elements t)), (In (k, d) (elements t))
+(false <> gv0), (true <> gv0), (~ BST t), (~ k < k), (~ k <= k), (t <> t), (k <> k), (v <> v), (v <> d), (d <> v)
+(d <> d), (gv0 <> gv0), (fast_elements t = elements t), (None = Some k), (lookup v k t = v), (lookup v k t = d), (lookup d k t = v), (lookup d k t = d), (Red = lookup v k t), (Red = lookup d k t)
+(Green = lookup v k t), (Green = lookup d k t), (Blue = lookup v k t), (Blue = lookup d k t), (None = Some gv0), (bound k t = gv0), (None = Some t), (T t k v t = t), (T t k v t = insert k v t), (T t k v t = insert k d t)
+(T t k d t = t), (T t k d t = insert k v t), (T t k d t = insert k d t), (insert k v t = t), (insert k d t = t), (empty_tree = T t k v t), (empty_tree = T t k d t), (empty_tree = insert k v t), (empty_tree = insert k d t), (E = T t k v t)
+(E = T t k d t), (E = insert k v t), (E = insert k d t), (None = Some v), (None = Some d)
+
+Label: 4 (4)
+(false = gv1), (true = gv1), (BST t), (k < k), (k <= k), (v = v), (v = d), (d = v), (d = d), (gv1 = gv1)
+(t = t), (k = k), (false = bound k t), (true = bound k t), (disjoint (fast_elements t) (elements t)), (disjoint (elements t) (fast_elements t)), (BST (T t k v t)), (BST (T t k d t)), (BST (insert k v t)), (BST (insert k d t))
+(BST empty_tree), (BST E), (k <=* []), (sorted []), (Permutation (fast_elements t) (elements t)), (Permutation (elements t) (fast_elements t)), (In (k, v) (fast_elements t)), (In (k, v) (elements t)), (In (k, d) (fast_elements t)), (In (k, d) (elements t))
+(false <> gv1), (true <> gv1), (~ BST t), (~ k < k), (~ k <= k), (v <> v), (v <> d), (d <> v), (d <> d), (gv1 <> gv1)
+(t <> t), (k <> k), (fast_elements t = elements t), (None = Some k), (lookup v k t = v), (lookup v k t = d), (lookup d k t = v), (lookup d k t = d), (Red = lookup v k t), (Red = lookup d k t)
+(Green = lookup v k t), (Green = lookup d k t), (Blue = lookup v k t), (Blue = lookup d k t), (None = Some gv1), (bound k t = gv1), (None = Some t), (T t k v t = t), (T t k v t = insert k v t), (T t k v t = insert k d t)
+(T t k d t = t), (T t k d t = insert k v t), (T t k d t = insert k d t), (insert k v t = t), (insert k d t = t), (empty_tree = T t k v t), (empty_tree = T t k d t), (empty_tree = insert k v t), (empty_tree = insert k d t), (E = T t k v t)
+(E = T t k d t), (E = insert k v t), (E = insert k d t), (None = Some v), (None = Some d)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 60.159 seconds
+
+
+Label: 0 (0)
+(BST t), (BST (insert k v t)), (BST (insert k d t))
+
+Label: 1 (1)
+(In (k, v) (elements t)), (In (k, v) (fast_elements t))
+
+Label: 2 (2)
+(v = gv2), (gv2 = v), (lookup d k t = gv2), (lookup v k t = gv2), (insert k gv2 t = t), (lookup gv2 k t = gv2), (In (k, gv2) (elements t)), (In (k, gv2) (fast_elements t))
+
+Label: 3 (3)
+(true = gv0), (false <> gv0), (bound k t = gv0)
+
+Label: 4 (4)
+(true = gv1), (false <> gv1), (bound k t = gv1)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (BST t -> In (k, v) (elements t) -> bound k t = true /\ lookup d k t = v)
+
+2. (lookup (lookup d k t) k t = lookup d k t)
+
+3. (In (k, v) (elements t) -> In (k, v) (fast_elements t))
+(In (k, v) (fast_elements t) -> BST t -> bound k t = true /\ lookup d k t = v)
+
+4. (BST t -> BST (insert k d t))
+(In (k, v) (elements t) ->  BST (insert k d t) -> bound k t = true /\ lookup d k t = v)
+
+5. (BST t -> BST (insert k v t))
+(In (k, v) (elements t) ->  BST (insert k v t) -> bound k t = true /\ lookup d k t = v)
+
+6. (In (k, v) (elements t) ->  false <> gv1 -> BST t -> bound k t = gv1 /\ lookup d k t = v)
+
+7. (In (k, v) (elements t) ->  BST t -> bound k t = gv1 -> bound k t = gv1 /\ lookup d k t = v)
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 92.261 seconds
+
+Number of Result Pairs Returned: 7
+
+1. (BST t -> In (k, v) (elements t) -> bound k t = true /\ lookup d k t = v)
+
+2. (lookup (lookup d k t) k t = lookup d k t)
+
+3. (In (k, v) (elements t) -> In (k, v) (fast_elements t))
+(In (k, v) (fast_elements t) -> BST t -> bound k t = true /\ lookup d k t = v)
+
+4. (BST t -> BST (insert k d t))
+(In (k, v) (elements t) ->  BST (insert k d t) -> bound k t = true /\ lookup d k t = v)
+
+5. (BST t -> BST (insert k v t))
+(In (k, v) (elements t) ->  BST (insert k v t) -> bound k t = true /\ lookup d k t = v)

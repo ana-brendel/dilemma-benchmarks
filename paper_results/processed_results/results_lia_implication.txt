@@ -1,0 +1,169 @@
+[TOTAL] 9
+
+[SUCCESS] 4
+    [SUCCESS][1][GENERALIZE] 1
+    [SUCCESS][5][WEAKEN] 2
+    [SUCCESS][5][INFER] 1
+
+[FAIL] 5
+    [FAIL][RESOURCE] 2
+    [FAIL][IMPLEMENTATION] 1
+    [FAIL][INCOMPLETE] 2
+
+-----------------------------------------------
+
+[SUCCESS][5][WEAKEN]
+Test = leftist_mergea_by_rank_right_height_5
+[TIME] 519.155
+[COUNTS] 51
+[TARGET] has_leftist_property h = true -> rank h = right_height h
+
+1. (has_leftist_property l = true ->  has_leftist_property r = true ->  right_height l < right_height r ->  has_leftist_property (Heap (rank l + 1) v r l) = true)
+
+2. (right_height l < right_height r -> right_height l < hsize r)
+(right_height l < hsize r ->  has_leftist_property l = true ->  has_leftist_property r = true ->  has_leftist_property (Heap (rank l + 1) v r l) = true)
+
+3. (right_height l < right_height r -> right_height l <= hsize r)
+(has_leftist_property l = true ->  has_leftist_property r = true ->  right_height l <= hsize r ->  has_leftist_property (Heap (rank l + 1) v r l) = true)
+
+4. (right_height l < right_height r -> right_height l <= right_height r)
+(has_leftist_property l = true ->  has_leftist_property r = true ->  right_height l <= right_height r ->  has_leftist_property (Heap (rank l + 1) v r l) = true)
+
+5. (has_leftist_property l = true -> right_height l = rank l)
+(right_height l < right_height r ->  right_height l = rank l ->  has_leftist_property r = true ->  has_leftist_property (Heap (rank l + 1) v r l) = true)
+
+
+
+[FAIL][RESOURCE]
+Test = leftist_mergea_by_rank_right_height_1
+[TIME] 412.847
+[COUNTS] 9
+[TARGET] has_leftist_property h = true -> rank h = right_height h
+
+1. (has_leftist_property r = gv6 ->  has_leftist_property l = gv6 ->  rank r <= rank l -> has_leftist_property (Heap (rank r + 1) v l r) = gv6)
+
+2. (rank r <= rank l ->  has_leftist_property l = true ->  has_leftist_property r = true ->  has_leftist_property (Heap (rank r + 1) v l r) = true)
+
+3. (false <> gv0 -> gv0 = true)
+
+4. (mergea v l r = gv1 ->  has_leftist_property l = gv6 ->  has_leftist_property r = gv6 -> has_leftist_property gv1 = gv6)
+
+5. (right_height r = gv3 ->  has_leftist_property l = gv6 ->  has_leftist_property r = gv6 ->  gv3 <= rank l -> has_leftist_property (Heap (gv3 + 1) v l r) = gv6)
+
+
+
+[FAIL][IMPLEMENTATION][RANK]
+Test = leftist_merge_by_leftist_mergea
+[TIME] 2748.57
+[COUNTS] 8
+[TARGET] has_leftist_property l && has_leftist_property r = true -> has_leftist_property (mergea v l r) = true
+
+1. (has_leftist_property h1_1 = gv4 ->  has_leftist_property h1_2 = gv4 ->  has_leftist_property gv3 = gv4 ->  has_leftist_property (mergea n0 h1_1 (merge h1_2 gv3)) = gv4)
+
+2. (has_leftist_property h1_1 = true ->  has_leftist_property h1_2 = true ->  has_leftist_property gv3 = true ->  has_leftist_property (mergea n0 h1_1 (merge h1_2 gv3)) = true)
+
+3. (has_leftist_property h1_1 = gv4 ->  has_leftist_property h1_2 = gv4 ->  has_leftist_property (Heap n1 n2 h2_1 h2_2) = gv4 ->  has_leftist_property (mergea n0 h1_1 (merge h1_2 (Heap n1 n2 h2_1 h2_2))) =  gv4)
+
+4. (has_leftist_property (Heap n1 n2 h2_1 h2_2) = true ->  has_leftist_property h1_2 = true ->  has_leftist_property h1_1 = true ->  has_leftist_property (mergea n0 h1_1 (merge h1_2 (Heap n1 n2 h2_1 h2_2))) =  true)
+
+5. (false <> gv0 -> gv0 = true)
+
+
+
+
+[FAIL][INCOMPLETE]
+Test = leftist_mergea_by_rank_right_height_6
+[TIME] -1
+[COUNTS] 0
+[TARGET] has_leftist_property h = true -> rank h = right_height h
+
+RESULTS NOT FOUND
+
+
+
+[FAIL][RESOURCE]
+Test = leftist_mergea_by_rank_right_height_2
+[TIME] 415.874
+[COUNTS] 9
+[TARGET] has_leftist_property h = true -> rank h = right_height h
+
+1. (has_leftist_property r = gv6 ->  has_leftist_property l = gv6 ->  right_height r <= rank l ->  has_leftist_property (Heap (rank r + 1) v l r) = gv6)
+
+2. (right_height r <= rank l ->  has_leftist_property l = true ->  has_leftist_property r = true ->  has_leftist_property (Heap (rank r + 1) v l r) = true)
+
+3. (false <> gv0 -> gv0 = true)
+
+4. (mergea v l r = gv1 ->  has_leftist_property l = gv6 ->  has_leftist_property r = gv6 -> has_leftist_property gv1 = gv6)
+
+5. (right_height r = gv3 ->  has_leftist_property l = gv6 ->  has_leftist_property r = gv6 ->  right_height r <= rank l ->  has_leftist_property (Heap (gv3 + 1) v l r) = gv6)
+
+
+
+[SUCCESS][5][INFER]
+Test = leftist_hinsert_by_leftist_merge
+[TIME] 148.584
+[COUNTS] 14
+[TARGET] has_leftist_property h1 && has_leftist_property h2 = true -> has_leftist_property (merge h1 h2) = true
+
+1. (has_leftist_property x = true ->  has_leftist_property (merge (Heap 1 n Hleaf Hleaf) x) = true)
+
+2. (hinsert x n = merge (Heap 1 n Hleaf Hleaf) x)
+
+3. (false <> gv0 -> gv0 = true)
+
+4. (true = has_leftist_property gv2 ->  has_leftist_property x = true -> has_leftist_property (merge gv2 x) = true)
+
+5. (false <> gv6 ->  has_leftist_property x = gv6 ->  has_leftist_property (merge (Heap 1 n Hleaf Hleaf) x) = gv6)
+
+
+
+[FAIL][INCOMPLETE]
+Test = leftist_mergea_by_rank_right_height_3
+[TIME] -1
+[COUNTS] 0
+[TARGET] has_leftist_property h = true -> rank h = right_height h
+
+RESULTS NOT FOUND
+
+
+
+[SUCCESS][5][WEAKEN]
+Test = leftist_mergea_by_rank_right_height_4
+[TIME] 502.749
+[COUNTS] 53
+[TARGET] has_leftist_property h = true -> rank h = right_height h
+
+1. (has_leftist_property r = gv6 ->  has_leftist_property l = gv6 ->  rank l < rank r -> has_leftist_property (Heap (rank l + 1) v r l) = gv6)
+
+2. (rank l < rank r ->  has_leftist_property l = true ->  has_leftist_property r = true ->  has_leftist_property (Heap (rank l + 1) v r l) = true)
+
+3. (has_leftist_property l = true -> right_height l <= rank l)
+(rank l < rank r ->  has_leftist_property r = true ->  right_height l <= rank l ->  has_leftist_property (Heap (rank l + 1) v r l) = true)
+
+4. (has_leftist_property l = true -> right_height l = rank l)
+(rank l < rank r ->  right_height l = rank l ->  has_leftist_property r = true ->  has_leftist_property (Heap (rank l + 1) v r l) = true)
+
+5. (rank l < rank r -> rank l <= rank r)
+(has_leftist_property l = true ->  has_leftist_property r = true ->  rank l <= rank r -> has_leftist_property (Heap (rank l + 1) v r l) = true)
+
+
+
+[SUCCESS][1][GENERALIZE]
+Test = leftist_hinsert_mulit_by_leftist_hinsert
+[TIME] 140.013
+[COUNTS] 5
+[TARGET] has_leftist_property x = true -> has_leftist_property (hinsert x n) = true
+
+1. (has_leftist_property gv2 = true ->  has_leftist_property (hinsert gv2 n) = true)
+
+2. (has_leftist_property h = true ->  has_leftist_property (hinsert (hinsert_all l h) n) = true)
+
+3. (false <> gv0 -> gv0 = true)
+
+4. (false <> gv3 ->  has_leftist_property h = gv3 ->  has_leftist_property (hinsert (hinsert_all l h) n) = gv3)
+
+5. (has_leftist_property h = gv3 ->  true = has_leftist_property h ->  has_leftist_property (hinsert (hinsert_all l h) n) = gv3)
+
+
+
+

@@ -1,0 +1,143 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+
+----------------------------------
+Goal: (len (rev l2) = len l2)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 1.544 seconds
+
+gv1 : lst = (rev l2)
+gv0 : nat = (len (rev l2))
+gv2 : nat = (len l2)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 19.609 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (len (rev l2) = len l2)
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (len l2 = gv2)
+
+----------------------------------
+Goal: (len (rev l2) = gv2)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (len (rev l2) = gv0)
+
+----------------------------------
+Goal: (gv0 = len l2)
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (rev l2 = gv1)
+
+----------------------------------
+Goal: (len gv1 = len l2)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 19.742 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+Datatypes.app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+lst : Set
+queue : Set
+len : (lst -> nat)
+qlen : (queue -> nat)
+app : (lst -> lst -> lst)
+rev : (lst -> lst)
+leb : (nat -> nat -> bool)
+amortizeQueue : (lst -> lst -> queue)
+Nil : lst
+Cons : (nat -> lst -> lst)
+Queue : (lst -> lst -> queue)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 19.875 seconds
+
+
+Label: 0 (0)
+(gv2 < gv2), (gv2 <= gv2), (gv2 = gv2), (l2 = l2), (false = leb gv2 gv2), (true = leb gv2 gv2), (gv2 < len l2), (len l2 < gv2), (gv2 <= len l2), (len l2 <= gv2)
+(~ gv2 < gv2), (~ gv2 <= gv2), (gv2 <> gv2), (l2 <> l2), (Queue l2 l2 = amortizeQueue l2 l2), (None = Some gv2), (Cons gv2 l2 = l2), (Cons gv2 l2 = rev l2), (Cons gv2 l2 = app l2 l2), (rev l2 = l2)
+(rev l2 = app l2 l2), (app l2 l2 = l2), (Nil = Cons gv2 l2), (Nil = rev l2), (Nil = app l2 l2), (len l2 = gv2), (None = Some l2)
+
+Label: 1 (1)
+(gv0 < gv0), (gv0 <= gv0), (l2 = l2), (gv0 = gv0), (false = leb gv0 gv0), (true = leb gv0 gv0), (gv0 < len l2), (len l2 < gv0), (gv0 <= len l2), (len l2 <= gv0)
+(~ gv0 < gv0), (~ gv0 <= gv0), (l2 <> l2), (gv0 <> gv0), (Queue l2 l2 = amortizeQueue l2 l2), (None = Some gv0), (Cons gv0 l2 = l2), (Cons gv0 l2 = rev l2), (Cons gv0 l2 = app l2 l2), (rev l2 = l2)
+(rev l2 = app l2 l2), (app l2 l2 = l2), (Nil = Cons gv0 l2), (Nil = rev l2), (Nil = app l2 l2), (len l2 = gv0), (None = Some l2)
+
+Label: 2 (2)
+(l2 = l2), (l2 = gv1), (gv1 = l2), (gv1 = gv1), (len l2 < len gv1), (len gv1 < len l2), (len l2 <= len gv1), (len gv1 <= len l2), (l2 <> l2), (l2 <> gv1)
+(gv1 <> l2), (gv1 <> gv1), (Queue l2 l2 = amortizeQueue l2 l2), (Queue l2 l2 = amortizeQueue l2 gv1), (Queue l2 l2 = amortizeQueue gv1 l2), (Queue l2 l2 = amortizeQueue gv1 gv1), (Queue l2 gv1 = amortizeQueue l2 l2), (Queue l2 gv1 = amortizeQueue l2 gv1), (Queue l2 gv1 = amortizeQueue gv1 l2), (Queue l2 gv1 = amortizeQueue gv1 gv1)
+(Queue gv1 l2 = amortizeQueue l2 l2), (Queue gv1 l2 = amortizeQueue l2 gv1), (Queue gv1 l2 = amortizeQueue gv1 l2), (Queue gv1 l2 = amortizeQueue gv1 gv1), (Queue gv1 gv1 = amortizeQueue l2 l2), (Queue gv1 gv1 = amortizeQueue l2 gv1), (Queue gv1 gv1 = amortizeQueue gv1 l2), (Queue gv1 gv1 = amortizeQueue gv1 gv1), (rev l2 = l2), (rev l2 = gv1)
+(rev l2 = app l2 l2), (rev l2 = app l2 gv1), (rev l2 = app gv1 l2), (rev l2 = app gv1 gv1), (rev gv1 = l2), (rev gv1 = gv1), (rev gv1 = app l2 l2), (rev gv1 = app l2 gv1), (rev gv1 = app gv1 l2), (rev gv1 = app gv1 gv1)
+(app l2 l2 = l2), (app l2 l2 = gv1), (app l2 gv1 = l2), (app l2 gv1 = gv1), (app gv1 l2 = l2), (app gv1 l2 = gv1), (app gv1 gv1 = l2), (app gv1 gv1 = gv1), (Nil = rev l2), (Nil = rev gv1)
+(Nil = app l2 l2), (Nil = app l2 gv1), (Nil = app gv1 l2), (Nil = app gv1 gv1), (None = Some l2), (None = Some gv1)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 24.48 seconds
+
+
+Label: 0 (0)
+(len l2 = gv2)
+
+Label: 1 (1)
+(len l2 = gv0)
+
+Label: 2 (2)
+(rev l2 = gv1), (rev gv1 = l2)
+
+
+
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 35.379 seconds
+
+Number of Result Pairs Returned: 2
+
+1. (len (rev l2) = len l2)
+
+2. (rev gv1 = l2 -> len gv1 = len l2)

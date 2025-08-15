@@ -1,0 +1,802 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (tree_elems t2 br0)
+ -- (tree_elems (Node n t1 t2) e1)
+ -- (forall e1 e2 : list nat,
+ tree_elems t1 e1 -> tree_elems t1 e2 -> Permutation e1 e2)
+ -- (tree_elems t1 bl0)
+ -- (Permutation e1 (n :: bl ++ br))
+ -- (Permutation bl bl0)
+ -- (Permutation e2 (n :: bl0 ++ br0))
+ -- (Permutation br br0)
+ -- (tree_elems (Node n t1 t2) e2)
+ -- (forall e1 e2 : list nat,
+ tree_elems t2 e1 -> tree_elems t2 e2 -> Permutation e1 e2)
+
+----------------------------------
+Goal: (Permutation (bl ++ br) (bl0 ++ br0))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3.733 seconds
+
+gv1 : (list nat) = (bl0 ++ br0)
+gv0 : (list nat) = (bl ++ br)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 114.258 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (Permutation bl bl0)
+ -- (Permutation br br0)
+
+----------------------------------
+Goal: (Permutation (bl ++ br) (bl0 ++ br0))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (Permutation bl bl0)
+ -- (bl ++ br = gv0)
+ -- (Permutation br br0)
+
+----------------------------------
+Goal: (Permutation gv0 (bl0 ++ br0))
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (Permutation e1 (n :: gv0))
+ -- (Permutation bl bl0)
+ -- (Permutation e2 (n :: gv1))
+ -- (Permutation br br0)
+
+----------------------------------
+Goal: (Permutation gv0 gv1)
+Case: Valid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (bl0 ++ br0 = gv1)
+ -- (Permutation bl bl0)
+ -- (Permutation br br0)
+
+----------------------------------
+Goal: (Permutation (bl ++ br) gv1)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 114.395 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+In : (forall A : Type, A -> list A -> Prop)
+existsb : (forall A : Type, (A -> bool) -> list A -> bool)
+forallb : (forall A : Type, (A -> bool) -> list A -> bool)
+Forall : (forall A : Type, (A -> Prop) -> list A -> Prop)
+nodup : (forall A : Type, (forall x y : A, {x = y} + {x <> y}) -> list A -> list A)
+map : (forall A B : Type, (A -> B) -> list A -> list B)
+Permutation : (forall A : Type, list A -> list A -> Prop)
+geb : (nat -> nat -> bool)
+gtb : (nat -> nat -> bool)
+tree : Set
+tree_rect : (forall P : tree -> Type,
+ (forall (n : nat) (t : tree),
+  P t -> forall t0 : tree, P t0 -> P (Node n t t0)) ->
+ P Leaf -> forall t : tree, P t)
+tree_rec : (forall P : tree -> Set,
+ (forall (n : nat) (t : tree),
+  P t -> forall t0 : tree, P t0 -> P (Node n t t0)) ->
+ P Leaf -> forall t : tree, P t)
+smash : (tree -> tree -> tree)
+carry : (list tree -> tree -> list tree)
+insert : (nat -> list tree -> list tree)
+join : (list tree -> list tree -> tree -> list tree)
+unzip : (tree -> (list tree -> list tree) -> list tree)
+heap_delete_max : (tree -> list tree)
+find_max' : (nat -> list tree -> nat)
+find_max : (list tree -> option nat)
+delete_max_aux : (nat -> list tree -> list tree * list tree)
+delete_max : (list tree -> option (nat * list tree))
+merge : (list tree -> list tree -> list tree)
+pow2heapp : (nat -> nat -> tree -> Prop)
+pow2heap : (nat -> tree -> Prop)
+priqq : (nat -> list tree -> Prop)
+priq : (list tree -> Prop)
+tree_elems : (tree -> list nat -> Prop)
+priqueue_elems : (list tree -> list nat -> Prop)
+Abs : (list tree -> list nat -> Prop)
+Node : (nat -> tree -> tree -> tree)
+Leaf : tree
+
+Label: 0 (0)
+Abducted Assumption: (Permutation bl bl0)
+Positive Examples: 332
+Negative Examples: 352
+
+Label: 1 (1)
+Abducted Assumption: (Permutation br br0)
+Positive Examples: 376
+Negative Examples: 308
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 21
+Negative Examples: 45
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 26
+Negative Examples: 56
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 114.75 seconds
+
+
+Label: 0 (0)
+(Permutation br0 br0), (Permutation br0 bl0), (Permutation br0 br), (Permutation br0 bl), (Permutation bl0 br0), (Permutation bl0 bl0), (Permutation bl0 br), (Permutation bl0 bl), (Permutation br br0), (Permutation br bl0)
+(Permutation br br), (Permutation br bl), (Permutation bl br0), (Permutation bl bl0), (Permutation bl br), (Permutation bl bl), (br0 = br0), (br0 = bl0), (br0 = br), (br0 = bl)
+(bl0 = br0), (bl0 = bl0), (bl0 = br), (bl0 = bl), (br = br0), (br = bl0), (br = br), (br = bl), (bl = br0), (bl = bl0)
+(bl = br), (bl = bl), (tree_elems Leaf br0), (tree_elems Leaf bl0), (tree_elems Leaf br), (tree_elems Leaf bl), (tree_elems Leaf (br0 ++ br0)), (tree_elems Leaf (br0 ++ bl0)), (tree_elems Leaf (br0 ++ br)), (tree_elems Leaf (br0 ++ bl))
+(tree_elems Leaf (bl0 ++ br0)), (tree_elems Leaf (bl0 ++ bl0)), (tree_elems Leaf (bl0 ++ br)), (tree_elems Leaf (bl0 ++ bl)), (tree_elems Leaf (br ++ br0)), (tree_elems Leaf (br ++ bl0)), (tree_elems Leaf (br ++ br)), (tree_elems Leaf (br ++ bl)), (tree_elems Leaf (bl ++ br0)), (tree_elems Leaf (bl ++ bl0))
+(tree_elems Leaf (bl ++ br)), (tree_elems Leaf (bl ++ bl)), (tree_elems Leaf []), (pow2heapp (length br0) (length br0) Leaf), (pow2heapp (length br0) (length bl0) Leaf), (pow2heapp (length br0) (length br) Leaf), (pow2heapp (length br0) (length bl) Leaf), (pow2heapp (length bl0) (length br0) Leaf), (pow2heapp (length bl0) (length bl0) Leaf), (pow2heapp (length bl0) (length br) Leaf)
+(pow2heapp (length bl0) (length bl) Leaf), (pow2heapp (length br) (length br0) Leaf), (pow2heapp (length br) (length bl0) Leaf), (pow2heapp (length br) (length br) Leaf), (pow2heapp (length br) (length bl) Leaf), (pow2heapp (length bl) (length br0) Leaf), (pow2heapp (length bl) (length bl0) Leaf), (pow2heapp (length bl) (length br) Leaf), (pow2heapp (length bl) (length bl) Leaf), (Permutation br0 (br0 ++ br0))
+(Permutation br0 (br0 ++ bl0)), (Permutation br0 (br0 ++ br)), (Permutation br0 (br0 ++ bl)), (Permutation br0 (bl0 ++ br0)), (Permutation br0 (bl0 ++ bl0)), (Permutation br0 (bl0 ++ br)), (Permutation br0 (bl0 ++ bl)), (Permutation br0 (br ++ br0)), (Permutation br0 (br ++ bl0)), (Permutation br0 (br ++ br))
+(Permutation br0 (br ++ bl)), (Permutation br0 (bl ++ br0)), (Permutation br0 (bl ++ bl0)), (Permutation br0 (bl ++ br)), (Permutation br0 (bl ++ bl)), (Permutation br0 []), (Permutation bl0 (br0 ++ br0)), (Permutation bl0 (br0 ++ bl0)), (Permutation bl0 (br0 ++ br)), (Permutation bl0 (br0 ++ bl))
+(Permutation bl0 (bl0 ++ br0)), (Permutation bl0 (bl0 ++ bl0)), (Permutation bl0 (bl0 ++ br)), (Permutation bl0 (bl0 ++ bl)), (Permutation bl0 (br ++ br0)), (Permutation bl0 (br ++ bl0)), (Permutation bl0 (br ++ br)), (Permutation bl0 (br ++ bl)), (Permutation bl0 (bl ++ br0)), (Permutation bl0 (bl ++ bl0))
+(Permutation bl0 (bl ++ br)), (Permutation bl0 (bl ++ bl)), (Permutation bl0 []), (Permutation br (br0 ++ br0)), (Permutation br (br0 ++ bl0)), (Permutation br (br0 ++ br)), (Permutation br (br0 ++ bl)), (Permutation br (bl0 ++ br0)), (Permutation br (bl0 ++ bl0)), (Permutation br (bl0 ++ br))
+(Permutation br (bl0 ++ bl)), (Permutation br (br ++ br0)), (Permutation br (br ++ bl0)), (Permutation br (br ++ br)), (Permutation br (br ++ bl)), (Permutation br (bl ++ br0)), (Permutation br (bl ++ bl0)), (Permutation br (bl ++ br)), (Permutation br (bl ++ bl)), (Permutation br [])
+(Permutation bl (br0 ++ br0)), (Permutation bl (br0 ++ bl0)), (Permutation bl (br0 ++ br)), (Permutation bl (br0 ++ bl)), (Permutation bl (bl0 ++ br0)), (Permutation bl (bl0 ++ bl0)), (Permutation bl (bl0 ++ br)), (Permutation bl (bl0 ++ bl)), (Permutation bl (br ++ br0)), (Permutation bl (br ++ bl0))
+(Permutation bl (br ++ br)), (Permutation bl (br ++ bl)), (Permutation bl (bl ++ br0)), (Permutation bl (bl ++ bl0)), (Permutation bl (bl ++ br)), (Permutation bl (bl ++ bl)), (Permutation bl []), (Permutation (br0 ++ br0) br0), (Permutation (br0 ++ br0) bl0), (Permutation (br0 ++ br0) br)
+(Permutation (br0 ++ br0) bl), (Permutation (br0 ++ br0) (br0 ++ bl0)), (Permutation (br0 ++ br0) (br0 ++ br)), (Permutation (br0 ++ br0) (br0 ++ bl)), (Permutation (br0 ++ br0) (bl0 ++ br0)), (Permutation (br0 ++ br0) (bl0 ++ bl0)), (Permutation (br0 ++ br0) (bl0 ++ br)), (Permutation (br0 ++ br0) (bl0 ++ bl)), (Permutation (br0 ++ br0) (br ++ br0)), (Permutation (br0 ++ br0) (br ++ bl0))
+(Permutation (br0 ++ br0) (br ++ br)), (Permutation (br0 ++ br0) (br ++ bl)), (Permutation (br0 ++ br0) (bl ++ br0)), (Permutation (br0 ++ br0) (bl ++ bl0)), (Permutation (br0 ++ br0) (bl ++ br)), (Permutation (br0 ++ br0) (bl ++ bl)), (Permutation (br0 ++ br0) []), (Permutation (br0 ++ bl0) br0), (Permutation (br0 ++ bl0) bl0), (Permutation (br0 ++ bl0) br)
+(Permutation (br0 ++ bl0) bl), (Permutation (br0 ++ bl0) (br0 ++ br0)), (Permutation (br0 ++ bl0) (br0 ++ br)), (Permutation (br0 ++ bl0) (br0 ++ bl)), (Permutation (br0 ++ bl0) (bl0 ++ br0)), (Permutation (br0 ++ bl0) (bl0 ++ bl0)), (Permutation (br0 ++ bl0) (bl0 ++ br)), (Permutation (br0 ++ bl0) (bl0 ++ bl)), (Permutation (br0 ++ bl0) (br ++ br0)), (Permutation (br0 ++ bl0) (br ++ bl0))
+(Permutation (br0 ++ bl0) (br ++ br)), (Permutation (br0 ++ bl0) (br ++ bl)), (Permutation (br0 ++ bl0) (bl ++ br0)), (Permutation (br0 ++ bl0) (bl ++ bl0)), (Permutation (br0 ++ bl0) (bl ++ br)), (Permutation (br0 ++ bl0) (bl ++ bl)), (Permutation (br0 ++ bl0) []), (Permutation (br0 ++ br) br0), (Permutation (br0 ++ br) bl0), (Permutation (br0 ++ br) br)
+(Permutation (br0 ++ br) bl), (Permutation (br0 ++ br) (br0 ++ br0)), (Permutation (br0 ++ br) (br0 ++ bl0)), (Permutation (br0 ++ br) (br0 ++ bl)), (Permutation (br0 ++ br) (bl0 ++ br0)), (Permutation (br0 ++ br) (bl0 ++ bl0)), (Permutation (br0 ++ br) (bl0 ++ br)), (Permutation (br0 ++ br) (bl0 ++ bl)), (Permutation (br0 ++ br) (br ++ br0)), (Permutation (br0 ++ br) (br ++ bl0))
+(Permutation (br0 ++ br) (br ++ br)), (Permutation (br0 ++ br) (br ++ bl)), (Permutation (br0 ++ br) (bl ++ br0)), (Permutation (br0 ++ br) (bl ++ bl0)), (Permutation (br0 ++ br) (bl ++ br)), (Permutation (br0 ++ br) (bl ++ bl)), (Permutation (br0 ++ br) []), (Permutation (br0 ++ bl) br0), (Permutation (br0 ++ bl) bl0), (Permutation (br0 ++ bl) br)
+(Permutation (br0 ++ bl) bl), (Permutation (br0 ++ bl) (br0 ++ br0)), (Permutation (br0 ++ bl) (br0 ++ bl0)), (Permutation (br0 ++ bl) (br0 ++ br)), (Permutation (br0 ++ bl) (bl0 ++ br0)), (Permutation (br0 ++ bl) (bl0 ++ bl0)), (Permutation (br0 ++ bl) (bl0 ++ br)), (Permutation (br0 ++ bl) (bl0 ++ bl)), (Permutation (br0 ++ bl) (br ++ br0)), (Permutation (br0 ++ bl) (br ++ bl0))
+(Permutation (br0 ++ bl) (br ++ br)), (Permutation (br0 ++ bl) (br ++ bl)), (Permutation (br0 ++ bl) (bl ++ br0)), (Permutation (br0 ++ bl) (bl ++ bl0)), (Permutation (br0 ++ bl) (bl ++ br)), (Permutation (br0 ++ bl) (bl ++ bl)), (Permutation (br0 ++ bl) []), (Permutation (bl0 ++ br0) br0), (Permutation (bl0 ++ br0) bl0), (Permutation (bl0 ++ br0) br)
+(Permutation (bl0 ++ br0) bl), (Permutation (bl0 ++ br0) (br0 ++ br0)), (Permutation (bl0 ++ br0) (br0 ++ bl0)), (Permutation (bl0 ++ br0) (br0 ++ br)), (Permutation (bl0 ++ br0) (br0 ++ bl)), (Permutation (bl0 ++ br0) (bl0 ++ bl0)), (Permutation (bl0 ++ br0) (bl0 ++ br)), (Permutation (bl0 ++ br0) (bl0 ++ bl)), (Permutation (bl0 ++ br0) (br ++ br0)), (Permutation (bl0 ++ br0) (br ++ bl0))
+(Permutation (bl0 ++ br0) (br ++ br)), (Permutation (bl0 ++ br0) (br ++ bl)), (Permutation (bl0 ++ br0) (bl ++ br0)), (Permutation (bl0 ++ br0) (bl ++ bl0)), (Permutation (bl0 ++ br0) (bl ++ br)), (Permutation (bl0 ++ br0) (bl ++ bl)), (Permutation (bl0 ++ br0) []), (Permutation (bl0 ++ bl0) br0), (Permutation (bl0 ++ bl0) bl0), (Permutation (bl0 ++ bl0) br)
+(Permutation (bl0 ++ bl0) bl), (Permutation (bl0 ++ bl0) (br0 ++ br0)), (Permutation (bl0 ++ bl0) (br0 ++ bl0)), (Permutation (bl0 ++ bl0) (br0 ++ br)), (Permutation (bl0 ++ bl0) (br0 ++ bl)), (Permutation (bl0 ++ bl0) (bl0 ++ br0)), (Permutation (bl0 ++ bl0) (bl0 ++ br)), (Permutation (bl0 ++ bl0) (bl0 ++ bl)), (Permutation (bl0 ++ bl0) (br ++ br0)), (Permutation (bl0 ++ bl0) (br ++ bl0))
+(Permutation (bl0 ++ bl0) (br ++ br)), (Permutation (bl0 ++ bl0) (br ++ bl)), (Permutation (bl0 ++ bl0) (bl ++ br0)), (Permutation (bl0 ++ bl0) (bl ++ bl0)), (Permutation (bl0 ++ bl0) (bl ++ br)), (Permutation (bl0 ++ bl0) (bl ++ bl)), (Permutation (bl0 ++ bl0) []), (Permutation (bl0 ++ br) br0), (Permutation (bl0 ++ br) bl0), (Permutation (bl0 ++ br) br)
+(Permutation (bl0 ++ br) bl), (Permutation (bl0 ++ br) (br0 ++ br0)), (Permutation (bl0 ++ br) (br0 ++ bl0)), (Permutation (bl0 ++ br) (br0 ++ br)), (Permutation (bl0 ++ br) (br0 ++ bl)), (Permutation (bl0 ++ br) (bl0 ++ br0)), (Permutation (bl0 ++ br) (bl0 ++ bl0)), (Permutation (bl0 ++ br) (bl0 ++ bl)), (Permutation (bl0 ++ br) (br ++ br0)), (Permutation (bl0 ++ br) (br ++ bl0))
+(Permutation (bl0 ++ br) (br ++ br)), (Permutation (bl0 ++ br) (br ++ bl)), (Permutation (bl0 ++ br) (bl ++ br0)), (Permutation (bl0 ++ br) (bl ++ bl0)), (Permutation (bl0 ++ br) (bl ++ br)), (Permutation (bl0 ++ br) (bl ++ bl)), (Permutation (bl0 ++ br) []), (Permutation (bl0 ++ bl) br0), (Permutation (bl0 ++ bl) bl0), (Permutation (bl0 ++ bl) br)
+(Permutation (bl0 ++ bl) bl), (Permutation (bl0 ++ bl) (br0 ++ br0)), (Permutation (bl0 ++ bl) (br0 ++ bl0)), (Permutation (bl0 ++ bl) (br0 ++ br)), (Permutation (bl0 ++ bl) (br0 ++ bl)), (Permutation (bl0 ++ bl) (bl0 ++ br0)), (Permutation (bl0 ++ bl) (bl0 ++ bl0)), (Permutation (bl0 ++ bl) (bl0 ++ br)), (Permutation (bl0 ++ bl) (br ++ br0)), (Permutation (bl0 ++ bl) (br ++ bl0))
+(Permutation (bl0 ++ bl) (br ++ br)), (Permutation (bl0 ++ bl) (br ++ bl)), (Permutation (bl0 ++ bl) (bl ++ br0)), (Permutation (bl0 ++ bl) (bl ++ bl0)), (Permutation (bl0 ++ bl) (bl ++ br)), (Permutation (bl0 ++ bl) (bl ++ bl)), (Permutation (bl0 ++ bl) []), (Permutation (br ++ br0) br0), (Permutation (br ++ br0) bl0), (Permutation (br ++ br0) br)
+(Permutation (br ++ br0) bl), (Permutation (br ++ br0) (br0 ++ br0)), (Permutation (br ++ br0) (br0 ++ bl0)), (Permutation (br ++ br0) (br0 ++ br)), (Permutation (br ++ br0) (br0 ++ bl)), (Permutation (br ++ br0) (bl0 ++ br0)), (Permutation (br ++ br0) (bl0 ++ bl0)), (Permutation (br ++ br0) (bl0 ++ br)), (Permutation (br ++ br0) (bl0 ++ bl)), (Permutation (br ++ br0) (br ++ bl0))
+(Permutation (br ++ br0) (br ++ br)), (Permutation (br ++ br0) (br ++ bl)), (Permutation (br ++ br0) (bl ++ br0)), (Permutation (br ++ br0) (bl ++ bl0)), (Permutation (br ++ br0) (bl ++ br)), (Permutation (br ++ br0) (bl ++ bl)), (Permutation (br ++ br0) []), (Permutation (br ++ bl0) br0), (Permutation (br ++ bl0) bl0), (Permutation (br ++ bl0) br)
+(Permutation (br ++ bl0) bl), (Permutation (br ++ bl0) (br0 ++ br0)), (Permutation (br ++ bl0) (br0 ++ bl0)), (Permutation (br ++ bl0) (br0 ++ br)), (Permutation (br ++ bl0) (br0 ++ bl)), (Permutation (br ++ bl0) (bl0 ++ br0)), (Permutation (br ++ bl0) (bl0 ++ bl0)), (Permutation (br ++ bl0) (bl0 ++ br)), (Permutation (br ++ bl0) (bl0 ++ bl)), (Permutation (br ++ bl0) (br ++ br0))
+(Permutation (br ++ bl0) (br ++ br)), (Permutation (br ++ bl0) (br ++ bl)), (Permutation (br ++ bl0) (bl ++ br0)), (Permutation (br ++ bl0) (bl ++ bl0)), (Permutation (br ++ bl0) (bl ++ br)), (Permutation (br ++ bl0) (bl ++ bl)), (Permutation (br ++ bl0) []), (Permutation (br ++ br) br0), (Permutation (br ++ br) bl0), (Permutation (br ++ br) br)
+(Permutation (br ++ br) bl), (Permutation (br ++ br) (br0 ++ br0)), (Permutation (br ++ br) (br0 ++ bl0)), (Permutation (br ++ br) (br0 ++ br)), (Permutation (br ++ br) (br0 ++ bl)), (Permutation (br ++ br) (bl0 ++ br0)), (Permutation (br ++ br) (bl0 ++ bl0)), (Permutation (br ++ br) (bl0 ++ br)), (Permutation (br ++ br) (bl0 ++ bl)), (Permutation (br ++ br) (br ++ br0))
+(Permutation (br ++ br) (br ++ bl0)), (Permutation (br ++ br) (br ++ bl)), (Permutation (br ++ br) (bl ++ br0)), (Permutation (br ++ br) (bl ++ bl0)), (Permutation (br ++ br) (bl ++ br)), (Permutation (br ++ br) (bl ++ bl)), (Permutation (br ++ br) []), (Permutation (br ++ bl) br0), (Permutation (br ++ bl) bl0), (Permutation (br ++ bl) br)
+(Permutation (br ++ bl) bl), (Permutation (br ++ bl) (br0 ++ br0)), (Permutation (br ++ bl) (br0 ++ bl0)), (Permutation (br ++ bl) (br0 ++ br)), (Permutation (br ++ bl) (br0 ++ bl)), (Permutation (br ++ bl) (bl0 ++ br0)), (Permutation (br ++ bl) (bl0 ++ bl0)), (Permutation (br ++ bl) (bl0 ++ br)), (Permutation (br ++ bl) (bl0 ++ bl)), (Permutation (br ++ bl) (br ++ br0))
+(Permutation (br ++ bl) (br ++ bl0)), (Permutation (br ++ bl) (br ++ br)), (Permutation (br ++ bl) (bl ++ br0)), (Permutation (br ++ bl) (bl ++ bl0)), (Permutation (br ++ bl) (bl ++ br)), (Permutation (br ++ bl) (bl ++ bl)), (Permutation (br ++ bl) []), (Permutation (bl ++ br0) br0), (Permutation (bl ++ br0) bl0), (Permutation (bl ++ br0) br)
+(Permutation (bl ++ br0) bl), (Permutation (bl ++ br0) (br0 ++ br0)), (Permutation (bl ++ br0) (br0 ++ bl0)), (Permutation (bl ++ br0) (br0 ++ br)), (Permutation (bl ++ br0) (br0 ++ bl)), (Permutation (bl ++ br0) (bl0 ++ br0)), (Permutation (bl ++ br0) (bl0 ++ bl0)), (Permutation (bl ++ br0) (bl0 ++ br)), (Permutation (bl ++ br0) (bl0 ++ bl)), (Permutation (bl ++ br0) (br ++ br0))
+(Permutation (bl ++ br0) (br ++ bl0)), (Permutation (bl ++ br0) (br ++ br)), (Permutation (bl ++ br0) (br ++ bl)), (Permutation (bl ++ br0) (bl ++ bl0)), (Permutation (bl ++ br0) (bl ++ br)), (Permutation (bl ++ br0) (bl ++ bl)), (Permutation (bl ++ br0) []), (Permutation (bl ++ bl0) br0), (Permutation (bl ++ bl0) bl0), (Permutation (bl ++ bl0) br)
+(Permutation (bl ++ bl0) bl), (Permutation (bl ++ bl0) (br0 ++ br0)), (Permutation (bl ++ bl0) (br0 ++ bl0)), (Permutation (bl ++ bl0) (br0 ++ br)), (Permutation (bl ++ bl0) (br0 ++ bl)), (Permutation (bl ++ bl0) (bl0 ++ br0)), (Permutation (bl ++ bl0) (bl0 ++ bl0)), (Permutation (bl ++ bl0) (bl0 ++ br)), (Permutation (bl ++ bl0) (bl0 ++ bl)), (Permutation (bl ++ bl0) (br ++ br0))
+(Permutation (bl ++ bl0) (br ++ bl0)), (Permutation (bl ++ bl0) (br ++ br)), (Permutation (bl ++ bl0) (br ++ bl)), (Permutation (bl ++ bl0) (bl ++ br0)), (Permutation (bl ++ bl0) (bl ++ br)), (Permutation (bl ++ bl0) (bl ++ bl)), (Permutation (bl ++ bl0) []), (Permutation (bl ++ br) br0), (Permutation (bl ++ br) bl0), (Permutation (bl ++ br) br)
+(Permutation (bl ++ br) bl), (Permutation (bl ++ br) (br0 ++ br0)), (Permutation (bl ++ br) (br0 ++ bl0)), (Permutation (bl ++ br) (br0 ++ br)), (Permutation (bl ++ br) (br0 ++ bl)), (Permutation (bl ++ br) (bl0 ++ br0)), (Permutation (bl ++ br) (bl0 ++ bl0)), (Permutation (bl ++ br) (bl0 ++ br)), (Permutation (bl ++ br) (bl0 ++ bl)), (Permutation (bl ++ br) (br ++ br0))
+(Permutation (bl ++ br) (br ++ bl0)), (Permutation (bl ++ br) (br ++ br)), (Permutation (bl ++ br) (br ++ bl)), (Permutation (bl ++ br) (bl ++ br0)), (Permutation (bl ++ br) (bl ++ bl0)), (Permutation (bl ++ br) (bl ++ bl)), (Permutation (bl ++ br) []), (Permutation (bl ++ bl) br0), (Permutation (bl ++ bl) bl0), (Permutation (bl ++ bl) br)
+(Permutation (bl ++ bl) bl), (Permutation (bl ++ bl) (br0 ++ br0)), (Permutation (bl ++ bl) (br0 ++ bl0)), (Permutation (bl ++ bl) (br0 ++ br)), (Permutation (bl ++ bl) (br0 ++ bl)), (Permutation (bl ++ bl) (bl0 ++ br0)), (Permutation (bl ++ bl) (bl0 ++ bl0)), (Permutation (bl ++ bl) (bl0 ++ br)), (Permutation (bl ++ bl) (bl0 ++ bl)), (Permutation (bl ++ bl) (br ++ br0))
+(Permutation (bl ++ bl) (br ++ bl0)), (Permutation (bl ++ bl) (br ++ br)), (Permutation (bl ++ bl) (br ++ bl)), (Permutation (bl ++ bl) (bl ++ br0)), (Permutation (bl ++ bl) (bl ++ bl0)), (Permutation (bl ++ bl) (bl ++ br)), (Permutation (bl ++ bl) []), (Permutation [] br0), (Permutation [] bl0), (Permutation [] br)
+(Permutation [] bl), (Permutation [] (br0 ++ br0)), (Permutation [] (br0 ++ bl0)), (Permutation [] (br0 ++ br)), (Permutation [] (br0 ++ bl)), (Permutation [] (bl0 ++ br0)), (Permutation [] (bl0 ++ bl0)), (Permutation [] (bl0 ++ br)), (Permutation [] (bl0 ++ bl)), (Permutation [] (br ++ br0))
+(Permutation [] (br ++ bl0)), (Permutation [] (br ++ br)), (Permutation [] (br ++ bl)), (Permutation [] (bl ++ br0)), (Permutation [] (bl ++ bl0)), (Permutation [] (bl ++ br)), (Permutation [] (bl ++ bl)), (In (length br0) br0), (In (length br0) bl0), (In (length br0) br)
+(In (length br0) bl), (In (length br0) (br0 ++ br0)), (In (length br0) (br0 ++ bl0)), (In (length br0) (br0 ++ br)), (In (length br0) (br0 ++ bl)), (In (length br0) (bl0 ++ br0)), (In (length br0) (bl0 ++ bl0)), (In (length br0) (bl0 ++ br)), (In (length br0) (bl0 ++ bl)), (In (length br0) (br ++ br0))
+(In (length br0) (br ++ bl0)), (In (length br0) (br ++ br)), (In (length br0) (br ++ bl)), (In (length br0) (bl ++ br0)), (In (length br0) (bl ++ bl0)), (In (length br0) (bl ++ br)), (In (length br0) (bl ++ bl)), (In (length bl0) br0), (In (length bl0) bl0), (In (length bl0) br)
+(In (length bl0) bl), (In (length bl0) (br0 ++ br0)), (In (length bl0) (br0 ++ bl0)), (In (length bl0) (br0 ++ br)), (In (length bl0) (br0 ++ bl)), (In (length bl0) (bl0 ++ br0)), (In (length bl0) (bl0 ++ bl0)), (In (length bl0) (bl0 ++ br)), (In (length bl0) (bl0 ++ bl)), (In (length bl0) (br ++ br0))
+(In (length bl0) (br ++ bl0)), (In (length bl0) (br ++ br)), (In (length bl0) (br ++ bl)), (In (length bl0) (bl ++ br0)), (In (length bl0) (bl ++ bl0)), (In (length bl0) (bl ++ br)), (In (length bl0) (bl ++ bl)), (In (length br) br0), (In (length br) bl0), (In (length br) br)
+(In (length br) bl), (In (length br) (br0 ++ br0)), (In (length br) (br0 ++ bl0)), (In (length br) (br0 ++ br)), (In (length br) (br0 ++ bl)), (In (length br) (bl0 ++ br0)), (In (length br) (bl0 ++ bl0)), (In (length br) (bl0 ++ br)), (In (length br) (bl0 ++ bl)), (In (length br) (br ++ br0))
+(In (length br) (br ++ bl0)), (In (length br) (br ++ br)), (In (length br) (br ++ bl)), (In (length br) (bl ++ br0)), (In (length br) (bl ++ bl0)), (In (length br) (bl ++ br)), (In (length br) (bl ++ bl)), (In (length bl) br0), (In (length bl) bl0), (In (length bl) br)
+(In (length bl) bl), (In (length bl) (br0 ++ br0)), (In (length bl) (br0 ++ bl0)), (In (length bl) (br0 ++ br)), (In (length bl) (br0 ++ bl)), (In (length bl) (bl0 ++ br0)), (In (length bl) (bl0 ++ bl0)), (In (length bl) (bl0 ++ br)), (In (length bl) (bl0 ++ bl)), (In (length bl) (br ++ br0))
+(In (length bl) (br ++ bl0)), (In (length bl) (br ++ br)), (In (length bl) (br ++ bl)), (In (length bl) (bl ++ br0)), (In (length bl) (bl ++ bl0)), (In (length bl) (bl ++ br)), (In (length bl) (bl ++ bl)), (length br0 < length bl0), (length br0 < length br), (length br0 < length bl)
+(length bl0 < length br0), (length bl0 < length br), (length bl0 < length bl), (length br < length br0), (length br < length bl0), (length br < length bl), (length bl < length br0), (length bl < length bl0), (length bl < length br), (length br0 <= length bl0)
+(length br0 <= length br), (length br0 <= length bl), (length bl0 <= length br0), (length bl0 <= length br), (length bl0 <= length bl), (length br <= length br0), (length br <= length bl0), (length br <= length bl), (length bl <= length br0), (length bl <= length bl0)
+(length bl <= length br), (~ Permutation br0 br0), (~ Permutation br0 bl0), (~ Permutation br0 br), (~ Permutation br0 bl), (~ Permutation bl0 br0), (~ Permutation bl0 bl0), (~ Permutation bl0 br), (~ Permutation bl0 bl), (~ Permutation br br0)
+(~ Permutation br bl0), (~ Permutation br br), (~ Permutation br bl), (~ Permutation bl br0), (~ Permutation bl bl0), (~ Permutation bl br), (~ Permutation bl bl), (br0 <> br0), (br0 <> bl0), (br0 <> br)
+(br0 <> bl), (bl0 <> br0), (bl0 <> bl0), (bl0 <> br), (bl0 <> bl), (br <> br0), (br <> bl0), (br <> br), (br <> bl), (bl <> br0)
+(bl <> bl0), (bl <> br), (bl <> bl), (None = Some br0), (None = Some bl0), (None = Some br), (None = Some bl), (br0 ++ br0 = br0), (br0 ++ br0 = bl0), (br0 ++ br0 = br)
+(br0 ++ br0 = bl), (br0 ++ bl0 = br0), (br0 ++ bl0 = bl0), (br0 ++ bl0 = br), (br0 ++ bl0 = bl), (br0 ++ br = br0), (br0 ++ br = bl0), (br0 ++ br = br), (br0 ++ br = bl), (br0 ++ bl = br0)
+(br0 ++ bl = bl0), (br0 ++ bl = br), (br0 ++ bl = bl), (bl0 ++ br0 = br0), (bl0 ++ br0 = bl0), (bl0 ++ br0 = br), (bl0 ++ br0 = bl), (bl0 ++ bl0 = br0), (bl0 ++ bl0 = bl0), (bl0 ++ bl0 = br)
+(bl0 ++ bl0 = bl), (bl0 ++ br = br0), (bl0 ++ br = bl0), (bl0 ++ br = br), (bl0 ++ br = bl), (bl0 ++ bl = br0), (bl0 ++ bl = bl0), (bl0 ++ bl = br), (bl0 ++ bl = bl), (br ++ br0 = br0)
+(br ++ br0 = bl0), (br ++ br0 = br), (br ++ br0 = bl), (br ++ bl0 = br0), (br ++ bl0 = bl0), (br ++ bl0 = br), (br ++ bl0 = bl), (br ++ br = br0), (br ++ br = bl0), (br ++ br = br)
+(br ++ br = bl), (br ++ bl = br0), (br ++ bl = bl0), (br ++ bl = br), (br ++ bl = bl), (bl ++ br0 = br0), (bl ++ br0 = bl0), (bl ++ br0 = br), (bl ++ br0 = bl), (bl ++ bl0 = br0)
+(bl ++ bl0 = bl0), (bl ++ bl0 = br), (bl ++ bl0 = bl), (bl ++ br = br0), (bl ++ br = bl0), (bl ++ br = br), (bl ++ br = bl), (bl ++ bl = br0), (bl ++ bl = bl0), (bl ++ bl = br)
+(bl ++ bl = bl), ([] = br0), ([] = bl0), ([] = br), ([] = bl), ([] = br0 ++ br0), ([] = br0 ++ bl0), ([] = br0 ++ br), ([] = br0 ++ bl), ([] = bl0 ++ br0)
+([] = bl0 ++ bl0), ([] = bl0 ++ br), ([] = bl0 ++ bl), ([] = br ++ br0), ([] = br ++ bl0), ([] = br ++ br), ([] = br ++ bl), ([] = bl ++ br0), ([] = bl ++ bl0), ([] = bl ++ br)
+([] = bl ++ bl)
+
+Label: 1 (1)
+(Permutation br0 br0), (Permutation br0 bl0), (Permutation br0 br), (Permutation br0 bl), (Permutation bl0 br0), (Permutation bl0 bl0), (Permutation bl0 br), (Permutation bl0 bl), (Permutation br br0), (Permutation br bl0)
+(Permutation br br), (Permutation br bl), (Permutation bl br0), (Permutation bl bl0), (Permutation bl br), (Permutation bl bl), (br0 = br0), (br0 = bl0), (br0 = br), (br0 = bl)
+(bl0 = br0), (bl0 = bl0), (bl0 = br), (bl0 = bl), (br = br0), (br = bl0), (br = br), (br = bl), (bl = br0), (bl = bl0)
+(bl = br), (bl = bl), (tree_elems Leaf br0), (tree_elems Leaf bl0), (tree_elems Leaf br), (tree_elems Leaf bl), (tree_elems Leaf (br0 ++ br0)), (tree_elems Leaf (br0 ++ bl0)), (tree_elems Leaf (br0 ++ br)), (tree_elems Leaf (br0 ++ bl))
+(tree_elems Leaf (bl0 ++ br0)), (tree_elems Leaf (bl0 ++ bl0)), (tree_elems Leaf (bl0 ++ br)), (tree_elems Leaf (bl0 ++ bl)), (tree_elems Leaf (br ++ br0)), (tree_elems Leaf (br ++ bl0)), (tree_elems Leaf (br ++ br)), (tree_elems Leaf (br ++ bl)), (tree_elems Leaf (bl ++ br0)), (tree_elems Leaf (bl ++ bl0))
+(tree_elems Leaf (bl ++ br)), (tree_elems Leaf (bl ++ bl)), (tree_elems Leaf []), (pow2heapp (length br0) (length br0) Leaf), (pow2heapp (length br0) (length bl0) Leaf), (pow2heapp (length br0) (length br) Leaf), (pow2heapp (length br0) (length bl) Leaf), (pow2heapp (length bl0) (length br0) Leaf), (pow2heapp (length bl0) (length bl0) Leaf), (pow2heapp (length bl0) (length br) Leaf)
+(pow2heapp (length bl0) (length bl) Leaf), (pow2heapp (length br) (length br0) Leaf), (pow2heapp (length br) (length bl0) Leaf), (pow2heapp (length br) (length br) Leaf), (pow2heapp (length br) (length bl) Leaf), (pow2heapp (length bl) (length br0) Leaf), (pow2heapp (length bl) (length bl0) Leaf), (pow2heapp (length bl) (length br) Leaf), (pow2heapp (length bl) (length bl) Leaf), (Permutation br0 (br0 ++ br0))
+(Permutation br0 (br0 ++ bl0)), (Permutation br0 (br0 ++ br)), (Permutation br0 (br0 ++ bl)), (Permutation br0 (bl0 ++ br0)), (Permutation br0 (bl0 ++ bl0)), (Permutation br0 (bl0 ++ br)), (Permutation br0 (bl0 ++ bl)), (Permutation br0 (br ++ br0)), (Permutation br0 (br ++ bl0)), (Permutation br0 (br ++ br))
+(Permutation br0 (br ++ bl)), (Permutation br0 (bl ++ br0)), (Permutation br0 (bl ++ bl0)), (Permutation br0 (bl ++ br)), (Permutation br0 (bl ++ bl)), (Permutation br0 []), (Permutation bl0 (br0 ++ br0)), (Permutation bl0 (br0 ++ bl0)), (Permutation bl0 (br0 ++ br)), (Permutation bl0 (br0 ++ bl))
+(Permutation bl0 (bl0 ++ br0)), (Permutation bl0 (bl0 ++ bl0)), (Permutation bl0 (bl0 ++ br)), (Permutation bl0 (bl0 ++ bl)), (Permutation bl0 (br ++ br0)), (Permutation bl0 (br ++ bl0)), (Permutation bl0 (br ++ br)), (Permutation bl0 (br ++ bl)), (Permutation bl0 (bl ++ br0)), (Permutation bl0 (bl ++ bl0))
+(Permutation bl0 (bl ++ br)), (Permutation bl0 (bl ++ bl)), (Permutation bl0 []), (Permutation br (br0 ++ br0)), (Permutation br (br0 ++ bl0)), (Permutation br (br0 ++ br)), (Permutation br (br0 ++ bl)), (Permutation br (bl0 ++ br0)), (Permutation br (bl0 ++ bl0)), (Permutation br (bl0 ++ br))
+(Permutation br (bl0 ++ bl)), (Permutation br (br ++ br0)), (Permutation br (br ++ bl0)), (Permutation br (br ++ br)), (Permutation br (br ++ bl)), (Permutation br (bl ++ br0)), (Permutation br (bl ++ bl0)), (Permutation br (bl ++ br)), (Permutation br (bl ++ bl)), (Permutation br [])
+(Permutation bl (br0 ++ br0)), (Permutation bl (br0 ++ bl0)), (Permutation bl (br0 ++ br)), (Permutation bl (br0 ++ bl)), (Permutation bl (bl0 ++ br0)), (Permutation bl (bl0 ++ bl0)), (Permutation bl (bl0 ++ br)), (Permutation bl (bl0 ++ bl)), (Permutation bl (br ++ br0)), (Permutation bl (br ++ bl0))
+(Permutation bl (br ++ br)), (Permutation bl (br ++ bl)), (Permutation bl (bl ++ br0)), (Permutation bl (bl ++ bl0)), (Permutation bl (bl ++ br)), (Permutation bl (bl ++ bl)), (Permutation bl []), (Permutation (br0 ++ br0) br0), (Permutation (br0 ++ br0) bl0), (Permutation (br0 ++ br0) br)
+(Permutation (br0 ++ br0) bl), (Permutation (br0 ++ br0) (br0 ++ bl0)), (Permutation (br0 ++ br0) (br0 ++ br)), (Permutation (br0 ++ br0) (br0 ++ bl)), (Permutation (br0 ++ br0) (bl0 ++ br0)), (Permutation (br0 ++ br0) (bl0 ++ bl0)), (Permutation (br0 ++ br0) (bl0 ++ br)), (Permutation (br0 ++ br0) (bl0 ++ bl)), (Permutation (br0 ++ br0) (br ++ br0)), (Permutation (br0 ++ br0) (br ++ bl0))
+(Permutation (br0 ++ br0) (br ++ br)), (Permutation (br0 ++ br0) (br ++ bl)), (Permutation (br0 ++ br0) (bl ++ br0)), (Permutation (br0 ++ br0) (bl ++ bl0)), (Permutation (br0 ++ br0) (bl ++ br)), (Permutation (br0 ++ br0) (bl ++ bl)), (Permutation (br0 ++ br0) []), (Permutation (br0 ++ bl0) br0), (Permutation (br0 ++ bl0) bl0), (Permutation (br0 ++ bl0) br)
+(Permutation (br0 ++ bl0) bl), (Permutation (br0 ++ bl0) (br0 ++ br0)), (Permutation (br0 ++ bl0) (br0 ++ br)), (Permutation (br0 ++ bl0) (br0 ++ bl)), (Permutation (br0 ++ bl0) (bl0 ++ br0)), (Permutation (br0 ++ bl0) (bl0 ++ bl0)), (Permutation (br0 ++ bl0) (bl0 ++ br)), (Permutation (br0 ++ bl0) (bl0 ++ bl)), (Permutation (br0 ++ bl0) (br ++ br0)), (Permutation (br0 ++ bl0) (br ++ bl0))
+(Permutation (br0 ++ bl0) (br ++ br)), (Permutation (br0 ++ bl0) (br ++ bl)), (Permutation (br0 ++ bl0) (bl ++ br0)), (Permutation (br0 ++ bl0) (bl ++ bl0)), (Permutation (br0 ++ bl0) (bl ++ br)), (Permutation (br0 ++ bl0) (bl ++ bl)), (Permutation (br0 ++ bl0) []), (Permutation (br0 ++ br) br0), (Permutation (br0 ++ br) bl0), (Permutation (br0 ++ br) br)
+(Permutation (br0 ++ br) bl), (Permutation (br0 ++ br) (br0 ++ br0)), (Permutation (br0 ++ br) (br0 ++ bl0)), (Permutation (br0 ++ br) (br0 ++ bl)), (Permutation (br0 ++ br) (bl0 ++ br0)), (Permutation (br0 ++ br) (bl0 ++ bl0)), (Permutation (br0 ++ br) (bl0 ++ br)), (Permutation (br0 ++ br) (bl0 ++ bl)), (Permutation (br0 ++ br) (br ++ br0)), (Permutation (br0 ++ br) (br ++ bl0))
+(Permutation (br0 ++ br) (br ++ br)), (Permutation (br0 ++ br) (br ++ bl)), (Permutation (br0 ++ br) (bl ++ br0)), (Permutation (br0 ++ br) (bl ++ bl0)), (Permutation (br0 ++ br) (bl ++ br)), (Permutation (br0 ++ br) (bl ++ bl)), (Permutation (br0 ++ br) []), (Permutation (br0 ++ bl) br0), (Permutation (br0 ++ bl) bl0), (Permutation (br0 ++ bl) br)
+(Permutation (br0 ++ bl) bl), (Permutation (br0 ++ bl) (br0 ++ br0)), (Permutation (br0 ++ bl) (br0 ++ bl0)), (Permutation (br0 ++ bl) (br0 ++ br)), (Permutation (br0 ++ bl) (bl0 ++ br0)), (Permutation (br0 ++ bl) (bl0 ++ bl0)), (Permutation (br0 ++ bl) (bl0 ++ br)), (Permutation (br0 ++ bl) (bl0 ++ bl)), (Permutation (br0 ++ bl) (br ++ br0)), (Permutation (br0 ++ bl) (br ++ bl0))
+(Permutation (br0 ++ bl) (br ++ br)), (Permutation (br0 ++ bl) (br ++ bl)), (Permutation (br0 ++ bl) (bl ++ br0)), (Permutation (br0 ++ bl) (bl ++ bl0)), (Permutation (br0 ++ bl) (bl ++ br)), (Permutation (br0 ++ bl) (bl ++ bl)), (Permutation (br0 ++ bl) []), (Permutation (bl0 ++ br0) br0), (Permutation (bl0 ++ br0) bl0), (Permutation (bl0 ++ br0) br)
+(Permutation (bl0 ++ br0) bl), (Permutation (bl0 ++ br0) (br0 ++ br0)), (Permutation (bl0 ++ br0) (br0 ++ bl0)), (Permutation (bl0 ++ br0) (br0 ++ br)), (Permutation (bl0 ++ br0) (br0 ++ bl)), (Permutation (bl0 ++ br0) (bl0 ++ bl0)), (Permutation (bl0 ++ br0) (bl0 ++ br)), (Permutation (bl0 ++ br0) (bl0 ++ bl)), (Permutation (bl0 ++ br0) (br ++ br0)), (Permutation (bl0 ++ br0) (br ++ bl0))
+(Permutation (bl0 ++ br0) (br ++ br)), (Permutation (bl0 ++ br0) (br ++ bl)), (Permutation (bl0 ++ br0) (bl ++ br0)), (Permutation (bl0 ++ br0) (bl ++ bl0)), (Permutation (bl0 ++ br0) (bl ++ br)), (Permutation (bl0 ++ br0) (bl ++ bl)), (Permutation (bl0 ++ br0) []), (Permutation (bl0 ++ bl0) br0), (Permutation (bl0 ++ bl0) bl0), (Permutation (bl0 ++ bl0) br)
+(Permutation (bl0 ++ bl0) bl), (Permutation (bl0 ++ bl0) (br0 ++ br0)), (Permutation (bl0 ++ bl0) (br0 ++ bl0)), (Permutation (bl0 ++ bl0) (br0 ++ br)), (Permutation (bl0 ++ bl0) (br0 ++ bl)), (Permutation (bl0 ++ bl0) (bl0 ++ br0)), (Permutation (bl0 ++ bl0) (bl0 ++ br)), (Permutation (bl0 ++ bl0) (bl0 ++ bl)), (Permutation (bl0 ++ bl0) (br ++ br0)), (Permutation (bl0 ++ bl0) (br ++ bl0))
+(Permutation (bl0 ++ bl0) (br ++ br)), (Permutation (bl0 ++ bl0) (br ++ bl)), (Permutation (bl0 ++ bl0) (bl ++ br0)), (Permutation (bl0 ++ bl0) (bl ++ bl0)), (Permutation (bl0 ++ bl0) (bl ++ br)), (Permutation (bl0 ++ bl0) (bl ++ bl)), (Permutation (bl0 ++ bl0) []), (Permutation (bl0 ++ br) br0), (Permutation (bl0 ++ br) bl0), (Permutation (bl0 ++ br) br)
+(Permutation (bl0 ++ br) bl), (Permutation (bl0 ++ br) (br0 ++ br0)), (Permutation (bl0 ++ br) (br0 ++ bl0)), (Permutation (bl0 ++ br) (br0 ++ br)), (Permutation (bl0 ++ br) (br0 ++ bl)), (Permutation (bl0 ++ br) (bl0 ++ br0)), (Permutation (bl0 ++ br) (bl0 ++ bl0)), (Permutation (bl0 ++ br) (bl0 ++ bl)), (Permutation (bl0 ++ br) (br ++ br0)), (Permutation (bl0 ++ br) (br ++ bl0))
+(Permutation (bl0 ++ br) (br ++ br)), (Permutation (bl0 ++ br) (br ++ bl)), (Permutation (bl0 ++ br) (bl ++ br0)), (Permutation (bl0 ++ br) (bl ++ bl0)), (Permutation (bl0 ++ br) (bl ++ br)), (Permutation (bl0 ++ br) (bl ++ bl)), (Permutation (bl0 ++ br) []), (Permutation (bl0 ++ bl) br0), (Permutation (bl0 ++ bl) bl0), (Permutation (bl0 ++ bl) br)
+(Permutation (bl0 ++ bl) bl), (Permutation (bl0 ++ bl) (br0 ++ br0)), (Permutation (bl0 ++ bl) (br0 ++ bl0)), (Permutation (bl0 ++ bl) (br0 ++ br)), (Permutation (bl0 ++ bl) (br0 ++ bl)), (Permutation (bl0 ++ bl) (bl0 ++ br0)), (Permutation (bl0 ++ bl) (bl0 ++ bl0)), (Permutation (bl0 ++ bl) (bl0 ++ br)), (Permutation (bl0 ++ bl) (br ++ br0)), (Permutation (bl0 ++ bl) (br ++ bl0))
+(Permutation (bl0 ++ bl) (br ++ br)), (Permutation (bl0 ++ bl) (br ++ bl)), (Permutation (bl0 ++ bl) (bl ++ br0)), (Permutation (bl0 ++ bl) (bl ++ bl0)), (Permutation (bl0 ++ bl) (bl ++ br)), (Permutation (bl0 ++ bl) (bl ++ bl)), (Permutation (bl0 ++ bl) []), (Permutation (br ++ br0) br0), (Permutation (br ++ br0) bl0), (Permutation (br ++ br0) br)
+(Permutation (br ++ br0) bl), (Permutation (br ++ br0) (br0 ++ br0)), (Permutation (br ++ br0) (br0 ++ bl0)), (Permutation (br ++ br0) (br0 ++ br)), (Permutation (br ++ br0) (br0 ++ bl)), (Permutation (br ++ br0) (bl0 ++ br0)), (Permutation (br ++ br0) (bl0 ++ bl0)), (Permutation (br ++ br0) (bl0 ++ br)), (Permutation (br ++ br0) (bl0 ++ bl)), (Permutation (br ++ br0) (br ++ bl0))
+(Permutation (br ++ br0) (br ++ br)), (Permutation (br ++ br0) (br ++ bl)), (Permutation (br ++ br0) (bl ++ br0)), (Permutation (br ++ br0) (bl ++ bl0)), (Permutation (br ++ br0) (bl ++ br)), (Permutation (br ++ br0) (bl ++ bl)), (Permutation (br ++ br0) []), (Permutation (br ++ bl0) br0), (Permutation (br ++ bl0) bl0), (Permutation (br ++ bl0) br)
+(Permutation (br ++ bl0) bl), (Permutation (br ++ bl0) (br0 ++ br0)), (Permutation (br ++ bl0) (br0 ++ bl0)), (Permutation (br ++ bl0) (br0 ++ br)), (Permutation (br ++ bl0) (br0 ++ bl)), (Permutation (br ++ bl0) (bl0 ++ br0)), (Permutation (br ++ bl0) (bl0 ++ bl0)), (Permutation (br ++ bl0) (bl0 ++ br)), (Permutation (br ++ bl0) (bl0 ++ bl)), (Permutation (br ++ bl0) (br ++ br0))
+(Permutation (br ++ bl0) (br ++ br)), (Permutation (br ++ bl0) (br ++ bl)), (Permutation (br ++ bl0) (bl ++ br0)), (Permutation (br ++ bl0) (bl ++ bl0)), (Permutation (br ++ bl0) (bl ++ br)), (Permutation (br ++ bl0) (bl ++ bl)), (Permutation (br ++ bl0) []), (Permutation (br ++ br) br0), (Permutation (br ++ br) bl0), (Permutation (br ++ br) br)
+(Permutation (br ++ br) bl), (Permutation (br ++ br) (br0 ++ br0)), (Permutation (br ++ br) (br0 ++ bl0)), (Permutation (br ++ br) (br0 ++ br)), (Permutation (br ++ br) (br0 ++ bl)), (Permutation (br ++ br) (bl0 ++ br0)), (Permutation (br ++ br) (bl0 ++ bl0)), (Permutation (br ++ br) (bl0 ++ br)), (Permutation (br ++ br) (bl0 ++ bl)), (Permutation (br ++ br) (br ++ br0))
+(Permutation (br ++ br) (br ++ bl0)), (Permutation (br ++ br) (br ++ bl)), (Permutation (br ++ br) (bl ++ br0)), (Permutation (br ++ br) (bl ++ bl0)), (Permutation (br ++ br) (bl ++ br)), (Permutation (br ++ br) (bl ++ bl)), (Permutation (br ++ br) []), (Permutation (br ++ bl) br0), (Permutation (br ++ bl) bl0), (Permutation (br ++ bl) br)
+(Permutation (br ++ bl) bl), (Permutation (br ++ bl) (br0 ++ br0)), (Permutation (br ++ bl) (br0 ++ bl0)), (Permutation (br ++ bl) (br0 ++ br)), (Permutation (br ++ bl) (br0 ++ bl)), (Permutation (br ++ bl) (bl0 ++ br0)), (Permutation (br ++ bl) (bl0 ++ bl0)), (Permutation (br ++ bl) (bl0 ++ br)), (Permutation (br ++ bl) (bl0 ++ bl)), (Permutation (br ++ bl) (br ++ br0))
+(Permutation (br ++ bl) (br ++ bl0)), (Permutation (br ++ bl) (br ++ br)), (Permutation (br ++ bl) (bl ++ br0)), (Permutation (br ++ bl) (bl ++ bl0)), (Permutation (br ++ bl) (bl ++ br)), (Permutation (br ++ bl) (bl ++ bl)), (Permutation (br ++ bl) []), (Permutation (bl ++ br0) br0), (Permutation (bl ++ br0) bl0), (Permutation (bl ++ br0) br)
+(Permutation (bl ++ br0) bl), (Permutation (bl ++ br0) (br0 ++ br0)), (Permutation (bl ++ br0) (br0 ++ bl0)), (Permutation (bl ++ br0) (br0 ++ br)), (Permutation (bl ++ br0) (br0 ++ bl)), (Permutation (bl ++ br0) (bl0 ++ br0)), (Permutation (bl ++ br0) (bl0 ++ bl0)), (Permutation (bl ++ br0) (bl0 ++ br)), (Permutation (bl ++ br0) (bl0 ++ bl)), (Permutation (bl ++ br0) (br ++ br0))
+(Permutation (bl ++ br0) (br ++ bl0)), (Permutation (bl ++ br0) (br ++ br)), (Permutation (bl ++ br0) (br ++ bl)), (Permutation (bl ++ br0) (bl ++ bl0)), (Permutation (bl ++ br0) (bl ++ br)), (Permutation (bl ++ br0) (bl ++ bl)), (Permutation (bl ++ br0) []), (Permutation (bl ++ bl0) br0), (Permutation (bl ++ bl0) bl0), (Permutation (bl ++ bl0) br)
+(Permutation (bl ++ bl0) bl), (Permutation (bl ++ bl0) (br0 ++ br0)), (Permutation (bl ++ bl0) (br0 ++ bl0)), (Permutation (bl ++ bl0) (br0 ++ br)), (Permutation (bl ++ bl0) (br0 ++ bl)), (Permutation (bl ++ bl0) (bl0 ++ br0)), (Permutation (bl ++ bl0) (bl0 ++ bl0)), (Permutation (bl ++ bl0) (bl0 ++ br)), (Permutation (bl ++ bl0) (bl0 ++ bl)), (Permutation (bl ++ bl0) (br ++ br0))
+(Permutation (bl ++ bl0) (br ++ bl0)), (Permutation (bl ++ bl0) (br ++ br)), (Permutation (bl ++ bl0) (br ++ bl)), (Permutation (bl ++ bl0) (bl ++ br0)), (Permutation (bl ++ bl0) (bl ++ br)), (Permutation (bl ++ bl0) (bl ++ bl)), (Permutation (bl ++ bl0) []), (Permutation (bl ++ br) br0), (Permutation (bl ++ br) bl0), (Permutation (bl ++ br) br)
+(Permutation (bl ++ br) bl), (Permutation (bl ++ br) (br0 ++ br0)), (Permutation (bl ++ br) (br0 ++ bl0)), (Permutation (bl ++ br) (br0 ++ br)), (Permutation (bl ++ br) (br0 ++ bl)), (Permutation (bl ++ br) (bl0 ++ br0)), (Permutation (bl ++ br) (bl0 ++ bl0)), (Permutation (bl ++ br) (bl0 ++ br)), (Permutation (bl ++ br) (bl0 ++ bl)), (Permutation (bl ++ br) (br ++ br0))
+(Permutation (bl ++ br) (br ++ bl0)), (Permutation (bl ++ br) (br ++ br)), (Permutation (bl ++ br) (br ++ bl)), (Permutation (bl ++ br) (bl ++ br0)), (Permutation (bl ++ br) (bl ++ bl0)), (Permutation (bl ++ br) (bl ++ bl)), (Permutation (bl ++ br) []), (Permutation (bl ++ bl) br0), (Permutation (bl ++ bl) bl0), (Permutation (bl ++ bl) br)
+(Permutation (bl ++ bl) bl), (Permutation (bl ++ bl) (br0 ++ br0)), (Permutation (bl ++ bl) (br0 ++ bl0)), (Permutation (bl ++ bl) (br0 ++ br)), (Permutation (bl ++ bl) (br0 ++ bl)), (Permutation (bl ++ bl) (bl0 ++ br0)), (Permutation (bl ++ bl) (bl0 ++ bl0)), (Permutation (bl ++ bl) (bl0 ++ br)), (Permutation (bl ++ bl) (bl0 ++ bl)), (Permutation (bl ++ bl) (br ++ br0))
+(Permutation (bl ++ bl) (br ++ bl0)), (Permutation (bl ++ bl) (br ++ br)), (Permutation (bl ++ bl) (br ++ bl)), (Permutation (bl ++ bl) (bl ++ br0)), (Permutation (bl ++ bl) (bl ++ bl0)), (Permutation (bl ++ bl) (bl ++ br)), (Permutation (bl ++ bl) []), (Permutation [] br0), (Permutation [] bl0), (Permutation [] br)
+(Permutation [] bl), (Permutation [] (br0 ++ br0)), (Permutation [] (br0 ++ bl0)), (Permutation [] (br0 ++ br)), (Permutation [] (br0 ++ bl)), (Permutation [] (bl0 ++ br0)), (Permutation [] (bl0 ++ bl0)), (Permutation [] (bl0 ++ br)), (Permutation [] (bl0 ++ bl)), (Permutation [] (br ++ br0))
+(Permutation [] (br ++ bl0)), (Permutation [] (br ++ br)), (Permutation [] (br ++ bl)), (Permutation [] (bl ++ br0)), (Permutation [] (bl ++ bl0)), (Permutation [] (bl ++ br)), (Permutation [] (bl ++ bl)), (In (length br0) br0), (In (length br0) bl0), (In (length br0) br)
+(In (length br0) bl), (In (length br0) (br0 ++ br0)), (In (length br0) (br0 ++ bl0)), (In (length br0) (br0 ++ br)), (In (length br0) (br0 ++ bl)), (In (length br0) (bl0 ++ br0)), (In (length br0) (bl0 ++ bl0)), (In (length br0) (bl0 ++ br)), (In (length br0) (bl0 ++ bl)), (In (length br0) (br ++ br0))
+(In (length br0) (br ++ bl0)), (In (length br0) (br ++ br)), (In (length br0) (br ++ bl)), (In (length br0) (bl ++ br0)), (In (length br0) (bl ++ bl0)), (In (length br0) (bl ++ br)), (In (length br0) (bl ++ bl)), (In (length bl0) br0), (In (length bl0) bl0), (In (length bl0) br)
+(In (length bl0) bl), (In (length bl0) (br0 ++ br0)), (In (length bl0) (br0 ++ bl0)), (In (length bl0) (br0 ++ br)), (In (length bl0) (br0 ++ bl)), (In (length bl0) (bl0 ++ br0)), (In (length bl0) (bl0 ++ bl0)), (In (length bl0) (bl0 ++ br)), (In (length bl0) (bl0 ++ bl)), (In (length bl0) (br ++ br0))
+(In (length bl0) (br ++ bl0)), (In (length bl0) (br ++ br)), (In (length bl0) (br ++ bl)), (In (length bl0) (bl ++ br0)), (In (length bl0) (bl ++ bl0)), (In (length bl0) (bl ++ br)), (In (length bl0) (bl ++ bl)), (In (length br) br0), (In (length br) bl0), (In (length br) br)
+(In (length br) bl), (In (length br) (br0 ++ br0)), (In (length br) (br0 ++ bl0)), (In (length br) (br0 ++ br)), (In (length br) (br0 ++ bl)), (In (length br) (bl0 ++ br0)), (In (length br) (bl0 ++ bl0)), (In (length br) (bl0 ++ br)), (In (length br) (bl0 ++ bl)), (In (length br) (br ++ br0))
+(In (length br) (br ++ bl0)), (In (length br) (br ++ br)), (In (length br) (br ++ bl)), (In (length br) (bl ++ br0)), (In (length br) (bl ++ bl0)), (In (length br) (bl ++ br)), (In (length br) (bl ++ bl)), (In (length bl) br0), (In (length bl) bl0), (In (length bl) br)
+(In (length bl) bl), (In (length bl) (br0 ++ br0)), (In (length bl) (br0 ++ bl0)), (In (length bl) (br0 ++ br)), (In (length bl) (br0 ++ bl)), (In (length bl) (bl0 ++ br0)), (In (length bl) (bl0 ++ bl0)), (In (length bl) (bl0 ++ br)), (In (length bl) (bl0 ++ bl)), (In (length bl) (br ++ br0))
+(In (length bl) (br ++ bl0)), (In (length bl) (br ++ br)), (In (length bl) (br ++ bl)), (In (length bl) (bl ++ br0)), (In (length bl) (bl ++ bl0)), (In (length bl) (bl ++ br)), (In (length bl) (bl ++ bl)), (length br0 < length bl0), (length br0 < length br), (length br0 < length bl)
+(length bl0 < length br0), (length bl0 < length br), (length bl0 < length bl), (length br < length br0), (length br < length bl0), (length br < length bl), (length bl < length br0), (length bl < length bl0), (length bl < length br), (length br0 <= length bl0)
+(length br0 <= length br), (length br0 <= length bl), (length bl0 <= length br0), (length bl0 <= length br), (length bl0 <= length bl), (length br <= length br0), (length br <= length bl0), (length br <= length bl), (length bl <= length br0), (length bl <= length bl0)
+(length bl <= length br), (~ Permutation br0 br0), (~ Permutation br0 bl0), (~ Permutation br0 br), (~ Permutation br0 bl), (~ Permutation bl0 br0), (~ Permutation bl0 bl0), (~ Permutation bl0 br), (~ Permutation bl0 bl), (~ Permutation br br0)
+(~ Permutation br bl0), (~ Permutation br br), (~ Permutation br bl), (~ Permutation bl br0), (~ Permutation bl bl0), (~ Permutation bl br), (~ Permutation bl bl), (br0 <> br0), (br0 <> bl0), (br0 <> br)
+(br0 <> bl), (bl0 <> br0), (bl0 <> bl0), (bl0 <> br), (bl0 <> bl), (br <> br0), (br <> bl0), (br <> br), (br <> bl), (bl <> br0)
+(bl <> bl0), (bl <> br), (bl <> bl), (None = Some br0), (None = Some bl0), (None = Some br), (None = Some bl), (br0 ++ br0 = br0), (br0 ++ br0 = bl0), (br0 ++ br0 = br)
+(br0 ++ br0 = bl), (br0 ++ bl0 = br0), (br0 ++ bl0 = bl0), (br0 ++ bl0 = br), (br0 ++ bl0 = bl), (br0 ++ br = br0), (br0 ++ br = bl0), (br0 ++ br = br), (br0 ++ br = bl), (br0 ++ bl = br0)
+(br0 ++ bl = bl0), (br0 ++ bl = br), (br0 ++ bl = bl), (bl0 ++ br0 = br0), (bl0 ++ br0 = bl0), (bl0 ++ br0 = br), (bl0 ++ br0 = bl), (bl0 ++ bl0 = br0), (bl0 ++ bl0 = bl0), (bl0 ++ bl0 = br)
+(bl0 ++ bl0 = bl), (bl0 ++ br = br0), (bl0 ++ br = bl0), (bl0 ++ br = br), (bl0 ++ br = bl), (bl0 ++ bl = br0), (bl0 ++ bl = bl0), (bl0 ++ bl = br), (bl0 ++ bl = bl), (br ++ br0 = br0)
+(br ++ br0 = bl0), (br ++ br0 = br), (br ++ br0 = bl), (br ++ bl0 = br0), (br ++ bl0 = bl0), (br ++ bl0 = br), (br ++ bl0 = bl), (br ++ br = br0), (br ++ br = bl0), (br ++ br = br)
+(br ++ br = bl), (br ++ bl = br0), (br ++ bl = bl0), (br ++ bl = br), (br ++ bl = bl), (bl ++ br0 = br0), (bl ++ br0 = bl0), (bl ++ br0 = br), (bl ++ br0 = bl), (bl ++ bl0 = br0)
+(bl ++ bl0 = bl0), (bl ++ bl0 = br), (bl ++ bl0 = bl), (bl ++ br = br0), (bl ++ br = bl0), (bl ++ br = br), (bl ++ br = bl), (bl ++ bl = br0), (bl ++ bl = bl0), (bl ++ bl = br)
+(bl ++ bl = bl), ([] = br0), ([] = bl0), ([] = br), ([] = bl), ([] = br0 ++ br0), ([] = br0 ++ bl0), ([] = br0 ++ br), ([] = br0 ++ bl), ([] = bl0 ++ br0)
+([] = bl0 ++ bl0), ([] = bl0 ++ br), ([] = bl0 ++ bl), ([] = br ++ br0), ([] = br ++ bl0), ([] = br ++ br), ([] = br ++ bl), ([] = bl ++ br0), ([] = bl ++ bl0), ([] = bl ++ br)
+([] = bl ++ bl)
+
+Label: 2 (2)
+(Permutation bl bl), (Permutation bl br), (Permutation bl br0), (Permutation bl bl0), (Permutation bl gv0), (Permutation br bl), (Permutation br br), (Permutation br br0), (Permutation br bl0), (Permutation br gv0)
+(Permutation br0 bl), (Permutation br0 br), (Permutation br0 br0), (Permutation br0 bl0), (Permutation br0 gv0), (Permutation bl0 bl), (Permutation bl0 br), (Permutation bl0 br0), (Permutation bl0 bl0), (Permutation bl0 gv0)
+(Permutation gv0 bl), (Permutation gv0 br), (Permutation gv0 br0), (Permutation gv0 bl0), (Permutation gv0 gv0), (bl = bl), (bl = br), (bl = br0), (bl = bl0), (bl = gv0)
+(br = bl), (br = br), (br = br0), (br = bl0), (br = gv0), (br0 = bl), (br0 = br), (br0 = br0), (br0 = bl0), (br0 = gv0)
+(bl0 = bl), (bl0 = br), (bl0 = br0), (bl0 = bl0), (bl0 = gv0), (gv0 = bl), (gv0 = br), (gv0 = br0), (gv0 = bl0), (gv0 = gv0)
+(tree_elems Leaf bl), (tree_elems Leaf br), (tree_elems Leaf br0), (tree_elems Leaf bl0), (tree_elems Leaf gv0), (tree_elems Leaf (bl ++ bl)), (tree_elems Leaf (bl ++ br)), (tree_elems Leaf (bl ++ br0)), (tree_elems Leaf (bl ++ bl0)), (tree_elems Leaf (bl ++ gv0))
+(tree_elems Leaf (br ++ bl)), (tree_elems Leaf (br ++ br)), (tree_elems Leaf (br ++ br0)), (tree_elems Leaf (br ++ bl0)), (tree_elems Leaf (br ++ gv0)), (tree_elems Leaf (br0 ++ bl)), (tree_elems Leaf (br0 ++ br)), (tree_elems Leaf (br0 ++ br0)), (tree_elems Leaf (br0 ++ bl0)), (tree_elems Leaf (br0 ++ gv0))
+(tree_elems Leaf (bl0 ++ bl)), (tree_elems Leaf (bl0 ++ br)), (tree_elems Leaf (bl0 ++ br0)), (tree_elems Leaf (bl0 ++ bl0)), (tree_elems Leaf (bl0 ++ gv0)), (tree_elems Leaf (gv0 ++ bl)), (tree_elems Leaf (gv0 ++ br)), (tree_elems Leaf (gv0 ++ br0)), (tree_elems Leaf (gv0 ++ bl0)), (tree_elems Leaf (gv0 ++ gv0))
+(tree_elems Leaf []), (pow2heapp (length bl) (length bl) Leaf), (pow2heapp (length bl) (length br) Leaf), (pow2heapp (length bl) (length br0) Leaf), (pow2heapp (length bl) (length bl0) Leaf), (pow2heapp (length bl) (length gv0) Leaf), (pow2heapp (length br) (length bl) Leaf), (pow2heapp (length br) (length br) Leaf), (pow2heapp (length br) (length br0) Leaf), (pow2heapp (length br) (length bl0) Leaf)
+(pow2heapp (length br) (length gv0) Leaf), (pow2heapp (length br0) (length bl) Leaf), (pow2heapp (length br0) (length br) Leaf), (pow2heapp (length br0) (length br0) Leaf), (pow2heapp (length br0) (length bl0) Leaf), (pow2heapp (length br0) (length gv0) Leaf), (pow2heapp (length bl0) (length bl) Leaf), (pow2heapp (length bl0) (length br) Leaf), (pow2heapp (length bl0) (length br0) Leaf), (pow2heapp (length bl0) (length bl0) Leaf)
+(pow2heapp (length bl0) (length gv0) Leaf), (pow2heapp (length gv0) (length bl) Leaf), (pow2heapp (length gv0) (length br) Leaf), (pow2heapp (length gv0) (length br0) Leaf), (pow2heapp (length gv0) (length bl0) Leaf), (pow2heapp (length gv0) (length gv0) Leaf), (Permutation bl (bl ++ bl)), (Permutation bl (bl ++ br)), (Permutation bl (bl ++ br0)), (Permutation bl (bl ++ bl0))
+(Permutation bl (bl ++ gv0)), (Permutation bl (br ++ bl)), (Permutation bl (br ++ br)), (Permutation bl (br ++ br0)), (Permutation bl (br ++ bl0)), (Permutation bl (br ++ gv0)), (Permutation bl (br0 ++ bl)), (Permutation bl (br0 ++ br)), (Permutation bl (br0 ++ br0)), (Permutation bl (br0 ++ bl0))
+(Permutation bl (br0 ++ gv0)), (Permutation bl (bl0 ++ bl)), (Permutation bl (bl0 ++ br)), (Permutation bl (bl0 ++ br0)), (Permutation bl (bl0 ++ bl0)), (Permutation bl (bl0 ++ gv0)), (Permutation bl (gv0 ++ bl)), (Permutation bl (gv0 ++ br)), (Permutation bl (gv0 ++ br0)), (Permutation bl (gv0 ++ bl0))
+(Permutation bl (gv0 ++ gv0)), (Permutation bl []), (Permutation br (bl ++ bl)), (Permutation br (bl ++ br)), (Permutation br (bl ++ br0)), (Permutation br (bl ++ bl0)), (Permutation br (bl ++ gv0)), (Permutation br (br ++ bl)), (Permutation br (br ++ br)), (Permutation br (br ++ br0))
+(Permutation br (br ++ bl0)), (Permutation br (br ++ gv0)), (Permutation br (br0 ++ bl)), (Permutation br (br0 ++ br)), (Permutation br (br0 ++ br0)), (Permutation br (br0 ++ bl0)), (Permutation br (br0 ++ gv0)), (Permutation br (bl0 ++ bl)), (Permutation br (bl0 ++ br)), (Permutation br (bl0 ++ br0))
+(Permutation br (bl0 ++ bl0)), (Permutation br (bl0 ++ gv0)), (Permutation br (gv0 ++ bl)), (Permutation br (gv0 ++ br)), (Permutation br (gv0 ++ br0)), (Permutation br (gv0 ++ bl0)), (Permutation br (gv0 ++ gv0)), (Permutation br []), (Permutation br0 (bl ++ bl)), (Permutation br0 (bl ++ br))
+(Permutation br0 (bl ++ br0)), (Permutation br0 (bl ++ bl0)), (Permutation br0 (bl ++ gv0)), (Permutation br0 (br ++ bl)), (Permutation br0 (br ++ br)), (Permutation br0 (br ++ br0)), (Permutation br0 (br ++ bl0)), (Permutation br0 (br ++ gv0)), (Permutation br0 (br0 ++ bl)), (Permutation br0 (br0 ++ br))
+(Permutation br0 (br0 ++ br0)), (Permutation br0 (br0 ++ bl0)), (Permutation br0 (br0 ++ gv0)), (Permutation br0 (bl0 ++ bl)), (Permutation br0 (bl0 ++ br)), (Permutation br0 (bl0 ++ br0)), (Permutation br0 (bl0 ++ bl0)), (Permutation br0 (bl0 ++ gv0)), (Permutation br0 (gv0 ++ bl)), (Permutation br0 (gv0 ++ br))
+(Permutation br0 (gv0 ++ br0)), (Permutation br0 (gv0 ++ bl0)), (Permutation br0 (gv0 ++ gv0)), (Permutation br0 []), (Permutation bl0 (bl ++ bl)), (Permutation bl0 (bl ++ br)), (Permutation bl0 (bl ++ br0)), (Permutation bl0 (bl ++ bl0)), (Permutation bl0 (bl ++ gv0)), (Permutation bl0 (br ++ bl))
+(Permutation bl0 (br ++ br)), (Permutation bl0 (br ++ br0)), (Permutation bl0 (br ++ bl0)), (Permutation bl0 (br ++ gv0)), (Permutation bl0 (br0 ++ bl)), (Permutation bl0 (br0 ++ br)), (Permutation bl0 (br0 ++ br0)), (Permutation bl0 (br0 ++ bl0)), (Permutation bl0 (br0 ++ gv0)), (Permutation bl0 (bl0 ++ bl))
+(Permutation bl0 (bl0 ++ br)), (Permutation bl0 (bl0 ++ br0)), (Permutation bl0 (bl0 ++ bl0)), (Permutation bl0 (bl0 ++ gv0)), (Permutation bl0 (gv0 ++ bl)), (Permutation bl0 (gv0 ++ br)), (Permutation bl0 (gv0 ++ br0)), (Permutation bl0 (gv0 ++ bl0)), (Permutation bl0 (gv0 ++ gv0)), (Permutation bl0 [])
+(Permutation gv0 (bl ++ bl)), (Permutation gv0 (bl ++ br)), (Permutation gv0 (bl ++ br0)), (Permutation gv0 (bl ++ bl0)), (Permutation gv0 (bl ++ gv0)), (Permutation gv0 (br ++ bl)), (Permutation gv0 (br ++ br)), (Permutation gv0 (br ++ br0)), (Permutation gv0 (br ++ bl0)), (Permutation gv0 (br ++ gv0))
+(Permutation gv0 (br0 ++ bl)), (Permutation gv0 (br0 ++ br)), (Permutation gv0 (br0 ++ br0)), (Permutation gv0 (br0 ++ bl0)), (Permutation gv0 (br0 ++ gv0)), (Permutation gv0 (bl0 ++ bl)), (Permutation gv0 (bl0 ++ br)), (Permutation gv0 (bl0 ++ br0)), (Permutation gv0 (bl0 ++ bl0)), (Permutation gv0 (bl0 ++ gv0))
+(Permutation gv0 (gv0 ++ bl)), (Permutation gv0 (gv0 ++ br)), (Permutation gv0 (gv0 ++ br0)), (Permutation gv0 (gv0 ++ bl0)), (Permutation gv0 (gv0 ++ gv0)), (Permutation gv0 []), (Permutation (bl ++ bl) bl), (Permutation (bl ++ bl) br), (Permutation (bl ++ bl) br0), (Permutation (bl ++ bl) bl0)
+(Permutation (bl ++ bl) gv0), (Permutation (bl ++ bl) (bl ++ br)), (Permutation (bl ++ bl) (bl ++ br0)), (Permutation (bl ++ bl) (bl ++ bl0)), (Permutation (bl ++ bl) (bl ++ gv0)), (Permutation (bl ++ bl) (br ++ bl)), (Permutation (bl ++ bl) (br ++ br)), (Permutation (bl ++ bl) (br ++ br0)), (Permutation (bl ++ bl) (br ++ bl0)), (Permutation (bl ++ bl) (br ++ gv0))
+(Permutation (bl ++ bl) (br0 ++ bl)), (Permutation (bl ++ bl) (br0 ++ br)), (Permutation (bl ++ bl) (br0 ++ br0)), (Permutation (bl ++ bl) (br0 ++ bl0)), (Permutation (bl ++ bl) (br0 ++ gv0)), (Permutation (bl ++ bl) (bl0 ++ bl)), (Permutation (bl ++ bl) (bl0 ++ br)), (Permutation (bl ++ bl) (bl0 ++ br0)), (Permutation (bl ++ bl) (bl0 ++ bl0)), (Permutation (bl ++ bl) (bl0 ++ gv0))
+(Permutation (bl ++ bl) (gv0 ++ bl)), (Permutation (bl ++ bl) (gv0 ++ br)), (Permutation (bl ++ bl) (gv0 ++ br0)), (Permutation (bl ++ bl) (gv0 ++ bl0)), (Permutation (bl ++ bl) (gv0 ++ gv0)), (Permutation (bl ++ bl) []), (Permutation (bl ++ br) bl), (Permutation (bl ++ br) br), (Permutation (bl ++ br) br0), (Permutation (bl ++ br) bl0)
+(Permutation (bl ++ br) gv0), (Permutation (bl ++ br) (bl ++ bl)), (Permutation (bl ++ br) (bl ++ br0)), (Permutation (bl ++ br) (bl ++ bl0)), (Permutation (bl ++ br) (bl ++ gv0)), (Permutation (bl ++ br) (br ++ bl)), (Permutation (bl ++ br) (br ++ br)), (Permutation (bl ++ br) (br ++ br0)), (Permutation (bl ++ br) (br ++ bl0)), (Permutation (bl ++ br) (br ++ gv0))
+(Permutation (bl ++ br) (br0 ++ bl)), (Permutation (bl ++ br) (br0 ++ br)), (Permutation (bl ++ br) (br0 ++ br0)), (Permutation (bl ++ br) (br0 ++ bl0)), (Permutation (bl ++ br) (br0 ++ gv0)), (Permutation (bl ++ br) (bl0 ++ bl)), (Permutation (bl ++ br) (bl0 ++ br)), (Permutation (bl ++ br) (bl0 ++ br0)), (Permutation (bl ++ br) (bl0 ++ bl0)), (Permutation (bl ++ br) (bl0 ++ gv0))
+(Permutation (bl ++ br) (gv0 ++ bl)), (Permutation (bl ++ br) (gv0 ++ br)), (Permutation (bl ++ br) (gv0 ++ br0)), (Permutation (bl ++ br) (gv0 ++ bl0)), (Permutation (bl ++ br) (gv0 ++ gv0)), (Permutation (bl ++ br) []), (Permutation (bl ++ br0) bl), (Permutation (bl ++ br0) br), (Permutation (bl ++ br0) br0), (Permutation (bl ++ br0) bl0)
+(Permutation (bl ++ br0) gv0), (Permutation (bl ++ br0) (bl ++ bl)), (Permutation (bl ++ br0) (bl ++ br)), (Permutation (bl ++ br0) (bl ++ bl0)), (Permutation (bl ++ br0) (bl ++ gv0)), (Permutation (bl ++ br0) (br ++ bl)), (Permutation (bl ++ br0) (br ++ br)), (Permutation (bl ++ br0) (br ++ br0)), (Permutation (bl ++ br0) (br ++ bl0)), (Permutation (bl ++ br0) (br ++ gv0))
+(Permutation (bl ++ br0) (br0 ++ bl)), (Permutation (bl ++ br0) (br0 ++ br)), (Permutation (bl ++ br0) (br0 ++ br0)), (Permutation (bl ++ br0) (br0 ++ bl0)), (Permutation (bl ++ br0) (br0 ++ gv0)), (Permutation (bl ++ br0) (bl0 ++ bl)), (Permutation (bl ++ br0) (bl0 ++ br)), (Permutation (bl ++ br0) (bl0 ++ br0)), (Permutation (bl ++ br0) (bl0 ++ bl0)), (Permutation (bl ++ br0) (bl0 ++ gv0))
+(Permutation (bl ++ br0) (gv0 ++ bl)), (Permutation (bl ++ br0) (gv0 ++ br)), (Permutation (bl ++ br0) (gv0 ++ br0)), (Permutation (bl ++ br0) (gv0 ++ bl0)), (Permutation (bl ++ br0) (gv0 ++ gv0)), (Permutation (bl ++ br0) []), (Permutation (bl ++ bl0) bl), (Permutation (bl ++ bl0) br), (Permutation (bl ++ bl0) br0), (Permutation (bl ++ bl0) bl0)
+(Permutation (bl ++ bl0) gv0), (Permutation (bl ++ bl0) (bl ++ bl)), (Permutation (bl ++ bl0) (bl ++ br)), (Permutation (bl ++ bl0) (bl ++ br0)), (Permutation (bl ++ bl0) (bl ++ gv0)), (Permutation (bl ++ bl0) (br ++ bl)), (Permutation (bl ++ bl0) (br ++ br)), (Permutation (bl ++ bl0) (br ++ br0)), (Permutation (bl ++ bl0) (br ++ bl0)), (Permutation (bl ++ bl0) (br ++ gv0))
+(Permutation (bl ++ bl0) (br0 ++ bl)), (Permutation (bl ++ bl0) (br0 ++ br)), (Permutation (bl ++ bl0) (br0 ++ br0)), (Permutation (bl ++ bl0) (br0 ++ bl0)), (Permutation (bl ++ bl0) (br0 ++ gv0)), (Permutation (bl ++ bl0) (bl0 ++ bl)), (Permutation (bl ++ bl0) (bl0 ++ br)), (Permutation (bl ++ bl0) (bl0 ++ br0)), (Permutation (bl ++ bl0) (bl0 ++ bl0)), (Permutation (bl ++ bl0) (bl0 ++ gv0))
+(Permutation (bl ++ bl0) (gv0 ++ bl)), (Permutation (bl ++ bl0) (gv0 ++ br)), (Permutation (bl ++ bl0) (gv0 ++ br0)), (Permutation (bl ++ bl0) (gv0 ++ bl0)), (Permutation (bl ++ bl0) (gv0 ++ gv0)), (Permutation (bl ++ bl0) []), (Permutation (bl ++ gv0) bl), (Permutation (bl ++ gv0) br), (Permutation (bl ++ gv0) br0), (Permutation (bl ++ gv0) bl0)
+(Permutation (bl ++ gv0) gv0), (Permutation (bl ++ gv0) (bl ++ bl)), (Permutation (bl ++ gv0) (bl ++ br)), (Permutation (bl ++ gv0) (bl ++ br0)), (Permutation (bl ++ gv0) (bl ++ bl0)), (Permutation (bl ++ gv0) (br ++ bl)), (Permutation (bl ++ gv0) (br ++ br)), (Permutation (bl ++ gv0) (br ++ br0)), (Permutation (bl ++ gv0) (br ++ bl0)), (Permutation (bl ++ gv0) (br ++ gv0))
+(Permutation (bl ++ gv0) (br0 ++ bl)), (Permutation (bl ++ gv0) (br0 ++ br)), (Permutation (bl ++ gv0) (br0 ++ br0)), (Permutation (bl ++ gv0) (br0 ++ bl0)), (Permutation (bl ++ gv0) (br0 ++ gv0)), (Permutation (bl ++ gv0) (bl0 ++ bl)), (Permutation (bl ++ gv0) (bl0 ++ br)), (Permutation (bl ++ gv0) (bl0 ++ br0)), (Permutation (bl ++ gv0) (bl0 ++ bl0)), (Permutation (bl ++ gv0) (bl0 ++ gv0))
+(Permutation (bl ++ gv0) (gv0 ++ bl)), (Permutation (bl ++ gv0) (gv0 ++ br)), (Permutation (bl ++ gv0) (gv0 ++ br0)), (Permutation (bl ++ gv0) (gv0 ++ bl0)), (Permutation (bl ++ gv0) (gv0 ++ gv0)), (Permutation (bl ++ gv0) []), (Permutation (br ++ bl) bl), (Permutation (br ++ bl) br), (Permutation (br ++ bl) br0), (Permutation (br ++ bl) bl0)
+(Permutation (br ++ bl) gv0), (Permutation (br ++ bl) (bl ++ bl)), (Permutation (br ++ bl) (bl ++ br)), (Permutation (br ++ bl) (bl ++ br0)), (Permutation (br ++ bl) (bl ++ bl0)), (Permutation (br ++ bl) (bl ++ gv0)), (Permutation (br ++ bl) (br ++ br)), (Permutation (br ++ bl) (br ++ br0)), (Permutation (br ++ bl) (br ++ bl0)), (Permutation (br ++ bl) (br ++ gv0))
+(Permutation (br ++ bl) (br0 ++ bl)), (Permutation (br ++ bl) (br0 ++ br)), (Permutation (br ++ bl) (br0 ++ br0)), (Permutation (br ++ bl) (br0 ++ bl0)), (Permutation (br ++ bl) (br0 ++ gv0)), (Permutation (br ++ bl) (bl0 ++ bl)), (Permutation (br ++ bl) (bl0 ++ br)), (Permutation (br ++ bl) (bl0 ++ br0)), (Permutation (br ++ bl) (bl0 ++ bl0)), (Permutation (br ++ bl) (bl0 ++ gv0))
+(Permutation (br ++ bl) (gv0 ++ bl)), (Permutation (br ++ bl) (gv0 ++ br)), (Permutation (br ++ bl) (gv0 ++ br0)), (Permutation (br ++ bl) (gv0 ++ bl0)), (Permutation (br ++ bl) (gv0 ++ gv0)), (Permutation (br ++ bl) []), (Permutation (br ++ br) bl), (Permutation (br ++ br) br), (Permutation (br ++ br) br0), (Permutation (br ++ br) bl0)
+(Permutation (br ++ br) gv0), (Permutation (br ++ br) (bl ++ bl)), (Permutation (br ++ br) (bl ++ br)), (Permutation (br ++ br) (bl ++ br0)), (Permutation (br ++ br) (bl ++ bl0)), (Permutation (br ++ br) (bl ++ gv0)), (Permutation (br ++ br) (br ++ bl)), (Permutation (br ++ br) (br ++ br0)), (Permutation (br ++ br) (br ++ bl0)), (Permutation (br ++ br) (br ++ gv0))
+(Permutation (br ++ br) (br0 ++ bl)), (Permutation (br ++ br) (br0 ++ br)), (Permutation (br ++ br) (br0 ++ br0)), (Permutation (br ++ br) (br0 ++ bl0)), (Permutation (br ++ br) (br0 ++ gv0)), (Permutation (br ++ br) (bl0 ++ bl)), (Permutation (br ++ br) (bl0 ++ br)), (Permutation (br ++ br) (bl0 ++ br0)), (Permutation (br ++ br) (bl0 ++ bl0)), (Permutation (br ++ br) (bl0 ++ gv0))
+(Permutation (br ++ br) (gv0 ++ bl)), (Permutation (br ++ br) (gv0 ++ br)), (Permutation (br ++ br) (gv0 ++ br0)), (Permutation (br ++ br) (gv0 ++ bl0)), (Permutation (br ++ br) (gv0 ++ gv0)), (Permutation (br ++ br) []), (Permutation (br ++ br0) bl), (Permutation (br ++ br0) br), (Permutation (br ++ br0) br0), (Permutation (br ++ br0) bl0)
+(Permutation (br ++ br0) gv0), (Permutation (br ++ br0) (bl ++ bl)), (Permutation (br ++ br0) (bl ++ br)), (Permutation (br ++ br0) (bl ++ br0)), (Permutation (br ++ br0) (bl ++ bl0)), (Permutation (br ++ br0) (bl ++ gv0)), (Permutation (br ++ br0) (br ++ bl)), (Permutation (br ++ br0) (br ++ br)), (Permutation (br ++ br0) (br ++ bl0)), (Permutation (br ++ br0) (br ++ gv0))
+(Permutation (br ++ br0) (br0 ++ bl)), (Permutation (br ++ br0) (br0 ++ br)), (Permutation (br ++ br0) (br0 ++ br0)), (Permutation (br ++ br0) (br0 ++ bl0)), (Permutation (br ++ br0) (br0 ++ gv0)), (Permutation (br ++ br0) (bl0 ++ bl)), (Permutation (br ++ br0) (bl0 ++ br)), (Permutation (br ++ br0) (bl0 ++ br0)), (Permutation (br ++ br0) (bl0 ++ bl0)), (Permutation (br ++ br0) (bl0 ++ gv0))
+(Permutation (br ++ br0) (gv0 ++ bl)), (Permutation (br ++ br0) (gv0 ++ br)), (Permutation (br ++ br0) (gv0 ++ br0)), (Permutation (br ++ br0) (gv0 ++ bl0)), (Permutation (br ++ br0) (gv0 ++ gv0)), (Permutation (br ++ br0) []), (Permutation (br ++ bl0) bl), (Permutation (br ++ bl0) br), (Permutation (br ++ bl0) br0), (Permutation (br ++ bl0) bl0)
+(Permutation (br ++ bl0) gv0), (Permutation (br ++ bl0) (bl ++ bl)), (Permutation (br ++ bl0) (bl ++ br)), (Permutation (br ++ bl0) (bl ++ br0)), (Permutation (br ++ bl0) (bl ++ bl0)), (Permutation (br ++ bl0) (bl ++ gv0)), (Permutation (br ++ bl0) (br ++ bl)), (Permutation (br ++ bl0) (br ++ br)), (Permutation (br ++ bl0) (br ++ br0)), (Permutation (br ++ bl0) (br ++ gv0))
+(Permutation (br ++ bl0) (br0 ++ bl)), (Permutation (br ++ bl0) (br0 ++ br)), (Permutation (br ++ bl0) (br0 ++ br0)), (Permutation (br ++ bl0) (br0 ++ bl0)), (Permutation (br ++ bl0) (br0 ++ gv0)), (Permutation (br ++ bl0) (bl0 ++ bl)), (Permutation (br ++ bl0) (bl0 ++ br)), (Permutation (br ++ bl0) (bl0 ++ br0)), (Permutation (br ++ bl0) (bl0 ++ bl0)), (Permutation (br ++ bl0) (bl0 ++ gv0))
+(Permutation (br ++ bl0) (gv0 ++ bl)), (Permutation (br ++ bl0) (gv0 ++ br)), (Permutation (br ++ bl0) (gv0 ++ br0)), (Permutation (br ++ bl0) (gv0 ++ bl0)), (Permutation (br ++ bl0) (gv0 ++ gv0)), (Permutation (br ++ bl0) []), (Permutation (br ++ gv0) bl), (Permutation (br ++ gv0) br), (Permutation (br ++ gv0) br0), (Permutation (br ++ gv0) bl0)
+(Permutation (br ++ gv0) gv0), (Permutation (br ++ gv0) (bl ++ bl)), (Permutation (br ++ gv0) (bl ++ br)), (Permutation (br ++ gv0) (bl ++ br0)), (Permutation (br ++ gv0) (bl ++ bl0)), (Permutation (br ++ gv0) (bl ++ gv0)), (Permutation (br ++ gv0) (br ++ bl)), (Permutation (br ++ gv0) (br ++ br)), (Permutation (br ++ gv0) (br ++ br0)), (Permutation (br ++ gv0) (br ++ bl0))
+(Permutation (br ++ gv0) (br0 ++ bl)), (Permutation (br ++ gv0) (br0 ++ br)), (Permutation (br ++ gv0) (br0 ++ br0)), (Permutation (br ++ gv0) (br0 ++ bl0)), (Permutation (br ++ gv0) (br0 ++ gv0)), (Permutation (br ++ gv0) (bl0 ++ bl)), (Permutation (br ++ gv0) (bl0 ++ br)), (Permutation (br ++ gv0) (bl0 ++ br0)), (Permutation (br ++ gv0) (bl0 ++ bl0)), (Permutation (br ++ gv0) (bl0 ++ gv0))
+(Permutation (br ++ gv0) (gv0 ++ bl)), (Permutation (br ++ gv0) (gv0 ++ br)), (Permutation (br ++ gv0) (gv0 ++ br0)), (Permutation (br ++ gv0) (gv0 ++ bl0)), (Permutation (br ++ gv0) (gv0 ++ gv0)), (Permutation (br ++ gv0) []), (Permutation (br0 ++ bl) bl), (Permutation (br0 ++ bl) br), (Permutation (br0 ++ bl) br0), (Permutation (br0 ++ bl) bl0)
+(Permutation (br0 ++ bl) gv0), (Permutation (br0 ++ bl) (bl ++ bl)), (Permutation (br0 ++ bl) (bl ++ br)), (Permutation (br0 ++ bl) (bl ++ br0)), (Permutation (br0 ++ bl) (bl ++ bl0)), (Permutation (br0 ++ bl) (bl ++ gv0)), (Permutation (br0 ++ bl) (br ++ bl)), (Permutation (br0 ++ bl) (br ++ br)), (Permutation (br0 ++ bl) (br ++ br0)), (Permutation (br0 ++ bl) (br ++ bl0))
+(Permutation (br0 ++ bl) (br ++ gv0)), (Permutation (br0 ++ bl) (br0 ++ br)), (Permutation (br0 ++ bl) (br0 ++ br0)), (Permutation (br0 ++ bl) (br0 ++ bl0)), (Permutation (br0 ++ bl) (br0 ++ gv0)), (Permutation (br0 ++ bl) (bl0 ++ bl)), (Permutation (br0 ++ bl) (bl0 ++ br)), (Permutation (br0 ++ bl) (bl0 ++ br0)), (Permutation (br0 ++ bl) (bl0 ++ bl0)), (Permutation (br0 ++ bl) (bl0 ++ gv0))
+(Permutation (br0 ++ bl) (gv0 ++ bl)), (Permutation (br0 ++ bl) (gv0 ++ br)), (Permutation (br0 ++ bl) (gv0 ++ br0)), (Permutation (br0 ++ bl) (gv0 ++ bl0)), (Permutation (br0 ++ bl) (gv0 ++ gv0)), (Permutation (br0 ++ bl) []), (Permutation (br0 ++ br) bl), (Permutation (br0 ++ br) br), (Permutation (br0 ++ br) br0), (Permutation (br0 ++ br) bl0)
+(Permutation (br0 ++ br) gv0), (Permutation (br0 ++ br) (bl ++ bl)), (Permutation (br0 ++ br) (bl ++ br)), (Permutation (br0 ++ br) (bl ++ br0)), (Permutation (br0 ++ br) (bl ++ bl0)), (Permutation (br0 ++ br) (bl ++ gv0)), (Permutation (br0 ++ br) (br ++ bl)), (Permutation (br0 ++ br) (br ++ br)), (Permutation (br0 ++ br) (br ++ br0)), (Permutation (br0 ++ br) (br ++ bl0))
+(Permutation (br0 ++ br) (br ++ gv0)), (Permutation (br0 ++ br) (br0 ++ bl)), (Permutation (br0 ++ br) (br0 ++ br0)), (Permutation (br0 ++ br) (br0 ++ bl0)), (Permutation (br0 ++ br) (br0 ++ gv0)), (Permutation (br0 ++ br) (bl0 ++ bl)), (Permutation (br0 ++ br) (bl0 ++ br)), (Permutation (br0 ++ br) (bl0 ++ br0)), (Permutation (br0 ++ br) (bl0 ++ bl0)), (Permutation (br0 ++ br) (bl0 ++ gv0))
+(Permutation (br0 ++ br) (gv0 ++ bl)), (Permutation (br0 ++ br) (gv0 ++ br)), (Permutation (br0 ++ br) (gv0 ++ br0)), (Permutation (br0 ++ br) (gv0 ++ bl0)), (Permutation (br0 ++ br) (gv0 ++ gv0)), (Permutation (br0 ++ br) []), (Permutation (br0 ++ br0) bl), (Permutation (br0 ++ br0) br), (Permutation (br0 ++ br0) br0), (Permutation (br0 ++ br0) bl0)
+(Permutation (br0 ++ br0) gv0), (Permutation (br0 ++ br0) (bl ++ bl)), (Permutation (br0 ++ br0) (bl ++ br)), (Permutation (br0 ++ br0) (bl ++ br0)), (Permutation (br0 ++ br0) (bl ++ bl0)), (Permutation (br0 ++ br0) (bl ++ gv0)), (Permutation (br0 ++ br0) (br ++ bl)), (Permutation (br0 ++ br0) (br ++ br)), (Permutation (br0 ++ br0) (br ++ br0)), (Permutation (br0 ++ br0) (br ++ bl0))
+(Permutation (br0 ++ br0) (br ++ gv0)), (Permutation (br0 ++ br0) (br0 ++ bl)), (Permutation (br0 ++ br0) (br0 ++ br)), (Permutation (br0 ++ br0) (br0 ++ bl0)), (Permutation (br0 ++ br0) (br0 ++ gv0)), (Permutation (br0 ++ br0) (bl0 ++ bl)), (Permutation (br0 ++ br0) (bl0 ++ br)), (Permutation (br0 ++ br0) (bl0 ++ br0)), (Permutation (br0 ++ br0) (bl0 ++ bl0)), (Permutation (br0 ++ br0) (bl0 ++ gv0))
+(Permutation (br0 ++ br0) (gv0 ++ bl)), (Permutation (br0 ++ br0) (gv0 ++ br)), (Permutation (br0 ++ br0) (gv0 ++ br0)), (Permutation (br0 ++ br0) (gv0 ++ bl0)), (Permutation (br0 ++ br0) (gv0 ++ gv0)), (Permutation (br0 ++ br0) []), (Permutation (br0 ++ bl0) bl), (Permutation (br0 ++ bl0) br), (Permutation (br0 ++ bl0) br0), (Permutation (br0 ++ bl0) bl0)
+(Permutation (br0 ++ bl0) gv0), (Permutation (br0 ++ bl0) (bl ++ bl)), (Permutation (br0 ++ bl0) (bl ++ br)), (Permutation (br0 ++ bl0) (bl ++ br0)), (Permutation (br0 ++ bl0) (bl ++ bl0)), (Permutation (br0 ++ bl0) (bl ++ gv0)), (Permutation (br0 ++ bl0) (br ++ bl)), (Permutation (br0 ++ bl0) (br ++ br)), (Permutation (br0 ++ bl0) (br ++ br0)), (Permutation (br0 ++ bl0) (br ++ bl0))
+(Permutation (br0 ++ bl0) (br ++ gv0)), (Permutation (br0 ++ bl0) (br0 ++ bl)), (Permutation (br0 ++ bl0) (br0 ++ br)), (Permutation (br0 ++ bl0) (br0 ++ br0)), (Permutation (br0 ++ bl0) (br0 ++ gv0)), (Permutation (br0 ++ bl0) (bl0 ++ bl)), (Permutation (br0 ++ bl0) (bl0 ++ br)), (Permutation (br0 ++ bl0) (bl0 ++ br0)), (Permutation (br0 ++ bl0) (bl0 ++ bl0)), (Permutation (br0 ++ bl0) (bl0 ++ gv0))
+(Permutation (br0 ++ bl0) (gv0 ++ bl)), (Permutation (br0 ++ bl0) (gv0 ++ br)), (Permutation (br0 ++ bl0) (gv0 ++ br0)), (Permutation (br0 ++ bl0) (gv0 ++ bl0)), (Permutation (br0 ++ bl0) (gv0 ++ gv0)), (Permutation (br0 ++ bl0) []), (Permutation (br0 ++ gv0) bl), (Permutation (br0 ++ gv0) br), (Permutation (br0 ++ gv0) br0), (Permutation (br0 ++ gv0) bl0)
+(Permutation (br0 ++ gv0) gv0), (Permutation (br0 ++ gv0) (bl ++ bl)), (Permutation (br0 ++ gv0) (bl ++ br)), (Permutation (br0 ++ gv0) (bl ++ br0)), (Permutation (br0 ++ gv0) (bl ++ bl0)), (Permutation (br0 ++ gv0) (bl ++ gv0)), (Permutation (br0 ++ gv0) (br ++ bl)), (Permutation (br0 ++ gv0) (br ++ br)), (Permutation (br0 ++ gv0) (br ++ br0)), (Permutation (br0 ++ gv0) (br ++ bl0))
+(Permutation (br0 ++ gv0) (br ++ gv0)), (Permutation (br0 ++ gv0) (br0 ++ bl)), (Permutation (br0 ++ gv0) (br0 ++ br)), (Permutation (br0 ++ gv0) (br0 ++ br0)), (Permutation (br0 ++ gv0) (br0 ++ bl0)), (Permutation (br0 ++ gv0) (bl0 ++ bl)), (Permutation (br0 ++ gv0) (bl0 ++ br)), (Permutation (br0 ++ gv0) (bl0 ++ br0)), (Permutation (br0 ++ gv0) (bl0 ++ bl0)), (Permutation (br0 ++ gv0) (bl0 ++ gv0))
+(Permutation (br0 ++ gv0) (gv0 ++ bl)), (Permutation (br0 ++ gv0) (gv0 ++ br)), (Permutation (br0 ++ gv0) (gv0 ++ br0)), (Permutation (br0 ++ gv0) (gv0 ++ bl0)), (Permutation (br0 ++ gv0) (gv0 ++ gv0)), (Permutation (br0 ++ gv0) []), (Permutation (bl0 ++ bl) bl), (Permutation (bl0 ++ bl) br), (Permutation (bl0 ++ bl) br0), (Permutation (bl0 ++ bl) bl0)
+(Permutation (bl0 ++ bl) gv0), (Permutation (bl0 ++ bl) (bl ++ bl)), (Permutation (bl0 ++ bl) (bl ++ br)), (Permutation (bl0 ++ bl) (bl ++ br0)), (Permutation (bl0 ++ bl) (bl ++ bl0)), (Permutation (bl0 ++ bl) (bl ++ gv0)), (Permutation (bl0 ++ bl) (br ++ bl)), (Permutation (bl0 ++ bl) (br ++ br)), (Permutation (bl0 ++ bl) (br ++ br0)), (Permutation (bl0 ++ bl) (br ++ bl0))
+(Permutation (bl0 ++ bl) (br ++ gv0)), (Permutation (bl0 ++ bl) (br0 ++ bl)), (Permutation (bl0 ++ bl) (br0 ++ br)), (Permutation (bl0 ++ bl) (br0 ++ br0)), (Permutation (bl0 ++ bl) (br0 ++ bl0)), (Permutation (bl0 ++ bl) (br0 ++ gv0)), (Permutation (bl0 ++ bl) (bl0 ++ br)), (Permutation (bl0 ++ bl) (bl0 ++ br0)), (Permutation (bl0 ++ bl) (bl0 ++ bl0)), (Permutation (bl0 ++ bl) (bl0 ++ gv0))
+(Permutation (bl0 ++ bl) (gv0 ++ bl)), (Permutation (bl0 ++ bl) (gv0 ++ br)), (Permutation (bl0 ++ bl) (gv0 ++ br0)), (Permutation (bl0 ++ bl) (gv0 ++ bl0)), (Permutation (bl0 ++ bl) (gv0 ++ gv0)), (Permutation (bl0 ++ bl) []), (Permutation (bl0 ++ br) bl), (Permutation (bl0 ++ br) br), (Permutation (bl0 ++ br) br0), (Permutation (bl0 ++ br) bl0)
+(Permutation (bl0 ++ br) gv0), (Permutation (bl0 ++ br) (bl ++ bl)), (Permutation (bl0 ++ br) (bl ++ br)), (Permutation (bl0 ++ br) (bl ++ br0)), (Permutation (bl0 ++ br) (bl ++ bl0)), (Permutation (bl0 ++ br) (bl ++ gv0)), (Permutation (bl0 ++ br) (br ++ bl)), (Permutation (bl0 ++ br) (br ++ br)), (Permutation (bl0 ++ br) (br ++ br0)), (Permutation (bl0 ++ br) (br ++ bl0))
+(Permutation (bl0 ++ br) (br ++ gv0)), (Permutation (bl0 ++ br) (br0 ++ bl)), (Permutation (bl0 ++ br) (br0 ++ br)), (Permutation (bl0 ++ br) (br0 ++ br0)), (Permutation (bl0 ++ br) (br0 ++ bl0)), (Permutation (bl0 ++ br) (br0 ++ gv0)), (Permutation (bl0 ++ br) (bl0 ++ bl)), (Permutation (bl0 ++ br) (bl0 ++ br0)), (Permutation (bl0 ++ br) (bl0 ++ bl0)), (Permutation (bl0 ++ br) (bl0 ++ gv0))
+(Permutation (bl0 ++ br) (gv0 ++ bl)), (Permutation (bl0 ++ br) (gv0 ++ br)), (Permutation (bl0 ++ br) (gv0 ++ br0)), (Permutation (bl0 ++ br) (gv0 ++ bl0)), (Permutation (bl0 ++ br) (gv0 ++ gv0)), (Permutation (bl0 ++ br) []), (Permutation (bl0 ++ br0) bl), (Permutation (bl0 ++ br0) br), (Permutation (bl0 ++ br0) br0), (Permutation (bl0 ++ br0) bl0)
+(Permutation (bl0 ++ br0) gv0), (Permutation (bl0 ++ br0) (bl ++ bl)), (Permutation (bl0 ++ br0) (bl ++ br)), (Permutation (bl0 ++ br0) (bl ++ br0)), (Permutation (bl0 ++ br0) (bl ++ bl0)), (Permutation (bl0 ++ br0) (bl ++ gv0)), (Permutation (bl0 ++ br0) (br ++ bl)), (Permutation (bl0 ++ br0) (br ++ br)), (Permutation (bl0 ++ br0) (br ++ br0)), (Permutation (bl0 ++ br0) (br ++ bl0))
+(Permutation (bl0 ++ br0) (br ++ gv0)), (Permutation (bl0 ++ br0) (br0 ++ bl)), (Permutation (bl0 ++ br0) (br0 ++ br)), (Permutation (bl0 ++ br0) (br0 ++ br0)), (Permutation (bl0 ++ br0) (br0 ++ bl0)), (Permutation (bl0 ++ br0) (br0 ++ gv0)), (Permutation (bl0 ++ br0) (bl0 ++ bl)), (Permutation (bl0 ++ br0) (bl0 ++ br)), (Permutation (bl0 ++ br0) (bl0 ++ bl0)), (Permutation (bl0 ++ br0) (bl0 ++ gv0))
+(Permutation (bl0 ++ br0) (gv0 ++ bl)), (Permutation (bl0 ++ br0) (gv0 ++ br)), (Permutation (bl0 ++ br0) (gv0 ++ br0)), (Permutation (bl0 ++ br0) (gv0 ++ bl0)), (Permutation (bl0 ++ br0) (gv0 ++ gv0)), (Permutation (bl0 ++ br0) []), (Permutation (bl0 ++ bl0) bl), (Permutation (bl0 ++ bl0) br), (Permutation (bl0 ++ bl0) br0), (Permutation (bl0 ++ bl0) bl0)
+(Permutation (bl0 ++ bl0) gv0), (Permutation (bl0 ++ bl0) (bl ++ bl)), (Permutation (bl0 ++ bl0) (bl ++ br)), (Permutation (bl0 ++ bl0) (bl ++ br0)), (Permutation (bl0 ++ bl0) (bl ++ bl0)), (Permutation (bl0 ++ bl0) (bl ++ gv0)), (Permutation (bl0 ++ bl0) (br ++ bl)), (Permutation (bl0 ++ bl0) (br ++ br)), (Permutation (bl0 ++ bl0) (br ++ br0)), (Permutation (bl0 ++ bl0) (br ++ bl0))
+(Permutation (bl0 ++ bl0) (br ++ gv0)), (Permutation (bl0 ++ bl0) (br0 ++ bl)), (Permutation (bl0 ++ bl0) (br0 ++ br)), (Permutation (bl0 ++ bl0) (br0 ++ br0)), (Permutation (bl0 ++ bl0) (br0 ++ bl0)), (Permutation (bl0 ++ bl0) (br0 ++ gv0)), (Permutation (bl0 ++ bl0) (bl0 ++ bl)), (Permutation (bl0 ++ bl0) (bl0 ++ br)), (Permutation (bl0 ++ bl0) (bl0 ++ br0)), (Permutation (bl0 ++ bl0) (bl0 ++ gv0))
+(Permutation (bl0 ++ bl0) (gv0 ++ bl)), (Permutation (bl0 ++ bl0) (gv0 ++ br)), (Permutation (bl0 ++ bl0) (gv0 ++ br0)), (Permutation (bl0 ++ bl0) (gv0 ++ bl0)), (Permutation (bl0 ++ bl0) (gv0 ++ gv0)), (Permutation (bl0 ++ bl0) []), (Permutation (bl0 ++ gv0) bl), (Permutation (bl0 ++ gv0) br), (Permutation (bl0 ++ gv0) br0), (Permutation (bl0 ++ gv0) bl0)
+(Permutation (bl0 ++ gv0) gv0), (Permutation (bl0 ++ gv0) (bl ++ bl)), (Permutation (bl0 ++ gv0) (bl ++ br)), (Permutation (bl0 ++ gv0) (bl ++ br0)), (Permutation (bl0 ++ gv0) (bl ++ bl0)), (Permutation (bl0 ++ gv0) (bl ++ gv0)), (Permutation (bl0 ++ gv0) (br ++ bl)), (Permutation (bl0 ++ gv0) (br ++ br)), (Permutation (bl0 ++ gv0) (br ++ br0)), (Permutation (bl0 ++ gv0) (br ++ bl0))
+(Permutation (bl0 ++ gv0) (br ++ gv0)), (Permutation (bl0 ++ gv0) (br0 ++ bl)), (Permutation (bl0 ++ gv0) (br0 ++ br)), (Permutation (bl0 ++ gv0) (br0 ++ br0)), (Permutation (bl0 ++ gv0) (br0 ++ bl0)), (Permutation (bl0 ++ gv0) (br0 ++ gv0)), (Permutation (bl0 ++ gv0) (bl0 ++ bl)), (Permutation (bl0 ++ gv0) (bl0 ++ br)), (Permutation (bl0 ++ gv0) (bl0 ++ br0)), (Permutation (bl0 ++ gv0) (bl0 ++ bl0))
+(Permutation (bl0 ++ gv0) (gv0 ++ bl)), (Permutation (bl0 ++ gv0) (gv0 ++ br)), (Permutation (bl0 ++ gv0) (gv0 ++ br0)), (Permutation (bl0 ++ gv0) (gv0 ++ bl0)), (Permutation (bl0 ++ gv0) (gv0 ++ gv0)), (Permutation (bl0 ++ gv0) []), (Permutation (gv0 ++ bl) bl), (Permutation (gv0 ++ bl) br), (Permutation (gv0 ++ bl) br0), (Permutation (gv0 ++ bl) bl0)
+(Permutation (gv0 ++ bl) gv0), (Permutation (gv0 ++ bl) (bl ++ bl)), (Permutation (gv0 ++ bl) (bl ++ br)), (Permutation (gv0 ++ bl) (bl ++ br0)), (Permutation (gv0 ++ bl) (bl ++ bl0)), (Permutation (gv0 ++ bl) (bl ++ gv0)), (Permutation (gv0 ++ bl) (br ++ bl)), (Permutation (gv0 ++ bl) (br ++ br)), (Permutation (gv0 ++ bl) (br ++ br0)), (Permutation (gv0 ++ bl) (br ++ bl0))
+(Permutation (gv0 ++ bl) (br ++ gv0)), (Permutation (gv0 ++ bl) (br0 ++ bl)), (Permutation (gv0 ++ bl) (br0 ++ br)), (Permutation (gv0 ++ bl) (br0 ++ br0)), (Permutation (gv0 ++ bl) (br0 ++ bl0)), (Permutation (gv0 ++ bl) (br0 ++ gv0)), (Permutation (gv0 ++ bl) (bl0 ++ bl)), (Permutation (gv0 ++ bl) (bl0 ++ br)), (Permutation (gv0 ++ bl) (bl0 ++ br0)), (Permutation (gv0 ++ bl) (bl0 ++ bl0))
+(Permutation (gv0 ++ bl) (bl0 ++ gv0)), (Permutation (gv0 ++ bl) (gv0 ++ br)), (Permutation (gv0 ++ bl) (gv0 ++ br0)), (Permutation (gv0 ++ bl) (gv0 ++ bl0)), (Permutation (gv0 ++ bl) (gv0 ++ gv0)), (Permutation (gv0 ++ bl) []), (Permutation (gv0 ++ br) bl), (Permutation (gv0 ++ br) br), (Permutation (gv0 ++ br) br0), (Permutation (gv0 ++ br) bl0)
+(Permutation (gv0 ++ br) gv0), (Permutation (gv0 ++ br) (bl ++ bl)), (Permutation (gv0 ++ br) (bl ++ br)), (Permutation (gv0 ++ br) (bl ++ br0)), (Permutation (gv0 ++ br) (bl ++ bl0)), (Permutation (gv0 ++ br) (bl ++ gv0)), (Permutation (gv0 ++ br) (br ++ bl)), (Permutation (gv0 ++ br) (br ++ br)), (Permutation (gv0 ++ br) (br ++ br0)), (Permutation (gv0 ++ br) (br ++ bl0))
+(Permutation (gv0 ++ br) (br ++ gv0)), (Permutation (gv0 ++ br) (br0 ++ bl)), (Permutation (gv0 ++ br) (br0 ++ br)), (Permutation (gv0 ++ br) (br0 ++ br0)), (Permutation (gv0 ++ br) (br0 ++ bl0)), (Permutation (gv0 ++ br) (br0 ++ gv0)), (Permutation (gv0 ++ br) (bl0 ++ bl)), (Permutation (gv0 ++ br) (bl0 ++ br)), (Permutation (gv0 ++ br) (bl0 ++ br0)), (Permutation (gv0 ++ br) (bl0 ++ bl0))
+(Permutation (gv0 ++ br) (bl0 ++ gv0)), (Permutation (gv0 ++ br) (gv0 ++ bl)), (Permutation (gv0 ++ br) (gv0 ++ br0)), (Permutation (gv0 ++ br) (gv0 ++ bl0)), (Permutation (gv0 ++ br) (gv0 ++ gv0)), (Permutation (gv0 ++ br) []), (Permutation (gv0 ++ br0) bl), (Permutation (gv0 ++ br0) br), (Permutation (gv0 ++ br0) br0), (Permutation (gv0 ++ br0) bl0)
+(Permutation (gv0 ++ br0) gv0), (Permutation (gv0 ++ br0) (bl ++ bl)), (Permutation (gv0 ++ br0) (bl ++ br)), (Permutation (gv0 ++ br0) (bl ++ br0)), (Permutation (gv0 ++ br0) (bl ++ bl0)), (Permutation (gv0 ++ br0) (bl ++ gv0)), (Permutation (gv0 ++ br0) (br ++ bl)), (Permutation (gv0 ++ br0) (br ++ br)), (Permutation (gv0 ++ br0) (br ++ br0)), (Permutation (gv0 ++ br0) (br ++ bl0))
+(Permutation (gv0 ++ br0) (br ++ gv0)), (Permutation (gv0 ++ br0) (br0 ++ bl)), (Permutation (gv0 ++ br0) (br0 ++ br)), (Permutation (gv0 ++ br0) (br0 ++ br0)), (Permutation (gv0 ++ br0) (br0 ++ bl0)), (Permutation (gv0 ++ br0) (br0 ++ gv0)), (Permutation (gv0 ++ br0) (bl0 ++ bl)), (Permutation (gv0 ++ br0) (bl0 ++ br)), (Permutation (gv0 ++ br0) (bl0 ++ br0)), (Permutation (gv0 ++ br0) (bl0 ++ bl0))
+(Permutation (gv0 ++ br0) (bl0 ++ gv0)), (Permutation (gv0 ++ br0) (gv0 ++ bl)), (Permutation (gv0 ++ br0) (gv0 ++ br)), (Permutation (gv0 ++ br0) (gv0 ++ bl0)), (Permutation (gv0 ++ br0) (gv0 ++ gv0)), (Permutation (gv0 ++ br0) []), (Permutation (gv0 ++ bl0) bl), (Permutation (gv0 ++ bl0) br), (Permutation (gv0 ++ bl0) br0), (Permutation (gv0 ++ bl0) bl0)
+(Permutation (gv0 ++ bl0) gv0), (Permutation (gv0 ++ bl0) (bl ++ bl)), (Permutation (gv0 ++ bl0) (bl ++ br)), (Permutation (gv0 ++ bl0) (bl ++ br0)), (Permutation (gv0 ++ bl0) (bl ++ bl0)), (Permutation (gv0 ++ bl0) (bl ++ gv0)), (Permutation (gv0 ++ bl0) (br ++ bl)), (Permutation (gv0 ++ bl0) (br ++ br)), (Permutation (gv0 ++ bl0) (br ++ br0)), (Permutation (gv0 ++ bl0) (br ++ bl0))
+(Permutation (gv0 ++ bl0) (br ++ gv0)), (Permutation (gv0 ++ bl0) (br0 ++ bl)), (Permutation (gv0 ++ bl0) (br0 ++ br)), (Permutation (gv0 ++ bl0) (br0 ++ br0)), (Permutation (gv0 ++ bl0) (br0 ++ bl0)), (Permutation (gv0 ++ bl0) (br0 ++ gv0)), (Permutation (gv0 ++ bl0) (bl0 ++ bl)), (Permutation (gv0 ++ bl0) (bl0 ++ br)), (Permutation (gv0 ++ bl0) (bl0 ++ br0)), (Permutation (gv0 ++ bl0) (bl0 ++ bl0))
+(Permutation (gv0 ++ bl0) (bl0 ++ gv0)), (Permutation (gv0 ++ bl0) (gv0 ++ bl)), (Permutation (gv0 ++ bl0) (gv0 ++ br)), (Permutation (gv0 ++ bl0) (gv0 ++ br0)), (Permutation (gv0 ++ bl0) (gv0 ++ gv0)), (Permutation (gv0 ++ bl0) []), (Permutation (gv0 ++ gv0) bl), (Permutation (gv0 ++ gv0) br), (Permutation (gv0 ++ gv0) br0), (Permutation (gv0 ++ gv0) bl0)
+(Permutation (gv0 ++ gv0) gv0), (Permutation (gv0 ++ gv0) (bl ++ bl)), (Permutation (gv0 ++ gv0) (bl ++ br)), (Permutation (gv0 ++ gv0) (bl ++ br0)), (Permutation (gv0 ++ gv0) (bl ++ bl0)), (Permutation (gv0 ++ gv0) (bl ++ gv0)), (Permutation (gv0 ++ gv0) (br ++ bl)), (Permutation (gv0 ++ gv0) (br ++ br)), (Permutation (gv0 ++ gv0) (br ++ br0)), (Permutation (gv0 ++ gv0) (br ++ bl0))
+(Permutation (gv0 ++ gv0) (br ++ gv0)), (Permutation (gv0 ++ gv0) (br0 ++ bl)), (Permutation (gv0 ++ gv0) (br0 ++ br)), (Permutation (gv0 ++ gv0) (br0 ++ br0)), (Permutation (gv0 ++ gv0) (br0 ++ bl0)), (Permutation (gv0 ++ gv0) (br0 ++ gv0)), (Permutation (gv0 ++ gv0) (bl0 ++ bl)), (Permutation (gv0 ++ gv0) (bl0 ++ br)), (Permutation (gv0 ++ gv0) (bl0 ++ br0)), (Permutation (gv0 ++ gv0) (bl0 ++ bl0))
+(Permutation (gv0 ++ gv0) (bl0 ++ gv0)), (Permutation (gv0 ++ gv0) (gv0 ++ bl)), (Permutation (gv0 ++ gv0) (gv0 ++ br)), (Permutation (gv0 ++ gv0) (gv0 ++ br0)), (Permutation (gv0 ++ gv0) (gv0 ++ bl0)), (Permutation (gv0 ++ gv0) []), (Permutation [] bl), (Permutation [] br), (Permutation [] br0), (Permutation [] bl0)
+(Permutation [] gv0), (Permutation [] (bl ++ bl)), (Permutation [] (bl ++ br)), (Permutation [] (bl ++ br0)), (Permutation [] (bl ++ bl0)), (Permutation [] (bl ++ gv0)), (Permutation [] (br ++ bl)), (Permutation [] (br ++ br)), (Permutation [] (br ++ br0)), (Permutation [] (br ++ bl0))
+(Permutation [] (br ++ gv0)), (Permutation [] (br0 ++ bl)), (Permutation [] (br0 ++ br)), (Permutation [] (br0 ++ br0)), (Permutation [] (br0 ++ bl0)), (Permutation [] (br0 ++ gv0)), (Permutation [] (bl0 ++ bl)), (Permutation [] (bl0 ++ br)), (Permutation [] (bl0 ++ br0)), (Permutation [] (bl0 ++ bl0))
+(Permutation [] (bl0 ++ gv0)), (Permutation [] (gv0 ++ bl)), (Permutation [] (gv0 ++ br)), (Permutation [] (gv0 ++ br0)), (Permutation [] (gv0 ++ bl0)), (Permutation [] (gv0 ++ gv0)), (In (length bl) bl), (In (length bl) br), (In (length bl) br0), (In (length bl) bl0)
+(In (length bl) gv0), (In (length bl) (bl ++ bl)), (In (length bl) (bl ++ br)), (In (length bl) (bl ++ br0)), (In (length bl) (bl ++ bl0)), (In (length bl) (bl ++ gv0)), (In (length bl) (br ++ bl)), (In (length bl) (br ++ br)), (In (length bl) (br ++ br0)), (In (length bl) (br ++ bl0))
+(In (length bl) (br ++ gv0)), (In (length bl) (br0 ++ bl)), (In (length bl) (br0 ++ br)), (In (length bl) (br0 ++ br0)), (In (length bl) (br0 ++ bl0)), (In (length bl) (br0 ++ gv0)), (In (length bl) (bl0 ++ bl)), (In (length bl) (bl0 ++ br)), (In (length bl) (bl0 ++ br0)), (In (length bl) (bl0 ++ bl0))
+(In (length bl) (bl0 ++ gv0)), (In (length bl) (gv0 ++ bl)), (In (length bl) (gv0 ++ br)), (In (length bl) (gv0 ++ br0)), (In (length bl) (gv0 ++ bl0)), (In (length bl) (gv0 ++ gv0)), (In (length br) bl), (In (length br) br), (In (length br) br0), (In (length br) bl0)
+(In (length br) gv0), (In (length br) (bl ++ bl)), (In (length br) (bl ++ br)), (In (length br) (bl ++ br0)), (In (length br) (bl ++ bl0)), (In (length br) (bl ++ gv0)), (In (length br) (br ++ bl)), (In (length br) (br ++ br)), (In (length br) (br ++ br0)), (In (length br) (br ++ bl0))
+(In (length br) (br ++ gv0)), (In (length br) (br0 ++ bl)), (In (length br) (br0 ++ br)), (In (length br) (br0 ++ br0)), (In (length br) (br0 ++ bl0)), (In (length br) (br0 ++ gv0)), (In (length br) (bl0 ++ bl)), (In (length br) (bl0 ++ br)), (In (length br) (bl0 ++ br0)), (In (length br) (bl0 ++ bl0))
+(In (length br) (bl0 ++ gv0)), (In (length br) (gv0 ++ bl)), (In (length br) (gv0 ++ br)), (In (length br) (gv0 ++ br0)), (In (length br) (gv0 ++ bl0)), (In (length br) (gv0 ++ gv0)), (In (length br0) bl), (In (length br0) br), (In (length br0) br0), (In (length br0) bl0)
+(In (length br0) gv0), (In (length br0) (bl ++ bl)), (In (length br0) (bl ++ br)), (In (length br0) (bl ++ br0)), (In (length br0) (bl ++ bl0)), (In (length br0) (bl ++ gv0)), (In (length br0) (br ++ bl)), (In (length br0) (br ++ br)), (In (length br0) (br ++ br0)), (In (length br0) (br ++ bl0))
+(In (length br0) (br ++ gv0)), (In (length br0) (br0 ++ bl)), (In (length br0) (br0 ++ br)), (In (length br0) (br0 ++ br0)), (In (length br0) (br0 ++ bl0)), (In (length br0) (br0 ++ gv0)), (In (length br0) (bl0 ++ bl)), (In (length br0) (bl0 ++ br)), (In (length br0) (bl0 ++ br0)), (In (length br0) (bl0 ++ bl0))
+(In (length br0) (bl0 ++ gv0)), (In (length br0) (gv0 ++ bl)), (In (length br0) (gv0 ++ br)), (In (length br0) (gv0 ++ br0)), (In (length br0) (gv0 ++ bl0)), (In (length br0) (gv0 ++ gv0)), (In (length bl0) bl), (In (length bl0) br), (In (length bl0) br0), (In (length bl0) bl0)
+(In (length bl0) gv0), (In (length bl0) (bl ++ bl)), (In (length bl0) (bl ++ br)), (In (length bl0) (bl ++ br0)), (In (length bl0) (bl ++ bl0)), (In (length bl0) (bl ++ gv0)), (In (length bl0) (br ++ bl)), (In (length bl0) (br ++ br)), (In (length bl0) (br ++ br0)), (In (length bl0) (br ++ bl0))
+(In (length bl0) (br ++ gv0)), (In (length bl0) (br0 ++ bl)), (In (length bl0) (br0 ++ br)), (In (length bl0) (br0 ++ br0)), (In (length bl0) (br0 ++ bl0)), (In (length bl0) (br0 ++ gv0)), (In (length bl0) (bl0 ++ bl)), (In (length bl0) (bl0 ++ br)), (In (length bl0) (bl0 ++ br0)), (In (length bl0) (bl0 ++ bl0))
+(In (length bl0) (bl0 ++ gv0)), (In (length bl0) (gv0 ++ bl)), (In (length bl0) (gv0 ++ br)), (In (length bl0) (gv0 ++ br0)), (In (length bl0) (gv0 ++ bl0)), (In (length bl0) (gv0 ++ gv0)), (In (length gv0) bl), (In (length gv0) br), (In (length gv0) br0), (In (length gv0) bl0)
+(In (length gv0) gv0), (In (length gv0) (bl ++ bl)), (In (length gv0) (bl ++ br)), (In (length gv0) (bl ++ br0)), (In (length gv0) (bl ++ bl0)), (In (length gv0) (bl ++ gv0)), (In (length gv0) (br ++ bl)), (In (length gv0) (br ++ br)), (In (length gv0) (br ++ br0)), (In (length gv0) (br ++ bl0))
+(In (length gv0) (br ++ gv0)), (In (length gv0) (br0 ++ bl)), (In (length gv0) (br0 ++ br)), (In (length gv0) (br0 ++ br0)), (In (length gv0) (br0 ++ bl0)), (In (length gv0) (br0 ++ gv0)), (In (length gv0) (bl0 ++ bl)), (In (length gv0) (bl0 ++ br)), (In (length gv0) (bl0 ++ br0)), (In (length gv0) (bl0 ++ bl0))
+(In (length gv0) (bl0 ++ gv0)), (In (length gv0) (gv0 ++ bl)), (In (length gv0) (gv0 ++ br)), (In (length gv0) (gv0 ++ br0)), (In (length gv0) (gv0 ++ bl0)), (In (length gv0) (gv0 ++ gv0)), (length bl < length br), (length bl < length br0), (length bl < length bl0), (length bl < length gv0)
+(length br < length bl), (length br < length br0), (length br < length bl0), (length br < length gv0), (length br0 < length bl), (length br0 < length br), (length br0 < length bl0), (length br0 < length gv0), (length bl0 < length bl), (length bl0 < length br)
+(length bl0 < length br0), (length bl0 < length gv0), (length gv0 < length bl), (length gv0 < length br), (length gv0 < length br0), (length gv0 < length bl0), (length bl <= length br), (length bl <= length br0), (length bl <= length bl0), (length bl <= length gv0)
+(length br <= length bl), (length br <= length br0), (length br <= length bl0), (length br <= length gv0), (length br0 <= length bl), (length br0 <= length br), (length br0 <= length bl0), (length br0 <= length gv0), (length bl0 <= length bl), (length bl0 <= length br)
+(length bl0 <= length br0), (length bl0 <= length gv0), (length gv0 <= length bl), (length gv0 <= length br), (length gv0 <= length br0), (length gv0 <= length bl0), (~ Permutation bl bl), (~ Permutation bl br), (~ Permutation bl br0), (~ Permutation bl bl0)
+(~ Permutation bl gv0), (~ Permutation br bl), (~ Permutation br br), (~ Permutation br br0), (~ Permutation br bl0), (~ Permutation br gv0), (~ Permutation br0 bl), (~ Permutation br0 br), (~ Permutation br0 br0), (~ Permutation br0 bl0)
+(~ Permutation br0 gv0), (~ Permutation bl0 bl), (~ Permutation bl0 br), (~ Permutation bl0 br0), (~ Permutation bl0 bl0), (~ Permutation bl0 gv0), (~ Permutation gv0 bl), (~ Permutation gv0 br), (~ Permutation gv0 br0), (~ Permutation gv0 bl0)
+(~ Permutation gv0 gv0), (bl <> bl), (bl <> br), (bl <> br0), (bl <> bl0), (bl <> gv0), (br <> bl), (br <> br), (br <> br0), (br <> bl0)
+(br <> gv0), (br0 <> bl), (br0 <> br), (br0 <> br0), (br0 <> bl0), (br0 <> gv0), (bl0 <> bl), (bl0 <> br), (bl0 <> br0), (bl0 <> bl0)
+(bl0 <> gv0), (gv0 <> bl), (gv0 <> br), (gv0 <> br0), (gv0 <> bl0), (gv0 <> gv0), (None = Some bl), (None = Some br), (None = Some br0), (None = Some bl0)
+(None = Some gv0), (bl ++ bl = bl), (bl ++ bl = br), (bl ++ bl = br0), (bl ++ bl = bl0), (bl ++ bl = gv0), (bl ++ br = bl), (bl ++ br = br), (bl ++ br = br0), (bl ++ br = bl0)
+(bl ++ br = gv0), (bl ++ br0 = bl), (bl ++ br0 = br), (bl ++ br0 = br0), (bl ++ br0 = bl0), (bl ++ br0 = gv0), (bl ++ bl0 = bl), (bl ++ bl0 = br), (bl ++ bl0 = br0), (bl ++ bl0 = bl0)
+(bl ++ bl0 = gv0), (bl ++ gv0 = bl), (bl ++ gv0 = br), (bl ++ gv0 = br0), (bl ++ gv0 = bl0), (bl ++ gv0 = gv0), (br ++ bl = bl), (br ++ bl = br), (br ++ bl = br0), (br ++ bl = bl0)
+(br ++ bl = gv0), (br ++ br = bl), (br ++ br = br), (br ++ br = br0), (br ++ br = bl0), (br ++ br = gv0), (br ++ br0 = bl), (br ++ br0 = br), (br ++ br0 = br0), (br ++ br0 = bl0)
+(br ++ br0 = gv0), (br ++ bl0 = bl), (br ++ bl0 = br), (br ++ bl0 = br0), (br ++ bl0 = bl0), (br ++ bl0 = gv0), (br ++ gv0 = bl), (br ++ gv0 = br), (br ++ gv0 = br0), (br ++ gv0 = bl0)
+(br ++ gv0 = gv0), (br0 ++ bl = bl), (br0 ++ bl = br), (br0 ++ bl = br0), (br0 ++ bl = bl0), (br0 ++ bl = gv0), (br0 ++ br = bl), (br0 ++ br = br), (br0 ++ br = br0), (br0 ++ br = bl0)
+(br0 ++ br = gv0), (br0 ++ br0 = bl), (br0 ++ br0 = br), (br0 ++ br0 = br0), (br0 ++ br0 = bl0), (br0 ++ br0 = gv0), (br0 ++ bl0 = bl), (br0 ++ bl0 = br), (br0 ++ bl0 = br0), (br0 ++ bl0 = bl0)
+(br0 ++ bl0 = gv0), (br0 ++ gv0 = bl), (br0 ++ gv0 = br), (br0 ++ gv0 = br0), (br0 ++ gv0 = bl0), (br0 ++ gv0 = gv0), (bl0 ++ bl = bl), (bl0 ++ bl = br), (bl0 ++ bl = br0), (bl0 ++ bl = bl0)
+(bl0 ++ bl = gv0), (bl0 ++ br = bl), (bl0 ++ br = br), (bl0 ++ br = br0), (bl0 ++ br = bl0), (bl0 ++ br = gv0), (bl0 ++ br0 = bl), (bl0 ++ br0 = br), (bl0 ++ br0 = br0), (bl0 ++ br0 = bl0)
+(bl0 ++ br0 = gv0), (bl0 ++ bl0 = bl), (bl0 ++ bl0 = br), (bl0 ++ bl0 = br0), (bl0 ++ bl0 = bl0), (bl0 ++ bl0 = gv0), (bl0 ++ gv0 = bl), (bl0 ++ gv0 = br), (bl0 ++ gv0 = br0), (bl0 ++ gv0 = bl0)
+(bl0 ++ gv0 = gv0), (gv0 ++ bl = bl), (gv0 ++ bl = br), (gv0 ++ bl = br0), (gv0 ++ bl = bl0), (gv0 ++ bl = gv0), (gv0 ++ br = bl), (gv0 ++ br = br), (gv0 ++ br = br0), (gv0 ++ br = bl0)
+(gv0 ++ br = gv0), (gv0 ++ br0 = bl), (gv0 ++ br0 = br), (gv0 ++ br0 = br0), (gv0 ++ br0 = bl0), (gv0 ++ br0 = gv0), (gv0 ++ bl0 = bl), (gv0 ++ bl0 = br), (gv0 ++ bl0 = br0), (gv0 ++ bl0 = bl0)
+(gv0 ++ bl0 = gv0), (gv0 ++ gv0 = bl), (gv0 ++ gv0 = br), (gv0 ++ gv0 = br0), (gv0 ++ gv0 = bl0), (gv0 ++ gv0 = gv0), ([] = bl), ([] = br), ([] = br0), ([] = bl0)
+([] = gv0), ([] = bl ++ bl), ([] = bl ++ br), ([] = bl ++ br0), ([] = bl ++ bl0), ([] = bl ++ gv0), ([] = br ++ bl), ([] = br ++ br), ([] = br ++ br0), ([] = br ++ bl0)
+([] = br ++ gv0), ([] = br0 ++ bl), ([] = br0 ++ br), ([] = br0 ++ br0), ([] = br0 ++ bl0), ([] = br0 ++ gv0), ([] = bl0 ++ bl), ([] = bl0 ++ br), ([] = bl0 ++ br0), ([] = bl0 ++ bl0)
+([] = bl0 ++ gv0), ([] = gv0 ++ bl), ([] = gv0 ++ br), ([] = gv0 ++ br0), ([] = gv0 ++ bl0), ([] = gv0 ++ gv0)
+
+Label: 3 (3)
+(Permutation bl0 bl0), (Permutation bl0 br0), (Permutation bl0 gv1), (Permutation bl0 br), (Permutation bl0 bl), (Permutation br0 bl0), (Permutation br0 br0), (Permutation br0 gv1), (Permutation br0 br), (Permutation br0 bl)
+(Permutation gv1 bl0), (Permutation gv1 br0), (Permutation gv1 gv1), (Permutation gv1 br), (Permutation gv1 bl), (Permutation br bl0), (Permutation br br0), (Permutation br gv1), (Permutation br br), (Permutation br bl)
+(Permutation bl bl0), (Permutation bl br0), (Permutation bl gv1), (Permutation bl br), (Permutation bl bl), (bl0 = bl0), (bl0 = br0), (bl0 = gv1), (bl0 = br), (bl0 = bl)
+(br0 = bl0), (br0 = br0), (br0 = gv1), (br0 = br), (br0 = bl), (gv1 = bl0), (gv1 = br0), (gv1 = gv1), (gv1 = br), (gv1 = bl)
+(br = bl0), (br = br0), (br = gv1), (br = br), (br = bl), (bl = bl0), (bl = br0), (bl = gv1), (bl = br), (bl = bl)
+(tree_elems Leaf bl0), (tree_elems Leaf br0), (tree_elems Leaf gv1), (tree_elems Leaf br), (tree_elems Leaf bl), (tree_elems Leaf (bl0 ++ bl0)), (tree_elems Leaf (bl0 ++ br0)), (tree_elems Leaf (bl0 ++ gv1)), (tree_elems Leaf (bl0 ++ br)), (tree_elems Leaf (bl0 ++ bl))
+(tree_elems Leaf (br0 ++ bl0)), (tree_elems Leaf (br0 ++ br0)), (tree_elems Leaf (br0 ++ gv1)), (tree_elems Leaf (br0 ++ br)), (tree_elems Leaf (br0 ++ bl)), (tree_elems Leaf (gv1 ++ bl0)), (tree_elems Leaf (gv1 ++ br0)), (tree_elems Leaf (gv1 ++ gv1)), (tree_elems Leaf (gv1 ++ br)), (tree_elems Leaf (gv1 ++ bl))
+(tree_elems Leaf (br ++ bl0)), (tree_elems Leaf (br ++ br0)), (tree_elems Leaf (br ++ gv1)), (tree_elems Leaf (br ++ br)), (tree_elems Leaf (br ++ bl)), (tree_elems Leaf (bl ++ bl0)), (tree_elems Leaf (bl ++ br0)), (tree_elems Leaf (bl ++ gv1)), (tree_elems Leaf (bl ++ br)), (tree_elems Leaf (bl ++ bl))
+(tree_elems Leaf []), (pow2heapp (length bl0) (length bl0) Leaf), (pow2heapp (length bl0) (length br0) Leaf), (pow2heapp (length bl0) (length gv1) Leaf), (pow2heapp (length bl0) (length br) Leaf), (pow2heapp (length bl0) (length bl) Leaf), (pow2heapp (length br0) (length bl0) Leaf), (pow2heapp (length br0) (length br0) Leaf), (pow2heapp (length br0) (length gv1) Leaf), (pow2heapp (length br0) (length br) Leaf)
+(pow2heapp (length br0) (length bl) Leaf), (pow2heapp (length gv1) (length bl0) Leaf), (pow2heapp (length gv1) (length br0) Leaf), (pow2heapp (length gv1) (length gv1) Leaf), (pow2heapp (length gv1) (length br) Leaf), (pow2heapp (length gv1) (length bl) Leaf), (pow2heapp (length br) (length bl0) Leaf), (pow2heapp (length br) (length br0) Leaf), (pow2heapp (length br) (length gv1) Leaf), (pow2heapp (length br) (length br) Leaf)
+(pow2heapp (length br) (length bl) Leaf), (pow2heapp (length bl) (length bl0) Leaf), (pow2heapp (length bl) (length br0) Leaf), (pow2heapp (length bl) (length gv1) Leaf), (pow2heapp (length bl) (length br) Leaf), (pow2heapp (length bl) (length bl) Leaf), (Permutation bl0 (bl0 ++ bl0)), (Permutation bl0 (bl0 ++ br0)), (Permutation bl0 (bl0 ++ gv1)), (Permutation bl0 (bl0 ++ br))
+(Permutation bl0 (bl0 ++ bl)), (Permutation bl0 (br0 ++ bl0)), (Permutation bl0 (br0 ++ br0)), (Permutation bl0 (br0 ++ gv1)), (Permutation bl0 (br0 ++ br)), (Permutation bl0 (br0 ++ bl)), (Permutation bl0 (gv1 ++ bl0)), (Permutation bl0 (gv1 ++ br0)), (Permutation bl0 (gv1 ++ gv1)), (Permutation bl0 (gv1 ++ br))
+(Permutation bl0 (gv1 ++ bl)), (Permutation bl0 (br ++ bl0)), (Permutation bl0 (br ++ br0)), (Permutation bl0 (br ++ gv1)), (Permutation bl0 (br ++ br)), (Permutation bl0 (br ++ bl)), (Permutation bl0 (bl ++ bl0)), (Permutation bl0 (bl ++ br0)), (Permutation bl0 (bl ++ gv1)), (Permutation bl0 (bl ++ br))
+(Permutation bl0 (bl ++ bl)), (Permutation bl0 []), (Permutation br0 (bl0 ++ bl0)), (Permutation br0 (bl0 ++ br0)), (Permutation br0 (bl0 ++ gv1)), (Permutation br0 (bl0 ++ br)), (Permutation br0 (bl0 ++ bl)), (Permutation br0 (br0 ++ bl0)), (Permutation br0 (br0 ++ br0)), (Permutation br0 (br0 ++ gv1))
+(Permutation br0 (br0 ++ br)), (Permutation br0 (br0 ++ bl)), (Permutation br0 (gv1 ++ bl0)), (Permutation br0 (gv1 ++ br0)), (Permutation br0 (gv1 ++ gv1)), (Permutation br0 (gv1 ++ br)), (Permutation br0 (gv1 ++ bl)), (Permutation br0 (br ++ bl0)), (Permutation br0 (br ++ br0)), (Permutation br0 (br ++ gv1))
+(Permutation br0 (br ++ br)), (Permutation br0 (br ++ bl)), (Permutation br0 (bl ++ bl0)), (Permutation br0 (bl ++ br0)), (Permutation br0 (bl ++ gv1)), (Permutation br0 (bl ++ br)), (Permutation br0 (bl ++ bl)), (Permutation br0 []), (Permutation gv1 (bl0 ++ bl0)), (Permutation gv1 (bl0 ++ br0))
+(Permutation gv1 (bl0 ++ gv1)), (Permutation gv1 (bl0 ++ br)), (Permutation gv1 (bl0 ++ bl)), (Permutation gv1 (br0 ++ bl0)), (Permutation gv1 (br0 ++ br0)), (Permutation gv1 (br0 ++ gv1)), (Permutation gv1 (br0 ++ br)), (Permutation gv1 (br0 ++ bl)), (Permutation gv1 (gv1 ++ bl0)), (Permutation gv1 (gv1 ++ br0))
+(Permutation gv1 (gv1 ++ gv1)), (Permutation gv1 (gv1 ++ br)), (Permutation gv1 (gv1 ++ bl)), (Permutation gv1 (br ++ bl0)), (Permutation gv1 (br ++ br0)), (Permutation gv1 (br ++ gv1)), (Permutation gv1 (br ++ br)), (Permutation gv1 (br ++ bl)), (Permutation gv1 (bl ++ bl0)), (Permutation gv1 (bl ++ br0))
+(Permutation gv1 (bl ++ gv1)), (Permutation gv1 (bl ++ br)), (Permutation gv1 (bl ++ bl)), (Permutation gv1 []), (Permutation br (bl0 ++ bl0)), (Permutation br (bl0 ++ br0)), (Permutation br (bl0 ++ gv1)), (Permutation br (bl0 ++ br)), (Permutation br (bl0 ++ bl)), (Permutation br (br0 ++ bl0))
+(Permutation br (br0 ++ br0)), (Permutation br (br0 ++ gv1)), (Permutation br (br0 ++ br)), (Permutation br (br0 ++ bl)), (Permutation br (gv1 ++ bl0)), (Permutation br (gv1 ++ br0)), (Permutation br (gv1 ++ gv1)), (Permutation br (gv1 ++ br)), (Permutation br (gv1 ++ bl)), (Permutation br (br ++ bl0))
+(Permutation br (br ++ br0)), (Permutation br (br ++ gv1)), (Permutation br (br ++ br)), (Permutation br (br ++ bl)), (Permutation br (bl ++ bl0)), (Permutation br (bl ++ br0)), (Permutation br (bl ++ gv1)), (Permutation br (bl ++ br)), (Permutation br (bl ++ bl)), (Permutation br [])
+(Permutation bl (bl0 ++ bl0)), (Permutation bl (bl0 ++ br0)), (Permutation bl (bl0 ++ gv1)), (Permutation bl (bl0 ++ br)), (Permutation bl (bl0 ++ bl)), (Permutation bl (br0 ++ bl0)), (Permutation bl (br0 ++ br0)), (Permutation bl (br0 ++ gv1)), (Permutation bl (br0 ++ br)), (Permutation bl (br0 ++ bl))
+(Permutation bl (gv1 ++ bl0)), (Permutation bl (gv1 ++ br0)), (Permutation bl (gv1 ++ gv1)), (Permutation bl (gv1 ++ br)), (Permutation bl (gv1 ++ bl)), (Permutation bl (br ++ bl0)), (Permutation bl (br ++ br0)), (Permutation bl (br ++ gv1)), (Permutation bl (br ++ br)), (Permutation bl (br ++ bl))
+(Permutation bl (bl ++ bl0)), (Permutation bl (bl ++ br0)), (Permutation bl (bl ++ gv1)), (Permutation bl (bl ++ br)), (Permutation bl (bl ++ bl)), (Permutation bl []), (Permutation (bl0 ++ bl0) bl0), (Permutation (bl0 ++ bl0) br0), (Permutation (bl0 ++ bl0) gv1), (Permutation (bl0 ++ bl0) br)
+(Permutation (bl0 ++ bl0) bl), (Permutation (bl0 ++ bl0) (bl0 ++ br0)), (Permutation (bl0 ++ bl0) (bl0 ++ gv1)), (Permutation (bl0 ++ bl0) (bl0 ++ br)), (Permutation (bl0 ++ bl0) (bl0 ++ bl)), (Permutation (bl0 ++ bl0) (br0 ++ bl0)), (Permutation (bl0 ++ bl0) (br0 ++ br0)), (Permutation (bl0 ++ bl0) (br0 ++ gv1)), (Permutation (bl0 ++ bl0) (br0 ++ br)), (Permutation (bl0 ++ bl0) (br0 ++ bl))
+(Permutation (bl0 ++ bl0) (gv1 ++ bl0)), (Permutation (bl0 ++ bl0) (gv1 ++ br0)), (Permutation (bl0 ++ bl0) (gv1 ++ gv1)), (Permutation (bl0 ++ bl0) (gv1 ++ br)), (Permutation (bl0 ++ bl0) (gv1 ++ bl)), (Permutation (bl0 ++ bl0) (br ++ bl0)), (Permutation (bl0 ++ bl0) (br ++ br0)), (Permutation (bl0 ++ bl0) (br ++ gv1)), (Permutation (bl0 ++ bl0) (br ++ br)), (Permutation (bl0 ++ bl0) (br ++ bl))
+(Permutation (bl0 ++ bl0) (bl ++ bl0)), (Permutation (bl0 ++ bl0) (bl ++ br0)), (Permutation (bl0 ++ bl0) (bl ++ gv1)), (Permutation (bl0 ++ bl0) (bl ++ br)), (Permutation (bl0 ++ bl0) (bl ++ bl)), (Permutation (bl0 ++ bl0) []), (Permutation (bl0 ++ br0) bl0), (Permutation (bl0 ++ br0) br0), (Permutation (bl0 ++ br0) gv1), (Permutation (bl0 ++ br0) br)
+(Permutation (bl0 ++ br0) bl), (Permutation (bl0 ++ br0) (bl0 ++ bl0)), (Permutation (bl0 ++ br0) (bl0 ++ gv1)), (Permutation (bl0 ++ br0) (bl0 ++ br)), (Permutation (bl0 ++ br0) (bl0 ++ bl)), (Permutation (bl0 ++ br0) (br0 ++ bl0)), (Permutation (bl0 ++ br0) (br0 ++ br0)), (Permutation (bl0 ++ br0) (br0 ++ gv1)), (Permutation (bl0 ++ br0) (br0 ++ br)), (Permutation (bl0 ++ br0) (br0 ++ bl))
+(Permutation (bl0 ++ br0) (gv1 ++ bl0)), (Permutation (bl0 ++ br0) (gv1 ++ br0)), (Permutation (bl0 ++ br0) (gv1 ++ gv1)), (Permutation (bl0 ++ br0) (gv1 ++ br)), (Permutation (bl0 ++ br0) (gv1 ++ bl)), (Permutation (bl0 ++ br0) (br ++ bl0)), (Permutation (bl0 ++ br0) (br ++ br0)), (Permutation (bl0 ++ br0) (br ++ gv1)), (Permutation (bl0 ++ br0) (br ++ br)), (Permutation (bl0 ++ br0) (br ++ bl))
+(Permutation (bl0 ++ br0) (bl ++ bl0)), (Permutation (bl0 ++ br0) (bl ++ br0)), (Permutation (bl0 ++ br0) (bl ++ gv1)), (Permutation (bl0 ++ br0) (bl ++ br)), (Permutation (bl0 ++ br0) (bl ++ bl)), (Permutation (bl0 ++ br0) []), (Permutation (bl0 ++ gv1) bl0), (Permutation (bl0 ++ gv1) br0), (Permutation (bl0 ++ gv1) gv1), (Permutation (bl0 ++ gv1) br)
+(Permutation (bl0 ++ gv1) bl), (Permutation (bl0 ++ gv1) (bl0 ++ bl0)), (Permutation (bl0 ++ gv1) (bl0 ++ br0)), (Permutation (bl0 ++ gv1) (bl0 ++ br)), (Permutation (bl0 ++ gv1) (bl0 ++ bl)), (Permutation (bl0 ++ gv1) (br0 ++ bl0)), (Permutation (bl0 ++ gv1) (br0 ++ br0)), (Permutation (bl0 ++ gv1) (br0 ++ gv1)), (Permutation (bl0 ++ gv1) (br0 ++ br)), (Permutation (bl0 ++ gv1) (br0 ++ bl))
+(Permutation (bl0 ++ gv1) (gv1 ++ bl0)), (Permutation (bl0 ++ gv1) (gv1 ++ br0)), (Permutation (bl0 ++ gv1) (gv1 ++ gv1)), (Permutation (bl0 ++ gv1) (gv1 ++ br)), (Permutation (bl0 ++ gv1) (gv1 ++ bl)), (Permutation (bl0 ++ gv1) (br ++ bl0)), (Permutation (bl0 ++ gv1) (br ++ br0)), (Permutation (bl0 ++ gv1) (br ++ gv1)), (Permutation (bl0 ++ gv1) (br ++ br)), (Permutation (bl0 ++ gv1) (br ++ bl))
+(Permutation (bl0 ++ gv1) (bl ++ bl0)), (Permutation (bl0 ++ gv1) (bl ++ br0)), (Permutation (bl0 ++ gv1) (bl ++ gv1)), (Permutation (bl0 ++ gv1) (bl ++ br)), (Permutation (bl0 ++ gv1) (bl ++ bl)), (Permutation (bl0 ++ gv1) []), (Permutation (bl0 ++ br) bl0), (Permutation (bl0 ++ br) br0), (Permutation (bl0 ++ br) gv1), (Permutation (bl0 ++ br) br)
+(Permutation (bl0 ++ br) bl), (Permutation (bl0 ++ br) (bl0 ++ bl0)), (Permutation (bl0 ++ br) (bl0 ++ br0)), (Permutation (bl0 ++ br) (bl0 ++ gv1)), (Permutation (bl0 ++ br) (bl0 ++ bl)), (Permutation (bl0 ++ br) (br0 ++ bl0)), (Permutation (bl0 ++ br) (br0 ++ br0)), (Permutation (bl0 ++ br) (br0 ++ gv1)), (Permutation (bl0 ++ br) (br0 ++ br)), (Permutation (bl0 ++ br) (br0 ++ bl))
+(Permutation (bl0 ++ br) (gv1 ++ bl0)), (Permutation (bl0 ++ br) (gv1 ++ br0)), (Permutation (bl0 ++ br) (gv1 ++ gv1)), (Permutation (bl0 ++ br) (gv1 ++ br)), (Permutation (bl0 ++ br) (gv1 ++ bl)), (Permutation (bl0 ++ br) (br ++ bl0)), (Permutation (bl0 ++ br) (br ++ br0)), (Permutation (bl0 ++ br) (br ++ gv1)), (Permutation (bl0 ++ br) (br ++ br)), (Permutation (bl0 ++ br) (br ++ bl))
+(Permutation (bl0 ++ br) (bl ++ bl0)), (Permutation (bl0 ++ br) (bl ++ br0)), (Permutation (bl0 ++ br) (bl ++ gv1)), (Permutation (bl0 ++ br) (bl ++ br)), (Permutation (bl0 ++ br) (bl ++ bl)), (Permutation (bl0 ++ br) []), (Permutation (bl0 ++ bl) bl0), (Permutation (bl0 ++ bl) br0), (Permutation (bl0 ++ bl) gv1), (Permutation (bl0 ++ bl) br)
+(Permutation (bl0 ++ bl) bl), (Permutation (bl0 ++ bl) (bl0 ++ bl0)), (Permutation (bl0 ++ bl) (bl0 ++ br0)), (Permutation (bl0 ++ bl) (bl0 ++ gv1)), (Permutation (bl0 ++ bl) (bl0 ++ br)), (Permutation (bl0 ++ bl) (br0 ++ bl0)), (Permutation (bl0 ++ bl) (br0 ++ br0)), (Permutation (bl0 ++ bl) (br0 ++ gv1)), (Permutation (bl0 ++ bl) (br0 ++ br)), (Permutation (bl0 ++ bl) (br0 ++ bl))
+(Permutation (bl0 ++ bl) (gv1 ++ bl0)), (Permutation (bl0 ++ bl) (gv1 ++ br0)), (Permutation (bl0 ++ bl) (gv1 ++ gv1)), (Permutation (bl0 ++ bl) (gv1 ++ br)), (Permutation (bl0 ++ bl) (gv1 ++ bl)), (Permutation (bl0 ++ bl) (br ++ bl0)), (Permutation (bl0 ++ bl) (br ++ br0)), (Permutation (bl0 ++ bl) (br ++ gv1)), (Permutation (bl0 ++ bl) (br ++ br)), (Permutation (bl0 ++ bl) (br ++ bl))
+(Permutation (bl0 ++ bl) (bl ++ bl0)), (Permutation (bl0 ++ bl) (bl ++ br0)), (Permutation (bl0 ++ bl) (bl ++ gv1)), (Permutation (bl0 ++ bl) (bl ++ br)), (Permutation (bl0 ++ bl) (bl ++ bl)), (Permutation (bl0 ++ bl) []), (Permutation (br0 ++ bl0) bl0), (Permutation (br0 ++ bl0) br0), (Permutation (br0 ++ bl0) gv1), (Permutation (br0 ++ bl0) br)
+(Permutation (br0 ++ bl0) bl), (Permutation (br0 ++ bl0) (bl0 ++ bl0)), (Permutation (br0 ++ bl0) (bl0 ++ br0)), (Permutation (br0 ++ bl0) (bl0 ++ gv1)), (Permutation (br0 ++ bl0) (bl0 ++ br)), (Permutation (br0 ++ bl0) (bl0 ++ bl)), (Permutation (br0 ++ bl0) (br0 ++ br0)), (Permutation (br0 ++ bl0) (br0 ++ gv1)), (Permutation (br0 ++ bl0) (br0 ++ br)), (Permutation (br0 ++ bl0) (br0 ++ bl))
+(Permutation (br0 ++ bl0) (gv1 ++ bl0)), (Permutation (br0 ++ bl0) (gv1 ++ br0)), (Permutation (br0 ++ bl0) (gv1 ++ gv1)), (Permutation (br0 ++ bl0) (gv1 ++ br)), (Permutation (br0 ++ bl0) (gv1 ++ bl)), (Permutation (br0 ++ bl0) (br ++ bl0)), (Permutation (br0 ++ bl0) (br ++ br0)), (Permutation (br0 ++ bl0) (br ++ gv1)), (Permutation (br0 ++ bl0) (br ++ br)), (Permutation (br0 ++ bl0) (br ++ bl))
+(Permutation (br0 ++ bl0) (bl ++ bl0)), (Permutation (br0 ++ bl0) (bl ++ br0)), (Permutation (br0 ++ bl0) (bl ++ gv1)), (Permutation (br0 ++ bl0) (bl ++ br)), (Permutation (br0 ++ bl0) (bl ++ bl)), (Permutation (br0 ++ bl0) []), (Permutation (br0 ++ br0) bl0), (Permutation (br0 ++ br0) br0), (Permutation (br0 ++ br0) gv1), (Permutation (br0 ++ br0) br)
+(Permutation (br0 ++ br0) bl), (Permutation (br0 ++ br0) (bl0 ++ bl0)), (Permutation (br0 ++ br0) (bl0 ++ br0)), (Permutation (br0 ++ br0) (bl0 ++ gv1)), (Permutation (br0 ++ br0) (bl0 ++ br)), (Permutation (br0 ++ br0) (bl0 ++ bl)), (Permutation (br0 ++ br0) (br0 ++ bl0)), (Permutation (br0 ++ br0) (br0 ++ gv1)), (Permutation (br0 ++ br0) (br0 ++ br)), (Permutation (br0 ++ br0) (br0 ++ bl))
+(Permutation (br0 ++ br0) (gv1 ++ bl0)), (Permutation (br0 ++ br0) (gv1 ++ br0)), (Permutation (br0 ++ br0) (gv1 ++ gv1)), (Permutation (br0 ++ br0) (gv1 ++ br)), (Permutation (br0 ++ br0) (gv1 ++ bl)), (Permutation (br0 ++ br0) (br ++ bl0)), (Permutation (br0 ++ br0) (br ++ br0)), (Permutation (br0 ++ br0) (br ++ gv1)), (Permutation (br0 ++ br0) (br ++ br)), (Permutation (br0 ++ br0) (br ++ bl))
+(Permutation (br0 ++ br0) (bl ++ bl0)), (Permutation (br0 ++ br0) (bl ++ br0)), (Permutation (br0 ++ br0) (bl ++ gv1)), (Permutation (br0 ++ br0) (bl ++ br)), (Permutation (br0 ++ br0) (bl ++ bl)), (Permutation (br0 ++ br0) []), (Permutation (br0 ++ gv1) bl0), (Permutation (br0 ++ gv1) br0), (Permutation (br0 ++ gv1) gv1), (Permutation (br0 ++ gv1) br)
+(Permutation (br0 ++ gv1) bl), (Permutation (br0 ++ gv1) (bl0 ++ bl0)), (Permutation (br0 ++ gv1) (bl0 ++ br0)), (Permutation (br0 ++ gv1) (bl0 ++ gv1)), (Permutation (br0 ++ gv1) (bl0 ++ br)), (Permutation (br0 ++ gv1) (bl0 ++ bl)), (Permutation (br0 ++ gv1) (br0 ++ bl0)), (Permutation (br0 ++ gv1) (br0 ++ br0)), (Permutation (br0 ++ gv1) (br0 ++ br)), (Permutation (br0 ++ gv1) (br0 ++ bl))
+(Permutation (br0 ++ gv1) (gv1 ++ bl0)), (Permutation (br0 ++ gv1) (gv1 ++ br0)), (Permutation (br0 ++ gv1) (gv1 ++ gv1)), (Permutation (br0 ++ gv1) (gv1 ++ br)), (Permutation (br0 ++ gv1) (gv1 ++ bl)), (Permutation (br0 ++ gv1) (br ++ bl0)), (Permutation (br0 ++ gv1) (br ++ br0)), (Permutation (br0 ++ gv1) (br ++ gv1)), (Permutation (br0 ++ gv1) (br ++ br)), (Permutation (br0 ++ gv1) (br ++ bl))
+(Permutation (br0 ++ gv1) (bl ++ bl0)), (Permutation (br0 ++ gv1) (bl ++ br0)), (Permutation (br0 ++ gv1) (bl ++ gv1)), (Permutation (br0 ++ gv1) (bl ++ br)), (Permutation (br0 ++ gv1) (bl ++ bl)), (Permutation (br0 ++ gv1) []), (Permutation (br0 ++ br) bl0), (Permutation (br0 ++ br) br0), (Permutation (br0 ++ br) gv1), (Permutation (br0 ++ br) br)
+(Permutation (br0 ++ br) bl), (Permutation (br0 ++ br) (bl0 ++ bl0)), (Permutation (br0 ++ br) (bl0 ++ br0)), (Permutation (br0 ++ br) (bl0 ++ gv1)), (Permutation (br0 ++ br) (bl0 ++ br)), (Permutation (br0 ++ br) (bl0 ++ bl)), (Permutation (br0 ++ br) (br0 ++ bl0)), (Permutation (br0 ++ br) (br0 ++ br0)), (Permutation (br0 ++ br) (br0 ++ gv1)), (Permutation (br0 ++ br) (br0 ++ bl))
+(Permutation (br0 ++ br) (gv1 ++ bl0)), (Permutation (br0 ++ br) (gv1 ++ br0)), (Permutation (br0 ++ br) (gv1 ++ gv1)), (Permutation (br0 ++ br) (gv1 ++ br)), (Permutation (br0 ++ br) (gv1 ++ bl)), (Permutation (br0 ++ br) (br ++ bl0)), (Permutation (br0 ++ br) (br ++ br0)), (Permutation (br0 ++ br) (br ++ gv1)), (Permutation (br0 ++ br) (br ++ br)), (Permutation (br0 ++ br) (br ++ bl))
+(Permutation (br0 ++ br) (bl ++ bl0)), (Permutation (br0 ++ br) (bl ++ br0)), (Permutation (br0 ++ br) (bl ++ gv1)), (Permutation (br0 ++ br) (bl ++ br)), (Permutation (br0 ++ br) (bl ++ bl)), (Permutation (br0 ++ br) []), (Permutation (br0 ++ bl) bl0), (Permutation (br0 ++ bl) br0), (Permutation (br0 ++ bl) gv1), (Permutation (br0 ++ bl) br)
+(Permutation (br0 ++ bl) bl), (Permutation (br0 ++ bl) (bl0 ++ bl0)), (Permutation (br0 ++ bl) (bl0 ++ br0)), (Permutation (br0 ++ bl) (bl0 ++ gv1)), (Permutation (br0 ++ bl) (bl0 ++ br)), (Permutation (br0 ++ bl) (bl0 ++ bl)), (Permutation (br0 ++ bl) (br0 ++ bl0)), (Permutation (br0 ++ bl) (br0 ++ br0)), (Permutation (br0 ++ bl) (br0 ++ gv1)), (Permutation (br0 ++ bl) (br0 ++ br))
+(Permutation (br0 ++ bl) (gv1 ++ bl0)), (Permutation (br0 ++ bl) (gv1 ++ br0)), (Permutation (br0 ++ bl) (gv1 ++ gv1)), (Permutation (br0 ++ bl) (gv1 ++ br)), (Permutation (br0 ++ bl) (gv1 ++ bl)), (Permutation (br0 ++ bl) (br ++ bl0)), (Permutation (br0 ++ bl) (br ++ br0)), (Permutation (br0 ++ bl) (br ++ gv1)), (Permutation (br0 ++ bl) (br ++ br)), (Permutation (br0 ++ bl) (br ++ bl))
+(Permutation (br0 ++ bl) (bl ++ bl0)), (Permutation (br0 ++ bl) (bl ++ br0)), (Permutation (br0 ++ bl) (bl ++ gv1)), (Permutation (br0 ++ bl) (bl ++ br)), (Permutation (br0 ++ bl) (bl ++ bl)), (Permutation (br0 ++ bl) []), (Permutation (gv1 ++ bl0) bl0), (Permutation (gv1 ++ bl0) br0), (Permutation (gv1 ++ bl0) gv1), (Permutation (gv1 ++ bl0) br)
+(Permutation (gv1 ++ bl0) bl), (Permutation (gv1 ++ bl0) (bl0 ++ bl0)), (Permutation (gv1 ++ bl0) (bl0 ++ br0)), (Permutation (gv1 ++ bl0) (bl0 ++ gv1)), (Permutation (gv1 ++ bl0) (bl0 ++ br)), (Permutation (gv1 ++ bl0) (bl0 ++ bl)), (Permutation (gv1 ++ bl0) (br0 ++ bl0)), (Permutation (gv1 ++ bl0) (br0 ++ br0)), (Permutation (gv1 ++ bl0) (br0 ++ gv1)), (Permutation (gv1 ++ bl0) (br0 ++ br))
+(Permutation (gv1 ++ bl0) (br0 ++ bl)), (Permutation (gv1 ++ bl0) (gv1 ++ br0)), (Permutation (gv1 ++ bl0) (gv1 ++ gv1)), (Permutation (gv1 ++ bl0) (gv1 ++ br)), (Permutation (gv1 ++ bl0) (gv1 ++ bl)), (Permutation (gv1 ++ bl0) (br ++ bl0)), (Permutation (gv1 ++ bl0) (br ++ br0)), (Permutation (gv1 ++ bl0) (br ++ gv1)), (Permutation (gv1 ++ bl0) (br ++ br)), (Permutation (gv1 ++ bl0) (br ++ bl))
+(Permutation (gv1 ++ bl0) (bl ++ bl0)), (Permutation (gv1 ++ bl0) (bl ++ br0)), (Permutation (gv1 ++ bl0) (bl ++ gv1)), (Permutation (gv1 ++ bl0) (bl ++ br)), (Permutation (gv1 ++ bl0) (bl ++ bl)), (Permutation (gv1 ++ bl0) []), (Permutation (gv1 ++ br0) bl0), (Permutation (gv1 ++ br0) br0), (Permutation (gv1 ++ br0) gv1), (Permutation (gv1 ++ br0) br)
+(Permutation (gv1 ++ br0) bl), (Permutation (gv1 ++ br0) (bl0 ++ bl0)), (Permutation (gv1 ++ br0) (bl0 ++ br0)), (Permutation (gv1 ++ br0) (bl0 ++ gv1)), (Permutation (gv1 ++ br0) (bl0 ++ br)), (Permutation (gv1 ++ br0) (bl0 ++ bl)), (Permutation (gv1 ++ br0) (br0 ++ bl0)), (Permutation (gv1 ++ br0) (br0 ++ br0)), (Permutation (gv1 ++ br0) (br0 ++ gv1)), (Permutation (gv1 ++ br0) (br0 ++ br))
+(Permutation (gv1 ++ br0) (br0 ++ bl)), (Permutation (gv1 ++ br0) (gv1 ++ bl0)), (Permutation (gv1 ++ br0) (gv1 ++ gv1)), (Permutation (gv1 ++ br0) (gv1 ++ br)), (Permutation (gv1 ++ br0) (gv1 ++ bl)), (Permutation (gv1 ++ br0) (br ++ bl0)), (Permutation (gv1 ++ br0) (br ++ br0)), (Permutation (gv1 ++ br0) (br ++ gv1)), (Permutation (gv1 ++ br0) (br ++ br)), (Permutation (gv1 ++ br0) (br ++ bl))
+(Permutation (gv1 ++ br0) (bl ++ bl0)), (Permutation (gv1 ++ br0) (bl ++ br0)), (Permutation (gv1 ++ br0) (bl ++ gv1)), (Permutation (gv1 ++ br0) (bl ++ br)), (Permutation (gv1 ++ br0) (bl ++ bl)), (Permutation (gv1 ++ br0) []), (Permutation (gv1 ++ gv1) bl0), (Permutation (gv1 ++ gv1) br0), (Permutation (gv1 ++ gv1) gv1), (Permutation (gv1 ++ gv1) br)
+(Permutation (gv1 ++ gv1) bl), (Permutation (gv1 ++ gv1) (bl0 ++ bl0)), (Permutation (gv1 ++ gv1) (bl0 ++ br0)), (Permutation (gv1 ++ gv1) (bl0 ++ gv1)), (Permutation (gv1 ++ gv1) (bl0 ++ br)), (Permutation (gv1 ++ gv1) (bl0 ++ bl)), (Permutation (gv1 ++ gv1) (br0 ++ bl0)), (Permutation (gv1 ++ gv1) (br0 ++ br0)), (Permutation (gv1 ++ gv1) (br0 ++ gv1)), (Permutation (gv1 ++ gv1) (br0 ++ br))
+(Permutation (gv1 ++ gv1) (br0 ++ bl)), (Permutation (gv1 ++ gv1) (gv1 ++ bl0)), (Permutation (gv1 ++ gv1) (gv1 ++ br0)), (Permutation (gv1 ++ gv1) (gv1 ++ br)), (Permutation (gv1 ++ gv1) (gv1 ++ bl)), (Permutation (gv1 ++ gv1) (br ++ bl0)), (Permutation (gv1 ++ gv1) (br ++ br0)), (Permutation (gv1 ++ gv1) (br ++ gv1)), (Permutation (gv1 ++ gv1) (br ++ br)), (Permutation (gv1 ++ gv1) (br ++ bl))
+(Permutation (gv1 ++ gv1) (bl ++ bl0)), (Permutation (gv1 ++ gv1) (bl ++ br0)), (Permutation (gv1 ++ gv1) (bl ++ gv1)), (Permutation (gv1 ++ gv1) (bl ++ br)), (Permutation (gv1 ++ gv1) (bl ++ bl)), (Permutation (gv1 ++ gv1) []), (Permutation (gv1 ++ br) bl0), (Permutation (gv1 ++ br) br0), (Permutation (gv1 ++ br) gv1), (Permutation (gv1 ++ br) br)
+(Permutation (gv1 ++ br) bl), (Permutation (gv1 ++ br) (bl0 ++ bl0)), (Permutation (gv1 ++ br) (bl0 ++ br0)), (Permutation (gv1 ++ br) (bl0 ++ gv1)), (Permutation (gv1 ++ br) (bl0 ++ br)), (Permutation (gv1 ++ br) (bl0 ++ bl)), (Permutation (gv1 ++ br) (br0 ++ bl0)), (Permutation (gv1 ++ br) (br0 ++ br0)), (Permutation (gv1 ++ br) (br0 ++ gv1)), (Permutation (gv1 ++ br) (br0 ++ br))
+(Permutation (gv1 ++ br) (br0 ++ bl)), (Permutation (gv1 ++ br) (gv1 ++ bl0)), (Permutation (gv1 ++ br) (gv1 ++ br0)), (Permutation (gv1 ++ br) (gv1 ++ gv1)), (Permutation (gv1 ++ br) (gv1 ++ bl)), (Permutation (gv1 ++ br) (br ++ bl0)), (Permutation (gv1 ++ br) (br ++ br0)), (Permutation (gv1 ++ br) (br ++ gv1)), (Permutation (gv1 ++ br) (br ++ br)), (Permutation (gv1 ++ br) (br ++ bl))
+(Permutation (gv1 ++ br) (bl ++ bl0)), (Permutation (gv1 ++ br) (bl ++ br0)), (Permutation (gv1 ++ br) (bl ++ gv1)), (Permutation (gv1 ++ br) (bl ++ br)), (Permutation (gv1 ++ br) (bl ++ bl)), (Permutation (gv1 ++ br) []), (Permutation (gv1 ++ bl) bl0), (Permutation (gv1 ++ bl) br0), (Permutation (gv1 ++ bl) gv1), (Permutation (gv1 ++ bl) br)
+(Permutation (gv1 ++ bl) bl), (Permutation (gv1 ++ bl) (bl0 ++ bl0)), (Permutation (gv1 ++ bl) (bl0 ++ br0)), (Permutation (gv1 ++ bl) (bl0 ++ gv1)), (Permutation (gv1 ++ bl) (bl0 ++ br)), (Permutation (gv1 ++ bl) (bl0 ++ bl)), (Permutation (gv1 ++ bl) (br0 ++ bl0)), (Permutation (gv1 ++ bl) (br0 ++ br0)), (Permutation (gv1 ++ bl) (br0 ++ gv1)), (Permutation (gv1 ++ bl) (br0 ++ br))
+(Permutation (gv1 ++ bl) (br0 ++ bl)), (Permutation (gv1 ++ bl) (gv1 ++ bl0)), (Permutation (gv1 ++ bl) (gv1 ++ br0)), (Permutation (gv1 ++ bl) (gv1 ++ gv1)), (Permutation (gv1 ++ bl) (gv1 ++ br)), (Permutation (gv1 ++ bl) (br ++ bl0)), (Permutation (gv1 ++ bl) (br ++ br0)), (Permutation (gv1 ++ bl) (br ++ gv1)), (Permutation (gv1 ++ bl) (br ++ br)), (Permutation (gv1 ++ bl) (br ++ bl))
+(Permutation (gv1 ++ bl) (bl ++ bl0)), (Permutation (gv1 ++ bl) (bl ++ br0)), (Permutation (gv1 ++ bl) (bl ++ gv1)), (Permutation (gv1 ++ bl) (bl ++ br)), (Permutation (gv1 ++ bl) (bl ++ bl)), (Permutation (gv1 ++ bl) []), (Permutation (br ++ bl0) bl0), (Permutation (br ++ bl0) br0), (Permutation (br ++ bl0) gv1), (Permutation (br ++ bl0) br)
+(Permutation (br ++ bl0) bl), (Permutation (br ++ bl0) (bl0 ++ bl0)), (Permutation (br ++ bl0) (bl0 ++ br0)), (Permutation (br ++ bl0) (bl0 ++ gv1)), (Permutation (br ++ bl0) (bl0 ++ br)), (Permutation (br ++ bl0) (bl0 ++ bl)), (Permutation (br ++ bl0) (br0 ++ bl0)), (Permutation (br ++ bl0) (br0 ++ br0)), (Permutation (br ++ bl0) (br0 ++ gv1)), (Permutation (br ++ bl0) (br0 ++ br))
+(Permutation (br ++ bl0) (br0 ++ bl)), (Permutation (br ++ bl0) (gv1 ++ bl0)), (Permutation (br ++ bl0) (gv1 ++ br0)), (Permutation (br ++ bl0) (gv1 ++ gv1)), (Permutation (br ++ bl0) (gv1 ++ br)), (Permutation (br ++ bl0) (gv1 ++ bl)), (Permutation (br ++ bl0) (br ++ br0)), (Permutation (br ++ bl0) (br ++ gv1)), (Permutation (br ++ bl0) (br ++ br)), (Permutation (br ++ bl0) (br ++ bl))
+(Permutation (br ++ bl0) (bl ++ bl0)), (Permutation (br ++ bl0) (bl ++ br0)), (Permutation (br ++ bl0) (bl ++ gv1)), (Permutation (br ++ bl0) (bl ++ br)), (Permutation (br ++ bl0) (bl ++ bl)), (Permutation (br ++ bl0) []), (Permutation (br ++ br0) bl0), (Permutation (br ++ br0) br0), (Permutation (br ++ br0) gv1), (Permutation (br ++ br0) br)
+(Permutation (br ++ br0) bl), (Permutation (br ++ br0) (bl0 ++ bl0)), (Permutation (br ++ br0) (bl0 ++ br0)), (Permutation (br ++ br0) (bl0 ++ gv1)), (Permutation (br ++ br0) (bl0 ++ br)), (Permutation (br ++ br0) (bl0 ++ bl)), (Permutation (br ++ br0) (br0 ++ bl0)), (Permutation (br ++ br0) (br0 ++ br0)), (Permutation (br ++ br0) (br0 ++ gv1)), (Permutation (br ++ br0) (br0 ++ br))
+(Permutation (br ++ br0) (br0 ++ bl)), (Permutation (br ++ br0) (gv1 ++ bl0)), (Permutation (br ++ br0) (gv1 ++ br0)), (Permutation (br ++ br0) (gv1 ++ gv1)), (Permutation (br ++ br0) (gv1 ++ br)), (Permutation (br ++ br0) (gv1 ++ bl)), (Permutation (br ++ br0) (br ++ bl0)), (Permutation (br ++ br0) (br ++ gv1)), (Permutation (br ++ br0) (br ++ br)), (Permutation (br ++ br0) (br ++ bl))
+(Permutation (br ++ br0) (bl ++ bl0)), (Permutation (br ++ br0) (bl ++ br0)), (Permutation (br ++ br0) (bl ++ gv1)), (Permutation (br ++ br0) (bl ++ br)), (Permutation (br ++ br0) (bl ++ bl)), (Permutation (br ++ br0) []), (Permutation (br ++ gv1) bl0), (Permutation (br ++ gv1) br0), (Permutation (br ++ gv1) gv1), (Permutation (br ++ gv1) br)
+(Permutation (br ++ gv1) bl), (Permutation (br ++ gv1) (bl0 ++ bl0)), (Permutation (br ++ gv1) (bl0 ++ br0)), (Permutation (br ++ gv1) (bl0 ++ gv1)), (Permutation (br ++ gv1) (bl0 ++ br)), (Permutation (br ++ gv1) (bl0 ++ bl)), (Permutation (br ++ gv1) (br0 ++ bl0)), (Permutation (br ++ gv1) (br0 ++ br0)), (Permutation (br ++ gv1) (br0 ++ gv1)), (Permutation (br ++ gv1) (br0 ++ br))
+(Permutation (br ++ gv1) (br0 ++ bl)), (Permutation (br ++ gv1) (gv1 ++ bl0)), (Permutation (br ++ gv1) (gv1 ++ br0)), (Permutation (br ++ gv1) (gv1 ++ gv1)), (Permutation (br ++ gv1) (gv1 ++ br)), (Permutation (br ++ gv1) (gv1 ++ bl)), (Permutation (br ++ gv1) (br ++ bl0)), (Permutation (br ++ gv1) (br ++ br0)), (Permutation (br ++ gv1) (br ++ br)), (Permutation (br ++ gv1) (br ++ bl))
+(Permutation (br ++ gv1) (bl ++ bl0)), (Permutation (br ++ gv1) (bl ++ br0)), (Permutation (br ++ gv1) (bl ++ gv1)), (Permutation (br ++ gv1) (bl ++ br)), (Permutation (br ++ gv1) (bl ++ bl)), (Permutation (br ++ gv1) []), (Permutation (br ++ br) bl0), (Permutation (br ++ br) br0), (Permutation (br ++ br) gv1), (Permutation (br ++ br) br)
+(Permutation (br ++ br) bl), (Permutation (br ++ br) (bl0 ++ bl0)), (Permutation (br ++ br) (bl0 ++ br0)), (Permutation (br ++ br) (bl0 ++ gv1)), (Permutation (br ++ br) (bl0 ++ br)), (Permutation (br ++ br) (bl0 ++ bl)), (Permutation (br ++ br) (br0 ++ bl0)), (Permutation (br ++ br) (br0 ++ br0)), (Permutation (br ++ br) (br0 ++ gv1)), (Permutation (br ++ br) (br0 ++ br))
+(Permutation (br ++ br) (br0 ++ bl)), (Permutation (br ++ br) (gv1 ++ bl0)), (Permutation (br ++ br) (gv1 ++ br0)), (Permutation (br ++ br) (gv1 ++ gv1)), (Permutation (br ++ br) (gv1 ++ br)), (Permutation (br ++ br) (gv1 ++ bl)), (Permutation (br ++ br) (br ++ bl0)), (Permutation (br ++ br) (br ++ br0)), (Permutation (br ++ br) (br ++ gv1)), (Permutation (br ++ br) (br ++ bl))
+(Permutation (br ++ br) (bl ++ bl0)), (Permutation (br ++ br) (bl ++ br0)), (Permutation (br ++ br) (bl ++ gv1)), (Permutation (br ++ br) (bl ++ br)), (Permutation (br ++ br) (bl ++ bl)), (Permutation (br ++ br) []), (Permutation (br ++ bl) bl0), (Permutation (br ++ bl) br0), (Permutation (br ++ bl) gv1), (Permutation (br ++ bl) br)
+(Permutation (br ++ bl) bl), (Permutation (br ++ bl) (bl0 ++ bl0)), (Permutation (br ++ bl) (bl0 ++ br0)), (Permutation (br ++ bl) (bl0 ++ gv1)), (Permutation (br ++ bl) (bl0 ++ br)), (Permutation (br ++ bl) (bl0 ++ bl)), (Permutation (br ++ bl) (br0 ++ bl0)), (Permutation (br ++ bl) (br0 ++ br0)), (Permutation (br ++ bl) (br0 ++ gv1)), (Permutation (br ++ bl) (br0 ++ br))
+(Permutation (br ++ bl) (br0 ++ bl)), (Permutation (br ++ bl) (gv1 ++ bl0)), (Permutation (br ++ bl) (gv1 ++ br0)), (Permutation (br ++ bl) (gv1 ++ gv1)), (Permutation (br ++ bl) (gv1 ++ br)), (Permutation (br ++ bl) (gv1 ++ bl)), (Permutation (br ++ bl) (br ++ bl0)), (Permutation (br ++ bl) (br ++ br0)), (Permutation (br ++ bl) (br ++ gv1)), (Permutation (br ++ bl) (br ++ br))
+(Permutation (br ++ bl) (bl ++ bl0)), (Permutation (br ++ bl) (bl ++ br0)), (Permutation (br ++ bl) (bl ++ gv1)), (Permutation (br ++ bl) (bl ++ br)), (Permutation (br ++ bl) (bl ++ bl)), (Permutation (br ++ bl) []), (Permutation (bl ++ bl0) bl0), (Permutation (bl ++ bl0) br0), (Permutation (bl ++ bl0) gv1), (Permutation (bl ++ bl0) br)
+(Permutation (bl ++ bl0) bl), (Permutation (bl ++ bl0) (bl0 ++ bl0)), (Permutation (bl ++ bl0) (bl0 ++ br0)), (Permutation (bl ++ bl0) (bl0 ++ gv1)), (Permutation (bl ++ bl0) (bl0 ++ br)), (Permutation (bl ++ bl0) (bl0 ++ bl)), (Permutation (bl ++ bl0) (br0 ++ bl0)), (Permutation (bl ++ bl0) (br0 ++ br0)), (Permutation (bl ++ bl0) (br0 ++ gv1)), (Permutation (bl ++ bl0) (br0 ++ br))
+(Permutation (bl ++ bl0) (br0 ++ bl)), (Permutation (bl ++ bl0) (gv1 ++ bl0)), (Permutation (bl ++ bl0) (gv1 ++ br0)), (Permutation (bl ++ bl0) (gv1 ++ gv1)), (Permutation (bl ++ bl0) (gv1 ++ br)), (Permutation (bl ++ bl0) (gv1 ++ bl)), (Permutation (bl ++ bl0) (br ++ bl0)), (Permutation (bl ++ bl0) (br ++ br0)), (Permutation (bl ++ bl0) (br ++ gv1)), (Permutation (bl ++ bl0) (br ++ br))
+(Permutation (bl ++ bl0) (br ++ bl)), (Permutation (bl ++ bl0) (bl ++ br0)), (Permutation (bl ++ bl0) (bl ++ gv1)), (Permutation (bl ++ bl0) (bl ++ br)), (Permutation (bl ++ bl0) (bl ++ bl)), (Permutation (bl ++ bl0) []), (Permutation (bl ++ br0) bl0), (Permutation (bl ++ br0) br0), (Permutation (bl ++ br0) gv1), (Permutation (bl ++ br0) br)
+(Permutation (bl ++ br0) bl), (Permutation (bl ++ br0) (bl0 ++ bl0)), (Permutation (bl ++ br0) (bl0 ++ br0)), (Permutation (bl ++ br0) (bl0 ++ gv1)), (Permutation (bl ++ br0) (bl0 ++ br)), (Permutation (bl ++ br0) (bl0 ++ bl)), (Permutation (bl ++ br0) (br0 ++ bl0)), (Permutation (bl ++ br0) (br0 ++ br0)), (Permutation (bl ++ br0) (br0 ++ gv1)), (Permutation (bl ++ br0) (br0 ++ br))
+(Permutation (bl ++ br0) (br0 ++ bl)), (Permutation (bl ++ br0) (gv1 ++ bl0)), (Permutation (bl ++ br0) (gv1 ++ br0)), (Permutation (bl ++ br0) (gv1 ++ gv1)), (Permutation (bl ++ br0) (gv1 ++ br)), (Permutation (bl ++ br0) (gv1 ++ bl)), (Permutation (bl ++ br0) (br ++ bl0)), (Permutation (bl ++ br0) (br ++ br0)), (Permutation (bl ++ br0) (br ++ gv1)), (Permutation (bl ++ br0) (br ++ br))
+(Permutation (bl ++ br0) (br ++ bl)), (Permutation (bl ++ br0) (bl ++ bl0)), (Permutation (bl ++ br0) (bl ++ gv1)), (Permutation (bl ++ br0) (bl ++ br)), (Permutation (bl ++ br0) (bl ++ bl)), (Permutation (bl ++ br0) []), (Permutation (bl ++ gv1) bl0), (Permutation (bl ++ gv1) br0), (Permutation (bl ++ gv1) gv1), (Permutation (bl ++ gv1) br)
+(Permutation (bl ++ gv1) bl), (Permutation (bl ++ gv1) (bl0 ++ bl0)), (Permutation (bl ++ gv1) (bl0 ++ br0)), (Permutation (bl ++ gv1) (bl0 ++ gv1)), (Permutation (bl ++ gv1) (bl0 ++ br)), (Permutation (bl ++ gv1) (bl0 ++ bl)), (Permutation (bl ++ gv1) (br0 ++ bl0)), (Permutation (bl ++ gv1) (br0 ++ br0)), (Permutation (bl ++ gv1) (br0 ++ gv1)), (Permutation (bl ++ gv1) (br0 ++ br))
+(Permutation (bl ++ gv1) (br0 ++ bl)), (Permutation (bl ++ gv1) (gv1 ++ bl0)), (Permutation (bl ++ gv1) (gv1 ++ br0)), (Permutation (bl ++ gv1) (gv1 ++ gv1)), (Permutation (bl ++ gv1) (gv1 ++ br)), (Permutation (bl ++ gv1) (gv1 ++ bl)), (Permutation (bl ++ gv1) (br ++ bl0)), (Permutation (bl ++ gv1) (br ++ br0)), (Permutation (bl ++ gv1) (br ++ gv1)), (Permutation (bl ++ gv1) (br ++ br))
+(Permutation (bl ++ gv1) (br ++ bl)), (Permutation (bl ++ gv1) (bl ++ bl0)), (Permutation (bl ++ gv1) (bl ++ br0)), (Permutation (bl ++ gv1) (bl ++ br)), (Permutation (bl ++ gv1) (bl ++ bl)), (Permutation (bl ++ gv1) []), (Permutation (bl ++ br) bl0), (Permutation (bl ++ br) br0), (Permutation (bl ++ br) gv1), (Permutation (bl ++ br) br)
+(Permutation (bl ++ br) bl), (Permutation (bl ++ br) (bl0 ++ bl0)), (Permutation (bl ++ br) (bl0 ++ br0)), (Permutation (bl ++ br) (bl0 ++ gv1)), (Permutation (bl ++ br) (bl0 ++ br)), (Permutation (bl ++ br) (bl0 ++ bl)), (Permutation (bl ++ br) (br0 ++ bl0)), (Permutation (bl ++ br) (br0 ++ br0)), (Permutation (bl ++ br) (br0 ++ gv1)), (Permutation (bl ++ br) (br0 ++ br))
+(Permutation (bl ++ br) (br0 ++ bl)), (Permutation (bl ++ br) (gv1 ++ bl0)), (Permutation (bl ++ br) (gv1 ++ br0)), (Permutation (bl ++ br) (gv1 ++ gv1)), (Permutation (bl ++ br) (gv1 ++ br)), (Permutation (bl ++ br) (gv1 ++ bl)), (Permutation (bl ++ br) (br ++ bl0)), (Permutation (bl ++ br) (br ++ br0)), (Permutation (bl ++ br) (br ++ gv1)), (Permutation (bl ++ br) (br ++ br))
+(Permutation (bl ++ br) (br ++ bl)), (Permutation (bl ++ br) (bl ++ bl0)), (Permutation (bl ++ br) (bl ++ br0)), (Permutation (bl ++ br) (bl ++ gv1)), (Permutation (bl ++ br) (bl ++ bl)), (Permutation (bl ++ br) []), (Permutation (bl ++ bl) bl0), (Permutation (bl ++ bl) br0), (Permutation (bl ++ bl) gv1), (Permutation (bl ++ bl) br)
+(Permutation (bl ++ bl) bl), (Permutation (bl ++ bl) (bl0 ++ bl0)), (Permutation (bl ++ bl) (bl0 ++ br0)), (Permutation (bl ++ bl) (bl0 ++ gv1)), (Permutation (bl ++ bl) (bl0 ++ br)), (Permutation (bl ++ bl) (bl0 ++ bl)), (Permutation (bl ++ bl) (br0 ++ bl0)), (Permutation (bl ++ bl) (br0 ++ br0)), (Permutation (bl ++ bl) (br0 ++ gv1)), (Permutation (bl ++ bl) (br0 ++ br))
+(Permutation (bl ++ bl) (br0 ++ bl)), (Permutation (bl ++ bl) (gv1 ++ bl0)), (Permutation (bl ++ bl) (gv1 ++ br0)), (Permutation (bl ++ bl) (gv1 ++ gv1)), (Permutation (bl ++ bl) (gv1 ++ br)), (Permutation (bl ++ bl) (gv1 ++ bl)), (Permutation (bl ++ bl) (br ++ bl0)), (Permutation (bl ++ bl) (br ++ br0)), (Permutation (bl ++ bl) (br ++ gv1)), (Permutation (bl ++ bl) (br ++ br))
+(Permutation (bl ++ bl) (br ++ bl)), (Permutation (bl ++ bl) (bl ++ bl0)), (Permutation (bl ++ bl) (bl ++ br0)), (Permutation (bl ++ bl) (bl ++ gv1)), (Permutation (bl ++ bl) (bl ++ br)), (Permutation (bl ++ bl) []), (Permutation [] bl0), (Permutation [] br0), (Permutation [] gv1), (Permutation [] br)
+(Permutation [] bl), (Permutation [] (bl0 ++ bl0)), (Permutation [] (bl0 ++ br0)), (Permutation [] (bl0 ++ gv1)), (Permutation [] (bl0 ++ br)), (Permutation [] (bl0 ++ bl)), (Permutation [] (br0 ++ bl0)), (Permutation [] (br0 ++ br0)), (Permutation [] (br0 ++ gv1)), (Permutation [] (br0 ++ br))
+(Permutation [] (br0 ++ bl)), (Permutation [] (gv1 ++ bl0)), (Permutation [] (gv1 ++ br0)), (Permutation [] (gv1 ++ gv1)), (Permutation [] (gv1 ++ br)), (Permutation [] (gv1 ++ bl)), (Permutation [] (br ++ bl0)), (Permutation [] (br ++ br0)), (Permutation [] (br ++ gv1)), (Permutation [] (br ++ br))
+(Permutation [] (br ++ bl)), (Permutation [] (bl ++ bl0)), (Permutation [] (bl ++ br0)), (Permutation [] (bl ++ gv1)), (Permutation [] (bl ++ br)), (Permutation [] (bl ++ bl)), (In (length bl0) bl0), (In (length bl0) br0), (In (length bl0) gv1), (In (length bl0) br)
+(In (length bl0) bl), (In (length bl0) (bl0 ++ bl0)), (In (length bl0) (bl0 ++ br0)), (In (length bl0) (bl0 ++ gv1)), (In (length bl0) (bl0 ++ br)), (In (length bl0) (bl0 ++ bl)), (In (length bl0) (br0 ++ bl0)), (In (length bl0) (br0 ++ br0)), (In (length bl0) (br0 ++ gv1)), (In (length bl0) (br0 ++ br))
+(In (length bl0) (br0 ++ bl)), (In (length bl0) (gv1 ++ bl0)), (In (length bl0) (gv1 ++ br0)), (In (length bl0) (gv1 ++ gv1)), (In (length bl0) (gv1 ++ br)), (In (length bl0) (gv1 ++ bl)), (In (length bl0) (br ++ bl0)), (In (length bl0) (br ++ br0)), (In (length bl0) (br ++ gv1)), (In (length bl0) (br ++ br))
+(In (length bl0) (br ++ bl)), (In (length bl0) (bl ++ bl0)), (In (length bl0) (bl ++ br0)), (In (length bl0) (bl ++ gv1)), (In (length bl0) (bl ++ br)), (In (length bl0) (bl ++ bl)), (In (length br0) bl0), (In (length br0) br0), (In (length br0) gv1), (In (length br0) br)
+(In (length br0) bl), (In (length br0) (bl0 ++ bl0)), (In (length br0) (bl0 ++ br0)), (In (length br0) (bl0 ++ gv1)), (In (length br0) (bl0 ++ br)), (In (length br0) (bl0 ++ bl)), (In (length br0) (br0 ++ bl0)), (In (length br0) (br0 ++ br0)), (In (length br0) (br0 ++ gv1)), (In (length br0) (br0 ++ br))
+(In (length br0) (br0 ++ bl)), (In (length br0) (gv1 ++ bl0)), (In (length br0) (gv1 ++ br0)), (In (length br0) (gv1 ++ gv1)), (In (length br0) (gv1 ++ br)), (In (length br0) (gv1 ++ bl)), (In (length br0) (br ++ bl0)), (In (length br0) (br ++ br0)), (In (length br0) (br ++ gv1)), (In (length br0) (br ++ br))
+(In (length br0) (br ++ bl)), (In (length br0) (bl ++ bl0)), (In (length br0) (bl ++ br0)), (In (length br0) (bl ++ gv1)), (In (length br0) (bl ++ br)), (In (length br0) (bl ++ bl)), (In (length gv1) bl0), (In (length gv1) br0), (In (length gv1) gv1), (In (length gv1) br)
+(In (length gv1) bl), (In (length gv1) (bl0 ++ bl0)), (In (length gv1) (bl0 ++ br0)), (In (length gv1) (bl0 ++ gv1)), (In (length gv1) (bl0 ++ br)), (In (length gv1) (bl0 ++ bl)), (In (length gv1) (br0 ++ bl0)), (In (length gv1) (br0 ++ br0)), (In (length gv1) (br0 ++ gv1)), (In (length gv1) (br0 ++ br))
+(In (length gv1) (br0 ++ bl)), (In (length gv1) (gv1 ++ bl0)), (In (length gv1) (gv1 ++ br0)), (In (length gv1) (gv1 ++ gv1)), (In (length gv1) (gv1 ++ br)), (In (length gv1) (gv1 ++ bl)), (In (length gv1) (br ++ bl0)), (In (length gv1) (br ++ br0)), (In (length gv1) (br ++ gv1)), (In (length gv1) (br ++ br))
+(In (length gv1) (br ++ bl)), (In (length gv1) (bl ++ bl0)), (In (length gv1) (bl ++ br0)), (In (length gv1) (bl ++ gv1)), (In (length gv1) (bl ++ br)), (In (length gv1) (bl ++ bl)), (In (length br) bl0), (In (length br) br0), (In (length br) gv1), (In (length br) br)
+(In (length br) bl), (In (length br) (bl0 ++ bl0)), (In (length br) (bl0 ++ br0)), (In (length br) (bl0 ++ gv1)), (In (length br) (bl0 ++ br)), (In (length br) (bl0 ++ bl)), (In (length br) (br0 ++ bl0)), (In (length br) (br0 ++ br0)), (In (length br) (br0 ++ gv1)), (In (length br) (br0 ++ br))
+(In (length br) (br0 ++ bl)), (In (length br) (gv1 ++ bl0)), (In (length br) (gv1 ++ br0)), (In (length br) (gv1 ++ gv1)), (In (length br) (gv1 ++ br)), (In (length br) (gv1 ++ bl)), (In (length br) (br ++ bl0)), (In (length br) (br ++ br0)), (In (length br) (br ++ gv1)), (In (length br) (br ++ br))
+(In (length br) (br ++ bl)), (In (length br) (bl ++ bl0)), (In (length br) (bl ++ br0)), (In (length br) (bl ++ gv1)), (In (length br) (bl ++ br)), (In (length br) (bl ++ bl)), (In (length bl) bl0), (In (length bl) br0), (In (length bl) gv1), (In (length bl) br)
+(In (length bl) bl), (In (length bl) (bl0 ++ bl0)), (In (length bl) (bl0 ++ br0)), (In (length bl) (bl0 ++ gv1)), (In (length bl) (bl0 ++ br)), (In (length bl) (bl0 ++ bl)), (In (length bl) (br0 ++ bl0)), (In (length bl) (br0 ++ br0)), (In (length bl) (br0 ++ gv1)), (In (length bl) (br0 ++ br))
+(In (length bl) (br0 ++ bl)), (In (length bl) (gv1 ++ bl0)), (In (length bl) (gv1 ++ br0)), (In (length bl) (gv1 ++ gv1)), (In (length bl) (gv1 ++ br)), (In (length bl) (gv1 ++ bl)), (In (length bl) (br ++ bl0)), (In (length bl) (br ++ br0)), (In (length bl) (br ++ gv1)), (In (length bl) (br ++ br))
+(In (length bl) (br ++ bl)), (In (length bl) (bl ++ bl0)), (In (length bl) (bl ++ br0)), (In (length bl) (bl ++ gv1)), (In (length bl) (bl ++ br)), (In (length bl) (bl ++ bl)), (length bl0 < length br0), (length bl0 < length gv1), (length bl0 < length br), (length bl0 < length bl)
+(length br0 < length bl0), (length br0 < length gv1), (length br0 < length br), (length br0 < length bl), (length gv1 < length bl0), (length gv1 < length br0), (length gv1 < length br), (length gv1 < length bl), (length br < length bl0), (length br < length br0)
+(length br < length gv1), (length br < length bl), (length bl < length bl0), (length bl < length br0), (length bl < length gv1), (length bl < length br), (length bl0 <= length br0), (length bl0 <= length gv1), (length bl0 <= length br), (length bl0 <= length bl)
+(length br0 <= length bl0), (length br0 <= length gv1), (length br0 <= length br), (length br0 <= length bl), (length gv1 <= length bl0), (length gv1 <= length br0), (length gv1 <= length br), (length gv1 <= length bl), (length br <= length bl0), (length br <= length br0)
+(length br <= length gv1), (length br <= length bl), (length bl <= length bl0), (length bl <= length br0), (length bl <= length gv1), (length bl <= length br), (~ Permutation bl0 bl0), (~ Permutation bl0 br0), (~ Permutation bl0 gv1), (~ Permutation bl0 br)
+(~ Permutation bl0 bl), (~ Permutation br0 bl0), (~ Permutation br0 br0), (~ Permutation br0 gv1), (~ Permutation br0 br), (~ Permutation br0 bl), (~ Permutation gv1 bl0), (~ Permutation gv1 br0), (~ Permutation gv1 gv1), (~ Permutation gv1 br)
+(~ Permutation gv1 bl), (~ Permutation br bl0), (~ Permutation br br0), (~ Permutation br gv1), (~ Permutation br br), (~ Permutation br bl), (~ Permutation bl bl0), (~ Permutation bl br0), (~ Permutation bl gv1), (~ Permutation bl br)
+(~ Permutation bl bl), (bl0 <> bl0), (bl0 <> br0), (bl0 <> gv1), (bl0 <> br), (bl0 <> bl), (br0 <> bl0), (br0 <> br0), (br0 <> gv1), (br0 <> br)
+(br0 <> bl), (gv1 <> bl0), (gv1 <> br0), (gv1 <> gv1), (gv1 <> br), (gv1 <> bl), (br <> bl0), (br <> br0), (br <> gv1), (br <> br)
+(br <> bl), (bl <> bl0), (bl <> br0), (bl <> gv1), (bl <> br), (bl <> bl), (None = Some bl0), (None = Some br0), (None = Some gv1), (None = Some br)
+(None = Some bl), (bl0 ++ bl0 = bl0), (bl0 ++ bl0 = br0), (bl0 ++ bl0 = gv1), (bl0 ++ bl0 = br), (bl0 ++ bl0 = bl), (bl0 ++ br0 = bl0), (bl0 ++ br0 = br0), (bl0 ++ br0 = gv1), (bl0 ++ br0 = br)
+(bl0 ++ br0 = bl), (bl0 ++ gv1 = bl0), (bl0 ++ gv1 = br0), (bl0 ++ gv1 = gv1), (bl0 ++ gv1 = br), (bl0 ++ gv1 = bl), (bl0 ++ br = bl0), (bl0 ++ br = br0), (bl0 ++ br = gv1), (bl0 ++ br = br)
+(bl0 ++ br = bl), (bl0 ++ bl = bl0), (bl0 ++ bl = br0), (bl0 ++ bl = gv1), (bl0 ++ bl = br), (bl0 ++ bl = bl), (br0 ++ bl0 = bl0), (br0 ++ bl0 = br0), (br0 ++ bl0 = gv1), (br0 ++ bl0 = br)
+(br0 ++ bl0 = bl), (br0 ++ br0 = bl0), (br0 ++ br0 = br0), (br0 ++ br0 = gv1), (br0 ++ br0 = br), (br0 ++ br0 = bl), (br0 ++ gv1 = bl0), (br0 ++ gv1 = br0), (br0 ++ gv1 = gv1), (br0 ++ gv1 = br)
+(br0 ++ gv1 = bl), (br0 ++ br = bl0), (br0 ++ br = br0), (br0 ++ br = gv1), (br0 ++ br = br), (br0 ++ br = bl), (br0 ++ bl = bl0), (br0 ++ bl = br0), (br0 ++ bl = gv1), (br0 ++ bl = br)
+(br0 ++ bl = bl), (gv1 ++ bl0 = bl0), (gv1 ++ bl0 = br0), (gv1 ++ bl0 = gv1), (gv1 ++ bl0 = br), (gv1 ++ bl0 = bl), (gv1 ++ br0 = bl0), (gv1 ++ br0 = br0), (gv1 ++ br0 = gv1), (gv1 ++ br0 = br)
+(gv1 ++ br0 = bl), (gv1 ++ gv1 = bl0), (gv1 ++ gv1 = br0), (gv1 ++ gv1 = gv1), (gv1 ++ gv1 = br), (gv1 ++ gv1 = bl), (gv1 ++ br = bl0), (gv1 ++ br = br0), (gv1 ++ br = gv1), (gv1 ++ br = br)
+(gv1 ++ br = bl), (gv1 ++ bl = bl0), (gv1 ++ bl = br0), (gv1 ++ bl = gv1), (gv1 ++ bl = br), (gv1 ++ bl = bl), (br ++ bl0 = bl0), (br ++ bl0 = br0), (br ++ bl0 = gv1), (br ++ bl0 = br)
+(br ++ bl0 = bl), (br ++ br0 = bl0), (br ++ br0 = br0), (br ++ br0 = gv1), (br ++ br0 = br), (br ++ br0 = bl), (br ++ gv1 = bl0), (br ++ gv1 = br0), (br ++ gv1 = gv1), (br ++ gv1 = br)
+(br ++ gv1 = bl), (br ++ br = bl0), (br ++ br = br0), (br ++ br = gv1), (br ++ br = br), (br ++ br = bl), (br ++ bl = bl0), (br ++ bl = br0), (br ++ bl = gv1), (br ++ bl = br)
+(br ++ bl = bl), (bl ++ bl0 = bl0), (bl ++ bl0 = br0), (bl ++ bl0 = gv1), (bl ++ bl0 = br), (bl ++ bl0 = bl), (bl ++ br0 = bl0), (bl ++ br0 = br0), (bl ++ br0 = gv1), (bl ++ br0 = br)
+(bl ++ br0 = bl), (bl ++ gv1 = bl0), (bl ++ gv1 = br0), (bl ++ gv1 = gv1), (bl ++ gv1 = br), (bl ++ gv1 = bl), (bl ++ br = bl0), (bl ++ br = br0), (bl ++ br = gv1), (bl ++ br = br)
+(bl ++ br = bl), (bl ++ bl = bl0), (bl ++ bl = br0), (bl ++ bl = gv1), (bl ++ bl = br), (bl ++ bl = bl), ([] = bl0), ([] = br0), ([] = gv1), ([] = br)
+([] = bl), ([] = bl0 ++ bl0), ([] = bl0 ++ br0), ([] = bl0 ++ gv1), ([] = bl0 ++ br), ([] = bl0 ++ bl), ([] = br0 ++ bl0), ([] = br0 ++ br0), ([] = br0 ++ gv1), ([] = br0 ++ br)
+([] = br0 ++ bl), ([] = gv1 ++ bl0), ([] = gv1 ++ br0), ([] = gv1 ++ gv1), ([] = gv1 ++ br), ([] = gv1 ++ bl), ([] = br ++ bl0), ([] = br ++ br0), ([] = br ++ gv1), ([] = br ++ br)
+([] = br ++ bl), ([] = bl ++ bl0), ([] = bl ++ br0), ([] = bl ++ gv1), ([] = bl ++ br), ([] = bl ++ bl)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 127.301 seconds
+
+
+Label: 0 (0)
+(Permutation bl0 bl), (Permutation bl bl0), (Permutation (bl0 ++ br) (br ++ bl)), (Permutation (bl0 ++ br) (bl ++ br)), (Permutation (bl0 ++ bl) (bl ++ bl)), (Permutation (br ++ bl0) (br ++ bl)), (Permutation (br ++ bl0) (bl ++ br)), (Permutation (br ++ bl) (bl0 ++ br)), (Permutation (br ++ bl) (br ++ bl0)), (Permutation (bl ++ bl0) (bl ++ bl))
+(Permutation (bl ++ br) (bl0 ++ br)), (Permutation (bl ++ br) (br ++ bl0)), (Permutation (bl ++ bl) (bl0 ++ bl)), (Permutation (bl ++ bl) (bl ++ bl0)), (Permutation (bl0 ++ bl0) (bl ++ bl)), (Permutation (bl ++ bl) (bl0 ++ bl0)), (Permutation (br0 ++ bl0) (br0 ++ bl)), (Permutation (br0 ++ bl0) (bl ++ br0)), (Permutation (br0 ++ bl) (br0 ++ bl0)), (Permutation (br0 ++ bl) (bl0 ++ br0))
+
+Label: 1 (1)
+(Permutation br0 br), (Permutation br br0), (Permutation (br0 ++ br) (br ++ br)), (Permutation (br0 ++ bl) (br ++ bl)), (Permutation (br0 ++ bl) (bl ++ br)), (Permutation (br ++ br0) (br ++ br)), (Permutation (br ++ br) (br0 ++ br)), (Permutation (br ++ br) (br ++ br0)), (Permutation (br ++ bl) (br0 ++ bl)), (Permutation (br ++ bl) (bl ++ br0))
+(Permutation (bl ++ br0) (br ++ bl)), (Permutation (bl ++ br0) (bl ++ br)), (Permutation (bl ++ br) (br0 ++ bl)), (Permutation (bl ++ br) (bl ++ br0)), (Permutation (br0 ++ br0) (br ++ br)), (Permutation (br ++ br) (br0 ++ br0)), (Permutation (br0 ++ br0) (br0 ++ br)), (Permutation (br0 ++ br0) (br ++ br0)), (Permutation (br0 ++ bl0) (bl0 ++ br)), (Permutation (br0 ++ bl0) (br ++ bl0))
+
+Label: 2 (2)
+(Permutation gv0 (bl ++ br)), (Permutation gv0 (br ++ bl)), (Permutation (bl ++ br) gv0), (Permutation (br ++ bl) gv0), (Permutation gv0 (bl ++ br0)), (Permutation gv0 (br ++ bl0)), (Permutation gv0 (br0 ++ bl)), (Permutation gv0 (bl0 ++ br)), (Permutation (bl ++ br0) gv0), (Permutation (br ++ bl0) gv0)
+(Permutation (br0 ++ bl) gv0), (Permutation (bl0 ++ br) gv0), (Permutation gv0 (br0 ++ bl0)), (Permutation gv0 (bl0 ++ br0)), (Permutation (br0 ++ bl0) gv0), (Permutation (bl0 ++ br0) gv0), (bl ++ br = gv0), (bl ++ br0 = gv0), (bl0 ++ br = gv0), (bl0 ++ br0 = gv0)
+
+Label: 3 (3)
+(Permutation gv1 (br ++ bl)), (Permutation gv1 (bl ++ br)), (Permutation (br ++ bl) gv1), (Permutation (bl ++ br) gv1), (Permutation gv1 (bl0 ++ br)), (Permutation gv1 (br0 ++ bl)), (Permutation gv1 (br ++ bl0)), (Permutation gv1 (bl ++ br0)), (Permutation (bl0 ++ br) gv1), (Permutation (br0 ++ bl) gv1)
+(Permutation (br ++ bl0) gv1), (Permutation (bl ++ br0) gv1), (Permutation gv1 (bl0 ++ br0)), (Permutation gv1 (br0 ++ bl0)), (Permutation (bl0 ++ br0) gv1), (Permutation (br0 ++ bl0) gv1), (bl0 ++ br = gv1), (bl0 ++ br0 = gv1)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (Permutation br br0 ->  Permutation e2 (n :: gv1) ->  Permutation bl bl0 -> Permutation e1 (n :: gv0) -> Permutation gv0 gv1)
+
+2. (Permutation bl bl0 ->  Permutation br br0 -> Permutation (bl ++ br) (bl0 ++ br0))
+
+3. (Permutation br br0 -> Permutation (br0 ++ bl) (br ++ bl))
+(Permutation bl bl0 ->  Permutation (br0 ++ bl) (br ++ bl) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+4. (Permutation br br0 -> Permutation (bl ++ br0) (br ++ bl))
+(Permutation bl bl0 ->  Permutation (bl ++ br0) (br ++ bl) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+5. (Permutation br br0 -> Permutation (br ++ bl) (br0 ++ bl))
+(Permutation bl bl0 ->  Permutation (br ++ bl) (br0 ++ bl) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+6. (Permutation br br0 -> Permutation (bl ++ br) (br0 ++ bl))
+(Permutation bl bl0 ->  Permutation (bl ++ br) (br0 ++ bl) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+7. (Permutation br br0 -> Permutation (br0 ++ bl0) (br ++ bl0))
+(Permutation bl bl0 ->  Permutation (br0 ++ bl0) (br ++ bl0) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+8. (Permutation br br0 -> Permutation (br0 ++ bl) (bl ++ br))
+(Permutation bl bl0 ->  Permutation (br0 ++ bl) (bl ++ br) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+9. (Permutation br br0 -> Permutation (bl ++ br0) (bl ++ br))
+(Permutation bl bl0 ->  Permutation (bl ++ br0) (bl ++ br) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+10. (Permutation br br0 -> Permutation (br0 ++ bl0) (bl0 ++ br))
+(Permutation bl bl0 ->  Permutation (br0 ++ bl0) (bl0 ++ br) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+11. (Permutation br br0 -> Permutation (br0 ++ br) (br ++ br))
+(Permutation bl bl0 ->  Permutation (br0 ++ br) (br ++ br) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+12. (Permutation br br0 -> Permutation (br ++ br0) (br ++ br))
+(Permutation bl bl0 ->  Permutation (br ++ br0) (br ++ br) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+13. (Permutation br br0 -> Permutation (br0 ++ br0) (br ++ br))
+(Permutation bl bl0 ->  Permutation (br0 ++ br0) (br ++ br) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+14. (Permutation br br0 -> Permutation (br ++ br) (br0 ++ br))
+(Permutation bl bl0 ->  Permutation (br ++ br) (br0 ++ br) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+15. (Permutation br br0 -> Permutation (br0 ++ br0) (br0 ++ br))
+(Permutation bl bl0 ->  Permutation (br0 ++ br0) (br0 ++ br) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+16. (Permutation br br0 -> Permutation (br ++ bl) (bl ++ br0))
+(Permutation bl bl0 ->  Permutation (br ++ bl) (bl ++ br0) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+17. (Permutation br br0 -> Permutation (bl ++ br) (bl ++ br0))
+(Permutation bl bl0 ->  Permutation (bl ++ br) (bl ++ br0) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+18. (Permutation br br0 -> Permutation (br ++ br) (br ++ br0))
+(Permutation bl bl0 ->  Permutation (br ++ br) (br ++ br0) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+19. (Permutation br br0 -> Permutation (br0 ++ br0) (br ++ br0))
+(Permutation bl bl0 ->  Permutation (br0 ++ br0) (br ++ br0) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+20. (Permutation br br0 -> Permutation (br ++ br) (br0 ++ br0))
+(Permutation bl bl0 ->  Permutation (br ++ br) (br0 ++ br0) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+21. (Permutation bl bl0 -> Permutation (bl0 ++ bl) (bl ++ bl))
+(Permutation br br0 ->  Permutation (bl0 ++ bl) (bl ++ bl) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+22. (Permutation bl bl0 -> Permutation (bl ++ bl0) (bl ++ bl))
+(Permutation br br0 ->  Permutation (bl ++ bl0) (bl ++ bl) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+23. (Permutation bl bl0 -> Permutation (bl0 ++ bl0) (bl ++ bl))
+(Permutation br br0 ->  Permutation (bl0 ++ bl0) (bl ++ bl) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+24. (Permutation bl bl0 -> Permutation (bl ++ bl) (bl0 ++ bl))
+(Permutation br br0 ->  Permutation (bl ++ bl) (bl0 ++ bl) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+25. (Permutation bl bl0 -> Permutation (br ++ bl0) (br ++ bl))
+(Permutation br br0 ->  Permutation (br ++ bl0) (br ++ bl) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+26. (Permutation bl bl0 -> Permutation (bl0 ++ br) (br ++ bl))
+(Permutation br br0 ->  Permutation (bl0 ++ br) (br ++ bl) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+27. (Permutation bl bl0 -> Permutation (br0 ++ bl0) (br0 ++ bl))
+(Permutation br br0 ->  Permutation (br0 ++ bl0) (br0 ++ bl) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+28. (Permutation bl bl0 -> Permutation (bl ++ bl) (bl ++ bl0))
+(Permutation br br0 ->  Permutation (bl ++ bl) (bl ++ bl0) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+29. (Permutation bl bl0 -> Permutation (bl ++ bl) (bl0 ++ bl0))
+(Permutation br br0 ->  Permutation (bl ++ bl) (bl0 ++ bl0) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+30. (Permutation bl bl0 -> Permutation (br ++ bl) (br ++ bl0))
+(Permutation br br0 ->  Permutation (br ++ bl) (br ++ bl0) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+31. (Permutation bl bl0 -> Permutation (bl ++ br) (br ++ bl0))
+(Permutation br br0 ->  Permutation (bl ++ br) (br ++ bl0) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+32. (Permutation bl bl0 -> Permutation (br0 ++ bl) (br0 ++ bl0))
+(Permutation br br0 ->  Permutation (br0 ++ bl) (br0 ++ bl0) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+33. (Permutation bl bl0 -> Permutation (br ++ bl0) (bl ++ br))
+(Permutation br br0 ->  Permutation (br ++ bl0) (bl ++ br) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+34. (Permutation bl bl0 -> Permutation (bl0 ++ br) (bl ++ br))
+(Permutation br br0 ->  Permutation (bl0 ++ br) (bl ++ br) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+35. (Permutation bl bl0 -> Permutation (br ++ bl) (bl0 ++ br))
+(Permutation br br0 ->  Permutation (br ++ bl) (bl0 ++ br) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+36. (Permutation bl bl0 -> Permutation (bl ++ br) (bl0 ++ br))
+(Permutation br br0 ->  Permutation (bl ++ br) (bl0 ++ br) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+37. (Permutation bl bl0 -> Permutation (br0 ++ bl0) (bl ++ br0))
+(Permutation br br0 ->  Permutation (br0 ++ bl0) (bl ++ br0) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+38. (Permutation bl bl0 -> Permutation (br0 ++ bl) (bl0 ++ br0))
+(Permutation br br0 ->  Permutation (br0 ++ bl) (bl0 ++ br0) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+39. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation gv0 (bl ++ br) -> Permutation gv0 (bl0 ++ br0))
+
+40. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation gv0 (br ++ bl) -> Permutation gv0 (bl0 ++ br0))
+
+41. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation (bl ++ br) gv0 -> Permutation gv0 (bl0 ++ br0))
+
+42. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation (br ++ bl) gv0 -> Permutation gv0 (bl0 ++ br0))
+
+43. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation gv0 (bl ++ br0) -> Permutation gv0 (bl0 ++ br0))
+
+44. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation gv0 (br ++ bl0) -> Permutation gv0 (bl0 ++ br0))
+
+45. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation gv0 (br0 ++ bl) -> Permutation gv0 (bl0 ++ br0))
+
+46. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation gv0 (bl0 ++ br) -> Permutation gv0 (bl0 ++ br0))
+
+47. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation (bl ++ br0) gv0 -> Permutation gv0 (bl0 ++ br0))
+
+48. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation (br ++ bl0) gv0 -> Permutation gv0 (bl0 ++ br0))
+
+49. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation (br0 ++ bl) gv0 -> Permutation gv0 (bl0 ++ br0))
+
+50. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation (bl0 ++ br) gv0 -> Permutation gv0 (bl0 ++ br0))
+
+51. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation gv0 (br0 ++ bl0) -> Permutation gv0 (bl0 ++ br0))
+
+52. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation (br0 ++ bl0) gv0 -> Permutation gv0 (bl0 ++ br0))
+
+53. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation gv1 (br ++ bl) -> Permutation (bl ++ br) gv1)
+
+54. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation (br ++ bl) gv1 -> Permutation (bl ++ br) gv1)
+
+55. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation gv1 (bl0 ++ br) -> Permutation (bl ++ br) gv1)
+
+56. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation gv1 (br0 ++ bl) -> Permutation (bl ++ br) gv1)
+
+57. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation gv1 (br ++ bl0) -> Permutation (bl ++ br) gv1)
+
+58. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation gv1 (bl ++ br0) -> Permutation (bl ++ br) gv1)
+
+59. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation (bl0 ++ br) gv1 -> Permutation (bl ++ br) gv1)
+
+60. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation (br0 ++ bl) gv1 -> Permutation (bl ++ br) gv1)
+
+61. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation (br ++ bl0) gv1 -> Permutation (bl ++ br) gv1)
+
+62. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation (bl ++ br0) gv1 -> Permutation (bl ++ br) gv1)
+
+63. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation gv1 (bl0 ++ br0) -> Permutation (bl ++ br) gv1)
+
+64. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation gv1 (br0 ++ bl0) -> Permutation (bl ++ br) gv1)
+
+65. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation (bl0 ++ br0) gv1 -> Permutation (bl ++ br) gv1)
+
+66. (Permutation bl bl0 ->  Permutation br br0 ->  Permutation (br0 ++ bl0) gv1 -> Permutation (bl ++ br) gv1)
+
+67. (Permutation bl bl0 ->  Permutation br br0 -> bl ++ br0 = gv0 -> Permutation gv0 (bl0 ++ br0))
+
+68. (Permutation bl bl0 ->  Permutation br br0 -> bl0 ++ br = gv0 -> Permutation gv0 (bl0 ++ br0))
+
+69. (Permutation bl bl0 ->  Permutation br br0 -> bl0 ++ br0 = gv0 -> Permutation gv0 (bl0 ++ br0))
+
+70. (Permutation bl bl0 ->  Permutation br br0 -> bl0 ++ br = gv1 -> Permutation (bl ++ br) gv1)
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 234.156 seconds
+
+Number of Result Pairs Returned: 70
+
+1. (Permutation br br0 ->  Permutation e2 (n :: gv1) ->  Permutation bl bl0 -> Permutation e1 (n :: gv0) -> Permutation gv0 gv1)
+
+2. (Permutation bl bl0 ->  Permutation br br0 -> Permutation (bl ++ br) (bl0 ++ br0))
+
+3. (Permutation br br0 -> Permutation (br0 ++ bl) (br ++ bl))
+(Permutation bl bl0 ->  Permutation (br0 ++ bl) (br ++ bl) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+4. (Permutation br br0 -> Permutation (bl ++ br0) (br ++ bl))
+(Permutation bl bl0 ->  Permutation (bl ++ br0) (br ++ bl) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+5. (Permutation br br0 -> Permutation (br ++ bl) (br0 ++ bl))
+(Permutation bl bl0 ->  Permutation (br ++ bl) (br0 ++ bl) -> Permutation (bl ++ br) (bl0 ++ br0))

@@ -1,0 +1,181 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+
+----------------------------------
+Goal: (even y = even (plus y Zero))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 1.384 seconds
+
+gv3 : natural = Zero
+gv2 : natural = (plus y Zero)
+gv1 : bool = (even (plus y Zero))
+gv0 : bool = (even y)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 12.948 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (even y = even (plus y Zero))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (even y = gv0)
+
+----------------------------------
+Goal: (gv0 = even (plus y Zero))
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (even (plus y Zero) = gv1)
+
+----------------------------------
+Goal: (even y = gv1)
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (plus y Zero = gv2)
+
+----------------------------------
+Goal: (even y = even gv2)
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (Zero = gv3)
+
+----------------------------------
+Goal: (even y = even (plus y gv3))
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 13.09 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+natural : Set
+plus : (natural -> natural -> natural)
+even : (natural -> bool)
+Succ : (natural -> natural)
+Zero : natural
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 21
+Negative Examples: 7
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 21
+Negative Examples: 7
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 56
+Negative Examples: 24
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 56
+Negative Examples: 21
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 13.221 seconds
+
+
+Label: 0 (0)
+(false = gv0), (true = gv0), (y = y), (gv0 = gv0), (false = even y), (true = even y), (false <> gv0), (true <> gv0), (y <> y), (gv0 <> gv0)
+(even y = gv0), (Succ y = y), (Succ y = plus y y), (plus y y = y), (Zero = Succ y), (Zero = plus y y), (None = Some gv0), (None = Some y)
+
+Label: 1 (1)
+(false = gv1), (true = gv1), (gv1 = gv1), (y = y), (false = even y), (true = even y), (false <> gv1), (true <> gv1), (gv1 <> gv1), (y <> y)
+(even y = gv1), (Succ y = y), (Succ y = plus y y), (plus y y = y), (Zero = Succ y), (Zero = plus y y), (None = Some y), (None = Some gv1)
+
+Label: 2 (2)
+(gv2 = gv2), (gv2 = y), (y = gv2), (y = y), (false = even gv2), (false = even y), (true = even gv2), (true = even y), (gv2 <> gv2), (gv2 <> y)
+(y <> gv2), (y <> y), (Succ gv2 = gv2), (Succ gv2 = y), (Succ gv2 = plus gv2 gv2), (Succ gv2 = plus gv2 y), (Succ gv2 = plus y gv2), (Succ gv2 = plus y y), (Succ y = gv2), (Succ y = y)
+(Succ y = plus gv2 gv2), (Succ y = plus gv2 y), (Succ y = plus y gv2), (Succ y = plus y y), (plus gv2 gv2 = gv2), (plus gv2 gv2 = y), (plus gv2 y = gv2), (plus gv2 y = y), (plus y gv2 = gv2), (plus y gv2 = y)
+(plus y y = gv2), (plus y y = y), (Zero = Succ gv2), (Zero = Succ y), (Zero = plus gv2 gv2), (Zero = plus gv2 y), (Zero = plus y gv2), (Zero = plus y y), (None = Some gv2), (None = Some y)
+
+Label: 3 (3)
+(gv3 = gv3), (gv3 = y), (y = gv3), (y = y), (false = even gv3), (false = even y), (true = even gv3), (true = even y), (gv3 <> gv3), (gv3 <> y)
+(y <> gv3), (y <> y), (Succ gv3 = gv3), (Succ gv3 = y), (Succ gv3 = plus gv3 gv3), (Succ gv3 = plus gv3 y), (Succ gv3 = plus y gv3), (Succ gv3 = plus y y), (Succ y = gv3), (Succ y = y)
+(Succ y = plus gv3 gv3), (Succ y = plus gv3 y), (Succ y = plus y gv3), (Succ y = plus y y), (plus gv3 gv3 = gv3), (plus gv3 gv3 = y), (plus gv3 y = gv3), (plus gv3 y = y), (plus y gv3 = gv3), (plus y gv3 = y)
+(plus y y = gv3), (plus y y = y), (Zero = Succ gv3), (Zero = Succ y), (Zero = plus gv3 gv3), (Zero = plus gv3 y), (Zero = plus y gv3), (Zero = plus y y), (None = Some gv3), (None = Some y)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 15.054 seconds
+
+
+Label: 0 (0)
+(even y = gv0)
+
+Label: 1 (1)
+(even y = gv1)
+
+Label: 2 (2)
+(gv2 = y), (y = gv2)
+
+Label: 3 (3)
+(true = even gv3), (plus gv3 y = y), (plus y gv3 = y), (plus gv3 gv3 = gv3), (Zero = plus gv3 gv3)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (even y = even (plus y Zero))
+
+2. (plus y Zero = y)
+
+3. (plus Zero Zero = Zero)
+
+4. (gv2 = y -> even y = even gv2)
+
+5. (y = gv2 -> even y = even gv2)
+
+6. (true = even gv3 -> even y = even (plus y gv3))
+
+7. (plus gv3 y = y -> even y = even (plus y gv3))
+
+8. (plus y gv3 = y -> even y = even (plus y gv3))
+
+9. (plus gv3 gv3 = gv3 -> even y = even (plus y gv3))
+
+10. (Zero = plus gv3 gv3 -> even y = even (plus y gv3))
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 31.28 seconds
+
+Number of Result Pairs Returned: 10
+
+1. (even y = even (plus y Zero))
+
+2. (plus y Zero = y)
+
+3. (gv2 = y -> even y = even gv2)
+
+4. (y = gv2 -> even y = even gv2)
+
+5. (true = even gv3 -> even y = even (plus y gv3))

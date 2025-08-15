@@ -1,0 +1,397 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (plus x (succ x) = succ (plus x x))
+
+----------------------------------
+Goal: (plus x (succ (succ x)) = succ (succ (plus x x)))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3.007 seconds
+
+gv5 : Nat = (plus x x)
+gv0 : Nat = (plus x (succ (succ x)))
+gv3 : Nat = (succ (succ (plus x x)))
+gv1 : Nat = (succ (succ x))
+gv2 : Nat = (succ x)
+gv4 : Nat = (succ (plus x x))
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 96.34 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (plus x (succ (succ x)) = succ (succ (plus x x)))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (plus x (succ x) = gv4)
+
+----------------------------------
+Goal: (plus x (succ (succ x)) = succ gv4)
+Case: Valid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (plus x gv2 = gv4)
+
+----------------------------------
+Goal: (plus x (succ gv2) = succ gv4)
+Case: Valid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (succ gv4 = gv3)
+
+----------------------------------
+Goal: (plus x (succ (succ x)) = gv3)
+Case: Not Stable
+
+Label: Generalization #7
+Assumptions: 
+ -- (succ (succ x) = gv1)
+ -- (succ (plus x x) = gv4)
+
+----------------------------------
+Goal: (plus x gv1 = succ gv4)
+Case: Invalid and Generalized
+
+Label: Generalization #8
+Assumptions: 
+ -- (succ (plus x x) = gv4)
+ -- (plus x (succ (succ x)) = gv0)
+
+----------------------------------
+Goal: (gv0 = succ gv4)
+Case: Invalid and Generalized
+
+Label: Generalization #9
+Assumptions: 
+ -- (plus x gv2 = succ (plus x x))
+
+----------------------------------
+Goal: (plus x (succ gv2) = succ (succ (plus x x)))
+Case: Valid and Generalized
+
+Label: Generalization #10
+Assumptions: 
+ -- (succ (succ (plus x x)) = gv3)
+ -- (succ x = gv2)
+
+----------------------------------
+Goal: (plus x (succ gv2) = gv3)
+Case: Invalid and Generalized
+
+Label: Generalization #11
+Assumptions: 
+ -- (succ gv2 = gv1)
+
+----------------------------------
+Goal: (plus x gv1 = succ (succ (plus x x)))
+Case: Not Stable
+
+Label: Generalization #12
+Assumptions: 
+ -- (plus x (succ gv2) = gv0)
+
+----------------------------------
+Goal: (gv0 = succ (succ (plus x x)))
+Case: Not Stable
+
+Label: Generalization #13
+Assumptions: 
+ -- (plus x gv2 = succ gv5)
+
+----------------------------------
+Goal: (plus x (succ gv2) = succ (succ gv5))
+Case: Valid and Generalized
+
+Label: Generalization #14
+Assumptions: 
+ -- (plus x gv2 = gv4)
+
+----------------------------------
+Goal: (plus x (succ gv2) = succ gv4)
+Case: Valid and Generalized
+
+Label: Generalization #18
+Assumptions: 
+ -- (succ (succ (plus x x)) = gv3)
+
+----------------------------------
+Goal: (plus x (succ (succ x)) = gv3)
+Case: Invalid and Generalized
+
+Label: Generalization #19
+Assumptions: 
+ -- (succ (succ x) = gv1)
+
+----------------------------------
+Goal: (plus x gv1 = succ (succ (plus x x)))
+Case: Invalid and Generalized
+
+Label: Generalization #20
+Assumptions: 
+ -- (plus x (succ (succ x)) = gv0)
+
+----------------------------------
+Goal: (gv0 = succ (succ (plus x x)))
+Case: Invalid and Generalized
+
+Label: Generalization #21
+Assumptions: 
+ -- (plus x (succ x) = succ gv5)
+
+----------------------------------
+Goal: (plus x (succ (succ x)) = succ (succ gv5))
+Case: Valid and Generalized
+
+Label: Generalization #22
+Assumptions: 
+ -- (plus x (succ x) = gv4)
+
+----------------------------------
+Goal: (plus x (succ (succ x)) = succ gv4)
+Case: Valid and Generalized
+
+Label: Generalization #23
+Assumptions: 
+ -- (succ gv4 = gv3)
+
+----------------------------------
+Goal: (plus x (succ (succ x)) = gv3)
+Case: Not Stable
+
+Label: Generalization #26
+Assumptions: 
+ -- (succ (succ gv5) = gv3)
+
+----------------------------------
+Goal: (plus x (succ (succ x)) = gv3)
+Case: Not Stable
+
+Label: Generalization #27
+Assumptions: 
+ -- (succ (succ x) = gv1)
+ -- (plus x x = gv5)
+
+----------------------------------
+Goal: (plus x gv1 = succ (succ gv5))
+Case: Invalid and Generalized
+
+Label: Generalization #28
+Assumptions: 
+ -- (plus x x = gv5)
+ -- (plus x (succ (succ x)) = gv0)
+
+----------------------------------
+Goal: (gv0 = succ (succ gv5))
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 96.474 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+plus : (Nat -> Nat -> Nat)
+succ : (Nat -> Nat)
+zero : Nat
+nil : Lst
+cons : (Nat -> Lst -> Lst)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 344
+Negative Examples: 308
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 340
+Negative Examples: 296
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 343
+Negative Examples: 319
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 52
+Negative Examples: 46
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 54
+Negative Examples: 44
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 52
+Negative Examples: 46
+
+Label: 6 (6)
+Inferring Condition About Generalization
+Positive Examples: 346
+Negative Examples: 306
+
+Label: 7 (7)
+Inferring Condition About Generalization
+Positive Examples: 344
+Negative Examples: 306
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 96.615 seconds
+
+
+Label: 0 (0)
+(gv4 = gv4), (gv4 = gv1), (gv4 = x), (gv1 = gv4), (gv1 = gv1), (gv1 = x), (x = gv4), (x = gv1), (x = x), (gv4 <> gv4)
+(gv4 <> gv1), (gv4 <> x), (gv1 <> gv4), (gv1 <> gv1), (gv1 <> x), (x <> gv4), (x <> gv1), (x <> x), (succ gv4 = gv4), (succ gv4 = gv1)
+(succ gv4 = x), (succ gv4 = plus gv4 gv4), (succ gv4 = plus gv4 gv1), (succ gv4 = plus gv4 x), (succ gv4 = plus gv1 gv4), (succ gv4 = plus gv1 gv1), (succ gv4 = plus gv1 x), (succ gv4 = plus x gv4), (succ gv4 = plus x gv1), (succ gv4 = plus x x)
+(succ gv1 = gv4), (succ gv1 = gv1), (succ gv1 = x), (succ gv1 = plus gv4 gv4), (succ gv1 = plus gv4 gv1), (succ gv1 = plus gv4 x), (succ gv1 = plus gv1 gv4), (succ gv1 = plus gv1 gv1), (succ gv1 = plus gv1 x), (succ gv1 = plus x gv4)
+(succ gv1 = plus x gv1), (succ gv1 = plus x x), (succ x = gv4), (succ x = gv1), (succ x = x), (succ x = plus gv4 gv4), (succ x = plus gv4 gv1), (succ x = plus gv4 x), (succ x = plus gv1 gv4), (succ x = plus gv1 gv1)
+(succ x = plus gv1 x), (succ x = plus x gv4), (succ x = plus x gv1), (succ x = plus x x), (plus gv4 gv4 = gv4), (plus gv4 gv4 = gv1), (plus gv4 gv4 = x), (plus gv4 gv1 = gv4), (plus gv4 gv1 = gv1), (plus gv4 gv1 = x)
+(plus gv4 x = gv4), (plus gv4 x = gv1), (plus gv4 x = x), (plus gv1 gv4 = gv4), (plus gv1 gv4 = gv1), (plus gv1 gv4 = x), (plus gv1 gv1 = gv4), (plus gv1 gv1 = gv1), (plus gv1 gv1 = x), (plus gv1 x = gv4)
+(plus gv1 x = gv1), (plus gv1 x = x), (plus x gv4 = gv4), (plus x gv4 = gv1), (plus x gv4 = x), (plus x gv1 = gv4), (plus x gv1 = gv1), (plus x gv1 = x), (plus x x = gv4), (plus x x = gv1)
+(plus x x = x), (zero = succ gv4), (zero = succ gv1), (zero = succ x), (zero = plus gv4 gv4), (zero = plus gv4 gv1), (zero = plus gv4 x), (zero = plus gv1 gv4), (zero = plus gv1 gv1), (zero = plus gv1 x)
+(zero = plus x gv4), (zero = plus x gv1), (zero = plus x x), (None = Some gv4), (None = Some gv1), (None = Some x)
+
+Label: 1 (1)
+(x = x), (x = gv4), (x = gv0), (gv4 = x), (gv4 = gv4), (gv4 = gv0), (gv0 = x), (gv0 = gv4), (gv0 = gv0), (x <> x)
+(x <> gv4), (x <> gv0), (gv4 <> x), (gv4 <> gv4), (gv4 <> gv0), (gv0 <> x), (gv0 <> gv4), (gv0 <> gv0), (succ x = x), (succ x = gv4)
+(succ x = gv0), (succ x = plus x x), (succ x = plus x gv4), (succ x = plus x gv0), (succ x = plus gv4 x), (succ x = plus gv4 gv4), (succ x = plus gv4 gv0), (succ x = plus gv0 x), (succ x = plus gv0 gv4), (succ x = plus gv0 gv0)
+(succ gv4 = x), (succ gv4 = gv4), (succ gv4 = gv0), (succ gv4 = plus x x), (succ gv4 = plus x gv4), (succ gv4 = plus x gv0), (succ gv4 = plus gv4 x), (succ gv4 = plus gv4 gv4), (succ gv4 = plus gv4 gv0), (succ gv4 = plus gv0 x)
+(succ gv4 = plus gv0 gv4), (succ gv4 = plus gv0 gv0), (succ gv0 = x), (succ gv0 = gv4), (succ gv0 = gv0), (succ gv0 = plus x x), (succ gv0 = plus x gv4), (succ gv0 = plus x gv0), (succ gv0 = plus gv4 x), (succ gv0 = plus gv4 gv4)
+(succ gv0 = plus gv4 gv0), (succ gv0 = plus gv0 x), (succ gv0 = plus gv0 gv4), (succ gv0 = plus gv0 gv0), (plus x x = x), (plus x x = gv4), (plus x x = gv0), (plus x gv4 = x), (plus x gv4 = gv4), (plus x gv4 = gv0)
+(plus x gv0 = x), (plus x gv0 = gv4), (plus x gv0 = gv0), (plus gv4 x = x), (plus gv4 x = gv4), (plus gv4 x = gv0), (plus gv4 gv4 = x), (plus gv4 gv4 = gv4), (plus gv4 gv4 = gv0), (plus gv4 gv0 = x)
+(plus gv4 gv0 = gv4), (plus gv4 gv0 = gv0), (plus gv0 x = x), (plus gv0 x = gv4), (plus gv0 x = gv0), (plus gv0 gv4 = x), (plus gv0 gv4 = gv4), (plus gv0 gv4 = gv0), (plus gv0 gv0 = x), (plus gv0 gv0 = gv4)
+(plus gv0 gv0 = gv0), (zero = succ x), (zero = succ gv4), (zero = succ gv0), (zero = plus x x), (zero = plus x gv4), (zero = plus x gv0), (zero = plus gv4 x), (zero = plus gv4 gv4), (zero = plus gv4 gv0)
+(zero = plus gv0 x), (zero = plus gv0 gv4), (zero = plus gv0 gv0), (None = Some x), (None = Some gv4), (None = Some gv0)
+
+Label: 2 (2)
+(gv3 = gv3), (gv3 = gv2), (gv3 = x), (gv2 = gv3), (gv2 = gv2), (gv2 = x), (x = gv3), (x = gv2), (x = x), (gv3 <> gv3)
+(gv3 <> gv2), (gv3 <> x), (gv2 <> gv3), (gv2 <> gv2), (gv2 <> x), (x <> gv3), (x <> gv2), (x <> x), (succ gv3 = gv3), (succ gv3 = gv2)
+(succ gv3 = x), (succ gv3 = plus gv3 gv3), (succ gv3 = plus gv3 gv2), (succ gv3 = plus gv3 x), (succ gv3 = plus gv2 gv3), (succ gv3 = plus gv2 gv2), (succ gv3 = plus gv2 x), (succ gv3 = plus x gv3), (succ gv3 = plus x gv2), (succ gv3 = plus x x)
+(succ gv2 = gv3), (succ gv2 = gv2), (succ gv2 = x), (succ gv2 = plus gv3 gv3), (succ gv2 = plus gv3 gv2), (succ gv2 = plus gv3 x), (succ gv2 = plus gv2 gv3), (succ gv2 = plus gv2 gv2), (succ gv2 = plus gv2 x), (succ gv2 = plus x gv3)
+(succ gv2 = plus x gv2), (succ gv2 = plus x x), (succ x = gv3), (succ x = gv2), (succ x = x), (succ x = plus gv3 gv3), (succ x = plus gv3 gv2), (succ x = plus gv3 x), (succ x = plus gv2 gv3), (succ x = plus gv2 gv2)
+(succ x = plus gv2 x), (succ x = plus x gv3), (succ x = plus x gv2), (succ x = plus x x), (plus gv3 gv3 = gv3), (plus gv3 gv3 = gv2), (plus gv3 gv3 = x), (plus gv3 gv2 = gv3), (plus gv3 gv2 = gv2), (plus gv3 gv2 = x)
+(plus gv3 x = gv3), (plus gv3 x = gv2), (plus gv3 x = x), (plus gv2 gv3 = gv3), (plus gv2 gv3 = gv2), (plus gv2 gv3 = x), (plus gv2 gv2 = gv3), (plus gv2 gv2 = gv2), (plus gv2 gv2 = x), (plus gv2 x = gv3)
+(plus gv2 x = gv2), (plus gv2 x = x), (plus x gv3 = gv3), (plus x gv3 = gv2), (plus x gv3 = x), (plus x gv2 = gv3), (plus x gv2 = gv2), (plus x gv2 = x), (plus x x = gv3), (plus x x = gv2)
+(plus x x = x), (zero = succ gv3), (zero = succ gv2), (zero = succ x), (zero = plus gv3 gv3), (zero = plus gv3 gv2), (zero = plus gv3 x), (zero = plus gv2 gv3), (zero = plus gv2 gv2), (zero = plus gv2 x)
+(zero = plus x gv3), (zero = plus x gv2), (zero = plus x x), (None = Some gv3), (None = Some gv2), (None = Some x)
+
+Label: 3 (3)
+(gv3 = gv3), (gv3 = x), (x = gv3), (x = x), (gv3 <> gv3), (gv3 <> x), (x <> gv3), (x <> x), (succ gv3 = gv3), (succ gv3 = x)
+(succ gv3 = plus gv3 gv3), (succ gv3 = plus gv3 x), (succ gv3 = plus x gv3), (succ gv3 = plus x x), (succ x = gv3), (succ x = x), (succ x = plus gv3 gv3), (succ x = plus gv3 x), (succ x = plus x gv3), (succ x = plus x x)
+(plus gv3 gv3 = gv3), (plus gv3 gv3 = x), (plus gv3 x = gv3), (plus gv3 x = x), (plus x gv3 = gv3), (plus x gv3 = x), (plus x x = gv3), (plus x x = x), (zero = succ gv3), (zero = succ x)
+(zero = plus gv3 gv3), (zero = plus gv3 x), (zero = plus x gv3), (zero = plus x x), (None = Some gv3), (None = Some x)
+
+Label: 4 (4)
+(gv1 = gv1), (gv1 = x), (x = gv1), (x = x), (gv1 <> gv1), (gv1 <> x), (x <> gv1), (x <> x), (succ gv1 = gv1), (succ gv1 = x)
+(succ gv1 = plus gv1 gv1), (succ gv1 = plus gv1 x), (succ gv1 = plus x gv1), (succ gv1 = plus x x), (succ x = gv1), (succ x = x), (succ x = plus gv1 gv1), (succ x = plus gv1 x), (succ x = plus x gv1), (succ x = plus x x)
+(plus gv1 gv1 = gv1), (plus gv1 gv1 = x), (plus gv1 x = gv1), (plus gv1 x = x), (plus x gv1 = gv1), (plus x gv1 = x), (plus x x = gv1), (plus x x = x), (zero = succ gv1), (zero = succ x)
+(zero = plus gv1 gv1), (zero = plus gv1 x), (zero = plus x gv1), (zero = plus x x), (None = Some gv1), (None = Some x)
+
+Label: 5 (5)
+(x = x), (x = gv0), (gv0 = x), (gv0 = gv0), (x <> x), (x <> gv0), (gv0 <> x), (gv0 <> gv0), (succ x = x), (succ x = gv0)
+(succ x = plus x x), (succ x = plus x gv0), (succ x = plus gv0 x), (succ x = plus gv0 gv0), (succ gv0 = x), (succ gv0 = gv0), (succ gv0 = plus x x), (succ gv0 = plus x gv0), (succ gv0 = plus gv0 x), (succ gv0 = plus gv0 gv0)
+(plus x x = x), (plus x x = gv0), (plus x gv0 = x), (plus x gv0 = gv0), (plus gv0 x = x), (plus gv0 x = gv0), (plus gv0 gv0 = x), (plus gv0 gv0 = gv0), (zero = succ x), (zero = succ gv0)
+(zero = plus x x), (zero = plus x gv0), (zero = plus gv0 x), (zero = plus gv0 gv0), (None = Some x), (None = Some gv0)
+
+Label: 6 (6)
+(gv5 = gv5), (gv5 = gv1), (gv5 = x), (gv1 = gv5), (gv1 = gv1), (gv1 = x), (x = gv5), (x = gv1), (x = x), (gv5 <> gv5)
+(gv5 <> gv1), (gv5 <> x), (gv1 <> gv5), (gv1 <> gv1), (gv1 <> x), (x <> gv5), (x <> gv1), (x <> x), (succ gv5 = gv5), (succ gv5 = gv1)
+(succ gv5 = x), (succ gv5 = plus gv5 gv5), (succ gv5 = plus gv5 gv1), (succ gv5 = plus gv5 x), (succ gv5 = plus gv1 gv5), (succ gv5 = plus gv1 gv1), (succ gv5 = plus gv1 x), (succ gv5 = plus x gv5), (succ gv5 = plus x gv1), (succ gv5 = plus x x)
+(succ gv1 = gv5), (succ gv1 = gv1), (succ gv1 = x), (succ gv1 = plus gv5 gv5), (succ gv1 = plus gv5 gv1), (succ gv1 = plus gv5 x), (succ gv1 = plus gv1 gv5), (succ gv1 = plus gv1 gv1), (succ gv1 = plus gv1 x), (succ gv1 = plus x gv5)
+(succ gv1 = plus x gv1), (succ gv1 = plus x x), (succ x = gv5), (succ x = gv1), (succ x = x), (succ x = plus gv5 gv5), (succ x = plus gv5 gv1), (succ x = plus gv5 x), (succ x = plus gv1 gv5), (succ x = plus gv1 gv1)
+(succ x = plus gv1 x), (succ x = plus x gv5), (succ x = plus x gv1), (succ x = plus x x), (plus gv5 gv5 = gv5), (plus gv5 gv5 = gv1), (plus gv5 gv5 = x), (plus gv5 gv1 = gv5), (plus gv5 gv1 = gv1), (plus gv5 gv1 = x)
+(plus gv5 x = gv5), (plus gv5 x = gv1), (plus gv5 x = x), (plus gv1 gv5 = gv5), (plus gv1 gv5 = gv1), (plus gv1 gv5 = x), (plus gv1 gv1 = gv5), (plus gv1 gv1 = gv1), (plus gv1 gv1 = x), (plus gv1 x = gv5)
+(plus gv1 x = gv1), (plus gv1 x = x), (plus x gv5 = gv5), (plus x gv5 = gv1), (plus x gv5 = x), (plus x gv1 = gv5), (plus x gv1 = gv1), (plus x gv1 = x), (plus x x = gv5), (plus x x = gv1)
+(plus x x = x), (zero = succ gv5), (zero = succ gv1), (zero = succ x), (zero = plus gv5 gv5), (zero = plus gv5 gv1), (zero = plus gv5 x), (zero = plus gv1 gv5), (zero = plus gv1 gv1), (zero = plus gv1 x)
+(zero = plus x gv5), (zero = plus x gv1), (zero = plus x x), (None = Some gv5), (None = Some gv1), (None = Some x)
+
+Label: 7 (7)
+(x = x), (x = gv5), (x = gv0), (gv5 = x), (gv5 = gv5), (gv5 = gv0), (gv0 = x), (gv0 = gv5), (gv0 = gv0), (x <> x)
+(x <> gv5), (x <> gv0), (gv5 <> x), (gv5 <> gv5), (gv5 <> gv0), (gv0 <> x), (gv0 <> gv5), (gv0 <> gv0), (succ x = x), (succ x = gv5)
+(succ x = gv0), (succ x = plus x x), (succ x = plus x gv5), (succ x = plus x gv0), (succ x = plus gv5 x), (succ x = plus gv5 gv5), (succ x = plus gv5 gv0), (succ x = plus gv0 x), (succ x = plus gv0 gv5), (succ x = plus gv0 gv0)
+(succ gv5 = x), (succ gv5 = gv5), (succ gv5 = gv0), (succ gv5 = plus x x), (succ gv5 = plus x gv5), (succ gv5 = plus x gv0), (succ gv5 = plus gv5 x), (succ gv5 = plus gv5 gv5), (succ gv5 = plus gv5 gv0), (succ gv5 = plus gv0 x)
+(succ gv5 = plus gv0 gv5), (succ gv5 = plus gv0 gv0), (succ gv0 = x), (succ gv0 = gv5), (succ gv0 = gv0), (succ gv0 = plus x x), (succ gv0 = plus x gv5), (succ gv0 = plus x gv0), (succ gv0 = plus gv5 x), (succ gv0 = plus gv5 gv5)
+(succ gv0 = plus gv5 gv0), (succ gv0 = plus gv0 x), (succ gv0 = plus gv0 gv5), (succ gv0 = plus gv0 gv0), (plus x x = x), (plus x x = gv5), (plus x x = gv0), (plus x gv5 = x), (plus x gv5 = gv5), (plus x gv5 = gv0)
+(plus x gv0 = x), (plus x gv0 = gv5), (plus x gv0 = gv0), (plus gv5 x = x), (plus gv5 x = gv5), (plus gv5 x = gv0), (plus gv5 gv5 = x), (plus gv5 gv5 = gv5), (plus gv5 gv5 = gv0), (plus gv5 gv0 = x)
+(plus gv5 gv0 = gv5), (plus gv5 gv0 = gv0), (plus gv0 x = x), (plus gv0 x = gv5), (plus gv0 x = gv0), (plus gv0 gv5 = x), (plus gv0 gv5 = gv5), (plus gv0 gv5 = gv0), (plus gv0 gv0 = x), (plus gv0 gv0 = gv5)
+(plus gv0 gv0 = gv0), (zero = succ x), (zero = succ gv5), (zero = succ gv0), (zero = plus x x), (zero = plus x gv5), (zero = plus x gv0), (zero = plus gv5 x), (zero = plus gv5 gv5), (zero = plus gv5 gv0)
+(zero = plus gv0 x), (zero = plus gv0 gv5), (zero = plus gv0 gv0), (None = Some x), (None = Some gv5), (None = Some gv0)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 99.598 seconds
+
+
+Label: 0 (0)
+(succ gv4 = plus gv1 x), (succ gv4 = plus x gv1)
+
+Label: 1 (1)
+(succ gv4 = gv0)
+
+Label: 2 (2)
+
+Label: 3 (3)
+
+Label: 4 (4)
+
+Label: 5 (5)
+
+Label: 6 (6)
+
+Label: 7 (7)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (plus x gv2 = gv4 -> plus x (succ gv2) = succ gv4)
+
+2. (plus x (succ x) = gv4 -> plus x (succ (succ x)) = succ gv4)
+
+3. (plus x gv2 = succ gv5 -> plus x (succ gv2) = succ (succ gv5))
+
+4. (plus x (succ x) = succ gv5 -> plus x (succ (succ x)) = succ (succ gv5))
+
+5. (plus x gv2 = succ (plus x x) -> plus x (succ gv2) = succ (succ (plus x x)))
+
+6. (plus x (succ (succ x)) = succ (succ (plus x x)))
+
+7. (succ gv4 = plus gv1 x -> plus x gv1 = succ gv4)
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 114.799 seconds
+
+Number of Result Pairs Returned: 7
+
+1. (plus x gv2 = gv4 -> plus x (succ gv2) = succ gv4)
+
+2. (plus x (succ x) = gv4 -> plus x (succ (succ x)) = succ gv4)
+
+3. (plus x gv2 = succ gv5 -> plus x (succ gv2) = succ (succ gv5))
+
+4. (plus x (succ x) = succ gv5 -> plus x (succ (succ x)) = succ (succ gv5))
+
+5. (plus x gv2 = succ (plus x x) -> plus x (succ gv2) = succ (succ (plus x x)))

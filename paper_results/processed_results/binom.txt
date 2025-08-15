@@ -1,0 +1,901 @@
+[TOTAL] 46
+
+[SUCCESS] 17
+    [SUCCESS][1][GENERALIZE] 4
+    [SUCCESS][1][AS IS] 6
+    [ATOMIC][SUCCESS][3][INFER] 2
+    [SUCCESS][3][WEAKEN] 1
+    [ATOMIC][SUCCESS][3][GENERALIZE] 1
+    [SUCCESS][3][AS IS] 1
+    [SUCCESS][5][INFER] 1
+    [SUCCESS][5][WEAKEN] 1
+
+[USEFUL] 11
+    [ATOMIC][USEFUL][MORE COMPLICATED][WEAKEN] 6
+    [USEFUL][STEP IN RIGHT DIRECTION][INFER] 4
+    [USEFUL][STEP IN RIGHT DIRECTION][WEAKEN] 1
+
+[FAIL] 18
+    [FAIL][BEYOND SCOPE] 5 ([ATOMIC] 1)
+    [FAIL][BEYOND SCOPE][EXTRA VAR] 4
+    [FAIL][FORWARD] 7
+    [FAIL][RESOURCE] 1
+    [FAIL][IMPLEMENTATION][RANK] 1
+
+
+[ATOMIC - EQUAL] 6
+[ATOMIC - OTHER] 3
+-----------------------------------------------
+[**]
+[ATOMIC][USEFUL][MORE COMPLICATED][WEAKEN]
+Test = smash_elems_by_app_nil_r_3
+[TIME] 275.742
+[COUNTS] 59
+[TARGET] [ ] ++ l = l
+
+1. (Permutation bu (n1 :: bl0 ++ []) ->  Permutation bt (n0 :: bl) -> Permutation (bt ++ bu) (n0 :: n1 :: bl0 ++ bl))
+
+2. (Permutation bu (n1 :: bl0 ++ []) -> Permutation (n1 :: bl0) bu)
+(Permutation (n1 :: bl0) bu ->  Permutation bt (n0 :: bl) -> Permutation (bt ++ bu) (n0 :: n1 :: bl0 ++ bl))
+
+3. (Permutation bu (n1 :: bl0 ++ []) -> Permutation bu (n1 :: bl0))
+(Permutation bt (n0 :: bl) ->  Permutation bu (n1 :: bl0) -> Permutation (bt ++ bu) (n0 :: n1 :: bl0 ++ bl))
+
+4. (Permutation gv2 bu ->  Permutation bt (n0 :: bl) ->  Permutation bu (n1 :: bl0 ++ []) -> Permutation (bt ++ bu) (n0 :: gv2))
+
+5. (Permutation bt (n0 :: bl) ->  Permutation bu (n1 :: bl0 ++ []) ->  gv2 = bu -> Permutation (bt ++ bu) (n0 :: gv2))
+
+
+
+[FAIL][BEYOND SCOPE][EXTRA VAR]
+Test = smash_elems_by_Permutation_trans_1
+[TIME] 379.437
+[COUNTS] 100
+[TARGET] Permutation l m -> Permutation m n-> Permutation l n
+
+1. (Permutation bu (n1 :: bl0) ->  Permutation bt (n0 :: bl) -> Permutation (bt ++ bu) (n0 :: n1 :: bl0 ++ bl))
+
+2. (Permutation bl0 gv3 ->  Permutation bt (n0 :: bl) ->  Permutation bu (n1 :: bl0) -> Permutation (bt ++ bu) (n0 :: n1 :: gv3))
+
+3. (Permutation gv3 bl0 ->  Permutation bt (n0 :: bl) ->  Permutation bu (n1 :: bl0) -> Permutation (bt ++ bu) (n0 :: n1 :: gv3))
+
+4. (Permutation bt (n0 :: bl) ->  Permutation bu (n1 :: bl0) ->  bl0 = gv3 -> Permutation (bt ++ bu) (n0 :: n1 :: gv3))
+
+5. (Permutation bt (n0 :: bl) ->  Permutation gv2 (n1 :: bl) ->  Permutation bu (n1 :: bl0) -> Permutation (bt ++ bu) (n0 :: gv2))
+
+
+
+
+[FAIL][FORWARD]
+Test = priqueue_perm_by_Permutation_app
+[TIME] 509.183
+[COUNTS] 59
+[TARGET] Permutation l l' -> Permutation m m' -> Permutation (l++m) (l'++m')
+
+1. (priqueue_elems p rest_elems ->  priqueue_elems p rest_elems0 ->  tree_elems a cons_elems0 ->  tree_elems a cons_elems ->  Permutation (cons_elems ++ rest_elems) (cons_elems0 ++ rest_elems0))
+
+2. (priqueue_elems p rest_elems0 -> Abs (p ++ p) (rest_elems0 ++ rest_elems0))
+(Abs (p ++ p) (rest_elems0 ++ rest_elems0) ->  priqueue_elems p rest_elems ->  tree_elems a cons_elems ->  tree_elems a cons_elems0 ->  Permutation (cons_elems ++ rest_elems) (cons_elems0 ++ rest_elems0))
+
+3. (priqueue_elems p rest_elems0 ->  priqueue_elems (p ++ p) (rest_elems0 ++ rest_elems0))
+(priqueue_elems p rest_elems ->  priqueue_elems (p ++ p) (rest_elems0 ++ rest_elems0) ->  tree_elems a cons_elems ->  tree_elems a cons_elems0 ->  Permutation (cons_elems ++ rest_elems) (cons_elems0 ++ rest_elems0))
+
+4. (priqueue_elems p rest_elems -> Abs (p ++ p) (rest_elems ++ rest_elems))
+(Abs (p ++ p) (rest_elems ++ rest_elems) ->  priqueue_elems p rest_elems0 ->  tree_elems a cons_elems ->  tree_elems a cons_elems0 ->  Permutation (cons_elems ++ rest_elems) (cons_elems0 ++ rest_elems0))
+
+5. (priqueue_elems p rest_elems ->  priqueue_elems (p ++ p) (rest_elems ++ rest_elems))
+(priqueue_elems p rest_elems0 ->  priqueue_elems (p ++ p) (rest_elems ++ rest_elems) ->  tree_elems a cons_elems ->  tree_elems a cons_elems0 ->  Permutation (cons_elems ++ rest_elems) (cons_elems0 ++ rest_elems0))
+
+
+
+[USEFUL][STEP IN RIGHT DIRECTION][INFER]
+Test = join_valid_by_smash_valid_4
+[TIME] 527.5
+[COUNTS] 47
+[TARGET] pow2heap n t -> pow2heap n u -> pow2heap (S n) (smash t u)
+
+1. (priqq n (Node n1 t1 t2 :: q) ->  Node n0 c1 c2 = Leaf \/ pow2heap n (Node n0 c1 c2) ->  pow2heap (S n) (smash (Node n0 c1 c2) (Node n1 t1 t2)))
+
+2. (Node n0 c1 c2 = Leaf \/ pow2heap n (Node n0 c1 c2) ->  pow2heap n (Node n0 c1 c2))
+(pow2heap n (Node n0 c1 c2) ->  priqq n (Node n1 t1 t2 :: q) ->  pow2heap (S n) (smash (Node n0 c1 c2) (Node n1 t1 t2)))
+
+3. (priqq n (Node n1 t1 t2 :: q) -> pow2heap n (Node n1 t1 t2))
+(pow2heap n (Node n1 t1 t2) ->  Node n0 c1 c2 = Leaf \/ pow2heap n (Node n0 c1 c2) ->  pow2heap (S n) (smash (Node n0 c1 c2) (Node n1 t1 t2)))
+
+4. (pow2heap n gv2 ->  priqq n (Node n1 t1 t2 :: q) ->  gv2 = Leaf \/ pow2heap n gv2 -> pow2heap (S n) (smash gv2 (Node n1 t1 t2)))
+
+5. (t2 <> gv2 ->  priqq n (Node n1 t1 t2 :: q) ->  gv2 = Leaf \/ pow2heap n gv2 -> pow2heap (S n) (smash gv2 (Node n1 t1 t2)))
+
+
+
+[SUCCESS][1][GENERALIZE]
+Test = join_valid_by_carry_valid_2
+[TIME] 259.216
+[COUNTS] 6
+[TARGET] priqq n q -> forall t, (t=Leaf \/ pow2heap n t) -> priqq n (carry q t)
+
+1. (c = Leaf \/ pow2heap n c -> priqq n gv1 -> priqq n (carry gv1 c))
+
+2. (c = Leaf \/ pow2heap n c ->  priqq n (gv2 :: p) -> priqq n (carry (gv2 :: p) c))
+
+3. (priqq n (Node n0 a1 a2 :: p) ->  c = Leaf \/ pow2heap n c -> priqq n (carry (Node n0 a1 a2 :: p) c))
+
+4. (priqq n gv1 ->  Permutation gv0 (carry gv1 c) -> c = Leaf \/ pow2heap n c -> priqq n gv0)
+
+5. (priqq n gv1 ->  Permutation (carry gv1 c) gv0 -> c = Leaf \/ pow2heap n c -> priqq n gv0)
+
+
+
+[FAIL][FORWARD]
+Test = abs_perm_by_Permutation_app
+[TIME] 238.839
+[COUNTS] 41
+[TARGET] Permutation l l' -> Permutation m m' -> Permutation (l++m) (l'++m')
+
+1. (tree_elems t cons_elems ->  tree_elems t cons_elems0 ->  priqueue_elems p rest_elems0 ->  priqueue_elems p rest_elems ->  Permutation (cons_elems ++ rest_elems) (cons_elems0 ++ rest_elems0))
+
+2. (priqueue_elems p rest_elems -> Abs (p ++ p) (rest_elems ++ rest_elems))
+(Abs (p ++ p) (rest_elems ++ rest_elems) ->  priqueue_elems p rest_elems0 ->  tree_elems t cons_elems ->  tree_elems t cons_elems0 ->  Permutation (cons_elems ++ rest_elems) (cons_elems0 ++ rest_elems0))
+
+3. (priqueue_elems p rest_elems0 -> Abs (p ++ p) (rest_elems0 ++ rest_elems0))
+(Abs (p ++ p) (rest_elems0 ++ rest_elems0) ->  priqueue_elems p rest_elems ->  tree_elems t cons_elems ->  tree_elems t cons_elems0 ->  Permutation (cons_elems ++ rest_elems) (cons_elems0 ++ rest_elems0))
+
+4. (priqueue_elems p rest_elems ->  priqueue_elems (p ++ p) (rest_elems ++ rest_elems))
+(priqueue_elems p rest_elems0 ->  priqueue_elems (p ++ p) (rest_elems ++ rest_elems) ->  tree_elems t cons_elems ->  tree_elems t cons_elems0 ->  Permutation (cons_elems ++ rest_elems) (cons_elems0 ++ rest_elems0))
+
+5. (priqueue_elems p rest_elems0 ->  priqueue_elems (p ++ p) (rest_elems0 ++ rest_elems0))
+(priqueue_elems p rest_elems ->  priqueue_elems (p ++ p) (rest_elems0 ++ rest_elems0) ->  tree_elems t cons_elems ->  tree_elems t cons_elems0 ->  Permutation (cons_elems ++ rest_elems) (cons_elems0 ++ rest_elems0))
+
+
+
+[SUCCESS][5][WEAKEN]
+Test = priqueue_elems_ext_by_Permutation_nil
+[TIME] 53.644
+[COUNTS] 12
+[TARGET] Permutation [] l -> l = []
+
+1. (priqueue_elems gv0 [] -> Permutation [] e2 -> priqueue_elems gv0 e2)
+
+2. (Permutation [] e2 -> priqueue_elems [] e2)
+
+3. (Permutation [] e2 -> tree_elems Leaf e2)
+(tree_elems Leaf e2 -> priqueue_elems [] e2)
+
+4. (Permutation [] e2 -> [] = e2)
+([] = e2 -> priqueue_elems [] e2)
+
+5. (Permutation [] e2 -> tree_elems Leaf (e2 ++ e2))
+(tree_elems Leaf (e2 ++ e2) -> priqueue_elems [] e2)
+
+
+
+[SUCCESS][1][AS IS]
+Test = priqueue_perm_by_tree_perm
+[TIME] 91.242
+[COUNTS] 1
+[TARGET] tree_elems t e1 -> tree_elems t e2 -> Permutation e1 e2
+
+1. (tree_elems a cons_elems0 ->  tree_elems a cons_elems -> Permutation cons_elems cons_elems0)
+
+
+
+
+[FAIL][FORWARD]
+Test = smash_elems_by_Permutation_trans_2
+[TIME] 251.687
+[COUNTS] 78
+[TARGET] Permutation l m -> Permutation m n-> Permutation l n
+
+1. (Permutation bu (n1 :: bl0) ->  Permutation bt (n0 :: bl) -> Permutation (bt ++ bu) (n1 :: n0 :: bl ++ bl0))
+
+2. (Permutation gv2 bt ->  Permutation bt (n0 :: bl) ->  Permutation bu (n1 :: bl0) -> Permutation (bt ++ bu) (n1 :: gv2))
+
+3. (Permutation bt gv2 ->  Permutation bt (n0 :: bl) ->  Permutation bu (n1 :: bl0) -> Permutation (bt ++ bu) (n1 :: gv2))
+
+4. (Permutation gv3 bl ->  Permutation bt (n0 :: bl) ->  Permutation bu (n1 :: bl0) -> Permutation (bt ++ bu) (n1 :: n0 :: gv3))
+
+5. (Permutation bt (n0 :: bl) ->  Permutation bu (n1 :: bl0) -> gv2 = bt -> Permutation (bt ++ bu) (n1 :: gv2))
+
+
+[**]
+[ATOMIC][USEFUL][MORE COMPLICATED][WEAKEN]
+Test = smash_elems_by_app_nil_r_4
+[TIME] 929.232
+[COUNTS] 224
+[TARGET] [ ] ++ l = l
+
+1. (Permutation bt (n0 :: bl ++ gv5) ->  Permutation bu (n1 :: bl0 ++ gv5) ->  Permutation (bt ++ bu) (n1 :: n0 :: (bl ++ bl0) ++ gv5))
+
+2. (Permutation bu (n1 :: bl0 ++ []) ->  Permutation bt (n0 :: bl ++ []) ->  Permutation (bt ++ bu) (n1 :: n0 :: (bl ++ bl0) ++ []))
+
+3. (bl ++ bl0 = (bl ++ bl0) ++ [])
+
+4. (Permutation bt (n0 :: bl ++ []) -> Permutation (n0 :: bl) bt)
+(Permutation (n0 :: bl) bt ->  Permutation bu (n1 :: bl0 ++ []) ->  Permutation (bt ++ bu) (n1 :: n0 :: (bl ++ bl0) ++ []))
+
+5. (Permutation bu (n1 :: bl0 ++ []) -> Permutation (n1 :: bl0) bu)
+(Permutation (n1 :: bl0) bu ->  Permutation bt (n0 :: bl ++ []) ->  Permutation (bt ++ bu) (n1 :: n0 :: (bl ++ bl0) ++ []))
+
+
+
+
+[SUCCESS][1][AS IS]
+Test = join_valid_by_carry_valid_1
+[TIME] 145.241
+[COUNTS] 3
+[TARGET] priqq n q -> forall t, (t=Leaf \/ pow2heap n t) -> priqq n (carry q t)
+
+1. (priqq n q -> c = Leaf \/ pow2heap n c -> priqq n (carry q c))
+
+2. (priqq n q ->  Permutation gv0 (carry q c) -> c = Leaf \/ pow2heap n c -> priqq n gv0)
+
+3. (priqq n q ->  Permutation (carry q c) gv0 -> c = Leaf \/ pow2heap n c -> priqq n gv0)
+
+
+
+[USEFUL][STEP IN RIGHT DIRECTION][INFER]
+Test = join_valid_by_smash_valid_3
+[TIME] 530.519
+[COUNTS] 61
+[TARGET] pow2heap n t -> pow2heap n u -> pow2heap (S n) (smash t u)
+
+1. (Node n1 c1 c2 = Leaf \/ pow2heap n (Node n1 c1 c2) ->  priqq n (Node n0 a1 a2 :: p) ->  pow2heap (S n) (smash (Node n1 c1 c2) (Node n0 a1 a2)))
+
+2. (Node n1 c1 c2 = Leaf \/ pow2heap n (Node n1 c1 c2) ->  pow2heap n (Node n1 c1 c2))
+(pow2heap n (Node n1 c1 c2) ->  priqq n (Node n0 a1 a2 :: p) ->  pow2heap (S n) (smash (Node n1 c1 c2) (Node n0 a1 a2)))
+
+3. (priqq n (Node n0 a1 a2 :: p) -> pow2heap n (Node n0 a1 a2))
+(pow2heap n (Node n0 a1 a2) ->  Node n1 c1 c2 = Leaf \/ pow2heap n (Node n1 c1 c2) ->  pow2heap (S n) (smash (Node n1 c1 c2) (Node n0 a1 a2)))
+
+4. (pow2heap n gv2 ->  priqq n (Node n0 a1 a2 :: p) ->  gv2 = Leaf \/ pow2heap n gv2 -> pow2heap (S n) (smash gv2 (Node n0 a1 a2)))
+
+5. (a2 <> gv2 ->  priqq n (Node n0 a1 a2 :: p) ->  gv2 = Leaf \/ pow2heap n gv2 -> pow2heap (S n) (smash gv2 (Node n0 a1 a2)))
+
+
+
+[FAIL][BEYOND SCOPE]
+Test = can_relate_by_priqq_can_relate
+[TIME] -1
+[COUNTS] 0
+[TARGET] priqq n p -> exists al, priqueue_elems p al
+
+RESULTS NOT FOUND
+
+
+
+[ATOMIC][FAIL][BEYOND SCOPE]
+Test = priqq_can_relate_by_tree_can_relate
+[TIME] -1
+[COUNTS] 0
+[TARGET] exists al, tree_elems t al
+
+RESULTS NOT FOUND
+
+
+[***]
+[ATOMIC][SUCCESS][3][INFER]
+Test = smash_elems_by_Permutation_app_comm_3
+[TIME] 236.364
+[COUNTS] 31
+[TARGET] Permutation (m ++ n) (n ++ m)
+
+1. (Permutation (bl0 ++ n0 :: bl) (n0 :: bl ++ bl0))
+
+2. (Permutation gv2 (gv1 ++ bl0) -> Permutation (bl0 ++ gv1) gv2)
+
+3. (Permutation (gv1 ++ bl0) gv2 -> Permutation (bl0 ++ gv1) gv2)
+
+4. (Permutation gv3 (bl ++ bl0) -> Permutation (bl0 ++ n0 :: bl) (n0 :: gv3))
+
+5. (Permutation gv3 (bl0 ++ bl) -> Permutation (bl0 ++ n0 :: bl) (n0 :: gv3))
+
+
+
+[SUCCESS][1][GENERALIZE]
+Test = smash_elems_by_Permutation_app_1
+[TIME] 426.707
+[COUNTS] 93
+[TARGET] Permutation l l' -> Permutation m m' -> Permutation (l++m) (l'++m')
+
+1. (Permutation bt gv2 ->  Permutation bu gv3 -> Permutation (bt ++ bu) (gv2 ++ gv3))
+
+2. (Permutation bt gv2 ->  Permutation bu (n1 :: bl0) -> Permutation (bt ++ bu) (gv2 ++ n1 :: bl0))
+
+3. (Permutation bt (n0 :: bl) ->  Permutation bu gv3 -> Permutation (bt ++ bu) ((n0 :: bl) ++ gv3))
+
+4. (Permutation bu (n1 :: bl0) ->  Permutation bt (n0 :: bl) ->  Permutation (bt ++ bu) ((n0 :: bl) ++ n1 :: bl0))
+
+5. (gv1 = gv0 -> Permutation gv0 gv1)
+
+
+
+[SUCCESS][1][AS IS]
+Test = abs_perm_by_tree_perm
+[TIME] 61.278
+[COUNTS] 1
+[TARGET] tree_elems t e1 -> tree_elems t e2 -> Permutation e1 e2
+
+1. (tree_elems t cons_elems0 ->  tree_elems t cons_elems -> Permutation cons_elems cons_elems0)
+
+
+
+
+[SUCCESS][1][GENERALIZE]
+Test = tree_elems_ext_by_Permutation_trans
+[TIME] 124.668
+[COUNTS] 21
+[TARGET] Permutation l m -> Permutation m n-> Permutation l n
+
+1. (Permutation e1 gv0 -> Permutation e1 e2 -> Permutation e2 gv0)
+
+2. (Permutation e1 (n :: gv1) -> Permutation e1 e2 -> Permutation e2 (n :: gv1))
+
+3. (Permutation e1 e2 ->  Permutation e1 (n :: bl ++ br) -> Permutation e2 (n :: bl ++ br))
+
+4. (Permutation e1 e2 -> Permutation (bl ++ e2) (e1 ++ bl))
+(Permutation (bl ++ e2) (e1 ++ bl) ->  Permutation e1 (n :: bl ++ br) -> Permutation e2 (n :: bl ++ br))
+
+5. (Permutation e1 e2 -> Permutation (e1 ++ bl) (e2 ++ bl))
+(Permutation (e1 ++ bl) (e2 ++ bl) ->  Permutation e1 (n :: bl ++ br) -> Permutation e2 (n :: bl ++ br))
+
+
+
+[FAIL][FORWARD]
+Test = abs_perm_by_Permutation_trans_2
+[TIME] 342.959
+[COUNTS] 25
+[TARGET] Permutation l m -> Permutation m n-> Permutation l n
+
+1. (priqueue_elems p rest_elems ->  tree_elems t cons_elems ->  tree_elems t cons_elems0 ->  Permutation bl (cons_elems0 ++ rest_elems0) ->  priqueue_elems p rest_elems0 -> Permutation (cons_elems ++ rest_elems) bl)
+
+2. (Permutation bl (cons_elems0 ++ rest_elems0) ->  Permutation (rest_elems0 ++ cons_elems0) bl)
+(Permutation (rest_elems0 ++ cons_elems0) bl ->  priqueue_elems p rest_elems ->  priqueue_elems p rest_elems0 ->  tree_elems t cons_elems ->  tree_elems t cons_elems0 -> Permutation (cons_elems ++ rest_elems) bl)
+
+3. (Permutation bl (cons_elems0 ++ rest_elems0) ->  Permutation bl (rest_elems0 ++ cons_elems0))
+(Permutation bl (rest_elems0 ++ cons_elems0) ->  priqueue_elems p rest_elems ->  priqueue_elems p rest_elems0 ->  tree_elems t cons_elems ->  tree_elems t cons_elems0 -> Permutation (cons_elems ++ rest_elems) bl)
+
+4. (priqueue_elems p rest_elems0 -> Abs (p ++ p) (rest_elems0 ++ rest_elems0))
+(Abs (p ++ p) (rest_elems0 ++ rest_elems0) ->  Permutation bl (cons_elems0 ++ rest_elems0) ->  priqueue_elems p rest_elems ->  tree_elems t cons_elems ->  tree_elems t cons_elems0 -> Permutation (cons_elems ++ rest_elems) bl)
+
+5. (priqueue_elems p rest_elems0 ->  priqueue_elems (p ++ p) (rest_elems0 ++ rest_elems0))
+(Permutation bl (cons_elems0 ++ rest_elems0) ->  priqueue_elems p rest_elems ->  priqueue_elems (p ++ p) (rest_elems0 ++ rest_elems0) ->  tree_elems t cons_elems ->  tree_elems t cons_elems0 -> Permutation (cons_elems ++ rest_elems) bl)
+
+
+
+[FAIL][BEYOND SCOPE]
+Test = delete_max_Some_priq_by_join_valid
+[TIME] 288.547
+[COUNTS] 25
+[TARGET] priqq n p -> priqq n q -> (c=Leaf \/ pow2heap n c) -> priqq n (join p q c)
+
+1. (Some (k, join l l0 gv1) = Some (k, q) -> Leaf = gv1 -> priq (join l l0 gv1))
+
+2. (merge l l0 = join l l0 Leaf)
+
+3. (priq q -> Some (k, gv0) = Some (k, q) -> priq gv0)
+
+4. (priq (insert k q) -> Some (k, gv0) = Some (k, q) -> priq gv0)
+
+5. (priq (merge gv0 q) -> Some (k, gv0) = Some (k, q) -> priq gv0)
+
+
+[**]
+[ATOMIC][USEFUL][MORE COMPLICATED][WEAKEN]
+Test = smash_elems_by_app_nil_r_1
+[TIME] 1107.318
+[COUNTS] 220
+[TARGET] [ ] ++ l = l
+
+1. (Permutation bu (n1 :: bl0 ++ []) ->  Permutation bt (n0 :: bl ++ []) ->  Permutation (bt ++ bu) (n0 :: n1 :: (bl0 ++ bl) ++ []))
+
+2. (bl0 ++ bl = (bl0 ++ bl) ++ [])
+
+3. (n1 :: gv4 = n1 :: gv4 ++ [])
+
+4. (Permutation bt (n0 :: bl ++ []) -> Permutation (n0 :: bl) bt)
+(Permutation (n0 :: bl) bt ->  Permutation bu (n1 :: bl0 ++ []) ->  Permutation (bt ++ bu) (n0 :: n1 :: (bl0 ++ bl) ++ []))
+
+5. (Permutation bu (n1 :: bl0 ++ []) -> Permutation (n1 :: bl0) bu)
+(Permutation (n1 :: bl0) bu ->  Permutation bt (n0 :: bl ++ []) ->  Permutation (bt ++ bu) (n0 :: n1 :: (bl0 ++ bl) ++ []))
+
+
+
+[FAIL][BEYOND SCOPE][EXTRA VAR]
+Test = smash_elems_by_Permutation_trans_3
+[TIME] 486.822
+[COUNTS] 41
+[TARGET] Permutation l m -> Permutation m n-> Permutation l n
+
+1. (Permutation ((n0 :: bl) ++ n1 :: bl0) (n1 :: n0 :: bl ++ bl0))
+
+2. (Permutation gv2 (n1 :: bl0) ->  Permutation ((n0 :: bl) ++ gv2) (n1 :: n0 :: bl ++ bl0))
+
+3. (Permutation (n1 :: bl0) gv2 ->  Permutation ((n0 :: bl) ++ gv2) (n1 :: n0 :: bl ++ bl0))
+
+4. (Permutation gv1 (n0 :: bl) ->  Permutation (gv1 ++ n1 :: bl0) (n1 :: n0 :: bl ++ bl0))
+
+5. (Permutation (n0 :: bl) gv1 ->  Permutation (gv1 ++ n1 :: bl0) (n1 :: n0 :: bl ++ bl0))
+
+
+
+[FAIL][FORWARD]
+Test = priqueue_perm_by_Permutation_trans_2
+[TIME] 291.531
+[COUNTS] 22
+[TARGET] Permutation l m -> Permutation m n-> Permutation l n
+
+1. (priqueue_elems p rest_elems ->  tree_elems a cons_elems ->  priqueue_elems (a :: p) elems2 ->  Permutation (cons_elems ++ rest_elems) elems2)
+
+2. (priqueue_elems (a :: p) elems2 -> Abs (carry p a) elems2)
+(Abs (carry p a) elems2 ->  priqueue_elems p rest_elems ->  tree_elems a cons_elems -> Permutation (cons_elems ++ rest_elems) elems2)
+
+3. (priqueue_elems p rest_elems -> Abs (p ++ p) (rest_elems ++ rest_elems))
+(Abs (p ++ p) (rest_elems ++ rest_elems) ->  priqueue_elems (a :: p) elems2 ->  tree_elems a cons_elems -> Permutation (cons_elems ++ rest_elems) elems2)
+
+4. (priqueue_elems p rest_elems ->  priqueue_elems (p ++ p) (rest_elems ++ rest_elems))
+(priqueue_elems (a :: p) elems2 ->  priqueue_elems (p ++ p) (rest_elems ++ rest_elems) ->  tree_elems a cons_elems -> Permutation (cons_elems ++ rest_elems) elems2)
+
+5. (elems2 = gv0 ->  priqueue_elems (a :: p) elems2 ->  priqueue_elems p rest_elems ->  tree_elems a cons_elems -> Permutation gv0 elems2)
+
+
+[**]
+[ATOMIC][USEFUL][MORE COMPLICATED][WEAKEN]
+Test = smash_elems_by_app_nil_r_5
+[TIME] 284.319
+[COUNTS] 77
+[TARGET] [ ] ++ l = l
+
+1. (Permutation bu (n1 :: bl0 ++ []) ->  Permutation bt (n0 :: bl ++ []) ->  Permutation (bt ++ bu) (n1 :: n0 :: bl ++ bl0))
+
+2. (Permutation bt (n0 :: bl ++ []) -> Permutation (n0 :: bl) bt)
+(Permutation (n0 :: bl) bt ->  Permutation bu (n1 :: bl0 ++ []) ->  Permutation (bt ++ bu) (n1 :: n0 :: bl ++ bl0))
+
+3. (Permutation bu (n1 :: bl0 ++ []) -> Permutation (n1 :: bl0) bu)
+(Permutation (n1 :: bl0) bu ->  Permutation bt (n0 :: bl ++ []) ->  Permutation (bt ++ bu) (n1 :: n0 :: bl ++ bl0))
+
+4. (Permutation bt (n0 :: bl ++ []) -> Permutation bt (n0 :: bl))
+(Permutation bt (n0 :: bl) ->  Permutation bu (n1 :: bl0 ++ []) ->  Permutation (bt ++ bu) (n1 :: n0 :: bl ++ bl0))
+
+5. (Permutation bu (n1 :: bl0 ++ []) -> Permutation bu (n1 :: bl0))
+(Permutation bu (n1 :: bl0) ->  Permutation bt (n0 :: bl ++ []) ->  Permutation (bt ++ bu) (n1 :: n0 :: bl ++ bl0))
+
+
+
+
+[SUCCESS][3][WEAKEN]
+Test = tree_elems_ext_by_Permutation_nil
+[TIME] 48.771
+[COUNTS] 11
+[TARGET] Permutation [] l -> l = []
+
+1. (tree_elems gv0 [] -> Permutation [] e2 -> tree_elems gv0 e2)
+
+2. (Permutation [] e2 -> tree_elems Leaf e2)
+
+3. (Permutation [] e2 -> [] = e2)
+([] = e2 -> tree_elems Leaf e2)
+
+4. (Permutation [] e2 -> tree_elems Leaf (e2 ++ e2))
+(tree_elems Leaf (e2 ++ e2) -> tree_elems Leaf e2)
+
+5. (Permutation [] e2 -> Permutation (e2 ++ e2) e2)
+(Permutation (e2 ++ e2) e2 -> tree_elems Leaf e2)
+
+
+
+[USEFUL][STEP IN RIGHT DIRECTION][INFER]
+Test = join_valid_by_smash_valid_2
+[TIME] 2233.523
+[COUNTS] 77
+[TARGET] pow2heap n t -> pow2heap n u -> pow2heap (S n) (smash t u)
+
+1. (priqq n (Node n1 t1 t2 :: q) ->  priqq n (Node n0 a1 a2 :: p) ->  pow2heap (S n) (smash (Node n0 a1 a2) (Node n1 t1 t2)))
+
+2. (priqq n (Node n0 a1 a2 :: p) -> pow2heap n (Node n0 a1 a2))
+(pow2heap n (Node n0 a1 a2) ->  priqq n (Node n1 t1 t2 :: q) ->  pow2heap (S n) (smash (Node n0 a1 a2) (Node n1 t1 t2)))
+
+3. (priqq n (Node n1 t1 t2 :: q) -> pow2heap n (Node n1 t1 t2))
+(pow2heap n (Node n1 t1 t2) ->  priqq n (Node n0 a1 a2 :: p) ->  pow2heap (S n) (smash (Node n0 a1 a2) (Node n1 t1 t2)))
+
+4. (pow2heap n gv3 ->  priqq n (Node n0 a1 a2 :: p) ->  priqq n (gv3 :: q) -> pow2heap (S n) (smash (Node n0 a1 a2) gv3))
+
+5. (pow2heap n gv2 ->  priqq n (gv2 :: p) ->  priqq n (Node n1 t1 t2 :: q) -> pow2heap (S n) (smash gv2 (Node n1 t1 t2)))
+
+
+
+[FAIL][FORWARD]
+Test = tree_perm_by_Permutation_trans_2
+[TIME] 332.51
+[COUNTS] 55
+[TARGET] Permutation l m -> Permutation m n-> Permutation l n
+
+1. (Permutation bl bl0 ->  Permutation e2 (n :: bl0 ++ br0) ->  Permutation br br0 -> Permutation (n :: bl ++ br) e2)
+
+2. (Permutation br br0 -> Permutation (br0 ++ bl) (br ++ bl))
+(Permutation bl bl0 ->  Permutation (br0 ++ bl) (br ++ bl) ->  Permutation e2 (n :: bl0 ++ br0) -> Permutation (n :: bl ++ br) e2)
+
+3. (Permutation br br0 -> Permutation (br ++ bl) (br0 ++ bl))
+(Permutation bl bl0 ->  Permutation (br ++ bl) (br0 ++ bl) ->  Permutation e2 (n :: bl0 ++ br0) -> Permutation (n :: bl ++ br) e2)
+
+4. (Permutation br br0 -> Permutation (br0 ++ bl) (bl ++ br))
+(Permutation bl bl0 ->  Permutation (br0 ++ bl) (bl ++ br) ->  Permutation e2 (n :: bl0 ++ br0) -> Permutation (n :: bl ++ br) e2)
+
+5. (Permutation br br0 -> Permutation (br0 ++ br) (br ++ br))
+(Permutation bl bl0 ->  Permutation (br0 ++ br) (br ++ br) ->  Permutation e2 (n :: bl0 ++ br0) -> Permutation (n :: bl ++ br) e2)
+
+
+
+
+[FAIL][IMPLEMENTATION][RANK]
+Test = insert_priq_by_carry_valid_2
+[TIME] 436.426
+[COUNTS] 73
+[TARGET] priqq n q -> forall t, (t=Leaf \/ pow2heap n t) -> priqq n (carry q t)
+
+1. (priqq 0 gv2 -> priqq 0 (carry gv2 (Node x Leaf Leaf)))
+
+2. (priqq 0 (gv3 :: q) -> priqq 0 (carry (gv3 :: q) (Node x gv3 gv3)))
+
+3. (priqq 0 (Leaf :: q) -> priqq 0 (carry (Leaf :: q) (Node x Leaf Leaf)))
+
+4. (insert x gv2 = carry gv2 (Node x Leaf Leaf))
+
+5. (priqq 0 gv2 -> tree_elems gv3 [] -> priqq 0 (carry gv2 (Node x gv3 gv3)))
+
+
+[***]
+[ATOMIC][SUCCESS][3][GENERALIZE]
+Test = smash_elems_by_Permutation_app_comm_2
+[TIME] 291.514
+[COUNTS] 22
+[TARGET] Permutation (m ++ n) (n ++ m)
+
+1. (Permutation ((n0 :: bl) ++ gv2) (gv2 ++ n0 :: bl))
+
+2. (Permutation (gv1 ++ gv2) (gv2 ++ gv1))
+
+3. (Permutation (gv1 ++ n1 :: bl0) ((n1 :: bl0) ++ gv1))
+
+4. (Permutation ((n0 :: bl) ++ n1 :: bl0) ((n1 :: bl0) ++ n0 :: bl))
+
+5. (Permutation (n1 :: gv3) (n1 :: gv0) -> Permutation gv0 gv3)
+
+
+
+[FAIL][BEYOND SCOPE]
+Test = merge_priq_by_join_valid
+[TIME] 207.472
+[COUNTS] 22
+[TARGET] priqq n p -> priqq n q -> (c=Leaf \/ pow2heap n c) -> priqq n (join p q c)
+
+1. (priq p -> priq q -> priq (join p q Leaf))
+
+2. (merge p q = join p q Leaf)
+
+3. (priq p -> priq q -> priq (join q q gv1) -> priq (join p q gv1))
+
+4. (priq p -> priq q -> priq (join q p gv1) -> priq (join p q gv1))
+
+5. (priq p -> priq q -> priq (join p p gv1) -> priq (join p q gv1))
+
+
+
+[FAIL][BEYOND SCOPE]
+Test = delete_max_Some_priq_by_delete_max_aux_priq
+[TIME] 210.081
+[COUNTS] 4
+[TARGET] priqq n p -> delete_max_aux m p = (q,q') -> priqq n q /\ priq q'
+
+1. (delete_max_aux k p = (l, l0) -> gv0 = q -> priq gv0)
+
+2. (join l l0 gv1 = q -> delete_max_aux k p = (l, l0) -> priq (join l l0 gv1))
+
+3. (delete_max_aux k p = (l, l0) -> priq (join l l0 Leaf))
+
+4. (delete_max_aux k p = (l, l0) -> priq (merge l0 l))
+(priq (merge l0 l) -> priq (join l l0 Leaf))
+
+
+
+[SUCCESS][1][AS IS]
+Test = smash_valid_by_smash_valid_helper1
+[TIME] 39.51
+[COUNTS] 11
+[TARGET] (k >? k2) = true -> k >= k2
+
+1. ((n0 >? n1) = true -> n0 >= n1)
+
+2. ((n0 >? n1) = true -> n1 < n0)
+(n1 < n0 -> n0 >= n1)
+
+3. ((n0 >? n1) = true -> ~ n0 < n1)
+(~ n0 < n1 -> n0 >= n1)
+
+4. ((n0 >? n1) = true -> ~ n0 <= n1)
+(~ n0 <= n1 -> n0 >= n1)
+
+5. ((n0 >? n1) = true -> false = (n1 >=? n0))
+(false = (n1 >=? n0) -> n0 >= n1)
+
+
+
+[SUCCESS][3][AS IS]
+Test = tree_perm_by_Permutation_app
+[TIME] 234.156
+[COUNTS] 70
+[TARGET] Permutation l l' -> Permutation m m' -> Permutation (l++m) (l'++m')
+
+1. (Permutation br br0 ->  Permutation e2 (n :: gv1) ->  Permutation bl bl0 -> Permutation e1 (n :: gv0) -> Permutation gv0 gv1)
+
+2. (Permutation bl bl0 ->  Permutation br br0 -> Permutation (bl ++ br) (bl0 ++ br0))
+
+3. (Permutation br br0 -> Permutation (br0 ++ bl) (br ++ bl))
+(Permutation bl bl0 ->  Permutation (br0 ++ bl) (br ++ bl) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+4. (Permutation br br0 -> Permutation (bl ++ br0) (br ++ bl))
+(Permutation bl bl0 ->  Permutation (bl ++ br0) (br ++ bl) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+5. (Permutation br br0 -> Permutation (br ++ bl) (br0 ++ bl))
+(Permutation bl bl0 ->  Permutation (br ++ bl) (br0 ++ bl) -> Permutation (bl ++ br) (bl0 ++ br0))
+
+
+[**]
+[ATOMIC][USEFUL][MORE COMPLICATED][WEAKEN]
+Test = smash_elems_by_app_nil_r_2
+[TIME] 267.977
+[COUNTS] 68
+[TARGET] [ ] ++ l = l
+
+1. (Permutation bu (n1 :: bl0 ++ []) ->  Permutation bt (n0 :: bl ++ []) ->  Permutation (bt ++ bu) (n0 :: n1 :: bl0 ++ bl))
+
+2. (Permutation bt (n0 :: bl ++ []) -> Permutation (n0 :: bl) bt)
+(Permutation (n0 :: bl) bt ->  Permutation bu (n1 :: bl0 ++ []) ->  Permutation (bt ++ bu) (n0 :: n1 :: bl0 ++ bl))
+
+3. (Permutation bu (n1 :: bl0 ++ []) -> Permutation (n1 :: bl0) bu)
+(Permutation (n1 :: bl0) bu ->  Permutation bt (n0 :: bl ++ []) ->  Permutation (bt ++ bu) (n0 :: n1 :: bl0 ++ bl))
+
+4. (Permutation bt (n0 :: bl ++ []) -> Permutation bt (n0 :: bl))
+(Permutation bt (n0 :: bl) ->  Permutation bu (n1 :: bl0 ++ []) ->  Permutation (bt ++ bu) (n0 :: n1 :: bl0 ++ bl))
+
+5. (Permutation bu (n1 :: bl0 ++ []) -> Permutation bu (n1 :: bl0))
+(Permutation bu (n1 :: bl0) ->  Permutation bt (n0 :: bl ++ []) ->  Permutation (bt ++ bu) (n0 :: n1 :: bl0 ++ bl))
+
+
+
+
+[FAIL][BEYOND SCOPE][EXTRA VAR]
+Test = priqueue_perm_by_Permutation_trans_1
+[TIME] 135.956
+[COUNTS] 5
+[TARGET] Permutation l m -> Permutation m n-> Permutation l n
+
+1. (priqueue_elems (a :: p) elems1 ->  priqueue_elems (a :: p) elems2 -> Permutation elems1 elems2)
+
+2. (priqueue_elems (a :: p) elems2 -> Abs (carry p a) elems2)
+(Abs (carry p a) elems2 ->  priqueue_elems (a :: p) elems1 -> Permutation elems1 elems2)
+
+3. (priqueue_elems (a :: p) elems2 -> priqueue_elems (carry p a) elems2)
+(priqueue_elems (a :: p) elems1 ->  priqueue_elems (carry p a) elems2 -> Permutation elems1 elems2)
+
+4. (priqueue_elems (a :: p) elems1 -> Abs (carry p a) elems1)
+(Abs (carry p a) elems1 ->  priqueue_elems (a :: p) elems2 -> Permutation elems1 elems2)
+
+5. (priqueue_elems (a :: p) elems1 -> priqueue_elems (carry p a) elems1)
+(priqueue_elems (carry p a) elems1 ->  priqueue_elems (a :: p) elems2 -> Permutation elems1 elems2)
+
+
+
+[SUCCESS][1][AS IS]
+Test = abs_perm_by_priqueue_perm
+[TIME] 90.888
+[COUNTS] 5
+[TARGET] priqueue_elems p elems1 -> priqueue_elems p elems2 -> Permutation elems1 elems2
+
+1. (priqueue_elems p rest_elems0 ->  priqueue_elems p rest_elems -> Permutation rest_elems rest_elems0)
+
+2. (priqueue_elems p rest_elems -> Abs (p ++ p) (rest_elems ++ rest_elems))
+(Abs (p ++ p) (rest_elems ++ rest_elems) ->  priqueue_elems p rest_elems0 -> Permutation rest_elems rest_elems0)
+
+3. (priqueue_elems p rest_elems0 -> Abs (p ++ p) (rest_elems0 ++ rest_elems0))
+(Abs (p ++ p) (rest_elems0 ++ rest_elems0) ->  priqueue_elems p rest_elems -> Permutation rest_elems rest_elems0)
+
+4. (priqueue_elems p rest_elems ->  priqueue_elems (p ++ p) (rest_elems ++ rest_elems))
+(priqueue_elems p rest_elems0 ->  priqueue_elems (p ++ p) (rest_elems ++ rest_elems) ->  Permutation rest_elems rest_elems0)
+
+5. (priqueue_elems p rest_elems0 ->  priqueue_elems (p ++ p) (rest_elems0 ++ rest_elems0))
+(priqueue_elems p rest_elems ->  priqueue_elems (p ++ p) (rest_elems0 ++ rest_elems0) ->  Permutation rest_elems rest_elems0)
+
+
+
+[FAIL][FORWARD]
+Test = abs_perm_by_Permutation_trans_1
+[TIME] 301.66
+[COUNTS] 9
+[TARGET] Permutation l m -> Permutation m n-> Permutation l n
+
+1. (Permutation al (cons_elems ++ rest_elems) ->  priqueue_elems p rest_elems ->  tree_elems t cons_elems ->  tree_elems t cons_elems0 ->  Permutation bl (cons_elems0 ++ rest_elems0) ->  priqueue_elems p rest_elems0 -> Permutation al bl)
+
+2. (Permutation bl (cons_elems0 ++ rest_elems0) ->  Permutation (rest_elems0 ++ cons_elems0) bl)
+(Permutation (rest_elems0 ++ cons_elems0) bl ->  Permutation al (cons_elems ++ rest_elems) ->  priqueue_elems p rest_elems ->  priqueue_elems p rest_elems0 ->  tree_elems t cons_elems -> tree_elems t cons_elems0 -> Permutation al bl)
+
+3. (Permutation bl (cons_elems0 ++ rest_elems0) ->  Permutation bl (rest_elems0 ++ cons_elems0))
+(Permutation bl (rest_elems0 ++ cons_elems0) ->  Permutation al (cons_elems ++ rest_elems) ->  priqueue_elems p rest_elems ->  priqueue_elems p rest_elems0 ->  tree_elems t cons_elems -> tree_elems t cons_elems0 -> Permutation al bl)
+
+4. (Permutation al (cons_elems ++ rest_elems) ->  Permutation (rest_elems ++ cons_elems) al)
+(Permutation (rest_elems ++ cons_elems) al ->  Permutation bl (cons_elems0 ++ rest_elems0) ->  priqueue_elems p rest_elems ->  priqueue_elems p rest_elems0 ->  tree_elems t cons_elems -> tree_elems t cons_elems0 -> Permutation al bl)
+
+5. (Permutation al (cons_elems ++ rest_elems) ->  Permutation al (rest_elems ++ cons_elems))
+(Permutation al (rest_elems ++ cons_elems) ->  Permutation bl (cons_elems0 ++ rest_elems0) ->  priqueue_elems p rest_elems ->  priqueue_elems p rest_elems0 ->  tree_elems t cons_elems -> tree_elems t cons_elems0 -> Permutation al bl)
+
+
+
+[SUCCESS][5][INFER]
+Test = carry_valid_by_smash_valid
+[TIME] 1017.753
+[COUNTS] 73
+[TARGET] pow2heap n t -> pow2heap n u -> pow2heap (S n) (smash t u)
+
+1. (pow2heap n gv2 ->  priqq n (Node n0 a1 a2 :: q) -> pow2heap (S n) (smash gv2 (Node n0 a1 a2)))
+
+2. (priqq n (Node n0 a1 a2 :: q) ->  pow2heap n (Node n1 t1 t2) ->  pow2heap (S n) (smash (Node n1 t1 t2) (Node n0 a1 a2)))
+
+3. (priqq n (Node n0 a1 a2 :: q) -> pow2heap n (Node n0 a1 a2))
+(pow2heap n (Node n0 a1 a2) ->  pow2heap n (Node n1 t1 t2) ->  pow2heap (S n) (smash (Node n1 t1 t2) (Node n0 a1 a2)))
+
+4. (pow2heap n gv2 ->  pow2heap n gv3 -> priqq n (gv3 :: q) -> pow2heap (S n) (smash gv2 gv3))
+
+5. (pow2heap n gv2 ->  pow2heap (find_max' n q) gv3 ->  priqq n (gv3 :: q) -> pow2heap (S n) (smash gv2 gv3))
+
+
+
+[USEFUL][STEP IN RIGHT DIRECTION][INFER]
+Test = join_valid_by_smash_valid_1
+[TIME] 2227.162
+[COUNTS] 63
+[TARGET] pow2heap n t -> pow2heap n u -> pow2heap (S n) (smash t u)
+
+1. (priqq n (Node n1 t1 t2 :: q) ->  priqq n (Node n0 a1 a2 :: p) ->  pow2heap (S n) (smash (Node n0 a1 a2) (Node n1 t1 t2)))
+
+2. (priqq n (Node n0 a1 a2 :: p) -> pow2heap n (Node n0 a1 a2))
+(pow2heap n (Node n0 a1 a2) ->  priqq n (Node n1 t1 t2 :: q) ->  pow2heap (S n) (smash (Node n0 a1 a2) (Node n1 t1 t2)))
+
+3. (priqq n (Node n1 t1 t2 :: q) -> pow2heap n (Node n1 t1 t2))
+(pow2heap n (Node n1 t1 t2) ->  priqq n (Node n0 a1 a2 :: p) ->  pow2heap (S n) (smash (Node n0 a1 a2) (Node n1 t1 t2)))
+
+4. (pow2heap n gv3 ->  priqq n (Node n0 a1 a2 :: p) ->  priqq n (gv3 :: q) -> pow2heap (S n) (smash (Node n0 a1 a2) gv3))
+
+5. (pow2heap n gv2 ->  priqq n (gv2 :: p) ->  priqq n (Node n1 t1 t2 :: q) -> pow2heap (S n) (smash gv2 (Node n1 t1 t2)))
+
+
+
+[FAIL][BEYOND SCOPE][EXTRA VAR]
+Test = tree_perm_by_Permutation_trans_1
+[TIME] 112.754
+[COUNTS] 3
+[TARGET] Permutation l m -> Permutation m n-> Permutation l n
+
+1. (tree_elems (Node n t1 t2) e1 ->  tree_elems (Node n t1 t2) e2 -> Permutation e1 e2)
+
+2. (tree_elems (Node n t1 t2) e2 -> tree_elems (Node n t2 t1) e2)
+(tree_elems (Node n t1 t2) e1 ->  tree_elems (Node n t2 t1) e2 -> Permutation e1 e2)
+
+3. (tree_elems (Node n t1 t2) e1 -> tree_elems (Node n t2 t1) e1)
+(tree_elems (Node n t2 t1) e1 ->  tree_elems (Node n t1 t2) e2 -> Permutation e1 e2)
+
+
+[**]
+[ATOMIC][USEFUL][MORE COMPLICATED][WEAKEN]
+Test = smash_elems_by_app_nil_r_6
+[TIME] 427.859
+[COUNTS] 100
+[TARGET] [ ] ++ l = l
+
+1. (Permutation bu (n1 :: bl0 ++ []) ->  Permutation bt (n0 :: bl) -> Permutation (bt ++ bu) (n1 :: n0 :: bl ++ bl0))
+
+2. (Permutation bu (n1 :: bl0 ++ []) -> Permutation (n1 :: bl0) bu)
+(Permutation (n1 :: bl0) bu ->  Permutation bt (n0 :: bl) -> Permutation (bt ++ bu) (n1 :: n0 :: bl ++ bl0))
+
+3. (Permutation bu (n1 :: bl0 ++ []) -> Permutation bu (n1 :: bl0))
+(Permutation bt (n0 :: bl) ->  Permutation bu (n1 :: bl0) -> Permutation (bt ++ bu) (n1 :: n0 :: bl ++ bl0))
+
+4. (Permutation gv0 (gv2 ++ bu) ->  Permutation bu (n1 :: bl0 ++ []) -> Permutation gv0 (n1 :: gv2))
+
+5. (Permutation (bu ++ gv2) gv0 ->  Permutation bu (n1 :: bl0 ++ []) -> Permutation gv0 (n1 :: gv2))
+
+
+
+[SUCCESS][1][GENERALIZE]
+Test = priqueue_elems_ext_by_Permutation_trans
+[TIME] 113.162
+[COUNTS] 22
+[TARGET] Permutation l m -> Permutation m n-> Permutation l n
+
+1. (Permutation e1 e2 -> Permutation e1 gv0 -> Permutation e2 gv0)
+
+2. (Permutation e1 (cons_elems ++ rest_elems) ->  Permutation e1 e2 -> Permutation e2 (cons_elems ++ rest_elems))
+
+3. (Permutation e1 (cons_elems ++ rest_elems) ->  Permutation (rest_elems ++ cons_elems) e1)
+(Permutation (rest_elems ++ cons_elems) e1 ->  Permutation e1 e2 -> Permutation e2 (cons_elems ++ rest_elems))
+
+4. (Permutation e1 (cons_elems ++ rest_elems) ->  Permutation e1 (rest_elems ++ cons_elems))
+(Permutation e1 e2 ->  Permutation e1 (rest_elems ++ cons_elems) ->  Permutation e2 (cons_elems ++ rest_elems))
+
+5. (Permutation e1 e2 -> Permutation (e1 ++ cons_elems) (e2 ++ cons_elems))
+(Permutation (e1 ++ cons_elems) (e2 ++ cons_elems) ->  Permutation e1 (cons_elems ++ rest_elems) ->  Permutation e2 (cons_elems ++ rest_elems))
+
+
+[***]
+[ATOMIC][SUCCESS][3][INFER]
+Test = smash_elems_by_Permutation_app_comm_1
+[TIME] 200.637
+[COUNTS] 31
+[TARGET] Permutation (m ++ n) (n ++ m)
+
+1. (Permutation (bl ++ n1 :: bl0) (n1 :: bl0 ++ bl))
+
+2. (Permutation gv2 (gv1 ++ bl) -> Permutation (bl ++ gv1) gv2)
+
+3. (Permutation (gv1 ++ bl) gv2 -> Permutation (bl ++ gv1) gv2)
+
+4. (Permutation gv3 (bl0 ++ bl) -> Permutation (bl ++ n1 :: bl0) (n1 :: gv3))
+
+5. (Permutation gv3 (bl ++ bl0) -> Permutation (bl ++ n1 :: bl0) (n1 :: gv3))
+
+
+
+[FAIL][RESOURCE]
+Test = insert_priq_by_carry_valid_1
+[TIME] 1713.733
+[COUNTS] 104
+[TARGET] priqq n q -> forall t, (t=Leaf \/ pow2heap n t) -> priqq n (carry q t)
+
+1. (priqq 0 gv2 -> priqq 0 (carry gv2 (Node x Leaf Leaf)))
+
+2. (priqq 0 (gv3 :: q) -> priqq 0 (carry (gv3 :: q) (Node x Leaf Leaf)))
+
+3. (priqq 0 (Node n a1 a2 :: q) ->  priqq 0 (carry (Node n a1 a2 :: q) (Node x gv5 gv5)))
+
+4. ((priqq gv0 q -> priqq gv0 (carry q (Node x Leaf Leaf))) ->  priqq gv0 (Node n a1 a2 :: q) ->  priqq gv0 (carry (Node n a1 a2 :: q) (Node x Leaf Leaf)))
+
+5. ((priqq gv0 q -> priqq gv0 (carry q (Node x gv5 gv5))) ->  priqq gv0 (Node n a1 a2 :: q) ->  priqq gv0 (carry (Node n a1 a2 :: q) (Node x gv5 gv5)))
+
+
+
+
+[SUCCESS][1][AS IS]
+Test = smash_valid_by_smash_valid_helper2
+[TIME] 28.1
+[COUNTS] 3
+[TARGET] (k >? k2) = false -> k2 >= k
+
+1. ((n0 >? n1) = false -> n1 >= n0)
+
+2. ((n0 >? n1) = false -> ~ n1 < n0)
+(~ n1 < n0 -> n1 >= n0)
+
+3. ((n0 >? n1) = false -> true = (n1 >=? n0))
+(true = (n1 >=? n0) -> n1 >= n0)
+
+
+
+[USEFUL][STEP IN RIGHT DIRECTION][WEAKEN]
+Test = delete_max_aux_priq_by_unzip_preq
+[TIME] 166.705
+[COUNTS] 9
+[TARGET] pow2heapp n k t -> priqq n (f nil) -> priq (unzip t f)
+
+1. (priqq n (Node n0 a1 Leaf :: p) -> priq (unzip a1 (fun u : list tree => u)))
+
+2. (priqq n (Node n0 a1 Leaf :: p) -> pow2heapp n n0 a1)
+(pow2heapp n n0 a1 -> priq (unzip a1 (fun u : list tree => u)))
+
+3. (priqq n (Node n0 a1 Leaf :: p) -> pow2heapp n (find_max' n0 p) a1)
+(pow2heapp n (find_max' n0 p) a1 -> priq (unzip a1 (fun u : list tree => u)))
+
+4. (priqq n (Node n0 a1 Leaf :: p) ->  Permutation (merge gv0 p) (carry p a1) -> priq gv0)
+
+5. (priqq n (Node n0 a1 Leaf :: p) ->  Permutation (carry p a1) (merge p gv0) -> priq gv0)
+
+
+
+

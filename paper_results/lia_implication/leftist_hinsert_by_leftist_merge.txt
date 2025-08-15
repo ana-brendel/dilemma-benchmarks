@@ -1,0 +1,396 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (has_leftist_property x = true)
+
+----------------------------------
+Goal: (has_leftist_property (merge (Heap 1 n Hleaf Hleaf) x) = true)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 4.858 seconds
+
+gv6 : bool = true
+gv4 : nat = 0
+gv1 : heap = (merge (Heap 1 n Hleaf Hleaf) x)
+gv2 : heap = (Heap 1 n Hleaf Hleaf)
+gv5 : heap = Hleaf
+gv3 : nat = 1
+gv0 : bool = (has_leftist_property (merge (Heap 1 n Hleaf Hleaf) x))
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 74.223 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (has_leftist_property x = true)
+
+----------------------------------
+Goal: (has_leftist_property (merge (Heap 1 n Hleaf Hleaf) x) = true)
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (has_leftist_property x = true)
+ -- (1 = gv3)
+
+----------------------------------
+Goal: (has_leftist_property (merge (Heap gv3 n Hleaf Hleaf) x) = true)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (has_leftist_property x = true)
+ -- (has_leftist_property (merge (Heap 1 n Hleaf Hleaf) x) = gv0)
+
+----------------------------------
+Goal: (gv0 = true)
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (has_leftist_property x = true)
+ -- (Hleaf = gv5)
+
+----------------------------------
+Goal: (has_leftist_property (merge (Heap 1 n gv5 gv5) x) = true)
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (has_leftist_property x = true)
+ -- (Heap 1 n Hleaf Hleaf = gv2)
+
+----------------------------------
+Goal: (has_leftist_property (merge gv2 x) = true)
+Case: Invalid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (has_leftist_property x = gv6)
+ -- (true = gv6)
+
+----------------------------------
+Goal: (has_leftist_property (merge (Heap 1 n Hleaf Hleaf) x) = gv6)
+Case: Invalid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (has_leftist_property x = true)
+ -- (0 = gv4)
+
+----------------------------------
+Goal: (has_leftist_property (merge (Heap (S gv4) n Hleaf Hleaf) x) = true)
+Case: Invalid and Generalized
+
+Label: Generalization #7
+Assumptions: 
+ -- (has_leftist_property x = true)
+ -- (merge (Heap 1 n Hleaf Hleaf) x = gv1)
+
+----------------------------------
+Goal: (has_leftist_property gv1 = true)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 74.443 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+lst : Set
+lst_rect : (forall P : lst -> Type,
+ (forall (n : nat) (l : lst), P l -> P (Cons n l)) ->
+ P Nil -> forall l : lst, P l)
+lst_rec : (forall P : lst -> Set,
+ (forall (n : nat) (l : lst), P l -> P (Cons n l)) ->
+ P Nil -> forall l : lst, P l)
+heap : Set
+heap_rect : (forall P : heap -> Type,
+ P Hleaf ->
+ (forall (n n0 : nat) (h : heap),
+  P h -> forall h0 : heap, P h0 -> P (Heap n n0 h h0)) ->
+ forall h : heap, P h)
+heap_rec : (forall P : heap -> Set,
+ P Hleaf ->
+ (forall (n n0 : nat) (h : heap),
+  P h -> forall h0 : heap, P h0 -> P (Heap n n0 h h0)) ->
+ forall h : heap, P h)
+right_height : (heap -> nat)
+rank : (heap -> nat)
+has_leftist_property : (heap -> bool)
+hsize : (heap -> nat)
+mergea : (nat -> heap -> heap -> heap)
+merge : (heap -> heap -> heap)
+hinsert : (heap -> nat -> heap)
+hinsert_all : (lst -> heap -> heap)
+Cons : (nat -> lst -> lst)
+Nil : lst
+Hleaf : heap
+Heap : (nat -> nat -> heap -> heap -> heap)
+show_lst : (Show.Show lst)
+show_heap : (Show.Show heap)
+
+Label: 0 (0)
+Abducted Assumption: (has_leftist_property x = true)
+Positive Examples: 58
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 116
+Negative Examples: 81
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 82
+Negative Examples: 45
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 240
+Negative Examples: 500
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 211
+Negative Examples: 500
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 85
+Negative Examples: 183
+
+Label: 6 (6)
+Inferring Condition About Generalization
+Positive Examples: 101
+Negative Examples: 82
+
+Label: 7 (7)
+Inferring Condition About Generalization
+Positive Examples: 209
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 74.656 seconds
+
+
+Label: 0 (0)
+(n < n), (n <= n), (x = x), (n = n), (false = has_leftist_property x), (true = has_leftist_property x), (n < hsize x), (n < rank x), (n < right_height x), (hsize x < n)
+(hsize x < rank x), (hsize x < right_height x), (rank x < n), (rank x < hsize x), (rank x < right_height x), (right_height x < n), (right_height x < hsize x), (right_height x < rank x), (n <= hsize x), (n <= rank x)
+(n <= right_height x), (hsize x <= n), (hsize x <= rank x), (hsize x <= right_height x), (rank x <= n), (rank x <= hsize x), (rank x <= right_height x), (right_height x <= n), (right_height x <= hsize x), (right_height x <= rank x)
+(~ n < n), (~ n <= n), (x <> x), (n <> n), (None = Some x), (Heap n n x x = x), (Heap n n x x = hinsert x n), (Heap n n x x = merge x x), (Heap n n x x = mergea n x x), (hinsert x n = x)
+(merge x x = x), (merge x x = hinsert x n), (mergea n x x = x), (mergea n x x = hinsert x n), (mergea n x x = merge x x), (Hleaf = Heap n n x x), (Hleaf = hinsert x n), (Hleaf = merge x x), (Hleaf = mergea n x x), (hsize x = n)
+(rank x = n), (rank x = hsize x), (right_height x = n), (right_height x = hsize x), (right_height x = rank x), (None = Some n)
+
+Label: 1 (1)
+(n < n), (n < gv3), (gv3 < n), (gv3 < gv3), (n <= n), (n <= gv3), (gv3 <= n), (gv3 <= gv3), (x = x), (n = n)
+(n = gv3), (gv3 = n), (gv3 = gv3), (false = has_leftist_property x), (true = has_leftist_property x), (n < hsize x), (n < rank x), (n < right_height x), (gv3 < hsize x), (gv3 < rank x)
+(gv3 < right_height x), (hsize x < n), (hsize x < gv3), (hsize x < rank x), (hsize x < right_height x), (rank x < n), (rank x < gv3), (rank x < hsize x), (rank x < right_height x), (right_height x < n)
+(right_height x < gv3), (right_height x < hsize x), (right_height x < rank x), (n <= hsize x), (n <= rank x), (n <= right_height x), (gv3 <= hsize x), (gv3 <= rank x), (gv3 <= right_height x), (hsize x <= n)
+(hsize x <= gv3), (hsize x <= rank x), (hsize x <= right_height x), (rank x <= n), (rank x <= gv3), (rank x <= hsize x), (rank x <= right_height x), (right_height x <= n), (right_height x <= gv3), (right_height x <= hsize x)
+(right_height x <= rank x), (~ n < n), (~ n < gv3), (~ gv3 < n), (~ gv3 < gv3), (~ n <= n), (~ n <= gv3), (~ gv3 <= n), (~ gv3 <= gv3), (x <> x)
+(n <> n), (n <> gv3), (gv3 <> n), (gv3 <> gv3), (None = Some x), (Heap n n x x = x), (Heap n n x x = hinsert x n), (Heap n n x x = hinsert x gv3), (Heap n n x x = merge x x), (Heap n n x x = mergea n x x)
+(Heap n n x x = mergea gv3 x x), (Heap n gv3 x x = x), (Heap n gv3 x x = hinsert x n), (Heap n gv3 x x = hinsert x gv3), (Heap n gv3 x x = merge x x), (Heap n gv3 x x = mergea n x x), (Heap n gv3 x x = mergea gv3 x x), (Heap gv3 n x x = x), (Heap gv3 n x x = hinsert x n), (Heap gv3 n x x = hinsert x gv3)
+(Heap gv3 n x x = merge x x), (Heap gv3 n x x = mergea n x x), (Heap gv3 n x x = mergea gv3 x x), (Heap gv3 gv3 x x = x), (Heap gv3 gv3 x x = hinsert x n), (Heap gv3 gv3 x x = hinsert x gv3), (Heap gv3 gv3 x x = merge x x), (Heap gv3 gv3 x x = mergea n x x), (Heap gv3 gv3 x x = mergea gv3 x x), (hinsert x n = x)
+(hinsert x gv3 = x), (merge x x = x), (merge x x = hinsert x n), (merge x x = hinsert x gv3), (mergea n x x = x), (mergea n x x = hinsert x n), (mergea n x x = hinsert x gv3), (mergea n x x = merge x x), (mergea gv3 x x = x), (mergea gv3 x x = hinsert x n)
+(mergea gv3 x x = hinsert x gv3), (mergea gv3 x x = merge x x), (Hleaf = Heap n n x x), (Hleaf = Heap n gv3 x x), (Hleaf = Heap gv3 n x x), (Hleaf = Heap gv3 gv3 x x), (Hleaf = hinsert x n), (Hleaf = hinsert x gv3), (Hleaf = merge x x), (Hleaf = mergea n x x)
+(Hleaf = mergea gv3 x x), (hsize x = n), (hsize x = gv3), (rank x = n), (rank x = gv3), (rank x = hsize x), (right_height x = n), (right_height x = gv3), (right_height x = hsize x), (right_height x = rank x)
+(None = Some n), (None = Some gv3)
+
+Label: 2 (2)
+(false = gv0), (true = gv0), (n < n), (n <= n), (x = x), (n = n), (gv0 = gv0), (false = has_leftist_property x), (true = has_leftist_property x), (n < hsize x)
+(n < rank x), (n < right_height x), (hsize x < n), (hsize x < rank x), (hsize x < right_height x), (rank x < n), (rank x < hsize x), (rank x < right_height x), (right_height x < n), (right_height x < hsize x)
+(right_height x < rank x), (n <= hsize x), (n <= rank x), (n <= right_height x), (hsize x <= n), (hsize x <= rank x), (hsize x <= right_height x), (rank x <= n), (rank x <= hsize x), (rank x <= right_height x)
+(right_height x <= n), (right_height x <= hsize x), (right_height x <= rank x), (false <> gv0), (true <> gv0), (~ n < n), (~ n <= n), (x <> x), (n <> n), (gv0 <> gv0)
+(None = Some x), (Heap n n x x = x), (Heap n n x x = hinsert x n), (Heap n n x x = merge x x), (Heap n n x x = mergea n x x), (hinsert x n = x), (merge x x = x), (merge x x = hinsert x n), (mergea n x x = x), (mergea n x x = hinsert x n)
+(mergea n x x = merge x x), (Hleaf = Heap n n x x), (Hleaf = hinsert x n), (Hleaf = merge x x), (Hleaf = mergea n x x), (hsize x = n), (rank x = n), (rank x = hsize x), (right_height x = n), (right_height x = hsize x)
+(right_height x = rank x), (None = Some gv0), (None = Some n), (has_leftist_property x = gv0)
+
+Label: 3 (3)
+(n < n), (n <= n), (x = x), (x = gv5), (gv5 = x), (gv5 = gv5), (n = n), (false = has_leftist_property x), (false = has_leftist_property gv5), (true = has_leftist_property x)
+(true = has_leftist_property gv5), (n < hsize x), (n < hsize gv5), (n < rank x), (n < rank gv5), (n < right_height x), (n < right_height gv5), (hsize x < n), (hsize x < hsize gv5), (hsize x < rank x)
+(hsize x < rank gv5), (hsize x < right_height x), (hsize x < right_height gv5), (hsize gv5 < n), (hsize gv5 < hsize x), (hsize gv5 < rank x), (hsize gv5 < rank gv5), (hsize gv5 < right_height x), (hsize gv5 < right_height gv5), (rank x < n)
+(rank x < hsize x), (rank x < hsize gv5), (rank x < rank gv5), (rank x < right_height x), (rank x < right_height gv5), (rank gv5 < n), (rank gv5 < hsize x), (rank gv5 < hsize gv5), (rank gv5 < rank x), (rank gv5 < right_height x)
+(rank gv5 < right_height gv5), (right_height x < n), (right_height x < hsize x), (right_height x < hsize gv5), (right_height x < rank x), (right_height x < rank gv5), (right_height x < right_height gv5), (right_height gv5 < n), (right_height gv5 < hsize x), (right_height gv5 < hsize gv5)
+(right_height gv5 < rank x), (right_height gv5 < rank gv5), (right_height gv5 < right_height x), (n <= hsize x), (n <= hsize gv5), (n <= rank x), (n <= rank gv5), (n <= right_height x), (n <= right_height gv5), (hsize x <= n)
+(hsize x <= hsize gv5), (hsize x <= rank x), (hsize x <= rank gv5), (hsize x <= right_height x), (hsize x <= right_height gv5), (hsize gv5 <= n), (hsize gv5 <= hsize x), (hsize gv5 <= rank x), (hsize gv5 <= rank gv5), (hsize gv5 <= right_height x)
+(hsize gv5 <= right_height gv5), (rank x <= n), (rank x <= hsize x), (rank x <= hsize gv5), (rank x <= rank gv5), (rank x <= right_height x), (rank x <= right_height gv5), (rank gv5 <= n), (rank gv5 <= hsize x), (rank gv5 <= hsize gv5)
+(rank gv5 <= rank x), (rank gv5 <= right_height x), (rank gv5 <= right_height gv5), (right_height x <= n), (right_height x <= hsize x), (right_height x <= hsize gv5), (right_height x <= rank x), (right_height x <= rank gv5), (right_height x <= right_height gv5), (right_height gv5 <= n)
+(right_height gv5 <= hsize x), (right_height gv5 <= hsize gv5), (right_height gv5 <= rank x), (right_height gv5 <= rank gv5), (right_height gv5 <= right_height x), (~ n < n), (~ n <= n), (x <> x), (x <> gv5), (gv5 <> x)
+(gv5 <> gv5), (n <> n), (None = Some x), (None = Some gv5), (Heap n n x x = x), (Heap n n x x = gv5), (Heap n n x x = hinsert x n), (Heap n n x x = hinsert gv5 n), (Heap n n x x = merge x x), (Heap n n x x = merge x gv5)
+(Heap n n x x = merge gv5 x), (Heap n n x x = merge gv5 gv5), (Heap n n x x = mergea n x x), (Heap n n x x = mergea n x gv5), (Heap n n x x = mergea n gv5 x), (Heap n n x x = mergea n gv5 gv5), (Heap n n x gv5 = x), (Heap n n x gv5 = gv5), (Heap n n x gv5 = hinsert x n), (Heap n n x gv5 = hinsert gv5 n)
+(Heap n n x gv5 = merge x x), (Heap n n x gv5 = merge x gv5), (Heap n n x gv5 = merge gv5 x), (Heap n n x gv5 = merge gv5 gv5), (Heap n n x gv5 = mergea n x x), (Heap n n x gv5 = mergea n x gv5), (Heap n n x gv5 = mergea n gv5 x), (Heap n n x gv5 = mergea n gv5 gv5), (Heap n n gv5 x = x), (Heap n n gv5 x = gv5)
+(Heap n n gv5 x = hinsert x n), (Heap n n gv5 x = hinsert gv5 n), (Heap n n gv5 x = merge x x), (Heap n n gv5 x = merge x gv5), (Heap n n gv5 x = merge gv5 x), (Heap n n gv5 x = merge gv5 gv5), (Heap n n gv5 x = mergea n x x), (Heap n n gv5 x = mergea n x gv5), (Heap n n gv5 x = mergea n gv5 x), (Heap n n gv5 x = mergea n gv5 gv5)
+(Heap n n gv5 gv5 = x), (Heap n n gv5 gv5 = gv5), (Heap n n gv5 gv5 = hinsert x n), (Heap n n gv5 gv5 = hinsert gv5 n), (Heap n n gv5 gv5 = merge x x), (Heap n n gv5 gv5 = merge x gv5), (Heap n n gv5 gv5 = merge gv5 x), (Heap n n gv5 gv5 = merge gv5 gv5), (Heap n n gv5 gv5 = mergea n x x), (Heap n n gv5 gv5 = mergea n x gv5)
+(Heap n n gv5 gv5 = mergea n gv5 x), (Heap n n gv5 gv5 = mergea n gv5 gv5), (hinsert x n = x), (hinsert x n = gv5), (hinsert gv5 n = x), (hinsert gv5 n = gv5), (merge x x = x), (merge x x = gv5), (merge x x = hinsert x n), (merge x x = hinsert gv5 n)
+(merge x gv5 = x), (merge x gv5 = gv5), (merge x gv5 = hinsert x n), (merge x gv5 = hinsert gv5 n), (merge gv5 x = x), (merge gv5 x = gv5), (merge gv5 x = hinsert x n), (merge gv5 x = hinsert gv5 n), (merge gv5 gv5 = x), (merge gv5 gv5 = gv5)
+(merge gv5 gv5 = hinsert x n), (merge gv5 gv5 = hinsert gv5 n), (mergea n x x = x), (mergea n x x = gv5), (mergea n x x = hinsert x n), (mergea n x x = hinsert gv5 n), (mergea n x x = merge x x), (mergea n x x = merge x gv5), (mergea n x x = merge gv5 x), (mergea n x x = merge gv5 gv5)
+(mergea n x gv5 = x), (mergea n x gv5 = gv5), (mergea n x gv5 = hinsert x n), (mergea n x gv5 = hinsert gv5 n), (mergea n x gv5 = merge x x), (mergea n x gv5 = merge x gv5), (mergea n x gv5 = merge gv5 x), (mergea n x gv5 = merge gv5 gv5), (mergea n gv5 x = x), (mergea n gv5 x = gv5)
+(mergea n gv5 x = hinsert x n), (mergea n gv5 x = hinsert gv5 n), (mergea n gv5 x = merge x x), (mergea n gv5 x = merge x gv5), (mergea n gv5 x = merge gv5 x), (mergea n gv5 x = merge gv5 gv5), (mergea n gv5 gv5 = x), (mergea n gv5 gv5 = gv5), (mergea n gv5 gv5 = hinsert x n), (mergea n gv5 gv5 = hinsert gv5 n)
+(mergea n gv5 gv5 = merge x x), (mergea n gv5 gv5 = merge x gv5), (mergea n gv5 gv5 = merge gv5 x), (mergea n gv5 gv5 = merge gv5 gv5), (Hleaf = Heap n n x x), (Hleaf = Heap n n x gv5), (Hleaf = Heap n n gv5 x), (Hleaf = Heap n n gv5 gv5), (Hleaf = hinsert x n), (Hleaf = hinsert gv5 n)
+(Hleaf = merge x x), (Hleaf = merge x gv5), (Hleaf = merge gv5 x), (Hleaf = merge gv5 gv5), (Hleaf = mergea n x x), (Hleaf = mergea n x gv5), (Hleaf = mergea n gv5 x), (Hleaf = mergea n gv5 gv5), (hsize x = n), (hsize gv5 = n)
+(rank x = n), (rank x = hsize x), (rank x = hsize gv5), (rank gv5 = n), (rank gv5 = hsize x), (rank gv5 = hsize gv5), (right_height x = n), (right_height x = hsize x), (right_height x = hsize gv5), (right_height x = rank x)
+(right_height x = rank gv5), (right_height gv5 = n), (right_height gv5 = hsize x), (right_height gv5 = hsize gv5), (right_height gv5 = rank x), (right_height gv5 = rank gv5), (None = Some n)
+
+Label: 4 (4)
+(n < n), (n <= n), (n = n), (x = x), (x = gv2), (gv2 = x), (gv2 = gv2), (false = has_leftist_property x), (false = has_leftist_property gv2), (true = has_leftist_property x)
+(true = has_leftist_property gv2), (n < hsize x), (n < hsize gv2), (n < rank x), (n < rank gv2), (n < right_height x), (n < right_height gv2), (hsize x < n), (hsize x < hsize gv2), (hsize x < rank x)
+(hsize x < rank gv2), (hsize x < right_height x), (hsize x < right_height gv2), (hsize gv2 < n), (hsize gv2 < hsize x), (hsize gv2 < rank x), (hsize gv2 < rank gv2), (hsize gv2 < right_height x), (hsize gv2 < right_height gv2), (rank x < n)
+(rank x < hsize x), (rank x < hsize gv2), (rank x < rank gv2), (rank x < right_height x), (rank x < right_height gv2), (rank gv2 < n), (rank gv2 < hsize x), (rank gv2 < hsize gv2), (rank gv2 < rank x), (rank gv2 < right_height x)
+(rank gv2 < right_height gv2), (right_height x < n), (right_height x < hsize x), (right_height x < hsize gv2), (right_height x < rank x), (right_height x < rank gv2), (right_height x < right_height gv2), (right_height gv2 < n), (right_height gv2 < hsize x), (right_height gv2 < hsize gv2)
+(right_height gv2 < rank x), (right_height gv2 < rank gv2), (right_height gv2 < right_height x), (n <= hsize x), (n <= hsize gv2), (n <= rank x), (n <= rank gv2), (n <= right_height x), (n <= right_height gv2), (hsize x <= n)
+(hsize x <= hsize gv2), (hsize x <= rank x), (hsize x <= rank gv2), (hsize x <= right_height x), (hsize x <= right_height gv2), (hsize gv2 <= n), (hsize gv2 <= hsize x), (hsize gv2 <= rank x), (hsize gv2 <= rank gv2), (hsize gv2 <= right_height x)
+(hsize gv2 <= right_height gv2), (rank x <= n), (rank x <= hsize x), (rank x <= hsize gv2), (rank x <= rank gv2), (rank x <= right_height x), (rank x <= right_height gv2), (rank gv2 <= n), (rank gv2 <= hsize x), (rank gv2 <= hsize gv2)
+(rank gv2 <= rank x), (rank gv2 <= right_height x), (rank gv2 <= right_height gv2), (right_height x <= n), (right_height x <= hsize x), (right_height x <= hsize gv2), (right_height x <= rank x), (right_height x <= rank gv2), (right_height x <= right_height gv2), (right_height gv2 <= n)
+(right_height gv2 <= hsize x), (right_height gv2 <= hsize gv2), (right_height gv2 <= rank x), (right_height gv2 <= rank gv2), (right_height gv2 <= right_height x), (~ n < n), (~ n <= n), (n <> n), (x <> x), (x <> gv2)
+(gv2 <> x), (gv2 <> gv2), (None = Some x), (None = Some gv2), (Heap n n x x = x), (Heap n n x x = gv2), (Heap n n x x = hinsert x n), (Heap n n x x = hinsert gv2 n), (Heap n n x x = merge x x), (Heap n n x x = merge x gv2)
+(Heap n n x x = merge gv2 x), (Heap n n x x = merge gv2 gv2), (Heap n n x x = mergea n x x), (Heap n n x x = mergea n x gv2), (Heap n n x x = mergea n gv2 x), (Heap n n x x = mergea n gv2 gv2), (Heap n n x gv2 = x), (Heap n n x gv2 = gv2), (Heap n n x gv2 = hinsert x n), (Heap n n x gv2 = hinsert gv2 n)
+(Heap n n x gv2 = merge x x), (Heap n n x gv2 = merge x gv2), (Heap n n x gv2 = merge gv2 x), (Heap n n x gv2 = merge gv2 gv2), (Heap n n x gv2 = mergea n x x), (Heap n n x gv2 = mergea n x gv2), (Heap n n x gv2 = mergea n gv2 x), (Heap n n x gv2 = mergea n gv2 gv2), (Heap n n gv2 x = x), (Heap n n gv2 x = gv2)
+(Heap n n gv2 x = hinsert x n), (Heap n n gv2 x = hinsert gv2 n), (Heap n n gv2 x = merge x x), (Heap n n gv2 x = merge x gv2), (Heap n n gv2 x = merge gv2 x), (Heap n n gv2 x = merge gv2 gv2), (Heap n n gv2 x = mergea n x x), (Heap n n gv2 x = mergea n x gv2), (Heap n n gv2 x = mergea n gv2 x), (Heap n n gv2 x = mergea n gv2 gv2)
+(Heap n n gv2 gv2 = x), (Heap n n gv2 gv2 = gv2), (Heap n n gv2 gv2 = hinsert x n), (Heap n n gv2 gv2 = hinsert gv2 n), (Heap n n gv2 gv2 = merge x x), (Heap n n gv2 gv2 = merge x gv2), (Heap n n gv2 gv2 = merge gv2 x), (Heap n n gv2 gv2 = merge gv2 gv2), (Heap n n gv2 gv2 = mergea n x x), (Heap n n gv2 gv2 = mergea n x gv2)
+(Heap n n gv2 gv2 = mergea n gv2 x), (Heap n n gv2 gv2 = mergea n gv2 gv2), (hinsert x n = x), (hinsert x n = gv2), (hinsert gv2 n = x), (hinsert gv2 n = gv2), (merge x x = x), (merge x x = gv2), (merge x x = hinsert x n), (merge x x = hinsert gv2 n)
+(merge x gv2 = x), (merge x gv2 = gv2), (merge x gv2 = hinsert x n), (merge x gv2 = hinsert gv2 n), (merge gv2 x = x), (merge gv2 x = gv2), (merge gv2 x = hinsert x n), (merge gv2 x = hinsert gv2 n), (merge gv2 gv2 = x), (merge gv2 gv2 = gv2)
+(merge gv2 gv2 = hinsert x n), (merge gv2 gv2 = hinsert gv2 n), (mergea n x x = x), (mergea n x x = gv2), (mergea n x x = hinsert x n), (mergea n x x = hinsert gv2 n), (mergea n x x = merge x x), (mergea n x x = merge x gv2), (mergea n x x = merge gv2 x), (mergea n x x = merge gv2 gv2)
+(mergea n x gv2 = x), (mergea n x gv2 = gv2), (mergea n x gv2 = hinsert x n), (mergea n x gv2 = hinsert gv2 n), (mergea n x gv2 = merge x x), (mergea n x gv2 = merge x gv2), (mergea n x gv2 = merge gv2 x), (mergea n x gv2 = merge gv2 gv2), (mergea n gv2 x = x), (mergea n gv2 x = gv2)
+(mergea n gv2 x = hinsert x n), (mergea n gv2 x = hinsert gv2 n), (mergea n gv2 x = merge x x), (mergea n gv2 x = merge x gv2), (mergea n gv2 x = merge gv2 x), (mergea n gv2 x = merge gv2 gv2), (mergea n gv2 gv2 = x), (mergea n gv2 gv2 = gv2), (mergea n gv2 gv2 = hinsert x n), (mergea n gv2 gv2 = hinsert gv2 n)
+(mergea n gv2 gv2 = merge x x), (mergea n gv2 gv2 = merge x gv2), (mergea n gv2 gv2 = merge gv2 x), (mergea n gv2 gv2 = merge gv2 gv2), (Hleaf = Heap n n x x), (Hleaf = Heap n n x gv2), (Hleaf = Heap n n gv2 x), (Hleaf = Heap n n gv2 gv2), (Hleaf = hinsert x n), (Hleaf = hinsert gv2 n)
+(Hleaf = merge x x), (Hleaf = merge x gv2), (Hleaf = merge gv2 x), (Hleaf = merge gv2 gv2), (Hleaf = mergea n x x), (Hleaf = mergea n x gv2), (Hleaf = mergea n gv2 x), (Hleaf = mergea n gv2 gv2), (hsize x = n), (hsize gv2 = n)
+(rank x = n), (rank x = hsize x), (rank x = hsize gv2), (rank gv2 = n), (rank gv2 = hsize x), (rank gv2 = hsize gv2), (right_height x = n), (right_height x = hsize x), (right_height x = hsize gv2), (right_height x = rank x)
+(right_height x = rank gv2), (right_height gv2 = n), (right_height gv2 = hsize x), (right_height gv2 = hsize gv2), (right_height gv2 = rank x), (right_height gv2 = rank gv2), (None = Some n)
+
+Label: 5 (5)
+(false = gv6), (true = gv6), (n < n), (n <= n), (gv6 = gv6), (x = x), (n = n), (false = has_leftist_property x), (true = has_leftist_property x), (n < hsize x)
+(n < rank x), (n < right_height x), (hsize x < n), (hsize x < rank x), (hsize x < right_height x), (rank x < n), (rank x < hsize x), (rank x < right_height x), (right_height x < n), (right_height x < hsize x)
+(right_height x < rank x), (n <= hsize x), (n <= rank x), (n <= right_height x), (hsize x <= n), (hsize x <= rank x), (hsize x <= right_height x), (rank x <= n), (rank x <= hsize x), (rank x <= right_height x)
+(right_height x <= n), (right_height x <= hsize x), (right_height x <= rank x), (false <> gv6), (true <> gv6), (~ n < n), (~ n <= n), (gv6 <> gv6), (x <> x), (n <> n)
+(None = Some x), (Heap n n x x = x), (Heap n n x x = hinsert x n), (Heap n n x x = merge x x), (Heap n n x x = mergea n x x), (hinsert x n = x), (merge x x = x), (merge x x = hinsert x n), (mergea n x x = x), (mergea n x x = hinsert x n)
+(mergea n x x = merge x x), (Hleaf = Heap n n x x), (Hleaf = hinsert x n), (Hleaf = merge x x), (Hleaf = mergea n x x), (hsize x = n), (rank x = n), (rank x = hsize x), (right_height x = n), (right_height x = hsize x)
+(right_height x = rank x), (None = Some gv6), (None = Some n), (has_leftist_property x = gv6)
+
+Label: 6 (6)
+(n < n), (n < gv4), (gv4 < n), (gv4 < gv4), (n <= n), (n <= gv4), (gv4 <= n), (gv4 <= gv4), (x = x), (n = n)
+(n = gv4), (gv4 = n), (gv4 = gv4), (false = has_leftist_property x), (true = has_leftist_property x), (n < hsize x), (n < rank x), (n < right_height x), (gv4 < hsize x), (gv4 < rank x)
+(gv4 < right_height x), (hsize x < n), (hsize x < gv4), (hsize x < rank x), (hsize x < right_height x), (rank x < n), (rank x < gv4), (rank x < hsize x), (rank x < right_height x), (right_height x < n)
+(right_height x < gv4), (right_height x < hsize x), (right_height x < rank x), (n <= hsize x), (n <= rank x), (n <= right_height x), (gv4 <= hsize x), (gv4 <= rank x), (gv4 <= right_height x), (hsize x <= n)
+(hsize x <= gv4), (hsize x <= rank x), (hsize x <= right_height x), (rank x <= n), (rank x <= gv4), (rank x <= hsize x), (rank x <= right_height x), (right_height x <= n), (right_height x <= gv4), (right_height x <= hsize x)
+(right_height x <= rank x), (~ n < n), (~ n < gv4), (~ gv4 < n), (~ gv4 < gv4), (~ n <= n), (~ n <= gv4), (~ gv4 <= n), (~ gv4 <= gv4), (x <> x)
+(n <> n), (n <> gv4), (gv4 <> n), (gv4 <> gv4), (None = Some x), (Heap n n x x = x), (Heap n n x x = hinsert x n), (Heap n n x x = hinsert x gv4), (Heap n n x x = merge x x), (Heap n n x x = mergea n x x)
+(Heap n n x x = mergea gv4 x x), (Heap n gv4 x x = x), (Heap n gv4 x x = hinsert x n), (Heap n gv4 x x = hinsert x gv4), (Heap n gv4 x x = merge x x), (Heap n gv4 x x = mergea n x x), (Heap n gv4 x x = mergea gv4 x x), (Heap gv4 n x x = x), (Heap gv4 n x x = hinsert x n), (Heap gv4 n x x = hinsert x gv4)
+(Heap gv4 n x x = merge x x), (Heap gv4 n x x = mergea n x x), (Heap gv4 n x x = mergea gv4 x x), (Heap gv4 gv4 x x = x), (Heap gv4 gv4 x x = hinsert x n), (Heap gv4 gv4 x x = hinsert x gv4), (Heap gv4 gv4 x x = merge x x), (Heap gv4 gv4 x x = mergea n x x), (Heap gv4 gv4 x x = mergea gv4 x x), (hinsert x n = x)
+(hinsert x gv4 = x), (merge x x = x), (merge x x = hinsert x n), (merge x x = hinsert x gv4), (mergea n x x = x), (mergea n x x = hinsert x n), (mergea n x x = hinsert x gv4), (mergea n x x = merge x x), (mergea gv4 x x = x), (mergea gv4 x x = hinsert x n)
+(mergea gv4 x x = hinsert x gv4), (mergea gv4 x x = merge x x), (Hleaf = Heap n n x x), (Hleaf = Heap n gv4 x x), (Hleaf = Heap gv4 n x x), (Hleaf = Heap gv4 gv4 x x), (Hleaf = hinsert x n), (Hleaf = hinsert x gv4), (Hleaf = merge x x), (Hleaf = mergea n x x)
+(Hleaf = mergea gv4 x x), (hsize x = n), (hsize x = gv4), (rank x = n), (rank x = gv4), (rank x = hsize x), (right_height x = n), (right_height x = gv4), (right_height x = hsize x), (right_height x = rank x)
+(None = Some n), (None = Some gv4)
+
+Label: 7 (7)
+(n < n), (n <= n), (n = n), (x = x), (x = gv1), (gv1 = x), (gv1 = gv1), (false = has_leftist_property x), (false = has_leftist_property gv1), (true = has_leftist_property x)
+(true = has_leftist_property gv1), (n < hsize x), (n < hsize gv1), (n < rank x), (n < rank gv1), (n < right_height x), (n < right_height gv1), (hsize x < n), (hsize x < hsize gv1), (hsize x < rank x)
+(hsize x < rank gv1), (hsize x < right_height x), (hsize x < right_height gv1), (hsize gv1 < n), (hsize gv1 < hsize x), (hsize gv1 < rank x), (hsize gv1 < rank gv1), (hsize gv1 < right_height x), (hsize gv1 < right_height gv1), (rank x < n)
+(rank x < hsize x), (rank x < hsize gv1), (rank x < rank gv1), (rank x < right_height x), (rank x < right_height gv1), (rank gv1 < n), (rank gv1 < hsize x), (rank gv1 < hsize gv1), (rank gv1 < rank x), (rank gv1 < right_height x)
+(rank gv1 < right_height gv1), (right_height x < n), (right_height x < hsize x), (right_height x < hsize gv1), (right_height x < rank x), (right_height x < rank gv1), (right_height x < right_height gv1), (right_height gv1 < n), (right_height gv1 < hsize x), (right_height gv1 < hsize gv1)
+(right_height gv1 < rank x), (right_height gv1 < rank gv1), (right_height gv1 < right_height x), (n <= hsize x), (n <= hsize gv1), (n <= rank x), (n <= rank gv1), (n <= right_height x), (n <= right_height gv1), (hsize x <= n)
+(hsize x <= hsize gv1), (hsize x <= rank x), (hsize x <= rank gv1), (hsize x <= right_height x), (hsize x <= right_height gv1), (hsize gv1 <= n), (hsize gv1 <= hsize x), (hsize gv1 <= rank x), (hsize gv1 <= rank gv1), (hsize gv1 <= right_height x)
+(hsize gv1 <= right_height gv1), (rank x <= n), (rank x <= hsize x), (rank x <= hsize gv1), (rank x <= rank gv1), (rank x <= right_height x), (rank x <= right_height gv1), (rank gv1 <= n), (rank gv1 <= hsize x), (rank gv1 <= hsize gv1)
+(rank gv1 <= rank x), (rank gv1 <= right_height x), (rank gv1 <= right_height gv1), (right_height x <= n), (right_height x <= hsize x), (right_height x <= hsize gv1), (right_height x <= rank x), (right_height x <= rank gv1), (right_height x <= right_height gv1), (right_height gv1 <= n)
+(right_height gv1 <= hsize x), (right_height gv1 <= hsize gv1), (right_height gv1 <= rank x), (right_height gv1 <= rank gv1), (right_height gv1 <= right_height x), (~ n < n), (~ n <= n), (n <> n), (x <> x), (x <> gv1)
+(gv1 <> x), (gv1 <> gv1), (None = Some x), (None = Some gv1), (Heap n n x x = x), (Heap n n x x = gv1), (Heap n n x x = hinsert x n), (Heap n n x x = hinsert gv1 n), (Heap n n x x = merge x x), (Heap n n x x = merge x gv1)
+(Heap n n x x = merge gv1 x), (Heap n n x x = merge gv1 gv1), (Heap n n x x = mergea n x x), (Heap n n x x = mergea n x gv1), (Heap n n x x = mergea n gv1 x), (Heap n n x x = mergea n gv1 gv1), (Heap n n x gv1 = x), (Heap n n x gv1 = gv1), (Heap n n x gv1 = hinsert x n), (Heap n n x gv1 = hinsert gv1 n)
+(Heap n n x gv1 = merge x x), (Heap n n x gv1 = merge x gv1), (Heap n n x gv1 = merge gv1 x), (Heap n n x gv1 = merge gv1 gv1), (Heap n n x gv1 = mergea n x x), (Heap n n x gv1 = mergea n x gv1), (Heap n n x gv1 = mergea n gv1 x), (Heap n n x gv1 = mergea n gv1 gv1), (Heap n n gv1 x = x), (Heap n n gv1 x = gv1)
+(Heap n n gv1 x = hinsert x n), (Heap n n gv1 x = hinsert gv1 n), (Heap n n gv1 x = merge x x), (Heap n n gv1 x = merge x gv1), (Heap n n gv1 x = merge gv1 x), (Heap n n gv1 x = merge gv1 gv1), (Heap n n gv1 x = mergea n x x), (Heap n n gv1 x = mergea n x gv1), (Heap n n gv1 x = mergea n gv1 x), (Heap n n gv1 x = mergea n gv1 gv1)
+(Heap n n gv1 gv1 = x), (Heap n n gv1 gv1 = gv1), (Heap n n gv1 gv1 = hinsert x n), (Heap n n gv1 gv1 = hinsert gv1 n), (Heap n n gv1 gv1 = merge x x), (Heap n n gv1 gv1 = merge x gv1), (Heap n n gv1 gv1 = merge gv1 x), (Heap n n gv1 gv1 = merge gv1 gv1), (Heap n n gv1 gv1 = mergea n x x), (Heap n n gv1 gv1 = mergea n x gv1)
+(Heap n n gv1 gv1 = mergea n gv1 x), (Heap n n gv1 gv1 = mergea n gv1 gv1), (hinsert x n = x), (hinsert x n = gv1), (hinsert gv1 n = x), (hinsert gv1 n = gv1), (merge x x = x), (merge x x = gv1), (merge x x = hinsert x n), (merge x x = hinsert gv1 n)
+(merge x gv1 = x), (merge x gv1 = gv1), (merge x gv1 = hinsert x n), (merge x gv1 = hinsert gv1 n), (merge gv1 x = x), (merge gv1 x = gv1), (merge gv1 x = hinsert x n), (merge gv1 x = hinsert gv1 n), (merge gv1 gv1 = x), (merge gv1 gv1 = gv1)
+(merge gv1 gv1 = hinsert x n), (merge gv1 gv1 = hinsert gv1 n), (mergea n x x = x), (mergea n x x = gv1), (mergea n x x = hinsert x n), (mergea n x x = hinsert gv1 n), (mergea n x x = merge x x), (mergea n x x = merge x gv1), (mergea n x x = merge gv1 x), (mergea n x x = merge gv1 gv1)
+(mergea n x gv1 = x), (mergea n x gv1 = gv1), (mergea n x gv1 = hinsert x n), (mergea n x gv1 = hinsert gv1 n), (mergea n x gv1 = merge x x), (mergea n x gv1 = merge x gv1), (mergea n x gv1 = merge gv1 x), (mergea n x gv1 = merge gv1 gv1), (mergea n gv1 x = x), (mergea n gv1 x = gv1)
+(mergea n gv1 x = hinsert x n), (mergea n gv1 x = hinsert gv1 n), (mergea n gv1 x = merge x x), (mergea n gv1 x = merge x gv1), (mergea n gv1 x = merge gv1 x), (mergea n gv1 x = merge gv1 gv1), (mergea n gv1 gv1 = x), (mergea n gv1 gv1 = gv1), (mergea n gv1 gv1 = hinsert x n), (mergea n gv1 gv1 = hinsert gv1 n)
+(mergea n gv1 gv1 = merge x x), (mergea n gv1 gv1 = merge x gv1), (mergea n gv1 gv1 = merge gv1 x), (mergea n gv1 gv1 = merge gv1 gv1), (Hleaf = Heap n n x x), (Hleaf = Heap n n x gv1), (Hleaf = Heap n n gv1 x), (Hleaf = Heap n n gv1 gv1), (Hleaf = hinsert x n), (Hleaf = hinsert gv1 n)
+(Hleaf = merge x x), (Hleaf = merge x gv1), (Hleaf = merge gv1 x), (Hleaf = merge gv1 gv1), (Hleaf = mergea n x x), (Hleaf = mergea n x gv1), (Hleaf = mergea n gv1 x), (Hleaf = mergea n gv1 gv1), (hsize x = n), (hsize gv1 = n)
+(rank x = n), (rank x = hsize x), (rank x = hsize gv1), (rank gv1 = n), (rank gv1 = hsize x), (rank gv1 = hsize gv1), (right_height x = n), (right_height x = hsize x), (right_height x = hsize gv1), (right_height x = rank x)
+(right_height x = rank gv1), (right_height gv1 = n), (right_height gv1 = hsize x), (right_height gv1 = hsize gv1), (right_height gv1 = rank x), (right_height gv1 = rank gv1), (None = Some n)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 96.101 seconds
+
+
+Label: 0 (0)
+(true = has_leftist_property x)
+
+Label: 1 (1)
+
+Label: 2 (2)
+(true = gv0), (false <> gv0), (has_leftist_property x = gv0)
+
+Label: 3 (3)
+(merge x gv5 = x), (merge gv5 x = x), (merge gv5 gv5 = gv5), (Hleaf = merge gv5 gv5), (mergea n gv5 gv5 = hinsert gv5 n)
+
+Label: 4 (4)
+(true = has_leftist_property gv2), (merge gv2 x = hinsert x n), (merge gv2 gv2 = hinsert gv2 n)
+
+Label: 5 (5)
+(true = gv6), (false <> gv6), (true = has_leftist_property x)
+
+Label: 6 (6)
+
+Label: 7 (7)
+(true = has_leftist_property gv1), (hinsert x n = gv1)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (has_leftist_property x = true ->  has_leftist_property (merge (Heap 1 n Hleaf Hleaf) x) = true)
+
+2. (merge Hleaf Hleaf = Hleaf)
+
+3. (hinsert x n = merge (Heap 1 n Hleaf Hleaf) x)
+
+4. (false <> gv0 -> gv0 = true)
+
+5. (true = has_leftist_property gv2 ->  has_leftist_property x = true -> has_leftist_property (merge gv2 x) = true)
+
+6. (false <> gv6 ->  has_leftist_property x = gv6 ->  has_leftist_property (merge (Heap 1 n Hleaf Hleaf) x) = gv6)
+
+7. (has_leftist_property x = gv6 ->  true = has_leftist_property x ->  has_leftist_property (merge (Heap 1 n Hleaf Hleaf) x) = gv6)
+
+8. (merge x gv5 = x ->  has_leftist_property x = true ->  has_leftist_property (merge (Heap 1 n gv5 gv5) x) = true)
+
+9. (merge gv5 x = x ->  has_leftist_property x = true ->  has_leftist_property (merge (Heap 1 n gv5 gv5) x) = true)
+
+10. (merge gv5 gv5 = gv5 ->  has_leftist_property x = true ->  has_leftist_property (merge (Heap 1 n gv5 gv5) x) = true)
+
+11. (Hleaf = merge gv5 gv5 ->  has_leftist_property x = true ->  has_leftist_property (merge (Heap 1 n gv5 gv5) x) = true)
+
+12. (merge gv2 x = hinsert x n ->  has_leftist_property x = true -> has_leftist_property (merge gv2 x) = true)
+
+13. (merge gv2 gv2 = hinsert gv2 n ->  has_leftist_property x = true -> has_leftist_property (merge gv2 x) = true)
+
+14. (mergea n gv5 gv5 = hinsert gv5 n ->  has_leftist_property x = true ->  has_leftist_property (merge (Heap 1 n gv5 gv5) x) = true)
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 148.584 seconds
+
+Number of Result Pairs Returned: 14
+
+1. (has_leftist_property x = true ->  has_leftist_property (merge (Heap 1 n Hleaf Hleaf) x) = true)
+
+2. (hinsert x n = merge (Heap 1 n Hleaf Hleaf) x)
+
+3. (false <> gv0 -> gv0 = true)
+
+4. (true = has_leftist_property gv2 ->  has_leftist_property x = true -> has_leftist_property (merge gv2 x) = true)
+
+5. (false <> gv6 ->  has_leftist_property x = gv6 ->  has_leftist_property (merge (Heap 1 n Hleaf Hleaf) x) = gv6)

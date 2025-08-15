@@ -1,0 +1,451 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (forall (c : bool) (q : positive),
+ positive2nat (addc c p q) =
+ (if c then 1 else 0) + positive2nat p + positive2nat q)
+
+----------------------------------
+Goal: (positive2nat (succ p) + (positive2nat (succ p) + 0) =
+ S (positive2nat p + (positive2nat p + 0) + 1))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 1.948 seconds
+
+gv4 : nat = 0
+gv6 : nat = (positive2nat p + (positive2nat p + 0) + 1)
+gv7 : nat = (positive2nat p + (positive2nat p + 0))
+gv0 : nat = (positive2nat (succ p) + (positive2nat (succ p) + 0))
+gv2 : positive = (succ p)
+gv3 : nat = (positive2nat (succ p) + 0)
+gv5 : nat = (S (positive2nat p + (positive2nat p + 0) + 1))
+gv1 : nat = (positive2nat (succ p))
+gv10 : nat = 1
+gv8 : nat = (positive2nat p)
+gv9 : nat = (positive2nat p + 0)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 36.453 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (positive2nat (succ p) + (positive2nat (succ p) + 0) =
+ S (positive2nat p + (positive2nat p + 0) + 1))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (positive2nat p + 0 = gv9)
+
+----------------------------------
+Goal: (positive2nat (succ p) + (positive2nat (succ p) + 0) =
+ S (positive2nat p + gv9 + 1))
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (1 = gv10)
+
+----------------------------------
+Goal: (positive2nat (succ p) + (positive2nat (succ p) + 0) =
+ S (positive2nat p + (positive2nat p + 0) + gv10))
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (positive2nat p = gv8)
+
+----------------------------------
+Goal: (positive2nat (succ p) + (positive2nat (succ p) + 0) =
+ S (gv8 + (gv8 + 0) + 1))
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (S (positive2nat p + (positive2nat p + 0) + 1) = gv5)
+
+----------------------------------
+Goal: (positive2nat (succ p) + (positive2nat (succ p) + 0) = gv5)
+Case: Invalid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (positive2nat (succ p) = gv1)
+
+----------------------------------
+Goal: (gv1 + (gv1 + 0) = S (positive2nat p + (positive2nat p + 0) + 1))
+Case: Invalid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (positive2nat (succ p) + 0 = gv3)
+
+----------------------------------
+Goal: (positive2nat (succ p) + gv3 = S (positive2nat p + (positive2nat p + 0) + 1))
+Case: Invalid and Generalized
+
+Label: Generalization #7
+Assumptions: 
+ -- (succ p = gv2)
+
+----------------------------------
+Goal: (positive2nat gv2 + (positive2nat gv2 + 0) =
+ S (positive2nat p + (positive2nat p + 0) + 1))
+Case: Invalid and Generalized
+
+Label: Generalization #8
+Assumptions: 
+ -- (positive2nat (succ p) + (positive2nat (succ p) + 0) = gv0)
+
+----------------------------------
+Goal: (gv0 = S (positive2nat p + (positive2nat p + 0) + 1))
+Case: Invalid and Generalized
+
+Label: Generalization #9
+Assumptions: 
+ -- (positive2nat p + (positive2nat p + 0) = gv7)
+
+----------------------------------
+Goal: (positive2nat (succ p) + (positive2nat (succ p) + 0) = S (gv7 + 1))
+Case: Invalid and Generalized
+
+Label: Generalization #10
+Assumptions: 
+ -- (positive2nat p + (positive2nat p + 0) + 1 = gv6)
+
+----------------------------------
+Goal: (positive2nat (succ p) + (positive2nat (succ p) + 0) = S gv6)
+Case: Invalid and Generalized
+
+Label: Generalization #11
+Assumptions: 
+ -- (0 = gv4)
+
+----------------------------------
+Goal: (positive2nat (succ p) + (positive2nat (succ p) + gv4) =
+ S (positive2nat p + (positive2nat p + gv4) + S gv4))
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 36.603 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+In : (forall A : Type, A -> list A -> Prop)
+existsb : (forall A : Type, (A -> bool) -> list A -> bool)
+forallb : (forall A : Type, (A -> bool) -> list A -> bool)
+Forall : (forall A : Type, (A -> Prop) -> list A -> Prop)
+nodup : (forall A : Type, (forall x y : A, {x = y} + {x <> y}) -> list A -> list A)
+map : (forall A B : Type, (A -> B) -> list A -> list B)
+Permutation : (forall A : Type, list A -> list A -> Prop)
+geb : (nat -> nat -> bool)
+gtb : (nat -> nat -> bool)
+maybe_swap : (list nat -> list nat)
+first_le_second : (list nat -> Prop)
+positive : Set
+positive_rect : (forall P : positive -> Type,
+ (forall p : positive, P p -> P p~1) ->
+ (forall p : positive, P p -> P p~0) -> P xH -> forall p : positive, P p)
+positive_rec : (forall P : positive -> Set,
+ (forall p : positive, P p -> P p~1) ->
+ (forall p : positive, P p -> P p~0) -> P xH -> forall p : positive, P p)
+positive2nat : (positive -> nat)
+succ : (positive -> positive)
+of_succ_nat : (nat -> positive)
+nat2positive : (nat -> positive)
+print_in_binary : (positive -> list nat)
+addc : (bool -> positive -> positive -> positive)
+add : (positive -> positive -> positive)
+comparison : Set
+comparison_rect : (forall P : comparison -> Type,
+ P Eq -> P Lt -> P Gt -> forall c : comparison, P c)
+comparison_rec : (forall P : comparison -> Set,
+ P Eq -> P Lt -> P Gt -> forall c : comparison, P c)
+compare : (positive -> positive -> comparison)
+LFType : Set
+LFType_rect : (forall P : LFType -> Type,
+ P One ->
+ P Two -> P Three -> P Four -> P Five -> P Six -> forall l : LFType, P l)
+LFType_rec : (forall P : LFType -> Set,
+ P One ->
+ P Two -> P Three -> P Four -> P Five -> P Six -> forall l : LFType, P l)
+trie : Set
+trie_rect : (forall P : trie -> Type,
+ P Leaf ->
+ (forall t : trie,
+  P t -> forall (l : LFType) (t0 : trie), P t0 -> P (Node t l t0)) ->
+ forall t : trie, P t)
+trie_rec : (forall P : trie -> Set,
+ P Leaf ->
+ (forall t : trie,
+  P t -> forall (l : LFType) (t0 : trie), P t0 -> P (Node t l t0)) ->
+ forall t : trie, P t)
+trie_table : Type
+empty : (LFType -> trie_table)
+look : (LFType -> positive -> trie -> LFType)
+lookup : (positive -> trie_table -> LFType)
+ins : (LFType -> positive -> LFType -> trie -> trie)
+insert : (positive -> LFType -> trie_table -> trie_table)
+xI : (positive -> positive)
+xO : (positive -> positive)
+xH : positive
+Eq : comparison
+Lt : comparison
+Gt : comparison
+One : LFType
+Two : LFType
+Three : LFType
+Four : LFType
+Leaf : trie
+Node : (trie -> LFType -> trie -> trie)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 6 (6)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 7 (7)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 8 (8)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 9 (9)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 10 (10)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 36.756 seconds
+
+
+Label: 0 (0)
+(gv9 < gv9), (gv9 <= gv9), (gv9 = gv9), (p = p), (false = (gv9 >? gv9)), (false = (gv9 >=? gv9)), (true = (gv9 >? gv9)), (true = (gv9 >=? gv9)), (first_le_second (print_in_binary p)), (Permutation (print_in_binary p) [])
+(Permutation [] (print_in_binary p)), (In gv9 (print_in_binary p)), (In (positive2nat p) (print_in_binary p)), (gv9 < positive2nat p), (positive2nat p < gv9), (gv9 <= positive2nat p), (positive2nat p <= gv9), (~ gv9 < gv9), (~ gv9 <= gv9), (gv9 <> gv9)
+(p <> p), (p~0 = p), (p~0 = p~1), (p~0 = add p p), (p~0 = nat2positive gv9), (p~0 = of_succ_nat gv9), (p~0 = succ p), (p~1 = p), (p~1 = add p p), (p~1 = nat2positive gv9)
+(p~1 = of_succ_nat gv9), (p~1 = succ p), (add p p = p), (nat2positive gv9 = p), (nat2positive gv9 = add p p), (of_succ_nat gv9 = p), (of_succ_nat gv9 = add p p), (of_succ_nat gv9 = nat2positive gv9), (succ p = p), (succ p = add p p)
+(succ p = nat2positive gv9), (succ p = of_succ_nat gv9), (xH = p~0), (xH = p~1), (xH = add p p), (xH = nat2positive gv9), (xH = of_succ_nat gv9), (xH = succ p), (Eq = compare p p), (Lt = compare p p)
+(Gt = compare p p), (None = Some p), (positive2nat p = gv9), ([] = print_in_binary p), (None = Some gv9), ((gv9 >? gv9) = (gv9 >=? gv9))
+
+Label: 1 (1)
+(gv10 < gv10), (gv10 <= gv10), (gv10 = gv10), (p = p), (false = (gv10 >? gv10)), (false = (gv10 >=? gv10)), (true = (gv10 >? gv10)), (true = (gv10 >=? gv10)), (first_le_second (print_in_binary p)), (Permutation (print_in_binary p) [])
+(Permutation [] (print_in_binary p)), (In gv10 (print_in_binary p)), (In (positive2nat p) (print_in_binary p)), (gv10 < positive2nat p), (positive2nat p < gv10), (gv10 <= positive2nat p), (positive2nat p <= gv10), (~ gv10 < gv10), (~ gv10 <= gv10), (gv10 <> gv10)
+(p <> p), (p~0 = p), (p~0 = p~1), (p~0 = add p p), (p~0 = nat2positive gv10), (p~0 = of_succ_nat gv10), (p~0 = succ p), (p~1 = p), (p~1 = add p p), (p~1 = nat2positive gv10)
+(p~1 = of_succ_nat gv10), (p~1 = succ p), (add p p = p), (nat2positive gv10 = p), (nat2positive gv10 = add p p), (of_succ_nat gv10 = p), (of_succ_nat gv10 = add p p), (of_succ_nat gv10 = nat2positive gv10), (succ p = p), (succ p = add p p)
+(succ p = nat2positive gv10), (succ p = of_succ_nat gv10), (xH = p~0), (xH = p~1), (xH = add p p), (xH = nat2positive gv10), (xH = of_succ_nat gv10), (xH = succ p), (Eq = compare p p), (Lt = compare p p)
+(Gt = compare p p), (None = Some p), (positive2nat p = gv10), ([] = print_in_binary p), (None = Some gv10), ((gv10 >? gv10) = (gv10 >=? gv10))
+
+Label: 2 (2)
+(gv8 < gv8), (gv8 <= gv8), (gv8 = gv8), (p = p), (false = (gv8 >? gv8)), (false = (gv8 >=? gv8)), (true = (gv8 >? gv8)), (true = (gv8 >=? gv8)), (first_le_second (print_in_binary p)), (Permutation (print_in_binary p) [])
+(Permutation [] (print_in_binary p)), (In gv8 (print_in_binary p)), (In (positive2nat p) (print_in_binary p)), (gv8 < positive2nat p), (positive2nat p < gv8), (gv8 <= positive2nat p), (positive2nat p <= gv8), (~ gv8 < gv8), (~ gv8 <= gv8), (gv8 <> gv8)
+(p <> p), (p~0 = p), (p~0 = p~1), (p~0 = add p p), (p~0 = nat2positive gv8), (p~0 = of_succ_nat gv8), (p~0 = succ p), (p~1 = p), (p~1 = add p p), (p~1 = nat2positive gv8)
+(p~1 = of_succ_nat gv8), (p~1 = succ p), (add p p = p), (nat2positive gv8 = p), (nat2positive gv8 = add p p), (of_succ_nat gv8 = p), (of_succ_nat gv8 = add p p), (of_succ_nat gv8 = nat2positive gv8), (succ p = p), (succ p = add p p)
+(succ p = nat2positive gv8), (succ p = of_succ_nat gv8), (xH = p~0), (xH = p~1), (xH = add p p), (xH = nat2positive gv8), (xH = of_succ_nat gv8), (xH = succ p), (Eq = compare p p), (Lt = compare p p)
+(Gt = compare p p), (None = Some p), (positive2nat p = gv8), ([] = print_in_binary p), (None = Some gv8), ((gv8 >? gv8) = (gv8 >=? gv8))
+
+Label: 3 (3)
+(gv5 < gv5), (gv5 <= gv5), (gv5 = gv5), (p = p), (false = (gv5 >? gv5)), (false = (gv5 >=? gv5)), (true = (gv5 >? gv5)), (true = (gv5 >=? gv5)), (first_le_second (print_in_binary p)), (Permutation (print_in_binary p) [])
+(Permutation [] (print_in_binary p)), (In gv5 (print_in_binary p)), (In (positive2nat p) (print_in_binary p)), (gv5 < positive2nat p), (positive2nat p < gv5), (gv5 <= positive2nat p), (positive2nat p <= gv5), (~ gv5 < gv5), (~ gv5 <= gv5), (gv5 <> gv5)
+(p <> p), (p~0 = p), (p~0 = p~1), (p~0 = add p p), (p~0 = nat2positive gv5), (p~0 = of_succ_nat gv5), (p~0 = succ p), (p~1 = p), (p~1 = add p p), (p~1 = nat2positive gv5)
+(p~1 = of_succ_nat gv5), (p~1 = succ p), (add p p = p), (nat2positive gv5 = p), (nat2positive gv5 = add p p), (of_succ_nat gv5 = p), (of_succ_nat gv5 = add p p), (of_succ_nat gv5 = nat2positive gv5), (succ p = p), (succ p = add p p)
+(succ p = nat2positive gv5), (succ p = of_succ_nat gv5), (xH = p~0), (xH = p~1), (xH = add p p), (xH = nat2positive gv5), (xH = of_succ_nat gv5), (xH = succ p), (Eq = compare p p), (Lt = compare p p)
+(Gt = compare p p), (None = Some p), (positive2nat p = gv5), ([] = print_in_binary p), (None = Some gv5), ((gv5 >? gv5) = (gv5 >=? gv5))
+
+Label: 4 (4)
+(gv1 < gv1), (gv1 <= gv1), (p = p), (gv1 = gv1), (false = (gv1 >? gv1)), (false = (gv1 >=? gv1)), (true = (gv1 >? gv1)), (true = (gv1 >=? gv1)), (first_le_second (print_in_binary p)), (Permutation (print_in_binary p) [])
+(Permutation [] (print_in_binary p)), (In gv1 (print_in_binary p)), (In (positive2nat p) (print_in_binary p)), (gv1 < positive2nat p), (positive2nat p < gv1), (gv1 <= positive2nat p), (positive2nat p <= gv1), (~ gv1 < gv1), (~ gv1 <= gv1), (p <> p)
+(gv1 <> gv1), (p~0 = p), (p~0 = p~1), (p~0 = add p p), (p~0 = nat2positive gv1), (p~0 = of_succ_nat gv1), (p~0 = succ p), (p~1 = p), (p~1 = add p p), (p~1 = nat2positive gv1)
+(p~1 = of_succ_nat gv1), (p~1 = succ p), (add p p = p), (nat2positive gv1 = p), (nat2positive gv1 = add p p), (of_succ_nat gv1 = p), (of_succ_nat gv1 = add p p), (of_succ_nat gv1 = nat2positive gv1), (succ p = p), (succ p = add p p)
+(succ p = nat2positive gv1), (succ p = of_succ_nat gv1), (xH = p~0), (xH = p~1), (xH = add p p), (xH = nat2positive gv1), (xH = of_succ_nat gv1), (xH = succ p), (Eq = compare p p), (Lt = compare p p)
+(Gt = compare p p), (None = Some p), (positive2nat p = gv1), ([] = print_in_binary p), (None = Some gv1), ((gv1 >? gv1) = (gv1 >=? gv1))
+
+Label: 5 (5)
+(gv3 < gv3), (gv3 <= gv3), (gv3 = gv3), (p = p), (false = (gv3 >? gv3)), (false = (gv3 >=? gv3)), (true = (gv3 >? gv3)), (true = (gv3 >=? gv3)), (first_le_second (print_in_binary p)), (Permutation (print_in_binary p) [])
+(Permutation [] (print_in_binary p)), (In gv3 (print_in_binary p)), (In (positive2nat p) (print_in_binary p)), (gv3 < positive2nat p), (positive2nat p < gv3), (gv3 <= positive2nat p), (positive2nat p <= gv3), (~ gv3 < gv3), (~ gv3 <= gv3), (gv3 <> gv3)
+(p <> p), (p~0 = p), (p~0 = p~1), (p~0 = add p p), (p~0 = nat2positive gv3), (p~0 = of_succ_nat gv3), (p~0 = succ p), (p~1 = p), (p~1 = add p p), (p~1 = nat2positive gv3)
+(p~1 = of_succ_nat gv3), (p~1 = succ p), (add p p = p), (nat2positive gv3 = p), (nat2positive gv3 = add p p), (of_succ_nat gv3 = p), (of_succ_nat gv3 = add p p), (of_succ_nat gv3 = nat2positive gv3), (succ p = p), (succ p = add p p)
+(succ p = nat2positive gv3), (succ p = of_succ_nat gv3), (xH = p~0), (xH = p~1), (xH = add p p), (xH = nat2positive gv3), (xH = of_succ_nat gv3), (xH = succ p), (Eq = compare p p), (Lt = compare p p)
+(Gt = compare p p), (None = Some p), (positive2nat p = gv3), ([] = print_in_binary p), (None = Some gv3), ((gv3 >? gv3) = (gv3 >=? gv3))
+
+Label: 6 (6)
+(p = p), (p = gv2), (gv2 = p), (gv2 = gv2), (first_le_second (print_in_binary p)), (first_le_second (print_in_binary gv2)), (Permutation (print_in_binary p) (print_in_binary gv2)), (Permutation (print_in_binary gv2) (print_in_binary p)), (In (positive2nat p) (print_in_binary p)), (In (positive2nat p) (print_in_binary gv2))
+(In (positive2nat gv2) (print_in_binary p)), (In (positive2nat gv2) (print_in_binary gv2)), (positive2nat p < positive2nat gv2), (positive2nat gv2 < positive2nat p), (positive2nat p <= positive2nat gv2), (positive2nat gv2 <= positive2nat p), (p <> p), (p <> gv2), (gv2 <> p), (gv2 <> gv2)
+(p~0 = p), (p~0 = gv2), (p~0 = p~1), (p~0 = gv2~1), (p~0 = add p p), (p~0 = add p gv2), (p~0 = add gv2 p), (p~0 = add gv2 gv2), (p~0 = succ p), (p~0 = succ gv2)
+(gv2~0 = p), (gv2~0 = gv2), (gv2~0 = p~1), (gv2~0 = gv2~1), (gv2~0 = add p p), (gv2~0 = add p gv2), (gv2~0 = add gv2 p), (gv2~0 = add gv2 gv2), (gv2~0 = succ p), (gv2~0 = succ gv2)
+(p~1 = p), (p~1 = gv2), (p~1 = add p p), (p~1 = add p gv2), (p~1 = add gv2 p), (p~1 = add gv2 gv2), (p~1 = succ p), (p~1 = succ gv2), (gv2~1 = p), (gv2~1 = gv2)
+(gv2~1 = add p p), (gv2~1 = add p gv2), (gv2~1 = add gv2 p), (gv2~1 = add gv2 gv2), (gv2~1 = succ p), (gv2~1 = succ gv2), (add p p = p), (add p p = gv2), (add p gv2 = p), (add p gv2 = gv2)
+(add gv2 p = p), (add gv2 p = gv2), (add gv2 gv2 = p), (add gv2 gv2 = gv2), (succ p = p), (succ p = gv2), (succ p = add p p), (succ p = add p gv2), (succ p = add gv2 p), (succ p = add gv2 gv2)
+(succ gv2 = p), (succ gv2 = gv2), (succ gv2 = add p p), (succ gv2 = add p gv2), (succ gv2 = add gv2 p), (succ gv2 = add gv2 gv2), (xH = p~0), (xH = gv2~0), (xH = p~1), (xH = gv2~1)
+(xH = add p p), (xH = add p gv2), (xH = add gv2 p), (xH = add gv2 gv2), (xH = succ p), (xH = succ gv2), (Eq = compare p p), (Eq = compare p gv2), (Eq = compare gv2 p), (Eq = compare gv2 gv2)
+(Lt = compare p p), (Lt = compare p gv2), (Lt = compare gv2 p), (Lt = compare gv2 gv2), (Gt = compare p p), (Gt = compare p gv2), (Gt = compare gv2 p), (Gt = compare gv2 gv2), (None = Some p), (None = Some gv2)
+
+Label: 7 (7)
+(gv0 < gv0), (gv0 <= gv0), (p = p), (gv0 = gv0), (false = (gv0 >? gv0)), (false = (gv0 >=? gv0)), (true = (gv0 >? gv0)), (true = (gv0 >=? gv0)), (first_le_second (print_in_binary p)), (Permutation (print_in_binary p) [])
+(Permutation [] (print_in_binary p)), (In gv0 (print_in_binary p)), (In (positive2nat p) (print_in_binary p)), (gv0 < positive2nat p), (positive2nat p < gv0), (gv0 <= positive2nat p), (positive2nat p <= gv0), (~ gv0 < gv0), (~ gv0 <= gv0), (p <> p)
+(gv0 <> gv0), (p~0 = p), (p~0 = p~1), (p~0 = add p p), (p~0 = nat2positive gv0), (p~0 = of_succ_nat gv0), (p~0 = succ p), (p~1 = p), (p~1 = add p p), (p~1 = nat2positive gv0)
+(p~1 = of_succ_nat gv0), (p~1 = succ p), (add p p = p), (nat2positive gv0 = p), (nat2positive gv0 = add p p), (of_succ_nat gv0 = p), (of_succ_nat gv0 = add p p), (of_succ_nat gv0 = nat2positive gv0), (succ p = p), (succ p = add p p)
+(succ p = nat2positive gv0), (succ p = of_succ_nat gv0), (xH = p~0), (xH = p~1), (xH = add p p), (xH = nat2positive gv0), (xH = of_succ_nat gv0), (xH = succ p), (Eq = compare p p), (Lt = compare p p)
+(Gt = compare p p), (None = Some p), (positive2nat p = gv0), ([] = print_in_binary p), (None = Some gv0), ((gv0 >? gv0) = (gv0 >=? gv0))
+
+Label: 8 (8)
+(gv7 < gv7), (gv7 <= gv7), (gv7 = gv7), (p = p), (false = (gv7 >? gv7)), (false = (gv7 >=? gv7)), (true = (gv7 >? gv7)), (true = (gv7 >=? gv7)), (first_le_second (print_in_binary p)), (Permutation (print_in_binary p) [])
+(Permutation [] (print_in_binary p)), (In gv7 (print_in_binary p)), (In (positive2nat p) (print_in_binary p)), (gv7 < positive2nat p), (positive2nat p < gv7), (gv7 <= positive2nat p), (positive2nat p <= gv7), (~ gv7 < gv7), (~ gv7 <= gv7), (gv7 <> gv7)
+(p <> p), (p~0 = p), (p~0 = p~1), (p~0 = add p p), (p~0 = nat2positive gv7), (p~0 = of_succ_nat gv7), (p~0 = succ p), (p~1 = p), (p~1 = add p p), (p~1 = nat2positive gv7)
+(p~1 = of_succ_nat gv7), (p~1 = succ p), (add p p = p), (nat2positive gv7 = p), (nat2positive gv7 = add p p), (of_succ_nat gv7 = p), (of_succ_nat gv7 = add p p), (of_succ_nat gv7 = nat2positive gv7), (succ p = p), (succ p = add p p)
+(succ p = nat2positive gv7), (succ p = of_succ_nat gv7), (xH = p~0), (xH = p~1), (xH = add p p), (xH = nat2positive gv7), (xH = of_succ_nat gv7), (xH = succ p), (Eq = compare p p), (Lt = compare p p)
+(Gt = compare p p), (None = Some p), (positive2nat p = gv7), ([] = print_in_binary p), (None = Some gv7), ((gv7 >? gv7) = (gv7 >=? gv7))
+
+Label: 9 (9)
+(gv6 < gv6), (gv6 <= gv6), (gv6 = gv6), (p = p), (false = (gv6 >? gv6)), (false = (gv6 >=? gv6)), (true = (gv6 >? gv6)), (true = (gv6 >=? gv6)), (first_le_second (print_in_binary p)), (Permutation (print_in_binary p) [])
+(Permutation [] (print_in_binary p)), (In gv6 (print_in_binary p)), (In (positive2nat p) (print_in_binary p)), (gv6 < positive2nat p), (positive2nat p < gv6), (gv6 <= positive2nat p), (positive2nat p <= gv6), (~ gv6 < gv6), (~ gv6 <= gv6), (gv6 <> gv6)
+(p <> p), (p~0 = p), (p~0 = p~1), (p~0 = add p p), (p~0 = nat2positive gv6), (p~0 = of_succ_nat gv6), (p~0 = succ p), (p~1 = p), (p~1 = add p p), (p~1 = nat2positive gv6)
+(p~1 = of_succ_nat gv6), (p~1 = succ p), (add p p = p), (nat2positive gv6 = p), (nat2positive gv6 = add p p), (of_succ_nat gv6 = p), (of_succ_nat gv6 = add p p), (of_succ_nat gv6 = nat2positive gv6), (succ p = p), (succ p = add p p)
+(succ p = nat2positive gv6), (succ p = of_succ_nat gv6), (xH = p~0), (xH = p~1), (xH = add p p), (xH = nat2positive gv6), (xH = of_succ_nat gv6), (xH = succ p), (Eq = compare p p), (Lt = compare p p)
+(Gt = compare p p), (None = Some p), (positive2nat p = gv6), ([] = print_in_binary p), (None = Some gv6), ((gv6 >? gv6) = (gv6 >=? gv6))
+
+Label: 10 (10)
+(gv4 < gv4), (gv4 <= gv4), (gv4 = gv4), (p = p), (false = (gv4 >? gv4)), (false = (gv4 >=? gv4)), (true = (gv4 >? gv4)), (true = (gv4 >=? gv4)), (first_le_second (print_in_binary p)), (Permutation (print_in_binary p) [])
+(Permutation [] (print_in_binary p)), (In gv4 (print_in_binary p)), (In (positive2nat p) (print_in_binary p)), (gv4 < positive2nat p), (positive2nat p < gv4), (gv4 <= positive2nat p), (positive2nat p <= gv4), (~ gv4 < gv4), (~ gv4 <= gv4), (gv4 <> gv4)
+(p <> p), (p~0 = p), (p~0 = p~1), (p~0 = add p p), (p~0 = nat2positive gv4), (p~0 = of_succ_nat gv4), (p~0 = succ p), (p~1 = p), (p~1 = add p p), (p~1 = nat2positive gv4)
+(p~1 = of_succ_nat gv4), (p~1 = succ p), (add p p = p), (nat2positive gv4 = p), (nat2positive gv4 = add p p), (of_succ_nat gv4 = p), (of_succ_nat gv4 = add p p), (of_succ_nat gv4 = nat2positive gv4), (succ p = p), (succ p = add p p)
+(succ p = nat2positive gv4), (succ p = of_succ_nat gv4), (xH = p~0), (xH = p~1), (xH = add p p), (xH = nat2positive gv4), (xH = of_succ_nat gv4), (xH = succ p), (Eq = compare p p), (Lt = compare p p)
+(Gt = compare p p), (None = Some p), (positive2nat p = gv4), ([] = print_in_binary p), (None = Some gv4), ((gv4 >? gv4) = (gv4 >=? gv4))
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 41.845 seconds
+
+
+Label: 0 (0)
+(positive2nat p = gv9), (succ p = of_succ_nat gv9)
+
+Label: 1 (1)
+
+Label: 2 (2)
+(positive2nat p = gv8), (succ p = of_succ_nat gv8)
+
+Label: 3 (3)
+
+Label: 4 (4)
+(succ p = nat2positive gv1)
+
+Label: 5 (5)
+(succ p = nat2positive gv3)
+
+Label: 6 (6)
+(succ p = gv2), (p~1 = add p gv2), (p~1 = add gv2 p)
+
+Label: 7 (7)
+
+Label: 8 (8)
+(p~1 = of_succ_nat gv7), (p~0 = nat2positive gv7), (nat2positive gv7 = add p p)
+
+Label: 9 (9)
+(p~1 = nat2positive gv6)
+
+Label: 10 (10)
+(xH = of_succ_nat gv4), (of_succ_nat gv4 = nat2positive gv4)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (positive2nat (succ p) + (positive2nat (succ p) + 0) =  S (positive2nat p + (positive2nat p + 0) + 1))
+
+2. (positive2nat p = positive2nat p + 0)
+
+3. (positive2nat p = gv9 ->  positive2nat (succ p) + (positive2nat (succ p) + 0) =  S (positive2nat p + gv9 + 1))
+
+4. (xH = of_succ_nat gv4 ->  positive2nat (succ p) + (positive2nat (succ p) + gv4) =  S (positive2nat p + (positive2nat p + gv4) + S gv4))
+
+5. (succ p = of_succ_nat gv9 ->  positive2nat (succ p) + (positive2nat (succ p) + 0) =  S (positive2nat p + gv9 + 1))
+
+6. (succ p = of_succ_nat gv8 ->  positive2nat (succ p) + (positive2nat (succ p) + 0) =  S (gv8 + (gv8 + 0) + 1))
+
+7. (succ p = nat2positive gv1 ->  gv1 + (gv1 + 0) = S (positive2nat p + (positive2nat p + 0) + 1))
+
+8. (succ p = nat2positive gv3 ->  positive2nat (succ p) + gv3 = S (positive2nat p + (positive2nat p + 0) + 1))
+
+9. (p~1 = of_succ_nat gv7 ->  positive2nat (succ p) + (positive2nat (succ p) + 0) = S (gv7 + 1))
+
+10. (p~0 = nat2positive gv7 ->  positive2nat (succ p) + (positive2nat (succ p) + 0) = S (gv7 + 1))
+
+11. (p~1 = nat2positive gv6 ->  positive2nat (succ p) + (positive2nat (succ p) + 0) = S gv6)
+
+12. (of_succ_nat gv4 = nat2positive gv4 ->  positive2nat (succ p) + (positive2nat (succ p) + gv4) =  S (positive2nat p + (positive2nat p + gv4) + S gv4))
+
+13. (p~1 = add p gv2 ->  positive2nat gv2 + (positive2nat gv2 + 0) =  S (positive2nat p + (positive2nat p + 0) + 1))
+
+14. (p~1 = add gv2 p ->  positive2nat gv2 + (positive2nat gv2 + 0) =  S (positive2nat p + (positive2nat p + 0) + 1))
+
+15. (nat2positive gv7 = add p p ->  positive2nat (succ p) + (positive2nat (succ p) + 0) = S (gv7 + 1))
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 75.547 seconds
+
+Number of Result Pairs Returned: 15
+
+1. (positive2nat (succ p) + (positive2nat (succ p) + 0) =  S (positive2nat p + (positive2nat p + 0) + 1))
+
+2. (positive2nat p = positive2nat p + 0)
+
+3. (positive2nat p = gv9 ->  positive2nat (succ p) + (positive2nat (succ p) + 0) =  S (positive2nat p + gv9 + 1))
+
+4. (xH = of_succ_nat gv4 ->  positive2nat (succ p) + (positive2nat (succ p) + gv4) =  S (positive2nat p + (positive2nat p + gv4) + S gv4))
+
+5. (succ p = of_succ_nat gv9 ->  positive2nat (succ p) + (positive2nat (succ p) + 0) =  S (positive2nat p + gv9 + 1))

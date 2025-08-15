@@ -1,0 +1,269 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (ForallT (fun (y : nat) (_ : value) => y <= k') t2 ->
+ In (k, v) (elements t2) -> k <= k')
+ -- (ForallT (fun (y : nat) (_ : value) => y <= k') t1 ->
+ In (k, v) (elements t1) -> k <= k')
+ -- (ForallT (fun (y : nat) (_ : value) => y <= k') (T t1 k0 v0 t2))
+ -- (In (k, v) (elements t1 ++ (k0, v0) :: elements t2))
+
+----------------------------------
+Goal: (k <= k')
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 4.922 seconds
+
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 49. seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (ForallT (fun (y : nat) (_ : value) => y <= k') (T t1 k0 v0 t2))
+ -- (In (k, v) (elements t1 ++ (k0, v0) :: elements t2))
+
+----------------------------------
+Goal: (k <= k')
+Case: Valid and Un-Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 49.174 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+In : (forall A : Type, A -> list A -> Prop)
+existsb : (forall A : Type, (A -> bool) -> list A -> bool)
+forallb : (forall A : Type, (A -> bool) -> list A -> bool)
+Forall : (forall A : Type, (A -> Prop) -> list A -> Prop)
+nodup : (forall A : Type, (forall x y : A, {x = y} + {x <> y}) -> list A -> list A)
+map : (forall A B : Type, (A -> B) -> list A -> list B)
+Permutation : (forall A : Type, list A -> list A -> Prop)
+sorted : (list nat -> Prop)
+is_a_sorting_algorithm : ((list nat -> list nat) -> Prop)
+select : (nat -> list nat -> nat * list nat)
+selsort : (list nat -> nat -> list nat)
+selection_sort : (list nat -> list nat)
+le_all : (nat -> list nat -> Prop)
+value : Set
+value_rect : (forall P : value -> Type,
+ P Red -> P Green -> P Blue -> forall v : value, P v)
+value_rec : (forall P : value -> Set, P Red -> P Green -> P Blue -> forall v : value, P v)
+tree : Set
+tree_rect : (forall P : tree -> Type,
+ P E ->
+ (forall l : tree,
+  P l -> forall (k : nat) (v : value) (r : tree), P r -> P (T l k v r)) ->
+ forall t : tree, P t)
+tree_rec : (forall P : tree -> Set,
+ P E ->
+ (forall l : tree,
+  P l -> forall (k : nat) (v : value) (r : tree), P r -> P (T l k v r)) ->
+ forall t : tree, P t)
+empty_tree : tree
+bound : (nat -> tree -> bool)
+lookup : (value -> nat -> tree -> value)
+insert : (nat -> value -> tree -> tree)
+ForallT : ((nat -> value -> Prop) -> tree -> Prop)
+BST : (tree -> Prop)
+elements : (tree -> list (nat * value))
+@uncurry : (forall X Y Z : Type, (X -> Y -> Z) -> X * Y -> Z)
+@list_keys : (forall V : Type, list (nat * V) -> list nat)
+@disjoint : (forall X : Type, list X -> list X -> Prop)
+fast_elements_tr : (tree -> list (nat * value) -> list (nat * value))
+fast_elements : (tree -> list (nat * value))
+kvs_insert : (nat -> value -> list (nat * value) -> list (nat * value))
+Red : value
+Green : value
+Blue : value
+E : tree
+T : (tree -> nat -> value -> tree -> tree)
+
+Label: 0 (0)
+Abducted Assumption: (ForallT (fun (y : nat) (_ : value) => y <= k') (T t1 k0 v0 t2))
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Abducted Assumption: (In (k, v) (elements t1 ++ (k0, v0) :: elements t2))
+Positive Examples: 500
+Negative Examples: 170
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 49.408 seconds
+
+
+Label: 0 (0)
+(BST t2), (BST t1), (k0 < k0), (k0 < k'), (k0 < k), (k' < k0), (k' < k'), (k' < k), (k < k0), (k < k')
+(k < k), (k0 <= k0), (k0 <= k'), (k0 <= k), (k' <= k0), (k' <= k'), (k' <= k), (k <= k0), (k <= k'), (k <= k)
+(t2 = t2), (t2 = t1), (t1 = t2), (t1 = t1), (v0 = v0), (v0 = v), (v = v0), (v = v), (k0 = k0), (k0 = k')
+(k0 = k), (k' = k0), (k' = k'), (k' = k), (k = k0), (k = k'), (k = k), (false = bound k0 t2), (false = bound k0 t1), (false = bound k' t2)
+(false = bound k' t1), (false = bound k t2), (false = bound k t1), (true = bound k0 t2), (true = bound k0 t1), (true = bound k' t2), (true = bound k' t1), (true = bound k t2), (true = bound k t1), (disjoint (fast_elements t2) (fast_elements t1))
+(disjoint (fast_elements t2) (elements t2)), (disjoint (fast_elements t2) (elements t1)), (disjoint (fast_elements t1) (fast_elements t2)), (disjoint (fast_elements t1) (elements t2)), (disjoint (fast_elements t1) (elements t1)), (disjoint (elements t2) (fast_elements t2)), (disjoint (elements t2) (fast_elements t1)), (disjoint (elements t2) (elements t1)), (disjoint (elements t1) (fast_elements t2)), (disjoint (elements t1) (fast_elements t1))
+(disjoint (elements t1) (elements t2)), (BST (T t2 k0 v0 t2)), (BST (T t2 k0 v0 t1)), (BST (T t2 k0 v t2)), (BST (T t2 k0 v t1)), (BST (T t2 k' v0 t2)), (BST (T t2 k' v0 t1)), (BST (T t2 k' v t2)), (BST (T t2 k' v t1)), (BST (T t2 k v0 t2))
+(BST (T t2 k v0 t1)), (BST (T t2 k v t2)), (BST (T t2 k v t1)), (BST (T t1 k0 v0 t2)), (BST (T t1 k0 v0 t1)), (BST (T t1 k0 v t2)), (BST (T t1 k0 v t1)), (BST (T t1 k' v0 t2)), (BST (T t1 k' v0 t1)), (BST (T t1 k' v t2))
+(BST (T t1 k' v t1)), (BST (T t1 k v0 t2)), (BST (T t1 k v0 t1)), (BST (T t1 k v t2)), (BST (T t1 k v t1)), (BST (insert k0 v0 t2)), (BST (insert k0 v0 t1)), (BST (insert k0 v t2)), (BST (insert k0 v t1)), (BST (insert k' v0 t2))
+(BST (insert k' v0 t1)), (BST (insert k' v t2)), (BST (insert k' v t1)), (BST (insert k v0 t2)), (BST (insert k v0 t1)), (BST (insert k v t2)), (BST (insert k v t1)), (BST empty_tree), (BST E), (k0 <=* [])
+(k' <=* []), (k <=* []), (sorted []), (Permutation (fast_elements t2) (fast_elements t1)), (Permutation (fast_elements t2) (elements t2)), (Permutation (fast_elements t2) (elements t1)), (Permutation (fast_elements t1) (fast_elements t2)), (Permutation (fast_elements t1) (elements t2)), (Permutation (fast_elements t1) (elements t1)), (Permutation (elements t2) (fast_elements t2))
+(Permutation (elements t2) (fast_elements t1)), (Permutation (elements t2) (elements t1)), (Permutation (elements t1) (fast_elements t2)), (Permutation (elements t1) (fast_elements t1)), (Permutation (elements t1) (elements t2)), (In (k0, v0) (fast_elements t2)), (In (k0, v0) (fast_elements t1)), (In (k0, v0) (elements t2)), (In (k0, v0) (elements t1)), (In (k0, v) (fast_elements t2))
+(In (k0, v) (fast_elements t1)), (In (k0, v) (elements t2)), (In (k0, v) (elements t1)), (In (k', v0) (fast_elements t2)), (In (k', v0) (fast_elements t1)), (In (k', v0) (elements t2)), (In (k', v0) (elements t1)), (In (k', v) (fast_elements t2)), (In (k', v) (fast_elements t1)), (In (k', v) (elements t2))
+(In (k', v) (elements t1)), (In (k, v0) (fast_elements t2)), (In (k, v0) (fast_elements t1)), (In (k, v0) (elements t2)), (In (k, v0) (elements t1)), (In (k, v) (fast_elements t2)), (In (k, v) (fast_elements t1)), (In (k, v) (elements t2)), (In (k, v) (elements t1)), (~ BST t2)
+(~ BST t1), (~ k0 < k0), (~ k0 < k'), (~ k0 < k), (~ k' < k0), (~ k' < k'), (~ k' < k), (~ k < k0), (~ k < k'), (~ k < k)
+(~ k0 <= k0), (~ k0 <= k'), (~ k0 <= k), (~ k' <= k0), (~ k' <= k'), (~ k' <= k), (~ k <= k0), (~ k <= k'), (~ k <= k), (t2 <> t2)
+(t2 <> t1), (t1 <> t2), (t1 <> t1), (v0 <> v0), (v0 <> v), (v <> v0), (v <> v), (k0 <> k0), (k0 <> k'), (k0 <> k)
+(k' <> k0), (k' <> k'), (k' <> k), (k <> k0), (k <> k'), (k <> k), (lookup v0 k0 t2 = v0), (lookup v0 k0 t2 = v), (lookup v0 k0 t1 = v0), (lookup v0 k0 t1 = v)
+(lookup v0 k' t2 = v0), (lookup v0 k' t2 = v), (lookup v0 k' t1 = v0), (lookup v0 k' t1 = v), (lookup v0 k t2 = v0), (lookup v0 k t2 = v), (lookup v0 k t1 = v0), (lookup v0 k t1 = v), (lookup v k0 t2 = v0), (lookup v k0 t2 = v)
+(lookup v k0 t1 = v0), (lookup v k0 t1 = v), (lookup v k' t2 = v0), (lookup v k' t2 = v), (lookup v k' t1 = v0), (lookup v k' t1 = v), (lookup v k t2 = v0), (lookup v k t2 = v), (lookup v k t1 = v0), (lookup v k t1 = v)
+(Red = lookup v0 k0 t2), (Red = lookup v0 k0 t1), (Red = lookup v0 k' t2), (Red = lookup v0 k' t1), (Red = lookup v0 k t2), (Red = lookup v0 k t1), (Red = lookup v k0 t2), (Red = lookup v k0 t1), (Red = lookup v k' t2), (Red = lookup v k' t1)
+(Red = lookup v k t2), (Red = lookup v k t1), (Green = lookup v0 k0 t2), (Green = lookup v0 k0 t1), (Green = lookup v0 k' t2), (Green = lookup v0 k' t1), (Green = lookup v0 k t2), (Green = lookup v0 k t1), (Green = lookup v k0 t2), (Green = lookup v k0 t1)
+(Green = lookup v k' t2), (Green = lookup v k' t1), (Green = lookup v k t2), (Green = lookup v k t1), (Blue = lookup v0 k0 t2), (Blue = lookup v0 k0 t1), (Blue = lookup v0 k' t2), (Blue = lookup v0 k' t1), (Blue = lookup v0 k t2), (Blue = lookup v0 k t1)
+(Blue = lookup v k0 t2), (Blue = lookup v k0 t1), (Blue = lookup v k' t2), (Blue = lookup v k' t1), (Blue = lookup v k t2), (Blue = lookup v k t1), (fast_elements t2 = elements t2), (fast_elements t2 = elements t1), (fast_elements t1 = elements t2), (fast_elements t1 = elements t1)
+(None = Some k0), (None = Some k'), (None = Some k), (None = Some t2), (None = Some t1), (T t2 k0 v0 t2 = t2), (T t2 k0 v0 t2 = t1), (T t2 k0 v0 t2 = insert k0 v0 t2), (T t2 k0 v0 t2 = insert k0 v0 t1), (T t2 k0 v0 t2 = insert k0 v t2)
+(T t2 k0 v0 t2 = insert k0 v t1), (T t2 k0 v0 t2 = insert k' v0 t2), (T t2 k0 v0 t2 = insert k' v0 t1), (T t2 k0 v0 t2 = insert k' v t2), (T t2 k0 v0 t2 = insert k' v t1), (T t2 k0 v0 t2 = insert k v0 t2), (T t2 k0 v0 t2 = insert k v0 t1), (T t2 k0 v0 t2 = insert k v t2), (T t2 k0 v0 t2 = insert k v t1), (T t2 k0 v0 t1 = t2)
+(T t2 k0 v0 t1 = t1), (T t2 k0 v0 t1 = insert k0 v0 t2), (T t2 k0 v0 t1 = insert k0 v0 t1), (T t2 k0 v0 t1 = insert k0 v t2), (T t2 k0 v0 t1 = insert k0 v t1), (T t2 k0 v0 t1 = insert k' v0 t2), (T t2 k0 v0 t1 = insert k' v0 t1), (T t2 k0 v0 t1 = insert k' v t2), (T t2 k0 v0 t1 = insert k' v t1), (T t2 k0 v0 t1 = insert k v0 t2)
+(T t2 k0 v0 t1 = insert k v0 t1), (T t2 k0 v0 t1 = insert k v t2), (T t2 k0 v0 t1 = insert k v t1), (T t2 k0 v t2 = t2), (T t2 k0 v t2 = t1), (T t2 k0 v t2 = insert k0 v0 t2), (T t2 k0 v t2 = insert k0 v0 t1), (T t2 k0 v t2 = insert k0 v t2), (T t2 k0 v t2 = insert k0 v t1), (T t2 k0 v t2 = insert k' v0 t2)
+(T t2 k0 v t2 = insert k' v0 t1), (T t2 k0 v t2 = insert k' v t2), (T t2 k0 v t2 = insert k' v t1), (T t2 k0 v t2 = insert k v0 t2), (T t2 k0 v t2 = insert k v0 t1), (T t2 k0 v t2 = insert k v t2), (T t2 k0 v t2 = insert k v t1), (T t2 k0 v t1 = t2), (T t2 k0 v t1 = t1), (T t2 k0 v t1 = insert k0 v0 t2)
+(T t2 k0 v t1 = insert k0 v0 t1), (T t2 k0 v t1 = insert k0 v t2), (T t2 k0 v t1 = insert k0 v t1), (T t2 k0 v t1 = insert k' v0 t2), (T t2 k0 v t1 = insert k' v0 t1), (T t2 k0 v t1 = insert k' v t2), (T t2 k0 v t1 = insert k' v t1), (T t2 k0 v t1 = insert k v0 t2), (T t2 k0 v t1 = insert k v0 t1), (T t2 k0 v t1 = insert k v t2)
+(T t2 k0 v t1 = insert k v t1), (T t2 k' v0 t2 = t2), (T t2 k' v0 t2 = t1), (T t2 k' v0 t2 = insert k0 v0 t2), (T t2 k' v0 t2 = insert k0 v0 t1), (T t2 k' v0 t2 = insert k0 v t2), (T t2 k' v0 t2 = insert k0 v t1), (T t2 k' v0 t2 = insert k' v0 t2), (T t2 k' v0 t2 = insert k' v0 t1), (T t2 k' v0 t2 = insert k' v t2)
+(T t2 k' v0 t2 = insert k' v t1), (T t2 k' v0 t2 = insert k v0 t2), (T t2 k' v0 t2 = insert k v0 t1), (T t2 k' v0 t2 = insert k v t2), (T t2 k' v0 t2 = insert k v t1), (T t2 k' v0 t1 = t2), (T t2 k' v0 t1 = t1), (T t2 k' v0 t1 = insert k0 v0 t2), (T t2 k' v0 t1 = insert k0 v0 t1), (T t2 k' v0 t1 = insert k0 v t2)
+(T t2 k' v0 t1 = insert k0 v t1), (T t2 k' v0 t1 = insert k' v0 t2), (T t2 k' v0 t1 = insert k' v0 t1), (T t2 k' v0 t1 = insert k' v t2), (T t2 k' v0 t1 = insert k' v t1), (T t2 k' v0 t1 = insert k v0 t2), (T t2 k' v0 t1 = insert k v0 t1), (T t2 k' v0 t1 = insert k v t2), (T t2 k' v0 t1 = insert k v t1), (T t2 k' v t2 = t2)
+(T t2 k' v t2 = t1), (T t2 k' v t2 = insert k0 v0 t2), (T t2 k' v t2 = insert k0 v0 t1), (T t2 k' v t2 = insert k0 v t2), (T t2 k' v t2 = insert k0 v t1), (T t2 k' v t2 = insert k' v0 t2), (T t2 k' v t2 = insert k' v0 t1), (T t2 k' v t2 = insert k' v t2), (T t2 k' v t2 = insert k' v t1), (T t2 k' v t2 = insert k v0 t2)
+(T t2 k' v t2 = insert k v0 t1), (T t2 k' v t2 = insert k v t2), (T t2 k' v t2 = insert k v t1), (T t2 k' v t1 = t2), (T t2 k' v t1 = t1), (T t2 k' v t1 = insert k0 v0 t2), (T t2 k' v t1 = insert k0 v0 t1), (T t2 k' v t1 = insert k0 v t2), (T t2 k' v t1 = insert k0 v t1), (T t2 k' v t1 = insert k' v0 t2)
+(T t2 k' v t1 = insert k' v0 t1), (T t2 k' v t1 = insert k' v t2), (T t2 k' v t1 = insert k' v t1), (T t2 k' v t1 = insert k v0 t2), (T t2 k' v t1 = insert k v0 t1), (T t2 k' v t1 = insert k v t2), (T t2 k' v t1 = insert k v t1), (T t2 k v0 t2 = t2), (T t2 k v0 t2 = t1), (T t2 k v0 t2 = insert k0 v0 t2)
+(T t2 k v0 t2 = insert k0 v0 t1), (T t2 k v0 t2 = insert k0 v t2), (T t2 k v0 t2 = insert k0 v t1), (T t2 k v0 t2 = insert k' v0 t2), (T t2 k v0 t2 = insert k' v0 t1), (T t2 k v0 t2 = insert k' v t2), (T t2 k v0 t2 = insert k' v t1), (T t2 k v0 t2 = insert k v0 t2), (T t2 k v0 t2 = insert k v0 t1), (T t2 k v0 t2 = insert k v t2)
+(T t2 k v0 t2 = insert k v t1), (T t2 k v0 t1 = t2), (T t2 k v0 t1 = t1), (T t2 k v0 t1 = insert k0 v0 t2), (T t2 k v0 t1 = insert k0 v0 t1), (T t2 k v0 t1 = insert k0 v t2), (T t2 k v0 t1 = insert k0 v t1), (T t2 k v0 t1 = insert k' v0 t2), (T t2 k v0 t1 = insert k' v0 t1), (T t2 k v0 t1 = insert k' v t2)
+(T t2 k v0 t1 = insert k' v t1), (T t2 k v0 t1 = insert k v0 t2), (T t2 k v0 t1 = insert k v0 t1), (T t2 k v0 t1 = insert k v t2), (T t2 k v0 t1 = insert k v t1), (T t2 k v t2 = t2), (T t2 k v t2 = t1), (T t2 k v t2 = insert k0 v0 t2), (T t2 k v t2 = insert k0 v0 t1), (T t2 k v t2 = insert k0 v t2)
+(T t2 k v t2 = insert k0 v t1), (T t2 k v t2 = insert k' v0 t2), (T t2 k v t2 = insert k' v0 t1), (T t2 k v t2 = insert k' v t2), (T t2 k v t2 = insert k' v t1), (T t2 k v t2 = insert k v0 t2), (T t2 k v t2 = insert k v0 t1), (T t2 k v t2 = insert k v t2), (T t2 k v t2 = insert k v t1), (T t2 k v t1 = t2)
+(T t2 k v t1 = t1), (T t2 k v t1 = insert k0 v0 t2), (T t2 k v t1 = insert k0 v0 t1), (T t2 k v t1 = insert k0 v t2), (T t2 k v t1 = insert k0 v t1), (T t2 k v t1 = insert k' v0 t2), (T t2 k v t1 = insert k' v0 t1), (T t2 k v t1 = insert k' v t2), (T t2 k v t1 = insert k' v t1), (T t2 k v t1 = insert k v0 t2)
+(T t2 k v t1 = insert k v0 t1), (T t2 k v t1 = insert k v t2), (T t2 k v t1 = insert k v t1), (T t1 k0 v0 t2 = t2), (T t1 k0 v0 t2 = t1), (T t1 k0 v0 t2 = insert k0 v0 t2), (T t1 k0 v0 t2 = insert k0 v0 t1), (T t1 k0 v0 t2 = insert k0 v t2), (T t1 k0 v0 t2 = insert k0 v t1), (T t1 k0 v0 t2 = insert k' v0 t2)
+(T t1 k0 v0 t2 = insert k' v0 t1), (T t1 k0 v0 t2 = insert k' v t2), (T t1 k0 v0 t2 = insert k' v t1), (T t1 k0 v0 t2 = insert k v0 t2), (T t1 k0 v0 t2 = insert k v0 t1), (T t1 k0 v0 t2 = insert k v t2), (T t1 k0 v0 t2 = insert k v t1), (T t1 k0 v0 t1 = t2), (T t1 k0 v0 t1 = t1), (T t1 k0 v0 t1 = insert k0 v0 t2)
+(T t1 k0 v0 t1 = insert k0 v0 t1), (T t1 k0 v0 t1 = insert k0 v t2), (T t1 k0 v0 t1 = insert k0 v t1), (T t1 k0 v0 t1 = insert k' v0 t2), (T t1 k0 v0 t1 = insert k' v0 t1), (T t1 k0 v0 t1 = insert k' v t2), (T t1 k0 v0 t1 = insert k' v t1), (T t1 k0 v0 t1 = insert k v0 t2), (T t1 k0 v0 t1 = insert k v0 t1), (T t1 k0 v0 t1 = insert k v t2)
+(T t1 k0 v0 t1 = insert k v t1), (T t1 k0 v t2 = t2), (T t1 k0 v t2 = t1), (T t1 k0 v t2 = insert k0 v0 t2), (T t1 k0 v t2 = insert k0 v0 t1), (T t1 k0 v t2 = insert k0 v t2), (T t1 k0 v t2 = insert k0 v t1), (T t1 k0 v t2 = insert k' v0 t2), (T t1 k0 v t2 = insert k' v0 t1), (T t1 k0 v t2 = insert k' v t2)
+(T t1 k0 v t2 = insert k' v t1), (T t1 k0 v t2 = insert k v0 t2), (T t1 k0 v t2 = insert k v0 t1), (T t1 k0 v t2 = insert k v t2), (T t1 k0 v t2 = insert k v t1), (T t1 k0 v t1 = t2), (T t1 k0 v t1 = t1), (T t1 k0 v t1 = insert k0 v0 t2), (T t1 k0 v t1 = insert k0 v0 t1), (T t1 k0 v t1 = insert k0 v t2)
+(T t1 k0 v t1 = insert k0 v t1), (T t1 k0 v t1 = insert k' v0 t2), (T t1 k0 v t1 = insert k' v0 t1), (T t1 k0 v t1 = insert k' v t2), (T t1 k0 v t1 = insert k' v t1), (T t1 k0 v t1 = insert k v0 t2), (T t1 k0 v t1 = insert k v0 t1), (T t1 k0 v t1 = insert k v t2), (T t1 k0 v t1 = insert k v t1), (T t1 k' v0 t2 = t2)
+(T t1 k' v0 t2 = t1), (T t1 k' v0 t2 = insert k0 v0 t2), (T t1 k' v0 t2 = insert k0 v0 t1), (T t1 k' v0 t2 = insert k0 v t2), (T t1 k' v0 t2 = insert k0 v t1), (T t1 k' v0 t2 = insert k' v0 t2), (T t1 k' v0 t2 = insert k' v0 t1), (T t1 k' v0 t2 = insert k' v t2), (T t1 k' v0 t2 = insert k' v t1), (T t1 k' v0 t2 = insert k v0 t2)
+(T t1 k' v0 t2 = insert k v0 t1), (T t1 k' v0 t2 = insert k v t2), (T t1 k' v0 t2 = insert k v t1), (T t1 k' v0 t1 = t2), (T t1 k' v0 t1 = t1), (T t1 k' v0 t1 = insert k0 v0 t2), (T t1 k' v0 t1 = insert k0 v0 t1), (T t1 k' v0 t1 = insert k0 v t2), (T t1 k' v0 t1 = insert k0 v t1), (T t1 k' v0 t1 = insert k' v0 t2)
+(T t1 k' v0 t1 = insert k' v0 t1), (T t1 k' v0 t1 = insert k' v t2), (T t1 k' v0 t1 = insert k' v t1), (T t1 k' v0 t1 = insert k v0 t2), (T t1 k' v0 t1 = insert k v0 t1), (T t1 k' v0 t1 = insert k v t2), (T t1 k' v0 t1 = insert k v t1), (T t1 k' v t2 = t2), (T t1 k' v t2 = t1), (T t1 k' v t2 = insert k0 v0 t2)
+(T t1 k' v t2 = insert k0 v0 t1), (T t1 k' v t2 = insert k0 v t2), (T t1 k' v t2 = insert k0 v t1), (T t1 k' v t2 = insert k' v0 t2), (T t1 k' v t2 = insert k' v0 t1), (T t1 k' v t2 = insert k' v t2), (T t1 k' v t2 = insert k' v t1), (T t1 k' v t2 = insert k v0 t2), (T t1 k' v t2 = insert k v0 t1), (T t1 k' v t2 = insert k v t2)
+(T t1 k' v t2 = insert k v t1), (T t1 k' v t1 = t2), (T t1 k' v t1 = t1), (T t1 k' v t1 = insert k0 v0 t2), (T t1 k' v t1 = insert k0 v0 t1), (T t1 k' v t1 = insert k0 v t2), (T t1 k' v t1 = insert k0 v t1), (T t1 k' v t1 = insert k' v0 t2), (T t1 k' v t1 = insert k' v0 t1), (T t1 k' v t1 = insert k' v t2)
+(T t1 k' v t1 = insert k' v t1), (T t1 k' v t1 = insert k v0 t2), (T t1 k' v t1 = insert k v0 t1), (T t1 k' v t1 = insert k v t2), (T t1 k' v t1 = insert k v t1), (T t1 k v0 t2 = t2), (T t1 k v0 t2 = t1), (T t1 k v0 t2 = insert k0 v0 t2), (T t1 k v0 t2 = insert k0 v0 t1), (T t1 k v0 t2 = insert k0 v t2)
+(T t1 k v0 t2 = insert k0 v t1), (T t1 k v0 t2 = insert k' v0 t2), (T t1 k v0 t2 = insert k' v0 t1), (T t1 k v0 t2 = insert k' v t2), (T t1 k v0 t2 = insert k' v t1), (T t1 k v0 t2 = insert k v0 t2), (T t1 k v0 t2 = insert k v0 t1), (T t1 k v0 t2 = insert k v t2), (T t1 k v0 t2 = insert k v t1), (T t1 k v0 t1 = t2)
+(T t1 k v0 t1 = t1), (T t1 k v0 t1 = insert k0 v0 t2), (T t1 k v0 t1 = insert k0 v0 t1), (T t1 k v0 t1 = insert k0 v t2), (T t1 k v0 t1 = insert k0 v t1), (T t1 k v0 t1 = insert k' v0 t2), (T t1 k v0 t1 = insert k' v0 t1), (T t1 k v0 t1 = insert k' v t2), (T t1 k v0 t1 = insert k' v t1), (T t1 k v0 t1 = insert k v0 t2)
+(T t1 k v0 t1 = insert k v0 t1), (T t1 k v0 t1 = insert k v t2), (T t1 k v0 t1 = insert k v t1), (T t1 k v t2 = t2), (T t1 k v t2 = t1), (T t1 k v t2 = insert k0 v0 t2), (T t1 k v t2 = insert k0 v0 t1), (T t1 k v t2 = insert k0 v t2), (T t1 k v t2 = insert k0 v t1), (T t1 k v t2 = insert k' v0 t2)
+(T t1 k v t2 = insert k' v0 t1), (T t1 k v t2 = insert k' v t2), (T t1 k v t2 = insert k' v t1), (T t1 k v t2 = insert k v0 t2), (T t1 k v t2 = insert k v0 t1), (T t1 k v t2 = insert k v t2), (T t1 k v t2 = insert k v t1), (T t1 k v t1 = t2), (T t1 k v t1 = t1), (T t1 k v t1 = insert k0 v0 t2)
+(T t1 k v t1 = insert k0 v0 t1), (T t1 k v t1 = insert k0 v t2), (T t1 k v t1 = insert k0 v t1), (T t1 k v t1 = insert k' v0 t2), (T t1 k v t1 = insert k' v0 t1), (T t1 k v t1 = insert k' v t2), (T t1 k v t1 = insert k' v t1), (T t1 k v t1 = insert k v0 t2), (T t1 k v t1 = insert k v0 t1), (T t1 k v t1 = insert k v t2)
+(T t1 k v t1 = insert k v t1), (insert k0 v0 t2 = t2), (insert k0 v0 t2 = t1), (insert k0 v0 t1 = t2), (insert k0 v0 t1 = t1), (insert k0 v t2 = t2), (insert k0 v t2 = t1), (insert k0 v t1 = t2), (insert k0 v t1 = t1), (insert k' v0 t2 = t2)
+(insert k' v0 t2 = t1), (insert k' v0 t1 = t2), (insert k' v0 t1 = t1), (insert k' v t2 = t2), (insert k' v t2 = t1), (insert k' v t1 = t2), (insert k' v t1 = t1), (insert k v0 t2 = t2), (insert k v0 t2 = t1), (insert k v0 t1 = t2)
+(insert k v0 t1 = t1), (insert k v t2 = t2), (insert k v t2 = t1), (insert k v t1 = t2), (insert k v t1 = t1), (empty_tree = T t2 k0 v0 t2), (empty_tree = T t2 k0 v0 t1), (empty_tree = T t2 k0 v t2), (empty_tree = T t2 k0 v t1), (empty_tree = T t2 k' v0 t2)
+(empty_tree = T t2 k' v0 t1), (empty_tree = T t2 k' v t2), (empty_tree = T t2 k' v t1), (empty_tree = T t2 k v0 t2), (empty_tree = T t2 k v0 t1), (empty_tree = T t2 k v t2), (empty_tree = T t2 k v t1), (empty_tree = T t1 k0 v0 t2), (empty_tree = T t1 k0 v0 t1), (empty_tree = T t1 k0 v t2)
+(empty_tree = T t1 k0 v t1), (empty_tree = T t1 k' v0 t2), (empty_tree = T t1 k' v0 t1), (empty_tree = T t1 k' v t2), (empty_tree = T t1 k' v t1), (empty_tree = T t1 k v0 t2), (empty_tree = T t1 k v0 t1), (empty_tree = T t1 k v t2), (empty_tree = T t1 k v t1), (empty_tree = insert k0 v0 t2)
+(empty_tree = insert k0 v0 t1), (empty_tree = insert k0 v t2), (empty_tree = insert k0 v t1), (empty_tree = insert k' v0 t2), (empty_tree = insert k' v0 t1), (empty_tree = insert k' v t2), (empty_tree = insert k' v t1), (empty_tree = insert k v0 t2), (empty_tree = insert k v0 t1), (empty_tree = insert k v t2)
+(empty_tree = insert k v t1), (E = T t2 k0 v0 t2), (E = T t2 k0 v0 t1), (E = T t2 k0 v t2), (E = T t2 k0 v t1), (E = T t2 k' v0 t2), (E = T t2 k' v0 t1), (E = T t2 k' v t2), (E = T t2 k' v t1), (E = T t2 k v0 t2)
+(E = T t2 k v0 t1), (E = T t2 k v t2), (E = T t2 k v t1), (E = T t1 k0 v0 t2), (E = T t1 k0 v0 t1), (E = T t1 k0 v t2), (E = T t1 k0 v t1), (E = T t1 k' v0 t2), (E = T t1 k' v0 t1), (E = T t1 k' v t2)
+(E = T t1 k' v t1), (E = T t1 k v0 t2), (E = T t1 k v0 t1), (E = T t1 k v t2), (E = T t1 k v t1), (E = insert k0 v0 t2), (E = insert k0 v0 t1), (E = insert k0 v t2), (E = insert k0 v t1), (E = insert k' v0 t2)
+(E = insert k' v0 t1), (E = insert k' v t2), (E = insert k' v t1), (E = insert k v0 t2), (E = insert k v0 t1), (E = insert k v t2), (E = insert k v t1), (None = Some v0), (None = Some v)
+
+Label: 1 (1)
+(BST t2), (BST t1), (k0 < k0), (k0 < k'), (k0 < k), (k' < k0), (k' < k'), (k' < k), (k < k0), (k < k')
+(k < k), (k0 <= k0), (k0 <= k'), (k0 <= k), (k' <= k0), (k' <= k'), (k' <= k), (k <= k0), (k <= k'), (k <= k)
+(t2 = t2), (t2 = t1), (t1 = t2), (t1 = t1), (v0 = v0), (v0 = v), (v = v0), (v = v), (k0 = k0), (k0 = k')
+(k0 = k), (k' = k0), (k' = k'), (k' = k), (k = k0), (k = k'), (k = k), (false = bound k0 t2), (false = bound k0 t1), (false = bound k' t2)
+(false = bound k' t1), (false = bound k t2), (false = bound k t1), (true = bound k0 t2), (true = bound k0 t1), (true = bound k' t2), (true = bound k' t1), (true = bound k t2), (true = bound k t1), (disjoint (fast_elements t2) (fast_elements t1))
+(disjoint (fast_elements t2) (elements t2)), (disjoint (fast_elements t2) (elements t1)), (disjoint (fast_elements t1) (fast_elements t2)), (disjoint (fast_elements t1) (elements t2)), (disjoint (fast_elements t1) (elements t1)), (disjoint (elements t2) (fast_elements t2)), (disjoint (elements t2) (fast_elements t1)), (disjoint (elements t2) (elements t1)), (disjoint (elements t1) (fast_elements t2)), (disjoint (elements t1) (fast_elements t1))
+(disjoint (elements t1) (elements t2)), (BST (T t2 k0 v0 t2)), (BST (T t2 k0 v0 t1)), (BST (T t2 k0 v t2)), (BST (T t2 k0 v t1)), (BST (T t2 k' v0 t2)), (BST (T t2 k' v0 t1)), (BST (T t2 k' v t2)), (BST (T t2 k' v t1)), (BST (T t2 k v0 t2))
+(BST (T t2 k v0 t1)), (BST (T t2 k v t2)), (BST (T t2 k v t1)), (BST (T t1 k0 v0 t2)), (BST (T t1 k0 v0 t1)), (BST (T t1 k0 v t2)), (BST (T t1 k0 v t1)), (BST (T t1 k' v0 t2)), (BST (T t1 k' v0 t1)), (BST (T t1 k' v t2))
+(BST (T t1 k' v t1)), (BST (T t1 k v0 t2)), (BST (T t1 k v0 t1)), (BST (T t1 k v t2)), (BST (T t1 k v t1)), (BST (insert k0 v0 t2)), (BST (insert k0 v0 t1)), (BST (insert k0 v t2)), (BST (insert k0 v t1)), (BST (insert k' v0 t2))
+(BST (insert k' v0 t1)), (BST (insert k' v t2)), (BST (insert k' v t1)), (BST (insert k v0 t2)), (BST (insert k v0 t1)), (BST (insert k v t2)), (BST (insert k v t1)), (BST empty_tree), (BST E), (k0 <=* [])
+(k' <=* []), (k <=* []), (sorted []), (Permutation (fast_elements t2) (fast_elements t1)), (Permutation (fast_elements t2) (elements t2)), (Permutation (fast_elements t2) (elements t1)), (Permutation (fast_elements t1) (fast_elements t2)), (Permutation (fast_elements t1) (elements t2)), (Permutation (fast_elements t1) (elements t1)), (Permutation (elements t2) (fast_elements t2))
+(Permutation (elements t2) (fast_elements t1)), (Permutation (elements t2) (elements t1)), (Permutation (elements t1) (fast_elements t2)), (Permutation (elements t1) (fast_elements t1)), (Permutation (elements t1) (elements t2)), (In (k0, v0) (fast_elements t2)), (In (k0, v0) (fast_elements t1)), (In (k0, v0) (elements t2)), (In (k0, v0) (elements t1)), (In (k0, v) (fast_elements t2))
+(In (k0, v) (fast_elements t1)), (In (k0, v) (elements t2)), (In (k0, v) (elements t1)), (In (k', v0) (fast_elements t2)), (In (k', v0) (fast_elements t1)), (In (k', v0) (elements t2)), (In (k', v0) (elements t1)), (In (k', v) (fast_elements t2)), (In (k', v) (fast_elements t1)), (In (k', v) (elements t2))
+(In (k', v) (elements t1)), (In (k, v0) (fast_elements t2)), (In (k, v0) (fast_elements t1)), (In (k, v0) (elements t2)), (In (k, v0) (elements t1)), (In (k, v) (fast_elements t2)), (In (k, v) (fast_elements t1)), (In (k, v) (elements t2)), (In (k, v) (elements t1)), (~ BST t2)
+(~ BST t1), (~ k0 < k0), (~ k0 < k'), (~ k0 < k), (~ k' < k0), (~ k' < k'), (~ k' < k), (~ k < k0), (~ k < k'), (~ k < k)
+(~ k0 <= k0), (~ k0 <= k'), (~ k0 <= k), (~ k' <= k0), (~ k' <= k'), (~ k' <= k), (~ k <= k0), (~ k <= k'), (~ k <= k), (t2 <> t2)
+(t2 <> t1), (t1 <> t2), (t1 <> t1), (v0 <> v0), (v0 <> v), (v <> v0), (v <> v), (k0 <> k0), (k0 <> k'), (k0 <> k)
+(k' <> k0), (k' <> k'), (k' <> k), (k <> k0), (k <> k'), (k <> k), (lookup v0 k0 t2 = v0), (lookup v0 k0 t2 = v), (lookup v0 k0 t1 = v0), (lookup v0 k0 t1 = v)
+(lookup v0 k' t2 = v0), (lookup v0 k' t2 = v), (lookup v0 k' t1 = v0), (lookup v0 k' t1 = v), (lookup v0 k t2 = v0), (lookup v0 k t2 = v), (lookup v0 k t1 = v0), (lookup v0 k t1 = v), (lookup v k0 t2 = v0), (lookup v k0 t2 = v)
+(lookup v k0 t1 = v0), (lookup v k0 t1 = v), (lookup v k' t2 = v0), (lookup v k' t2 = v), (lookup v k' t1 = v0), (lookup v k' t1 = v), (lookup v k t2 = v0), (lookup v k t2 = v), (lookup v k t1 = v0), (lookup v k t1 = v)
+(Red = lookup v0 k0 t2), (Red = lookup v0 k0 t1), (Red = lookup v0 k' t2), (Red = lookup v0 k' t1), (Red = lookup v0 k t2), (Red = lookup v0 k t1), (Red = lookup v k0 t2), (Red = lookup v k0 t1), (Red = lookup v k' t2), (Red = lookup v k' t1)
+(Red = lookup v k t2), (Red = lookup v k t1), (Green = lookup v0 k0 t2), (Green = lookup v0 k0 t1), (Green = lookup v0 k' t2), (Green = lookup v0 k' t1), (Green = lookup v0 k t2), (Green = lookup v0 k t1), (Green = lookup v k0 t2), (Green = lookup v k0 t1)
+(Green = lookup v k' t2), (Green = lookup v k' t1), (Green = lookup v k t2), (Green = lookup v k t1), (Blue = lookup v0 k0 t2), (Blue = lookup v0 k0 t1), (Blue = lookup v0 k' t2), (Blue = lookup v0 k' t1), (Blue = lookup v0 k t2), (Blue = lookup v0 k t1)
+(Blue = lookup v k0 t2), (Blue = lookup v k0 t1), (Blue = lookup v k' t2), (Blue = lookup v k' t1), (Blue = lookup v k t2), (Blue = lookup v k t1), (fast_elements t2 = elements t2), (fast_elements t2 = elements t1), (fast_elements t1 = elements t2), (fast_elements t1 = elements t1)
+(None = Some k0), (None = Some k'), (None = Some k), (None = Some t2), (None = Some t1), (T t2 k0 v0 t2 = t2), (T t2 k0 v0 t2 = t1), (T t2 k0 v0 t2 = insert k0 v0 t2), (T t2 k0 v0 t2 = insert k0 v0 t1), (T t2 k0 v0 t2 = insert k0 v t2)
+(T t2 k0 v0 t2 = insert k0 v t1), (T t2 k0 v0 t2 = insert k' v0 t2), (T t2 k0 v0 t2 = insert k' v0 t1), (T t2 k0 v0 t2 = insert k' v t2), (T t2 k0 v0 t2 = insert k' v t1), (T t2 k0 v0 t2 = insert k v0 t2), (T t2 k0 v0 t2 = insert k v0 t1), (T t2 k0 v0 t2 = insert k v t2), (T t2 k0 v0 t2 = insert k v t1), (T t2 k0 v0 t1 = t2)
+(T t2 k0 v0 t1 = t1), (T t2 k0 v0 t1 = insert k0 v0 t2), (T t2 k0 v0 t1 = insert k0 v0 t1), (T t2 k0 v0 t1 = insert k0 v t2), (T t2 k0 v0 t1 = insert k0 v t1), (T t2 k0 v0 t1 = insert k' v0 t2), (T t2 k0 v0 t1 = insert k' v0 t1), (T t2 k0 v0 t1 = insert k' v t2), (T t2 k0 v0 t1 = insert k' v t1), (T t2 k0 v0 t1 = insert k v0 t2)
+(T t2 k0 v0 t1 = insert k v0 t1), (T t2 k0 v0 t1 = insert k v t2), (T t2 k0 v0 t1 = insert k v t1), (T t2 k0 v t2 = t2), (T t2 k0 v t2 = t1), (T t2 k0 v t2 = insert k0 v0 t2), (T t2 k0 v t2 = insert k0 v0 t1), (T t2 k0 v t2 = insert k0 v t2), (T t2 k0 v t2 = insert k0 v t1), (T t2 k0 v t2 = insert k' v0 t2)
+(T t2 k0 v t2 = insert k' v0 t1), (T t2 k0 v t2 = insert k' v t2), (T t2 k0 v t2 = insert k' v t1), (T t2 k0 v t2 = insert k v0 t2), (T t2 k0 v t2 = insert k v0 t1), (T t2 k0 v t2 = insert k v t2), (T t2 k0 v t2 = insert k v t1), (T t2 k0 v t1 = t2), (T t2 k0 v t1 = t1), (T t2 k0 v t1 = insert k0 v0 t2)
+(T t2 k0 v t1 = insert k0 v0 t1), (T t2 k0 v t1 = insert k0 v t2), (T t2 k0 v t1 = insert k0 v t1), (T t2 k0 v t1 = insert k' v0 t2), (T t2 k0 v t1 = insert k' v0 t1), (T t2 k0 v t1 = insert k' v t2), (T t2 k0 v t1 = insert k' v t1), (T t2 k0 v t1 = insert k v0 t2), (T t2 k0 v t1 = insert k v0 t1), (T t2 k0 v t1 = insert k v t2)
+(T t2 k0 v t1 = insert k v t1), (T t2 k' v0 t2 = t2), (T t2 k' v0 t2 = t1), (T t2 k' v0 t2 = insert k0 v0 t2), (T t2 k' v0 t2 = insert k0 v0 t1), (T t2 k' v0 t2 = insert k0 v t2), (T t2 k' v0 t2 = insert k0 v t1), (T t2 k' v0 t2 = insert k' v0 t2), (T t2 k' v0 t2 = insert k' v0 t1), (T t2 k' v0 t2 = insert k' v t2)
+(T t2 k' v0 t2 = insert k' v t1), (T t2 k' v0 t2 = insert k v0 t2), (T t2 k' v0 t2 = insert k v0 t1), (T t2 k' v0 t2 = insert k v t2), (T t2 k' v0 t2 = insert k v t1), (T t2 k' v0 t1 = t2), (T t2 k' v0 t1 = t1), (T t2 k' v0 t1 = insert k0 v0 t2), (T t2 k' v0 t1 = insert k0 v0 t1), (T t2 k' v0 t1 = insert k0 v t2)
+(T t2 k' v0 t1 = insert k0 v t1), (T t2 k' v0 t1 = insert k' v0 t2), (T t2 k' v0 t1 = insert k' v0 t1), (T t2 k' v0 t1 = insert k' v t2), (T t2 k' v0 t1 = insert k' v t1), (T t2 k' v0 t1 = insert k v0 t2), (T t2 k' v0 t1 = insert k v0 t1), (T t2 k' v0 t1 = insert k v t2), (T t2 k' v0 t1 = insert k v t1), (T t2 k' v t2 = t2)
+(T t2 k' v t2 = t1), (T t2 k' v t2 = insert k0 v0 t2), (T t2 k' v t2 = insert k0 v0 t1), (T t2 k' v t2 = insert k0 v t2), (T t2 k' v t2 = insert k0 v t1), (T t2 k' v t2 = insert k' v0 t2), (T t2 k' v t2 = insert k' v0 t1), (T t2 k' v t2 = insert k' v t2), (T t2 k' v t2 = insert k' v t1), (T t2 k' v t2 = insert k v0 t2)
+(T t2 k' v t2 = insert k v0 t1), (T t2 k' v t2 = insert k v t2), (T t2 k' v t2 = insert k v t1), (T t2 k' v t1 = t2), (T t2 k' v t1 = t1), (T t2 k' v t1 = insert k0 v0 t2), (T t2 k' v t1 = insert k0 v0 t1), (T t2 k' v t1 = insert k0 v t2), (T t2 k' v t1 = insert k0 v t1), (T t2 k' v t1 = insert k' v0 t2)
+(T t2 k' v t1 = insert k' v0 t1), (T t2 k' v t1 = insert k' v t2), (T t2 k' v t1 = insert k' v t1), (T t2 k' v t1 = insert k v0 t2), (T t2 k' v t1 = insert k v0 t1), (T t2 k' v t1 = insert k v t2), (T t2 k' v t1 = insert k v t1), (T t2 k v0 t2 = t2), (T t2 k v0 t2 = t1), (T t2 k v0 t2 = insert k0 v0 t2)
+(T t2 k v0 t2 = insert k0 v0 t1), (T t2 k v0 t2 = insert k0 v t2), (T t2 k v0 t2 = insert k0 v t1), (T t2 k v0 t2 = insert k' v0 t2), (T t2 k v0 t2 = insert k' v0 t1), (T t2 k v0 t2 = insert k' v t2), (T t2 k v0 t2 = insert k' v t1), (T t2 k v0 t2 = insert k v0 t2), (T t2 k v0 t2 = insert k v0 t1), (T t2 k v0 t2 = insert k v t2)
+(T t2 k v0 t2 = insert k v t1), (T t2 k v0 t1 = t2), (T t2 k v0 t1 = t1), (T t2 k v0 t1 = insert k0 v0 t2), (T t2 k v0 t1 = insert k0 v0 t1), (T t2 k v0 t1 = insert k0 v t2), (T t2 k v0 t1 = insert k0 v t1), (T t2 k v0 t1 = insert k' v0 t2), (T t2 k v0 t1 = insert k' v0 t1), (T t2 k v0 t1 = insert k' v t2)
+(T t2 k v0 t1 = insert k' v t1), (T t2 k v0 t1 = insert k v0 t2), (T t2 k v0 t1 = insert k v0 t1), (T t2 k v0 t1 = insert k v t2), (T t2 k v0 t1 = insert k v t1), (T t2 k v t2 = t2), (T t2 k v t2 = t1), (T t2 k v t2 = insert k0 v0 t2), (T t2 k v t2 = insert k0 v0 t1), (T t2 k v t2 = insert k0 v t2)
+(T t2 k v t2 = insert k0 v t1), (T t2 k v t2 = insert k' v0 t2), (T t2 k v t2 = insert k' v0 t1), (T t2 k v t2 = insert k' v t2), (T t2 k v t2 = insert k' v t1), (T t2 k v t2 = insert k v0 t2), (T t2 k v t2 = insert k v0 t1), (T t2 k v t2 = insert k v t2), (T t2 k v t2 = insert k v t1), (T t2 k v t1 = t2)
+(T t2 k v t1 = t1), (T t2 k v t1 = insert k0 v0 t2), (T t2 k v t1 = insert k0 v0 t1), (T t2 k v t1 = insert k0 v t2), (T t2 k v t1 = insert k0 v t1), (T t2 k v t1 = insert k' v0 t2), (T t2 k v t1 = insert k' v0 t1), (T t2 k v t1 = insert k' v t2), (T t2 k v t1 = insert k' v t1), (T t2 k v t1 = insert k v0 t2)
+(T t2 k v t1 = insert k v0 t1), (T t2 k v t1 = insert k v t2), (T t2 k v t1 = insert k v t1), (T t1 k0 v0 t2 = t2), (T t1 k0 v0 t2 = t1), (T t1 k0 v0 t2 = insert k0 v0 t2), (T t1 k0 v0 t2 = insert k0 v0 t1), (T t1 k0 v0 t2 = insert k0 v t2), (T t1 k0 v0 t2 = insert k0 v t1), (T t1 k0 v0 t2 = insert k' v0 t2)
+(T t1 k0 v0 t2 = insert k' v0 t1), (T t1 k0 v0 t2 = insert k' v t2), (T t1 k0 v0 t2 = insert k' v t1), (T t1 k0 v0 t2 = insert k v0 t2), (T t1 k0 v0 t2 = insert k v0 t1), (T t1 k0 v0 t2 = insert k v t2), (T t1 k0 v0 t2 = insert k v t1), (T t1 k0 v0 t1 = t2), (T t1 k0 v0 t1 = t1), (T t1 k0 v0 t1 = insert k0 v0 t2)
+(T t1 k0 v0 t1 = insert k0 v0 t1), (T t1 k0 v0 t1 = insert k0 v t2), (T t1 k0 v0 t1 = insert k0 v t1), (T t1 k0 v0 t1 = insert k' v0 t2), (T t1 k0 v0 t1 = insert k' v0 t1), (T t1 k0 v0 t1 = insert k' v t2), (T t1 k0 v0 t1 = insert k' v t1), (T t1 k0 v0 t1 = insert k v0 t2), (T t1 k0 v0 t1 = insert k v0 t1), (T t1 k0 v0 t1 = insert k v t2)
+(T t1 k0 v0 t1 = insert k v t1), (T t1 k0 v t2 = t2), (T t1 k0 v t2 = t1), (T t1 k0 v t2 = insert k0 v0 t2), (T t1 k0 v t2 = insert k0 v0 t1), (T t1 k0 v t2 = insert k0 v t2), (T t1 k0 v t2 = insert k0 v t1), (T t1 k0 v t2 = insert k' v0 t2), (T t1 k0 v t2 = insert k' v0 t1), (T t1 k0 v t2 = insert k' v t2)
+(T t1 k0 v t2 = insert k' v t1), (T t1 k0 v t2 = insert k v0 t2), (T t1 k0 v t2 = insert k v0 t1), (T t1 k0 v t2 = insert k v t2), (T t1 k0 v t2 = insert k v t1), (T t1 k0 v t1 = t2), (T t1 k0 v t1 = t1), (T t1 k0 v t1 = insert k0 v0 t2), (T t1 k0 v t1 = insert k0 v0 t1), (T t1 k0 v t1 = insert k0 v t2)
+(T t1 k0 v t1 = insert k0 v t1), (T t1 k0 v t1 = insert k' v0 t2), (T t1 k0 v t1 = insert k' v0 t1), (T t1 k0 v t1 = insert k' v t2), (T t1 k0 v t1 = insert k' v t1), (T t1 k0 v t1 = insert k v0 t2), (T t1 k0 v t1 = insert k v0 t1), (T t1 k0 v t1 = insert k v t2), (T t1 k0 v t1 = insert k v t1), (T t1 k' v0 t2 = t2)
+(T t1 k' v0 t2 = t1), (T t1 k' v0 t2 = insert k0 v0 t2), (T t1 k' v0 t2 = insert k0 v0 t1), (T t1 k' v0 t2 = insert k0 v t2), (T t1 k' v0 t2 = insert k0 v t1), (T t1 k' v0 t2 = insert k' v0 t2), (T t1 k' v0 t2 = insert k' v0 t1), (T t1 k' v0 t2 = insert k' v t2), (T t1 k' v0 t2 = insert k' v t1), (T t1 k' v0 t2 = insert k v0 t2)
+(T t1 k' v0 t2 = insert k v0 t1), (T t1 k' v0 t2 = insert k v t2), (T t1 k' v0 t2 = insert k v t1), (T t1 k' v0 t1 = t2), (T t1 k' v0 t1 = t1), (T t1 k' v0 t1 = insert k0 v0 t2), (T t1 k' v0 t1 = insert k0 v0 t1), (T t1 k' v0 t1 = insert k0 v t2), (T t1 k' v0 t1 = insert k0 v t1), (T t1 k' v0 t1 = insert k' v0 t2)
+(T t1 k' v0 t1 = insert k' v0 t1), (T t1 k' v0 t1 = insert k' v t2), (T t1 k' v0 t1 = insert k' v t1), (T t1 k' v0 t1 = insert k v0 t2), (T t1 k' v0 t1 = insert k v0 t1), (T t1 k' v0 t1 = insert k v t2), (T t1 k' v0 t1 = insert k v t1), (T t1 k' v t2 = t2), (T t1 k' v t2 = t1), (T t1 k' v t2 = insert k0 v0 t2)
+(T t1 k' v t2 = insert k0 v0 t1), (T t1 k' v t2 = insert k0 v t2), (T t1 k' v t2 = insert k0 v t1), (T t1 k' v t2 = insert k' v0 t2), (T t1 k' v t2 = insert k' v0 t1), (T t1 k' v t2 = insert k' v t2), (T t1 k' v t2 = insert k' v t1), (T t1 k' v t2 = insert k v0 t2), (T t1 k' v t2 = insert k v0 t1), (T t1 k' v t2 = insert k v t2)
+(T t1 k' v t2 = insert k v t1), (T t1 k' v t1 = t2), (T t1 k' v t1 = t1), (T t1 k' v t1 = insert k0 v0 t2), (T t1 k' v t1 = insert k0 v0 t1), (T t1 k' v t1 = insert k0 v t2), (T t1 k' v t1 = insert k0 v t1), (T t1 k' v t1 = insert k' v0 t2), (T t1 k' v t1 = insert k' v0 t1), (T t1 k' v t1 = insert k' v t2)
+(T t1 k' v t1 = insert k' v t1), (T t1 k' v t1 = insert k v0 t2), (T t1 k' v t1 = insert k v0 t1), (T t1 k' v t1 = insert k v t2), (T t1 k' v t1 = insert k v t1), (T t1 k v0 t2 = t2), (T t1 k v0 t2 = t1), (T t1 k v0 t2 = insert k0 v0 t2), (T t1 k v0 t2 = insert k0 v0 t1), (T t1 k v0 t2 = insert k0 v t2)
+(T t1 k v0 t2 = insert k0 v t1), (T t1 k v0 t2 = insert k' v0 t2), (T t1 k v0 t2 = insert k' v0 t1), (T t1 k v0 t2 = insert k' v t2), (T t1 k v0 t2 = insert k' v t1), (T t1 k v0 t2 = insert k v0 t2), (T t1 k v0 t2 = insert k v0 t1), (T t1 k v0 t2 = insert k v t2), (T t1 k v0 t2 = insert k v t1), (T t1 k v0 t1 = t2)
+(T t1 k v0 t1 = t1), (T t1 k v0 t1 = insert k0 v0 t2), (T t1 k v0 t1 = insert k0 v0 t1), (T t1 k v0 t1 = insert k0 v t2), (T t1 k v0 t1 = insert k0 v t1), (T t1 k v0 t1 = insert k' v0 t2), (T t1 k v0 t1 = insert k' v0 t1), (T t1 k v0 t1 = insert k' v t2), (T t1 k v0 t1 = insert k' v t1), (T t1 k v0 t1 = insert k v0 t2)
+(T t1 k v0 t1 = insert k v0 t1), (T t1 k v0 t1 = insert k v t2), (T t1 k v0 t1 = insert k v t1), (T t1 k v t2 = t2), (T t1 k v t2 = t1), (T t1 k v t2 = insert k0 v0 t2), (T t1 k v t2 = insert k0 v0 t1), (T t1 k v t2 = insert k0 v t2), (T t1 k v t2 = insert k0 v t1), (T t1 k v t2 = insert k' v0 t2)
+(T t1 k v t2 = insert k' v0 t1), (T t1 k v t2 = insert k' v t2), (T t1 k v t2 = insert k' v t1), (T t1 k v t2 = insert k v0 t2), (T t1 k v t2 = insert k v0 t1), (T t1 k v t2 = insert k v t2), (T t1 k v t2 = insert k v t1), (T t1 k v t1 = t2), (T t1 k v t1 = t1), (T t1 k v t1 = insert k0 v0 t2)
+(T t1 k v t1 = insert k0 v0 t1), (T t1 k v t1 = insert k0 v t2), (T t1 k v t1 = insert k0 v t1), (T t1 k v t1 = insert k' v0 t2), (T t1 k v t1 = insert k' v0 t1), (T t1 k v t1 = insert k' v t2), (T t1 k v t1 = insert k' v t1), (T t1 k v t1 = insert k v0 t2), (T t1 k v t1 = insert k v0 t1), (T t1 k v t1 = insert k v t2)
+(T t1 k v t1 = insert k v t1), (insert k0 v0 t2 = t2), (insert k0 v0 t2 = t1), (insert k0 v0 t1 = t2), (insert k0 v0 t1 = t1), (insert k0 v t2 = t2), (insert k0 v t2 = t1), (insert k0 v t1 = t2), (insert k0 v t1 = t1), (insert k' v0 t2 = t2)
+(insert k' v0 t2 = t1), (insert k' v0 t1 = t2), (insert k' v0 t1 = t1), (insert k' v t2 = t2), (insert k' v t2 = t1), (insert k' v t1 = t2), (insert k' v t1 = t1), (insert k v0 t2 = t2), (insert k v0 t2 = t1), (insert k v0 t1 = t2)
+(insert k v0 t1 = t1), (insert k v t2 = t2), (insert k v t2 = t1), (insert k v t1 = t2), (insert k v t1 = t1), (empty_tree = T t2 k0 v0 t2), (empty_tree = T t2 k0 v0 t1), (empty_tree = T t2 k0 v t2), (empty_tree = T t2 k0 v t1), (empty_tree = T t2 k' v0 t2)
+(empty_tree = T t2 k' v0 t1), (empty_tree = T t2 k' v t2), (empty_tree = T t2 k' v t1), (empty_tree = T t2 k v0 t2), (empty_tree = T t2 k v0 t1), (empty_tree = T t2 k v t2), (empty_tree = T t2 k v t1), (empty_tree = T t1 k0 v0 t2), (empty_tree = T t1 k0 v0 t1), (empty_tree = T t1 k0 v t2)
+(empty_tree = T t1 k0 v t1), (empty_tree = T t1 k' v0 t2), (empty_tree = T t1 k' v0 t1), (empty_tree = T t1 k' v t2), (empty_tree = T t1 k' v t1), (empty_tree = T t1 k v0 t2), (empty_tree = T t1 k v0 t1), (empty_tree = T t1 k v t2), (empty_tree = T t1 k v t1), (empty_tree = insert k0 v0 t2)
+(empty_tree = insert k0 v0 t1), (empty_tree = insert k0 v t2), (empty_tree = insert k0 v t1), (empty_tree = insert k' v0 t2), (empty_tree = insert k' v0 t1), (empty_tree = insert k' v t2), (empty_tree = insert k' v t1), (empty_tree = insert k v0 t2), (empty_tree = insert k v0 t1), (empty_tree = insert k v t2)
+(empty_tree = insert k v t1), (E = T t2 k0 v0 t2), (E = T t2 k0 v0 t1), (E = T t2 k0 v t2), (E = T t2 k0 v t1), (E = T t2 k' v0 t2), (E = T t2 k' v0 t1), (E = T t2 k' v t2), (E = T t2 k' v t1), (E = T t2 k v0 t2)
+(E = T t2 k v0 t1), (E = T t2 k v t2), (E = T t2 k v t1), (E = T t1 k0 v0 t2), (E = T t1 k0 v0 t1), (E = T t1 k0 v t2), (E = T t1 k0 v t1), (E = T t1 k' v0 t2), (E = T t1 k' v0 t1), (E = T t1 k' v t2)
+(E = T t1 k' v t1), (E = T t1 k v0 t2), (E = T t1 k v0 t1), (E = T t1 k v t2), (E = T t1 k v t1), (E = insert k0 v0 t2), (E = insert k0 v0 t1), (E = insert k0 v t2), (E = insert k0 v t1), (E = insert k' v0 t2)
+(E = insert k' v0 t1), (E = insert k' v t2), (E = insert k' v t1), (E = insert k v0 t2), (E = insert k v0 t1), (E = insert k v t2), (E = insert k v t1), (None = Some v0), (None = Some v)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 63.436 seconds
+
+
+Label: 0 (0)
+
+Label: 1 (1)
+
+
+
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 65.724 seconds
+
+Number of Result Pairs Returned: 1
+
+1. (ForallT (fun (y : nat) (_ : value) => y <= k') (T t1 k0 v0 t2) ->  In (k, v) (elements t1 ++ (k0, v0) :: elements t2) -> k <= k')

@@ -1,0 +1,444 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (isAmortized (Queue (Cons n0 l) Nil) &&
+ negb (isEmpty (Queue (Cons n0 l) Nil)) = true)
+
+----------------------------------
+Goal: (S (len (butlast (Cons n0 l))) = len (Cons n0 l) + 0)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3.099 seconds
+
+gv2 : lst = (butlast (Cons n0 l))
+gv4 : nat = (len (Cons n0 l) + 0)
+gv6 : nat = 0
+gv0 : nat = (S (len (butlast (Cons n0 l))))
+gv3 : lst = (Cons n0 l)
+gv5 : nat = (len (Cons n0 l))
+gv1 : nat = (len (butlast (Cons n0 l)))
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 82.919 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (S (len (butlast (Cons n0 l))) = len (Cons n0 l) + 0)
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (len (Cons n0 l) = gv5)
+
+----------------------------------
+Goal: (S (len (butlast (Cons n0 l))) = gv5 + 0)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (len (butlast (Cons n0 l)) = gv1)
+
+----------------------------------
+Goal: (S gv1 = len (Cons n0 l) + 0)
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (isAmortized (Queue gv3 Nil) && negb (isEmpty (Queue gv3 Nil)) = true)
+
+----------------------------------
+Goal: (S (len (butlast gv3)) = len gv3 + 0)
+Case: Valid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (len gv3 = gv5)
+ -- (Cons n0 l = gv3)
+
+----------------------------------
+Goal: (S (len (butlast gv3)) = gv5 + 0)
+Case: Invalid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (len (butlast gv3) = gv1)
+ -- (Cons n0 l = gv3)
+
+----------------------------------
+Goal: (S gv1 = len gv3 + 0)
+Case: Invalid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (Cons n0 l = gv3)
+ -- (S (len (butlast gv3)) = gv0)
+
+----------------------------------
+Goal: (gv0 = len gv3 + 0)
+Case: Invalid and Generalized
+
+Label: Generalization #7
+Assumptions: 
+ -- (Cons n0 l = gv3)
+ -- (0 = gv6)
+
+----------------------------------
+Goal: (S (len (butlast gv3)) = len gv3 + gv6)
+Case: Invalid and Generalized
+
+Label: Generalization #8
+Assumptions: 
+ -- (len gv3 + 0 = gv4)
+ -- (Cons n0 l = gv3)
+
+----------------------------------
+Goal: (S (len (butlast gv3)) = gv4)
+Case: Invalid and Generalized
+
+Label: Generalization #9
+Assumptions: 
+ -- (Cons n0 l = gv3)
+ -- (butlast gv3 = gv2)
+
+----------------------------------
+Goal: (S (len gv2) = len gv3 + 0)
+Case: Invalid and Generalized
+
+Label: Generalization #10
+Assumptions: 
+ -- (S (len (butlast (Cons n0 l))) = gv0)
+
+----------------------------------
+Goal: (gv0 = len (Cons n0 l) + 0)
+Case: Invalid and Generalized
+
+Label: Generalization #11
+Assumptions: 
+ -- (0 = gv6)
+
+----------------------------------
+Goal: (S (len (butlast (Cons n0 l))) = len (Cons n0 l) + gv6)
+Case: Invalid and Generalized
+
+Label: Generalization #12
+Assumptions: 
+ -- (len (Cons n0 l) + 0 = gv4)
+
+----------------------------------
+Goal: (S (len (butlast (Cons n0 l))) = gv4)
+Case: Invalid and Generalized
+
+Label: Generalization #13
+Assumptions: 
+ -- (butlast (Cons n0 l) = gv2)
+
+----------------------------------
+Goal: (S (len gv2) = len (Cons n0 l) + 0)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 83.076 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+lst : Set
+queue : Set
+len : (lst -> nat)
+qlen : (queue -> nat)
+append : (lst -> lst -> lst)
+butlast : (lst -> lst)
+qpopback : (queue -> queue)
+isAmortized : (queue -> bool)
+isEmpty : (queue -> bool)
+Nil : lst
+Cons : (nat -> lst -> lst)
+Queue : (lst -> lst -> queue)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 193
+Negative Examples: 500
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 6 (6)
+Inferring Condition About Generalization
+Positive Examples: 175
+Negative Examples: 500
+
+Label: 7 (7)
+Inferring Condition About Generalization
+Positive Examples: 124
+Negative Examples: 500
+
+Label: 8 (8)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 9 (9)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 10 (10)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 11 (11)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 83.238 seconds
+
+
+Label: 0 (0)
+(gv5 < gv5), (gv5 < n0), (n0 < gv5), (n0 < n0), (gv5 <= gv5), (gv5 <= n0), (n0 <= gv5), (n0 <= n0), (l = l), (gv5 = gv5)
+(gv5 = n0), (n0 = gv5), (n0 = n0), (gv5 < len l), (n0 < len l), (len l < gv5), (len l < n0), (gv5 <= len l), (n0 <= len l), (len l <= gv5)
+(len l <= n0), (~ gv5 < gv5), (~ gv5 < n0), (~ n0 < gv5), (~ n0 < n0), (~ gv5 <= gv5), (~ gv5 <= n0), (~ n0 <= gv5), (~ n0 <= n0), (l <> l)
+(gv5 <> gv5), (gv5 <> n0), (n0 <> gv5), (n0 <> n0), (None = Some l), (None = Some gv5), (None = Some n0), (Cons gv5 l = l), (Cons gv5 l = butlast l), (Cons gv5 l = append l l)
+(Cons n0 l = l), (Cons n0 l = butlast l), (Cons n0 l = append l l), (butlast l = l), (butlast l = append l l), (append l l = l), (Nil = Cons gv5 l), (Nil = Cons n0 l), (Nil = butlast l), (Nil = append l l)
+(len l = gv5), (len l = n0)
+
+Label: 1 (1)
+(n0 < n0), (n0 < gv1), (gv1 < n0), (gv1 < gv1), (n0 <= n0), (n0 <= gv1), (gv1 <= n0), (gv1 <= gv1), (l = l), (n0 = n0)
+(n0 = gv1), (gv1 = n0), (gv1 = gv1), (n0 < len l), (gv1 < len l), (len l < n0), (len l < gv1), (n0 <= len l), (gv1 <= len l), (len l <= n0)
+(len l <= gv1), (~ n0 < n0), (~ n0 < gv1), (~ gv1 < n0), (~ gv1 < gv1), (~ n0 <= n0), (~ n0 <= gv1), (~ gv1 <= n0), (~ gv1 <= gv1), (l <> l)
+(n0 <> n0), (n0 <> gv1), (gv1 <> n0), (gv1 <> gv1), (None = Some l), (None = Some n0), (None = Some gv1), (Cons n0 l = l), (Cons n0 l = butlast l), (Cons n0 l = append l l)
+(Cons gv1 l = l), (Cons gv1 l = butlast l), (Cons gv1 l = append l l), (butlast l = l), (butlast l = append l l), (append l l = l), (Nil = Cons n0 l), (Nil = Cons gv1 l), (Nil = butlast l), (Nil = append l l)
+(len l = n0), (len l = gv1)
+
+Label: 2 (2)
+(n0 < n0), (n0 < gv5), (gv5 < n0), (gv5 < gv5), (n0 <= n0), (n0 <= gv5), (gv5 <= n0), (gv5 <= gv5), (n0 = n0), (n0 = gv5)
+(gv5 = n0), (gv5 = gv5), (l = l), (l = gv3), (gv3 = l), (gv3 = gv3), (n0 < len l), (n0 < len gv3), (gv5 < len l), (gv5 < len gv3)
+(len l < n0), (len l < gv5), (len l < len gv3), (len gv3 < n0), (len gv3 < gv5), (len gv3 < len l), (n0 <= len l), (n0 <= len gv3), (gv5 <= len l), (gv5 <= len gv3)
+(len l <= n0), (len l <= gv5), (len l <= len gv3), (len gv3 <= n0), (len gv3 <= gv5), (len gv3 <= len l), (~ n0 < n0), (~ n0 < gv5), (~ gv5 < n0), (~ gv5 < gv5)
+(~ n0 <= n0), (~ n0 <= gv5), (~ gv5 <= n0), (~ gv5 <= gv5), (n0 <> n0), (n0 <> gv5), (gv5 <> n0), (gv5 <> gv5), (l <> l), (l <> gv3)
+(gv3 <> l), (gv3 <> gv3), (None = Some l), (None = Some gv3), (None = Some n0), (None = Some gv5), (Cons n0 l = l), (Cons n0 l = gv3), (Cons n0 l = butlast l), (Cons n0 l = butlast gv3)
+(Cons n0 l = append l l), (Cons n0 l = append l gv3), (Cons n0 l = append gv3 l), (Cons n0 l = append gv3 gv3), (Cons n0 gv3 = l), (Cons n0 gv3 = gv3), (Cons n0 gv3 = butlast l), (Cons n0 gv3 = butlast gv3), (Cons n0 gv3 = append l l), (Cons n0 gv3 = append l gv3)
+(Cons n0 gv3 = append gv3 l), (Cons n0 gv3 = append gv3 gv3), (Cons gv5 l = l), (Cons gv5 l = gv3), (Cons gv5 l = butlast l), (Cons gv5 l = butlast gv3), (Cons gv5 l = append l l), (Cons gv5 l = append l gv3), (Cons gv5 l = append gv3 l), (Cons gv5 l = append gv3 gv3)
+(Cons gv5 gv3 = l), (Cons gv5 gv3 = gv3), (Cons gv5 gv3 = butlast l), (Cons gv5 gv3 = butlast gv3), (Cons gv5 gv3 = append l l), (Cons gv5 gv3 = append l gv3), (Cons gv5 gv3 = append gv3 l), (Cons gv5 gv3 = append gv3 gv3), (butlast l = l), (butlast l = gv3)
+(butlast l = append l l), (butlast l = append l gv3), (butlast l = append gv3 l), (butlast l = append gv3 gv3), (butlast gv3 = l), (butlast gv3 = gv3), (butlast gv3 = append l l), (butlast gv3 = append l gv3), (butlast gv3 = append gv3 l), (butlast gv3 = append gv3 gv3)
+(append l l = l), (append l l = gv3), (append l gv3 = l), (append l gv3 = gv3), (append gv3 l = l), (append gv3 l = gv3), (append gv3 gv3 = l), (append gv3 gv3 = gv3), (Nil = Cons n0 l), (Nil = Cons n0 gv3)
+(Nil = Cons gv5 l), (Nil = Cons gv5 gv3), (Nil = butlast l), (Nil = butlast gv3), (Nil = append l l), (Nil = append l gv3), (Nil = append gv3 l), (Nil = append gv3 gv3), (len l = n0), (len l = gv5)
+(len gv3 = n0), (len gv3 = gv5)
+
+Label: 3 (3)
+(n0 < n0), (n0 < gv1), (gv1 < n0), (gv1 < gv1), (n0 <= n0), (n0 <= gv1), (gv1 <= n0), (gv1 <= gv1), (l = l), (l = gv3)
+(gv3 = l), (gv3 = gv3), (n0 = n0), (n0 = gv1), (gv1 = n0), (gv1 = gv1), (n0 < len l), (n0 < len gv3), (gv1 < len l), (gv1 < len gv3)
+(len l < n0), (len l < gv1), (len l < len gv3), (len gv3 < n0), (len gv3 < gv1), (len gv3 < len l), (n0 <= len l), (n0 <= len gv3), (gv1 <= len l), (gv1 <= len gv3)
+(len l <= n0), (len l <= gv1), (len l <= len gv3), (len gv3 <= n0), (len gv3 <= gv1), (len gv3 <= len l), (~ n0 < n0), (~ n0 < gv1), (~ gv1 < n0), (~ gv1 < gv1)
+(~ n0 <= n0), (~ n0 <= gv1), (~ gv1 <= n0), (~ gv1 <= gv1), (l <> l), (l <> gv3), (gv3 <> l), (gv3 <> gv3), (n0 <> n0), (n0 <> gv1)
+(gv1 <> n0), (gv1 <> gv1), (None = Some l), (None = Some gv3), (None = Some n0), (None = Some gv1), (Cons n0 l = l), (Cons n0 l = gv3), (Cons n0 l = butlast l), (Cons n0 l = butlast gv3)
+(Cons n0 l = append l l), (Cons n0 l = append l gv3), (Cons n0 l = append gv3 l), (Cons n0 l = append gv3 gv3), (Cons n0 gv3 = l), (Cons n0 gv3 = gv3), (Cons n0 gv3 = butlast l), (Cons n0 gv3 = butlast gv3), (Cons n0 gv3 = append l l), (Cons n0 gv3 = append l gv3)
+(Cons n0 gv3 = append gv3 l), (Cons n0 gv3 = append gv3 gv3), (Cons gv1 l = l), (Cons gv1 l = gv3), (Cons gv1 l = butlast l), (Cons gv1 l = butlast gv3), (Cons gv1 l = append l l), (Cons gv1 l = append l gv3), (Cons gv1 l = append gv3 l), (Cons gv1 l = append gv3 gv3)
+(Cons gv1 gv3 = l), (Cons gv1 gv3 = gv3), (Cons gv1 gv3 = butlast l), (Cons gv1 gv3 = butlast gv3), (Cons gv1 gv3 = append l l), (Cons gv1 gv3 = append l gv3), (Cons gv1 gv3 = append gv3 l), (Cons gv1 gv3 = append gv3 gv3), (butlast l = l), (butlast l = gv3)
+(butlast l = append l l), (butlast l = append l gv3), (butlast l = append gv3 l), (butlast l = append gv3 gv3), (butlast gv3 = l), (butlast gv3 = gv3), (butlast gv3 = append l l), (butlast gv3 = append l gv3), (butlast gv3 = append gv3 l), (butlast gv3 = append gv3 gv3)
+(append l l = l), (append l l = gv3), (append l gv3 = l), (append l gv3 = gv3), (append gv3 l = l), (append gv3 l = gv3), (append gv3 gv3 = l), (append gv3 gv3 = gv3), (Nil = Cons n0 l), (Nil = Cons n0 gv3)
+(Nil = Cons gv1 l), (Nil = Cons gv1 gv3), (Nil = butlast l), (Nil = butlast gv3), (Nil = append l l), (Nil = append l gv3), (Nil = append gv3 l), (Nil = append gv3 gv3), (len l = n0), (len l = gv1)
+(len gv3 = n0), (len gv3 = gv1)
+
+Label: 4 (4)
+(n0 < n0), (n0 < gv0), (gv0 < n0), (gv0 < gv0), (n0 <= n0), (n0 <= gv0), (gv0 <= n0), (gv0 <= gv0), (l = l), (l = gv3)
+(gv3 = l), (gv3 = gv3), (n0 = n0), (n0 = gv0), (gv0 = n0), (gv0 = gv0), (n0 < len l), (n0 < len gv3), (gv0 < len l), (gv0 < len gv3)
+(len l < n0), (len l < gv0), (len l < len gv3), (len gv3 < n0), (len gv3 < gv0), (len gv3 < len l), (n0 <= len l), (n0 <= len gv3), (gv0 <= len l), (gv0 <= len gv3)
+(len l <= n0), (len l <= gv0), (len l <= len gv3), (len gv3 <= n0), (len gv3 <= gv0), (len gv3 <= len l), (~ n0 < n0), (~ n0 < gv0), (~ gv0 < n0), (~ gv0 < gv0)
+(~ n0 <= n0), (~ n0 <= gv0), (~ gv0 <= n0), (~ gv0 <= gv0), (l <> l), (l <> gv3), (gv3 <> l), (gv3 <> gv3), (n0 <> n0), (n0 <> gv0)
+(gv0 <> n0), (gv0 <> gv0), (None = Some l), (None = Some gv3), (None = Some n0), (None = Some gv0), (Cons n0 l = l), (Cons n0 l = gv3), (Cons n0 l = butlast l), (Cons n0 l = butlast gv3)
+(Cons n0 l = append l l), (Cons n0 l = append l gv3), (Cons n0 l = append gv3 l), (Cons n0 l = append gv3 gv3), (Cons n0 gv3 = l), (Cons n0 gv3 = gv3), (Cons n0 gv3 = butlast l), (Cons n0 gv3 = butlast gv3), (Cons n0 gv3 = append l l), (Cons n0 gv3 = append l gv3)
+(Cons n0 gv3 = append gv3 l), (Cons n0 gv3 = append gv3 gv3), (Cons gv0 l = l), (Cons gv0 l = gv3), (Cons gv0 l = butlast l), (Cons gv0 l = butlast gv3), (Cons gv0 l = append l l), (Cons gv0 l = append l gv3), (Cons gv0 l = append gv3 l), (Cons gv0 l = append gv3 gv3)
+(Cons gv0 gv3 = l), (Cons gv0 gv3 = gv3), (Cons gv0 gv3 = butlast l), (Cons gv0 gv3 = butlast gv3), (Cons gv0 gv3 = append l l), (Cons gv0 gv3 = append l gv3), (Cons gv0 gv3 = append gv3 l), (Cons gv0 gv3 = append gv3 gv3), (butlast l = l), (butlast l = gv3)
+(butlast l = append l l), (butlast l = append l gv3), (butlast l = append gv3 l), (butlast l = append gv3 gv3), (butlast gv3 = l), (butlast gv3 = gv3), (butlast gv3 = append l l), (butlast gv3 = append l gv3), (butlast gv3 = append gv3 l), (butlast gv3 = append gv3 gv3)
+(append l l = l), (append l l = gv3), (append l gv3 = l), (append l gv3 = gv3), (append gv3 l = l), (append gv3 l = gv3), (append gv3 gv3 = l), (append gv3 gv3 = gv3), (Nil = Cons n0 l), (Nil = Cons n0 gv3)
+(Nil = Cons gv0 l), (Nil = Cons gv0 gv3), (Nil = butlast l), (Nil = butlast gv3), (Nil = append l l), (Nil = append l gv3), (Nil = append gv3 l), (Nil = append gv3 gv3), (len l = n0), (len l = gv0)
+(len gv3 = n0), (len gv3 = gv0)
+
+Label: 5 (5)
+(n0 < n0), (n0 < gv6), (gv6 < n0), (gv6 < gv6), (n0 <= n0), (n0 <= gv6), (gv6 <= n0), (gv6 <= gv6), (n0 = n0), (n0 = gv6)
+(gv6 = n0), (gv6 = gv6), (l = l), (l = gv3), (gv3 = l), (gv3 = gv3), (n0 < len l), (n0 < len gv3), (gv6 < len l), (gv6 < len gv3)
+(len l < n0), (len l < gv6), (len l < len gv3), (len gv3 < n0), (len gv3 < gv6), (len gv3 < len l), (n0 <= len l), (n0 <= len gv3), (gv6 <= len l), (gv6 <= len gv3)
+(len l <= n0), (len l <= gv6), (len l <= len gv3), (len gv3 <= n0), (len gv3 <= gv6), (len gv3 <= len l), (~ n0 < n0), (~ n0 < gv6), (~ gv6 < n0), (~ gv6 < gv6)
+(~ n0 <= n0), (~ n0 <= gv6), (~ gv6 <= n0), (~ gv6 <= gv6), (n0 <> n0), (n0 <> gv6), (gv6 <> n0), (gv6 <> gv6), (l <> l), (l <> gv3)
+(gv3 <> l), (gv3 <> gv3), (None = Some l), (None = Some gv3), (None = Some n0), (None = Some gv6), (Cons n0 l = l), (Cons n0 l = gv3), (Cons n0 l = butlast l), (Cons n0 l = butlast gv3)
+(Cons n0 l = append l l), (Cons n0 l = append l gv3), (Cons n0 l = append gv3 l), (Cons n0 l = append gv3 gv3), (Cons n0 gv3 = l), (Cons n0 gv3 = gv3), (Cons n0 gv3 = butlast l), (Cons n0 gv3 = butlast gv3), (Cons n0 gv3 = append l l), (Cons n0 gv3 = append l gv3)
+(Cons n0 gv3 = append gv3 l), (Cons n0 gv3 = append gv3 gv3), (Cons gv6 l = l), (Cons gv6 l = gv3), (Cons gv6 l = butlast l), (Cons gv6 l = butlast gv3), (Cons gv6 l = append l l), (Cons gv6 l = append l gv3), (Cons gv6 l = append gv3 l), (Cons gv6 l = append gv3 gv3)
+(Cons gv6 gv3 = l), (Cons gv6 gv3 = gv3), (Cons gv6 gv3 = butlast l), (Cons gv6 gv3 = butlast gv3), (Cons gv6 gv3 = append l l), (Cons gv6 gv3 = append l gv3), (Cons gv6 gv3 = append gv3 l), (Cons gv6 gv3 = append gv3 gv3), (butlast l = l), (butlast l = gv3)
+(butlast l = append l l), (butlast l = append l gv3), (butlast l = append gv3 l), (butlast l = append gv3 gv3), (butlast gv3 = l), (butlast gv3 = gv3), (butlast gv3 = append l l), (butlast gv3 = append l gv3), (butlast gv3 = append gv3 l), (butlast gv3 = append gv3 gv3)
+(append l l = l), (append l l = gv3), (append l gv3 = l), (append l gv3 = gv3), (append gv3 l = l), (append gv3 l = gv3), (append gv3 gv3 = l), (append gv3 gv3 = gv3), (Nil = Cons n0 l), (Nil = Cons n0 gv3)
+(Nil = Cons gv6 l), (Nil = Cons gv6 gv3), (Nil = butlast l), (Nil = butlast gv3), (Nil = append l l), (Nil = append l gv3), (Nil = append gv3 l), (Nil = append gv3 gv3), (len l = n0), (len l = gv6)
+(len gv3 = n0), (len gv3 = gv6)
+
+Label: 6 (6)
+(n0 < n0), (n0 < gv4), (gv4 < n0), (gv4 < gv4), (n0 <= n0), (n0 <= gv4), (gv4 <= n0), (gv4 <= gv4), (n0 = n0), (n0 = gv4)
+(gv4 = n0), (gv4 = gv4), (l = l), (l = gv3), (gv3 = l), (gv3 = gv3), (n0 < len l), (n0 < len gv3), (gv4 < len l), (gv4 < len gv3)
+(len l < n0), (len l < gv4), (len l < len gv3), (len gv3 < n0), (len gv3 < gv4), (len gv3 < len l), (n0 <= len l), (n0 <= len gv3), (gv4 <= len l), (gv4 <= len gv3)
+(len l <= n0), (len l <= gv4), (len l <= len gv3), (len gv3 <= n0), (len gv3 <= gv4), (len gv3 <= len l), (~ n0 < n0), (~ n0 < gv4), (~ gv4 < n0), (~ gv4 < gv4)
+(~ n0 <= n0), (~ n0 <= gv4), (~ gv4 <= n0), (~ gv4 <= gv4), (n0 <> n0), (n0 <> gv4), (gv4 <> n0), (gv4 <> gv4), (l <> l), (l <> gv3)
+(gv3 <> l), (gv3 <> gv3), (None = Some l), (None = Some gv3), (None = Some n0), (None = Some gv4), (Cons n0 l = l), (Cons n0 l = gv3), (Cons n0 l = butlast l), (Cons n0 l = butlast gv3)
+(Cons n0 l = append l l), (Cons n0 l = append l gv3), (Cons n0 l = append gv3 l), (Cons n0 l = append gv3 gv3), (Cons n0 gv3 = l), (Cons n0 gv3 = gv3), (Cons n0 gv3 = butlast l), (Cons n0 gv3 = butlast gv3), (Cons n0 gv3 = append l l), (Cons n0 gv3 = append l gv3)
+(Cons n0 gv3 = append gv3 l), (Cons n0 gv3 = append gv3 gv3), (Cons gv4 l = l), (Cons gv4 l = gv3), (Cons gv4 l = butlast l), (Cons gv4 l = butlast gv3), (Cons gv4 l = append l l), (Cons gv4 l = append l gv3), (Cons gv4 l = append gv3 l), (Cons gv4 l = append gv3 gv3)
+(Cons gv4 gv3 = l), (Cons gv4 gv3 = gv3), (Cons gv4 gv3 = butlast l), (Cons gv4 gv3 = butlast gv3), (Cons gv4 gv3 = append l l), (Cons gv4 gv3 = append l gv3), (Cons gv4 gv3 = append gv3 l), (Cons gv4 gv3 = append gv3 gv3), (butlast l = l), (butlast l = gv3)
+(butlast l = append l l), (butlast l = append l gv3), (butlast l = append gv3 l), (butlast l = append gv3 gv3), (butlast gv3 = l), (butlast gv3 = gv3), (butlast gv3 = append l l), (butlast gv3 = append l gv3), (butlast gv3 = append gv3 l), (butlast gv3 = append gv3 gv3)
+(append l l = l), (append l l = gv3), (append l gv3 = l), (append l gv3 = gv3), (append gv3 l = l), (append gv3 l = gv3), (append gv3 gv3 = l), (append gv3 gv3 = gv3), (Nil = Cons n0 l), (Nil = Cons n0 gv3)
+(Nil = Cons gv4 l), (Nil = Cons gv4 gv3), (Nil = butlast l), (Nil = butlast gv3), (Nil = append l l), (Nil = append l gv3), (Nil = append gv3 l), (Nil = append gv3 gv3), (len l = n0), (len l = gv4)
+(len gv3 = n0), (len gv3 = gv4)
+
+Label: 7 (7)
+(n0 < n0), (n0 <= n0), (n0 = n0), (l = l), (l = gv3), (l = gv2), (gv3 = l), (gv3 = gv3), (gv3 = gv2), (gv2 = l)
+(gv2 = gv3), (gv2 = gv2), (n0 < len l), (n0 < len gv3), (n0 < len gv2), (len l < n0), (len l < len gv3), (len l < len gv2), (len gv3 < n0), (len gv3 < len l)
+(len gv3 < len gv2), (len gv2 < n0), (len gv2 < len l), (len gv2 < len gv3), (n0 <= len l), (n0 <= len gv3), (n0 <= len gv2), (len l <= n0), (len l <= len gv3), (len l <= len gv2)
+(len gv3 <= n0), (len gv3 <= len l), (len gv3 <= len gv2), (len gv2 <= n0), (len gv2 <= len l), (len gv2 <= len gv3), (~ n0 < n0), (~ n0 <= n0), (n0 <> n0), (l <> l)
+(l <> gv3), (l <> gv2), (gv3 <> l), (gv3 <> gv3), (gv3 <> gv2), (gv2 <> l), (gv2 <> gv3), (gv2 <> gv2), (None = Some l), (None = Some gv3)
+(None = Some gv2), (None = Some n0), (Cons n0 l = l), (Cons n0 l = gv3), (Cons n0 l = gv2), (Cons n0 l = butlast l), (Cons n0 l = butlast gv3), (Cons n0 l = butlast gv2), (Cons n0 l = append l l), (Cons n0 l = append l gv3)
+(Cons n0 l = append l gv2), (Cons n0 l = append gv3 l), (Cons n0 l = append gv3 gv3), (Cons n0 l = append gv3 gv2), (Cons n0 l = append gv2 l), (Cons n0 l = append gv2 gv3), (Cons n0 l = append gv2 gv2), (Cons n0 gv3 = l), (Cons n0 gv3 = gv3), (Cons n0 gv3 = gv2)
+(Cons n0 gv3 = butlast l), (Cons n0 gv3 = butlast gv3), (Cons n0 gv3 = butlast gv2), (Cons n0 gv3 = append l l), (Cons n0 gv3 = append l gv3), (Cons n0 gv3 = append l gv2), (Cons n0 gv3 = append gv3 l), (Cons n0 gv3 = append gv3 gv3), (Cons n0 gv3 = append gv3 gv2), (Cons n0 gv3 = append gv2 l)
+(Cons n0 gv3 = append gv2 gv3), (Cons n0 gv3 = append gv2 gv2), (Cons n0 gv2 = l), (Cons n0 gv2 = gv3), (Cons n0 gv2 = gv2), (Cons n0 gv2 = butlast l), (Cons n0 gv2 = butlast gv3), (Cons n0 gv2 = butlast gv2), (Cons n0 gv2 = append l l), (Cons n0 gv2 = append l gv3)
+(Cons n0 gv2 = append l gv2), (Cons n0 gv2 = append gv3 l), (Cons n0 gv2 = append gv3 gv3), (Cons n0 gv2 = append gv3 gv2), (Cons n0 gv2 = append gv2 l), (Cons n0 gv2 = append gv2 gv3), (Cons n0 gv2 = append gv2 gv2), (butlast l = l), (butlast l = gv3), (butlast l = gv2)
+(butlast l = append l l), (butlast l = append l gv3), (butlast l = append l gv2), (butlast l = append gv3 l), (butlast l = append gv3 gv3), (butlast l = append gv3 gv2), (butlast l = append gv2 l), (butlast l = append gv2 gv3), (butlast l = append gv2 gv2), (butlast gv3 = l)
+(butlast gv3 = gv3), (butlast gv3 = gv2), (butlast gv3 = append l l), (butlast gv3 = append l gv3), (butlast gv3 = append l gv2), (butlast gv3 = append gv3 l), (butlast gv3 = append gv3 gv3), (butlast gv3 = append gv3 gv2), (butlast gv3 = append gv2 l), (butlast gv3 = append gv2 gv3)
+(butlast gv3 = append gv2 gv2), (butlast gv2 = l), (butlast gv2 = gv3), (butlast gv2 = gv2), (butlast gv2 = append l l), (butlast gv2 = append l gv3), (butlast gv2 = append l gv2), (butlast gv2 = append gv3 l), (butlast gv2 = append gv3 gv3), (butlast gv2 = append gv3 gv2)
+(butlast gv2 = append gv2 l), (butlast gv2 = append gv2 gv3), (butlast gv2 = append gv2 gv2), (append l l = l), (append l l = gv3), (append l l = gv2), (append l gv3 = l), (append l gv3 = gv3), (append l gv3 = gv2), (append l gv2 = l)
+(append l gv2 = gv3), (append l gv2 = gv2), (append gv3 l = l), (append gv3 l = gv3), (append gv3 l = gv2), (append gv3 gv3 = l), (append gv3 gv3 = gv3), (append gv3 gv3 = gv2), (append gv3 gv2 = l), (append gv3 gv2 = gv3)
+(append gv3 gv2 = gv2), (append gv2 l = l), (append gv2 l = gv3), (append gv2 l = gv2), (append gv2 gv3 = l), (append gv2 gv3 = gv3), (append gv2 gv3 = gv2), (append gv2 gv2 = l), (append gv2 gv2 = gv3), (append gv2 gv2 = gv2)
+(Nil = Cons n0 l), (Nil = Cons n0 gv3), (Nil = Cons n0 gv2), (Nil = butlast l), (Nil = butlast gv3), (Nil = butlast gv2), (Nil = append l l), (Nil = append l gv3), (Nil = append l gv2), (Nil = append gv3 l)
+(Nil = append gv3 gv3), (Nil = append gv3 gv2), (Nil = append gv2 l), (Nil = append gv2 gv3), (Nil = append gv2 gv2), (len l = n0), (len gv3 = n0), (len gv2 = n0)
+
+Label: 8 (8)
+(n0 < n0), (n0 < gv0), (gv0 < n0), (gv0 < gv0), (n0 <= n0), (n0 <= gv0), (gv0 <= n0), (gv0 <= gv0), (l = l), (n0 = n0)
+(n0 = gv0), (gv0 = n0), (gv0 = gv0), (n0 < len l), (gv0 < len l), (len l < n0), (len l < gv0), (n0 <= len l), (gv0 <= len l), (len l <= n0)
+(len l <= gv0), (~ n0 < n0), (~ n0 < gv0), (~ gv0 < n0), (~ gv0 < gv0), (~ n0 <= n0), (~ n0 <= gv0), (~ gv0 <= n0), (~ gv0 <= gv0), (l <> l)
+(n0 <> n0), (n0 <> gv0), (gv0 <> n0), (gv0 <> gv0), (None = Some l), (None = Some n0), (None = Some gv0), (Cons n0 l = l), (Cons n0 l = butlast l), (Cons n0 l = append l l)
+(Cons gv0 l = l), (Cons gv0 l = butlast l), (Cons gv0 l = append l l), (butlast l = l), (butlast l = append l l), (append l l = l), (Nil = Cons n0 l), (Nil = Cons gv0 l), (Nil = butlast l), (Nil = append l l)
+(len l = n0), (len l = gv0)
+
+Label: 9 (9)
+(gv6 < gv6), (gv6 < n0), (n0 < gv6), (n0 < n0), (gv6 <= gv6), (gv6 <= n0), (n0 <= gv6), (n0 <= n0), (l = l), (gv6 = gv6)
+(gv6 = n0), (n0 = gv6), (n0 = n0), (gv6 < len l), (n0 < len l), (len l < gv6), (len l < n0), (gv6 <= len l), (n0 <= len l), (len l <= gv6)
+(len l <= n0), (~ gv6 < gv6), (~ gv6 < n0), (~ n0 < gv6), (~ n0 < n0), (~ gv6 <= gv6), (~ gv6 <= n0), (~ n0 <= gv6), (~ n0 <= n0), (l <> l)
+(gv6 <> gv6), (gv6 <> n0), (n0 <> gv6), (n0 <> n0), (None = Some l), (None = Some gv6), (None = Some n0), (Cons gv6 l = l), (Cons gv6 l = butlast l), (Cons gv6 l = append l l)
+(Cons n0 l = l), (Cons n0 l = butlast l), (Cons n0 l = append l l), (butlast l = l), (butlast l = append l l), (append l l = l), (Nil = Cons gv6 l), (Nil = Cons n0 l), (Nil = butlast l), (Nil = append l l)
+(len l = gv6), (len l = n0)
+
+Label: 10 (10)
+(gv4 < gv4), (gv4 < n0), (n0 < gv4), (n0 < n0), (gv4 <= gv4), (gv4 <= n0), (n0 <= gv4), (n0 <= n0), (l = l), (gv4 = gv4)
+(gv4 = n0), (n0 = gv4), (n0 = n0), (gv4 < len l), (n0 < len l), (len l < gv4), (len l < n0), (gv4 <= len l), (n0 <= len l), (len l <= gv4)
+(len l <= n0), (~ gv4 < gv4), (~ gv4 < n0), (~ n0 < gv4), (~ n0 < n0), (~ gv4 <= gv4), (~ gv4 <= n0), (~ n0 <= gv4), (~ n0 <= n0), (l <> l)
+(gv4 <> gv4), (gv4 <> n0), (n0 <> gv4), (n0 <> n0), (None = Some l), (None = Some gv4), (None = Some n0), (Cons gv4 l = l), (Cons gv4 l = butlast l), (Cons gv4 l = append l l)
+(Cons n0 l = l), (Cons n0 l = butlast l), (Cons n0 l = append l l), (butlast l = l), (butlast l = append l l), (append l l = l), (Nil = Cons gv4 l), (Nil = Cons n0 l), (Nil = butlast l), (Nil = append l l)
+(len l = gv4), (len l = n0)
+
+Label: 11 (11)
+(n0 < n0), (n0 <= n0), (n0 = n0), (l = l), (l = gv2), (gv2 = l), (gv2 = gv2), (n0 < len l), (n0 < len gv2), (len l < n0)
+(len l < len gv2), (len gv2 < n0), (len gv2 < len l), (n0 <= len l), (n0 <= len gv2), (len l <= n0), (len l <= len gv2), (len gv2 <= n0), (len gv2 <= len l), (~ n0 < n0)
+(~ n0 <= n0), (n0 <> n0), (l <> l), (l <> gv2), (gv2 <> l), (gv2 <> gv2), (None = Some l), (None = Some gv2), (None = Some n0), (Cons n0 l = l)
+(Cons n0 l = gv2), (Cons n0 l = butlast l), (Cons n0 l = butlast gv2), (Cons n0 l = append l l), (Cons n0 l = append l gv2), (Cons n0 l = append gv2 l), (Cons n0 l = append gv2 gv2), (Cons n0 gv2 = l), (Cons n0 gv2 = gv2), (Cons n0 gv2 = butlast l)
+(Cons n0 gv2 = butlast gv2), (Cons n0 gv2 = append l l), (Cons n0 gv2 = append l gv2), (Cons n0 gv2 = append gv2 l), (Cons n0 gv2 = append gv2 gv2), (butlast l = l), (butlast l = gv2), (butlast l = append l l), (butlast l = append l gv2), (butlast l = append gv2 l)
+(butlast l = append gv2 gv2), (butlast gv2 = l), (butlast gv2 = gv2), (butlast gv2 = append l l), (butlast gv2 = append l gv2), (butlast gv2 = append gv2 l), (butlast gv2 = append gv2 gv2), (append l l = l), (append l l = gv2), (append l gv2 = l)
+(append l gv2 = gv2), (append gv2 l = l), (append gv2 l = gv2), (append gv2 gv2 = l), (append gv2 gv2 = gv2), (Nil = Cons n0 l), (Nil = Cons n0 gv2), (Nil = butlast l), (Nil = butlast gv2), (Nil = append l l)
+(Nil = append l gv2), (Nil = append gv2 l), (Nil = append gv2 gv2), (len l = n0), (len gv2 = n0)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 97.623 seconds
+
+
+Label: 0 (0)
+
+Label: 1 (1)
+(len l = gv1)
+
+Label: 2 (2)
+
+Label: 3 (3)
+
+Label: 4 (4)
+(len gv3 = gv0)
+
+Label: 5 (5)
+
+Label: 6 (6)
+(len gv3 = gv4)
+
+Label: 7 (7)
+(butlast gv3 = gv2)
+
+Label: 8 (8)
+
+Label: 9 (9)
+
+Label: 10 (10)
+
+Label: 11 (11)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (isAmortized (Queue gv3 Nil) && negb (isEmpty (Queue gv3 Nil)) = true ->  S (len (butlast gv3)) = len gv3 + 0)
+
+2. (S (len (butlast (Cons n0 l))) = len (Cons n0 l) + 0)
+
+3. (len l = len (butlast (Cons n0 l)))
+
+4. (len gv3 = len gv3 + 0)
+
+5. (len l = gv1 -> S gv1 = len (Cons n0 l) + 0)
+
+6. (len gv3 = gv0 -> gv0 = len gv3 + 0)
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 116.234 seconds
+
+Number of Result Pairs Returned: 6
+
+1. (isAmortized (Queue gv3 Nil) && negb (isEmpty (Queue gv3 Nil)) = true ->  S (len (butlast gv3)) = len gv3 + 0)
+
+2. (S (len (butlast (Cons n0 l))) = len (Cons n0 l) + 0)
+
+3. (len l = len (butlast (Cons n0 l)))
+
+4. (len gv3 = len gv3 + 0)
+
+5. (len l = gv1 -> S gv1 = len (Cons n0 l) + 0)

@@ -1,0 +1,517 @@
+[TOTAL] 29
+
+[SUCCESS] 10
+    [SUCCESS][1][AS IS] 1
+    [SUCCESS][3][INFER ATOMIC] 2
+    [SUCCESS][1][GENERALIZE] 4
+    [SUCCESS][3][GENERALIZE] 2
+    [SUCCESS][5][GENERALIZE] 1
+
+[USEFUL] 3
+    [USEFUL][MORE COMPLICATED] 3
+
+[FAIL] 16
+    [FAIL][RESOURCE] 10
+    [FAIL][IMPLEMENTATION] 2
+    [FAIL][BEYOND SCOPE] 3
+    [FAIL][INCOMPLETE] 1
+
+-----------------------------------------------
+
+[FAIL][RESOURCE]
+Test = list_rev2_append_by_append_single
+[TIME] 80.858
+[COUNTS] 25
+[TARGET] append (Cons n Nil) a = Cons n a
+
+1. (append (rev2 x Nil) (Cons n a) = append (rev2 x (Cons n Nil)) a)
+
+2. (rev2 gv2 a = a ->  append (rev2 x gv2) (Cons n a) = append (rev2 x (Cons n gv2)) a)
+
+3. (rev2 gv2 x = x ->  append (rev2 x gv2) (Cons n a) = append (rev2 x (Cons n gv2)) a)
+
+4. (append a gv2 = a ->  append (rev2 x gv2) (Cons n a) = append (rev2 x (Cons n gv2)) a)
+
+5. (append gv2 a = a ->  append (rev2 x gv2) (Cons n a) = append (rev2 x (Cons n gv2)) a)
+
+
+
+[SUCCESS][3][INFER ATOMIC]
+Test = queue_push_to_list_by_append_nil_1
+[TIME] 154.564
+[COUNTS] 38
+[TARGET] append x Nil = x
+
+1. (append gv1 (Cons n Nil) = append (append gv1 (Cons n Nil)) Nil)
+
+2. (append gv1 gv2 = append (append gv1 gv2) Nil)
+
+3. (gv0 = append gv0 Nil)
+
+4. (append (rev l0) gv2 = append (append (rev l0) gv2) Nil)
+
+5. (append (rev l0) (Cons n Nil) = append (append (rev l0) (Cons n Nil)) Nil)
+
+
+
+[FAIL][RESOURCE]
+Test = list_double_rev_by_rev_append
+[TIME] 92.127
+[COUNTS] 11
+[TARGET] rev (append x y) = append (rev y) (rev x)
+
+1. (rev gv2 = x -> rev (append gv2 (Cons n Nil)) = Cons n x)
+
+2. (rev (append (rev x) (Cons n Nil)) = Cons n x)
+
+3. (Nil = rev gv4 -> rev (append (rev x) (Cons n gv4)) = Cons n x)
+
+4. (append gv4 x = x -> rev (append (rev x) (Cons n gv4)) = Cons n x)
+
+5. (append x gv4 = x -> rev (append (rev x) (Cons n gv4)) = Cons n x)
+
+
+
+[FAIL][IMPLEMENTATION][RANK]
+Test = list_rev_append_by_append_assoc
+[TIME] 357.836
+[COUNTS] 17
+[TARGET] append (append x y) z = append x (append y z)
+
+1. (append (append (rev y) (rev x)) (Cons n gv5) =  append (rev y) (append (rev x) (Cons n gv5)))
+
+2. (append (append (rev y) gv3) (Cons n gv5) =  append (rev y) (append gv3 (Cons n gv5)))
+
+3. (append (append (rev y) gv3) gv4 = append (rev y) (append gv3 gv4))
+
+4. (append (append gv2 gv3) (Cons n gv5) = append gv2 (append gv3 (Cons n gv5)))
+
+5. (append (append (rev y) (rev x)) gv4 = append (rev y) (append (rev x) gv4))
+
+
+
+[USEFUL][MORE COMPLICATED]
+Test = queue_push_to_list_by_append_nil_2
+[TIME] 368.446
+[COUNTS] 47
+[TARGET] append x Nil = x
+
+1. (Cons n0 (append (append l (append (rev l0) gv5)) Nil) =  Cons n0 (append l (append (rev l0) gv5)))
+
+2. (Cons n0 (append (append l (append gv4 gv5)) Nil) =  Cons n0 (append l (append gv4 gv5)))
+
+3. (Cons n0 (append gv2 Nil) = Cons n0 gv2)
+
+4. (Cons n0 (append (append l gv3) Nil) = Cons n0 (append l gv3))
+
+5. (Cons n0 (append (append l (append gv4 (Cons n Nil))) Nil) =  Cons n0 (append l (append gv4 (Cons n Nil))))
+
+
+
+[USEFUL][MORE COMPLICATED]
+Test = queue_popback_by_len_butlast
+[TIME] 116.234
+[COUNTS] 6
+[TARGET] S (len (butlast (Cons n l))) = len (Cons n l)
+
+1. (isAmortized (Queue gv3 Nil) && negb (isEmpty (Queue gv3 Nil)) = true ->  S (len (butlast gv3)) = len gv3 + 0)
+
+2. (S (len (butlast (Cons n0 l))) = len (Cons n0 l) + 0)
+
+3. (len l = len (butlast (Cons n0 l)))
+
+4. (len gv3 = len gv3 + 0)
+
+5. (len l = gv1 -> S gv1 = len (Cons n0 l) + 0)
+
+
+
+[FAIL][RESOURCE]
+Test = list_len_rev_by_len_append
+[TIME] 192.297
+[COUNTS] 16
+[TARGET] len (append x y) = len x + len y
+
+1. (len gv2 = gv6 -> len (append gv2 (Cons n Nil)) = S gv6)
+
+2. (len (rev x) = gv6 -> len (append (rev x) (Cons n Nil)) = S gv6)
+
+3. (len gv2 = len x -> len (append gv2 (Cons n Nil)) = S (len x))
+
+4. (len (append (rev x) (Cons n Nil)) = S (len x))
+
+5. (Nil = rev gv4 -> len (append (rev x) (Cons n gv4)) = S (len x))
+
+
+
+[SUCCESS][1][GENERALIZE]
+Test = list_rev2_append_by_rev2_append_aux
+[TIME] 186.142
+[COUNTS] 44
+[TARGET] append (rev2 x Nil) (append a b) = append (rev2 x a) b
+
+1. (append (rev2 x Nil) (append gv4 a) = append (rev2 x gv4) a)
+
+2. (append (rev2 x Nil) (append (Cons n Nil) a) = append (rev2 x (Cons n Nil)) a)
+
+3. (Cons n a = append (Cons n Nil) a)
+
+4. (rev2 gv2 a = a -> append (rev2 x gv2) (append gv4 a) = append (rev2 x gv4) a)
+
+5. (rev2 gv2 x = x -> append (rev2 x gv2) (append gv4 a) = append (rev2 x gv4) a)
+
+
+
+[SUCCESS][5][GENERALIZE]
+Test = list_rev2_len_by_plus_n_0
+[TIME] 58.832
+[COUNTS] 7
+[TARGET] n + 0 = n
+
+1. (S (gv2 + 0) = S gv2)
+
+2. (S (len l + 0) = S (len l))
+
+3. (len l = len l + 0)
+
+4. (gv2 + 0 = gv2)
+
+5. (gv2 = gv1 -> S gv1 = S gv2)
+
+
+
+[FAIL][RESOURCE]
+Test = queue_push_by_len_app_1
+[TIME] 98.339
+[COUNTS] 15
+[TARGET] len (app l1 l2) = (len l1) + (len l2)
+
+1. (len (app l (app (rev l0) (Cons n Nil))) = S (len l + len l0))
+
+2. (Nil = rev gv5 ->  len (app l (app (rev l0) (Cons n gv5))) = S (len l + len l0))
+
+3. (rev gv3 = l0 -> len (app l (app gv3 (Cons n Nil))) = S (len l + len l0))
+
+4. (app gv5 l = l ->  len (app l (app (rev l0) (Cons n gv5))) = S (len l + len l0))
+
+5. (app l gv5 = l ->  len (app l (app (rev l0) (Cons n gv5))) = S (len l + len l0))
+
+
+
+[SUCCESS][3][GENERALIZE]
+Test = tree_insert_size_by_plus_n_Sm
+[TIME] 359.911
+[COUNTS] 12
+[TARGET] S (n + m) = S (n) + m ... or something like that
+
+1. (tsize t1 + (1 + gv5) = S (tsize t1 + gv5))
+
+2. (gv1 + (1 + gv5) = S (gv1 + gv5))
+
+3. (gv1 + (1 + tsize t2) = S (gv1 + tsize t2))
+
+4. (tsize (tinsert t2 n) = gv2 -> gv1 + gv2 = S (gv1 + tsize t2))
+
+5. (tsize (tinsert t2 n) = gv2 -> tsize t1 + gv2 = S (tsize t1 + tsize t2))
+
+
+
+[SUCCESS][3][GENERALIZE]
+Test = list_rev2_len_lem_by_plus_n_Sm
+[TIME] 122.748
+[COUNTS] 4
+[TARGET] S (n + m) = S (n) + m ... or something like that
+
+1. (gv1 + S (len l2) = S (gv1 + len l2))
+
+2. (gv1 + S gv3 = S (gv1 + gv3))
+
+3. (len l1 + S gv3 = S (len l1 + gv3))
+
+4. (len l1 + S (len l2) = S (len l1 + len l2))
+
+
+
+[FAIL][RESOURCE]
+Test = list_rev2_len_by_list_rev2_len_lem
+[TIME] 99.88
+[COUNTS] 4
+[TARGET] len (rev l1 l2) = (len l1) + (len l2)
+
+1. (len (rev gv2 Nil) = len gv2)
+
+2. (len (rev l gv3) = len l -> len (rev (Cons n l) gv3) = len (Cons n l))
+
+3. (len (rev l gv3) = len l -> len (rev gv2 gv3) = len gv2)
+
+4. (len (rev (Cons n l) Nil) = len (Cons n l))
+
+
+
+[SUCCESS][1][AS IS]
+Test = queue_len_by_len_rev
+[TIME] 35.379
+[COUNTS] 2
+[TARGET] len (rev l) = len l
+
+1. (len (rev l2) = len l2)
+
+2. (rev gv1 = l2 -> len gv1 = len l2)
+
+
+
+[USEFUL][MORE COMPLICATED]
+Test = queue_push_to_list_by_append_nil_3
+[TIME] 431.727
+[COUNTS] 51
+[TARGET] append x Nil = x
+
+1. (Cons n0 (append (append l (append gv4 (Cons n Nil))) Nil) =  Cons n0 (append l (append gv4 (Cons n Nil))))
+
+2. (Cons n0 (append (append l gv3) Nil) = Cons n0 (append l gv3))
+
+3. (Cons n0 (append gv2 Nil) = Cons n0 gv2)
+
+4. (Cons n0 (append (append l (append gv4 gv5)) Nil) =  Cons n0 (append l (append gv4 gv5)))
+
+5. (Cons n0 (append (append l (append (rev l0) gv5)) Nil) =  Cons n0 (append l (append (rev l0) gv5)))
+
+
+
+[FAIL][RESOURCE]
+Test = list_rev_append_cons_aux_by_append_assoc_1
+[TIME] 345.587
+[COUNTS] 46
+[TARGET] append (append x y) z = append x (append y z)
+
+1. (append (append gv2 (Cons x Nil)) (Cons n l1) =  append gv2 (Cons x (Cons n l1)))
+
+2. (append (append gv2 (Cons x Nil)) gv5 = append gv2 (Cons x gv5))
+
+3. (append (append (rev l2) (Cons x Nil)) gv5 = append (rev l2) (Cons x gv5))
+
+4. (append (append (rev l2) (Cons x Nil)) (Cons n l1) =  append (rev l2) (Cons x (Cons n l1)))
+
+5. (Nil = rev gv4 ->  append (append gv2 (Cons x gv4)) (Cons n l1) =  append gv2 (Cons x (Cons n l1)))
+
+
+
+[FAIL][RESOURCE]
+Test = list_rev_append_cons_by_rev_append_cons_aux
+[TIME] 178.734
+[COUNTS] 4
+[TARGET] rev (append (rev l1) (Cons x l2)) = append (rev l2) (Cons x l1)
+
+1. (rev (append (rev l) gv4) = Cons x l ->  rev (append (rev l) (Cons n gv4)) = Cons x (Cons n l))
+
+2. (rev (append gv2 (Cons x Nil)) = Cons x l ->  rev (append gv2 (Cons n (Cons x Nil))) = Cons x (Cons n l))
+
+3. (rev (append (rev l) (Cons x gv5)) = Cons x l ->  rev (append (rev l) (Cons n (Cons x gv5))) = Cons x (Cons n l))
+
+4. (rev (append (rev l) (Cons n (Cons x Nil))) = Cons x (Cons n l))
+
+
+
+[FAIL][INCOMPLETE]
+Test = list_rev_append_cons_by_append_assoc
+[TIME] -1
+[COUNTS] 0
+[TARGET] append (append x y) z = append x (append y z)
+
+RESULTS NOT FOUND
+
+
+
+[FAIL][RESOURCE]
+Test = queue_len_by_len_app
+[TIME] 46.254
+[COUNTS] 2
+[TARGET] len (app l1 l2) = (len l1) + (len l2)
+
+1. (len (app l1 (rev l2)) = len l1 + len l2)
+
+2. (rev gv2 = l2 -> len (app l1 gv2) = len l1 + len l2)
+
+
+
+[FAIL][RESOURCE]
+Test = tree_insert_all_by_insert_n_S
+[TIME] 107.726
+[COUNTS] 5
+[TARGET] (tsize (tinsert t n)) = S (tsize t)
+
+1. (tsize gv1 <= tsize (tinsert gv1 n))
+
+2. (tsize (tinsert_all t l) <= tsize (tinsert (tinsert_all t l) n))
+
+3. (tsize gv1 < gv2 -> tsize gv1 <= gv2)
+
+4. (gv0 <= tsize gv1 -> gv0 <= tsize (tinsert gv1 n))
+
+5. (tsize gv1 < tsize gv3 -> tsize gv1 <= tsize gv3)
+
+
+
+[FAIL][RESOURCE]
+Test = queue_push_by_len_app_2
+[TIME] 258.86
+[COUNTS] 29
+[TARGET] len (app l1 l2) = (len l1) + (len l2)
+
+1. (gv1 + len (app (rev l0) (Cons n Nil)) = S (gv1 + len l0))
+
+2. (len l + len (app (rev l0) (Cons n Nil)) = S (len l + len l0))
+
+3. (Nil = rev gv6 -> gv1 + len (app (rev l0) (Cons n gv6)) = S (gv1 + len l0))
+
+4. (rev gv4 = l0 -> gv1 + len (app gv4 (Cons n Nil)) = S (gv1 + len l0))
+
+5. (Nil = rev gv6 ->  len l + len (app (rev l0) (Cons n gv6)) = S (len l + len l0))
+
+
+
+[SUCCESS][1][GENERALIZE]
+Test = list_rev_eq_rev2_by_rev2_append
+[TIME] 135.813
+[COUNTS] 11
+[TARGET] rev2 x a = append (rev2 x Nil) a
+
+1. (rev2 x gv1 = append (rev2 x Nil) gv1)
+
+2. (gv4 = rev x -> rev2 x (Cons n gv2) = append gv4 (Cons n gv2))
+
+3. (gv4 = rev x -> rev2 x gv1 = append gv4 gv1)
+
+4. (gv4 = rev x -> rev2 x (Cons n Nil) = append gv4 (Cons n Nil))
+
+5. (rev2 x gv2 = rev x -> rev2 x (Cons n gv2) = append (rev2 x gv2) (Cons n gv2))
+
+
+
+[SUCCESS][1][GENERALIZE]
+Test = list_rev_append_by_app_nil
+[TIME] 63.406
+[COUNTS] 17
+[TARGET] app x Nil = x
+
+1. (gv0 = app gv0 Nil)
+
+2. (rev y = app (rev y) Nil)
+
+3. (Nil = rev gv2 -> rev y = app (rev y) gv2)
+
+4. (Nil = rev gv2 -> gv0 = app gv0 gv2)
+
+5. (rev gv1 = y -> rev y = gv1)
+
+
+
+[FAIL][BEYOND SCOPE]
+Test = list_rev_append_cons_aux_by_append_assoc_2
+[TIME] 131.821
+[COUNTS] 16
+[TARGET] append (append x y) z = append x (append y z)
+
+1. (rev (append (append (rev l1) (Cons n Nil)) (Cons x l2)) =  append (rev l2) (Cons x (Cons n l1)))
+
+2. (Nil = rev gv5 ->  rev (append (append (rev l1) (Cons n gv5)) (Cons x l2)) =  append (rev l2) (Cons x (Cons n l1)))
+
+3. (rev gv3 = l1 ->  rev (append (append gv3 (Cons n Nil)) (Cons x l2)) =  append (rev l2) (Cons x (Cons n l1)))
+
+4. (rev gv8 = l2 ->  rev (append (append (rev l1) (Cons n Nil)) (Cons x l2)) =  append gv8 (Cons x (Cons n l1)))
+
+5. (append l2 gv5 = l2 ->  rev (append (append (rev l1) (Cons n gv5)) (Cons x l2)) =  append (rev l2) (Cons x (Cons n l1)))
+
+
+
+[SUCCESS][1][GENERALIZE]
+Test = list_rev_append_by_append_nil
+[TIME] 62.848
+[COUNTS] 17
+[TARGET] append x Nil = x
+
+1. (gv0 = append gv0 Nil)
+
+2. (rev y = append (rev y) Nil)
+
+3. (rev gv1 = y -> rev y = gv1)
+
+4. (Nil = rev gv2 -> gv0 = append gv0 gv2)
+
+5. (Nil = rev gv2 -> rev y = append (rev y) gv2)
+
+
+
+[FAIL][BEYOND SCOPE]
+Test = tree_size_by_le_O_n
+[TIME] 173.225
+[COUNTS] 15
+[TARGET] 0 <= S (n)
+
+1. (S gv1 >= 0)
+
+2. (gv0 >= 0)
+
+3. (S (tsize x1 + gv3) >= 0)
+
+4. (S (gv2 + gv3) >= 0)
+
+5. (S (gv2 + tsize x2) >= 0)
+
+
+
+[SUCCESS][3][INFER ATOMIC]
+Test = queue_push_by_len_rev
+[TIME] 166.585
+[COUNTS] 30
+[TARGET] len (rev l) = len l
+
+1. (gv1 + (len (rev l0) + len (Cons n Nil)) = S (gv1 + len l0))
+
+2. (len l + (len (rev l0) + len (Cons n Nil)) = S (len l + len l0))
+
+3. (len l0 = len (rev l0))
+
+4. (Nil = rev gv7 ->  len l + (len (rev l0) + len (Cons n gv7)) = S (len l + len l0))
+
+5. (rev gv4 = l0 -> len l + (len gv4 + len (Cons n Nil)) = S (len l + len l0))
+
+
+
+[FAIL][BEYOND SCOPE]
+Test = heap_size_by_le_O_n
+[TIME] 197.001
+[COUNTS] 15
+[TARGET] 0 <= S (n)
+
+1. (S gv1 >= 0)
+
+2. (gv0 >= 0)
+
+3. (S (hsize x1 + gv3) >= 0)
+
+4. (S (gv2 + gv3) >= 0)
+
+5. (S (gv2 + hsize x2) >= 0)
+
+
+
+[FAIL][IMPLEMENTATION][RANK]
+Test = list_rev_append_by_app_assoc
+[TIME] 372.616
+[COUNTS] 17
+[TARGET] app x (app y z) = app (app x y) z
+
+1. (app (app (rev y) (rev x)) (Cons n gv5) =  app (rev y) (app (rev x) (Cons n gv5)))
+
+2. (app (app (rev y) gv3) (Cons n gv5) = app (rev y) (app gv3 (Cons n gv5)))
+
+3. (app (app gv2 gv3) (Cons n gv5) = app gv2 (app gv3 (Cons n gv5)))
+
+4. (app (app (rev y) gv3) gv4 = app (rev y) (app gv3 gv4))
+
+5. (app (app gv2 (rev x)) (Cons n gv5) = app gv2 (app (rev x) (Cons n gv5)))
+
+
+
+

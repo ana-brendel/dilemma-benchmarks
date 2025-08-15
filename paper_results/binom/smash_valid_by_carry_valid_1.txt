@@ -1,0 +1,21 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (Node n a1 a2 = Leaf \/
+ match a2 with
+ | Node _ _ _ => False
+ | Leaf => match a1 with
+           | Node _ _ _ => False
+           | Leaf => True
+           end
+ end)
+ -- (priqq 1 q)
+ -- (priqq 0 (a1 :: q) -> priqq 0 (carry (a1 :: q) (Node x Leaf Leaf)))
+ -- (priqq 0 q -> priqq 0 (carry q (Node x Leaf Leaf)))
+ -- (priqq 0 (a2 :: q) -> priqq 0 (carry (a2 :: q) (Node x Leaf Leaf)))
+
+----------------------------------
+Goal: (priqq 0 (carry (Node n a1 a2 :: q) (Node x Leaf Leaf)))

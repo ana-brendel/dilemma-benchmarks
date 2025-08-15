@@ -1,0 +1,216 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (count x (insort x y) = succ (count x y))
+ -- (Nat_beq x n = false)
+ -- (less x n = true)
+
+----------------------------------
+Goal: ((if Nat_beq x x
+  then succ (if Nat_beq x n then succ (count x y) else count x y)
+  else if Nat_beq x n then succ (count x y) else count x y) =
+ succ (count x y))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3.026 seconds
+
+gv2 : Nat = (count x y)
+gv1 : Nat = (succ (count x y))
+gv0 : Nat = (if Nat_beq x x
+ then succ (if Nat_beq x n then succ (count x y) else count x y)
+ else if Nat_beq x n then succ (count x y) else count x y)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 48.367 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (Nat_beq x n = false)
+
+----------------------------------
+Goal: ((if Nat_beq x x
+  then succ (if Nat_beq x n then succ (count x y) else count x y)
+  else if Nat_beq x n then succ (count x y) else count x y) =
+ succ (count x y))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (Nat_beq x n = false)
+ -- ((if Nat_beq x x
+  then succ (if Nat_beq x n then succ (count x y) else count x y)
+  else if Nat_beq x n then succ (count x y) else count x y) = gv0)
+
+----------------------------------
+Goal: (gv0 = succ (count x y))
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (count x (insort x y) = succ gv2)
+ -- (Nat_beq x n = false)
+
+----------------------------------
+Goal: ((if Nat_beq x x
+  then succ (if Nat_beq x n then succ (count x y) else count x y)
+  else if Nat_beq x n then succ (count x y) else count x y) = 
+ succ gv2)
+Case: Valid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (Nat_beq x n = false)
+ -- ((if Nat_beq x x
+  then succ (if Nat_beq x n then succ (count x y) else count x y)
+  else if Nat_beq x n then succ (count x y) else count x y) = gv0)
+ -- (count x y = gv2)
+
+----------------------------------
+Goal: (gv0 = succ gv2)
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (count x (insort x y) = gv1)
+ -- (Nat_beq x n = false)
+
+----------------------------------
+Goal: ((if Nat_beq x x
+  then succ (if Nat_beq x n then succ (count x y) else count x y)
+  else if Nat_beq x n then succ (count x y) else count x y) = gv1)
+Case: Valid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (count x (insort x y) = gv1)
+ -- (Nat_beq x n = false)
+
+----------------------------------
+Goal: ((if Nat_beq x x
+  then succ (if Nat_beq x n then succ (count x y) else count x y)
+  else if Nat_beq x n then succ (count x y) else count x y) = gv1)
+Case: Valid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 48.553 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+less : (Nat -> Nat -> bool)
+count : (Nat -> Lst -> Nat)
+insort : (Nat -> Lst -> Lst)
+sort : (Lst -> Lst)
+succ : (Nat -> Nat)
+zero : Nat
+nil : Lst
+cons : (Nat -> Lst -> Lst)
+
+Label: 0 (0)
+Abducted Assumption: (Nat_beq x n = false)
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 48.7 seconds
+
+
+Label: 0 (0)
+(y = y), (n = n), (n = x), (x = n), (x = x), (false = less n n), (false = less n x), (false = less x n), (false = less x x), (true = less n n)
+(true = less n x), (true = less x n), (true = less x x), (y <> y), (n <> n), (n <> x), (x <> n), (x <> x), (succ n = n), (succ n = x)
+(succ n = count n y), (succ n = count x y), (succ x = n), (succ x = x), (succ x = count n y), (succ x = count x y), (count n y = n), (count n y = x), (count x y = n), (count x y = x)
+(zero = succ n), (zero = succ x), (zero = count n y), (zero = count x y), (None = Some n), (None = Some x), (None = Some y), (cons n y = y), (cons n y = sort y), (cons n y = insort n y)
+(cons n y = insort x y), (cons x y = y), (cons x y = sort y), (cons x y = insort n y), (cons x y = insort x y), (sort y = y), (sort y = insort n y), (sort y = insort x y), (insort n y = y), (insort x y = y)
+(nil = cons n y), (nil = cons x y), (nil = sort y), (nil = insort n y), (nil = insort x y)
+
+Label: 1 (1)
+(y = y), (n = n), (n = x), (n = gv0), (x = n), (x = x), (x = gv0), (gv0 = n), (gv0 = x), (gv0 = gv0)
+(false = less n n), (false = less n x), (false = less n gv0), (false = less x n), (false = less x x), (false = less x gv0), (false = less gv0 n), (false = less gv0 x), (false = less gv0 gv0), (true = less n n)
+(true = less n x), (true = less n gv0), (true = less x n), (true = less x x), (true = less x gv0), (true = less gv0 n), (true = less gv0 x), (true = less gv0 gv0), (y <> y), (n <> n)
+(n <> x), (n <> gv0), (x <> n), (x <> x), (x <> gv0), (gv0 <> n), (gv0 <> x), (gv0 <> gv0), (succ n = n), (succ n = x)
+(succ n = gv0), (succ n = count n y), (succ n = count x y), (succ n = count gv0 y), (succ x = n), (succ x = x), (succ x = gv0), (succ x = count n y), (succ x = count x y), (succ x = count gv0 y)
+(succ gv0 = n), (succ gv0 = x), (succ gv0 = gv0), (succ gv0 = count n y), (succ gv0 = count x y), (succ gv0 = count gv0 y), (count n y = n), (count n y = x), (count n y = gv0), (count x y = n)
+(count x y = x), (count x y = gv0), (count gv0 y = n), (count gv0 y = x), (count gv0 y = gv0), (zero = succ n), (zero = succ x), (zero = succ gv0), (zero = count n y), (zero = count x y)
+(zero = count gv0 y), (None = Some n), (None = Some x), (None = Some gv0), (None = Some y), (cons n y = y), (cons n y = sort y), (cons n y = insort n y), (cons n y = insort x y), (cons n y = insort gv0 y)
+(cons x y = y), (cons x y = sort y), (cons x y = insort n y), (cons x y = insort x y), (cons x y = insort gv0 y), (cons gv0 y = y), (cons gv0 y = sort y), (cons gv0 y = insort n y), (cons gv0 y = insort x y), (cons gv0 y = insort gv0 y)
+(sort y = y), (sort y = insort n y), (sort y = insort x y), (sort y = insort gv0 y), (insort n y = y), (insort x y = y), (insort gv0 y = y), (nil = cons n y), (nil = cons x y), (nil = cons gv0 y)
+(nil = sort y), (nil = insort n y), (nil = insort x y), (nil = insort gv0 y)
+
+Label: 2 (2)
+(y = y), (n = n), (n = x), (n = gv2), (n = gv0), (x = n), (x = x), (x = gv2), (x = gv0), (gv2 = n)
+(gv2 = x), (gv2 = gv2), (gv2 = gv0), (gv0 = n), (gv0 = x), (gv0 = gv2), (gv0 = gv0), (false = less n n), (false = less n x), (false = less n gv2)
+(false = less n gv0), (false = less x n), (false = less x x), (false = less x gv2), (false = less x gv0), (false = less gv2 n), (false = less gv2 x), (false = less gv2 gv2), (false = less gv2 gv0), (false = less gv0 n)
+(false = less gv0 x), (false = less gv0 gv2), (false = less gv0 gv0), (true = less n n), (true = less n x), (true = less n gv2), (true = less n gv0), (true = less x n), (true = less x x), (true = less x gv2)
+(true = less x gv0), (true = less gv2 n), (true = less gv2 x), (true = less gv2 gv2), (true = less gv2 gv0), (true = less gv0 n), (true = less gv0 x), (true = less gv0 gv2), (true = less gv0 gv0), (y <> y)
+(n <> n), (n <> x), (n <> gv2), (n <> gv0), (x <> n), (x <> x), (x <> gv2), (x <> gv0), (gv2 <> n), (gv2 <> x)
+(gv2 <> gv2), (gv2 <> gv0), (gv0 <> n), (gv0 <> x), (gv0 <> gv2), (gv0 <> gv0), (succ n = n), (succ n = x), (succ n = gv2), (succ n = gv0)
+(succ n = count n y), (succ n = count x y), (succ n = count gv2 y), (succ n = count gv0 y), (succ x = n), (succ x = x), (succ x = gv2), (succ x = gv0), (succ x = count n y), (succ x = count x y)
+(succ x = count gv2 y), (succ x = count gv0 y), (succ gv2 = n), (succ gv2 = x), (succ gv2 = gv2), (succ gv2 = gv0), (succ gv2 = count n y), (succ gv2 = count x y), (succ gv2 = count gv2 y), (succ gv2 = count gv0 y)
+(succ gv0 = n), (succ gv0 = x), (succ gv0 = gv2), (succ gv0 = gv0), (succ gv0 = count n y), (succ gv0 = count x y), (succ gv0 = count gv2 y), (succ gv0 = count gv0 y), (count n y = n), (count n y = x)
+(count n y = gv2), (count n y = gv0), (count x y = n), (count x y = x), (count x y = gv2), (count x y = gv0), (count gv2 y = n), (count gv2 y = x), (count gv2 y = gv2), (count gv2 y = gv0)
+(count gv0 y = n), (count gv0 y = x), (count gv0 y = gv2), (count gv0 y = gv0), (zero = succ n), (zero = succ x), (zero = succ gv2), (zero = succ gv0), (zero = count n y), (zero = count x y)
+(zero = count gv2 y), (zero = count gv0 y), (None = Some n), (None = Some x), (None = Some gv2), (None = Some gv0), (None = Some y), (cons n y = y), (cons n y = sort y), (cons n y = insort n y)
+(cons n y = insort x y), (cons n y = insort gv2 y), (cons n y = insort gv0 y), (cons x y = y), (cons x y = sort y), (cons x y = insort n y), (cons x y = insort x y), (cons x y = insort gv2 y), (cons x y = insort gv0 y), (cons gv2 y = y)
+(cons gv2 y = sort y), (cons gv2 y = insort n y), (cons gv2 y = insort x y), (cons gv2 y = insort gv2 y), (cons gv2 y = insort gv0 y), (cons gv0 y = y), (cons gv0 y = sort y), (cons gv0 y = insort n y), (cons gv0 y = insort x y), (cons gv0 y = insort gv2 y)
+(cons gv0 y = insort gv0 y), (sort y = y), (sort y = insort n y), (sort y = insort x y), (sort y = insort gv2 y), (sort y = insort gv0 y), (insort n y = y), (insort x y = y), (insort gv2 y = y), (insort gv0 y = y)
+(nil = cons n y), (nil = cons x y), (nil = cons gv2 y), (nil = cons gv0 y), (nil = sort y), (nil = insort n y), (nil = insort x y), (nil = insort gv2 y), (nil = insort gv0 y)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 54.882 seconds
+
+
+Label: 0 (0)
+(n <> x), (x <> n)
+
+Label: 1 (1)
+
+Label: 2 (2)
+(succ gv2 = gv0)
+
+
+
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 72.555 seconds
+
+Number of Result Pairs Returned: 5
+
+1. (Nat_beq x n = false ->  count x (insort x y) = gv1 ->  (if Nat_beq x x   then succ (if Nat_beq x n then succ (count x y) else count x y)   else if Nat_beq x n then succ (count x y) else count x y) = gv1)
+
+2. (Nat_beq x n = false ->  count x (insort x y) = succ gv2 ->  (if Nat_beq x x   then succ (if Nat_beq x n then succ (count x y) else count x y)   else if Nat_beq x n then succ (count x y) else count x y) =   succ gv2)
+
+3. (Nat_beq x n = false ->  (if Nat_beq x x   then succ (if Nat_beq x n then succ (count x y) else count x y)   else if Nat_beq x n then succ (count x y) else count x y) =  succ (count x y))
+
+4. (Nat_beq x n = false -> x <> n)
+(x <> n ->  (if Nat_beq x x   then succ (if Nat_beq x n then succ (count x y) else count x y)   else if Nat_beq x n then succ (count x y) else count x y) =  succ (count x y))
+
+5. (Nat_beq x n = false -> n <> x)
+(n <> x ->  (if Nat_beq x x   then succ (if Nat_beq x n then succ (count x y) else count x y)   else if Nat_beq x n then succ (count x y) else count x y) =  succ (count x y))

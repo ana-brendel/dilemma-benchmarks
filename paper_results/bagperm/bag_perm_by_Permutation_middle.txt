@@ -1,0 +1,472 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (a <> n)
+ -- (forall bl : bag, bag_eqv al bl -> Permutation al bl)
+ -- (Permutation (a :: al) (a :: (n :: x) ++ x0))
+ -- (exists l2 : list nat, bl = x ++ a :: l2 /\ count a (x ++ l2) = count a al)
+ -- (bl = x ++ a :: x0)
+ -- (exists l1 l2 : list nat,
+   bl = l1 ++ a :: l2 /\ count a (l1 ++ l2) = count a al)
+ -- (forall n0 : nat, count n0 (a :: al) = count n0 (n :: bl))
+ -- (count a (x ++ x0) = count a al)
+
+----------------------------------
+Goal: (Permutation (a :: al) (n :: bl))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3.625 seconds
+
+gv1 : (list nat) = (n :: bl)
+gv0 : (list nat) = (a :: al)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 72.357 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (Permutation (a :: al) (a :: (n :: x) ++ x0))
+ -- (bl = x ++ a :: x0)
+
+----------------------------------
+Goal: (Permutation (a :: al) (n :: bl))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (Permutation gv0 (a :: (n :: x) ++ x0))
+ -- (bl = x ++ a :: x0)
+
+----------------------------------
+Goal: (Permutation gv0 (n :: bl))
+Case: Valid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (n :: bl = gv1)
+ -- (Permutation gv0 (a :: (n :: x) ++ x0))
+ -- (bl = x ++ a :: x0)
+ -- (a :: al = gv0)
+
+----------------------------------
+Goal: (Permutation gv0 gv1)
+Case: Valid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (n :: bl = gv1)
+ -- (Permutation (a :: al) (a :: (n :: x) ++ x0))
+ -- (bl = x ++ a :: x0)
+
+----------------------------------
+Goal: (Permutation (a :: al) gv1)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 72.494 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+insert : (nat -> list nat -> list nat)
+sort : (list nat -> list nat)
+bag : Set
+count : (nat -> bag -> nat)
+bag_eqv : (bag -> bag -> Prop)
+
+Label: 0 (0)
+Abducted Assumption: (Permutation (a :: al) (a :: (n :: x) ++ x0))
+Positive Examples: 57
+Negative Examples: 40
+
+Label: 1 (1)
+Abducted Assumption: (bl = x ++ a :: x0)
+Positive Examples: 44
+Negative Examples: 52
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 2
+Negative Examples: 11
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 72.835 seconds
+
+
+Label: 0 (0)
+(n < n), (n < a), (a < n), (a < a), (n <= n), (n <= a), (a <= n), (a <= a), (x0 = x0), (x0 = x)
+(x0 = bl), (x0 = al), (x = x0), (x = x), (x = bl), (x = al), (bl = x0), (bl = x), (bl = bl), (bl = al)
+(al = x0), (al = x), (al = bl), (al = al), (n = n), (n = a), (a = n), (a = a), (n < length x0), (n < length x)
+(n < length bl), (n < length al), (a < length x0), (a < length x), (a < length bl), (a < length al), (length x0 < n), (length x0 < a), (length x0 < length x), (length x0 < length bl)
+(length x0 < length al), (length x < n), (length x < a), (length x < length x0), (length x < length bl), (length x < length al), (length bl < n), (length bl < a), (length bl < length x0), (length bl < length x)
+(length bl < length al), (length al < n), (length al < a), (length al < length x0), (length al < length x), (length al < length bl), (n <= length x0), (n <= length x), (n <= length bl), (n <= length al)
+(a <= length x0), (a <= length x), (a <= length bl), (a <= length al), (length x0 <= n), (length x0 <= a), (length x0 <= length x), (length x0 <= length bl), (length x0 <= length al), (length x <= n)
+(length x <= a), (length x <= length x0), (length x <= length bl), (length x <= length al), (length bl <= n), (length bl <= a), (length bl <= length x0), (length bl <= length x), (length bl <= length al), (length al <= n)
+(length al <= a), (length al <= length x0), (length al <= length x), (length al <= length bl), (~ n < n), (~ n < a), (~ a < n), (~ a < a), (~ n <= n), (~ n <= a)
+(~ a <= n), (~ a <= a), (x0 <> x0), (x0 <> x), (x0 <> bl), (x0 <> al), (x <> x0), (x <> x), (x <> bl), (x <> al)
+(bl <> x0), (bl <> x), (bl <> bl), (bl <> al), (al <> x0), (al <> x), (al <> bl), (al <> al), (n <> n), (n <> a)
+(a <> n), (a <> a), (None = Some x0), (None = Some x), (None = Some bl), (None = Some al), (n :: x0 = x0), (n :: x0 = x), (n :: x0 = bl), (n :: x0 = al)
+(n :: x0 = sort x0), (n :: x0 = sort x), (n :: x0 = sort bl), (n :: x0 = sort al), (n :: x0 = insert n x0), (n :: x0 = insert n x), (n :: x0 = insert n bl), (n :: x0 = insert n al), (n :: x0 = insert a x0), (n :: x0 = insert a x)
+(n :: x0 = insert a bl), (n :: x0 = insert a al), (n :: x0 = x0 ++ x0), (n :: x0 = x0 ++ x), (n :: x0 = x0 ++ bl), (n :: x0 = x0 ++ al), (n :: x0 = x ++ x0), (n :: x0 = x ++ x), (n :: x0 = x ++ bl), (n :: x0 = x ++ al)
+(n :: x0 = bl ++ x0), (n :: x0 = bl ++ x), (n :: x0 = bl ++ bl), (n :: x0 = bl ++ al), (n :: x0 = al ++ x0), (n :: x0 = al ++ x), (n :: x0 = al ++ bl), (n :: x0 = al ++ al), (n :: x0 = []), (n :: x = x0)
+(n :: x = x), (n :: x = bl), (n :: x = al), (n :: x = sort x0), (n :: x = sort x), (n :: x = sort bl), (n :: x = sort al), (n :: x = insert n x0), (n :: x = insert n x), (n :: x = insert n bl)
+(n :: x = insert n al), (n :: x = insert a x0), (n :: x = insert a x), (n :: x = insert a bl), (n :: x = insert a al), (n :: x = x0 ++ x0), (n :: x = x0 ++ x), (n :: x = x0 ++ bl), (n :: x = x0 ++ al), (n :: x = x ++ x0)
+(n :: x = x ++ x), (n :: x = x ++ bl), (n :: x = x ++ al), (n :: x = bl ++ x0), (n :: x = bl ++ x), (n :: x = bl ++ bl), (n :: x = bl ++ al), (n :: x = al ++ x0), (n :: x = al ++ x), (n :: x = al ++ bl)
+(n :: x = al ++ al), (n :: x = []), (n :: bl = x0), (n :: bl = x), (n :: bl = bl), (n :: bl = al), (n :: bl = sort x0), (n :: bl = sort x), (n :: bl = sort bl), (n :: bl = sort al)
+(n :: bl = insert n x0), (n :: bl = insert n x), (n :: bl = insert n bl), (n :: bl = insert n al), (n :: bl = insert a x0), (n :: bl = insert a x), (n :: bl = insert a bl), (n :: bl = insert a al), (n :: bl = x0 ++ x0), (n :: bl = x0 ++ x)
+(n :: bl = x0 ++ bl), (n :: bl = x0 ++ al), (n :: bl = x ++ x0), (n :: bl = x ++ x), (n :: bl = x ++ bl), (n :: bl = x ++ al), (n :: bl = bl ++ x0), (n :: bl = bl ++ x), (n :: bl = bl ++ bl), (n :: bl = bl ++ al)
+(n :: bl = al ++ x0), (n :: bl = al ++ x), (n :: bl = al ++ bl), (n :: bl = al ++ al), (n :: bl = []), (n :: al = x0), (n :: al = x), (n :: al = bl), (n :: al = al), (n :: al = sort x0)
+(n :: al = sort x), (n :: al = sort bl), (n :: al = sort al), (n :: al = insert n x0), (n :: al = insert n x), (n :: al = insert n bl), (n :: al = insert n al), (n :: al = insert a x0), (n :: al = insert a x), (n :: al = insert a bl)
+(n :: al = insert a al), (n :: al = x0 ++ x0), (n :: al = x0 ++ x), (n :: al = x0 ++ bl), (n :: al = x0 ++ al), (n :: al = x ++ x0), (n :: al = x ++ x), (n :: al = x ++ bl), (n :: al = x ++ al), (n :: al = bl ++ x0)
+(n :: al = bl ++ x), (n :: al = bl ++ bl), (n :: al = bl ++ al), (n :: al = al ++ x0), (n :: al = al ++ x), (n :: al = al ++ bl), (n :: al = al ++ al), (n :: al = []), (a :: x0 = x0), (a :: x0 = x)
+(a :: x0 = bl), (a :: x0 = al), (a :: x0 = sort x0), (a :: x0 = sort x), (a :: x0 = sort bl), (a :: x0 = sort al), (a :: x0 = insert n x0), (a :: x0 = insert n x), (a :: x0 = insert n bl), (a :: x0 = insert n al)
+(a :: x0 = insert a x0), (a :: x0 = insert a x), (a :: x0 = insert a bl), (a :: x0 = insert a al), (a :: x0 = x0 ++ x0), (a :: x0 = x0 ++ x), (a :: x0 = x0 ++ bl), (a :: x0 = x0 ++ al), (a :: x0 = x ++ x0), (a :: x0 = x ++ x)
+(a :: x0 = x ++ bl), (a :: x0 = x ++ al), (a :: x0 = bl ++ x0), (a :: x0 = bl ++ x), (a :: x0 = bl ++ bl), (a :: x0 = bl ++ al), (a :: x0 = al ++ x0), (a :: x0 = al ++ x), (a :: x0 = al ++ bl), (a :: x0 = al ++ al)
+(a :: x0 = []), (a :: x = x0), (a :: x = x), (a :: x = bl), (a :: x = al), (a :: x = sort x0), (a :: x = sort x), (a :: x = sort bl), (a :: x = sort al), (a :: x = insert n x0)
+(a :: x = insert n x), (a :: x = insert n bl), (a :: x = insert n al), (a :: x = insert a x0), (a :: x = insert a x), (a :: x = insert a bl), (a :: x = insert a al), (a :: x = x0 ++ x0), (a :: x = x0 ++ x), (a :: x = x0 ++ bl)
+(a :: x = x0 ++ al), (a :: x = x ++ x0), (a :: x = x ++ x), (a :: x = x ++ bl), (a :: x = x ++ al), (a :: x = bl ++ x0), (a :: x = bl ++ x), (a :: x = bl ++ bl), (a :: x = bl ++ al), (a :: x = al ++ x0)
+(a :: x = al ++ x), (a :: x = al ++ bl), (a :: x = al ++ al), (a :: x = []), (a :: bl = x0), (a :: bl = x), (a :: bl = bl), (a :: bl = al), (a :: bl = sort x0), (a :: bl = sort x)
+(a :: bl = sort bl), (a :: bl = sort al), (a :: bl = insert n x0), (a :: bl = insert n x), (a :: bl = insert n bl), (a :: bl = insert n al), (a :: bl = insert a x0), (a :: bl = insert a x), (a :: bl = insert a bl), (a :: bl = insert a al)
+(a :: bl = x0 ++ x0), (a :: bl = x0 ++ x), (a :: bl = x0 ++ bl), (a :: bl = x0 ++ al), (a :: bl = x ++ x0), (a :: bl = x ++ x), (a :: bl = x ++ bl), (a :: bl = x ++ al), (a :: bl = bl ++ x0), (a :: bl = bl ++ x)
+(a :: bl = bl ++ bl), (a :: bl = bl ++ al), (a :: bl = al ++ x0), (a :: bl = al ++ x), (a :: bl = al ++ bl), (a :: bl = al ++ al), (a :: bl = []), (a :: al = x0), (a :: al = x), (a :: al = bl)
+(a :: al = al), (a :: al = sort x0), (a :: al = sort x), (a :: al = sort bl), (a :: al = sort al), (a :: al = insert n x0), (a :: al = insert n x), (a :: al = insert n bl), (a :: al = insert n al), (a :: al = insert a x0)
+(a :: al = insert a x), (a :: al = insert a bl), (a :: al = insert a al), (a :: al = x0 ++ x0), (a :: al = x0 ++ x), (a :: al = x0 ++ bl), (a :: al = x0 ++ al), (a :: al = x ++ x0), (a :: al = x ++ x), (a :: al = x ++ bl)
+(a :: al = x ++ al), (a :: al = bl ++ x0), (a :: al = bl ++ x), (a :: al = bl ++ bl), (a :: al = bl ++ al), (a :: al = al ++ x0), (a :: al = al ++ x), (a :: al = al ++ bl), (a :: al = al ++ al), (a :: al = [])
+(sort x0 = x0), (sort x0 = x), (sort x0 = bl), (sort x0 = al), (sort x0 = insert n x0), (sort x0 = insert n x), (sort x0 = insert n bl), (sort x0 = insert n al), (sort x0 = insert a x0), (sort x0 = insert a x)
+(sort x0 = insert a bl), (sort x0 = insert a al), (sort x0 = x0 ++ x0), (sort x0 = x0 ++ x), (sort x0 = x0 ++ bl), (sort x0 = x0 ++ al), (sort x0 = x ++ x0), (sort x0 = x ++ x), (sort x0 = x ++ bl), (sort x0 = x ++ al)
+(sort x0 = bl ++ x0), (sort x0 = bl ++ x), (sort x0 = bl ++ bl), (sort x0 = bl ++ al), (sort x0 = al ++ x0), (sort x0 = al ++ x), (sort x0 = al ++ bl), (sort x0 = al ++ al), (sort x = x0), (sort x = x)
+(sort x = bl), (sort x = al), (sort x = insert n x0), (sort x = insert n x), (sort x = insert n bl), (sort x = insert n al), (sort x = insert a x0), (sort x = insert a x), (sort x = insert a bl), (sort x = insert a al)
+(sort x = x0 ++ x0), (sort x = x0 ++ x), (sort x = x0 ++ bl), (sort x = x0 ++ al), (sort x = x ++ x0), (sort x = x ++ x), (sort x = x ++ bl), (sort x = x ++ al), (sort x = bl ++ x0), (sort x = bl ++ x)
+(sort x = bl ++ bl), (sort x = bl ++ al), (sort x = al ++ x0), (sort x = al ++ x), (sort x = al ++ bl), (sort x = al ++ al), (sort bl = x0), (sort bl = x), (sort bl = bl), (sort bl = al)
+(sort bl = insert n x0), (sort bl = insert n x), (sort bl = insert n bl), (sort bl = insert n al), (sort bl = insert a x0), (sort bl = insert a x), (sort bl = insert a bl), (sort bl = insert a al), (sort bl = x0 ++ x0), (sort bl = x0 ++ x)
+(sort bl = x0 ++ bl), (sort bl = x0 ++ al), (sort bl = x ++ x0), (sort bl = x ++ x), (sort bl = x ++ bl), (sort bl = x ++ al), (sort bl = bl ++ x0), (sort bl = bl ++ x), (sort bl = bl ++ bl), (sort bl = bl ++ al)
+(sort bl = al ++ x0), (sort bl = al ++ x), (sort bl = al ++ bl), (sort bl = al ++ al), (sort al = x0), (sort al = x), (sort al = bl), (sort al = al), (sort al = insert n x0), (sort al = insert n x)
+(sort al = insert n bl), (sort al = insert n al), (sort al = insert a x0), (sort al = insert a x), (sort al = insert a bl), (sort al = insert a al), (sort al = x0 ++ x0), (sort al = x0 ++ x), (sort al = x0 ++ bl), (sort al = x0 ++ al)
+(sort al = x ++ x0), (sort al = x ++ x), (sort al = x ++ bl), (sort al = x ++ al), (sort al = bl ++ x0), (sort al = bl ++ x), (sort al = bl ++ bl), (sort al = bl ++ al), (sort al = al ++ x0), (sort al = al ++ x)
+(sort al = al ++ bl), (sort al = al ++ al), (insert n x0 = x0), (insert n x0 = x), (insert n x0 = bl), (insert n x0 = al), (insert n x0 = x0 ++ x0), (insert n x0 = x0 ++ x), (insert n x0 = x0 ++ bl), (insert n x0 = x0 ++ al)
+(insert n x0 = x ++ x0), (insert n x0 = x ++ x), (insert n x0 = x ++ bl), (insert n x0 = x ++ al), (insert n x0 = bl ++ x0), (insert n x0 = bl ++ x), (insert n x0 = bl ++ bl), (insert n x0 = bl ++ al), (insert n x0 = al ++ x0), (insert n x0 = al ++ x)
+(insert n x0 = al ++ bl), (insert n x0 = al ++ al), (insert n x = x0), (insert n x = x), (insert n x = bl), (insert n x = al), (insert n x = x0 ++ x0), (insert n x = x0 ++ x), (insert n x = x0 ++ bl), (insert n x = x0 ++ al)
+(insert n x = x ++ x0), (insert n x = x ++ x), (insert n x = x ++ bl), (insert n x = x ++ al), (insert n x = bl ++ x0), (insert n x = bl ++ x), (insert n x = bl ++ bl), (insert n x = bl ++ al), (insert n x = al ++ x0), (insert n x = al ++ x)
+(insert n x = al ++ bl), (insert n x = al ++ al), (insert n bl = x0), (insert n bl = x), (insert n bl = bl), (insert n bl = al), (insert n bl = x0 ++ x0), (insert n bl = x0 ++ x), (insert n bl = x0 ++ bl), (insert n bl = x0 ++ al)
+(insert n bl = x ++ x0), (insert n bl = x ++ x), (insert n bl = x ++ bl), (insert n bl = x ++ al), (insert n bl = bl ++ x0), (insert n bl = bl ++ x), (insert n bl = bl ++ bl), (insert n bl = bl ++ al), (insert n bl = al ++ x0), (insert n bl = al ++ x)
+(insert n bl = al ++ bl), (insert n bl = al ++ al), (insert n al = x0), (insert n al = x), (insert n al = bl), (insert n al = al), (insert n al = x0 ++ x0), (insert n al = x0 ++ x), (insert n al = x0 ++ bl), (insert n al = x0 ++ al)
+(insert n al = x ++ x0), (insert n al = x ++ x), (insert n al = x ++ bl), (insert n al = x ++ al), (insert n al = bl ++ x0), (insert n al = bl ++ x), (insert n al = bl ++ bl), (insert n al = bl ++ al), (insert n al = al ++ x0), (insert n al = al ++ x)
+(insert n al = al ++ bl), (insert n al = al ++ al), (insert a x0 = x0), (insert a x0 = x), (insert a x0 = bl), (insert a x0 = al), (insert a x0 = x0 ++ x0), (insert a x0 = x0 ++ x), (insert a x0 = x0 ++ bl), (insert a x0 = x0 ++ al)
+(insert a x0 = x ++ x0), (insert a x0 = x ++ x), (insert a x0 = x ++ bl), (insert a x0 = x ++ al), (insert a x0 = bl ++ x0), (insert a x0 = bl ++ x), (insert a x0 = bl ++ bl), (insert a x0 = bl ++ al), (insert a x0 = al ++ x0), (insert a x0 = al ++ x)
+(insert a x0 = al ++ bl), (insert a x0 = al ++ al), (insert a x = x0), (insert a x = x), (insert a x = bl), (insert a x = al), (insert a x = x0 ++ x0), (insert a x = x0 ++ x), (insert a x = x0 ++ bl), (insert a x = x0 ++ al)
+(insert a x = x ++ x0), (insert a x = x ++ x), (insert a x = x ++ bl), (insert a x = x ++ al), (insert a x = bl ++ x0), (insert a x = bl ++ x), (insert a x = bl ++ bl), (insert a x = bl ++ al), (insert a x = al ++ x0), (insert a x = al ++ x)
+(insert a x = al ++ bl), (insert a x = al ++ al), (insert a bl = x0), (insert a bl = x), (insert a bl = bl), (insert a bl = al), (insert a bl = x0 ++ x0), (insert a bl = x0 ++ x), (insert a bl = x0 ++ bl), (insert a bl = x0 ++ al)
+(insert a bl = x ++ x0), (insert a bl = x ++ x), (insert a bl = x ++ bl), (insert a bl = x ++ al), (insert a bl = bl ++ x0), (insert a bl = bl ++ x), (insert a bl = bl ++ bl), (insert a bl = bl ++ al), (insert a bl = al ++ x0), (insert a bl = al ++ x)
+(insert a bl = al ++ bl), (insert a bl = al ++ al), (insert a al = x0), (insert a al = x), (insert a al = bl), (insert a al = al), (insert a al = x0 ++ x0), (insert a al = x0 ++ x), (insert a al = x0 ++ bl), (insert a al = x0 ++ al)
+(insert a al = x ++ x0), (insert a al = x ++ x), (insert a al = x ++ bl), (insert a al = x ++ al), (insert a al = bl ++ x0), (insert a al = bl ++ x), (insert a al = bl ++ bl), (insert a al = bl ++ al), (insert a al = al ++ x0), (insert a al = al ++ x)
+(insert a al = al ++ bl), (insert a al = al ++ al), (x0 ++ x0 = x0), (x0 ++ x0 = x), (x0 ++ x0 = bl), (x0 ++ x0 = al), (x0 ++ x = x0), (x0 ++ x = x), (x0 ++ x = bl), (x0 ++ x = al)
+(x0 ++ bl = x0), (x0 ++ bl = x), (x0 ++ bl = bl), (x0 ++ bl = al), (x0 ++ al = x0), (x0 ++ al = x), (x0 ++ al = bl), (x0 ++ al = al), (x ++ x0 = x0), (x ++ x0 = x)
+(x ++ x0 = bl), (x ++ x0 = al), (x ++ x = x0), (x ++ x = x), (x ++ x = bl), (x ++ x = al), (x ++ bl = x0), (x ++ bl = x), (x ++ bl = bl), (x ++ bl = al)
+(x ++ al = x0), (x ++ al = x), (x ++ al = bl), (x ++ al = al), (bl ++ x0 = x0), (bl ++ x0 = x), (bl ++ x0 = bl), (bl ++ x0 = al), (bl ++ x = x0), (bl ++ x = x)
+(bl ++ x = bl), (bl ++ x = al), (bl ++ bl = x0), (bl ++ bl = x), (bl ++ bl = bl), (bl ++ bl = al), (bl ++ al = x0), (bl ++ al = x), (bl ++ al = bl), (bl ++ al = al)
+(al ++ x0 = x0), (al ++ x0 = x), (al ++ x0 = bl), (al ++ x0 = al), (al ++ x = x0), (al ++ x = x), (al ++ x = bl), (al ++ x = al), (al ++ bl = x0), (al ++ bl = x)
+(al ++ bl = bl), (al ++ bl = al), (al ++ al = x0), (al ++ al = x), (al ++ al = bl), (al ++ al = al), ([] = x0), ([] = x), ([] = bl), ([] = al)
+([] = sort x0), ([] = sort x), ([] = sort bl), ([] = sort al), ([] = insert n x0), ([] = insert n x), ([] = insert n bl), ([] = insert n al), ([] = insert a x0), ([] = insert a x)
+([] = insert a bl), ([] = insert a al), ([] = x0 ++ x0), ([] = x0 ++ x), ([] = x0 ++ bl), ([] = x0 ++ al), ([] = x ++ x0), ([] = x ++ x), ([] = x ++ bl), ([] = x ++ al)
+([] = bl ++ x0), ([] = bl ++ x), ([] = bl ++ bl), ([] = bl ++ al), ([] = al ++ x0), ([] = al ++ x), ([] = al ++ bl), ([] = al ++ al), (None = Some n), (None = Some a)
+(length x0 = n), (length x0 = a), (length x = n), (length x = a), (length bl = n), (length bl = a), (length al = n), (length al = a)
+
+Label: 1 (1)
+(n < n), (n < a), (a < n), (a < a), (n <= n), (n <= a), (a <= n), (a <= a), (x0 = x0), (x0 = x)
+(x0 = bl), (x0 = al), (x = x0), (x = x), (x = bl), (x = al), (bl = x0), (bl = x), (bl = bl), (bl = al)
+(al = x0), (al = x), (al = bl), (al = al), (n = n), (n = a), (a = n), (a = a), (n < length x0), (n < length x)
+(n < length bl), (n < length al), (a < length x0), (a < length x), (a < length bl), (a < length al), (length x0 < n), (length x0 < a), (length x0 < length x), (length x0 < length bl)
+(length x0 < length al), (length x < n), (length x < a), (length x < length x0), (length x < length bl), (length x < length al), (length bl < n), (length bl < a), (length bl < length x0), (length bl < length x)
+(length bl < length al), (length al < n), (length al < a), (length al < length x0), (length al < length x), (length al < length bl), (n <= length x0), (n <= length x), (n <= length bl), (n <= length al)
+(a <= length x0), (a <= length x), (a <= length bl), (a <= length al), (length x0 <= n), (length x0 <= a), (length x0 <= length x), (length x0 <= length bl), (length x0 <= length al), (length x <= n)
+(length x <= a), (length x <= length x0), (length x <= length bl), (length x <= length al), (length bl <= n), (length bl <= a), (length bl <= length x0), (length bl <= length x), (length bl <= length al), (length al <= n)
+(length al <= a), (length al <= length x0), (length al <= length x), (length al <= length bl), (~ n < n), (~ n < a), (~ a < n), (~ a < a), (~ n <= n), (~ n <= a)
+(~ a <= n), (~ a <= a), (x0 <> x0), (x0 <> x), (x0 <> bl), (x0 <> al), (x <> x0), (x <> x), (x <> bl), (x <> al)
+(bl <> x0), (bl <> x), (bl <> bl), (bl <> al), (al <> x0), (al <> x), (al <> bl), (al <> al), (n <> n), (n <> a)
+(a <> n), (a <> a), (None = Some x0), (None = Some x), (None = Some bl), (None = Some al), (n :: x0 = x0), (n :: x0 = x), (n :: x0 = bl), (n :: x0 = al)
+(n :: x0 = sort x0), (n :: x0 = sort x), (n :: x0 = sort bl), (n :: x0 = sort al), (n :: x0 = insert n x0), (n :: x0 = insert n x), (n :: x0 = insert n bl), (n :: x0 = insert n al), (n :: x0 = insert a x0), (n :: x0 = insert a x)
+(n :: x0 = insert a bl), (n :: x0 = insert a al), (n :: x0 = x0 ++ x0), (n :: x0 = x0 ++ x), (n :: x0 = x0 ++ bl), (n :: x0 = x0 ++ al), (n :: x0 = x ++ x0), (n :: x0 = x ++ x), (n :: x0 = x ++ bl), (n :: x0 = x ++ al)
+(n :: x0 = bl ++ x0), (n :: x0 = bl ++ x), (n :: x0 = bl ++ bl), (n :: x0 = bl ++ al), (n :: x0 = al ++ x0), (n :: x0 = al ++ x), (n :: x0 = al ++ bl), (n :: x0 = al ++ al), (n :: x0 = []), (n :: x = x0)
+(n :: x = x), (n :: x = bl), (n :: x = al), (n :: x = sort x0), (n :: x = sort x), (n :: x = sort bl), (n :: x = sort al), (n :: x = insert n x0), (n :: x = insert n x), (n :: x = insert n bl)
+(n :: x = insert n al), (n :: x = insert a x0), (n :: x = insert a x), (n :: x = insert a bl), (n :: x = insert a al), (n :: x = x0 ++ x0), (n :: x = x0 ++ x), (n :: x = x0 ++ bl), (n :: x = x0 ++ al), (n :: x = x ++ x0)
+(n :: x = x ++ x), (n :: x = x ++ bl), (n :: x = x ++ al), (n :: x = bl ++ x0), (n :: x = bl ++ x), (n :: x = bl ++ bl), (n :: x = bl ++ al), (n :: x = al ++ x0), (n :: x = al ++ x), (n :: x = al ++ bl)
+(n :: x = al ++ al), (n :: x = []), (n :: bl = x0), (n :: bl = x), (n :: bl = bl), (n :: bl = al), (n :: bl = sort x0), (n :: bl = sort x), (n :: bl = sort bl), (n :: bl = sort al)
+(n :: bl = insert n x0), (n :: bl = insert n x), (n :: bl = insert n bl), (n :: bl = insert n al), (n :: bl = insert a x0), (n :: bl = insert a x), (n :: bl = insert a bl), (n :: bl = insert a al), (n :: bl = x0 ++ x0), (n :: bl = x0 ++ x)
+(n :: bl = x0 ++ bl), (n :: bl = x0 ++ al), (n :: bl = x ++ x0), (n :: bl = x ++ x), (n :: bl = x ++ bl), (n :: bl = x ++ al), (n :: bl = bl ++ x0), (n :: bl = bl ++ x), (n :: bl = bl ++ bl), (n :: bl = bl ++ al)
+(n :: bl = al ++ x0), (n :: bl = al ++ x), (n :: bl = al ++ bl), (n :: bl = al ++ al), (n :: bl = []), (n :: al = x0), (n :: al = x), (n :: al = bl), (n :: al = al), (n :: al = sort x0)
+(n :: al = sort x), (n :: al = sort bl), (n :: al = sort al), (n :: al = insert n x0), (n :: al = insert n x), (n :: al = insert n bl), (n :: al = insert n al), (n :: al = insert a x0), (n :: al = insert a x), (n :: al = insert a bl)
+(n :: al = insert a al), (n :: al = x0 ++ x0), (n :: al = x0 ++ x), (n :: al = x0 ++ bl), (n :: al = x0 ++ al), (n :: al = x ++ x0), (n :: al = x ++ x), (n :: al = x ++ bl), (n :: al = x ++ al), (n :: al = bl ++ x0)
+(n :: al = bl ++ x), (n :: al = bl ++ bl), (n :: al = bl ++ al), (n :: al = al ++ x0), (n :: al = al ++ x), (n :: al = al ++ bl), (n :: al = al ++ al), (n :: al = []), (a :: x0 = x0), (a :: x0 = x)
+(a :: x0 = bl), (a :: x0 = al), (a :: x0 = sort x0), (a :: x0 = sort x), (a :: x0 = sort bl), (a :: x0 = sort al), (a :: x0 = insert n x0), (a :: x0 = insert n x), (a :: x0 = insert n bl), (a :: x0 = insert n al)
+(a :: x0 = insert a x0), (a :: x0 = insert a x), (a :: x0 = insert a bl), (a :: x0 = insert a al), (a :: x0 = x0 ++ x0), (a :: x0 = x0 ++ x), (a :: x0 = x0 ++ bl), (a :: x0 = x0 ++ al), (a :: x0 = x ++ x0), (a :: x0 = x ++ x)
+(a :: x0 = x ++ bl), (a :: x0 = x ++ al), (a :: x0 = bl ++ x0), (a :: x0 = bl ++ x), (a :: x0 = bl ++ bl), (a :: x0 = bl ++ al), (a :: x0 = al ++ x0), (a :: x0 = al ++ x), (a :: x0 = al ++ bl), (a :: x0 = al ++ al)
+(a :: x0 = []), (a :: x = x0), (a :: x = x), (a :: x = bl), (a :: x = al), (a :: x = sort x0), (a :: x = sort x), (a :: x = sort bl), (a :: x = sort al), (a :: x = insert n x0)
+(a :: x = insert n x), (a :: x = insert n bl), (a :: x = insert n al), (a :: x = insert a x0), (a :: x = insert a x), (a :: x = insert a bl), (a :: x = insert a al), (a :: x = x0 ++ x0), (a :: x = x0 ++ x), (a :: x = x0 ++ bl)
+(a :: x = x0 ++ al), (a :: x = x ++ x0), (a :: x = x ++ x), (a :: x = x ++ bl), (a :: x = x ++ al), (a :: x = bl ++ x0), (a :: x = bl ++ x), (a :: x = bl ++ bl), (a :: x = bl ++ al), (a :: x = al ++ x0)
+(a :: x = al ++ x), (a :: x = al ++ bl), (a :: x = al ++ al), (a :: x = []), (a :: bl = x0), (a :: bl = x), (a :: bl = bl), (a :: bl = al), (a :: bl = sort x0), (a :: bl = sort x)
+(a :: bl = sort bl), (a :: bl = sort al), (a :: bl = insert n x0), (a :: bl = insert n x), (a :: bl = insert n bl), (a :: bl = insert n al), (a :: bl = insert a x0), (a :: bl = insert a x), (a :: bl = insert a bl), (a :: bl = insert a al)
+(a :: bl = x0 ++ x0), (a :: bl = x0 ++ x), (a :: bl = x0 ++ bl), (a :: bl = x0 ++ al), (a :: bl = x ++ x0), (a :: bl = x ++ x), (a :: bl = x ++ bl), (a :: bl = x ++ al), (a :: bl = bl ++ x0), (a :: bl = bl ++ x)
+(a :: bl = bl ++ bl), (a :: bl = bl ++ al), (a :: bl = al ++ x0), (a :: bl = al ++ x), (a :: bl = al ++ bl), (a :: bl = al ++ al), (a :: bl = []), (a :: al = x0), (a :: al = x), (a :: al = bl)
+(a :: al = al), (a :: al = sort x0), (a :: al = sort x), (a :: al = sort bl), (a :: al = sort al), (a :: al = insert n x0), (a :: al = insert n x), (a :: al = insert n bl), (a :: al = insert n al), (a :: al = insert a x0)
+(a :: al = insert a x), (a :: al = insert a bl), (a :: al = insert a al), (a :: al = x0 ++ x0), (a :: al = x0 ++ x), (a :: al = x0 ++ bl), (a :: al = x0 ++ al), (a :: al = x ++ x0), (a :: al = x ++ x), (a :: al = x ++ bl)
+(a :: al = x ++ al), (a :: al = bl ++ x0), (a :: al = bl ++ x), (a :: al = bl ++ bl), (a :: al = bl ++ al), (a :: al = al ++ x0), (a :: al = al ++ x), (a :: al = al ++ bl), (a :: al = al ++ al), (a :: al = [])
+(sort x0 = x0), (sort x0 = x), (sort x0 = bl), (sort x0 = al), (sort x0 = insert n x0), (sort x0 = insert n x), (sort x0 = insert n bl), (sort x0 = insert n al), (sort x0 = insert a x0), (sort x0 = insert a x)
+(sort x0 = insert a bl), (sort x0 = insert a al), (sort x0 = x0 ++ x0), (sort x0 = x0 ++ x), (sort x0 = x0 ++ bl), (sort x0 = x0 ++ al), (sort x0 = x ++ x0), (sort x0 = x ++ x), (sort x0 = x ++ bl), (sort x0 = x ++ al)
+(sort x0 = bl ++ x0), (sort x0 = bl ++ x), (sort x0 = bl ++ bl), (sort x0 = bl ++ al), (sort x0 = al ++ x0), (sort x0 = al ++ x), (sort x0 = al ++ bl), (sort x0 = al ++ al), (sort x = x0), (sort x = x)
+(sort x = bl), (sort x = al), (sort x = insert n x0), (sort x = insert n x), (sort x = insert n bl), (sort x = insert n al), (sort x = insert a x0), (sort x = insert a x), (sort x = insert a bl), (sort x = insert a al)
+(sort x = x0 ++ x0), (sort x = x0 ++ x), (sort x = x0 ++ bl), (sort x = x0 ++ al), (sort x = x ++ x0), (sort x = x ++ x), (sort x = x ++ bl), (sort x = x ++ al), (sort x = bl ++ x0), (sort x = bl ++ x)
+(sort x = bl ++ bl), (sort x = bl ++ al), (sort x = al ++ x0), (sort x = al ++ x), (sort x = al ++ bl), (sort x = al ++ al), (sort bl = x0), (sort bl = x), (sort bl = bl), (sort bl = al)
+(sort bl = insert n x0), (sort bl = insert n x), (sort bl = insert n bl), (sort bl = insert n al), (sort bl = insert a x0), (sort bl = insert a x), (sort bl = insert a bl), (sort bl = insert a al), (sort bl = x0 ++ x0), (sort bl = x0 ++ x)
+(sort bl = x0 ++ bl), (sort bl = x0 ++ al), (sort bl = x ++ x0), (sort bl = x ++ x), (sort bl = x ++ bl), (sort bl = x ++ al), (sort bl = bl ++ x0), (sort bl = bl ++ x), (sort bl = bl ++ bl), (sort bl = bl ++ al)
+(sort bl = al ++ x0), (sort bl = al ++ x), (sort bl = al ++ bl), (sort bl = al ++ al), (sort al = x0), (sort al = x), (sort al = bl), (sort al = al), (sort al = insert n x0), (sort al = insert n x)
+(sort al = insert n bl), (sort al = insert n al), (sort al = insert a x0), (sort al = insert a x), (sort al = insert a bl), (sort al = insert a al), (sort al = x0 ++ x0), (sort al = x0 ++ x), (sort al = x0 ++ bl), (sort al = x0 ++ al)
+(sort al = x ++ x0), (sort al = x ++ x), (sort al = x ++ bl), (sort al = x ++ al), (sort al = bl ++ x0), (sort al = bl ++ x), (sort al = bl ++ bl), (sort al = bl ++ al), (sort al = al ++ x0), (sort al = al ++ x)
+(sort al = al ++ bl), (sort al = al ++ al), (insert n x0 = x0), (insert n x0 = x), (insert n x0 = bl), (insert n x0 = al), (insert n x0 = x0 ++ x0), (insert n x0 = x0 ++ x), (insert n x0 = x0 ++ bl), (insert n x0 = x0 ++ al)
+(insert n x0 = x ++ x0), (insert n x0 = x ++ x), (insert n x0 = x ++ bl), (insert n x0 = x ++ al), (insert n x0 = bl ++ x0), (insert n x0 = bl ++ x), (insert n x0 = bl ++ bl), (insert n x0 = bl ++ al), (insert n x0 = al ++ x0), (insert n x0 = al ++ x)
+(insert n x0 = al ++ bl), (insert n x0 = al ++ al), (insert n x = x0), (insert n x = x), (insert n x = bl), (insert n x = al), (insert n x = x0 ++ x0), (insert n x = x0 ++ x), (insert n x = x0 ++ bl), (insert n x = x0 ++ al)
+(insert n x = x ++ x0), (insert n x = x ++ x), (insert n x = x ++ bl), (insert n x = x ++ al), (insert n x = bl ++ x0), (insert n x = bl ++ x), (insert n x = bl ++ bl), (insert n x = bl ++ al), (insert n x = al ++ x0), (insert n x = al ++ x)
+(insert n x = al ++ bl), (insert n x = al ++ al), (insert n bl = x0), (insert n bl = x), (insert n bl = bl), (insert n bl = al), (insert n bl = x0 ++ x0), (insert n bl = x0 ++ x), (insert n bl = x0 ++ bl), (insert n bl = x0 ++ al)
+(insert n bl = x ++ x0), (insert n bl = x ++ x), (insert n bl = x ++ bl), (insert n bl = x ++ al), (insert n bl = bl ++ x0), (insert n bl = bl ++ x), (insert n bl = bl ++ bl), (insert n bl = bl ++ al), (insert n bl = al ++ x0), (insert n bl = al ++ x)
+(insert n bl = al ++ bl), (insert n bl = al ++ al), (insert n al = x0), (insert n al = x), (insert n al = bl), (insert n al = al), (insert n al = x0 ++ x0), (insert n al = x0 ++ x), (insert n al = x0 ++ bl), (insert n al = x0 ++ al)
+(insert n al = x ++ x0), (insert n al = x ++ x), (insert n al = x ++ bl), (insert n al = x ++ al), (insert n al = bl ++ x0), (insert n al = bl ++ x), (insert n al = bl ++ bl), (insert n al = bl ++ al), (insert n al = al ++ x0), (insert n al = al ++ x)
+(insert n al = al ++ bl), (insert n al = al ++ al), (insert a x0 = x0), (insert a x0 = x), (insert a x0 = bl), (insert a x0 = al), (insert a x0 = x0 ++ x0), (insert a x0 = x0 ++ x), (insert a x0 = x0 ++ bl), (insert a x0 = x0 ++ al)
+(insert a x0 = x ++ x0), (insert a x0 = x ++ x), (insert a x0 = x ++ bl), (insert a x0 = x ++ al), (insert a x0 = bl ++ x0), (insert a x0 = bl ++ x), (insert a x0 = bl ++ bl), (insert a x0 = bl ++ al), (insert a x0 = al ++ x0), (insert a x0 = al ++ x)
+(insert a x0 = al ++ bl), (insert a x0 = al ++ al), (insert a x = x0), (insert a x = x), (insert a x = bl), (insert a x = al), (insert a x = x0 ++ x0), (insert a x = x0 ++ x), (insert a x = x0 ++ bl), (insert a x = x0 ++ al)
+(insert a x = x ++ x0), (insert a x = x ++ x), (insert a x = x ++ bl), (insert a x = x ++ al), (insert a x = bl ++ x0), (insert a x = bl ++ x), (insert a x = bl ++ bl), (insert a x = bl ++ al), (insert a x = al ++ x0), (insert a x = al ++ x)
+(insert a x = al ++ bl), (insert a x = al ++ al), (insert a bl = x0), (insert a bl = x), (insert a bl = bl), (insert a bl = al), (insert a bl = x0 ++ x0), (insert a bl = x0 ++ x), (insert a bl = x0 ++ bl), (insert a bl = x0 ++ al)
+(insert a bl = x ++ x0), (insert a bl = x ++ x), (insert a bl = x ++ bl), (insert a bl = x ++ al), (insert a bl = bl ++ x0), (insert a bl = bl ++ x), (insert a bl = bl ++ bl), (insert a bl = bl ++ al), (insert a bl = al ++ x0), (insert a bl = al ++ x)
+(insert a bl = al ++ bl), (insert a bl = al ++ al), (insert a al = x0), (insert a al = x), (insert a al = bl), (insert a al = al), (insert a al = x0 ++ x0), (insert a al = x0 ++ x), (insert a al = x0 ++ bl), (insert a al = x0 ++ al)
+(insert a al = x ++ x0), (insert a al = x ++ x), (insert a al = x ++ bl), (insert a al = x ++ al), (insert a al = bl ++ x0), (insert a al = bl ++ x), (insert a al = bl ++ bl), (insert a al = bl ++ al), (insert a al = al ++ x0), (insert a al = al ++ x)
+(insert a al = al ++ bl), (insert a al = al ++ al), (x0 ++ x0 = x0), (x0 ++ x0 = x), (x0 ++ x0 = bl), (x0 ++ x0 = al), (x0 ++ x = x0), (x0 ++ x = x), (x0 ++ x = bl), (x0 ++ x = al)
+(x0 ++ bl = x0), (x0 ++ bl = x), (x0 ++ bl = bl), (x0 ++ bl = al), (x0 ++ al = x0), (x0 ++ al = x), (x0 ++ al = bl), (x0 ++ al = al), (x ++ x0 = x0), (x ++ x0 = x)
+(x ++ x0 = bl), (x ++ x0 = al), (x ++ x = x0), (x ++ x = x), (x ++ x = bl), (x ++ x = al), (x ++ bl = x0), (x ++ bl = x), (x ++ bl = bl), (x ++ bl = al)
+(x ++ al = x0), (x ++ al = x), (x ++ al = bl), (x ++ al = al), (bl ++ x0 = x0), (bl ++ x0 = x), (bl ++ x0 = bl), (bl ++ x0 = al), (bl ++ x = x0), (bl ++ x = x)
+(bl ++ x = bl), (bl ++ x = al), (bl ++ bl = x0), (bl ++ bl = x), (bl ++ bl = bl), (bl ++ bl = al), (bl ++ al = x0), (bl ++ al = x), (bl ++ al = bl), (bl ++ al = al)
+(al ++ x0 = x0), (al ++ x0 = x), (al ++ x0 = bl), (al ++ x0 = al), (al ++ x = x0), (al ++ x = x), (al ++ x = bl), (al ++ x = al), (al ++ bl = x0), (al ++ bl = x)
+(al ++ bl = bl), (al ++ bl = al), (al ++ al = x0), (al ++ al = x), (al ++ al = bl), (al ++ al = al), ([] = x0), ([] = x), ([] = bl), ([] = al)
+([] = sort x0), ([] = sort x), ([] = sort bl), ([] = sort al), ([] = insert n x0), ([] = insert n x), ([] = insert n bl), ([] = insert n al), ([] = insert a x0), ([] = insert a x)
+([] = insert a bl), ([] = insert a al), ([] = x0 ++ x0), ([] = x0 ++ x), ([] = x0 ++ bl), ([] = x0 ++ al), ([] = x ++ x0), ([] = x ++ x), ([] = x ++ bl), ([] = x ++ al)
+([] = bl ++ x0), ([] = bl ++ x), ([] = bl ++ bl), ([] = bl ++ al), ([] = al ++ x0), ([] = al ++ x), ([] = al ++ bl), ([] = al ++ al), (None = Some n), (None = Some a)
+(length x0 = n), (length x0 = a), (length x = n), (length x = a), (length bl = n), (length bl = a), (length al = n), (length al = a)
+
+Label: 2 (2)
+(n < n), (n < a), (a < n), (a < a), (n <= n), (n <= a), (a <= n), (a <= a), (x0 = x0), (x0 = x)
+(x0 = bl), (x0 = gv1), (x0 = al), (x = x0), (x = x), (x = bl), (x = gv1), (x = al), (bl = x0), (bl = x)
+(bl = bl), (bl = gv1), (bl = al), (gv1 = x0), (gv1 = x), (gv1 = bl), (gv1 = gv1), (gv1 = al), (al = x0), (al = x)
+(al = bl), (al = gv1), (al = al), (n = n), (n = a), (a = n), (a = a), (n < length x0), (n < length x), (n < length bl)
+(n < length gv1), (n < length al), (a < length x0), (a < length x), (a < length bl), (a < length gv1), (a < length al), (length x0 < n), (length x0 < a), (length x0 < length x)
+(length x0 < length bl), (length x0 < length gv1), (length x0 < length al), (length x < n), (length x < a), (length x < length x0), (length x < length bl), (length x < length gv1), (length x < length al), (length bl < n)
+(length bl < a), (length bl < length x0), (length bl < length x), (length bl < length gv1), (length bl < length al), (length gv1 < n), (length gv1 < a), (length gv1 < length x0), (length gv1 < length x), (length gv1 < length bl)
+(length gv1 < length al), (length al < n), (length al < a), (length al < length x0), (length al < length x), (length al < length bl), (length al < length gv1), (n <= length x0), (n <= length x), (n <= length bl)
+(n <= length gv1), (n <= length al), (a <= length x0), (a <= length x), (a <= length bl), (a <= length gv1), (a <= length al), (length x0 <= n), (length x0 <= a), (length x0 <= length x)
+(length x0 <= length bl), (length x0 <= length gv1), (length x0 <= length al), (length x <= n), (length x <= a), (length x <= length x0), (length x <= length bl), (length x <= length gv1), (length x <= length al), (length bl <= n)
+(length bl <= a), (length bl <= length x0), (length bl <= length x), (length bl <= length gv1), (length bl <= length al), (length gv1 <= n), (length gv1 <= a), (length gv1 <= length x0), (length gv1 <= length x), (length gv1 <= length bl)
+(length gv1 <= length al), (length al <= n), (length al <= a), (length al <= length x0), (length al <= length x), (length al <= length bl), (length al <= length gv1), (~ n < n), (~ n < a), (~ a < n)
+(~ a < a), (~ n <= n), (~ n <= a), (~ a <= n), (~ a <= a), (x0 <> x0), (x0 <> x), (x0 <> bl), (x0 <> gv1), (x0 <> al)
+(x <> x0), (x <> x), (x <> bl), (x <> gv1), (x <> al), (bl <> x0), (bl <> x), (bl <> bl), (bl <> gv1), (bl <> al)
+(gv1 <> x0), (gv1 <> x), (gv1 <> bl), (gv1 <> gv1), (gv1 <> al), (al <> x0), (al <> x), (al <> bl), (al <> gv1), (al <> al)
+(n <> n), (n <> a), (a <> n), (a <> a), (None = Some x0), (None = Some x), (None = Some bl), (None = Some gv1), (None = Some al), (n :: x0 = x0)
+(n :: x0 = x), (n :: x0 = bl), (n :: x0 = gv1), (n :: x0 = al), (n :: x0 = sort x0), (n :: x0 = sort x), (n :: x0 = sort bl), (n :: x0 = sort gv1), (n :: x0 = sort al), (n :: x0 = insert n x0)
+(n :: x0 = insert n x), (n :: x0 = insert n bl), (n :: x0 = insert n gv1), (n :: x0 = insert n al), (n :: x0 = insert a x0), (n :: x0 = insert a x), (n :: x0 = insert a bl), (n :: x0 = insert a gv1), (n :: x0 = insert a al), (n :: x0 = x0 ++ x0)
+(n :: x0 = x0 ++ x), (n :: x0 = x0 ++ bl), (n :: x0 = x0 ++ gv1), (n :: x0 = x0 ++ al), (n :: x0 = x ++ x0), (n :: x0 = x ++ x), (n :: x0 = x ++ bl), (n :: x0 = x ++ gv1), (n :: x0 = x ++ al), (n :: x0 = bl ++ x0)
+(n :: x0 = bl ++ x), (n :: x0 = bl ++ bl), (n :: x0 = bl ++ gv1), (n :: x0 = bl ++ al), (n :: x0 = gv1 ++ x0), (n :: x0 = gv1 ++ x), (n :: x0 = gv1 ++ bl), (n :: x0 = gv1 ++ gv1), (n :: x0 = gv1 ++ al), (n :: x0 = al ++ x0)
+(n :: x0 = al ++ x), (n :: x0 = al ++ bl), (n :: x0 = al ++ gv1), (n :: x0 = al ++ al), (n :: x0 = []), (n :: x = x0), (n :: x = x), (n :: x = bl), (n :: x = gv1), (n :: x = al)
+(n :: x = sort x0), (n :: x = sort x), (n :: x = sort bl), (n :: x = sort gv1), (n :: x = sort al), (n :: x = insert n x0), (n :: x = insert n x), (n :: x = insert n bl), (n :: x = insert n gv1), (n :: x = insert n al)
+(n :: x = insert a x0), (n :: x = insert a x), (n :: x = insert a bl), (n :: x = insert a gv1), (n :: x = insert a al), (n :: x = x0 ++ x0), (n :: x = x0 ++ x), (n :: x = x0 ++ bl), (n :: x = x0 ++ gv1), (n :: x = x0 ++ al)
+(n :: x = x ++ x0), (n :: x = x ++ x), (n :: x = x ++ bl), (n :: x = x ++ gv1), (n :: x = x ++ al), (n :: x = bl ++ x0), (n :: x = bl ++ x), (n :: x = bl ++ bl), (n :: x = bl ++ gv1), (n :: x = bl ++ al)
+(n :: x = gv1 ++ x0), (n :: x = gv1 ++ x), (n :: x = gv1 ++ bl), (n :: x = gv1 ++ gv1), (n :: x = gv1 ++ al), (n :: x = al ++ x0), (n :: x = al ++ x), (n :: x = al ++ bl), (n :: x = al ++ gv1), (n :: x = al ++ al)
+(n :: x = []), (n :: bl = x0), (n :: bl = x), (n :: bl = bl), (n :: bl = gv1), (n :: bl = al), (n :: bl = sort x0), (n :: bl = sort x), (n :: bl = sort bl), (n :: bl = sort gv1)
+(n :: bl = sort al), (n :: bl = insert n x0), (n :: bl = insert n x), (n :: bl = insert n bl), (n :: bl = insert n gv1), (n :: bl = insert n al), (n :: bl = insert a x0), (n :: bl = insert a x), (n :: bl = insert a bl), (n :: bl = insert a gv1)
+(n :: bl = insert a al), (n :: bl = x0 ++ x0), (n :: bl = x0 ++ x), (n :: bl = x0 ++ bl), (n :: bl = x0 ++ gv1), (n :: bl = x0 ++ al), (n :: bl = x ++ x0), (n :: bl = x ++ x), (n :: bl = x ++ bl), (n :: bl = x ++ gv1)
+(n :: bl = x ++ al), (n :: bl = bl ++ x0), (n :: bl = bl ++ x), (n :: bl = bl ++ bl), (n :: bl = bl ++ gv1), (n :: bl = bl ++ al), (n :: bl = gv1 ++ x0), (n :: bl = gv1 ++ x), (n :: bl = gv1 ++ bl), (n :: bl = gv1 ++ gv1)
+(n :: bl = gv1 ++ al), (n :: bl = al ++ x0), (n :: bl = al ++ x), (n :: bl = al ++ bl), (n :: bl = al ++ gv1), (n :: bl = al ++ al), (n :: bl = []), (n :: gv1 = x0), (n :: gv1 = x), (n :: gv1 = bl)
+(n :: gv1 = gv1), (n :: gv1 = al), (n :: gv1 = sort x0), (n :: gv1 = sort x), (n :: gv1 = sort bl), (n :: gv1 = sort gv1), (n :: gv1 = sort al), (n :: gv1 = insert n x0), (n :: gv1 = insert n x), (n :: gv1 = insert n bl)
+(n :: gv1 = insert n gv1), (n :: gv1 = insert n al), (n :: gv1 = insert a x0), (n :: gv1 = insert a x), (n :: gv1 = insert a bl), (n :: gv1 = insert a gv1), (n :: gv1 = insert a al), (n :: gv1 = x0 ++ x0), (n :: gv1 = x0 ++ x), (n :: gv1 = x0 ++ bl)
+(n :: gv1 = x0 ++ gv1), (n :: gv1 = x0 ++ al), (n :: gv1 = x ++ x0), (n :: gv1 = x ++ x), (n :: gv1 = x ++ bl), (n :: gv1 = x ++ gv1), (n :: gv1 = x ++ al), (n :: gv1 = bl ++ x0), (n :: gv1 = bl ++ x), (n :: gv1 = bl ++ bl)
+(n :: gv1 = bl ++ gv1), (n :: gv1 = bl ++ al), (n :: gv1 = gv1 ++ x0), (n :: gv1 = gv1 ++ x), (n :: gv1 = gv1 ++ bl), (n :: gv1 = gv1 ++ gv1), (n :: gv1 = gv1 ++ al), (n :: gv1 = al ++ x0), (n :: gv1 = al ++ x), (n :: gv1 = al ++ bl)
+(n :: gv1 = al ++ gv1), (n :: gv1 = al ++ al), (n :: gv1 = []), (n :: al = x0), (n :: al = x), (n :: al = bl), (n :: al = gv1), (n :: al = al), (n :: al = sort x0), (n :: al = sort x)
+(n :: al = sort bl), (n :: al = sort gv1), (n :: al = sort al), (n :: al = insert n x0), (n :: al = insert n x), (n :: al = insert n bl), (n :: al = insert n gv1), (n :: al = insert n al), (n :: al = insert a x0), (n :: al = insert a x)
+(n :: al = insert a bl), (n :: al = insert a gv1), (n :: al = insert a al), (n :: al = x0 ++ x0), (n :: al = x0 ++ x), (n :: al = x0 ++ bl), (n :: al = x0 ++ gv1), (n :: al = x0 ++ al), (n :: al = x ++ x0), (n :: al = x ++ x)
+(n :: al = x ++ bl), (n :: al = x ++ gv1), (n :: al = x ++ al), (n :: al = bl ++ x0), (n :: al = bl ++ x), (n :: al = bl ++ bl), (n :: al = bl ++ gv1), (n :: al = bl ++ al), (n :: al = gv1 ++ x0), (n :: al = gv1 ++ x)
+(n :: al = gv1 ++ bl), (n :: al = gv1 ++ gv1), (n :: al = gv1 ++ al), (n :: al = al ++ x0), (n :: al = al ++ x), (n :: al = al ++ bl), (n :: al = al ++ gv1), (n :: al = al ++ al), (n :: al = []), (a :: x0 = x0)
+(a :: x0 = x), (a :: x0 = bl), (a :: x0 = gv1), (a :: x0 = al), (a :: x0 = sort x0), (a :: x0 = sort x), (a :: x0 = sort bl), (a :: x0 = sort gv1), (a :: x0 = sort al), (a :: x0 = insert n x0)
+(a :: x0 = insert n x), (a :: x0 = insert n bl), (a :: x0 = insert n gv1), (a :: x0 = insert n al), (a :: x0 = insert a x0), (a :: x0 = insert a x), (a :: x0 = insert a bl), (a :: x0 = insert a gv1), (a :: x0 = insert a al), (a :: x0 = x0 ++ x0)
+(a :: x0 = x0 ++ x), (a :: x0 = x0 ++ bl), (a :: x0 = x0 ++ gv1), (a :: x0 = x0 ++ al), (a :: x0 = x ++ x0), (a :: x0 = x ++ x), (a :: x0 = x ++ bl), (a :: x0 = x ++ gv1), (a :: x0 = x ++ al), (a :: x0 = bl ++ x0)
+(a :: x0 = bl ++ x), (a :: x0 = bl ++ bl), (a :: x0 = bl ++ gv1), (a :: x0 = bl ++ al), (a :: x0 = gv1 ++ x0), (a :: x0 = gv1 ++ x), (a :: x0 = gv1 ++ bl), (a :: x0 = gv1 ++ gv1), (a :: x0 = gv1 ++ al), (a :: x0 = al ++ x0)
+(a :: x0 = al ++ x), (a :: x0 = al ++ bl), (a :: x0 = al ++ gv1), (a :: x0 = al ++ al), (a :: x0 = []), (a :: x = x0), (a :: x = x), (a :: x = bl), (a :: x = gv1), (a :: x = al)
+(a :: x = sort x0), (a :: x = sort x), (a :: x = sort bl), (a :: x = sort gv1), (a :: x = sort al), (a :: x = insert n x0), (a :: x = insert n x), (a :: x = insert n bl), (a :: x = insert n gv1), (a :: x = insert n al)
+(a :: x = insert a x0), (a :: x = insert a x), (a :: x = insert a bl), (a :: x = insert a gv1), (a :: x = insert a al), (a :: x = x0 ++ x0), (a :: x = x0 ++ x), (a :: x = x0 ++ bl), (a :: x = x0 ++ gv1), (a :: x = x0 ++ al)
+(a :: x = x ++ x0), (a :: x = x ++ x), (a :: x = x ++ bl), (a :: x = x ++ gv1), (a :: x = x ++ al), (a :: x = bl ++ x0), (a :: x = bl ++ x), (a :: x = bl ++ bl), (a :: x = bl ++ gv1), (a :: x = bl ++ al)
+(a :: x = gv1 ++ x0), (a :: x = gv1 ++ x), (a :: x = gv1 ++ bl), (a :: x = gv1 ++ gv1), (a :: x = gv1 ++ al), (a :: x = al ++ x0), (a :: x = al ++ x), (a :: x = al ++ bl), (a :: x = al ++ gv1), (a :: x = al ++ al)
+(a :: x = []), (a :: bl = x0), (a :: bl = x), (a :: bl = bl), (a :: bl = gv1), (a :: bl = al), (a :: bl = sort x0), (a :: bl = sort x), (a :: bl = sort bl), (a :: bl = sort gv1)
+(a :: bl = sort al), (a :: bl = insert n x0), (a :: bl = insert n x), (a :: bl = insert n bl), (a :: bl = insert n gv1), (a :: bl = insert n al), (a :: bl = insert a x0), (a :: bl = insert a x), (a :: bl = insert a bl), (a :: bl = insert a gv1)
+(a :: bl = insert a al), (a :: bl = x0 ++ x0), (a :: bl = x0 ++ x), (a :: bl = x0 ++ bl), (a :: bl = x0 ++ gv1), (a :: bl = x0 ++ al), (a :: bl = x ++ x0), (a :: bl = x ++ x), (a :: bl = x ++ bl), (a :: bl = x ++ gv1)
+(a :: bl = x ++ al), (a :: bl = bl ++ x0), (a :: bl = bl ++ x), (a :: bl = bl ++ bl), (a :: bl = bl ++ gv1), (a :: bl = bl ++ al), (a :: bl = gv1 ++ x0), (a :: bl = gv1 ++ x), (a :: bl = gv1 ++ bl), (a :: bl = gv1 ++ gv1)
+(a :: bl = gv1 ++ al), (a :: bl = al ++ x0), (a :: bl = al ++ x), (a :: bl = al ++ bl), (a :: bl = al ++ gv1), (a :: bl = al ++ al), (a :: bl = []), (a :: gv1 = x0), (a :: gv1 = x), (a :: gv1 = bl)
+(a :: gv1 = gv1), (a :: gv1 = al), (a :: gv1 = sort x0), (a :: gv1 = sort x), (a :: gv1 = sort bl), (a :: gv1 = sort gv1), (a :: gv1 = sort al), (a :: gv1 = insert n x0), (a :: gv1 = insert n x), (a :: gv1 = insert n bl)
+(a :: gv1 = insert n gv1), (a :: gv1 = insert n al), (a :: gv1 = insert a x0), (a :: gv1 = insert a x), (a :: gv1 = insert a bl), (a :: gv1 = insert a gv1), (a :: gv1 = insert a al), (a :: gv1 = x0 ++ x0), (a :: gv1 = x0 ++ x), (a :: gv1 = x0 ++ bl)
+(a :: gv1 = x0 ++ gv1), (a :: gv1 = x0 ++ al), (a :: gv1 = x ++ x0), (a :: gv1 = x ++ x), (a :: gv1 = x ++ bl), (a :: gv1 = x ++ gv1), (a :: gv1 = x ++ al), (a :: gv1 = bl ++ x0), (a :: gv1 = bl ++ x), (a :: gv1 = bl ++ bl)
+(a :: gv1 = bl ++ gv1), (a :: gv1 = bl ++ al), (a :: gv1 = gv1 ++ x0), (a :: gv1 = gv1 ++ x), (a :: gv1 = gv1 ++ bl), (a :: gv1 = gv1 ++ gv1), (a :: gv1 = gv1 ++ al), (a :: gv1 = al ++ x0), (a :: gv1 = al ++ x), (a :: gv1 = al ++ bl)
+(a :: gv1 = al ++ gv1), (a :: gv1 = al ++ al), (a :: gv1 = []), (a :: al = x0), (a :: al = x), (a :: al = bl), (a :: al = gv1), (a :: al = al), (a :: al = sort x0), (a :: al = sort x)
+(a :: al = sort bl), (a :: al = sort gv1), (a :: al = sort al), (a :: al = insert n x0), (a :: al = insert n x), (a :: al = insert n bl), (a :: al = insert n gv1), (a :: al = insert n al), (a :: al = insert a x0), (a :: al = insert a x)
+(a :: al = insert a bl), (a :: al = insert a gv1), (a :: al = insert a al), (a :: al = x0 ++ x0), (a :: al = x0 ++ x), (a :: al = x0 ++ bl), (a :: al = x0 ++ gv1), (a :: al = x0 ++ al), (a :: al = x ++ x0), (a :: al = x ++ x)
+(a :: al = x ++ bl), (a :: al = x ++ gv1), (a :: al = x ++ al), (a :: al = bl ++ x0), (a :: al = bl ++ x), (a :: al = bl ++ bl), (a :: al = bl ++ gv1), (a :: al = bl ++ al), (a :: al = gv1 ++ x0), (a :: al = gv1 ++ x)
+(a :: al = gv1 ++ bl), (a :: al = gv1 ++ gv1), (a :: al = gv1 ++ al), (a :: al = al ++ x0), (a :: al = al ++ x), (a :: al = al ++ bl), (a :: al = al ++ gv1), (a :: al = al ++ al), (a :: al = []), (sort x0 = x0)
+(sort x0 = x), (sort x0 = bl), (sort x0 = gv1), (sort x0 = al), (sort x0 = insert n x0), (sort x0 = insert n x), (sort x0 = insert n bl), (sort x0 = insert n gv1), (sort x0 = insert n al), (sort x0 = insert a x0)
+(sort x0 = insert a x), (sort x0 = insert a bl), (sort x0 = insert a gv1), (sort x0 = insert a al), (sort x0 = x0 ++ x0), (sort x0 = x0 ++ x), (sort x0 = x0 ++ bl), (sort x0 = x0 ++ gv1), (sort x0 = x0 ++ al), (sort x0 = x ++ x0)
+(sort x0 = x ++ x), (sort x0 = x ++ bl), (sort x0 = x ++ gv1), (sort x0 = x ++ al), (sort x0 = bl ++ x0), (sort x0 = bl ++ x), (sort x0 = bl ++ bl), (sort x0 = bl ++ gv1), (sort x0 = bl ++ al), (sort x0 = gv1 ++ x0)
+(sort x0 = gv1 ++ x), (sort x0 = gv1 ++ bl), (sort x0 = gv1 ++ gv1), (sort x0 = gv1 ++ al), (sort x0 = al ++ x0), (sort x0 = al ++ x), (sort x0 = al ++ bl), (sort x0 = al ++ gv1), (sort x0 = al ++ al), (sort x = x0)
+(sort x = x), (sort x = bl), (sort x = gv1), (sort x = al), (sort x = insert n x0), (sort x = insert n x), (sort x = insert n bl), (sort x = insert n gv1), (sort x = insert n al), (sort x = insert a x0)
+(sort x = insert a x), (sort x = insert a bl), (sort x = insert a gv1), (sort x = insert a al), (sort x = x0 ++ x0), (sort x = x0 ++ x), (sort x = x0 ++ bl), (sort x = x0 ++ gv1), (sort x = x0 ++ al), (sort x = x ++ x0)
+(sort x = x ++ x), (sort x = x ++ bl), (sort x = x ++ gv1), (sort x = x ++ al), (sort x = bl ++ x0), (sort x = bl ++ x), (sort x = bl ++ bl), (sort x = bl ++ gv1), (sort x = bl ++ al), (sort x = gv1 ++ x0)
+(sort x = gv1 ++ x), (sort x = gv1 ++ bl), (sort x = gv1 ++ gv1), (sort x = gv1 ++ al), (sort x = al ++ x0), (sort x = al ++ x), (sort x = al ++ bl), (sort x = al ++ gv1), (sort x = al ++ al), (sort bl = x0)
+(sort bl = x), (sort bl = bl), (sort bl = gv1), (sort bl = al), (sort bl = insert n x0), (sort bl = insert n x), (sort bl = insert n bl), (sort bl = insert n gv1), (sort bl = insert n al), (sort bl = insert a x0)
+(sort bl = insert a x), (sort bl = insert a bl), (sort bl = insert a gv1), (sort bl = insert a al), (sort bl = x0 ++ x0), (sort bl = x0 ++ x), (sort bl = x0 ++ bl), (sort bl = x0 ++ gv1), (sort bl = x0 ++ al), (sort bl = x ++ x0)
+(sort bl = x ++ x), (sort bl = x ++ bl), (sort bl = x ++ gv1), (sort bl = x ++ al), (sort bl = bl ++ x0), (sort bl = bl ++ x), (sort bl = bl ++ bl), (sort bl = bl ++ gv1), (sort bl = bl ++ al), (sort bl = gv1 ++ x0)
+(sort bl = gv1 ++ x), (sort bl = gv1 ++ bl), (sort bl = gv1 ++ gv1), (sort bl = gv1 ++ al), (sort bl = al ++ x0), (sort bl = al ++ x), (sort bl = al ++ bl), (sort bl = al ++ gv1), (sort bl = al ++ al), (sort gv1 = x0)
+(sort gv1 = x), (sort gv1 = bl), (sort gv1 = gv1), (sort gv1 = al), (sort gv1 = insert n x0), (sort gv1 = insert n x), (sort gv1 = insert n bl), (sort gv1 = insert n gv1), (sort gv1 = insert n al), (sort gv1 = insert a x0)
+(sort gv1 = insert a x), (sort gv1 = insert a bl), (sort gv1 = insert a gv1), (sort gv1 = insert a al), (sort gv1 = x0 ++ x0), (sort gv1 = x0 ++ x), (sort gv1 = x0 ++ bl), (sort gv1 = x0 ++ gv1), (sort gv1 = x0 ++ al), (sort gv1 = x ++ x0)
+(sort gv1 = x ++ x), (sort gv1 = x ++ bl), (sort gv1 = x ++ gv1), (sort gv1 = x ++ al), (sort gv1 = bl ++ x0), (sort gv1 = bl ++ x), (sort gv1 = bl ++ bl), (sort gv1 = bl ++ gv1), (sort gv1 = bl ++ al), (sort gv1 = gv1 ++ x0)
+(sort gv1 = gv1 ++ x), (sort gv1 = gv1 ++ bl), (sort gv1 = gv1 ++ gv1), (sort gv1 = gv1 ++ al), (sort gv1 = al ++ x0), (sort gv1 = al ++ x), (sort gv1 = al ++ bl), (sort gv1 = al ++ gv1), (sort gv1 = al ++ al), (sort al = x0)
+(sort al = x), (sort al = bl), (sort al = gv1), (sort al = al), (sort al = insert n x0), (sort al = insert n x), (sort al = insert n bl), (sort al = insert n gv1), (sort al = insert n al), (sort al = insert a x0)
+(sort al = insert a x), (sort al = insert a bl), (sort al = insert a gv1), (sort al = insert a al), (sort al = x0 ++ x0), (sort al = x0 ++ x), (sort al = x0 ++ bl), (sort al = x0 ++ gv1), (sort al = x0 ++ al), (sort al = x ++ x0)
+(sort al = x ++ x), (sort al = x ++ bl), (sort al = x ++ gv1), (sort al = x ++ al), (sort al = bl ++ x0), (sort al = bl ++ x), (sort al = bl ++ bl), (sort al = bl ++ gv1), (sort al = bl ++ al), (sort al = gv1 ++ x0)
+(sort al = gv1 ++ x), (sort al = gv1 ++ bl), (sort al = gv1 ++ gv1), (sort al = gv1 ++ al), (sort al = al ++ x0), (sort al = al ++ x), (sort al = al ++ bl), (sort al = al ++ gv1), (sort al = al ++ al), (insert n x0 = x0)
+(insert n x0 = x), (insert n x0 = bl), (insert n x0 = gv1), (insert n x0 = al), (insert n x0 = x0 ++ x0), (insert n x0 = x0 ++ x), (insert n x0 = x0 ++ bl), (insert n x0 = x0 ++ gv1), (insert n x0 = x0 ++ al), (insert n x0 = x ++ x0)
+(insert n x0 = x ++ x), (insert n x0 = x ++ bl), (insert n x0 = x ++ gv1), (insert n x0 = x ++ al), (insert n x0 = bl ++ x0), (insert n x0 = bl ++ x), (insert n x0 = bl ++ bl), (insert n x0 = bl ++ gv1), (insert n x0 = bl ++ al), (insert n x0 = gv1 ++ x0)
+(insert n x0 = gv1 ++ x), (insert n x0 = gv1 ++ bl), (insert n x0 = gv1 ++ gv1), (insert n x0 = gv1 ++ al), (insert n x0 = al ++ x0), (insert n x0 = al ++ x), (insert n x0 = al ++ bl), (insert n x0 = al ++ gv1), (insert n x0 = al ++ al), (insert n x = x0)
+(insert n x = x), (insert n x = bl), (insert n x = gv1), (insert n x = al), (insert n x = x0 ++ x0), (insert n x = x0 ++ x), (insert n x = x0 ++ bl), (insert n x = x0 ++ gv1), (insert n x = x0 ++ al), (insert n x = x ++ x0)
+(insert n x = x ++ x), (insert n x = x ++ bl), (insert n x = x ++ gv1), (insert n x = x ++ al), (insert n x = bl ++ x0), (insert n x = bl ++ x), (insert n x = bl ++ bl), (insert n x = bl ++ gv1), (insert n x = bl ++ al), (insert n x = gv1 ++ x0)
+(insert n x = gv1 ++ x), (insert n x = gv1 ++ bl), (insert n x = gv1 ++ gv1), (insert n x = gv1 ++ al), (insert n x = al ++ x0), (insert n x = al ++ x), (insert n x = al ++ bl), (insert n x = al ++ gv1), (insert n x = al ++ al), (insert n bl = x0)
+(insert n bl = x), (insert n bl = bl), (insert n bl = gv1), (insert n bl = al), (insert n bl = x0 ++ x0), (insert n bl = x0 ++ x), (insert n bl = x0 ++ bl), (insert n bl = x0 ++ gv1), (insert n bl = x0 ++ al), (insert n bl = x ++ x0)
+(insert n bl = x ++ x), (insert n bl = x ++ bl), (insert n bl = x ++ gv1), (insert n bl = x ++ al), (insert n bl = bl ++ x0), (insert n bl = bl ++ x), (insert n bl = bl ++ bl), (insert n bl = bl ++ gv1), (insert n bl = bl ++ al), (insert n bl = gv1 ++ x0)
+(insert n bl = gv1 ++ x), (insert n bl = gv1 ++ bl), (insert n bl = gv1 ++ gv1), (insert n bl = gv1 ++ al), (insert n bl = al ++ x0), (insert n bl = al ++ x), (insert n bl = al ++ bl), (insert n bl = al ++ gv1), (insert n bl = al ++ al), (insert n gv1 = x0)
+(insert n gv1 = x), (insert n gv1 = bl), (insert n gv1 = gv1), (insert n gv1 = al), (insert n gv1 = x0 ++ x0), (insert n gv1 = x0 ++ x), (insert n gv1 = x0 ++ bl), (insert n gv1 = x0 ++ gv1), (insert n gv1 = x0 ++ al), (insert n gv1 = x ++ x0)
+(insert n gv1 = x ++ x), (insert n gv1 = x ++ bl), (insert n gv1 = x ++ gv1), (insert n gv1 = x ++ al), (insert n gv1 = bl ++ x0), (insert n gv1 = bl ++ x), (insert n gv1 = bl ++ bl), (insert n gv1 = bl ++ gv1), (insert n gv1 = bl ++ al), (insert n gv1 = gv1 ++ x0)
+(insert n gv1 = gv1 ++ x), (insert n gv1 = gv1 ++ bl), (insert n gv1 = gv1 ++ gv1), (insert n gv1 = gv1 ++ al), (insert n gv1 = al ++ x0), (insert n gv1 = al ++ x), (insert n gv1 = al ++ bl), (insert n gv1 = al ++ gv1), (insert n gv1 = al ++ al), (insert n al = x0)
+(insert n al = x), (insert n al = bl), (insert n al = gv1), (insert n al = al), (insert n al = x0 ++ x0), (insert n al = x0 ++ x), (insert n al = x0 ++ bl), (insert n al = x0 ++ gv1), (insert n al = x0 ++ al), (insert n al = x ++ x0)
+(insert n al = x ++ x), (insert n al = x ++ bl), (insert n al = x ++ gv1), (insert n al = x ++ al), (insert n al = bl ++ x0), (insert n al = bl ++ x), (insert n al = bl ++ bl), (insert n al = bl ++ gv1), (insert n al = bl ++ al), (insert n al = gv1 ++ x0)
+(insert n al = gv1 ++ x), (insert n al = gv1 ++ bl), (insert n al = gv1 ++ gv1), (insert n al = gv1 ++ al), (insert n al = al ++ x0), (insert n al = al ++ x), (insert n al = al ++ bl), (insert n al = al ++ gv1), (insert n al = al ++ al), (insert a x0 = x0)
+(insert a x0 = x), (insert a x0 = bl), (insert a x0 = gv1), (insert a x0 = al), (insert a x0 = x0 ++ x0), (insert a x0 = x0 ++ x), (insert a x0 = x0 ++ bl), (insert a x0 = x0 ++ gv1), (insert a x0 = x0 ++ al), (insert a x0 = x ++ x0)
+(insert a x0 = x ++ x), (insert a x0 = x ++ bl), (insert a x0 = x ++ gv1), (insert a x0 = x ++ al), (insert a x0 = bl ++ x0), (insert a x0 = bl ++ x), (insert a x0 = bl ++ bl), (insert a x0 = bl ++ gv1), (insert a x0 = bl ++ al), (insert a x0 = gv1 ++ x0)
+(insert a x0 = gv1 ++ x), (insert a x0 = gv1 ++ bl), (insert a x0 = gv1 ++ gv1), (insert a x0 = gv1 ++ al), (insert a x0 = al ++ x0), (insert a x0 = al ++ x), (insert a x0 = al ++ bl), (insert a x0 = al ++ gv1), (insert a x0 = al ++ al), (insert a x = x0)
+(insert a x = x), (insert a x = bl), (insert a x = gv1), (insert a x = al), (insert a x = x0 ++ x0), (insert a x = x0 ++ x), (insert a x = x0 ++ bl), (insert a x = x0 ++ gv1), (insert a x = x0 ++ al), (insert a x = x ++ x0)
+(insert a x = x ++ x), (insert a x = x ++ bl), (insert a x = x ++ gv1), (insert a x = x ++ al), (insert a x = bl ++ x0), (insert a x = bl ++ x), (insert a x = bl ++ bl), (insert a x = bl ++ gv1), (insert a x = bl ++ al), (insert a x = gv1 ++ x0)
+(insert a x = gv1 ++ x), (insert a x = gv1 ++ bl), (insert a x = gv1 ++ gv1), (insert a x = gv1 ++ al), (insert a x = al ++ x0), (insert a x = al ++ x), (insert a x = al ++ bl), (insert a x = al ++ gv1), (insert a x = al ++ al), (insert a bl = x0)
+(insert a bl = x), (insert a bl = bl), (insert a bl = gv1), (insert a bl = al), (insert a bl = x0 ++ x0), (insert a bl = x0 ++ x), (insert a bl = x0 ++ bl), (insert a bl = x0 ++ gv1), (insert a bl = x0 ++ al), (insert a bl = x ++ x0)
+(insert a bl = x ++ x), (insert a bl = x ++ bl), (insert a bl = x ++ gv1), (insert a bl = x ++ al), (insert a bl = bl ++ x0), (insert a bl = bl ++ x), (insert a bl = bl ++ bl), (insert a bl = bl ++ gv1), (insert a bl = bl ++ al), (insert a bl = gv1 ++ x0)
+(insert a bl = gv1 ++ x), (insert a bl = gv1 ++ bl), (insert a bl = gv1 ++ gv1), (insert a bl = gv1 ++ al), (insert a bl = al ++ x0), (insert a bl = al ++ x), (insert a bl = al ++ bl), (insert a bl = al ++ gv1), (insert a bl = al ++ al), (insert a gv1 = x0)
+(insert a gv1 = x), (insert a gv1 = bl), (insert a gv1 = gv1), (insert a gv1 = al), (insert a gv1 = x0 ++ x0), (insert a gv1 = x0 ++ x), (insert a gv1 = x0 ++ bl), (insert a gv1 = x0 ++ gv1), (insert a gv1 = x0 ++ al), (insert a gv1 = x ++ x0)
+(insert a gv1 = x ++ x), (insert a gv1 = x ++ bl), (insert a gv1 = x ++ gv1), (insert a gv1 = x ++ al), (insert a gv1 = bl ++ x0), (insert a gv1 = bl ++ x), (insert a gv1 = bl ++ bl), (insert a gv1 = bl ++ gv1), (insert a gv1 = bl ++ al), (insert a gv1 = gv1 ++ x0)
+(insert a gv1 = gv1 ++ x), (insert a gv1 = gv1 ++ bl), (insert a gv1 = gv1 ++ gv1), (insert a gv1 = gv1 ++ al), (insert a gv1 = al ++ x0), (insert a gv1 = al ++ x), (insert a gv1 = al ++ bl), (insert a gv1 = al ++ gv1), (insert a gv1 = al ++ al), (insert a al = x0)
+(insert a al = x), (insert a al = bl), (insert a al = gv1), (insert a al = al), (insert a al = x0 ++ x0), (insert a al = x0 ++ x), (insert a al = x0 ++ bl), (insert a al = x0 ++ gv1), (insert a al = x0 ++ al), (insert a al = x ++ x0)
+(insert a al = x ++ x), (insert a al = x ++ bl), (insert a al = x ++ gv1), (insert a al = x ++ al), (insert a al = bl ++ x0), (insert a al = bl ++ x), (insert a al = bl ++ bl), (insert a al = bl ++ gv1), (insert a al = bl ++ al), (insert a al = gv1 ++ x0)
+(insert a al = gv1 ++ x), (insert a al = gv1 ++ bl), (insert a al = gv1 ++ gv1), (insert a al = gv1 ++ al), (insert a al = al ++ x0), (insert a al = al ++ x), (insert a al = al ++ bl), (insert a al = al ++ gv1), (insert a al = al ++ al), (x0 ++ x0 = x0)
+(x0 ++ x0 = x), (x0 ++ x0 = bl), (x0 ++ x0 = gv1), (x0 ++ x0 = al), (x0 ++ x = x0), (x0 ++ x = x), (x0 ++ x = bl), (x0 ++ x = gv1), (x0 ++ x = al), (x0 ++ bl = x0)
+(x0 ++ bl = x), (x0 ++ bl = bl), (x0 ++ bl = gv1), (x0 ++ bl = al), (x0 ++ gv1 = x0), (x0 ++ gv1 = x), (x0 ++ gv1 = bl), (x0 ++ gv1 = gv1), (x0 ++ gv1 = al), (x0 ++ al = x0)
+(x0 ++ al = x), (x0 ++ al = bl), (x0 ++ al = gv1), (x0 ++ al = al), (x ++ x0 = x0), (x ++ x0 = x), (x ++ x0 = bl), (x ++ x0 = gv1), (x ++ x0 = al), (x ++ x = x0)
+(x ++ x = x), (x ++ x = bl), (x ++ x = gv1), (x ++ x = al), (x ++ bl = x0), (x ++ bl = x), (x ++ bl = bl), (x ++ bl = gv1), (x ++ bl = al), (x ++ gv1 = x0)
+(x ++ gv1 = x), (x ++ gv1 = bl), (x ++ gv1 = gv1), (x ++ gv1 = al), (x ++ al = x0), (x ++ al = x), (x ++ al = bl), (x ++ al = gv1), (x ++ al = al), (bl ++ x0 = x0)
+(bl ++ x0 = x), (bl ++ x0 = bl), (bl ++ x0 = gv1), (bl ++ x0 = al), (bl ++ x = x0), (bl ++ x = x), (bl ++ x = bl), (bl ++ x = gv1), (bl ++ x = al), (bl ++ bl = x0)
+(bl ++ bl = x), (bl ++ bl = bl), (bl ++ bl = gv1), (bl ++ bl = al), (bl ++ gv1 = x0), (bl ++ gv1 = x), (bl ++ gv1 = bl), (bl ++ gv1 = gv1), (bl ++ gv1 = al), (bl ++ al = x0)
+(bl ++ al = x), (bl ++ al = bl), (bl ++ al = gv1), (bl ++ al = al), (gv1 ++ x0 = x0), (gv1 ++ x0 = x), (gv1 ++ x0 = bl), (gv1 ++ x0 = gv1), (gv1 ++ x0 = al), (gv1 ++ x = x0)
+(gv1 ++ x = x), (gv1 ++ x = bl), (gv1 ++ x = gv1), (gv1 ++ x = al), (gv1 ++ bl = x0), (gv1 ++ bl = x), (gv1 ++ bl = bl), (gv1 ++ bl = gv1), (gv1 ++ bl = al), (gv1 ++ gv1 = x0)
+(gv1 ++ gv1 = x), (gv1 ++ gv1 = bl), (gv1 ++ gv1 = gv1), (gv1 ++ gv1 = al), (gv1 ++ al = x0), (gv1 ++ al = x), (gv1 ++ al = bl), (gv1 ++ al = gv1), (gv1 ++ al = al), (al ++ x0 = x0)
+(al ++ x0 = x), (al ++ x0 = bl), (al ++ x0 = gv1), (al ++ x0 = al), (al ++ x = x0), (al ++ x = x), (al ++ x = bl), (al ++ x = gv1), (al ++ x = al), (al ++ bl = x0)
+(al ++ bl = x), (al ++ bl = bl), (al ++ bl = gv1), (al ++ bl = al), (al ++ gv1 = x0), (al ++ gv1 = x), (al ++ gv1 = bl), (al ++ gv1 = gv1), (al ++ gv1 = al), (al ++ al = x0)
+(al ++ al = x), (al ++ al = bl), (al ++ al = gv1), (al ++ al = al), ([] = x0), ([] = x), ([] = bl), ([] = gv1), ([] = al), ([] = sort x0)
+([] = sort x), ([] = sort bl), ([] = sort gv1), ([] = sort al), ([] = insert n x0), ([] = insert n x), ([] = insert n bl), ([] = insert n gv1), ([] = insert n al), ([] = insert a x0)
+([] = insert a x), ([] = insert a bl), ([] = insert a gv1), ([] = insert a al), ([] = x0 ++ x0), ([] = x0 ++ x), ([] = x0 ++ bl), ([] = x0 ++ gv1), ([] = x0 ++ al), ([] = x ++ x0)
+([] = x ++ x), ([] = x ++ bl), ([] = x ++ gv1), ([] = x ++ al), ([] = bl ++ x0), ([] = bl ++ x), ([] = bl ++ bl), ([] = bl ++ gv1), ([] = bl ++ al), ([] = gv1 ++ x0)
+([] = gv1 ++ x), ([] = gv1 ++ bl), ([] = gv1 ++ gv1), ([] = gv1 ++ al), ([] = al ++ x0), ([] = al ++ x), ([] = al ++ bl), ([] = al ++ gv1), ([] = al ++ al), (None = Some n)
+(None = Some a), (length x0 = n), (length x0 = a), (length x = n), (length x = a), (length bl = n), (length bl = a), (length gv1 = n), (length gv1 = a), (length al = n)
+(length al = a)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 86.217 seconds
+
+
+Label: 0 (0)
+
+Label: 1 (1)
+
+Label: 2 (2)
+(insert n bl = gv1), (insert a al = gv1), (length bl < length gv1), (length al < length gv1), (n :: bl = gv1), (al ++ bl = gv1), (sort gv1 = insert n bl), (sort gv1 = insert a al), (n :: bl = sort gv1), (sort gv1 = al ++ bl)
+(insert n bl = x ++ gv1), (insert n bl = gv1 ++ x), (insert a al = x ++ gv1), (insert a al = gv1 ++ x), (insert n bl = x0 ++ gv1), (insert n bl = gv1 ++ x0), (insert a al = x0 ++ gv1), (insert a al = gv1 ++ x0), (n :: bl = x ++ gv1), (n :: bl = gv1 ++ x)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (bl = x ++ a :: x0 ->  Permutation gv0 (a :: (n :: x) ++ x0) -> Permutation gv0 (n :: bl))
+
+2. (n :: bl = gv1 ->  Permutation gv0 (a :: (n :: x) ++ x0) ->  bl = x ++ a :: x0 -> a :: al = gv0 -> Permutation gv0 gv1)
+
+3. (Permutation (a :: al) (a :: (n :: x) ++ x0) ->  bl = x ++ a :: x0 -> Permutation (a :: al) (n :: bl))
+
+4. (Permutation (a :: al) (a :: (n :: x) ++ x0) ->  insert n bl = gv1 -> bl = x ++ a :: x0 -> Permutation (a :: al) gv1)
+
+5. (Permutation (a :: al) (a :: (n :: x) ++ x0) ->  insert a al = gv1 -> bl = x ++ a :: x0 -> Permutation (a :: al) gv1)
+
+6. (length bl < length gv1 ->  Permutation (a :: al) (a :: (n :: x) ++ x0) ->  bl = x ++ a :: x0 -> Permutation (a :: al) gv1)
+
+7. (length al < length gv1 ->  Permutation (a :: al) (a :: (n :: x) ++ x0) ->  bl = x ++ a :: x0 -> Permutation (a :: al) gv1)
+
+8. (Permutation (a :: al) (a :: (n :: x) ++ x0) ->  al ++ bl = gv1 -> bl = x ++ a :: x0 -> Permutation (a :: al) gv1)
+
+9. (Permutation (a :: al) (a :: (n :: x) ++ x0) ->  bl = x ++ a :: x0 -> sort gv1 = insert n bl -> Permutation (a :: al) gv1)
+
+10. (Permutation (a :: al) (a :: (n :: x) ++ x0) ->  bl = x ++ a :: x0 -> sort gv1 = insert a al -> Permutation (a :: al) gv1)
+
+11. (Permutation (a :: al) (a :: (n :: x) ++ x0) ->  bl = x ++ a :: x0 -> n :: bl = sort gv1 -> Permutation (a :: al) gv1)
+
+12. (Permutation (a :: al) (a :: (n :: x) ++ x0) ->  sort gv1 = al ++ bl -> bl = x ++ a :: x0 -> Permutation (a :: al) gv1)
+
+13. (Permutation (a :: al) (a :: (n :: x) ++ x0) ->  insert n bl = x ++ gv1 -> bl = x ++ a :: x0 -> Permutation (a :: al) gv1)
+
+14. (Permutation (a :: al) (a :: (n :: x) ++ x0) ->  insert n bl = gv1 ++ x -> bl = x ++ a :: x0 -> Permutation (a :: al) gv1)
+
+15. (Permutation (a :: al) (a :: (n :: x) ++ x0) ->  insert a al = x ++ gv1 -> bl = x ++ a :: x0 -> Permutation (a :: al) gv1)
+
+16. (Permutation (a :: al) (a :: (n :: x) ++ x0) ->  insert a al = gv1 ++ x -> bl = x ++ a :: x0 -> Permutation (a :: al) gv1)
+
+17. (Permutation (a :: al) (a :: (n :: x) ++ x0) ->  insert n bl = x0 ++ gv1 -> bl = x ++ a :: x0 -> Permutation (a :: al) gv1)
+
+18. (Permutation (a :: al) (a :: (n :: x) ++ x0) ->  insert n bl = gv1 ++ x0 -> bl = x ++ a :: x0 -> Permutation (a :: al) gv1)
+
+19. (Permutation (a :: al) (a :: (n :: x) ++ x0) ->  insert a al = x0 ++ gv1 -> bl = x ++ a :: x0 -> Permutation (a :: al) gv1)
+
+20. (Permutation (a :: al) (a :: (n :: x) ++ x0) ->  insert a al = gv1 ++ x0 -> bl = x ++ a :: x0 -> Permutation (a :: al) gv1)
+
+21. (Permutation (a :: al) (a :: (n :: x) ++ x0) ->  n :: bl = x ++ gv1 -> bl = x ++ a :: x0 -> Permutation (a :: al) gv1)
+
+22. (Permutation (a :: al) (a :: (n :: x) ++ x0) ->  n :: bl = gv1 ++ x -> bl = x ++ a :: x0 -> Permutation (a :: al) gv1)
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 135.525 seconds
+
+Number of Result Pairs Returned: 22
+
+1. (bl = x ++ a :: x0 ->  Permutation gv0 (a :: (n :: x) ++ x0) -> Permutation gv0 (n :: bl))
+
+2. (n :: bl = gv1 ->  Permutation gv0 (a :: (n :: x) ++ x0) ->  bl = x ++ a :: x0 -> a :: al = gv0 -> Permutation gv0 gv1)
+
+3. (Permutation (a :: al) (a :: (n :: x) ++ x0) ->  bl = x ++ a :: x0 -> Permutation (a :: al) (n :: bl))
+
+4. (Permutation (a :: al) (a :: (n :: x) ++ x0) ->  insert n bl = gv1 -> bl = x ++ a :: x0 -> Permutation (a :: al) gv1)
+
+5. (Permutation (a :: al) (a :: (n :: x) ++ x0) ->  insert a al = gv1 -> bl = x ++ a :: x0 -> Permutation (a :: al) gv1)

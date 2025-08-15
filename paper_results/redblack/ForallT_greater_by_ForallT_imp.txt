@@ -1,0 +1,164 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (ForallT (fun (k' : nat) (_ : value) => k' > k) t)
+ -- (k > k0)
+
+----------------------------------
+Goal: (ForallT (fun (k' : nat) (_ : value) => k' > k0) t)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 5.543 seconds
+
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 39.462 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (ForallT (fun (k' : nat) (_ : value) => k' > k) t)
+ -- (k > k0)
+
+----------------------------------
+Goal: (ForallT (fun (k' : nat) (_ : value) => k' > k0) t)
+Case: Valid and Un-Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 39.613 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+In : (forall A : Type, A -> list A -> Prop)
+existsb : (forall A : Type, (A -> bool) -> list A -> bool)
+forallb : (forall A : Type, (A -> bool) -> list A -> bool)
+Forall : (forall A : Type, (A -> Prop) -> list A -> Prop)
+nodup : (forall A : Type, (forall x y : A, {x = y} + {x <> y}) -> list A -> list A)
+map : (forall A B : Type, (A -> B) -> list A -> list B)
+value : Set
+value_rect : (forall P : value -> Type,
+ (forall n : nat, P (Positive n)) ->
+ (forall n : nat, P (Negative n)) -> forall v : value, P v)
+value_rec : (forall P : value -> Set,
+ (forall n : nat, P (Positive n)) ->
+ (forall n : nat, P (Negative n)) -> forall v : value, P v)
+color : Set
+color_rect : (forall P : color -> Type, P Red -> P Black -> forall c : color, P c)
+color_rec : (forall P : color -> Set, P Red -> P Black -> forall c : color, P c)
+tree : Set
+tree_rect : (forall P : tree -> Type,
+ P E ->
+ (forall (c : color) (t : tree),
+  P t -> forall (n : nat) (v : value) (t0 : tree), P t0 -> P (T c t n v t0)) ->
+ forall t : tree, P t)
+tree_rec : (forall P : tree -> Set,
+ P E ->
+ (forall (c : color) (t : tree),
+  P t -> forall (n : nat) (v : value) (t0 : tree), P t0 -> P (T c t n v t0)) ->
+ forall t : tree, P t)
+empty_tree : tree
+lookup : (value -> nat -> tree -> value)
+balance : (color -> tree -> nat -> value -> tree -> tree)
+ins : (nat -> value -> tree -> tree)
+make_black : (tree -> tree)
+insert : (nat -> value -> tree -> tree)
+elements_tr : (tree -> list (nat * value) -> list (nat * value))
+elements : (tree -> list (nat * value))
+ForallT : ((nat -> value -> Prop) -> tree -> Prop)
+BST : (tree -> Prop)
+RB : (tree -> color -> nat -> Prop)
+NearlyRB : (tree -> nat -> Prop)
+height : (tree -> nat)
+mindepth : (tree -> nat)
+Positive : (nat -> value)
+Negative : (nat -> value)
+Red : color
+Black : color
+E : tree
+T : (color -> tree -> nat -> value -> tree -> tree)
+
+Label: 0 (0)
+Abducted Assumption: (ForallT (fun (k' : nat) (_ : value) => k' > k) t)
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Abducted Assumption: (k > k0)
+Positive Examples: 500
+Negative Examples: 260
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 39.752 seconds
+
+
+Label: 0 (0)
+(NearlyRB t k), (NearlyRB t k0), (BST t), (k < k), (k < k0), (k0 < k), (k0 < k0), (k <= k), (k <= k0), (k0 <= k)
+(k0 <= k0), (t = t), (k = k), (k = k0), (k0 = k), (k0 = k0), (NearlyRB t (mindepth t)), (NearlyRB t (height t)), (NearlyRB (make_black t) k), (NearlyRB (make_black t) k0)
+(NearlyRB (make_black t) (mindepth t)), (NearlyRB (make_black t) (height t)), (NearlyRB empty_tree k), (NearlyRB empty_tree k0), (NearlyRB empty_tree (mindepth t)), (NearlyRB empty_tree (height t)), (NearlyRB E k), (NearlyRB E k0), (NearlyRB E (mindepth t)), (NearlyRB E (height t))
+(RB t Red k), (RB t Red k0), (RB t Red (mindepth t)), (RB t Red (height t)), (RB t Black k), (RB t Black k0), (RB t Black (mindepth t)), (RB t Black (height t)), (RB (make_black t) Red k), (RB (make_black t) Red k0)
+(RB (make_black t) Red (mindepth t)), (RB (make_black t) Red (height t)), (RB (make_black t) Black k), (RB (make_black t) Black k0), (RB (make_black t) Black (mindepth t)), (RB (make_black t) Black (height t)), (RB empty_tree Red k), (RB empty_tree Red k0), (RB empty_tree Red (mindepth t)), (RB empty_tree Red (height t))
+(RB empty_tree Black k), (RB empty_tree Black k0), (RB empty_tree Black (mindepth t)), (RB empty_tree Black (height t)), (RB E Red k), (RB E Red k0), (RB E Red (mindepth t)), (RB E Red (height t)), (RB E Black k), (RB E Black k0)
+(RB E Black (mindepth t)), (RB E Black (height t)), (BST (make_black t)), (BST empty_tree), (BST E), (k < mindepth t), (k < height t), (k0 < mindepth t), (k0 < height t), (mindepth t < k)
+(mindepth t < k0), (mindepth t < height t), (height t < k), (height t < k0), (height t < mindepth t), (k <= mindepth t), (k <= height t), (k0 <= mindepth t), (k0 <= height t), (mindepth t <= k)
+(mindepth t <= k0), (mindepth t <= height t), (height t <= k), (height t <= k0), (height t <= mindepth t), (~ NearlyRB t k), (~ NearlyRB t k0), (~ BST t), (~ k < k), (~ k < k0)
+(~ k0 < k), (~ k0 < k0), (~ k <= k), (~ k <= k0), (~ k0 <= k), (~ k0 <= k0), (t <> t), (k <> k), (k <> k0), (k0 <> k)
+(k0 <> k0), (None = Some t), (Negative k = Positive k), (Negative k = Positive k0), (Negative k0 = Positive k), (Negative k0 = Positive k0), (mindepth t = k), (mindepth t = k0), (mindepth t = height t), (height t = k)
+(height t = k0), (None = Some k), (None = Some k0), (make_black t = t), (empty_tree = make_black t), (E = make_black t)
+
+Label: 1 (1)
+(NearlyRB t k), (NearlyRB t k0), (BST t), (k < k), (k < k0), (k0 < k), (k0 < k0), (k <= k), (k <= k0), (k0 <= k)
+(k0 <= k0), (t = t), (k = k), (k = k0), (k0 = k), (k0 = k0), (NearlyRB t (mindepth t)), (NearlyRB t (height t)), (NearlyRB (make_black t) k), (NearlyRB (make_black t) k0)
+(NearlyRB (make_black t) (mindepth t)), (NearlyRB (make_black t) (height t)), (NearlyRB empty_tree k), (NearlyRB empty_tree k0), (NearlyRB empty_tree (mindepth t)), (NearlyRB empty_tree (height t)), (NearlyRB E k), (NearlyRB E k0), (NearlyRB E (mindepth t)), (NearlyRB E (height t))
+(RB t Red k), (RB t Red k0), (RB t Red (mindepth t)), (RB t Red (height t)), (RB t Black k), (RB t Black k0), (RB t Black (mindepth t)), (RB t Black (height t)), (RB (make_black t) Red k), (RB (make_black t) Red k0)
+(RB (make_black t) Red (mindepth t)), (RB (make_black t) Red (height t)), (RB (make_black t) Black k), (RB (make_black t) Black k0), (RB (make_black t) Black (mindepth t)), (RB (make_black t) Black (height t)), (RB empty_tree Red k), (RB empty_tree Red k0), (RB empty_tree Red (mindepth t)), (RB empty_tree Red (height t))
+(RB empty_tree Black k), (RB empty_tree Black k0), (RB empty_tree Black (mindepth t)), (RB empty_tree Black (height t)), (RB E Red k), (RB E Red k0), (RB E Red (mindepth t)), (RB E Red (height t)), (RB E Black k), (RB E Black k0)
+(RB E Black (mindepth t)), (RB E Black (height t)), (BST (make_black t)), (BST empty_tree), (BST E), (k < mindepth t), (k < height t), (k0 < mindepth t), (k0 < height t), (mindepth t < k)
+(mindepth t < k0), (mindepth t < height t), (height t < k), (height t < k0), (height t < mindepth t), (k <= mindepth t), (k <= height t), (k0 <= mindepth t), (k0 <= height t), (mindepth t <= k)
+(mindepth t <= k0), (mindepth t <= height t), (height t <= k), (height t <= k0), (height t <= mindepth t), (~ NearlyRB t k), (~ NearlyRB t k0), (~ BST t), (~ k < k), (~ k < k0)
+(~ k0 < k), (~ k0 < k0), (~ k <= k), (~ k <= k0), (~ k0 <= k), (~ k0 <= k0), (t <> t), (k <> k), (k <> k0), (k0 <> k)
+(k0 <> k0), (None = Some t), (Negative k = Positive k), (Negative k = Positive k0), (Negative k0 = Positive k), (Negative k0 = Positive k0), (mindepth t = k), (mindepth t = k0), (mindepth t = height t), (height t = k)
+(height t = k0), (None = Some k), (None = Some k0), (make_black t = t), (empty_tree = make_black t), (E = make_black t)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 49.033 seconds
+
+
+Label: 0 (0)
+
+Label: 1 (1)
+(k0 < k), (k0 <= k), (~ k < k0), (~ k <= k0)
+
+
+
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 67.198 seconds
+
+Number of Result Pairs Returned: 4
+
+1. (ForallT (fun (k' : nat) (_ : value) => k' > k) t ->  k > k0 -> ForallT (fun (k' : nat) (_ : value) => k' > k0) t)
+
+2. (k > k0 -> k0 <= k)
+(ForallT (fun (k' : nat) (_ : value) => k' > k) t ->  k0 <= k -> ForallT (fun (k' : nat) (_ : value) => k' > k0) t)
+
+3. (k > k0 -> ~ k < k0)
+(ForallT (fun (k' : nat) (_ : value) => k' > k) t ->  ~ k < k0 -> ForallT (fun (k' : nat) (_ : value) => k' > k0) t)
+
+4. (k > k0 -> ~ k <= k0)
+(ForallT (fun (k' : nat) (_ : value) => k' > k) t ->  ~ k <= k0 -> ForallT (fun (k' : nat) (_ : value) => k' > k0) t)

@@ -1,0 +1,167 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+
+----------------------------------
+Goal: (Permutation al (mergesort al))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 2.16 seconds
+
+gv0 : (list nat) = (mergesort al)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 18.694 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (Permutation al (mergesort al))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (mergesort al = gv0)
+
+----------------------------------
+Goal: (Permutation al gv0)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 18.829 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+In : (forall A : Type, A -> list A -> Prop)
+existsb : (forall A : Type, (A -> bool) -> list A -> bool)
+forallb : (forall A : Type, (A -> bool) -> list A -> bool)
+Forall : (forall A : Type, (A -> Prop) -> list A -> Prop)
+nodup : (forall A : Type, (forall x y : A, {x = y} + {x <> y}) -> list A -> list A)
+map : (forall A B : Type, (A -> B) -> list A -> list B)
+Permutation : (forall A : Type, list A -> list A -> Prop)
+sorted : (list nat -> Prop)
+is_a_sorting_algorithm : ((list nat -> list nat) -> Prop)
+@split : (forall X : Type, list X -> list X * list X)
+merge : (list nat -> list nat -> list nat)
+le_all : (nat -> list nat -> Prop)
+list_ind2 : (forall (A : Type) (P : list A -> Prop),
+ P [] ->
+ (forall a : A, P [a]) ->
+ (forall (a b : A) (l : list A), P l -> P (a :: b :: l)) ->
+ forall l : list A, P l)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 18.978 seconds
+
+
+Label: 0 (0)
+(sorted gv0), (sorted al), (Permutation gv0 gv0), (Permutation gv0 al), (Permutation al gv0), (Permutation al al), (gv0 = gv0), (gv0 = al), (al = gv0), (al = al)
+(length gv0 <=* gv0), (length gv0 <=* al), (length gv0 <=* merge gv0 gv0), (length gv0 <=* merge gv0 al), (length gv0 <=* merge al gv0), (length gv0 <=* merge al al), (length gv0 <=* gv0 ++ gv0), (length gv0 <=* gv0 ++ al), (length gv0 <=* al ++ gv0), (length gv0 <=* al ++ al)
+(length gv0 <=* []), (length al <=* gv0), (length al <=* al), (length al <=* merge gv0 gv0), (length al <=* merge gv0 al), (length al <=* merge al gv0), (length al <=* merge al al), (length al <=* gv0 ++ gv0), (length al <=* gv0 ++ al), (length al <=* al ++ gv0)
+(length al <=* al ++ al), (length al <=* []), (sorted (merge gv0 gv0)), (sorted (merge gv0 al)), (sorted (merge al gv0)), (sorted (merge al al)), (sorted (gv0 ++ gv0)), (sorted (gv0 ++ al)), (sorted (al ++ gv0)), (sorted (al ++ al))
+(sorted []), (Permutation gv0 (merge gv0 gv0)), (Permutation gv0 (merge gv0 al)), (Permutation gv0 (merge al gv0)), (Permutation gv0 (merge al al)), (Permutation gv0 (gv0 ++ gv0)), (Permutation gv0 (gv0 ++ al)), (Permutation gv0 (al ++ gv0)), (Permutation gv0 (al ++ al)), (Permutation gv0 [])
+(Permutation al (merge gv0 gv0)), (Permutation al (merge gv0 al)), (Permutation al (merge al gv0)), (Permutation al (merge al al)), (Permutation al (gv0 ++ gv0)), (Permutation al (gv0 ++ al)), (Permutation al (al ++ gv0)), (Permutation al (al ++ al)), (Permutation al []), (Permutation (merge gv0 gv0) gv0)
+(Permutation (merge gv0 gv0) al), (Permutation (merge gv0 gv0) (merge gv0 al)), (Permutation (merge gv0 gv0) (merge al gv0)), (Permutation (merge gv0 gv0) (merge al al)), (Permutation (merge gv0 gv0) (gv0 ++ gv0)), (Permutation (merge gv0 gv0) (gv0 ++ al)), (Permutation (merge gv0 gv0) (al ++ gv0)), (Permutation (merge gv0 gv0) (al ++ al)), (Permutation (merge gv0 gv0) []), (Permutation (merge gv0 al) gv0)
+(Permutation (merge gv0 al) al), (Permutation (merge gv0 al) (merge gv0 gv0)), (Permutation (merge gv0 al) (merge al gv0)), (Permutation (merge gv0 al) (merge al al)), (Permutation (merge gv0 al) (gv0 ++ gv0)), (Permutation (merge gv0 al) (gv0 ++ al)), (Permutation (merge gv0 al) (al ++ gv0)), (Permutation (merge gv0 al) (al ++ al)), (Permutation (merge gv0 al) []), (Permutation (merge al gv0) gv0)
+(Permutation (merge al gv0) al), (Permutation (merge al gv0) (merge gv0 gv0)), (Permutation (merge al gv0) (merge gv0 al)), (Permutation (merge al gv0) (merge al al)), (Permutation (merge al gv0) (gv0 ++ gv0)), (Permutation (merge al gv0) (gv0 ++ al)), (Permutation (merge al gv0) (al ++ gv0)), (Permutation (merge al gv0) (al ++ al)), (Permutation (merge al gv0) []), (Permutation (merge al al) gv0)
+(Permutation (merge al al) al), (Permutation (merge al al) (merge gv0 gv0)), (Permutation (merge al al) (merge gv0 al)), (Permutation (merge al al) (merge al gv0)), (Permutation (merge al al) (gv0 ++ gv0)), (Permutation (merge al al) (gv0 ++ al)), (Permutation (merge al al) (al ++ gv0)), (Permutation (merge al al) (al ++ al)), (Permutation (merge al al) []), (Permutation (gv0 ++ gv0) gv0)
+(Permutation (gv0 ++ gv0) al), (Permutation (gv0 ++ gv0) (merge gv0 gv0)), (Permutation (gv0 ++ gv0) (merge gv0 al)), (Permutation (gv0 ++ gv0) (merge al gv0)), (Permutation (gv0 ++ gv0) (merge al al)), (Permutation (gv0 ++ gv0) (gv0 ++ al)), (Permutation (gv0 ++ gv0) (al ++ gv0)), (Permutation (gv0 ++ gv0) (al ++ al)), (Permutation (gv0 ++ gv0) []), (Permutation (gv0 ++ al) gv0)
+(Permutation (gv0 ++ al) al), (Permutation (gv0 ++ al) (merge gv0 gv0)), (Permutation (gv0 ++ al) (merge gv0 al)), (Permutation (gv0 ++ al) (merge al gv0)), (Permutation (gv0 ++ al) (merge al al)), (Permutation (gv0 ++ al) (gv0 ++ gv0)), (Permutation (gv0 ++ al) (al ++ gv0)), (Permutation (gv0 ++ al) (al ++ al)), (Permutation (gv0 ++ al) []), (Permutation (al ++ gv0) gv0)
+(Permutation (al ++ gv0) al), (Permutation (al ++ gv0) (merge gv0 gv0)), (Permutation (al ++ gv0) (merge gv0 al)), (Permutation (al ++ gv0) (merge al gv0)), (Permutation (al ++ gv0) (merge al al)), (Permutation (al ++ gv0) (gv0 ++ gv0)), (Permutation (al ++ gv0) (gv0 ++ al)), (Permutation (al ++ gv0) (al ++ al)), (Permutation (al ++ gv0) []), (Permutation (al ++ al) gv0)
+(Permutation (al ++ al) al), (Permutation (al ++ al) (merge gv0 gv0)), (Permutation (al ++ al) (merge gv0 al)), (Permutation (al ++ al) (merge al gv0)), (Permutation (al ++ al) (merge al al)), (Permutation (al ++ al) (gv0 ++ gv0)), (Permutation (al ++ al) (gv0 ++ al)), (Permutation (al ++ al) (al ++ gv0)), (Permutation (al ++ al) []), (Permutation [] gv0)
+(Permutation [] al), (Permutation [] (merge gv0 gv0)), (Permutation [] (merge gv0 al)), (Permutation [] (merge al gv0)), (Permutation [] (merge al al)), (Permutation [] (gv0 ++ gv0)), (Permutation [] (gv0 ++ al)), (Permutation [] (al ++ gv0)), (Permutation [] (al ++ al)), (In (length gv0) gv0)
+(In (length gv0) al), (In (length gv0) (merge gv0 gv0)), (In (length gv0) (merge gv0 al)), (In (length gv0) (merge al gv0)), (In (length gv0) (merge al al)), (In (length gv0) (gv0 ++ gv0)), (In (length gv0) (gv0 ++ al)), (In (length gv0) (al ++ gv0)), (In (length gv0) (al ++ al)), (In (length al) gv0)
+(In (length al) al), (In (length al) (merge gv0 gv0)), (In (length al) (merge gv0 al)), (In (length al) (merge al gv0)), (In (length al) (merge al al)), (In (length al) (gv0 ++ gv0)), (In (length al) (gv0 ++ al)), (In (length al) (al ++ gv0)), (In (length al) (al ++ al)), (length gv0 < length al)
+(length al < length gv0), (length gv0 <= length al), (length al <= length gv0), (~ sorted gv0), (~ sorted al), (~ Permutation gv0 gv0), (~ Permutation gv0 al), (~ Permutation al gv0), (~ Permutation al al), (gv0 <> gv0)
+(gv0 <> al), (al <> gv0), (al <> al), (None = Some gv0), (None = Some al), (merge gv0 gv0 = gv0), (merge gv0 gv0 = al), (merge gv0 gv0 = gv0 ++ gv0), (merge gv0 gv0 = gv0 ++ al), (merge gv0 gv0 = al ++ gv0)
+(merge gv0 gv0 = al ++ al), (merge gv0 al = gv0), (merge gv0 al = al), (merge gv0 al = gv0 ++ gv0), (merge gv0 al = gv0 ++ al), (merge gv0 al = al ++ gv0), (merge gv0 al = al ++ al), (merge al gv0 = gv0), (merge al gv0 = al), (merge al gv0 = gv0 ++ gv0)
+(merge al gv0 = gv0 ++ al), (merge al gv0 = al ++ gv0), (merge al gv0 = al ++ al), (merge al al = gv0), (merge al al = al), (merge al al = gv0 ++ gv0), (merge al al = gv0 ++ al), (merge al al = al ++ gv0), (merge al al = al ++ al), (gv0 ++ gv0 = gv0)
+(gv0 ++ gv0 = al), (gv0 ++ al = gv0), (gv0 ++ al = al), (al ++ gv0 = gv0), (al ++ gv0 = al), (al ++ al = gv0), (al ++ al = al), ([] = gv0), ([] = al), ([] = merge gv0 gv0)
+([] = merge gv0 al), ([] = merge al gv0), ([] = merge al al), ([] = gv0 ++ gv0), ([] = gv0 ++ al), ([] = al ++ gv0), ([] = al ++ al), ((gv0, gv0) = split gv0), ((gv0, gv0) = split al), ((gv0, al) = split gv0)
+((gv0, al) = split al), ((al, gv0) = split gv0), ((al, gv0) = split al), ((al, al) = split gv0), ((al, al) = split al)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 23.792 seconds
+
+
+Label: 0 (0)
+(Permutation gv0 al), (Permutation al gv0), (Permutation (merge gv0 al) (merge al al)), (Permutation (merge al gv0) (merge al al)), (Permutation (merge al al) (merge gv0 al)), (Permutation (merge al al) (merge al gv0)), (Permutation (merge gv0 gv0) (merge al al)), (Permutation (merge al al) (merge gv0 gv0)), (Permutation (merge gv0 gv0) (merge gv0 al)), (Permutation (merge gv0 gv0) (merge al gv0))
+(Permutation (merge gv0 al) (merge gv0 gv0)), (Permutation (merge al gv0) (merge gv0 gv0)), (Permutation (merge gv0 al) (al ++ al)), (Permutation (merge al gv0) (al ++ al)), (Permutation (merge al al) (gv0 ++ al)), (Permutation (merge al al) (al ++ gv0)), (Permutation (gv0 ++ al) (merge al al)), (Permutation (al ++ gv0) (merge al al)), (Permutation (al ++ al) (merge gv0 al)), (Permutation (al ++ al) (merge al gv0))
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (Permutation al (mergesort al))
+
+2. (Permutation (merge gv0 al) (merge al al) -> Permutation al gv0)
+
+3. (Permutation (merge al gv0) (merge al al) -> Permutation al gv0)
+
+4. (Permutation (merge al al) (merge gv0 al) -> Permutation al gv0)
+
+5. (Permutation (merge al al) (merge al gv0) -> Permutation al gv0)
+
+6. (Permutation (merge gv0 gv0) (merge al al) -> Permutation al gv0)
+
+7. (Permutation (merge al al) (merge gv0 gv0) -> Permutation al gv0)
+
+8. (Permutation (merge gv0 gv0) (merge gv0 al) -> Permutation al gv0)
+
+9. (Permutation (merge gv0 gv0) (merge al gv0) -> Permutation al gv0)
+
+10. (Permutation (merge gv0 al) (merge gv0 gv0) -> Permutation al gv0)
+
+11. (Permutation (merge al gv0) (merge gv0 gv0) -> Permutation al gv0)
+
+12. (Permutation (merge gv0 al) (al ++ al) -> Permutation al gv0)
+
+13. (Permutation (merge al gv0) (al ++ al) -> Permutation al gv0)
+
+14. (Permutation (merge al al) (gv0 ++ al) -> Permutation al gv0)
+
+15. (Permutation (merge al al) (al ++ gv0) -> Permutation al gv0)
+
+16. (Permutation (gv0 ++ al) (merge al al) -> Permutation al gv0)
+
+17. (Permutation (al ++ gv0) (merge al al) -> Permutation al gv0)
+
+18. (Permutation (al ++ al) (merge gv0 al) -> Permutation al gv0)
+
+19. (Permutation (al ++ al) (merge al gv0) -> Permutation al gv0)
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 66.673 seconds
+
+Number of Result Pairs Returned: 19
+
+1. (Permutation al (mergesort al))
+
+2. (Permutation (merge gv0 al) (merge al al) -> Permutation al gv0)
+
+3. (Permutation (merge al gv0) (merge al al) -> Permutation al gv0)
+
+4. (Permutation (merge al al) (merge gv0 al) -> Permutation al gv0)
+
+5. (Permutation (merge al al) (merge al gv0) -> Permutation al gv0)

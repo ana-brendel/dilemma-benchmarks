@@ -1,0 +1,88 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (forall bl : bag, bag_eqv al bl -> Permutation al bl)
+ -- (bag_eqv (n :: al) (n :: bl))
+
+----------------------------------
+Goal: (bag_eqv al bl)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3.567 seconds
+
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 20.107 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (bag_eqv (n :: al) (n :: bl))
+
+----------------------------------
+Goal: (bag_eqv al bl)
+Case: Valid and Un-Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 20.245 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+insert : (nat -> list nat -> list nat)
+sort : (list nat -> list nat)
+bag : Set
+count : (nat -> bag -> nat)
+bag_eqv : (bag -> bag -> Prop)
+
+Label: 0 (0)
+Abducted Assumption: (bag_eqv (n :: al) (n :: bl))
+Positive Examples: 72
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 20.383 seconds
+
+
+Label: 0 (0)
+(n < n), (n <= n), (n = n), (bl = bl), (bl = al), (al = bl), (al = al), (n < length bl), (n < length al), (length bl < n)
+(length bl < length al), (length al < n), (length al < length bl), (n <= length bl), (n <= length al), (length bl <= n), (length bl <= length al), (length al <= n), (length al <= length bl), (~ n < n)
+(~ n <= n), (n <> n), (bl <> bl), (bl <> al), (al <> bl), (al <> al), (None = Some bl), (None = Some al), (n :: bl = bl), (n :: bl = al)
+(n :: bl = sort bl), (n :: bl = sort al), (n :: bl = insert n bl), (n :: bl = insert n al), (n :: bl = bl ++ bl), (n :: bl = bl ++ al), (n :: bl = al ++ bl), (n :: bl = al ++ al), (n :: bl = []), (n :: al = bl)
+(n :: al = al), (n :: al = sort bl), (n :: al = sort al), (n :: al = insert n bl), (n :: al = insert n al), (n :: al = bl ++ bl), (n :: al = bl ++ al), (n :: al = al ++ bl), (n :: al = al ++ al), (n :: al = [])
+(sort bl = bl), (sort bl = al), (sort bl = insert n bl), (sort bl = insert n al), (sort bl = bl ++ bl), (sort bl = bl ++ al), (sort bl = al ++ bl), (sort bl = al ++ al), (sort al = bl), (sort al = al)
+(sort al = insert n bl), (sort al = insert n al), (sort al = bl ++ bl), (sort al = bl ++ al), (sort al = al ++ bl), (sort al = al ++ al), (insert n bl = bl), (insert n bl = al), (insert n bl = bl ++ bl), (insert n bl = bl ++ al)
+(insert n bl = al ++ bl), (insert n bl = al ++ al), (insert n al = bl), (insert n al = al), (insert n al = bl ++ bl), (insert n al = bl ++ al), (insert n al = al ++ bl), (insert n al = al ++ al), (bl ++ bl = bl), (bl ++ bl = al)
+(bl ++ al = bl), (bl ++ al = al), (al ++ bl = bl), (al ++ bl = al), (al ++ al = bl), (al ++ al = al), ([] = bl), ([] = al), ([] = sort bl), ([] = sort al)
+([] = insert n bl), ([] = insert n al), ([] = bl ++ bl), ([] = bl ++ al), ([] = al ++ bl), ([] = al ++ al), (None = Some n), (length bl = n), (length al = n)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 24.614 seconds
+
+
+Label: 0 (0)
+
+
+
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 26.321 seconds
+
+Number of Result Pairs Returned: 1
+
+1. (bag_eqv (n :: al) (n :: bl) -> bag_eqv al bl)

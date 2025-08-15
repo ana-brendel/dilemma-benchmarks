@@ -1,0 +1,211 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+
+----------------------------------
+Goal: (half (plus x y) = half (plus y x))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 1.473 seconds
+
+gv0 : Nat = (half (plus x y))
+gv1 : Nat = (plus x y)
+gv2 : Nat = (half (plus y x))
+gv3 : Nat = (plus y x)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 15.066 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (half (plus x y) = half (plus y x))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (plus y x = gv3)
+
+----------------------------------
+Goal: (half (plus x y) = half gv3)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (half (plus y x) = gv2)
+
+----------------------------------
+Goal: (half (plus x y) = gv2)
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (plus x y = gv1)
+
+----------------------------------
+Goal: (half gv1 = half (plus y x))
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (half (plus x y) = gv0)
+
+----------------------------------
+Goal: (gv0 = half (plus y x))
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 15.206 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+plus : (Nat -> Nat -> Nat)
+half : (Nat -> Nat)
+succ : (Nat -> Nat)
+zero : Nat
+nil : Lst
+cons : (Nat -> Lst -> Lst)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 366
+Negative Examples: 285
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 387
+Negative Examples: 289
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 368
+Negative Examples: 285
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 392
+Negative Examples: 294
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 15.349 seconds
+
+
+Label: 0 (0)
+(gv3 = gv3), (gv3 = y), (gv3 = x), (y = gv3), (y = y), (y = x), (x = gv3), (x = y), (x = x), (gv3 <> gv3)
+(gv3 <> y), (gv3 <> x), (y <> gv3), (y <> y), (y <> x), (x <> gv3), (x <> y), (x <> x), (succ gv3 = gv3), (succ gv3 = y)
+(succ gv3 = x), (succ gv3 = half gv3), (succ gv3 = half y), (succ gv3 = half x), (succ gv3 = plus gv3 gv3), (succ gv3 = plus gv3 y), (succ gv3 = plus gv3 x), (succ gv3 = plus y gv3), (succ gv3 = plus y y), (succ gv3 = plus y x)
+(succ gv3 = plus x gv3), (succ gv3 = plus x y), (succ gv3 = plus x x), (succ y = gv3), (succ y = y), (succ y = x), (succ y = half gv3), (succ y = half y), (succ y = half x), (succ y = plus gv3 gv3)
+(succ y = plus gv3 y), (succ y = plus gv3 x), (succ y = plus y gv3), (succ y = plus y y), (succ y = plus y x), (succ y = plus x gv3), (succ y = plus x y), (succ y = plus x x), (succ x = gv3), (succ x = y)
+(succ x = x), (succ x = half gv3), (succ x = half y), (succ x = half x), (succ x = plus gv3 gv3), (succ x = plus gv3 y), (succ x = plus gv3 x), (succ x = plus y gv3), (succ x = plus y y), (succ x = plus y x)
+(succ x = plus x gv3), (succ x = plus x y), (succ x = plus x x), (half gv3 = gv3), (half gv3 = y), (half gv3 = x), (half y = gv3), (half y = y), (half y = x), (half x = gv3)
+(half x = y), (half x = x), (plus gv3 gv3 = gv3), (plus gv3 gv3 = y), (plus gv3 gv3 = x), (plus gv3 gv3 = half gv3), (plus gv3 gv3 = half y), (plus gv3 gv3 = half x), (plus gv3 y = gv3), (plus gv3 y = y)
+(plus gv3 y = x), (plus gv3 y = half gv3), (plus gv3 y = half y), (plus gv3 y = half x), (plus gv3 x = gv3), (plus gv3 x = y), (plus gv3 x = x), (plus gv3 x = half gv3), (plus gv3 x = half y), (plus gv3 x = half x)
+(plus y gv3 = gv3), (plus y gv3 = y), (plus y gv3 = x), (plus y gv3 = half gv3), (plus y gv3 = half y), (plus y gv3 = half x), (plus y y = gv3), (plus y y = y), (plus y y = x), (plus y y = half gv3)
+(plus y y = half y), (plus y y = half x), (plus y x = gv3), (plus y x = y), (plus y x = x), (plus y x = half gv3), (plus y x = half y), (plus y x = half x), (plus x gv3 = gv3), (plus x gv3 = y)
+(plus x gv3 = x), (plus x gv3 = half gv3), (plus x gv3 = half y), (plus x gv3 = half x), (plus x y = gv3), (plus x y = y), (plus x y = x), (plus x y = half gv3), (plus x y = half y), (plus x y = half x)
+(plus x x = gv3), (plus x x = y), (plus x x = x), (plus x x = half gv3), (plus x x = half y), (plus x x = half x), (zero = succ gv3), (zero = succ y), (zero = succ x), (zero = half gv3)
+(zero = half y), (zero = half x), (zero = plus gv3 gv3), (zero = plus gv3 y), (zero = plus gv3 x), (zero = plus y gv3), (zero = plus y y), (zero = plus y x), (zero = plus x gv3), (zero = plus x y)
+(zero = plus x x), (None = Some gv3), (None = Some y), (None = Some x)
+
+Label: 1 (1)
+(gv2 = gv2), (gv2 = y), (gv2 = x), (y = gv2), (y = y), (y = x), (x = gv2), (x = y), (x = x), (gv2 <> gv2)
+(gv2 <> y), (gv2 <> x), (y <> gv2), (y <> y), (y <> x), (x <> gv2), (x <> y), (x <> x), (succ gv2 = gv2), (succ gv2 = y)
+(succ gv2 = x), (succ gv2 = half gv2), (succ gv2 = half y), (succ gv2 = half x), (succ gv2 = plus gv2 gv2), (succ gv2 = plus gv2 y), (succ gv2 = plus gv2 x), (succ gv2 = plus y gv2), (succ gv2 = plus y y), (succ gv2 = plus y x)
+(succ gv2 = plus x gv2), (succ gv2 = plus x y), (succ gv2 = plus x x), (succ y = gv2), (succ y = y), (succ y = x), (succ y = half gv2), (succ y = half y), (succ y = half x), (succ y = plus gv2 gv2)
+(succ y = plus gv2 y), (succ y = plus gv2 x), (succ y = plus y gv2), (succ y = plus y y), (succ y = plus y x), (succ y = plus x gv2), (succ y = plus x y), (succ y = plus x x), (succ x = gv2), (succ x = y)
+(succ x = x), (succ x = half gv2), (succ x = half y), (succ x = half x), (succ x = plus gv2 gv2), (succ x = plus gv2 y), (succ x = plus gv2 x), (succ x = plus y gv2), (succ x = plus y y), (succ x = plus y x)
+(succ x = plus x gv2), (succ x = plus x y), (succ x = plus x x), (half gv2 = gv2), (half gv2 = y), (half gv2 = x), (half y = gv2), (half y = y), (half y = x), (half x = gv2)
+(half x = y), (half x = x), (plus gv2 gv2 = gv2), (plus gv2 gv2 = y), (plus gv2 gv2 = x), (plus gv2 gv2 = half gv2), (plus gv2 gv2 = half y), (plus gv2 gv2 = half x), (plus gv2 y = gv2), (plus gv2 y = y)
+(plus gv2 y = x), (plus gv2 y = half gv2), (plus gv2 y = half y), (plus gv2 y = half x), (plus gv2 x = gv2), (plus gv2 x = y), (plus gv2 x = x), (plus gv2 x = half gv2), (plus gv2 x = half y), (plus gv2 x = half x)
+(plus y gv2 = gv2), (plus y gv2 = y), (plus y gv2 = x), (plus y gv2 = half gv2), (plus y gv2 = half y), (plus y gv2 = half x), (plus y y = gv2), (plus y y = y), (plus y y = x), (plus y y = half gv2)
+(plus y y = half y), (plus y y = half x), (plus y x = gv2), (plus y x = y), (plus y x = x), (plus y x = half gv2), (plus y x = half y), (plus y x = half x), (plus x gv2 = gv2), (plus x gv2 = y)
+(plus x gv2 = x), (plus x gv2 = half gv2), (plus x gv2 = half y), (plus x gv2 = half x), (plus x y = gv2), (plus x y = y), (plus x y = x), (plus x y = half gv2), (plus x y = half y), (plus x y = half x)
+(plus x x = gv2), (plus x x = y), (plus x x = x), (plus x x = half gv2), (plus x x = half y), (plus x x = half x), (zero = succ gv2), (zero = succ y), (zero = succ x), (zero = half gv2)
+(zero = half y), (zero = half x), (zero = plus gv2 gv2), (zero = plus gv2 y), (zero = plus gv2 x), (zero = plus y gv2), (zero = plus y y), (zero = plus y x), (zero = plus x gv2), (zero = plus x y)
+(zero = plus x x), (None = Some gv2), (None = Some y), (None = Some x)
+
+Label: 2 (2)
+(x = x), (x = y), (x = gv1), (y = x), (y = y), (y = gv1), (gv1 = x), (gv1 = y), (gv1 = gv1), (x <> x)
+(x <> y), (x <> gv1), (y <> x), (y <> y), (y <> gv1), (gv1 <> x), (gv1 <> y), (gv1 <> gv1), (succ x = x), (succ x = y)
+(succ x = gv1), (succ x = half x), (succ x = half y), (succ x = half gv1), (succ x = plus x x), (succ x = plus x y), (succ x = plus x gv1), (succ x = plus y x), (succ x = plus y y), (succ x = plus y gv1)
+(succ x = plus gv1 x), (succ x = plus gv1 y), (succ x = plus gv1 gv1), (succ y = x), (succ y = y), (succ y = gv1), (succ y = half x), (succ y = half y), (succ y = half gv1), (succ y = plus x x)
+(succ y = plus x y), (succ y = plus x gv1), (succ y = plus y x), (succ y = plus y y), (succ y = plus y gv1), (succ y = plus gv1 x), (succ y = plus gv1 y), (succ y = plus gv1 gv1), (succ gv1 = x), (succ gv1 = y)
+(succ gv1 = gv1), (succ gv1 = half x), (succ gv1 = half y), (succ gv1 = half gv1), (succ gv1 = plus x x), (succ gv1 = plus x y), (succ gv1 = plus x gv1), (succ gv1 = plus y x), (succ gv1 = plus y y), (succ gv1 = plus y gv1)
+(succ gv1 = plus gv1 x), (succ gv1 = plus gv1 y), (succ gv1 = plus gv1 gv1), (half x = x), (half x = y), (half x = gv1), (half y = x), (half y = y), (half y = gv1), (half gv1 = x)
+(half gv1 = y), (half gv1 = gv1), (plus x x = x), (plus x x = y), (plus x x = gv1), (plus x x = half x), (plus x x = half y), (plus x x = half gv1), (plus x y = x), (plus x y = y)
+(plus x y = gv1), (plus x y = half x), (plus x y = half y), (plus x y = half gv1), (plus x gv1 = x), (plus x gv1 = y), (plus x gv1 = gv1), (plus x gv1 = half x), (plus x gv1 = half y), (plus x gv1 = half gv1)
+(plus y x = x), (plus y x = y), (plus y x = gv1), (plus y x = half x), (plus y x = half y), (plus y x = half gv1), (plus y y = x), (plus y y = y), (plus y y = gv1), (plus y y = half x)
+(plus y y = half y), (plus y y = half gv1), (plus y gv1 = x), (plus y gv1 = y), (plus y gv1 = gv1), (plus y gv1 = half x), (plus y gv1 = half y), (plus y gv1 = half gv1), (plus gv1 x = x), (plus gv1 x = y)
+(plus gv1 x = gv1), (plus gv1 x = half x), (plus gv1 x = half y), (plus gv1 x = half gv1), (plus gv1 y = x), (plus gv1 y = y), (plus gv1 y = gv1), (plus gv1 y = half x), (plus gv1 y = half y), (plus gv1 y = half gv1)
+(plus gv1 gv1 = x), (plus gv1 gv1 = y), (plus gv1 gv1 = gv1), (plus gv1 gv1 = half x), (plus gv1 gv1 = half y), (plus gv1 gv1 = half gv1), (zero = succ x), (zero = succ y), (zero = succ gv1), (zero = half x)
+(zero = half y), (zero = half gv1), (zero = plus x x), (zero = plus x y), (zero = plus x gv1), (zero = plus y x), (zero = plus y y), (zero = plus y gv1), (zero = plus gv1 x), (zero = plus gv1 y)
+(zero = plus gv1 gv1), (None = Some x), (None = Some y), (None = Some gv1)
+
+Label: 3 (3)
+(x = x), (x = y), (x = gv0), (y = x), (y = y), (y = gv0), (gv0 = x), (gv0 = y), (gv0 = gv0), (x <> x)
+(x <> y), (x <> gv0), (y <> x), (y <> y), (y <> gv0), (gv0 <> x), (gv0 <> y), (gv0 <> gv0), (succ x = x), (succ x = y)
+(succ x = gv0), (succ x = half x), (succ x = half y), (succ x = half gv0), (succ x = plus x x), (succ x = plus x y), (succ x = plus x gv0), (succ x = plus y x), (succ x = plus y y), (succ x = plus y gv0)
+(succ x = plus gv0 x), (succ x = plus gv0 y), (succ x = plus gv0 gv0), (succ y = x), (succ y = y), (succ y = gv0), (succ y = half x), (succ y = half y), (succ y = half gv0), (succ y = plus x x)
+(succ y = plus x y), (succ y = plus x gv0), (succ y = plus y x), (succ y = plus y y), (succ y = plus y gv0), (succ y = plus gv0 x), (succ y = plus gv0 y), (succ y = plus gv0 gv0), (succ gv0 = x), (succ gv0 = y)
+(succ gv0 = gv0), (succ gv0 = half x), (succ gv0 = half y), (succ gv0 = half gv0), (succ gv0 = plus x x), (succ gv0 = plus x y), (succ gv0 = plus x gv0), (succ gv0 = plus y x), (succ gv0 = plus y y), (succ gv0 = plus y gv0)
+(succ gv0 = plus gv0 x), (succ gv0 = plus gv0 y), (succ gv0 = plus gv0 gv0), (half x = x), (half x = y), (half x = gv0), (half y = x), (half y = y), (half y = gv0), (half gv0 = x)
+(half gv0 = y), (half gv0 = gv0), (plus x x = x), (plus x x = y), (plus x x = gv0), (plus x x = half x), (plus x x = half y), (plus x x = half gv0), (plus x y = x), (plus x y = y)
+(plus x y = gv0), (plus x y = half x), (plus x y = half y), (plus x y = half gv0), (plus x gv0 = x), (plus x gv0 = y), (plus x gv0 = gv0), (plus x gv0 = half x), (plus x gv0 = half y), (plus x gv0 = half gv0)
+(plus y x = x), (plus y x = y), (plus y x = gv0), (plus y x = half x), (plus y x = half y), (plus y x = half gv0), (plus y y = x), (plus y y = y), (plus y y = gv0), (plus y y = half x)
+(plus y y = half y), (plus y y = half gv0), (plus y gv0 = x), (plus y gv0 = y), (plus y gv0 = gv0), (plus y gv0 = half x), (plus y gv0 = half y), (plus y gv0 = half gv0), (plus gv0 x = x), (plus gv0 x = y)
+(plus gv0 x = gv0), (plus gv0 x = half x), (plus gv0 x = half y), (plus gv0 x = half gv0), (plus gv0 y = x), (plus gv0 y = y), (plus gv0 y = gv0), (plus gv0 y = half x), (plus gv0 y = half y), (plus gv0 y = half gv0)
+(plus gv0 gv0 = x), (plus gv0 gv0 = y), (plus gv0 gv0 = gv0), (plus gv0 gv0 = half x), (plus gv0 gv0 = half y), (plus gv0 gv0 = half gv0), (zero = succ x), (zero = succ y), (zero = succ gv0), (zero = half x)
+(zero = half y), (zero = half gv0), (zero = plus x x), (zero = plus x y), (zero = plus x gv0), (zero = plus y x), (zero = plus y y), (zero = plus y gv0), (zero = plus gv0 x), (zero = plus gv0 y)
+(zero = plus gv0 gv0), (None = Some x), (None = Some y), (None = Some gv0)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 17.867 seconds
+
+
+Label: 0 (0)
+(plus y x = gv3), (plus x y = gv3)
+
+Label: 1 (1)
+
+Label: 2 (2)
+(plus x y = gv1), (plus y x = gv1)
+
+Label: 3 (3)
+
+
+
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 30.701 seconds
+
+Number of Result Pairs Returned: 5
+
+1. (half (plus x y) = half (plus y x))
+
+2. (plus x y = plus y x)
+
+3. (plus y x = plus x y)
+
+4. (plus x y = gv3 -> half (plus x y) = half gv3)
+
+5. (plus y x = gv1 -> half gv1 = half (plus y x))

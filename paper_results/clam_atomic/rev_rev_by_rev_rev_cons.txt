@@ -1,0 +1,524 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (rev (rev l) = l)
+
+----------------------------------
+Goal: (rev (append (rev l) (cons n nil)) = cons n l)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 4.613 seconds
+
+gv3 : Lst = (cons n nil)
+gv5 : Lst = (cons n l)
+gv0 : Lst = (rev (append (rev l) (cons n nil)))
+gv4 : Lst = nil
+gv1 : Lst = (append (rev l) (cons n nil))
+gv2 : Lst = (rev l)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 72.564 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (rev (append (rev l) (cons n nil)) = cons n l)
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (rev gv2 = l)
+
+----------------------------------
+Goal: (rev (append gv2 (cons n nil)) = cons n l)
+Case: Valid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (nil = gv4)
+ -- (rev l = gv2)
+
+----------------------------------
+Goal: (rev (append gv2 (cons n gv4)) = cons n l)
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (append gv2 (cons n nil) = gv1)
+
+----------------------------------
+Goal: (rev gv1 = cons n l)
+Case: Not Stable
+
+Label: Generalization #4
+Assumptions: 
+ -- (rev (append gv2 (cons n nil)) = gv0)
+
+----------------------------------
+Goal: (gv0 = cons n l)
+Case: Not Stable
+
+Label: Generalization #5
+Assumptions: 
+ -- (cons n l = gv5)
+ -- (rev l = gv2)
+
+----------------------------------
+Goal: (rev (append gv2 (cons n nil)) = gv5)
+Case: Invalid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (cons n nil = gv3)
+ -- (rev l = gv2)
+
+----------------------------------
+Goal: (rev (append gv2 gv3) = cons n l)
+Case: Invalid and Generalized
+
+Label: Generalization #7
+Assumptions: 
+ -- (nil = gv4)
+
+----------------------------------
+Goal: (rev (append (rev l) (cons n gv4)) = cons n l)
+Case: Invalid and Generalized
+
+Label: Generalization #8
+Assumptions: 
+ -- (append (rev l) (cons n nil) = gv1)
+
+----------------------------------
+Goal: (rev gv1 = cons n l)
+Case: Invalid and Generalized
+
+Label: Generalization #9
+Assumptions: 
+ -- (rev (append (rev l) (cons n nil)) = gv0)
+
+----------------------------------
+Goal: (gv0 = cons n l)
+Case: Invalid and Generalized
+
+Label: Generalization #10
+Assumptions: 
+ -- (cons n l = gv5)
+
+----------------------------------
+Goal: (rev (append (rev l) (cons n nil)) = gv5)
+Case: Invalid and Generalized
+
+Label: Generalization #11
+Assumptions: 
+ -- (cons n nil = gv3)
+
+----------------------------------
+Goal: (rev (append (rev l) gv3) = cons n l)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 72.745 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+plus : (Nat -> Nat -> Nat)
+mult : (Nat -> Nat -> Nat)
+append : (Lst -> Lst -> Lst)
+rev : (Lst -> Lst)
+qreva : (Lst -> Lst -> Lst)
+exp : (Nat -> Nat -> Nat)
+qexp : (Nat -> Nat -> Nat -> Nat)
+less : (Nat -> Nat -> bool)
+drop : (Nat -> Lst -> Lst)
+len : (Lst -> Nat)
+zero : Nat
+succ : (Nat -> Nat)
+nil : Lst
+cons : (Nat -> Lst -> Lst)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 6 (6)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 7 (7)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 72.995 seconds
+
+
+Label: 0 (0)
+(n = n), (l = l), (l = gv4), (l = gv2), (gv4 = l), (gv4 = gv4), (gv4 = gv2), (gv2 = l), (gv2 = gv4), (gv2 = gv2)
+(false = less n n), (true = less n n), (n <> n), (l <> l), (l <> gv4), (l <> gv2), (gv4 <> l), (gv4 <> gv4), (gv4 <> gv2), (gv2 <> l)
+(gv2 <> gv4), (gv2 <> gv2), (None = Some l), (None = Some gv4), (None = Some gv2), (cons n l = l), (cons n l = gv4), (cons n l = gv2), (cons n l = drop n l), (cons n l = drop n gv4)
+(cons n l = drop n gv2), (cons n l = qreva l l), (cons n l = qreva l gv4), (cons n l = qreva l gv2), (cons n l = qreva gv4 l), (cons n l = qreva gv4 gv4), (cons n l = qreva gv4 gv2), (cons n l = qreva gv2 l), (cons n l = qreva gv2 gv4), (cons n l = qreva gv2 gv2)
+(cons n l = rev l), (cons n l = rev gv4), (cons n l = rev gv2), (cons n l = append l l), (cons n l = append l gv4), (cons n l = append l gv2), (cons n l = append gv4 l), (cons n l = append gv4 gv4), (cons n l = append gv4 gv2), (cons n l = append gv2 l)
+(cons n l = append gv2 gv4), (cons n l = append gv2 gv2), (cons n gv4 = l), (cons n gv4 = gv4), (cons n gv4 = gv2), (cons n gv4 = drop n l), (cons n gv4 = drop n gv4), (cons n gv4 = drop n gv2), (cons n gv4 = qreva l l), (cons n gv4 = qreva l gv4)
+(cons n gv4 = qreva l gv2), (cons n gv4 = qreva gv4 l), (cons n gv4 = qreva gv4 gv4), (cons n gv4 = qreva gv4 gv2), (cons n gv4 = qreva gv2 l), (cons n gv4 = qreva gv2 gv4), (cons n gv4 = qreva gv2 gv2), (cons n gv4 = rev l), (cons n gv4 = rev gv4), (cons n gv4 = rev gv2)
+(cons n gv4 = append l l), (cons n gv4 = append l gv4), (cons n gv4 = append l gv2), (cons n gv4 = append gv4 l), (cons n gv4 = append gv4 gv4), (cons n gv4 = append gv4 gv2), (cons n gv4 = append gv2 l), (cons n gv4 = append gv2 gv4), (cons n gv4 = append gv2 gv2), (cons n gv2 = l)
+(cons n gv2 = gv4), (cons n gv2 = gv2), (cons n gv2 = drop n l), (cons n gv2 = drop n gv4), (cons n gv2 = drop n gv2), (cons n gv2 = qreva l l), (cons n gv2 = qreva l gv4), (cons n gv2 = qreva l gv2), (cons n gv2 = qreva gv4 l), (cons n gv2 = qreva gv4 gv4)
+(cons n gv2 = qreva gv4 gv2), (cons n gv2 = qreva gv2 l), (cons n gv2 = qreva gv2 gv4), (cons n gv2 = qreva gv2 gv2), (cons n gv2 = rev l), (cons n gv2 = rev gv4), (cons n gv2 = rev gv2), (cons n gv2 = append l l), (cons n gv2 = append l gv4), (cons n gv2 = append l gv2)
+(cons n gv2 = append gv4 l), (cons n gv2 = append gv4 gv4), (cons n gv2 = append gv4 gv2), (cons n gv2 = append gv2 l), (cons n gv2 = append gv2 gv4), (cons n gv2 = append gv2 gv2), (drop n l = l), (drop n l = gv4), (drop n l = gv2), (drop n l = append l l)
+(drop n l = append l gv4), (drop n l = append l gv2), (drop n l = append gv4 l), (drop n l = append gv4 gv4), (drop n l = append gv4 gv2), (drop n l = append gv2 l), (drop n l = append gv2 gv4), (drop n l = append gv2 gv2), (drop n gv4 = l), (drop n gv4 = gv4)
+(drop n gv4 = gv2), (drop n gv4 = append l l), (drop n gv4 = append l gv4), (drop n gv4 = append l gv2), (drop n gv4 = append gv4 l), (drop n gv4 = append gv4 gv4), (drop n gv4 = append gv4 gv2), (drop n gv4 = append gv2 l), (drop n gv4 = append gv2 gv4), (drop n gv4 = append gv2 gv2)
+(drop n gv2 = l), (drop n gv2 = gv4), (drop n gv2 = gv2), (drop n gv2 = append l l), (drop n gv2 = append l gv4), (drop n gv2 = append l gv2), (drop n gv2 = append gv4 l), (drop n gv2 = append gv4 gv4), (drop n gv2 = append gv4 gv2), (drop n gv2 = append gv2 l)
+(drop n gv2 = append gv2 gv4), (drop n gv2 = append gv2 gv2), (qreva l l = l), (qreva l l = gv4), (qreva l l = gv2), (qreva l l = drop n l), (qreva l l = drop n gv4), (qreva l l = drop n gv2), (qreva l l = append l l), (qreva l l = append l gv4)
+(qreva l l = append l gv2), (qreva l l = append gv4 l), (qreva l l = append gv4 gv4), (qreva l l = append gv4 gv2), (qreva l l = append gv2 l), (qreva l l = append gv2 gv4), (qreva l l = append gv2 gv2), (qreva l gv4 = l), (qreva l gv4 = gv4), (qreva l gv4 = gv2)
+(qreva l gv4 = drop n l), (qreva l gv4 = drop n gv4), (qreva l gv4 = drop n gv2), (qreva l gv4 = append l l), (qreva l gv4 = append l gv4), (qreva l gv4 = append l gv2), (qreva l gv4 = append gv4 l), (qreva l gv4 = append gv4 gv4), (qreva l gv4 = append gv4 gv2), (qreva l gv4 = append gv2 l)
+(qreva l gv4 = append gv2 gv4), (qreva l gv4 = append gv2 gv2), (qreva l gv2 = l), (qreva l gv2 = gv4), (qreva l gv2 = gv2), (qreva l gv2 = drop n l), (qreva l gv2 = drop n gv4), (qreva l gv2 = drop n gv2), (qreva l gv2 = append l l), (qreva l gv2 = append l gv4)
+(qreva l gv2 = append l gv2), (qreva l gv2 = append gv4 l), (qreva l gv2 = append gv4 gv4), (qreva l gv2 = append gv4 gv2), (qreva l gv2 = append gv2 l), (qreva l gv2 = append gv2 gv4), (qreva l gv2 = append gv2 gv2), (qreva gv4 l = l), (qreva gv4 l = gv4), (qreva gv4 l = gv2)
+(qreva gv4 l = drop n l), (qreva gv4 l = drop n gv4), (qreva gv4 l = drop n gv2), (qreva gv4 l = append l l), (qreva gv4 l = append l gv4), (qreva gv4 l = append l gv2), (qreva gv4 l = append gv4 l), (qreva gv4 l = append gv4 gv4), (qreva gv4 l = append gv4 gv2), (qreva gv4 l = append gv2 l)
+(qreva gv4 l = append gv2 gv4), (qreva gv4 l = append gv2 gv2), (qreva gv4 gv4 = l), (qreva gv4 gv4 = gv4), (qreva gv4 gv4 = gv2), (qreva gv4 gv4 = drop n l), (qreva gv4 gv4 = drop n gv4), (qreva gv4 gv4 = drop n gv2), (qreva gv4 gv4 = append l l), (qreva gv4 gv4 = append l gv4)
+(qreva gv4 gv4 = append l gv2), (qreva gv4 gv4 = append gv4 l), (qreva gv4 gv4 = append gv4 gv4), (qreva gv4 gv4 = append gv4 gv2), (qreva gv4 gv4 = append gv2 l), (qreva gv4 gv4 = append gv2 gv4), (qreva gv4 gv4 = append gv2 gv2), (qreva gv4 gv2 = l), (qreva gv4 gv2 = gv4), (qreva gv4 gv2 = gv2)
+(qreva gv4 gv2 = drop n l), (qreva gv4 gv2 = drop n gv4), (qreva gv4 gv2 = drop n gv2), (qreva gv4 gv2 = append l l), (qreva gv4 gv2 = append l gv4), (qreva gv4 gv2 = append l gv2), (qreva gv4 gv2 = append gv4 l), (qreva gv4 gv2 = append gv4 gv4), (qreva gv4 gv2 = append gv4 gv2), (qreva gv4 gv2 = append gv2 l)
+(qreva gv4 gv2 = append gv2 gv4), (qreva gv4 gv2 = append gv2 gv2), (qreva gv2 l = l), (qreva gv2 l = gv4), (qreva gv2 l = gv2), (qreva gv2 l = drop n l), (qreva gv2 l = drop n gv4), (qreva gv2 l = drop n gv2), (qreva gv2 l = append l l), (qreva gv2 l = append l gv4)
+(qreva gv2 l = append l gv2), (qreva gv2 l = append gv4 l), (qreva gv2 l = append gv4 gv4), (qreva gv2 l = append gv4 gv2), (qreva gv2 l = append gv2 l), (qreva gv2 l = append gv2 gv4), (qreva gv2 l = append gv2 gv2), (qreva gv2 gv4 = l), (qreva gv2 gv4 = gv4), (qreva gv2 gv4 = gv2)
+(qreva gv2 gv4 = drop n l), (qreva gv2 gv4 = drop n gv4), (qreva gv2 gv4 = drop n gv2), (qreva gv2 gv4 = append l l), (qreva gv2 gv4 = append l gv4), (qreva gv2 gv4 = append l gv2), (qreva gv2 gv4 = append gv4 l), (qreva gv2 gv4 = append gv4 gv4), (qreva gv2 gv4 = append gv4 gv2), (qreva gv2 gv4 = append gv2 l)
+(qreva gv2 gv4 = append gv2 gv4), (qreva gv2 gv4 = append gv2 gv2), (qreva gv2 gv2 = l), (qreva gv2 gv2 = gv4), (qreva gv2 gv2 = gv2), (qreva gv2 gv2 = drop n l), (qreva gv2 gv2 = drop n gv4), (qreva gv2 gv2 = drop n gv2), (qreva gv2 gv2 = append l l), (qreva gv2 gv2 = append l gv4)
+(qreva gv2 gv2 = append l gv2), (qreva gv2 gv2 = append gv4 l), (qreva gv2 gv2 = append gv4 gv4), (qreva gv2 gv2 = append gv4 gv2), (qreva gv2 gv2 = append gv2 l), (qreva gv2 gv2 = append gv2 gv4), (qreva gv2 gv2 = append gv2 gv2), (rev l = l), (rev l = gv4), (rev l = gv2)
+(rev l = drop n l), (rev l = drop n gv4), (rev l = drop n gv2), (rev l = qreva l l), (rev l = qreva l gv4), (rev l = qreva l gv2), (rev l = qreva gv4 l), (rev l = qreva gv4 gv4), (rev l = qreva gv4 gv2), (rev l = qreva gv2 l)
+(rev l = qreva gv2 gv4), (rev l = qreva gv2 gv2), (rev l = append l l), (rev l = append l gv4), (rev l = append l gv2), (rev l = append gv4 l), (rev l = append gv4 gv4), (rev l = append gv4 gv2), (rev l = append gv2 l), (rev l = append gv2 gv4)
+(rev l = append gv2 gv2), (rev gv4 = l), (rev gv4 = gv4), (rev gv4 = gv2), (rev gv4 = drop n l), (rev gv4 = drop n gv4), (rev gv4 = drop n gv2), (rev gv4 = qreva l l), (rev gv4 = qreva l gv4), (rev gv4 = qreva l gv2)
+(rev gv4 = qreva gv4 l), (rev gv4 = qreva gv4 gv4), (rev gv4 = qreva gv4 gv2), (rev gv4 = qreva gv2 l), (rev gv4 = qreva gv2 gv4), (rev gv4 = qreva gv2 gv2), (rev gv4 = append l l), (rev gv4 = append l gv4), (rev gv4 = append l gv2), (rev gv4 = append gv4 l)
+(rev gv4 = append gv4 gv4), (rev gv4 = append gv4 gv2), (rev gv4 = append gv2 l), (rev gv4 = append gv2 gv4), (rev gv4 = append gv2 gv2), (rev gv2 = l), (rev gv2 = gv4), (rev gv2 = gv2), (rev gv2 = drop n l), (rev gv2 = drop n gv4)
+(rev gv2 = drop n gv2), (rev gv2 = qreva l l), (rev gv2 = qreva l gv4), (rev gv2 = qreva l gv2), (rev gv2 = qreva gv4 l), (rev gv2 = qreva gv4 gv4), (rev gv2 = qreva gv4 gv2), (rev gv2 = qreva gv2 l), (rev gv2 = qreva gv2 gv4), (rev gv2 = qreva gv2 gv2)
+(rev gv2 = append l l), (rev gv2 = append l gv4), (rev gv2 = append l gv2), (rev gv2 = append gv4 l), (rev gv2 = append gv4 gv4), (rev gv2 = append gv4 gv2), (rev gv2 = append gv2 l), (rev gv2 = append gv2 gv4), (rev gv2 = append gv2 gv2), (append l l = l)
+(append l l = gv4), (append l l = gv2), (append l gv4 = l), (append l gv4 = gv4), (append l gv4 = gv2), (append l gv2 = l), (append l gv2 = gv4), (append l gv2 = gv2), (append gv4 l = l), (append gv4 l = gv4)
+(append gv4 l = gv2), (append gv4 gv4 = l), (append gv4 gv4 = gv4), (append gv4 gv4 = gv2), (append gv4 gv2 = l), (append gv4 gv2 = gv4), (append gv4 gv2 = gv2), (append gv2 l = l), (append gv2 l = gv4), (append gv2 l = gv2)
+(append gv2 gv4 = l), (append gv2 gv4 = gv4), (append gv2 gv4 = gv2), (append gv2 gv2 = l), (append gv2 gv2 = gv4), (append gv2 gv2 = gv2), (nil = cons n l), (nil = cons n gv4), (nil = cons n gv2), (nil = drop n l)
+(nil = drop n gv4), (nil = drop n gv2), (nil = qreva l l), (nil = qreva l gv4), (nil = qreva l gv2), (nil = qreva gv4 l), (nil = qreva gv4 gv4), (nil = qreva gv4 gv2), (nil = qreva gv2 l), (nil = qreva gv2 gv4)
+(nil = qreva gv2 gv2), (nil = rev l), (nil = rev gv4), (nil = rev gv2), (nil = append l l), (nil = append l gv4), (nil = append l gv2), (nil = append gv4 l), (nil = append gv4 gv4), (nil = append gv4 gv2)
+(nil = append gv2 l), (nil = append gv2 gv4), (nil = append gv2 gv2), (succ n = n), (succ n = len l), (succ n = len gv4), (succ n = len gv2), (succ n = qexp n n n), (succ n = exp n n), (succ n = mult n n)
+(succ n = plus n n), (len l = n), (len l = exp n n), (len gv4 = n), (len gv4 = exp n n), (len gv2 = n), (len gv2 = exp n n), (qexp n n n = n), (qexp n n n = len l), (qexp n n n = len gv4)
+(qexp n n n = len gv2), (qexp n n n = exp n n), (qexp n n n = mult n n), (qexp n n n = plus n n), (exp n n = n), (mult n n = n), (mult n n = len l), (mult n n = len gv4), (mult n n = len gv2), (mult n n = exp n n)
+(plus n n = n), (plus n n = len l), (plus n n = len gv4), (plus n n = len gv2), (plus n n = exp n n), (plus n n = mult n n), (zero = succ n), (zero = len l), (zero = len gv4), (zero = len gv2)
+(zero = qexp n n n), (zero = exp n n), (zero = mult n n), (zero = plus n n), (None = Some n)
+
+Label: 1 (1)
+(n = n), (l = l), (l = gv5), (l = gv2), (gv5 = l), (gv5 = gv5), (gv5 = gv2), (gv2 = l), (gv2 = gv5), (gv2 = gv2)
+(false = less n n), (true = less n n), (n <> n), (l <> l), (l <> gv5), (l <> gv2), (gv5 <> l), (gv5 <> gv5), (gv5 <> gv2), (gv2 <> l)
+(gv2 <> gv5), (gv2 <> gv2), (None = Some l), (None = Some gv5), (None = Some gv2), (cons n l = l), (cons n l = gv5), (cons n l = gv2), (cons n l = drop n l), (cons n l = drop n gv5)
+(cons n l = drop n gv2), (cons n l = qreva l l), (cons n l = qreva l gv5), (cons n l = qreva l gv2), (cons n l = qreva gv5 l), (cons n l = qreva gv5 gv5), (cons n l = qreva gv5 gv2), (cons n l = qreva gv2 l), (cons n l = qreva gv2 gv5), (cons n l = qreva gv2 gv2)
+(cons n l = rev l), (cons n l = rev gv5), (cons n l = rev gv2), (cons n l = append l l), (cons n l = append l gv5), (cons n l = append l gv2), (cons n l = append gv5 l), (cons n l = append gv5 gv5), (cons n l = append gv5 gv2), (cons n l = append gv2 l)
+(cons n l = append gv2 gv5), (cons n l = append gv2 gv2), (cons n gv5 = l), (cons n gv5 = gv5), (cons n gv5 = gv2), (cons n gv5 = drop n l), (cons n gv5 = drop n gv5), (cons n gv5 = drop n gv2), (cons n gv5 = qreva l l), (cons n gv5 = qreva l gv5)
+(cons n gv5 = qreva l gv2), (cons n gv5 = qreva gv5 l), (cons n gv5 = qreva gv5 gv5), (cons n gv5 = qreva gv5 gv2), (cons n gv5 = qreva gv2 l), (cons n gv5 = qreva gv2 gv5), (cons n gv5 = qreva gv2 gv2), (cons n gv5 = rev l), (cons n gv5 = rev gv5), (cons n gv5 = rev gv2)
+(cons n gv5 = append l l), (cons n gv5 = append l gv5), (cons n gv5 = append l gv2), (cons n gv5 = append gv5 l), (cons n gv5 = append gv5 gv5), (cons n gv5 = append gv5 gv2), (cons n gv5 = append gv2 l), (cons n gv5 = append gv2 gv5), (cons n gv5 = append gv2 gv2), (cons n gv2 = l)
+(cons n gv2 = gv5), (cons n gv2 = gv2), (cons n gv2 = drop n l), (cons n gv2 = drop n gv5), (cons n gv2 = drop n gv2), (cons n gv2 = qreva l l), (cons n gv2 = qreva l gv5), (cons n gv2 = qreva l gv2), (cons n gv2 = qreva gv5 l), (cons n gv2 = qreva gv5 gv5)
+(cons n gv2 = qreva gv5 gv2), (cons n gv2 = qreva gv2 l), (cons n gv2 = qreva gv2 gv5), (cons n gv2 = qreva gv2 gv2), (cons n gv2 = rev l), (cons n gv2 = rev gv5), (cons n gv2 = rev gv2), (cons n gv2 = append l l), (cons n gv2 = append l gv5), (cons n gv2 = append l gv2)
+(cons n gv2 = append gv5 l), (cons n gv2 = append gv5 gv5), (cons n gv2 = append gv5 gv2), (cons n gv2 = append gv2 l), (cons n gv2 = append gv2 gv5), (cons n gv2 = append gv2 gv2), (drop n l = l), (drop n l = gv5), (drop n l = gv2), (drop n l = append l l)
+(drop n l = append l gv5), (drop n l = append l gv2), (drop n l = append gv5 l), (drop n l = append gv5 gv5), (drop n l = append gv5 gv2), (drop n l = append gv2 l), (drop n l = append gv2 gv5), (drop n l = append gv2 gv2), (drop n gv5 = l), (drop n gv5 = gv5)
+(drop n gv5 = gv2), (drop n gv5 = append l l), (drop n gv5 = append l gv5), (drop n gv5 = append l gv2), (drop n gv5 = append gv5 l), (drop n gv5 = append gv5 gv5), (drop n gv5 = append gv5 gv2), (drop n gv5 = append gv2 l), (drop n gv5 = append gv2 gv5), (drop n gv5 = append gv2 gv2)
+(drop n gv2 = l), (drop n gv2 = gv5), (drop n gv2 = gv2), (drop n gv2 = append l l), (drop n gv2 = append l gv5), (drop n gv2 = append l gv2), (drop n gv2 = append gv5 l), (drop n gv2 = append gv5 gv5), (drop n gv2 = append gv5 gv2), (drop n gv2 = append gv2 l)
+(drop n gv2 = append gv2 gv5), (drop n gv2 = append gv2 gv2), (qreva l l = l), (qreva l l = gv5), (qreva l l = gv2), (qreva l l = drop n l), (qreva l l = drop n gv5), (qreva l l = drop n gv2), (qreva l l = append l l), (qreva l l = append l gv5)
+(qreva l l = append l gv2), (qreva l l = append gv5 l), (qreva l l = append gv5 gv5), (qreva l l = append gv5 gv2), (qreva l l = append gv2 l), (qreva l l = append gv2 gv5), (qreva l l = append gv2 gv2), (qreva l gv5 = l), (qreva l gv5 = gv5), (qreva l gv5 = gv2)
+(qreva l gv5 = drop n l), (qreva l gv5 = drop n gv5), (qreva l gv5 = drop n gv2), (qreva l gv5 = append l l), (qreva l gv5 = append l gv5), (qreva l gv5 = append l gv2), (qreva l gv5 = append gv5 l), (qreva l gv5 = append gv5 gv5), (qreva l gv5 = append gv5 gv2), (qreva l gv5 = append gv2 l)
+(qreva l gv5 = append gv2 gv5), (qreva l gv5 = append gv2 gv2), (qreva l gv2 = l), (qreva l gv2 = gv5), (qreva l gv2 = gv2), (qreva l gv2 = drop n l), (qreva l gv2 = drop n gv5), (qreva l gv2 = drop n gv2), (qreva l gv2 = append l l), (qreva l gv2 = append l gv5)
+(qreva l gv2 = append l gv2), (qreva l gv2 = append gv5 l), (qreva l gv2 = append gv5 gv5), (qreva l gv2 = append gv5 gv2), (qreva l gv2 = append gv2 l), (qreva l gv2 = append gv2 gv5), (qreva l gv2 = append gv2 gv2), (qreva gv5 l = l), (qreva gv5 l = gv5), (qreva gv5 l = gv2)
+(qreva gv5 l = drop n l), (qreva gv5 l = drop n gv5), (qreva gv5 l = drop n gv2), (qreva gv5 l = append l l), (qreva gv5 l = append l gv5), (qreva gv5 l = append l gv2), (qreva gv5 l = append gv5 l), (qreva gv5 l = append gv5 gv5), (qreva gv5 l = append gv5 gv2), (qreva gv5 l = append gv2 l)
+(qreva gv5 l = append gv2 gv5), (qreva gv5 l = append gv2 gv2), (qreva gv5 gv5 = l), (qreva gv5 gv5 = gv5), (qreva gv5 gv5 = gv2), (qreva gv5 gv5 = drop n l), (qreva gv5 gv5 = drop n gv5), (qreva gv5 gv5 = drop n gv2), (qreva gv5 gv5 = append l l), (qreva gv5 gv5 = append l gv5)
+(qreva gv5 gv5 = append l gv2), (qreva gv5 gv5 = append gv5 l), (qreva gv5 gv5 = append gv5 gv5), (qreva gv5 gv5 = append gv5 gv2), (qreva gv5 gv5 = append gv2 l), (qreva gv5 gv5 = append gv2 gv5), (qreva gv5 gv5 = append gv2 gv2), (qreva gv5 gv2 = l), (qreva gv5 gv2 = gv5), (qreva gv5 gv2 = gv2)
+(qreva gv5 gv2 = drop n l), (qreva gv5 gv2 = drop n gv5), (qreva gv5 gv2 = drop n gv2), (qreva gv5 gv2 = append l l), (qreva gv5 gv2 = append l gv5), (qreva gv5 gv2 = append l gv2), (qreva gv5 gv2 = append gv5 l), (qreva gv5 gv2 = append gv5 gv5), (qreva gv5 gv2 = append gv5 gv2), (qreva gv5 gv2 = append gv2 l)
+(qreva gv5 gv2 = append gv2 gv5), (qreva gv5 gv2 = append gv2 gv2), (qreva gv2 l = l), (qreva gv2 l = gv5), (qreva gv2 l = gv2), (qreva gv2 l = drop n l), (qreva gv2 l = drop n gv5), (qreva gv2 l = drop n gv2), (qreva gv2 l = append l l), (qreva gv2 l = append l gv5)
+(qreva gv2 l = append l gv2), (qreva gv2 l = append gv5 l), (qreva gv2 l = append gv5 gv5), (qreva gv2 l = append gv5 gv2), (qreva gv2 l = append gv2 l), (qreva gv2 l = append gv2 gv5), (qreva gv2 l = append gv2 gv2), (qreva gv2 gv5 = l), (qreva gv2 gv5 = gv5), (qreva gv2 gv5 = gv2)
+(qreva gv2 gv5 = drop n l), (qreva gv2 gv5 = drop n gv5), (qreva gv2 gv5 = drop n gv2), (qreva gv2 gv5 = append l l), (qreva gv2 gv5 = append l gv5), (qreva gv2 gv5 = append l gv2), (qreva gv2 gv5 = append gv5 l), (qreva gv2 gv5 = append gv5 gv5), (qreva gv2 gv5 = append gv5 gv2), (qreva gv2 gv5 = append gv2 l)
+(qreva gv2 gv5 = append gv2 gv5), (qreva gv2 gv5 = append gv2 gv2), (qreva gv2 gv2 = l), (qreva gv2 gv2 = gv5), (qreva gv2 gv2 = gv2), (qreva gv2 gv2 = drop n l), (qreva gv2 gv2 = drop n gv5), (qreva gv2 gv2 = drop n gv2), (qreva gv2 gv2 = append l l), (qreva gv2 gv2 = append l gv5)
+(qreva gv2 gv2 = append l gv2), (qreva gv2 gv2 = append gv5 l), (qreva gv2 gv2 = append gv5 gv5), (qreva gv2 gv2 = append gv5 gv2), (qreva gv2 gv2 = append gv2 l), (qreva gv2 gv2 = append gv2 gv5), (qreva gv2 gv2 = append gv2 gv2), (rev l = l), (rev l = gv5), (rev l = gv2)
+(rev l = drop n l), (rev l = drop n gv5), (rev l = drop n gv2), (rev l = qreva l l), (rev l = qreva l gv5), (rev l = qreva l gv2), (rev l = qreva gv5 l), (rev l = qreva gv5 gv5), (rev l = qreva gv5 gv2), (rev l = qreva gv2 l)
+(rev l = qreva gv2 gv5), (rev l = qreva gv2 gv2), (rev l = append l l), (rev l = append l gv5), (rev l = append l gv2), (rev l = append gv5 l), (rev l = append gv5 gv5), (rev l = append gv5 gv2), (rev l = append gv2 l), (rev l = append gv2 gv5)
+(rev l = append gv2 gv2), (rev gv5 = l), (rev gv5 = gv5), (rev gv5 = gv2), (rev gv5 = drop n l), (rev gv5 = drop n gv5), (rev gv5 = drop n gv2), (rev gv5 = qreva l l), (rev gv5 = qreva l gv5), (rev gv5 = qreva l gv2)
+(rev gv5 = qreva gv5 l), (rev gv5 = qreva gv5 gv5), (rev gv5 = qreva gv5 gv2), (rev gv5 = qreva gv2 l), (rev gv5 = qreva gv2 gv5), (rev gv5 = qreva gv2 gv2), (rev gv5 = append l l), (rev gv5 = append l gv5), (rev gv5 = append l gv2), (rev gv5 = append gv5 l)
+(rev gv5 = append gv5 gv5), (rev gv5 = append gv5 gv2), (rev gv5 = append gv2 l), (rev gv5 = append gv2 gv5), (rev gv5 = append gv2 gv2), (rev gv2 = l), (rev gv2 = gv5), (rev gv2 = gv2), (rev gv2 = drop n l), (rev gv2 = drop n gv5)
+(rev gv2 = drop n gv2), (rev gv2 = qreva l l), (rev gv2 = qreva l gv5), (rev gv2 = qreva l gv2), (rev gv2 = qreva gv5 l), (rev gv2 = qreva gv5 gv5), (rev gv2 = qreva gv5 gv2), (rev gv2 = qreva gv2 l), (rev gv2 = qreva gv2 gv5), (rev gv2 = qreva gv2 gv2)
+(rev gv2 = append l l), (rev gv2 = append l gv5), (rev gv2 = append l gv2), (rev gv2 = append gv5 l), (rev gv2 = append gv5 gv5), (rev gv2 = append gv5 gv2), (rev gv2 = append gv2 l), (rev gv2 = append gv2 gv5), (rev gv2 = append gv2 gv2), (append l l = l)
+(append l l = gv5), (append l l = gv2), (append l gv5 = l), (append l gv5 = gv5), (append l gv5 = gv2), (append l gv2 = l), (append l gv2 = gv5), (append l gv2 = gv2), (append gv5 l = l), (append gv5 l = gv5)
+(append gv5 l = gv2), (append gv5 gv5 = l), (append gv5 gv5 = gv5), (append gv5 gv5 = gv2), (append gv5 gv2 = l), (append gv5 gv2 = gv5), (append gv5 gv2 = gv2), (append gv2 l = l), (append gv2 l = gv5), (append gv2 l = gv2)
+(append gv2 gv5 = l), (append gv2 gv5 = gv5), (append gv2 gv5 = gv2), (append gv2 gv2 = l), (append gv2 gv2 = gv5), (append gv2 gv2 = gv2), (nil = cons n l), (nil = cons n gv5), (nil = cons n gv2), (nil = drop n l)
+(nil = drop n gv5), (nil = drop n gv2), (nil = qreva l l), (nil = qreva l gv5), (nil = qreva l gv2), (nil = qreva gv5 l), (nil = qreva gv5 gv5), (nil = qreva gv5 gv2), (nil = qreva gv2 l), (nil = qreva gv2 gv5)
+(nil = qreva gv2 gv2), (nil = rev l), (nil = rev gv5), (nil = rev gv2), (nil = append l l), (nil = append l gv5), (nil = append l gv2), (nil = append gv5 l), (nil = append gv5 gv5), (nil = append gv5 gv2)
+(nil = append gv2 l), (nil = append gv2 gv5), (nil = append gv2 gv2), (succ n = n), (succ n = len l), (succ n = len gv5), (succ n = len gv2), (succ n = qexp n n n), (succ n = exp n n), (succ n = mult n n)
+(succ n = plus n n), (len l = n), (len l = exp n n), (len gv5 = n), (len gv5 = exp n n), (len gv2 = n), (len gv2 = exp n n), (qexp n n n = n), (qexp n n n = len l), (qexp n n n = len gv5)
+(qexp n n n = len gv2), (qexp n n n = exp n n), (qexp n n n = mult n n), (qexp n n n = plus n n), (exp n n = n), (mult n n = n), (mult n n = len l), (mult n n = len gv5), (mult n n = len gv2), (mult n n = exp n n)
+(plus n n = n), (plus n n = len l), (plus n n = len gv5), (plus n n = len gv2), (plus n n = exp n n), (plus n n = mult n n), (zero = succ n), (zero = len l), (zero = len gv5), (zero = len gv2)
+(zero = qexp n n n), (zero = exp n n), (zero = mult n n), (zero = plus n n), (None = Some n)
+
+Label: 2 (2)
+(n = n), (l = l), (l = gv3), (l = gv2), (gv3 = l), (gv3 = gv3), (gv3 = gv2), (gv2 = l), (gv2 = gv3), (gv2 = gv2)
+(false = less n n), (true = less n n), (n <> n), (l <> l), (l <> gv3), (l <> gv2), (gv3 <> l), (gv3 <> gv3), (gv3 <> gv2), (gv2 <> l)
+(gv2 <> gv3), (gv2 <> gv2), (None = Some l), (None = Some gv3), (None = Some gv2), (cons n l = l), (cons n l = gv3), (cons n l = gv2), (cons n l = drop n l), (cons n l = drop n gv3)
+(cons n l = drop n gv2), (cons n l = qreva l l), (cons n l = qreva l gv3), (cons n l = qreva l gv2), (cons n l = qreva gv3 l), (cons n l = qreva gv3 gv3), (cons n l = qreva gv3 gv2), (cons n l = qreva gv2 l), (cons n l = qreva gv2 gv3), (cons n l = qreva gv2 gv2)
+(cons n l = rev l), (cons n l = rev gv3), (cons n l = rev gv2), (cons n l = append l l), (cons n l = append l gv3), (cons n l = append l gv2), (cons n l = append gv3 l), (cons n l = append gv3 gv3), (cons n l = append gv3 gv2), (cons n l = append gv2 l)
+(cons n l = append gv2 gv3), (cons n l = append gv2 gv2), (cons n gv3 = l), (cons n gv3 = gv3), (cons n gv3 = gv2), (cons n gv3 = drop n l), (cons n gv3 = drop n gv3), (cons n gv3 = drop n gv2), (cons n gv3 = qreva l l), (cons n gv3 = qreva l gv3)
+(cons n gv3 = qreva l gv2), (cons n gv3 = qreva gv3 l), (cons n gv3 = qreva gv3 gv3), (cons n gv3 = qreva gv3 gv2), (cons n gv3 = qreva gv2 l), (cons n gv3 = qreva gv2 gv3), (cons n gv3 = qreva gv2 gv2), (cons n gv3 = rev l), (cons n gv3 = rev gv3), (cons n gv3 = rev gv2)
+(cons n gv3 = append l l), (cons n gv3 = append l gv3), (cons n gv3 = append l gv2), (cons n gv3 = append gv3 l), (cons n gv3 = append gv3 gv3), (cons n gv3 = append gv3 gv2), (cons n gv3 = append gv2 l), (cons n gv3 = append gv2 gv3), (cons n gv3 = append gv2 gv2), (cons n gv2 = l)
+(cons n gv2 = gv3), (cons n gv2 = gv2), (cons n gv2 = drop n l), (cons n gv2 = drop n gv3), (cons n gv2 = drop n gv2), (cons n gv2 = qreva l l), (cons n gv2 = qreva l gv3), (cons n gv2 = qreva l gv2), (cons n gv2 = qreva gv3 l), (cons n gv2 = qreva gv3 gv3)
+(cons n gv2 = qreva gv3 gv2), (cons n gv2 = qreva gv2 l), (cons n gv2 = qreva gv2 gv3), (cons n gv2 = qreva gv2 gv2), (cons n gv2 = rev l), (cons n gv2 = rev gv3), (cons n gv2 = rev gv2), (cons n gv2 = append l l), (cons n gv2 = append l gv3), (cons n gv2 = append l gv2)
+(cons n gv2 = append gv3 l), (cons n gv2 = append gv3 gv3), (cons n gv2 = append gv3 gv2), (cons n gv2 = append gv2 l), (cons n gv2 = append gv2 gv3), (cons n gv2 = append gv2 gv2), (drop n l = l), (drop n l = gv3), (drop n l = gv2), (drop n l = append l l)
+(drop n l = append l gv3), (drop n l = append l gv2), (drop n l = append gv3 l), (drop n l = append gv3 gv3), (drop n l = append gv3 gv2), (drop n l = append gv2 l), (drop n l = append gv2 gv3), (drop n l = append gv2 gv2), (drop n gv3 = l), (drop n gv3 = gv3)
+(drop n gv3 = gv2), (drop n gv3 = append l l), (drop n gv3 = append l gv3), (drop n gv3 = append l gv2), (drop n gv3 = append gv3 l), (drop n gv3 = append gv3 gv3), (drop n gv3 = append gv3 gv2), (drop n gv3 = append gv2 l), (drop n gv3 = append gv2 gv3), (drop n gv3 = append gv2 gv2)
+(drop n gv2 = l), (drop n gv2 = gv3), (drop n gv2 = gv2), (drop n gv2 = append l l), (drop n gv2 = append l gv3), (drop n gv2 = append l gv2), (drop n gv2 = append gv3 l), (drop n gv2 = append gv3 gv3), (drop n gv2 = append gv3 gv2), (drop n gv2 = append gv2 l)
+(drop n gv2 = append gv2 gv3), (drop n gv2 = append gv2 gv2), (qreva l l = l), (qreva l l = gv3), (qreva l l = gv2), (qreva l l = drop n l), (qreva l l = drop n gv3), (qreva l l = drop n gv2), (qreva l l = append l l), (qreva l l = append l gv3)
+(qreva l l = append l gv2), (qreva l l = append gv3 l), (qreva l l = append gv3 gv3), (qreva l l = append gv3 gv2), (qreva l l = append gv2 l), (qreva l l = append gv2 gv3), (qreva l l = append gv2 gv2), (qreva l gv3 = l), (qreva l gv3 = gv3), (qreva l gv3 = gv2)
+(qreva l gv3 = drop n l), (qreva l gv3 = drop n gv3), (qreva l gv3 = drop n gv2), (qreva l gv3 = append l l), (qreva l gv3 = append l gv3), (qreva l gv3 = append l gv2), (qreva l gv3 = append gv3 l), (qreva l gv3 = append gv3 gv3), (qreva l gv3 = append gv3 gv2), (qreva l gv3 = append gv2 l)
+(qreva l gv3 = append gv2 gv3), (qreva l gv3 = append gv2 gv2), (qreva l gv2 = l), (qreva l gv2 = gv3), (qreva l gv2 = gv2), (qreva l gv2 = drop n l), (qreva l gv2 = drop n gv3), (qreva l gv2 = drop n gv2), (qreva l gv2 = append l l), (qreva l gv2 = append l gv3)
+(qreva l gv2 = append l gv2), (qreva l gv2 = append gv3 l), (qreva l gv2 = append gv3 gv3), (qreva l gv2 = append gv3 gv2), (qreva l gv2 = append gv2 l), (qreva l gv2 = append gv2 gv3), (qreva l gv2 = append gv2 gv2), (qreva gv3 l = l), (qreva gv3 l = gv3), (qreva gv3 l = gv2)
+(qreva gv3 l = drop n l), (qreva gv3 l = drop n gv3), (qreva gv3 l = drop n gv2), (qreva gv3 l = append l l), (qreva gv3 l = append l gv3), (qreva gv3 l = append l gv2), (qreva gv3 l = append gv3 l), (qreva gv3 l = append gv3 gv3), (qreva gv3 l = append gv3 gv2), (qreva gv3 l = append gv2 l)
+(qreva gv3 l = append gv2 gv3), (qreva gv3 l = append gv2 gv2), (qreva gv3 gv3 = l), (qreva gv3 gv3 = gv3), (qreva gv3 gv3 = gv2), (qreva gv3 gv3 = drop n l), (qreva gv3 gv3 = drop n gv3), (qreva gv3 gv3 = drop n gv2), (qreva gv3 gv3 = append l l), (qreva gv3 gv3 = append l gv3)
+(qreva gv3 gv3 = append l gv2), (qreva gv3 gv3 = append gv3 l), (qreva gv3 gv3 = append gv3 gv3), (qreva gv3 gv3 = append gv3 gv2), (qreva gv3 gv3 = append gv2 l), (qreva gv3 gv3 = append gv2 gv3), (qreva gv3 gv3 = append gv2 gv2), (qreva gv3 gv2 = l), (qreva gv3 gv2 = gv3), (qreva gv3 gv2 = gv2)
+(qreva gv3 gv2 = drop n l), (qreva gv3 gv2 = drop n gv3), (qreva gv3 gv2 = drop n gv2), (qreva gv3 gv2 = append l l), (qreva gv3 gv2 = append l gv3), (qreva gv3 gv2 = append l gv2), (qreva gv3 gv2 = append gv3 l), (qreva gv3 gv2 = append gv3 gv3), (qreva gv3 gv2 = append gv3 gv2), (qreva gv3 gv2 = append gv2 l)
+(qreva gv3 gv2 = append gv2 gv3), (qreva gv3 gv2 = append gv2 gv2), (qreva gv2 l = l), (qreva gv2 l = gv3), (qreva gv2 l = gv2), (qreva gv2 l = drop n l), (qreva gv2 l = drop n gv3), (qreva gv2 l = drop n gv2), (qreva gv2 l = append l l), (qreva gv2 l = append l gv3)
+(qreva gv2 l = append l gv2), (qreva gv2 l = append gv3 l), (qreva gv2 l = append gv3 gv3), (qreva gv2 l = append gv3 gv2), (qreva gv2 l = append gv2 l), (qreva gv2 l = append gv2 gv3), (qreva gv2 l = append gv2 gv2), (qreva gv2 gv3 = l), (qreva gv2 gv3 = gv3), (qreva gv2 gv3 = gv2)
+(qreva gv2 gv3 = drop n l), (qreva gv2 gv3 = drop n gv3), (qreva gv2 gv3 = drop n gv2), (qreva gv2 gv3 = append l l), (qreva gv2 gv3 = append l gv3), (qreva gv2 gv3 = append l gv2), (qreva gv2 gv3 = append gv3 l), (qreva gv2 gv3 = append gv3 gv3), (qreva gv2 gv3 = append gv3 gv2), (qreva gv2 gv3 = append gv2 l)
+(qreva gv2 gv3 = append gv2 gv3), (qreva gv2 gv3 = append gv2 gv2), (qreva gv2 gv2 = l), (qreva gv2 gv2 = gv3), (qreva gv2 gv2 = gv2), (qreva gv2 gv2 = drop n l), (qreva gv2 gv2 = drop n gv3), (qreva gv2 gv2 = drop n gv2), (qreva gv2 gv2 = append l l), (qreva gv2 gv2 = append l gv3)
+(qreva gv2 gv2 = append l gv2), (qreva gv2 gv2 = append gv3 l), (qreva gv2 gv2 = append gv3 gv3), (qreva gv2 gv2 = append gv3 gv2), (qreva gv2 gv2 = append gv2 l), (qreva gv2 gv2 = append gv2 gv3), (qreva gv2 gv2 = append gv2 gv2), (rev l = l), (rev l = gv3), (rev l = gv2)
+(rev l = drop n l), (rev l = drop n gv3), (rev l = drop n gv2), (rev l = qreva l l), (rev l = qreva l gv3), (rev l = qreva l gv2), (rev l = qreva gv3 l), (rev l = qreva gv3 gv3), (rev l = qreva gv3 gv2), (rev l = qreva gv2 l)
+(rev l = qreva gv2 gv3), (rev l = qreva gv2 gv2), (rev l = append l l), (rev l = append l gv3), (rev l = append l gv2), (rev l = append gv3 l), (rev l = append gv3 gv3), (rev l = append gv3 gv2), (rev l = append gv2 l), (rev l = append gv2 gv3)
+(rev l = append gv2 gv2), (rev gv3 = l), (rev gv3 = gv3), (rev gv3 = gv2), (rev gv3 = drop n l), (rev gv3 = drop n gv3), (rev gv3 = drop n gv2), (rev gv3 = qreva l l), (rev gv3 = qreva l gv3), (rev gv3 = qreva l gv2)
+(rev gv3 = qreva gv3 l), (rev gv3 = qreva gv3 gv3), (rev gv3 = qreva gv3 gv2), (rev gv3 = qreva gv2 l), (rev gv3 = qreva gv2 gv3), (rev gv3 = qreva gv2 gv2), (rev gv3 = append l l), (rev gv3 = append l gv3), (rev gv3 = append l gv2), (rev gv3 = append gv3 l)
+(rev gv3 = append gv3 gv3), (rev gv3 = append gv3 gv2), (rev gv3 = append gv2 l), (rev gv3 = append gv2 gv3), (rev gv3 = append gv2 gv2), (rev gv2 = l), (rev gv2 = gv3), (rev gv2 = gv2), (rev gv2 = drop n l), (rev gv2 = drop n gv3)
+(rev gv2 = drop n gv2), (rev gv2 = qreva l l), (rev gv2 = qreva l gv3), (rev gv2 = qreva l gv2), (rev gv2 = qreva gv3 l), (rev gv2 = qreva gv3 gv3), (rev gv2 = qreva gv3 gv2), (rev gv2 = qreva gv2 l), (rev gv2 = qreva gv2 gv3), (rev gv2 = qreva gv2 gv2)
+(rev gv2 = append l l), (rev gv2 = append l gv3), (rev gv2 = append l gv2), (rev gv2 = append gv3 l), (rev gv2 = append gv3 gv3), (rev gv2 = append gv3 gv2), (rev gv2 = append gv2 l), (rev gv2 = append gv2 gv3), (rev gv2 = append gv2 gv2), (append l l = l)
+(append l l = gv3), (append l l = gv2), (append l gv3 = l), (append l gv3 = gv3), (append l gv3 = gv2), (append l gv2 = l), (append l gv2 = gv3), (append l gv2 = gv2), (append gv3 l = l), (append gv3 l = gv3)
+(append gv3 l = gv2), (append gv3 gv3 = l), (append gv3 gv3 = gv3), (append gv3 gv3 = gv2), (append gv3 gv2 = l), (append gv3 gv2 = gv3), (append gv3 gv2 = gv2), (append gv2 l = l), (append gv2 l = gv3), (append gv2 l = gv2)
+(append gv2 gv3 = l), (append gv2 gv3 = gv3), (append gv2 gv3 = gv2), (append gv2 gv2 = l), (append gv2 gv2 = gv3), (append gv2 gv2 = gv2), (nil = cons n l), (nil = cons n gv3), (nil = cons n gv2), (nil = drop n l)
+(nil = drop n gv3), (nil = drop n gv2), (nil = qreva l l), (nil = qreva l gv3), (nil = qreva l gv2), (nil = qreva gv3 l), (nil = qreva gv3 gv3), (nil = qreva gv3 gv2), (nil = qreva gv2 l), (nil = qreva gv2 gv3)
+(nil = qreva gv2 gv2), (nil = rev l), (nil = rev gv3), (nil = rev gv2), (nil = append l l), (nil = append l gv3), (nil = append l gv2), (nil = append gv3 l), (nil = append gv3 gv3), (nil = append gv3 gv2)
+(nil = append gv2 l), (nil = append gv2 gv3), (nil = append gv2 gv2), (succ n = n), (succ n = len l), (succ n = len gv3), (succ n = len gv2), (succ n = qexp n n n), (succ n = exp n n), (succ n = mult n n)
+(succ n = plus n n), (len l = n), (len l = exp n n), (len gv3 = n), (len gv3 = exp n n), (len gv2 = n), (len gv2 = exp n n), (qexp n n n = n), (qexp n n n = len l), (qexp n n n = len gv3)
+(qexp n n n = len gv2), (qexp n n n = exp n n), (qexp n n n = mult n n), (qexp n n n = plus n n), (exp n n = n), (mult n n = n), (mult n n = len l), (mult n n = len gv3), (mult n n = len gv2), (mult n n = exp n n)
+(plus n n = n), (plus n n = len l), (plus n n = len gv3), (plus n n = len gv2), (plus n n = exp n n), (plus n n = mult n n), (zero = succ n), (zero = len l), (zero = len gv3), (zero = len gv2)
+(zero = qexp n n n), (zero = exp n n), (zero = mult n n), (zero = plus n n), (None = Some n)
+
+Label: 3 (3)
+(n = n), (gv4 = gv4), (gv4 = l), (l = gv4), (l = l), (false = less n n), (true = less n n), (n <> n), (gv4 <> gv4), (gv4 <> l)
+(l <> gv4), (l <> l), (None = Some gv4), (None = Some l), (cons n gv4 = gv4), (cons n gv4 = l), (cons n gv4 = drop n gv4), (cons n gv4 = drop n l), (cons n gv4 = qreva gv4 gv4), (cons n gv4 = qreva gv4 l)
+(cons n gv4 = qreva l gv4), (cons n gv4 = qreva l l), (cons n gv4 = rev gv4), (cons n gv4 = rev l), (cons n gv4 = append gv4 gv4), (cons n gv4 = append gv4 l), (cons n gv4 = append l gv4), (cons n gv4 = append l l), (cons n l = gv4), (cons n l = l)
+(cons n l = drop n gv4), (cons n l = drop n l), (cons n l = qreva gv4 gv4), (cons n l = qreva gv4 l), (cons n l = qreva l gv4), (cons n l = qreva l l), (cons n l = rev gv4), (cons n l = rev l), (cons n l = append gv4 gv4), (cons n l = append gv4 l)
+(cons n l = append l gv4), (cons n l = append l l), (drop n gv4 = gv4), (drop n gv4 = l), (drop n gv4 = append gv4 gv4), (drop n gv4 = append gv4 l), (drop n gv4 = append l gv4), (drop n gv4 = append l l), (drop n l = gv4), (drop n l = l)
+(drop n l = append gv4 gv4), (drop n l = append gv4 l), (drop n l = append l gv4), (drop n l = append l l), (qreva gv4 gv4 = gv4), (qreva gv4 gv4 = l), (qreva gv4 gv4 = drop n gv4), (qreva gv4 gv4 = drop n l), (qreva gv4 gv4 = append gv4 gv4), (qreva gv4 gv4 = append gv4 l)
+(qreva gv4 gv4 = append l gv4), (qreva gv4 gv4 = append l l), (qreva gv4 l = gv4), (qreva gv4 l = l), (qreva gv4 l = drop n gv4), (qreva gv4 l = drop n l), (qreva gv4 l = append gv4 gv4), (qreva gv4 l = append gv4 l), (qreva gv4 l = append l gv4), (qreva gv4 l = append l l)
+(qreva l gv4 = gv4), (qreva l gv4 = l), (qreva l gv4 = drop n gv4), (qreva l gv4 = drop n l), (qreva l gv4 = append gv4 gv4), (qreva l gv4 = append gv4 l), (qreva l gv4 = append l gv4), (qreva l gv4 = append l l), (qreva l l = gv4), (qreva l l = l)
+(qreva l l = drop n gv4), (qreva l l = drop n l), (qreva l l = append gv4 gv4), (qreva l l = append gv4 l), (qreva l l = append l gv4), (qreva l l = append l l), (rev gv4 = gv4), (rev gv4 = l), (rev gv4 = drop n gv4), (rev gv4 = drop n l)
+(rev gv4 = qreva gv4 gv4), (rev gv4 = qreva gv4 l), (rev gv4 = qreva l gv4), (rev gv4 = qreva l l), (rev gv4 = append gv4 gv4), (rev gv4 = append gv4 l), (rev gv4 = append l gv4), (rev gv4 = append l l), (rev l = gv4), (rev l = l)
+(rev l = drop n gv4), (rev l = drop n l), (rev l = qreva gv4 gv4), (rev l = qreva gv4 l), (rev l = qreva l gv4), (rev l = qreva l l), (rev l = append gv4 gv4), (rev l = append gv4 l), (rev l = append l gv4), (rev l = append l l)
+(append gv4 gv4 = gv4), (append gv4 gv4 = l), (append gv4 l = gv4), (append gv4 l = l), (append l gv4 = gv4), (append l gv4 = l), (append l l = gv4), (append l l = l), (nil = cons n gv4), (nil = cons n l)
+(nil = drop n gv4), (nil = drop n l), (nil = qreva gv4 gv4), (nil = qreva gv4 l), (nil = qreva l gv4), (nil = qreva l l), (nil = rev gv4), (nil = rev l), (nil = append gv4 gv4), (nil = append gv4 l)
+(nil = append l gv4), (nil = append l l), (succ n = n), (succ n = len gv4), (succ n = len l), (succ n = qexp n n n), (succ n = exp n n), (succ n = mult n n), (succ n = plus n n), (len gv4 = n)
+(len gv4 = exp n n), (len l = n), (len l = exp n n), (qexp n n n = n), (qexp n n n = len gv4), (qexp n n n = len l), (qexp n n n = exp n n), (qexp n n n = mult n n), (qexp n n n = plus n n), (exp n n = n)
+(mult n n = n), (mult n n = len gv4), (mult n n = len l), (mult n n = exp n n), (plus n n = n), (plus n n = len gv4), (plus n n = len l), (plus n n = exp n n), (plus n n = mult n n), (zero = succ n)
+(zero = len gv4), (zero = len l), (zero = qexp n n n), (zero = exp n n), (zero = mult n n), (zero = plus n n), (None = Some n)
+
+Label: 4 (4)
+(n = n), (l = l), (l = gv1), (gv1 = l), (gv1 = gv1), (false = less n n), (true = less n n), (n <> n), (l <> l), (l <> gv1)
+(gv1 <> l), (gv1 <> gv1), (None = Some l), (None = Some gv1), (cons n l = l), (cons n l = gv1), (cons n l = drop n l), (cons n l = drop n gv1), (cons n l = qreva l l), (cons n l = qreva l gv1)
+(cons n l = qreva gv1 l), (cons n l = qreva gv1 gv1), (cons n l = rev l), (cons n l = rev gv1), (cons n l = append l l), (cons n l = append l gv1), (cons n l = append gv1 l), (cons n l = append gv1 gv1), (cons n gv1 = l), (cons n gv1 = gv1)
+(cons n gv1 = drop n l), (cons n gv1 = drop n gv1), (cons n gv1 = qreva l l), (cons n gv1 = qreva l gv1), (cons n gv1 = qreva gv1 l), (cons n gv1 = qreva gv1 gv1), (cons n gv1 = rev l), (cons n gv1 = rev gv1), (cons n gv1 = append l l), (cons n gv1 = append l gv1)
+(cons n gv1 = append gv1 l), (cons n gv1 = append gv1 gv1), (drop n l = l), (drop n l = gv1), (drop n l = append l l), (drop n l = append l gv1), (drop n l = append gv1 l), (drop n l = append gv1 gv1), (drop n gv1 = l), (drop n gv1 = gv1)
+(drop n gv1 = append l l), (drop n gv1 = append l gv1), (drop n gv1 = append gv1 l), (drop n gv1 = append gv1 gv1), (qreva l l = l), (qreva l l = gv1), (qreva l l = drop n l), (qreva l l = drop n gv1), (qreva l l = append l l), (qreva l l = append l gv1)
+(qreva l l = append gv1 l), (qreva l l = append gv1 gv1), (qreva l gv1 = l), (qreva l gv1 = gv1), (qreva l gv1 = drop n l), (qreva l gv1 = drop n gv1), (qreva l gv1 = append l l), (qreva l gv1 = append l gv1), (qreva l gv1 = append gv1 l), (qreva l gv1 = append gv1 gv1)
+(qreva gv1 l = l), (qreva gv1 l = gv1), (qreva gv1 l = drop n l), (qreva gv1 l = drop n gv1), (qreva gv1 l = append l l), (qreva gv1 l = append l gv1), (qreva gv1 l = append gv1 l), (qreva gv1 l = append gv1 gv1), (qreva gv1 gv1 = l), (qreva gv1 gv1 = gv1)
+(qreva gv1 gv1 = drop n l), (qreva gv1 gv1 = drop n gv1), (qreva gv1 gv1 = append l l), (qreva gv1 gv1 = append l gv1), (qreva gv1 gv1 = append gv1 l), (qreva gv1 gv1 = append gv1 gv1), (rev l = l), (rev l = gv1), (rev l = drop n l), (rev l = drop n gv1)
+(rev l = qreva l l), (rev l = qreva l gv1), (rev l = qreva gv1 l), (rev l = qreva gv1 gv1), (rev l = append l l), (rev l = append l gv1), (rev l = append gv1 l), (rev l = append gv1 gv1), (rev gv1 = l), (rev gv1 = gv1)
+(rev gv1 = drop n l), (rev gv1 = drop n gv1), (rev gv1 = qreva l l), (rev gv1 = qreva l gv1), (rev gv1 = qreva gv1 l), (rev gv1 = qreva gv1 gv1), (rev gv1 = append l l), (rev gv1 = append l gv1), (rev gv1 = append gv1 l), (rev gv1 = append gv1 gv1)
+(append l l = l), (append l l = gv1), (append l gv1 = l), (append l gv1 = gv1), (append gv1 l = l), (append gv1 l = gv1), (append gv1 gv1 = l), (append gv1 gv1 = gv1), (nil = cons n l), (nil = cons n gv1)
+(nil = drop n l), (nil = drop n gv1), (nil = qreva l l), (nil = qreva l gv1), (nil = qreva gv1 l), (nil = qreva gv1 gv1), (nil = rev l), (nil = rev gv1), (nil = append l l), (nil = append l gv1)
+(nil = append gv1 l), (nil = append gv1 gv1), (succ n = n), (succ n = len l), (succ n = len gv1), (succ n = qexp n n n), (succ n = exp n n), (succ n = mult n n), (succ n = plus n n), (len l = n)
+(len l = exp n n), (len gv1 = n), (len gv1 = exp n n), (qexp n n n = n), (qexp n n n = len l), (qexp n n n = len gv1), (qexp n n n = exp n n), (qexp n n n = mult n n), (qexp n n n = plus n n), (exp n n = n)
+(mult n n = n), (mult n n = len l), (mult n n = len gv1), (mult n n = exp n n), (plus n n = n), (plus n n = len l), (plus n n = len gv1), (plus n n = exp n n), (plus n n = mult n n), (zero = succ n)
+(zero = len l), (zero = len gv1), (zero = qexp n n n), (zero = exp n n), (zero = mult n n), (zero = plus n n), (None = Some n)
+
+Label: 5 (5)
+(n = n), (l = l), (l = gv0), (gv0 = l), (gv0 = gv0), (false = less n n), (true = less n n), (n <> n), (l <> l), (l <> gv0)
+(gv0 <> l), (gv0 <> gv0), (None = Some l), (None = Some gv0), (cons n l = l), (cons n l = gv0), (cons n l = drop n l), (cons n l = drop n gv0), (cons n l = qreva l l), (cons n l = qreva l gv0)
+(cons n l = qreva gv0 l), (cons n l = qreva gv0 gv0), (cons n l = rev l), (cons n l = rev gv0), (cons n l = append l l), (cons n l = append l gv0), (cons n l = append gv0 l), (cons n l = append gv0 gv0), (cons n gv0 = l), (cons n gv0 = gv0)
+(cons n gv0 = drop n l), (cons n gv0 = drop n gv0), (cons n gv0 = qreva l l), (cons n gv0 = qreva l gv0), (cons n gv0 = qreva gv0 l), (cons n gv0 = qreva gv0 gv0), (cons n gv0 = rev l), (cons n gv0 = rev gv0), (cons n gv0 = append l l), (cons n gv0 = append l gv0)
+(cons n gv0 = append gv0 l), (cons n gv0 = append gv0 gv0), (drop n l = l), (drop n l = gv0), (drop n l = append l l), (drop n l = append l gv0), (drop n l = append gv0 l), (drop n l = append gv0 gv0), (drop n gv0 = l), (drop n gv0 = gv0)
+(drop n gv0 = append l l), (drop n gv0 = append l gv0), (drop n gv0 = append gv0 l), (drop n gv0 = append gv0 gv0), (qreva l l = l), (qreva l l = gv0), (qreva l l = drop n l), (qreva l l = drop n gv0), (qreva l l = append l l), (qreva l l = append l gv0)
+(qreva l l = append gv0 l), (qreva l l = append gv0 gv0), (qreva l gv0 = l), (qreva l gv0 = gv0), (qreva l gv0 = drop n l), (qreva l gv0 = drop n gv0), (qreva l gv0 = append l l), (qreva l gv0 = append l gv0), (qreva l gv0 = append gv0 l), (qreva l gv0 = append gv0 gv0)
+(qreva gv0 l = l), (qreva gv0 l = gv0), (qreva gv0 l = drop n l), (qreva gv0 l = drop n gv0), (qreva gv0 l = append l l), (qreva gv0 l = append l gv0), (qreva gv0 l = append gv0 l), (qreva gv0 l = append gv0 gv0), (qreva gv0 gv0 = l), (qreva gv0 gv0 = gv0)
+(qreva gv0 gv0 = drop n l), (qreva gv0 gv0 = drop n gv0), (qreva gv0 gv0 = append l l), (qreva gv0 gv0 = append l gv0), (qreva gv0 gv0 = append gv0 l), (qreva gv0 gv0 = append gv0 gv0), (rev l = l), (rev l = gv0), (rev l = drop n l), (rev l = drop n gv0)
+(rev l = qreva l l), (rev l = qreva l gv0), (rev l = qreva gv0 l), (rev l = qreva gv0 gv0), (rev l = append l l), (rev l = append l gv0), (rev l = append gv0 l), (rev l = append gv0 gv0), (rev gv0 = l), (rev gv0 = gv0)
+(rev gv0 = drop n l), (rev gv0 = drop n gv0), (rev gv0 = qreva l l), (rev gv0 = qreva l gv0), (rev gv0 = qreva gv0 l), (rev gv0 = qreva gv0 gv0), (rev gv0 = append l l), (rev gv0 = append l gv0), (rev gv0 = append gv0 l), (rev gv0 = append gv0 gv0)
+(append l l = l), (append l l = gv0), (append l gv0 = l), (append l gv0 = gv0), (append gv0 l = l), (append gv0 l = gv0), (append gv0 gv0 = l), (append gv0 gv0 = gv0), (nil = cons n l), (nil = cons n gv0)
+(nil = drop n l), (nil = drop n gv0), (nil = qreva l l), (nil = qreva l gv0), (nil = qreva gv0 l), (nil = qreva gv0 gv0), (nil = rev l), (nil = rev gv0), (nil = append l l), (nil = append l gv0)
+(nil = append gv0 l), (nil = append gv0 gv0), (succ n = n), (succ n = len l), (succ n = len gv0), (succ n = qexp n n n), (succ n = exp n n), (succ n = mult n n), (succ n = plus n n), (len l = n)
+(len l = exp n n), (len gv0 = n), (len gv0 = exp n n), (qexp n n n = n), (qexp n n n = len l), (qexp n n n = len gv0), (qexp n n n = exp n n), (qexp n n n = mult n n), (qexp n n n = plus n n), (exp n n = n)
+(mult n n = n), (mult n n = len l), (mult n n = len gv0), (mult n n = exp n n), (plus n n = n), (plus n n = len l), (plus n n = len gv0), (plus n n = exp n n), (plus n n = mult n n), (zero = succ n)
+(zero = len l), (zero = len gv0), (zero = qexp n n n), (zero = exp n n), (zero = mult n n), (zero = plus n n), (None = Some n)
+
+Label: 6 (6)
+(n = n), (gv5 = gv5), (gv5 = l), (l = gv5), (l = l), (false = less n n), (true = less n n), (n <> n), (gv5 <> gv5), (gv5 <> l)
+(l <> gv5), (l <> l), (None = Some gv5), (None = Some l), (cons n gv5 = gv5), (cons n gv5 = l), (cons n gv5 = drop n gv5), (cons n gv5 = drop n l), (cons n gv5 = qreva gv5 gv5), (cons n gv5 = qreva gv5 l)
+(cons n gv5 = qreva l gv5), (cons n gv5 = qreva l l), (cons n gv5 = rev gv5), (cons n gv5 = rev l), (cons n gv5 = append gv5 gv5), (cons n gv5 = append gv5 l), (cons n gv5 = append l gv5), (cons n gv5 = append l l), (cons n l = gv5), (cons n l = l)
+(cons n l = drop n gv5), (cons n l = drop n l), (cons n l = qreva gv5 gv5), (cons n l = qreva gv5 l), (cons n l = qreva l gv5), (cons n l = qreva l l), (cons n l = rev gv5), (cons n l = rev l), (cons n l = append gv5 gv5), (cons n l = append gv5 l)
+(cons n l = append l gv5), (cons n l = append l l), (drop n gv5 = gv5), (drop n gv5 = l), (drop n gv5 = append gv5 gv5), (drop n gv5 = append gv5 l), (drop n gv5 = append l gv5), (drop n gv5 = append l l), (drop n l = gv5), (drop n l = l)
+(drop n l = append gv5 gv5), (drop n l = append gv5 l), (drop n l = append l gv5), (drop n l = append l l), (qreva gv5 gv5 = gv5), (qreva gv5 gv5 = l), (qreva gv5 gv5 = drop n gv5), (qreva gv5 gv5 = drop n l), (qreva gv5 gv5 = append gv5 gv5), (qreva gv5 gv5 = append gv5 l)
+(qreva gv5 gv5 = append l gv5), (qreva gv5 gv5 = append l l), (qreva gv5 l = gv5), (qreva gv5 l = l), (qreva gv5 l = drop n gv5), (qreva gv5 l = drop n l), (qreva gv5 l = append gv5 gv5), (qreva gv5 l = append gv5 l), (qreva gv5 l = append l gv5), (qreva gv5 l = append l l)
+(qreva l gv5 = gv5), (qreva l gv5 = l), (qreva l gv5 = drop n gv5), (qreva l gv5 = drop n l), (qreva l gv5 = append gv5 gv5), (qreva l gv5 = append gv5 l), (qreva l gv5 = append l gv5), (qreva l gv5 = append l l), (qreva l l = gv5), (qreva l l = l)
+(qreva l l = drop n gv5), (qreva l l = drop n l), (qreva l l = append gv5 gv5), (qreva l l = append gv5 l), (qreva l l = append l gv5), (qreva l l = append l l), (rev gv5 = gv5), (rev gv5 = l), (rev gv5 = drop n gv5), (rev gv5 = drop n l)
+(rev gv5 = qreva gv5 gv5), (rev gv5 = qreva gv5 l), (rev gv5 = qreva l gv5), (rev gv5 = qreva l l), (rev gv5 = append gv5 gv5), (rev gv5 = append gv5 l), (rev gv5 = append l gv5), (rev gv5 = append l l), (rev l = gv5), (rev l = l)
+(rev l = drop n gv5), (rev l = drop n l), (rev l = qreva gv5 gv5), (rev l = qreva gv5 l), (rev l = qreva l gv5), (rev l = qreva l l), (rev l = append gv5 gv5), (rev l = append gv5 l), (rev l = append l gv5), (rev l = append l l)
+(append gv5 gv5 = gv5), (append gv5 gv5 = l), (append gv5 l = gv5), (append gv5 l = l), (append l gv5 = gv5), (append l gv5 = l), (append l l = gv5), (append l l = l), (nil = cons n gv5), (nil = cons n l)
+(nil = drop n gv5), (nil = drop n l), (nil = qreva gv5 gv5), (nil = qreva gv5 l), (nil = qreva l gv5), (nil = qreva l l), (nil = rev gv5), (nil = rev l), (nil = append gv5 gv5), (nil = append gv5 l)
+(nil = append l gv5), (nil = append l l), (succ n = n), (succ n = len gv5), (succ n = len l), (succ n = qexp n n n), (succ n = exp n n), (succ n = mult n n), (succ n = plus n n), (len gv5 = n)
+(len gv5 = exp n n), (len l = n), (len l = exp n n), (qexp n n n = n), (qexp n n n = len gv5), (qexp n n n = len l), (qexp n n n = exp n n), (qexp n n n = mult n n), (qexp n n n = plus n n), (exp n n = n)
+(mult n n = n), (mult n n = len gv5), (mult n n = len l), (mult n n = exp n n), (plus n n = n), (plus n n = len gv5), (plus n n = len l), (plus n n = exp n n), (plus n n = mult n n), (zero = succ n)
+(zero = len gv5), (zero = len l), (zero = qexp n n n), (zero = exp n n), (zero = mult n n), (zero = plus n n), (None = Some n)
+
+Label: 7 (7)
+(n = n), (gv3 = gv3), (gv3 = l), (l = gv3), (l = l), (false = less n n), (true = less n n), (n <> n), (gv3 <> gv3), (gv3 <> l)
+(l <> gv3), (l <> l), (None = Some gv3), (None = Some l), (cons n gv3 = gv3), (cons n gv3 = l), (cons n gv3 = drop n gv3), (cons n gv3 = drop n l), (cons n gv3 = qreva gv3 gv3), (cons n gv3 = qreva gv3 l)
+(cons n gv3 = qreva l gv3), (cons n gv3 = qreva l l), (cons n gv3 = rev gv3), (cons n gv3 = rev l), (cons n gv3 = append gv3 gv3), (cons n gv3 = append gv3 l), (cons n gv3 = append l gv3), (cons n gv3 = append l l), (cons n l = gv3), (cons n l = l)
+(cons n l = drop n gv3), (cons n l = drop n l), (cons n l = qreva gv3 gv3), (cons n l = qreva gv3 l), (cons n l = qreva l gv3), (cons n l = qreva l l), (cons n l = rev gv3), (cons n l = rev l), (cons n l = append gv3 gv3), (cons n l = append gv3 l)
+(cons n l = append l gv3), (cons n l = append l l), (drop n gv3 = gv3), (drop n gv3 = l), (drop n gv3 = append gv3 gv3), (drop n gv3 = append gv3 l), (drop n gv3 = append l gv3), (drop n gv3 = append l l), (drop n l = gv3), (drop n l = l)
+(drop n l = append gv3 gv3), (drop n l = append gv3 l), (drop n l = append l gv3), (drop n l = append l l), (qreva gv3 gv3 = gv3), (qreva gv3 gv3 = l), (qreva gv3 gv3 = drop n gv3), (qreva gv3 gv3 = drop n l), (qreva gv3 gv3 = append gv3 gv3), (qreva gv3 gv3 = append gv3 l)
+(qreva gv3 gv3 = append l gv3), (qreva gv3 gv3 = append l l), (qreva gv3 l = gv3), (qreva gv3 l = l), (qreva gv3 l = drop n gv3), (qreva gv3 l = drop n l), (qreva gv3 l = append gv3 gv3), (qreva gv3 l = append gv3 l), (qreva gv3 l = append l gv3), (qreva gv3 l = append l l)
+(qreva l gv3 = gv3), (qreva l gv3 = l), (qreva l gv3 = drop n gv3), (qreva l gv3 = drop n l), (qreva l gv3 = append gv3 gv3), (qreva l gv3 = append gv3 l), (qreva l gv3 = append l gv3), (qreva l gv3 = append l l), (qreva l l = gv3), (qreva l l = l)
+(qreva l l = drop n gv3), (qreva l l = drop n l), (qreva l l = append gv3 gv3), (qreva l l = append gv3 l), (qreva l l = append l gv3), (qreva l l = append l l), (rev gv3 = gv3), (rev gv3 = l), (rev gv3 = drop n gv3), (rev gv3 = drop n l)
+(rev gv3 = qreva gv3 gv3), (rev gv3 = qreva gv3 l), (rev gv3 = qreva l gv3), (rev gv3 = qreva l l), (rev gv3 = append gv3 gv3), (rev gv3 = append gv3 l), (rev gv3 = append l gv3), (rev gv3 = append l l), (rev l = gv3), (rev l = l)
+(rev l = drop n gv3), (rev l = drop n l), (rev l = qreva gv3 gv3), (rev l = qreva gv3 l), (rev l = qreva l gv3), (rev l = qreva l l), (rev l = append gv3 gv3), (rev l = append gv3 l), (rev l = append l gv3), (rev l = append l l)
+(append gv3 gv3 = gv3), (append gv3 gv3 = l), (append gv3 l = gv3), (append gv3 l = l), (append l gv3 = gv3), (append l gv3 = l), (append l l = gv3), (append l l = l), (nil = cons n gv3), (nil = cons n l)
+(nil = drop n gv3), (nil = drop n l), (nil = qreva gv3 gv3), (nil = qreva gv3 l), (nil = qreva l gv3), (nil = qreva l l), (nil = rev gv3), (nil = rev l), (nil = append gv3 gv3), (nil = append gv3 l)
+(nil = append l gv3), (nil = append l l), (succ n = n), (succ n = len gv3), (succ n = len l), (succ n = qexp n n n), (succ n = exp n n), (succ n = mult n n), (succ n = plus n n), (len gv3 = n)
+(len gv3 = exp n n), (len l = n), (len l = exp n n), (qexp n n n = n), (qexp n n n = len gv3), (qexp n n n = len l), (qexp n n n = exp n n), (qexp n n n = mult n n), (qexp n n n = plus n n), (exp n n = n)
+(mult n n = n), (mult n n = len gv3), (mult n n = len l), (mult n n = exp n n), (plus n n = n), (plus n n = len gv3), (plus n n = len l), (plus n n = exp n n), (plus n n = mult n n), (zero = succ n)
+(zero = len gv3), (zero = len l), (zero = qexp n n n), (zero = exp n n), (zero = mult n n), (zero = plus n n), (None = Some n)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 82.188 seconds
+
+
+Label: 0 (0)
+
+Label: 1 (1)
+
+Label: 2 (2)
+
+Label: 3 (3)
+(nil = rev gv4), (zero = len gv4), (qreva gv4 l = l), (append gv4 l = l), (append l gv4 = l), (qreva gv4 gv4 = gv4), (nil = qreva gv4 gv4), (append gv4 gv4 = gv4), (nil = append gv4 gv4), (rev l = qreva l gv4)
+(rev gv4 = qreva gv4 gv4), (rev gv4 = append gv4 gv4), (qreva gv4 gv4 = drop n gv4), (drop n gv4 = append gv4 gv4)
+
+Label: 4 (4)
+(cons n l = rev gv1)
+
+Label: 5 (5)
+(cons n l = gv0)
+
+Label: 6 (6)
+(cons n l = gv5)
+
+Label: 7 (7)
+(cons n l = qreva gv3 l), (cons n l = append gv3 l), (cons n gv3 = qreva gv3 gv3), (cons n gv3 = append gv3 gv3)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (rev gv2 = l -> rev (append gv2 (cons n nil)) = cons n l)
+
+2. (rev (append (rev l) (cons n nil)) = cons n l)
+
+3. (qreva nil nil = nil)
+
+4. (append nil nil = nil)
+
+5. (nil = rev gv4 -> rev (append (rev l) (cons n gv4)) = cons n l)
+
+6. (zero = len gv4 -> rev (append (rev l) (cons n gv4)) = cons n l)
+
+7. (qreva gv4 l = l -> rev (append (rev l) (cons n gv4)) = cons n l)
+
+8. (append gv4 l = l -> rev (append (rev l) (cons n gv4)) = cons n l)
+
+9. (append l gv4 = l -> rev (append (rev l) (cons n gv4)) = cons n l)
+
+10. (qreva gv4 gv4 = gv4 -> rev (append (rev l) (cons n gv4)) = cons n l)
+
+11. (nil = qreva gv4 gv4 -> rev (append (rev l) (cons n gv4)) = cons n l)
+
+12. (append gv4 gv4 = gv4 -> rev (append (rev l) (cons n gv4)) = cons n l)
+
+13. (nil = append gv4 gv4 -> rev (append (rev l) (cons n gv4)) = cons n l)
+
+14. (rev l = qreva l gv4 -> rev (append (rev l) (cons n gv4)) = cons n l)
+
+15. (rev gv4 = qreva gv4 gv4 -> rev (append (rev l) (cons n gv4)) = cons n l)
+
+16. (rev gv4 = append gv4 gv4 -> rev (append (rev l) (cons n gv4)) = cons n l)
+
+17. (qreva gv4 gv4 = drop n gv4 -> rev (append (rev l) (cons n gv4)) = cons n l)
+
+18. (drop n gv4 = append gv4 gv4 -> rev (append (rev l) (cons n gv4)) = cons n l)
+
+19. (cons n l = qreva gv3 l -> rev (append (rev l) gv3) = cons n l)
+
+20. (cons n l = append gv3 l -> rev (append (rev l) gv3) = cons n l)
+
+21. (cons n gv3 = qreva gv3 gv3 -> rev (append (rev l) gv3) = cons n l)
+
+22. (cons n gv3 = append gv3 gv3 -> rev (append (rev l) gv3) = cons n l)
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 143.176 seconds
+
+Number of Result Pairs Returned: 22
+
+1. (rev gv2 = l -> rev (append gv2 (cons n nil)) = cons n l)
+
+2. (rev (append (rev l) (cons n nil)) = cons n l)
+
+3. (nil = rev gv4 -> rev (append (rev l) (cons n gv4)) = cons n l)
+
+4. (zero = len gv4 -> rev (append (rev l) (cons n gv4)) = cons n l)
+
+5. (qreva gv4 l = l -> rev (append (rev l) (cons n gv4)) = cons n l)

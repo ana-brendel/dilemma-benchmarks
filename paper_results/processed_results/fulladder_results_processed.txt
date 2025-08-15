@@ -1,0 +1,717 @@
+FAIL - 22
+MISSING - 19 (+ 14 = 23)
+SUCCESS - 7
+TOTAL - 48 (+ 14 = 62)
+
+
+[FAIL]
+Test = BV_full_adder_carry_sym_by_412_BV_full_adder_carry_eq2
+[TIME] 98.654
+[COUNTS] 20
+[TARGET] bV_full_adder_carry Nil (Cons vh vt) b = bV_full_adder_carry Nil vt (half_adder_carry vh b).
+
+1. (bV_full_adder_carry (Cons b b0) gv2 cin =  bV_full_adder_carry gv2 (Cons b b0) cin)
+
+2. (bV_full_adder_carry gv1 gv2 cin = bV_full_adder_carry gv2 gv1 cin)
+
+3. (bV_full_adder_carry gv1 Nil cin = bV_full_adder_carry Nil gv1 cin)
+
+4. (Cons b b0 = gv1 ->  bV_full_adder_carry Nil gv1 cin = gv3 ->  bV_full_adder_carry gv1 Nil cin = gv3)
+
+5. (bV_full_adder_carry (Cons b b0) Nil cin =  bV_full_adder_carry Nil (Cons b b0) cin)
+
+
+
+[MISSING]
+Test = BV_full_adder_nil_true_ok_by_480_BV_full_adder_carry_eq3
+[TIME] -1
+[COUNTS] 0
+[TARGET] Lemma BV_full_adder_carry_eq3 : forall (vh : bool) (vt : boolList) (b : bool), bV_full_adder_carry (Cons vh vt) Nil b = bV_full_adder_carry vt Nil (half_adder_carry vh b).
+
+FILE NOT FOUND
+
+
+
+[MISSING]
+Test = BV_full_adder_sum_sym_by_390_full_adder_sum_sym1
+[TIME] -1
+[COUNTS] 0
+[TARGET] Lemma full_adder_sum_sym1 : forall a b c : bool, full_adder_sum a b c = full_adder_sum b a c.
+
+FILE NOT FOUND
+
+
+
+[FAIL]
+Test = BV_full_adder_sum_sym_by_388_BV_full_adder_sum_eq4
+[TIME] 248.388
+[COUNTS] 4
+[TARGET] bV_full_adder_sum (Cons vh vt) (Cons wh wt) b = Cons (full_adder_sum vh wh b)   (bV_full_adder_sum vt wt (full_adder_carry vh wh b)).
+
+1. (bV_full_adder_sum gv1 (Cons b1 b2) cin =  bV_full_adder_sum (Cons b1 b2) gv1 cin)
+
+2. (bV_full_adder_sum gv1 gv2 cin = bV_full_adder_sum gv2 gv1 cin)
+
+3. (bV_full_adder_sum (Cons b b0) gv2 cin =  bV_full_adder_sum gv2 (Cons b b0) cin)
+
+4. (bV_full_adder_sum (Cons b b0) (Cons b1 b2) cin =  bV_full_adder_sum (Cons b1 b2) (Cons b b0) cin)
+
+
+
+[MISSING]
+Test = full_adder_carry_neg_by_182_full_adder_carry_false
+[TIME] -1
+[COUNTS] 0
+[TARGET] Lemma full_adder_carry_false : forall a : bool, full_adder_carry a false false = false.
+
+FILE NOT FOUND
+
+
+
+[FAIL]
+Test = full_adder_carry_sym2_by_147_half_adder_carry_false
+[TIME] 58.568
+[COUNTS] 45
+[TARGET] half_adder_carry a false = false.
+
+1. ((if half_adder_carry a false   then true   else half_adder_carry (half_adder_sum a false) c) =  (if half_adder_carry a c   then true   else half_adder_carry (half_adder_sum a c) false))
+
+2. (half_adder_carry c a =  (if half_adder_carry a false   then true   else half_adder_carry (half_adder_sum a false) c))
+
+3. (half_adder_carry a c =  (if half_adder_carry a false   then true   else half_adder_carry (half_adder_sum a false) c))
+
+4. (half_adder_carry c a =  (if half_adder_carry a c   then true   else half_adder_carry (half_adder_sum a c) false))
+
+5. (half_adder_carry a c =  (if half_adder_carry a c   then true   else half_adder_carry (half_adder_sum a c) false))
+
+
+
+[FAIL]
+Test = full_adder_carry_sym2_by_140_half_adder_sum_false
+[TIME] 61.232
+[COUNTS] 60
+[TARGET] half_adder_sum a false = a.
+
+1. ((if half_adder_carry a true   then true   else half_adder_carry (half_adder_sum a true) false) =  (if half_adder_carry a false   then true   else half_adder_carry (half_adder_sum a false) true))
+
+2. ((if half_adder_carry a true   then true   else half_adder_carry (half_adder_sum a true) false) = a)
+
+3. (half_adder_carry a a =  (if half_adder_carry a true   then true   else half_adder_carry (half_adder_sum a true) false))
+
+4. (full_adder_sum a a a =  (if half_adder_carry a true   then true   else half_adder_carry (half_adder_sum a true) false))
+
+5. (full_adder_carry a a a =  (if half_adder_carry a true   then true   else half_adder_carry (half_adder_sum a true) false))
+
+
+
+[FAIL]
+Test = BV_full_adder_sum_sym_by_386_BV_full_adder_sum_eq2
+[TIME] 62.404
+[COUNTS] 6
+[TARGET] bV_full_adder_sum Nil (Cons vh vt) b = Cons (half_adder_sum vh b)   (bV_full_adder_sum Nil vt (half_adder_carry vh b)).
+
+1. (bV_full_adder_sum gv1 Nil cin = bV_full_adder_sum Nil gv1 cin)
+
+2. (bV_full_adder_sum gv1 gv2 cin = bV_full_adder_sum gv2 gv1 cin)
+
+3. (bV_full_adder_sum (Cons b b0) gv2 cin =  bV_full_adder_sum gv2 (Cons b b0) cin)
+
+4. (bV_full_adder_sum (Cons b b0) Nil cin =  bV_full_adder_sum Nil (Cons b b0) cin)
+
+5. (bV_full_adder_sum_nil gv1 cin = bV_full_adder_sum Nil gv1 cin)
+
+
+
+[SUCCESS]
+Test = BV_full_adder_sum_sym_by_384_BV_full_adder_sum_eq3
+[TIME] 72.023
+[COUNTS] 44
+[TARGET] bV_full_adder_sum (Cons vh vt) Nil b = Cons (half_adder_sum vh b)   (bV_full_adder_sum vt Nil (half_adder_carry vh b)).
+
+1. (Nil = gv3 ->  Cons (half_adder_sum b cin)    (bV_full_adder_sum gv3 b0 (half_adder_carry b cin)) =  bV_full_adder_sum (Cons b b0) gv3 cin)
+
+2. (Cons (half_adder_sum b cin)    (bV_full_adder_sum Nil b0 (half_adder_carry b cin)) =  bV_full_adder_sum (Cons b b0) Nil cin)
+
+3. (bV_full_adder b0 b0 b = Cons b b0)
+
+4. (half_adder_carry cin b = half_adder_carry b cin)
+
+5. (half_adder_sum cin b = half_adder_sum b cin)
+
+
+
+[FAIL]
+Test = BV_full_adder_carry_sym_by_413_BV_full_adder_carry_eq3
+[TIME] 60.147
+[COUNTS] 24
+[TARGET] bV_full_adder_carry (Cons vh vt) Nil b = bV_full_adder_carry vt Nil (half_adder_carry vh b).
+
+1. (Nil = gv2 ->  bV_full_adder_carry (Cons b b0) gv2 cin =  bV_full_adder_carry gv2 b0 (half_adder_carry b cin))
+
+2. (bV_full_adder_carry (Cons b b0) Nil cin =  bV_full_adder_carry Nil b0 (half_adder_carry b cin))
+
+3. (half_adder_carry cin b = half_adder_carry b cin)
+
+4. (bV_full_adder b0 b0 b = Cons b b0)
+
+5. (half_adder_carry cin b = gv4 ->  bV_full_adder_carry (Cons b b0) Nil cin = bV_full_adder_carry Nil b0 gv4)
+
+
+
+[MISSING]
+Test = BV_full_adder_nil_ok_by_498_BV_full_adder_carry_v_nil_false
+[TIME] -1
+[COUNTS] 0
+[TARGET] Lemma BV_full_adder_carry_v_nil_false : forall v : boolList, bV_full_adder_carry v Nil false = false.
+
+FILE NOT FOUND
+
+
+
+[MISSING]
+Test = BV_to_nat_app2_by_472_BV_to_nat_app
+[TIME] -1
+[COUNTS] 0
+[TARGET] Lemma BV_to_nat_app : forall (l n : boolList) (ll : nat), (******************) length l = ll -> bV_to_nat (app l n) = bV_to_nat l + power2 ll * bV_to_nat n.
+
+FILE NOT FOUND
+
+
+
+[FAIL]
+Test = BV_full_adder_sum_v_nil_false_by_365_half_adder_sum_false
+[TIME] 133.494
+[COUNTS] 81
+[TARGET] half_adder_sum a false = a.
+
+1. (false = gv2 ->  Cons (half_adder_sum b gv2) (bV_full_adder_sum b0 Nil gv2) = Cons b b0)
+
+2. (gv3 = b0 -> Cons (half_adder_sum b false) gv3 = Cons b b0)
+
+3. (bV_full_adder_sum b0 gv4 false = b0 ->  Cons (half_adder_sum b false) (bV_full_adder_sum b0 gv4 false) = Cons b b0)
+
+4. (Cons (half_adder_sum b false) (bV_full_adder_sum b0 Nil false) = Cons b b0)
+
+5. (bV_full_adder b0 b0 b = Cons b b0)
+
+
+
+[FAIL]
+Test = BV_full_adder_sym_by_426_BV_full_adder_carry_sym
+[TIME] 350.565
+[COUNTS] 126
+[TARGET] bV_full_adder_carry v w cin = bV_full_adder_carry w v cin.
+
+1. (app gv1 (Cons (bV_full_adder_carry v w cin) Nil) =  app gv1 (Cons (bV_full_adder_carry w v cin) Nil))
+
+2. (app gv1 (Cons (bV_full_adder_carry v w cin) gv4) =  app gv1 (Cons (bV_full_adder_carry w v cin) gv4))
+
+3. (app (bV_full_adder_sum w v cin) (Cons (bV_full_adder_carry v w cin) gv4) =  app (bV_full_adder_sum w v cin) (Cons (bV_full_adder_carry w v cin) gv4))
+
+4. (app (bV_full_adder_sum w v cin) (Cons (bV_full_adder_carry v w cin) Nil) =  app (bV_full_adder_sum w v cin) (Cons (bV_full_adder_carry w v cin) Nil))
+
+5. (bV_full_adder v w cin =  app (bV_full_adder_sum w v cin) (Cons (bV_full_adder_carry v w cin) Nil))
+
+
+
+[MISSING]
+Test = BV_full_adder_nil_true_ok_by_484_BV_full_adder_sum_v_nil_false
+[TIME] -1
+[COUNTS] 0
+[TARGET] Lemma BV_full_adder_sum_v_nil_false : forall v : boolList, bV_full_adder_sum v Nil false = v.
+
+FILE NOT FOUND
+
+
+
+[SUCCESS]
+Test = BV_full_adder_carry_v_nil_false_by_374_half_adder_carry_false
+[TIME] 90.419
+[COUNTS] 74
+[TARGET]  half_adder_carry a false = false.
+
+1. (false = gv3 -> bV_full_adder_carry b0 Nil (half_adder_carry b gv3) = gv3)
+
+2. (bV_full_adder_carry b0 gv1 false = false ->  bV_full_adder_carry b0 gv1 (half_adder_carry b false) = false)
+
+3. (bV_full_adder_carry b0 Nil (half_adder_carry b false) = false)
+
+4. (false = half_adder_carry b false)
+
+5. (half_adder_sum b b = half_adder_carry b false)
+
+
+
+[FAIL]
+Test = BV_full_adder_sum_sym_by_387_BV_full_adder_sum_eq3
+[TIME] 72.588
+[COUNTS] 44
+[TARGET] bV_full_adder_sum (Cons vh vt) Nil b = Cons (half_adder_sum vh b)   (bV_full_adder_sum vt Nil (half_adder_carry vh b)).
+
+1. (Nil = gv2 ->  bV_full_adder_sum (Cons b b0) gv2 cin =  Cons (half_adder_sum b cin)    (bV_full_adder_sum gv2 b0 (half_adder_carry b cin)))
+
+2. (bV_full_adder_sum (Cons b b0) Nil cin =  Cons (half_adder_sum b cin)    (bV_full_adder_sum Nil b0 (half_adder_carry b cin)))
+
+3. (half_adder_sum cin b = half_adder_sum b cin)
+
+4. (half_adder_carry cin b = half_adder_carry b cin)
+
+5. (bV_full_adder b0 b0 b = Cons b b0)
+
+
+
+[SUCCESS]
+Test = full_adder_sum_sym2_by_112_half_adder_sum_false
+[TIME] 47.772
+[COUNTS] 24
+[TARGET] half_adder_sum a false = a.
+
+1. (gv0 = half_adder_sum gv0 false)
+
+2. (false = gv2 -> half_adder_sum a c = half_adder_sum (half_adder_sum a c) gv2)
+
+3. (half_adder_sum a c = gv0 -> false = gv2 -> gv0 = half_adder_sum gv0 gv2)
+
+4. (half_adder_sum a c = half_adder_sum (half_adder_sum a c) false)
+
+5. (half_adder_sum c a = half_adder_sum (half_adder_sum a c) false)
+
+
+
+[FAIL]
+Test = full_adder_carry_sym2_by_142_half_adder_carry_false
+[TIME] 61.601
+[COUNTS] 60
+[TARGET] half_adder_carry a false = false.
+
+1. ((if half_adder_carry a true then true else false) =  (if half_adder_carry a false then true else half_adder_carry a true))
+
+2. ((if half_adder_carry a true then true else false) = a)
+
+3. (half_adder_carry a a = (if half_adder_carry a true then true else false))
+
+4. (full_adder_sum a a a = (if half_adder_carry a true then true else false))
+
+5. (full_adder_carry a a a = (if half_adder_carry a true then true else false))
+
+
+
+[MISSING]
+Test = BV_full_adder_nil_true_ok_by_481_app_eq2
+[TIME] -1
+[COUNTS] 0
+[TARGET] Lemma app_eq2 : forall (x : bool) (l l' : boolList), app (Cons x l) l' = Cons x  (app l l').
+
+FILE NOT FOUND
+
+
+
+[MISSING]
+Test = full_adder_carry_neg_by_183_full_adder_carry_true
+[TIME] -1
+[COUNTS] 0
+[TARGET] Lemma full_adder_carry_true : forall a : bool, full_adder_carry a true true = true.
+
+FILE NOT FOUND
+
+
+
+[MISSING]
+Test = BV_full_adder_nil_ok_by_499_BV_to_nat_app2
+[TIME] -1
+[COUNTS] 0
+[TARGET] Lemma BV_to_nat_app2 : forall l n : boolList, (*******************) bV_to_nat (app l n) = bV_to_nat l + power2 (length l) * bV_to_nat n.
+
+FILE NOT FOUND
+
+
+
+[SUCCESS]
+Test = BV_full_adder_sum_sym_by_389_full_adder_carry_sym1
+[TIME] 289.777
+[COUNTS] 95
+[TARGET] full_adder_carry a b c = full_adder_carry b a c.
+
+1. (Cons (full_adder_sum b b1 cin)    (bV_full_adder_sum b2 b0 (full_adder_carry b b1 cin)) =  Cons (full_adder_sum b1 b cin)    (bV_full_adder_sum b2 b0 (full_adder_carry b1 b cin)))
+
+2. (full_adder_carry cin b1 b = full_adder_carry b b1 cin)
+
+3. (full_adder_carry cin b b1 = full_adder_carry b b1 cin)
+
+4. (full_adder_carry b1 cin b = full_adder_carry b b1 cin)
+
+5. (full_adder_carry b1 b cin = full_adder_carry b b1 cin)
+
+
+
+[MISSING]
+Test = BV_full_adder_nil_true_ok_by_486_BV_to_nat_app2
+[TIME] -1
+[COUNTS] 0
+[TARGET] Lemma BV_to_nat_app2 : forall l n : boolList, (*******************) bV_to_nat (app l n) = bV_to_nat l + power2 (length l) * bV_to_nat n.
+
+FILE NOT FOUND
+
+
+
+[FAIL]
+Test = full_adder_sum_sym2_by_111_half_adder_sum_false
+[TIME] 192.821
+[COUNTS] 187
+[TARGET] half_adder_sum a false = a.
+
+1. (half_adder_sum (half_adder_sum a gv2) c =  half_adder_sum (half_adder_sum a c) gv2)
+
+2. (half_adder_sum (half_adder_sum a false) c =  half_adder_sum (half_adder_sum a c) false)
+
+3. (full_adder_sum c gv2 a = half_adder_sum (half_adder_sum a c) gv2)
+
+4. (full_adder_sum c a gv2 = half_adder_sum (half_adder_sum a c) gv2)
+
+5. (full_adder_sum gv2 c a = half_adder_sum (half_adder_sum a c) gv2)
+
+
+
+[FAIL]
+Test = full_adder_carry_sym2_by_148_half_adder_sum_false
+[TIME] 73.54
+[COUNTS] 72
+[TARGET] half_adder_sum a false = a.
+
+1. (false = gv2 ->  half_adder_carry (half_adder_sum a gv2) c =  (if half_adder_carry a c   then true   else half_adder_carry (half_adder_sum a c) false))
+
+2. (half_adder_carry (half_adder_sum a false) c =  (if half_adder_carry a c   then true   else half_adder_carry (half_adder_sum a c) false))
+
+3. (half_adder_carry c a =  (if half_adder_carry a c   then true   else half_adder_carry (half_adder_sum a c) false))
+
+4. (half_adder_carry a c =  (if half_adder_carry a c   then true   else half_adder_carry (half_adder_sum a c) false))
+
+5. (half_adder_carry c a = half_adder_carry (half_adder_sum a false) c)
+
+
+
+[MISSING]
+Test = BV_full_adder_nil_true_ok_by_479_BV_full_adder_sum_eq3
+[TIME] -1
+[COUNTS] 0
+[TARGET] Lemma BV_full_adder_sum_eq3 : forall (vh : bool) (vt : boolList) (b : bool), bV_full_adder_sum (Cons vh vt) Nil b = Cons (half_adder_sum vh b)   (bV_full_adder_sum vt Nil (half_adder_carry vh b)).
+
+FILE NOT FOUND
+
+
+
+[FAIL]
+Test = BV_full_adder_carry_sym_by_410_BV_full_adder_carry_eq3
+[TIME] 59.995
+[COUNTS] 24
+[TARGET] bV_full_adder_carry (Cons vh vt) Nil b = bV_full_adder_carry vt Nil (half_adder_carry vh b).
+
+1. (Nil = gv1 ->  bV_full_adder_carry gv1 b0 (half_adder_carry b cin) =  bV_full_adder_carry (Cons b b0) gv1 cin)
+
+2. (bV_full_adder_carry Nil b0 (half_adder_carry b cin) =  bV_full_adder_carry (Cons b b0) Nil cin)
+
+3. (half_adder_carry cin b = half_adder_carry b cin)
+
+4. (bV_full_adder b0 b0 b = Cons b b0)
+
+5. (half_adder_carry cin b = gv2 ->  bV_full_adder_carry Nil b0 gv2 = bV_full_adder_carry (Cons b b0) Nil cin)
+
+
+
+[SUCCESS]
+Test = BV_full_adder_sym_by_425_BV_full_adder_sum_sym
+[TIME] 317.34
+[COUNTS] 90
+[TARGET] bV_full_adder_sum v w cin = bV_full_adder_sum w v cin.
+
+1. (app (bV_full_adder_sum v w cin) (Cons (bV_full_adder_carry v w cin) gv4) =  app (bV_full_adder_sum w v cin) (Cons (bV_full_adder_carry w v cin) gv4))
+
+2. (app (bV_full_adder_sum v w cin) (Cons (bV_full_adder_carry v w cin) Nil) =  app (bV_full_adder_sum w v cin) (Cons (bV_full_adder_carry w v cin) Nil))
+
+3. (bV_full_adder_sum v w cin = bV_full_adder_sum w v cin)
+
+4. (bV_full_adder_sum w v cin = bV_full_adder_sum v w cin)
+
+5. (bV_full_adder_carry v w cin = bV_full_adder_carry w v cin)
+
+
+
+[MISSING]
+Test = BV_full_adder_nil_ok_by_497_BV_full_adder_sum_v_nil_false
+[TIME] -1
+[COUNTS] 0
+[TARGET] Lemma BV_full_adder_sum_v_nil_false : forall v : boolList, bV_full_adder_sum v Nil false = v.
+
+FILE NOT FOUND
+
+
+
+[MISSING]
+Test = full_adder_carry_neg_by_181_full_adder_carry_true
+[TIME] -1
+[COUNTS] 0
+[TARGET] Lemma full_adder_carry_true : forall a : bool, full_adder_carry a true true = true.
+
+FILE NOT FOUND
+
+
+
+[MISSING]
+Test = full_adder_carry_neg_by_184_full_adder_carry_sym1
+[TIME] -1
+[COUNTS] 0
+[TARGET] Lemma full_adder_carry_sym1 : forall a b c : bool, full_adder_carry a b c = full_adder_carry b a c.
+
+FILE NOT FOUND
+
+
+
+[MISSING]
+Test = full_adder_carry_neg_by_185_full_adder_carry_false
+[TIME] -1
+[COUNTS] 0
+[TARGET] Lemma full_adder_carry_false : forall a : bool, full_adder_carry a false false = false.
+
+FILE NOT FOUND
+
+
+
+[FAIL]
+Test = BV_full_adder_sum_sym_by_383_BV_full_adder_sum_eq2
+[TIME] 64.05
+[COUNTS] 6
+[TARGET] bV_full_adder_sum Nil (Cons vh vt) b = Cons (half_adder_sum vh b)   (bV_full_adder_sum Nil vt (half_adder_carry vh b)).
+
+1. (bV_full_adder_sum Nil gv2 cin = bV_full_adder_sum gv2 Nil cin)
+
+2. (bV_full_adder_sum gv1 gv2 cin = bV_full_adder_sum gv2 gv1 cin)
+
+3. (bV_full_adder_sum gv1 (Cons b b0) cin =  bV_full_adder_sum (Cons b b0) gv1 cin)
+
+4. (bV_full_adder_sum Nil (Cons b b0) cin =  bV_full_adder_sum (Cons b b0) Nil cin)
+
+5. (bV_full_adder_sum_nil gv2 cin = bV_full_adder_sum Nil gv2 cin)
+
+
+
+[FAIL]
+Test = full_adder_sum_sym2_by_107_half_adder_sum_false
+[TIME] 129.151
+[COUNTS] 174
+[TARGET] half_adder_sum a false = a.
+
+1. (half_adder_sum (half_adder_sum a gv2) false =  half_adder_sum (half_adder_sum a false) gv2)
+
+2. (half_adder_sum (half_adder_sum a gv2) gv3 =  half_adder_sum (half_adder_sum a gv3) gv2)
+
+3. (half_adder_sum (half_adder_sum a true) gv3 =  half_adder_sum (half_adder_sum a gv3) true)
+
+4. (half_adder_sum (half_adder_sum a true) false =  half_adder_sum (half_adder_sum a false) true)
+
+5. (half_adder_sum gv2 a = half_adder_sum (half_adder_sum a false) gv2)
+
+
+
+[SUCCESS]
+Test = BV_full_adder_sum_v_nil_false_by_364_half_adder_carry_false
+[TIME] 137.179
+[COUNTS] 90
+[TARGET] half_adder_carry a false = false.
+
+1. (false = gv2 ->  Cons (half_adder_sum b gv2)    (bV_full_adder_sum b0 Nil (half_adder_carry b gv2)) =   Cons b b0)
+
+2. (bV_full_adder_sum b0 gv4 false = b0 ->  Cons (half_adder_sum b false)    (bV_full_adder_sum b0 gv4 (half_adder_carry b false)) =   Cons b b0)
+
+3. (Cons (half_adder_sum b false)    (bV_full_adder_sum b0 Nil (half_adder_carry b false)) =   Cons b b0)
+
+4. (half_adder_sum b false = b)
+
+5. (half_adder_carry b b = half_adder_sum b false)
+
+
+
+[FAIL]
+Test = BV_full_adder_carry_sym_by_416_full_adder_carry_sym1
+[TIME] 248.376
+[COUNTS] 49
+[TARGET]  full_adder_carry a b c = full_adder_carry b a c.
+
+1. (bV_full_adder_carry b2 b0 (full_adder_carry b b1 cin) =  bV_full_adder_carry b2 b0 (full_adder_carry b1 b cin))
+
+2. (full_adder_carry cin b1 b = full_adder_carry b1 b cin)
+
+3. (full_adder_carry cin b b1 = full_adder_carry b1 b cin)
+
+4. (full_adder_carry b1 cin b = full_adder_carry b1 b cin)
+
+5. (full_adder_carry b cin b1 = full_adder_carry b1 b cin)
+
+
+
+[FAIL]
+Test = BV_full_adder_carry_sym_by_415_BV_full_adder_carry_eq4
+[TIME] 484.842
+[COUNTS] 5
+[TARGET] bV_full_adder_carry (Cons vh vt) (Cons wh wt) b = bV_full_adder_carry vt wt (full_adder_carry vh wh b).
+
+1. (bV_full_adder_carry gv1 (Cons b1 b2) cin =  bV_full_adder_carry (Cons b1 b2) gv1 cin)
+
+2. (bV_full_adder_carry gv1 gv2 cin = bV_full_adder_carry gv2 gv1 cin)
+
+3. (bV_full_adder_carry (Cons b b0) gv2 cin =  bV_full_adder_carry gv2 (Cons b b0) cin)
+
+4. (Cons b b0 = gv1 ->  bV_full_adder_carry (Cons b1 b2) gv1 cin = gv3 ->  bV_full_adder_carry gv1 (Cons b1 b2) cin = gv3)
+
+5. (bV_full_adder_carry (Cons b b0) (Cons b1 b2) cin =  bV_full_adder_carry (Cons b1 b2) (Cons b b0) cin)
+
+
+
+[MISSING]
+Test = BV_full_adder_nil_true_ok_by_485_BV_full_adder_carry_v_nil_false
+[TIME] -1
+[COUNTS] 0
+[TARGET] Lemma BV_full_adder_carry_v_nil_false : forall v : boolList, bV_full_adder_carry v Nil false = false.
+
+FILE NOT FOUND
+
+
+
+[MISSING]
+Test = full_adder_carry_neg_by_180_full_adder_carry_sym1
+[TIME] -1
+[COUNTS] 0
+[TARGET] Lemma full_adder_carry_sym1 : forall a b c : bool, full_adder_carry a b c = full_adder_carry b a c.
+
+FILE NOT FOUND
+
+
+
+[FAIL]
+Test = BV_full_adder_sum_v_nil_false_by_363_BV_full_adder_sum_eq3
+[TIME] 50.552
+[COUNTS] 8
+[TARGET] bV_full_adder_sum (Cons vh vt) Nil b = Cons (half_adder_sum vh b)   (bV_full_adder_sum vt Nil (half_adder_carry vh b)).
+
+1. (bV_full_adder_sum gv1 Nil false = gv1)
+
+2. (false = gv3 -> bV_full_adder_sum (Cons b b0) Nil gv3 = Cons b b0)
+
+3. (bV_full_adder_sum b0 gv2 false = b0 ->  bV_full_adder_sum (Cons b b0) gv2 false = Cons b b0)
+
+4. (Cons b b0 = gv1 -> false = gv3 -> bV_full_adder_sum gv1 Nil gv3 = gv1)
+
+5. (Cons b b0 = gv1 -> Nil = gv2 -> bV_full_adder_sum gv1 gv2 false = gv1)
+
+
+
+[FAIL]
+Test = BV_full_adder_carry_v_nil_false_by_373_BV_full_adder_carry_eq3
+[TIME] 70.271
+[COUNTS] 30
+[TARGET] bV_full_adder_carry (Cons vh vt) Nil b = bV_full_adder_carry vt Nil (half_adder_carry vh b).
+
+1. (bV_full_adder_carry gv1 Nil false = false)
+
+2. (false = gv3 -> bV_full_adder_carry (Cons b b0) Nil gv3 = gv3)
+
+3. (Nil = gv2 -> bV_full_adder_carry (Cons b b0) gv2 false = false)
+
+4. (Cons b b0 = gv1 -> false = gv3 -> bV_full_adder_carry gv1 Nil gv3 = gv3)
+
+5. (Cons b b0 = gv1 -> Nil = gv2 -> bV_full_adder_carry gv1 gv2 false = false)
+
+
+
+[MISSING]
+Test = BV_full_adder_nil_true_ok_by_482_half_adder_carry_true
+[TIME] -1
+[COUNTS] 0
+[TARGET] Lemma half_adder_carry_true : forall a : bool, half_adder_carry a true = a.
+
+FILE NOT FOUND
+
+
+
+[FAIL]
+Test = BV_full_adder_carry_sym_by_409_BV_full_adder_carry_eq2
+[TIME] 114.45
+[COUNTS] 36
+[TARGET] bV_full_adder_carry Nil (Cons vh vt) b = bV_full_adder_carry Nil vt (half_adder_carry vh b).
+
+1. (bV_full_adder_carry gv1 (Cons b b0) cin =  bV_full_adder_carry (Cons b b0) gv1 cin)
+
+2. (bV_full_adder_carry gv1 gv2 cin = bV_full_adder_carry gv2 gv1 cin)
+
+3. (bV_full_adder_carry Nil gv2 cin = bV_full_adder_carry gv2 Nil cin)
+
+4. (bV_full_adder_carry Nil (Cons b b0) cin =  bV_full_adder_carry (Cons b b0) Nil cin)
+
+5. (bV_full_adder_carry_nil gv2 cin = bV_full_adder_carry Nil gv2 cin)
+
+
+
+[MISSING]
+Test = BV_full_adder_nil_ok_by_496_BV_full_adder_nil_true_ok
+[TIME] -1
+[COUNTS] 0
+[TARGET] Lemma BV_full_adder_nil_true_ok : forall v : boolList, bV_to_nat (bV_full_adder v Nil true) = S (bV_to_nat v).
+
+FILE NOT FOUND
+
+
+
+[FAIL]
+Test = full_adder_carry_sym2_by_149_half_adder_carry_false
+[TIME] 54.084
+[COUNTS] 41
+[TARGET] half_adder_carry a false = false.
+
+1. (half_adder_carry a c =  (if half_adder_carry a c   then true   else half_adder_carry (half_adder_sum a c) false))
+
+2. (half_adder_carry c a = half_adder_carry a c)
+
+3. (half_adder_carry c a =  (if half_adder_carry a c   then true   else half_adder_carry (half_adder_sum a c) false))
+
+4. (half_adder_carry c a = gv0 ->  gv0 =  (if half_adder_carry a c   then true   else half_adder_carry (half_adder_sum a c) false))
+
+5. (half_adder_carry c a = gv1 -> half_adder_carry a c = gv1)
+
+
+
+[SUCCESS]
+Test = full_adder_sum_sym2_by_108_half_adder_sum_false
+[TIME] 90.074
+[COUNTS] 104
+[TARGET] half_adder_sum a false = a.
+
+1. (half_adder_sum a gv1 = half_adder_sum (half_adder_sum a false) gv1)
+
+2. (false = gv4 ->  half_adder_sum a true = half_adder_sum (half_adder_sum a gv4) true)
+
+3. (true = gv1 ->  false = gv4 ->  half_adder_sum a gv1 = half_adder_sum (half_adder_sum a gv4) gv1)
+
+4. (half_adder_sum a true = half_adder_sum (half_adder_sum a false) true)
+
+5. (half_adder_sum a false = a)
+
+
+
+[FAIL]
+Test = full_adder_carry_sym2_by_141_half_adder_carry_false
+[TIME] 61.664
+[COUNTS] 60
+[TARGET] half_adder_carry a false = false.
+
+1. ((if half_adder_carry a true   then true   else half_adder_carry (half_adder_sum a true) false) =  (if half_adder_carry a false then true else half_adder_carry a true))
+
+2. ((if half_adder_carry a true   then true   else half_adder_carry (half_adder_sum a true) false) = a)
+
+3. (half_adder_carry a a =  (if half_adder_carry a true   then true   else half_adder_carry (half_adder_sum a true) false))
+
+4. (full_adder_sum a a a =  (if half_adder_carry a true   then true   else half_adder_carry (half_adder_sum a true) false))
+
+5. (full_adder_carry a a a =  (if half_adder_carry a true   then true   else half_adder_carry (half_adder_sum a true) false))
+
+
+
+

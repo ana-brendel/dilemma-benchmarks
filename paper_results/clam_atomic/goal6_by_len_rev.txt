@@ -1,0 +1,233 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+
+----------------------------------
+Goal: (len (rev (append x y)) = plus (len x) (len y))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 1.931 seconds
+
+gv1 : Lst = (rev (append x y))
+gv0 : Nat = (len (rev (append x y)))
+gv5 : Nat = (len y)
+gv3 : Nat = (plus (len x) (len y))
+gv2 : Lst = (append x y)
+gv4 : Nat = (len x)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 34.649 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (len (rev (append x y)) = plus (len x) (len y))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (len x = gv4)
+
+----------------------------------
+Goal: (len (rev (append x y)) = plus gv4 (len y))
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (append x y = gv2)
+
+----------------------------------
+Goal: (len (rev gv2) = plus (len x) (len y))
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (plus (len x) (len y) = gv3)
+
+----------------------------------
+Goal: (len (rev (append x y)) = gv3)
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (len y = gv5)
+
+----------------------------------
+Goal: (len (rev (append x y)) = plus (len x) gv5)
+Case: Invalid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (rev (append x y) = gv1)
+
+----------------------------------
+Goal: (len gv1 = plus (len x) (len y))
+Case: Invalid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (len (rev (append x y)) = gv0)
+
+----------------------------------
+Goal: (gv0 = plus (len x) (len y))
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 34.819 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+plus : (Nat -> Nat -> Nat)
+append : (Lst -> Lst -> Lst)
+len : (Lst -> Nat)
+rev : (Lst -> Lst)
+succ : (Nat -> Nat)
+zero : Nat
+nil : Lst
+cons : (Nat -> Lst -> Lst)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 34.995 seconds
+
+
+Label: 0 (0)
+(gv4 = gv4), (y = y), (y = x), (x = y), (x = x), (gv4 <> gv4), (y <> y), (y <> x), (x <> y), (x <> x)
+(succ gv4 = gv4), (succ gv4 = len y), (succ gv4 = len x), (succ gv4 = plus gv4 gv4), (len y = gv4), (len x = gv4), (plus gv4 gv4 = gv4), (plus gv4 gv4 = len y), (plus gv4 gv4 = len x), (zero = succ gv4)
+(zero = len y), (zero = len x), (zero = plus gv4 gv4), (cons gv4 y = y), (cons gv4 y = x), (cons gv4 y = rev y), (cons gv4 y = rev x), (cons gv4 y = append y y), (cons gv4 y = append y x), (cons gv4 y = append x y)
+(cons gv4 y = append x x), (cons gv4 x = y), (cons gv4 x = x), (cons gv4 x = rev y), (cons gv4 x = rev x), (cons gv4 x = append y y), (cons gv4 x = append y x), (cons gv4 x = append x y), (cons gv4 x = append x x), (rev y = y)
+(rev y = x), (rev y = append y y), (rev y = append y x), (rev y = append x y), (rev y = append x x), (rev x = y), (rev x = x), (rev x = append y y), (rev x = append y x), (rev x = append x y)
+(rev x = append x x), (append y y = y), (append y y = x), (append y x = y), (append y x = x), (append x y = y), (append x y = x), (append x x = y), (append x x = x), (nil = cons gv4 y)
+(nil = cons gv4 x), (nil = rev y), (nil = rev x), (nil = append y y), (nil = append y x), (nil = append x y), (nil = append x x), (None = Some y), (None = Some x), (None = Some gv4)
+
+Label: 1 (1)
+(y = y), (y = x), (y = gv2), (x = y), (x = x), (x = gv2), (gv2 = y), (gv2 = x), (gv2 = gv2), (y <> y)
+(y <> x), (y <> gv2), (x <> y), (x <> x), (x <> gv2), (gv2 <> y), (gv2 <> x), (gv2 <> gv2), (zero = len y), (zero = len x)
+(zero = len gv2), (rev y = y), (rev y = x), (rev y = gv2), (rev y = append y y), (rev y = append y x), (rev y = append y gv2), (rev y = append x y), (rev y = append x x), (rev y = append x gv2)
+(rev y = append gv2 y), (rev y = append gv2 x), (rev y = append gv2 gv2), (rev x = y), (rev x = x), (rev x = gv2), (rev x = append y y), (rev x = append y x), (rev x = append y gv2), (rev x = append x y)
+(rev x = append x x), (rev x = append x gv2), (rev x = append gv2 y), (rev x = append gv2 x), (rev x = append gv2 gv2), (rev gv2 = y), (rev gv2 = x), (rev gv2 = gv2), (rev gv2 = append y y), (rev gv2 = append y x)
+(rev gv2 = append y gv2), (rev gv2 = append x y), (rev gv2 = append x x), (rev gv2 = append x gv2), (rev gv2 = append gv2 y), (rev gv2 = append gv2 x), (rev gv2 = append gv2 gv2), (append y y = y), (append y y = x), (append y y = gv2)
+(append y x = y), (append y x = x), (append y x = gv2), (append y gv2 = y), (append y gv2 = x), (append y gv2 = gv2), (append x y = y), (append x y = x), (append x y = gv2), (append x x = y)
+(append x x = x), (append x x = gv2), (append x gv2 = y), (append x gv2 = x), (append x gv2 = gv2), (append gv2 y = y), (append gv2 y = x), (append gv2 y = gv2), (append gv2 x = y), (append gv2 x = x)
+(append gv2 x = gv2), (append gv2 gv2 = y), (append gv2 gv2 = x), (append gv2 gv2 = gv2), (nil = rev y), (nil = rev x), (nil = rev gv2), (nil = append y y), (nil = append y x), (nil = append y gv2)
+(nil = append x y), (nil = append x x), (nil = append x gv2), (nil = append gv2 y), (nil = append gv2 x), (nil = append gv2 gv2), (None = Some y), (None = Some x), (None = Some gv2)
+
+Label: 2 (2)
+(gv3 = gv3), (y = y), (y = x), (x = y), (x = x), (gv3 <> gv3), (y <> y), (y <> x), (x <> y), (x <> x)
+(succ gv3 = gv3), (succ gv3 = len y), (succ gv3 = len x), (succ gv3 = plus gv3 gv3), (len y = gv3), (len x = gv3), (plus gv3 gv3 = gv3), (plus gv3 gv3 = len y), (plus gv3 gv3 = len x), (zero = succ gv3)
+(zero = len y), (zero = len x), (zero = plus gv3 gv3), (cons gv3 y = y), (cons gv3 y = x), (cons gv3 y = rev y), (cons gv3 y = rev x), (cons gv3 y = append y y), (cons gv3 y = append y x), (cons gv3 y = append x y)
+(cons gv3 y = append x x), (cons gv3 x = y), (cons gv3 x = x), (cons gv3 x = rev y), (cons gv3 x = rev x), (cons gv3 x = append y y), (cons gv3 x = append y x), (cons gv3 x = append x y), (cons gv3 x = append x x), (rev y = y)
+(rev y = x), (rev y = append y y), (rev y = append y x), (rev y = append x y), (rev y = append x x), (rev x = y), (rev x = x), (rev x = append y y), (rev x = append y x), (rev x = append x y)
+(rev x = append x x), (append y y = y), (append y y = x), (append y x = y), (append y x = x), (append x y = y), (append x y = x), (append x x = y), (append x x = x), (nil = cons gv3 y)
+(nil = cons gv3 x), (nil = rev y), (nil = rev x), (nil = append y y), (nil = append y x), (nil = append x y), (nil = append x x), (None = Some y), (None = Some x), (None = Some gv3)
+
+Label: 3 (3)
+(gv5 = gv5), (y = y), (y = x), (x = y), (x = x), (gv5 <> gv5), (y <> y), (y <> x), (x <> y), (x <> x)
+(succ gv5 = gv5), (succ gv5 = len y), (succ gv5 = len x), (succ gv5 = plus gv5 gv5), (len y = gv5), (len x = gv5), (plus gv5 gv5 = gv5), (plus gv5 gv5 = len y), (plus gv5 gv5 = len x), (zero = succ gv5)
+(zero = len y), (zero = len x), (zero = plus gv5 gv5), (cons gv5 y = y), (cons gv5 y = x), (cons gv5 y = rev y), (cons gv5 y = rev x), (cons gv5 y = append y y), (cons gv5 y = append y x), (cons gv5 y = append x y)
+(cons gv5 y = append x x), (cons gv5 x = y), (cons gv5 x = x), (cons gv5 x = rev y), (cons gv5 x = rev x), (cons gv5 x = append y y), (cons gv5 x = append y x), (cons gv5 x = append x y), (cons gv5 x = append x x), (rev y = y)
+(rev y = x), (rev y = append y y), (rev y = append y x), (rev y = append x y), (rev y = append x x), (rev x = y), (rev x = x), (rev x = append y y), (rev x = append y x), (rev x = append x y)
+(rev x = append x x), (append y y = y), (append y y = x), (append y x = y), (append y x = x), (append x y = y), (append x y = x), (append x x = y), (append x x = x), (nil = cons gv5 y)
+(nil = cons gv5 x), (nil = rev y), (nil = rev x), (nil = append y y), (nil = append y x), (nil = append x y), (nil = append x x), (None = Some y), (None = Some x), (None = Some gv5)
+
+Label: 4 (4)
+(y = y), (y = x), (y = gv1), (x = y), (x = x), (x = gv1), (gv1 = y), (gv1 = x), (gv1 = gv1), (y <> y)
+(y <> x), (y <> gv1), (x <> y), (x <> x), (x <> gv1), (gv1 <> y), (gv1 <> x), (gv1 <> gv1), (zero = len y), (zero = len x)
+(zero = len gv1), (rev y = y), (rev y = x), (rev y = gv1), (rev y = append y y), (rev y = append y x), (rev y = append y gv1), (rev y = append x y), (rev y = append x x), (rev y = append x gv1)
+(rev y = append gv1 y), (rev y = append gv1 x), (rev y = append gv1 gv1), (rev x = y), (rev x = x), (rev x = gv1), (rev x = append y y), (rev x = append y x), (rev x = append y gv1), (rev x = append x y)
+(rev x = append x x), (rev x = append x gv1), (rev x = append gv1 y), (rev x = append gv1 x), (rev x = append gv1 gv1), (rev gv1 = y), (rev gv1 = x), (rev gv1 = gv1), (rev gv1 = append y y), (rev gv1 = append y x)
+(rev gv1 = append y gv1), (rev gv1 = append x y), (rev gv1 = append x x), (rev gv1 = append x gv1), (rev gv1 = append gv1 y), (rev gv1 = append gv1 x), (rev gv1 = append gv1 gv1), (append y y = y), (append y y = x), (append y y = gv1)
+(append y x = y), (append y x = x), (append y x = gv1), (append y gv1 = y), (append y gv1 = x), (append y gv1 = gv1), (append x y = y), (append x y = x), (append x y = gv1), (append x x = y)
+(append x x = x), (append x x = gv1), (append x gv1 = y), (append x gv1 = x), (append x gv1 = gv1), (append gv1 y = y), (append gv1 y = x), (append gv1 y = gv1), (append gv1 x = y), (append gv1 x = x)
+(append gv1 x = gv1), (append gv1 gv1 = y), (append gv1 gv1 = x), (append gv1 gv1 = gv1), (nil = rev y), (nil = rev x), (nil = rev gv1), (nil = append y y), (nil = append y x), (nil = append y gv1)
+(nil = append x y), (nil = append x x), (nil = append x gv1), (nil = append gv1 y), (nil = append gv1 x), (nil = append gv1 gv1), (None = Some y), (None = Some x), (None = Some gv1)
+
+Label: 5 (5)
+(y = y), (y = x), (x = y), (x = x), (gv0 = gv0), (y <> y), (y <> x), (x <> y), (x <> x), (gv0 <> gv0)
+(succ gv0 = gv0), (succ gv0 = len y), (succ gv0 = len x), (succ gv0 = plus gv0 gv0), (len y = gv0), (len x = gv0), (plus gv0 gv0 = gv0), (plus gv0 gv0 = len y), (plus gv0 gv0 = len x), (zero = succ gv0)
+(zero = len y), (zero = len x), (zero = plus gv0 gv0), (cons gv0 y = y), (cons gv0 y = x), (cons gv0 y = rev y), (cons gv0 y = rev x), (cons gv0 y = append y y), (cons gv0 y = append y x), (cons gv0 y = append x y)
+(cons gv0 y = append x x), (cons gv0 x = y), (cons gv0 x = x), (cons gv0 x = rev y), (cons gv0 x = rev x), (cons gv0 x = append y y), (cons gv0 x = append y x), (cons gv0 x = append x y), (cons gv0 x = append x x), (rev y = y)
+(rev y = x), (rev y = append y y), (rev y = append y x), (rev y = append x y), (rev y = append x x), (rev x = y), (rev x = x), (rev x = append y y), (rev x = append y x), (rev x = append x y)
+(rev x = append x x), (append y y = y), (append y y = x), (append y x = y), (append y x = x), (append x y = y), (append x y = x), (append x x = y), (append x x = x), (nil = cons gv0 y)
+(nil = cons gv0 x), (nil = rev y), (nil = rev x), (nil = append y y), (nil = append y x), (nil = append x y), (nil = append x x), (None = Some y), (None = Some x), (None = Some gv0)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 42.608 seconds
+
+
+Label: 0 (0)
+(len x = gv4)
+
+Label: 1 (1)
+(append x y = gv2)
+
+Label: 2 (2)
+
+Label: 3 (3)
+(len y = gv5)
+
+Label: 4 (4)
+(rev gv1 = append x y)
+
+Label: 5 (5)
+
+
+
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 54.595 seconds
+
+Number of Result Pairs Returned: 2
+
+1. (len (rev (append x y)) = plus (len x) (len y))
+
+2. (rev gv1 = append x y -> len gv1 = plus (len x) (len y))

@@ -1,0 +1,302 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (eqb x n = false)
+ -- (count x (sort y) = count x y)
+
+----------------------------------
+Goal: (count x (insort n (sort y)) = count x y)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3.132 seconds
+
+gv3 : Nat = (count x y)
+gv2 : Lst = (sort y)
+gv0 : Nat = (count x (insort n (sort y)))
+gv1 : Lst = (insort n (sort y))
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 57.317 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (eqb x n = false)
+
+----------------------------------
+Goal: (count x (insort n (sort y)) = count x y)
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (eqb x n = false)
+ -- (insort n (sort y) = gv1)
+
+----------------------------------
+Goal: (count x gv1 = count x y)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (eqb x n = false)
+ -- (count x (insort n (sort y)) = gv0)
+
+----------------------------------
+Goal: (gv0 = count x y)
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (eqb x n = false)
+ -- (count x gv2 = count x y)
+
+----------------------------------
+Goal: (count x (insort n gv2) = count x y)
+Case: Valid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (eqb x n = false)
+ -- (insort n gv2 = gv1)
+
+----------------------------------
+Goal: (count x gv1 = count x y)
+Case: Not Stable
+
+Label: Generalization #5
+Assumptions: 
+ -- (eqb x n = false)
+ -- (count x (insort n gv2) = gv0)
+
+----------------------------------
+Goal: (gv0 = count x y)
+Case: Not Stable
+
+Label: Generalization #6
+Assumptions: 
+ -- (eqb x n = false)
+ -- (count x gv2 = gv3)
+
+----------------------------------
+Goal: (count x (insort n gv2) = gv3)
+Case: Valid and Generalized
+
+Label: Generalization #8
+Assumptions: 
+ -- (eqb x n = false)
+ -- (count x (sort y) = gv3)
+
+----------------------------------
+Goal: (count x (insort n (sort y)) = gv3)
+Case: Valid and Generalized
+
+Label: Generalization #9
+Assumptions: 
+ -- (eqb x n = false)
+ -- (insort n (sort y) = gv1)
+ -- (count x y = gv3)
+
+----------------------------------
+Goal: (count x gv1 = gv3)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 57.512 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+less : (Nat -> Nat -> bool)
+eqb : (Nat -> Nat -> bool)
+count : (Nat -> Lst -> Nat)
+insort : (Nat -> Lst -> Lst)
+sort : (Lst -> Lst)
+succ : (Nat -> Nat)
+zero : Nat
+cons : (Nat -> Lst -> Lst)
+nil : Lst
+
+Label: 0 (0)
+Abducted Assumption: (eqb x n = false)
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 57.688 seconds
+
+
+Label: 0 (0)
+(y = y), (n = n), (n = x), (x = n), (x = x), (false = eqb n n), (false = eqb n x), (false = eqb x n), (false = eqb x x), (false = less n n)
+(false = less n x), (false = less x n), (false = less x x), (true = eqb n n), (true = eqb n x), (true = eqb x n), (true = eqb x x), (true = less n n), (true = less n x), (true = less x n)
+(true = less x x), (y <> y), (n <> n), (n <> x), (x <> n), (x <> x), (less n n = eqb n n), (less n n = eqb n x), (less n n = eqb x n), (less n n = eqb x x)
+(less n x = eqb n n), (less n x = eqb n x), (less n x = eqb x n), (less n x = eqb x x), (less x n = eqb n n), (less x n = eqb n x), (less x n = eqb x n), (less x n = eqb x x), (less x x = eqb n n), (less x x = eqb n x)
+(less x x = eqb x n), (less x x = eqb x x), (None = Some y), (None = Some n), (None = Some x), (succ n = n), (succ n = x), (succ n = count n y), (succ n = count x y), (succ x = n)
+(succ x = x), (succ x = count n y), (succ x = count x y), (count n y = n), (count n y = x), (count x y = n), (count x y = x), (zero = succ n), (zero = succ x), (zero = count n y)
+(zero = count x y), (cons n y = y), (cons n y = sort y), (cons n y = insort n y), (cons n y = insort x y), (cons x y = y), (cons x y = sort y), (cons x y = insort n y), (cons x y = insort x y), (sort y = y)
+(sort y = insort n y), (sort y = insort x y), (insort n y = y), (insort x y = y), (nil = cons n y), (nil = cons x y), (nil = sort y), (nil = insort n y), (nil = insort x y)
+
+Label: 1 (1)
+(y = y), (y = gv1), (gv1 = y), (gv1 = gv1), (n = n), (n = x), (x = n), (x = x), (false = eqb n n), (false = eqb n x)
+(false = eqb x n), (false = eqb x x), (false = less n n), (false = less n x), (false = less x n), (false = less x x), (true = eqb n n), (true = eqb n x), (true = eqb x n), (true = eqb x x)
+(true = less n n), (true = less n x), (true = less x n), (true = less x x), (y <> y), (y <> gv1), (gv1 <> y), (gv1 <> gv1), (n <> n), (n <> x)
+(x <> n), (x <> x), (less n n = eqb n n), (less n n = eqb n x), (less n n = eqb x n), (less n n = eqb x x), (less n x = eqb n n), (less n x = eqb n x), (less n x = eqb x n), (less n x = eqb x x)
+(less x n = eqb n n), (less x n = eqb n x), (less x n = eqb x n), (less x n = eqb x x), (less x x = eqb n n), (less x x = eqb n x), (less x x = eqb x n), (less x x = eqb x x), (None = Some y), (None = Some gv1)
+(None = Some n), (None = Some x), (succ n = n), (succ n = x), (succ n = count n y), (succ n = count n gv1), (succ n = count x y), (succ n = count x gv1), (succ x = n), (succ x = x)
+(succ x = count n y), (succ x = count n gv1), (succ x = count x y), (succ x = count x gv1), (count n y = n), (count n y = x), (count n gv1 = n), (count n gv1 = x), (count x y = n), (count x y = x)
+(count x gv1 = n), (count x gv1 = x), (zero = succ n), (zero = succ x), (zero = count n y), (zero = count n gv1), (zero = count x y), (zero = count x gv1), (cons n y = y), (cons n y = gv1)
+(cons n y = sort y), (cons n y = sort gv1), (cons n y = insort n y), (cons n y = insort n gv1), (cons n y = insort x y), (cons n y = insort x gv1), (cons n gv1 = y), (cons n gv1 = gv1), (cons n gv1 = sort y), (cons n gv1 = sort gv1)
+(cons n gv1 = insort n y), (cons n gv1 = insort n gv1), (cons n gv1 = insort x y), (cons n gv1 = insort x gv1), (cons x y = y), (cons x y = gv1), (cons x y = sort y), (cons x y = sort gv1), (cons x y = insort n y), (cons x y = insort n gv1)
+(cons x y = insort x y), (cons x y = insort x gv1), (cons x gv1 = y), (cons x gv1 = gv1), (cons x gv1 = sort y), (cons x gv1 = sort gv1), (cons x gv1 = insort n y), (cons x gv1 = insort n gv1), (cons x gv1 = insort x y), (cons x gv1 = insort x gv1)
+(sort y = y), (sort y = gv1), (sort y = insort n y), (sort y = insort n gv1), (sort y = insort x y), (sort y = insort x gv1), (sort gv1 = y), (sort gv1 = gv1), (sort gv1 = insort n y), (sort gv1 = insort n gv1)
+(sort gv1 = insort x y), (sort gv1 = insort x gv1), (insort n y = y), (insort n y = gv1), (insort n gv1 = y), (insort n gv1 = gv1), (insort x y = y), (insort x y = gv1), (insort x gv1 = y), (insort x gv1 = gv1)
+(nil = cons n y), (nil = cons n gv1), (nil = cons x y), (nil = cons x gv1), (nil = sort y), (nil = sort gv1), (nil = insort n y), (nil = insort n gv1), (nil = insort x y), (nil = insort x gv1)
+
+Label: 2 (2)
+(y = y), (n = n), (n = x), (n = gv0), (x = n), (x = x), (x = gv0), (gv0 = n), (gv0 = x), (gv0 = gv0)
+(false = eqb n n), (false = eqb n x), (false = eqb n gv0), (false = eqb x n), (false = eqb x x), (false = eqb x gv0), (false = eqb gv0 n), (false = eqb gv0 x), (false = eqb gv0 gv0), (false = less n n)
+(false = less n x), (false = less n gv0), (false = less x n), (false = less x x), (false = less x gv0), (false = less gv0 n), (false = less gv0 x), (false = less gv0 gv0), (true = eqb n n), (true = eqb n x)
+(true = eqb n gv0), (true = eqb x n), (true = eqb x x), (true = eqb x gv0), (true = eqb gv0 n), (true = eqb gv0 x), (true = eqb gv0 gv0), (true = less n n), (true = less n x), (true = less n gv0)
+(true = less x n), (true = less x x), (true = less x gv0), (true = less gv0 n), (true = less gv0 x), (true = less gv0 gv0), (y <> y), (n <> n), (n <> x), (n <> gv0)
+(x <> n), (x <> x), (x <> gv0), (gv0 <> n), (gv0 <> x), (gv0 <> gv0), (less n n = eqb n n), (less n n = eqb n x), (less n n = eqb n gv0), (less n n = eqb x n)
+(less n n = eqb x x), (less n n = eqb x gv0), (less n n = eqb gv0 n), (less n n = eqb gv0 x), (less n n = eqb gv0 gv0), (less n x = eqb n n), (less n x = eqb n x), (less n x = eqb n gv0), (less n x = eqb x n), (less n x = eqb x x)
+(less n x = eqb x gv0), (less n x = eqb gv0 n), (less n x = eqb gv0 x), (less n x = eqb gv0 gv0), (less n gv0 = eqb n n), (less n gv0 = eqb n x), (less n gv0 = eqb n gv0), (less n gv0 = eqb x n), (less n gv0 = eqb x x), (less n gv0 = eqb x gv0)
+(less n gv0 = eqb gv0 n), (less n gv0 = eqb gv0 x), (less n gv0 = eqb gv0 gv0), (less x n = eqb n n), (less x n = eqb n x), (less x n = eqb n gv0), (less x n = eqb x n), (less x n = eqb x x), (less x n = eqb x gv0), (less x n = eqb gv0 n)
+(less x n = eqb gv0 x), (less x n = eqb gv0 gv0), (less x x = eqb n n), (less x x = eqb n x), (less x x = eqb n gv0), (less x x = eqb x n), (less x x = eqb x x), (less x x = eqb x gv0), (less x x = eqb gv0 n), (less x x = eqb gv0 x)
+(less x x = eqb gv0 gv0), (less x gv0 = eqb n n), (less x gv0 = eqb n x), (less x gv0 = eqb n gv0), (less x gv0 = eqb x n), (less x gv0 = eqb x x), (less x gv0 = eqb x gv0), (less x gv0 = eqb gv0 n), (less x gv0 = eqb gv0 x), (less x gv0 = eqb gv0 gv0)
+(less gv0 n = eqb n n), (less gv0 n = eqb n x), (less gv0 n = eqb n gv0), (less gv0 n = eqb x n), (less gv0 n = eqb x x), (less gv0 n = eqb x gv0), (less gv0 n = eqb gv0 n), (less gv0 n = eqb gv0 x), (less gv0 n = eqb gv0 gv0), (less gv0 x = eqb n n)
+(less gv0 x = eqb n x), (less gv0 x = eqb n gv0), (less gv0 x = eqb x n), (less gv0 x = eqb x x), (less gv0 x = eqb x gv0), (less gv0 x = eqb gv0 n), (less gv0 x = eqb gv0 x), (less gv0 x = eqb gv0 gv0), (less gv0 gv0 = eqb n n), (less gv0 gv0 = eqb n x)
+(less gv0 gv0 = eqb n gv0), (less gv0 gv0 = eqb x n), (less gv0 gv0 = eqb x x), (less gv0 gv0 = eqb x gv0), (less gv0 gv0 = eqb gv0 n), (less gv0 gv0 = eqb gv0 x), (less gv0 gv0 = eqb gv0 gv0), (None = Some y), (None = Some n), (None = Some x)
+(None = Some gv0), (succ n = n), (succ n = x), (succ n = gv0), (succ n = count n y), (succ n = count x y), (succ n = count gv0 y), (succ x = n), (succ x = x), (succ x = gv0)
+(succ x = count n y), (succ x = count x y), (succ x = count gv0 y), (succ gv0 = n), (succ gv0 = x), (succ gv0 = gv0), (succ gv0 = count n y), (succ gv0 = count x y), (succ gv0 = count gv0 y), (count n y = n)
+(count n y = x), (count n y = gv0), (count x y = n), (count x y = x), (count x y = gv0), (count gv0 y = n), (count gv0 y = x), (count gv0 y = gv0), (zero = succ n), (zero = succ x)
+(zero = succ gv0), (zero = count n y), (zero = count x y), (zero = count gv0 y), (cons n y = y), (cons n y = sort y), (cons n y = insort n y), (cons n y = insort x y), (cons n y = insort gv0 y), (cons x y = y)
+(cons x y = sort y), (cons x y = insort n y), (cons x y = insort x y), (cons x y = insort gv0 y), (cons gv0 y = y), (cons gv0 y = sort y), (cons gv0 y = insort n y), (cons gv0 y = insort x y), (cons gv0 y = insort gv0 y), (sort y = y)
+(sort y = insort n y), (sort y = insort x y), (sort y = insort gv0 y), (insort n y = y), (insort x y = y), (insort gv0 y = y), (nil = cons n y), (nil = cons x y), (nil = cons gv0 y), (nil = sort y)
+(nil = insort n y), (nil = insort x y), (nil = insort gv0 y)
+
+Label: 3 (3)
+(y = y), (y = gv1), (gv1 = y), (gv1 = gv1), (n = n), (n = gv3), (n = x), (gv3 = n), (gv3 = gv3), (gv3 = x)
+(x = n), (x = gv3), (x = x), (false = eqb n n), (false = eqb n gv3), (false = eqb n x), (false = eqb gv3 n), (false = eqb gv3 gv3), (false = eqb gv3 x), (false = eqb x n)
+(false = eqb x gv3), (false = eqb x x), (false = less n n), (false = less n gv3), (false = less n x), (false = less gv3 n), (false = less gv3 gv3), (false = less gv3 x), (false = less x n), (false = less x gv3)
+(false = less x x), (true = eqb n n), (true = eqb n gv3), (true = eqb n x), (true = eqb gv3 n), (true = eqb gv3 gv3), (true = eqb gv3 x), (true = eqb x n), (true = eqb x gv3), (true = eqb x x)
+(true = less n n), (true = less n gv3), (true = less n x), (true = less gv3 n), (true = less gv3 gv3), (true = less gv3 x), (true = less x n), (true = less x gv3), (true = less x x), (y <> y)
+(y <> gv1), (gv1 <> y), (gv1 <> gv1), (n <> n), (n <> gv3), (n <> x), (gv3 <> n), (gv3 <> gv3), (gv3 <> x), (x <> n)
+(x <> gv3), (x <> x), (less n n = eqb n n), (less n n = eqb n gv3), (less n n = eqb n x), (less n n = eqb gv3 n), (less n n = eqb gv3 gv3), (less n n = eqb gv3 x), (less n n = eqb x n), (less n n = eqb x gv3)
+(less n n = eqb x x), (less n gv3 = eqb n n), (less n gv3 = eqb n gv3), (less n gv3 = eqb n x), (less n gv3 = eqb gv3 n), (less n gv3 = eqb gv3 gv3), (less n gv3 = eqb gv3 x), (less n gv3 = eqb x n), (less n gv3 = eqb x gv3), (less n gv3 = eqb x x)
+(less n x = eqb n n), (less n x = eqb n gv3), (less n x = eqb n x), (less n x = eqb gv3 n), (less n x = eqb gv3 gv3), (less n x = eqb gv3 x), (less n x = eqb x n), (less n x = eqb x gv3), (less n x = eqb x x), (less gv3 n = eqb n n)
+(less gv3 n = eqb n gv3), (less gv3 n = eqb n x), (less gv3 n = eqb gv3 n), (less gv3 n = eqb gv3 gv3), (less gv3 n = eqb gv3 x), (less gv3 n = eqb x n), (less gv3 n = eqb x gv3), (less gv3 n = eqb x x), (less gv3 gv3 = eqb n n), (less gv3 gv3 = eqb n gv3)
+(less gv3 gv3 = eqb n x), (less gv3 gv3 = eqb gv3 n), (less gv3 gv3 = eqb gv3 gv3), (less gv3 gv3 = eqb gv3 x), (less gv3 gv3 = eqb x n), (less gv3 gv3 = eqb x gv3), (less gv3 gv3 = eqb x x), (less gv3 x = eqb n n), (less gv3 x = eqb n gv3), (less gv3 x = eqb n x)
+(less gv3 x = eqb gv3 n), (less gv3 x = eqb gv3 gv3), (less gv3 x = eqb gv3 x), (less gv3 x = eqb x n), (less gv3 x = eqb x gv3), (less gv3 x = eqb x x), (less x n = eqb n n), (less x n = eqb n gv3), (less x n = eqb n x), (less x n = eqb gv3 n)
+(less x n = eqb gv3 gv3), (less x n = eqb gv3 x), (less x n = eqb x n), (less x n = eqb x gv3), (less x n = eqb x x), (less x gv3 = eqb n n), (less x gv3 = eqb n gv3), (less x gv3 = eqb n x), (less x gv3 = eqb gv3 n), (less x gv3 = eqb gv3 gv3)
+(less x gv3 = eqb gv3 x), (less x gv3 = eqb x n), (less x gv3 = eqb x gv3), (less x gv3 = eqb x x), (less x x = eqb n n), (less x x = eqb n gv3), (less x x = eqb n x), (less x x = eqb gv3 n), (less x x = eqb gv3 gv3), (less x x = eqb gv3 x)
+(less x x = eqb x n), (less x x = eqb x gv3), (less x x = eqb x x), (None = Some y), (None = Some gv1), (None = Some n), (None = Some gv3), (None = Some x), (succ n = n), (succ n = gv3)
+(succ n = x), (succ n = count n y), (succ n = count n gv1), (succ n = count gv3 y), (succ n = count gv3 gv1), (succ n = count x y), (succ n = count x gv1), (succ gv3 = n), (succ gv3 = gv3), (succ gv3 = x)
+(succ gv3 = count n y), (succ gv3 = count n gv1), (succ gv3 = count gv3 y), (succ gv3 = count gv3 gv1), (succ gv3 = count x y), (succ gv3 = count x gv1), (succ x = n), (succ x = gv3), (succ x = x), (succ x = count n y)
+(succ x = count n gv1), (succ x = count gv3 y), (succ x = count gv3 gv1), (succ x = count x y), (succ x = count x gv1), (count n y = n), (count n y = gv3), (count n y = x), (count n gv1 = n), (count n gv1 = gv3)
+(count n gv1 = x), (count gv3 y = n), (count gv3 y = gv3), (count gv3 y = x), (count gv3 gv1 = n), (count gv3 gv1 = gv3), (count gv3 gv1 = x), (count x y = n), (count x y = gv3), (count x y = x)
+(count x gv1 = n), (count x gv1 = gv3), (count x gv1 = x), (zero = succ n), (zero = succ gv3), (zero = succ x), (zero = count n y), (zero = count n gv1), (zero = count gv3 y), (zero = count gv3 gv1)
+(zero = count x y), (zero = count x gv1), (cons n y = y), (cons n y = gv1), (cons n y = sort y), (cons n y = sort gv1), (cons n y = insort n y), (cons n y = insort n gv1), (cons n y = insort gv3 y), (cons n y = insort gv3 gv1)
+(cons n y = insort x y), (cons n y = insort x gv1), (cons n gv1 = y), (cons n gv1 = gv1), (cons n gv1 = sort y), (cons n gv1 = sort gv1), (cons n gv1 = insort n y), (cons n gv1 = insort n gv1), (cons n gv1 = insort gv3 y), (cons n gv1 = insort gv3 gv1)
+(cons n gv1 = insort x y), (cons n gv1 = insort x gv1), (cons gv3 y = y), (cons gv3 y = gv1), (cons gv3 y = sort y), (cons gv3 y = sort gv1), (cons gv3 y = insort n y), (cons gv3 y = insort n gv1), (cons gv3 y = insort gv3 y), (cons gv3 y = insort gv3 gv1)
+(cons gv3 y = insort x y), (cons gv3 y = insort x gv1), (cons gv3 gv1 = y), (cons gv3 gv1 = gv1), (cons gv3 gv1 = sort y), (cons gv3 gv1 = sort gv1), (cons gv3 gv1 = insort n y), (cons gv3 gv1 = insort n gv1), (cons gv3 gv1 = insort gv3 y), (cons gv3 gv1 = insort gv3 gv1)
+(cons gv3 gv1 = insort x y), (cons gv3 gv1 = insort x gv1), (cons x y = y), (cons x y = gv1), (cons x y = sort y), (cons x y = sort gv1), (cons x y = insort n y), (cons x y = insort n gv1), (cons x y = insort gv3 y), (cons x y = insort gv3 gv1)
+(cons x y = insort x y), (cons x y = insort x gv1), (cons x gv1 = y), (cons x gv1 = gv1), (cons x gv1 = sort y), (cons x gv1 = sort gv1), (cons x gv1 = insort n y), (cons x gv1 = insort n gv1), (cons x gv1 = insort gv3 y), (cons x gv1 = insort gv3 gv1)
+(cons x gv1 = insort x y), (cons x gv1 = insort x gv1), (sort y = y), (sort y = gv1), (sort y = insort n y), (sort y = insort n gv1), (sort y = insort gv3 y), (sort y = insort gv3 gv1), (sort y = insort x y), (sort y = insort x gv1)
+(sort gv1 = y), (sort gv1 = gv1), (sort gv1 = insort n y), (sort gv1 = insort n gv1), (sort gv1 = insort gv3 y), (sort gv1 = insort gv3 gv1), (sort gv1 = insort x y), (sort gv1 = insort x gv1), (insort n y = y), (insort n y = gv1)
+(insort n gv1 = y), (insort n gv1 = gv1), (insort gv3 y = y), (insort gv3 y = gv1), (insort gv3 gv1 = y), (insort gv3 gv1 = gv1), (insort x y = y), (insort x y = gv1), (insort x gv1 = y), (insort x gv1 = gv1)
+(nil = cons n y), (nil = cons n gv1), (nil = cons gv3 y), (nil = cons gv3 gv1), (nil = cons x y), (nil = cons x gv1), (nil = sort y), (nil = sort gv1), (nil = insort n y), (nil = insort n gv1)
+(nil = insort gv3 y), (nil = insort gv3 gv1), (nil = insort x y), (nil = insort x gv1)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 64.378 seconds
+
+
+Label: 0 (0)
+(n <> x), (x <> n), (false = eqb n x), (false = eqb x n), (less n n = eqb n x), (less n n = eqb x n), (less x x = eqb n x), (less x x = eqb x n)
+
+Label: 1 (1)
+
+Label: 2 (2)
+(count x y = gv0)
+
+Label: 3 (3)
+(count x gv1 = gv3)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (count x gv2 = gv3 -> eqb x n = false -> count x (insort n gv2) = gv3)
+
+2. (count x (sort y) = gv3 ->  eqb x n = false -> count x (insort n (sort y)) = gv3)
+
+3. (count x gv2 = count x y ->  eqb x n = false -> count x (insort n gv2) = count x y)
+
+4. (eqb x n = false -> count x (insort n (sort y)) = count x y)
+
+5. (eqb x n = false -> x <> n)
+(x <> n -> count x (insort n (sort y)) = count x y)
+
+6. (eqb x n = false -> n <> x)
+(n <> x -> count x (insort n (sort y)) = count x y)
+
+7. (eqb x n = false -> false = eqb n x)
+(false = eqb n x -> count x (insort n (sort y)) = count x y)
+
+8. (eqb x n = false -> less n n = eqb x n)
+(less n n = eqb x n -> count x (insort n (sort y)) = count x y)
+
+9. (eqb x n = false -> less x x = eqb x n)
+(less x x = eqb x n -> count x (insort n (sort y)) = count x y)
+
+10. (eqb x n = false -> less n n = eqb n x)
+(less n n = eqb n x -> count x (insort n (sort y)) = count x y)
+
+11. (eqb x n = false -> less x x = eqb n x)
+(less x x = eqb n x -> count x (insort n (sort y)) = count x y)
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 89.02 seconds
+
+Number of Result Pairs Returned: 11
+
+1. (count x gv2 = gv3 -> eqb x n = false -> count x (insort n gv2) = gv3)
+
+2. (count x (sort y) = gv3 ->  eqb x n = false -> count x (insort n (sort y)) = gv3)
+
+3. (count x gv2 = count x y ->  eqb x n = false -> count x (insort n gv2) = count x y)
+
+4. (eqb x n = false -> count x (insort n (sort y)) = count x y)
+
+5. (eqb x n = false -> x <> n)
+(x <> n -> count x (insort n (sort y)) = count x y)

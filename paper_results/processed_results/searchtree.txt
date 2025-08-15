@@ -1,0 +1,875 @@
+[TOTAL] 59
+
+[SUCCESS] 1
+    [SUCCESS][1][AS IS] 1
+
+[USEFUL] 5
+    [USEFUL][STEP IN RIGHT DIRECTION][GENERALIZE] 3
+    [ATOMIC][USEFUL][MORE COMPLICATED][WEAKEN] 1
+    [ATOMIC][USEFUL][MORE COMPLICATED][GENERALIZE] 1
+
+[FAIL] 53
+    [FAIL][IMPLEMENTATION] 17 ([ATOMIC] 2)
+    [FAIL][FORWARD] 32
+    [FAIL][BEYOND SCOPE] 3
+    [ATOMIC][FAIL][RESOURCE] 1
+
+[ATOMIC - EQUAL] 7
+[ATOMIC - OTHER] 0
+-----------------------------------------------
+
+[FAIL][FORWARD]
+Test = elements_preserves_relation_by_in_app_or
+[TIME] 65.724
+[COUNTS] 1
+[TARGET] In a (l ++ m) -> In a l \/ In a m
+
+1. (ForallT (fun (y : nat) (_ : value) => y <= k') (T t1 k0 v0 t2) ->  In (k, v) (elements t1 ++ (k0, v0) :: elements t2) -> k <= k')
+
+
+
+[FAIL][FORWARD]
+Test = elements_nodup_keys_by_NoDup_append
+[TIME] 244.326
+[COUNTS] 9
+[TARGET] NoDup l1 -> NoDup l2 -> disjoint l1 l2 -> NoDup (l1 ++ l2)
+
+1. (ForallT (fun (y : nat) (_ : value) => y > x) r ->  BST r ->  ForallT (fun (y : nat) (_ : value) => y < x) l ->  BST l -> NoDup (map fst (elements l) ++ fst (x, v) :: map fst (elements r)))
+
+2. (fast_elements r = elements r)
+
+3. (fst (x, v) = x)
+
+4. (fast_elements l = elements l)
+
+5. (BST l -> BST (insert x v l))
+(ForallT (fun (y : nat) (_ : value) => y < x) l ->  ForallT (fun (y : nat) (_ : value) => y > x) r ->  BST r ->  BST (insert x v l) ->  NoDup (map fst (elements l) ++ fst (x, v) :: map fst (elements r)))
+
+
+
+[FAIL][FORWARD]
+Test = elements_complete_by_in_or_app_3
+[TIME] 578.922
+[COUNTS] 7
+[TARGET] In a l \/ In a m -> In a (l ++ m)
+
+1. (bound k (T l x v0 r) = true ->  (bound k r = true -> lookup d k r = v -> In (k, v) gv5) ->  lookup d k (T l x v0 r) = v -> In (k, v) (elements l ++ (x, v0) :: gv5))
+
+2. (bound k (T l x v0 r) = true ->  lookup d k (T l x v0 r) = v ->  (bound k l = true -> lookup d k l = v -> In (k, v) gv2) ->  In (k, v) (gv2 ++ (x, v0) :: elements r))
+
+3. (bound k (T l x v0 r) = true ->  (bound k r = true -> lookup d k r = v -> In (k, v) gv5) ->  lookup d k (T l x v0 r) = v ->  (bound k l = true -> lookup d k l = v -> In (k, v) gv2) ->  In (k, v) (gv2 ++ (x, v0) :: gv5))
+
+4. (lookup d k (T l x v0 r) = v ->  bound k (T l x v0 r) = true ->  In (k, v) (elements l ++ (x, v0) :: elements r))
+
+5. (In (k, v) (fast_elements_tr l gv3) ->  lookup d k (T l x v0 r) = v ->  bound k (T l x v0 r) = true -> In (k, v) (elements l ++ gv3))
+
+
+
+[FAIL][FORWARD]
+Test = elements_nodup_keys_by_Forall_In_1
+[TIME] -1
+[COUNTS] 0
+[TARGET] Forall P l -> In a l -> P a
+
+CONTRADICTION
+
+
+
+[FAIL][FORWARD]
+Test = elements_nodup_keys_by_forall_fst_1
+[TIME] -1
+[COUNTS] 0
+[TARGET] Forall (uncurry (fun (n : nat) (_ : nat) => P n)) lst -> Forall P (list_keys lst)
+
+CONTRADICTION
+
+
+
+[FAIL][FORWARD]
+Test = elements_correct_by_elements_preserves_forall_1
+[TIME] -1
+[COUNTS] 0
+[TARGET] ForallT P t -> Forall (uncurry P) (elements t)
+
+CONTRADICTION
+
+
+
+[FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = elements_preserves_forall_by_Forall_app
+[TIME] 227.428
+[COUNTS] 4
+[TARGET] Forall P l1 -> Forall P l2 -> Forall P (l1 ++ l2)
+
+1. ((ForallT (fun (_ : nat) (v : value) => v = Blue) t1 ->   Forall (uncurry (fun (_ : nat) (v : value) => v = Blue)) gv1) ->  ForallT (fun (_ : nat) (v : value) => v = Blue) (T t1 k v t2) ->  Forall (uncurry (fun (_ : nat) (v : value) => v = Blue))    (gv1 ++ (k, v) :: elements t2))
+
+2. ((ForallT (fun (_ : nat) (v : value) => v = Blue) t2 ->   Forall (uncurry (fun (_ : nat) (v : value) => v = Blue)) gv4) ->  ForallT (fun (_ : nat) (v : value) => v = Blue) (T t1 k v t2) ->  Forall (uncurry (fun (_ : nat) (v : value) => v = Blue))    (elements t1 ++ (k, v) :: gv4))
+
+3. ((ForallT (fun (_ : nat) (v : value) => v = Blue) t2 ->   Forall (uncurry (fun (_ : nat) (v : value) => v = Blue)) gv4) ->  (ForallT (fun (_ : nat) (v : value) => v = Blue) t1 ->   Forall (uncurry (fun (_ : nat) (v : value) => v = Blue)) gv1) ->  ForallT (fun (_ : nat) (v : value) => v = Blue) (T t1 k v t2) ->  Forall (uncurry (fun (_ : nat) (v : value) => v = Blue))    (gv1 ++ (k, v) :: gv4))
+
+4. (ForallT (fun (_ : nat) (v : value) => v = Blue) (T t1 k v t2) ->  Forall (uncurry (fun (_ : nat) (v : value) => v = Blue))    (elements t1 ++ (k, v) :: elements t2))
+
+
+
+[FAIL][BEYOND SCOPE]
+Test = kvs_insert_elements_by_kvs_insert_split_3
+[TIME] 989.238
+[COUNTS] 30
+[TARGET] Forall (fun '(k',_) => k' < k0) e1 -> Forall (fun '(k',_) => k' > k0) e2 -> kvs_insert k v (e1 ++ (k0,v0):: e2) = if Nat.ltb k k0 then (kvs_insert k v e1) ++ (k0,v0)::e2 else if Nat.ltb k0 k then e1 ++ (k0,v0)::(kvs_insert k v e2 else e1 ++ (k,v)::e2
+
+1. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  k >= x ->  x >= k ->  elements l ++ (k, v) :: gv4 = kvs_insert k v (elements l ++ (x, v0) :: gv4))
+
+2. (x >= k ->  k >= x ->  ForallT (fun (y : nat) (_ : value) => y < x) l ->  elements l ++ (k, v) :: elements r =  kvs_insert k v (elements l ++ (x, v0) :: elements r))
+
+3. (fast_elements l = elements l)
+
+4. (k >= x -> ~ k < x)
+(ForallT (fun (y : nat) (_ : value) => y < x) l ->  x >= k ->  ~ k < x ->  elements l ++ (k, v) :: elements r =  kvs_insert k v (elements l ++ (x, v0) :: elements r))
+
+5. (x >= k -> ~ x < k)
+(ForallT (fun (y : nat) (_ : value) => y < x) l ->  k >= x ->  ~ x < k ->  elements l ++ (k, v) :: elements r =  kvs_insert k v (elements l ++ (x, v0) :: elements r))
+
+
+
+[FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = kvs_insert_elements_by_elements_preserves_forall_1
+[TIME] 106.85
+[COUNTS] 10
+[TARGET] ForallT P t -> Forall (uncurry P) (elements t)
+
+1. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  Forall (fun '(k', _) => k' < x) (elements l))
+
+2. (fast_elements l = elements l)
+
+3. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  Permutation gv0 (elements l) -> Forall (fun '(k', _) => k' < x) gv0)
+
+4. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  Permutation (elements l) gv0 -> Forall (fun '(k', _) => k' < x) gv0)
+
+5. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  Permutation gv0 (fast_elements l) -> Forall (fun '(k', _) => k' < x) gv0)
+
+
+
+[FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = sorted_elements_by_elements_preserves_forall_1
+[TIME] 203.567
+[COUNTS] 6
+[TARGET] ForallT P t -> Forall (uncurry P) (elements t)
+
+1. (ForallT (fun (y : nat) (_ : value) => y > x) r ->  BST r ->  ForallT (fun (y : nat) (_ : value) => y < x) l ->  BST l -> sorted (list_keys (elements l ++ (x, v) :: elements r)))
+
+2. (fast_elements r = elements r)
+
+3. (fast_elements l = elements l)
+
+4. (BST l -> BST (insert x v l))
+(ForallT (fun (y : nat) (_ : value) => y < x) l ->  ForallT (fun (y : nat) (_ : value) => y > x) r ->  BST r ->  BST (insert x v l) ->  sorted (list_keys (elements l ++ (x, v) :: elements r)))
+
+5. (BST r -> BST (insert x v r))
+(ForallT (fun (y : nat) (_ : value) => y < x) l ->  ForallT (fun (y : nat) (_ : value) => y > x) r ->  BST l ->  BST (insert x v r) ->  sorted (list_keys (elements l ++ (x, v) :: elements r)))
+
+
+[**]
+[ATOMIC][FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = elements_nodup_keys_by_map_app
+[TIME] 199.872
+[COUNTS] 5
+[TARGET] map f (l++l') = (map f l) ++ (map f l')
+
+1. (ForallT (fun (y : nat) (_ : value) => y > x) r ->  BST r ->  ForallT (fun (y : nat) (_ : value) => y < x) l ->  BST l -> NoDup (map fst (elements l ++ (x, v) :: elements r)))
+
+2. (fast_elements r = elements r)
+
+3. (fast_elements l = elements l)
+
+4. (BST l -> BST (insert x v l))
+(ForallT (fun (y : nat) (_ : value) => y < x) l ->  ForallT (fun (y : nat) (_ : value) => y > x) r ->  BST r ->  BST (insert x v l) -> NoDup (map fst (elements l ++ (x, v) :: elements r)))
+
+5. (BST r -> BST (insert x v r))
+(ForallT (fun (y : nat) (_ : value) => y < x) l ->  ForallT (fun (y : nat) (_ : value) => y > x) r ->  BST l ->  BST (insert x v r) -> NoDup (map fst (elements l ++ (x, v) :: elements r)))
+
+
+[**]
+[ATOMIC][FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = sorted_elements_by_map_app
+[TIME] 620.726
+[COUNTS] 16
+[TARGET] map f (l++l') = (map f l) ++ (map f l')
+
+1. (Forall (uncurry (fun (y : nat) (_ : value) => y < x)) (elements l) ->  Forall (uncurry (fun (y : nat) (_ : value) => y > x)) gv5 ->  BST l ->  sorted (list_keys gv5) -> sorted (map fst (elements l ++ (x, v) :: gv5)))
+
+2. (sorted (list_keys gv2) ->  Forall (uncurry (fun (y : nat) (_ : value) => y < x)) gv2 ->  Forall (uncurry (fun (y : nat) (_ : value) => y > x)) (elements r) ->  BST r -> sorted (map fst (gv2 ++ (x, v) :: elements r)))
+
+3. (sorted (list_keys gv2) ->  Forall (uncurry (fun (y : nat) (_ : value) => y < x)) gv2 ->  Forall (uncurry (fun (y : nat) (_ : value) => y > x)) gv5 ->  sorted (list_keys gv5) -> sorted (map fst (gv2 ++ (x, v) :: gv5)))
+
+4. (BST r ->  BST l ->  Forall (uncurry (fun (y : nat) (_ : value) => y > x)) (elements r) ->  Forall (uncurry (fun (y : nat) (_ : value) => y < x)) (elements l) ->  sorted (map fst (elements l ++ (x, v) :: elements r)))
+
+5. (BST l -> BST (insert x v l))
+(BST r ->  BST (insert x v l) ->  Forall (uncurry (fun (y : nat) (_ : value) => y < x)) (elements l) ->  Forall (uncurry (fun (y : nat) (_ : value) => y > x)) (elements r) ->  sorted (map fst (elements l ++ (x, v) :: elements r)))
+
+
+
+[FAIL][FORWARD]
+Test = elements_correct_by_Forall_in_1
+[TIME] -1
+[COUNTS] 0
+[TARGET] Forall P l -> In a l -> P a
+
+CONTRADICTION
+
+
+
+[FAIL][FORWARD]
+Test = elements_nodup_keys_by_elements_preserves_forall_1
+[TIME] -1
+[COUNTS] 0
+[TARGET] ForallT P t -> Forall (uncurry P) (elements t)
+
+CONTRADICTION
+
+
+
+[FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = kvs_insert_elements_by_elements_preserves_forall_5
+[TIME] 103.008
+[COUNTS] 10
+[TARGET] ForallT P t -> Forall (uncurry P) (elements t)
+
+1. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  Forall (fun '(k', _) => k' < x) (elements l))
+
+2. (fast_elements l = elements l)
+
+3. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  Permutation gv0 (elements l) -> Forall (fun '(k', _) => k' < x) gv0)
+
+4. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  Permutation (elements l) gv0 -> Forall (fun '(k', _) => k' < x) gv0)
+
+5. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  Permutation gv0 (fast_elements l) -> Forall (fun '(k', _) => k' < x) gv0)
+
+
+
+[FAIL][FORWARD]
+Test = elements_nodup_keys_by_forall_fst_2
+[TIME] -1
+[COUNTS] 0
+[TARGET] Forall (uncurry (fun (n : nat) (_ : nat) => P n)) lst -> Forall P (list_keys lst)
+
+CONTRADICTION
+
+
+
+[FAIL][FORWARD]
+Test = elements_nodup_keys_by_Forall_In_2
+[TIME] -1
+[COUNTS] 0
+[TARGET] Forall P l -> In a l -> P a
+
+CONTRADICTION
+
+
+
+[FAIL][FORWARD]
+Test = elements_correct_by_elements_preserves_forall_2
+[TIME] -1
+[COUNTS] 0
+[TARGET] ForallT P t -> Forall (uncurry P) (elements t)
+
+CONTRADICTION
+
+
+[**]
+[FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = elements_nodup_keys_by_map_cons
+[TIME] 217.717
+[COUNTS] 5
+[TARGET] map f (x::l) = (f x) :: (map f l)
+
+1. (ForallT (fun (y : nat) (_ : value) => y > x) r ->  BST r ->  ForallT (fun (y : nat) (_ : value) => y < x) l ->  BST l -> NoDup (map fst (elements l) ++ map fst ((x, v) :: elements r)))
+
+2. (fast_elements l = elements l)
+
+3. (fast_elements r = elements r)
+
+4. (BST l -> BST (insert x v l))
+(ForallT (fun (y : nat) (_ : value) => y < x) l ->  ForallT (fun (y : nat) (_ : value) => y > x) r ->  BST r ->  BST (insert x v l) ->  NoDup (map fst (elements l) ++ map fst ((x, v) :: elements r)))
+
+5. (BST r -> BST (insert x v r))
+(ForallT (fun (y : nat) (_ : value) => y < x) l ->  ForallT (fun (y : nat) (_ : value) => y > x) r ->  BST l ->  BST (insert x v r) ->  NoDup (map fst (elements l) ++ map fst ((x, v) :: elements r)))
+
+
+
+[FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = sorted_elements_by_sorted_app
+[TIME] 915.902
+[COUNTS] 18
+[TARGET] sorted l1 -> sorted l2 -> Forall (fun n => n < x) l1 -> Forall (fun n => n > x) l2 -> sorted (l1 ++ x :: l2)
+
+1. (Forall (uncurry (fun (y : nat) (_ : value) => y < x)) (elements l) ->  Forall (uncurry (fun (y : nat) (_ : value) => y > x)) gv7 ->  BST l ->  sorted (list_keys gv7) ->  sorted (map fst (elements l) ++ fst (x, v) :: map fst gv7))
+
+2. (sorted (list_keys gv2) ->  Forall (uncurry (fun (y : nat) (_ : value) => y < x)) gv2 ->  Forall (uncurry (fun (y : nat) (_ : value) => y > x)) (elements r) ->  BST r -> sorted (map fst gv2 ++ fst (x, v) :: map fst (elements r)))
+
+3. (sorted (list_keys gv2) ->  Forall (uncurry (fun (y : nat) (_ : value) => y < x)) gv2 ->  Forall (uncurry (fun (y : nat) (_ : value) => y > x)) gv7 ->  sorted (list_keys gv7) -> sorted (map fst gv2 ++ fst (x, v) :: map fst gv7))
+
+4. (BST r ->  BST l ->  Forall (uncurry (fun (y : nat) (_ : value) => y > x)) (elements r) ->  Forall (uncurry (fun (y : nat) (_ : value) => y < x)) (elements l) ->  sorted (map fst (elements l) ++ fst (x, v) :: map fst (elements r)))
+
+5. (list_keys gv7 = map fst gv7)
+
+
+
+[USEFUL][STEP IN RIGHT DIRECTION][GENERALIZE]
+Test = elements_correct_inverse_by_in_or_app_3
+[TIME] 314.276
+[COUNTS] 27
+[TARGET] In a l \/ In a m -> In a (l ++ m)
+
+1. (In gv0 (elements l ++ gv0 :: elements r))
+
+2. (In gv0 (elements l ++ gv0 :: gv4))
+
+3. (In gv0 (gv2 ++ gv0 :: gv4))
+
+4. (In gv0 (gv2 ++ gv0 :: elements r))
+
+5. (In (x, v) (elements l ++ (x, v) :: gv4))
+
+
+[**]
+[FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = sorted_elements_by_map_cons
+[TIME] 998.347
+[COUNTS] 10
+[TARGET] map f (x::l) = (f x) :: (map f l)
+
+1. (sorted (list_keys gv2) ->  Forall (uncurry (fun (y : nat) (_ : value) => y < x)) gv2 ->  Forall (uncurry (fun (y : nat) (_ : value) => y > x)) (elements r) ->  BST r -> sorted (map fst gv2 ++ map fst ((x, v) :: elements r)))
+
+2. (Forall (uncurry (fun (y : nat) (_ : value) => y < x)) (elements l) ->  Forall (uncurry (fun (y : nat) (_ : value) => y > x)) gv6 ->  BST l ->  sorted (list_keys gv6) ->  sorted (map fst (elements l) ++ map fst ((x, v) :: gv6)))
+
+3. (sorted (list_keys gv2) ->  Forall (uncurry (fun (y : nat) (_ : value) => y < x)) gv2 ->  Forall (uncurry (fun (y : nat) (_ : value) => y > x)) gv6 ->  sorted (list_keys gv6) -> sorted (map fst gv2 ++ map fst ((x, v) :: gv6)))
+
+4. (BST r ->  BST l ->  Forall (uncurry (fun (y : nat) (_ : value) => y > x)) (elements r) ->  Forall (uncurry (fun (y : nat) (_ : value) => y < x)) (elements l) ->  sorted (map fst (elements l) ++ map fst ((x, v) :: elements r)))
+
+5. (list_keys gv2 = map fst gv2)
+
+
+
+[FAIL][FORWARD]
+Test = elements_correct_by_in_app_or
+[TIME] 306.369
+[COUNTS] 15
+[TARGET] In a (l ++ m) -> In a l \/ In a m
+
+1. (BST r ->  BST l ->  ForallT (fun (y : nat) (_ : value) => y > x) r ->  In (k, v) (elements l ++ (x, v0) :: elements r) ->  ForallT (fun (y : nat) (_ : value) => y < x) l ->  bound k (T l x v0 r) = true /\ lookup d k (T l x v0 r) = v)
+
+2. (BST l -> BST (insert k d l))
+(ForallT (fun (y : nat) (_ : value) => y < x) l ->  ForallT (fun (y : nat) (_ : value) => y > x) r ->  In (k, v) (elements l ++ (x, v0) :: elements r) ->  BST r ->  BST (insert k d l) ->  bound k (T l x v0 r) = true /\ lookup d k (T l x v0 r) = v)
+
+3. (BST l -> BST (insert x d l))
+(ForallT (fun (y : nat) (_ : value) => y < x) l ->  ForallT (fun (y : nat) (_ : value) => y > x) r ->  In (k, v) (elements l ++ (x, v0) :: elements r) ->  BST r ->  BST (insert x d l) ->  bound k (T l x v0 r) = true /\ lookup d k (T l x v0 r) = v)
+
+4. (BST l -> BST (insert k v l))
+(ForallT (fun (y : nat) (_ : value) => y < x) l ->  ForallT (fun (y : nat) (_ : value) => y > x) r ->  In (k, v) (elements l ++ (x, v0) :: elements r) ->  BST r ->  BST (insert k v l) ->  bound k (T l x v0 r) = true /\ lookup d k (T l x v0 r) = v)
+
+5. (BST l -> BST (insert x v l))
+(ForallT (fun (y : nat) (_ : value) => y < x) l ->  ForallT (fun (y : nat) (_ : value) => y > x) r ->  In (k, v) (elements l ++ (x, v0) :: elements r) ->  BST r ->  BST (insert x v l) ->  bound k (T l x v0 r) = true /\ lookup d k (T l x v0 r) = v)
+
+
+
+[FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = kvs_insert_elements_by_elements_preserves_forall_2
+[TIME] 100.323
+[COUNTS] 10
+[TARGET] ForallT P t -> Forall (uncurry P) (elements t)
+
+1. (ForallT (fun (y : nat) (_ : value) => y > x) r ->  Forall (fun '(k', _) => k' > x) (elements r))
+
+2. (fast_elements r = elements r)
+
+3. (ForallT (fun (y : nat) (_ : value) => y > x) r ->  Permutation gv0 (elements r) -> Forall (fun '(k', _) => k' > x) gv0)
+
+4. (ForallT (fun (y : nat) (_ : value) => y > x) r ->  Permutation (elements r) gv0 -> Forall (fun '(k', _) => k' > x) gv0)
+
+5. (ForallT (fun (y : nat) (_ : value) => y > x) r ->  Permutation gv0 (fast_elements r) -> Forall (fun '(k', _) => k' > x) gv0)
+
+
+
+[FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = sorted_elements_by_elements_preserves_forall_2
+[TIME] 410.581
+[COUNTS] 7
+[TARGET] ForallT P t -> Forall (uncurry P) (elements t)
+
+1. (ForallT (fun (y : nat) (_ : value) => y > x) r ->  Forall (uncurry (fun (y : nat) (_ : value) => y < x)) gv2 ->  sorted (list_keys gv2) ->  BST r -> sorted (list_keys (gv2 ++ (x, v) :: elements r)))
+
+2. (BST r ->  BST l ->  Forall (uncurry (fun (y : nat) (_ : value) => y < x)) (elements l) ->  ForallT (fun (y : nat) (_ : value) => y > x) r ->  sorted (list_keys (elements l ++ (x, v) :: elements r)))
+
+3. (fast_elements r = elements r)
+
+4. (fast_elements l = elements l)
+
+5. (BST l -> BST (insert x v l))
+(ForallT (fun (y : nat) (_ : value) => y > x) r ->  BST r ->  BST (insert x v l) ->  Forall (uncurry (fun (y : nat) (_ : value) => y < x)) (elements l) ->  sorted (list_keys (elements l ++ (x, v) :: elements r)))
+
+
+
+[FAIL][FORWARD]
+Test = elements_nodup_keys_by_elements_preserves_forall_2
+[TIME] -1
+[COUNTS] 0
+[TARGET] ForallT P t -> Forall (uncurry P) (elements t)
+
+CONTRADICTION
+
+
+
+[FAIL][FORWARD]
+Test = elements_correct_by_Forall_in_2
+[TIME] -1
+[COUNTS] 0
+[TARGET] Forall P l -> In a l -> P a
+
+CONTRADICTION
+
+
+
+[FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = kvs_insert_elements_by_elements_preserves_forall_6
+[TIME] 102.622
+[COUNTS] 10
+[TARGET] ForallT P t -> Forall (uncurry P) (elements t)
+
+1. (ForallT (fun (y : nat) (_ : value) => y > x) r ->  Forall (fun '(k', _) => k' > x) (elements r))
+
+2. (fast_elements r = elements r)
+
+3. (ForallT (fun (y : nat) (_ : value) => y > x) r ->  Permutation gv0 (elements r) -> Forall (fun '(k', _) => k' > x) gv0)
+
+4. (ForallT (fun (y : nat) (_ : value) => y > x) r ->  Permutation (elements r) gv0 -> Forall (fun '(k', _) => k' > x) gv0)
+
+5. (ForallT (fun (y : nat) (_ : value) => y > x) r ->  Permutation gv0 (fast_elements r) -> Forall (fun '(k', _) => k' > x) gv0)
+
+
+
+[SUCCESS][1][AS IS]
+Test = fast_elements_correct_by_elements_correct
+[TIME] 92.261
+[COUNTS] 7
+[TARGET] BST t -> In (k, v) (elements t) -> bound k t = true /\ lookup d k t = v
+
+1. (BST t -> In (k, v) (elements t) -> bound k t = true /\ lookup d k t = v)
+
+2. (lookup (lookup d k t) k t = lookup d k t)
+
+3. (In (k, v) (elements t) -> In (k, v) (fast_elements t))
+(In (k, v) (fast_elements t) -> BST t -> bound k t = true /\ lookup d k t = v)
+
+4. (BST t -> BST (insert k d t))
+(In (k, v) (elements t) ->  BST (insert k d t) -> bound k t = true /\ lookup d k t = v)
+
+5. (BST t -> BST (insert k v t))
+(In (k, v) (elements t) ->  BST (insert k v t) -> bound k t = true /\ lookup d k t = v)
+
+
+
+[FAIL][FORWARD]
+Test = elements_correct_by_elements_preserves_forall_3
+[TIME] -1
+[COUNTS] 0
+[TARGET] ForallT P t -> Forall (uncurry P) (elements t)
+
+CONTRADICTION
+
+
+
+[FAIL][FORWARD]
+Test = elements_nodup_keys_by_Forall_In_3
+[TIME] -1
+[COUNTS] 0
+[TARGET] Forall P l -> In a l -> P a
+
+CONTRADICTION
+
+
+
+[FAIL][FORWARD]
+Test = elements_nodup_keys_by_forall_fst_3
+[TIME] -1
+[COUNTS] 0
+[TARGET] Forall (uncurry (fun (n : nat) (_ : nat) => P n)) lst -> Forall P (list_keys lst)
+
+CONTRADICTION
+
+
+
+[FAIL][FORWARD]
+Test = elements_complete_by_in_or_app_1
+[TIME] 637.403
+[COUNTS] 9
+[TARGET] In a l \/ In a m -> In a (l ++ m)
+
+1. (lookup d k (T l x v0 r) = v ->  (bound k r = true -> lookup d k r = v -> In (k, v) gv5) ->  bound k (T l x v0 r) = true -> In (k, v) (elements l ++ (x, v0) :: gv5))
+
+2. (lookup d k (T l x v0 r) = v ->  bound k (T l x v0 r) = true ->  (bound k l = true -> lookup d k l = v -> In (k, v) gv2) ->  In (k, v) (gv2 ++ (x, v0) :: elements r))
+
+3. (lookup d k (T l x v0 r) = v ->  (bound k r = true -> lookup d k r = v -> In (k, v) gv5) ->  bound k (T l x v0 r) = true ->  (bound k l = true -> lookup d k l = v -> In (k, v) gv2) ->  In (k, v) (gv2 ++ (x, v0) :: gv5))
+
+4. (bound k (T l x v0 r) = true ->  lookup d k (T l x v0 r) = v ->  In (k, v) (elements l ++ (x, v0) :: elements r))
+
+5. (In gv0 (gv1 ++ gv1) -> lookup d k (T l x v0 r) = v -> In gv0 gv1)
+
+
+
+[FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = sorted_elements_by_forall_fst_2
+[TIME] 99.758
+[COUNTS] 8
+[TARGET] Forall (uncurry (fun (n : nat) (_ : nat) => P n)) lst -> Forall P (list_keys lst)
+
+1. (Forall (uncurry (fun (y : nat) (_ : value) => y > x)) gv1 ->  Forall (fun n : nat => n > fst (x, v)) (map fst gv1))
+
+2. (Forall (uncurry (fun (y : nat) (_ : value) => y > x)) (elements r) ->  Forall (fun n : nat => n > fst (x, v)) (map fst (elements r)))
+
+3. (list_keys gv1 = map fst gv1)
+
+4. (Forall (uncurry (fun (y : nat) (_ : value) => y > x)) gv1 ->  Permutation gv0 (list_keys gv1) ->  Forall (fun n : nat => n > fst (x, v)) gv0)
+
+5. (Forall (uncurry (fun (y : nat) (_ : value) => y > x)) gv1 ->  Permutation (list_keys gv1) gv0 ->  Forall (fun n : nat => n > fst (x, v)) gv0)
+
+
+
+[FAIL][FORWARD]
+Test = NoDup_append_by_in_app_or
+[TIME] -1
+[COUNTS] 0
+[TARGET] In a (l ++ m) -> In a l \/ In a m
+
+CONTRADICTION
+
+
+
+[USEFUL][STEP IN RIGHT DIRECTION][GENERALIZE]
+Test = elements_correct_inverse_by_in_or_app_2
+[TIME] 536.672
+[COUNTS] 31
+[TARGET] In a l \/ In a m -> In a (l ++ m)
+
+1. (In gv0 gv5 -> In gv0 (elements l ++ gv4 :: gv5))
+
+2. (In gv0 gv5 -> In gv0 (elements l ++ (x, v) :: gv5))
+
+3. (In gv0 gv5 -> In gv0 (gv2 ++ (x, v) :: gv5))
+
+4. (In gv0 (elements r) -> In gv0 (elements l ++ gv4 :: elements r))
+
+5. (In gv0 (elements r) -> In gv0 (gv2 ++ gv4 :: elements r))
+
+
+
+[FAIL][FORWARD]
+Test = elements_complete_inverse_by_elements_preserves_forall_2
+[TIME] -1
+[COUNTS] 0
+[TARGET] ForallT P t -> Forall (uncurry P) (elements t)
+
+CONTRADICTION
+
+
+
+[FAIL][BEYOND SCOPE]
+Test = kvs_insert_elements_by_kvs_insert_split_1
+[TIME] 545.357
+[COUNTS] 12
+[TARGET] Forall (fun '(k',_) => k' < k0) e1 -> Forall (fun '(k',_) => k' > k0) e2 -> kvs_insert k v (e1 ++ (k0,v0):: e2) = if Nat.ltb k k0 then (kvs_insert k v e1) ++ (k0,v0)::e2 else if Nat.ltb k0 k then e1 ++ (k0,v0)::(kvs_insert k v e2 else e1 ++ (k,v)::e2
+
+1. (elements gv2 = kvs_insert k v gv5 ->  k < x ->  elements (T gv2 x v0 r) = kvs_insert k v (gv5 ++ (x, v0) :: elements r))
+
+2. (elements gv2 = kvs_insert k v (elements l) ->  k < x ->  elements (T gv2 x v0 r) =  kvs_insert k v (elements l ++ (x, v0) :: elements r))
+
+3. (elements (insert k v l) = kvs_insert k v gv5 ->  k < x ->  elements (T (insert k v l) x v0 r) =  kvs_insert k v (gv5 ++ (x, v0) :: elements r))
+
+4. (BST l ->  k < x ->  elements (T (insert k v l) x v0 r) =  kvs_insert k v (elements l ++ (x, v0) :: elements r))
+
+5. (fast_elements r = elements r)
+
+
+[**]
+[ATOMIC][FAIL][RESOURCE]
+Test = fast_elements_eq_elements_by_fast_elements_tr_helper
+[TIME] 119.527
+[COUNTS] 24
+[TARGET] fast_elements_tr t lst = elements t ++ lst
+
+1. (fast_elements_tr t [] = elements t)
+
+2. (fast_elements t = fast_elements_tr t [])
+
+3. (disjoint gv1 gv1 -> fast_elements_tr t gv1 = elements t)
+
+4. (disjoint gv1 (fast_elements_tr t gv1) -> fast_elements_tr t gv1 = elements t)
+
+5. (disjoint (fast_elements_tr t gv1) gv1 -> fast_elements_tr t gv1 = elements t)
+
+
+[**]
+[ATOMIC][USEFUL][MORE COMPLICATED][GENERALIZE][AST]
+Test = fast_elements_tr_helper_by_app_assoc
+[TIME] 671.125
+[COUNTS] 14
+[TARGET] app x (app y z) = app (app x y) z
+
+1. (elements t1 ++ (k, v) :: gv5 ++ lst = (elements t1 ++ (k, v) :: gv5) ++ lst)
+
+2. (gv1 ++ (k, v) :: gv5 ++ lst = (gv1 ++ (k, v) :: gv5) ++ lst)
+
+3. (gv1 ++ gv3 :: gv5 ++ lst = (gv1 ++ gv3 :: gv5) ++ lst)
+
+4. (elements t1 ++ gv3 :: gv5 ++ lst = (elements t1 ++ gv3 :: gv5) ++ lst)
+
+5. (gv1 ++ (k, v) :: elements t2 ++ lst = (gv1 ++ (k, v) :: elements t2) ++ lst)
+
+
+
+[FAIL][FORWARD]
+Test = elements_complete_inverse_by_Forall_in_2
+[TIME] -1
+[COUNTS] 0
+[TARGET] Forall P l -> In a l -> P a
+
+CONTRADICTION
+
+
+
+[FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = kvs_insert_elements_by_elements_preserves_forall_3
+[TIME] 103.312
+[COUNTS] 10
+[TARGET] ForallT P t -> Forall (uncurry P) (elements t)
+
+1. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  Forall (fun '(k', _) => k' < x) (elements l))
+
+2. (fast_elements l = elements l)
+
+3. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  Permutation gv0 (elements l) -> Forall (fun '(k', _) => k' < x) gv0)
+
+4. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  Permutation (elements l) gv0 -> Forall (fun '(k', _) => k' < x) gv0)
+
+5. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  Permutation gv0 (fast_elements l) -> Forall (fun '(k', _) => k' < x) gv0)
+
+
+
+[FAIL][FORWARD]
+Test = elements_correct_by_Forall_in_3
+[TIME] -1
+[COUNTS] 0
+[TARGET] Forall P l -> In a l -> P a
+
+CONTRADICTION
+
+
+
+[FAIL][FORWARD]
+Test = elements_nodup_keys_by_elements_preserves_forall_3
+[TIME] -1
+[COUNTS] 0
+[TARGET] ForallT P t -> Forall (uncurry P) (elements t)
+
+CONTRADICTION
+
+
+
+[FAIL][FORWARD]
+Test = elements_complete_inverse_by_in_app_or
+[TIME] -1
+[COUNTS] 0
+[TARGET] In a (l ++ m) -> In a l \/ In a m
+
+CONTRADICTION
+
+
+
+[FAIL][FORWARD]
+Test = elements_complete_by_in_or_app_2
+[TIME] 907.099
+[COUNTS] 9
+[TARGET] In a l \/ In a m -> In a (l ++ m)
+
+1. ((bound k r = true -> lookup d k r = v -> In (k, v) gv5) ->  bound k (T l x v0 r) = true ->  lookup d k (T l x v0 r) = v -> In (k, v) (elements l ++ (x, v0) :: gv5))
+
+2. (bound k (T l x v0 r) = true ->  lookup d k (T l x v0 r) = v ->  (bound k l = true -> lookup d k l = v -> In (k, v) gv2) ->  In (k, v) (gv2 ++ (x, v0) :: elements r))
+
+3. ((bound k r = true -> lookup d k r = v -> In (k, v) gv5) ->  bound k (T l x v0 r) = true ->  lookup d k (T l x v0 r) = v ->  (bound k l = true -> lookup d k l = v -> In (k, v) gv2) ->  In (k, v) (gv2 ++ (x, v0) :: gv5))
+
+4. (lookup d k (T l x v0 r) = v ->  bound k (T l x v0 r) = true ->  In (k, v) (elements l ++ (x, v0) :: elements r))
+
+5. (In gv0 (gv1 ++ gv1) -> lookup d k (T l x v0 r) = v -> In gv0 gv1)
+
+
+
+[FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = sorted_elements_by_forall_fst_1
+[TIME] 101.101
+[COUNTS] 2
+[TARGET] Forall (uncurry (fun (n : nat) (_ : nat) => P n)) lst -> Forall P (list_keys lst)
+
+1. (Forall (uncurry (fun (y : nat) (_ : value) => y < x)) gv1 ->  Forall (fun n : nat => n < x) (map fst gv1))
+
+2. (Forall (uncurry (fun (y : nat) (_ : value) => y < x)) (elements l) ->  Forall (fun n : nat => n < x) (map fst (elements l)))
+
+
+
+[FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = insert_BST_by_ForallT_insert_1
+[TIME] 111.072
+[COUNTS] 2
+[TARGET] ForallT P t -> P k v -> ForallT P (insert k v t)
+
+1. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  k < x -> ForallT (fun (y : nat) (_ : value) => y < x) (insert k v l))
+
+2. (k < x -> ~ x <= k)
+(ForallT (fun (y : nat) (_ : value) => y < x) l ->  ~ x <= k -> ForallT (fun (y : nat) (_ : value) => y < x) (insert k v l))
+
+
+
+[FAIL][FORWARD]
+Test = elements_nodup_keys_by_Forall_In_4
+[TIME] -1
+[COUNTS] 0
+[TARGET] Forall P l -> In a l -> P a
+
+CONTRADICTION
+
+
+
+[FAIL][FORWARD]
+Test = elements_nodup_keys_by_forall_fst_4
+[TIME] -1
+[COUNTS] 0
+[TARGET] Forall (uncurry (fun (n : nat) (_ : nat) => P n)) lst -> Forall P (list_keys lst)
+
+CONTRADICTION
+
+
+
+[FAIL][BEYOND SCOPE]
+Test = kvs_insert_elements_by_kvs_insert_split_2
+[TIME] 976.55
+[COUNTS] 31
+[TARGET] Forall (fun '(k',_) => k' < k0) e1 -> Forall (fun '(k',_) => k' > k0) e2 -> kvs_insert k v (e1 ++ (k0,v0):: e2) = if Nat.ltb k k0 then (kvs_insert k v e1) ++ (k0,v0)::e2 else if Nat.ltb k0 k then e1 ++ (k0,v0)::(kvs_insert k v e2 else e1 ++ (k,v)::e2
+
+1. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  gv4 = kvs_insert k v gv9 ->  x < k ->  elements l ++ (x, v0) :: gv4 = kvs_insert k v (elements l ++ (x, v0) :: gv9))
+
+2. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  gv4 = kvs_insert k v (elements r) ->  x < k ->  elements l ++ (x, v0) :: gv4 =  kvs_insert k v (elements l ++ (x, v0) :: elements r))
+
+3. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  elements gv5 = kvs_insert k v gv9 ->  x < k ->  elements l ++ (x, v0) :: elements gv5 =  kvs_insert k v (elements l ++ (x, v0) :: gv9))
+
+4. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  elements gv5 = kvs_insert k v (elements r) ->  x < k ->  elements l ++ (x, v0) :: elements gv5 =  kvs_insert k v (elements l ++ (x, v0) :: elements r))
+
+5. (ForallT (fun (y : nat) (_ : value) => y < x) l ->  elements (insert k v r) = kvs_insert k v gv9 ->  x < k ->  elements l ++ (x, v0) :: elements (insert k v r) =  kvs_insert k v (elements l ++ (x, v0) :: gv9))
+
+
+
+[FAIL][FORWARD]
+Test = elements_correct_by_elements_preserves_forall_4
+[TIME] -1
+[COUNTS] 0
+[TARGET] ForallT P t -> Forall (uncurry P) (elements t)
+
+CONTRADICTION
+
+
+
+[USEFUL][STEP IN RIGHT DIRECTION][GENERALIZE]
+Test = elements_correct_inverse_by_in_or_app_1
+[TIME] 351.153
+[COUNTS] 27
+[TARGET] In a l \/ In a m -> In a (l ++ m)
+
+1. (In gv0 gv2 -> In gv0 (gv2 ++ (x, v) :: gv5))
+
+2. (In gv0 gv2 -> In gv0 (gv2 ++ gv4 :: elements r))
+
+3. (In gv0 gv2 -> In gv0 (gv2 ++ gv3))
+
+4. (In gv0 gv2 -> In gv0 (gv2 ++ (x, v) :: elements r))
+
+5. (In gv0 (elements l) -> In gv0 (elements l ++ gv4 :: gv5))
+
+
+
+[FAIL][FORWARD]
+Test = elements_complete_inverse_by_elements_preserves_forall_1
+[TIME] -1
+[COUNTS] 0
+[TARGET] ForallT P t -> Forall (uncurry P) (elements t)
+
+CONTRADICTION
+
+
+
+[FAIL][FORWARD]
+Test = elements_correct_by_Forall_in_4
+[TIME] -1
+[COUNTS] 0
+[TARGET] Forall P l -> In a l -> P a
+
+CONTRADICTION
+
+
+
+[FAIL][FORWARD]
+Test = elements_nodup_keys_by_elements_preserves_forall_4
+[TIME] -1
+[COUNTS] 0
+[TARGET] ForallT P t -> Forall (uncurry P) (elements t)
+
+CONTRADICTION
+
+
+[**]
+[ATOMIC][USEFUL][MORE COMPLICATED][WEAKEN]
+Test = fast_elements_correct_by_fast_elements_eq_elements
+[TIME] 91.881
+[COUNTS] 7
+[TARGET] fast_elements t = elements t
+
+1. (BST t -> In (k, v) (fast_elements t) -> bound k t = true /\ lookup d k t = v)
+
+2. (lookup (lookup d k t) k t = lookup d k t)
+
+3. (In (k, v) (fast_elements t) -> In (k, v) (elements t))
+(In (k, v) (elements t) -> BST t -> bound k t = true /\ lookup d k t = v)
+
+4. (BST t -> BST (insert k d t))
+(In (k, v) (fast_elements t) ->  BST (insert k d t) -> bound k t = true /\ lookup d k t = v)
+
+5. (BST t -> BST (insert k v t))
+(In (k, v) (fast_elements t) ->  BST (insert k v t) -> bound k t = true /\ lookup d k t = v)
+
+
+
+[FAIL][FORWARD]
+Test = elements_complete_inverse_by_Forall_in_1
+[TIME] -1
+[COUNTS] 0
+[TARGET] Forall P l -> In a l -> P a
+
+CONTRADICTION
+
+
+
+[FAIL][IMPLEMENTATION][FUNC TYPE]
+Test = kvs_insert_elements_by_elements_preserves_forall_4
+[TIME] 110.432
+[COUNTS] 10
+[TARGET] ForallT P t -> Forall (uncurry P) (elements t)
+
+1. (ForallT (fun (y : nat) (_ : value) => y > x) r ->  Forall (fun '(k', _) => k' > x) (elements r))
+
+2. (fast_elements r = elements r)
+
+3. (ForallT (fun (y : nat) (_ : value) => y > x) r ->  Permutation gv0 (elements r) -> Forall (fun '(k', _) => k' > x) gv0)
+
+4. (ForallT (fun (y : nat) (_ : value) => y > x) r ->  Permutation (elements r) gv0 -> Forall (fun '(k', _) => k' > x) gv0)
+
+5. (ForallT (fun (y : nat) (_ : value) => y > x) r ->  Permutation gv0 (fast_elements r) -> Forall (fun '(k', _) => k' > x) gv0)
+
+
+
+

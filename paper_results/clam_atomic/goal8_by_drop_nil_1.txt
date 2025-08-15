@@ -1,0 +1,146 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (forall (x3 : Nat) (l : Lst),
+ drop (succ x1) (drop x2 (cons x3 l)) = drop x2 (drop (succ x1) (cons x3 l)))
+ -- (forall (x2 x3 : Nat) (l : Lst),
+ drop x1 (drop x2 (cons x3 l)) = drop x2 (drop x1 (cons x3 l)))
+
+----------------------------------
+Goal: (match drop x2 nil with
+ | nil => nil
+ | cons _ z => drop x1 z
+ end = match drop x1 nil with
+       | nil => nil
+       | cons _ z => drop x2 z
+       end)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 1.538 seconds
+
+gv0 : Lst = match drop x2 nil with
+| nil => nil
+| cons _ z => drop x1 z
+end
+gv1 : Lst = match drop x1 nil with
+| nil => nil
+| cons _ z => drop x2 z
+end
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 17.464 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (match drop x2 nil with
+ | nil => nil
+ | cons _ z => drop x1 z
+ end = match drop x1 nil with
+       | nil => nil
+       | cons _ z => drop x2 z
+       end)
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (match drop x1 nil with
+ | nil => nil
+ | cons _ z => drop x2 z
+ end = gv1)
+
+----------------------------------
+Goal: (match drop x2 nil with
+ | nil => nil
+ | cons _ z => drop x1 z
+ end = gv1)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (match drop x2 nil with
+ | nil => nil
+ | cons _ z => drop x1 z
+ end = gv0)
+
+----------------------------------
+Goal: (gv0 = match drop x1 nil with
+       | nil => nil
+       | cons _ z => drop x2 z
+       end)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 17.595 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+drop : (Nat -> Lst -> Lst)
+succ : (Nat -> Nat)
+zero : Nat
+nil : Lst
+cons : (Nat -> Lst -> Lst)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 17.726 seconds
+
+
+Label: 0 (0)
+(gv1 = gv1), (x1 = x1), (x1 = x2), (x2 = x1), (x2 = x2), (gv1 <> gv1), (x1 <> x1), (x1 <> x2), (x2 <> x1), (x2 <> x2)
+(None = Some x1), (None = Some x2), (None = Some gv1), (succ x1 = x1), (succ x1 = x2), (succ x2 = x1), (succ x2 = x2), (zero = succ x1), (zero = succ x2), (cons x1 gv1 = gv1)
+(cons x1 gv1 = drop x1 gv1), (cons x1 gv1 = drop x2 gv1), (cons x2 gv1 = gv1), (cons x2 gv1 = drop x1 gv1), (cons x2 gv1 = drop x2 gv1), (drop x1 gv1 = gv1), (drop x2 gv1 = gv1), (nil = cons x1 gv1), (nil = cons x2 gv1), (nil = drop x1 gv1)
+(nil = drop x2 gv1)
+
+Label: 1 (1)
+(x2 = x2), (x2 = x1), (x1 = x2), (x1 = x1), (gv0 = gv0), (x2 <> x2), (x2 <> x1), (x1 <> x2), (x1 <> x1), (gv0 <> gv0)
+(None = Some x2), (None = Some x1), (None = Some gv0), (succ x2 = x2), (succ x2 = x1), (succ x1 = x2), (succ x1 = x1), (zero = succ x2), (zero = succ x1), (cons x2 gv0 = gv0)
+(cons x2 gv0 = drop x2 gv0), (cons x2 gv0 = drop x1 gv0), (cons x1 gv0 = gv0), (cons x1 gv0 = drop x2 gv0), (cons x1 gv0 = drop x1 gv0), (drop x2 gv0 = gv0), (drop x1 gv0 = gv0), (nil = cons x2 gv0), (nil = cons x1 gv0), (nil = drop x2 gv0)
+(nil = drop x1 gv0)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 21.655 seconds
+
+
+Label: 0 (0)
+
+Label: 1 (1)
+
+
+
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 23.377 seconds
+
+Number of Result Pairs Returned: 1
+
+1. (match drop x2 nil with  | nil => nil  | cons _ z => drop x1 z  end = match drop x1 nil with        | nil => nil        | cons _ z => drop x2 z        end)

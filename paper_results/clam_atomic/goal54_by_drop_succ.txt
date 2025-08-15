@@ -1,0 +1,249 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+
+----------------------------------
+Goal: (drop (succ w) (drop x (cons y z)) = drop w (drop x z))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 1.501 seconds
+
+gv1 : Nat = (succ w)
+gv4 : Lst = (drop w (drop x z))
+gv0 : Lst = (drop (succ w) (drop x (cons y z)))
+gv5 : Lst = (drop x z)
+gv3 : Lst = (cons y z)
+gv2 : Lst = (drop x (cons y z))
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 30.752 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (drop (succ w) (drop x (cons y z)) = drop w (drop x z))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (drop x z = gv5)
+
+----------------------------------
+Goal: (drop (succ w) (drop x (cons y z)) = drop w gv5)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (cons y z = gv3)
+
+----------------------------------
+Goal: (drop (succ w) (drop x gv3) = drop w (drop x z))
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (drop x (cons y z) = gv2)
+
+----------------------------------
+Goal: (drop (succ w) gv2 = drop w (drop x z))
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (drop (succ w) (drop x (cons y z)) = gv0)
+
+----------------------------------
+Goal: (gv0 = drop w (drop x z))
+Case: Invalid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (drop w (drop x z) = gv4)
+
+----------------------------------
+Goal: (drop (succ w) (drop x (cons y z)) = gv4)
+Case: Invalid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (succ w = gv1)
+
+----------------------------------
+Goal: (drop gv1 (drop x (cons y z)) = drop w (drop x z))
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 30.895 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+drop : (Nat -> Lst -> Lst)
+succ : (Nat -> Nat)
+zero : Nat
+nil : Lst
+cons : (Nat -> Lst -> Lst)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 31.044 seconds
+
+
+Label: 0 (0)
+(gv5 = gv5), (gv5 = z), (z = gv5), (z = z), (y = y), (y = x), (y = w), (x = y), (x = x), (x = w)
+(w = y), (w = x), (w = w), (gv5 <> gv5), (gv5 <> z), (z <> gv5), (z <> z), (y <> y), (y <> x), (y <> w)
+(x <> y), (x <> x), (x <> w), (w <> y), (w <> x), (w <> w), (cons y gv5 = gv5), (cons y gv5 = z), (cons y gv5 = drop y gv5), (cons y gv5 = drop y z)
+(cons y gv5 = drop x gv5), (cons y gv5 = drop x z), (cons y gv5 = drop w gv5), (cons y gv5 = drop w z), (cons y z = gv5), (cons y z = z), (cons y z = drop y gv5), (cons y z = drop y z), (cons y z = drop x gv5), (cons y z = drop x z)
+(cons y z = drop w gv5), (cons y z = drop w z), (cons x gv5 = gv5), (cons x gv5 = z), (cons x gv5 = drop y gv5), (cons x gv5 = drop y z), (cons x gv5 = drop x gv5), (cons x gv5 = drop x z), (cons x gv5 = drop w gv5), (cons x gv5 = drop w z)
+(cons x z = gv5), (cons x z = z), (cons x z = drop y gv5), (cons x z = drop y z), (cons x z = drop x gv5), (cons x z = drop x z), (cons x z = drop w gv5), (cons x z = drop w z), (cons w gv5 = gv5), (cons w gv5 = z)
+(cons w gv5 = drop y gv5), (cons w gv5 = drop y z), (cons w gv5 = drop x gv5), (cons w gv5 = drop x z), (cons w gv5 = drop w gv5), (cons w gv5 = drop w z), (cons w z = gv5), (cons w z = z), (cons w z = drop y gv5), (cons w z = drop y z)
+(cons w z = drop x gv5), (cons w z = drop x z), (cons w z = drop w gv5), (cons w z = drop w z), (drop y gv5 = gv5), (drop y gv5 = z), (drop y z = gv5), (drop y z = z), (drop x gv5 = gv5), (drop x gv5 = z)
+(drop x z = gv5), (drop x z = z), (drop w gv5 = gv5), (drop w gv5 = z), (drop w z = gv5), (drop w z = z), (nil = cons y gv5), (nil = cons y z), (nil = cons x gv5), (nil = cons x z)
+(nil = cons w gv5), (nil = cons w z), (nil = drop y gv5), (nil = drop y z), (nil = drop x gv5), (nil = drop x z), (nil = drop w gv5), (nil = drop w z), (None = Some y), (None = Some x)
+(None = Some w), (succ y = y), (succ y = x), (succ y = w), (succ x = y), (succ x = x), (succ x = w), (succ w = y), (succ w = x), (succ w = w)
+(zero = succ y), (zero = succ x), (zero = succ w), (None = Some gv5), (None = Some z)
+
+Label: 1 (1)
+(z = z), (z = gv3), (gv3 = z), (gv3 = gv3), (y = y), (y = x), (y = w), (x = y), (x = x), (x = w)
+(w = y), (w = x), (w = w), (z <> z), (z <> gv3), (gv3 <> z), (gv3 <> gv3), (y <> y), (y <> x), (y <> w)
+(x <> y), (x <> x), (x <> w), (w <> y), (w <> x), (w <> w), (cons y z = z), (cons y z = gv3), (cons y z = drop y z), (cons y z = drop y gv3)
+(cons y z = drop x z), (cons y z = drop x gv3), (cons y z = drop w z), (cons y z = drop w gv3), (cons y gv3 = z), (cons y gv3 = gv3), (cons y gv3 = drop y z), (cons y gv3 = drop y gv3), (cons y gv3 = drop x z), (cons y gv3 = drop x gv3)
+(cons y gv3 = drop w z), (cons y gv3 = drop w gv3), (cons x z = z), (cons x z = gv3), (cons x z = drop y z), (cons x z = drop y gv3), (cons x z = drop x z), (cons x z = drop x gv3), (cons x z = drop w z), (cons x z = drop w gv3)
+(cons x gv3 = z), (cons x gv3 = gv3), (cons x gv3 = drop y z), (cons x gv3 = drop y gv3), (cons x gv3 = drop x z), (cons x gv3 = drop x gv3), (cons x gv3 = drop w z), (cons x gv3 = drop w gv3), (cons w z = z), (cons w z = gv3)
+(cons w z = drop y z), (cons w z = drop y gv3), (cons w z = drop x z), (cons w z = drop x gv3), (cons w z = drop w z), (cons w z = drop w gv3), (cons w gv3 = z), (cons w gv3 = gv3), (cons w gv3 = drop y z), (cons w gv3 = drop y gv3)
+(cons w gv3 = drop x z), (cons w gv3 = drop x gv3), (cons w gv3 = drop w z), (cons w gv3 = drop w gv3), (drop y z = z), (drop y z = gv3), (drop y gv3 = z), (drop y gv3 = gv3), (drop x z = z), (drop x z = gv3)
+(drop x gv3 = z), (drop x gv3 = gv3), (drop w z = z), (drop w z = gv3), (drop w gv3 = z), (drop w gv3 = gv3), (nil = cons y z), (nil = cons y gv3), (nil = cons x z), (nil = cons x gv3)
+(nil = cons w z), (nil = cons w gv3), (nil = drop y z), (nil = drop y gv3), (nil = drop x z), (nil = drop x gv3), (nil = drop w z), (nil = drop w gv3), (None = Some y), (None = Some x)
+(None = Some w), (succ y = y), (succ y = x), (succ y = w), (succ x = y), (succ x = x), (succ x = w), (succ w = y), (succ w = x), (succ w = w)
+(zero = succ y), (zero = succ x), (zero = succ w), (None = Some z), (None = Some gv3)
+
+Label: 2 (2)
+(z = z), (z = gv2), (gv2 = z), (gv2 = gv2), (y = y), (y = x), (y = w), (x = y), (x = x), (x = w)
+(w = y), (w = x), (w = w), (z <> z), (z <> gv2), (gv2 <> z), (gv2 <> gv2), (y <> y), (y <> x), (y <> w)
+(x <> y), (x <> x), (x <> w), (w <> y), (w <> x), (w <> w), (cons y z = z), (cons y z = gv2), (cons y z = drop y z), (cons y z = drop y gv2)
+(cons y z = drop x z), (cons y z = drop x gv2), (cons y z = drop w z), (cons y z = drop w gv2), (cons y gv2 = z), (cons y gv2 = gv2), (cons y gv2 = drop y z), (cons y gv2 = drop y gv2), (cons y gv2 = drop x z), (cons y gv2 = drop x gv2)
+(cons y gv2 = drop w z), (cons y gv2 = drop w gv2), (cons x z = z), (cons x z = gv2), (cons x z = drop y z), (cons x z = drop y gv2), (cons x z = drop x z), (cons x z = drop x gv2), (cons x z = drop w z), (cons x z = drop w gv2)
+(cons x gv2 = z), (cons x gv2 = gv2), (cons x gv2 = drop y z), (cons x gv2 = drop y gv2), (cons x gv2 = drop x z), (cons x gv2 = drop x gv2), (cons x gv2 = drop w z), (cons x gv2 = drop w gv2), (cons w z = z), (cons w z = gv2)
+(cons w z = drop y z), (cons w z = drop y gv2), (cons w z = drop x z), (cons w z = drop x gv2), (cons w z = drop w z), (cons w z = drop w gv2), (cons w gv2 = z), (cons w gv2 = gv2), (cons w gv2 = drop y z), (cons w gv2 = drop y gv2)
+(cons w gv2 = drop x z), (cons w gv2 = drop x gv2), (cons w gv2 = drop w z), (cons w gv2 = drop w gv2), (drop y z = z), (drop y z = gv2), (drop y gv2 = z), (drop y gv2 = gv2), (drop x z = z), (drop x z = gv2)
+(drop x gv2 = z), (drop x gv2 = gv2), (drop w z = z), (drop w z = gv2), (drop w gv2 = z), (drop w gv2 = gv2), (nil = cons y z), (nil = cons y gv2), (nil = cons x z), (nil = cons x gv2)
+(nil = cons w z), (nil = cons w gv2), (nil = drop y z), (nil = drop y gv2), (nil = drop x z), (nil = drop x gv2), (nil = drop w z), (nil = drop w gv2), (None = Some y), (None = Some x)
+(None = Some w), (succ y = y), (succ y = x), (succ y = w), (succ x = y), (succ x = x), (succ x = w), (succ w = y), (succ w = x), (succ w = w)
+(zero = succ y), (zero = succ x), (zero = succ w), (None = Some z), (None = Some gv2)
+
+Label: 3 (3)
+(y = y), (y = x), (y = w), (x = y), (x = x), (x = w), (w = y), (w = x), (w = w), (z = z)
+(z = gv0), (gv0 = z), (gv0 = gv0), (y <> y), (y <> x), (y <> w), (x <> y), (x <> x), (x <> w), (w <> y)
+(w <> x), (w <> w), (z <> z), (z <> gv0), (gv0 <> z), (gv0 <> gv0), (cons y z = z), (cons y z = gv0), (cons y z = drop y z), (cons y z = drop y gv0)
+(cons y z = drop x z), (cons y z = drop x gv0), (cons y z = drop w z), (cons y z = drop w gv0), (cons y gv0 = z), (cons y gv0 = gv0), (cons y gv0 = drop y z), (cons y gv0 = drop y gv0), (cons y gv0 = drop x z), (cons y gv0 = drop x gv0)
+(cons y gv0 = drop w z), (cons y gv0 = drop w gv0), (cons x z = z), (cons x z = gv0), (cons x z = drop y z), (cons x z = drop y gv0), (cons x z = drop x z), (cons x z = drop x gv0), (cons x z = drop w z), (cons x z = drop w gv0)
+(cons x gv0 = z), (cons x gv0 = gv0), (cons x gv0 = drop y z), (cons x gv0 = drop y gv0), (cons x gv0 = drop x z), (cons x gv0 = drop x gv0), (cons x gv0 = drop w z), (cons x gv0 = drop w gv0), (cons w z = z), (cons w z = gv0)
+(cons w z = drop y z), (cons w z = drop y gv0), (cons w z = drop x z), (cons w z = drop x gv0), (cons w z = drop w z), (cons w z = drop w gv0), (cons w gv0 = z), (cons w gv0 = gv0), (cons w gv0 = drop y z), (cons w gv0 = drop y gv0)
+(cons w gv0 = drop x z), (cons w gv0 = drop x gv0), (cons w gv0 = drop w z), (cons w gv0 = drop w gv0), (drop y z = z), (drop y z = gv0), (drop y gv0 = z), (drop y gv0 = gv0), (drop x z = z), (drop x z = gv0)
+(drop x gv0 = z), (drop x gv0 = gv0), (drop w z = z), (drop w z = gv0), (drop w gv0 = z), (drop w gv0 = gv0), (nil = cons y z), (nil = cons y gv0), (nil = cons x z), (nil = cons x gv0)
+(nil = cons w z), (nil = cons w gv0), (nil = drop y z), (nil = drop y gv0), (nil = drop x z), (nil = drop x gv0), (nil = drop w z), (nil = drop w gv0), (None = Some y), (None = Some x)
+(None = Some w), (succ y = y), (succ y = x), (succ y = w), (succ x = y), (succ x = x), (succ x = w), (succ w = y), (succ w = x), (succ w = w)
+(zero = succ y), (zero = succ x), (zero = succ w), (None = Some z), (None = Some gv0)
+
+Label: 4 (4)
+(gv4 = gv4), (gv4 = z), (z = gv4), (z = z), (y = y), (y = x), (y = w), (x = y), (x = x), (x = w)
+(w = y), (w = x), (w = w), (gv4 <> gv4), (gv4 <> z), (z <> gv4), (z <> z), (y <> y), (y <> x), (y <> w)
+(x <> y), (x <> x), (x <> w), (w <> y), (w <> x), (w <> w), (cons y gv4 = gv4), (cons y gv4 = z), (cons y gv4 = drop y gv4), (cons y gv4 = drop y z)
+(cons y gv4 = drop x gv4), (cons y gv4 = drop x z), (cons y gv4 = drop w gv4), (cons y gv4 = drop w z), (cons y z = gv4), (cons y z = z), (cons y z = drop y gv4), (cons y z = drop y z), (cons y z = drop x gv4), (cons y z = drop x z)
+(cons y z = drop w gv4), (cons y z = drop w z), (cons x gv4 = gv4), (cons x gv4 = z), (cons x gv4 = drop y gv4), (cons x gv4 = drop y z), (cons x gv4 = drop x gv4), (cons x gv4 = drop x z), (cons x gv4 = drop w gv4), (cons x gv4 = drop w z)
+(cons x z = gv4), (cons x z = z), (cons x z = drop y gv4), (cons x z = drop y z), (cons x z = drop x gv4), (cons x z = drop x z), (cons x z = drop w gv4), (cons x z = drop w z), (cons w gv4 = gv4), (cons w gv4 = z)
+(cons w gv4 = drop y gv4), (cons w gv4 = drop y z), (cons w gv4 = drop x gv4), (cons w gv4 = drop x z), (cons w gv4 = drop w gv4), (cons w gv4 = drop w z), (cons w z = gv4), (cons w z = z), (cons w z = drop y gv4), (cons w z = drop y z)
+(cons w z = drop x gv4), (cons w z = drop x z), (cons w z = drop w gv4), (cons w z = drop w z), (drop y gv4 = gv4), (drop y gv4 = z), (drop y z = gv4), (drop y z = z), (drop x gv4 = gv4), (drop x gv4 = z)
+(drop x z = gv4), (drop x z = z), (drop w gv4 = gv4), (drop w gv4 = z), (drop w z = gv4), (drop w z = z), (nil = cons y gv4), (nil = cons y z), (nil = cons x gv4), (nil = cons x z)
+(nil = cons w gv4), (nil = cons w z), (nil = drop y gv4), (nil = drop y z), (nil = drop x gv4), (nil = drop x z), (nil = drop w gv4), (nil = drop w z), (None = Some y), (None = Some x)
+(None = Some w), (succ y = y), (succ y = x), (succ y = w), (succ x = y), (succ x = x), (succ x = w), (succ w = y), (succ w = x), (succ w = w)
+(zero = succ y), (zero = succ x), (zero = succ w), (None = Some gv4), (None = Some z)
+
+Label: 5 (5)
+(z = z), (w = w), (w = y), (w = x), (w = gv1), (y = w), (y = y), (y = x), (y = gv1), (x = w)
+(x = y), (x = x), (x = gv1), (gv1 = w), (gv1 = y), (gv1 = x), (gv1 = gv1), (z <> z), (w <> w), (w <> y)
+(w <> x), (w <> gv1), (y <> w), (y <> y), (y <> x), (y <> gv1), (x <> w), (x <> y), (x <> x), (x <> gv1)
+(gv1 <> w), (gv1 <> y), (gv1 <> x), (gv1 <> gv1), (cons w z = z), (cons w z = drop w z), (cons w z = drop y z), (cons w z = drop x z), (cons w z = drop gv1 z), (cons y z = z)
+(cons y z = drop w z), (cons y z = drop y z), (cons y z = drop x z), (cons y z = drop gv1 z), (cons x z = z), (cons x z = drop w z), (cons x z = drop y z), (cons x z = drop x z), (cons x z = drop gv1 z), (cons gv1 z = z)
+(cons gv1 z = drop w z), (cons gv1 z = drop y z), (cons gv1 z = drop x z), (cons gv1 z = drop gv1 z), (drop w z = z), (drop y z = z), (drop x z = z), (drop gv1 z = z), (nil = cons w z), (nil = cons y z)
+(nil = cons x z), (nil = cons gv1 z), (nil = drop w z), (nil = drop y z), (nil = drop x z), (nil = drop gv1 z), (None = Some w), (None = Some y), (None = Some x), (None = Some gv1)
+(succ w = w), (succ w = y), (succ w = x), (succ w = gv1), (succ y = w), (succ y = y), (succ y = x), (succ y = gv1), (succ x = w), (succ x = y)
+(succ x = x), (succ x = gv1), (succ gv1 = w), (succ gv1 = y), (succ gv1 = x), (succ gv1 = gv1), (zero = succ w), (zero = succ y), (zero = succ x), (zero = succ gv1)
+(None = Some z)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 38.134 seconds
+
+
+Label: 0 (0)
+(drop x z = gv5)
+
+Label: 1 (1)
+(cons y z = gv3)
+
+Label: 2 (2)
+
+Label: 3 (3)
+
+Label: 4 (4)
+
+Label: 5 (5)
+(succ w = gv1)
+
+
+
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 40.003 seconds
+
+Number of Result Pairs Returned: 1
+
+1. (drop (succ w) (drop x (cons y z)) = drop w (drop x z))

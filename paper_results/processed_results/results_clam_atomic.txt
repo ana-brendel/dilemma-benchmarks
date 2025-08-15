@@ -1,0 +1,2287 @@
+[TOTAL] 151
+
+[SUCCESS] 49
+    [SUCCESS][1][AS IS] 14
+    [SUCCESS][3][AS IS] 1
+    [SUCCESS][1][INFER ATOMIC] 6
+    [SUCCESS][3][INFER ATOMIC] 17
+    [SUCCESS][5][INFER ATOMIC] 3
+    [SUCCESS][1][GENERALIZE] 8
+
+[FAIL] 102
+    [FAIL][RESOURCE] 42
+    [FAIL][IMPLEMENTATION] 9
+    [FAIL][BEYOND SCOPE] 9
+    [FAIL][BEYOND SCOPE][EXTRA VAR] 7
+    [FAIL][FORWARD] 2
+    [FAIL][INCOMPLETE] 33
+
+-----------------------------------------------
+
+[SUCCESS][1][AS IS]
+Test = goal59_by_rev_rev_cons
+[TIME] 54.631
+[COUNTS] 11
+[TARGET] cons n (rev l) = rev (append l (cons n nil))
+
+1. (rev (append y (cons z nil)) = cons z (rev y))
+
+2. (rev gv5 = y -> rev (append y (cons z nil)) = cons z gv5)
+
+3. (nil = rev gv3 -> rev (append y (cons z gv3)) = cons z (rev y))
+
+4. (append gv3 y = y -> rev (append y (cons z gv3)) = cons z (rev y))
+
+5. (append y gv3 = y -> rev (append y (cons z gv3)) = cons z (rev y))
+
+
+
+[FAIL][RESOURCE]
+Test = goal12_by_append_assoc
+[TIME] 98.586
+[COUNTS] 32
+[TARGET] append (append x y) z = append x (append y z)
+
+1. (qreva x (cons n y) = append (append (rev x) (cons n nil)) y)
+
+2. (nil = rev gv6 -> qreva x (cons n y) = append (append (rev x) (cons n gv6)) y)
+
+3. (rev gv4 = x -> qreva x (cons n y) = append (append gv4 (cons n nil)) y)
+
+4. (qreva gv6 y = y ->  qreva x (cons n y) = append (append (rev x) (cons n gv6)) y)
+
+5. (qreva gv6 x = x ->  qreva x (cons n y) = append (append (rev x) (cons n gv6)) y)
+
+
+
+[FAIL][RESOURCE]
+Test = qreva_append_by_qreva_nil_2
+[TIME] 650.922
+[COUNTS] 59
+[TARGET] qreva x y = append (qreva x nil) y
+
+1. (append (qreva y nil) (append (qreva x nil) gv5) =  append (qreva y nil) (qreva x gv5))
+
+2. (append gv1 (append (qreva x nil) gv5) = append gv1 (qreva x gv5))
+
+3. (append gv1 (append (qreva x nil) (cons n nil)) =  append gv1 (qreva x (cons n nil)))
+
+4. (qreva (append x y) nil = append (qreva y nil) gv4 ->  append (qreva y nil) (append gv4 gv5) = append (qreva y nil) (qreva x gv5))
+
+5. (qreva (append x y) nil = append (qreva y nil) gv4 ->  append (qreva y nil) (append gv4 (cons n nil)) =  append (qreva y nil) (qreva x (cons n nil)))
+
+
+
+[FAIL][BEYOND SCOPE]
+Test = goal21_by_append_assoc_1
+[TIME] 71.138
+[COUNTS] 14
+[TARGET] append (append x y) z = append x (append y z)
+
+1. (rotate (len x) (append (append x y) (cons n nil)) = append y (cons n x))
+
+2. (zero = len gv5 ->  rotate (len x) (append (append x y) (cons n gv5)) = append y (cons n x))
+
+3. (append gv5 y = y ->  rotate (len x) (append (append x y) (cons n gv5)) = append y (cons n x))
+
+4. (append gv5 x = x ->  rotate (len x) (append (append x y) (cons n gv5)) = append y (cons n x))
+
+5. (append y gv5 = y ->  rotate (len x) (append (append x y) (cons n gv5)) = append y (cons n x))
+
+
+
+[EQUIV][SUCCESS][1][GENERALIZE]
+Test = goal48_by_insort_len
+[TIME] 100.937
+[COUNTS] 4
+[TARGET] len (insort n x) = succ (len x)
+
+1. (len gv2 = gv4 -> len (insort n gv2) = succ gv4)
+
+2. (len gv2 = len x -> len (insort n gv2) = succ (len x))
+
+3. (len (sort x) = gv4 -> len (insort n (sort x)) = succ gv4)
+
+4. (len (insort n (sort x)) = succ (len x))
+
+
+
+[FAIL][BEYOND SCOPE]
+Test = goal7_by_plus_comm_3
+[TIME] 198.869
+[COUNTS] 3
+[TARGET] plus x y = plus y x.
+
+1. (len (qreva (cons n x) y) = plus (len (cons n x)) gv8 ->  len (qreva x (cons n (cons n0 y))) = succ (plus (len x) (succ gv8)))
+
+2. (len (qreva x (cons n (cons n0 y))) = succ (plus (len x) (succ (len y))))
+
+3. (succ gv8 = len gv3 ->  len (qreva x (cons n gv3)) = succ (plus (len x) (succ gv8)))
+
+
+
+[FAIL][BEYOND SCOPE][EXTRA VAR]
+Test = goal16_by_even_odd_plus
+[TIME] 54.262
+[COUNTS] 9
+[TARGET] even (plus m n) = negb (even (plus m (succ n)))
+
+1. (even (plus x x) = gv4 -> negb (even (plus x (succ x))) = gv4)
+
+2. (negb (even (plus x (succ x))) = true)
+
+3. (false = even (plus x (succ x)))
+
+4. (false = gv1 -> negb gv1 = true)
+
+5. (gv4 <> gv1 -> negb gv1 = gv4)
+
+
+
+[FAIL][RESOURCE]
+Test = goal32_by_rotate_len_append
+[TIME] 60.844
+[COUNTS] 11
+[TARGET] rotate (len x) (append x y) = append y x
+
+1. (rotate (len x) (append x (cons n nil)) = cons n x)
+
+2. (zero = len gv4 -> rotate (len x) (append x (cons n gv4)) = cons n x)
+
+3. (append gv4 x = x -> rotate (len x) (append x (cons n gv4)) = cons n x)
+
+4. (append x gv4 = x -> rotate (len x) (append x (cons n gv4)) = cons n x)
+
+5. (nil = rotate n gv4 -> rotate (len x) (append x (cons n gv4)) = cons n x)
+
+
+
+[INCOMPLETE]
+Test = distrib_by_plus_assoc_1
+[TIME] -1
+[COUNTS] 0
+[TARGET] plus (plus x y) z = plus x (plus y z)
+
+RESULTS NOT FOUND
+
+
+
+[SUCCESS][3][INFER ATOMIC]
+Test = goal45_by_Nat_beq_refl_1
+[TIME] 51.85
+[COUNTS] 12
+[TARGET] Nat_beq n n = true
+
+1. (Nat_beq x x || gv2 = true)
+
+2. (Nat_beq x x || false = true)
+
+3. (true = Nat_beq x x)
+
+4. (true = gv1 -> gv1 || gv2 = true)
+
+5. (true = gv1 -> gv1 || false = true)
+
+
+
+[SUCCESS][1][AS IS]
+Test = goal29_by_rev_involutive
+[TIME] 37.188
+[COUNTS] 5
+[TARGET] eq (rev (rev x)) x
+
+1. (rev (rev x) = x)
+
+2. (qreva x x = append gv1 x -> rev gv1 = x)
+
+3. (qreva gv1 x = append x x -> rev gv1 = x)
+
+4. (qreva x gv1 = append gv1 gv1 -> rev gv1 = x)
+
+5. (qreva gv1 gv1 = append x gv1 -> rev gv1 = x)
+
+
+
+[INCOMPLETE]
+Test = goal35_by_mult_assoc_1
+[TIME] -1
+[COUNTS] 0
+[TARGET] mult (mult x y) z = mult x (mult y z)
+
+FILE NOT FOUND
+
+
+
+[FAIL][BEYOND SCOPE]
+Test = goal28_by_append_nil_1
+[TIME] 425.708
+[COUNTS] 11
+[TARGET] append x Nil = x
+
+1. (append (append (revflat x1) (cons n (revflat x2))) gv5 =  qrevaflat x1 (cons n (qrevaflat x2 gv5)))
+
+2. (append (append (revflat x1) (cons n (revflat x2))) nil =  qrevaflat x1 (cons n (qrevaflat x2 nil)))
+
+3. (revflat x2 = qrevaflat x2 nil)
+
+4. (revflat x2 = gv8 ->  append (append (revflat x1) (cons n (revflat x2))) nil =  qrevaflat x1 (cons n gv8))
+
+5. (qrevaflat x2 gv5 = append gv4 gv5 ->  append (append (revflat x1) (cons n gv4)) gv5 =  qrevaflat x1 (cons n (qrevaflat x2 gv5)))
+
+
+
+[SUCCESS][1][AS IS]
+Test = goal30_by_rev_involutive
+[TIME] 30.533
+[COUNTS] 1
+[TARGET] eq (rev (rev x)) x
+
+1. (rev (rev x) = x)
+
+
+
+[SUCCESS][3][INFER ATOMIC]
+Test = goal8_by_drop_cons_2
+[TIME] 142.271
+[COUNTS] 6
+[TARGET] drop (succ x) (cons n l) = drop x l
+
+1. (drop x2 (drop (succ x1) gv3) = drop x1 (drop (succ x2) gv3))
+
+2. (drop x2 (drop (succ x1) (cons n l)) = drop x1 (drop (succ x2) (cons n l)))
+
+3. (drop x1 l = drop (succ x1) (cons n l))
+
+4. (drop x2 l = drop (succ x2) (cons n l))
+
+5. (drop x1 l = gv1 -> drop x2 gv1 = drop x1 (drop (succ x2) (cons n l)))
+
+
+
+[INCOMPLETE]
+Test = goal46_by_eqb_refl_2
+[TIME] -1
+[COUNTS] 0
+[TARGET] eqb n n = true
+
+RESULTS NOT FOUND
+
+
+
+[SUCCESS][1][AS IS]
+Test = goal11_by_append_nil
+[TIME] 38.434
+[COUNTS] 7
+[TARGET] append x Nil = x
+
+1. (y = append y nil)
+
+2. (nil = rev gv1 -> y = append y gv1)
+
+3. (append gv1 y = y -> y = append y gv1)
+
+4. (append gv1 gv1 = gv1 -> y = append y gv1)
+
+5. (nil = append gv1 gv1 -> y = append y gv1)
+
+
+
+[INCOMPLETE]
+Test = mult_commut_by_mult_succ
+[TIME] -1
+[COUNTS] 0
+[TARGET] plus (mult x y) x = mult x (succ y)
+
+FILE NOT FOUND
+
+
+
+[SUCCESS][1][GENERALIZE]
+Test = goal81_by_qreva_rev
+[TIME] 91.709
+[COUNTS] 29
+[TARGET] qreva x y = append (rev x) y
+
+1. (qreva y gv1 = append (rev y) gv1)
+
+2. (qreva y nil = append (rev y) nil)
+
+3. (rev y = qreva y nil)
+
+4. (rev y = append (rev y) nil)
+
+5. (rev y = gv0 -> gv0 = append (rev y) nil)
+
+
+
+[SUCCESS][1][GENERALIZE]
+Test = rev_append_by_append_nil_1
+[TIME] 98.84
+[COUNTS] 36
+[TARGET] append x Nil = x
+
+1. (gv0 = append gv0 nil)
+
+2. (rev l2 = append (rev l2) nil)
+
+3. (rev gv1 = l2 -> rev l2 = gv1)
+
+4. (nil = rev gv2 -> rev l2 = append (rev l2) gv2)
+
+5. (zero = len gv2 -> rev l2 = append (rev l2) gv2)
+
+
+
+[FAIL][RESOURCE]
+Test = goal9_by_drop_assoc
+[TIME] 40.531
+[COUNTS] 1
+[TARGET] eq (drop x (drop y z)) (drop y (drop x z))
+
+1. (drop w (drop x (drop y z)) = drop y (drop x (drop w z)))
+
+
+
+[SUCCESS][3][AS IS]
+Test = goal8_by_drop_cons_assoc
+[TIME] 61.135
+[COUNTS] 2
+[TARGET] drop x1 (drop x2 (cons x3 l)) = drop x2 (drop x1 (cons x3 l))
+
+1. (drop x (drop y gv2) = drop y (drop x gv2))
+
+2. (drop x (drop y (cons n z)) = drop y (drop x (cons n z)))
+
+
+
+[FAIL][BEYOND SCOPE][EXTRA VAR]
+Test = goal34_by_plus_qmult
+[TIME] 70.361
+[COUNTS] 8
+[TARGET] plus (qmult x y z) a = qmult x y (plus z a)
+
+1. (mult x y = gv1 -> plus gv1 y = qmult x y y)
+
+2. (mult x y = qmult x y gv2 -> plus (qmult x y gv2) y = qmult x y y)
+
+3. (plus (qmult x y zero) y = qmult x y y)
+
+4. (qmult y x y = qmult x y y)
+
+5. (qmult y x y = plus (qmult x y zero) y)
+
+
+
+[FAIL][RESOURCE]
+Test = goal5_by_len_cons_succ
+[TIME] 261.688
+[COUNTS] 26
+[TARGET] succ (len (append l1 l2)) = len (append l1 (cons n l2))
+
+1. (len (append gv2 (cons n nil)) = succ (len gv2))
+
+2. (gv6 = len x -> len (append (rev x) (cons n nil)) = succ gv6)
+
+3. (len (append (rev x) (cons n nil)) = succ (len (rev x)))
+
+4. (nil = rev gv4 -> len (append (rev x) (cons n gv4)) = succ (len (rev x)))
+
+5. (zero = len gv4 -> len (append (rev x) (cons n gv4)) = succ (len (rev x)))
+
+
+
+[INCOMPLETE]
+Test = goal33_by_mult_commut
+[TIME] -1
+[COUNTS] 0
+[TARGET] mult x y = mult y x
+
+FILE NOT FOUND
+
+
+
+[EQUIV][SUCCESS][1][INFER ATOMIC]
+Test = rev_rev_by_rev_rev_cons
+[TIME] 143.176
+[COUNTS] 22
+[TARGET] cons n (rev l) = rev (append l (cons n nil))
+
+1. (rev gv2 = l -> rev (append gv2 (cons n nil)) = cons n l)
+
+2. (rev (append (rev l) (cons n nil)) = cons n l)
+
+3. (nil = rev gv4 -> rev (append (rev l) (cons n gv4)) = cons n l)
+
+4. (zero = len gv4 -> rev (append (rev l) (cons n gv4)) = cons n l)
+
+5. (qreva gv4 l = l -> rev (append (rev l) (cons n gv4)) = cons n l)
+
+
+
+[FAIL][RESOURCE]
+Test = goal56_by_drop_succ_2
+[TIME] 48.412
+[COUNTS] 1
+[TARGET] drop (succ n1) (drop n2 l) = drop n1 (drop (succ n2) l)
+
+1. (drop v (drop (succ w) (drop x (cons y z))) = drop v (drop w (drop x z)))
+
+
+
+[SUCCESS][3][INFER ATOMIC]
+Test = goal40_by_Nat_beq_refl_1
+[TIME] 60.927
+[COUNTS] 10
+[TARGET] Nat_beq n n = true
+
+1. (Nat_beq n n || gv2 = true)
+
+2. (Nat_beq n n || lst_mem n x = true)
+
+3. (true = Nat_beq n n)
+
+4. (true = gv1 -> gv1 || gv2 = true)
+
+5. (true = gv1 -> gv1 || lst_mem n x = true)
+
+
+
+[FAIL][RESOURCE]
+Test = qreva_nil_by_append_assoc
+[TIME] 204.978
+[COUNTS] 57
+[TARGET] append (append x y) z = append x (append y z)
+
+1. (append gv1 (cons n y) = append (append gv1 (cons n nil)) y)
+
+2. (append (qreva x nil) (cons n y) =  append (append (qreva x nil) (cons n nil)) y)
+
+3. (nil = rev gv2 -> append gv1 (cons n y) = append (append gv1 (cons n gv2)) y)
+
+4. (zero = len gv2 -> append gv1 (cons n y) = append (append gv1 (cons n gv2)) y)
+
+5. (nil = rev gv2 ->  append (qreva x gv2) (cons n y) =  append (append (qreva x gv2) (cons n gv2)) y)
+
+
+
+[FAIL][RESOURCE]
+Test = goal57_by_drop_succ_1
+[TIME] 98.625
+[COUNTS] 1
+[TARGET] drop (succ n1) (drop n2 l) = drop n1 (drop (succ n2) l)
+
+1. (drop (succ u) (drop v (drop (succ w) (cons x (cons y z)))) =  drop (succ u) (drop v (drop w (cons x z))))
+
+
+
+[INCOMPLETE]
+Test = rev_append_by_append_rev_cons
+[TIME] -1
+[COUNTS] 0
+[TARGET] rev (append l1 (cons x l2)) = append (rev l2) (cons x (rev l1))
+
+FILE NOT FOUND
+
+
+
+[FAIL][RESOURCE]
+Test = goal21_by_append_assoc_2
+[TIME] 65.016
+[COUNTS] 14
+[TARGET] append (append x y) z = append x (append y z)
+
+1. (append (append y (cons n nil)) x = append y (cons n x))
+
+2. (zero = len gv3 -> append (append y (cons n gv3)) x = append y (cons n x))
+
+3. (append x gv3 = x -> append (append y (cons n gv3)) x = append y (cons n x))
+
+4. (append gv3 x = x -> append (append y (cons n gv3)) x = append y (cons n x))
+
+5. (append gv3 y = y -> append (append y (cons n gv3)) x = append y (cons n x))
+
+
+
+[FAIL][RESOURCE]
+Test = goal10_by_append_assoc
+[TIME] 391.531
+[COUNTS] 69
+[TARGET] append (append x y) z = append x (append y z)
+
+1. (append (append (rev l2) (cons n0 (rev l1))) gv5 =  append (append (rev l2) (cons n0 nil)) (append (rev l1) gv5))
+
+2. (append (append (rev l2) (cons n0 gv4)) gv5 =  append (append (rev l2) (cons n0 nil)) (append gv4 gv5))
+
+3. (append (append gv2 (cons n0 gv4)) gv5 =  append (append gv2 (cons n0 nil)) (append gv4 gv5))
+
+4. (append (append gv2 (cons n0 (rev l1))) gv5 =  append (append gv2 (cons n0 nil)) (append (rev l1) gv5))
+
+5. (append (append (rev l2) (cons n0 gv4)) (cons n nil) =  append (append (rev l2) (cons n0 nil)) (append gv4 (cons n nil)))
+
+
+
+[FAIL][BEYOND SCOPE]
+Test = goal78_by_rev_append
+[TIME] 109.217
+[COUNTS] 37
+[TARGET] rev (append x y) = append (rev y) (rev x)
+
+1. (rev (qreva x (append (rev (cons n nil)) (rev y))) = append y (cons n x))
+
+2. (rev gv6 = y ->  rev (qreva x (append (rev (cons n nil)) gv6)) = append y (cons n x))
+
+3. (nil = rev gv5 ->  rev (qreva x (append (rev (cons n gv5)) (rev y))) = append y (cons n x))
+
+4. (qreva gv5 y = y ->  rev (qreva x (append (rev (cons n gv5)) (rev y))) = append y (cons n x))
+
+5. (qreva gv5 x = x ->  rev (qreva x (append (rev (cons n gv5)) (rev y))) = append y (cons n x))
+
+
+
+[FAIL][RESOURCE]
+Test = qreva_append_by_qreva_nil_1
+[TIME] 327.82
+[COUNTS] 19
+[TARGET] qreva x y = append (qreva x nil) y
+
+1. (qreva (append x y) gv2 = append (qreva y nil) (qreva x gv2))
+
+2. (qreva gv1 gv3 = append gv5 (qreva x gv3) ->  qreva gv1 (cons n gv3) = append gv5 (qreva x (cons n gv3)))
+
+3. (qreva gv1 nil = append gv5 (qreva x nil) ->  qreva gv1 (cons n nil) = append gv5 (qreva x (cons n nil)))
+
+4. (qreva gv1 nil = append gv5 (qreva x nil) ->  qreva gv1 gv2 = append gv5 (qreva x gv2))
+
+5. (qreva gv1 nil = append (qreva y nil) (qreva x nil) ->  qreva gv1 (cons n nil) = append (qreva y nil) (qreva x (cons n nil)))
+
+
+
+[FAIL][RESOURCE]
+Test = goal80_by_rev_append
+[TIME] 81.932
+[COUNTS] 16
+[TARGET] rev (append x y) = append (rev y) (rev x)
+
+1. (rev (append (append (rev x) (cons n nil)) (rev y)) = append y (cons n x))
+
+2. (nil = rev gv5 ->  rev (append (append (rev x) (cons n gv5)) (rev y)) = append y (cons n x))
+
+3. (rev gv6 = y ->  rev (append (append (rev x) (cons n nil)) gv6) = append y (cons n x))
+
+4. (rev gv3 = x ->  rev (append (append gv3 (cons n nil)) (rev y)) = append y (cons n x))
+
+5. (append y gv5 = y ->  rev (append (append (rev x) (cons n gv5)) (rev y)) = append y (cons n x))
+
+
+
+[FAIL][RESOURCE]
+Test = goal28_by_qrevflat_append
+[TIME] 64.605
+[COUNTS] 12
+[TARGET] append (revflat x) y = qrevaflat x y
+
+1. (revflat x = qrevaflat x nil)
+
+2. (nil = rev gv2 -> revflat x = qrevaflat x gv2)
+
+3. (qreva gv2 gv2 = gv2 -> revflat x = qrevaflat x gv2)
+
+4. (nil = qreva gv2 gv2 -> revflat x = qrevaflat x gv2)
+
+5. (append gv2 gv2 = gv2 -> revflat x = qrevaflat x gv2)
+
+
+
+[FAIL][IMPLEMENTATION]
+Test = goal8_by_drop_nil_3
+[TIME] 52.969
+[COUNTS] 4
+[TARGET] drop x nil = nil
+
+1. (drop x (drop y gv2) = drop y (drop x gv2))
+
+2. (drop x (drop y nil) = drop y (drop x nil))
+
+3. (nil = drop y gv4 -> drop x (drop y nil) = drop y gv4)
+
+4. (nil = drop x gv1 -> drop x gv1 = drop y (drop x nil))
+
+
+
+[FAIL][BEYOND SCOPE][EXTRA VAR]
+Test = goal20_by_even_odd_append_len
+[TIME] 81.722
+[COUNTS] 9
+[TARGET] negb (even (len (append l1 l2))) = even (len (append l1 (cons n l2)))
+
+1. (even (len (append x x)) = gv5 ->  negb (even (len (append x (cons n x)))) = gv5)
+
+2. (negb (even (len (append x (cons n x)))) = true)
+
+3. (false = even (len (append x (cons n x))))
+
+4. (false = gv1 -> negb gv1 = true)
+
+5. (false = even gv2 -> negb (even gv2) = true)
+
+
+
+[INCOMPLETE]
+Test = plus_commut_by_plus_zero
+[TIME] -1
+[COUNTS] 0
+[TARGET] plus x zero = x
+
+FILE NOT FOUND
+
+
+
+[INCOMPLETE]
+Test = goal45_by_Nat_beq_refl_2
+[TIME] -1
+[COUNTS] 0
+[TARGET] Nat_beq n n = true
+
+RESULTS NOT FOUND
+
+
+
+[SUCCESS][3][INFER ATOMIC]
+Test = goal22_by_append_nil
+[TIME] 54.464
+[COUNTS] 12
+[TARGET] append x Nil = x
+
+1. (even (len y) = even (len (append y nil)))
+
+2. (append y nil = y)
+
+3. (len y = len (append y nil))
+
+4. (gv4 = y -> even (len y) = even (len gv4))
+
+5. (y = gv4 -> even (len y) = even (len gv4))
+
+
+
+[FAIL][RESOURCE]
+Test = goal31_by_qreva_nil
+[TIME] 78.304
+[COUNTS] 7
+[TARGET] qreva x y = append (qreva x nil) y
+
+1. (qreva (qreva x gv3) gv3 = x -> qreva (qreva x (cons n gv3)) gv3 = cons n x)
+
+2. (qreva (qreva x (cons n nil)) nil = cons n x)
+
+3. (cons n x = rev gv1 -> qreva gv1 nil = cons n x)
+
+4. (cons n x = qreva gv2 x -> qreva (qreva x gv2) nil = cons n x)
+
+5. (cons n x = append gv2 x -> qreva (qreva x gv2) nil = cons n x)
+
+
+
+[INCOMPLETE]
+Test = goal7_by_plus_comm_4
+[TIME] -1
+[COUNTS] 0
+[TARGET] plus x y = plus y x.
+
+FILE NOT FOUND
+
+
+
+[INCOMPLETE]
+Test = goal86_by_mult_assoc
+[TIME] -1
+[COUNTS] 0
+[TARGET] mult (mult x y) z = mult x (mult y z)
+
+FILE NOT FOUND
+
+
+
+[SUCCESS][3][INFER ATOMIC]
+Test = goal34_by_plus_commut
+[TIME] 105.043
+[COUNTS] 5
+[TARGET] plus x y = plus y x
+
+1. (qmult x y (plus z (plus y a)) = qmult x y (plus (plus z a) y))
+
+2. (plus a y = plus y a)
+
+3. (plus a z = plus z a)
+
+4. (plus a y = gv2 -> qmult x y (plus z gv2) = qmult x y (plus (plus z a) y))
+
+5. (plus a z = gv5 -> qmult x y (plus z (plus y a)) = qmult x y (plus gv5 y))
+
+
+
+[FAIL][RESOURCE]
+Test = goal27_by_qreva_append
+[TIME] 60.917
+[COUNTS] 23
+[TARGET] (qreva x y) = (append (rev x) y) [NOTE: incorrect label, had to paste real target in manually]
+
+1. (rev x = qreva x nil)
+
+2. (rev gv1 = x -> rev x = gv1)
+
+3. (rev gv0 = x -> gv0 = qreva x nil)
+
+4. (nil = rev gv2 -> rev x = qreva x gv2)
+
+5. (qreva gv2 x = x -> rev x = qreva x gv2)
+
+
+
+[FAIL][BEYOND SCOPE][EXTRA VAR]
+Test = goal33_by_qfac_mult
+[TIME] 115.687
+[COUNTS] 43
+[TARGET] qfac x y = mult (qfac x (succ zero)) y
+
+1. (gv1 = qfac x (succ zero) -> mult gv1 x = qfac x x)
+
+2. (mult (fac x) x = qfac x x)
+
+3. (qfac (mult (fac x) x) (mult (fac x) x) = mult (fac x) x)
+
+4. (plus (mult (fac x) x) (mult (fac x) x) = mult (fac x) x)
+
+5. (qfac (qfac x x) (qfac x x) = qfac x x)
+
+
+
+[SUCCESS][3][INFER ATOMIC]
+Test = goal82_by_rev_rev
+[TIME] 99.617
+[COUNTS] 27
+[TARGET] rev (rev l) = l
+
+1. (append (rev (rev y)) gv3 = append y gv3)
+
+2. (append (rev (rev y)) nil = append y nil)
+
+3. (rev (rev y) = y)
+
+4. (append (rev (rev y)) nil = y)
+
+5. (append y nil = y)
+
+
+
+[SUCCESS][3][INFER ATOMIC]
+Test = goal17_by_rev_rev_3
+[TIME] 49.188
+[COUNTS] 5
+[TARGET] rev (rev l) = l
+
+1. (append x y = append x (rev (rev y)))
+
+2. (rev (rev y) = y)
+
+3. (gv2 = y -> append x y = append x gv2)
+
+4. (y = gv2 -> append x y = append x gv2)
+
+5. (rev gv3 = y -> append x y = append x (rev gv3))
+
+
+
+[FAIL][RESOURCE]
+Test = qreva_append_by_append_assoc
+[TIME] 636.708
+[COUNTS] 56
+[TARGET] append (append x y) z = append x (append y z)
+
+1. (append (append gv2 (qreva x nil)) (cons n nil) =  append gv2 (qreva x (cons n nil)))
+
+2. (append (append gv2 (qreva x nil)) gv5 = append gv2 (qreva x gv5))
+
+3. (append (append (qreva y nil) (qreva x nil)) gv5 =  append (qreva y nil) (qreva x gv5))
+
+4. (qreva (append x y) nil = gv1 ->  append gv1 (cons n nil) = append (qreva y nil) (qreva x (cons n nil)))
+
+5. (qreva (append x y) nil = gv1 ->  append gv1 gv5 = append (qreva y nil) (qreva x gv5))
+
+
+
+[FAIL][IMPLEMENTATION][RANK]
+Test = rev_append_by_append_nil_2
+[TIME] 195.351
+[COUNTS] 79
+[TARGET] append x Nil = x
+
+1. (append (rev (append l1 nil)) gv4 = append (rev l1) gv4)
+
+2. (append (rev (append l1 nil)) (cons n nil) = append (rev l1) (cons n nil))
+
+3. (rev l1 = rev (append l1 nil))
+
+4. (qreva l1 gv4 = append (rev (append l1 nil)) gv4)
+
+5. (qreva l1 gv4 = append (rev l1) gv4)
+
+
+
+[FAIL][RESOURCE]
+Test = goal77_by_append_assoc
+[TIME] 210.876
+[COUNTS] 53
+[TARGET] append (append x y) z = append x (append y z)
+
+1. (append (append gv2 (cons n nil)) x = append gv2 (cons n x))
+
+2. (append (append (rev y) (cons n nil)) x = append (rev y) (cons n x))
+
+3. (nil = rev gv4 ->  append (append (rev y) (cons n gv4)) x = append (rev y) (cons n x))
+
+4. (nil = rev gv4 -> append (append gv2 (cons n gv4)) x = append gv2 (cons n x))
+
+5. (qreva gv4 x = x ->  append (append (rev y) (cons n gv4)) x = append (rev y) (cons n x))
+
+
+
+[FAIL][IMPLEMENTATION][RANK]
+Test = goal82_by_qreva_rev
+[TIME] 77.822
+[COUNTS] 19
+[TARGET] qreva x y = append (rev x) y
+
+1. (qreva (rev y) gv2 = append y gv2)
+
+2. (qreva (rev y) nil = append y nil)
+
+3. (append y nil = y)
+
+4. (qreva (rev y) nil = y)
+
+5. (gv3 = y -> qreva (rev y) nil = gv3)
+
+
+
+[SUCCESS][1][INFER ATOMIC]
+Test = goal18_by_append_nil
+[TIME] 64.415
+[COUNTS] 17
+[TARGET] append x Nil = x
+
+1. (gv0 = append gv0 nil)
+
+2. (rev y = append (rev y) nil)
+
+3. (rev gv1 = y -> rev y = gv1)
+
+4. (nil = rev gv2 -> rev y = append (rev y) gv2)
+
+5. (nil = rev gv2 -> gv0 = append gv0 gv2)
+
+
+
+[INCOMPLETE]
+Test = goal35_by_mult_assoc_2
+[TIME] -1
+[COUNTS] 0
+[TARGET] mult (mult x y) z = mult x (mult y z)
+
+FILE NOT FOUND
+
+
+
+[INCOMPLETE]
+Test = goal84_by_mult_commut
+[TIME] -1
+[COUNTS] 0
+[TARGET] mult x y = mult y x
+
+FILE NOT FOUND
+
+
+
+[FAIL][RESOURCE]
+Test = goal6_by_len_rev
+[TIME] 54.595
+[COUNTS] 2
+[TARGET] len (rev l) = len l
+
+1. (len (rev (append x y)) = plus (len x) (len y))
+
+2. (rev gv1 = append x y -> len gv1 = plus (len x) (len y))
+
+
+
+[FAIL][RESOURCE]
+Test = goal40_by_append_single
+[TIME] 71.744
+[COUNTS] 20
+[TARGET] append (Cons n Nil) a = Cons n a
+
+1. (lst_subset x (cons n x))
+
+2. (lst_eq gv0 (cons n x) -> lst_subset x gv0)
+
+3. (lst_eq (cons n x) gv0 -> lst_subset x gv0)
+
+4. (lst_eq gv0 (append gv0 x) -> lst_subset x gv0)
+
+5. (lst_eq gv0 (append x gv0) -> lst_subset x gv0)
+
+
+
+[SUCCESS][1][INFER ATOMIC]
+Test = goal28_by_append_nil_2
+[TIME] 90.389
+[COUNTS] 24
+[TARGET] append x Nil = x
+
+1. (gv0 = append gv0 nil)
+
+2. (revflat x2 = append (revflat x2) nil)
+
+3. (nil = rev gv2 -> revflat x2 = append (revflat x2) gv2)
+
+4. (nil = rev gv2 -> gv0 = append gv0 gv2)
+
+5. (qreva gv2 gv2 = gv2 -> revflat x2 = append (revflat x2) gv2)
+
+
+
+[INCOMPLETE]
+Test = goal46_by_eqb_refl_1
+[TIME] -1
+[COUNTS] 0
+[TARGET] eqb n n = true
+
+RESULTS NOT FOUND
+
+
+
+[FAIL][IMPLEMENTATION][RANK]
+Test = goal8_by_drop_cons_1
+[TIME] 292.66
+[COUNTS] 16
+[TARGET] drop (succ x) (cons n l) = drop x l
+
+1. (drop (succ x1) (drop (succ x2) (cons x3 gv5)) =  drop (succ x2) (drop (succ x1) (cons x3 gv5)))
+
+2. (drop (succ x1) (drop (succ x2) gv4) = drop (succ x2) (drop (succ x1) gv4))
+
+3. (drop (succ x1) (drop gv3 gv4) = drop gv3 (drop (succ x1) gv4))
+
+4. (drop gv1 (drop (succ x2) gv4) = drop (succ x2) (drop gv1 gv4))
+
+5. (drop (succ x1) (drop gv3 (cons x3 gv5)) =  drop gv3 (drop (succ x1) (cons x3 gv5)))
+
+
+
+[SUCCESS][3][INFER ATOMIC]
+Test = goal40_by_Nat_beq_refl_2
+[TIME] 67.736
+[COUNTS] 10
+[TARGET] Nat_beq n n = true
+
+1. (Nat_beq n n || gv2 = true)
+
+2. (Nat_beq n n || lst_mem n x = true)
+
+3. (true = Nat_beq n n)
+
+4. (true = gv1 -> gv1 || gv2 = true)
+
+5. (true = gv1 -> gv1 || lst_mem n x = true)
+
+
+
+[FAIL][RESOURCE]
+Test = goal56_by_drop_succ_1
+[TIME] 48.276
+[COUNTS] 1
+[TARGET] drop (succ n1) (drop n2 l) = drop n1 (drop (succ n2) l)
+
+1. (drop (succ v) (drop w (drop x (cons y z))) = drop v (drop w (drop x z)))
+
+
+
+[FAIL][RESOURCE]
+Test = goal11_by_rev_rev_cons
+[TIME] 65.061
+[COUNTS] 3
+[TARGET] cons n (rev l) = rev (append l (cons n nil))
+
+1. (rev (append (rev x) (cons n (rev y))) = append y (cons n x))
+
+2. (rev gv4 = y -> rev (append (rev x) (cons n gv4)) = append y (cons n x))
+
+3. (rev gv2 = x -> rev (append gv2 (cons n (rev y))) = append y (cons n x))
+
+
+
+[FAIL][RESOURCE]
+Test = goal57_by_drop_succ_2
+[TIME] 125.065
+[COUNTS] 1
+[TARGET] drop (succ n1) (drop n2 l) = drop n1 (drop (succ n2) l)
+
+1. (drop u (drop (succ v) (drop (succ w) (cons x (cons y z)))) =  drop (succ u) (drop v (drop w (cons x z))))
+
+
+
+[FAIL][RESOURCE]
+Test = goal6_by_plus_comm
+[TIME] 220.685
+[COUNTS] 22
+[TARGET] plus x y = plus y x.
+
+1. (gv1 = gv7 -> plus gv1 (len (cons n nil)) = succ gv7)
+
+2. (len gv2 = gv7 -> plus (len gv2) (len (cons n nil)) = succ gv7)
+
+3. (gv1 = len l -> plus gv1 (len (cons n nil)) = succ (len l))
+
+4. (len gv2 = len l -> plus (len gv2) (len (cons n nil)) = succ (len l))
+
+5. (len (rev l) = gv7 -> plus (len (rev l)) (len (cons n nil)) = succ gv7)
+
+
+
+[SUCCESS][5][INFER ATOMIC]
+Test = goal10_by_append_nil_2
+[TIME] 172.131
+[COUNTS] 33
+[TARGET] append x Nil = x
+
+1. (append (rev (append l1 nil)) gv4 = append (rev l1) gv4)
+
+2. (append (rev (append l1 nil)) (cons n nil) = append (rev l1) (cons n nil))
+
+3. (rev l1 = rev (append l1 nil))
+
+4. (append l1 nil = l1)
+
+5. (l1 = gv2 -> append (rev gv2) gv4 = append (rev l1) gv4)
+
+
+
+[SUCCESS][1][GENERALIZE]
+Test = goal19_by_rev_rev_2
+[TIME] 51.722
+[COUNTS] 2
+[TARGET] rev (rev l) = l
+
+1. (gv0 = rev (rev gv0))
+
+2. (append x y = rev (rev (append x y)))
+
+
+
+[FAIL][BEYOND SCOPE]
+Test = goal7_by_plus_comm_1
+[TIME] 84.191
+[COUNTS] 27
+[TARGET] plus x y = plus y x.
+
+1. (len (qreva x (cons n nil)) = succ (plus (len x) zero))
+
+2. (len x = plus (len x) zero)
+
+3. (len x = gv5 -> len (qreva x (cons n nil)) = succ gv5)
+
+4. (nil = rev gv3 -> len (qreva x (cons n gv3)) = succ (plus (len x) zero))
+
+5. (zero = len gv3 -> len (qreva x (cons n gv3)) = succ (plus (len x) zero))
+
+
+
+[FAIL][RESOURCE]
+Test = goal15_by_plus_succ_swap_1
+[TIME] 114.799
+[COUNTS] 7
+[TARGET] plus (succ m) n = plus m (succ n)
+
+1. (plus x gv2 = gv4 -> plus x (succ gv2) = succ gv4)
+
+2. (plus x (succ x) = gv4 -> plus x (succ (succ x)) = succ gv4)
+
+3. (plus x gv2 = succ gv5 -> plus x (succ gv2) = succ (succ gv5))
+
+4. (plus x (succ x) = succ gv5 -> plus x (succ (succ x)) = succ (succ gv5))
+
+5. (plus x gv2 = succ (plus x x) -> plus x (succ gv2) = succ (succ (plus x x)))
+
+
+
+[FAIL][RESOURCE]
+Test = append_rev_cons_by_append_assoc
+[TIME] 1016.402
+[COUNTS] 38
+[TARGET] append (append x y) z = append x (append y z)
+
+1. (append (append gv2 (cons x (rev l1))) (cons n nil) =  append gv2 (cons x (append (rev l1) (cons n nil))))
+
+2. (append (append gv2 (cons x (rev l1))) gv8 =  append gv2 (cons x (append (rev l1) gv8)))
+
+3. (append (append gv2 (cons x gv7)) gv8 = append gv2 (cons x (append gv7 gv8)))
+
+4. (append (append gv2 (cons x (rev l1))) (cons n gv5) =  append gv2 (cons x (append (rev l1) (cons n gv5))))
+
+5. (append (append gv2 (cons x gv7)) (cons n gv5) =  append gv2 (cons x (append gv7 (cons n gv5))))
+
+
+
+[SUCCESS][3][INFER ATOMIC]
+Test = goal78_by_rev_rev
+[TIME] 70.356
+[COUNTS] 25
+[TARGET] rev (rev l) = l
+
+1. (rev (rev y) = append y nil)
+
+2. (rev (rev y) = y)
+
+3. (append y nil = y)
+
+4. (y = gv0 -> gv0 = append y nil)
+
+5. (gv0 = y -> gv0 = append y nil)
+
+
+
+[FAIL][RESOURCE]
+Test = rev_involutive_by_rev_append
+[TIME] 122.785
+[COUNTS] 22
+[TARGET] rev (append x y) = append (rev y) (rev x)
+
+1. (rev gv2 = x -> rev (append gv2 (cons n nil)) = cons n x)
+
+2. (rev (append (rev x) (cons n nil)) = cons n x)
+
+3. (nil = rev gv4 -> rev (append (rev x) (cons n gv4)) = cons n x)
+
+4. (zero = len gv4 -> rev (append (rev x) (cons n gv4)) = cons n x)
+
+5. (qreva gv4 x = x -> rev (append (rev x) (cons n gv4)) = cons n x)
+
+
+
+[FAIL][BEYOND SCOPE]
+Test = goal82_by_rev_append
+[TIME] 105.885
+[COUNTS] 37
+[TARGET] rev (append x y) = append (rev y) (rev x)
+
+1. (qreva (qreva x (append (rev (cons n nil)) (rev y))) nil =  append y (cons n x))
+
+2. (nil = rev gv5 ->  qreva (qreva x (append (rev (cons n gv5)) (rev y))) gv5 =  append y (cons n x))
+
+3. (rev gv6 = y ->  qreva (qreva x (append (rev (cons n nil)) gv6)) nil = append y (cons n x))
+
+4. (qreva gv5 y = y ->  qreva (qreva x (append (rev (cons n gv5)) (rev y))) gv5 =  append y (cons n x))
+
+5. (qreva gv5 x = x ->  qreva (qreva x (append (rev (cons n gv5)) (rev y))) gv5 =  append y (cons n x))
+
+
+
+[FAIL][IMPLEMENTATION]
+Test = goal8_by_drop_nil_2
+[TIME] 61.349
+[COUNTS] 4
+[TARGET] drop x nil = nil
+
+1. (drop x2 (drop x1 gv2) = drop x1 (drop x2 gv2))
+
+2. (drop x2 (drop x1 nil) = drop x1 (drop x2 nil))
+
+3. (nil = drop x2 gv1 -> drop x2 gv1 = drop x1 (drop x2 nil))
+
+4. (nil = drop x1 gv4 -> drop x2 (drop x1 nil) = drop x1 gv4)
+
+
+
+[INCOMPLETE]
+Test = mult_commut_by_mult_zero
+[TIME] -1
+[COUNTS] 0
+[TARGET] mult x zero = zero
+
+FILE NOT FOUND
+
+
+
+[FAIL][IMPLEMENTATION]
+Test = goal70_by_Nat_beq_refl_2
+[TIME] 72.555
+[COUNTS] 5
+[TARGET] Nat_beq n n = true
+
+1. (Nat_beq x n = false ->  count x (insort x y) = gv1 ->  (if Nat_beq x x   then succ (if Nat_beq x n then succ (count x y) else count x y)   else if Nat_beq x n then succ (count x y) else count x y) = gv1)
+
+2. (Nat_beq x n = false ->  count x (insort x y) = succ gv2 ->  (if Nat_beq x x   then succ (if Nat_beq x n then succ (count x y) else count x y)   else if Nat_beq x n then succ (count x y) else count x y) =   succ gv2)
+
+3. (Nat_beq x n = false ->  (if Nat_beq x x   then succ (if Nat_beq x n then succ (count x y) else count x y)   else if Nat_beq x n then succ (count x y) else count x y) =  succ (count x y))
+
+4. (Nat_beq x n = false -> x <> n)
+(x <> n ->  (if Nat_beq x x   then succ (if Nat_beq x n then succ (count x y) else count x y)   else if Nat_beq x n then succ (count x y) else count x y) =  succ (count x y))
+
+5. (Nat_beq x n = false -> n <> x)
+(n <> x ->  (if Nat_beq x x   then succ (if Nat_beq x n then succ (count x y) else count x y)   else if Nat_beq x n then succ (count x y) else count x y) =  succ (count x y))
+
+
+
+[SUCCESS][1][AS IS]
+Test = goal2_by_len_append_nil
+[TIME] 45.923
+[COUNTS] 10
+[TARGET] len l = len (append l nil)
+
+1. (len y = len (append y nil))
+
+2. (append y nil = y)
+
+3. (gv2 = y -> len y = len gv2)
+
+4. (y = gv2 -> len y = len gv2)
+
+5. (zero = len gv3 -> len y = len (append y gv3))
+
+
+
+[INCOMPLETE]
+Test = goal85_by_plus_assoc
+[TIME] -1
+[COUNTS] 0
+[TARGET] plus (plus x y) z = plus x (plus y z)
+
+FILE NOT FOUND
+
+
+
+[FAIL][BEYOND SCOPE][EXTRA VAR]
+Test = goal1_by_plus_succ
+[TIME] 38.411
+[COUNTS] 3
+[TARGET] plus x (succ y) = succ (plus x y)
+
+1. (double x = gv1 -> succ gv1 = plus x (succ x))
+
+2. (succ (plus x x) = plus x (succ x))
+
+3. (succ gv1 = plus gv3 x -> succ gv1 = plus x gv3)
+
+
+
+[SUCCESS][1][AS IS]
+Test = goal22_by_even_odd_append_len
+[TIME] 47.065
+[COUNTS] 1
+[TARGET] negb (even (len (append l1 l2))) = even (len (append l1 (cons n l2)))
+
+1. (negb (even (len (append x y))) = even (len (append y (cons n x))))
+
+
+
+[SUCCESS][1][AS IS]
+Test = goal40_by_subset_refl_1
+[TIME] 14.663
+[COUNTS] 1
+[TARGET] lst_subset x x
+
+1. (lst_subset y y)
+
+
+
+[INCOMPLETE]
+Test = goal35_by_mult_commut
+[TIME] -1
+[COUNTS] 0
+[TARGET] mult x y = mult y x
+
+FILE NOT FOUND
+
+
+
+[SUCCESS][3][INFER ATOMIC]
+Test = goal29_by_rev_qreva_nil
+[TIME] 60.497
+[COUNTS] 20
+[TARGET] eq (rev x) (qreva x nil)
+
+1. (rev (qreva x nil) = x)
+
+2. (rev x = qreva x nil)
+
+3. (nil = rev gv2 -> rev (qreva x gv2) = x)
+
+4. (rev x = gv1 -> rev gv1 = x)
+
+5. (qreva gv2 x = x -> rev (qreva x gv2) = x)
+
+
+
+[INCOMPLETE]
+Test = goal84_by_mult_assoc
+[TIME] -1
+[COUNTS] 0
+[TARGET] mult (mult x y) z = mult x (mult y z)
+
+FILE NOT FOUND
+
+
+
+[INCOMPLETE]
+Test = distrib_by_plus_assoc_3
+[TIME] -1
+[COUNTS] 0
+[TARGET] plus (plus x y) z = plus x (plus y z)
+
+FILE NOT FOUND
+
+
+
+[INCOMPLETE]
+Test = mult_succ_by_plus_assoc_1
+[TIME] -1
+[COUNTS] 0
+[TARGET] plus (plus x y) z = plus x (plus y z)
+
+FILE NOT FOUND
+
+
+
+[SUCCESS][3][INFER ATOMIC]
+Test = len_append_by_append_nil
+[TIME] 59.582
+[COUNTS] 18
+[TARGET] append x Nil = x
+
+1. (len l2 = len (append l2 nil))
+
+2. (append l2 nil = l2)
+
+3. (gv2 = l2 -> len l2 = len gv2)
+
+4. (l2 = gv2 -> len l2 = len gv2)
+
+5. (nil = rev gv3 -> len l2 = len (append l2 gv3))
+
+
+
+[FAIL][RESOURCE]
+Test = goal54_by_drop_succ
+[TIME] 40.003
+[COUNTS] 1
+[TARGET] drop (succ n1) (drop n2 l) = drop n1 (drop (succ n2) l)
+
+1. (drop (succ w) (drop x (cons y z)) = drop w (drop x z))
+
+
+
+[FAIL][RESOURCE]
+Test = qreva_rev_by_append_assoc
+[TIME] 222.142
+[COUNTS] 57
+[TARGET] append (append x y) z = append x (append y z)
+
+1. (append gv1 (cons n y) = append (append gv1 (cons n nil)) y)
+
+2. (append (rev x) (cons n y) = append (append (rev x) (cons n nil)) y)
+
+3. (nil = rev gv6 -> append gv1 (cons n y) = append (append gv1 (cons n gv6)) y)
+
+4. (zero = len gv6 -> append gv1 (cons n y) = append (append gv1 (cons n gv6)) y)
+
+5. (nil = rev gv6 ->  append (rev x) (cons n y) = append (append (rev x) (cons n gv6)) y)
+
+
+
+[SUCCESS][1][AS IS]
+Test = goal6_by_len_append_2
+[TIME] 34.787
+[COUNTS] 1
+[TARGET] len (append x y) = len x + len y
+
+1. (len (append x y) = plus (len x) (len y))
+
+
+
+[FAIL][BEYOND SCOPE]
+Test = goal18_by_append_assoc_1
+[TIME] 83.217
+[COUNTS] 16
+[TARGET] append (append x y) z = append x (append y z)
+
+1. (rev (append (append (rev x) (cons n nil)) y) = append (rev y) (cons n x))
+
+2. (rev gv7 = y ->  rev (append (append (rev x) (cons n nil)) y) = append gv7 (cons n x))
+
+3. (nil = rev gv5 ->  rev (append (append (rev x) (cons n gv5)) y) = append (rev y) (cons n x))
+
+4. (rev gv3 = x ->  rev (append (append gv3 (cons n nil)) y) = append (rev y) (cons n x))
+
+5. (append y gv5 = y ->  rev (append (append (rev x) (cons n gv5)) y) = append (rev y) (cons n x))
+
+
+
+[SUCCESS][3][INFER ATOMIC]
+Test = goal17_by_rev_rev_2
+[TIME] 59.657
+[COUNTS] 9
+[TARGET] rev (rev l) = l
+
+1. (append x y = append (rev (rev x)) (rev (rev y)))
+
+2. (rev (rev y) = y)
+
+3. (rev (rev x) = x)
+
+4. (gv4 = y -> append x y = append (rev (rev x)) gv4)
+
+5. (y = gv4 -> append x y = append (rev (rev x)) gv4)
+
+
+
+[FAIL][RESOURCE]
+Test = rev_append_by_append_assoc
+[TIME] 1698.23
+[COUNTS] 128
+[TARGET] append (append x y) z = append x (append y z)
+
+1. (append (append (rev l2) (cons n0 gv4)) (cons n nil) =  append (append (rev l2) (cons n0 nil)) (append gv4 (cons n nil)))
+
+2. (append (append gv2 (cons n0 gv4)) (cons n nil) =  append (append gv2 (cons n0 nil)) (append gv4 (cons n nil)))
+
+3. (append (append gv2 (cons n0 gv4)) gv5 =  append (append gv2 (cons n0 nil)) (append gv4 gv5))
+
+4. (append (append (rev l2) (cons n0 gv4)) gv5 =  append (append (rev l2) (cons n0 nil)) (append gv4 gv5))
+
+5. (append (append gv2 (cons n0 (rev l1))) (cons n nil) =  append (append gv2 (cons n0 nil)) (append (rev l1) (cons n nil)))
+
+
+
+[FAIL][RESOURCE]
+Test = goal82_by_append_assoc
+[TIME] 83.785
+[COUNTS] 24
+[TARGET] append (append x y) z = append x (append y z)
+
+1. (append (append y (cons n nil)) x = append y (cons n x))
+
+2. (nil = rev gv3 -> append (append y (cons n gv3)) x = append y (cons n x))
+
+3. (qreva gv3 x = x -> append (append y (cons n gv3)) x = append y (cons n x))
+
+4. (qreva gv3 y = y -> append (append y (cons n gv3)) x = append y (cons n x))
+
+5. (append x gv3 = x -> append (append y (cons n gv3)) x = append y (cons n x))
+
+
+
+[SUCCESS][3][INFER ATOMIC]
+Test = goal26_by_plus_comm
+[TIME] 30.701
+[COUNTS] 5
+[TARGET] plus x y = plus y x.
+
+1. (half (plus x y) = half (plus y x))
+
+2. (plus x y = plus y x)
+
+3. (plus y x = plus x y)
+
+4. (plus x y = gv3 -> half (plus x y) = half gv3)
+
+5. (plus y x = gv1 -> half gv1 = half (plus y x))
+
+
+
+[INCOMPLETE]
+Test = goal85_by_plus_commut
+[TIME] -1
+[COUNTS] 0
+[TARGET] plus x y = plus y x
+
+FILE NOT FOUND
+
+
+
+[SUCCESS][1][INFER ATOMIC]
+Test = goal28_by_append_nil_3
+[TIME] 92.91
+[COUNTS] 24
+[TARGET] append x Nil = x
+
+1. (gv0 = append gv0 nil)
+
+2. (revflat x = append (revflat x) nil)
+
+3. (nil = rev gv2 -> gv0 = append gv0 gv2)
+
+4. (nil = rev gv2 -> revflat x = append (revflat x) gv2)
+
+5. (qreva gv2 gv2 = gv2 -> gv0 = append gv0 gv2)
+
+
+
+[FAIL][RESOURCE]
+Test = goal28_by_append_assoc
+[TIME] 395.437
+[COUNTS] 12
+[TARGET] append (append x y) z = append x (append y z)
+
+1. (append (append (revflat x1) (cons n (revflat x2))) gv5 =  append (revflat x1) (cons n (qrevaflat x2 gv5)))
+
+2. (append (append gv2 (cons n (revflat x2))) gv5 =  append gv2 (cons n (qrevaflat x2 gv5)))
+
+3. (append (append gv2 (cons n (revflat x2))) (cons n0 y) =  append gv2 (cons n (qrevaflat x2 (cons n0 y))))
+
+4. (append (append (revflat x1) (cons n (revflat x2))) (cons n0 y) =  append (revflat x1) (cons n (qrevaflat x2 (cons n0 y))))
+
+5. (qrevaflat x2 y = append gv4 y ->  append (append (revflat x1) (cons n gv4)) (cons n0 y) =  append (revflat x1) (cons n (qrevaflat x2 (cons n0 y))))
+
+
+
+[FAIL][RESOURCE]
+Test = goal10_by_append_rev_cons
+[TIME] 344.08
+[COUNTS] 37
+[TARGET] rev (append l1 (cons x l2)) = append (rev l2) (cons x (rev l1))
+
+1. (append (rev (append l1 (cons n0 l2))) gv4 =  append (append (rev l2) (cons n0 nil)) (append (rev l1) gv4))
+
+2. (rev (append (cons n l1) l2) = append gv8 (rev (cons n l1)) ->  append (rev (append l1 (cons n0 l2))) (cons n nil) =  append (append gv8 (cons n0 nil)) (append (rev l1) (cons n nil)))
+
+3. (rev (append (cons n l1) l2) = append gv8 (rev (cons n l1)) ->  append (rev (append l1 (cons n0 l2))) gv4 =  append (append gv8 (cons n0 nil)) (append (rev l1) gv4))
+
+4. (append (rev (append l1 (cons n0 l2))) (cons n nil) =  append (append (rev l2) (cons n0 nil)) (append (rev l1) (cons n nil)))
+
+5. (rev gv11 = l1 ->  append (rev (append l1 (cons n0 l2))) gv4 =  append (append (rev l2) (cons n0 nil)) (append gv11 gv4))
+
+
+
+[INCOMPLETE]
+Test = goal34_by_plus_assoc_1
+[TIME] -1
+[COUNTS] 0
+[TARGET] plus (plus x y) z = plus x (plus y z)
+
+FILE NOT FOUND
+
+
+
+[SUCCESS][1][INFER ATOMIC]
+Test = goal27_by_append_nil
+[TIME] 89.615
+[COUNTS] 34
+[TARGET] append x Nil = x
+
+1. (gv0 = append gv0 nil)
+
+2. (rev x = append (rev x) nil)
+
+3. (nil = rev gv2 -> rev x = append (rev x) gv2)
+
+4. (nil = rev gv2 -> gv0 = append gv0 gv2)
+
+5. (rev gv1 = x -> rev x = gv1)
+
+
+
+[SUCCESS][1][AS IS]
+Test = goal2_by_len_cons_succ
+[TIME] 39.248
+[COUNTS] 1
+[TARGET] succ (len (append l1 l2)) = len (append l1 (cons n l2))
+
+1. (succ (len (append y x)) = len (append y (cons n x)))
+
+
+
+[FAIL][RESOURCE]
+Test = goal57_by_drop_succ_3
+[TIME] 139.789
+[COUNTS] 3
+[TARGET] drop (succ n1) (drop n2 l) = drop n1 (drop (succ n2) l)
+
+1. (drop u (drop v (drop (succ (succ w)) (cons x (cons y z)))) =  drop (succ u) (drop v (drop w (cons x z))))
+
+2. (drop w z = drop (succ (succ w)) (cons x (cons y z)))
+
+3. (drop w z = gv2 ->  drop u (drop v gv2) = drop (succ u) (drop v (drop w (cons x z))))
+
+
+
+[FAIL][FORWARD]
+Test = goal70_by_less_not_refl
+[TIME] -1
+[COUNTS] 0
+[TARGET] less n n = false
+
+CONTRADICTION
+
+
+
+[INCOMPLETE]
+Test = mult_succ_by_plus_succ_2
+[TIME] -1
+[COUNTS] 0
+[TARGET] plus x (succ y) = succ (plus x y)
+
+FILE NOT FOUND
+
+
+
+[FAIL][RESOURCE]
+Test = goal11_by_append_assoc_2
+[TIME] 62.995
+[COUNTS] 13
+[TARGET] append (append x y) z = append x (append y z)
+
+1. (append (append y (cons n nil)) x = append y (cons n x))
+
+2. (nil = rev gv3 -> append (append y (cons n gv3)) x = append y (cons n x))
+
+3. (append x gv3 = x -> append (append y (cons n gv3)) x = append y (cons n x))
+
+4. (append gv3 x = x -> append (append y (cons n gv3)) x = append y (cons n x))
+
+5. (append gv3 y = y -> append (append y (cons n gv3)) x = append y (cons n x))
+
+
+
+[INCOMPLETE]
+Test = goal33_by_mult_assoc
+[TIME] -1
+[COUNTS] 0
+[TARGET] mult (mult x y) z = mult x (mult y z)
+
+FILE NOT FOUND
+
+
+
+[SUCCESS][5][INFER ATOMIC]
+Test = goal5_by_len_append_nil
+[TIME] 247.194
+[COUNTS] 33
+[TARGET] len l = len (append l nil)
+
+1. (succ (len (append gv3 nil)) = succ (len gv3))
+
+2. (gv6 = len x -> succ (len (append (rev x) nil)) = succ gv6)
+
+3. (succ (len (append (rev x) nil)) = succ (len (rev x)))
+
+4. (append gv3 nil = gv3)
+
+5. (len gv3 = len (append gv3 nil))
+
+
+
+[SUCCESS][3][INFER ATOMIC]
+Test = goal80_by_rev_rev_1
+[TIME] 54.999
+[COUNTS] 15
+[TARGET] rev (rev l) = l
+
+1. (rev (rev y) = append y nil)
+
+2. (append y nil = y)
+
+3. (rev (rev y) = y)
+
+4. (gv2 = y -> rev (rev y) = gv2)
+
+5. (y = gv2 -> rev (rev y) = gv2)
+
+
+
+[FAIL][IMPLEMENTATION]
+Test = goal70_by_Nat_beq_refl_1
+[TIME] 17.179
+[COUNTS] 1
+[TARGET] Nat_beq n n = true
+
+1. ((if Nat_beq x x then succ zero else zero) = succ zero)
+
+
+
+[FAIL][IMPLEMENTATION]
+Test = goal8_by_drop_nil_1
+[TIME] 23.377
+[COUNTS] 1
+[TARGET] drop x nil = nil
+
+1. (match drop x2 nil with  | nil => nil  | cons _ z => drop x1 z  end = match drop x1 nil with        | nil => nil        | cons _ z => drop x2 z        end)
+
+
+
+[SUCCESS][1][AS IS]
+Test = goal78_by_append_nil
+[TIME] 47.914
+[COUNTS] 13
+[TARGET] append x Nil = x
+
+1. (y = append y nil)
+
+2. (nil = rev gv1 -> y = append y gv1)
+
+3. (qreva gv1 y = y -> y = append y gv1)
+
+4. (append gv1 y = y -> y = append y gv1)
+
+5. (qreva gv1 gv1 = gv1 -> y = append y gv1)
+
+
+
+[FAIL][RESOURCE]
+Test = goal31_by_qreva_append
+[TIME] 170.43
+[COUNTS] 8
+[TARGET] qreva (append x y) nil = append (qreva y nil) (qreva x nil)
+
+1. (qreva gv2 nil = x -> qreva (append gv2 (cons n nil)) nil = cons n x)
+
+2. (qreva (qreva x gv3) gv3 = x ->  qreva (append (qreva x gv3) (cons n gv3)) gv3 = cons n x)
+
+3. (qreva (append (qreva x nil) (cons n nil)) nil = cons n x)
+
+4. (cons n x = rev gv1 -> qreva gv1 nil = cons n x)
+
+5. (cons n x = qreva gv4 x -> qreva (append (qreva x nil) gv4) nil = cons n x)
+
+
+
+[SUCCESS][1][AS IS]
+Test = goal40_by_subset_refl_2
+[TIME] 14.575
+[COUNTS] 1
+[TARGET] lst_subset x x
+
+1. (lst_subset y y)
+
+
+
+[FAIL][RESOURCE]
+Test = goal81_by_append_assoc
+[TIME] 183.882
+[COUNTS] 53
+[TARGET] append (append x y) z = append x (append y z)
+
+1. (append (append gv2 (cons n nil)) x = append gv2 (cons n x))
+
+2. (append (append (rev y) (cons n nil)) x = append (rev y) (cons n x))
+
+3. (nil = rev gv4 -> append (append gv2 (cons n gv4)) x = append gv2 (cons n x))
+
+4. (nil = rev gv4 ->  append (append (rev y) (cons n gv4)) x = append (rev y) (cons n x))
+
+5. (qreva gv4 y = y ->  append (append gv2 (cons n gv4)) x = append gv2 (cons n x))
+
+
+
+[FAIL][RESOURCE]
+Test = goal7_by_plus_comm_2
+[TIME] 61.484
+[COUNTS] 12
+[TARGET] plus x y = plus y x.
+
+1. (plus gv1 (succ zero) = succ gv1)
+
+2. (plus (len x) (succ zero) = succ (len x))
+
+3. (plus gv3 gv3 = gv3 -> plus gv1 (succ gv3) = succ gv1)
+
+4. (plus gv3 gv1 = gv1 -> plus gv1 (succ gv3) = succ gv1)
+
+5. (plus gv1 gv3 = gv1 -> plus gv1 (succ gv3) = succ gv1)
+
+
+
+[INCOMPLETE]
+Test = mult_succ_by_plus_commut
+[TIME] -1
+[COUNTS] 0
+[TARGET] plus x y = plus y x
+
+FILE NOT FOUND
+
+
+
+[SUCCESS][1][AS IS]
+Test = goal80_by_append_nil
+[TIME] 39.174
+[COUNTS] 7
+[TARGET] append x Nil = x
+
+1. (y = append y nil)
+
+2. (nil = rev gv1 -> y = append y gv1)
+
+3. (append gv1 y = y -> y = append y gv1)
+
+4. (append gv1 gv1 = gv1 -> y = append y gv1)
+
+5. (nil = append gv1 gv1 -> y = append y gv1)
+
+
+
+[SUCCESS][5][INFER ATOMIC]
+Test = goal19_by_rev_rev_1
+[TIME] 63.122
+[COUNTS] 10
+[TARGET] rev (rev l) = l
+
+1. (append (rev (rev x)) y = rev (rev (append x y)))
+
+2. (append x y = rev (rev (append x y)))
+
+3. (append x y = append (rev (rev x)) y)
+
+4. (rev (rev x) = x)
+
+5. (x = gv1 -> append gv1 y = rev (rev (append x y)))
+
+
+
+[SUCCESS][1][GENERALIZE]
+Test = goal10_by_append_nil_1
+[TIME] 70.161
+[COUNTS] 17
+[TARGET] append x Nil = x
+
+1. (gv0 = append gv0 nil)
+
+2. (rev l2 = append (rev l2) nil)
+
+3. (nil = rev gv2 -> rev l2 = append (rev l2) gv2)
+
+4. (nil = rev gv2 -> gv0 = append gv0 gv2)
+
+5. (rev gv1 = l2 -> rev l2 = gv1)
+
+
+
+[FAIL][BEYOND SCOPE][EXTRA VAR]
+Test = goal15_by_plus_succ_swap_2
+[TIME] 105.307
+[COUNTS] 4
+[TARGET] plus (succ m) n = plus m (succ n)
+
+1. (plus x (succ x) = gv3 -> plus (succ x) (succ x) = succ gv3)
+
+2. (plus x (succ x) = succ gv4 -> plus (succ x) (succ x) = succ (succ gv4))
+
+3. (plus x gv1 = succ (plus x x) -> plus gv1 gv1 = succ (succ (plus x x)))
+
+4. (plus (succ x) (succ x) = succ (succ (plus x x)))
+
+
+
+[SUCCESS][1][GENERALIZE]
+Test = goal29_by_append_nil
+[TIME] 90.099
+[COUNTS] 34
+[TARGET] append x Nil = x
+
+1. (gv0 = append gv0 nil)
+
+2. (rev x = append (rev x) nil)
+
+3. (nil = rev gv2 -> rev x = append (rev x) gv2)
+
+4. (rev gv1 = x -> rev x = gv1)
+
+5. (nil = rev gv2 -> gv0 = append gv0 gv2)
+
+
+
+[INCOMPLETE]
+Test = goal6_by_len_append_1
+[TIME] -1
+[COUNTS] 0
+[TARGET] len (append x y) = len x + len y
+
+RESULTS NOT FOUND
+
+
+
+[SUCCESS][1][AS IS]
+Test = len_append_by_len_cons_succ
+[TIME] 40.944
+[COUNTS] 1
+[TARGET] succ (len (append l1 l2)) = len (append l1 (cons n l2))
+
+1. (succ (len (append l2 l1)) = len (append l2 (cons n l1)))
+
+
+
+[INCOMPLETE]
+Test = distrib_by_plus_commut
+[TIME] -1
+[COUNTS] 0
+[TARGET] plus x y = plus y x
+
+FILE NOT FOUND
+
+
+
+[FAIL][BEYOND SCOPE][EXTRA VAR]
+Test = goal4_by_len_cons_succ
+[TIME] 145.409
+[COUNTS] 4
+[TARGET] succ (len (append l1 l2)) = len (append l1 (cons n l2))
+
+1. (gv4 = double (len x) -> len (append x (cons n x)) = succ gv4)
+
+2. (len gv5 = double (len x) -> len (append x (cons n x)) = succ (len gv5))
+
+3. (len (append x (cons n x)) = succ (len (append x x)))
+
+4. (cons n gv5 = append gv2 x -> len (append x gv2) = succ (len gv5))
+
+
+
+[SUCCESS][1][GENERALIZE]
+Test = goal77_by_append_nil
+[TIME] 88.805
+[COUNTS] 34
+[TARGET] append x Nil = x
+
+1. (gv0 = append gv0 nil)
+
+2. (rev y = append (rev y) nil)
+
+3. (rev gv1 = y -> rev y = gv1)
+
+4. (nil = rev gv2 -> gv0 = append gv0 gv2)
+
+5. (nil = rev gv2 -> rev y = append (rev y) gv2)
+
+
+
+[FAIL][IMPLEMENTATION]
+Test = goal30_by_append_nil
+[TIME] 49.766
+[COUNTS] 11
+[TARGET] append x Nil = x
+
+1. (rev (append (rev x) nil) = x)
+
+2. (rev x = append (rev x) nil)
+
+3. (rev x = gv1 -> rev gv1 = x)
+
+4. (rev gv2 = x -> rev (append gv2 nil) = x)
+
+5. (nil = rev gv3 -> rev (append (rev x) gv3) = x)
+
+
+
+[INCOMPLETE]
+Test = mult_succ_by_plus_assoc_2
+[TIME] -1
+[COUNTS] 0
+[TARGET] plus (plus x y) z = plus x (plus y z)
+
+FILE NOT FOUND
+
+
+
+[SUCCESS][1][GENERALIZE]
+Test = goal40_by_subset_append
+[TIME] 113.15
+[COUNTS] 33
+[TARGET] lst_subset x (append y x)
+
+1. (lst_subset x (append gv1 x))
+
+2. (lst_subset x (append (cons n gv2) x))
+
+3. (lst_subset x (append (cons n nil) x))
+
+4. (lst_eq gv0 (cons n x) -> lst_subset x gv0)
+
+5. (lst_eq (cons n x) gv0 -> lst_subset x gv0)
+
+
+
+[FAIL][RESOURCE]
+Test = goal78_by_append_assoc
+[TIME] 83.337
+[COUNTS] 24
+[TARGET] append (append x y) z = append x (append y z)
+
+1. (append (append y (cons n nil)) x = append y (cons n x))
+
+2. (nil = rev gv3 -> append (append y (cons n gv3)) x = append y (cons n x))
+
+3. (qreva gv3 x = x -> append (append y (cons n gv3)) x = append y (cons n x))
+
+4. (qreva gv3 y = y -> append (append y (cons n gv3)) x = append y (cons n x))
+
+5. (append x gv3 = x -> append (append y (cons n gv3)) x = append y (cons n x))
+
+
+
+[FAIL][BEYOND SCOPE]
+Test = goal13_by_plus_succ_swap
+[TIME] 35.644
+[COUNTS] 4
+[TARGET] plus (succ m) n = plus m (succ n)
+
+1. (succ (half (plus x (succ (succ x)))) = succ (succ x))
+
+2. (succ x = half (plus x (succ (succ x))))
+
+3. (succ x = gv1 -> succ gv1 = succ (succ x))
+
+4. (succ x = half gv2 -> succ (half gv2) = succ (succ x))
+
+
+
+[SUCCESS][3][INFER ATOMIC]
+Test = goal11_by_rev_rev
+[TIME] 54.125
+[COUNTS] 15
+[TARGET] rev (rev l) = l
+
+1. (rev (rev y) = append y nil)
+
+2. (append y nil = y)
+
+3. (rev (rev y) = y)
+
+4. (gv2 = y -> rev (rev y) = gv2)
+
+5. (y = gv2 -> rev (rev y) = gv2)
+
+
+
+[INCOMPLETE]
+Test = goal34_by_plus_assoc_2
+[TIME] -1
+[COUNTS] 0
+[TARGET] plus (plus x y) z = plus x (plus y z)
+
+FILE NOT FOUND
+
+
+
+[FAIL][RESOURCE]
+Test = goal18_by_append_assoc_2
+[TIME] 181.342
+[COUNTS] 29
+[TARGET] append (append x y) z = append x (append y z)
+
+1. (append (append gv2 (cons n nil)) x = append gv2 (cons n x))
+
+2. (append (append (rev y) (cons n nil)) x = append (rev y) (cons n x))
+
+3. (nil = rev gv4 ->  append (append (rev y) (cons n gv4)) x = append (rev y) (cons n x))
+
+4. (nil = rev gv4 -> append (append gv2 (cons n gv4)) x = append gv2 (cons n x))
+
+5. (append x gv4 = x ->  append (append (rev y) (cons n gv4)) x = append (rev y) (cons n x))
+
+
+
+[SUCCESS][3][INFER ATOMIC]
+Test = goal17_by_rev_rev_1
+[TIME] 77.387
+[COUNTS] 14
+[TARGET] rev (rev l) = l
+
+1. (rev (rev (append x y)) = append (rev (rev x)) (rev (rev y)))
+
+2. (rev (rev y) = y)
+
+3. (rev (rev x) = x)
+
+4. (append x y = append (rev (rev x)) (rev (rev y)))
+
+5. (append x y = rev (rev (append x y)))
+
+
+
+[FAIL][RESOURCE]
+Test = goal23_by_len_append
+[TIME] 32.738
+[COUNTS] 1
+[TARGET] len (append x y) = len x + len y
+
+1. (len (append x y) = len (append y x))
+
+
+
+[FAIL][FORWARD]
+Test = goal70_by_Nat_beq_eq
+[TIME] -1
+[COUNTS] 0
+[TARGET] Nat_beq x y = true -> x = y
+
+CONTRADICTION
+
+
+
+[SUCCESS][1][INFER ATOMIC]
+Test = qreva_append_by_append_nil
+[TIME] 97.634
+[COUNTS] 38
+[TARGET] append x Nil = x
+
+1. (gv0 = append gv0 nil)
+
+2. (qreva y nil = append (qreva y nil) nil)
+
+3. (rev y = append (qreva y nil) nil)
+
+4. (rev gv2 = y -> qreva y nil = gv2)
+
+5. (rev y = gv2 -> qreva y nil = gv2)
+
+
+
+[FAIL][IMPLEMENTATION][G NESTED]
+Test = goal11_by_append_assoc_1
+[TIME] 83.883
+[COUNTS] 16
+[TARGET] append (append x y) z = append x (append y z)
+
+1. (rev (append (append (rev x) (cons n nil)) (rev y)) = append y (cons n x))
+
+2. (rev gv3 = x ->  rev (append (append gv3 (cons n nil)) (rev y)) = append y (cons n x))
+
+3. (nil = rev gv5 ->  rev (append (append (rev x) (cons n gv5)) (rev y)) = append y (cons n x))
+
+4. (rev gv6 = y ->  rev (append (append (rev x) (cons n nil)) gv6) = append y (cons n x))
+
+5. (append y gv5 = y ->  rev (append (append (rev x) (cons n gv5)) (rev y)) = append y (cons n x))
+
+
+
+[SUCCESS][1][AS IS]
+Test = goal21_by_append_nil
+[TIME] 37.448
+[COUNTS] 6
+[TARGET] append x Nil = x
+
+1. (y = append y nil)
+
+2. (zero = len gv1 -> y = append y gv1)
+
+3. (append gv1 y = y -> y = append y gv1)
+
+4. (append gv1 gv1 = gv1 -> y = append y gv1)
+
+5. (nil = append gv1 gv1 -> y = append y gv1)
+
+
+
+[INCOMPLETE]
+Test = plus_commut_by_plus_succ
+[TIME] -1
+[COUNTS] 0
+[TARGET] plus x (succ y) = succ (plus x y)
+
+FILE NOT FOUND
+
+
+
+[INCOMPLETE]
+Test = goal86_by_mult_commut
+[TIME] -1
+[COUNTS] 0
+[TARGET] mult x y = mult y x
+
+FILE NOT FOUND
+
+
+
+[SUCCESS][3][INFER ATOMIC]
+Test = goal80_by_rev_rev_2
+[TIME] 84.316
+[COUNTS] 19
+[TARGET] rev (rev l) = l
+
+1. (append (rev (rev y)) (append (cons n nil) x) = append y (cons n x))
+
+2. (rev (rev y) = y)
+
+3. (cons n x = append (cons n nil) x)
+
+4. (y = gv1 -> append gv1 (append (cons n nil) x) = append y (cons n x))
+
+5. (gv1 = y -> append gv1 (append (cons n nil) x) = append y (cons n x))
+
+
+
+[FAIL][RESOURCE]
+Test = goal29_by_qreva_append
+[TIME] 62.483
+[COUNTS] 23
+[TARGET] (qreva x y) = (append (rev x) y) [NOTE: incorrect label, had to paste real target in manually]
+
+1. (rev x = qreva x nil)
+
+2. (rev gv1 = x -> rev x = gv1)
+
+3. (nil = rev gv2 -> rev x = qreva x gv2)
+
+4. (rev gv0 = x -> gv0 = qreva x nil)
+
+5. (qreva gv2 x = x -> rev x = qreva x gv2)
+
+
+
+[INCOMPLETE]
+Test = mult_assoc_by_distrib
+[TIME] -1
+[COUNTS] 0
+[TARGET] mult (plus x y) z = plus (mult x z) (mult y z)
+
+FILE NOT FOUND
+
+
+
+[INCOMPLETE]
+Test = mult_succ_by_plus_succ_1
+[TIME] -1
+[COUNTS] 0
+[TARGET] plus x (succ y) = succ (plus x y)
+
+FILE NOT FOUND
+
+
+
+[FAIL][RESOURCE]
+Test = goal40_by_append_cons
+[TIME] 107.374
+[COUNTS] 39
+[TARGET] append x (cons n y) = append (append x (cons n nil)) y
+
+1. (lst_subset x (append y (cons n x)))
+
+2. (lst_subset x gv1 -> lst_subset x (append y gv1))
+
+3. (lst_eq gv1 (cons n x) -> lst_subset x (append y gv1))
+
+4. (lst_eq (cons n x) gv1 -> lst_subset x (append y gv1))
+
+5. (lst_eq gv1 (append gv1 x) -> lst_subset x (append y gv1))
+
+
+
+[INCOMPLETE]
+Test = goal35_by_mult_qexp
+[TIME] -1
+[COUNTS] 0
+[TARGET] mult (qexp x y z) a = qexp x y (mult z a)
+
+FILE NOT FOUND
+
+
+
+

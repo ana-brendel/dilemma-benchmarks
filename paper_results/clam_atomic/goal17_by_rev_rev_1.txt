@@ -1,0 +1,336 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+
+----------------------------------
+Goal: (rev (rev (append x y)) = append (rev (rev x)) (rev (rev y)))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 1.488 seconds
+
+gv0 : Lst = (rev (rev (append x y)))
+gv2 : Lst = (append x y)
+gv3 : Lst = (append (rev (rev x)) (rev (rev y)))
+gv1 : Lst = (rev (append x y))
+gv4 : Lst = (rev (rev x))
+gv7 : Lst = (rev y)
+gv6 : Lst = (rev (rev y))
+gv5 : Lst = (rev x)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 32.835 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (rev (rev (append x y)) = append (rev (rev x)) (rev (rev y)))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (rev x = gv5)
+
+----------------------------------
+Goal: (rev (rev (append x y)) = append (rev gv5) (rev (rev y)))
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (rev (rev y) = gv6)
+
+----------------------------------
+Goal: (rev (rev (append x y)) = append (rev (rev x)) gv6)
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (rev y = gv7)
+
+----------------------------------
+Goal: (rev (rev (append x y)) = append (rev (rev x)) (rev gv7))
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (rev (rev x) = gv4)
+
+----------------------------------
+Goal: (rev (rev (append x y)) = append gv4 (rev (rev y)))
+Case: Invalid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (rev (append x y) = gv1)
+
+----------------------------------
+Goal: (rev gv1 = append (rev (rev x)) (rev (rev y)))
+Case: Invalid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (append (rev (rev x)) (rev (rev y)) = gv3)
+
+----------------------------------
+Goal: (rev (rev (append x y)) = gv3)
+Case: Invalid and Generalized
+
+Label: Generalization #7
+Assumptions: 
+ -- (append x y = gv2)
+
+----------------------------------
+Goal: (rev (rev gv2) = append (rev (rev x)) (rev (rev y)))
+Case: Invalid and Generalized
+
+Label: Generalization #8
+Assumptions: 
+ -- (rev (rev (append x y)) = gv0)
+
+----------------------------------
+Goal: (gv0 = append (rev (rev x)) (rev (rev y)))
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 32.976 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+append : (Lst -> Lst -> Lst)
+rev : (Lst -> Lst)
+succ : (Nat -> Nat)
+zero : Nat
+nil : Lst
+cons : (Nat -> Lst -> Lst)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 6 (6)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 7 (7)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 33.126 seconds
+
+
+Label: 0 (0)
+(gv5 = gv5), (gv5 = y), (gv5 = x), (y = gv5), (y = y), (y = x), (x = gv5), (x = y), (x = x), (gv5 <> gv5)
+(gv5 <> y), (gv5 <> x), (y <> gv5), (y <> y), (y <> x), (x <> gv5), (x <> y), (x <> x), (None = Some gv5), (None = Some y)
+(None = Some x), (rev gv5 = gv5), (rev gv5 = y), (rev gv5 = x), (rev gv5 = append gv5 gv5), (rev gv5 = append gv5 y), (rev gv5 = append gv5 x), (rev gv5 = append y gv5), (rev gv5 = append y y), (rev gv5 = append y x)
+(rev gv5 = append x gv5), (rev gv5 = append x y), (rev gv5 = append x x), (rev y = gv5), (rev y = y), (rev y = x), (rev y = append gv5 gv5), (rev y = append gv5 y), (rev y = append gv5 x), (rev y = append y gv5)
+(rev y = append y y), (rev y = append y x), (rev y = append x gv5), (rev y = append x y), (rev y = append x x), (rev x = gv5), (rev x = y), (rev x = x), (rev x = append gv5 gv5), (rev x = append gv5 y)
+(rev x = append gv5 x), (rev x = append y gv5), (rev x = append y y), (rev x = append y x), (rev x = append x gv5), (rev x = append x y), (rev x = append x x), (append gv5 gv5 = gv5), (append gv5 gv5 = y), (append gv5 gv5 = x)
+(append gv5 y = gv5), (append gv5 y = y), (append gv5 y = x), (append gv5 x = gv5), (append gv5 x = y), (append gv5 x = x), (append y gv5 = gv5), (append y gv5 = y), (append y gv5 = x), (append y y = gv5)
+(append y y = y), (append y y = x), (append y x = gv5), (append y x = y), (append y x = x), (append x gv5 = gv5), (append x gv5 = y), (append x gv5 = x), (append x y = gv5), (append x y = y)
+(append x y = x), (append x x = gv5), (append x x = y), (append x x = x), (nil = rev gv5), (nil = rev y), (nil = rev x), (nil = append gv5 gv5), (nil = append gv5 y), (nil = append gv5 x)
+(nil = append y gv5), (nil = append y y), (nil = append y x), (nil = append x gv5), (nil = append x y), (nil = append x x)
+
+Label: 1 (1)
+(gv6 = gv6), (gv6 = y), (gv6 = x), (y = gv6), (y = y), (y = x), (x = gv6), (x = y), (x = x), (gv6 <> gv6)
+(gv6 <> y), (gv6 <> x), (y <> gv6), (y <> y), (y <> x), (x <> gv6), (x <> y), (x <> x), (None = Some gv6), (None = Some y)
+(None = Some x), (rev gv6 = gv6), (rev gv6 = y), (rev gv6 = x), (rev gv6 = append gv6 gv6), (rev gv6 = append gv6 y), (rev gv6 = append gv6 x), (rev gv6 = append y gv6), (rev gv6 = append y y), (rev gv6 = append y x)
+(rev gv6 = append x gv6), (rev gv6 = append x y), (rev gv6 = append x x), (rev y = gv6), (rev y = y), (rev y = x), (rev y = append gv6 gv6), (rev y = append gv6 y), (rev y = append gv6 x), (rev y = append y gv6)
+(rev y = append y y), (rev y = append y x), (rev y = append x gv6), (rev y = append x y), (rev y = append x x), (rev x = gv6), (rev x = y), (rev x = x), (rev x = append gv6 gv6), (rev x = append gv6 y)
+(rev x = append gv6 x), (rev x = append y gv6), (rev x = append y y), (rev x = append y x), (rev x = append x gv6), (rev x = append x y), (rev x = append x x), (append gv6 gv6 = gv6), (append gv6 gv6 = y), (append gv6 gv6 = x)
+(append gv6 y = gv6), (append gv6 y = y), (append gv6 y = x), (append gv6 x = gv6), (append gv6 x = y), (append gv6 x = x), (append y gv6 = gv6), (append y gv6 = y), (append y gv6 = x), (append y y = gv6)
+(append y y = y), (append y y = x), (append y x = gv6), (append y x = y), (append y x = x), (append x gv6 = gv6), (append x gv6 = y), (append x gv6 = x), (append x y = gv6), (append x y = y)
+(append x y = x), (append x x = gv6), (append x x = y), (append x x = x), (nil = rev gv6), (nil = rev y), (nil = rev x), (nil = append gv6 gv6), (nil = append gv6 y), (nil = append gv6 x)
+(nil = append y gv6), (nil = append y y), (nil = append y x), (nil = append x gv6), (nil = append x y), (nil = append x x)
+
+Label: 2 (2)
+(gv7 = gv7), (gv7 = y), (gv7 = x), (y = gv7), (y = y), (y = x), (x = gv7), (x = y), (x = x), (gv7 <> gv7)
+(gv7 <> y), (gv7 <> x), (y <> gv7), (y <> y), (y <> x), (x <> gv7), (x <> y), (x <> x), (None = Some gv7), (None = Some y)
+(None = Some x), (rev gv7 = gv7), (rev gv7 = y), (rev gv7 = x), (rev gv7 = append gv7 gv7), (rev gv7 = append gv7 y), (rev gv7 = append gv7 x), (rev gv7 = append y gv7), (rev gv7 = append y y), (rev gv7 = append y x)
+(rev gv7 = append x gv7), (rev gv7 = append x y), (rev gv7 = append x x), (rev y = gv7), (rev y = y), (rev y = x), (rev y = append gv7 gv7), (rev y = append gv7 y), (rev y = append gv7 x), (rev y = append y gv7)
+(rev y = append y y), (rev y = append y x), (rev y = append x gv7), (rev y = append x y), (rev y = append x x), (rev x = gv7), (rev x = y), (rev x = x), (rev x = append gv7 gv7), (rev x = append gv7 y)
+(rev x = append gv7 x), (rev x = append y gv7), (rev x = append y y), (rev x = append y x), (rev x = append x gv7), (rev x = append x y), (rev x = append x x), (append gv7 gv7 = gv7), (append gv7 gv7 = y), (append gv7 gv7 = x)
+(append gv7 y = gv7), (append gv7 y = y), (append gv7 y = x), (append gv7 x = gv7), (append gv7 x = y), (append gv7 x = x), (append y gv7 = gv7), (append y gv7 = y), (append y gv7 = x), (append y y = gv7)
+(append y y = y), (append y y = x), (append y x = gv7), (append y x = y), (append y x = x), (append x gv7 = gv7), (append x gv7 = y), (append x gv7 = x), (append x y = gv7), (append x y = y)
+(append x y = x), (append x x = gv7), (append x x = y), (append x x = x), (nil = rev gv7), (nil = rev y), (nil = rev x), (nil = append gv7 gv7), (nil = append gv7 y), (nil = append gv7 x)
+(nil = append y gv7), (nil = append y y), (nil = append y x), (nil = append x gv7), (nil = append x y), (nil = append x x)
+
+Label: 3 (3)
+(gv4 = gv4), (gv4 = y), (gv4 = x), (y = gv4), (y = y), (y = x), (x = gv4), (x = y), (x = x), (gv4 <> gv4)
+(gv4 <> y), (gv4 <> x), (y <> gv4), (y <> y), (y <> x), (x <> gv4), (x <> y), (x <> x), (None = Some gv4), (None = Some y)
+(None = Some x), (rev gv4 = gv4), (rev gv4 = y), (rev gv4 = x), (rev gv4 = append gv4 gv4), (rev gv4 = append gv4 y), (rev gv4 = append gv4 x), (rev gv4 = append y gv4), (rev gv4 = append y y), (rev gv4 = append y x)
+(rev gv4 = append x gv4), (rev gv4 = append x y), (rev gv4 = append x x), (rev y = gv4), (rev y = y), (rev y = x), (rev y = append gv4 gv4), (rev y = append gv4 y), (rev y = append gv4 x), (rev y = append y gv4)
+(rev y = append y y), (rev y = append y x), (rev y = append x gv4), (rev y = append x y), (rev y = append x x), (rev x = gv4), (rev x = y), (rev x = x), (rev x = append gv4 gv4), (rev x = append gv4 y)
+(rev x = append gv4 x), (rev x = append y gv4), (rev x = append y y), (rev x = append y x), (rev x = append x gv4), (rev x = append x y), (rev x = append x x), (append gv4 gv4 = gv4), (append gv4 gv4 = y), (append gv4 gv4 = x)
+(append gv4 y = gv4), (append gv4 y = y), (append gv4 y = x), (append gv4 x = gv4), (append gv4 x = y), (append gv4 x = x), (append y gv4 = gv4), (append y gv4 = y), (append y gv4 = x), (append y y = gv4)
+(append y y = y), (append y y = x), (append y x = gv4), (append y x = y), (append y x = x), (append x gv4 = gv4), (append x gv4 = y), (append x gv4 = x), (append x y = gv4), (append x y = y)
+(append x y = x), (append x x = gv4), (append x x = y), (append x x = x), (nil = rev gv4), (nil = rev y), (nil = rev x), (nil = append gv4 gv4), (nil = append gv4 y), (nil = append gv4 x)
+(nil = append y gv4), (nil = append y y), (nil = append y x), (nil = append x gv4), (nil = append x y), (nil = append x x)
+
+Label: 4 (4)
+(y = y), (y = x), (y = gv1), (x = y), (x = x), (x = gv1), (gv1 = y), (gv1 = x), (gv1 = gv1), (y <> y)
+(y <> x), (y <> gv1), (x <> y), (x <> x), (x <> gv1), (gv1 <> y), (gv1 <> x), (gv1 <> gv1), (None = Some y), (None = Some x)
+(None = Some gv1), (rev y = y), (rev y = x), (rev y = gv1), (rev y = append y y), (rev y = append y x), (rev y = append y gv1), (rev y = append x y), (rev y = append x x), (rev y = append x gv1)
+(rev y = append gv1 y), (rev y = append gv1 x), (rev y = append gv1 gv1), (rev x = y), (rev x = x), (rev x = gv1), (rev x = append y y), (rev x = append y x), (rev x = append y gv1), (rev x = append x y)
+(rev x = append x x), (rev x = append x gv1), (rev x = append gv1 y), (rev x = append gv1 x), (rev x = append gv1 gv1), (rev gv1 = y), (rev gv1 = x), (rev gv1 = gv1), (rev gv1 = append y y), (rev gv1 = append y x)
+(rev gv1 = append y gv1), (rev gv1 = append x y), (rev gv1 = append x x), (rev gv1 = append x gv1), (rev gv1 = append gv1 y), (rev gv1 = append gv1 x), (rev gv1 = append gv1 gv1), (append y y = y), (append y y = x), (append y y = gv1)
+(append y x = y), (append y x = x), (append y x = gv1), (append y gv1 = y), (append y gv1 = x), (append y gv1 = gv1), (append x y = y), (append x y = x), (append x y = gv1), (append x x = y)
+(append x x = x), (append x x = gv1), (append x gv1 = y), (append x gv1 = x), (append x gv1 = gv1), (append gv1 y = y), (append gv1 y = x), (append gv1 y = gv1), (append gv1 x = y), (append gv1 x = x)
+(append gv1 x = gv1), (append gv1 gv1 = y), (append gv1 gv1 = x), (append gv1 gv1 = gv1), (nil = rev y), (nil = rev x), (nil = rev gv1), (nil = append y y), (nil = append y x), (nil = append y gv1)
+(nil = append x y), (nil = append x x), (nil = append x gv1), (nil = append gv1 y), (nil = append gv1 x), (nil = append gv1 gv1)
+
+Label: 5 (5)
+(gv3 = gv3), (gv3 = y), (gv3 = x), (y = gv3), (y = y), (y = x), (x = gv3), (x = y), (x = x), (gv3 <> gv3)
+(gv3 <> y), (gv3 <> x), (y <> gv3), (y <> y), (y <> x), (x <> gv3), (x <> y), (x <> x), (None = Some gv3), (None = Some y)
+(None = Some x), (rev gv3 = gv3), (rev gv3 = y), (rev gv3 = x), (rev gv3 = append gv3 gv3), (rev gv3 = append gv3 y), (rev gv3 = append gv3 x), (rev gv3 = append y gv3), (rev gv3 = append y y), (rev gv3 = append y x)
+(rev gv3 = append x gv3), (rev gv3 = append x y), (rev gv3 = append x x), (rev y = gv3), (rev y = y), (rev y = x), (rev y = append gv3 gv3), (rev y = append gv3 y), (rev y = append gv3 x), (rev y = append y gv3)
+(rev y = append y y), (rev y = append y x), (rev y = append x gv3), (rev y = append x y), (rev y = append x x), (rev x = gv3), (rev x = y), (rev x = x), (rev x = append gv3 gv3), (rev x = append gv3 y)
+(rev x = append gv3 x), (rev x = append y gv3), (rev x = append y y), (rev x = append y x), (rev x = append x gv3), (rev x = append x y), (rev x = append x x), (append gv3 gv3 = gv3), (append gv3 gv3 = y), (append gv3 gv3 = x)
+(append gv3 y = gv3), (append gv3 y = y), (append gv3 y = x), (append gv3 x = gv3), (append gv3 x = y), (append gv3 x = x), (append y gv3 = gv3), (append y gv3 = y), (append y gv3 = x), (append y y = gv3)
+(append y y = y), (append y y = x), (append y x = gv3), (append y x = y), (append y x = x), (append x gv3 = gv3), (append x gv3 = y), (append x gv3 = x), (append x y = gv3), (append x y = y)
+(append x y = x), (append x x = gv3), (append x x = y), (append x x = x), (nil = rev gv3), (nil = rev y), (nil = rev x), (nil = append gv3 gv3), (nil = append gv3 y), (nil = append gv3 x)
+(nil = append y gv3), (nil = append y y), (nil = append y x), (nil = append x gv3), (nil = append x y), (nil = append x x)
+
+Label: 6 (6)
+(y = y), (y = x), (y = gv2), (x = y), (x = x), (x = gv2), (gv2 = y), (gv2 = x), (gv2 = gv2), (y <> y)
+(y <> x), (y <> gv2), (x <> y), (x <> x), (x <> gv2), (gv2 <> y), (gv2 <> x), (gv2 <> gv2), (None = Some y), (None = Some x)
+(None = Some gv2), (rev y = y), (rev y = x), (rev y = gv2), (rev y = append y y), (rev y = append y x), (rev y = append y gv2), (rev y = append x y), (rev y = append x x), (rev y = append x gv2)
+(rev y = append gv2 y), (rev y = append gv2 x), (rev y = append gv2 gv2), (rev x = y), (rev x = x), (rev x = gv2), (rev x = append y y), (rev x = append y x), (rev x = append y gv2), (rev x = append x y)
+(rev x = append x x), (rev x = append x gv2), (rev x = append gv2 y), (rev x = append gv2 x), (rev x = append gv2 gv2), (rev gv2 = y), (rev gv2 = x), (rev gv2 = gv2), (rev gv2 = append y y), (rev gv2 = append y x)
+(rev gv2 = append y gv2), (rev gv2 = append x y), (rev gv2 = append x x), (rev gv2 = append x gv2), (rev gv2 = append gv2 y), (rev gv2 = append gv2 x), (rev gv2 = append gv2 gv2), (append y y = y), (append y y = x), (append y y = gv2)
+(append y x = y), (append y x = x), (append y x = gv2), (append y gv2 = y), (append y gv2 = x), (append y gv2 = gv2), (append x y = y), (append x y = x), (append x y = gv2), (append x x = y)
+(append x x = x), (append x x = gv2), (append x gv2 = y), (append x gv2 = x), (append x gv2 = gv2), (append gv2 y = y), (append gv2 y = x), (append gv2 y = gv2), (append gv2 x = y), (append gv2 x = x)
+(append gv2 x = gv2), (append gv2 gv2 = y), (append gv2 gv2 = x), (append gv2 gv2 = gv2), (nil = rev y), (nil = rev x), (nil = rev gv2), (nil = append y y), (nil = append y x), (nil = append y gv2)
+(nil = append x y), (nil = append x x), (nil = append x gv2), (nil = append gv2 y), (nil = append gv2 x), (nil = append gv2 gv2)
+
+Label: 7 (7)
+(y = y), (y = x), (y = gv0), (x = y), (x = x), (x = gv0), (gv0 = y), (gv0 = x), (gv0 = gv0), (y <> y)
+(y <> x), (y <> gv0), (x <> y), (x <> x), (x <> gv0), (gv0 <> y), (gv0 <> x), (gv0 <> gv0), (None = Some y), (None = Some x)
+(None = Some gv0), (rev y = y), (rev y = x), (rev y = gv0), (rev y = append y y), (rev y = append y x), (rev y = append y gv0), (rev y = append x y), (rev y = append x x), (rev y = append x gv0)
+(rev y = append gv0 y), (rev y = append gv0 x), (rev y = append gv0 gv0), (rev x = y), (rev x = x), (rev x = gv0), (rev x = append y y), (rev x = append y x), (rev x = append y gv0), (rev x = append x y)
+(rev x = append x x), (rev x = append x gv0), (rev x = append gv0 y), (rev x = append gv0 x), (rev x = append gv0 gv0), (rev gv0 = y), (rev gv0 = x), (rev gv0 = gv0), (rev gv0 = append y y), (rev gv0 = append y x)
+(rev gv0 = append y gv0), (rev gv0 = append x y), (rev gv0 = append x x), (rev gv0 = append x gv0), (rev gv0 = append gv0 y), (rev gv0 = append gv0 x), (rev gv0 = append gv0 gv0), (append y y = y), (append y y = x), (append y y = gv0)
+(append y x = y), (append y x = x), (append y x = gv0), (append y gv0 = y), (append y gv0 = x), (append y gv0 = gv0), (append x y = y), (append x y = x), (append x y = gv0), (append x x = y)
+(append x x = x), (append x x = gv0), (append x gv0 = y), (append x gv0 = x), (append x gv0 = gv0), (append gv0 y = y), (append gv0 y = x), (append gv0 y = gv0), (append gv0 x = y), (append gv0 x = x)
+(append gv0 x = gv0), (append gv0 gv0 = y), (append gv0 gv0 = x), (append gv0 gv0 = gv0), (nil = rev y), (nil = rev x), (nil = rev gv0), (nil = append y y), (nil = append y x), (nil = append y gv0)
+(nil = append x y), (nil = append x x), (nil = append x gv0), (nil = append gv0 y), (nil = append gv0 x), (nil = append gv0 gv0)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 40.665 seconds
+
+
+Label: 0 (0)
+(rev gv5 = x), (rev x = gv5)
+
+Label: 1 (1)
+(gv6 = y), (y = gv6)
+
+Label: 2 (2)
+(rev gv7 = y), (rev y = gv7)
+
+Label: 3 (3)
+(gv4 = x), (x = gv4)
+
+Label: 4 (4)
+(rev gv1 = append x y)
+
+Label: 5 (5)
+(append x y = gv3)
+
+Label: 6 (6)
+(append x y = gv2)
+
+Label: 7 (7)
+(append x y = gv0)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (rev (rev (append x y)) = append (rev (rev x)) (rev (rev y)))
+
+2. (rev (rev y) = y)
+
+3. (rev (rev x) = x)
+
+4. (append x y = append (rev (rev x)) (rev (rev y)))
+
+5. (append x y = rev (rev (append x y)))
+
+6. (gv6 = y -> rev (rev (append x y)) = append (rev (rev x)) gv6)
+
+7. (y = gv6 -> rev (rev (append x y)) = append (rev (rev x)) gv6)
+
+8. (gv4 = x -> rev (rev (append x y)) = append gv4 (rev (rev y)))
+
+9. (x = gv4 -> rev (rev (append x y)) = append gv4 (rev (rev y)))
+
+10. (rev gv5 = x -> rev (rev (append x y)) = append (rev gv5) (rev (rev y)))
+
+11. (rev gv7 = y -> rev (rev (append x y)) = append (rev (rev x)) (rev gv7))
+
+12. (append x y = gv3 -> rev (rev (append x y)) = gv3)
+
+13. (append x y = gv0 -> gv0 = append (rev (rev x)) (rev (rev y)))
+
+14. (rev gv1 = append x y -> rev gv1 = append (rev (rev x)) (rev (rev y)))
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 77.387 seconds
+
+Number of Result Pairs Returned: 14
+
+1. (rev (rev (append x y)) = append (rev (rev x)) (rev (rev y)))
+
+2. (rev (rev y) = y)
+
+3. (rev (rev x) = x)
+
+4. (append x y = append (rev (rev x)) (rev (rev y)))
+
+5. (append x y = rev (rev (append x y)))

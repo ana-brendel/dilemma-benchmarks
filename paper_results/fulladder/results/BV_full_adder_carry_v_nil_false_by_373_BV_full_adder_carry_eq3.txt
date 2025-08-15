@@ -1,0 +1,284 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (bV_full_adder_carry b0 Nil false = false)
+
+----------------------------------
+Goal: (bV_full_adder_carry (Cons b b0) Nil false = false)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 2.87 seconds
+
+gv1 : boolList = (Cons b b0)
+gv0 : bool = (bV_full_adder_carry (Cons b b0) Nil false)
+gv2 : boolList = Nil
+gv3 : bool = false
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 27.097 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (bV_full_adder_carry (Cons b b0) Nil false = false)
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (false = gv3)
+
+----------------------------------
+Goal: (bV_full_adder_carry (Cons b b0) Nil gv3 = gv3)
+Case: Valid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (Nil = gv2)
+
+----------------------------------
+Goal: (bV_full_adder_carry (Cons b b0) gv2 false = false)
+Case: Valid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (bV_full_adder_carry (Cons b b0) Nil false = gv0)
+
+----------------------------------
+Goal: (gv0 = false)
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+
+----------------------------------
+Goal: (bV_full_adder_carry gv1 Nil false = false)
+Case: Valid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (Cons b b0 = gv1)
+ -- (false = gv3)
+
+----------------------------------
+Goal: (bV_full_adder_carry gv1 Nil gv3 = gv3)
+Case: Valid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (Cons b b0 = gv1)
+ -- (Nil = gv2)
+
+----------------------------------
+Goal: (bV_full_adder_carry gv1 gv2 false = false)
+Case: Valid and Generalized
+
+Label: Generalization #7
+Assumptions: 
+ -- (bV_full_adder_carry gv1 Nil false = gv0)
+
+----------------------------------
+Goal: (gv0 = false)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 27.237 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+Datatypes.app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+half_adder_sum : (bool -> bool -> bool)
+half_adder_carry : (bool -> bool -> bool)
+bool_to_nat : (bool -> nat)
+full_adder_sum : (bool -> bool -> bool -> bool)
+full_adder_carry : (bool -> bool -> bool -> bool)
+boolList : Set
+length : (boolList -> nat)
+app : (boolList -> boolList -> boolList)
+bV_full_adder_sum_nil : (boolList -> bool -> boolList)
+bV_full_adder_sum : (boolList -> boolList -> bool -> boolList)
+bV_full_adder_carry_nil : (boolList -> bool -> bool)
+bV_full_adder_carry : (boolList -> boolList -> bool -> bool)
+bV_full_adder : (boolList -> boolList -> bool -> boolList)
+Nil : boolList
+Cons : (bool -> boolList -> boolList)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 190
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 335
+Negative Examples: 109
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 27.444 seconds
+
+
+Label: 0 (0)
+(false = b), (false = gv0), (true = b), (true = gv0), (b0 = b0), (b = b), (b = gv0), (gv0 = b), (gv0 = gv0), (false = bV_full_adder_carry b0 b0 b)
+(false = bV_full_adder_carry b0 b0 gv0), (false = bV_full_adder_carry_nil b0 b), (false = bV_full_adder_carry_nil b0 gv0), (false = full_adder_carry b b b), (false = full_adder_carry b b gv0), (false = full_adder_carry b gv0 b), (false = full_adder_carry b gv0 gv0), (false = full_adder_carry gv0 b b), (false = full_adder_carry gv0 b gv0), (false = full_adder_carry gv0 gv0 b)
+(false = full_adder_carry gv0 gv0 gv0), (false = full_adder_sum b b b), (false = full_adder_sum b b gv0), (false = full_adder_sum b gv0 b), (false = full_adder_sum b gv0 gv0), (false = full_adder_sum gv0 b b), (false = full_adder_sum gv0 b gv0), (false = full_adder_sum gv0 gv0 b), (false = full_adder_sum gv0 gv0 gv0), (false = half_adder_carry b b)
+(false = half_adder_carry b gv0), (false = half_adder_carry gv0 b), (false = half_adder_carry gv0 gv0), (false = half_adder_sum b b), (false = half_adder_sum b gv0), (false = half_adder_sum gv0 b), (false = half_adder_sum gv0 gv0), (true = bV_full_adder_carry b0 b0 b), (true = bV_full_adder_carry b0 b0 gv0), (true = bV_full_adder_carry_nil b0 b)
+(true = bV_full_adder_carry_nil b0 gv0), (true = full_adder_carry b b b), (true = full_adder_carry b b gv0), (true = full_adder_carry b gv0 b), (true = full_adder_carry b gv0 gv0), (true = full_adder_carry gv0 b b), (true = full_adder_carry gv0 b gv0), (true = full_adder_carry gv0 gv0 b), (true = full_adder_carry gv0 gv0 gv0), (true = full_adder_sum b b b)
+(true = full_adder_sum b b gv0), (true = full_adder_sum b gv0 b), (true = full_adder_sum b gv0 gv0), (true = full_adder_sum gv0 b b), (true = full_adder_sum gv0 b gv0), (true = full_adder_sum gv0 gv0 b), (true = full_adder_sum gv0 gv0 gv0), (true = half_adder_carry b b), (true = half_adder_carry b gv0), (true = half_adder_carry gv0 b)
+(true = half_adder_carry gv0 gv0), (true = half_adder_sum b b), (true = half_adder_sum b gv0), (true = half_adder_sum gv0 b), (true = half_adder_sum gv0 gv0), (length b0 < bool_to_nat b), (length b0 < bool_to_nat gv0), (bool_to_nat b < length b0), (bool_to_nat b < bool_to_nat gv0), (bool_to_nat gv0 < length b0)
+(bool_to_nat gv0 < bool_to_nat b), (length b0 <= bool_to_nat b), (length b0 <= bool_to_nat gv0), (bool_to_nat b <= length b0), (bool_to_nat b <= bool_to_nat gv0), (bool_to_nat gv0 <= length b0), (bool_to_nat gv0 <= bool_to_nat b), (false <> b), (false <> gv0), (true <> b)
+(true <> gv0), (b0 <> b0), (b <> b), (b <> gv0), (gv0 <> b), (gv0 <> gv0), (bV_full_adder_carry b0 b0 b = b), (bV_full_adder_carry b0 b0 b = gv0), (bV_full_adder_carry b0 b0 gv0 = b), (bV_full_adder_carry b0 b0 gv0 = gv0)
+(bV_full_adder_carry_nil b0 b = b), (bV_full_adder_carry_nil b0 b = gv0), (bV_full_adder_carry_nil b0 b = bV_full_adder_carry b0 b0 b), (bV_full_adder_carry_nil b0 b = bV_full_adder_carry b0 b0 gv0), (bV_full_adder_carry_nil b0 gv0 = b), (bV_full_adder_carry_nil b0 gv0 = gv0), (bV_full_adder_carry_nil b0 gv0 = bV_full_adder_carry b0 b0 b), (bV_full_adder_carry_nil b0 gv0 = bV_full_adder_carry b0 b0 gv0), (full_adder_carry b b b = b), (full_adder_carry b b b = gv0)
+(full_adder_carry b b b = bV_full_adder_carry b0 b0 b), (full_adder_carry b b b = bV_full_adder_carry b0 b0 gv0), (full_adder_carry b b b = bV_full_adder_carry_nil b0 b), (full_adder_carry b b b = bV_full_adder_carry_nil b0 gv0), (full_adder_carry b b gv0 = b), (full_adder_carry b b gv0 = gv0), (full_adder_carry b b gv0 = bV_full_adder_carry b0 b0 b), (full_adder_carry b b gv0 = bV_full_adder_carry b0 b0 gv0), (full_adder_carry b b gv0 = bV_full_adder_carry_nil b0 b), (full_adder_carry b b gv0 = bV_full_adder_carry_nil b0 gv0)
+(full_adder_carry b gv0 b = b), (full_adder_carry b gv0 b = gv0), (full_adder_carry b gv0 b = bV_full_adder_carry b0 b0 b), (full_adder_carry b gv0 b = bV_full_adder_carry b0 b0 gv0), (full_adder_carry b gv0 b = bV_full_adder_carry_nil b0 b), (full_adder_carry b gv0 b = bV_full_adder_carry_nil b0 gv0), (full_adder_carry b gv0 gv0 = b), (full_adder_carry b gv0 gv0 = gv0), (full_adder_carry b gv0 gv0 = bV_full_adder_carry b0 b0 b), (full_adder_carry b gv0 gv0 = bV_full_adder_carry b0 b0 gv0)
+(full_adder_carry b gv0 gv0 = bV_full_adder_carry_nil b0 b), (full_adder_carry b gv0 gv0 = bV_full_adder_carry_nil b0 gv0), (full_adder_carry gv0 b b = b), (full_adder_carry gv0 b b = gv0), (full_adder_carry gv0 b b = bV_full_adder_carry b0 b0 b), (full_adder_carry gv0 b b = bV_full_adder_carry b0 b0 gv0), (full_adder_carry gv0 b b = bV_full_adder_carry_nil b0 b), (full_adder_carry gv0 b b = bV_full_adder_carry_nil b0 gv0), (full_adder_carry gv0 b gv0 = b), (full_adder_carry gv0 b gv0 = gv0)
+(full_adder_carry gv0 b gv0 = bV_full_adder_carry b0 b0 b), (full_adder_carry gv0 b gv0 = bV_full_adder_carry b0 b0 gv0), (full_adder_carry gv0 b gv0 = bV_full_adder_carry_nil b0 b), (full_adder_carry gv0 b gv0 = bV_full_adder_carry_nil b0 gv0), (full_adder_carry gv0 gv0 b = b), (full_adder_carry gv0 gv0 b = gv0), (full_adder_carry gv0 gv0 b = bV_full_adder_carry b0 b0 b), (full_adder_carry gv0 gv0 b = bV_full_adder_carry b0 b0 gv0), (full_adder_carry gv0 gv0 b = bV_full_adder_carry_nil b0 b), (full_adder_carry gv0 gv0 b = bV_full_adder_carry_nil b0 gv0)
+(full_adder_carry gv0 gv0 gv0 = b), (full_adder_carry gv0 gv0 gv0 = gv0), (full_adder_carry gv0 gv0 gv0 = bV_full_adder_carry b0 b0 b), (full_adder_carry gv0 gv0 gv0 = bV_full_adder_carry b0 b0 gv0), (full_adder_carry gv0 gv0 gv0 = bV_full_adder_carry_nil b0 b), (full_adder_carry gv0 gv0 gv0 = bV_full_adder_carry_nil b0 gv0), (full_adder_sum b b b = b), (full_adder_sum b b b = gv0), (full_adder_sum b b b = bV_full_adder_carry b0 b0 b), (full_adder_sum b b b = bV_full_adder_carry b0 b0 gv0)
+(full_adder_sum b b b = bV_full_adder_carry_nil b0 b), (full_adder_sum b b b = bV_full_adder_carry_nil b0 gv0), (full_adder_sum b b b = full_adder_carry b b b), (full_adder_sum b b b = full_adder_carry b b gv0), (full_adder_sum b b b = full_adder_carry b gv0 b), (full_adder_sum b b b = full_adder_carry b gv0 gv0), (full_adder_sum b b b = full_adder_carry gv0 b b), (full_adder_sum b b b = full_adder_carry gv0 b gv0), (full_adder_sum b b b = full_adder_carry gv0 gv0 b), (full_adder_sum b b b = full_adder_carry gv0 gv0 gv0)
+(full_adder_sum b b gv0 = b), (full_adder_sum b b gv0 = gv0), (full_adder_sum b b gv0 = bV_full_adder_carry b0 b0 b), (full_adder_sum b b gv0 = bV_full_adder_carry b0 b0 gv0), (full_adder_sum b b gv0 = bV_full_adder_carry_nil b0 b), (full_adder_sum b b gv0 = bV_full_adder_carry_nil b0 gv0), (full_adder_sum b b gv0 = full_adder_carry b b b), (full_adder_sum b b gv0 = full_adder_carry b b gv0), (full_adder_sum b b gv0 = full_adder_carry b gv0 b), (full_adder_sum b b gv0 = full_adder_carry b gv0 gv0)
+(full_adder_sum b b gv0 = full_adder_carry gv0 b b), (full_adder_sum b b gv0 = full_adder_carry gv0 b gv0), (full_adder_sum b b gv0 = full_adder_carry gv0 gv0 b), (full_adder_sum b b gv0 = full_adder_carry gv0 gv0 gv0), (full_adder_sum b gv0 b = b), (full_adder_sum b gv0 b = gv0), (full_adder_sum b gv0 b = bV_full_adder_carry b0 b0 b), (full_adder_sum b gv0 b = bV_full_adder_carry b0 b0 gv0), (full_adder_sum b gv0 b = bV_full_adder_carry_nil b0 b), (full_adder_sum b gv0 b = bV_full_adder_carry_nil b0 gv0)
+(full_adder_sum b gv0 b = full_adder_carry b b b), (full_adder_sum b gv0 b = full_adder_carry b b gv0), (full_adder_sum b gv0 b = full_adder_carry b gv0 b), (full_adder_sum b gv0 b = full_adder_carry b gv0 gv0), (full_adder_sum b gv0 b = full_adder_carry gv0 b b), (full_adder_sum b gv0 b = full_adder_carry gv0 b gv0), (full_adder_sum b gv0 b = full_adder_carry gv0 gv0 b), (full_adder_sum b gv0 b = full_adder_carry gv0 gv0 gv0), (full_adder_sum b gv0 gv0 = b), (full_adder_sum b gv0 gv0 = gv0)
+(full_adder_sum b gv0 gv0 = bV_full_adder_carry b0 b0 b), (full_adder_sum b gv0 gv0 = bV_full_adder_carry b0 b0 gv0), (full_adder_sum b gv0 gv0 = bV_full_adder_carry_nil b0 b), (full_adder_sum b gv0 gv0 = bV_full_adder_carry_nil b0 gv0), (full_adder_sum b gv0 gv0 = full_adder_carry b b b), (full_adder_sum b gv0 gv0 = full_adder_carry b b gv0), (full_adder_sum b gv0 gv0 = full_adder_carry b gv0 b), (full_adder_sum b gv0 gv0 = full_adder_carry b gv0 gv0), (full_adder_sum b gv0 gv0 = full_adder_carry gv0 b b), (full_adder_sum b gv0 gv0 = full_adder_carry gv0 b gv0)
+(full_adder_sum b gv0 gv0 = full_adder_carry gv0 gv0 b), (full_adder_sum b gv0 gv0 = full_adder_carry gv0 gv0 gv0), (full_adder_sum gv0 b b = b), (full_adder_sum gv0 b b = gv0), (full_adder_sum gv0 b b = bV_full_adder_carry b0 b0 b), (full_adder_sum gv0 b b = bV_full_adder_carry b0 b0 gv0), (full_adder_sum gv0 b b = bV_full_adder_carry_nil b0 b), (full_adder_sum gv0 b b = bV_full_adder_carry_nil b0 gv0), (full_adder_sum gv0 b b = full_adder_carry b b b), (full_adder_sum gv0 b b = full_adder_carry b b gv0)
+(full_adder_sum gv0 b b = full_adder_carry b gv0 b), (full_adder_sum gv0 b b = full_adder_carry b gv0 gv0), (full_adder_sum gv0 b b = full_adder_carry gv0 b b), (full_adder_sum gv0 b b = full_adder_carry gv0 b gv0), (full_adder_sum gv0 b b = full_adder_carry gv0 gv0 b), (full_adder_sum gv0 b b = full_adder_carry gv0 gv0 gv0), (full_adder_sum gv0 b gv0 = b), (full_adder_sum gv0 b gv0 = gv0), (full_adder_sum gv0 b gv0 = bV_full_adder_carry b0 b0 b), (full_adder_sum gv0 b gv0 = bV_full_adder_carry b0 b0 gv0)
+(full_adder_sum gv0 b gv0 = bV_full_adder_carry_nil b0 b), (full_adder_sum gv0 b gv0 = bV_full_adder_carry_nil b0 gv0), (full_adder_sum gv0 b gv0 = full_adder_carry b b b), (full_adder_sum gv0 b gv0 = full_adder_carry b b gv0), (full_adder_sum gv0 b gv0 = full_adder_carry b gv0 b), (full_adder_sum gv0 b gv0 = full_adder_carry b gv0 gv0), (full_adder_sum gv0 b gv0 = full_adder_carry gv0 b b), (full_adder_sum gv0 b gv0 = full_adder_carry gv0 b gv0), (full_adder_sum gv0 b gv0 = full_adder_carry gv0 gv0 b), (full_adder_sum gv0 b gv0 = full_adder_carry gv0 gv0 gv0)
+(full_adder_sum gv0 gv0 b = b), (full_adder_sum gv0 gv0 b = gv0), (full_adder_sum gv0 gv0 b = bV_full_adder_carry b0 b0 b), (full_adder_sum gv0 gv0 b = bV_full_adder_carry b0 b0 gv0), (full_adder_sum gv0 gv0 b = bV_full_adder_carry_nil b0 b), (full_adder_sum gv0 gv0 b = bV_full_adder_carry_nil b0 gv0), (full_adder_sum gv0 gv0 b = full_adder_carry b b b), (full_adder_sum gv0 gv0 b = full_adder_carry b b gv0), (full_adder_sum gv0 gv0 b = full_adder_carry b gv0 b), (full_adder_sum gv0 gv0 b = full_adder_carry b gv0 gv0)
+(full_adder_sum gv0 gv0 b = full_adder_carry gv0 b b), (full_adder_sum gv0 gv0 b = full_adder_carry gv0 b gv0), (full_adder_sum gv0 gv0 b = full_adder_carry gv0 gv0 b), (full_adder_sum gv0 gv0 b = full_adder_carry gv0 gv0 gv0), (full_adder_sum gv0 gv0 gv0 = b), (full_adder_sum gv0 gv0 gv0 = gv0), (full_adder_sum gv0 gv0 gv0 = bV_full_adder_carry b0 b0 b), (full_adder_sum gv0 gv0 gv0 = bV_full_adder_carry b0 b0 gv0), (full_adder_sum gv0 gv0 gv0 = bV_full_adder_carry_nil b0 b), (full_adder_sum gv0 gv0 gv0 = bV_full_adder_carry_nil b0 gv0)
+(full_adder_sum gv0 gv0 gv0 = full_adder_carry b b b), (full_adder_sum gv0 gv0 gv0 = full_adder_carry b b gv0), (full_adder_sum gv0 gv0 gv0 = full_adder_carry b gv0 b), (full_adder_sum gv0 gv0 gv0 = full_adder_carry b gv0 gv0), (full_adder_sum gv0 gv0 gv0 = full_adder_carry gv0 b b), (full_adder_sum gv0 gv0 gv0 = full_adder_carry gv0 b gv0), (full_adder_sum gv0 gv0 gv0 = full_adder_carry gv0 gv0 b), (full_adder_sum gv0 gv0 gv0 = full_adder_carry gv0 gv0 gv0), (half_adder_carry b b = b), (half_adder_carry b b = gv0)
+(half_adder_carry b b = bV_full_adder_carry b0 b0 b), (half_adder_carry b b = bV_full_adder_carry b0 b0 gv0), (half_adder_carry b b = bV_full_adder_carry_nil b0 b), (half_adder_carry b b = bV_full_adder_carry_nil b0 gv0), (half_adder_carry b b = full_adder_carry b b b), (half_adder_carry b b = full_adder_carry b b gv0), (half_adder_carry b b = full_adder_carry b gv0 b), (half_adder_carry b b = full_adder_carry b gv0 gv0), (half_adder_carry b b = full_adder_carry gv0 b b), (half_adder_carry b b = full_adder_carry gv0 b gv0)
+(half_adder_carry b b = full_adder_carry gv0 gv0 b), (half_adder_carry b b = full_adder_carry gv0 gv0 gv0), (half_adder_carry b b = full_adder_sum b b b), (half_adder_carry b b = full_adder_sum b b gv0), (half_adder_carry b b = full_adder_sum b gv0 b), (half_adder_carry b b = full_adder_sum b gv0 gv0), (half_adder_carry b b = full_adder_sum gv0 b b), (half_adder_carry b b = full_adder_sum gv0 b gv0), (half_adder_carry b b = full_adder_sum gv0 gv0 b), (half_adder_carry b b = full_adder_sum gv0 gv0 gv0)
+(half_adder_carry b gv0 = b), (half_adder_carry b gv0 = gv0), (half_adder_carry b gv0 = bV_full_adder_carry b0 b0 b), (half_adder_carry b gv0 = bV_full_adder_carry b0 b0 gv0), (half_adder_carry b gv0 = bV_full_adder_carry_nil b0 b), (half_adder_carry b gv0 = bV_full_adder_carry_nil b0 gv0), (half_adder_carry b gv0 = full_adder_carry b b b), (half_adder_carry b gv0 = full_adder_carry b b gv0), (half_adder_carry b gv0 = full_adder_carry b gv0 b), (half_adder_carry b gv0 = full_adder_carry b gv0 gv0)
+(half_adder_carry b gv0 = full_adder_carry gv0 b b), (half_adder_carry b gv0 = full_adder_carry gv0 b gv0), (half_adder_carry b gv0 = full_adder_carry gv0 gv0 b), (half_adder_carry b gv0 = full_adder_carry gv0 gv0 gv0), (half_adder_carry b gv0 = full_adder_sum b b b), (half_adder_carry b gv0 = full_adder_sum b b gv0), (half_adder_carry b gv0 = full_adder_sum b gv0 b), (half_adder_carry b gv0 = full_adder_sum b gv0 gv0), (half_adder_carry b gv0 = full_adder_sum gv0 b b), (half_adder_carry b gv0 = full_adder_sum gv0 b gv0)
+(half_adder_carry b gv0 = full_adder_sum gv0 gv0 b), (half_adder_carry b gv0 = full_adder_sum gv0 gv0 gv0), (half_adder_carry gv0 b = b), (half_adder_carry gv0 b = gv0), (half_adder_carry gv0 b = bV_full_adder_carry b0 b0 b), (half_adder_carry gv0 b = bV_full_adder_carry b0 b0 gv0), (half_adder_carry gv0 b = bV_full_adder_carry_nil b0 b), (half_adder_carry gv0 b = bV_full_adder_carry_nil b0 gv0), (half_adder_carry gv0 b = full_adder_carry b b b), (half_adder_carry gv0 b = full_adder_carry b b gv0)
+(half_adder_carry gv0 b = full_adder_carry b gv0 b), (half_adder_carry gv0 b = full_adder_carry b gv0 gv0), (half_adder_carry gv0 b = full_adder_carry gv0 b b), (half_adder_carry gv0 b = full_adder_carry gv0 b gv0), (half_adder_carry gv0 b = full_adder_carry gv0 gv0 b), (half_adder_carry gv0 b = full_adder_carry gv0 gv0 gv0), (half_adder_carry gv0 b = full_adder_sum b b b), (half_adder_carry gv0 b = full_adder_sum b b gv0), (half_adder_carry gv0 b = full_adder_sum b gv0 b), (half_adder_carry gv0 b = full_adder_sum b gv0 gv0)
+(half_adder_carry gv0 b = full_adder_sum gv0 b b), (half_adder_carry gv0 b = full_adder_sum gv0 b gv0), (half_adder_carry gv0 b = full_adder_sum gv0 gv0 b), (half_adder_carry gv0 b = full_adder_sum gv0 gv0 gv0), (half_adder_carry gv0 gv0 = b), (half_adder_carry gv0 gv0 = gv0), (half_adder_carry gv0 gv0 = bV_full_adder_carry b0 b0 b), (half_adder_carry gv0 gv0 = bV_full_adder_carry b0 b0 gv0), (half_adder_carry gv0 gv0 = bV_full_adder_carry_nil b0 b), (half_adder_carry gv0 gv0 = bV_full_adder_carry_nil b0 gv0)
+(half_adder_carry gv0 gv0 = full_adder_carry b b b), (half_adder_carry gv0 gv0 = full_adder_carry b b gv0), (half_adder_carry gv0 gv0 = full_adder_carry b gv0 b), (half_adder_carry gv0 gv0 = full_adder_carry b gv0 gv0), (half_adder_carry gv0 gv0 = full_adder_carry gv0 b b), (half_adder_carry gv0 gv0 = full_adder_carry gv0 b gv0), (half_adder_carry gv0 gv0 = full_adder_carry gv0 gv0 b), (half_adder_carry gv0 gv0 = full_adder_carry gv0 gv0 gv0), (half_adder_carry gv0 gv0 = full_adder_sum b b b), (half_adder_carry gv0 gv0 = full_adder_sum b b gv0)
+(half_adder_carry gv0 gv0 = full_adder_sum b gv0 b), (half_adder_carry gv0 gv0 = full_adder_sum b gv0 gv0), (half_adder_carry gv0 gv0 = full_adder_sum gv0 b b), (half_adder_carry gv0 gv0 = full_adder_sum gv0 b gv0), (half_adder_carry gv0 gv0 = full_adder_sum gv0 gv0 b), (half_adder_carry gv0 gv0 = full_adder_sum gv0 gv0 gv0), (half_adder_sum b b = b), (half_adder_sum b b = gv0), (half_adder_sum b b = bV_full_adder_carry b0 b0 b), (half_adder_sum b b = bV_full_adder_carry b0 b0 gv0)
+(half_adder_sum b b = bV_full_adder_carry_nil b0 b), (half_adder_sum b b = bV_full_adder_carry_nil b0 gv0), (half_adder_sum b b = full_adder_carry b b b), (half_adder_sum b b = full_adder_carry b b gv0), (half_adder_sum b b = full_adder_carry b gv0 b), (half_adder_sum b b = full_adder_carry b gv0 gv0), (half_adder_sum b b = full_adder_carry gv0 b b), (half_adder_sum b b = full_adder_carry gv0 b gv0), (half_adder_sum b b = full_adder_carry gv0 gv0 b), (half_adder_sum b b = full_adder_carry gv0 gv0 gv0)
+(half_adder_sum b b = full_adder_sum b b b), (half_adder_sum b b = full_adder_sum b b gv0), (half_adder_sum b b = full_adder_sum b gv0 b), (half_adder_sum b b = full_adder_sum b gv0 gv0), (half_adder_sum b b = full_adder_sum gv0 b b), (half_adder_sum b b = full_adder_sum gv0 b gv0), (half_adder_sum b b = full_adder_sum gv0 gv0 b), (half_adder_sum b b = full_adder_sum gv0 gv0 gv0), (half_adder_sum b b = half_adder_carry b b), (half_adder_sum b b = half_adder_carry b gv0)
+(half_adder_sum b b = half_adder_carry gv0 b), (half_adder_sum b b = half_adder_carry gv0 gv0), (half_adder_sum b gv0 = b), (half_adder_sum b gv0 = gv0), (half_adder_sum b gv0 = bV_full_adder_carry b0 b0 b), (half_adder_sum b gv0 = bV_full_adder_carry b0 b0 gv0), (half_adder_sum b gv0 = bV_full_adder_carry_nil b0 b), (half_adder_sum b gv0 = bV_full_adder_carry_nil b0 gv0), (half_adder_sum b gv0 = full_adder_carry b b b), (half_adder_sum b gv0 = full_adder_carry b b gv0)
+(half_adder_sum b gv0 = full_adder_carry b gv0 b), (half_adder_sum b gv0 = full_adder_carry b gv0 gv0), (half_adder_sum b gv0 = full_adder_carry gv0 b b), (half_adder_sum b gv0 = full_adder_carry gv0 b gv0), (half_adder_sum b gv0 = full_adder_carry gv0 gv0 b), (half_adder_sum b gv0 = full_adder_carry gv0 gv0 gv0), (half_adder_sum b gv0 = full_adder_sum b b b), (half_adder_sum b gv0 = full_adder_sum b b gv0), (half_adder_sum b gv0 = full_adder_sum b gv0 b), (half_adder_sum b gv0 = full_adder_sum b gv0 gv0)
+(half_adder_sum b gv0 = full_adder_sum gv0 b b), (half_adder_sum b gv0 = full_adder_sum gv0 b gv0), (half_adder_sum b gv0 = full_adder_sum gv0 gv0 b), (half_adder_sum b gv0 = full_adder_sum gv0 gv0 gv0), (half_adder_sum b gv0 = half_adder_carry b b), (half_adder_sum b gv0 = half_adder_carry b gv0), (half_adder_sum b gv0 = half_adder_carry gv0 b), (half_adder_sum b gv0 = half_adder_carry gv0 gv0), (half_adder_sum gv0 b = b), (half_adder_sum gv0 b = gv0)
+(half_adder_sum gv0 b = bV_full_adder_carry b0 b0 b), (half_adder_sum gv0 b = bV_full_adder_carry b0 b0 gv0), (half_adder_sum gv0 b = bV_full_adder_carry_nil b0 b), (half_adder_sum gv0 b = bV_full_adder_carry_nil b0 gv0), (half_adder_sum gv0 b = full_adder_carry b b b), (half_adder_sum gv0 b = full_adder_carry b b gv0), (half_adder_sum gv0 b = full_adder_carry b gv0 b), (half_adder_sum gv0 b = full_adder_carry b gv0 gv0), (half_adder_sum gv0 b = full_adder_carry gv0 b b), (half_adder_sum gv0 b = full_adder_carry gv0 b gv0)
+(half_adder_sum gv0 b = full_adder_carry gv0 gv0 b), (half_adder_sum gv0 b = full_adder_carry gv0 gv0 gv0), (half_adder_sum gv0 b = full_adder_sum b b b), (half_adder_sum gv0 b = full_adder_sum b b gv0), (half_adder_sum gv0 b = full_adder_sum b gv0 b), (half_adder_sum gv0 b = full_adder_sum b gv0 gv0), (half_adder_sum gv0 b = full_adder_sum gv0 b b), (half_adder_sum gv0 b = full_adder_sum gv0 b gv0), (half_adder_sum gv0 b = full_adder_sum gv0 gv0 b), (half_adder_sum gv0 b = full_adder_sum gv0 gv0 gv0)
+(half_adder_sum gv0 b = half_adder_carry b b), (half_adder_sum gv0 b = half_adder_carry b gv0), (half_adder_sum gv0 b = half_adder_carry gv0 b), (half_adder_sum gv0 b = half_adder_carry gv0 gv0), (half_adder_sum gv0 gv0 = b), (half_adder_sum gv0 gv0 = gv0), (half_adder_sum gv0 gv0 = bV_full_adder_carry b0 b0 b), (half_adder_sum gv0 gv0 = bV_full_adder_carry b0 b0 gv0), (half_adder_sum gv0 gv0 = bV_full_adder_carry_nil b0 b), (half_adder_sum gv0 gv0 = bV_full_adder_carry_nil b0 gv0)
+(half_adder_sum gv0 gv0 = full_adder_carry b b b), (half_adder_sum gv0 gv0 = full_adder_carry b b gv0), (half_adder_sum gv0 gv0 = full_adder_carry b gv0 b), (half_adder_sum gv0 gv0 = full_adder_carry b gv0 gv0), (half_adder_sum gv0 gv0 = full_adder_carry gv0 b b), (half_adder_sum gv0 gv0 = full_adder_carry gv0 b gv0), (half_adder_sum gv0 gv0 = full_adder_carry gv0 gv0 b), (half_adder_sum gv0 gv0 = full_adder_carry gv0 gv0 gv0), (half_adder_sum gv0 gv0 = full_adder_sum b b b), (half_adder_sum gv0 gv0 = full_adder_sum b b gv0)
+(half_adder_sum gv0 gv0 = full_adder_sum b gv0 b), (half_adder_sum gv0 gv0 = full_adder_sum b gv0 gv0), (half_adder_sum gv0 gv0 = full_adder_sum gv0 b b), (half_adder_sum gv0 gv0 = full_adder_sum gv0 b gv0), (half_adder_sum gv0 gv0 = full_adder_sum gv0 gv0 b), (half_adder_sum gv0 gv0 = full_adder_sum gv0 gv0 gv0), (half_adder_sum gv0 gv0 = half_adder_carry b b), (half_adder_sum gv0 gv0 = half_adder_carry b gv0), (half_adder_sum gv0 gv0 = half_adder_carry gv0 b), (half_adder_sum gv0 gv0 = half_adder_carry gv0 gv0)
+(None = Some b0), (length b0 = bool_to_nat b), (length b0 = bool_to_nat gv0), (None = Some b), (None = Some gv0), (Cons b b0 = b0), (Cons b b0 = bV_full_adder b0 b0 b), (Cons b b0 = bV_full_adder b0 b0 gv0), (Cons b b0 = bV_full_adder_sum b0 b0 b), (Cons b b0 = bV_full_adder_sum b0 b0 gv0)
+(Cons b b0 = bV_full_adder_sum_nil b0 b), (Cons b b0 = bV_full_adder_sum_nil b0 gv0), (Cons b b0 = app b0 b0), (Cons gv0 b0 = b0), (Cons gv0 b0 = bV_full_adder b0 b0 b), (Cons gv0 b0 = bV_full_adder b0 b0 gv0), (Cons gv0 b0 = bV_full_adder_sum b0 b0 b), (Cons gv0 b0 = bV_full_adder_sum b0 b0 gv0), (Cons gv0 b0 = bV_full_adder_sum_nil b0 b), (Cons gv0 b0 = bV_full_adder_sum_nil b0 gv0)
+(Cons gv0 b0 = app b0 b0), (bV_full_adder b0 b0 b = b0), (bV_full_adder b0 b0 b = app b0 b0), (bV_full_adder b0 b0 gv0 = b0), (bV_full_adder b0 b0 gv0 = app b0 b0), (bV_full_adder_sum b0 b0 b = b0), (bV_full_adder_sum b0 b0 b = bV_full_adder b0 b0 b), (bV_full_adder_sum b0 b0 b = bV_full_adder b0 b0 gv0), (bV_full_adder_sum b0 b0 b = app b0 b0), (bV_full_adder_sum b0 b0 gv0 = b0)
+(bV_full_adder_sum b0 b0 gv0 = bV_full_adder b0 b0 b), (bV_full_adder_sum b0 b0 gv0 = bV_full_adder b0 b0 gv0), (bV_full_adder_sum b0 b0 gv0 = app b0 b0), (bV_full_adder_sum_nil b0 b = b0), (bV_full_adder_sum_nil b0 b = bV_full_adder b0 b0 b), (bV_full_adder_sum_nil b0 b = bV_full_adder b0 b0 gv0), (bV_full_adder_sum_nil b0 b = bV_full_adder_sum b0 b0 b), (bV_full_adder_sum_nil b0 b = bV_full_adder_sum b0 b0 gv0), (bV_full_adder_sum_nil b0 b = app b0 b0), (bV_full_adder_sum_nil b0 gv0 = b0)
+(bV_full_adder_sum_nil b0 gv0 = bV_full_adder b0 b0 b), (bV_full_adder_sum_nil b0 gv0 = bV_full_adder b0 b0 gv0), (bV_full_adder_sum_nil b0 gv0 = bV_full_adder_sum b0 b0 b), (bV_full_adder_sum_nil b0 gv0 = bV_full_adder_sum b0 b0 gv0), (bV_full_adder_sum_nil b0 gv0 = app b0 b0), (app b0 b0 = b0), (Nil = Cons b b0), (Nil = Cons gv0 b0), (Nil = bV_full_adder b0 b0 b), (Nil = bV_full_adder b0 b0 gv0)
+(Nil = bV_full_adder_sum b0 b0 b), (Nil = bV_full_adder_sum b0 b0 gv0), (Nil = bV_full_adder_sum_nil b0 b), (Nil = bV_full_adder_sum_nil b0 gv0), (Nil = app b0 b0)
+
+Label: 1 (1)
+(false = gv0), (true = gv0), (gv1 = gv1), (gv0 = gv0), (false = bV_full_adder_carry gv1 gv1 gv0), (false = bV_full_adder_carry_nil gv1 gv0), (false = full_adder_carry gv0 gv0 gv0), (false = full_adder_sum gv0 gv0 gv0), (false = half_adder_carry gv0 gv0), (false = half_adder_sum gv0 gv0)
+(true = bV_full_adder_carry gv1 gv1 gv0), (true = bV_full_adder_carry_nil gv1 gv0), (true = full_adder_carry gv0 gv0 gv0), (true = full_adder_sum gv0 gv0 gv0), (true = half_adder_carry gv0 gv0), (true = half_adder_sum gv0 gv0), (length gv1 < bool_to_nat gv0), (bool_to_nat gv0 < length gv1), (length gv1 <= bool_to_nat gv0), (bool_to_nat gv0 <= length gv1)
+(false <> gv0), (true <> gv0), (gv1 <> gv1), (gv0 <> gv0), (bV_full_adder_carry gv1 gv1 gv0 = gv0), (bV_full_adder_carry_nil gv1 gv0 = gv0), (bV_full_adder_carry_nil gv1 gv0 = bV_full_adder_carry gv1 gv1 gv0), (full_adder_carry gv0 gv0 gv0 = gv0), (full_adder_carry gv0 gv0 gv0 = bV_full_adder_carry gv1 gv1 gv0), (full_adder_carry gv0 gv0 gv0 = bV_full_adder_carry_nil gv1 gv0)
+(full_adder_sum gv0 gv0 gv0 = gv0), (full_adder_sum gv0 gv0 gv0 = bV_full_adder_carry gv1 gv1 gv0), (full_adder_sum gv0 gv0 gv0 = bV_full_adder_carry_nil gv1 gv0), (full_adder_sum gv0 gv0 gv0 = full_adder_carry gv0 gv0 gv0), (half_adder_carry gv0 gv0 = gv0), (half_adder_carry gv0 gv0 = bV_full_adder_carry gv1 gv1 gv0), (half_adder_carry gv0 gv0 = bV_full_adder_carry_nil gv1 gv0), (half_adder_carry gv0 gv0 = full_adder_carry gv0 gv0 gv0), (half_adder_carry gv0 gv0 = full_adder_sum gv0 gv0 gv0), (half_adder_sum gv0 gv0 = gv0)
+(half_adder_sum gv0 gv0 = bV_full_adder_carry gv1 gv1 gv0), (half_adder_sum gv0 gv0 = bV_full_adder_carry_nil gv1 gv0), (half_adder_sum gv0 gv0 = full_adder_carry gv0 gv0 gv0), (half_adder_sum gv0 gv0 = full_adder_sum gv0 gv0 gv0), (half_adder_sum gv0 gv0 = half_adder_carry gv0 gv0), (None = Some gv1), (length gv1 = bool_to_nat gv0), (None = Some gv0), (Cons gv0 gv1 = gv1), (Cons gv0 gv1 = bV_full_adder gv1 gv1 gv0)
+(Cons gv0 gv1 = bV_full_adder_sum gv1 gv1 gv0), (Cons gv0 gv1 = bV_full_adder_sum_nil gv1 gv0), (Cons gv0 gv1 = app gv1 gv1), (bV_full_adder gv1 gv1 gv0 = gv1), (bV_full_adder gv1 gv1 gv0 = app gv1 gv1), (bV_full_adder_sum gv1 gv1 gv0 = gv1), (bV_full_adder_sum gv1 gv1 gv0 = bV_full_adder gv1 gv1 gv0), (bV_full_adder_sum gv1 gv1 gv0 = app gv1 gv1), (bV_full_adder_sum_nil gv1 gv0 = gv1), (bV_full_adder_sum_nil gv1 gv0 = bV_full_adder gv1 gv1 gv0)
+(bV_full_adder_sum_nil gv1 gv0 = bV_full_adder_sum gv1 gv1 gv0), (bV_full_adder_sum_nil gv1 gv0 = app gv1 gv1), (app gv1 gv1 = gv1), (Nil = Cons gv0 gv1), (Nil = bV_full_adder gv1 gv1 gv0), (Nil = bV_full_adder_sum gv1 gv1 gv0), (Nil = bV_full_adder_sum_nil gv1 gv0), (Nil = app gv1 gv1)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 29.83 seconds
+
+
+Label: 0 (0)
+(false = gv0), (true <> gv0), (half_adder_sum b b = gv0), (half_adder_sum b gv0 = b), (half_adder_sum gv0 b = b), (half_adder_sum gv0 gv0 = gv0), (false = half_adder_carry gv0 gv0), (false = full_adder_sum b b gv0), (false = full_adder_sum b gv0 b), (false = full_adder_sum gv0 b b)
+(false = full_adder_carry b gv0 gv0), (false = full_adder_carry gv0 b gv0), (false = full_adder_carry gv0 gv0 b), (false = full_adder_sum gv0 gv0 gv0), (false = full_adder_carry gv0 gv0 gv0), (half_adder_sum b gv0 = half_adder_carry b b), (half_adder_sum gv0 b = half_adder_carry b b), (half_adder_sum b b = half_adder_carry gv0 gv0), (half_adder_sum gv0 gv0 = half_adder_carry gv0 gv0), (half_adder_sum b b = full_adder_sum b b gv0)
+
+Label: 1 (1)
+(false = gv0), (true <> gv0), (half_adder_sum gv0 gv0 = gv0), (false = half_adder_carry gv0 gv0), (false = full_adder_sum gv0 gv0 gv0), (false = full_adder_carry gv0 gv0 gv0), (half_adder_sum gv0 gv0 = half_adder_carry gv0 gv0), (half_adder_sum gv0 gv0 = full_adder_sum gv0 gv0 gv0), (half_adder_sum gv0 gv0 = full_adder_carry gv0 gv0 gv0)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (bV_full_adder_carry gv1 Nil false = false)
+
+2. (false = gv3 -> bV_full_adder_carry (Cons b b0) Nil gv3 = gv3)
+
+3. (Nil = gv2 -> bV_full_adder_carry (Cons b b0) gv2 false = false)
+
+4. (Cons b b0 = gv1 -> false = gv3 -> bV_full_adder_carry gv1 Nil gv3 = gv3)
+
+5. (Cons b b0 = gv1 -> Nil = gv2 -> bV_full_adder_carry gv1 gv2 false = false)
+
+6. (bV_full_adder_carry (Cons b b0) Nil false = false)
+
+7. (half_adder_sum b b = bV_full_adder_carry (Cons b b0) Nil false)
+
+8. (half_adder_sum (bV_full_adder_carry (Cons b b0) Nil false)    (bV_full_adder_carry (Cons b b0) Nil false) =  bV_full_adder_carry (Cons b b0) Nil false)
+
+9. (half_adder_sum (bV_full_adder_carry gv1 Nil false)    (bV_full_adder_carry gv1 Nil false) = bV_full_adder_carry gv1 Nil false)
+
+10. (true <> gv0 -> gv0 = false)
+
+11. (half_adder_sum b b = gv0 -> gv0 = false)
+
+12. (half_adder_sum b gv0 = b -> gv0 = false)
+
+13. (half_adder_sum gv0 b = b -> gv0 = false)
+
+14. (half_adder_sum gv0 gv0 = gv0 -> gv0 = false)
+
+15. (false = half_adder_carry gv0 gv0 -> gv0 = false)
+
+16. (false = full_adder_sum b b gv0 -> gv0 = false)
+
+17. (false = full_adder_sum b gv0 b -> gv0 = false)
+
+18. (false = full_adder_sum gv0 b b -> gv0 = false)
+
+19. (false = full_adder_carry b gv0 gv0 -> gv0 = false)
+
+20. (false = full_adder_carry gv0 b gv0 -> gv0 = false)
+
+21. (false = full_adder_carry gv0 gv0 b -> gv0 = false)
+
+22. (false = full_adder_sum gv0 gv0 gv0 -> gv0 = false)
+
+23. (false = full_adder_carry gv0 gv0 gv0 -> gv0 = false)
+
+24. (half_adder_sum b gv0 = half_adder_carry b b -> gv0 = false)
+
+25. (half_adder_sum gv0 b = half_adder_carry b b -> gv0 = false)
+
+26. (half_adder_sum b b = half_adder_carry gv0 gv0 -> gv0 = false)
+
+27. (half_adder_sum gv0 gv0 = half_adder_carry gv0 gv0 -> gv0 = false)
+
+28. (half_adder_sum b b = full_adder_sum b b gv0 -> gv0 = false)
+
+29. (half_adder_sum gv0 gv0 = full_adder_sum gv0 gv0 gv0 -> gv0 = false)
+
+30. (half_adder_sum gv0 gv0 = full_adder_carry gv0 gv0 gv0 -> gv0 = false)
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 70.271 seconds
+
+Number of Result Pairs Returned: 30
+
+1. (bV_full_adder_carry gv1 Nil false = false)
+
+2. (false = gv3 -> bV_full_adder_carry (Cons b b0) Nil gv3 = gv3)
+
+3. (Nil = gv2 -> bV_full_adder_carry (Cons b b0) gv2 false = false)
+
+4. (Cons b b0 = gv1 -> false = gv3 -> bV_full_adder_carry gv1 Nil gv3 = gv3)
+
+5. (Cons b b0 = gv1 -> Nil = gv2 -> bV_full_adder_carry gv1 gv2 false = false)

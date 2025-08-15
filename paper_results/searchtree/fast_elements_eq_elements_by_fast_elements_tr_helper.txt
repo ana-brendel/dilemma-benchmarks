@@ -1,0 +1,247 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+
+----------------------------------
+Goal: (fast_elements_tr t [] = elements t)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3.026 seconds
+
+gv2 : (list (nat * value)) = (elements t)
+gv0 : (list (nat * value)) = (fast_elements_tr t [])
+gv1 : (list (nat * value)) = []
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 36.294 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (fast_elements_tr t [] = elements t)
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- ([] = gv1)
+
+----------------------------------
+Goal: (fast_elements_tr t gv1 = elements t)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (fast_elements_tr t [] = gv0)
+
+----------------------------------
+Goal: (gv0 = elements t)
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (elements t = gv2)
+
+----------------------------------
+Goal: (fast_elements_tr t [] = gv2)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 36.437 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+In : (forall A : Type, A -> list A -> Prop)
+existsb : (forall A : Type, (A -> bool) -> list A -> bool)
+forallb : (forall A : Type, (A -> bool) -> list A -> bool)
+Forall : (forall A : Type, (A -> Prop) -> list A -> Prop)
+nodup : (forall A : Type, (forall x y : A, {x = y} + {x <> y}) -> list A -> list A)
+map : (forall A B : Type, (A -> B) -> list A -> list B)
+Permutation : (forall A : Type, list A -> list A -> Prop)
+sorted : (list nat -> Prop)
+is_a_sorting_algorithm : ((list nat -> list nat) -> Prop)
+select : (nat -> list nat -> nat * list nat)
+selsort : (list nat -> nat -> list nat)
+selection_sort : (list nat -> list nat)
+le_all : (nat -> list nat -> Prop)
+value : Set
+value_rect : (forall P : value -> Type,
+ P Red -> P Green -> P Blue -> forall v : value, P v)
+value_rec : (forall P : value -> Set, P Red -> P Green -> P Blue -> forall v : value, P v)
+tree : Set
+tree_rect : (forall P : tree -> Type,
+ P E ->
+ (forall l : tree,
+  P l -> forall (k : nat) (v : value) (r : tree), P r -> P (T l k v r)) ->
+ forall t : tree, P t)
+tree_rec : (forall P : tree -> Set,
+ P E ->
+ (forall l : tree,
+  P l -> forall (k : nat) (v : value) (r : tree), P r -> P (T l k v r)) ->
+ forall t : tree, P t)
+empty_tree : tree
+bound : (nat -> tree -> bool)
+lookup : (value -> nat -> tree -> value)
+insert : (nat -> value -> tree -> tree)
+ForallT : ((nat -> value -> Prop) -> tree -> Prop)
+BST : (tree -> Prop)
+elements : (tree -> list (nat * value))
+@uncurry : (forall X Y Z : Type, (X -> Y -> Z) -> X * Y -> Z)
+@list_keys : (forall V : Type, list (nat * V) -> list nat)
+@disjoint : (forall X : Type, list X -> list X -> Prop)
+fast_elements_tr : (tree -> list (nat * value) -> list (nat * value))
+fast_elements : (tree -> list (nat * value))
+kvs_insert : (nat -> value -> list (nat * value) -> list (nat * value))
+Red : value
+Green : value
+Blue : value
+E : tree
+T : (tree -> nat -> value -> tree -> tree)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 36.588 seconds
+
+
+Label: 0 (0)
+(disjoint gv1 gv1), (BST t), (Permutation gv1 gv1), (gv1 = gv1), (t = t), (disjoint gv1 (fast_elements t)), (disjoint gv1 (fast_elements_tr t gv1)), (disjoint gv1 (elements t)), (disjoint gv1 (gv1 ++ gv1)), (disjoint gv1 [])
+(disjoint (fast_elements t) gv1), (disjoint (fast_elements t) (fast_elements_tr t gv1)), (disjoint (fast_elements t) (elements t)), (disjoint (fast_elements t) (gv1 ++ gv1)), (disjoint (fast_elements t) []), (disjoint (fast_elements_tr t gv1) gv1), (disjoint (fast_elements_tr t gv1) (fast_elements t)), (disjoint (fast_elements_tr t gv1) (elements t)), (disjoint (fast_elements_tr t gv1) (gv1 ++ gv1)), (disjoint (fast_elements_tr t gv1) [])
+(disjoint (elements t) gv1), (disjoint (elements t) (fast_elements t)), (disjoint (elements t) (fast_elements_tr t gv1)), (disjoint (elements t) (gv1 ++ gv1)), (disjoint (elements t) []), (disjoint (gv1 ++ gv1) gv1), (disjoint (gv1 ++ gv1) (fast_elements t)), (disjoint (gv1 ++ gv1) (fast_elements_tr t gv1)), (disjoint (gv1 ++ gv1) (elements t)), (disjoint (gv1 ++ gv1) [])
+(disjoint [] gv1), (disjoint [] (fast_elements t)), (disjoint [] (fast_elements_tr t gv1)), (disjoint [] (elements t)), (disjoint [] (gv1 ++ gv1)), (BST empty_tree), (BST E), (Permutation gv1 (fast_elements t)), (Permutation gv1 (fast_elements_tr t gv1)), (Permutation gv1 (elements t))
+(Permutation gv1 (gv1 ++ gv1)), (Permutation gv1 []), (Permutation (fast_elements t) gv1), (Permutation (fast_elements t) (fast_elements_tr t gv1)), (Permutation (fast_elements t) (elements t)), (Permutation (fast_elements t) (gv1 ++ gv1)), (Permutation (fast_elements t) []), (Permutation (fast_elements_tr t gv1) gv1), (Permutation (fast_elements_tr t gv1) (fast_elements t)), (Permutation (fast_elements_tr t gv1) (elements t))
+(Permutation (fast_elements_tr t gv1) (gv1 ++ gv1)), (Permutation (fast_elements_tr t gv1) []), (Permutation (elements t) gv1), (Permutation (elements t) (fast_elements t)), (Permutation (elements t) (fast_elements_tr t gv1)), (Permutation (elements t) (gv1 ++ gv1)), (Permutation (elements t) []), (Permutation (gv1 ++ gv1) gv1), (Permutation (gv1 ++ gv1) (fast_elements t)), (Permutation (gv1 ++ gv1) (fast_elements_tr t gv1))
+(Permutation (gv1 ++ gv1) (elements t)), (Permutation (gv1 ++ gv1) []), (Permutation [] gv1), (Permutation [] (fast_elements t)), (Permutation [] (fast_elements_tr t gv1)), (Permutation [] (elements t)), (Permutation [] (gv1 ++ gv1)), (~ disjoint gv1 gv1), (~ BST t), (~ Permutation gv1 gv1)
+(gv1 <> gv1), (t <> t), (None = Some gv1), (fast_elements t = gv1), (fast_elements t = elements t), (fast_elements t = gv1 ++ gv1), (fast_elements_tr t gv1 = gv1), (fast_elements_tr t gv1 = fast_elements t), (fast_elements_tr t gv1 = elements t), (fast_elements_tr t gv1 = gv1 ++ gv1)
+(elements t = gv1), (elements t = gv1 ++ gv1), (gv1 ++ gv1 = gv1), ([] = gv1), ([] = fast_elements t), ([] = fast_elements_tr t gv1), ([] = elements t), ([] = gv1 ++ gv1), (None = Some t)
+
+Label: 1 (1)
+(disjoint gv0 gv0), (BST t), (Permutation gv0 gv0), (t = t), (gv0 = gv0), (disjoint gv0 (fast_elements t)), (disjoint gv0 (fast_elements_tr t gv0)), (disjoint gv0 (elements t)), (disjoint gv0 (gv0 ++ gv0)), (disjoint gv0 [])
+(disjoint (fast_elements t) gv0), (disjoint (fast_elements t) (fast_elements_tr t gv0)), (disjoint (fast_elements t) (elements t)), (disjoint (fast_elements t) (gv0 ++ gv0)), (disjoint (fast_elements t) []), (disjoint (fast_elements_tr t gv0) gv0), (disjoint (fast_elements_tr t gv0) (fast_elements t)), (disjoint (fast_elements_tr t gv0) (elements t)), (disjoint (fast_elements_tr t gv0) (gv0 ++ gv0)), (disjoint (fast_elements_tr t gv0) [])
+(disjoint (elements t) gv0), (disjoint (elements t) (fast_elements t)), (disjoint (elements t) (fast_elements_tr t gv0)), (disjoint (elements t) (gv0 ++ gv0)), (disjoint (elements t) []), (disjoint (gv0 ++ gv0) gv0), (disjoint (gv0 ++ gv0) (fast_elements t)), (disjoint (gv0 ++ gv0) (fast_elements_tr t gv0)), (disjoint (gv0 ++ gv0) (elements t)), (disjoint (gv0 ++ gv0) [])
+(disjoint [] gv0), (disjoint [] (fast_elements t)), (disjoint [] (fast_elements_tr t gv0)), (disjoint [] (elements t)), (disjoint [] (gv0 ++ gv0)), (BST empty_tree), (BST E), (Permutation gv0 (fast_elements t)), (Permutation gv0 (fast_elements_tr t gv0)), (Permutation gv0 (elements t))
+(Permutation gv0 (gv0 ++ gv0)), (Permutation gv0 []), (Permutation (fast_elements t) gv0), (Permutation (fast_elements t) (fast_elements_tr t gv0)), (Permutation (fast_elements t) (elements t)), (Permutation (fast_elements t) (gv0 ++ gv0)), (Permutation (fast_elements t) []), (Permutation (fast_elements_tr t gv0) gv0), (Permutation (fast_elements_tr t gv0) (fast_elements t)), (Permutation (fast_elements_tr t gv0) (elements t))
+(Permutation (fast_elements_tr t gv0) (gv0 ++ gv0)), (Permutation (fast_elements_tr t gv0) []), (Permutation (elements t) gv0), (Permutation (elements t) (fast_elements t)), (Permutation (elements t) (fast_elements_tr t gv0)), (Permutation (elements t) (gv0 ++ gv0)), (Permutation (elements t) []), (Permutation (gv0 ++ gv0) gv0), (Permutation (gv0 ++ gv0) (fast_elements t)), (Permutation (gv0 ++ gv0) (fast_elements_tr t gv0))
+(Permutation (gv0 ++ gv0) (elements t)), (Permutation (gv0 ++ gv0) []), (Permutation [] gv0), (Permutation [] (fast_elements t)), (Permutation [] (fast_elements_tr t gv0)), (Permutation [] (elements t)), (Permutation [] (gv0 ++ gv0)), (~ disjoint gv0 gv0), (~ BST t), (~ Permutation gv0 gv0)
+(t <> t), (gv0 <> gv0), (None = Some gv0), (fast_elements t = gv0), (fast_elements t = elements t), (fast_elements t = gv0 ++ gv0), (fast_elements_tr t gv0 = gv0), (fast_elements_tr t gv0 = fast_elements t), (fast_elements_tr t gv0 = elements t), (fast_elements_tr t gv0 = gv0 ++ gv0)
+(elements t = gv0), (elements t = gv0 ++ gv0), (gv0 ++ gv0 = gv0), ([] = gv0), ([] = fast_elements t), ([] = fast_elements_tr t gv0), ([] = elements t), ([] = gv0 ++ gv0), (None = Some t)
+
+Label: 2 (2)
+(disjoint gv2 gv2), (BST t), (Permutation gv2 gv2), (gv2 = gv2), (t = t), (disjoint gv2 (fast_elements t)), (disjoint gv2 (fast_elements_tr t gv2)), (disjoint gv2 (elements t)), (disjoint gv2 (gv2 ++ gv2)), (disjoint gv2 [])
+(disjoint (fast_elements t) gv2), (disjoint (fast_elements t) (fast_elements_tr t gv2)), (disjoint (fast_elements t) (elements t)), (disjoint (fast_elements t) (gv2 ++ gv2)), (disjoint (fast_elements t) []), (disjoint (fast_elements_tr t gv2) gv2), (disjoint (fast_elements_tr t gv2) (fast_elements t)), (disjoint (fast_elements_tr t gv2) (elements t)), (disjoint (fast_elements_tr t gv2) (gv2 ++ gv2)), (disjoint (fast_elements_tr t gv2) [])
+(disjoint (elements t) gv2), (disjoint (elements t) (fast_elements t)), (disjoint (elements t) (fast_elements_tr t gv2)), (disjoint (elements t) (gv2 ++ gv2)), (disjoint (elements t) []), (disjoint (gv2 ++ gv2) gv2), (disjoint (gv2 ++ gv2) (fast_elements t)), (disjoint (gv2 ++ gv2) (fast_elements_tr t gv2)), (disjoint (gv2 ++ gv2) (elements t)), (disjoint (gv2 ++ gv2) [])
+(disjoint [] gv2), (disjoint [] (fast_elements t)), (disjoint [] (fast_elements_tr t gv2)), (disjoint [] (elements t)), (disjoint [] (gv2 ++ gv2)), (BST empty_tree), (BST E), (Permutation gv2 (fast_elements t)), (Permutation gv2 (fast_elements_tr t gv2)), (Permutation gv2 (elements t))
+(Permutation gv2 (gv2 ++ gv2)), (Permutation gv2 []), (Permutation (fast_elements t) gv2), (Permutation (fast_elements t) (fast_elements_tr t gv2)), (Permutation (fast_elements t) (elements t)), (Permutation (fast_elements t) (gv2 ++ gv2)), (Permutation (fast_elements t) []), (Permutation (fast_elements_tr t gv2) gv2), (Permutation (fast_elements_tr t gv2) (fast_elements t)), (Permutation (fast_elements_tr t gv2) (elements t))
+(Permutation (fast_elements_tr t gv2) (gv2 ++ gv2)), (Permutation (fast_elements_tr t gv2) []), (Permutation (elements t) gv2), (Permutation (elements t) (fast_elements t)), (Permutation (elements t) (fast_elements_tr t gv2)), (Permutation (elements t) (gv2 ++ gv2)), (Permutation (elements t) []), (Permutation (gv2 ++ gv2) gv2), (Permutation (gv2 ++ gv2) (fast_elements t)), (Permutation (gv2 ++ gv2) (fast_elements_tr t gv2))
+(Permutation (gv2 ++ gv2) (elements t)), (Permutation (gv2 ++ gv2) []), (Permutation [] gv2), (Permutation [] (fast_elements t)), (Permutation [] (fast_elements_tr t gv2)), (Permutation [] (elements t)), (Permutation [] (gv2 ++ gv2)), (~ disjoint gv2 gv2), (~ BST t), (~ Permutation gv2 gv2)
+(gv2 <> gv2), (t <> t), (None = Some gv2), (fast_elements t = gv2), (fast_elements t = elements t), (fast_elements t = gv2 ++ gv2), (fast_elements_tr t gv2 = gv2), (fast_elements_tr t gv2 = fast_elements t), (fast_elements_tr t gv2 = elements t), (fast_elements_tr t gv2 = gv2 ++ gv2)
+(elements t = gv2), (elements t = gv2 ++ gv2), (gv2 ++ gv2 = gv2), ([] = gv2), ([] = fast_elements t), ([] = fast_elements_tr t gv2), ([] = elements t), ([] = gv2 ++ gv2), (None = Some t)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 46.639 seconds
+
+
+Label: 0 (0)
+(disjoint gv1 gv1), (disjoint gv1 (fast_elements_tr t gv1)), (disjoint (fast_elements_tr t gv1) gv1), (Permutation (fast_elements_tr t gv1) (elements t)), (Permutation (elements t) (fast_elements_tr t gv1)), (Permutation (fast_elements t) (fast_elements_tr t gv1)), (Permutation (fast_elements_tr t gv1) (fast_elements t)), (Permutation gv1 []), (Permutation [] gv1), ([] = gv1)
+(fast_elements_tr t gv1 = elements t), (fast_elements_tr t gv1 = fast_elements t), (disjoint gv1 (gv1 ++ gv1)), (disjoint (gv1 ++ gv1) gv1), (Permutation gv1 (gv1 ++ gv1)), (Permutation (gv1 ++ gv1) gv1), (gv1 ++ gv1 = gv1), (disjoint (fast_elements_tr t gv1) (gv1 ++ gv1)), (disjoint (gv1 ++ gv1) (fast_elements_tr t gv1)), (Permutation (gv1 ++ gv1) [])
+
+Label: 1 (1)
+(Permutation gv0 (elements t)), (Permutation (elements t) gv0), (Permutation gv0 (fast_elements t)), (Permutation (fast_elements t) gv0), (elements t = gv0), (fast_elements t = gv0), (Permutation (fast_elements_tr t gv0) (gv0 ++ gv0)), (Permutation (gv0 ++ gv0) (fast_elements_tr t gv0)), (fast_elements_tr t gv0 = gv0 ++ gv0)
+
+Label: 2 (2)
+(Permutation gv2 (elements t)), (Permutation (elements t) gv2), (Permutation gv2 (fast_elements t)), (Permutation (fast_elements t) gv2), (elements t = gv2), (fast_elements t = gv2), (Permutation (fast_elements_tr t gv2) (gv2 ++ gv2)), (Permutation (gv2 ++ gv2) (fast_elements_tr t gv2)), (fast_elements_tr t gv2 = gv2 ++ gv2)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (fast_elements_tr t [] = elements t)
+
+2. ([] ++ [] = [])
+
+3. (fast_elements t = fast_elements_tr t [])
+
+4. (disjoint gv1 gv1 -> fast_elements_tr t gv1 = elements t)
+
+5. (disjoint gv1 (fast_elements_tr t gv1) -> fast_elements_tr t gv1 = elements t)
+
+6. (disjoint (fast_elements_tr t gv1) gv1 -> fast_elements_tr t gv1 = elements t)
+
+7. (fast_elements t = gv0 -> gv0 = elements t)
+
+8. (Permutation (fast_elements_tr t gv1) (elements t) ->  fast_elements_tr t gv1 = elements t)
+
+9. (Permutation (elements t) (fast_elements_tr t gv1) ->  fast_elements_tr t gv1 = elements t)
+
+10. (Permutation (fast_elements t) (fast_elements_tr t gv1) ->  fast_elements_tr t gv1 = elements t)
+
+11. (Permutation (fast_elements_tr t gv1) (fast_elements t) ->  fast_elements_tr t gv1 = elements t)
+
+12. (Permutation gv1 [] -> fast_elements_tr t gv1 = elements t)
+
+13. (Permutation [] gv1 -> fast_elements_tr t gv1 = elements t)
+
+14. (fast_elements_tr t gv1 = fast_elements t ->  fast_elements_tr t gv1 = elements t)
+
+15. (disjoint gv1 (gv1 ++ gv1) -> fast_elements_tr t gv1 = elements t)
+
+16. (disjoint (gv1 ++ gv1) gv1 -> fast_elements_tr t gv1 = elements t)
+
+17. (Permutation gv1 (gv1 ++ gv1) -> fast_elements_tr t gv1 = elements t)
+
+18. (Permutation (gv1 ++ gv1) gv1 -> fast_elements_tr t gv1 = elements t)
+
+19. (gv1 ++ gv1 = gv1 -> fast_elements_tr t gv1 = elements t)
+
+20. (disjoint (fast_elements_tr t gv1) (gv1 ++ gv1) ->  fast_elements_tr t gv1 = elements t)
+
+21. (disjoint (gv1 ++ gv1) (fast_elements_tr t gv1) ->  fast_elements_tr t gv1 = elements t)
+
+22. (Permutation (gv1 ++ gv1) [] -> fast_elements_tr t gv1 = elements t)
+
+23. (fast_elements_tr t gv0 = gv0 ++ gv0 -> gv0 = elements t)
+
+24. (fast_elements_tr t gv2 = gv2 ++ gv2 -> fast_elements_tr t [] = gv2)
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 119.527 seconds
+
+Number of Result Pairs Returned: 24
+
+1. (fast_elements_tr t [] = elements t)
+
+2. (fast_elements t = fast_elements_tr t [])
+
+3. (disjoint gv1 gv1 -> fast_elements_tr t gv1 = elements t)
+
+4. (disjoint gv1 (fast_elements_tr t gv1) -> fast_elements_tr t gv1 = elements t)
+
+5. (disjoint (fast_elements_tr t gv1) gv1 -> fast_elements_tr t gv1 = elements t)

@@ -1,0 +1,147 @@
+[TOTAL] 11
+
+[SUCCESS] 5
+    [SUCCESS][1][AS IS] 5
+
+[FAIL] 6
+    [FAIL][FORWARD] 4 ([ATOMIC] 2)
+    [ATOMIC][FAIL][BEYOND SCOPE] 1
+    [ATOMIC][FAIL][RESOURCE] 1
+
+[ATOMIC - EQUAL] 2
+[ATOMIC - OTHER] 2
+-----------------------------------------------
+
+[SUCCESS][1][AS IS]
+Test = bag_perm_by_bag_eqv_uncons
+[TIME] 26.321
+[COUNTS] 1
+[TARGET] bag_eqv (b :: l1) (b :: l2) -> bag_eqv l1 l2
+
+1. (bag_eqv (n :: al) (n :: bl) -> bag_eqv al bl)
+
+
+
+[FAIL][FORWARD]
+Test = bag_perm_by_count_insert_other
+[TIME] 77.088
+[COUNTS] 1
+[TARGET] y <> x -> count y (l1 ++ x :: l2) = count y (l1 ++ l2)
+
+1. (count n0 (a :: al) = count n0 (n :: x ++ a :: x0) ->  count n0 al = count n0 ((n :: x) ++ x0))
+
+
+
+[FAIL][FORWARD][CONTRADICTION]
+Test = bag_perm_by_bag_cons_inv
+[TIME] -1
+[COUNTS] 0
+[TARGET] S n = count x l -> exists l1 l2, l = l1 ++ x :: l2 /\ count x (l1 ++ l2) = n
+
+CONTRADICTION
+
+
+
+[SUCCESS][1][AS IS]
+Test = bag_eqv_iff_perm_by_bag_perm
+[TIME] 16.879
+[COUNTS] 1
+[TARGET] bag_eqv al bl -> Permutation al bl
+
+1. (bag_eqv al bl -> Permutation al bl)
+
+
+[***]
+[ATOMIC][FAIL][FORWARD]
+Test = bag_perm_by_Permutation_middle
+[TIME] 135.525
+[COUNTS] 22
+[TARGET] Permutation (a :: l1 ++ l2) (l1 ++ a :: l2)
+
+1. (bl = x ++ a :: x0 ->  Permutation gv0 (a :: (n :: x) ++ x0) -> Permutation gv0 (n :: bl))
+
+2. (n :: bl = gv1 ->  Permutation gv0 (a :: (n :: x) ++ x0) ->  bl = x ++ a :: x0 -> a :: al = gv0 -> Permutation gv0 gv1)
+
+3. (Permutation (a :: al) (a :: (n :: x) ++ x0) ->  bl = x ++ a :: x0 -> Permutation (a :: al) (n :: bl))
+
+4. (Permutation (a :: al) (a :: (n :: x) ++ x0) ->  insert n bl = gv1 -> bl = x ++ a :: x0 -> Permutation (a :: al) gv1)
+
+5. (Permutation (a :: al) (a :: (n :: x) ++ x0) ->  insert a al = gv1 -> bl = x ++ a :: x0 -> Permutation (a :: al) gv1)
+
+
+
+[SUCCESS][1][AS IS]
+Test = perm_bag_by_bag_eqv_cons
+[TIME] 46.048
+[COUNTS] 1
+[TARGET] bag_eqv b1 b2 -> bag_eqv (x::b1) (x::b2)
+
+1. (bag_eqv l l' -> bag_eqv (x :: l) (x :: l'))
+
+
+
+[SUCCESS][1][AS IS]
+Test = bag_eqv_iff_perm_by_perm_bag
+[TIME] 15.635
+[COUNTS] 1
+[TARGET] Permutation al bl -> bag_eqv al bl
+
+1. (Permutation al bl -> bag_eqv al bl)
+
+
+
+[SUCCESS][1][AS IS]
+Test = perm_bag_by_bag_eqv_trans
+[TIME] 43.54
+[COUNTS] 1
+[TARGET] bag_eqv b1 b2 -> bag_eqv b2 b3 -> bag_eqv b1 b3
+
+1. (bag_eqv l l' -> bag_eqv l' l'' -> bag_eqv l l'')
+
+
+[**]
+[ATOMIC][FAIL][RESOURCE]
+Test = bag_perm_by_app_comm_cons_1
+[TIME] 77.077
+[COUNTS] 1
+[TARGET] a :: (x ++ y) = (a :: x) ++ y
+
+1. (count n0 (a :: al) = count n0 (n :: x ++ a :: x0) ->  count n0 al = count n0 (n :: x ++ x0))
+
+
+[***]
+[ATOMIC][FAIL][BEYOND SCOPE]
+Test = sort_bag_by_insert_bag
+[TIME] 118.594
+[COUNTS] 4
+[TARGET] bag_eqv (x::l) (insert x l)
+
+1. (gv2 = count n gv5 ->  (if a =? n then 1 else 0) + gv2 = count n (insert a gv5))
+
+2. (gv2 = count n (sort l) ->  (if a =? n then 1 else 0) + gv2 = count n (insert a (sort l)))
+
+3. (count n l = count n gv5 ->  (if a =? n then 1 else 0) + count n l = count n (insert a gv5))
+
+4. ((if a =? n then 1 else 0) + count n l = count n (insert a (sort l)))
+
+
+[**]
+[ATOMIC][FAIL][FORWARD]
+Test = bag_perm_by_app_comm_cons_2
+[TIME] 151.17
+[COUNTS] 23
+[TARGET] a :: (x ++ y) = (a :: x) ++ y
+
+1. (bl = x ++ a :: x0 ->  Permutation gv0 (a :: n :: x ++ x0) -> Permutation gv0 (n :: bl))
+
+2. (Permutation (a :: al) (a :: n :: x ++ x0) ->  bl = x ++ a :: x0 -> Permutation (a :: al) (n :: bl))
+
+3. (n < length gv0 ->  Permutation gv0 (a :: n :: x ++ x0) ->  bl = x ++ a :: x0 -> Permutation gv0 gv1)
+
+4. (a < length gv1 ->  Permutation gv0 (a :: n :: x ++ x0) ->  bl = x ++ a :: x0 -> Permutation gv0 gv1)
+
+5. (a < length gv0 ->  Permutation gv0 (a :: n :: x ++ x0) ->  bl = x ++ a :: x0 -> Permutation gv0 gv1)
+
+
+
+

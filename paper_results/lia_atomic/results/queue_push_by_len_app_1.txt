@@ -1,0 +1,506 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+
+----------------------------------
+Goal: (len (app l (app (rev l0) (Cons n Nil))) = S (len l + len l0))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 1.534 seconds
+
+gv2 : lst = (app (rev l0) (Cons n Nil))
+gv3 : lst = (rev l0)
+gv6 : nat = (S (len l + len l0))
+gv1 : lst = (app l (app (rev l0) (Cons n Nil)))
+gv7 : nat = (len l + len l0)
+gv0 : nat = (len (app l (app (rev l0) (Cons n Nil))))
+gv4 : lst = (Cons n Nil)
+gv5 : lst = Nil
+gv8 : nat = (len l)
+gv9 : nat = (len l0)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 50.916 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (len (app l (app (rev l0) (Cons n Nil))) = S (len l + len l0))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (len l0 = gv9)
+
+----------------------------------
+Goal: (len (app l (app (rev l0) (Cons n Nil))) = S (len l + gv9))
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (len l = gv8)
+
+----------------------------------
+Goal: (len (app l (app (rev l0) (Cons n Nil))) = S (gv8 + len l0))
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (Nil = gv5)
+
+----------------------------------
+Goal: (len (app l (app (rev l0) (Cons n gv5))) = S (len l + len l0))
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (Cons n Nil = gv4)
+
+----------------------------------
+Goal: (len (app l (app (rev l0) gv4)) = S (len l + len l0))
+Case: Invalid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (len (app l (app (rev l0) (Cons n Nil))) = gv0)
+
+----------------------------------
+Goal: (gv0 = S (len l + len l0))
+Case: Invalid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (len l + len l0 = gv7)
+
+----------------------------------
+Goal: (len (app l (app (rev l0) (Cons n Nil))) = S gv7)
+Case: Invalid and Generalized
+
+Label: Generalization #7
+Assumptions: 
+ -- (S (len l + len l0) = gv6)
+
+----------------------------------
+Goal: (len (app l (app (rev l0) (Cons n Nil))) = gv6)
+Case: Invalid and Generalized
+
+Label: Generalization #8
+Assumptions: 
+ -- (app l (app (rev l0) (Cons n Nil)) = gv1)
+
+----------------------------------
+Goal: (len gv1 = S (len l + len l0))
+Case: Invalid and Generalized
+
+Label: Generalization #9
+Assumptions: 
+ -- (rev l0 = gv3)
+
+----------------------------------
+Goal: (len (app l (app gv3 (Cons n Nil))) = S (len l + len l0))
+Case: Invalid and Generalized
+
+Label: Generalization #10
+Assumptions: 
+ -- (app (rev l0) (Cons n Nil) = gv2)
+
+----------------------------------
+Goal: (len (app l gv2) = S (len l + len l0))
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 51.053 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+Datatypes.app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+lst : Set
+queue : Set
+len : (lst -> nat)
+qlen : (queue -> nat)
+app : (lst -> lst -> lst)
+rev : (lst -> lst)
+leb : (nat -> nat -> bool)
+amortizeQueue : (lst -> lst -> queue)
+qpush : (queue -> nat -> queue)
+Nil : lst
+Cons : (nat -> lst -> lst)
+Queue : (lst -> lst -> queue)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 6 (6)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 7 (7)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 8 (8)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 9 (9)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 51.23 seconds
+
+
+Label: 0 (0)
+(gv9 < gv9), (gv9 < n), (n < gv9), (n < n), (gv9 <= gv9), (gv9 <= n), (n <= gv9), (n <= n), (gv9 = gv9), (gv9 = n)
+(n = gv9), (n = n), (l0 = l0), (l0 = l), (l = l0), (l = l), (false = leb gv9 gv9), (false = leb gv9 n), (false = leb n gv9), (false = leb n n)
+(true = leb gv9 gv9), (true = leb gv9 n), (true = leb n gv9), (true = leb n n), (gv9 < len l0), (gv9 < len l), (n < len l0), (n < len l), (len l0 < gv9), (len l0 < n)
+(len l0 < len l), (len l < gv9), (len l < n), (len l < len l0), (gv9 <= len l0), (gv9 <= len l), (n <= len l0), (n <= len l), (len l0 <= gv9), (len l0 <= n)
+(len l0 <= len l), (len l <= gv9), (len l <= n), (len l <= len l0), (~ gv9 < gv9), (~ gv9 < n), (~ n < gv9), (~ n < n), (~ gv9 <= gv9), (~ gv9 <= n)
+(~ n <= gv9), (~ n <= n), (gv9 <> gv9), (gv9 <> n), (n <> gv9), (n <> n), (l0 <> l0), (l0 <> l), (l <> l0), (l <> l)
+(Queue l0 l0 = amortizeQueue l0 l0), (Queue l0 l0 = amortizeQueue l0 l), (Queue l0 l0 = amortizeQueue l l0), (Queue l0 l0 = amortizeQueue l l), (Queue l0 l = amortizeQueue l0 l0), (Queue l0 l = amortizeQueue l0 l), (Queue l0 l = amortizeQueue l l0), (Queue l0 l = amortizeQueue l l), (Queue l l0 = amortizeQueue l0 l0), (Queue l l0 = amortizeQueue l0 l)
+(Queue l l0 = amortizeQueue l l0), (Queue l l0 = amortizeQueue l l), (Queue l l = amortizeQueue l0 l0), (Queue l l = amortizeQueue l0 l), (Queue l l = amortizeQueue l l0), (Queue l l = amortizeQueue l l), (None = Some gv9), (None = Some n), (Cons gv9 l0 = l0), (Cons gv9 l0 = l)
+(Cons gv9 l0 = rev l0), (Cons gv9 l0 = rev l), (Cons gv9 l0 = app l0 l0), (Cons gv9 l0 = app l0 l), (Cons gv9 l0 = app l l0), (Cons gv9 l0 = app l l), (Cons gv9 l = l0), (Cons gv9 l = l), (Cons gv9 l = rev l0), (Cons gv9 l = rev l)
+(Cons gv9 l = app l0 l0), (Cons gv9 l = app l0 l), (Cons gv9 l = app l l0), (Cons gv9 l = app l l), (Cons n l0 = l0), (Cons n l0 = l), (Cons n l0 = rev l0), (Cons n l0 = rev l), (Cons n l0 = app l0 l0), (Cons n l0 = app l0 l)
+(Cons n l0 = app l l0), (Cons n l0 = app l l), (Cons n l = l0), (Cons n l = l), (Cons n l = rev l0), (Cons n l = rev l), (Cons n l = app l0 l0), (Cons n l = app l0 l), (Cons n l = app l l0), (Cons n l = app l l)
+(rev l0 = l0), (rev l0 = l), (rev l0 = app l0 l0), (rev l0 = app l0 l), (rev l0 = app l l0), (rev l0 = app l l), (rev l = l0), (rev l = l), (rev l = app l0 l0), (rev l = app l0 l)
+(rev l = app l l0), (rev l = app l l), (app l0 l0 = l0), (app l0 l0 = l), (app l0 l = l0), (app l0 l = l), (app l l0 = l0), (app l l0 = l), (app l l = l0), (app l l = l)
+(Nil = Cons gv9 l0), (Nil = Cons gv9 l), (Nil = Cons n l0), (Nil = Cons n l), (Nil = rev l0), (Nil = rev l), (Nil = app l0 l0), (Nil = app l0 l), (Nil = app l l0), (Nil = app l l)
+(len l0 = gv9), (len l0 = n), (len l = gv9), (len l = n), (None = Some l0), (None = Some l)
+
+Label: 1 (1)
+(gv8 < gv8), (gv8 < n), (n < gv8), (n < n), (gv8 <= gv8), (gv8 <= n), (n <= gv8), (n <= n), (gv8 = gv8), (gv8 = n)
+(n = gv8), (n = n), (l0 = l0), (l0 = l), (l = l0), (l = l), (false = leb gv8 gv8), (false = leb gv8 n), (false = leb n gv8), (false = leb n n)
+(true = leb gv8 gv8), (true = leb gv8 n), (true = leb n gv8), (true = leb n n), (gv8 < len l0), (gv8 < len l), (n < len l0), (n < len l), (len l0 < gv8), (len l0 < n)
+(len l0 < len l), (len l < gv8), (len l < n), (len l < len l0), (gv8 <= len l0), (gv8 <= len l), (n <= len l0), (n <= len l), (len l0 <= gv8), (len l0 <= n)
+(len l0 <= len l), (len l <= gv8), (len l <= n), (len l <= len l0), (~ gv8 < gv8), (~ gv8 < n), (~ n < gv8), (~ n < n), (~ gv8 <= gv8), (~ gv8 <= n)
+(~ n <= gv8), (~ n <= n), (gv8 <> gv8), (gv8 <> n), (n <> gv8), (n <> n), (l0 <> l0), (l0 <> l), (l <> l0), (l <> l)
+(Queue l0 l0 = amortizeQueue l0 l0), (Queue l0 l0 = amortizeQueue l0 l), (Queue l0 l0 = amortizeQueue l l0), (Queue l0 l0 = amortizeQueue l l), (Queue l0 l = amortizeQueue l0 l0), (Queue l0 l = amortizeQueue l0 l), (Queue l0 l = amortizeQueue l l0), (Queue l0 l = amortizeQueue l l), (Queue l l0 = amortizeQueue l0 l0), (Queue l l0 = amortizeQueue l0 l)
+(Queue l l0 = amortizeQueue l l0), (Queue l l0 = amortizeQueue l l), (Queue l l = amortizeQueue l0 l0), (Queue l l = amortizeQueue l0 l), (Queue l l = amortizeQueue l l0), (Queue l l = amortizeQueue l l), (None = Some gv8), (None = Some n), (Cons gv8 l0 = l0), (Cons gv8 l0 = l)
+(Cons gv8 l0 = rev l0), (Cons gv8 l0 = rev l), (Cons gv8 l0 = app l0 l0), (Cons gv8 l0 = app l0 l), (Cons gv8 l0 = app l l0), (Cons gv8 l0 = app l l), (Cons gv8 l = l0), (Cons gv8 l = l), (Cons gv8 l = rev l0), (Cons gv8 l = rev l)
+(Cons gv8 l = app l0 l0), (Cons gv8 l = app l0 l), (Cons gv8 l = app l l0), (Cons gv8 l = app l l), (Cons n l0 = l0), (Cons n l0 = l), (Cons n l0 = rev l0), (Cons n l0 = rev l), (Cons n l0 = app l0 l0), (Cons n l0 = app l0 l)
+(Cons n l0 = app l l0), (Cons n l0 = app l l), (Cons n l = l0), (Cons n l = l), (Cons n l = rev l0), (Cons n l = rev l), (Cons n l = app l0 l0), (Cons n l = app l0 l), (Cons n l = app l l0), (Cons n l = app l l)
+(rev l0 = l0), (rev l0 = l), (rev l0 = app l0 l0), (rev l0 = app l0 l), (rev l0 = app l l0), (rev l0 = app l l), (rev l = l0), (rev l = l), (rev l = app l0 l0), (rev l = app l0 l)
+(rev l = app l l0), (rev l = app l l), (app l0 l0 = l0), (app l0 l0 = l), (app l0 l = l0), (app l0 l = l), (app l l0 = l0), (app l l0 = l), (app l l = l0), (app l l = l)
+(Nil = Cons gv8 l0), (Nil = Cons gv8 l), (Nil = Cons n l0), (Nil = Cons n l), (Nil = rev l0), (Nil = rev l), (Nil = app l0 l0), (Nil = app l0 l), (Nil = app l l0), (Nil = app l l)
+(len l0 = gv8), (len l0 = n), (len l = gv8), (len l = n), (None = Some l0), (None = Some l)
+
+Label: 2 (2)
+(n < n), (n <= n), (n = n), (gv5 = gv5), (gv5 = l0), (gv5 = l), (l0 = gv5), (l0 = l0), (l0 = l), (l = gv5)
+(l = l0), (l = l), (false = leb n n), (true = leb n n), (n < len gv5), (n < len l0), (n < len l), (len gv5 < n), (len gv5 < len l0), (len gv5 < len l)
+(len l0 < n), (len l0 < len gv5), (len l0 < len l), (len l < n), (len l < len gv5), (len l < len l0), (n <= len gv5), (n <= len l0), (n <= len l), (len gv5 <= n)
+(len gv5 <= len l0), (len gv5 <= len l), (len l0 <= n), (len l0 <= len gv5), (len l0 <= len l), (len l <= n), (len l <= len gv5), (len l <= len l0), (~ n < n), (~ n <= n)
+(n <> n), (gv5 <> gv5), (gv5 <> l0), (gv5 <> l), (l0 <> gv5), (l0 <> l0), (l0 <> l), (l <> gv5), (l <> l0), (l <> l)
+(Queue gv5 gv5 = amortizeQueue gv5 gv5), (Queue gv5 gv5 = amortizeQueue gv5 l0), (Queue gv5 gv5 = amortizeQueue gv5 l), (Queue gv5 gv5 = amortizeQueue l0 gv5), (Queue gv5 gv5 = amortizeQueue l0 l0), (Queue gv5 gv5 = amortizeQueue l0 l), (Queue gv5 gv5 = amortizeQueue l gv5), (Queue gv5 gv5 = amortizeQueue l l0), (Queue gv5 gv5 = amortizeQueue l l), (Queue gv5 l0 = amortizeQueue gv5 gv5)
+(Queue gv5 l0 = amortizeQueue gv5 l0), (Queue gv5 l0 = amortizeQueue gv5 l), (Queue gv5 l0 = amortizeQueue l0 gv5), (Queue gv5 l0 = amortizeQueue l0 l0), (Queue gv5 l0 = amortizeQueue l0 l), (Queue gv5 l0 = amortizeQueue l gv5), (Queue gv5 l0 = amortizeQueue l l0), (Queue gv5 l0 = amortizeQueue l l), (Queue gv5 l = amortizeQueue gv5 gv5), (Queue gv5 l = amortizeQueue gv5 l0)
+(Queue gv5 l = amortizeQueue gv5 l), (Queue gv5 l = amortizeQueue l0 gv5), (Queue gv5 l = amortizeQueue l0 l0), (Queue gv5 l = amortizeQueue l0 l), (Queue gv5 l = amortizeQueue l gv5), (Queue gv5 l = amortizeQueue l l0), (Queue gv5 l = amortizeQueue l l), (Queue l0 gv5 = amortizeQueue gv5 gv5), (Queue l0 gv5 = amortizeQueue gv5 l0), (Queue l0 gv5 = amortizeQueue gv5 l)
+(Queue l0 gv5 = amortizeQueue l0 gv5), (Queue l0 gv5 = amortizeQueue l0 l0), (Queue l0 gv5 = amortizeQueue l0 l), (Queue l0 gv5 = amortizeQueue l gv5), (Queue l0 gv5 = amortizeQueue l l0), (Queue l0 gv5 = amortizeQueue l l), (Queue l0 l0 = amortizeQueue gv5 gv5), (Queue l0 l0 = amortizeQueue gv5 l0), (Queue l0 l0 = amortizeQueue gv5 l), (Queue l0 l0 = amortizeQueue l0 gv5)
+(Queue l0 l0 = amortizeQueue l0 l0), (Queue l0 l0 = amortizeQueue l0 l), (Queue l0 l0 = amortizeQueue l gv5), (Queue l0 l0 = amortizeQueue l l0), (Queue l0 l0 = amortizeQueue l l), (Queue l0 l = amortizeQueue gv5 gv5), (Queue l0 l = amortizeQueue gv5 l0), (Queue l0 l = amortizeQueue gv5 l), (Queue l0 l = amortizeQueue l0 gv5), (Queue l0 l = amortizeQueue l0 l0)
+(Queue l0 l = amortizeQueue l0 l), (Queue l0 l = amortizeQueue l gv5), (Queue l0 l = amortizeQueue l l0), (Queue l0 l = amortizeQueue l l), (Queue l gv5 = amortizeQueue gv5 gv5), (Queue l gv5 = amortizeQueue gv5 l0), (Queue l gv5 = amortizeQueue gv5 l), (Queue l gv5 = amortizeQueue l0 gv5), (Queue l gv5 = amortizeQueue l0 l0), (Queue l gv5 = amortizeQueue l0 l)
+(Queue l gv5 = amortizeQueue l gv5), (Queue l gv5 = amortizeQueue l l0), (Queue l gv5 = amortizeQueue l l), (Queue l l0 = amortizeQueue gv5 gv5), (Queue l l0 = amortizeQueue gv5 l0), (Queue l l0 = amortizeQueue gv5 l), (Queue l l0 = amortizeQueue l0 gv5), (Queue l l0 = amortizeQueue l0 l0), (Queue l l0 = amortizeQueue l0 l), (Queue l l0 = amortizeQueue l gv5)
+(Queue l l0 = amortizeQueue l l0), (Queue l l0 = amortizeQueue l l), (Queue l l = amortizeQueue gv5 gv5), (Queue l l = amortizeQueue gv5 l0), (Queue l l = amortizeQueue gv5 l), (Queue l l = amortizeQueue l0 gv5), (Queue l l = amortizeQueue l0 l0), (Queue l l = amortizeQueue l0 l), (Queue l l = amortizeQueue l gv5), (Queue l l = amortizeQueue l l0)
+(Queue l l = amortizeQueue l l), (None = Some n), (Cons n gv5 = gv5), (Cons n gv5 = l0), (Cons n gv5 = l), (Cons n gv5 = rev gv5), (Cons n gv5 = rev l0), (Cons n gv5 = rev l), (Cons n gv5 = app gv5 gv5), (Cons n gv5 = app gv5 l0)
+(Cons n gv5 = app gv5 l), (Cons n gv5 = app l0 gv5), (Cons n gv5 = app l0 l0), (Cons n gv5 = app l0 l), (Cons n gv5 = app l gv5), (Cons n gv5 = app l l0), (Cons n gv5 = app l l), (Cons n l0 = gv5), (Cons n l0 = l0), (Cons n l0 = l)
+(Cons n l0 = rev gv5), (Cons n l0 = rev l0), (Cons n l0 = rev l), (Cons n l0 = app gv5 gv5), (Cons n l0 = app gv5 l0), (Cons n l0 = app gv5 l), (Cons n l0 = app l0 gv5), (Cons n l0 = app l0 l0), (Cons n l0 = app l0 l), (Cons n l0 = app l gv5)
+(Cons n l0 = app l l0), (Cons n l0 = app l l), (Cons n l = gv5), (Cons n l = l0), (Cons n l = l), (Cons n l = rev gv5), (Cons n l = rev l0), (Cons n l = rev l), (Cons n l = app gv5 gv5), (Cons n l = app gv5 l0)
+(Cons n l = app gv5 l), (Cons n l = app l0 gv5), (Cons n l = app l0 l0), (Cons n l = app l0 l), (Cons n l = app l gv5), (Cons n l = app l l0), (Cons n l = app l l), (rev gv5 = gv5), (rev gv5 = l0), (rev gv5 = l)
+(rev gv5 = app gv5 gv5), (rev gv5 = app gv5 l0), (rev gv5 = app gv5 l), (rev gv5 = app l0 gv5), (rev gv5 = app l0 l0), (rev gv5 = app l0 l), (rev gv5 = app l gv5), (rev gv5 = app l l0), (rev gv5 = app l l), (rev l0 = gv5)
+(rev l0 = l0), (rev l0 = l), (rev l0 = app gv5 gv5), (rev l0 = app gv5 l0), (rev l0 = app gv5 l), (rev l0 = app l0 gv5), (rev l0 = app l0 l0), (rev l0 = app l0 l), (rev l0 = app l gv5), (rev l0 = app l l0)
+(rev l0 = app l l), (rev l = gv5), (rev l = l0), (rev l = l), (rev l = app gv5 gv5), (rev l = app gv5 l0), (rev l = app gv5 l), (rev l = app l0 gv5), (rev l = app l0 l0), (rev l = app l0 l)
+(rev l = app l gv5), (rev l = app l l0), (rev l = app l l), (app gv5 gv5 = gv5), (app gv5 gv5 = l0), (app gv5 gv5 = l), (app gv5 l0 = gv5), (app gv5 l0 = l0), (app gv5 l0 = l), (app gv5 l = gv5)
+(app gv5 l = l0), (app gv5 l = l), (app l0 gv5 = gv5), (app l0 gv5 = l0), (app l0 gv5 = l), (app l0 l0 = gv5), (app l0 l0 = l0), (app l0 l0 = l), (app l0 l = gv5), (app l0 l = l0)
+(app l0 l = l), (app l gv5 = gv5), (app l gv5 = l0), (app l gv5 = l), (app l l0 = gv5), (app l l0 = l0), (app l l0 = l), (app l l = gv5), (app l l = l0), (app l l = l)
+(Nil = Cons n gv5), (Nil = Cons n l0), (Nil = Cons n l), (Nil = rev gv5), (Nil = rev l0), (Nil = rev l), (Nil = app gv5 gv5), (Nil = app gv5 l0), (Nil = app gv5 l), (Nil = app l0 gv5)
+(Nil = app l0 l0), (Nil = app l0 l), (Nil = app l gv5), (Nil = app l l0), (Nil = app l l), (len gv5 = n), (len l0 = n), (len l = n), (None = Some gv5), (None = Some l0)
+(None = Some l)
+
+Label: 3 (3)
+(n < n), (n <= n), (n = n), (gv4 = gv4), (gv4 = l0), (gv4 = l), (l0 = gv4), (l0 = l0), (l0 = l), (l = gv4)
+(l = l0), (l = l), (false = leb n n), (true = leb n n), (n < len gv4), (n < len l0), (n < len l), (len gv4 < n), (len gv4 < len l0), (len gv4 < len l)
+(len l0 < n), (len l0 < len gv4), (len l0 < len l), (len l < n), (len l < len gv4), (len l < len l0), (n <= len gv4), (n <= len l0), (n <= len l), (len gv4 <= n)
+(len gv4 <= len l0), (len gv4 <= len l), (len l0 <= n), (len l0 <= len gv4), (len l0 <= len l), (len l <= n), (len l <= len gv4), (len l <= len l0), (~ n < n), (~ n <= n)
+(n <> n), (gv4 <> gv4), (gv4 <> l0), (gv4 <> l), (l0 <> gv4), (l0 <> l0), (l0 <> l), (l <> gv4), (l <> l0), (l <> l)
+(Queue gv4 gv4 = amortizeQueue gv4 gv4), (Queue gv4 gv4 = amortizeQueue gv4 l0), (Queue gv4 gv4 = amortizeQueue gv4 l), (Queue gv4 gv4 = amortizeQueue l0 gv4), (Queue gv4 gv4 = amortizeQueue l0 l0), (Queue gv4 gv4 = amortizeQueue l0 l), (Queue gv4 gv4 = amortizeQueue l gv4), (Queue gv4 gv4 = amortizeQueue l l0), (Queue gv4 gv4 = amortizeQueue l l), (Queue gv4 l0 = amortizeQueue gv4 gv4)
+(Queue gv4 l0 = amortizeQueue gv4 l0), (Queue gv4 l0 = amortizeQueue gv4 l), (Queue gv4 l0 = amortizeQueue l0 gv4), (Queue gv4 l0 = amortizeQueue l0 l0), (Queue gv4 l0 = amortizeQueue l0 l), (Queue gv4 l0 = amortizeQueue l gv4), (Queue gv4 l0 = amortizeQueue l l0), (Queue gv4 l0 = amortizeQueue l l), (Queue gv4 l = amortizeQueue gv4 gv4), (Queue gv4 l = amortizeQueue gv4 l0)
+(Queue gv4 l = amortizeQueue gv4 l), (Queue gv4 l = amortizeQueue l0 gv4), (Queue gv4 l = amortizeQueue l0 l0), (Queue gv4 l = amortizeQueue l0 l), (Queue gv4 l = amortizeQueue l gv4), (Queue gv4 l = amortizeQueue l l0), (Queue gv4 l = amortizeQueue l l), (Queue l0 gv4 = amortizeQueue gv4 gv4), (Queue l0 gv4 = amortizeQueue gv4 l0), (Queue l0 gv4 = amortizeQueue gv4 l)
+(Queue l0 gv4 = amortizeQueue l0 gv4), (Queue l0 gv4 = amortizeQueue l0 l0), (Queue l0 gv4 = amortizeQueue l0 l), (Queue l0 gv4 = amortizeQueue l gv4), (Queue l0 gv4 = amortizeQueue l l0), (Queue l0 gv4 = amortizeQueue l l), (Queue l0 l0 = amortizeQueue gv4 gv4), (Queue l0 l0 = amortizeQueue gv4 l0), (Queue l0 l0 = amortizeQueue gv4 l), (Queue l0 l0 = amortizeQueue l0 gv4)
+(Queue l0 l0 = amortizeQueue l0 l0), (Queue l0 l0 = amortizeQueue l0 l), (Queue l0 l0 = amortizeQueue l gv4), (Queue l0 l0 = amortizeQueue l l0), (Queue l0 l0 = amortizeQueue l l), (Queue l0 l = amortizeQueue gv4 gv4), (Queue l0 l = amortizeQueue gv4 l0), (Queue l0 l = amortizeQueue gv4 l), (Queue l0 l = amortizeQueue l0 gv4), (Queue l0 l = amortizeQueue l0 l0)
+(Queue l0 l = amortizeQueue l0 l), (Queue l0 l = amortizeQueue l gv4), (Queue l0 l = amortizeQueue l l0), (Queue l0 l = amortizeQueue l l), (Queue l gv4 = amortizeQueue gv4 gv4), (Queue l gv4 = amortizeQueue gv4 l0), (Queue l gv4 = amortizeQueue gv4 l), (Queue l gv4 = amortizeQueue l0 gv4), (Queue l gv4 = amortizeQueue l0 l0), (Queue l gv4 = amortizeQueue l0 l)
+(Queue l gv4 = amortizeQueue l gv4), (Queue l gv4 = amortizeQueue l l0), (Queue l gv4 = amortizeQueue l l), (Queue l l0 = amortizeQueue gv4 gv4), (Queue l l0 = amortizeQueue gv4 l0), (Queue l l0 = amortizeQueue gv4 l), (Queue l l0 = amortizeQueue l0 gv4), (Queue l l0 = amortizeQueue l0 l0), (Queue l l0 = amortizeQueue l0 l), (Queue l l0 = amortizeQueue l gv4)
+(Queue l l0 = amortizeQueue l l0), (Queue l l0 = amortizeQueue l l), (Queue l l = amortizeQueue gv4 gv4), (Queue l l = amortizeQueue gv4 l0), (Queue l l = amortizeQueue gv4 l), (Queue l l = amortizeQueue l0 gv4), (Queue l l = amortizeQueue l0 l0), (Queue l l = amortizeQueue l0 l), (Queue l l = amortizeQueue l gv4), (Queue l l = amortizeQueue l l0)
+(Queue l l = amortizeQueue l l), (None = Some n), (Cons n gv4 = gv4), (Cons n gv4 = l0), (Cons n gv4 = l), (Cons n gv4 = rev gv4), (Cons n gv4 = rev l0), (Cons n gv4 = rev l), (Cons n gv4 = app gv4 gv4), (Cons n gv4 = app gv4 l0)
+(Cons n gv4 = app gv4 l), (Cons n gv4 = app l0 gv4), (Cons n gv4 = app l0 l0), (Cons n gv4 = app l0 l), (Cons n gv4 = app l gv4), (Cons n gv4 = app l l0), (Cons n gv4 = app l l), (Cons n l0 = gv4), (Cons n l0 = l0), (Cons n l0 = l)
+(Cons n l0 = rev gv4), (Cons n l0 = rev l0), (Cons n l0 = rev l), (Cons n l0 = app gv4 gv4), (Cons n l0 = app gv4 l0), (Cons n l0 = app gv4 l), (Cons n l0 = app l0 gv4), (Cons n l0 = app l0 l0), (Cons n l0 = app l0 l), (Cons n l0 = app l gv4)
+(Cons n l0 = app l l0), (Cons n l0 = app l l), (Cons n l = gv4), (Cons n l = l0), (Cons n l = l), (Cons n l = rev gv4), (Cons n l = rev l0), (Cons n l = rev l), (Cons n l = app gv4 gv4), (Cons n l = app gv4 l0)
+(Cons n l = app gv4 l), (Cons n l = app l0 gv4), (Cons n l = app l0 l0), (Cons n l = app l0 l), (Cons n l = app l gv4), (Cons n l = app l l0), (Cons n l = app l l), (rev gv4 = gv4), (rev gv4 = l0), (rev gv4 = l)
+(rev gv4 = app gv4 gv4), (rev gv4 = app gv4 l0), (rev gv4 = app gv4 l), (rev gv4 = app l0 gv4), (rev gv4 = app l0 l0), (rev gv4 = app l0 l), (rev gv4 = app l gv4), (rev gv4 = app l l0), (rev gv4 = app l l), (rev l0 = gv4)
+(rev l0 = l0), (rev l0 = l), (rev l0 = app gv4 gv4), (rev l0 = app gv4 l0), (rev l0 = app gv4 l), (rev l0 = app l0 gv4), (rev l0 = app l0 l0), (rev l0 = app l0 l), (rev l0 = app l gv4), (rev l0 = app l l0)
+(rev l0 = app l l), (rev l = gv4), (rev l = l0), (rev l = l), (rev l = app gv4 gv4), (rev l = app gv4 l0), (rev l = app gv4 l), (rev l = app l0 gv4), (rev l = app l0 l0), (rev l = app l0 l)
+(rev l = app l gv4), (rev l = app l l0), (rev l = app l l), (app gv4 gv4 = gv4), (app gv4 gv4 = l0), (app gv4 gv4 = l), (app gv4 l0 = gv4), (app gv4 l0 = l0), (app gv4 l0 = l), (app gv4 l = gv4)
+(app gv4 l = l0), (app gv4 l = l), (app l0 gv4 = gv4), (app l0 gv4 = l0), (app l0 gv4 = l), (app l0 l0 = gv4), (app l0 l0 = l0), (app l0 l0 = l), (app l0 l = gv4), (app l0 l = l0)
+(app l0 l = l), (app l gv4 = gv4), (app l gv4 = l0), (app l gv4 = l), (app l l0 = gv4), (app l l0 = l0), (app l l0 = l), (app l l = gv4), (app l l = l0), (app l l = l)
+(Nil = Cons n gv4), (Nil = Cons n l0), (Nil = Cons n l), (Nil = rev gv4), (Nil = rev l0), (Nil = rev l), (Nil = app gv4 gv4), (Nil = app gv4 l0), (Nil = app gv4 l), (Nil = app l0 gv4)
+(Nil = app l0 l0), (Nil = app l0 l), (Nil = app l gv4), (Nil = app l l0), (Nil = app l l), (len gv4 = n), (len l0 = n), (len l = n), (None = Some gv4), (None = Some l0)
+(None = Some l)
+
+Label: 4 (4)
+(n < n), (n < gv0), (gv0 < n), (gv0 < gv0), (n <= n), (n <= gv0), (gv0 <= n), (gv0 <= gv0), (l0 = l0), (l0 = l)
+(l = l0), (l = l), (n = n), (n = gv0), (gv0 = n), (gv0 = gv0), (false = leb n n), (false = leb n gv0), (false = leb gv0 n), (false = leb gv0 gv0)
+(true = leb n n), (true = leb n gv0), (true = leb gv0 n), (true = leb gv0 gv0), (n < len l0), (n < len l), (gv0 < len l0), (gv0 < len l), (len l0 < n), (len l0 < gv0)
+(len l0 < len l), (len l < n), (len l < gv0), (len l < len l0), (n <= len l0), (n <= len l), (gv0 <= len l0), (gv0 <= len l), (len l0 <= n), (len l0 <= gv0)
+(len l0 <= len l), (len l <= n), (len l <= gv0), (len l <= len l0), (~ n < n), (~ n < gv0), (~ gv0 < n), (~ gv0 < gv0), (~ n <= n), (~ n <= gv0)
+(~ gv0 <= n), (~ gv0 <= gv0), (l0 <> l0), (l0 <> l), (l <> l0), (l <> l), (n <> n), (n <> gv0), (gv0 <> n), (gv0 <> gv0)
+(Queue l0 l0 = amortizeQueue l0 l0), (Queue l0 l0 = amortizeQueue l0 l), (Queue l0 l0 = amortizeQueue l l0), (Queue l0 l0 = amortizeQueue l l), (Queue l0 l = amortizeQueue l0 l0), (Queue l0 l = amortizeQueue l0 l), (Queue l0 l = amortizeQueue l l0), (Queue l0 l = amortizeQueue l l), (Queue l l0 = amortizeQueue l0 l0), (Queue l l0 = amortizeQueue l0 l)
+(Queue l l0 = amortizeQueue l l0), (Queue l l0 = amortizeQueue l l), (Queue l l = amortizeQueue l0 l0), (Queue l l = amortizeQueue l0 l), (Queue l l = amortizeQueue l l0), (Queue l l = amortizeQueue l l), (None = Some n), (None = Some gv0), (Cons n l0 = l0), (Cons n l0 = l)
+(Cons n l0 = rev l0), (Cons n l0 = rev l), (Cons n l0 = app l0 l0), (Cons n l0 = app l0 l), (Cons n l0 = app l l0), (Cons n l0 = app l l), (Cons n l = l0), (Cons n l = l), (Cons n l = rev l0), (Cons n l = rev l)
+(Cons n l = app l0 l0), (Cons n l = app l0 l), (Cons n l = app l l0), (Cons n l = app l l), (Cons gv0 l0 = l0), (Cons gv0 l0 = l), (Cons gv0 l0 = rev l0), (Cons gv0 l0 = rev l), (Cons gv0 l0 = app l0 l0), (Cons gv0 l0 = app l0 l)
+(Cons gv0 l0 = app l l0), (Cons gv0 l0 = app l l), (Cons gv0 l = l0), (Cons gv0 l = l), (Cons gv0 l = rev l0), (Cons gv0 l = rev l), (Cons gv0 l = app l0 l0), (Cons gv0 l = app l0 l), (Cons gv0 l = app l l0), (Cons gv0 l = app l l)
+(rev l0 = l0), (rev l0 = l), (rev l0 = app l0 l0), (rev l0 = app l0 l), (rev l0 = app l l0), (rev l0 = app l l), (rev l = l0), (rev l = l), (rev l = app l0 l0), (rev l = app l0 l)
+(rev l = app l l0), (rev l = app l l), (app l0 l0 = l0), (app l0 l0 = l), (app l0 l = l0), (app l0 l = l), (app l l0 = l0), (app l l0 = l), (app l l = l0), (app l l = l)
+(Nil = Cons n l0), (Nil = Cons n l), (Nil = Cons gv0 l0), (Nil = Cons gv0 l), (Nil = rev l0), (Nil = rev l), (Nil = app l0 l0), (Nil = app l0 l), (Nil = app l l0), (Nil = app l l)
+(len l0 = n), (len l0 = gv0), (len l = n), (len l = gv0), (None = Some l0), (None = Some l)
+
+Label: 5 (5)
+(gv7 < gv7), (gv7 < n), (n < gv7), (n < n), (gv7 <= gv7), (gv7 <= n), (n <= gv7), (n <= n), (gv7 = gv7), (gv7 = n)
+(n = gv7), (n = n), (l0 = l0), (l0 = l), (l = l0), (l = l), (false = leb gv7 gv7), (false = leb gv7 n), (false = leb n gv7), (false = leb n n)
+(true = leb gv7 gv7), (true = leb gv7 n), (true = leb n gv7), (true = leb n n), (gv7 < len l0), (gv7 < len l), (n < len l0), (n < len l), (len l0 < gv7), (len l0 < n)
+(len l0 < len l), (len l < gv7), (len l < n), (len l < len l0), (gv7 <= len l0), (gv7 <= len l), (n <= len l0), (n <= len l), (len l0 <= gv7), (len l0 <= n)
+(len l0 <= len l), (len l <= gv7), (len l <= n), (len l <= len l0), (~ gv7 < gv7), (~ gv7 < n), (~ n < gv7), (~ n < n), (~ gv7 <= gv7), (~ gv7 <= n)
+(~ n <= gv7), (~ n <= n), (gv7 <> gv7), (gv7 <> n), (n <> gv7), (n <> n), (l0 <> l0), (l0 <> l), (l <> l0), (l <> l)
+(Queue l0 l0 = amortizeQueue l0 l0), (Queue l0 l0 = amortizeQueue l0 l), (Queue l0 l0 = amortizeQueue l l0), (Queue l0 l0 = amortizeQueue l l), (Queue l0 l = amortizeQueue l0 l0), (Queue l0 l = amortizeQueue l0 l), (Queue l0 l = amortizeQueue l l0), (Queue l0 l = amortizeQueue l l), (Queue l l0 = amortizeQueue l0 l0), (Queue l l0 = amortizeQueue l0 l)
+(Queue l l0 = amortizeQueue l l0), (Queue l l0 = amortizeQueue l l), (Queue l l = amortizeQueue l0 l0), (Queue l l = amortizeQueue l0 l), (Queue l l = amortizeQueue l l0), (Queue l l = amortizeQueue l l), (None = Some gv7), (None = Some n), (Cons gv7 l0 = l0), (Cons gv7 l0 = l)
+(Cons gv7 l0 = rev l0), (Cons gv7 l0 = rev l), (Cons gv7 l0 = app l0 l0), (Cons gv7 l0 = app l0 l), (Cons gv7 l0 = app l l0), (Cons gv7 l0 = app l l), (Cons gv7 l = l0), (Cons gv7 l = l), (Cons gv7 l = rev l0), (Cons gv7 l = rev l)
+(Cons gv7 l = app l0 l0), (Cons gv7 l = app l0 l), (Cons gv7 l = app l l0), (Cons gv7 l = app l l), (Cons n l0 = l0), (Cons n l0 = l), (Cons n l0 = rev l0), (Cons n l0 = rev l), (Cons n l0 = app l0 l0), (Cons n l0 = app l0 l)
+(Cons n l0 = app l l0), (Cons n l0 = app l l), (Cons n l = l0), (Cons n l = l), (Cons n l = rev l0), (Cons n l = rev l), (Cons n l = app l0 l0), (Cons n l = app l0 l), (Cons n l = app l l0), (Cons n l = app l l)
+(rev l0 = l0), (rev l0 = l), (rev l0 = app l0 l0), (rev l0 = app l0 l), (rev l0 = app l l0), (rev l0 = app l l), (rev l = l0), (rev l = l), (rev l = app l0 l0), (rev l = app l0 l)
+(rev l = app l l0), (rev l = app l l), (app l0 l0 = l0), (app l0 l0 = l), (app l0 l = l0), (app l0 l = l), (app l l0 = l0), (app l l0 = l), (app l l = l0), (app l l = l)
+(Nil = Cons gv7 l0), (Nil = Cons gv7 l), (Nil = Cons n l0), (Nil = Cons n l), (Nil = rev l0), (Nil = rev l), (Nil = app l0 l0), (Nil = app l0 l), (Nil = app l l0), (Nil = app l l)
+(len l0 = gv7), (len l0 = n), (len l = gv7), (len l = n), (None = Some l0), (None = Some l)
+
+Label: 6 (6)
+(gv6 < gv6), (gv6 < n), (n < gv6), (n < n), (gv6 <= gv6), (gv6 <= n), (n <= gv6), (n <= n), (gv6 = gv6), (gv6 = n)
+(n = gv6), (n = n), (l0 = l0), (l0 = l), (l = l0), (l = l), (false = leb gv6 gv6), (false = leb gv6 n), (false = leb n gv6), (false = leb n n)
+(true = leb gv6 gv6), (true = leb gv6 n), (true = leb n gv6), (true = leb n n), (gv6 < len l0), (gv6 < len l), (n < len l0), (n < len l), (len l0 < gv6), (len l0 < n)
+(len l0 < len l), (len l < gv6), (len l < n), (len l < len l0), (gv6 <= len l0), (gv6 <= len l), (n <= len l0), (n <= len l), (len l0 <= gv6), (len l0 <= n)
+(len l0 <= len l), (len l <= gv6), (len l <= n), (len l <= len l0), (~ gv6 < gv6), (~ gv6 < n), (~ n < gv6), (~ n < n), (~ gv6 <= gv6), (~ gv6 <= n)
+(~ n <= gv6), (~ n <= n), (gv6 <> gv6), (gv6 <> n), (n <> gv6), (n <> n), (l0 <> l0), (l0 <> l), (l <> l0), (l <> l)
+(Queue l0 l0 = amortizeQueue l0 l0), (Queue l0 l0 = amortizeQueue l0 l), (Queue l0 l0 = amortizeQueue l l0), (Queue l0 l0 = amortizeQueue l l), (Queue l0 l = amortizeQueue l0 l0), (Queue l0 l = amortizeQueue l0 l), (Queue l0 l = amortizeQueue l l0), (Queue l0 l = amortizeQueue l l), (Queue l l0 = amortizeQueue l0 l0), (Queue l l0 = amortizeQueue l0 l)
+(Queue l l0 = amortizeQueue l l0), (Queue l l0 = amortizeQueue l l), (Queue l l = amortizeQueue l0 l0), (Queue l l = amortizeQueue l0 l), (Queue l l = amortizeQueue l l0), (Queue l l = amortizeQueue l l), (None = Some gv6), (None = Some n), (Cons gv6 l0 = l0), (Cons gv6 l0 = l)
+(Cons gv6 l0 = rev l0), (Cons gv6 l0 = rev l), (Cons gv6 l0 = app l0 l0), (Cons gv6 l0 = app l0 l), (Cons gv6 l0 = app l l0), (Cons gv6 l0 = app l l), (Cons gv6 l = l0), (Cons gv6 l = l), (Cons gv6 l = rev l0), (Cons gv6 l = rev l)
+(Cons gv6 l = app l0 l0), (Cons gv6 l = app l0 l), (Cons gv6 l = app l l0), (Cons gv6 l = app l l), (Cons n l0 = l0), (Cons n l0 = l), (Cons n l0 = rev l0), (Cons n l0 = rev l), (Cons n l0 = app l0 l0), (Cons n l0 = app l0 l)
+(Cons n l0 = app l l0), (Cons n l0 = app l l), (Cons n l = l0), (Cons n l = l), (Cons n l = rev l0), (Cons n l = rev l), (Cons n l = app l0 l0), (Cons n l = app l0 l), (Cons n l = app l l0), (Cons n l = app l l)
+(rev l0 = l0), (rev l0 = l), (rev l0 = app l0 l0), (rev l0 = app l0 l), (rev l0 = app l l0), (rev l0 = app l l), (rev l = l0), (rev l = l), (rev l = app l0 l0), (rev l = app l0 l)
+(rev l = app l l0), (rev l = app l l), (app l0 l0 = l0), (app l0 l0 = l), (app l0 l = l0), (app l0 l = l), (app l l0 = l0), (app l l0 = l), (app l l = l0), (app l l = l)
+(Nil = Cons gv6 l0), (Nil = Cons gv6 l), (Nil = Cons n l0), (Nil = Cons n l), (Nil = rev l0), (Nil = rev l), (Nil = app l0 l0), (Nil = app l0 l), (Nil = app l l0), (Nil = app l l)
+(len l0 = gv6), (len l0 = n), (len l = gv6), (len l = n), (None = Some l0), (None = Some l)
+
+Label: 7 (7)
+(n < n), (n <= n), (n = n), (l0 = l0), (l0 = l), (l0 = gv1), (l = l0), (l = l), (l = gv1), (gv1 = l0)
+(gv1 = l), (gv1 = gv1), (false = leb n n), (true = leb n n), (n < len l0), (n < len l), (n < len gv1), (len l0 < n), (len l0 < len l), (len l0 < len gv1)
+(len l < n), (len l < len l0), (len l < len gv1), (len gv1 < n), (len gv1 < len l0), (len gv1 < len l), (n <= len l0), (n <= len l), (n <= len gv1), (len l0 <= n)
+(len l0 <= len l), (len l0 <= len gv1), (len l <= n), (len l <= len l0), (len l <= len gv1), (len gv1 <= n), (len gv1 <= len l0), (len gv1 <= len l), (~ n < n), (~ n <= n)
+(n <> n), (l0 <> l0), (l0 <> l), (l0 <> gv1), (l <> l0), (l <> l), (l <> gv1), (gv1 <> l0), (gv1 <> l), (gv1 <> gv1)
+(Queue l0 l0 = amortizeQueue l0 l0), (Queue l0 l0 = amortizeQueue l0 l), (Queue l0 l0 = amortizeQueue l0 gv1), (Queue l0 l0 = amortizeQueue l l0), (Queue l0 l0 = amortizeQueue l l), (Queue l0 l0 = amortizeQueue l gv1), (Queue l0 l0 = amortizeQueue gv1 l0), (Queue l0 l0 = amortizeQueue gv1 l), (Queue l0 l0 = amortizeQueue gv1 gv1), (Queue l0 l = amortizeQueue l0 l0)
+(Queue l0 l = amortizeQueue l0 l), (Queue l0 l = amortizeQueue l0 gv1), (Queue l0 l = amortizeQueue l l0), (Queue l0 l = amortizeQueue l l), (Queue l0 l = amortizeQueue l gv1), (Queue l0 l = amortizeQueue gv1 l0), (Queue l0 l = amortizeQueue gv1 l), (Queue l0 l = amortizeQueue gv1 gv1), (Queue l0 gv1 = amortizeQueue l0 l0), (Queue l0 gv1 = amortizeQueue l0 l)
+(Queue l0 gv1 = amortizeQueue l0 gv1), (Queue l0 gv1 = amortizeQueue l l0), (Queue l0 gv1 = amortizeQueue l l), (Queue l0 gv1 = amortizeQueue l gv1), (Queue l0 gv1 = amortizeQueue gv1 l0), (Queue l0 gv1 = amortizeQueue gv1 l), (Queue l0 gv1 = amortizeQueue gv1 gv1), (Queue l l0 = amortizeQueue l0 l0), (Queue l l0 = amortizeQueue l0 l), (Queue l l0 = amortizeQueue l0 gv1)
+(Queue l l0 = amortizeQueue l l0), (Queue l l0 = amortizeQueue l l), (Queue l l0 = amortizeQueue l gv1), (Queue l l0 = amortizeQueue gv1 l0), (Queue l l0 = amortizeQueue gv1 l), (Queue l l0 = amortizeQueue gv1 gv1), (Queue l l = amortizeQueue l0 l0), (Queue l l = amortizeQueue l0 l), (Queue l l = amortizeQueue l0 gv1), (Queue l l = amortizeQueue l l0)
+(Queue l l = amortizeQueue l l), (Queue l l = amortizeQueue l gv1), (Queue l l = amortizeQueue gv1 l0), (Queue l l = amortizeQueue gv1 l), (Queue l l = amortizeQueue gv1 gv1), (Queue l gv1 = amortizeQueue l0 l0), (Queue l gv1 = amortizeQueue l0 l), (Queue l gv1 = amortizeQueue l0 gv1), (Queue l gv1 = amortizeQueue l l0), (Queue l gv1 = amortizeQueue l l)
+(Queue l gv1 = amortizeQueue l gv1), (Queue l gv1 = amortizeQueue gv1 l0), (Queue l gv1 = amortizeQueue gv1 l), (Queue l gv1 = amortizeQueue gv1 gv1), (Queue gv1 l0 = amortizeQueue l0 l0), (Queue gv1 l0 = amortizeQueue l0 l), (Queue gv1 l0 = amortizeQueue l0 gv1), (Queue gv1 l0 = amortizeQueue l l0), (Queue gv1 l0 = amortizeQueue l l), (Queue gv1 l0 = amortizeQueue l gv1)
+(Queue gv1 l0 = amortizeQueue gv1 l0), (Queue gv1 l0 = amortizeQueue gv1 l), (Queue gv1 l0 = amortizeQueue gv1 gv1), (Queue gv1 l = amortizeQueue l0 l0), (Queue gv1 l = amortizeQueue l0 l), (Queue gv1 l = amortizeQueue l0 gv1), (Queue gv1 l = amortizeQueue l l0), (Queue gv1 l = amortizeQueue l l), (Queue gv1 l = amortizeQueue l gv1), (Queue gv1 l = amortizeQueue gv1 l0)
+(Queue gv1 l = amortizeQueue gv1 l), (Queue gv1 l = amortizeQueue gv1 gv1), (Queue gv1 gv1 = amortizeQueue l0 l0), (Queue gv1 gv1 = amortizeQueue l0 l), (Queue gv1 gv1 = amortizeQueue l0 gv1), (Queue gv1 gv1 = amortizeQueue l l0), (Queue gv1 gv1 = amortizeQueue l l), (Queue gv1 gv1 = amortizeQueue l gv1), (Queue gv1 gv1 = amortizeQueue gv1 l0), (Queue gv1 gv1 = amortizeQueue gv1 l)
+(Queue gv1 gv1 = amortizeQueue gv1 gv1), (None = Some n), (Cons n l0 = l0), (Cons n l0 = l), (Cons n l0 = gv1), (Cons n l0 = rev l0), (Cons n l0 = rev l), (Cons n l0 = rev gv1), (Cons n l0 = app l0 l0), (Cons n l0 = app l0 l)
+(Cons n l0 = app l0 gv1), (Cons n l0 = app l l0), (Cons n l0 = app l l), (Cons n l0 = app l gv1), (Cons n l0 = app gv1 l0), (Cons n l0 = app gv1 l), (Cons n l0 = app gv1 gv1), (Cons n l = l0), (Cons n l = l), (Cons n l = gv1)
+(Cons n l = rev l0), (Cons n l = rev l), (Cons n l = rev gv1), (Cons n l = app l0 l0), (Cons n l = app l0 l), (Cons n l = app l0 gv1), (Cons n l = app l l0), (Cons n l = app l l), (Cons n l = app l gv1), (Cons n l = app gv1 l0)
+(Cons n l = app gv1 l), (Cons n l = app gv1 gv1), (Cons n gv1 = l0), (Cons n gv1 = l), (Cons n gv1 = gv1), (Cons n gv1 = rev l0), (Cons n gv1 = rev l), (Cons n gv1 = rev gv1), (Cons n gv1 = app l0 l0), (Cons n gv1 = app l0 l)
+(Cons n gv1 = app l0 gv1), (Cons n gv1 = app l l0), (Cons n gv1 = app l l), (Cons n gv1 = app l gv1), (Cons n gv1 = app gv1 l0), (Cons n gv1 = app gv1 l), (Cons n gv1 = app gv1 gv1), (rev l0 = l0), (rev l0 = l), (rev l0 = gv1)
+(rev l0 = app l0 l0), (rev l0 = app l0 l), (rev l0 = app l0 gv1), (rev l0 = app l l0), (rev l0 = app l l), (rev l0 = app l gv1), (rev l0 = app gv1 l0), (rev l0 = app gv1 l), (rev l0 = app gv1 gv1), (rev l = l0)
+(rev l = l), (rev l = gv1), (rev l = app l0 l0), (rev l = app l0 l), (rev l = app l0 gv1), (rev l = app l l0), (rev l = app l l), (rev l = app l gv1), (rev l = app gv1 l0), (rev l = app gv1 l)
+(rev l = app gv1 gv1), (rev gv1 = l0), (rev gv1 = l), (rev gv1 = gv1), (rev gv1 = app l0 l0), (rev gv1 = app l0 l), (rev gv1 = app l0 gv1), (rev gv1 = app l l0), (rev gv1 = app l l), (rev gv1 = app l gv1)
+(rev gv1 = app gv1 l0), (rev gv1 = app gv1 l), (rev gv1 = app gv1 gv1), (app l0 l0 = l0), (app l0 l0 = l), (app l0 l0 = gv1), (app l0 l = l0), (app l0 l = l), (app l0 l = gv1), (app l0 gv1 = l0)
+(app l0 gv1 = l), (app l0 gv1 = gv1), (app l l0 = l0), (app l l0 = l), (app l l0 = gv1), (app l l = l0), (app l l = l), (app l l = gv1), (app l gv1 = l0), (app l gv1 = l)
+(app l gv1 = gv1), (app gv1 l0 = l0), (app gv1 l0 = l), (app gv1 l0 = gv1), (app gv1 l = l0), (app gv1 l = l), (app gv1 l = gv1), (app gv1 gv1 = l0), (app gv1 gv1 = l), (app gv1 gv1 = gv1)
+(Nil = Cons n l0), (Nil = Cons n l), (Nil = Cons n gv1), (Nil = rev l0), (Nil = rev l), (Nil = rev gv1), (Nil = app l0 l0), (Nil = app l0 l), (Nil = app l0 gv1), (Nil = app l l0)
+(Nil = app l l), (Nil = app l gv1), (Nil = app gv1 l0), (Nil = app gv1 l), (Nil = app gv1 gv1), (len l0 = n), (len l = n), (len gv1 = n), (None = Some l0), (None = Some l)
+(None = Some gv1)
+
+Label: 8 (8)
+(n < n), (n <= n), (n = n), (l0 = l0), (l0 = gv3), (l0 = l), (gv3 = l0), (gv3 = gv3), (gv3 = l), (l = l0)
+(l = gv3), (l = l), (false = leb n n), (true = leb n n), (n < len l0), (n < len gv3), (n < len l), (len l0 < n), (len l0 < len gv3), (len l0 < len l)
+(len gv3 < n), (len gv3 < len l0), (len gv3 < len l), (len l < n), (len l < len l0), (len l < len gv3), (n <= len l0), (n <= len gv3), (n <= len l), (len l0 <= n)
+(len l0 <= len gv3), (len l0 <= len l), (len gv3 <= n), (len gv3 <= len l0), (len gv3 <= len l), (len l <= n), (len l <= len l0), (len l <= len gv3), (~ n < n), (~ n <= n)
+(n <> n), (l0 <> l0), (l0 <> gv3), (l0 <> l), (gv3 <> l0), (gv3 <> gv3), (gv3 <> l), (l <> l0), (l <> gv3), (l <> l)
+(Queue l0 l0 = amortizeQueue l0 l0), (Queue l0 l0 = amortizeQueue l0 gv3), (Queue l0 l0 = amortizeQueue l0 l), (Queue l0 l0 = amortizeQueue gv3 l0), (Queue l0 l0 = amortizeQueue gv3 gv3), (Queue l0 l0 = amortizeQueue gv3 l), (Queue l0 l0 = amortizeQueue l l0), (Queue l0 l0 = amortizeQueue l gv3), (Queue l0 l0 = amortizeQueue l l), (Queue l0 gv3 = amortizeQueue l0 l0)
+(Queue l0 gv3 = amortizeQueue l0 gv3), (Queue l0 gv3 = amortizeQueue l0 l), (Queue l0 gv3 = amortizeQueue gv3 l0), (Queue l0 gv3 = amortizeQueue gv3 gv3), (Queue l0 gv3 = amortizeQueue gv3 l), (Queue l0 gv3 = amortizeQueue l l0), (Queue l0 gv3 = amortizeQueue l gv3), (Queue l0 gv3 = amortizeQueue l l), (Queue l0 l = amortizeQueue l0 l0), (Queue l0 l = amortizeQueue l0 gv3)
+(Queue l0 l = amortizeQueue l0 l), (Queue l0 l = amortizeQueue gv3 l0), (Queue l0 l = amortizeQueue gv3 gv3), (Queue l0 l = amortizeQueue gv3 l), (Queue l0 l = amortizeQueue l l0), (Queue l0 l = amortizeQueue l gv3), (Queue l0 l = amortizeQueue l l), (Queue gv3 l0 = amortizeQueue l0 l0), (Queue gv3 l0 = amortizeQueue l0 gv3), (Queue gv3 l0 = amortizeQueue l0 l)
+(Queue gv3 l0 = amortizeQueue gv3 l0), (Queue gv3 l0 = amortizeQueue gv3 gv3), (Queue gv3 l0 = amortizeQueue gv3 l), (Queue gv3 l0 = amortizeQueue l l0), (Queue gv3 l0 = amortizeQueue l gv3), (Queue gv3 l0 = amortizeQueue l l), (Queue gv3 gv3 = amortizeQueue l0 l0), (Queue gv3 gv3 = amortizeQueue l0 gv3), (Queue gv3 gv3 = amortizeQueue l0 l), (Queue gv3 gv3 = amortizeQueue gv3 l0)
+(Queue gv3 gv3 = amortizeQueue gv3 gv3), (Queue gv3 gv3 = amortizeQueue gv3 l), (Queue gv3 gv3 = amortizeQueue l l0), (Queue gv3 gv3 = amortizeQueue l gv3), (Queue gv3 gv3 = amortizeQueue l l), (Queue gv3 l = amortizeQueue l0 l0), (Queue gv3 l = amortizeQueue l0 gv3), (Queue gv3 l = amortizeQueue l0 l), (Queue gv3 l = amortizeQueue gv3 l0), (Queue gv3 l = amortizeQueue gv3 gv3)
+(Queue gv3 l = amortizeQueue gv3 l), (Queue gv3 l = amortizeQueue l l0), (Queue gv3 l = amortizeQueue l gv3), (Queue gv3 l = amortizeQueue l l), (Queue l l0 = amortizeQueue l0 l0), (Queue l l0 = amortizeQueue l0 gv3), (Queue l l0 = amortizeQueue l0 l), (Queue l l0 = amortizeQueue gv3 l0), (Queue l l0 = amortizeQueue gv3 gv3), (Queue l l0 = amortizeQueue gv3 l)
+(Queue l l0 = amortizeQueue l l0), (Queue l l0 = amortizeQueue l gv3), (Queue l l0 = amortizeQueue l l), (Queue l gv3 = amortizeQueue l0 l0), (Queue l gv3 = amortizeQueue l0 gv3), (Queue l gv3 = amortizeQueue l0 l), (Queue l gv3 = amortizeQueue gv3 l0), (Queue l gv3 = amortizeQueue gv3 gv3), (Queue l gv3 = amortizeQueue gv3 l), (Queue l gv3 = amortizeQueue l l0)
+(Queue l gv3 = amortizeQueue l gv3), (Queue l gv3 = amortizeQueue l l), (Queue l l = amortizeQueue l0 l0), (Queue l l = amortizeQueue l0 gv3), (Queue l l = amortizeQueue l0 l), (Queue l l = amortizeQueue gv3 l0), (Queue l l = amortizeQueue gv3 gv3), (Queue l l = amortizeQueue gv3 l), (Queue l l = amortizeQueue l l0), (Queue l l = amortizeQueue l gv3)
+(Queue l l = amortizeQueue l l), (None = Some n), (Cons n l0 = l0), (Cons n l0 = gv3), (Cons n l0 = l), (Cons n l0 = rev l0), (Cons n l0 = rev gv3), (Cons n l0 = rev l), (Cons n l0 = app l0 l0), (Cons n l0 = app l0 gv3)
+(Cons n l0 = app l0 l), (Cons n l0 = app gv3 l0), (Cons n l0 = app gv3 gv3), (Cons n l0 = app gv3 l), (Cons n l0 = app l l0), (Cons n l0 = app l gv3), (Cons n l0 = app l l), (Cons n gv3 = l0), (Cons n gv3 = gv3), (Cons n gv3 = l)
+(Cons n gv3 = rev l0), (Cons n gv3 = rev gv3), (Cons n gv3 = rev l), (Cons n gv3 = app l0 l0), (Cons n gv3 = app l0 gv3), (Cons n gv3 = app l0 l), (Cons n gv3 = app gv3 l0), (Cons n gv3 = app gv3 gv3), (Cons n gv3 = app gv3 l), (Cons n gv3 = app l l0)
+(Cons n gv3 = app l gv3), (Cons n gv3 = app l l), (Cons n l = l0), (Cons n l = gv3), (Cons n l = l), (Cons n l = rev l0), (Cons n l = rev gv3), (Cons n l = rev l), (Cons n l = app l0 l0), (Cons n l = app l0 gv3)
+(Cons n l = app l0 l), (Cons n l = app gv3 l0), (Cons n l = app gv3 gv3), (Cons n l = app gv3 l), (Cons n l = app l l0), (Cons n l = app l gv3), (Cons n l = app l l), (rev l0 = l0), (rev l0 = gv3), (rev l0 = l)
+(rev l0 = app l0 l0), (rev l0 = app l0 gv3), (rev l0 = app l0 l), (rev l0 = app gv3 l0), (rev l0 = app gv3 gv3), (rev l0 = app gv3 l), (rev l0 = app l l0), (rev l0 = app l gv3), (rev l0 = app l l), (rev gv3 = l0)
+(rev gv3 = gv3), (rev gv3 = l), (rev gv3 = app l0 l0), (rev gv3 = app l0 gv3), (rev gv3 = app l0 l), (rev gv3 = app gv3 l0), (rev gv3 = app gv3 gv3), (rev gv3 = app gv3 l), (rev gv3 = app l l0), (rev gv3 = app l gv3)
+(rev gv3 = app l l), (rev l = l0), (rev l = gv3), (rev l = l), (rev l = app l0 l0), (rev l = app l0 gv3), (rev l = app l0 l), (rev l = app gv3 l0), (rev l = app gv3 gv3), (rev l = app gv3 l)
+(rev l = app l l0), (rev l = app l gv3), (rev l = app l l), (app l0 l0 = l0), (app l0 l0 = gv3), (app l0 l0 = l), (app l0 gv3 = l0), (app l0 gv3 = gv3), (app l0 gv3 = l), (app l0 l = l0)
+(app l0 l = gv3), (app l0 l = l), (app gv3 l0 = l0), (app gv3 l0 = gv3), (app gv3 l0 = l), (app gv3 gv3 = l0), (app gv3 gv3 = gv3), (app gv3 gv3 = l), (app gv3 l = l0), (app gv3 l = gv3)
+(app gv3 l = l), (app l l0 = l0), (app l l0 = gv3), (app l l0 = l), (app l gv3 = l0), (app l gv3 = gv3), (app l gv3 = l), (app l l = l0), (app l l = gv3), (app l l = l)
+(Nil = Cons n l0), (Nil = Cons n gv3), (Nil = Cons n l), (Nil = rev l0), (Nil = rev gv3), (Nil = rev l), (Nil = app l0 l0), (Nil = app l0 gv3), (Nil = app l0 l), (Nil = app gv3 l0)
+(Nil = app gv3 gv3), (Nil = app gv3 l), (Nil = app l l0), (Nil = app l gv3), (Nil = app l l), (len l0 = n), (len gv3 = n), (len l = n), (None = Some l0), (None = Some gv3)
+(None = Some l)
+
+Label: 9 (9)
+(n < n), (n <= n), (n = n), (l0 = l0), (l0 = gv2), (l0 = l), (gv2 = l0), (gv2 = gv2), (gv2 = l), (l = l0)
+(l = gv2), (l = l), (false = leb n n), (true = leb n n), (n < len l0), (n < len gv2), (n < len l), (len l0 < n), (len l0 < len gv2), (len l0 < len l)
+(len gv2 < n), (len gv2 < len l0), (len gv2 < len l), (len l < n), (len l < len l0), (len l < len gv2), (n <= len l0), (n <= len gv2), (n <= len l), (len l0 <= n)
+(len l0 <= len gv2), (len l0 <= len l), (len gv2 <= n), (len gv2 <= len l0), (len gv2 <= len l), (len l <= n), (len l <= len l0), (len l <= len gv2), (~ n < n), (~ n <= n)
+(n <> n), (l0 <> l0), (l0 <> gv2), (l0 <> l), (gv2 <> l0), (gv2 <> gv2), (gv2 <> l), (l <> l0), (l <> gv2), (l <> l)
+(Queue l0 l0 = amortizeQueue l0 l0), (Queue l0 l0 = amortizeQueue l0 gv2), (Queue l0 l0 = amortizeQueue l0 l), (Queue l0 l0 = amortizeQueue gv2 l0), (Queue l0 l0 = amortizeQueue gv2 gv2), (Queue l0 l0 = amortizeQueue gv2 l), (Queue l0 l0 = amortizeQueue l l0), (Queue l0 l0 = amortizeQueue l gv2), (Queue l0 l0 = amortizeQueue l l), (Queue l0 gv2 = amortizeQueue l0 l0)
+(Queue l0 gv2 = amortizeQueue l0 gv2), (Queue l0 gv2 = amortizeQueue l0 l), (Queue l0 gv2 = amortizeQueue gv2 l0), (Queue l0 gv2 = amortizeQueue gv2 gv2), (Queue l0 gv2 = amortizeQueue gv2 l), (Queue l0 gv2 = amortizeQueue l l0), (Queue l0 gv2 = amortizeQueue l gv2), (Queue l0 gv2 = amortizeQueue l l), (Queue l0 l = amortizeQueue l0 l0), (Queue l0 l = amortizeQueue l0 gv2)
+(Queue l0 l = amortizeQueue l0 l), (Queue l0 l = amortizeQueue gv2 l0), (Queue l0 l = amortizeQueue gv2 gv2), (Queue l0 l = amortizeQueue gv2 l), (Queue l0 l = amortizeQueue l l0), (Queue l0 l = amortizeQueue l gv2), (Queue l0 l = amortizeQueue l l), (Queue gv2 l0 = amortizeQueue l0 l0), (Queue gv2 l0 = amortizeQueue l0 gv2), (Queue gv2 l0 = amortizeQueue l0 l)
+(Queue gv2 l0 = amortizeQueue gv2 l0), (Queue gv2 l0 = amortizeQueue gv2 gv2), (Queue gv2 l0 = amortizeQueue gv2 l), (Queue gv2 l0 = amortizeQueue l l0), (Queue gv2 l0 = amortizeQueue l gv2), (Queue gv2 l0 = amortizeQueue l l), (Queue gv2 gv2 = amortizeQueue l0 l0), (Queue gv2 gv2 = amortizeQueue l0 gv2), (Queue gv2 gv2 = amortizeQueue l0 l), (Queue gv2 gv2 = amortizeQueue gv2 l0)
+(Queue gv2 gv2 = amortizeQueue gv2 gv2), (Queue gv2 gv2 = amortizeQueue gv2 l), (Queue gv2 gv2 = amortizeQueue l l0), (Queue gv2 gv2 = amortizeQueue l gv2), (Queue gv2 gv2 = amortizeQueue l l), (Queue gv2 l = amortizeQueue l0 l0), (Queue gv2 l = amortizeQueue l0 gv2), (Queue gv2 l = amortizeQueue l0 l), (Queue gv2 l = amortizeQueue gv2 l0), (Queue gv2 l = amortizeQueue gv2 gv2)
+(Queue gv2 l = amortizeQueue gv2 l), (Queue gv2 l = amortizeQueue l l0), (Queue gv2 l = amortizeQueue l gv2), (Queue gv2 l = amortizeQueue l l), (Queue l l0 = amortizeQueue l0 l0), (Queue l l0 = amortizeQueue l0 gv2), (Queue l l0 = amortizeQueue l0 l), (Queue l l0 = amortizeQueue gv2 l0), (Queue l l0 = amortizeQueue gv2 gv2), (Queue l l0 = amortizeQueue gv2 l)
+(Queue l l0 = amortizeQueue l l0), (Queue l l0 = amortizeQueue l gv2), (Queue l l0 = amortizeQueue l l), (Queue l gv2 = amortizeQueue l0 l0), (Queue l gv2 = amortizeQueue l0 gv2), (Queue l gv2 = amortizeQueue l0 l), (Queue l gv2 = amortizeQueue gv2 l0), (Queue l gv2 = amortizeQueue gv2 gv2), (Queue l gv2 = amortizeQueue gv2 l), (Queue l gv2 = amortizeQueue l l0)
+(Queue l gv2 = amortizeQueue l gv2), (Queue l gv2 = amortizeQueue l l), (Queue l l = amortizeQueue l0 l0), (Queue l l = amortizeQueue l0 gv2), (Queue l l = amortizeQueue l0 l), (Queue l l = amortizeQueue gv2 l0), (Queue l l = amortizeQueue gv2 gv2), (Queue l l = amortizeQueue gv2 l), (Queue l l = amortizeQueue l l0), (Queue l l = amortizeQueue l gv2)
+(Queue l l = amortizeQueue l l), (None = Some n), (Cons n l0 = l0), (Cons n l0 = gv2), (Cons n l0 = l), (Cons n l0 = rev l0), (Cons n l0 = rev gv2), (Cons n l0 = rev l), (Cons n l0 = app l0 l0), (Cons n l0 = app l0 gv2)
+(Cons n l0 = app l0 l), (Cons n l0 = app gv2 l0), (Cons n l0 = app gv2 gv2), (Cons n l0 = app gv2 l), (Cons n l0 = app l l0), (Cons n l0 = app l gv2), (Cons n l0 = app l l), (Cons n gv2 = l0), (Cons n gv2 = gv2), (Cons n gv2 = l)
+(Cons n gv2 = rev l0), (Cons n gv2 = rev gv2), (Cons n gv2 = rev l), (Cons n gv2 = app l0 l0), (Cons n gv2 = app l0 gv2), (Cons n gv2 = app l0 l), (Cons n gv2 = app gv2 l0), (Cons n gv2 = app gv2 gv2), (Cons n gv2 = app gv2 l), (Cons n gv2 = app l l0)
+(Cons n gv2 = app l gv2), (Cons n gv2 = app l l), (Cons n l = l0), (Cons n l = gv2), (Cons n l = l), (Cons n l = rev l0), (Cons n l = rev gv2), (Cons n l = rev l), (Cons n l = app l0 l0), (Cons n l = app l0 gv2)
+(Cons n l = app l0 l), (Cons n l = app gv2 l0), (Cons n l = app gv2 gv2), (Cons n l = app gv2 l), (Cons n l = app l l0), (Cons n l = app l gv2), (Cons n l = app l l), (rev l0 = l0), (rev l0 = gv2), (rev l0 = l)
+(rev l0 = app l0 l0), (rev l0 = app l0 gv2), (rev l0 = app l0 l), (rev l0 = app gv2 l0), (rev l0 = app gv2 gv2), (rev l0 = app gv2 l), (rev l0 = app l l0), (rev l0 = app l gv2), (rev l0 = app l l), (rev gv2 = l0)
+(rev gv2 = gv2), (rev gv2 = l), (rev gv2 = app l0 l0), (rev gv2 = app l0 gv2), (rev gv2 = app l0 l), (rev gv2 = app gv2 l0), (rev gv2 = app gv2 gv2), (rev gv2 = app gv2 l), (rev gv2 = app l l0), (rev gv2 = app l gv2)
+(rev gv2 = app l l), (rev l = l0), (rev l = gv2), (rev l = l), (rev l = app l0 l0), (rev l = app l0 gv2), (rev l = app l0 l), (rev l = app gv2 l0), (rev l = app gv2 gv2), (rev l = app gv2 l)
+(rev l = app l l0), (rev l = app l gv2), (rev l = app l l), (app l0 l0 = l0), (app l0 l0 = gv2), (app l0 l0 = l), (app l0 gv2 = l0), (app l0 gv2 = gv2), (app l0 gv2 = l), (app l0 l = l0)
+(app l0 l = gv2), (app l0 l = l), (app gv2 l0 = l0), (app gv2 l0 = gv2), (app gv2 l0 = l), (app gv2 gv2 = l0), (app gv2 gv2 = gv2), (app gv2 gv2 = l), (app gv2 l = l0), (app gv2 l = gv2)
+(app gv2 l = l), (app l l0 = l0), (app l l0 = gv2), (app l l0 = l), (app l gv2 = l0), (app l gv2 = gv2), (app l gv2 = l), (app l l = l0), (app l l = gv2), (app l l = l)
+(Nil = Cons n l0), (Nil = Cons n gv2), (Nil = Cons n l), (Nil = rev l0), (Nil = rev gv2), (Nil = rev l), (Nil = app l0 l0), (Nil = app l0 gv2), (Nil = app l0 l), (Nil = app gv2 l0)
+(Nil = app gv2 gv2), (Nil = app gv2 l), (Nil = app l l0), (Nil = app l gv2), (Nil = app l l), (len l0 = n), (len gv2 = n), (len l = n), (None = Some l0), (None = Some gv2)
+(None = Some l)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 62.142 seconds
+
+
+Label: 0 (0)
+(len l0 = gv9)
+
+Label: 1 (1)
+(len l = gv8)
+
+Label: 2 (2)
+(Nil = rev gv5), (app gv5 l = l), (app l gv5 = l), (app gv5 l0 = l0), (app l0 gv5 = l0), (app gv5 gv5 = gv5), (Nil = app gv5 gv5), (rev gv5 = app gv5 gv5)
+
+Label: 3 (3)
+(Cons n l = app gv4 l), (Cons n l0 = app gv4 l0), (Cons n gv4 = app gv4 gv4)
+
+Label: 4 (4)
+
+Label: 5 (5)
+
+Label: 6 (6)
+
+Label: 7 (7)
+
+Label: 8 (8)
+(rev l0 = gv3), (rev gv3 = l0)
+
+Label: 9 (9)
+(Cons n l0 = rev gv2)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (len (app l (app (rev l0) (Cons n Nil))) = S (len l + len l0))
+
+2. (app Nil Nil = Nil)
+
+3. (Nil = rev gv5 ->  len (app l (app (rev l0) (Cons n gv5))) = S (len l + len l0))
+
+4. (rev gv3 = l0 -> len (app l (app gv3 (Cons n Nil))) = S (len l + len l0))
+
+5. (app gv5 l = l ->  len (app l (app (rev l0) (Cons n gv5))) = S (len l + len l0))
+
+6. (app l gv5 = l ->  len (app l (app (rev l0) (Cons n gv5))) = S (len l + len l0))
+
+7. (app gv5 l0 = l0 ->  len (app l (app (rev l0) (Cons n gv5))) = S (len l + len l0))
+
+8. (app l0 gv5 = l0 ->  len (app l (app (rev l0) (Cons n gv5))) = S (len l + len l0))
+
+9. (app gv5 gv5 = gv5 ->  len (app l (app (rev l0) (Cons n gv5))) = S (len l + len l0))
+
+10. (Nil = app gv5 gv5 ->  len (app l (app (rev l0) (Cons n gv5))) = S (len l + len l0))
+
+11. (rev gv5 = app gv5 gv5 ->  len (app l (app (rev l0) (Cons n gv5))) = S (len l + len l0))
+
+12. (Cons n l0 = rev gv2 -> len (app l gv2) = S (len l + len l0))
+
+13. (Cons n l = app gv4 l -> len (app l (app (rev l0) gv4)) = S (len l + len l0))
+
+14. (Cons n l0 = app gv4 l0 ->  len (app l (app (rev l0) gv4)) = S (len l + len l0))
+
+15. (Cons n gv4 = app gv4 gv4 ->  len (app l (app (rev l0) gv4)) = S (len l + len l0))
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 98.339 seconds
+
+Number of Result Pairs Returned: 15
+
+1. (len (app l (app (rev l0) (Cons n Nil))) = S (len l + len l0))
+
+2. (Nil = rev gv5 ->  len (app l (app (rev l0) (Cons n gv5))) = S (len l + len l0))
+
+3. (rev gv3 = l0 -> len (app l (app gv3 (Cons n Nil))) = S (len l + len l0))
+
+4. (app gv5 l = l ->  len (app l (app (rev l0) (Cons n gv5))) = S (len l + len l0))
+
+5. (app l gv5 = l ->  len (app l (app (rev l0) (Cons n gv5))) = S (len l + len l0))

@@ -1,0 +1,177 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (forall (k : positive) (v : LFType) (t : trie),
+ j <> k -> look a j (ins a k v t) = look a j t)
+ -- (j~0 <> xH)
+
+----------------------------------
+Goal: (look a j Leaf = a)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3.613 seconds
+
+gv0 : LFType = (look a j Leaf)
+gv1 : trie = Leaf
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 26.698 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (look a j Leaf = a)
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (Leaf = gv1)
+
+----------------------------------
+Goal: (look a j gv1 = a)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (look a j Leaf = gv0)
+
+----------------------------------
+Goal: (gv0 = a)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 26.835 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+In : (forall A : Type, A -> list A -> Prop)
+existsb : (forall A : Type, (A -> bool) -> list A -> bool)
+forallb : (forall A : Type, (A -> bool) -> list A -> bool)
+Forall : (forall A : Type, (A -> Prop) -> list A -> Prop)
+nodup : (forall A : Type, (forall x y : A, {x = y} + {x <> y}) -> list A -> list A)
+map : (forall A B : Type, (A -> B) -> list A -> list B)
+Permutation : (forall A : Type, list A -> list A -> Prop)
+geb : (nat -> nat -> bool)
+gtb : (nat -> nat -> bool)
+maybe_swap : (list nat -> list nat)
+first_le_second : (list nat -> Prop)
+positive : Set
+positive_rect : (forall P : positive -> Type,
+ (forall p : positive, P p -> P p~1) ->
+ (forall p : positive, P p -> P p~0) -> P xH -> forall p : positive, P p)
+positive_rec : (forall P : positive -> Set,
+ (forall p : positive, P p -> P p~1) ->
+ (forall p : positive, P p -> P p~0) -> P xH -> forall p : positive, P p)
+positive2nat : (positive -> nat)
+succ : (positive -> positive)
+of_succ_nat : (nat -> positive)
+nat2positive : (nat -> positive)
+print_in_binary : (positive -> list nat)
+addc : (bool -> positive -> positive -> positive)
+add : (positive -> positive -> positive)
+comparison : Set
+comparison_rect : (forall P : comparison -> Type,
+ P Eq -> P Lt -> P Gt -> forall c : comparison, P c)
+comparison_rec : (forall P : comparison -> Set,
+ P Eq -> P Lt -> P Gt -> forall c : comparison, P c)
+compare : (positive -> positive -> comparison)
+LFType : Set
+LFType_rect : (forall P : LFType -> Type,
+ P One ->
+ P Two -> P Three -> P Four -> P Five -> P Six -> forall l : LFType, P l)
+LFType_rec : (forall P : LFType -> Set,
+ P One ->
+ P Two -> P Three -> P Four -> P Five -> P Six -> forall l : LFType, P l)
+trie : Set
+trie_rect : (forall P : trie -> Type,
+ P Leaf ->
+ (forall t : trie,
+  P t -> forall (l : LFType) (t0 : trie), P t0 -> P (Node t l t0)) ->
+ forall t : trie, P t)
+trie_rec : (forall P : trie -> Set,
+ P Leaf ->
+ (forall t : trie,
+  P t -> forall (l : LFType) (t0 : trie), P t0 -> P (Node t l t0)) ->
+ forall t : trie, P t)
+trie_table : Type
+empty : (LFType -> trie_table)
+look : (LFType -> positive -> trie -> LFType)
+lookup : (positive -> trie_table -> LFType)
+ins : (LFType -> positive -> LFType -> trie -> trie)
+insert : (positive -> LFType -> trie_table -> trie_table)
+xI : (positive -> positive)
+xO : (positive -> positive)
+xH : positive
+Eq : comparison
+Lt : comparison
+Gt : comparison
+One : LFType
+Two : LFType
+Three : LFType
+Four : LFType
+Leaf : trie
+Node : (trie -> LFType -> trie -> trie)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 26.973 seconds
+
+
+Label: 0 (0)
+(gv1 = gv1), (j = j), (a = a), (first_le_second (print_in_binary j)), (In (positive2nat j) (print_in_binary j)), (gv1 <> gv1), (j <> j), (a <> a), (Node gv1 a gv1 = gv1), (Node gv1 a gv1 = ins a j a gv1)
+(ins a j a gv1 = gv1), (Leaf = Node gv1 a gv1), (Leaf = ins a j a gv1), (j~0 = j), (j~0 = j~1), (j~0 = add j j), (j~0 = succ j), (j~1 = j), (j~1 = add j j), (j~1 = succ j)
+(add j j = j), (succ j = j), (succ j = add j j), (xH = j~0), (xH = j~1), (xH = add j j), (xH = succ j), (Eq = compare j j), (Lt = compare j j), (Gt = compare j j)
+(None = Some j), (None = Some a), (None = Some gv1), (look a j gv1 = a), (One = look a j gv1), (Two = look a j gv1), (Three = look a j gv1), (Four = look a j gv1)
+
+Label: 1 (1)
+(j = j), (a = a), (a = gv0), (gv0 = a), (gv0 = gv0), (first_le_second (print_in_binary j)), (In (positive2nat j) (print_in_binary j)), (j <> j), (a <> a), (a <> gv0)
+(gv0 <> a), (gv0 <> gv0), (j~0 = j), (j~0 = j~1), (j~0 = add j j), (j~0 = succ j), (j~1 = j), (j~1 = add j j), (j~1 = succ j), (add j j = j)
+(succ j = j), (succ j = add j j), (xH = j~0), (xH = j~1), (xH = add j j), (xH = succ j), (Eq = compare j j), (Lt = compare j j), (Gt = compare j j), (None = Some j)
+(None = Some a), (None = Some gv0)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 31.633 seconds
+
+
+Label: 0 (0)
+(look a j gv1 = a)
+
+Label: 1 (1)
+(a = gv0), (gv0 = a)
+
+
+
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 38.268 seconds
+
+Number of Result Pairs Returned: 1
+
+1. (look a j Leaf = a)

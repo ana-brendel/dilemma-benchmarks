@@ -1,0 +1,169 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (Permutation [] e2)
+ -- (priqueue_elems [] [])
+
+----------------------------------
+Goal: (priqueue_elems [] e2)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3.639 seconds
+
+gv0 : (list tree) = []
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 27.214 seconds
+
+Label: Generalization #0
+Assumptions: 
+ -- (Permutation [] e2)
+
+----------------------------------
+Goal: (priqueue_elems [] e2)
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (Permutation [] e2)
+ -- (priqueue_elems gv0 [])
+
+----------------------------------
+Goal: (priqueue_elems gv0 e2)
+Case: Valid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 27.355 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+In : (forall A : Type, A -> list A -> Prop)
+existsb : (forall A : Type, (A -> bool) -> list A -> bool)
+forallb : (forall A : Type, (A -> bool) -> list A -> bool)
+Forall : (forall A : Type, (A -> Prop) -> list A -> Prop)
+nodup : (forall A : Type, (forall x y : A, {x = y} + {x <> y}) -> list A -> list A)
+map : (forall A B : Type, (A -> B) -> list A -> list B)
+Permutation : (forall A : Type, list A -> list A -> Prop)
+geb : (nat -> nat -> bool)
+gtb : (nat -> nat -> bool)
+tree : Set
+tree_rect : (forall P : tree -> Type,
+ (forall (n : nat) (t : tree),
+  P t -> forall t0 : tree, P t0 -> P (Node n t t0)) ->
+ P Leaf -> forall t : tree, P t)
+tree_rec : (forall P : tree -> Set,
+ (forall (n : nat) (t : tree),
+  P t -> forall t0 : tree, P t0 -> P (Node n t t0)) ->
+ P Leaf -> forall t : tree, P t)
+smash : (tree -> tree -> tree)
+carry : (list tree -> tree -> list tree)
+insert : (nat -> list tree -> list tree)
+join : (list tree -> list tree -> tree -> list tree)
+unzip : (tree -> (list tree -> list tree) -> list tree)
+heap_delete_max : (tree -> list tree)
+find_max' : (nat -> list tree -> nat)
+find_max : (list tree -> option nat)
+delete_max_aux : (nat -> list tree -> list tree * list tree)
+delete_max : (list tree -> option (nat * list tree))
+merge : (list tree -> list tree -> list tree)
+pow2heapp : (nat -> nat -> tree -> Prop)
+pow2heap : (nat -> tree -> Prop)
+priqq : (nat -> list tree -> Prop)
+priq : (list tree -> Prop)
+tree_elems : (tree -> list nat -> Prop)
+priqueue_elems : (list tree -> list nat -> Prop)
+Abs : (list tree -> list nat -> Prop)
+Node : (nat -> tree -> tree -> tree)
+Leaf : tree
+
+Label: 0 (0)
+Abducted Assumption: (Permutation [] e2)
+Positive Examples: 1
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 27.489 seconds
+
+
+Label: 0 (0)
+(Permutation e2 e2), (e2 = e2), (tree_elems Leaf e2), (tree_elems Leaf (e2 ++ e2)), (tree_elems Leaf []), (pow2heapp (length e2) (length e2) Leaf), (Permutation e2 (e2 ++ e2)), (Permutation e2 []), (Permutation (e2 ++ e2) e2), (Permutation (e2 ++ e2) [])
+(Permutation [] e2), (Permutation [] (e2 ++ e2)), (In (length e2) e2), (In (length e2) (e2 ++ e2)), (~ Permutation e2 e2), (e2 <> e2), (None = Some e2), (e2 ++ e2 = e2), ([] = e2), ([] = e2 ++ e2)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 29.52 seconds
+
+
+Label: 0 (0)
+(tree_elems Leaf e2), (Permutation e2 []), (Permutation [] e2), ([] = e2), (tree_elems Leaf (e2 ++ e2)), (Permutation e2 (e2 ++ e2)), (Permutation (e2 ++ e2) e2), (e2 ++ e2 = e2), (Permutation (e2 ++ e2) []), (Permutation [] (e2 ++ e2))
+(pow2heapp (length e2) (length e2) Leaf), ([] = e2 ++ e2)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (priqueue_elems gv0 [] -> Permutation [] e2 -> priqueue_elems gv0 e2)
+
+2. (Permutation [] e2 -> priqueue_elems [] e2)
+
+3. (Permutation [] e2 -> tree_elems Leaf e2)
+(tree_elems Leaf e2 -> priqueue_elems [] e2)
+
+4. (Permutation [] e2 -> [] = e2)
+([] = e2 -> priqueue_elems [] e2)
+
+5. (Permutation [] e2 -> tree_elems Leaf (e2 ++ e2))
+(tree_elems Leaf (e2 ++ e2) -> priqueue_elems [] e2)
+
+6. (Permutation [] e2 -> Permutation (e2 ++ e2) e2)
+(Permutation (e2 ++ e2) e2 -> priqueue_elems [] e2)
+
+7. (Permutation [] e2 -> Permutation e2 (e2 ++ e2))
+(Permutation e2 (e2 ++ e2) -> priqueue_elems [] e2)
+
+8. (Permutation [] e2 -> pow2heapp (length e2) (length e2) Leaf)
+(pow2heapp (length e2) (length e2) Leaf -> priqueue_elems [] e2)
+
+9. (Permutation [] e2 -> Permutation [] (e2 ++ e2))
+(Permutation [] (e2 ++ e2) -> priqueue_elems [] e2)
+
+10. (Permutation [] e2 -> Permutation (e2 ++ e2) [])
+(Permutation (e2 ++ e2) [] -> priqueue_elems [] e2)
+
+11. (Permutation [] e2 -> e2 ++ e2 = e2)
+(e2 ++ e2 = e2 -> priqueue_elems [] e2)
+
+12. (Permutation [] e2 -> [] = e2 ++ e2)
+([] = e2 ++ e2 -> priqueue_elems [] e2)
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 53.644 seconds
+
+Number of Result Pairs Returned: 12
+
+1. (priqueue_elems gv0 [] -> Permutation [] e2 -> priqueue_elems gv0 e2)
+
+2. (Permutation [] e2 -> priqueue_elems [] e2)
+
+3. (Permutation [] e2 -> tree_elems Leaf e2)
+(tree_elems Leaf e2 -> priqueue_elems [] e2)
+
+4. (Permutation [] e2 -> [] = e2)
+([] = e2 -> priqueue_elems [] e2)
+
+5. (Permutation [] e2 -> tree_elems Leaf (e2 ++ e2))
+(tree_elems Leaf (e2 ++ e2) -> priqueue_elems [] e2)

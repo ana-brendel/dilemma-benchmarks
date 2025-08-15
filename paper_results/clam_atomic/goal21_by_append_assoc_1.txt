@@ -1,0 +1,379 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (forall y : Lst, rotate (len x) (append x y) = append y x)
+
+----------------------------------
+Goal: (rotate (len x) (append (append x y) (cons n nil)) = append y (cons n x))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 1.495 seconds
+
+gv5 : Lst = nil
+gv0 : Lst = (rotate (len x) (append (append x y) (cons n nil)))
+gv4 : Lst = (cons n nil)
+gv1 : Nat = (len x)
+gv7 : Lst = (cons n x)
+gv3 : Lst = (append x y)
+gv6 : Lst = (append y (cons n x))
+gv2 : Lst = (append (append x y) (cons n nil))
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 35.957 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (rotate (len x) (append (append x y) (cons n nil)) = append y (cons n x))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (append (append x y) (cons n nil) = gv2)
+
+----------------------------------
+Goal: (rotate (len x) gv2 = append y (cons n x))
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (append y (cons n x) = gv6)
+
+----------------------------------
+Goal: (rotate (len x) (append (append x y) (cons n nil)) = gv6)
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (append x y = gv3)
+
+----------------------------------
+Goal: (rotate (len x) (append gv3 (cons n nil)) = append y (cons n x))
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (cons n x = gv7)
+
+----------------------------------
+Goal: (rotate (len x) (append (append x y) (cons n nil)) = append y gv7)
+Case: Invalid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (cons n nil = gv4)
+
+----------------------------------
+Goal: (rotate (len x) (append (append x y) gv4) = append y (cons n x))
+Case: Invalid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (len x = gv1)
+
+----------------------------------
+Goal: (rotate gv1 (append (append x y) (cons n nil)) = append y (cons n x))
+Case: Invalid and Generalized
+
+Label: Generalization #7
+Assumptions: 
+ -- (rotate (len x) (append (append x y) (cons n nil)) = gv0)
+
+----------------------------------
+Goal: (gv0 = append y (cons n x))
+Case: Invalid and Generalized
+
+Label: Generalization #8
+Assumptions: 
+ -- (nil = gv5)
+
+----------------------------------
+Goal: (rotate (len x) (append (append x y) (cons n gv5)) = append y (cons n x))
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 36.097 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+append : (Lst -> Lst -> Lst)
+len : (Lst -> Nat)
+rotate : (Nat -> Lst -> Lst)
+succ : (Nat -> Nat)
+zero : Nat
+nil : Lst
+cons : (Nat -> Lst -> Lst)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 6 (6)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 7 (7)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 36.25 seconds
+
+
+Label: 0 (0)
+(n = n), (y = y), (y = gv2), (y = x), (gv2 = y), (gv2 = gv2), (gv2 = x), (x = y), (x = gv2), (x = x)
+(n <> n), (y <> y), (y <> gv2), (y <> x), (gv2 <> y), (gv2 <> gv2), (gv2 <> x), (x <> y), (x <> gv2), (x <> x)
+(cons n y = y), (cons n y = gv2), (cons n y = x), (cons n y = rotate n y), (cons n y = rotate n gv2), (cons n y = rotate n x), (cons n y = append y y), (cons n y = append y gv2), (cons n y = append y x), (cons n y = append gv2 y)
+(cons n y = append gv2 gv2), (cons n y = append gv2 x), (cons n y = append x y), (cons n y = append x gv2), (cons n y = append x x), (cons n gv2 = y), (cons n gv2 = gv2), (cons n gv2 = x), (cons n gv2 = rotate n y), (cons n gv2 = rotate n gv2)
+(cons n gv2 = rotate n x), (cons n gv2 = append y y), (cons n gv2 = append y gv2), (cons n gv2 = append y x), (cons n gv2 = append gv2 y), (cons n gv2 = append gv2 gv2), (cons n gv2 = append gv2 x), (cons n gv2 = append x y), (cons n gv2 = append x gv2), (cons n gv2 = append x x)
+(cons n x = y), (cons n x = gv2), (cons n x = x), (cons n x = rotate n y), (cons n x = rotate n gv2), (cons n x = rotate n x), (cons n x = append y y), (cons n x = append y gv2), (cons n x = append y x), (cons n x = append gv2 y)
+(cons n x = append gv2 gv2), (cons n x = append gv2 x), (cons n x = append x y), (cons n x = append x gv2), (cons n x = append x x), (rotate n y = y), (rotate n y = gv2), (rotate n y = x), (rotate n y = append y y), (rotate n y = append y gv2)
+(rotate n y = append y x), (rotate n y = append gv2 y), (rotate n y = append gv2 gv2), (rotate n y = append gv2 x), (rotate n y = append x y), (rotate n y = append x gv2), (rotate n y = append x x), (rotate n gv2 = y), (rotate n gv2 = gv2), (rotate n gv2 = x)
+(rotate n gv2 = append y y), (rotate n gv2 = append y gv2), (rotate n gv2 = append y x), (rotate n gv2 = append gv2 y), (rotate n gv2 = append gv2 gv2), (rotate n gv2 = append gv2 x), (rotate n gv2 = append x y), (rotate n gv2 = append x gv2), (rotate n gv2 = append x x), (rotate n x = y)
+(rotate n x = gv2), (rotate n x = x), (rotate n x = append y y), (rotate n x = append y gv2), (rotate n x = append y x), (rotate n x = append gv2 y), (rotate n x = append gv2 gv2), (rotate n x = append gv2 x), (rotate n x = append x y), (rotate n x = append x gv2)
+(rotate n x = append x x), (append y y = y), (append y y = gv2), (append y y = x), (append y gv2 = y), (append y gv2 = gv2), (append y gv2 = x), (append y x = y), (append y x = gv2), (append y x = x)
+(append gv2 y = y), (append gv2 y = gv2), (append gv2 y = x), (append gv2 gv2 = y), (append gv2 gv2 = gv2), (append gv2 gv2 = x), (append gv2 x = y), (append gv2 x = gv2), (append gv2 x = x), (append x y = y)
+(append x y = gv2), (append x y = x), (append x gv2 = y), (append x gv2 = gv2), (append x gv2 = x), (append x x = y), (append x x = gv2), (append x x = x), (nil = cons n y), (nil = cons n gv2)
+(nil = cons n x), (nil = rotate n y), (nil = rotate n gv2), (nil = rotate n x), (nil = append y y), (nil = append y gv2), (nil = append y x), (nil = append gv2 y), (nil = append gv2 gv2), (nil = append gv2 x)
+(nil = append x y), (nil = append x gv2), (nil = append x x), (succ n = n), (succ n = len y), (succ n = len gv2), (succ n = len x), (len y = n), (len gv2 = n), (len x = n)
+(zero = succ n), (zero = len y), (zero = len gv2), (zero = len x), (None = Some y), (None = Some gv2), (None = Some x), (None = Some n)
+
+Label: 1 (1)
+(n = n), (gv6 = gv6), (gv6 = y), (gv6 = x), (y = gv6), (y = y), (y = x), (x = gv6), (x = y), (x = x)
+(n <> n), (gv6 <> gv6), (gv6 <> y), (gv6 <> x), (y <> gv6), (y <> y), (y <> x), (x <> gv6), (x <> y), (x <> x)
+(cons n gv6 = gv6), (cons n gv6 = y), (cons n gv6 = x), (cons n gv6 = rotate n gv6), (cons n gv6 = rotate n y), (cons n gv6 = rotate n x), (cons n gv6 = append gv6 gv6), (cons n gv6 = append gv6 y), (cons n gv6 = append gv6 x), (cons n gv6 = append y gv6)
+(cons n gv6 = append y y), (cons n gv6 = append y x), (cons n gv6 = append x gv6), (cons n gv6 = append x y), (cons n gv6 = append x x), (cons n y = gv6), (cons n y = y), (cons n y = x), (cons n y = rotate n gv6), (cons n y = rotate n y)
+(cons n y = rotate n x), (cons n y = append gv6 gv6), (cons n y = append gv6 y), (cons n y = append gv6 x), (cons n y = append y gv6), (cons n y = append y y), (cons n y = append y x), (cons n y = append x gv6), (cons n y = append x y), (cons n y = append x x)
+(cons n x = gv6), (cons n x = y), (cons n x = x), (cons n x = rotate n gv6), (cons n x = rotate n y), (cons n x = rotate n x), (cons n x = append gv6 gv6), (cons n x = append gv6 y), (cons n x = append gv6 x), (cons n x = append y gv6)
+(cons n x = append y y), (cons n x = append y x), (cons n x = append x gv6), (cons n x = append x y), (cons n x = append x x), (rotate n gv6 = gv6), (rotate n gv6 = y), (rotate n gv6 = x), (rotate n gv6 = append gv6 gv6), (rotate n gv6 = append gv6 y)
+(rotate n gv6 = append gv6 x), (rotate n gv6 = append y gv6), (rotate n gv6 = append y y), (rotate n gv6 = append y x), (rotate n gv6 = append x gv6), (rotate n gv6 = append x y), (rotate n gv6 = append x x), (rotate n y = gv6), (rotate n y = y), (rotate n y = x)
+(rotate n y = append gv6 gv6), (rotate n y = append gv6 y), (rotate n y = append gv6 x), (rotate n y = append y gv6), (rotate n y = append y y), (rotate n y = append y x), (rotate n y = append x gv6), (rotate n y = append x y), (rotate n y = append x x), (rotate n x = gv6)
+(rotate n x = y), (rotate n x = x), (rotate n x = append gv6 gv6), (rotate n x = append gv6 y), (rotate n x = append gv6 x), (rotate n x = append y gv6), (rotate n x = append y y), (rotate n x = append y x), (rotate n x = append x gv6), (rotate n x = append x y)
+(rotate n x = append x x), (append gv6 gv6 = gv6), (append gv6 gv6 = y), (append gv6 gv6 = x), (append gv6 y = gv6), (append gv6 y = y), (append gv6 y = x), (append gv6 x = gv6), (append gv6 x = y), (append gv6 x = x)
+(append y gv6 = gv6), (append y gv6 = y), (append y gv6 = x), (append y y = gv6), (append y y = y), (append y y = x), (append y x = gv6), (append y x = y), (append y x = x), (append x gv6 = gv6)
+(append x gv6 = y), (append x gv6 = x), (append x y = gv6), (append x y = y), (append x y = x), (append x x = gv6), (append x x = y), (append x x = x), (nil = cons n gv6), (nil = cons n y)
+(nil = cons n x), (nil = rotate n gv6), (nil = rotate n y), (nil = rotate n x), (nil = append gv6 gv6), (nil = append gv6 y), (nil = append gv6 x), (nil = append y gv6), (nil = append y y), (nil = append y x)
+(nil = append x gv6), (nil = append x y), (nil = append x x), (succ n = n), (succ n = len gv6), (succ n = len y), (succ n = len x), (len gv6 = n), (len y = n), (len x = n)
+(zero = succ n), (zero = len gv6), (zero = len y), (zero = len x), (None = Some gv6), (None = Some y), (None = Some x), (None = Some n)
+
+Label: 2 (2)
+(n = n), (y = y), (y = gv3), (y = x), (gv3 = y), (gv3 = gv3), (gv3 = x), (x = y), (x = gv3), (x = x)
+(n <> n), (y <> y), (y <> gv3), (y <> x), (gv3 <> y), (gv3 <> gv3), (gv3 <> x), (x <> y), (x <> gv3), (x <> x)
+(cons n y = y), (cons n y = gv3), (cons n y = x), (cons n y = rotate n y), (cons n y = rotate n gv3), (cons n y = rotate n x), (cons n y = append y y), (cons n y = append y gv3), (cons n y = append y x), (cons n y = append gv3 y)
+(cons n y = append gv3 gv3), (cons n y = append gv3 x), (cons n y = append x y), (cons n y = append x gv3), (cons n y = append x x), (cons n gv3 = y), (cons n gv3 = gv3), (cons n gv3 = x), (cons n gv3 = rotate n y), (cons n gv3 = rotate n gv3)
+(cons n gv3 = rotate n x), (cons n gv3 = append y y), (cons n gv3 = append y gv3), (cons n gv3 = append y x), (cons n gv3 = append gv3 y), (cons n gv3 = append gv3 gv3), (cons n gv3 = append gv3 x), (cons n gv3 = append x y), (cons n gv3 = append x gv3), (cons n gv3 = append x x)
+(cons n x = y), (cons n x = gv3), (cons n x = x), (cons n x = rotate n y), (cons n x = rotate n gv3), (cons n x = rotate n x), (cons n x = append y y), (cons n x = append y gv3), (cons n x = append y x), (cons n x = append gv3 y)
+(cons n x = append gv3 gv3), (cons n x = append gv3 x), (cons n x = append x y), (cons n x = append x gv3), (cons n x = append x x), (rotate n y = y), (rotate n y = gv3), (rotate n y = x), (rotate n y = append y y), (rotate n y = append y gv3)
+(rotate n y = append y x), (rotate n y = append gv3 y), (rotate n y = append gv3 gv3), (rotate n y = append gv3 x), (rotate n y = append x y), (rotate n y = append x gv3), (rotate n y = append x x), (rotate n gv3 = y), (rotate n gv3 = gv3), (rotate n gv3 = x)
+(rotate n gv3 = append y y), (rotate n gv3 = append y gv3), (rotate n gv3 = append y x), (rotate n gv3 = append gv3 y), (rotate n gv3 = append gv3 gv3), (rotate n gv3 = append gv3 x), (rotate n gv3 = append x y), (rotate n gv3 = append x gv3), (rotate n gv3 = append x x), (rotate n x = y)
+(rotate n x = gv3), (rotate n x = x), (rotate n x = append y y), (rotate n x = append y gv3), (rotate n x = append y x), (rotate n x = append gv3 y), (rotate n x = append gv3 gv3), (rotate n x = append gv3 x), (rotate n x = append x y), (rotate n x = append x gv3)
+(rotate n x = append x x), (append y y = y), (append y y = gv3), (append y y = x), (append y gv3 = y), (append y gv3 = gv3), (append y gv3 = x), (append y x = y), (append y x = gv3), (append y x = x)
+(append gv3 y = y), (append gv3 y = gv3), (append gv3 y = x), (append gv3 gv3 = y), (append gv3 gv3 = gv3), (append gv3 gv3 = x), (append gv3 x = y), (append gv3 x = gv3), (append gv3 x = x), (append x y = y)
+(append x y = gv3), (append x y = x), (append x gv3 = y), (append x gv3 = gv3), (append x gv3 = x), (append x x = y), (append x x = gv3), (append x x = x), (nil = cons n y), (nil = cons n gv3)
+(nil = cons n x), (nil = rotate n y), (nil = rotate n gv3), (nil = rotate n x), (nil = append y y), (nil = append y gv3), (nil = append y x), (nil = append gv3 y), (nil = append gv3 gv3), (nil = append gv3 x)
+(nil = append x y), (nil = append x gv3), (nil = append x x), (succ n = n), (succ n = len y), (succ n = len gv3), (succ n = len x), (len y = n), (len gv3 = n), (len x = n)
+(zero = succ n), (zero = len y), (zero = len gv3), (zero = len x), (None = Some y), (None = Some gv3), (None = Some x), (None = Some n)
+
+Label: 3 (3)
+(n = n), (gv7 = gv7), (gv7 = y), (gv7 = x), (y = gv7), (y = y), (y = x), (x = gv7), (x = y), (x = x)
+(n <> n), (gv7 <> gv7), (gv7 <> y), (gv7 <> x), (y <> gv7), (y <> y), (y <> x), (x <> gv7), (x <> y), (x <> x)
+(cons n gv7 = gv7), (cons n gv7 = y), (cons n gv7 = x), (cons n gv7 = rotate n gv7), (cons n gv7 = rotate n y), (cons n gv7 = rotate n x), (cons n gv7 = append gv7 gv7), (cons n gv7 = append gv7 y), (cons n gv7 = append gv7 x), (cons n gv7 = append y gv7)
+(cons n gv7 = append y y), (cons n gv7 = append y x), (cons n gv7 = append x gv7), (cons n gv7 = append x y), (cons n gv7 = append x x), (cons n y = gv7), (cons n y = y), (cons n y = x), (cons n y = rotate n gv7), (cons n y = rotate n y)
+(cons n y = rotate n x), (cons n y = append gv7 gv7), (cons n y = append gv7 y), (cons n y = append gv7 x), (cons n y = append y gv7), (cons n y = append y y), (cons n y = append y x), (cons n y = append x gv7), (cons n y = append x y), (cons n y = append x x)
+(cons n x = gv7), (cons n x = y), (cons n x = x), (cons n x = rotate n gv7), (cons n x = rotate n y), (cons n x = rotate n x), (cons n x = append gv7 gv7), (cons n x = append gv7 y), (cons n x = append gv7 x), (cons n x = append y gv7)
+(cons n x = append y y), (cons n x = append y x), (cons n x = append x gv7), (cons n x = append x y), (cons n x = append x x), (rotate n gv7 = gv7), (rotate n gv7 = y), (rotate n gv7 = x), (rotate n gv7 = append gv7 gv7), (rotate n gv7 = append gv7 y)
+(rotate n gv7 = append gv7 x), (rotate n gv7 = append y gv7), (rotate n gv7 = append y y), (rotate n gv7 = append y x), (rotate n gv7 = append x gv7), (rotate n gv7 = append x y), (rotate n gv7 = append x x), (rotate n y = gv7), (rotate n y = y), (rotate n y = x)
+(rotate n y = append gv7 gv7), (rotate n y = append gv7 y), (rotate n y = append gv7 x), (rotate n y = append y gv7), (rotate n y = append y y), (rotate n y = append y x), (rotate n y = append x gv7), (rotate n y = append x y), (rotate n y = append x x), (rotate n x = gv7)
+(rotate n x = y), (rotate n x = x), (rotate n x = append gv7 gv7), (rotate n x = append gv7 y), (rotate n x = append gv7 x), (rotate n x = append y gv7), (rotate n x = append y y), (rotate n x = append y x), (rotate n x = append x gv7), (rotate n x = append x y)
+(rotate n x = append x x), (append gv7 gv7 = gv7), (append gv7 gv7 = y), (append gv7 gv7 = x), (append gv7 y = gv7), (append gv7 y = y), (append gv7 y = x), (append gv7 x = gv7), (append gv7 x = y), (append gv7 x = x)
+(append y gv7 = gv7), (append y gv7 = y), (append y gv7 = x), (append y y = gv7), (append y y = y), (append y y = x), (append y x = gv7), (append y x = y), (append y x = x), (append x gv7 = gv7)
+(append x gv7 = y), (append x gv7 = x), (append x y = gv7), (append x y = y), (append x y = x), (append x x = gv7), (append x x = y), (append x x = x), (nil = cons n gv7), (nil = cons n y)
+(nil = cons n x), (nil = rotate n gv7), (nil = rotate n y), (nil = rotate n x), (nil = append gv7 gv7), (nil = append gv7 y), (nil = append gv7 x), (nil = append y gv7), (nil = append y y), (nil = append y x)
+(nil = append x gv7), (nil = append x y), (nil = append x x), (succ n = n), (succ n = len gv7), (succ n = len y), (succ n = len x), (len gv7 = n), (len y = n), (len x = n)
+(zero = succ n), (zero = len gv7), (zero = len y), (zero = len x), (None = Some gv7), (None = Some y), (None = Some x), (None = Some n)
+
+Label: 4 (4)
+(n = n), (gv4 = gv4), (gv4 = y), (gv4 = x), (y = gv4), (y = y), (y = x), (x = gv4), (x = y), (x = x)
+(n <> n), (gv4 <> gv4), (gv4 <> y), (gv4 <> x), (y <> gv4), (y <> y), (y <> x), (x <> gv4), (x <> y), (x <> x)
+(cons n gv4 = gv4), (cons n gv4 = y), (cons n gv4 = x), (cons n gv4 = rotate n gv4), (cons n gv4 = rotate n y), (cons n gv4 = rotate n x), (cons n gv4 = append gv4 gv4), (cons n gv4 = append gv4 y), (cons n gv4 = append gv4 x), (cons n gv4 = append y gv4)
+(cons n gv4 = append y y), (cons n gv4 = append y x), (cons n gv4 = append x gv4), (cons n gv4 = append x y), (cons n gv4 = append x x), (cons n y = gv4), (cons n y = y), (cons n y = x), (cons n y = rotate n gv4), (cons n y = rotate n y)
+(cons n y = rotate n x), (cons n y = append gv4 gv4), (cons n y = append gv4 y), (cons n y = append gv4 x), (cons n y = append y gv4), (cons n y = append y y), (cons n y = append y x), (cons n y = append x gv4), (cons n y = append x y), (cons n y = append x x)
+(cons n x = gv4), (cons n x = y), (cons n x = x), (cons n x = rotate n gv4), (cons n x = rotate n y), (cons n x = rotate n x), (cons n x = append gv4 gv4), (cons n x = append gv4 y), (cons n x = append gv4 x), (cons n x = append y gv4)
+(cons n x = append y y), (cons n x = append y x), (cons n x = append x gv4), (cons n x = append x y), (cons n x = append x x), (rotate n gv4 = gv4), (rotate n gv4 = y), (rotate n gv4 = x), (rotate n gv4 = append gv4 gv4), (rotate n gv4 = append gv4 y)
+(rotate n gv4 = append gv4 x), (rotate n gv4 = append y gv4), (rotate n gv4 = append y y), (rotate n gv4 = append y x), (rotate n gv4 = append x gv4), (rotate n gv4 = append x y), (rotate n gv4 = append x x), (rotate n y = gv4), (rotate n y = y), (rotate n y = x)
+(rotate n y = append gv4 gv4), (rotate n y = append gv4 y), (rotate n y = append gv4 x), (rotate n y = append y gv4), (rotate n y = append y y), (rotate n y = append y x), (rotate n y = append x gv4), (rotate n y = append x y), (rotate n y = append x x), (rotate n x = gv4)
+(rotate n x = y), (rotate n x = x), (rotate n x = append gv4 gv4), (rotate n x = append gv4 y), (rotate n x = append gv4 x), (rotate n x = append y gv4), (rotate n x = append y y), (rotate n x = append y x), (rotate n x = append x gv4), (rotate n x = append x y)
+(rotate n x = append x x), (append gv4 gv4 = gv4), (append gv4 gv4 = y), (append gv4 gv4 = x), (append gv4 y = gv4), (append gv4 y = y), (append gv4 y = x), (append gv4 x = gv4), (append gv4 x = y), (append gv4 x = x)
+(append y gv4 = gv4), (append y gv4 = y), (append y gv4 = x), (append y y = gv4), (append y y = y), (append y y = x), (append y x = gv4), (append y x = y), (append y x = x), (append x gv4 = gv4)
+(append x gv4 = y), (append x gv4 = x), (append x y = gv4), (append x y = y), (append x y = x), (append x x = gv4), (append x x = y), (append x x = x), (nil = cons n gv4), (nil = cons n y)
+(nil = cons n x), (nil = rotate n gv4), (nil = rotate n y), (nil = rotate n x), (nil = append gv4 gv4), (nil = append gv4 y), (nil = append gv4 x), (nil = append y gv4), (nil = append y y), (nil = append y x)
+(nil = append x gv4), (nil = append x y), (nil = append x x), (succ n = n), (succ n = len gv4), (succ n = len y), (succ n = len x), (len gv4 = n), (len y = n), (len x = n)
+(zero = succ n), (zero = len gv4), (zero = len y), (zero = len x), (None = Some gv4), (None = Some y), (None = Some x), (None = Some n)
+
+Label: 5 (5)
+(y = y), (y = x), (x = y), (x = x), (n = n), (n = gv1), (gv1 = n), (gv1 = gv1), (y <> y), (y <> x)
+(x <> y), (x <> x), (n <> n), (n <> gv1), (gv1 <> n), (gv1 <> gv1), (cons n y = y), (cons n y = x), (cons n y = rotate n y), (cons n y = rotate n x)
+(cons n y = rotate gv1 y), (cons n y = rotate gv1 x), (cons n y = append y y), (cons n y = append y x), (cons n y = append x y), (cons n y = append x x), (cons n x = y), (cons n x = x), (cons n x = rotate n y), (cons n x = rotate n x)
+(cons n x = rotate gv1 y), (cons n x = rotate gv1 x), (cons n x = append y y), (cons n x = append y x), (cons n x = append x y), (cons n x = append x x), (cons gv1 y = y), (cons gv1 y = x), (cons gv1 y = rotate n y), (cons gv1 y = rotate n x)
+(cons gv1 y = rotate gv1 y), (cons gv1 y = rotate gv1 x), (cons gv1 y = append y y), (cons gv1 y = append y x), (cons gv1 y = append x y), (cons gv1 y = append x x), (cons gv1 x = y), (cons gv1 x = x), (cons gv1 x = rotate n y), (cons gv1 x = rotate n x)
+(cons gv1 x = rotate gv1 y), (cons gv1 x = rotate gv1 x), (cons gv1 x = append y y), (cons gv1 x = append y x), (cons gv1 x = append x y), (cons gv1 x = append x x), (rotate n y = y), (rotate n y = x), (rotate n y = append y y), (rotate n y = append y x)
+(rotate n y = append x y), (rotate n y = append x x), (rotate n x = y), (rotate n x = x), (rotate n x = append y y), (rotate n x = append y x), (rotate n x = append x y), (rotate n x = append x x), (rotate gv1 y = y), (rotate gv1 y = x)
+(rotate gv1 y = append y y), (rotate gv1 y = append y x), (rotate gv1 y = append x y), (rotate gv1 y = append x x), (rotate gv1 x = y), (rotate gv1 x = x), (rotate gv1 x = append y y), (rotate gv1 x = append y x), (rotate gv1 x = append x y), (rotate gv1 x = append x x)
+(append y y = y), (append y y = x), (append y x = y), (append y x = x), (append x y = y), (append x y = x), (append x x = y), (append x x = x), (nil = cons n y), (nil = cons n x)
+(nil = cons gv1 y), (nil = cons gv1 x), (nil = rotate n y), (nil = rotate n x), (nil = rotate gv1 y), (nil = rotate gv1 x), (nil = append y y), (nil = append y x), (nil = append x y), (nil = append x x)
+(succ n = n), (succ n = gv1), (succ n = len y), (succ n = len x), (succ gv1 = n), (succ gv1 = gv1), (succ gv1 = len y), (succ gv1 = len x), (len y = n), (len y = gv1)
+(len x = n), (len x = gv1), (zero = succ n), (zero = succ gv1), (zero = len y), (zero = len x), (None = Some y), (None = Some x), (None = Some n), (None = Some gv1)
+
+Label: 6 (6)
+(n = n), (x = x), (x = y), (x = gv0), (y = x), (y = y), (y = gv0), (gv0 = x), (gv0 = y), (gv0 = gv0)
+(n <> n), (x <> x), (x <> y), (x <> gv0), (y <> x), (y <> y), (y <> gv0), (gv0 <> x), (gv0 <> y), (gv0 <> gv0)
+(cons n x = x), (cons n x = y), (cons n x = gv0), (cons n x = rotate n x), (cons n x = rotate n y), (cons n x = rotate n gv0), (cons n x = append x x), (cons n x = append x y), (cons n x = append x gv0), (cons n x = append y x)
+(cons n x = append y y), (cons n x = append y gv0), (cons n x = append gv0 x), (cons n x = append gv0 y), (cons n x = append gv0 gv0), (cons n y = x), (cons n y = y), (cons n y = gv0), (cons n y = rotate n x), (cons n y = rotate n y)
+(cons n y = rotate n gv0), (cons n y = append x x), (cons n y = append x y), (cons n y = append x gv0), (cons n y = append y x), (cons n y = append y y), (cons n y = append y gv0), (cons n y = append gv0 x), (cons n y = append gv0 y), (cons n y = append gv0 gv0)
+(cons n gv0 = x), (cons n gv0 = y), (cons n gv0 = gv0), (cons n gv0 = rotate n x), (cons n gv0 = rotate n y), (cons n gv0 = rotate n gv0), (cons n gv0 = append x x), (cons n gv0 = append x y), (cons n gv0 = append x gv0), (cons n gv0 = append y x)
+(cons n gv0 = append y y), (cons n gv0 = append y gv0), (cons n gv0 = append gv0 x), (cons n gv0 = append gv0 y), (cons n gv0 = append gv0 gv0), (rotate n x = x), (rotate n x = y), (rotate n x = gv0), (rotate n x = append x x), (rotate n x = append x y)
+(rotate n x = append x gv0), (rotate n x = append y x), (rotate n x = append y y), (rotate n x = append y gv0), (rotate n x = append gv0 x), (rotate n x = append gv0 y), (rotate n x = append gv0 gv0), (rotate n y = x), (rotate n y = y), (rotate n y = gv0)
+(rotate n y = append x x), (rotate n y = append x y), (rotate n y = append x gv0), (rotate n y = append y x), (rotate n y = append y y), (rotate n y = append y gv0), (rotate n y = append gv0 x), (rotate n y = append gv0 y), (rotate n y = append gv0 gv0), (rotate n gv0 = x)
+(rotate n gv0 = y), (rotate n gv0 = gv0), (rotate n gv0 = append x x), (rotate n gv0 = append x y), (rotate n gv0 = append x gv0), (rotate n gv0 = append y x), (rotate n gv0 = append y y), (rotate n gv0 = append y gv0), (rotate n gv0 = append gv0 x), (rotate n gv0 = append gv0 y)
+(rotate n gv0 = append gv0 gv0), (append x x = x), (append x x = y), (append x x = gv0), (append x y = x), (append x y = y), (append x y = gv0), (append x gv0 = x), (append x gv0 = y), (append x gv0 = gv0)
+(append y x = x), (append y x = y), (append y x = gv0), (append y y = x), (append y y = y), (append y y = gv0), (append y gv0 = x), (append y gv0 = y), (append y gv0 = gv0), (append gv0 x = x)
+(append gv0 x = y), (append gv0 x = gv0), (append gv0 y = x), (append gv0 y = y), (append gv0 y = gv0), (append gv0 gv0 = x), (append gv0 gv0 = y), (append gv0 gv0 = gv0), (nil = cons n x), (nil = cons n y)
+(nil = cons n gv0), (nil = rotate n x), (nil = rotate n y), (nil = rotate n gv0), (nil = append x x), (nil = append x y), (nil = append x gv0), (nil = append y x), (nil = append y y), (nil = append y gv0)
+(nil = append gv0 x), (nil = append gv0 y), (nil = append gv0 gv0), (succ n = n), (succ n = len x), (succ n = len y), (succ n = len gv0), (len x = n), (len y = n), (len gv0 = n)
+(zero = succ n), (zero = len x), (zero = len y), (zero = len gv0), (None = Some x), (None = Some y), (None = Some gv0), (None = Some n)
+
+Label: 7 (7)
+(n = n), (gv5 = gv5), (gv5 = y), (gv5 = x), (y = gv5), (y = y), (y = x), (x = gv5), (x = y), (x = x)
+(n <> n), (gv5 <> gv5), (gv5 <> y), (gv5 <> x), (y <> gv5), (y <> y), (y <> x), (x <> gv5), (x <> y), (x <> x)
+(cons n gv5 = gv5), (cons n gv5 = y), (cons n gv5 = x), (cons n gv5 = rotate n gv5), (cons n gv5 = rotate n y), (cons n gv5 = rotate n x), (cons n gv5 = append gv5 gv5), (cons n gv5 = append gv5 y), (cons n gv5 = append gv5 x), (cons n gv5 = append y gv5)
+(cons n gv5 = append y y), (cons n gv5 = append y x), (cons n gv5 = append x gv5), (cons n gv5 = append x y), (cons n gv5 = append x x), (cons n y = gv5), (cons n y = y), (cons n y = x), (cons n y = rotate n gv5), (cons n y = rotate n y)
+(cons n y = rotate n x), (cons n y = append gv5 gv5), (cons n y = append gv5 y), (cons n y = append gv5 x), (cons n y = append y gv5), (cons n y = append y y), (cons n y = append y x), (cons n y = append x gv5), (cons n y = append x y), (cons n y = append x x)
+(cons n x = gv5), (cons n x = y), (cons n x = x), (cons n x = rotate n gv5), (cons n x = rotate n y), (cons n x = rotate n x), (cons n x = append gv5 gv5), (cons n x = append gv5 y), (cons n x = append gv5 x), (cons n x = append y gv5)
+(cons n x = append y y), (cons n x = append y x), (cons n x = append x gv5), (cons n x = append x y), (cons n x = append x x), (rotate n gv5 = gv5), (rotate n gv5 = y), (rotate n gv5 = x), (rotate n gv5 = append gv5 gv5), (rotate n gv5 = append gv5 y)
+(rotate n gv5 = append gv5 x), (rotate n gv5 = append y gv5), (rotate n gv5 = append y y), (rotate n gv5 = append y x), (rotate n gv5 = append x gv5), (rotate n gv5 = append x y), (rotate n gv5 = append x x), (rotate n y = gv5), (rotate n y = y), (rotate n y = x)
+(rotate n y = append gv5 gv5), (rotate n y = append gv5 y), (rotate n y = append gv5 x), (rotate n y = append y gv5), (rotate n y = append y y), (rotate n y = append y x), (rotate n y = append x gv5), (rotate n y = append x y), (rotate n y = append x x), (rotate n x = gv5)
+(rotate n x = y), (rotate n x = x), (rotate n x = append gv5 gv5), (rotate n x = append gv5 y), (rotate n x = append gv5 x), (rotate n x = append y gv5), (rotate n x = append y y), (rotate n x = append y x), (rotate n x = append x gv5), (rotate n x = append x y)
+(rotate n x = append x x), (append gv5 gv5 = gv5), (append gv5 gv5 = y), (append gv5 gv5 = x), (append gv5 y = gv5), (append gv5 y = y), (append gv5 y = x), (append gv5 x = gv5), (append gv5 x = y), (append gv5 x = x)
+(append y gv5 = gv5), (append y gv5 = y), (append y gv5 = x), (append y y = gv5), (append y y = y), (append y y = x), (append y x = gv5), (append y x = y), (append y x = x), (append x gv5 = gv5)
+(append x gv5 = y), (append x gv5 = x), (append x y = gv5), (append x y = y), (append x y = x), (append x x = gv5), (append x x = y), (append x x = x), (nil = cons n gv5), (nil = cons n y)
+(nil = cons n x), (nil = rotate n gv5), (nil = rotate n y), (nil = rotate n x), (nil = append gv5 gv5), (nil = append gv5 y), (nil = append gv5 x), (nil = append y gv5), (nil = append y y), (nil = append y x)
+(nil = append x gv5), (nil = append x y), (nil = append x x), (succ n = n), (succ n = len gv5), (succ n = len y), (succ n = len x), (len gv5 = n), (len y = n), (len x = n)
+(zero = succ n), (zero = len gv5), (zero = len y), (zero = len x), (None = Some gv5), (None = Some y), (None = Some x), (None = Some n)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 44.133 seconds
+
+
+Label: 0 (0)
+
+Label: 1 (1)
+
+Label: 2 (2)
+(append x y = gv3)
+
+Label: 3 (3)
+(cons n x = gv7)
+
+Label: 4 (4)
+(cons n y = append gv4 y), (cons n x = append gv4 x), (cons n gv4 = append gv4 gv4)
+
+Label: 5 (5)
+(len x = gv1)
+
+Label: 6 (6)
+
+Label: 7 (7)
+(zero = len gv5), (append gv5 y = y), (append gv5 x = x), (append y gv5 = y), (append x gv5 = x), (nil = rotate n gv5), (append gv5 gv5 = gv5), (nil = append gv5 gv5), (rotate n gv5 = append gv5 gv5)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (rotate (len x) (append (append x y) (cons n nil)) = append y (cons n x))
+
+2. (append nil nil = nil)
+
+3. (zero = len gv5 ->  rotate (len x) (append (append x y) (cons n gv5)) = append y (cons n x))
+
+4. (append gv5 y = y ->  rotate (len x) (append (append x y) (cons n gv5)) = append y (cons n x))
+
+5. (append gv5 x = x ->  rotate (len x) (append (append x y) (cons n gv5)) = append y (cons n x))
+
+6. (append y gv5 = y ->  rotate (len x) (append (append x y) (cons n gv5)) = append y (cons n x))
+
+7. (append x gv5 = x ->  rotate (len x) (append (append x y) (cons n gv5)) = append y (cons n x))
+
+8. (nil = rotate n gv5 ->  rotate (len x) (append (append x y) (cons n gv5)) = append y (cons n x))
+
+9. (append gv5 gv5 = gv5 ->  rotate (len x) (append (append x y) (cons n gv5)) = append y (cons n x))
+
+10. (nil = append gv5 gv5 ->  rotate (len x) (append (append x y) (cons n gv5)) = append y (cons n x))
+
+11. (cons n y = append gv4 y ->  rotate (len x) (append (append x y) gv4) = append y (cons n x))
+
+12. (cons n x = append gv4 x ->  rotate (len x) (append (append x y) gv4) = append y (cons n x))
+
+13. (cons n gv4 = append gv4 gv4 ->  rotate (len x) (append (append x y) gv4) = append y (cons n x))
+
+14. (rotate n gv5 = append gv5 gv5 ->  rotate (len x) (append (append x y) (cons n gv5)) = append y (cons n x))
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 71.138 seconds
+
+Number of Result Pairs Returned: 14
+
+1. (rotate (len x) (append (append x y) (cons n nil)) = append y (cons n x))
+
+2. (zero = len gv5 ->  rotate (len x) (append (append x y) (cons n gv5)) = append y (cons n x))
+
+3. (append gv5 y = y ->  rotate (len x) (append (append x y) (cons n gv5)) = append y (cons n x))
+
+4. (append gv5 x = x ->  rotate (len x) (append (append x y) (cons n gv5)) = append y (cons n x))
+
+5. (append y gv5 = y ->  rotate (len x) (append (append x y) (cons n gv5)) = append y (cons n x))

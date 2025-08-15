@@ -1,0 +1,288 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (tsize t <= tsize (tinsert_all t l))
+
+----------------------------------
+Goal: (tsize (tinsert_all t l) <= tsize (tinsert (tinsert_all t l) n))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 3.038 seconds
+
+gv3 : tree = (tinsert (tinsert_all t l) n)
+gv0 : nat = (tsize (tinsert_all t l))
+gv2 : nat = (tsize (tinsert (tinsert_all t l) n))
+gv1 : tree = (tinsert_all t l)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 62.435 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (tsize (tinsert_all t l) <= tsize (tinsert (tinsert_all t l) n))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+
+----------------------------------
+Goal: (tsize gv1 <= tsize (tinsert gv1 n))
+Case: Valid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (tinsert_all t l = gv1)
+ -- (tsize (tinsert gv1 n) = gv2)
+
+----------------------------------
+Goal: (tsize gv1 <= gv2)
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (tinsert_all t l = gv1)
+ -- (tsize gv1 = gv0)
+
+----------------------------------
+Goal: (gv0 <= tsize (tinsert gv1 n))
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (tinsert_all t l = gv1)
+ -- (tinsert gv1 n = gv3)
+
+----------------------------------
+Goal: (tsize gv1 <= tsize gv3)
+Case: Invalid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (tsize (tinsert (tinsert_all t l) n) = gv2)
+
+----------------------------------
+Goal: (tsize (tinsert_all t l) <= gv2)
+Case: Invalid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (tsize (tinsert_all t l) = gv0)
+
+----------------------------------
+Goal: (gv0 <= tsize (tinsert (tinsert_all t l) n))
+Case: Invalid and Generalized
+
+Label: Generalization #7
+Assumptions: 
+ -- (tinsert (tinsert_all t l) n = gv3)
+
+----------------------------------
+Goal: (tsize (tinsert_all t l) <= tsize gv3)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 62.58 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+lst : Set
+tree : Set
+ltb : (nat -> nat -> bool)
+tinsert : (tree -> nat -> tree)
+tinsert_all : (tree -> lst -> tree)
+tsize : (tree -> nat)
+leb : (nat -> nat -> bool)
+Nil : lst
+Cons : (nat -> lst -> lst)
+Leaf : tree
+Node : (nat -> tree -> tree -> tree)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 108
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 110
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 31
+Negative Examples: 500
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 146
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 62.738 seconds
+
+
+Label: 0 (0)
+(n < n), (n < gv2), (gv2 < n), (gv2 < gv2), (n <= n), (n <= gv2), (gv2 <= n), (gv2 <= gv2), (l = l), (n = n)
+(n = gv2), (gv2 = n), (gv2 = gv2), (t = t), (t = gv1), (gv1 = t), (gv1 = gv1), (false = leb n n), (false = leb n gv2), (false = leb gv2 n)
+(false = leb gv2 gv2), (false = ltb n n), (false = ltb n gv2), (false = ltb gv2 n), (false = ltb gv2 gv2), (true = leb n n), (true = leb n gv2), (true = leb gv2 n), (true = leb gv2 gv2), (true = ltb n n)
+(true = ltb n gv2), (true = ltb gv2 n), (true = ltb gv2 gv2), (n < tsize t), (n < tsize gv1), (gv2 < tsize t), (gv2 < tsize gv1), (tsize t < n), (tsize t < gv2), (tsize t < tsize gv1)
+(tsize gv1 < n), (tsize gv1 < gv2), (tsize gv1 < tsize t), (n <= tsize t), (n <= tsize gv1), (gv2 <= tsize t), (gv2 <= tsize gv1), (tsize t <= n), (tsize t <= gv2), (tsize t <= tsize gv1)
+(tsize gv1 <= n), (tsize gv1 <= gv2), (tsize gv1 <= tsize t), (~ n < n), (~ n < gv2), (~ gv2 < n), (~ gv2 < gv2), (~ n <= n), (~ n <= gv2), (~ gv2 <= n)
+(~ gv2 <= gv2), (l <> l), (n <> n), (n <> gv2), (gv2 <> n), (gv2 <> gv2), (t <> t), (t <> gv1), (gv1 <> t), (gv1 <> gv1)
+(Cons n l = l), (Cons gv2 l = l), (Nil = Cons n l), (Nil = Cons gv2 l), (Node n t t = t), (Node n t t = gv1), (Node n t t = tinsert_all t l), (Node n t t = tinsert_all gv1 l), (Node n t t = tinsert t n), (Node n t t = tinsert t gv2)
+(Node n t t = tinsert gv1 n), (Node n t t = tinsert gv1 gv2), (Node n t gv1 = t), (Node n t gv1 = gv1), (Node n t gv1 = tinsert_all t l), (Node n t gv1 = tinsert_all gv1 l), (Node n t gv1 = tinsert t n), (Node n t gv1 = tinsert t gv2), (Node n t gv1 = tinsert gv1 n), (Node n t gv1 = tinsert gv1 gv2)
+(Node n gv1 t = t), (Node n gv1 t = gv1), (Node n gv1 t = tinsert_all t l), (Node n gv1 t = tinsert_all gv1 l), (Node n gv1 t = tinsert t n), (Node n gv1 t = tinsert t gv2), (Node n gv1 t = tinsert gv1 n), (Node n gv1 t = tinsert gv1 gv2), (Node n gv1 gv1 = t), (Node n gv1 gv1 = gv1)
+(Node n gv1 gv1 = tinsert_all t l), (Node n gv1 gv1 = tinsert_all gv1 l), (Node n gv1 gv1 = tinsert t n), (Node n gv1 gv1 = tinsert t gv2), (Node n gv1 gv1 = tinsert gv1 n), (Node n gv1 gv1 = tinsert gv1 gv2), (Node gv2 t t = t), (Node gv2 t t = gv1), (Node gv2 t t = tinsert_all t l), (Node gv2 t t = tinsert_all gv1 l)
+(Node gv2 t t = tinsert t n), (Node gv2 t t = tinsert t gv2), (Node gv2 t t = tinsert gv1 n), (Node gv2 t t = tinsert gv1 gv2), (Node gv2 t gv1 = t), (Node gv2 t gv1 = gv1), (Node gv2 t gv1 = tinsert_all t l), (Node gv2 t gv1 = tinsert_all gv1 l), (Node gv2 t gv1 = tinsert t n), (Node gv2 t gv1 = tinsert t gv2)
+(Node gv2 t gv1 = tinsert gv1 n), (Node gv2 t gv1 = tinsert gv1 gv2), (Node gv2 gv1 t = t), (Node gv2 gv1 t = gv1), (Node gv2 gv1 t = tinsert_all t l), (Node gv2 gv1 t = tinsert_all gv1 l), (Node gv2 gv1 t = tinsert t n), (Node gv2 gv1 t = tinsert t gv2), (Node gv2 gv1 t = tinsert gv1 n), (Node gv2 gv1 t = tinsert gv1 gv2)
+(Node gv2 gv1 gv1 = t), (Node gv2 gv1 gv1 = gv1), (Node gv2 gv1 gv1 = tinsert_all t l), (Node gv2 gv1 gv1 = tinsert_all gv1 l), (Node gv2 gv1 gv1 = tinsert t n), (Node gv2 gv1 gv1 = tinsert t gv2), (Node gv2 gv1 gv1 = tinsert gv1 n), (Node gv2 gv1 gv1 = tinsert gv1 gv2), (tinsert_all t l = t), (tinsert_all t l = gv1)
+(tinsert_all t l = tinsert t n), (tinsert_all t l = tinsert t gv2), (tinsert_all t l = tinsert gv1 n), (tinsert_all t l = tinsert gv1 gv2), (tinsert_all gv1 l = t), (tinsert_all gv1 l = gv1), (tinsert_all gv1 l = tinsert t n), (tinsert_all gv1 l = tinsert t gv2), (tinsert_all gv1 l = tinsert gv1 n), (tinsert_all gv1 l = tinsert gv1 gv2)
+(tinsert t n = t), (tinsert t n = gv1), (tinsert t gv2 = t), (tinsert t gv2 = gv1), (tinsert gv1 n = t), (tinsert gv1 n = gv1), (tinsert gv1 gv2 = t), (tinsert gv1 gv2 = gv1), (Leaf = Node n t t), (Leaf = Node n t gv1)
+(Leaf = Node n gv1 t), (Leaf = Node n gv1 gv1), (Leaf = Node gv2 t t), (Leaf = Node gv2 t gv1), (Leaf = Node gv2 gv1 t), (Leaf = Node gv2 gv1 gv1), (Leaf = tinsert_all t l), (Leaf = tinsert_all gv1 l), (Leaf = tinsert t n), (Leaf = tinsert t gv2)
+(Leaf = tinsert gv1 n), (Leaf = tinsert gv1 gv2), (None = Some l), (tsize t = n), (tsize t = gv2), (tsize gv1 = n), (tsize gv1 = gv2), (None = Some t), (None = Some gv1), (None = Some n)
+(None = Some gv2), (ltb n n = leb n n), (ltb n n = leb n gv2), (ltb n n = leb gv2 n), (ltb n n = leb gv2 gv2), (ltb n gv2 = leb n n), (ltb n gv2 = leb n gv2), (ltb n gv2 = leb gv2 n), (ltb n gv2 = leb gv2 gv2), (ltb gv2 n = leb n n)
+(ltb gv2 n = leb n gv2), (ltb gv2 n = leb gv2 n), (ltb gv2 n = leb gv2 gv2), (ltb gv2 gv2 = leb n n), (ltb gv2 gv2 = leb n gv2), (ltb gv2 gv2 = leb gv2 n), (ltb gv2 gv2 = leb gv2 gv2)
+
+Label: 1 (1)
+(n < n), (n < gv0), (gv0 < n), (gv0 < gv0), (n <= n), (n <= gv0), (gv0 <= n), (gv0 <= gv0), (l = l), (t = t)
+(t = gv1), (gv1 = t), (gv1 = gv1), (n = n), (n = gv0), (gv0 = n), (gv0 = gv0), (false = leb n n), (false = leb n gv0), (false = leb gv0 n)
+(false = leb gv0 gv0), (false = ltb n n), (false = ltb n gv0), (false = ltb gv0 n), (false = ltb gv0 gv0), (true = leb n n), (true = leb n gv0), (true = leb gv0 n), (true = leb gv0 gv0), (true = ltb n n)
+(true = ltb n gv0), (true = ltb gv0 n), (true = ltb gv0 gv0), (n < tsize t), (n < tsize gv1), (gv0 < tsize t), (gv0 < tsize gv1), (tsize t < n), (tsize t < gv0), (tsize t < tsize gv1)
+(tsize gv1 < n), (tsize gv1 < gv0), (tsize gv1 < tsize t), (n <= tsize t), (n <= tsize gv1), (gv0 <= tsize t), (gv0 <= tsize gv1), (tsize t <= n), (tsize t <= gv0), (tsize t <= tsize gv1)
+(tsize gv1 <= n), (tsize gv1 <= gv0), (tsize gv1 <= tsize t), (~ n < n), (~ n < gv0), (~ gv0 < n), (~ gv0 < gv0), (~ n <= n), (~ n <= gv0), (~ gv0 <= n)
+(~ gv0 <= gv0), (l <> l), (t <> t), (t <> gv1), (gv1 <> t), (gv1 <> gv1), (n <> n), (n <> gv0), (gv0 <> n), (gv0 <> gv0)
+(Cons n l = l), (Cons gv0 l = l), (Nil = Cons n l), (Nil = Cons gv0 l), (Node n t t = t), (Node n t t = gv1), (Node n t t = tinsert_all t l), (Node n t t = tinsert_all gv1 l), (Node n t t = tinsert t n), (Node n t t = tinsert t gv0)
+(Node n t t = tinsert gv1 n), (Node n t t = tinsert gv1 gv0), (Node n t gv1 = t), (Node n t gv1 = gv1), (Node n t gv1 = tinsert_all t l), (Node n t gv1 = tinsert_all gv1 l), (Node n t gv1 = tinsert t n), (Node n t gv1 = tinsert t gv0), (Node n t gv1 = tinsert gv1 n), (Node n t gv1 = tinsert gv1 gv0)
+(Node n gv1 t = t), (Node n gv1 t = gv1), (Node n gv1 t = tinsert_all t l), (Node n gv1 t = tinsert_all gv1 l), (Node n gv1 t = tinsert t n), (Node n gv1 t = tinsert t gv0), (Node n gv1 t = tinsert gv1 n), (Node n gv1 t = tinsert gv1 gv0), (Node n gv1 gv1 = t), (Node n gv1 gv1 = gv1)
+(Node n gv1 gv1 = tinsert_all t l), (Node n gv1 gv1 = tinsert_all gv1 l), (Node n gv1 gv1 = tinsert t n), (Node n gv1 gv1 = tinsert t gv0), (Node n gv1 gv1 = tinsert gv1 n), (Node n gv1 gv1 = tinsert gv1 gv0), (Node gv0 t t = t), (Node gv0 t t = gv1), (Node gv0 t t = tinsert_all t l), (Node gv0 t t = tinsert_all gv1 l)
+(Node gv0 t t = tinsert t n), (Node gv0 t t = tinsert t gv0), (Node gv0 t t = tinsert gv1 n), (Node gv0 t t = tinsert gv1 gv0), (Node gv0 t gv1 = t), (Node gv0 t gv1 = gv1), (Node gv0 t gv1 = tinsert_all t l), (Node gv0 t gv1 = tinsert_all gv1 l), (Node gv0 t gv1 = tinsert t n), (Node gv0 t gv1 = tinsert t gv0)
+(Node gv0 t gv1 = tinsert gv1 n), (Node gv0 t gv1 = tinsert gv1 gv0), (Node gv0 gv1 t = t), (Node gv0 gv1 t = gv1), (Node gv0 gv1 t = tinsert_all t l), (Node gv0 gv1 t = tinsert_all gv1 l), (Node gv0 gv1 t = tinsert t n), (Node gv0 gv1 t = tinsert t gv0), (Node gv0 gv1 t = tinsert gv1 n), (Node gv0 gv1 t = tinsert gv1 gv0)
+(Node gv0 gv1 gv1 = t), (Node gv0 gv1 gv1 = gv1), (Node gv0 gv1 gv1 = tinsert_all t l), (Node gv0 gv1 gv1 = tinsert_all gv1 l), (Node gv0 gv1 gv1 = tinsert t n), (Node gv0 gv1 gv1 = tinsert t gv0), (Node gv0 gv1 gv1 = tinsert gv1 n), (Node gv0 gv1 gv1 = tinsert gv1 gv0), (tinsert_all t l = t), (tinsert_all t l = gv1)
+(tinsert_all t l = tinsert t n), (tinsert_all t l = tinsert t gv0), (tinsert_all t l = tinsert gv1 n), (tinsert_all t l = tinsert gv1 gv0), (tinsert_all gv1 l = t), (tinsert_all gv1 l = gv1), (tinsert_all gv1 l = tinsert t n), (tinsert_all gv1 l = tinsert t gv0), (tinsert_all gv1 l = tinsert gv1 n), (tinsert_all gv1 l = tinsert gv1 gv0)
+(tinsert t n = t), (tinsert t n = gv1), (tinsert t gv0 = t), (tinsert t gv0 = gv1), (tinsert gv1 n = t), (tinsert gv1 n = gv1), (tinsert gv1 gv0 = t), (tinsert gv1 gv0 = gv1), (Leaf = Node n t t), (Leaf = Node n t gv1)
+(Leaf = Node n gv1 t), (Leaf = Node n gv1 gv1), (Leaf = Node gv0 t t), (Leaf = Node gv0 t gv1), (Leaf = Node gv0 gv1 t), (Leaf = Node gv0 gv1 gv1), (Leaf = tinsert_all t l), (Leaf = tinsert_all gv1 l), (Leaf = tinsert t n), (Leaf = tinsert t gv0)
+(Leaf = tinsert gv1 n), (Leaf = tinsert gv1 gv0), (None = Some l), (tsize t = n), (tsize t = gv0), (tsize gv1 = n), (tsize gv1 = gv0), (None = Some t), (None = Some gv1), (None = Some n)
+(None = Some gv0), (ltb n n = leb n n), (ltb n n = leb n gv0), (ltb n n = leb gv0 n), (ltb n n = leb gv0 gv0), (ltb n gv0 = leb n n), (ltb n gv0 = leb n gv0), (ltb n gv0 = leb gv0 n), (ltb n gv0 = leb gv0 gv0), (ltb gv0 n = leb n n)
+(ltb gv0 n = leb n gv0), (ltb gv0 n = leb gv0 n), (ltb gv0 n = leb gv0 gv0), (ltb gv0 gv0 = leb n n), (ltb gv0 gv0 = leb n gv0), (ltb gv0 gv0 = leb gv0 n), (ltb gv0 gv0 = leb gv0 gv0)
+
+Label: 2 (2)
+(n < n), (n <= n), (l = l), (n = n), (t = t), (t = gv3), (t = gv1), (gv3 = t), (gv3 = gv3), (gv3 = gv1)
+(gv1 = t), (gv1 = gv3), (gv1 = gv1), (false = leb n n), (false = ltb n n), (true = leb n n), (true = ltb n n), (n < tsize t), (n < tsize gv3), (n < tsize gv1)
+(tsize t < n), (tsize t < tsize gv3), (tsize t < tsize gv1), (tsize gv3 < n), (tsize gv3 < tsize t), (tsize gv3 < tsize gv1), (tsize gv1 < n), (tsize gv1 < tsize t), (tsize gv1 < tsize gv3), (n <= tsize t)
+(n <= tsize gv3), (n <= tsize gv1), (tsize t <= n), (tsize t <= tsize gv3), (tsize t <= tsize gv1), (tsize gv3 <= n), (tsize gv3 <= tsize t), (tsize gv3 <= tsize gv1), (tsize gv1 <= n), (tsize gv1 <= tsize t)
+(tsize gv1 <= tsize gv3), (~ n < n), (~ n <= n), (l <> l), (n <> n), (t <> t), (t <> gv3), (t <> gv1), (gv3 <> t), (gv3 <> gv3)
+(gv3 <> gv1), (gv1 <> t), (gv1 <> gv3), (gv1 <> gv1), (Cons n l = l), (Nil = Cons n l), (Node n t t = t), (Node n t t = gv3), (Node n t t = gv1), (Node n t t = tinsert_all t l)
+(Node n t t = tinsert_all gv3 l), (Node n t t = tinsert_all gv1 l), (Node n t t = tinsert t n), (Node n t t = tinsert gv3 n), (Node n t t = tinsert gv1 n), (Node n t gv3 = t), (Node n t gv3 = gv3), (Node n t gv3 = gv1), (Node n t gv3 = tinsert_all t l), (Node n t gv3 = tinsert_all gv3 l)
+(Node n t gv3 = tinsert_all gv1 l), (Node n t gv3 = tinsert t n), (Node n t gv3 = tinsert gv3 n), (Node n t gv3 = tinsert gv1 n), (Node n t gv1 = t), (Node n t gv1 = gv3), (Node n t gv1 = gv1), (Node n t gv1 = tinsert_all t l), (Node n t gv1 = tinsert_all gv3 l), (Node n t gv1 = tinsert_all gv1 l)
+(Node n t gv1 = tinsert t n), (Node n t gv1 = tinsert gv3 n), (Node n t gv1 = tinsert gv1 n), (Node n gv3 t = t), (Node n gv3 t = gv3), (Node n gv3 t = gv1), (Node n gv3 t = tinsert_all t l), (Node n gv3 t = tinsert_all gv3 l), (Node n gv3 t = tinsert_all gv1 l), (Node n gv3 t = tinsert t n)
+(Node n gv3 t = tinsert gv3 n), (Node n gv3 t = tinsert gv1 n), (Node n gv3 gv3 = t), (Node n gv3 gv3 = gv3), (Node n gv3 gv3 = gv1), (Node n gv3 gv3 = tinsert_all t l), (Node n gv3 gv3 = tinsert_all gv3 l), (Node n gv3 gv3 = tinsert_all gv1 l), (Node n gv3 gv3 = tinsert t n), (Node n gv3 gv3 = tinsert gv3 n)
+(Node n gv3 gv3 = tinsert gv1 n), (Node n gv3 gv1 = t), (Node n gv3 gv1 = gv3), (Node n gv3 gv1 = gv1), (Node n gv3 gv1 = tinsert_all t l), (Node n gv3 gv1 = tinsert_all gv3 l), (Node n gv3 gv1 = tinsert_all gv1 l), (Node n gv3 gv1 = tinsert t n), (Node n gv3 gv1 = tinsert gv3 n), (Node n gv3 gv1 = tinsert gv1 n)
+(Node n gv1 t = t), (Node n gv1 t = gv3), (Node n gv1 t = gv1), (Node n gv1 t = tinsert_all t l), (Node n gv1 t = tinsert_all gv3 l), (Node n gv1 t = tinsert_all gv1 l), (Node n gv1 t = tinsert t n), (Node n gv1 t = tinsert gv3 n), (Node n gv1 t = tinsert gv1 n), (Node n gv1 gv3 = t)
+(Node n gv1 gv3 = gv3), (Node n gv1 gv3 = gv1), (Node n gv1 gv3 = tinsert_all t l), (Node n gv1 gv3 = tinsert_all gv3 l), (Node n gv1 gv3 = tinsert_all gv1 l), (Node n gv1 gv3 = tinsert t n), (Node n gv1 gv3 = tinsert gv3 n), (Node n gv1 gv3 = tinsert gv1 n), (Node n gv1 gv1 = t), (Node n gv1 gv1 = gv3)
+(Node n gv1 gv1 = gv1), (Node n gv1 gv1 = tinsert_all t l), (Node n gv1 gv1 = tinsert_all gv3 l), (Node n gv1 gv1 = tinsert_all gv1 l), (Node n gv1 gv1 = tinsert t n), (Node n gv1 gv1 = tinsert gv3 n), (Node n gv1 gv1 = tinsert gv1 n), (tinsert_all t l = t), (tinsert_all t l = gv3), (tinsert_all t l = gv1)
+(tinsert_all t l = tinsert t n), (tinsert_all t l = tinsert gv3 n), (tinsert_all t l = tinsert gv1 n), (tinsert_all gv3 l = t), (tinsert_all gv3 l = gv3), (tinsert_all gv3 l = gv1), (tinsert_all gv3 l = tinsert t n), (tinsert_all gv3 l = tinsert gv3 n), (tinsert_all gv3 l = tinsert gv1 n), (tinsert_all gv1 l = t)
+(tinsert_all gv1 l = gv3), (tinsert_all gv1 l = gv1), (tinsert_all gv1 l = tinsert t n), (tinsert_all gv1 l = tinsert gv3 n), (tinsert_all gv1 l = tinsert gv1 n), (tinsert t n = t), (tinsert t n = gv3), (tinsert t n = gv1), (tinsert gv3 n = t), (tinsert gv3 n = gv3)
+(tinsert gv3 n = gv1), (tinsert gv1 n = t), (tinsert gv1 n = gv3), (tinsert gv1 n = gv1), (Leaf = Node n t t), (Leaf = Node n t gv3), (Leaf = Node n t gv1), (Leaf = Node n gv3 t), (Leaf = Node n gv3 gv3), (Leaf = Node n gv3 gv1)
+(Leaf = Node n gv1 t), (Leaf = Node n gv1 gv3), (Leaf = Node n gv1 gv1), (Leaf = tinsert_all t l), (Leaf = tinsert_all gv3 l), (Leaf = tinsert_all gv1 l), (Leaf = tinsert t n), (Leaf = tinsert gv3 n), (Leaf = tinsert gv1 n), (None = Some l)
+(tsize t = n), (tsize gv3 = n), (tsize gv1 = n), (None = Some t), (None = Some gv3), (None = Some gv1), (None = Some n), (ltb n n = leb n n)
+
+Label: 3 (3)
+(n < n), (n < gv2), (gv2 < n), (gv2 < gv2), (n <= n), (n <= gv2), (gv2 <= n), (gv2 <= gv2), (n = n), (n = gv2)
+(gv2 = n), (gv2 = gv2), (l = l), (t = t), (false = leb n n), (false = leb n gv2), (false = leb gv2 n), (false = leb gv2 gv2), (false = ltb n n), (false = ltb n gv2)
+(false = ltb gv2 n), (false = ltb gv2 gv2), (true = leb n n), (true = leb n gv2), (true = leb gv2 n), (true = leb gv2 gv2), (true = ltb n n), (true = ltb n gv2), (true = ltb gv2 n), (true = ltb gv2 gv2)
+(n < tsize t), (gv2 < tsize t), (tsize t < n), (tsize t < gv2), (n <= tsize t), (gv2 <= tsize t), (tsize t <= n), (tsize t <= gv2), (~ n < n), (~ n < gv2)
+(~ gv2 < n), (~ gv2 < gv2), (~ n <= n), (~ n <= gv2), (~ gv2 <= n), (~ gv2 <= gv2), (n <> n), (n <> gv2), (gv2 <> n), (gv2 <> gv2)
+(l <> l), (t <> t), (Cons n l = l), (Cons gv2 l = l), (Nil = Cons n l), (Nil = Cons gv2 l), (Node n t t = t), (Node n t t = tinsert_all t l), (Node n t t = tinsert t n), (Node n t t = tinsert t gv2)
+(Node gv2 t t = t), (Node gv2 t t = tinsert_all t l), (Node gv2 t t = tinsert t n), (Node gv2 t t = tinsert t gv2), (tinsert_all t l = t), (tinsert_all t l = tinsert t n), (tinsert_all t l = tinsert t gv2), (tinsert t n = t), (tinsert t gv2 = t), (Leaf = Node n t t)
+(Leaf = Node gv2 t t), (Leaf = tinsert_all t l), (Leaf = tinsert t n), (Leaf = tinsert t gv2), (None = Some l), (tsize t = n), (tsize t = gv2), (None = Some t), (None = Some n), (None = Some gv2)
+(ltb n n = leb n n), (ltb n n = leb n gv2), (ltb n n = leb gv2 n), (ltb n n = leb gv2 gv2), (ltb n gv2 = leb n n), (ltb n gv2 = leb n gv2), (ltb n gv2 = leb gv2 n), (ltb n gv2 = leb gv2 gv2), (ltb gv2 n = leb n n), (ltb gv2 n = leb n gv2)
+(ltb gv2 n = leb gv2 n), (ltb gv2 n = leb gv2 gv2), (ltb gv2 gv2 = leb n n), (ltb gv2 gv2 = leb n gv2), (ltb gv2 gv2 = leb gv2 n), (ltb gv2 gv2 = leb gv2 gv2)
+
+Label: 4 (4)
+(n < n), (n < gv0), (gv0 < n), (gv0 < gv0), (n <= n), (n <= gv0), (gv0 <= n), (gv0 <= gv0), (l = l), (t = t)
+(n = n), (n = gv0), (gv0 = n), (gv0 = gv0), (false = leb n n), (false = leb n gv0), (false = leb gv0 n), (false = leb gv0 gv0), (false = ltb n n), (false = ltb n gv0)
+(false = ltb gv0 n), (false = ltb gv0 gv0), (true = leb n n), (true = leb n gv0), (true = leb gv0 n), (true = leb gv0 gv0), (true = ltb n n), (true = ltb n gv0), (true = ltb gv0 n), (true = ltb gv0 gv0)
+(n < tsize t), (gv0 < tsize t), (tsize t < n), (tsize t < gv0), (n <= tsize t), (gv0 <= tsize t), (tsize t <= n), (tsize t <= gv0), (~ n < n), (~ n < gv0)
+(~ gv0 < n), (~ gv0 < gv0), (~ n <= n), (~ n <= gv0), (~ gv0 <= n), (~ gv0 <= gv0), (l <> l), (t <> t), (n <> n), (n <> gv0)
+(gv0 <> n), (gv0 <> gv0), (Cons n l = l), (Cons gv0 l = l), (Nil = Cons n l), (Nil = Cons gv0 l), (Node n t t = t), (Node n t t = tinsert_all t l), (Node n t t = tinsert t n), (Node n t t = tinsert t gv0)
+(Node gv0 t t = t), (Node gv0 t t = tinsert_all t l), (Node gv0 t t = tinsert t n), (Node gv0 t t = tinsert t gv0), (tinsert_all t l = t), (tinsert_all t l = tinsert t n), (tinsert_all t l = tinsert t gv0), (tinsert t n = t), (tinsert t gv0 = t), (Leaf = Node n t t)
+(Leaf = Node gv0 t t), (Leaf = tinsert_all t l), (Leaf = tinsert t n), (Leaf = tinsert t gv0), (None = Some l), (tsize t = n), (tsize t = gv0), (None = Some t), (None = Some n), (None = Some gv0)
+(ltb n n = leb n n), (ltb n n = leb n gv0), (ltb n n = leb gv0 n), (ltb n n = leb gv0 gv0), (ltb n gv0 = leb n n), (ltb n gv0 = leb n gv0), (ltb n gv0 = leb gv0 n), (ltb n gv0 = leb gv0 gv0), (ltb gv0 n = leb n n), (ltb gv0 n = leb n gv0)
+(ltb gv0 n = leb gv0 n), (ltb gv0 n = leb gv0 gv0), (ltb gv0 gv0 = leb n n), (ltb gv0 gv0 = leb n gv0), (ltb gv0 gv0 = leb gv0 n), (ltb gv0 gv0 = leb gv0 gv0)
+
+Label: 5 (5)
+(n < n), (n <= n), (n = n), (l = l), (gv3 = gv3), (gv3 = t), (t = gv3), (t = t), (false = leb n n), (false = ltb n n)
+(true = leb n n), (true = ltb n n), (n < tsize gv3), (n < tsize t), (tsize gv3 < n), (tsize gv3 < tsize t), (tsize t < n), (tsize t < tsize gv3), (n <= tsize gv3), (n <= tsize t)
+(tsize gv3 <= n), (tsize gv3 <= tsize t), (tsize t <= n), (tsize t <= tsize gv3), (~ n < n), (~ n <= n), (n <> n), (l <> l), (gv3 <> gv3), (gv3 <> t)
+(t <> gv3), (t <> t), (Cons n l = l), (Nil = Cons n l), (Node n gv3 gv3 = gv3), (Node n gv3 gv3 = t), (Node n gv3 gv3 = tinsert_all gv3 l), (Node n gv3 gv3 = tinsert_all t l), (Node n gv3 gv3 = tinsert gv3 n), (Node n gv3 gv3 = tinsert t n)
+(Node n gv3 t = gv3), (Node n gv3 t = t), (Node n gv3 t = tinsert_all gv3 l), (Node n gv3 t = tinsert_all t l), (Node n gv3 t = tinsert gv3 n), (Node n gv3 t = tinsert t n), (Node n t gv3 = gv3), (Node n t gv3 = t), (Node n t gv3 = tinsert_all gv3 l), (Node n t gv3 = tinsert_all t l)
+(Node n t gv3 = tinsert gv3 n), (Node n t gv3 = tinsert t n), (Node n t t = gv3), (Node n t t = t), (Node n t t = tinsert_all gv3 l), (Node n t t = tinsert_all t l), (Node n t t = tinsert gv3 n), (Node n t t = tinsert t n), (tinsert_all gv3 l = gv3), (tinsert_all gv3 l = t)
+(tinsert_all gv3 l = tinsert gv3 n), (tinsert_all gv3 l = tinsert t n), (tinsert_all t l = gv3), (tinsert_all t l = t), (tinsert_all t l = tinsert gv3 n), (tinsert_all t l = tinsert t n), (tinsert gv3 n = gv3), (tinsert gv3 n = t), (tinsert t n = gv3), (tinsert t n = t)
+(Leaf = Node n gv3 gv3), (Leaf = Node n gv3 t), (Leaf = Node n t gv3), (Leaf = Node n t t), (Leaf = tinsert_all gv3 l), (Leaf = tinsert_all t l), (Leaf = tinsert gv3 n), (Leaf = tinsert t n), (None = Some l), (tsize gv3 = n)
+(tsize t = n), (None = Some gv3), (None = Some t), (None = Some n), (ltb n n = leb n n)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 79.924 seconds
+
+
+Label: 0 (0)
+(tsize gv1 < gv2), (tsize gv1 <= gv2)
+
+Label: 1 (1)
+(gv0 <= tsize gv1), (tsize gv1 = gv0)
+
+Label: 2 (2)
+(tsize gv1 < tsize gv3), (tsize gv1 <= tsize gv3), (tinsert gv1 n = gv3)
+
+Label: 3 (3)
+
+Label: 4 (4)
+
+Label: 5 (5)
+
+
+
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 107.726 seconds
+
+Number of Result Pairs Returned: 5
+
+1. (tsize gv1 <= tsize (tinsert gv1 n))
+
+2. (tsize (tinsert_all t l) <= tsize (tinsert (tinsert_all t l) n))
+
+3. (tsize gv1 < gv2 -> tsize gv1 <= gv2)
+
+4. (gv0 <= tsize gv1 -> gv0 <= tsize (tinsert gv1 n))
+
+5. (tsize gv1 < tsize gv3 -> tsize gv1 <= tsize gv3)

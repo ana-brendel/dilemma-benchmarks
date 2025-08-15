@@ -1,0 +1,375 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+ -- (forall l2 l3 : Lst, append l1 (append l2 l3) = append (append l1 l2) l3)
+
+----------------------------------
+Goal: (cons n (append l1 nil) = cons n (append (append l1 nil) nil))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 1.388 seconds
+
+gv3 : Lst = (cons n (append (append l1 nil) nil))
+gv0 : Lst = (cons n (append l1 nil))
+gv2 : Lst = nil
+gv4 : Lst = (append (append l1 nil) nil)
+gv1 : Lst = (append l1 nil)
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 34.126 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (cons n (append l1 nil) = cons n (append (append l1 nil) nil))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+
+----------------------------------
+Goal: (cons n gv1 = cons n (append gv1 nil))
+Case: Valid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (append l1 nil = gv1)
+ -- (append gv1 nil = gv4)
+
+----------------------------------
+Goal: (cons n gv1 = cons n gv4)
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (append l1 gv2 = gv1)
+ -- (nil = gv2)
+
+----------------------------------
+Goal: (cons n gv1 = cons n (append gv1 gv2))
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (append l1 nil = gv1)
+ -- (cons n gv1 = gv0)
+
+----------------------------------
+Goal: (gv0 = cons n (append gv1 nil))
+Case: Invalid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (append l1 nil = gv1)
+ -- (cons n (append gv1 nil) = gv3)
+
+----------------------------------
+Goal: (cons n gv1 = gv3)
+Case: Invalid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (append (append l1 nil) nil = gv4)
+
+----------------------------------
+Goal: (cons n (append l1 nil) = cons n gv4)
+Case: Invalid and Generalized
+
+Label: Generalization #7
+Assumptions: 
+ -- (nil = gv2)
+
+----------------------------------
+Goal: (cons n (append l1 gv2) = cons n (append (append l1 gv2) gv2))
+Case: Invalid and Generalized
+
+Label: Generalization #8
+Assumptions: 
+ -- (cons n (append l1 nil) = gv0)
+
+----------------------------------
+Goal: (gv0 = cons n (append (append l1 nil) nil))
+Case: Invalid and Generalized
+
+Label: Generalization #9
+Assumptions: 
+ -- (cons n (append (append l1 nil) nil) = gv3)
+
+----------------------------------
+Goal: (cons n (append l1 nil) = gv3)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 34.266 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+append : (Lst -> Lst -> Lst)
+rev : (Lst -> Lst)
+succ : (Nat -> Nat)
+zero : Nat
+nil : Lst
+cons : (Nat -> Lst -> Lst)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 73
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 77
+Negative Examples: 500
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 75
+Negative Examples: 500
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 6 (6)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 7 (7)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 34.415 seconds
+
+
+Label: 0 (0)
+(l1 = l1), (l1 = gv4), (l1 = gv1), (gv4 = l1), (gv4 = gv4), (gv4 = gv1), (gv1 = l1), (gv1 = gv4), (gv1 = gv1), (n = n)
+(l1 <> l1), (l1 <> gv4), (l1 <> gv1), (gv4 <> l1), (gv4 <> gv4), (gv4 <> gv1), (gv1 <> l1), (gv1 <> gv4), (gv1 <> gv1), (n <> n)
+(None = Some n), (None = Some l1), (None = Some gv4), (None = Some gv1), (cons n l1 = l1), (cons n l1 = gv4), (cons n l1 = gv1), (cons n l1 = rev l1), (cons n l1 = rev gv4), (cons n l1 = rev gv1)
+(cons n l1 = append l1 l1), (cons n l1 = append l1 gv4), (cons n l1 = append l1 gv1), (cons n l1 = append gv4 l1), (cons n l1 = append gv4 gv4), (cons n l1 = append gv4 gv1), (cons n l1 = append gv1 l1), (cons n l1 = append gv1 gv4), (cons n l1 = append gv1 gv1), (cons n gv4 = l1)
+(cons n gv4 = gv4), (cons n gv4 = gv1), (cons n gv4 = rev l1), (cons n gv4 = rev gv4), (cons n gv4 = rev gv1), (cons n gv4 = append l1 l1), (cons n gv4 = append l1 gv4), (cons n gv4 = append l1 gv1), (cons n gv4 = append gv4 l1), (cons n gv4 = append gv4 gv4)
+(cons n gv4 = append gv4 gv1), (cons n gv4 = append gv1 l1), (cons n gv4 = append gv1 gv4), (cons n gv4 = append gv1 gv1), (cons n gv1 = l1), (cons n gv1 = gv4), (cons n gv1 = gv1), (cons n gv1 = rev l1), (cons n gv1 = rev gv4), (cons n gv1 = rev gv1)
+(cons n gv1 = append l1 l1), (cons n gv1 = append l1 gv4), (cons n gv1 = append l1 gv1), (cons n gv1 = append gv4 l1), (cons n gv1 = append gv4 gv4), (cons n gv1 = append gv4 gv1), (cons n gv1 = append gv1 l1), (cons n gv1 = append gv1 gv4), (cons n gv1 = append gv1 gv1), (rev l1 = l1)
+(rev l1 = gv4), (rev l1 = gv1), (rev l1 = append l1 l1), (rev l1 = append l1 gv4), (rev l1 = append l1 gv1), (rev l1 = append gv4 l1), (rev l1 = append gv4 gv4), (rev l1 = append gv4 gv1), (rev l1 = append gv1 l1), (rev l1 = append gv1 gv4)
+(rev l1 = append gv1 gv1), (rev gv4 = l1), (rev gv4 = gv4), (rev gv4 = gv1), (rev gv4 = append l1 l1), (rev gv4 = append l1 gv4), (rev gv4 = append l1 gv1), (rev gv4 = append gv4 l1), (rev gv4 = append gv4 gv4), (rev gv4 = append gv4 gv1)
+(rev gv4 = append gv1 l1), (rev gv4 = append gv1 gv4), (rev gv4 = append gv1 gv1), (rev gv1 = l1), (rev gv1 = gv4), (rev gv1 = gv1), (rev gv1 = append l1 l1), (rev gv1 = append l1 gv4), (rev gv1 = append l1 gv1), (rev gv1 = append gv4 l1)
+(rev gv1 = append gv4 gv4), (rev gv1 = append gv4 gv1), (rev gv1 = append gv1 l1), (rev gv1 = append gv1 gv4), (rev gv1 = append gv1 gv1), (append l1 l1 = l1), (append l1 l1 = gv4), (append l1 l1 = gv1), (append l1 gv4 = l1), (append l1 gv4 = gv4)
+(append l1 gv4 = gv1), (append l1 gv1 = l1), (append l1 gv1 = gv4), (append l1 gv1 = gv1), (append gv4 l1 = l1), (append gv4 l1 = gv4), (append gv4 l1 = gv1), (append gv4 gv4 = l1), (append gv4 gv4 = gv4), (append gv4 gv4 = gv1)
+(append gv4 gv1 = l1), (append gv4 gv1 = gv4), (append gv4 gv1 = gv1), (append gv1 l1 = l1), (append gv1 l1 = gv4), (append gv1 l1 = gv1), (append gv1 gv4 = l1), (append gv1 gv4 = gv4), (append gv1 gv4 = gv1), (append gv1 gv1 = l1)
+(append gv1 gv1 = gv4), (append gv1 gv1 = gv1), (nil = cons n l1), (nil = cons n gv4), (nil = cons n gv1), (nil = rev l1), (nil = rev gv4), (nil = rev gv1), (nil = append l1 l1), (nil = append l1 gv4)
+(nil = append l1 gv1), (nil = append gv4 l1), (nil = append gv4 gv4), (nil = append gv4 gv1), (nil = append gv1 l1), (nil = append gv1 gv4), (nil = append gv1 gv1), (succ n = n), (zero = succ n)
+
+Label: 1 (1)
+(l1 = l1), (l1 = gv2), (l1 = gv1), (gv2 = l1), (gv2 = gv2), (gv2 = gv1), (gv1 = l1), (gv1 = gv2), (gv1 = gv1), (n = n)
+(l1 <> l1), (l1 <> gv2), (l1 <> gv1), (gv2 <> l1), (gv2 <> gv2), (gv2 <> gv1), (gv1 <> l1), (gv1 <> gv2), (gv1 <> gv1), (n <> n)
+(None = Some n), (None = Some l1), (None = Some gv2), (None = Some gv1), (cons n l1 = l1), (cons n l1 = gv2), (cons n l1 = gv1), (cons n l1 = rev l1), (cons n l1 = rev gv2), (cons n l1 = rev gv1)
+(cons n l1 = append l1 l1), (cons n l1 = append l1 gv2), (cons n l1 = append l1 gv1), (cons n l1 = append gv2 l1), (cons n l1 = append gv2 gv2), (cons n l1 = append gv2 gv1), (cons n l1 = append gv1 l1), (cons n l1 = append gv1 gv2), (cons n l1 = append gv1 gv1), (cons n gv2 = l1)
+(cons n gv2 = gv2), (cons n gv2 = gv1), (cons n gv2 = rev l1), (cons n gv2 = rev gv2), (cons n gv2 = rev gv1), (cons n gv2 = append l1 l1), (cons n gv2 = append l1 gv2), (cons n gv2 = append l1 gv1), (cons n gv2 = append gv2 l1), (cons n gv2 = append gv2 gv2)
+(cons n gv2 = append gv2 gv1), (cons n gv2 = append gv1 l1), (cons n gv2 = append gv1 gv2), (cons n gv2 = append gv1 gv1), (cons n gv1 = l1), (cons n gv1 = gv2), (cons n gv1 = gv1), (cons n gv1 = rev l1), (cons n gv1 = rev gv2), (cons n gv1 = rev gv1)
+(cons n gv1 = append l1 l1), (cons n gv1 = append l1 gv2), (cons n gv1 = append l1 gv1), (cons n gv1 = append gv2 l1), (cons n gv1 = append gv2 gv2), (cons n gv1 = append gv2 gv1), (cons n gv1 = append gv1 l1), (cons n gv1 = append gv1 gv2), (cons n gv1 = append gv1 gv1), (rev l1 = l1)
+(rev l1 = gv2), (rev l1 = gv1), (rev l1 = append l1 l1), (rev l1 = append l1 gv2), (rev l1 = append l1 gv1), (rev l1 = append gv2 l1), (rev l1 = append gv2 gv2), (rev l1 = append gv2 gv1), (rev l1 = append gv1 l1), (rev l1 = append gv1 gv2)
+(rev l1 = append gv1 gv1), (rev gv2 = l1), (rev gv2 = gv2), (rev gv2 = gv1), (rev gv2 = append l1 l1), (rev gv2 = append l1 gv2), (rev gv2 = append l1 gv1), (rev gv2 = append gv2 l1), (rev gv2 = append gv2 gv2), (rev gv2 = append gv2 gv1)
+(rev gv2 = append gv1 l1), (rev gv2 = append gv1 gv2), (rev gv2 = append gv1 gv1), (rev gv1 = l1), (rev gv1 = gv2), (rev gv1 = gv1), (rev gv1 = append l1 l1), (rev gv1 = append l1 gv2), (rev gv1 = append l1 gv1), (rev gv1 = append gv2 l1)
+(rev gv1 = append gv2 gv2), (rev gv1 = append gv2 gv1), (rev gv1 = append gv1 l1), (rev gv1 = append gv1 gv2), (rev gv1 = append gv1 gv1), (append l1 l1 = l1), (append l1 l1 = gv2), (append l1 l1 = gv1), (append l1 gv2 = l1), (append l1 gv2 = gv2)
+(append l1 gv2 = gv1), (append l1 gv1 = l1), (append l1 gv1 = gv2), (append l1 gv1 = gv1), (append gv2 l1 = l1), (append gv2 l1 = gv2), (append gv2 l1 = gv1), (append gv2 gv2 = l1), (append gv2 gv2 = gv2), (append gv2 gv2 = gv1)
+(append gv2 gv1 = l1), (append gv2 gv1 = gv2), (append gv2 gv1 = gv1), (append gv1 l1 = l1), (append gv1 l1 = gv2), (append gv1 l1 = gv1), (append gv1 gv2 = l1), (append gv1 gv2 = gv2), (append gv1 gv2 = gv1), (append gv1 gv1 = l1)
+(append gv1 gv1 = gv2), (append gv1 gv1 = gv1), (nil = cons n l1), (nil = cons n gv2), (nil = cons n gv1), (nil = rev l1), (nil = rev gv2), (nil = rev gv1), (nil = append l1 l1), (nil = append l1 gv2)
+(nil = append l1 gv1), (nil = append gv2 l1), (nil = append gv2 gv2), (nil = append gv2 gv1), (nil = append gv1 l1), (nil = append gv1 gv2), (nil = append gv1 gv1), (succ n = n), (zero = succ n)
+
+Label: 2 (2)
+(n = n), (l1 = l1), (l1 = gv1), (l1 = gv0), (gv1 = l1), (gv1 = gv1), (gv1 = gv0), (gv0 = l1), (gv0 = gv1), (gv0 = gv0)
+(n <> n), (l1 <> l1), (l1 <> gv1), (l1 <> gv0), (gv1 <> l1), (gv1 <> gv1), (gv1 <> gv0), (gv0 <> l1), (gv0 <> gv1), (gv0 <> gv0)
+(None = Some n), (None = Some l1), (None = Some gv1), (None = Some gv0), (cons n l1 = l1), (cons n l1 = gv1), (cons n l1 = gv0), (cons n l1 = rev l1), (cons n l1 = rev gv1), (cons n l1 = rev gv0)
+(cons n l1 = append l1 l1), (cons n l1 = append l1 gv1), (cons n l1 = append l1 gv0), (cons n l1 = append gv1 l1), (cons n l1 = append gv1 gv1), (cons n l1 = append gv1 gv0), (cons n l1 = append gv0 l1), (cons n l1 = append gv0 gv1), (cons n l1 = append gv0 gv0), (cons n gv1 = l1)
+(cons n gv1 = gv1), (cons n gv1 = gv0), (cons n gv1 = rev l1), (cons n gv1 = rev gv1), (cons n gv1 = rev gv0), (cons n gv1 = append l1 l1), (cons n gv1 = append l1 gv1), (cons n gv1 = append l1 gv0), (cons n gv1 = append gv1 l1), (cons n gv1 = append gv1 gv1)
+(cons n gv1 = append gv1 gv0), (cons n gv1 = append gv0 l1), (cons n gv1 = append gv0 gv1), (cons n gv1 = append gv0 gv0), (cons n gv0 = l1), (cons n gv0 = gv1), (cons n gv0 = gv0), (cons n gv0 = rev l1), (cons n gv0 = rev gv1), (cons n gv0 = rev gv0)
+(cons n gv0 = append l1 l1), (cons n gv0 = append l1 gv1), (cons n gv0 = append l1 gv0), (cons n gv0 = append gv1 l1), (cons n gv0 = append gv1 gv1), (cons n gv0 = append gv1 gv0), (cons n gv0 = append gv0 l1), (cons n gv0 = append gv0 gv1), (cons n gv0 = append gv0 gv0), (rev l1 = l1)
+(rev l1 = gv1), (rev l1 = gv0), (rev l1 = append l1 l1), (rev l1 = append l1 gv1), (rev l1 = append l1 gv0), (rev l1 = append gv1 l1), (rev l1 = append gv1 gv1), (rev l1 = append gv1 gv0), (rev l1 = append gv0 l1), (rev l1 = append gv0 gv1)
+(rev l1 = append gv0 gv0), (rev gv1 = l1), (rev gv1 = gv1), (rev gv1 = gv0), (rev gv1 = append l1 l1), (rev gv1 = append l1 gv1), (rev gv1 = append l1 gv0), (rev gv1 = append gv1 l1), (rev gv1 = append gv1 gv1), (rev gv1 = append gv1 gv0)
+(rev gv1 = append gv0 l1), (rev gv1 = append gv0 gv1), (rev gv1 = append gv0 gv0), (rev gv0 = l1), (rev gv0 = gv1), (rev gv0 = gv0), (rev gv0 = append l1 l1), (rev gv0 = append l1 gv1), (rev gv0 = append l1 gv0), (rev gv0 = append gv1 l1)
+(rev gv0 = append gv1 gv1), (rev gv0 = append gv1 gv0), (rev gv0 = append gv0 l1), (rev gv0 = append gv0 gv1), (rev gv0 = append gv0 gv0), (append l1 l1 = l1), (append l1 l1 = gv1), (append l1 l1 = gv0), (append l1 gv1 = l1), (append l1 gv1 = gv1)
+(append l1 gv1 = gv0), (append l1 gv0 = l1), (append l1 gv0 = gv1), (append l1 gv0 = gv0), (append gv1 l1 = l1), (append gv1 l1 = gv1), (append gv1 l1 = gv0), (append gv1 gv1 = l1), (append gv1 gv1 = gv1), (append gv1 gv1 = gv0)
+(append gv1 gv0 = l1), (append gv1 gv0 = gv1), (append gv1 gv0 = gv0), (append gv0 l1 = l1), (append gv0 l1 = gv1), (append gv0 l1 = gv0), (append gv0 gv1 = l1), (append gv0 gv1 = gv1), (append gv0 gv1 = gv0), (append gv0 gv0 = l1)
+(append gv0 gv0 = gv1), (append gv0 gv0 = gv0), (nil = cons n l1), (nil = cons n gv1), (nil = cons n gv0), (nil = rev l1), (nil = rev gv1), (nil = rev gv0), (nil = append l1 l1), (nil = append l1 gv1)
+(nil = append l1 gv0), (nil = append gv1 l1), (nil = append gv1 gv1), (nil = append gv1 gv0), (nil = append gv0 l1), (nil = append gv0 gv1), (nil = append gv0 gv0), (succ n = n), (zero = succ n)
+
+Label: 3 (3)
+(l1 = l1), (l1 = gv3), (l1 = gv1), (gv3 = l1), (gv3 = gv3), (gv3 = gv1), (gv1 = l1), (gv1 = gv3), (gv1 = gv1), (n = n)
+(l1 <> l1), (l1 <> gv3), (l1 <> gv1), (gv3 <> l1), (gv3 <> gv3), (gv3 <> gv1), (gv1 <> l1), (gv1 <> gv3), (gv1 <> gv1), (n <> n)
+(None = Some n), (None = Some l1), (None = Some gv3), (None = Some gv1), (cons n l1 = l1), (cons n l1 = gv3), (cons n l1 = gv1), (cons n l1 = rev l1), (cons n l1 = rev gv3), (cons n l1 = rev gv1)
+(cons n l1 = append l1 l1), (cons n l1 = append l1 gv3), (cons n l1 = append l1 gv1), (cons n l1 = append gv3 l1), (cons n l1 = append gv3 gv3), (cons n l1 = append gv3 gv1), (cons n l1 = append gv1 l1), (cons n l1 = append gv1 gv3), (cons n l1 = append gv1 gv1), (cons n gv3 = l1)
+(cons n gv3 = gv3), (cons n gv3 = gv1), (cons n gv3 = rev l1), (cons n gv3 = rev gv3), (cons n gv3 = rev gv1), (cons n gv3 = append l1 l1), (cons n gv3 = append l1 gv3), (cons n gv3 = append l1 gv1), (cons n gv3 = append gv3 l1), (cons n gv3 = append gv3 gv3)
+(cons n gv3 = append gv3 gv1), (cons n gv3 = append gv1 l1), (cons n gv3 = append gv1 gv3), (cons n gv3 = append gv1 gv1), (cons n gv1 = l1), (cons n gv1 = gv3), (cons n gv1 = gv1), (cons n gv1 = rev l1), (cons n gv1 = rev gv3), (cons n gv1 = rev gv1)
+(cons n gv1 = append l1 l1), (cons n gv1 = append l1 gv3), (cons n gv1 = append l1 gv1), (cons n gv1 = append gv3 l1), (cons n gv1 = append gv3 gv3), (cons n gv1 = append gv3 gv1), (cons n gv1 = append gv1 l1), (cons n gv1 = append gv1 gv3), (cons n gv1 = append gv1 gv1), (rev l1 = l1)
+(rev l1 = gv3), (rev l1 = gv1), (rev l1 = append l1 l1), (rev l1 = append l1 gv3), (rev l1 = append l1 gv1), (rev l1 = append gv3 l1), (rev l1 = append gv3 gv3), (rev l1 = append gv3 gv1), (rev l1 = append gv1 l1), (rev l1 = append gv1 gv3)
+(rev l1 = append gv1 gv1), (rev gv3 = l1), (rev gv3 = gv3), (rev gv3 = gv1), (rev gv3 = append l1 l1), (rev gv3 = append l1 gv3), (rev gv3 = append l1 gv1), (rev gv3 = append gv3 l1), (rev gv3 = append gv3 gv3), (rev gv3 = append gv3 gv1)
+(rev gv3 = append gv1 l1), (rev gv3 = append gv1 gv3), (rev gv3 = append gv1 gv1), (rev gv1 = l1), (rev gv1 = gv3), (rev gv1 = gv1), (rev gv1 = append l1 l1), (rev gv1 = append l1 gv3), (rev gv1 = append l1 gv1), (rev gv1 = append gv3 l1)
+(rev gv1 = append gv3 gv3), (rev gv1 = append gv3 gv1), (rev gv1 = append gv1 l1), (rev gv1 = append gv1 gv3), (rev gv1 = append gv1 gv1), (append l1 l1 = l1), (append l1 l1 = gv3), (append l1 l1 = gv1), (append l1 gv3 = l1), (append l1 gv3 = gv3)
+(append l1 gv3 = gv1), (append l1 gv1 = l1), (append l1 gv1 = gv3), (append l1 gv1 = gv1), (append gv3 l1 = l1), (append gv3 l1 = gv3), (append gv3 l1 = gv1), (append gv3 gv3 = l1), (append gv3 gv3 = gv3), (append gv3 gv3 = gv1)
+(append gv3 gv1 = l1), (append gv3 gv1 = gv3), (append gv3 gv1 = gv1), (append gv1 l1 = l1), (append gv1 l1 = gv3), (append gv1 l1 = gv1), (append gv1 gv3 = l1), (append gv1 gv3 = gv3), (append gv1 gv3 = gv1), (append gv1 gv1 = l1)
+(append gv1 gv1 = gv3), (append gv1 gv1 = gv1), (nil = cons n l1), (nil = cons n gv3), (nil = cons n gv1), (nil = rev l1), (nil = rev gv3), (nil = rev gv1), (nil = append l1 l1), (nil = append l1 gv3)
+(nil = append l1 gv1), (nil = append gv3 l1), (nil = append gv3 gv3), (nil = append gv3 gv1), (nil = append gv1 l1), (nil = append gv1 gv3), (nil = append gv1 gv1), (succ n = n), (zero = succ n)
+
+Label: 4 (4)
+(gv4 = gv4), (gv4 = l1), (l1 = gv4), (l1 = l1), (n = n), (gv4 <> gv4), (gv4 <> l1), (l1 <> gv4), (l1 <> l1), (n <> n)
+(None = Some n), (None = Some gv4), (None = Some l1), (cons n gv4 = gv4), (cons n gv4 = l1), (cons n gv4 = rev gv4), (cons n gv4 = rev l1), (cons n gv4 = append gv4 gv4), (cons n gv4 = append gv4 l1), (cons n gv4 = append l1 gv4)
+(cons n gv4 = append l1 l1), (cons n l1 = gv4), (cons n l1 = l1), (cons n l1 = rev gv4), (cons n l1 = rev l1), (cons n l1 = append gv4 gv4), (cons n l1 = append gv4 l1), (cons n l1 = append l1 gv4), (cons n l1 = append l1 l1), (rev gv4 = gv4)
+(rev gv4 = l1), (rev gv4 = append gv4 gv4), (rev gv4 = append gv4 l1), (rev gv4 = append l1 gv4), (rev gv4 = append l1 l1), (rev l1 = gv4), (rev l1 = l1), (rev l1 = append gv4 gv4), (rev l1 = append gv4 l1), (rev l1 = append l1 gv4)
+(rev l1 = append l1 l1), (append gv4 gv4 = gv4), (append gv4 gv4 = l1), (append gv4 l1 = gv4), (append gv4 l1 = l1), (append l1 gv4 = gv4), (append l1 gv4 = l1), (append l1 l1 = gv4), (append l1 l1 = l1), (nil = cons n gv4)
+(nil = cons n l1), (nil = rev gv4), (nil = rev l1), (nil = append gv4 gv4), (nil = append gv4 l1), (nil = append l1 gv4), (nil = append l1 l1), (succ n = n), (zero = succ n)
+
+Label: 5 (5)
+(gv2 = gv2), (gv2 = l1), (l1 = gv2), (l1 = l1), (n = n), (gv2 <> gv2), (gv2 <> l1), (l1 <> gv2), (l1 <> l1), (n <> n)
+(None = Some n), (None = Some gv2), (None = Some l1), (cons n gv2 = gv2), (cons n gv2 = l1), (cons n gv2 = rev gv2), (cons n gv2 = rev l1), (cons n gv2 = append gv2 gv2), (cons n gv2 = append gv2 l1), (cons n gv2 = append l1 gv2)
+(cons n gv2 = append l1 l1), (cons n l1 = gv2), (cons n l1 = l1), (cons n l1 = rev gv2), (cons n l1 = rev l1), (cons n l1 = append gv2 gv2), (cons n l1 = append gv2 l1), (cons n l1 = append l1 gv2), (cons n l1 = append l1 l1), (rev gv2 = gv2)
+(rev gv2 = l1), (rev gv2 = append gv2 gv2), (rev gv2 = append gv2 l1), (rev gv2 = append l1 gv2), (rev gv2 = append l1 l1), (rev l1 = gv2), (rev l1 = l1), (rev l1 = append gv2 gv2), (rev l1 = append gv2 l1), (rev l1 = append l1 gv2)
+(rev l1 = append l1 l1), (append gv2 gv2 = gv2), (append gv2 gv2 = l1), (append gv2 l1 = gv2), (append gv2 l1 = l1), (append l1 gv2 = gv2), (append l1 gv2 = l1), (append l1 l1 = gv2), (append l1 l1 = l1), (nil = cons n gv2)
+(nil = cons n l1), (nil = rev gv2), (nil = rev l1), (nil = append gv2 gv2), (nil = append gv2 l1), (nil = append l1 gv2), (nil = append l1 l1), (succ n = n), (zero = succ n)
+
+Label: 6 (6)
+(n = n), (l1 = l1), (l1 = gv0), (gv0 = l1), (gv0 = gv0), (n <> n), (l1 <> l1), (l1 <> gv0), (gv0 <> l1), (gv0 <> gv0)
+(None = Some n), (None = Some l1), (None = Some gv0), (cons n l1 = l1), (cons n l1 = gv0), (cons n l1 = rev l1), (cons n l1 = rev gv0), (cons n l1 = append l1 l1), (cons n l1 = append l1 gv0), (cons n l1 = append gv0 l1)
+(cons n l1 = append gv0 gv0), (cons n gv0 = l1), (cons n gv0 = gv0), (cons n gv0 = rev l1), (cons n gv0 = rev gv0), (cons n gv0 = append l1 l1), (cons n gv0 = append l1 gv0), (cons n gv0 = append gv0 l1), (cons n gv0 = append gv0 gv0), (rev l1 = l1)
+(rev l1 = gv0), (rev l1 = append l1 l1), (rev l1 = append l1 gv0), (rev l1 = append gv0 l1), (rev l1 = append gv0 gv0), (rev gv0 = l1), (rev gv0 = gv0), (rev gv0 = append l1 l1), (rev gv0 = append l1 gv0), (rev gv0 = append gv0 l1)
+(rev gv0 = append gv0 gv0), (append l1 l1 = l1), (append l1 l1 = gv0), (append l1 gv0 = l1), (append l1 gv0 = gv0), (append gv0 l1 = l1), (append gv0 l1 = gv0), (append gv0 gv0 = l1), (append gv0 gv0 = gv0), (nil = cons n l1)
+(nil = cons n gv0), (nil = rev l1), (nil = rev gv0), (nil = append l1 l1), (nil = append l1 gv0), (nil = append gv0 l1), (nil = append gv0 gv0), (succ n = n), (zero = succ n)
+
+Label: 7 (7)
+(gv3 = gv3), (gv3 = l1), (l1 = gv3), (l1 = l1), (n = n), (gv3 <> gv3), (gv3 <> l1), (l1 <> gv3), (l1 <> l1), (n <> n)
+(None = Some n), (None = Some gv3), (None = Some l1), (cons n gv3 = gv3), (cons n gv3 = l1), (cons n gv3 = rev gv3), (cons n gv3 = rev l1), (cons n gv3 = append gv3 gv3), (cons n gv3 = append gv3 l1), (cons n gv3 = append l1 gv3)
+(cons n gv3 = append l1 l1), (cons n l1 = gv3), (cons n l1 = l1), (cons n l1 = rev gv3), (cons n l1 = rev l1), (cons n l1 = append gv3 gv3), (cons n l1 = append gv3 l1), (cons n l1 = append l1 gv3), (cons n l1 = append l1 l1), (rev gv3 = gv3)
+(rev gv3 = l1), (rev gv3 = append gv3 gv3), (rev gv3 = append gv3 l1), (rev gv3 = append l1 gv3), (rev gv3 = append l1 l1), (rev l1 = gv3), (rev l1 = l1), (rev l1 = append gv3 gv3), (rev l1 = append gv3 l1), (rev l1 = append l1 gv3)
+(rev l1 = append l1 l1), (append gv3 gv3 = gv3), (append gv3 gv3 = l1), (append gv3 l1 = gv3), (append gv3 l1 = l1), (append l1 gv3 = gv3), (append l1 gv3 = l1), (append l1 l1 = gv3), (append l1 l1 = l1), (nil = cons n gv3)
+(nil = cons n l1), (nil = rev gv3), (nil = rev l1), (nil = append gv3 gv3), (nil = append gv3 l1), (nil = append l1 gv3), (nil = append l1 l1), (succ n = n), (zero = succ n)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 41.616 seconds
+
+
+Label: 0 (0)
+(l1 = gv4), (gv4 = l1), (gv4 = gv1), (gv1 = gv4)
+
+Label: 1 (1)
+(nil = rev gv2), (append l1 gv2 = l1), (append gv2 l1 = l1), (append gv2 gv2 = gv2), (append gv2 gv1 = gv1), (append gv1 gv2 = gv1), (nil = append gv2 gv2), (rev gv2 = append gv2 gv2)
+
+Label: 2 (2)
+(cons n l1 = gv0), (cons n gv1 = gv0)
+
+Label: 3 (3)
+(cons n l1 = gv3), (cons n gv1 = gv3)
+
+Label: 4 (4)
+(gv4 = l1), (l1 = gv4)
+
+Label: 5 (5)
+(nil = rev gv2), (append gv2 l1 = l1), (append l1 gv2 = l1), (append gv2 gv2 = gv2), (nil = append gv2 gv2), (rev gv2 = append gv2 gv2)
+
+Label: 6 (6)
+(cons n l1 = gv0)
+
+Label: 7 (7)
+(cons n l1 = gv3)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (cons n gv1 = cons n (append gv1 nil))
+
+2. (cons n (append l1 nil) = cons n (append (append l1 nil) nil))
+
+3. (append gv1 nil = gv1)
+
+4. (append nil nil = nil)
+
+5. (append (append l1 nil) nil = l1)
+
+6. (cons n l1 = cons n (append l1 nil))
+
+7. (cons n l1 = cons n (append (append l1 nil) nil))
+
+8. (gv4 = gv1 -> cons n gv1 = cons n gv4)
+
+9. (gv1 = gv4 -> cons n gv1 = cons n gv4)
+
+10. (gv4 = l1 -> cons n (append l1 nil) = cons n gv4)
+
+11. (l1 = gv4 -> cons n (append l1 nil) = cons n gv4)
+
+12. (nil = rev gv2 -> cons n gv1 = cons n (append gv1 gv2))
+
+13. (nil = rev gv2 ->  cons n (append l1 gv2) = cons n (append (append l1 gv2) gv2))
+
+14. (append l1 gv2 = l1 -> cons n gv1 = cons n (append gv1 gv2))
+
+15. (append gv2 l1 = l1 -> cons n gv1 = cons n (append gv1 gv2))
+
+16. (append gv2 gv2 = gv2 -> cons n gv1 = cons n (append gv1 gv2))
+
+17. (append gv2 gv1 = gv1 -> cons n gv1 = cons n (append gv1 gv2))
+
+18. (append gv1 gv2 = gv1 -> cons n gv1 = cons n (append gv1 gv2))
+
+19. (nil = append gv2 gv2 -> cons n gv1 = cons n (append gv1 gv2))
+
+20. (append gv2 l1 = l1 ->  cons n (append l1 gv2) = cons n (append (append l1 gv2) gv2))
+
+21. (append l1 gv2 = l1 ->  cons n (append l1 gv2) = cons n (append (append l1 gv2) gv2))
+
+22. (append gv2 gv2 = gv2 ->  cons n (append l1 gv2) = cons n (append (append l1 gv2) gv2))
+
+23. (nil = append gv2 gv2 ->  cons n (append l1 gv2) = cons n (append (append l1 gv2) gv2))
+
+24. (cons n l1 = gv0 -> gv0 = cons n (append (append l1 nil) nil))
+
+25. (cons n l1 = gv3 -> cons n (append l1 nil) = gv3)
+
+26. (rev gv2 = append gv2 gv2 -> cons n gv1 = cons n (append gv1 gv2))
+
+27. (rev gv2 = append gv2 gv2 ->  cons n (append l1 gv2) = cons n (append (append l1 gv2) gv2))
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 90.955 seconds
+
+Number of Result Pairs Returned: 27
+
+1. (cons n gv1 = cons n (append gv1 nil))
+
+2. (cons n (append l1 nil) = cons n (append (append l1 nil) nil))
+
+3. (append gv1 nil = gv1)
+
+4. (append (append l1 nil) nil = l1)
+
+5. (cons n l1 = cons n (append l1 nil))

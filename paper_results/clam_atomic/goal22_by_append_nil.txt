@@ -1,0 +1,227 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+
+----------------------------------
+Goal: (even (len y) = even (len (append y nil)))
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 1.59 seconds
+
+gv5 : Lst = nil
+gv1 : Nat = (len y)
+gv0 : bool = (even (len y))
+gv4 : Lst = (append y nil)
+gv3 : Nat = (len (append y nil))
+gv2 : bool = (even (len (append y nil)))
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 23.882 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (even (len y) = even (len (append y nil)))
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (even (len (append y nil)) = gv2)
+
+----------------------------------
+Goal: (even (len y) = gv2)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+ -- (append y nil = gv4)
+
+----------------------------------
+Goal: (even (len y) = even (len gv4))
+Case: Invalid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (len (append y nil) = gv3)
+
+----------------------------------
+Goal: (even (len y) = even gv3)
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (len y = gv1)
+
+----------------------------------
+Goal: (even gv1 = even (len (append y nil)))
+Case: Invalid and Generalized
+
+Label: Generalization #5
+Assumptions: 
+ -- (even (len y) = gv0)
+
+----------------------------------
+Goal: (gv0 = even (len (append y nil)))
+Case: Invalid and Generalized
+
+Label: Generalization #6
+Assumptions: 
+ -- (nil = gv5)
+
+----------------------------------
+Goal: (even (len y) = even (len (append y gv5)))
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 24.022 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+Nat : Set
+Lst : Set
+even : (Nat -> bool)
+append : (Lst -> Lst -> Lst)
+len : (Lst -> Nat)
+succ : (Nat -> Nat)
+zero : Nat
+nil : Lst
+cons : (Nat -> Lst -> Lst)
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 3 (3)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 4 (4)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 5 (5)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 24.159 seconds
+
+
+Label: 0 (0)
+(false = gv2), (true = gv2), (gv2 = gv2), (y = y), (false <> gv2), (true <> gv2), (gv2 <> gv2), (y <> y), (None = Some y), (None = Some gv2)
+(zero = len y), (append y y = y), (nil = append y y)
+
+Label: 1 (1)
+(gv4 = gv4), (gv4 = y), (y = gv4), (y = y), (gv4 <> gv4), (gv4 <> y), (y <> gv4), (y <> y), (None = Some gv4), (None = Some y)
+(zero = len gv4), (zero = len y), (append gv4 gv4 = gv4), (append gv4 gv4 = y), (append gv4 y = gv4), (append gv4 y = y), (append y gv4 = gv4), (append y gv4 = y), (append y y = gv4), (append y y = y)
+(nil = append gv4 gv4), (nil = append gv4 y), (nil = append y gv4), (nil = append y y)
+
+Label: 2 (2)
+(gv3 = gv3), (y = y), (false = even gv3), (true = even gv3), (gv3 <> gv3), (y <> y), (None = Some y), (None = Some gv3), (succ gv3 = gv3), (succ gv3 = len y)
+(len y = gv3), (zero = succ gv3), (zero = len y), (cons gv3 y = y), (cons gv3 y = append y y), (append y y = y), (nil = cons gv3 y), (nil = append y y)
+
+Label: 3 (3)
+(y = y), (gv1 = gv1), (false = even gv1), (true = even gv1), (y <> y), (gv1 <> gv1), (None = Some y), (None = Some gv1), (cons gv1 y = y), (cons gv1 y = append y y)
+(append y y = y), (nil = cons gv1 y), (nil = append y y), (succ gv1 = gv1), (succ gv1 = len y), (len y = gv1), (zero = succ gv1), (zero = len y)
+
+Label: 4 (4)
+(false = gv0), (true = gv0), (y = y), (gv0 = gv0), (false <> gv0), (true <> gv0), (y <> y), (gv0 <> gv0), (None = Some y), (None = Some gv0)
+(zero = len y), (append y y = y), (nil = append y y)
+
+Label: 5 (5)
+(gv5 = gv5), (gv5 = y), (y = gv5), (y = y), (gv5 <> gv5), (gv5 <> y), (y <> gv5), (y <> y), (None = Some gv5), (None = Some y)
+(zero = len gv5), (zero = len y), (append gv5 gv5 = gv5), (append gv5 gv5 = y), (append gv5 y = gv5), (append gv5 y = y), (append y gv5 = gv5), (append y gv5 = y), (append y y = gv5), (append y y = y)
+(nil = append gv5 gv5), (nil = append gv5 y), (nil = append y gv5), (nil = append y y)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 28.688 seconds
+
+
+Label: 0 (0)
+
+Label: 1 (1)
+(gv4 = y), (y = gv4)
+
+Label: 2 (2)
+(len y = gv3)
+
+Label: 3 (3)
+(len y = gv1)
+
+Label: 4 (4)
+
+Label: 5 (5)
+(zero = len gv5), (append gv5 y = y), (append y gv5 = y), (append gv5 gv5 = gv5), (nil = append gv5 gv5)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (even (len y) = even (len (append y nil)))
+
+2. (append y nil = y)
+
+3. (len y = len (append y nil))
+
+4. (append nil nil = nil)
+
+5. (gv4 = y -> even (len y) = even (len gv4))
+
+6. (y = gv4 -> even (len y) = even (len gv4))
+
+7. (len y = gv3 -> even (len y) = even gv3)
+
+8. (zero = len gv5 -> even (len y) = even (len (append y gv5)))
+
+9. (append gv5 y = y -> even (len y) = even (len (append y gv5)))
+
+10. (append y gv5 = y -> even (len y) = even (len (append y gv5)))
+
+11. (append gv5 gv5 = gv5 -> even (len y) = even (len (append y gv5)))
+
+12. (nil = append gv5 gv5 -> even (len y) = even (len (append y gv5)))
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 54.464 seconds
+
+Number of Result Pairs Returned: 12
+
+1. (even (len y) = even (len (append y nil)))
+
+2. (append y nil = y)
+
+3. (len y = len (append y nil))
+
+4. (gv4 = y -> even (len y) = even (len gv4))
+
+5. (y = gv4 -> even (len y) = even (len gv4))

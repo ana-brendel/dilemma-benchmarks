@@ -1,0 +1,190 @@
+Lemma Synthesis Execution Log and Results
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Label: Initial State
+Assumptions: 
+
+----------------------------------
+Goal: (rev y = app (rev y) Nil)
+
+
+------------------------------ GENERALIZED VARIABLES ------------------------------
+Time Elapsed From Start: 1.51 seconds
+
+gv1 : lst = (app (rev y) Nil)
+gv0 : lst = (rev y)
+gv2 : lst = Nil
+
+
+------------------------------ GENERALIZATIONS ------------------------------
+  NOTE: The assumptions have been restricted to be only the necessary assumptions.
+Time Elapsed From Start: 27.23 seconds
+
+Label: Generalization #0
+Assumptions: 
+
+----------------------------------
+Goal: (rev y = app (rev y) Nil)
+Case: Valid and Un-Generalized
+
+Label: Generalization #1
+Assumptions: 
+ -- (Nil = gv2)
+
+----------------------------------
+Goal: (rev y = app (rev y) gv2)
+Case: Invalid and Generalized
+
+Label: Generalization #2
+Assumptions: 
+
+----------------------------------
+Goal: (gv0 = app gv0 Nil)
+Case: Valid and Generalized
+
+Label: Generalization #3
+Assumptions: 
+ -- (rev y = gv0)
+ -- (Nil = gv2)
+
+----------------------------------
+Goal: (gv0 = app gv0 gv2)
+Case: Invalid and Generalized
+
+Label: Generalization #4
+Assumptions: 
+ -- (app (rev y) Nil = gv1)
+
+----------------------------------
+Goal: (rev y = gv1)
+Case: Invalid and Generalized
+
+
+
+------------------------------ SYNTHESIS PROBLEMS ------------------------------
+Time Elapsed From Start: 27.363 seconds
+
+ -- functions to consider -- 
+@eq : (forall A : Type, A -> A -> Prop)
+not : (Prop -> Prop)
+Datatypes.length : (forall A : Type, list A -> nat)
+Datatypes.app : (forall A : Type, list A -> list A -> list A)
+le : (nat -> nat -> Prop)
+lt : (nat -> nat -> Prop)
+lst : Set
+app : (lst -> lst -> lst)
+rev : (lst -> lst)
+Cons : (nat -> lst -> lst)
+Nil : lst
+
+Label: 0 (0)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 1 (1)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+Label: 2 (2)
+Inferring Condition About Generalization
+Positive Examples: 500
+Negative Examples: 500
+
+
+------------------------------ TERMS CONSIDERED IN SYNTHESIS ------------------------------
+Time Elapsed From Start: 27.5 seconds
+
+
+Label: 0 (0)
+(gv2 = gv2), (gv2 = y), (y = gv2), (y = y), (gv2 <> gv2), (gv2 <> y), (y <> gv2), (y <> y), (rev gv2 = gv2), (rev gv2 = y)
+(rev gv2 = app gv2 gv2), (rev gv2 = app gv2 y), (rev gv2 = app y gv2), (rev gv2 = app y y), (rev y = gv2), (rev y = y), (rev y = app gv2 gv2), (rev y = app gv2 y), (rev y = app y gv2), (rev y = app y y)
+(app gv2 gv2 = gv2), (app gv2 gv2 = y), (app gv2 y = gv2), (app gv2 y = y), (app y gv2 = gv2), (app y gv2 = y), (app y y = gv2), (app y y = y), (Nil = rev gv2), (Nil = rev y)
+(Nil = app gv2 gv2), (Nil = app gv2 y), (Nil = app y gv2), (Nil = app y y), (None = Some gv2), (None = Some y)
+
+Label: 1 (1)
+(y = y), (y = gv2), (y = gv0), (gv2 = y), (gv2 = gv2), (gv2 = gv0), (gv0 = y), (gv0 = gv2), (gv0 = gv0), (y <> y)
+(y <> gv2), (y <> gv0), (gv2 <> y), (gv2 <> gv2), (gv2 <> gv0), (gv0 <> y), (gv0 <> gv2), (gv0 <> gv0), (rev y = y), (rev y = gv2)
+(rev y = gv0), (rev y = app y y), (rev y = app y gv2), (rev y = app y gv0), (rev y = app gv2 y), (rev y = app gv2 gv2), (rev y = app gv2 gv0), (rev y = app gv0 y), (rev y = app gv0 gv2), (rev y = app gv0 gv0)
+(rev gv2 = y), (rev gv2 = gv2), (rev gv2 = gv0), (rev gv2 = app y y), (rev gv2 = app y gv2), (rev gv2 = app y gv0), (rev gv2 = app gv2 y), (rev gv2 = app gv2 gv2), (rev gv2 = app gv2 gv0), (rev gv2 = app gv0 y)
+(rev gv2 = app gv0 gv2), (rev gv2 = app gv0 gv0), (rev gv0 = y), (rev gv0 = gv2), (rev gv0 = gv0), (rev gv0 = app y y), (rev gv0 = app y gv2), (rev gv0 = app y gv0), (rev gv0 = app gv2 y), (rev gv0 = app gv2 gv2)
+(rev gv0 = app gv2 gv0), (rev gv0 = app gv0 y), (rev gv0 = app gv0 gv2), (rev gv0 = app gv0 gv0), (app y y = y), (app y y = gv2), (app y y = gv0), (app y gv2 = y), (app y gv2 = gv2), (app y gv2 = gv0)
+(app y gv0 = y), (app y gv0 = gv2), (app y gv0 = gv0), (app gv2 y = y), (app gv2 y = gv2), (app gv2 y = gv0), (app gv2 gv2 = y), (app gv2 gv2 = gv2), (app gv2 gv2 = gv0), (app gv2 gv0 = y)
+(app gv2 gv0 = gv2), (app gv2 gv0 = gv0), (app gv0 y = y), (app gv0 y = gv2), (app gv0 y = gv0), (app gv0 gv2 = y), (app gv0 gv2 = gv2), (app gv0 gv2 = gv0), (app gv0 gv0 = y), (app gv0 gv0 = gv2)
+(app gv0 gv0 = gv0), (Nil = rev y), (Nil = rev gv2), (Nil = rev gv0), (Nil = app y y), (Nil = app y gv2), (Nil = app y gv0), (Nil = app gv2 y), (Nil = app gv2 gv2), (Nil = app gv2 gv0)
+(Nil = app gv0 y), (Nil = app gv0 gv2), (Nil = app gv0 gv0), (None = Some y), (None = Some gv2), (None = Some gv0)
+
+Label: 2 (2)
+(gv1 = gv1), (gv1 = y), (y = gv1), (y = y), (gv1 <> gv1), (gv1 <> y), (y <> gv1), (y <> y), (rev gv1 = gv1), (rev gv1 = y)
+(rev gv1 = app gv1 gv1), (rev gv1 = app gv1 y), (rev gv1 = app y gv1), (rev gv1 = app y y), (rev y = gv1), (rev y = y), (rev y = app gv1 gv1), (rev y = app gv1 y), (rev y = app y gv1), (rev y = app y y)
+(app gv1 gv1 = gv1), (app gv1 gv1 = y), (app gv1 y = gv1), (app gv1 y = y), (app y gv1 = gv1), (app y gv1 = y), (app y y = gv1), (app y y = y), (Nil = rev gv1), (Nil = rev y)
+(Nil = app gv1 gv1), (Nil = app gv1 y), (Nil = app y gv1), (Nil = app y y), (None = Some gv1), (None = Some y)
+
+
+------------------------------ SYNTHESIS RESULTS ------------------------------
+Time Elapsed From Start: 33.64 seconds
+
+
+Label: 0 (0)
+(Nil = rev gv2), (app gv2 y = y), (app y gv2 = y), (app gv2 gv2 = gv2), (Nil = app gv2 gv2), (rev gv2 = app gv2 gv2)
+
+Label: 1 (1)
+(Nil = rev gv2), (app y gv2 = y), (app gv2 y = y), (app gv2 gv2 = gv2), (app gv2 gv0 = gv0), (app gv0 gv2 = gv0), (Nil = app gv2 gv2), (rev gv2 = app gv2 gv2)
+
+Label: 2 (2)
+(rev gv1 = y), (rev y = gv1)
+
+
+------------------------------ ALL RESULTS ------------------------------
+1. (gv0 = app gv0 Nil)
+
+2. (rev y = app (rev y) Nil)
+
+3. (app Nil Nil = Nil)
+
+4. (Nil = rev gv2 -> rev y = app (rev y) gv2)
+
+5. (Nil = rev gv2 -> gv0 = app gv0 gv2)
+
+6. (rev gv1 = y -> rev y = gv1)
+
+7. (app gv2 y = y -> rev y = app (rev y) gv2)
+
+8. (app y gv2 = y -> rev y = app (rev y) gv2)
+
+9. (app gv2 gv2 = gv2 -> rev y = app (rev y) gv2)
+
+10. (Nil = app gv2 gv2 -> rev y = app (rev y) gv2)
+
+11. (app y gv2 = y -> gv0 = app gv0 gv2)
+
+12. (app gv2 y = y -> gv0 = app gv0 gv2)
+
+13. (app gv2 gv2 = gv2 -> gv0 = app gv0 gv2)
+
+14. (app gv2 gv0 = gv0 -> gv0 = app gv0 gv2)
+
+15. (Nil = app gv2 gv2 -> gv0 = app gv0 gv2)
+
+16. (rev gv2 = app gv2 gv2 -> rev y = app (rev y) gv2)
+
+17. (rev gv2 = app gv2 gv2 -> gv0 = app gv0 gv2)
+
+
+
+------------------------------ FINAL RESULTS ------------------------------
+Time Elapsed From Start: 63.406 seconds
+
+Number of Result Pairs Returned: 17
+
+1. (gv0 = app gv0 Nil)
+
+2. (rev y = app (rev y) Nil)
+
+3. (Nil = rev gv2 -> rev y = app (rev y) gv2)
+
+4. (Nil = rev gv2 -> gv0 = app gv0 gv2)
+
+5. (rev gv1 = y -> rev y = gv1)
